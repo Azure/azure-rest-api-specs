@@ -54,6 +54,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3021](#r3021) | [PathResourceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 | [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
 | [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs |
+| [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs |
+| [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -64,6 +66,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
+| [R4009](#r4009) | [RequiredSystemDataInNewApiVersions](#r4009) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -99,6 +102,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs |
+| [R4012](#r4012) | [XmsPageableMustHaveCorrespondingResponse](#r4012) | ARM OpenAPI(swagger) specs |
+| [R4013](#r4013) | [IntergerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -2394,3 +2399,186 @@ The following would be invalid:
  }
 ...
 ```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4009" ></a>R4009 RequiredSystemDataInNewApiVersion
+
+**Category** : ARM Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response of operation '{operation name }' is defined without 'systemData'. Consider adding the systemData to the response.
+
+**Description** : The responses of GET, PUT and PATCH in new API versions should contain the `systemData` object.The version after 2020-05-01 is consider a new API version.
+For more information, see the documentation: [AzureRPCSystemData-RP_Copy.docx](https://microsoft.sharepoint.com/:w:/t/Operations_Management_Suite/EZP2GBYnvsRKnSmJ_FXV4jkBUz6xG_glzG3KVnmHN9Q0qA?e=99dfOo). 
+
+**CreatedAt**: May 21, 2020
+
+**LastModifiedAt**: May 2, 2020
+
+**How to fix the violation**: For each response in the GET/PUT/PATCH opearation add the systemData object:
+``` json
+"x-ms-parameter-location":"method"
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4010" ></a>R4010 RequiredDefaultResponse
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response is defined without a default error response implementing,please add it. 
+
+**Description** : Per ARM Specs, Every operation must have a default error response implementing.
+
+**CreatedAt**: May 21, 2020
+
+**LastModifiedAt**: May 2, 2020
+
+**How to fix the violation**: For each opearation response add a default error response implementing:
+The following would be valid:
+
+```json
+...
+ "responese":{
+   "default": {
+     "schema":{
+       "$ref":#/definiton/Error
+     }
+  }
+ }
+...
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r4011" ></a>R4011 DeleteOperationResponses
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The delete operation is defined without a 200 or 204 error response implementing,please add it. 
+
+**Description** : Per ARM Specs, All DELETE methods must have responses code implementing: 200, 204.   
+
+**CreatedAt**: May 21, 2020
+
+**LastModifiedAt**: May 2, 2020
+
+**How to fix the violation**: For each opearation response add the missing code response implementing:
+
+The following would be valid:
+
+```json
+...
+"path1":{
+ "delete": {
+   "parameters": [
+     .....
+     .....
+   ]
+  "responese":{
+   "default": {
+     "schema":{
+       "$ref":#/definiton/Error
+     }
+   },
+   "200": {
+     "schema":{
+       "$ref":#/definiton/response
+     }
+   },
+   "204": {
+     "schema":{
+       "$ref":#/definiton/resonse
+     }
+   }
+  }
+ }
+}
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4012" ></a>R4012 XmsPageableMustHaveCorrespondingResponse
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The operation: '{operation name}' is defined with x-ms-pageable enabled,but can not find the corresponding nextLink property in the response, please add it.
+
+**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) When specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the 200 response schema.
+
+**CreatedAt**: May 21, 2020
+
+**LastModifiedAt**: May 2, 2020
+
+**How to fix the violation**: Add the missing corresponding property e.g. nextLink in response:
+
+The following would be valid:
+
+```json
+...
+"get":{
+  ....
+   "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+  },
+  ....
+  "responese":{
+   "200": {
+     "schema":{
+       "description": "The list of metric items.",
+        "type": "object",
+        "properties": {
+          "nextLink": {
+            "description": "The link used to get the next page of operations.",
+            "type": "string"
+          }
+        ....
+     }
+   }
+  }
+  ....
+ }
+}
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4013" ></a>R4013 IntergerTypeMustHaveFormat
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The integer type does not have a format, please add it.
+
+**Description** :  The type:integer must have a format required.Possible value for format are int32 and int64.
+
+**CreatedAt**: May 21, 2020
+
+**LastModifiedAt**: May 2, 2020
+
+**Why this rule is important**: Right now it's possible to type a field as integer, but not specifying format. It actually creates problems for generate when the number o bits matter, like C#. OAS3 doesn't even document not having a format:
+https://github.com/OAI/OpenAPI-Specification/blob/98138c7b4c153f780a38907f3472a7a5996692d4/versions/3.0.2.md#data-types
+
+**How to fix the violation**: Add the correct format:
+
+The following would be valid:
+
+```json
+...
+  "incomingChanges": {
+          "type": "integer",
+          "format": "int64",
+      ....
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
