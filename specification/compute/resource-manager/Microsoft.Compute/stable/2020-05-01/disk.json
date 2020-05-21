@@ -99,6 +99,12 @@
           },
           "Create a managed upload disk.": {
             "$ref": "./examples/CreateAManagedUploadDisk.json"
+          },
+          "Create a managed disk and associate with disk access resource.": {
+            "$ref": "./examples/CreateAManagedDiskWithDiskAccess.json"
+          },
+          "Create a managed disk and associate with disk encryption set.": {
+            "$ref": "./examples/CreateAManagedDiskWithDiskEncryptionSet.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -146,7 +152,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update managed disk to remove disk access resource association.": {
+            "$ref": "./examples/UpdateAManagedDiskToRemoveDiskAccess.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -1018,7 +1029,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a disk encryption set.": {
+          "Create a disk access resource.": {
             "$ref": "./examples/CreateADiskAccess.json"
           }
         },
@@ -1074,7 +1085,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a disk encryption set.": {
+          "Update a disk access resource.": {
             "$ref": "./examples/UpdateADiskAccess.json"
           }
         },
@@ -1115,8 +1126,11 @@
           }
         },
         "x-ms-examples": {
-          "Get information about a disk encryption set.": {
+          "Get information about a disk access resource.": {
             "$ref": "./examples/GetInformationAboutADiskAccess.json"
+          },
+          "Get information about a disk access resource with private endpoints.": {
+            "$ref": "./examples/GetInformationAboutADiskAccessWithPrivatEndpoints.json"
           }
         }
       },
@@ -1158,7 +1172,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a disk encryption set.": {
+          "Delete a disk access resource.": {
             "$ref": "./examples/DeleteADiskAccess.json"
           }
         },
@@ -1198,7 +1212,7 @@
           }
         },
         "x-ms-examples": {
-          "List all disk encryption sets in a resource group.": {
+          "List all disk access resources in a resource group.": {
             "$ref": "./examples/ListDiskAccessesInAResourceGroup.json"
           }
         },
@@ -1237,7 +1251,7 @@
           }
         },
         "x-ms-examples": {
-          "List all disk encryption sets in a subscription.": {
+          "List all disk access resources in a subscription.": {
             "$ref": "./examples/ListDiskAccessesInASubscription.json"
           }
         },
@@ -1273,6 +1287,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all possible private link resources under disk access resource.": {
+            "$ref": "./examples/GetDiskAccessPrivateLinkResources.json"
           }
         }
       }

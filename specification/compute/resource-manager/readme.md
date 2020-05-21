@@ -229,6 +229,15 @@ input-file:
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
+### Tag: package-2020-05-01-only
+
+These settings apply only when `--tag=package-2020-05-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01-only'
+input-file:
+- Microsoft.Compute/stable/2020-05-01/disk.json
+```
+
 ### Tag: package-2019-12-01
 
 These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
