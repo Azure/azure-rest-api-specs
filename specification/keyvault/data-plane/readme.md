@@ -326,6 +326,10 @@ directive:
     from: securitydomain.json
     where: $.definitions.UploadPendingResponse.properties.status_details
     reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.status_details
+    reason: Consistency with other properties.
   - suppress: MISSING_REQUIRED_PARAMETER
     from: certificates.json
     where: $..parameters[?(@.name=='vaultBaseUrl')]
