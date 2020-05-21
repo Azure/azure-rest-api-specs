@@ -298,6 +298,14 @@ directive:
     from: keys.json
     where: $.definitions.KeyUpdateParameters.properties.key_ops
     reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.TransferKey.properties.transfer_key
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.UploadPendingResponse.properties.status_details
+    reason: Merely refactored existing definitions into new files.
   - suppress: MISSING_REQUIRED_PARAMETER
     from: certificates.json
     where: $..parameters[?(@.name=='vaultBaseUrl')]
@@ -312,5 +320,5 @@ directive:
     reason: Suppress an invalid error caused by a bug in the linter.
   - suppress: MISSING_REQUIRED_PARAMETER
     from: storage.json
-    reason: Suppress an invalid error caused by a bug in the linter.
+    reason: Suppress an invalid error caused by a bug in the linter.  
 ```

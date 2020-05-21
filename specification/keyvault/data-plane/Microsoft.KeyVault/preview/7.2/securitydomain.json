@@ -32,7 +32,7 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomain_Download",
+        "operationId": "HSMSecurityDomainDownload",
         "description": "Retrieves Security domain from HSM enclave",
         "parameters": [
           {
@@ -74,7 +74,12 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomain_TransferKey",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "operationId": "HSMSecurityDomainTransferKey",
         "description": "Retrieve security domain transfer key",
         "responses": {
           "200": {
@@ -102,7 +107,7 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomain_Upload",
+        "operationId": "HSMSecurityDomainUpload",
         "description": "Request Security domain upload operation",
         "parameters": [
           {
@@ -129,15 +134,7 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "status_details": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
           "default": {
@@ -159,7 +156,7 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomain_UploadPending",
+        "operationId": "HSMSecurityDomainUploadPending",
         "description": "Get Security domain upload operation status",
         "responses": {
           "200": {
@@ -175,7 +172,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/UploadPendingResponse"
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
           "default": {
@@ -239,13 +236,13 @@
         }
       }
     },
-    "UploadPendingResponse": {
+    "SecurityDomainOperationStatus": {
       "properties": {
         "status": {
           "description": "operation status",
           "enum": [
             "Success",
-            "Inprogress",
+            "InProgress",
             "Failed"
           ],
           "x-ms-enum": {
