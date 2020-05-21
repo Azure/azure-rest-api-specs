@@ -219,7 +219,7 @@ directive:
 
 These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-12-01'
+``` yaml $(tag) == 'package-2020-05-01'
 input-file:
 - Microsoft.Compute/stable/2019-12-01/compute.json
 - Microsoft.Compute/stable/2019-12-01/runCommands.json
