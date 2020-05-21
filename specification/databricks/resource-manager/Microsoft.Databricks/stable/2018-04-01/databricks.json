@@ -1003,7 +1003,7 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "databricksVirtualNetwork": {
-          "$ref": "#/definitions/DatabricksVirtualNetwork",
+          "$ref": "#/definitions/AddressSpace",
           "description": "The reference to the databricks virtual network. The remote virtual network can be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
         },
         "remoteVirtualNetwork": {
@@ -1011,10 +1011,6 @@
           "description": "The reference to the remote virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
         },
         "remoteAddressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The reference to the remote virtual network address space."
-        },
-        "databricksAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
           "description": "The reference to the remote virtual network address space."
         },
@@ -1060,23 +1056,6 @@
         }
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
-    },
-    "DatabricksVirtualNetwork": {
-      "properties": {
-        "addressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of address blocks reserved for this virtual network in CIDR notation."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SubResource",
-          "description":"Resource ID."
-        }
-      },
-      "description": "Databricks virtual network."
     }
   },
   "parameters": {
