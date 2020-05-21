@@ -145,3 +145,15 @@ uncomment the  `exclude-file` section below and add the file paths.
 # exclude-file: 
 #- $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
 ```
+
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+    cli-name: peering
+    package-name: peering
+    namespace: peering
+    clear-output-folder: false
+```
