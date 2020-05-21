@@ -484,26 +484,6 @@
         "modelAsString": true
       }
     },
-    "ConfluentOrganizationProperties": {
-      "description": "Confluent organization property",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the Confluent organization.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the Confluent organization.",
-          "type": "string",
-          "readOnly": true
-        },
-        "ssOurl": {
-          "description": "SSO url for the Confluent organization.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "OfferDetail": {
       "description": "Confluent Offer detail",
       "type": "object",
@@ -570,13 +550,15 @@
           "description": "Provision states for confluent RP",
           "$ref": "#/definitions/ProvisioningState"
         },
-        "organizationProperties": {
-          "description": "Confluent organization properties",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConfluentOrganizationProperties"
-            }
-          ]
+        "organizationId": {
+          "description": "Id of the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ssoUrl": {
+          "description": "SSO url for the Confluent organization.",
+          "type": "string",
+          "readOnly": true
         },
         "offerDetail": {
           "description": "Confluent offer detail",
