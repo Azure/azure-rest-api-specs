@@ -3614,10 +3614,7 @@
         },
         "billingProfiles": {
           "description": "The billing profiles associated with the billing account. By default this is not populated, unless it's specified in $expand.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BillingProfile"
-          }
+          "$ref": "#/definitions/BillingProfilesOnExpand"          
         },
         "enrollmentDetails": {
           "description": "The details about the associated legacy enrollment. By default this is not populated, unless it's specified in $expand.",
@@ -3642,6 +3639,23 @@
           "description": "Indicates whether user has read access to the billing account.",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "BillingProfilesOnExpand": {
+      "description": "The billing profiles associated with the billing account. By default this is not populated, unless it's specified in $expand.",
+      "properties": {
+        "hasMoreResults": {
+          "description": "Indicates whether there are more billing profiles than the ones listed in this collection. The collection lists a maximum of 50 billing profiles. To get all billing profiles, use the list billing profiles API.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The billing profiles associated with the billing account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          }
         }
       }
     },
@@ -4114,11 +4128,8 @@
           }
         },
         "invoiceSections": {
-          "description": "The invoice sections associated to the billing profile.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InvoiceSection"
-          }
+          "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/InvoiceSectionsOnExpand"          
         },
         "hasReadAccess": {
           "description": "Indicates whether user has read access to the billing profile.",
@@ -4169,6 +4180,23 @@
           "x-ms-enum": {
             "name": "SpendingLimit",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "InvoiceSectionsOnExpand": {
+      "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand.",
+      "properties": {
+        "hasMoreResults": {
+          "description": "Indicates whether there are more invoice sections than the ones listed in this collection. The collection lists a maximum of 50 invoice sections. To get all invoice sections, use the list invoice sections API.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The invoice sections associated to the billing profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
           }
         }
       }
