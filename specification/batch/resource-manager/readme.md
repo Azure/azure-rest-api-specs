@@ -26,14 +26,23 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03
+tag: package-2020-05
 ```
 
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Batch/stable/2020-05-01/BatchManagement.json
+```
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-03'
+``` yaml $(tag) == 'package-2020-03'
 input-file:
   - Microsoft.Batch/stable/2020-03-01/BatchManagement.json
 ```
@@ -42,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08'
+``` yaml $(tag) == 'package-2019-08'
 input-file:
   - Microsoft.Batch/stable/2019-08-01/BatchManagement.json
 ```
@@ -51,7 +60,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.Batch/stable/2019-04-01/BatchManagement.json
 ```
@@ -180,7 +189,6 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -259,7 +267,7 @@ generate-interface: true
 
 `
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -282,11 +290,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
