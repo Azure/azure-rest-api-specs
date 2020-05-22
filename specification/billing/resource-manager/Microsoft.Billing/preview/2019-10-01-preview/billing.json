@@ -503,6 +503,48 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDissociatePaymentInstrumentEligibility": {
+      "get": {
+        "tags": [
+          "ValidateDissociatePaymentInstrumentEligibility"
+        ],
+        "x-ms-examples": {
+          "SubscriptionTransferValidateSuccess": {
+            "$ref": "./examples/ValidateDissociatePaymentInstrumentEligibilitySuccess.json"
+          },
+          "SubscriptionTransferValidateFailure": {
+            "$ref": "./examples/ValidateDissociatePaymentInstrumentEligibilityFailure.json"
+          }
+        },
+        "operationId": "BillingProfile_ValidateDissociatePaymentInstrument",
+        "description": "Validates if the default payment instrument can be dissociated from the billing group. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "parameters": [          
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DissociatePaymentInstrumentEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles": {
       "get": {
         "tags": [
@@ -5167,6 +5209,54 @@
         "destinationBillingProfileId": {
           "type": "string",
           "description": "The destination billing profile id."
+        }
+      }
+    },
+    "DissociatePaymentInstrumentEligibilityErrorCode": {
+      "type": "string",
+      "description": "Error code of the dissociate payment instrument eligibility validation response.",
+      "enum": [
+        "AzureSubscriptions",
+        "RecurringCharges",
+        "ReservedInstances",
+        "OutstandingCharges",
+        "PendingCharges"
+      ],
+      "x-ms-enum": {
+        "name": "dissociatePaymentInstrumentEligibilityErrorCode",
+        "modelAsString": true
+      }
+    },
+    "DissociatePaymentInstrumentErrorDetails": {
+      "type": "object",
+      "description": "Error details of the dissociate payment instrument eligibility validation.",
+      "properties": {
+        "code": {
+          "description": "Error code for the dissociate payment instrument eligibility validation.",
+          "$ref": "#/definitions/DissociatePaymentInstrumentEligibilityErrorCode"
+        },
+        "message": {
+          "description": "Error message for the dissociate payment instrument eligibility validation.",
+          "type": "string"
+        }
+      }
+    },
+    "DissociatePaymentInstrumentEligibilityResult": {
+      "type": "object",
+      "description": "Result of the dissociate payment instrument eligibility validation.",
+      "properties": {
+        "isEligible": {
+          "description": "Specifies whether the subscription is eligible to be transferred.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "The list of dissociate payment instrument eligibility errors.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DissociatePaymentInstrumentErrorDetails"
+          }
         }
       }
     },
