@@ -1733,6 +1733,37 @@
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+        },
+        "networkAccessPolicy": {
+          "type": "string",
+          "description": "Policy for accessing the disk via network.",
+          "enum": [
+            "AllowAll",
+            "AllowPrivate",
+            "DenyAll"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkAccessPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AllowAll",
+                "description": "The disk can be exported or uploaded to from any network."
+              },
+              {
+                "value": "AllowPrivate",
+                "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
+              },
+              {
+                "value": "DenyAll",
+                "description": "The disk cannot be exported."
+              }
+            ]
+          }
+        },
+        "diskAccessId": {
+          "type": "string",
+          "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         }
       },
       "required": [
