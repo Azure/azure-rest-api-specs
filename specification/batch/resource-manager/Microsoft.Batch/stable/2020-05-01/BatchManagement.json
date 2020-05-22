@@ -1734,11 +1734,22 @@
             "description": "The operation was successful. The response contains the PrivateEndpointConnection.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            },
+            }
+          },
+          "204": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
             "headers": {
-              "ETag": {
-                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1748,7 +1759,8 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools": {
@@ -5092,9 +5104,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9_-]+$",
+      "pattern": "^[a-zA-Z0-9_-]+\\.?[a-fA-F0-9-]*$",
       "minLength": 1,
-      "maxLength": 64,
+      "maxLength": 101,
       "description": "The private link resource name. This must be unique within the account.",
       "x-ms-parameter-location": "method"
     },
@@ -5103,9 +5115,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9_-]+$",
+      "pattern": "^[a-zA-Z0-9_-]+\\.?[a-fA-F0-9-]*$",
       "minLength": 1,
-      "maxLength": 64,
+      "maxLength": 101,
       "description": "The private endpoint connection name. This must be unique within the account.",
       "x-ms-parameter-location": "method"
     },
