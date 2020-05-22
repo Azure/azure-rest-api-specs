@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}": {
       "put": {
         "tags": [
           "Blueprint"
@@ -153,7 +153,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints": {
       "get": {
         "tags": [
           "Blueprint"
@@ -189,7 +189,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts/{artifactName}": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts/{artifactName}": {
       "put": {
         "tags": [
           "Artifact"
@@ -350,7 +350,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts": {
       "get": {
         "tags": [
           "Artifact"
@@ -389,7 +389,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}": {
       "put": {
         "tags": [
           "PublishedBlueprint"
@@ -514,7 +514,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions": {
       "get": {
         "tags": [
           "PublishedBlueprint"
@@ -553,7 +553,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts/{artifactName}": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts/{artifactName}": {
       "get": {
         "tags": [
           "PublishedArtifact"
@@ -607,7 +607,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts": {
       "get": {
         "tags": [
           "PublishedArtifact"
@@ -1180,14 +1180,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of this resourceGroup. Leave empty if the resource group name will be specified during the blueprint assignment.",
-          "minLength": 1,
-          "maxLength": 90
+          "description": "Name of this resourceGroup. Leave empty if the resource group name will be specified during the blueprint assignment."
         },
         "location": {
           "type": "string",
-          "description": "Location of this resourceGroup. Leave empty if the resource group location will be specified during the blueprint assignment.",
-          "maxLength": 90
+          "description": "Location of this resourceGroup. Leave empty if the resource group location will be specified during the blueprint assignment."
         },
         "metadata": {
           "description": "User-friendly properties for this resource group.",
@@ -1307,11 +1304,11 @@
   },
   "parameters": {
     "ScopeParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

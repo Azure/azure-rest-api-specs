@@ -225,6 +225,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Domain update request accepted.",
             "schema": {
@@ -695,6 +698,255 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/eventChannels/{eventChannelName}": {
+      "get": {
+        "tags": [
+          "EventChannels"
+        ],
+        "summary": "Get an event channel.",
+        "description": "Get properties of an event channel.",
+        "operationId": "EventChannels_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventChannelName",
+            "in": "path",
+            "description": "Name of the event channel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventChannel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "EventChannels_Get": {
+            "$ref": "./examples/EventChannels_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventChannels"
+        ],
+        "summary": "Create an event channel.",
+        "description": "Asynchronously creates a new event channel with the specified parameters.",
+        "operationId": "EventChannels_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventChannelName",
+            "in": "path",
+            "description": "Name of the event channel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventChannelInfo",
+            "in": "body",
+            "description": "EventChannel information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventChannel"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventChannel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "EventChannels_CreateOrUpdate": {
+            "$ref": "./examples/EventChannels_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EventChannels"
+        ],
+        "summary": "Delete an event channel.",
+        "description": "Delete existing event channel.",
+        "operationId": "EventChannels_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventChannelName",
+            "in": "path",
+            "description": "Name of the event channel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "EventChannels_Delete": {
+            "$ref": "./examples/EventChannels_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/eventChannels": {
+      "get": {
+        "tags": [
+          "EventChannels"
+        ],
+        "summary": "List event channels.",
+        "description": "List all the event channels in a partner namespace.",
+        "operationId": "EventChannels_ListByPartnerNamespace",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventChannelsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "EventChannels_ListByPartnerNamespace": {
+            "$ref": "./examples/EventChannels_ListByPartnerNamespace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}": {
       "get": {
         "tags": [
@@ -962,6 +1214,320 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}": {
+      "get": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get an event subscription of a system topic.",
+        "description": "Get an event subscription.",
+        "operationId": "SystemTopicEventSubscriptions_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_Get": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Create or update an event subscription for a system topic.",
+        "description": "Asynchronously creates or updates an event subscription with the specified parameters. Existing event subscriptions will be updated with this API.",
+        "operationId": "SystemTopicEventSubscriptions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionInfo",
+            "in": "body",
+            "description": "Event subscription properties containing the destination and filter information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_CreateOrUpdate": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Delete an event subscription of a system topic.",
+        "description": "Delete an event subscription of a system topic.",
+        "operationId": "SystemTopicEventSubscriptions_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_Delete": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Update event subscription of a system topic.",
+        "description": "Update event subscription of a system topic.",
+        "operationId": "SystemTopicEventSubscriptions_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionUpdateParameters",
+            "in": "body",
+            "description": "Updated event subscription information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_Update": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get full URL of an event subscription of a system topic",
+        "description": "Get the full endpoint URL for an event subscription of a system topic.",
+        "operationId": "SystemTopicEventSubscriptions_GetFullUrl",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionFullUrl"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_GetFullUrl": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_GetFullUrl.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getFullUrl": {
       "post": {
         "tags": [
@@ -1018,6 +1584,442 @@
           "EventSubscriptions_GetFullUrlForCustomTopic": {
             "$ref": "./examples/EventSubscriptions_GetFullUrlForCustomTopic.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions": {
+      "get": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "List event subscriptions of a system topic.",
+        "description": "List event subscriptions that belong to a specific system topic.",
+        "operationId": "SystemTopicEventSubscriptions_ListBySystemTopic",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_ListBySystemTopic": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_ListBySystemTopic.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}": {
+      "get": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get an event subscription of a partner topic.",
+        "description": "Get an event subscription of a partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be found. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_Get": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Create or update an event subscription of a partner topic.",
+        "description": "Asynchronously creates or updates an event subscription of a partner topic with the specified parameters. Existing event subscriptions will be updated with this API.",
+        "operationId": "PartnerTopicEventSubscriptions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionInfo",
+            "in": "body",
+            "description": "Event subscription properties containing the destination and filter information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_CreateOrUpdate": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Delete an event subscription of a partner topic.",
+        "description": "Delete an event subscription of a partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_Delete": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Update event subscription of a partner topic.",
+        "description": "Update event subscription of a partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionUpdateParameters",
+            "in": "body",
+            "description": "Updated event subscription information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_Update": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get full URL of an event subscription of a partner topic.",
+        "description": "Get the full endpoint URL for an event subscription of a partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_GetFullUrl",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionFullUrl"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_GetFullUrl": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_GetFullUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions": {
+      "get": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "List event subscriptions of a partner topic.",
+        "description": "List event subscriptions that belong to a specific partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_ListByPartnerTopic",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_ListByPartnerTopic": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_ListByPartnerTopic.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1662,6 +2664,1957 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}": {
+      "get": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "Get a partner namespace.",
+        "description": "Get properties of a partner namespace.",
+        "operationId": "PartnerNamespaces_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespace"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_Get": {
+            "$ref": "./examples/PartnerNamespaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "Create a partner namespace.",
+        "description": "Asynchronously creates a new partner namespace with the specified parameters.",
+        "operationId": "PartnerNamespaces_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceInfo",
+            "in": "body",
+            "description": "PartnerNamespace information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespace"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespace"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_CreateOrUpdate": {
+            "$ref": "./examples/PartnerNamespaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "Delete a partner namespace.",
+        "description": "Delete existing partner namespace.",
+        "operationId": "PartnerNamespaces_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_Delete": {
+            "$ref": "./examples/PartnerNamespaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "Update a partner namespace.",
+        "description": "Asynchronously updates a partner namespace with the specified parameters.",
+        "operationId": "PartnerNamespaces_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceUpdateParameters",
+            "in": "body",
+            "description": "Partner namespace update information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespaceUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Partner namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespace"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_Update": {
+            "$ref": "./examples/PartnerNamespaces_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/partnerNamespaces": {
+      "get": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "List partner namespaces under an Azure subscription.",
+        "description": "List all the partner namespaces under an Azure subscription.",
+        "operationId": "PartnerNamespaces_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespacesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_ListBySubscription": {
+            "$ref": "./examples/PartnerNamespaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces": {
+      "get": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "List partner namespaces under a resource group.",
+        "description": "List all the partner namespaces under a resource group.",
+        "operationId": "PartnerNamespaces_ListByResourceGroup",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespacesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_ListByResourceGroup": {
+            "$ref": "./examples/PartnerNamespaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/listKeys": {
+      "post": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "List keys for a partner namespace.",
+        "description": "List the two keys used to publish to a partner namespace.",
+        "operationId": "PartnerNamespaces_ListSharedAccessKeys",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespaceSharedAccessKeys"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_ListSharedAccessKeys": {
+            "$ref": "./examples/PartnerNamespaces_ListSharedAccessKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "PartnerNamespaces"
+        ],
+        "summary": "Regenerate key for a partner namespace.",
+        "description": "Regenerate a shared access key for a partner namespace.",
+        "operationId": "PartnerNamespaces_RegenerateKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "regenerateKeyRequest",
+            "in": "body",
+            "description": "Request body to regenerate key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespaceRegenerateKeyRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespaceSharedAccessKeys"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerNamespaces_RegenerateKey": {
+            "$ref": "./examples/PartnerNamespaces_RegenerateKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}": {
+      "get": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "Get a partner registration.",
+        "description": "Gets a partner registration with the specified parameters.",
+        "operationId": "PartnerRegistrations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerRegistrationName",
+            "in": "path",
+            "description": "Name of the partner registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_Get": {
+            "$ref": "./examples/PartnerRegistrations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "Create a partner registration.",
+        "description": "Creates a new partner registration with the specified parameters.",
+        "operationId": "PartnerRegistrations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerRegistrationName",
+            "in": "path",
+            "description": "Name of the partner registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerRegistrationInfo",
+            "in": "body",
+            "description": "PartnerRegistration information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistration"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistration"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/PartnerRegistrations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "Delete a partner registration.",
+        "description": "Deletes a partner registration with the specified parameters.",
+        "operationId": "PartnerRegistrations_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerRegistrationName",
+            "in": "path",
+            "description": "Name of the partner registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_Delete": {
+            "$ref": "./examples/PartnerRegistrations_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "Update a partner registration.",
+        "description": "Updates a partner registration with the specified parameters.",
+        "operationId": "PartnerRegistrations_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerRegistrationName",
+            "in": "path",
+            "description": "Name of the partner registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerRegistrationUpdateParameters",
+            "in": "body",
+            "description": "Partner registration update information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistrationUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Partner registration update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_Update": {
+            "$ref": "./examples/PartnerRegistrations_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/partnerRegistrations": {
+      "get": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "List partner registrations under an Azure subscription.",
+        "description": "List all the partner registrations under an Azure subscription.",
+        "operationId": "PartnerRegistrations_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistrationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_ListBySubscription": {
+            "$ref": "./examples/PartnerRegistrations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations": {
+      "get": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "List partner registrations under a resource group.",
+        "description": "List all the partner registrations under a resource group.",
+        "operationId": "PartnerRegistrations_ListByResourceGroup",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistrationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_ListByResourceGroup": {
+            "$ref": "./examples/PartnerRegistrations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.EventGrid/partnerRegistrations": {
+      "get": {
+        "tags": [
+          "PartnerRegistrations"
+        ],
+        "summary": "List all available partners registrations.",
+        "description": "List all partners registrations.",
+        "operationId": "PartnerRegistrations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerRegistrationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PartnerRegistrations_List": {
+            "$ref": "./examples/PartnerRegistrations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}": {
+      "get": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "Get a partner topic.",
+        "description": "Get properties of a partner topic.",
+        "operationId": "PartnerTopics_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_Get": {
+            "$ref": "./examples/PartnerTopics_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "Delete a partner topic.",
+        "description": "Delete existing partner topic.",
+        "operationId": "PartnerTopics_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_Delete": {
+            "$ref": "./examples/PartnerTopics_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "Update a partner topic.",
+        "description": "Asynchronously updates a partner topic with the specified parameters.",
+        "operationId": "PartnerTopics_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicUpdateParameters",
+            "in": "body",
+            "description": "PartnerTopic update information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerTopicUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Partner Topic update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/PartnerTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_Update": {
+            "$ref": "./examples/PartnerTopics_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/partnerTopics": {
+      "get": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "List partner topics under an Azure subscription.",
+        "description": "List all the partner topics under an Azure subscription.",
+        "operationId": "PartnerTopics_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerTopicsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_ListBySubscription": {
+            "$ref": "./examples/PartnerTopics_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics": {
+      "get": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "List partner topics under a resource group.",
+        "description": "List all the partner topics under a resource group.",
+        "operationId": "PartnerTopics_ListByResourceGroup",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerTopicsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_ListByResourceGroup": {
+            "$ref": "./examples/PartnerTopics_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/activate": {
+      "post": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "Activate a partner topic.",
+        "description": "Activate a newly created partner topic.",
+        "operationId": "PartnerTopics_Activate",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_Activate": {
+            "$ref": "./examples/PartnerTopics_Activate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/deactivate": {
+      "post": {
+        "tags": [
+          "PartnerTopics"
+        ],
+        "summary": "Deactivate a partner topic.",
+        "description": "Deactivate specific partner topic.",
+        "operationId": "PartnerTopics_Deactivate",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PartnerTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopics_Deactivate": {
+            "$ref": "./examples/PartnerTopics_Deactivate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Get a specific private endpoint connection.",
+        "description": "Get a specific private endpoint connection under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Update a specific private endpoint connection.",
+        "description": "Update a specific private endpoint connection under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection object to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Delete a specific private endpoint connection.",
+        "description": "Delete a specific private endpoint connection under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Lists all private endpoint connections under a resource.",
+        "description": "Get all private endpoint connections under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByResource": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "Get a private link resource.",
+        "description": "Get properties of a private link resource.",
+        "operationId": "PrivateLinkResources_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of private link resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "List private link resources under specific topic or domain.",
+        "description": "List all the private link resources under a topic or domain.",
+        "operationId": "PrivateLinkResources_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByResource": {
+            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}": {
+      "get": {
+        "tags": [
+          "SystemTopics"
+        ],
+        "summary": "Get a system topic.",
+        "description": "Get properties of a system topic.",
+        "operationId": "SystemTopics_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SystemTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopics_Get": {
+            "$ref": "./examples/SystemTopics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SystemTopics"
+        ],
+        "summary": "Create a system topic.",
+        "description": "Asynchronously creates a new system topic with the specified parameters.",
+        "operationId": "SystemTopics_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicInfo",
+            "in": "body",
+            "description": "System Topic information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemTopic"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SystemTopic"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SystemTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopics_CreateOrUpdate": {
+            "$ref": "./examples/SystemTopics_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "SystemTopics"
+        ],
+        "summary": "Delete a system topic.",
+        "description": "Delete existing system topic.",
+        "operationId": "SystemTopics_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopics_Delete": {
+            "$ref": "./examples/SystemTopics_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "SystemTopics"
+        ],
+        "summary": "Update a system topic.",
+        "description": "Asynchronously updates a system topic with the specified parameters.",
+        "operationId": "SystemTopics_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicUpdateParameters",
+            "in": "body",
+            "description": "SystemTopic update information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemTopicUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "System Topic update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/SystemTopic"
+            }
+          },
+          "201": {
+            "description": "System Topic update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/SystemTopic"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopics_Update": {
+            "$ref": "./examples/SystemTopics_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/systemTopics": {
+      "get": {
+        "tags": [
+          "SystemTopics"
+        ],
+        "summary": "List system topics under an Azure subscription.",
+        "description": "List all the system topics under an Azure subscription.",
+        "operationId": "SystemTopics_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SystemTopicsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopics_ListBySubscription": {
+            "$ref": "./examples/SystemTopics_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics": {
+      "get": {
+        "tags": [
+          "SystemTopics"
+        ],
+        "summary": "List system topics under a resource group.",
+        "description": "List all the system topics under a resource group.",
+        "operationId": "SystemTopics_ListByResourceGroup",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SystemTopicsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopics_ListByResourceGroup": {
+            "$ref": "./examples/SystemTopics_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}": {
       "get": {
         "tags": [
@@ -1871,6 +4824,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Topic update request accepted.",
             "schema": {
@@ -2174,6 +5130,45 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.EventGrid/extensionTopics/default": {
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "summary": "Get properties of an extension topic.",
+        "description": "Get the properties of an extension topic.",
+        "operationId": "ExtensionTopics_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The identifier of the resource to which extension topic is queried. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace. For example, use '/subscriptions/{subscriptionId}/' for a subscription, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for Azure resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTopic"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionTopics_Get": {
+            "$ref": "./examples/ExtensionTopics_Get.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.EventGrid/topicTypes": {
       "get": {
         "tags": [
@@ -2305,6 +5300,13 @@
       "description": "Properties of the Domain.",
       "type": "object",
       "properties": {
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
         "provisioningState": {
           "description": "Provisioning state of the domain.",
           "enum": [
@@ -2350,16 +5352,92 @@
           "type": "string",
           "readOnly": true
         },
-        "allowTrafficFromAllIPs": {
-          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaluate and will allow traffic from all IPs.",
-          "type": "boolean"
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         },
         "inboundIpRules": {
-          "description": "This determines the IP filtering rules that ought be applied when events are received on this domain.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
           }
+        }
+      }
+    },
+    "ResourceSku": {
+      "description": "Describes an EventGrid Resource Sku.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the Sku name of the resource.\r\nthe possible values: Basic; Premium",
+          "enum": [
+            "Basic",
+            "Premium"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Sku",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "IdentityInfo": {
+      "description": "The identity information for the resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "The principal ID of resource identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\r\nThis property is currently not used and reserved for future usage.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of the PrivateEndpointConnection.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2380,6 +5458,20 @@
             "name": "IpActionType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "UserIdentityProperties": {
+      "description": "The information about the user identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -2404,6 +5496,81 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of the private endpoint connection resource.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The Private Endpoint resource for this Connection."
+        },
+        "groupIds": {
+          "description": "GroupIds from the private link service resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Details about the state of the connection."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Private Endpoint Connection.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "PrivateEndpoint information.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM identifier for Private Endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionState": {
+      "description": "ConnectionState information.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the connection.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PersistedConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Description of the connection state.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "Actions required (if any).",
+          "type": "string"
+        }
+      }
     },
     "JsonInputSchemaMappingProperties": {
       "description": "This can be used to map properties of a source schema (or default values, for certain supported properties) to properties of the EventGridEvent schema.",
@@ -2478,10 +5645,10 @@
     },
     "InputSchemaMapping": {
       "description": "By default, Event Grid expects events to be in the Event Grid event schema. Specifying an input schema mapping enables publishing to Event Grid using a custom input schema. Currently, the only supported type of InputSchemaMapping is 'JsonInputSchemaMapping'.",
-      "type": "object",
       "required": [
         "inputSchemaMappingType"
       ],
+      "type": "object",
       "properties": {
         "inputSchemaMappingType": {
           "description": "Type of the custom mapping",
@@ -2539,26 +5706,61 @@
           "$ref": "#/definitions/DomainProperties",
           "description": "Properties of the domain.",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The Sku pricing tier for the domain."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         }
       }
     },
     "DomainUpdateParameters": {
-      "description": "Properties of the Domain update",
+      "description": "Properties of the Domain update.",
       "type": "object",
       "properties": {
         "tags": {
-          "description": "Tags of the domains resource",
+          "description": "Tags of the domains resource.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
-        "allowTrafficFromAllIPs": {
-          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaluate and will allow traffic from all IPs.",
-          "type": "boolean"
+        "properties": {
+          "$ref": "#/definitions/DomainUpdateParameterProperties",
+          "description": "Properties of the resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The Sku pricing tier for the domain."
+        }
+      }
+    },
+    "DomainUpdateParameterProperties": {
+      "description": "Information of domain update parameter properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         },
         "inboundIpRules": {
-          "description": "This determines the IP filtering rules that ought be applied when events are received on this domain.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
@@ -2665,90 +5867,83 @@
         }
       }
     },
-    "EventSubscriptionProperties": {
-      "description": "Properties of the Event Subscription.",
+    "EventChannelProperties": {
+      "description": "Properties of the Event Channel.",
       "type": "object",
       "properties": {
-        "topic": {
-          "description": "Name of the topic of the event subscription.",
-          "type": "string",
-          "readOnly": true
+        "source": {
+          "$ref": "#/definitions/EventChannelSource",
+          "description": "Source of the event channel. This represents a unique resource in the partner's resource model."
+        },
+        "destination": {
+          "$ref": "#/definitions/EventChannelDestination",
+          "description": "Represents the destination of an event channel."
         },
         "provisioningState": {
-          "description": "Provisioning state of the event subscription.",
+          "description": "Provisioning state of the event channel.",
           "enum": [
             "Creating",
             "Updating",
             "Deleting",
             "Succeeded",
             "Canceled",
-            "Failed",
-            "AwaitingManualAction"
+            "Failed"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "EventSubscriptionProvisioningState",
+            "name": "EventChannelProvisioningState",
             "modelAsString": true
           }
-        },
-        "destination": {
-          "$ref": "#/definitions/EventSubscriptionDestination",
-          "description": "Information about the destination where events have to be delivered for the event subscription."
         },
         "filter": {
-          "$ref": "#/definitions/EventSubscriptionFilter",
-          "description": "Information about the filter for the event subscription."
-        },
-        "labels": {
-          "description": "List of user defined labels.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expirationTimeUtc": {
-          "format": "date-time",
-          "description": "Expiration time of the event subscription.",
-          "type": "string"
-        },
-        "eventDeliverySchema": {
-          "description": "The event delivery schema for the event subscription.",
-          "enum": [
-            "EventGridSchema",
-            "CustomInputSchema",
-            "CloudEventSchemaV1_0"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EventDeliverySchema",
-            "modelAsString": true
-          }
-        },
-        "retryPolicy": {
-          "$ref": "#/definitions/RetryPolicy",
-          "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events."
-        },
-        "deadLetterDestination": {
-          "$ref": "#/definitions/DeadLetterDestination",
-          "description": "The DeadLetter destination of the event subscription."
+          "$ref": "#/definitions/EventChannelFilter",
+          "description": "Information about the filter for the event channel."
         }
       }
     },
-    "EventSubscriptionFilter": {
-      "description": "Filter for the Event Subscription.",
+    "EventChannelSource": {
+      "description": "Properties of the source of an event channel.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "The identifier of the resource that's the source of the events.\r\nThis represents a unique resource in the partner's resource model.",
+          "type": "string"
+        }
+      }
+    },
+    "EventChannelDestination": {
+      "description": "Properties of the destination of an event channel.",
+      "type": "object",
+      "properties": {
+        "azureSubscriptionId": {
+          "description": "Azure subscription ID of the customer creating the event channel. The partner topic\r\nassociated with the event channel will be created under this Azure subscription.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Azure Resource Group of the customer creating the event channel. The partner topic\r\nassociated with the event channel will be created under this resource group.",
+          "type": "string"
+        },
+        "partnerTopicName": {
+          "description": "Name of the partner topic associated with the event channel.",
+          "type": "string"
+        }
+      }
+    },
+    "EventChannelFilter": {
+      "description": "Filter for the Event Channel.",
       "type": "object",
       "properties": {
         "subjectBeginsWith": {
-          "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events.\r\nWildcard characters are not supported in this path.",
+          "description": "An optional string to filter events for an event channel based on a resource path prefix.\r\nThe format of this depends on the publisher of the events. Wildcard characters are not supported in this path.",
           "type": "string"
         },
         "subjectEndsWith": {
-          "description": "An optional string to filter events for an event subscription based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
+          "description": "An optional string to filter events for an event channel based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
           "type": "string"
         },
         "includedEventTypes": {
-          "description": "A list of applicable event types that need to be part of the event subscription. If it is desired to subscribe to all default event types, set the IncludedEventTypes to null.",
+          "description": "A list of applicable event types that need to be part of the event channel. If it is desired to subscribe to all default event types, set the IncludedEventTypes to null.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2756,78 +5951,14 @@
         },
         "isSubjectCaseSensitive": {
           "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
-          "default": false,
           "type": "boolean"
         },
         "advancedFilters": {
-          "description": "An array of advanced filters that are used for filtering event subscriptions.",
+          "description": "An array of advanced filters that are used for filtering event channels.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdvancedFilter"
           }
-        }
-      }
-    },
-    "RetryPolicy": {
-      "description": "Information about the retry policy for an event subscription.",
-      "type": "object",
-      "properties": {
-        "maxDeliveryAttempts": {
-          "format": "int32",
-          "description": "Maximum number of delivery retry attempts for events.",
-          "type": "integer"
-        },
-        "eventTimeToLiveInMinutes": {
-          "format": "int32",
-          "description": "Time To Live (in minutes) for events.",
-          "type": "integer"
-        }
-      }
-    },
-    "WebHookEventSubscriptionDestinationProperties": {
-      "description": "Information about the webhook destination properties for an event subscription.",
-      "type": "object",
-      "properties": {
-        "endpointUrl": {
-          "description": "The URL that represents the endpoint of the destination of an event subscription.",
-          "type": "string"
-        },
-        "endpointBaseUrl": {
-          "description": "The base URL that represents the endpoint of the destination of an event subscription.",
-          "type": "string",
-          "readOnly": true
-        },
-        "maxEventsPerBatch": {
-          "format": "int32",
-          "description": "Maximum number of events per batch.",
-          "type": "integer"
-        },
-        "preferredBatchSizeInKilobytes": {
-          "format": "int32",
-          "description": "Preferred batch size in Kilobytes.",
-          "type": "integer"
-        },
-        "azureActiveDirectoryTenantId": {
-          "description": "The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
-          "type": "string"
-        },
-        "azureActiveDirectoryApplicationIdOrUri": {
-          "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
-          "type": "string"
-        }
-      }
-    },
-    "StorageBlobDeadLetterDestinationProperties": {
-      "description": "Properties of the storage blob based dead letter destination.",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
-          "type": "string"
-        },
-        "blobContainerName": {
-          "description": "The name of the Storage blob container that is the destination of the deadletter events",
-          "type": "string"
         }
       }
     },
@@ -2850,23 +5981,6 @@
         }
       },
       "x-ms-discriminator-value": "NumberIn"
-    },
-    "StorageBlobDeadLetterDestination": {
-      "description": "Information about the storage blob based dead letter destination.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeadLetterDestination"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageBlobDeadLetterDestinationProperties",
-          "description": "The properties of the Storage Blob based deadletter destination",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "StorageBlob"
     },
     "NumberNotInAdvancedFilter": {
       "description": "NumberNotIn Advanced Filter.",
@@ -3103,6 +6217,280 @@
       },
       "discriminator": "operatorType"
     },
+    "EventChannel": {
+      "description": "Event Channel.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventChannelProperties",
+          "description": "Properties of the EventChannel.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventChannelsListResult": {
+      "description": "Result of the List Event Channels operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of Event Channels",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventChannel"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of event channels",
+          "type": "string"
+        }
+      }
+    },
+    "EventSubscriptionProperties": {
+      "description": "Properties of the Event Subscription.",
+      "type": "object",
+      "properties": {
+        "topic": {
+          "description": "Name of the topic of the event subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the event subscription.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "AwaitingManualAction"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EventSubscriptionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "destination": {
+          "$ref": "#/definitions/EventSubscriptionDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deliveryWithResourceIdentity": {
+          "$ref": "#/definitions/DeliveryWithResourceIdentity",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "filter": {
+          "$ref": "#/definitions/EventSubscriptionFilter",
+          "description": "Information about the filter for the event subscription."
+        },
+        "labels": {
+          "description": "List of user defined labels.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expirationTimeUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the event subscription.",
+          "type": "string"
+        },
+        "eventDeliverySchema": {
+          "description": "The event delivery schema for the event subscription.",
+          "enum": [
+            "EventGridSchema",
+            "CustomInputSchema",
+            "CloudEventSchemaV1_0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventDeliverySchema",
+            "modelAsString": true
+          }
+        },
+        "retryPolicy": {
+          "$ref": "#/definitions/RetryPolicy",
+          "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events."
+        },
+        "deadLetterDestination": {
+          "$ref": "#/definitions/DeadLetterDestination",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deadLetterWithResourceIdentity": {
+          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "DeliveryWithResourceIdentity": {
+      "description": "Information about the delivery for an event subscription with resource identity.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EventSubscriptionIdentity",
+          "description": "The identity to use when delivering events."
+        },
+        "destination": {
+          "$ref": "#/definitions/EventSubscriptionDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "EventSubscriptionFilter": {
+      "description": "Filter for the Event Subscription.",
+      "type": "object",
+      "properties": {
+        "subjectBeginsWith": {
+          "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events.\r\nWildcard characters are not supported in this path.",
+          "type": "string"
+        },
+        "subjectEndsWith": {
+          "description": "An optional string to filter events for an event subscription based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
+          "type": "string"
+        },
+        "includedEventTypes": {
+          "description": "A list of applicable event types that need to be part of the event subscription. If it is desired to subscribe to all default event types, set the IncludedEventTypes to null.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isSubjectCaseSensitive": {
+          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
+          "default": false,
+          "type": "boolean"
+        },
+        "advancedFilters": {
+          "description": "An array of advanced filters that are used for filtering event subscriptions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedFilter"
+          }
+        }
+      }
+    },
+    "RetryPolicy": {
+      "description": "Information about the retry policy for an event subscription.",
+      "type": "object",
+      "properties": {
+        "maxDeliveryAttempts": {
+          "format": "int32",
+          "description": "Maximum number of delivery retry attempts for events.",
+          "type": "integer"
+        },
+        "eventTimeToLiveInMinutes": {
+          "format": "int32",
+          "description": "Time To Live (in minutes) for events.",
+          "type": "integer"
+        }
+      }
+    },
+    "DeadLetterWithResourceIdentity": {
+      "description": "Information about the deadletter destination with resource identity.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EventSubscriptionIdentity",
+          "description": "The identity to use when dead-lettering events."
+        },
+        "deadLetterDestination": {
+          "$ref": "#/definitions/DeadLetterDestination",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
+    "EventSubscriptionIdentity": {
+      "description": "The identity information with the event subscription.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventSubscriptionIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "description": "The user identity associated with the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "WebHookEventSubscriptionDestinationProperties": {
+      "description": "Information about the webhook destination properties for an event subscription.",
+      "type": "object",
+      "properties": {
+        "endpointUrl": {
+          "description": "The URL that represents the endpoint of the destination of an event subscription.",
+          "type": "string"
+        },
+        "endpointBaseUrl": {
+          "description": "The base URL that represents the endpoint of the destination of an event subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maxEventsPerBatch": {
+          "format": "int32",
+          "description": "Maximum number of events per batch.",
+          "type": "integer"
+        },
+        "preferredBatchSizeInKilobytes": {
+          "format": "int32",
+          "description": "Preferred batch size in Kilobytes.",
+          "type": "integer"
+        },
+        "azureActiveDirectoryTenantId": {
+          "description": "The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        },
+        "azureActiveDirectoryApplicationIdOrUri": {
+          "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageBlobDeadLetterDestinationProperties": {
+      "description": "Properties of the storage blob based dead letter destination.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
+          "type": "string"
+        },
+        "blobContainerName": {
+          "description": "The name of the Storage blob container that is the destination of the deadletter events",
+          "type": "string"
+        }
+      }
+    },
+    "StorageBlobDeadLetterDestination": {
+      "description": "Information about the storage blob based dead letter destination.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeadLetterDestination"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageBlobDeadLetterDestinationProperties",
+          "description": "The properties of the Storage Blob based deadletter destination",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "StorageBlob"
+    },
     "WebHookEventSubscriptionDestination": {
       "description": "Information about the webhook destination for an event subscription.",
       "type": "object",
@@ -3318,14 +6706,14 @@
       "x-ms-discriminator-value": "AzureFunction"
     },
     "EventSubscriptionDestination": {
-      "description": "Information about the destination for an event subscription",
+      "description": "Information about the destination for an event subscription.",
       "required": [
         "endpointType"
       ],
       "type": "object",
       "properties": {
         "endpointType": {
-          "description": "Type of the endpoint for the event subscription destination",
+          "description": "Type of the endpoint for the event subscription destination.",
           "enum": [
             "WebHook",
             "EventHub",
@@ -3366,7 +6754,11 @@
       "properties": {
         "destination": {
           "$ref": "#/definitions/EventSubscriptionDestination",
-          "description": "Information about the destination where events have to be delivered for the event subscription."
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deliveryWithResourceIdentity": {
+          "$ref": "#/definitions/DeliveryWithResourceIdentity",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (topic / domain) to acquire the authentication tokens being used during delivery / dead-lettering."
         },
         "filter": {
           "$ref": "#/definitions/EventSubscriptionFilter",
@@ -3403,7 +6795,11 @@
         },
         "deadLetterDestination": {
           "$ref": "#/definitions/DeadLetterDestination",
-          "description": "The DeadLetter destination of the event subscription."
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses Azure Event Grid's identity to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deadLetterWithResourceIdentity": {
+          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (topic / domain) to acquire the authentication tokens being used during delivery / dead-lettering."
         }
       }
     },
@@ -3492,10 +6888,645 @@
         }
       }
     },
+    "PartnerNamespaceProperties": {
+      "description": "Properties of the partner namespace.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the partner namespace.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PartnerNamespaceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "partnerRegistrationFullyQualifiedId": {
+          "description": "The fully qualified ARM Id of the partner registration that should be associated with this partner namespace. This takes the following format:\r\n/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerRegistrations/{partnerRegistrationName}.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "Endpoint for the partner namespace.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PartnerNamespace": {
+      "description": "EventGrid Partner Namespace.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerNamespaceProperties",
+          "description": "Properties of the partner namespace.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PartnerNamespaceUpdateParameters": {
+      "description": "Properties of the PartnerNamespace update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the partner namespace.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PartnerNamespacesListResult": {
+      "description": "Result of the List Partner Namespaces operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner namespaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerNamespace"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of partner namespaces.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerNamespaceSharedAccessKeys": {
+      "description": "Shared access keys of the partner namespace.",
+      "type": "object",
+      "properties": {
+        "key1": {
+          "description": "Shared access key1 for the partner namespace.",
+          "type": "string"
+        },
+        "key2": {
+          "description": "Shared access key2 for the partner namespace.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerNamespaceRegenerateKeyRequest": {
+      "description": "PartnerNamespace regenerate shared access key request.",
+      "required": [
+        "keyName"
+      ],
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "description": "Key name to regenerate (key1 or key2).",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerRegistrationProperties": {
+      "description": "Properties of the partner registration.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the partner registration.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PartnerRegistrationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "partnerName": {
+          "description": "Official name of the partner name. For example: \"Contoso\".",
+          "type": "string"
+        },
+        "partnerResourceTypeName": {
+          "description": "Name of the partner resource type.",
+          "type": "string"
+        },
+        "partnerResourceTypeDisplayName": {
+          "description": "Display name of the partner resource type.",
+          "type": "string"
+        },
+        "partnerResourceTypeDescription": {
+          "description": "Description of the partner resource type.",
+          "type": "string"
+        },
+        "setupUri": {
+          "description": "URI of the partner website that can be used by Azure customers to setup Event Grid\r\nintegration on an event source.",
+          "type": "string"
+        },
+        "logoUri": {
+          "description": "URI of the logo.",
+          "type": "string"
+        },
+        "visibilityState": {
+          "description": "Visibility state of the partner registration.",
+          "enum": [
+            "Hidden",
+            "PublicPreview",
+            "GenerallyAvailable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PartnerRegistrationVisibilityState",
+            "modelAsString": true
+          }
+        },
+        "authorizedAzureSubscriptionIds": {
+          "description": "List of Azure subscription Ids that are authorized to create a partner namespace\r\nassociated with this partner registration. This is an optional property. Creating\r\npartner namespaces is always permitted under the same Azure subscription as the one used\r\nfor creating the partner registration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PartnerRegistration": {
+      "description": "Information about a partner registration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerRegistrationProperties",
+          "description": "Properties of the partner registration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PartnerRegistrationUpdateParameters": {
+      "description": "Properties of the Partner Registration update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the partner registration resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partnerTopicTypeName": {
+          "description": "Name of the partner topic type.",
+          "type": "string"
+        },
+        "partnerTopicTypeDisplayName": {
+          "description": "Display name of the partner topic type.",
+          "type": "string"
+        },
+        "partnerTopicTypeDescription": {
+          "description": "Description of the partner topic type.",
+          "type": "string"
+        },
+        "setupUri": {
+          "description": "URI of the partner website that can be used by Azure customers to setup Event Grid\r\nintegration on an event source.",
+          "type": "string"
+        },
+        "logoUri": {
+          "description": "URI of the partner logo.",
+          "type": "string"
+        },
+        "authorizedAzureSubscriptionIds": {
+          "description": "List of IDs of Azure AD applications that are authorized to create a partner namespace\r\nassociated with this partner registration. This is an optional property. Creating\r\npartner namespaces is always permitted under the same Azure subscription as the one used\r\nfor creating the partner registration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PartnerRegistrationsListResult": {
+      "description": "Result of the List Partner Registrations operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner registrations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerRegistration"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of partner registrations.",
+          "type": "string"
+        }
+      }
+    },
+    "EventTypeProperties": {
+      "description": "Properties of the event type",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the event type.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the event type.",
+          "type": "string"
+        },
+        "schemaUrl": {
+          "description": "Url of the schema for this event type.",
+          "type": "string"
+        },
+        "isInDefaultSet": {
+          "description": "IsInDefaultSet flag of the event type.",
+          "type": "boolean"
+        }
+      }
+    },
+    "EventType": {
+      "description": "Event Type for a subject under a topic",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventTypeProperties",
+          "description": "Properties of the event type.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PartnerRegistrationEventTypesListResult": {
+      "description": "Result of the List Partner Registration Event Types operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner registration event types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventType"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of partner registration event types.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerTopicUpdateParameters": {
+      "description": "Properties of the Partner Topic update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the partner topic.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PartnerTopicProperties": {
+      "description": "Properties of the Partner Topic.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Source associated with this partner topic. This represents a unique partner resource.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the partner topic.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PartnerTopicProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "activationState": {
+          "description": "Activation state of the partner topic.",
+          "enum": [
+            "NeverActivated",
+            "Activated",
+            "Deactivated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PartnerTopicActivationState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PartnerTopic": {
+      "description": "EventGrid Partner Topic.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerTopicProperties",
+          "description": "Properties of the partner topic.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PartnerTopicsListResult": {
+      "description": "Result of the List Partner Topics operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner topics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerTopic"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of partner topics.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerTopicTypesListResult": {
+      "description": "Result of the List Partner Topic Types operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of partner topic types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerTopicType"
+          }
+        }
+      }
+    },
+    "PartnerTopicTypeProperties": {
+      "description": "Properties of a partner topic type.",
+      "type": "object",
+      "properties": {
+        "partnerName": {
+          "description": "Official name of the partner.",
+          "type": "string"
+        },
+        "topicTypeName": {
+          "description": "Name of the partner topic type. This name should be unique among all partner topic types names.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display Name for the partner topic type.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the partner topic type.",
+          "type": "string"
+        },
+        "setupUri": {
+          "description": "URI of the partner website that can be used by Azure customers to setup Event Grid\r\nintegration on an event source.",
+          "type": "string"
+        },
+        "authorizationState": {
+          "description": "Status of whether the customer has authorized a partner to create partner topics\r\nin the customer's subscription.",
+          "enum": [
+            "NotApplicable",
+            "NotAuthorized",
+            "Authorized"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PartnerTopicTypeAuthorizationState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PartnerTopicType": {
+      "description": "Properties of a partner topic type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerTopicTypeProperties",
+          "description": "Properties of the partner topic type.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventTypesListResult": {
+      "description": "Result of the List Event Types operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of event types",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventType"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "description": "Result of the list of all private endpoint connections operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of private endpoint connection resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private endpoint connection resources.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "Information of the private link resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of the private link resource.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourcesListResult": {
+      "description": "Result of the List private link resources operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of private link resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "SystemTopicProperties": {
+      "description": "Properties of the System Topic.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the system topic.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResourceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "description": "Source for the system topic.",
+          "type": "string"
+        },
+        "topicType": {
+          "description": "TopicType for the system topic.",
+          "type": "string"
+        },
+        "metricResourceId": {
+          "description": "Metric resource id for the system topic.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemTopic": {
+      "description": "EventGrid System Topic.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemTopicProperties",
+          "description": "Properties of the system topic.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SystemTopicUpdateParameters": {
+      "description": "Properties of the System Topic update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the system topic.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SystemTopicsListResult": {
+      "description": "Result of the List System topics operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of system Topics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SystemTopic"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of topics.",
+          "type": "string"
+        }
+      }
+    },
     "TopicProperties": {
       "description": "Properties of the Topic",
       "type": "object",
       "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
         "provisioningState": {
           "description": "Provisioning state of the topic.",
           "enum": [
@@ -3541,12 +7572,20 @@
           "type": "string",
           "readOnly": true
         },
-        "allowTrafficFromAllIPs": {
-          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaluate and will allow traffic from all IPs.",
-          "type": "boolean"
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         },
         "inboundIpRules": {
-          "description": "This determines the IP filtering rules that ought to be applied when events are received on this topic.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
@@ -3565,8 +7604,16 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TopicProperties",
-          "description": "Properties of the topic",
+          "description": "Properties of the topic.",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The Sku pricing tier for the topic."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         }
       }
     },
@@ -3581,12 +7628,39 @@
             "type": "string"
           }
         },
-        "allowTrafficFromAllIPs": {
-          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaluate and will allow traffic from all IPs.",
-          "type": "boolean"
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Resource identity information."
+        },
+        "properties": {
+          "$ref": "#/definitions/TopicUpdateParameterProperties",
+          "description": "Properties of the resource.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The Sku pricing tier for the topic."
+        }
+      }
+    },
+    "TopicUpdateParameterProperties": {
+      "description": "Information of topic update parameter properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicUpdateParameterProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         },
         "inboundIpRules": {
-          "description": "This determines the IP filtering rules that ought be applied when events are received on this domain.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
@@ -3638,43 +7712,22 @@
         }
       }
     },
-    "EventTypesListResult": {
-      "description": "Result of the List Event Types operation",
+    "ExtensionTopicProperties": {
+      "description": "Properties of the Extension Topic",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "A collection of event types",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EventType"
-          }
-        }
-      }
-    },
-    "EventTypeProperties": {
-      "description": "Properties of the event type",
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "description": "Display name of the event type.",
-          "type": "string"
-        },
         "description": {
-          "description": "Description of the event type.",
+          "description": "Description of the extension topic.",
           "type": "string"
         },
-        "schemaUrl": {
-          "description": "Url of the schema for this event type.",
+        "systemTopic": {
+          "description": "System topic resource id which is mapped to the source.",
           "type": "string"
-        },
-        "isInDefaultSet": {
-          "description": "IsInDefaultSet flag of the event type.",
-          "type": "boolean"
         }
       }
     },
-    "EventType": {
-      "description": "Event Type for a subject under a topic",
+    "ExtensionTopic": {
+      "description": "Event grid Extension Topic. This is used for getting Event Grid related metrics for Azure resources.",
       "type": "object",
       "allOf": [
         {
@@ -3683,8 +7736,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EventTypeProperties",
-          "description": "Properties of the event type.",
+          "$ref": "#/definitions/ExtensionTopicProperties",
+          "description": "Properties of the extension topic",
           "x-ms-client-flatten": true
         }
       }
