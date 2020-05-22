@@ -43,6 +43,12 @@
           },
           "parameters": [
             {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
               "name": "nameAvailabilityParameters",
               "in": "body",
               "required": true,
@@ -50,12 +56,6 @@
                 "$ref": "#/definitions/MCVPAccountCheckNameAvailabilityParameters"
               },
               "description": "The name and type of resource to validate within the specified subscription."
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -63,6 +63,12 @@
               "description": "OK. The response indicates if the name is valid and available or not.",
               "schema": {
                 "$ref": "#/definitions/CheckNameAvailabilityResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
               }
             }
           }
@@ -82,10 +88,16 @@
           },
           "parameters": [
             {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountName"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MCVPAccountNameParameter"
             },
             {
               "name": "parameters",
@@ -95,12 +107,6 @@
                 "$ref": "#/definitions/MCVPAccount"
               },
               "description": "The parameters used to create an MCVP account."
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -110,8 +116,17 @@
                 "$ref": "#/definitions/MCVPAccount"
               }
             },
-            "202": {
-              "description": "Accepted. The request to create or update the MCVP account has been accepted and the operation will complete asynchronously."
+            "201": {
+              "description": "Created.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
             }
           },
           "x-ms-long-running-operation": true
@@ -129,26 +144,36 @@
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountName"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "#/parameters/MCVPAccountNameParameter"
             }
           ],
           "responses": {
             "200": {
               "description": "OK. The MCVP account was deleted successfully."
             },
+            "202": {
+              "description": "Accepted. The request to delete the MCVP account has been accepted and the operation will complete asynchronously."
+            },
             "204": {
               "description": "NoContent. An MCVP account with the specified parameters does not exist."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         },
         "get": {
           "tags": [
@@ -163,16 +188,16 @@
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountName"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "#/parameters/MCVPAccountNameParameter"
             }
           ],
           "responses": {
@@ -180,6 +205,12 @@
               "description": "OK. The response includes the properties of the specified MCVP account.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
               }
             }
           }
@@ -197,10 +228,16 @@
           },
           "parameters": [
             {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountName"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MCVPAccountNameParameter"
             },
             {
               "name": "parameters",
@@ -210,12 +247,6 @@
                 "$ref": "#/definitions/MCVPAccountUpdateParameters"
               },
               "description": "The parameters to provide for the updated account."
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -224,8 +255,15 @@
               "schema": {
                 "$ref": "#/definitions/MCVPAccount"
               }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         }
       },
       "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/mcvpAccounts": {
@@ -242,10 +280,10 @@
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
@@ -253,6 +291,12 @@
               "description": "OK. The response includes the list of MCVP accounts under the specified subscription.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccountListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -275,13 +319,13 @@
           },
           "parameters": [
             {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             }
           ],
           "responses": {
@@ -289,6 +333,12 @@
               "description": "OK. The response includes the list of MCVP accounts under the specified resource group.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccountListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -314,6 +364,12 @@
               "description": "OK. The response includes the list of available operations.",
               "schema": {
                 "$ref": "#/definitions/OperationsListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -351,12 +407,10 @@
     "CheckNameAvailabilityResult": {
       "properties": {
         "isNameAvailable": {
-          "readOnly": true,
           "type": "boolean",
           "description": "Indicates whether the name is valid and available."
         },
         "reason": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "AccountNameInvalid",
@@ -369,7 +423,6 @@
           "description": "If the name is not valid or available, describes the reason why it cannot be used."
         },
         "message": {
-          "readOnly": true,
           "type": "string",
           "description": "If the name is not valid or available, describes the reason why it cannot be used in detail."
         }
@@ -499,17 +552,14 @@
       "properties": {
         "cosmosDb": {
           "$ref": "#/definitions/CosmosDb",
-          "readOnly": true,
           "description": "The ID of the Cosmos DB resource in the user's subscription."
         },
         "extensions": {
           "$ref": "#/definitions/Extensions",
-          "readOnly": true,
           "description": "The ID to the Azure Functions resource in the user's subscription."
         },
         "networking": {
           "$ref": "#/definitions/Networking",
-          "readOnly": true,
           "description": "The networking configuration."
         }
       },
@@ -540,18 +590,31 @@
       "properties": {
         "cosmosDb": {
           "$ref": "#/definitions/CosmosDb",
-          "readOnly": true,
           "description": "The ID of the Cosmos DB resource in the user's subscription."
         },
         "extensions": {
           "$ref": "#/definitions/Extensions",
-          "readOnly": true,
           "description": "The ID to the Azure Functions resource in the user's subscription."
         },
         "networking": {
           "$ref": "#/definitions/Networking",
-          "readOnly": true,
           "description": "The networking configuration."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current provisioning state of the MCVP account."
         }
       },
       "description": "The properties of the MCVP account."
@@ -560,7 +623,6 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "readOnly": true,
           "description": "The SKU of the MCVP account."
         },
         "properties": {
@@ -579,7 +641,6 @@
     "MCVPAccountListResult": {
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MCVPAccount"
@@ -598,6 +659,7 @@
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the operation."
         },
         "display": {
@@ -629,6 +691,7 @@
       "properties": {
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "The request URL that can be used to query the next page of operations. This is returned when the total number of operations exceeds the maximum page size."
         },
         "value": {
@@ -646,14 +709,12 @@
     }
   },
   "parameters": {
-    "MCVPAccountName": {
+    "MCVPAccountNameParameter": {
       "name": "accountName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the MCVP account within the specified resource group. MCVP account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-      "maxLength": 24,
-      "minLength": 3,
+      "description": "The name of the MCVP account within the specified resource group.",
       "x-ms-parameter-location": "method"
     }
   }
