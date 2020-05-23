@@ -1,0 +1,721 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01-preview",
+    "title": "mobility",
+    "description": "Resource Provider for the Microsoft Connected Vehicle Platform",
+    "x-ms-code-generation-settings": {
+      "name": "mobilityClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/checkNameAvailability": {
+        "post": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_CheckNameAvailability",
+          "description": "Checks that the name of the MCVP account is valid and is not already in use.",
+          "x-ms-examples": {
+            "MCVPAccountCheckNameAvailability": {
+              "$ref": "./examples/MCVPAccountCheckNameAvailability.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "name": "nameAvailabilityParameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/MCVPAccountCheckNameAvailabilityParameters"
+              },
+              "description": "The name and type of resource to validate within the specified subscription."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The response indicates if the name is valid and available or not.",
+              "schema": {
+                "$ref": "#/definitions/CheckNameAvailabilityResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mobility/mcvpAccounts/{accountName}": {
+        "put": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_Create",
+          "description": "Asynchronously creates a new MCVP account with the specified parameters.",
+          "x-ms-examples": {
+            "MCVPAccountCreate": {
+              "$ref": "./examples/MCVPAccountCreate.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MCVPAccountNameParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              },
+              "description": "The parameters used to create an MCVP account."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The specified MCVP account had already been created by a previous request with the same properties.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "201": {
+              "description": "Created.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
+        "delete": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_Delete",
+          "description": "Deletes an MCVP account.",
+          "x-ms-examples": {
+            "MCVPAccountDelete": {
+              "$ref": "./examples/MCVPAccountDelete.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MCVPAccountNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The MCVP account was deleted successfully."
+            },
+            "202": {
+              "description": "Accepted. The request to delete the MCVP account has been accepted and the operation will complete asynchronously."
+            },
+            "204": {
+              "description": "NoContent. An MCVP account with the specified parameters does not exist."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
+        "get": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_GetProperties",
+          "description": "Returns the properties of the specified MCVP account.",
+          "x-ms-examples": {
+            "MCVPAccountGetProperties": {
+              "$ref": "./examples/MCVPAccountGetProperties.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MCVPAccountNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The response includes the properties of the specified MCVP account.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_Update",
+          "description": "Updates the properties of a specified MCVP account.",
+          "x-ms-examples": {
+            "MCVPAccountUpdate": {
+              "$ref": "./examples/MCVPAccountUpdate.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MCVPAccountNameParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/MCVPAccountUpdateParameters"
+              },
+              "description": "The parameters to provide for the updated account."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The properties of the specified MCVP account were updated successfully.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/mcvpAccounts": {
+        "get": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_ListBySubscription",
+          "description": "Lists all the MCVP accounts available under the specified subscription.",
+          "x-ms-examples": {
+            "MCVPAccountListBySubscription": {
+              "$ref": "./examples/MCVPAccountListBySubscription.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The response includes the list of MCVP accounts under the specified subscription.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccountListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mobility/mcvpAccounts": {
+        "get": {
+          "tags": [
+            "MCVPAccounts"
+          ],
+          "operationId": "MCVPAccounts_ListByResourceGroup",
+          "description": "Lists all the MCVP accounts available under the specified resource group.",
+          "x-ms-examples": {
+            "MCVPAccountListByResourceGroup": {
+              "$ref": "./examples/MCVPAccountListByResourceGroup.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The response includes the list of MCVP accounts under the specified resource group.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccountListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/providers/Microsoft.Mobility/operations": {
+        "get": {
+          "tags": [
+            "Operations"
+          ],
+          "description": "Returns list of operations.",
+          "operationId": "Operations_List",
+          "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The response includes the list of available operations.",
+              "schema": {
+                "$ref": "#/definitions/OperationsListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      }
+  },
+  "definitions": {
+    "MCVPAccountCheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource to validate."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Mobility/mcvpAccounts"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of the resource to validate, e.g. Microsoft.Mobility/mcvpAccounts"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The parameters used to check the availability of a resource name."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "isNameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the name is valid and available."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": false
+          },
+          "description": "If the name is not valid or available, describes the reason why it cannot be used."
+        },
+        "message": {
+          "type": "string",
+          "description": "If the name is not valid or available, describes the reason why it cannot be used in detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The name of the SKU."
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier",
+          "description": "The tier of the SKU."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity associated with this SKU."
+        }
+      },
+      "required": [
+        "name",
+        "capacity"
+      ],
+      "description": "The SKU of the MCVP account."
+    },
+    "SkuName": {
+      "type": "string",
+      "enum": [
+        "Standard_A",
+        "Standard_B",
+        "Premium_A",
+        "Premium_B"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      },
+      "description": "The SKU name."
+    },
+    "Tier": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
+      },
+      "description": "The SKU tier, which is based on the SKU name."
+    },
+    "MqttEndpoint": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the endpoint is enabled."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "The MQTT endpoint."
+    },
+    "IoTHubEndpoint": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the endpoint is enabled."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "The IoT Hub endpoint."
+    },
+    "Endpoints": {
+      "properties": {
+        "mqtt": {
+          "$ref": "#/definitions/MqttEndpoint",
+          "description": "The details of the MQTT endpoint."
+        },
+        "iotHub": {
+          "$ref": "#/definitions/IoTHubEndpoint",
+          "description": "The details of the IoT Hub endpoint."
+        }
+      },
+      "description": "The details of the endpoints."
+    },
+    "Networking": {
+      "properties": {
+        "endpoints": {
+          "$ref": "#/definitions/Endpoints",
+          "description": "The details of the endpoints."
+        }
+      },
+      "description": "The networking configuration."
+    },
+    "CosmosDb": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the Cosmos DB resource."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The details of the Cosmos DB resource in the user's subscription."
+    },
+    "Extensions": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the Azure Functions resource."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The details of the Azure Functions resource in the user's subscription."
+    },
+    "MCVPAccountPropertiesUpdateParameters": {
+      "properties": {
+        "cosmosDb": {
+          "$ref": "#/definitions/CosmosDb",
+          "description": "The ID of the Cosmos DB resource in the user's subscription."
+        },
+        "extensions": {
+          "$ref": "#/definitions/Extensions",
+          "description": "The ID to the Azure Functions resource in the user's subscription."
+        },
+        "networking": {
+          "$ref": "#/definitions/Networking",
+          "description": "The networking configuration."
+        }
+      },
+      "description": "The properties of the MCVP account to update."
+    },
+    "MCVPAccountUpdateParameters": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the MCVP account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The list of key-value pairs that describe the MCVP account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MCVPAccountPropertiesUpdateParameters",
+          "description": "The parameters used to update the MCVP account."
+        }
+      },
+      "description": "The parameters used to update the properties of an MCVP account."
+    },
+    "MCVPAccountProperties": {
+      "properties": {
+        "cosmosDb": {
+          "$ref": "#/definitions/CosmosDb",
+          "description": "The ID of the Cosmos DB resource in the user's subscription."
+        },
+        "extensions": {
+          "$ref": "#/definitions/Extensions",
+          "description": "The ID to the Azure Functions resource in the user's subscription."
+        },
+        "networking": {
+          "$ref": "#/definitions/Networking",
+          "description": "The networking configuration."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current provisioning state of the MCVP account."
+        }
+      },
+      "description": "The properties of the MCVP account."
+    },
+    "MCVPAccount": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the MCVP account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MCVPAccountProperties",
+          "description": "The properties of the MCVP account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The MCVP account."
+    },
+    "MCVPAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MCVPAccount"
+          },
+          "description": "The list of MCVP accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The request URL that can be used to query the next page of MCVP accounts. This is returned when the total number of requested MCVP accounts exceeds the maximum page size."
+        }
+      },
+      "description": "The response from the operations that list MCVP accounts by subscription and by resource group."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the operation."
+        },
+        "display": {
+          "type": "object",
+          "description": "The properties of the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The name of the resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "The name of the resource."
+            },
+            "operation": {
+              "type": "string",
+              "description": "The operation."
+            },
+            "description": {
+              "type": "string",
+              "description": "The description of the operation."
+            }
+          }
+        }
+      },
+      "description": "The operation provided by the resource provider."
+    },
+    "OperationsListResult": {
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The request URL that can be used to query the next page of operations. This is returned when the total number of operations exceeds the maximum page size."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "The array of operations."
+        }
+      },
+      "required": [
+          "value"
+      ],
+      "description": "The list of available operations."
+    }
+  },
+  "parameters": {
+    "MCVPAccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the MCVP account within the specified resource group.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
