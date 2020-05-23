@@ -20,8 +20,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Azure Synapse Analytics API.
 
@@ -39,6 +37,10 @@ tag: package-development-2019-06-01-preview
 
 ``` yaml $(package-access-control)
 tag: package-access-control-2020-02-01-preview
+```
+
+``` yaml $(package-vnet)
+tag: package-vnet-2019-06-01-preview
 ```
 
 ### Tag: package-spark-2019-11-01-preview
@@ -69,8 +71,13 @@ input-file:
 - Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
 ```
 
-``` yaml $(package-vnet)
-tag: package-vnet-2019-06-01-preview
+### Tag: package-vnet-2019-06-01-preview
+
+These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-vnet-2019-06-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
 ```
 
 ## Suppression
@@ -94,15 +101,6 @@ directive:
       - $.definitions.NotebookKernelSpec.properties.display_name
       - $.definitions.NotebookMetadata.properties.language_info
       - $.definitions.Notebook.properties.nbformat_minor
-```
-
-### Tag: package-vnet-2019-06-01-preview
-
-These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specified on the command line
-
-``` yaml $(tag) == 'package-vnet-2019-06-01-preview'
-input-file:
-- Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
 ```
 
 ---
