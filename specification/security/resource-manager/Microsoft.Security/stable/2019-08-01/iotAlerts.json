@@ -89,7 +89,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CompactIotAlertPropertiesList"
+              "$ref": "#/definitions/IotAlertPropertiesList"
             }
           },
           "default": {
@@ -151,7 +151,7 @@
     }
   },
   "definitions": {
-    "CompactIotAlertPropertiesList": {
+    "IotAlertPropertiesList": {
       "description": "List of alerts",
       "type": "object",
       "properties": {
@@ -160,7 +160,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CompactIotAlertProperties"
+            "$ref": "#/definitions/IotAlertProperties"
           }
         },
         "nextLink": {
@@ -170,9 +170,9 @@
         }
       }
     },
-    "CompactIotAlertProperties": {
+    "IotAlertProperties": {
       "type": "object",
-      "description": "Compact version of IoT alert properties",
+      "description": "IoT alert properties",
       "properties": {
         "systemAlertId": {
           "description": "Holds the product canonical identifier of the alert within the scope of a product",
@@ -198,42 +198,26 @@
           "type": "string",
           "example": "2020-05-13T06:32:25Z"
         },
-        "extendedProperties": {
-          "description": "A bag of fields which extends the general alert properties",
+        "endTimeUtc": {
+          "description": "The impact end time of the alert (the time of the last event or activity included in the alert)",
           "readOnly": true,
-          "type": "object",
-          "example": {
-            "CommandLine": "docker run --privileged",
-            "User Name": "aUser",
-            "UserId": "",
-            "ParentProcessId": 1593,
-            "DeviceId": "device-1"
-          }
+          "type": "string",
+          "example": "2020-05-13T06:32:25Z"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": [
+            {
+              "$id": "1",
+              "CommandLine": "docker run --privileged",
+              "Type": "process"
+            }
+          ]
         }
       }
-    },
-    "IotAlert": {
-      "type": "object",
-      "description": "Iot alert",
-      "properties": {
-        "properties": {
-          "readOnly": true,
-          "x-ms-client-flatten": true,
-          "description": "Iot alert properties",
-          "$ref": "#/definitions/IotAlertProperties"
-        }
-      },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/Resource"
-      }]
-    },
-    "IotAlertProperties": {
-      "type": "object",
-      "description": "IoT alert properties",
-      "properties": {},
-      "allOf": [{
-        "$ref": "#/definitions/CompactIotAlertProperties"
-      }]
     }
   },
   "parameters": {
