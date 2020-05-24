@@ -80,17 +80,17 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
-      "put": {
+      "patch": {
         "tags": [
           "Tables"
         ],
         "x-ms-examples": {
           "TablesSet": {
-            "$ref": "./examples/TablesSet.json"
+            "$ref": "./examples/TablesUpdate.json"
           }
         },
-        "operationId": "Tables_Set",
-        "description": "Sets a Log Analytics workspace table properties.",
+        "operationId": "Tables_Update",
+        "description": "Updates a Log Analytics workspace table properties.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -114,7 +114,7 @@
             "schema": {
               "$ref": "#/definitions/Table"
             },
-            "description": "The parameters required to set table properties."
+            "description": "The parameters required to update table properties."
           }
         ],
         "responses": {
