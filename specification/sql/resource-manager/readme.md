@@ -140,6 +140,8 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2020-02-02-preview/DatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
