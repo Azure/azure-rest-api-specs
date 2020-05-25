@@ -935,6 +935,14 @@
           "description": "The internal identifier.",
           "readOnly": true
         },
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only."
+        },
         "customSubDomainName": {
           "type": "string",
           "description": "Optional subdomain name used for token-based authentication."
@@ -1312,6 +1320,19 @@
           "description": "Additional error message."
         }
       }
+    },
+    "SkuCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SkuCapability."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the SkuCapability."
+        }
+      },
+      "description": "SkuCapability indicates the capability of a certain feature."
     },
     "CheckDomainAvailabilityParameter": {
       "description": "Check Domain availability parameter.",
