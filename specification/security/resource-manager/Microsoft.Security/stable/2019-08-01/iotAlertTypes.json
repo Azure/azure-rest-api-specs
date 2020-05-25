@@ -198,6 +198,89 @@
           "example": "IoTSecurity",
           "description": "The name of the alert provider or internal partner"
         },
+        "vendorName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Microsoft",
+          "description": "The name of the vendor that raise the alert"
+        },
+        "intent": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Exploitation,Execution",
+          "description": "Kill chain related intent behind the alert. Could contain multiple enum values (separated by commas)",
+          "enum": [
+            "Unknown",
+            "PreAttack",
+            "InitialAccess",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Execution",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact",
+            "Probing",
+            "Exploitation"
+          ],
+          "x-ms-enum": {
+            "name": "alertIntent",
+            "modelAsString": true,
+            "values": [{
+                "value": "Unknown"
+              },
+              {
+                "value": "PreAttack"
+              },
+              {
+                "value": "InitialAccess"
+              },
+              {
+                "value": "Persistence"
+              },
+              {
+                "value": "PrivilegeEscalation"
+              },
+              {
+                "value": "DefenseEvasion"
+              },
+              {
+                "value": "CredentialAccess"
+              },
+              {
+                "value": "Discovery"
+              },
+              {
+                "value": "LateralMovement"
+              },
+              {
+                "value": "Execution"
+              },
+              {
+                "value": "Collection"
+              },
+              {
+                "value": "Exfiltration"
+              },
+              {
+                "value": "CommandAndControl"
+              },
+              {
+                "value": "Impact"
+              },
+              {
+                "value": "Probing"
+              },
+              {
+                "value": "Exploitation"
+              }
+            ]
+          }
+        },
         "remediationSteps": {
           "readOnly": true,
           "description": "Manual action items to take to remediate the alert",
