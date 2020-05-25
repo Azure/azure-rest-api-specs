@@ -2414,7 +2414,7 @@ For more information, see: [AzureRPCSystemData-RP_Copy.docx](https://microsoft.s
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 2, 2020
+**LastModifiedAt**: May 21, 2020
 
 **How to fix the violation**: For each response in the GET/PUT/PATCH opearation add the systemData object:
 ``` json
@@ -2437,7 +2437,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 2, 2020
+**LastModifiedAt**: May 21, 2020
 
 **How to fix the violation**: For each operation response add a default error response implementing:
 The following would be valid:
@@ -2469,7 +2469,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 2, 2020
+**LastModifiedAt**: May 21, 2020
 
 **How to fix the violation**: For each operation response add the missing code response implementing:
 
@@ -2518,7 +2518,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 2, 2020
+**LastModifiedAt**: May 21, 2020
 
 **How to fix the violation**: Add the missing corresponding property like nextLink in response:
 
@@ -2565,7 +2565,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 2, 2020
+**LastModifiedAt**: May 21, 2020
 
 **Why this rule is important**: Right now it's possible to type a field as integer, but not specifying format. It actually creates problems for generate when the number of bits matter, like C#.
 
