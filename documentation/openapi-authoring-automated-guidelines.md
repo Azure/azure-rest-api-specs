@@ -2410,7 +2410,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message** : The response of operation '{operation name }' is defined without 'systemData'. Consider adding the systemData to the response.
 
 **Description** : The responses of GET, PUT and PATCH in new API versions should contain the `systemData` object.The version after 2020-05-01 is consider a new API version.
-For more information, see the documentation: [AzureRPCSystemData-RP_Copy.docx](https://microsoft.sharepoint.com/:w:/t/Operations_Management_Suite/EZP2GBYnvsRKnSmJ_FXV4jkBUz6xG_glzG3KVnmHN9Q0qA?e=99dfOo). 
+For more information, see: [AzureRPCSystemData-RP_Copy.docx](https://microsoft.sharepoint.com/:w:/t/Operations_Management_Suite/EZP2GBYnvsRKnSmJ_FXV4jkBUz6xG_glzG3KVnmHN9Q0qA?e=99dfOo). 
 
 **CreatedAt**: May 21, 2020
 
@@ -2418,7 +2418,9 @@ For more information, see the documentation: [AzureRPCSystemData-RP_Copy.docx](h
 
 **How to fix the violation**: For each response in the GET/PUT/PATCH opearation add the systemData object:
 ``` json
-"x-ms-parameter-location":"method"
+ "systemData": {
+    "$ref": "#/definitions/SystemData"
+  }
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
@@ -2437,12 +2439,12 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: May 2, 2020
 
-**How to fix the violation**: For each opearation response add a default error response implementing:
+**How to fix the violation**: For each operation response add a default error response implementing:
 The following would be valid:
 
 ```json
 ...
- "responese":{
+ "responses":{
    "default": {
      "schema":{
        "$ref":#/definiton/Error
@@ -2469,7 +2471,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: May 2, 2020
 
-**How to fix the violation**: For each opearation response add the missing code response implementing:
+**How to fix the violation**: For each operation response add the missing code response implementing:
 
 The following would be valid:
 
@@ -2518,7 +2520,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: May 2, 2020
 
-**How to fix the violation**: Add the missing corresponding property e.g. nextLink in response:
+**How to fix the violation**: Add the missing corresponding property like nextLink in response:
 
 The following would be valid:
 
@@ -2559,16 +2561,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The integer type does not have a format, please add it.
 
-**Description** :  The type:integer must have a format required.Possible value for format are int32 and int64.
+**Description** :  The type:integer must have a required format. Possible value for format are int32 and int64.
 
 **CreatedAt**: May 21, 2020
 
 **LastModifiedAt**: May 2, 2020
 
-**Why this rule is important**: Right now it's possible to type a field as integer, but not specifying format. It actually creates problems for generate when the number o bits matter, like C#. OAS3 doesn't even document not having a format:
-https://github.com/OAI/OpenAPI-Specification/blob/98138c7b4c153f780a38907f3472a7a5996692d4/versions/3.0.2.md#data-types
+**Why this rule is important**: Right now it's possible to type a field as integer, but not specifying format. It actually creates problems for generate when the number of bits matter, like C#.
 
-**How to fix the violation**: Add the correct format:
+**How to fix the violation**: Add the correct format for integer type:
 
 The following would be valid:
 
