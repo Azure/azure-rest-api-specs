@@ -2409,7 +2409,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response of operation '{operation name }' is defined without 'systemData'. Consider adding the systemData to the response.
 
-**Description** : The responses of GET, PUT and PATCH in new API versions should contain the `systemData` object.The version after 2020-05-01 is consider a new API version.
+**Description** : The responses of GET, PUT and PATCH in new API versions should contain the `systemData` object.The version after 2020-05-01 consider as a new API version.
 For more information, see: [AzureRPCSystemData-RP_Copy.docx](https://microsoft.sharepoint.com/:w:/t/Operations_Management_Suite/EZP2GBYnvsRKnSmJ_FXV4jkBUz6xG_glzG3KVnmHN9Q0qA?e=99dfOo). 
 
 **CreatedAt**: May 21, 2020
@@ -2431,15 +2431,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The response is defined without a default error response implementing,please add it. 
+**Output Message** : The response is defined without a default error response implementation,please add it. 
 
-**Description** : Per ARM Specs, Every operation must have a default error response implementing.
+**Description** : Per ARM Specs, every operation must have a default error response implementation.
 
 **CreatedAt**: May 21, 2020
 
 **LastModifiedAt**: May 21, 2020
 
-**How to fix the violation**: For each operation response add a default error response implementing:
+**How to fix the violation**: For each operation response, please add a default error response implementation:
 The following would be valid:
 
 ```json
@@ -2463,15 +2463,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The delete operation is defined without a 200 or 204 error response implementing,please add it. 
+**Output Message** : The delete operation is defined without a 200 or 204 error response implementation,please add it. 
 
-**Description** : Per ARM Specs, All DELETE methods must have responses code implementing: 200, 204.   
+**Description** : Per ARM Specs, all DELETE methods must have responses code implementation: 200, 204.   
 
 **CreatedAt**: May 21, 2020
 
 **LastModifiedAt**: May 21, 2020
 
-**How to fix the violation**: For each operation response add the missing code response implementing:
+**How to fix the violation**: For each operation response, please add the missing code response implementation:
 
 The following would be valid:
 
@@ -2514,7 +2514,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The operation: '{operation name}' is defined with x-ms-pageable enabled,but can not find the corresponding nextLink property in the response, please add it.
 
-**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) When specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the 200 response schema.
+**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) When specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
 
 **CreatedAt**: May 21, 2020
 
