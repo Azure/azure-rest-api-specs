@@ -99,6 +99,7 @@ input-file:
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
 ```
 
 ---
