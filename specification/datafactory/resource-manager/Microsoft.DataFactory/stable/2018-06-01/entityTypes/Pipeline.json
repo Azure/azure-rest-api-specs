@@ -1018,6 +1018,28 @@
         }
       }
     },
+    "ExcelSource": {
+      "description": "A copy activity excel source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Excel store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
     "ParquetSource": {
       "description": "A copy activity Parquet source.",
       "type": "object",
