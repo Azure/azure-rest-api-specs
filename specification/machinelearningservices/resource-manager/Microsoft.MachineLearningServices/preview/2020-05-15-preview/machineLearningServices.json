@@ -2776,6 +2776,18 @@
               "type": "object",
               "description": "AML Compute properties",
               "properties": {
+                "osType": {
+                  "description": "Compute OS Type",
+                  "type": "string",
+                  "enum": [
+                    "Linux",
+                    "Windows"
+                  ],
+                  "x-ms-enum": {
+                    "name": "OsType",
+                    "modelAsString": true
+                  }
+                },
                 "vmSize": {
                   "description": "Virtual Machine Size",
                   "type": "string"
@@ -2791,6 +2803,10 @@
                     "name": "VmPriority",
                     "modelAsString": true
                   }
+                },
+                "virtualMachineImage": {
+                  "description": "Virtual Machine image for AML Compute - windows only",
+                  "$ref": "#/definitions/VirtualMachineImage"
                 },
                 "scaleSettings": {
                   "description": "Scale settings for AML Compute",
@@ -3137,6 +3153,19 @@
       },
       "required": [
         "maxNodeCount"
+      ]
+    },
+    "VirtualMachineImage": {
+      "type": "object",
+      "description": "Virtual Machine image for Windows AML Compute",
+      "properties": {
+        "id": {
+          "description": "Virtual Machine image path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "NodeStateCounts": {
