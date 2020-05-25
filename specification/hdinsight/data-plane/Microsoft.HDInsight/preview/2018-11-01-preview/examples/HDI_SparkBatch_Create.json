@@ -3,10 +3,15 @@
     "endpoint": "cluster.azurehdinsight.net",
     "X-Requested-By": "admin",
     "sparkBatchJobRequest": {
-      "file": "abfss://",
+      "file": "wasbs://containercmk002@shangweistorageaccount.blob.core.windows.net/microsoft-spark-2.3.x-0.6.0.jar",
       "proxyUser": "",
-      "className": "classname",
-      "args": [],
+      "className": "org.apache.spark.deploy.dotnet.DotnetRunner12",
+      "args": [
+        "wasbs://containercmk002@shangweistorageaccount.blob.core.windows.net/wordcount.zip",
+        "WordCount",
+        "wasbs://containercmk002@shangweistorageaccount.blob.core.windows.net/user/sshroot/shakespeare.txt",
+        "wasbs://containercmk002@shangweistorageaccount.blob.core.windows.net/user/sshroot/result_livy.txt"
+      ],
       "jars": [],
       "pyFiles": [],
       "files": [],
@@ -24,11 +29,18 @@
   "responses": {
     "201": {
       "body": {
-        "id": 1,
-        "appId": "fill in here",
-        "appInfo": null,
-        "state": "the state",
-        "log": []
+        "id": 46,
+        "state": "starting",
+        "appId": null,
+        "appInfo": {
+          "driverLogUrl": null,
+          "sparkUiUrl": null
+        },
+        "log": [
+          "stdout: ",
+          "\nstderr: ",
+          "\nYARN Diagnostics: "
+        ]
       }
     }
   }

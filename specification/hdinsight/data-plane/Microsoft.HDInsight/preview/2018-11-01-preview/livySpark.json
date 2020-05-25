@@ -44,15 +44,12 @@
           "SparkBatch"
         ],
         "description": "List all spark batch jobs",
-        "operationId": "SparkBatch_List",
+        "operationId": "SparkBatches_List",
         "x-ms-examples": {
           "List all spark batch jobs": {
             "$ref": "./examples/HDI_SparkBatch_List.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -88,7 +85,7 @@
           "SparkBatch"
         ],
         "description": "Create a new spark batch job.",
-        "operationId": "SparkBatch_Create",
+        "operationId": "SparkBatches_Create",
         "x-ms-examples": {
           "Create a spark batch job": {
             "$ref": "./examples/HDI_SparkBatch_Create.json"
@@ -130,15 +127,12 @@
           "SparkBatch"
         ],
         "description": "Gets a single spark batch job.",
-        "operationId": "SparkBatch_Get",
+        "operationId": "SparkBatches_Get",
         "x-ms-examples": {
           "Gets a single spark batch job": {
             "$ref": "./examples/HDI_SparkBatch_Get.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -166,7 +160,7 @@
           "SparkBatch"
         ],
         "description": "Cancels a running spark batch job.",
-        "operationId": "SparkBatch_Delete",
+        "operationId": "SparkBatches_Delete",
         "x-ms-examples": {
           "Cancels a running spark batch job": {
             "$ref": "./examples/HDI_SparkBatch_Delete.json"
@@ -193,7 +187,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDeletedResult"
+            }
           }
         }
       }
@@ -204,15 +201,12 @@
           "SparkBatch"
         ],
         "description": "Gets a single spark batch job logs.",
-        "operationId": "SparkBatch_GetLogs",
+        "operationId": "SparkBatches_GetLogs",
         "x-ms-examples": {
           "Gets a single spark batch job logs": {
             "$ref": "./examples/HDI_SparkBatch_GetLogs.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -258,15 +252,12 @@
           "SparkBatch"
         ],
         "description": "Gets a single spark batch state.",
-        "operationId": "SparkBatch_GetState",
+        "operationId": "SparkBatches_GetState",
         "x-ms-examples": {
           "Gets a single spark batch state": {
             "$ref": "./examples/HDI_SparkBatch_GetState.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -296,15 +287,12 @@
           "SparkSession"
         ],
         "description": "List all spark sessions.",
-        "operationId": "SparkSession_List",
+        "operationId": "SparkSessions_List",
         "x-ms-examples": {
           "List all spark sessions": {
             "$ref": "./examples/HDI_SparkSession_List.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -340,7 +328,7 @@
           "SparkSession"
         ],
         "description": "Create a new spark session.",
-        "operationId": "SparkSession_Create",
+        "operationId": "SparkSessions_Create",
         "x-ms-examples": {
           "Create a new spark session": {
             "$ref": "./examples/HDI_SparkSession_Create.json"
@@ -382,15 +370,12 @@
           "SparkSession"
         ],
         "description": "Gets a single spark session.",
-        "operationId": "SparkSession_Get",
+        "operationId": "SparkSessions_Get",
         "x-ms-examples": {
           "Gets a single spark session": {
             "$ref": "./examples/HDI_SparkSession_Get.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -418,7 +403,7 @@
           "SparkSession"
         ],
         "description": "Cancels a running spark session.",
-        "operationId": "SparkSession_Delete",
+        "operationId": "SparkSessions_Delete",
         "x-ms-examples": {
           "Cancels a running spark session": {
             "$ref": "./examples/HDI_SparkSession_Delete.json"
@@ -445,7 +430,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDeletedResult"
+            }
           }
         }
       }
@@ -456,15 +444,12 @@
           "SparkSession"
         ],
         "description": "Gets a single spark session job logs.",
-        "operationId": "SparkSession_GetLogs",
+        "operationId": "SparkSessions_GetLogs",
         "x-ms-examples": {
           "Gets a single spark session job logs": {
             "$ref": "./examples/HDI_SparkSession_GetLogs.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -510,15 +495,12 @@
           "SparkSession"
         ],
         "description": "Gets a single spark session job state.",
-        "operationId": "SparkSession_GetState",
+        "operationId": "SparkSessions_GetState",
         "x-ms-examples": {
           "Gets a single spark session job state": {
             "$ref": "./examples/HDI_SparkSession_GetState.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -548,15 +530,12 @@
           "SparkSession"
         ],
         "description": "Gets a list of statements within a spark session.",
-        "operationId": "SparkSession_ListStatements",
+        "operationId": "SparkSessions_ListStatements",
         "x-ms-examples": {
           "Gets a list of statements within a spark session": {
             "$ref": "./examples/HDI_SparkSession_ListStatements.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -584,7 +563,7 @@
           "SparkSession"
         ],
         "description": "Create a statement within a spark session.",
-        "operationId": "SparkSession_CreateStatement",
+        "operationId": "SparkSessions_CreateStatement",
         "x-ms-examples": {
           "Create a statement within a spark session": {
             "$ref": "./examples/HDI_SparkSession_CreateStatement.json"
@@ -634,15 +613,12 @@
           "SparkSession"
         ],
         "description": "Gets a single statement within a spark session.",
-        "operationId": "SparkSession_GetStatement",
+        "operationId": "SparkSessions_GetStatement",
         "x-ms-examples": {
           "Gets a single statement within a spark session": {
             "$ref": "./examples/HDI_SparkSession_GetStatement.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -680,7 +656,7 @@
           "SparkSession"
         ],
         "description": "Kill a statement within a session.",
-        "operationId": "SparkSession_DeleteStatement",
+        "operationId": "SparkSessions_DeleteStatement",
         "x-ms-examples": {
           "Kill a statement within a session": {
             "$ref": "./examples/HDI_SparkSession_DeleteStatement.json"
@@ -922,7 +898,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SessionJobKind",
-            "modelAsString": false
+            "modelAsString": true
           },
           "enum": [
             "spark",
@@ -1016,6 +992,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "total": {
+          "format": "int64",
+          "type": "integer"
+        },
         "log": {
           "x-ms-client-name": "logLines",
           "uniqueItems": false,
@@ -1065,6 +1045,10 @@
         },
         "output": {
           "$ref": "#/definitions/SparkStatementOutput"
+        },
+        "progress": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -1102,12 +1086,21 @@
           "type": "string"
         }
       }
+    },
+    "SparkJobDeletedResult": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "x-ms-client-name": "deletedMessage",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
     "requestedByParameter": {
       "name": "X-Requested-By",
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "x-ms-client-name": "requestedBy",
       "description": "Add default value for X-Requested-By in header.",
       "in": "header",
@@ -1121,7 +1114,7 @@
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
-      "description": "The endpoint against which the job management is to be.",
+      "description": "The cluster endpoint, for example https://clustername.azurehdinsight.net.",
       "x-ms-parameter-location": "client"
     }
   }
