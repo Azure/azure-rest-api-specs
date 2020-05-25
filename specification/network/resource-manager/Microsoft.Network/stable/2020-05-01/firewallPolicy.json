@@ -630,6 +630,10 @@
         "transportSecurity": {
           "description": "TLS Configuration definition.",
           "$ref": "#/definitions/FirewallPolicyTransportSecurity"
+        },
+        "dnsSettings": {
+          "description": "DNS Proxy Settings definition.",
+          "$ref": "#/definitions/DnsSettings"
         }
       },
       "description": "Firewall Policy definition."
@@ -1181,6 +1185,27 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "DnsSettings": {
+      "description": "DNS Proxy Settings in Firewall Policy.",
+      "x-ms-discriminator-value": "DnsSettings",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "description": "List of Custom DNS Servers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableProxy": {
+          "type": "boolean",
+          "description": "Enable DNS Proxy on Firewalls attached to the Firewall Policy."
+        },
+        "requireProxyForNetworkRules": {
+          "type": "boolean",
+          "description": "FQDNs in Network Rules are supported when set to true."
         }
       }
     }
