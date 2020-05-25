@@ -276,12 +276,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "201": {
-            "description": "Created. The response indicates the private endpoint connection is now updating and contains a Location header to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
           "default": {
             "description": "An unexpected error occurred during the operation.",
             "schema": {
@@ -289,7 +283,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "SignalRPrivateEndpointConnections_Create": {
             "$ref": "./examples/SignalRPrivateEndpointConnections_Create.json"
@@ -1060,21 +1053,25 @@
           "x-ms-client-flatten": true
         },
         "kind": {
+          "$ref": "#/definitions/ServiceKind",
           "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
-          "enum": [
-            "SignalR",
-            "RawWebSockets"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceKind",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read",
             "create"
           ]
         }
+      }
+    },
+    "ServiceKind": {
+      "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+      "enum": [
+        "SignalR",
+        "RawWebSockets"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServiceKind",
+        "modelAsString": true
       }
     },
     "TrackedResource": {
@@ -1137,18 +1134,8 @@
           "type": "string"
         },
         "tier": {
-          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead.",
-          "enum": [
-            "Free",
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SignalRSkuTier",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SignalRSkuTier",
+          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead."
         },
         "size": {
           "description": "Optional string. For future use.",
@@ -1165,6 +1152,20 @@
         }
       }
     },
+    "SignalRSkuTier": {
+      "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SignalRSkuTier",
+        "modelAsString": true
+      }
+    },
     "SignalRProperties": {
       "description": "A class that describes the properties of the SignalR service that should contain more read-only properties than AzSignalR.Models.SignalRCreateOrUpdateProperties",
       "type": "object",
@@ -1175,8 +1176,8 @@
       ],
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the resource.",
           "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         },
         "externalIP": {
@@ -1214,6 +1215,25 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "ProvisioningState": {
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
       }
     },
     "SignalRCreateOrUpdateProperties": {
@@ -1254,17 +1274,8 @@
       "type": "object",
       "properties": {
         "flag": {
-          "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.",
-          "enum": [
-            "ServiceMode",
-            "EnableConnectivityLogs",
-            "EnableMessagingLogs"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "FeatureFlags",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/FeatureFlags",
+          "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively."
         },
         "value": {
           "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
@@ -1279,6 +1290,19 @@
             "type": "string"
           }
         }
+      }
+    },
+    "FeatureFlags": {
+      "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.",
+      "enum": [
+        "ServiceMode",
+        "EnableConnectivityLogs",
+        "EnableMessagingLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureFlags",
+        "modelAsString": true
       }
     },
     "SignalRCorsSettings": {
@@ -1312,16 +1336,8 @@
       "type": "object",
       "properties": {
         "defaultAction": {
-          "description": "Default action when no other rule matches",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ACLAction",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ACLAction",
+          "description": "Default action when no other rule matches"
         },
         "publicNetwork": {
           "$ref": "#/definitions/NetworkACL",
@@ -1334,6 +1350,18 @@
             "$ref": "#/definitions/PrivateEndpointACL"
           }
         }
+      }
+    },
+    "ACLAction": {
+      "description": "Default action when no other rule matches",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ACLAction",
+        "modelAsString": true
       }
     },
     "UpstreamTemplate": {
@@ -1369,16 +1397,29 @@
           "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SignalRRequestType"
           }
         },
         "deny": {
           "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SignalRRequestType"
           }
         }
+      }
+    },
+    "SignalRRequestType": {
+      "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+      "enum": [
+        "ClientConnection",
+        "ServerConnection",
+        "RESTAPI"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SignalRRequestType",
+        "modelAsString": true
       }
     },
     "PrivateEndpointACL": {
@@ -1387,24 +1428,15 @@
         "name"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkACL"
+        }
+      ],
       "properties": {
         "name": {
           "description": "Name of the private endpoint connection",
           "type": "string"
-        },
-        "allow": {
-          "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "deny": {
-          "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1434,32 +1466,13 @@
       ],
       "properties": {}
     },
-    "ProvisioningState": {
-      "description": "Provisioning state of Azure Resource",
-      "enum": [
-        "Unknown",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Running",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Moving"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
-      }
-    },
     "PrivateEndpointConnectionProperties": {
       "description": "Private endpoint connection properties",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the private endpoint connection",
           "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the private endpoint connection",
           "readOnly": true
         },
         "privateEndpoint": {
@@ -1487,18 +1500,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrivateLinkServiceConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
         },
         "description": {
           "description": "The reason for approval/rejection of the connection.",
@@ -1508,6 +1511,20 @@
           "description": "A message indicating if changes on the service provider require any updates on the consumer.",
           "type": "string"
         }
+      }
+    },
+    "PrivateLinkServiceConnectionStatus": {
+      "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStatus",
+        "modelAsString": true
       }
     },
     "PrivateLinkResourceList": {
@@ -1594,17 +1611,21 @@
       "type": "object",
       "properties": {
         "keyType": {
-          "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "KeyType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/KeyType",
+          "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive)."
         }
+      }
+    },
+    "KeyType": {
+      "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": true
       }
     },
     "SignalRUsageList": {
