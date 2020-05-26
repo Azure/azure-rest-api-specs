@@ -170,18 +170,3 @@ cli:
   package-name: azure-mgmt-ResourceGraph
   clear-output-folder: false
 ```
-
-## trenton
-
-These settings apply only when `--trenton` is specified on the command line.
-
-``` yaml $(trenton)
-trenton:
-  cli_name: ResourceGraph
-  azure_arm: true
-  license_header: MICROSOFT_MIT_NO_VERSION
-  payload_flattening_threshold: 2
-  namespace: azure.mgmt.ResourceGraph
-  package_name: azure-mgmt-ResourceGraph
-  clear_output_folder: false
-```
