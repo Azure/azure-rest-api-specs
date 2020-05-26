@@ -503,6 +503,48 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDisconnectPaymentInstrumentEligibility": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "ValidateDisconnectPaymentInstrumentEligibilitySuccess": {
+            "$ref": "./examples/ValidateDisconnectPaymentInstrumentEligibilitySuccess.json"
+          },
+          "ValidateDisconnectPaymentInstrumentEligibilityFailure": {
+            "$ref": "./examples/ValidateDisconnectPaymentInstrumentEligibilityFailure.json"
+          }
+        },
+        "operationId": "BillingProfiles_ValidateDisconnectPaymentInstrumentEligibility",
+        "description": "Validates if the default payment instrument can be disconnected from the billing group. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "parameters": [          
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DisconnectPaymentInstrumentEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles": {
       "get": {
         "tags": [
@@ -5167,6 +5209,54 @@
         "destinationBillingProfileId": {
           "type": "string",
           "description": "The destination billing profile id."
+        }
+      }
+    },
+    "DisconnectPaymentInstrumentEligibilityErrorCode": {
+      "type": "string",
+      "description": "Error code of the disconnect payment instrument eligibility validation response.",
+      "enum": [
+        "AzureSubscriptions",
+        "RecurringCharges",
+        "ReservedInstances",
+        "OutstandingCharges",
+        "PendingCharges"
+      ],
+      "x-ms-enum": {
+        "name": "disconnectPaymentInstrumentEligibilityErrorCode",
+        "modelAsString": true
+      }
+    },
+    "DisconnectPaymentInstrumentErrorDetails": {
+      "type": "object",
+      "description": "Error details of the disconnect payment instrument eligibility validation.",
+      "properties": {
+        "code": {
+          "description": "Error code for the disconnect payment instrument eligibility validation.",
+          "$ref": "#/definitions/DisconnectPaymentInstrumentEligibilityErrorCode"
+        },
+        "message": {
+          "description": "Error message for the disconnect payment instrument eligibility validation.",
+          "type": "string"
+        }
+      }
+    },
+    "DisconnectPaymentInstrumentEligibilityResult": {
+      "type": "object",
+      "description": "Result of the disconnect payment instrument eligibility validation.",
+      "properties": {
+        "isEligible": {
+          "description": "Specifies whether the payment instrument is eligible to be disconnected from the billing group.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "The list of disconnect payment instrument eligibility errors.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DisconnectPaymentInstrumentErrorDetails"
+          }
         }
       }
     },
