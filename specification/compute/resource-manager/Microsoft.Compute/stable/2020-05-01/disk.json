@@ -1800,7 +1800,7 @@
               },
               {
                 "value": "EncryptionAtRestWithCustomerKey",
-                "description": "Disk is encrypted with Customer managed key at rest."
+                "description": "Disk is encrypted with a customer managed key that can be changed and revoked by a customer."
               },
               {
                 "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
@@ -2381,7 +2381,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "A readonly collection of private endpoint connections created on the disk."
+          "description": "A readonly collection of private endpoint connections created on the disk. Currently only one endpoint connection is supported."
         },
         "provisioningState": {
           "readOnly": true,
@@ -2439,7 +2439,7 @@
           "description": "Resource tags"
         }
       },
-      "description": "disk access update resource."
+      "description": "Used for updating a disk access resource."
     },
     "CloudError": {
       "x-ms-external": true,
