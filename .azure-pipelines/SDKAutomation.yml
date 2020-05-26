@@ -69,6 +69,7 @@ jobs:
         -e SPEC_REPO \
         -e PR_NUMBER \
         -e SDK_REPO_NAME \
+        -e AZURE_DEVOPS_EXT_PAT \
         sdk-automation:latest npm start
     env:
       BLOB_STORAGE_NAME: $(blob-storage-name)
@@ -76,4 +77,6 @@ jobs:
       GITHUB_COMMENT_AUTHOR_NAME: $(github-comment-author-name)
       GITHUBAPP_ID: $(githubapp-id)
       GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
+      AZURE_DEVOPS_EXT_PAT: $(azure-devops-ext-pat)
+      BUILD_ID: $(Build.BuildId)
     displayName: SDK Automation
