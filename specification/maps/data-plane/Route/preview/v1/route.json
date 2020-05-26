@@ -891,7 +891,7 @@
           },
           {
             "value": "tagged",
-            "description": "Returns raw instruction data with tagged human-readable messages to permit formatting. A human-readable message is built up from repeatable identified elements. These are tagged to allow client applications to format them correctly. The following message components are tagged when instructionsType=tagged: street, roadNumber, signpostText, exitNumber, roundaboutExitNumber.\n\nExample of tagged 'Turn left' message:​\n\n```\nTurn left onto <roadNumber>A4</roadNumber>/<roadNumber>E19</roadNumber> towards <signpostText>Den Haag</signpostText>\n```"
+            "description": "Returns raw instruction data with tagged human-readable messages to permit formatting. A human-readable message is built up from repeatable identified elements. These are tagged to allow client applications to format them correctly. The following message components are tagged when instructionsType=tagged: street, roadNumber, signpostText, exitNumber, roundaboutExitNumber.\n\nExample of tagged 'Turn left' message:​\n\n```\nTurn left onto <roadNumber>A4</roadNumber>/<roadNumber>E19</roadNumber>\ntowards <signpostText>Den Haag</signpostText>\n```"
           }
         ]
       },
@@ -2633,7 +2633,7 @@
           "readOnly": true
         },
         "combinedMessage": {
-          "description": "A human-readable message for the maneuver combined with the message from the next instruction. Sometimes it is possible to combine two successive instructions into a single instruction making it easier to follow. When this is the case the possibleCombineWithNext flag will be true. For example:\n\n```\n10. Turn left onto Einsteinweg/A10/E22 towards Ring Amsterdam\n11. Follow Einsteinweg/A10/E22 towards Ring Amsterdam\n```\n\nThe possibleCombineWithNext flag on instruction 10 is true. This indicates to the clients of coded guidance that it can be combined with instruction 11. The instructions will be combined automatically for clients requesting human-readable guidance. The combinedMessage field contains the combined message:\n\n```\nTurn left onto Einsteinweg/A10/E22 towards Ring Amsterdam then follow Einsteinweg/A10/E22 towards Ring Amsterdam.\n```",
+          "description": "A human-readable message for the maneuver combined with the message from the next instruction. Sometimes it is possible to combine two successive instructions into a single instruction making it easier to follow. When this is the case the possibleCombineWithNext flag will be true. For example:\n\n```\n10. Turn left onto Einsteinweg/A10/E22 towards Ring Amsterdam\n11. Follow Einsteinweg/A10/E22 towards Ring Amsterdam\n```\n\nThe possibleCombineWithNext flag on instruction 10 is true. This indicates to the clients of coded guidance that it can be combined with instruction 11. The instructions will be combined automatically for clients requesting human-readable guidance. The combinedMessage field contains the combined message:\n\n```\nTurn left onto Einsteinweg/A10/E22 towards Ring Amsterdam\nthen follow Einsteinweg/A10/E22 towards Ring Amsterdam.\n```",
           "type": "string",
           "readOnly": true
         }
