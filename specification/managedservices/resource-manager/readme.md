@@ -26,7 +26,7 @@ These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-02
+tag: package-2020-02-preview
 ```
 
 
