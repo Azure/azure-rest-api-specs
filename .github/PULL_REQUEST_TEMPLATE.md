@@ -2,8 +2,8 @@
 </i>
 
 ### Contribution checklist:
-- [x] I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow.
-- [x] [Validation tools](https://aka.ms/swaggertools) were run on swagger spec(s) and have all been fixed in this PR. [How to fix?](https://aka.ms/ci-fix)
+- [ ] I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow.
+- [ ] [Validation tools](https://aka.ms/swaggertools) were run on swagger spec(s) and have all been fixed in this PR. [How to fix?](https://aka.ms/ci-fix)
 
 If any further question about AME onboarding or validation tools, please view the [FAQ](https://aka.ms/faqinprreview).
 
