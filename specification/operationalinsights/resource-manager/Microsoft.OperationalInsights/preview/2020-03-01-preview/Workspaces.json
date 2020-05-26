@@ -369,12 +369,62 @@
             "name": "WorkspaceSkuNameEnum",
             "modelAsString": true
           }
+        },
+        "capacityReservationLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected."
+        },
+        "maxCapacityReservationLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity reservation level available for this workspace, when CapacityReservation sku is selected.",
+          "readOnly": true
+        },
+        "lastSkuUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the sku was updated.",
+          "readOnly": true
         }
       },
       "required": [
         "name"
       ],
       "description": "The SKU (tier) of a workspace."
+    },
+    "WorkspaceCapping": {
+      "description": "The daily volume cap for ingestion.",
+      "properties": {
+        "dailyQuotaGb": {
+          "type": "number",
+          "format": "double",
+          "description": "The workspace daily quota for ingestion. -1 means unlimited."
+        },
+        "quotaNextResetTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the quota will be rest.",
+          "readOnly": true
+        },
+        "dataIngestionStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of data ingestion for this workspace.",
+          "enum": [
+            "RespectQuota",
+            "ForceOn",
+            "ForceOff",
+            "OverQuota",
+            "SubscriptionSuspended",
+            "ApproachingQuota"
+          ],
+          "x-ms-enum": {
+            "name": "DataIngestionStatus",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "WorkspaceProperties": {
       "properties": {
@@ -410,6 +460,10 @@
           "minimum": -1,
           "maximum": 730,
           "description": "The workspace data retention in days. -1 means Unlimited retention for the Unlimited Sku. 730 days is the maximum allowed for all other Skus. "
+        },
+        "workspaceCapping": {
+          "$ref": "#/definitions/WorkspaceCapping",
+          "description": "The daily volume cap for ingestion."
         },
         "publicNetworkAccessForIngestion": {
           "description": "The network access type for accessing Log Analytics ingestion.",
