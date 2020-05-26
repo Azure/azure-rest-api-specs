@@ -38,15 +38,6 @@ input-file:
   - Microsoft.Portal/stable/2018-10-01/CloudShell.json
 ```
 
-### Tag: package-2020-04-01
-
-These settings apply only when `--tag=package-2020-04-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-04-01'
-input-file:
-- Microsoft.Portal/preview/2020-04-01/CloudShell.json
-```
-
 ---
 
 # Code Generation
