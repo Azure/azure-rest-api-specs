@@ -87,6 +87,7 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
 
 ---
@@ -216,6 +217,7 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 
 ```
 
