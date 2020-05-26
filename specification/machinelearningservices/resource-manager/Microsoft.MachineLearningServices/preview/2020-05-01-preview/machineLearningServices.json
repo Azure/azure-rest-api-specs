@@ -1440,6 +1440,53 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningServices"
+        ],
+        "description": "Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If your intent is to create a new service, do a GET first to verify that it does not exist yet.",
+        "operationId": "MachineLearningService_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload that is used to create or update the Service.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted.  The header 'Operation-Location' contains the async operation location URL.  Accessing this URL with a GET call will return the status of the background task."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
       }
     }
   },
@@ -4801,6 +4848,85 @@
         }
       ],
       "x-ms-discriminator-value": "AKS"
+    },
+    "AuthKeys": {
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary key.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "The secondary key.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateServiceRequest": {
+      "description": "The base class for creating a service.",
+      "required": [
+        "computeType",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The service name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the service.",
+          "type": "string"
+        },
+        "kvTags": {
+          "description": "The service tag dictionary. Tags are mutable.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The service properties dictionary. Properties are immutable.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "keys": {
+          "description": "The authentication keys.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AuthKeys"
+            }
+          ]
+        },
+        "computeType": {
+          "description": "The compute environment type for the service.",
+          "enum": [
+            "ACI",
+            "AKS"
+          ],
+          "type": "string",
+          "example": "AKS",
+          "x-ms-enum": {
+            "name": "ComputeEnvironmentType",
+            "modelAsString": false
+          }
+        },
+        "environmentImageRequest": {
+          "description": "The Environment, models and assets needed for inferencing.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentImageRequest"
+            }
+          ]
+        },
+        "location": {
+          "description": "The location of the service.",
+          "type": "string"
+        }
+      },
+      "discriminator": "computeType"
     }
   }
 }
