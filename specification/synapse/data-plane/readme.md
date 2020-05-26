@@ -27,7 +27,14 @@ These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
 openapi-type: data-plane
+```
+
+``` yaml $(package-others)
 tag: package-2019-11-01-preview
+```
+
+``` yaml $(package-vnet)
+tag: package-vnet-2019-06-01-preview
 ```
 
 ## Suppression
@@ -61,15 +68,22 @@ These settings apply only when `--tag=package-2019-11-01-preview` is specified o
 input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 - Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-- Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
 - Microsoft.Synapse/preview/2019-11-01-preview/roles.json
 - Microsoft.Synapse/preview/2019-11-01-preview/roleAssignments.json
 - Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
 ```
 
+### Tag: package-vnet-2019-06-01-preview
+
+These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-vnet-2019-06-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
+```
+
 ---
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -87,6 +101,9 @@ csharp:
   namespace: Microsoft.Azure.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Synapse/src/Generated
   clear-output-folder: true
+batch:
+- package-others: true
+- package-vnet: true
 ```
 
 ## TypeScript
@@ -106,10 +123,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/roles.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/roleAssignments.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
 
 ```
 
