@@ -44,6 +44,22 @@ input-file:
 - Microsoft.KeyVault/preview/7.2/backuprestore.json
 ```
 
+### Tag: package-7.2-preview
+
+These settings apply only when `--tag=package-7.2-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-7.2-preview'
+input-file:
+- Microsoft.KeyVault/preview/7.2/certificates.json
+- Microsoft.KeyVault/preview/7.2/common.json
+- Microsoft.KeyVault/preview/7.2/keys.json
+- Microsoft.KeyVault/preview/7.2/rbac.json
+- Microsoft.KeyVault/preview/7.2/secrets.json
+- Microsoft.KeyVault/preview/7.2/storage.json
+- Microsoft.KeyVault/preview/7.2/backuprestore.json
+```
+
+
 ### Tag: package-7.1-preview
 
 These settings apply only when `--tag=package-7.1-preview` is specified on the command line.
@@ -153,6 +169,13 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/common.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/keys.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/rbac.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/storage.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2/backuprestore.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/certificates.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/common.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/keys.json

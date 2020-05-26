@@ -593,6 +593,56 @@
         "location"
       ]
     },
+    "ExcelDataset": {
+      "x-ms-discriminator-value": "Excel",
+      "description": "Excel dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Excel dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExcelDatasetTypeProperties"
+        }
+      }
+    },
+    "ExcelDatasetTypeProperties": {
+      "description": "Excel dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the excel storage."
+        },
+        "sheetName": {
+          "type": "object",
+          "description": "The sheet of excel file. Type: string (or Expression with resultType string)."
+        },
+        "range": {
+          "type": "object",
+          "description": "The partial data of one sheet. Type: string (or Expression with resultType string)."
+        },
+        "firstRowAsHeader": {
+          "type": "object",
+          "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "compression": {
+          "description": "The data compression method used for the json dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        },
+        "nullValue": {
+          "type": "object",
+          "description": "The null value string. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "location",
+        "sheetName"
+      ]
+    },
     "ParquetDataset": {
       "x-ms-discriminator-value": "Parquet",
       "description": "Parquet dataset.",
@@ -3068,6 +3118,65 @@
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
+    "SnowflakeDataset": {
+      "x-ms-discriminator-value": "SnowflakeTable",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeDatasetTypeProperties": {
+      "description": "Snowflake dataset properties.",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Snowflake database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Snowflake database. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SharePointOnlineListResourceDataset": {
+      "x-ms-discriminator-value": "SharePointOnlineListResource",
+      "description": "The sharepoint online list resource dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sharepoint online list dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListDatasetTypeProperties"
+        }
+      }
+    },
+    "SharePointOnlineListDatasetTypeProperties": {
+      "description": "Sharepoint online list dataset properties.",
+      "properties": {
+        "listName": {
+          "type": "object",
+          "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
         }
       }
     }
