@@ -42,9 +42,9 @@
           }
         },
         "tags": [
-          "Secure Scores"
+          "Secure Score"
         ],
-        "description": "Get secure scores on all your initiatives inside a scope",
+        "description": "List secure scores for all your Security Center initiatives within your current scope.",
         "operationId": "SecureScores_List",
         "parameters": [
           {
@@ -81,9 +81,9 @@
           }
         },
         "tags": [
-          "Secure Scores"
+          "Secure Score"
         ],
-        "description": "Get secure score for a specific initiatives inside a scope",
+        "description": "Get secure score for a specific initiative within your current scope. For the ASC Default initiative, use 'ascScore'.",
         "operationId": "SecureScores_Get",
         "parameters": [
           {
@@ -115,17 +115,17 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
       "get": {
         "x-ms-examples": {
-          "List secure score's controls level for the specified name": {
+          "Get security controls and their current score for the specified initiative": {
             "$ref": "./examples/secureScores/ListSecureScoreControlsForName_builtin_example.json"
           },
-          "Get secure score's controls level for the specified name with expand parameter (builtin)": {
+          "Get security controls and their current score for the specified initiative with the expand parameter": {
             "$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_builtin_example.json"
           }
         },
         "tags": [
-          "Secure Scores"
+          "Secure Score"
         ],
-        "description": "Get all secure score controls on specific initiatives inside a scope",
+        "description": "Get all security controls for a specific initiative within a scope",
         "operationId": "SecureScoreControls_ListBySecureScore",
         "parameters": [
           {
@@ -168,9 +168,9 @@
           }
         },
         "tags": [
-          "Secure Scores"
+          "Secure Score Controls"
         ],
-        "description": "Get all secure score controls on specific initiatives inside a scope",
+        "description": "Get all security controls within a scope",
         "operationId": "SecureScoreControls_List",
         "parameters": [
           {
@@ -205,15 +205,15 @@
     "/providers/Microsoft.Security/secureScoreControlDefinitions": {
       "get": {
         "x-ms-examples": {
-          "List secure score controls definition": {
+          "List security controls definition": {
             "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_example.json"
           }
         },
         "tags": [
-          "Secure Score Controls Definition"
+          "Secure Score Control Definitions"
         ],
-        "description": "Get definition information on all secure score controls",
-        "operationId": "secureScoreControlDefinitions_List",
+        "description": "List the available security controls, their assessments, and the max score",
+        "operationId": "SecureScoreControlDefinitions_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -241,14 +241,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlDefinitions": {
       "get": {
         "x-ms-examples": {
-          "List secure score controls definition by subscription": {
+          "List security controls definition by subscription": {
             "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_subscription_example.json"
           }
         },
         "tags": [
-          "Secure Score Controls Definition"
+          "Secure Score Control Definitions"
         ],
-        "description": "Get definition information on all secure score controls in subscription level",
+        "description": "For a specified subscription, list the available security controls, their assessments, and the max score",
         "operationId": "SecureScoreControlDefinitions_ListBySubscription",
         "parameters": [
           {
@@ -281,7 +281,7 @@
   "definitions": {
     "SecureScoresList": {
       "type": "object",
-      "description": "Page of a secure scores list",
+      "description": "List of secure scores",
       "properties": {
         "value": {
           "description": "Collection of secure scores in this page",
@@ -322,7 +322,7 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "User friendly display name of the secure score item",
+          "description": "The initiative’s name",
           "readOnly": true,
           "type": "string"
         },
@@ -340,7 +340,7 @@
       "type": "object",
       "properties": {
         "max": {
-          "description": "Maximum score applicable",
+          "description": "Maximum score available",
           "readOnly": true,
           "type": "integer",
           "format": "int32",
@@ -348,7 +348,7 @@
           "exclusiveMinimum": false
         },
         "current": {
-          "description": "Actual score",
+          "description": "Current score",
           "readOnly": true,
           "type": "number",
           "format": "double",
@@ -382,11 +382,11 @@
       }
     },
     "SecureScoreControlList": {
-      "description": "Page of a secure score controls list",
+      "description": "List of security controls",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of secure score controls in this page",
+          "description": "Collection of security controls in this page",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -401,7 +401,7 @@
       }
     },
     "SecureScoreControlDetails": {
-      "description": "Secure score control (calculated) object",
+      "description": "Details of the security control, its score, and the health status of the relevant resources.",
       "type": "object",
       "properties": {
         "properties": {
@@ -453,11 +453,11 @@
       }
     },
     "secureScoreControlDefinitionList": {
-      "description": "Page of a secure score controls definition list",
+      "description": "List of security controls definition",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of secure score controls definition in this page",
+          "description": "Collection of security controls definition in this page",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -472,7 +472,7 @@
       }
     },
     "SecureScoreControlDefinitionItem": {
-      "description": "Secure Score Control's Definition information",
+      "description": "Information about the security control.",
       "type": "object",
       "properties": {
         "properties": {
@@ -487,7 +487,7 @@
       ]
     },
     "SecureScoreControlDefinitionItemProperties": {
-      "description": "Secure Score Control Definition Properties",
+      "description": "Security Control Definition Properties.",
       "type": "object",
       "properties": {
         "displayName": {
@@ -516,19 +516,19 @@
           "$ref": "#/definitions/SecureScoreControlDefinitionSource"
         },
         "assessmentDefinitions": {
-          "description": "array of assessments metadata IDs that are included in this control",
+          "description": "Array of assessments metadata IDs that are included in this security control",
           "readOnly": true,
           "$ref": "../../../common/v1/types.json#/definitions/AzureResourceLinks"
         }
       }
     },
     "SecureScoreControlDefinitionSource": {
-      "description": "representing the source of the control",
+      "description": "The type of the security control (For example, BuiltIn)",
       "readOnly": true,
       "type": "object",
       "properties": {
         "sourceType": {
-          "description": "BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom (Future) if the assessment based on custom Azure Policy definition, CustomerManaged (future) for customers who build their own controls",
+          "description": "The type of security control (for example, BuiltIn)",
           "type": "string",
           "enum": [
             "BuiltIn",
@@ -579,7 +579,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The secure score initiative name",
+      "description": "The initiative name. For the ASC Default initiative, use 'ascScore' as in the sample request below.",
       "x-ms-parameter-location": "method"
     }
   }
