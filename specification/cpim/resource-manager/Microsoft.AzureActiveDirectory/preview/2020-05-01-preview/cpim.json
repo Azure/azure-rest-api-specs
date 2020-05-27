@@ -254,12 +254,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
       "get": {
-        "operationId": "GuestUsages_Subscription_Get",
+        "operationId": "GuestUsagesSubscription_List",
         "tags": [
           "GuestUsages"
         ],
         "x-ms-examples": {
-          "GuestUsages_Get": {
+          "GuestUsagesSubscription_List": {
             "$ref": "./examples/GuestUsagesSubscriptionGet.json"
           }
         },
@@ -286,17 +286,20 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
       "get": {
-        "operationId": "GuestUsages_ResourceGroup_Get",
+        "operationId": "GuestUsagesResourceGroup_List",
         "tags": [
           "GuestUsages"
         ],
         "x-ms-examples": {
-          "GuestUsages_Get": {
+          "GuestUsagesResourceGroup_List": {
             "$ref": "./examples/GuestUsagesResourceGroupGet.json"
           }
         },
@@ -326,6 +329,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
