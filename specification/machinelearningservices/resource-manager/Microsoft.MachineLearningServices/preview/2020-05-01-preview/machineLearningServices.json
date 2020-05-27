@@ -1477,7 +1477,13 @@
         ],
         "responses": {
           "202": {
-            "description": "The request was accepted.  The header 'Operation-Location' contains the async operation location URL.  Accessing this URL with a GET call will return the status of the background task."
+            "description": "The request was accepted.  The header 'Operation-Location' contains the async operation location URL.  Accessing this URL with a GET call will return the status of the background task.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
