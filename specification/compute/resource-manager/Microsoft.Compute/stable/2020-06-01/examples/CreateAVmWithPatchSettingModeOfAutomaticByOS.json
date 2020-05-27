@@ -25,6 +25,18 @@
             "name": "myVMosdisk",
             "createOption": "FromImage"
           }
+        },       
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}",
+          "windowsConfiguration": {
+            "provisionVMAgent": true,
+            "enableAutomaticUpdates": true,
+            "patchSettings": {              
+              "patchMode": "AutomaticByOS"              
+            }
+          }
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -35,20 +47,6 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminUsername": "{your-username}",
-          "computerName": "myVM",
-          "adminPassword": "{your-password}",
-          "windowsConfiguration": {
-            "provisionVMAgent": true,
-            "enableAutomaticUpdates": true,
-            "patchSettings": {
-              "properties": {
-                "patchMode": "AutomaticByOS"
-              }
-            }
-          }
         }
       }
     }
@@ -66,10 +64,8 @@
                 "windowsConfiguration": {
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
-                  "patchSettings": {
-                    "properties": {
-                      "patchMode": "AutomaticByOS"
-                    }
+                  "patchSettings": {                    
+                    "patchMode": "AutomaticByOS"                    
                   }
                 }
               },
@@ -123,10 +119,8 @@
                 "windowsConfiguration": {
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
-                  "patchSettings": {
-                    "properties": {
-                      "patchMode": "AutomaticByOS"
-                    }
+                  "patchSettings": {                    
+                    "patchMode": "AutomaticByOS"                    
                   }
                 }
               },
