@@ -7,8 +7,10 @@
       "properties": {
         "category": "Saved Search Test Category",
         "displayName": "Create or Update Saved Search Test",
-        "query": "Heartbeat | summarize Count() by Computer",
         "version": 2,
+        "functionAlias": "heartbeat_func",
+        "functionParameters": "a:int=1",
+        "query": "Heartbeat | summarize Count() by Computer | take a",
         "tags": [
           {
             "name": "Group",
@@ -29,7 +31,9 @@
         "properties": {
           "category": "Saved Search Test Category",
           "displayName": "Create or Update Saved Search Test",
-          "query": "Heartbeat | summarize Count() by Computer",
+          "functionAlias": "heartbeat_func",
+          "functionParameters": "a:int=1",
+          "query": "Heartbeat | summarize Count() by Computer | take a",
           "version": 2
         }
       }

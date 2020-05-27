@@ -21,7 +21,7 @@
         "tags": [
           "TableServiceProperties"
         ],
-        "operationId": "ListTableService",
+        "operationId": "TableServices_List",
         "x-ms-examples": {
           "TableServicesList": {
             "$ref": "./examples/TableServicesList.json"
@@ -52,7 +52,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -149,7 +149,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -160,7 +160,7 @@
         "tags": [
           "TableService"
         ],
-        "operationId": "PutTable",
+        "operationId": "Table_Create",
         "x-ms-examples": {
           "TableOperationPut": {
             "$ref": "./examples/TableOperationPut.json"
@@ -194,7 +194,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -203,7 +203,7 @@
         "tags": [
           "TableService"
         ],
-        "operationId": "PatchTable",
+        "operationId": "Table_Update",
         "x-ms-examples": {
           "TableOperationPatch": {
             "$ref": "./examples/TableOperationPatch.json"
@@ -237,7 +237,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -246,7 +246,7 @@
         "tags": [
           "TableService"
         ],
-        "operationId": "GetTable",
+        "operationId": "Table_Get",
         "x-ms-examples": {
           "TableOperationGet": {
             "$ref": "./examples/TableOperationGet.json"
@@ -280,7 +280,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -289,7 +289,7 @@
         "tags": [
           "TableService"
         ],
-        "operationId": "DeleteTable",
+        "operationId": "Table_Delete",
         "x-ms-examples": {
           "TableOperationDelete": {
             "$ref": "./examples/TableOperationDelete.json"
@@ -320,7 +320,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         }
@@ -331,10 +331,10 @@
         "tags": [
           "TableService"
         ],
-        "operationId": "QueryTable",
+        "operationId": "Table_List",
         "x-ms-examples": {
-          "TableOperationQuery": {
-            "$ref": "./examples/TableOperationQuery.json"
+          "TableOperationList": {
+            "$ref": "./examples/TableOperationList.json"
           }
         },
         "description": "Gets a list of all the tables under the specified storage account",
@@ -362,7 +362,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./file.json#/definitions/CloudError"
             }
           }
         },
@@ -448,40 +448,6 @@
         }
       },
       "description": "Response schema. Contains list of tables returned"
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the Storage service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Storage service."
     }
   },
   "parameters": {
