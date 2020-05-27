@@ -84,7 +84,7 @@
           {
             "name": "securityAlertPolicyName",
             "in": "path",
-            "description": "The name of the threat detection policy.",
+            "description": "The name of the security alert policy.",
             "required": true,
             "type": "string",
             "enum": [
@@ -206,18 +206,26 @@
         }
       }
     }
-  }
+  },
   "parameters": {
-    "SecurityAlertPolicyNameParameter": {
-      "name": "securityAlertPolicyName",
+    "ServerNameParameter": {
+      "name": "serverName",
       "in": "path",
-      "description": "The name of the security alert policy.",
       "required": true,
       "type": "string",
-      "enum": [
-        "default"
-      ],
+      "description": "The name of the server.",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
