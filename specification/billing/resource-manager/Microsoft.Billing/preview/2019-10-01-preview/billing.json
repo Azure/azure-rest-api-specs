@@ -517,7 +517,7 @@
           }
         },
         "operationId": "BillingProfiles_GetValidateDetachPaymentInstrumentEligibility",
-        "description": "Validates if the default payment instrument can be detached from the billing group. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Validates if the default payment instrument can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "parameters": [          
           {
             "$ref": "#/parameters/billingAccountNameParameter"
@@ -5211,20 +5211,24 @@
           "description": "The destination billing profile id."
         }
       }
-    },
-    "DetachPaymentInstrumentEligibilityErrorCode": {
-      "type": "string",
-      "description": "Error code of the detach payment instrument eligibility validation response.",
-      "enum": [
-        "AzureSubscriptions",
-        "RecurringCharges",
-        "ReservedInstances",
-        "OutstandingCharges",
-        "PendingCharges"
-      ],
-      "x-ms-enum": {
-        "name": "detachPaymentInstrumentEligibilityErrorCode",
-        "modelAsString": true
+    },        
+    "DetachPaymentInstrumentEligibilityResult": {
+      "type": "object",
+      "description": "Result of the detach payment instrument eligibility validation.",
+      "properties": {
+        "isEligible": {
+          "description": "Specifies whether the payment instrument is eligible to be detached from the billing profile.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "The list of detach payment instrument eligibility errors.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DetachPaymentInstrumentErrorDetails"
+          }
+        }
       }
     },
     "DetachPaymentInstrumentErrorDetails": {
@@ -5241,23 +5245,19 @@
         }
       }
     },
-    "DetachPaymentInstrumentEligibilityResult": {
-      "type": "object",
-      "description": "Result of the detach payment instrument eligibility validation.",
-      "properties": {
-        "isEligible": {
-          "description": "Specifies whether the payment instrument is eligible to be detached from the billing group.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "errorDetails": {
-          "description": "The list of detach payment instrument eligibility errors.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/DetachPaymentInstrumentErrorDetails"
-          }
-        }
+    "DetachPaymentInstrumentEligibilityErrorCode": {
+      "type": "string",
+      "description": "Error code of the detach payment instrument eligibility validation response.",
+      "enum": [
+        "AzureSubscriptions",
+        "RecurringCharges",
+        "ReservedInstances",
+        "OutstandingCharges",
+        "PendingCharges"
+      ],
+      "x-ms-enum": {
+        "name": "detachPaymentInstrumentEligibilityErrorCode",
+        "modelAsString": true
       }
     },
     "ValidateSubscriptionTransferEligibilityResult": {
