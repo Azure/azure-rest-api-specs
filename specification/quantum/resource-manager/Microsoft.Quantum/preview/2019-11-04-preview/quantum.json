@@ -415,6 +415,24 @@
         "tags": {
           "type": "object",
           "description": "Gets or sets the tags."
+        },
+        "identity": {
+          "type": "object",
+          "description": "Managed Identity information",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of identity. Supported: SystemAssigned or None (case insensitive)"
+            },
+            "principalId": {
+              "type": "string",
+              "description": "objectId of the managed identity,"
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "tenantId where the managed identity lives."
+            }
+          }
         }
       },
       "x-ms-azure-resource": true
