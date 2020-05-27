@@ -138,6 +138,18 @@
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
           },
+		  {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster",
+              "required": [
+                "location"
+              ]
+            },
+            "description": "Parameters for creating a eventhub cluster resource."
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
@@ -324,12 +336,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
-            "created": {
+            "createdAt": {
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was created."
             },
-            "updated": {
+            "updatedAt": {
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was last updated."
