@@ -503,21 +503,21 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDisconnectPaymentInstrumentEligibility": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDetachPaymentInstrumentEligibility": {
       "get": {
         "tags": [
           "BillingProfiles"
         ],
         "x-ms-examples": {
-          "ValidateDisconnectPaymentInstrumentEligibilitySuccess": {
-            "$ref": "./examples/ValidateDisconnectPaymentInstrumentEligibilitySuccess.json"
+          "ValidateDetachPaymentInstrumentEligibilitySuccess": {
+            "$ref": "./examples/ValidateDetachPaymentInstrumentEligibilitySuccess.json"
           },
-          "ValidateDisconnectPaymentInstrumentEligibilityFailure": {
-            "$ref": "./examples/ValidateDisconnectPaymentInstrumentEligibilityFailure.json"
+          "ValidateDetachPaymentInstrumentEligibilityFailure": {
+            "$ref": "./examples/ValidateDetachPaymentInstrumentEligibilityFailure.json"
           }
         },
-        "operationId": "BillingProfiles_GetValidateDisconnectPaymentInstrumentEligibility",
-        "description": "Validates if the default payment instrument can be disconnected from the billing group. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "BillingProfiles_GetValidateDetachPaymentInstrumentEligibility",
+        "description": "Validates if the default payment instrument can be detached from the billing group. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "parameters": [          
           {
             "$ref": "#/parameters/billingAccountNameParameter"
@@ -533,7 +533,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DisconnectPaymentInstrumentEligibilityResult"
+              "$ref": "#/definitions/DetachPaymentInstrumentEligibilityResult"
             }
           },
           "default": {
@@ -5212,9 +5212,9 @@
         }
       }
     },
-    "DisconnectPaymentInstrumentEligibilityErrorCode": {
+    "DetachPaymentInstrumentEligibilityErrorCode": {
       "type": "string",
-      "description": "Error code of the disconnect payment instrument eligibility validation response.",
+      "description": "Error code of the detach payment instrument eligibility validation response.",
       "enum": [
         "AzureSubscriptions",
         "RecurringCharges",
@@ -5223,39 +5223,39 @@
         "PendingCharges"
       ],
       "x-ms-enum": {
-        "name": "disconnectPaymentInstrumentEligibilityErrorCode",
+        "name": "detachPaymentInstrumentEligibilityErrorCode",
         "modelAsString": true
       }
     },
-    "DisconnectPaymentInstrumentErrorDetails": {
+    "DetachPaymentInstrumentErrorDetails": {
       "type": "object",
-      "description": "Error details of the disconnect payment instrument eligibility validation.",
+      "description": "Error details of the detach payment instrument eligibility validation.",
       "properties": {
         "code": {
-          "description": "Error code for the disconnect payment instrument eligibility validation.",
-          "$ref": "#/definitions/DisconnectPaymentInstrumentEligibilityErrorCode"
+          "description": "Error code for the detach payment instrument eligibility validation.",
+          "$ref": "#/definitions/DetachPaymentInstrumentEligibilityErrorCode"
         },
         "message": {
-          "description": "Error message for the disconnect payment instrument eligibility validation.",
+          "description": "Error message for the detach payment instrument eligibility validation.",
           "type": "string"
         }
       }
     },
-    "DisconnectPaymentInstrumentEligibilityResult": {
+    "DetachPaymentInstrumentEligibilityResult": {
       "type": "object",
-      "description": "Result of the disconnect payment instrument eligibility validation.",
+      "description": "Result of the detach payment instrument eligibility validation.",
       "properties": {
         "isEligible": {
-          "description": "Specifies whether the payment instrument is eligible to be disconnected from the billing group.",
+          "description": "Specifies whether the payment instrument is eligible to be detached from the billing group.",
           "type": "boolean",
           "readOnly": true
         },
         "errorDetails": {
-          "description": "The list of disconnect payment instrument eligibility errors.",
+          "description": "The list of detach payment instrument eligibility errors.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/DisconnectPaymentInstrumentErrorDetails"
+            "$ref": "#/definitions/DetachPaymentInstrumentErrorDetails"
           }
         }
       }
