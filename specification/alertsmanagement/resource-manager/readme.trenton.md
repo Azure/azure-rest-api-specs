@@ -21,6 +21,11 @@ overrides:
   - where:
       property: "type"
     set:
+      - Hidden: true
+  - where:
+      resource: "ActionRules"
+      property: "/actionRule/properties/type"
+    set:
       - Hidden: false
   - where:
       resource: "ActionRules"
