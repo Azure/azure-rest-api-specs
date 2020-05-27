@@ -844,7 +844,6 @@
       "properties": {
         "configurationMode": {
           "type": "string",
-           
           "description": "Specifies how the LCM(Local Configuration Manager) actually applies the configuration to the target nodes. Possible values are ApplyOnly, ApplyAndMonitor, and ApplyAndAutoCorrect.",
           "x-ms-enum": {
             "name": "configurationMode",
@@ -870,7 +869,6 @@
         },
         "actionAfterReboot": {
           "type": "string",
-           
           "description": "Specifies what happens after a reboot during the application of a configuration. The possible values are ContinueConfiguration and StopConfiguration",
           "x-ms-enum": {
             "name": "actionAfterReboot",
@@ -883,13 +881,11 @@
         },
         "refreshFrequencyMins": {
           "type": "number",
-           
           "default": 30,
           "description": "The time interval, in minutes, at which the LCM checks a pull service to get updated configurations. This value is ignored if the LCM is not configured in pull mode. The default value is 30."
         },
         "rebootIfNeeded": {
           "type": "string",
-           
           "default": "False",
           "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module.",
           "x-ms-enum": {
@@ -903,7 +899,6 @@
         },
         "configurationModeFrequencyMins": {
           "type": "number",
-           
           "default": 15,
           "description": "How often, in minutes, the current configuration is checked and applied. This property is ignored if the ConfigurationMode property is set to ApplyOnly. The default value is 15."
         }
@@ -918,7 +913,6 @@
         },
         "complianceStatus": {
           "type": "string",
-           
           "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
           "x-ms-enum": {
             "name": "complianceStatus",
@@ -933,13 +927,11 @@
         "lastComplianceStatusChecked": {
           "type": "string",
           "format": "date-time",
-           
           "description": "Date and time when last compliance status was checked.",
           "x-nullable": true
         },
         "latestReportId": {
           "type": "string",
-           
           "description": "Id of the latest report for the guest configuration assignment. ",
           "x-nullable": true
         },
@@ -949,12 +941,10 @@
         },
         "assignmentHash": {
           "type": "string",
-           
           "description": "Combined hash of the configuration package and parameters.",
           "x-nullable": true
         },
         "provisioningState": {
-           
           "type": "string",
           "description": "The provisioning state, which only appears in the response.",
           "x-nullable": true,
@@ -988,12 +978,10 @@
       "properties": {
         "id": {
           "type": "string",
-           
           "description": "ARM resource id of the report for the guest configuration assignment."
         },
         "name": {
           "type": "string",
-           
           "description": "GUID that identifies the guest configuration assignment report under a subscription, resource group."
         },
         "properties": {
@@ -1007,7 +995,6 @@
       "properties": {
         "complianceStatus": {
           "type": "string",
-           
           "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
           "x-ms-enum": {
             "name": "complianceStatus",
@@ -1021,7 +1008,6 @@
         },
         "reportId": {
           "type": "string",
-           
           "description": "GUID that identifies the guest configuration assignment report under a subscription, resource group."
         },
         "assignment": {
@@ -1035,13 +1021,11 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-           
           "description": "Start date and time of the guest configuration assignment compliance status check."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-           
           "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "details": {
@@ -1056,7 +1040,6 @@
       "properties": {
         "name": {
           "type": "string",
-           
           "description": "Name of the guest configuration assignment."
         },
         "configuration": {
@@ -1070,12 +1053,10 @@
       "properties": {
         "id": {
           "type": "string",
-           
           "description": "Azure resource Id of the VM."
         },
         "uuid": {
           "type": "string",
-           
           "description": "UUID(Universally Unique Identifier) of the VM."
         }
       },
@@ -1085,12 +1066,10 @@
       "properties": {
         "name": {
           "type": "string",
-           
           "description": "Name of the configuration."
         },
         "version": {
           "type": "string",
-           
           "description": "Version of the configuration."
         }
       },
@@ -1100,7 +1079,6 @@
       "properties": {
         "complianceStatus": {
           "type": "string",
-           
           "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
           "x-ms-enum": {
             "name": "complianceStatus",
@@ -1115,23 +1093,19 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-           
           "description": "Start date and time of the guest configuration assignment compliance status check."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-           
           "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "jobId": {
           "type": "string",
-           
           "description": "GUID of the report."
         },
         "operationType": {
           "type": "string",
-           
           "description": "Type of report, Consistency or Initial",
           "x-ms-enum": {
             "name": "type",
@@ -1156,7 +1130,6 @@
       "properties": {
         "complianceStatus": {
           "type": "string",
-           
           "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
           "x-ms-enum": {
             "name": "complianceStatus",
@@ -1177,7 +1150,6 @@
         },
         "properties": {
           "type": "object",
-           
           "description": "Properties of a guest configuration assignment resource."
         }
       },
@@ -1187,12 +1159,10 @@
       "properties": {
         "phrase": {
           "type": "string",
-           
           "description": "Reason for the compliance of the guest configuration assignment resource."
         },
         "code": {
           "type": "string",
-           
           "description": "Code for the compliance of the guest configuration assignment resource."
         }
       },
