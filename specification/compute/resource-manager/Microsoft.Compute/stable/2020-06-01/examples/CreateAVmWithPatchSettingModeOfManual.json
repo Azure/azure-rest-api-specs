@@ -33,23 +33,27 @@
           "windowsConfiguration": {
             "provisionVMAgent": true,
             "enableAutomaticUpdates": true,
-            "PatchSettings": {
-              "patchMode": "Manual"
-            },
-            "networkProfile": {
-              "networkInterfaces": [
-                {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
-                  "properties": {
-                    "primary": true
-                  }
-                }
-              ]
-            }
+            "patchSettings": {
+              "properties":{
+                "patchMode": "Manual"
+              }
+            }            
           }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
         }
-      },
-      "responses": {
+      }
+    }
+  },
+   "responses": {
         "200": {
           "body": {
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
@@ -63,8 +67,10 @@
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
                   "patchSettings": {
-                    "patchMode": "Manual"
-                  }
+                    "properties":{
+                      "patchMode": "Manual"
+                    }
+                  }      
                 }
               },
               "networkProfile": {
@@ -118,8 +124,10 @@
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": false,
                   "patchSettings": {
-                    "patchMode": "Manual"
-                  }
+                    "properties":{
+                      "patchMode": "Manual"
+                    }
+                  }      
                 }
               },
               "networkProfile": {
@@ -161,6 +169,4 @@
           }
         }
       }
-    }
-  }
 }

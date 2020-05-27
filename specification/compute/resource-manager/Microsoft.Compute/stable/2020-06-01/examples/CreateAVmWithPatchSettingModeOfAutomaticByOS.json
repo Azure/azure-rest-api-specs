@@ -26,6 +26,16 @@
             "createOption": "FromImage"
           }
         },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
         "osProfile": {
           "adminUsername": "{your-username}",
           "computerName": "myVM",
@@ -34,22 +44,16 @@
             "provisionVMAgent": true,
             "enableAutomaticUpdates": true,
             "patchSettings": {
-              "patchMode": "AutomaticByOS"
-            },
-            "networkProfile": {
-              "networkInterfaces": [
-                {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
-                  "properties": {
-                    "primary": true
-                  }
-                }
-              ]
+              "properties": {
+                "patchMode": "AutomaticByOS"
+              }
             }
           }
         }
-      },
-      "responses": {
+      }
+    }
+  },
+  "responses": {
         "200": {
           "body": {
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
@@ -63,7 +67,9 @@
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
                   "patchSettings": {
-                    "patchMode": "AutomaticByOS"
+                    "properties": {
+                      "patchMode": "AutomaticByOS"
+                    }
                   }
                 }
               },
@@ -118,7 +124,9 @@
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
                   "patchSettings": {
-                    "patchMode": "AutomaticByOS"
+                    "properties": {
+                      "patchMode": "AutomaticByOS"
+                    }
                   }
                 }
               },
@@ -161,6 +169,4 @@
           }
         }
       }
-    }
-  }
 }
