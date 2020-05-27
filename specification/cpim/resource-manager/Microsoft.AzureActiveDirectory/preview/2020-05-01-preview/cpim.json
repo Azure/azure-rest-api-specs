@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/operations": {
+    "/providers/Microsoft.AzureActiveDirectory/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -49,12 +49,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -62,6 +56,12 @@
             "description": "Describe the result of a successful operation.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -111,6 +111,12 @@
             "schema": {
               "$ref": "#/definitions/GuestUsagesResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -154,6 +160,12 @@
             "schema": {
               "$ref": "#/definitions/GuestUsagesResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -189,6 +201,12 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -223,6 +241,89 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/GuestUsagesResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/guestUsages" : {
+      "get": {
+        "operationId": "GuestUsages_Subscription_Get",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Get": {
+            "$ref": "./examples/GuestUsagesSubscriptionGet.json"
+          }
+        },
+        "summary": "Gets a Guest Usages resources under a subscription",
+        "description": "Gets Guest Usages resources under a subscription for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages" : {
+      "get": {
+        "operationId": "GuestUsages_ResourceGroup_Get",        
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Get": {
+            "$ref": "./examples/GuestUsagesResourceGroupGet.json"
+          }
+        },
+        "summary": "Gets a Guest Usages resources under a subscription and resource group",
+        "description": "Gets Guest Usages resources under a subscription and a resource group for the Microsoft.AzureActiveDirectory resource provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -329,6 +430,54 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "GuestUsagesResourceList": {
+      "description": "The collection of guest usages resources",
+      "properties": {
+        "value": {
+          "description": "List of guest usages resources",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GuestUsagesResource"
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the Batch AI service."
+        }
+      },
+      "description": "An error response from the Batch AI service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch AI service."
     }
   },
   "parameters": {
