@@ -49,6 +49,7 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
 
