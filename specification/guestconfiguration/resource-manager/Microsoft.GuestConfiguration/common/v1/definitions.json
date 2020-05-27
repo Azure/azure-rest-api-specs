@@ -26,10 +26,6 @@
   "definitions": {
     "ErrorResponse": {
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
@@ -43,17 +39,21 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "ARM resource id of the guest configuration assignment."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Name of the guest configuration assignment."
         },
         "location": {
           "type": "string",
+          "readOnly": true,
           "description": "Region where the VM is located."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "The type of the resource."
         }
