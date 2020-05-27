@@ -2,7 +2,12 @@
   "parameters": {
     "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
-    "productName": "{productName}"
+    "productName": "{productName}",
+    "parameters": {
+      "properties": {
+        "autoRenew": "Off"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -11,7 +16,7 @@
         "name": "{productName}",
         "type": "Microsoft.Billing/billingAccounts/products",
         "properties": {
-          "autoRenew": "On",
+          "autoRenew": "Off",
           "productTypeId": "A12345",
           "productType": "Subscription",
           "displayName": "AIP Dev",

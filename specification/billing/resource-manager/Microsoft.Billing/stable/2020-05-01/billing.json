@@ -2001,6 +2001,52 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Update",
+        "description": "Updates the properties of a Product. Currently, auto renew can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "x-ms-examples": {
+          "UpdateBillingProperty": {
+            "$ref": "./examples/UpdateProduct.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/productNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            },
+            "description": "Request parameters that are provided to the update product operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/move": {
@@ -4811,6 +4857,18 @@
     "ProductProperties": {
       "description": "The properties of a product.",
       "properties": {
+        "autoRenew": {
+          "description": "Indicates whether auto renewal is turned on or off for a product.",
+          "type": "string",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "x-ms-enum": {
+            "name": "AutoRenew",
+            "modelAsString": true
+          }
+        },
         "displayName": {
           "description": "The display name of the product.",
           "type": "string",
