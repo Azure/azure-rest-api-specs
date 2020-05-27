@@ -2309,6 +2309,31 @@
         }
       }
     },
+    "ManagedIdentityProperties": {
+      "description": "Managed identity properties retrieved from ARM request headers.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      }
+    },
     "Sku": {
       "description": "Sku of Azure Spring Cloud",
       "required": [
@@ -2597,6 +2622,10 @@
           "$ref": "#/definitions/AppResourceProperties",
           "description": "Properties of the App resource",
           "x-ms-client-flatten": false
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentityProperties",
+          "description": "The Managed Identity type of the app resource"
         },
         "location": {
           "description": "The GEO location of the application, always the same with its parent resource",
