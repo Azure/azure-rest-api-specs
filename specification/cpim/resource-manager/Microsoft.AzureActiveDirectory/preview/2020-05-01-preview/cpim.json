@@ -146,17 +146,17 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "Resource",
+            "name": "ResourcePatch",
             "in": "body",
             "description": "Guest Usages Resource to be updated",
             "schema": {
-              "$ref": "#/definitions/GuestUsagesResource"
+              "$ref": "#/definitions/GuestUsagesResourcePatch"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Guest Usages Resource Successfully Updated",
             "schema": {
               "$ref": "#/definitions/GuestUsagesResource"
             }
@@ -197,10 +197,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
-          },
-          "204": {
-            "description": "No Content."
+            "description": "Guest Usages Resource Successfully Deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -238,7 +235,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Guest Usages resource successfully retrieved",
             "schema": {
               "$ref": "#/definitions/GuestUsagesResource"
             }
@@ -254,7 +251,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
       "get": {
-        "operationId": "GuestUsagesSubscription_List",
+        "operationId": "GuestUsages_ListBySubscription",
         "tags": [
           "GuestUsages"
         ],
@@ -275,7 +272,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "List of Guest Usages resources under the subscription successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/GuestUsagesResourceList"
             }
@@ -294,7 +291,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages": {
       "get": {
-        "operationId": "GuestUsagesResourceGroup_List",
+        "operationId": "GuestUsages_ListByResourceGroup",
         "tags": [
           "GuestUsages"
         ],
@@ -318,7 +315,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "List of Guest Usages resources under the resourceGroup successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/GuestUsagesResourceList"
             }
@@ -391,7 +388,7 @@
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "An identifier that represents the Guest Usages Resource Properties."
+          "description": "An identifier for the tenant for which the resource is being created"
         }
       }
     },
@@ -437,6 +434,19 @@
       },
       "x-ms-azure-resource": true
     },
+    "GuestUsagesResourcePatch": {
+      "description": "Guest Usages Resource for Patch",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        }
+      }
+    },
     "GuestUsagesResourceList": {
       "description": "The collection of guest usages resources",
       "properties": {
@@ -454,36 +464,10 @@
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "An error response from the Batch AI service."
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
-      "description": "An error response from the Batch AI service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Batch AI service."
+      "description": "An error response for a resource management request."
     }
   },
   "parameters": {
