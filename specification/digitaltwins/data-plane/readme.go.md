@@ -8,12 +8,12 @@ go:
   clear-output-folder: true
 ```
 
-### Tag: package-2020-05-31 and go
+### Tag: package-2020-05-31-preview and go
 
-These settings apply only when `--tag=package-2020-05-31 --go` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-31-preview --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag) == 'package-2020-05-31' && $(go)
+```yaml $(tag) == 'package-2020-05-31-preview' && $(go)
 namespace: Microsoft.DigitalTwins
 output-folder: $(go-sdks-folder)/azuredigitaltwins/Generated
 ```

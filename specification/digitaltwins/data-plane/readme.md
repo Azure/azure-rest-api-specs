@@ -26,16 +26,16 @@ These are the global settings for Azure Digital Twins.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2020-05-31
+tag: package-2020-05-31-preview
 ```
 
-### Tag: package-2020-05-31
+### Tag: package-2020-05-31-preview
 
-These settings apply only when `--tag=package-2020-05-31` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-31-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-05-31'
+```yaml $(tag) == 'package-2020-05-31-preview'
 input-file:
-  - Microsoft.DigitalTwins/preview/2020-05-31/digitaltwins.json
+  - Microsoft.DigitalTwins/preview/2020-05-31-preview/digitaltwins.json
 ```
 
 ---

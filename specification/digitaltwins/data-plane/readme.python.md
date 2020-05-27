@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.DigitalTwins
   package-name: azuredigitaltwins
-  package-version: 2020-05-31
+  package-version: 2020-05-31-preview
   clear-output-folder: true
 ```
 
