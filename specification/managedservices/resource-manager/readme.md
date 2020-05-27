@@ -126,6 +126,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/preview/2019-04-01-preview/managedservices.json
