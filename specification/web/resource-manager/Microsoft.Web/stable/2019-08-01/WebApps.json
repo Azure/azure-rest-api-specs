@@ -941,6 +941,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettingsV2": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates site's Authentication / Authorization settings for apps via the V2 format",
+        "description": "Description for Updates site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_UpdateAuthSettingsV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteAuthSettingsV2",
+            "in": "body",
+            "description": "Auth settings associated with web app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettingsV2/list": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "description": "Description for Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_GetAuthSettingsV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts": {
       "put": {
         "tags": [
@@ -19791,6 +19884,17 @@
     }
   },
   "definitions": {
+    "AllowedAudiencesValidation": {
+      "type": "object",
+      "properties": {
+        "allowedAudiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ApiKVReference": {
       "description": "Description of site key vault references.",
       "type": "object",
@@ -19880,6 +19984,17 @@
         }
       }
     },
+    "AppRegistration": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "appSecretSettingName": {
+          "type": "string"
+        }
+      }
+    },
     "ArmIdWrapper": {
       "description": "A wrapper for an ARM resource id",
       "type": "object",
@@ -19887,6 +20002,85 @@
         "id": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AuthPlatform": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "runtimeVersion": {
+          "type": "string"
+        },
+        "configFilePath": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureActiveDirectory": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AzureActiveDirectoryRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/AzureActiveDirectoryLogin"
+        },
+        "validation": {
+          "$ref": "#/definitions/AzureActiveDirectoryValidation"
+        },
+        "isAutoProvisioned": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AzureActiveDirectoryLogin": {
+      "type": "object",
+      "properties": {
+        "disableWWWAuthenticate": {
+          "type": "boolean"
+        },
+        "loginParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureActiveDirectoryRegistration": {
+      "type": "object",
+      "properties": {
+        "openIdIssuer": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "type": "string"
+        },
+        "clientSecretCertificateThumbprint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureActiveDirectoryValidation": {
+      "type": "object",
+      "properties": {
+        "jwtClaimChecks": {
+          "$ref": "#/definitions/JwtClaimChecksV2"
+        },
+        "allowedAudiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -20264,6 +20458,25 @@
         }
       }
     },
+    "BlobStorageTokenStore": {
+      "type": "object",
+      "properties": {
+        "sasUrlSettingName": {
+          "type": "string"
+        }
+      }
+    },
+    "ClientRegistration": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "type": "string"
+        }
+      }
+    },
     "ConnStringValueTypePair": {
       "description": "Database connection string value to type pair.",
       "required": [
@@ -20563,6 +20776,25 @@
         }
       }
     },
+    "CookieExpiration": {
+      "type": "object",
+      "properties": {
+        "convention": {
+          "enum": [
+            "FixedTime",
+            "IdentityProviderDerived"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CookieExpirationConvention",
+            "modelAsString": false
+          }
+        },
+        "timeToExpiration": {
+          "type": "string"
+        }
+      }
+    },
     "CsmCopySlotEntity": {
       "description": "Copy deployment slot parameters.",
       "required": [
@@ -20710,6 +20942,20 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CustomOpenIdConnectProvider": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/OpenIdConnectRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/OpenIdConnectLogin"
         }
       }
     },
@@ -20867,6 +21113,23 @@
         }
       }
     },
+    "Facebook": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AppRegistration"
+        },
+        "graphApiVersion": {
+          "type": "string"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes"
+        }
+      }
+    },
     "FileSystemApplicationLogsConfig": {
       "description": "Application logs to file system configuration.",
       "type": "object",
@@ -20908,6 +21171,37 @@
         "enabled": {
           "description": "True if configuration is enabled, false if it is disabled and null if configuration is not set.",
           "type": "boolean"
+        }
+      }
+    },
+    "FileSystemTokenStore": {
+      "type": "object",
+      "properties": {
+        "directory": {
+          "type": "string"
+        }
+      }
+    },
+    "ForwardProxy": {
+      "type": "object",
+      "properties": {
+        "convention": {
+          "enum": [
+            "NoProxy",
+            "Standard",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ForwardProxyConvention",
+            "modelAsString": false
+          }
+        },
+        "customHostHeaderName": {
+          "type": "string"
+        },
+        "customProtoHeadername": {
+          "type": "string"
         }
       }
     },
@@ -21026,6 +21320,67 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GitHub": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/ClientRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes"
+        }
+      }
+    },
+    "GlobalValidation": {
+      "type": "object",
+      "properties": {
+        "requireAuthentication": {
+          "type": "boolean"
+        },
+        "unauthenticatedClientAction": {
+          "enum": [
+            "RedirectToLoginPage",
+            "AllowAnonymous",
+            "Return401",
+            "Return403"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UnauthenticatedClientActionV2",
+            "modelAsString": false
+          }
+        },
+        "redirectToProvider": {
+          "type": "string"
+        },
+        "excludedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Google": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/ClientRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes"
+        },
+        "validation": {
+          "$ref": "#/definitions/AllowedAudiencesValidation"
         }
       }
     },
@@ -21207,6 +21562,71 @@
         }
       }
     },
+    "HttpSettings": {
+      "type": "object",
+      "properties": {
+        "requireHttps": {
+          "type": "boolean"
+        },
+        "routes": {
+          "$ref": "#/definitions/HttpSettingsRoutes"
+        },
+        "forwardProxy": {
+          "$ref": "#/definitions/ForwardProxy"
+        }
+      }
+    },
+    "HttpSettingsRoutes": {
+      "type": "object",
+      "properties": {
+        "apiPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "IdentityProviders": {
+      "type": "object",
+      "properties": {
+        "azureActiveDirectory": {
+          "$ref": "#/definitions/AzureActiveDirectory"
+        },
+        "facebook": {
+          "$ref": "#/definitions/Facebook"
+        },
+        "gitHub": {
+          "$ref": "#/definitions/GitHub"
+        },
+        "google": {
+          "$ref": "#/definitions/Google"
+        },
+        "twitter": {
+          "$ref": "#/definitions/Twitter"
+        },
+        "customOpenIdConnectProviders": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomOpenIdConnectProvider"
+          }
+        }
+      }
+    },
+    "JwtClaimChecksV2": {
+      "type": "object",
+      "properties": {
+        "allowedGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedClientApplications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "KeyInfo": {
       "description": "Function key info.",
       "type": "object",
@@ -21324,6 +21744,51 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "$ref": "#/definitions/LoginRoutes"
+        },
+        "tokenStore": {
+          "$ref": "#/definitions/TokenStore"
+        },
+        "preserveUrlFragmentsForLogins": {
+          "type": "boolean"
+        },
+        "allowedExternalRedirectUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cookieExpiration": {
+          "$ref": "#/definitions/CookieExpiration"
+        },
+        "nonce": {
+          "$ref": "#/definitions/Nonce"
+        }
+      }
+    },
+    "LoginRoutes": {
+      "type": "object",
+      "properties": {
+        "logoutEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginScopes": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -21638,6 +22103,83 @@
         "message": {
           "description": "Detailed message of a network trace operation, e.g. error message in case of failure.",
           "type": "string"
+        }
+      }
+    },
+    "Nonce": {
+      "type": "object",
+      "properties": {
+        "validateNonce": {
+          "type": "boolean"
+        },
+        "nonceExpirationInterval": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectClientCredential": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "enum": [
+            "ClientSecretPost"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientCredentialMethod",
+            "modelAsString": false
+          }
+        },
+        "clientSecretSettingName": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectConfig": {
+      "type": "object",
+      "properties": {
+        "authorizationEndpoint": {
+          "type": "string"
+        },
+        "tokenEndpoint": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "jwksUri": {
+          "type": "string"
+        },
+        "wellKnownOpenIdConfiguration": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectLogin": {
+      "type": "object",
+      "properties": {
+        "nameClaimType": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OpenIdConnectRegistration": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientCredential": {
+          "$ref": "#/definitions/OpenIdConnectClientCredential"
+        },
+        "openIdConnectConfiguration": {
+          "$ref": "#/definitions/OpenIdConnectConfig"
         }
       }
     },
@@ -22638,7 +23180,8 @@
                 "Facebook",
                 "Google",
                 "MicrosoftAccount",
-                "Twitter"
+                "Twitter",
+                "Github"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -22657,6 +23200,10 @@
             },
             "clientSecret": {
               "description": "The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).\nThis setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.\nOtherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.\nMore information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+              "type": "string"
+            },
+            "clientSecretSettingName": {
+              "description": "The app setting name that contains the client secret of the relying party application.",
               "type": "string"
             },
             "clientSecretCertificateThumbprint": {
@@ -22693,6 +23240,10 @@
               "description": "The client secret associated with the Google web application.\nThis setting is required for enabling Google Sign-In.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
               "type": "string"
             },
+            "googleClientSecretSettingName": {
+              "description": "The app setting name that contains the client secret associated with \nthe Google web application.",
+              "type": "string"
+            },
             "googleOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication.\nThis setting is optional. If not specified, \"openid\", \"profile\", and \"email\" are used as default scopes.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
               "type": "array",
@@ -22708,8 +23259,30 @@
               "description": "The App Secret of the Facebook app used for Facebook Login.\nThis setting is required for enabling Facebook Login.\nFacebook Login documentation: https://developers.facebook.com/docs/facebook-login",
               "type": "string"
             },
+            "facebookAppSecretSettingName": {
+              "description": "The app setting name that contains the app secret used for Facebook Login.",
+              "type": "string"
+            },
             "facebookOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.\nThis setting is optional.\nFacebook Login documentation: https://developers.facebook.com/docs/facebook-login",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gitHubClientId": {
+              "description": "The Client Id of the GitHub app used for login.\nThis setting is required for enabling Github login",
+              "type": "string"
+            },
+            "gitHubClientSecret": {
+              "description": "The Client Secret of the GitHub app used for Github Login.\nThis setting is required for enabling Github login.",
+              "type": "string"
+            },
+            "gitHubClientSecretSettingName": {
+              "type": "string"
+            },
+            "gitHubOAuthScopes": {
+              "description": "THe OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.\nThis setting is optional",
               "type": "array",
               "items": {
                 "type": "string"
@@ -22723,6 +23296,10 @@
               "description": "The OAuth 1.0a consumer secret of the Twitter application used for sign-in.\nThis setting is required for enabling Twitter Sign-In.\nTwitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
               "type": "string"
             },
+            "twitterConsumerSecretSettingName": {
+              "description": "The app setting name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
+              "type": "string"
+            },
             "microsoftAccountClientId": {
               "description": "The OAuth 2.0 client ID that was created for the app used for authentication.\nThis setting is required for enabling Microsoft Account authentication.\nMicrosoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
               "type": "string"
@@ -22731,15 +23308,47 @@
               "description": "The OAuth 2.0 client secret that was created for the app used for authentication.\nThis setting is required for enabling Microsoft Account authentication.\nMicrosoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
               "type": "string"
             },
+            "microsoftAccountClientSecretSettingName": {
+              "description": "The app setting name containing the OAuth 2.0 client secret that was created for the\napp used for authentication.",
+              "type": "string"
+            },
             "microsoftAccountOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.\nThis setting is optional. If not specified, \"wl.basic\" is used as the default scope.\nMicrosoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx",
               "type": "array",
               "items": {
                 "type": "string"
               }
+            },
+            "isAuthFromFile": {
+              "description": "\"true\" if the auth config settings should be read from a file,\n\"false\" otherwise",
+              "type": "string"
+            },
+            "authFilePath": {
+              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will be %HOME%\\site\\wwwroot\\",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteAuthSettingsV2": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/AuthPlatform"
+        },
+        "globalValidation": {
+          "$ref": "#/definitions/GlobalValidation"
+        },
+        "identityProviders": {
+          "$ref": "#/definitions/IdentityProviders"
+        },
+        "login": {
+          "$ref": "#/definitions/Login"
+        },
+        "httpSettings": {
+          "$ref": "#/definitions/HttpSettings"
         }
       }
     },
@@ -23724,6 +24333,24 @@
         }
       }
     },
+    "TokenStore": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "tokenRefreshExtensionHours": {
+          "format": "double",
+          "type": "number"
+        },
+        "fileSystem": {
+          "$ref": "#/definitions/FileSystemTokenStore"
+        },
+        "azureBlobStorage": {
+          "$ref": "#/definitions/BlobStorageTokenStore"
+        }
+      }
+    },
     "TriggeredJobHistory": {
       "description": "Triggered Web Job History. List of Triggered Web Job Run Information elements.",
       "type": "object",
@@ -23927,6 +24554,28 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "Twitter": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/TwitterRegistration"
+        }
+      }
+    },
+    "TwitterRegistration": {
+      "type": "object",
+      "properties": {
+        "consumerKey": {
+          "type": "string"
+        },
+        "consumerSecretSettingName": {
+          "type": "string"
         }
       }
     },
