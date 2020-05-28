@@ -7016,19 +7016,15 @@
         }
       ],
       "properties": {
-        "lineEnding": {
-          "$ref": "#/definitions/OcrSkillLineEnding",
-          "description": "A value indicating which line ending to use. Default is \"space\"."
-        },
         "defaultLanguageCode": {
           "$ref": "#/definitions/OcrSkillLanguage",
-          "description": "A value indicating which language code to use. Default is \"en\"."
+          "description": "A value indicating which language code to use. Default is en."
         },
         "detectOrientation": {
           "x-ms-client-name": "ShouldDetectOrientation",
           "type": "boolean",
           "default": false,
-          "description": "A value indicating to turn orientation detection on or not. Default is \"false\"."
+          "description": "A value indicating to turn orientation detection on or not. Default is false."
         }
       },
       "externalDocs": {
@@ -7777,33 +7773,6 @@
         ]
       },
       "description": "The language codes supported for input by OcrSkill."
-    },
-    "OcrSkillLineEnding": {
-      "type": "string",
-      "enum": [
-        "Space",
-        "CarriageReturn",
-        "LineFeed"
-      ],
-      "x-ms-enum": {
-        "name": "LineEndingOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Space",
-            "description": "Space, which is the default value for line endings"
-          },
-          {
-            "value": "CarriageReturn",
-            "description": "Carriage return, represented by \\r\\n"
-          },
-          {
-            "value": "LineFeed",
-            "description": "Line feed, represented by \\n"
-          }
-        ]
-      },
-      "description": "The line endings supported for input by OcrSkill."
     },
     "SplitSkillLanguage": {
       "type": "string",
