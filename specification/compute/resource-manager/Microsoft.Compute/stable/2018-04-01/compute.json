@@ -251,14 +251,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation.",
-            "enum": [
-              "instanceView"
-            ],
-            "x-ms-enum": {
-              "name": "InstanceViewTypes",
-              "modelAsString": false
-            }
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           }
         ],
         "responses": {
@@ -4086,45 +4079,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation.",
-            "enum": [
-              "startswith(instanceView/statuses/code, 'PowerState') eq true",
-              "properties/latestModelApplied eq true",
-              "properties/latestModelApplied eq false"
-            ],
-            "x-ms-enum": {
-              "name": "FilterQueryOptions",
-              "modelAsString": false
-            }
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters.",
-            "enum": [
-              "instanceView",
-              "instanceView/statuses"
-            ],
-            "x-ms-enum": {
-              "name": "SelectQueryOptions",
-              "modelAsString": false
-            }
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation.",
-            "enum": [
-              "instanceView"
-            ],
-            "x-ms-enum": {
-              "name": "InstanceViewTypes",
-              "modelAsString": false
-            }
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
