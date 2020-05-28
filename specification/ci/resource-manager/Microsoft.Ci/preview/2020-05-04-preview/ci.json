@@ -830,6 +830,479 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Ci/workspaces/{workspaceName}/pipelines": {
+      "get": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "List Pipelines in a Workspace.",
+        "description": "List Pipelines in a Workspace",
+        "operationId": "Pipelines_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Pipelines_ListByWorkspace": {
+            "$ref": "./examples/Pipelines_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Ci/workspaces/{workspaceName}/pipelines/{pipelineName}": {
+      "get": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Get Pipeline in a workspace.",
+        "description": "Get a Pipeline in a workspace",
+        "operationId": "Pipelines_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Get": {
+            "$ref": "./examples/Pipelines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Adds a new pipeline to an existing workspace.",
+        "description": "Create a Pipeline",
+        "operationId": "Pipelines_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipeline",
+            "in": "body",
+            "description": "The new pipeline information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Create": {
+            "$ref": "./examples/Pipelines_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Delete a Pipeline in a workspace.",
+        "description": "Delete a Pipeline in a Workspace",
+        "operationId": "Pipelines_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Pipelines_Delete": {
+            "$ref": "./examples/Pipelines_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Ci/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineSteps": {
+      "get": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "List PipelineSteps of a Pipeline.\r\n///",
+        "description": "List PipelineSteps of a Pipeline",
+        "operationId": "PipelineSteps_ListByPipeline",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineSteps_ListByPipeline": {
+            "$ref": "./examples/PipelineSteps_ListByPipeline.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Ci/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineSteps/{pipelineStepName}": {
+      "get": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "Get a PipelineStep in a Pipeline.",
+        "description": "Get a PipelineStep in a Pipeline",
+        "operationId": "PipelineSteps_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepName",
+            "in": "path",
+            "description": "The name of the pipeline step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineSteps_Get": {
+            "$ref": "./examples/PipelineSteps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "Adds a new PipelineStep to an existing Pipeline.",
+        "description": "Create a PipelineStep",
+        "operationId": "PipelineSteps_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepName",
+            "in": "path",
+            "description": "The name of the pipeline step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStep",
+            "in": "body",
+            "description": "The new pipeline information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineSteps_Create": {
+            "$ref": "./examples/PipelineSteps_Create.json"
+          },
+          "PipelineSteps_SynapseSpark_Create": {
+            "$ref": "./examples/PipelineSteps_SynapseSpark_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "Delete a PipelineStep in a Pipeline.",
+        "description": "Delete a PipelineStep in a Pipeline",
+        "operationId": "PipelineSteps_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepName",
+            "in": "path",
+            "description": "The name of the pipeline step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.Ci resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PipelineSteps_Delete": {
+            "$ref": "./examples/PipelineSteps_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Ci/workspaces/{workspaceName}/proposals": {
       "get": {
         "tags": [
@@ -967,13 +1440,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "invitationId",
-            "in": "query",
-            "description": "Optional invitation id for accepting an invitation to join an existing proposal",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -3770,6 +4236,100 @@
         }
       }
     },
+    "Pipeline": {
+      "description": "A pipeline data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineProperties",
+          "description": "Properties on the pipeline",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineList": {
+      "description": "List response for get Pipelines",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          }
+        }
+      }
+    },
+    "PipelineProperties": {
+      "description": "Pipeline property bag.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "General Description of the pipeline content",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineStep": {
+      "description": "A pipeline step data transfer object",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of pipeline step.",
+          "enum": [
+            "SynapseSparkPipelineStep"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "PipelineStepList": {
+      "description": "List response for get Pipeline steps",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineStep"
+          }
+        }
+      }
+    },
     "Proposal": {
       "description": "Proposal data transfer object.",
       "required": [
@@ -3817,6 +4377,13 @@
         "description": {
           "description": "Textual description of the proposal",
           "type": "string"
+        },
+        "invitationId": {
+          "description": "The invitation id for joining a proposal",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "lastUpdated": {
           "format": "date-time",
@@ -3921,6 +4488,20 @@
         },
         "scriptReferenceId": {
           "description": "The unique identifier of the script reference.",
+          "type": "string"
+        }
+      }
+    },
+    "ScriptDataAssetBinding": {
+      "description": "Binds a data asset reference to a script source or sink by key.",
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "description": "The bounded data asset Id",
+          "type": "string"
+        },
+        "key": {
+          "description": "The key of script's source or sink",
           "type": "string"
         }
       }
@@ -4125,6 +4706,78 @@
         "subscriptionId": {
           "description": "Subscription id of storage account",
           "type": "string"
+        }
+      }
+    },
+    "SynapseSparkPipelineStep": {
+      "description": "A Synapse Spark based pipeline step.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineStep"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseSparkPipelineStepProperties",
+          "description": "Properties of Synapse Spark pipelineStep",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SynapseSparkPipelineStep"
+    },
+    "SynapseSparkPipelineStepProperties": {
+      "description": "A Synapse Spark PipelineStep data transfer object.",
+      "required": [
+        "clusterSize",
+        "scriptId",
+        "scriptRevision",
+        "scriptSourceBindings",
+        "scriptSinkBindings"
+      ],
+      "type": "object",
+      "properties": {
+        "clusterSize": {
+          "format": "int32",
+          "description": "Defines the cluster size for running a SynapseSpark pipeline step",
+          "type": "integer"
+        },
+        "dependencies": {
+          "description": "List of other steps names, in the same pipeline, which this step is depended on\r\nand should run only when they finish.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scriptId": {
+          "description": "The script Id that the pipeline step should execute",
+          "type": "string"
+        },
+        "scriptRevision": {
+          "format": "int32",
+          "description": "The script's revision that the pipeline step should execute",
+          "type": "integer"
+        },
+        "scriptSinkBindings": {
+          "description": "Bindings between the script's sink keys and data assets",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptDataAssetBinding"
+          }
+        },
+        "scriptSourceBindings": {
+          "description": "Bindings between the script's source keys and data assets",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptDataAssetBinding"
+          }
         }
       }
     },
