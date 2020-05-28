@@ -49,6 +49,24 @@ directive:
 ```
 
 
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Network/stable/2020-04-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-04-01/frontdoor.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
@@ -255,6 +273,9 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2020-01-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2020-01-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
