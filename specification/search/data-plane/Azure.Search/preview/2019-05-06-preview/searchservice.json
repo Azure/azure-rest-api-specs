@@ -7015,10 +7015,6 @@
         }
       ],
       "properties": {
-        "textExtractionAlgorithm": {
-          "$ref": "#/definitions/TextExtractionAlgorithm",
-          "description": "A value indicating which algorithm to use for extracting text. Default is printed."
-        },
         "defaultLanguageCode": {
           "$ref": "#/definitions/OcrSkillLanguage",
           "description": "A value indicating which language code to use. Default is en."
@@ -7299,30 +7295,6 @@
         "value"
       ],
       "description": "Response from a list skillset request. If successful, it includes the full definitions of all skillsets."
-    },
-    "TextExtractionAlgorithm": {
-      "type": "string",
-      "enum": [
-        "printed",
-        "handwritten"
-      ],
-      "x-ms-enum": {
-        "name": "TextExtractionAlgorithm",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "printed",
-            "name": "Printed",
-            "description": "An algorithm suitable for printed text."
-          },
-          {
-            "value": "handwritten",
-            "name": "Handwritten",
-            "description": "An algorithm suitable for handwritten text."
-          }
-        ]
-      },
-      "description": "A value indicating which algorithm to use. Default is printed."
     },
     "TextSplitMode": {
       "type": "string",
