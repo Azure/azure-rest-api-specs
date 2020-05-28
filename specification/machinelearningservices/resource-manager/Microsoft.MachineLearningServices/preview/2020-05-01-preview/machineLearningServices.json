@@ -1705,21 +1705,24 @@
       "name": "modelId",
       "type": "string",
       "description": "The Model Id.",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "ModelNameParameter": {
       "in": "query",
       "name": "modelName",
       "type": "string",
       "description": "The Model name.",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServiceTagParameter": {
       "in": "query",
       "name": "tag",
       "type": "string",
       "description": "The object tag.",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServiceCountParameter": {
       "in": "query",
@@ -1727,35 +1730,40 @@
       "type": "integer",
       "format": "int32",
       "description": "The number of items to retrieve in a page.",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServiceTagsParameter": {
       "in": "query",
       "name": "tags",
       "type": "string",
       "description": "A set of tags with which to filter the returned services. It is a comma separated string of tags key or tags key=value Example: tagKey1,tagKey2,tagKey3=value3 .",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServicePropertiesParameter": {
       "in": "query",
       "name": "properties",
       "type": "string",
       "description": "A set of properties with which to filter the returned services. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServiceRunIdParameter": {
       "in": "query",
       "name": "runId",
       "type": "string",
       "description": "runId for model associated with service.",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServiceExpandParameter": {
       "in": "query",
       "name": "expand",
       "type": "boolean",
       "description": "Set to True to include Model details.",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WebServiceOrderByParameter": {
       "in": "query",
@@ -1773,7 +1781,8 @@
       "x-ms-enum": {
         "name": "OrderString",
         "modelAsString": false
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -4069,7 +4078,7 @@
               ]
             },
             "scoringUri": {
-              "format": "uri",
+              "format": "string",
               "description": "The Uri for sending scoring requests.",
               "type": "string"
             },
@@ -4118,7 +4127,7 @@
               "type": "string"
             },
             "swaggerUri": {
-              "format": "uri",
+              "format": "string",
               "description": "The Uri for sending swagger requests.",
               "type": "string"
             },
@@ -4145,7 +4154,7 @@
               ]
             },
             "vnetConfiguration": {
-              "description": "VnetConfiguration",
+              "description": "The virtual network configuration.",
               "allOf": [
                 {
                   "$ref": "#/definitions/VnetConfiguration"
@@ -4153,7 +4162,7 @@
               ]
             },
             "encryptionProperties": {
-              "description": "EncryptionProperties.",
+              "description": "The encryption properties.",
               "allOf": [
                 {
                   "$ref": "#/definitions/EncryptionProperties"
@@ -4211,11 +4220,11 @@
       "type": "object",
       "properties": {
         "vnetName": {
-          "description": "vnetName",
+          "description": "The name of the virtual network.",
           "type": "string"
         },
         "subnetName": {
-          "description": "subnetName",
+          "description": "The name of the virtual network subnet.",
           "type": "string"
         }
       }
@@ -4224,7 +4233,7 @@
       "type": "object",
       "properties": {
         "vaultBaseUrl": {
-          "format": "uri",
+          "format": "string",
           "description": "vault base Url",
           "type": "string"
         },
@@ -4279,7 +4288,7 @@
           }
         },
         "url": {
-          "format": "uri",
+          "format": "string",
           "description": "The URL of the Model. Usually a SAS URL.",
           "type": "string"
         },
@@ -4426,7 +4435,7 @@
           "type": "string"
         },
         "url": {
-          "format": "uri",
+          "format": "string",
           "description": "The Url of the Asset.",
           "type": "string"
         },
@@ -4895,7 +4904,7 @@
               ]
             },
             "scoringUri": {
-              "format": "uri",
+              "format": "string",
               "description": "The Uri for sending scoring requests.",
               "type": "string"
             },
@@ -4930,7 +4939,7 @@
               "type": "boolean"
             },
             "swaggerUri": {
-              "format": "uri",
+              "format": "string",
               "description": "The Uri for sending swagger requests.",
               "type": "string"
             },
@@ -5093,7 +5102,7 @@
               "type": "string"
             },
             "vnetConfiguration": {
-              "description": "VnetConfiguration",
+              "description": "The virtual network configuration.",
               "allOf": [
                 {
                   "$ref": "#/definitions/VnetConfiguration"
@@ -5101,7 +5110,7 @@
               ]
             },
             "encryptionProperties": {
-              "description": "EncryptionProperties.",
+              "description": "The encryption properties.",
               "allOf": [
                 {
                   "$ref": "#/definitions/EncryptionProperties"
