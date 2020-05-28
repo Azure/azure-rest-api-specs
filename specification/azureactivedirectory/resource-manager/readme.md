@@ -29,16 +29,25 @@ openapi-type: arm
 tag: package-preview-2020-07
 ```
 
-
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2020-07'
 input-file:
-  - Microsoft.Aadiam/preview/2020-07-01-preview/privateLinkForAzureAD.json
-  - Microsoft.Aadiam/preview/2020-07-01-preview/privateLinkResources.json
+  - Microsoft.Aadiam/preview/2020-07-01-preview/azureADHealth.json
 ```
+
+### Tag: package-preview-2020-03
+
+These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-07'
+input-file:
+  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
+  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
+```
+
 ### Tag: package-2017-04-01
 
 These settings apply only when `--tag=package-2017-04-01` is specified on the command line.
