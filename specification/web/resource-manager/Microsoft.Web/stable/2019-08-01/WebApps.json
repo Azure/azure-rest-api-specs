@@ -23551,6 +23551,10 @@
                 "type": "string"
               }
             },
+            "aadClaimsAuthorization": {
+              "description": "Gets a JSON string containing the Azure AD Acl settings.",
+              "type": "string"
+            },
             "googleClientId": {
               "description": "The OpenID Connect Client ID for the Google web application.\nThis setting is required for enabling Google Sign-In.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
               "type": "string"
@@ -23598,7 +23602,6 @@
               "type": "string"
             },
             "gitHubClientSecretSettingName": {
-              "description": "The app setting name that contains the client secret of the Github\napp used for GitHub Login.",
               "type": "string"
             },
             "gitHubOAuthScopes": {
@@ -23644,7 +23647,7 @@
               "type": "string"
             },
             "authFilePath": {
-              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will the site's root directory.",
+              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will be %HOME%\\site\\wwwroot\\",
               "type": "string"
             }
           },
