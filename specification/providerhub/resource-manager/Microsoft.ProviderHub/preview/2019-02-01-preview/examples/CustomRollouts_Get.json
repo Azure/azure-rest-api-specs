@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "hostedResourceProvider": "Microsoft.Contoso",
+    "rolloutName": "canaryTesting99",
+    "api-version": "2019-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Custom rollout resource.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
+        "name": "Microsoft.Contoso/canaryTesting99",
+        "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+        "properties": {
+          "provisioningState": "Completed",
+          "specification": {
+            "TestRegions": {
+              "regions": ["eastus2euap","centraluseuap"]
+            }
+          },
+          "status": {
+            "completedRegions": ["eastus2euap","centraluseuap"]          
+          }
+        }
+      }
+    }
+  }
+}

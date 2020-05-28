@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "fusionGroupTestRG",
+    "fusionGroupName": "fusionGroupName",
+    "api-version": "2019-09-01-preview",
+    "replicationRuleName": "repl1",
+    "replicationRule": {
+      "location": "East US",
+      "properties": {
+        "path": "/root"
+      },
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fusionGroupTestRG/providers/Wandisco.Fusion/fusionGroups/fusionGroupName/replicationRules/replicationRuleName",
+        "name": "replicationRuleCreate",
+        "properties": {
+          "path": "/root",
+          "provisioningState": "Accepted",
+          "zoneNames": ["zone1", "zone2"],
+          "priorityZone": "zone1",
+          "pathMapping" : [
+            {
+              "zone": "zone1",
+              "path": "/other"
+            }
+          ]
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/replicationRule",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fusionGroupTestRG/providers/Wandisco.Fusion/fusionGroups/fusionGroupName/replicationRules/replicationRuleName",
+        "name": "replicationRuleCreate",
+        "properties": {
+          "path": "/root",
+          "provisioningState": "Accepted",
+          "zoneNames": ["zone1", "zone2"],
+          "priorityZone": "zone1",
+          "pathMapping" : [
+            {
+              "zone": "zone1",
+              "path": "/other"
+            }
+          ]
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/replicationRule",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    }
+  }
+}

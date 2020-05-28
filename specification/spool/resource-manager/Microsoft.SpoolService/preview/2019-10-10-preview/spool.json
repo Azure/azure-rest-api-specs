@@ -5,6 +5,13 @@
     "version": "2019-10-10-preview",
     "description": "REST API for Azure Spool Service"
   },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
   "schemes": [ "https" ],
   "securityDefinitions": {
     "azure_auth": {
@@ -23,7 +30,7 @@
         "description": "Lists all of the available REST API operations of the Microsoft.SpoolService provider.",
         "operationId": "Operations_List",
         "summary": "List Operations",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "Operations" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -49,7 +56,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/checkNameAvailability": {
+    "/providers/Microsoft.SpoolService/locations/{location}/checkNameAvailability": {
       "post": {
         "description": "Checks that the Spool name is valid and is not already in use.",
         "operationId": "Spool_CheckNameAvailability",
@@ -68,7 +75,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/LocationParameter"
           }
         ],
         "consumes": [ "application/json" ],
@@ -88,8 +95,11 @@
         },
         "produces": [ "application/json" ],
         "x-ms-examples": {
-          "Check name availability": {
-            "$ref": "./examples/checkNameAvailability.json"
+          "Check name availability available": {
+            "$ref": "./examples/checkNameAvailabilityAvailable.json"
+          },
+          "Check name availability unavailable": {
+            "$ref": "./examples/checkNameAvailabilityUnavailable.json"
           }
         }
       }
@@ -99,7 +109,7 @@
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "Spool_ListBySubscription",
         "summary": "List By Subscription",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -138,7 +148,7 @@
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "Spool_ListByResourceGroup",
         "summary": "List By Resource Group",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -175,12 +185,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}": {
       "patch": {
         "description": "Operation to update an exiting Spool service.",
         "operationId": "Spool_Update",
         "summary": "Update",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "name": "parameters",
@@ -229,7 +239,7 @@
         "description": "Get the Spool service and its properties.",
         "operationId": "Spool_Get",
         "summary": "Get",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -269,7 +279,7 @@
         "description": "Create a new Spool service or update an existing Spool service.",
         "operationId": "Spool_CreateOrUpdate",
         "summary": "Create Or Update",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "name": "parameters",
@@ -301,12 +311,6 @@
               "$ref": "#/definitions/SpoolResource"
             }
           },
-          "201": {
-            "description": "Created. The response describes the new service and contains an Azure-AsyncOperation header to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/SpoolResource"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -326,7 +330,7 @@
         "description": "Operation to delete a Spool service.",
         "operationId": "Spool_Delete",
         "summary": "Delete",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -366,13 +370,12 @@
         }
       }
     },
-    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/listKeys": {
       "post": {
         "description": "Get the access keys of the Spool resource.",
         "operationId": "Spool_ListKeys",
         "summary": "List Keys",
-        "tags": [ "Spool Keys" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -409,12 +412,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/regenerateKey": {
       "post": {
         "description": "Regenerate Spool service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "Spool_RegenerateKey",
         "summary": "Regenerate Key",
-        "tags": [ "Spool Keys" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "name": "parameters",
@@ -439,6 +442,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Created. The response contains the new key.",
+            "schema": {
+              "$ref": "#/definitions/SpoolKeys"
+            }
+          },
           "201": {
             "description": "Created and an async operation is executing in background to make the new key take effect. The response contains new keys and an Azure-AsyncOperation header to query the async operation result.",
             "schema": {
@@ -635,7 +644,7 @@
           "type": "boolean"
         }
       }
-    },  
+    },
     "NameAvailabilityParameters": {
       "description": "Data POST-ed to the nameAvailability action",
       "required": [
@@ -694,7 +703,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/LocationResource"
+        },
+        {
+          "$ref": "#/definitions/TaggedResource"
         }
       ],
       "properties": {
@@ -702,29 +717,6 @@
           "$ref": "#/definitions/SpoolProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "tags": {
-          "description": "Tags of the service which is a list of key value pairs that describe the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
         }
       }
     },
@@ -746,13 +738,38 @@
           "description": "The type of the service - e.g. \"Microsoft.SpoolService/spools\"",
           "type": "string",
           "readOnly": true
-        },
-        "location": {
-          "description": "The Azure location where the Spool service is running.",
-          "type": "string"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "LocationResource": {
+      "description": "An ARM resource with its own location (not a global or an inherited location).",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The Azure location where the Spool service is running.",
+          "type": "string",
+          "x-ms-mutability": ["create", "read"]
+        }
+      }
+    },
+    "TaggedResource": {
+      "description": "An ARM resource with that can accept tags",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the service which is a list of key value pairs that describe the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
     },
     "SpoolProperties": {
       "description": "A class that describes the properties of the Spool service.",
@@ -778,12 +795,8 @@
             "modelAsString": true
           }
         },
-        "hostNamePrefix": {
-          "description": "Prefix for the hostName of the Spool service. \r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.spool.azure.net.",
-          "type": "string"
-        },
         "hostName": {
-          "description": "FQDN of the Spool service instance. Format: xxx.service.Spool.net",
+          "description": "FQDN of the Spool service instance. Format: xxx.westus2.service.Spool.net",
           "type": "string",
           "readOnly": true
         },
@@ -807,10 +820,7 @@
             }
           }
         }
-      },
-      "required": [
-        "hostNamePrefix"
-      ]
+      }
     },
     "SpoolKeys": {
       "description": "A class representing the access keys of Spool service.",
@@ -880,13 +890,21 @@
       "x-ms-parameter-location": "method"
     },
     "SpoolServiceName": {
-      "name": "resourceName",
+      "name": "spoolName",
       "in": "path",
       "description": "The name of the Spool resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The Azure region",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
-  
 }
+

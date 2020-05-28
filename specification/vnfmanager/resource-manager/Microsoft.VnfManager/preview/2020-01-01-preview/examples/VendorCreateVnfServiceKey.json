@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "locationName": "eastus",
+    "vendorName": "TestVendor",
+    "vnfServiceKey": "TestVnfServiceKey",
+    "parameters": {
+      "properties": {
+        "vendorProvisioningState": "Provisioned"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/locations/eastus/vendors/TestVendor/vnfs/TestVnfServiceKey",
+        "properties": {
+          "provisioningState": "Accepted",
+          "vendorProvisioningState": "Not Provisioned",
+          "serviceKey": "ServiceKey",
+          "sku": {
+            "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "preview": false,
+              "skuType": "Packetcore",
+              "deploymentMode": "Edgedevice",
+              "vnfTemplate": "SaS?URI"
+            }
+          },
+          "managedApp": {
+            "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/locations/eastus/vendors/TestVendor/vnfs/TestVnfServiceKey",
+        "properties": {
+          "provisioningState": "Accepted",
+          "vendorProvisioningState": "Not Provisioned",
+          "serviceKey": "ServiceKey",
+          "sku": {
+            "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "preview": false,
+              "skuType": "Packetcore",
+              "deploymentMode": "Edgedevice",
+              "vnfTemplate": "SaS?URI"
+            }
+          },
+          "managedApp": {
+            "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+          }
+        }
+      }
+    }
+  }
+}

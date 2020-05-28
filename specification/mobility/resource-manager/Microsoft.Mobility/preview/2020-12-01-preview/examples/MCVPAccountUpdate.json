@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "resource-group-name",
+    "accountName": "account-name",
+    "api-version": "2020-12-01-preview",
+    "parameters": {
+      "properties": {
+        "cosmosDb": {
+          "id": "cosmos-db-id"
+        },
+        "extensions": {
+          "id": "extensions-id"
+        },
+        "networking": {
+          "endpoints": {
+            "mqtt": {
+              "enabled": true
+            },
+            "iotHub": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscription-id/resourceGroups/resource-group-name/providers/Microsoft.Mobility/mcvpAccounts/account-name",
+        "location": "eastus2",
+        "name": "account-name",
+        "properties": {
+          "cosmosDb": {
+            "id": "cosmos-db-id"
+          },
+          "extensions": {
+            "id": "extensions-id"
+          },
+          "networking": {
+            "endpoints": {
+              "mqtt": {
+                "enabled": true
+              },
+              "iotHub": {
+                "enabled": true
+              }
+            }
+          },
+          "provisioningState": "Accepted"
+        },
+        "sku": {
+          "name": "Standard_A",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "type": "Microsoft.Mobility/mcvpAccounts"
+      }
+    }
+  }
+}

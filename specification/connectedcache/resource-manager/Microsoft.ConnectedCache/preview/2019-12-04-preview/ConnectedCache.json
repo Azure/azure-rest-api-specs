@@ -1,0 +1,578 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-12-04-preview",
+    "title": "ConnectedCache",
+    "description": "Microsoft Connected cache REST API version 2019-12-04-preview.",
+    "x-ms-code-generation-settings": {
+      "name": "ConnectedCache"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "security": [
+    {
+      "azure_auth": [ "user_impersonation" ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user node"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.ConnectedCache/operations": {
+      "get": {
+        "tags": [ "Operations" ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ConnectedCacheOperationsList": {
+            "$ref": "./examples/ConnectedCacheOperationsList.json"
+          }
+        },
+        "description": "Retrieves a list of available API operations",
+        "summary": "Retrieves a list of available API operations under this Resource Provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of operations under Microsoft.ConnectedCache resource provider.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Connected Cache does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedCache/cacheNodes/{cacheNodeName}": {
+      "get": {
+        "tags": [
+          "cacheNodes"
+        ],
+        "summary": "Retrieves information about a cacheNodes resource.",
+        "description": "Retrieves the properties of a cacheNodes.",
+        "operationId": "cacheNodes_Get",
+        "x-ms-examples": {
+          "CacheNodesGet": {
+            "$ref": "./examples/CacheNodesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNodeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the cacheNodes",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (cacheNodes does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "cacheNodes"
+        ],
+        "summary": "Creates a cacheNodes resource.",
+        "description": "Creates a cacheNodes with the specified create parameters.",
+        "operationId": "cacheNodes_CreateorUpdate",
+        "x-ms-examples": {
+          "CacheNodesCreateorUpdate": {
+            "$ref": "./examples/CacheNodesCreateorUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNodeNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "cacheNodes create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the cacheNodes",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "201": {
+            "description": "The request was successful; response contains the updated Connected Cache node.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (cacheNodes could not be created/updated)",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "cacheNodes" ],
+        "summary": "Deletes a cache Nodes resource.",
+        "description": "Deletes an existing cache Node.",
+        "operationId": "cacheNode_Delete",
+        "x-ms-examples": {
+          "CacheNodesDelete": {
+            "$ref": "./examples/CacheNodesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNodeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the Cache Node is deleted."
+          },
+          "204": {
+            "description": "The request was successful; Cache Node does not exist."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 409 - Conflict"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "cacheNodes"
+        ],
+        "summary": "updates an existing Cache Node resource",
+        "description": "updates an existing Cache Node.",
+        "operationId": "cacheNodes_Update",
+        "x-ms-examples": {
+          "CacheNodesUpdate": {
+            "$ref": "./examples/CacheNodesUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNodeNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "cacheNodes patch parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedCachePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the updated Cache node.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "201": {
+            "description": "The request was successful; response contains the updated Cache node.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Cache Node does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedCache/cacheNodes": {
+      "get": {
+        "tags": [
+          "cacheNodes"
+        ],
+        "summary": "Retrieves information about all ConnectedCache resources under the given subscription and resource group",
+        "description": "Retrieves the properties of all ConnectedCache.",
+        "operationId": "cacheNodes_ListByResourceGroup",
+        "x-ms-examples": {
+          "CacheNodesListByResourceGroup": {
+            "$ref": "./examples/CacheNodesListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the ConnectedCache",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCacheList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (ConnectedCache does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedCache/cacheNodes": {
+      "get": {
+        "tags": [
+          "cacheNodes"
+        ],
+        "summary": "Retrieves information about all ConnectedCache resources under the given subscription",
+        "description": "Retrieves the properties of all ConnectedCaches.",
+        "operationId": "cacheNodes_ListBySubscription",
+        "x-ms-examples": {
+          "CacheNodesListBySubscription": {
+            "$ref": "./examples/CacheNodesListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of ConnectedCache resources",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCacheList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (ConnectedCache does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MCCErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource Id for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags for the ConnectedCache",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "location": {
+          "description": "Region where the Azure resource is located.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ConnectedCache": {
+      "type": "object",
+      "description": "ConnectedCache Resource. Represents the high level Nodes needed to provision CacheNode resources.",
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Additional ConnectedCache properties.",
+          "title": "ConnectedCache Additional properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CacheNode"
+        }
+      }
+    },
+    "ConnectedCachePatchResource": {
+      "type": "object",
+      "description": "cacheNodes patch properties",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Additional tag configuration related properties",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CacheNode": {
+      "type": "object",
+      "description": "Model representing Cache Node for ConnectedCache resource",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioned state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Upgrading",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "description": "List containing this Resource Provider's available operations.",
+      "properties": {
+        "value": {
+          "description": "Resource provider operations list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperationDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next page for list of Azure operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "title": "A REST API operation",
+      "type": "object",
+      "description": "Describes the Resource Provider Operation.",
+      "properties": {
+        "name": {
+          "title": "The operations name.",
+          "description": "Resource provider operation name.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Resource provider display properties.",
+          "$ref": "#/definitions/ResourceProviderOperationDisplay"
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "description": "Describes the properties of the Operation.",
+      "properties": {
+        "provider": {
+          "description": "Name of the resource provider.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the resource provider operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the resource provider operation.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedCacheList": {
+      "description": "Object that includes an array of MConnectedCache and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of ConnectedCache resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedCache"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "maxLength": 90,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "CacheNodeNameParameter": {
+      "name": "cacheNodeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the ConnectedCache resource",
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

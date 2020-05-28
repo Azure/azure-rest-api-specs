@@ -1,0 +1,972 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-02-01-preview",
+    "title": "providerhub",
+    "description": "Microsoft Provider Hub",
+    "x-ms-code-generation-settings": {
+      "name": "providerhubClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{hostedResourceProvider}/defaultRollouts/{rolloutName}": {
+      "get": {
+        "tags": ["defaultrollout"],
+        "operationId": "DefaultRollouts_Get",
+        "description": "Gets the default rollout details.",
+        "x-ms-examples": {
+          "DefaultRollouts_Get": {
+            "$ref": "./examples/DefaultRollouts_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets rollout details.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRolloutDefinition"
+            }
+          },
+          "default": {
+            "description": "Failed to get the rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["defaultrollout"],
+        "operationId": "DefaultRollouts_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Create or update the rollout details.",
+        "x-ms-examples": {
+          "DefaultRollouts_CreateOrUpdate": {
+            "$ref": "./examples/DefaultRollouts_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "#/parameters/DefaultRolloutSpec"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default rollout updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRolloutDefinition"
+            }
+          },
+          "201": {
+            "description": "Default rollout started successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRolloutDefinition"
+            }
+          },
+          "default": {
+            "description": "Failed to create or update default rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["defaultrollout"],
+        "operationId": "DefaultRollouts_Delete",
+        "description": "Deletes the rollout resource. Rollout must be in terminal state.",
+        "x-ms-examples": {
+          "DefaultRollouts_Delete": {
+            "$ref": "./examples/DefaultRollouts_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default rollout resource is deleted successfully."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Failed to delete default rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{hostedResourceProvider}/defaultRollouts/{rolloutName}/stop": {
+      "post": {
+        "tags": ["defaultrollout"],
+        "operationId": "DefaultRollouts_Stop",
+        "description": "Stops or cancels the rollout, if in progress.",
+        "x-ms-examples": {
+          "DefaultRollouts_Action_Cancel": {
+            "$ref": "./examples/DefaultRollouts_Action_Cancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rollout cancelled successfully."
+          },
+          "default": {
+            "description": "Failed to start rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{hostedResourceProvider}/defaultRollouts": {
+      "get": {
+        "tags": ["defaultrollout"],
+        "operationId": "DefaultRollouts_List",
+        "description": "Gets the list of the rollouts for the given provider.",
+        "x-ms-examples": {
+          "DefaultRollouts_List": {
+            "$ref": "./examples/DefaultRollouts_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets list of rollouts for given provider.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRolloutsList"
+            }
+          },
+          "default": {
+            "description": "Failed to get rollout list.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{hostedResourceProvider}/customRollouts/{rolloutName}": {
+      "get": {
+        "tags": ["customrollout"],
+        "operationId": "CustomRollouts_Get",
+        "description": "Gets the rollout details.",
+        "x-ms-examples": {
+          "CustomRollouts_Get": {
+            "$ref": "./examples/CustomRollouts_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets rollout details.",
+            "schema": {
+              "$ref": "#/definitions/CustomRolloutDefinition"
+            }
+          },
+          "default": {
+            "description": "Failed to get the rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["customrollout"],
+        "operationId": "CustomRollouts_CreateOrUpdate",
+        "description": "Create or update the rollout details.",
+        "x-ms-examples": {
+          "CustomRollouts_CreateOrUpdate": {
+            "$ref": "./examples/CustomRollouts_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "#/parameters/CustomRolloutSpec"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rollout completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomRolloutDefinition"
+            }
+          },
+          "default": {
+            "description": "Failed to create or update rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["customrollout"],
+        "operationId": "CustomRollouts_Delete",
+        "description": "Deletes the rollout resource. Rollout must be in terminal state.",
+        "x-ms-examples": {
+          "CustomRollouts_Delete": {
+            "$ref": "./examples/CustomRollouts_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/RolloutName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rollout deleted successfully."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Failed to delete rollout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{hostedResourceProvider}/customRollouts": {
+      "get": {
+        "tags": ["customrollout"],
+        "operationId": "CustomRollouts_List",
+        "description": "Gets the list of the custom rollouts for the given provider.",
+        "x-ms-examples": {
+          "CustomRollouts_List": {
+            "$ref": "./examples/CustomRollouts_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/HostedProviderNamespace"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets list of custom rollouts for given provider.",
+            "schema": {
+              "$ref": "#/definitions/CustomRolloutsList"
+            }
+          },
+          "default": {
+            "description": "Failed to get rollout list.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ProviderHub/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all the operations supported by Microsoft.ProviderHub.",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported operations has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of operations supported by Microsoft.ProviderHub resource provider": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegionCategory": {
+      "type": "string",
+      "description": "Region category.",
+      "enum": ["TestRegions", "LowTraffic", "MediumTraffic", "HighTraffic", "RestOfTheWorldGroupOne", "RestOfTheWorldGroupTwo"],
+      "x-ms-enum": {
+        "name": "RegionCategory",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "AzureRegions": {
+      "type": "string",
+      "description": "Azure regions.",
+      "enum": [
+        "westus",
+        "westus2",
+        "eastus",
+        "centralus",
+        "centraluseuap",
+        "southcentralus",
+        "northcentralus",
+        "westcentralus",
+        "eastus2",
+        "eastus2euap",
+        "brazilsouth",
+        "brazilus",
+        "northeurope",
+        "westeurope",
+        "eastasia",
+        "southeastasia",
+        "japanwest",
+        "japaneast",
+        "koreacentral",
+        "koreasouth",
+        "indiasouth",
+        "indiawest",
+        "indiacentral",
+        "australiaeast",
+        "australiasoutheast",
+        "canadacentral",
+        "canadaeast",
+        "uknorth",
+        "uksouth2",
+        "uksouth",
+        "ukwest",
+        "francecentral",
+        "francesouth",
+        "australiacentral",
+        "australiacentral2",
+        "uaecentral",
+        "uaenorth",
+        "southafricanorth",
+        "southafricawest",
+        "switzerlandnorth",
+        "switzerlandwest",
+        "germanynorth",
+        "germanywestcentral",
+        "norwayeast",
+        "norwaywest",
+        "chinaeast",
+        "chinanorth",
+        "chinanorth2",
+        "chinaeast2",
+        "usgovvirginia",
+        "usgoviowa",
+        "usdodeast",
+        "usdodcentral",
+        "usgovtexas",
+        "usgovarizona",
+        "germanycentral",
+        "germanynortheast"
+      ],
+      "x-ms-enum": {
+        "name": "AzureRegions",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "NotSpecified",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DefaultRolloutStatusDefinition": {
+      "description": "Default rollout status properties.",
+      "type": "object",
+      "properties": {
+        "completedRegions": {
+          "description": "List of regions with rollout completion.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/AzureRegions"
+          },
+          "readOnly": true
+        },
+        "failedOrSkippedRegions": {
+          "description": "A dictionary of regions with failed or cancelled rollout, along with details. Ex: {\"westUS\" : {<error object>}}.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        },
+        "nextTrafficRegion": {
+          "description": "Next region category scheduled for rollout.",
+          "$ref": "#/definitions/RegionCategory",
+          "readOnly": true
+        },
+        "nextTrafficRegionScheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Next rollout scheduled date-time in ISO-8601 format.",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultRolloutDefinition": {
+      "description": "Rollout details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DefaultRolloutProperties",
+          "description": "Properties of the rollout."
+        }
+      }
+    },
+    "DefaultRolloutProperties": {
+      "description": "Rollout properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning status.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "specification": {
+          "type": "object",
+          "description": "Rollout specification.",
+          "x-ms-mutability": ["create", "read"],
+          "properties": {
+            "TestRegions": {
+              "description": "Test region(s) configuration.",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of canary (prod), BrazilUS (prod) or dogfood regions.",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions"
+                  },
+                  "readOnly": true
+                }
+              }
+            },
+            "LowTraffic": {
+              "description": "Low traffic region(s) configuration",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of low traffic regions.",
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 2,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions",
+                    "readOnly": true
+                  },
+                  "readOnly": true
+                },
+                "waitDuration": {
+                  "description": "Wait duration (ISO8601 format) before rolling out to low traffic region (after canary raffic regions). This is determined by the service.",
+                  "type": "string",
+                  "format": "duration",
+                  "readOnly": true
+                }
+              }
+            },
+            "MediumTraffic": {
+              "description": "Medium traffic region(s) configuration",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of medium traffic regions.",
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 2,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions",
+                    "readOnly": true
+                  },
+                  "readOnly": true
+                },
+                "waitDuration": {
+                  "description": "Wait duration (ISO8601 format) before rolling out to medium traffic region (after low raffic regions). This is determined by the service.",
+                  "type": "string",
+                  "format": "duration",
+                  "readOnly": true
+                }
+              }
+            },
+            "HighTraffic": {
+              "description": "High traffic region configuration",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of high traffic regions.",
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 2,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions",
+                    "readOnly": true
+                  },
+                  "readOnly": true
+                },
+                "waitDuration": {
+                  "description": "Wait duration (ISO8601 format) before rolling out to low traffic region (after canary raffic regions). This is determined by the service.",
+                  "type": "string",
+                  "format": "duration",
+                  "readOnly": true
+                }
+              }
+            },
+            "RestOfTheWorldGroupOne": {
+              "description": "Rest of the world configuration",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of remaining Azure regions (part 1). This is automatically filled by the ProviderHub service.",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions",
+                    "readOnly": true
+                  },
+                  "readOnly": true
+                },
+                "waitDuration": {
+                  "description": "Wait duration (ISO8601 format) before rolling out to low traffic region (after canary raffic regions). This is determined by the service.",
+                  "type": "string",
+                  "format": "duration",
+                  "readOnly": true
+                }
+              }
+            },
+            "RestOfTheWorldGroupTwo": {
+              "description": "Rest of the world configuration",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of remaining Azure regions(part 2). This is automatically filled by the ProviderHub service.",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions",
+                    "readOnly": true
+                  },
+                  "readOnly": true
+                },
+                "waitDuration": {
+                  "description": "Wait duration (ISO8601 format) before rolling out to low traffic region (after canary raffic regions). Can't be modified after set during creation.",
+                  "type": "string",
+                  "format": "duration",
+                  "default": "PT24H"
+                }
+              }
+            }
+          }
+        },
+        "status": {
+          "description": "Status details of an ongoing rollout.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DefaultRolloutStatusDefinition"
+        }
+      }
+    },
+    "DefaultRolloutsList": {
+      "description": "The list of rollouts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of rollouts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DefaultRolloutDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of rollouts.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomRolloutStatusDefinition": {
+      "description": "Custom rollout status properties.",
+      "type": "object",
+      "properties": {
+        "completedRegions": {
+          "description": "List of regions with rollout completion.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/AzureRegions"
+          },
+          "readOnly": true
+        },
+        "failedOrSkippedRegions": {
+          "description": "A dictionary of regions with failed or cancelled rollout, along with details. Ex: {\"westUS\" : {<error object>}}.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CustomRolloutDefinition": {
+      "description": "Rollout details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomRolloutProperties",
+          "description": "Properties of the rollout."
+        }
+      }
+    },
+    "CustomRolloutProperties": {
+      "description": "Rollout properties.",
+      "type": "object",
+      "required": ["specification"],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning status.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "specification": {
+          "type": "object",
+          "description": "Rollout specification.",
+          "required": ["TestRegions"],
+          "x-ms-mutability": ["create", "read"],
+          "properties": {
+            "TestRegions": {
+              "description": "Test region(s) configuration",
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "description": "List of canary (prod), BrazilUS (prod) or dogfood regions.",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/AzureRegions"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "status": {
+          "description": "Status details of an ongoing rollout.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomRolloutStatusDefinition"
+        }
+      }
+    },
+    "CustomRolloutsList": {
+      "description": "The list of rollouts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of rollouts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRolloutDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of rollouts.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error details.",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of operations, if there are any."
+        }
+      },
+      "description": "Result of a request to list all operations supported."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplayValue"
+        }
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplayValue": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
+    }
+  },
+  "parameters": {
+    "HostedProviderNamespace": {
+      "name": "hostedResourceProvider",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource provider hosted within Provider hub.",
+      "x-ms-parameter-location": "client"
+    },
+    "RolloutName": {
+      "name": "rolloutName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of rollout.",
+      "x-ms-parameter-location": "method"
+    },
+    "DefaultRolloutSpec": {
+      "name": "defaultRolloutSpecification",
+      "in": "body",
+      "required": true,
+      "description": "The rollout specification.",
+      "schema": {
+        "$ref": "#/definitions/DefaultRolloutDefinition"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CustomRolloutSpec": {
+      "name": "customRolloutSpecification",
+      "in": "body",
+      "required": true,
+      "description": "The rollout specification.",
+      "schema": {
+        "$ref": "#/definitions/CustomRolloutDefinition"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
