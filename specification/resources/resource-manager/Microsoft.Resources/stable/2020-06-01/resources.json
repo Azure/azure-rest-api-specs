@@ -5410,9 +5410,10 @@
           "type": "string",
           "description": "Operation status code."
         },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The template export error."
+        "statusMessage": {
+          "readOnly": true,
+          "description": "Operation status message.",
+          "$ref": "#/definitions/StatusMessage"
         },
         "targetResource": {
           "readOnly": true,
@@ -5827,6 +5828,20 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "StatusMessage": {
+      "type": "object",
+      "description": "Operation status message object.",
+      "properties":{
+        "status": {
+          "type": "string",
+          "description": "Status of the deployment operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The error reported by the operation."
+        }
+      }
     }
   },
   "parameters": {
