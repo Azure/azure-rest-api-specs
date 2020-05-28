@@ -1467,7 +1467,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "properties",
             "description": "The payload that is used to create or update the Service.",
             "required": true,
             "schema": {
@@ -1477,7 +1477,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request was accepted.  The header 'Operation-Location' contains the async operation location URL.  Accessing this URL with a GET call will return the status of the background task.",
+            "description": "The request was accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation status.",
@@ -3979,7 +3979,7 @@
           "example": "AKS",
           "x-ms-enum": {
             "name": "ComputeEnvironmentType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "deploymentType": {
@@ -5015,7 +5015,7 @@
           "example": "AKS",
           "x-ms-enum": {
             "name": "ComputeEnvironmentType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "environmentImageRequest": {
@@ -5032,6 +5032,222 @@
         }
       },
       "discriminator": "computeType"
+    },
+    "ACIServiceCreateRequest": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "containerResourceRequirements": {
+              "description": "The container resource requirements.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ContainerResourceRequirements"
+                }
+              ]
+            },
+            "authEnabled": {
+              "description": "Whether or not authentication is enabled on the service.",
+              "default": false,
+              "type": "boolean"
+            },
+            "sslEnabled": {
+              "description": "Whether or not SSL is enabled.",
+              "default": false,
+              "type": "boolean"
+            },
+            "appInsightsEnabled": {
+              "description": "Whether or not Application Insights is enabled.",
+              "default": false,
+              "type": "boolean"
+            },
+            "dataCollection": {
+              "description": "Details of the data collection options specified.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ModelDataCollection"
+                }
+              ]
+            },
+            "sslCertificate": {
+              "description": "The SSL certificate to use if SSL is enabled.",
+              "type": "string"
+            },
+            "sslKey": {
+              "description": "The SSL key for the certificate.",
+              "type": "string"
+            },
+            "cname": {
+              "description": "The CName for the service.",
+              "type": "string"
+            },
+            "dnsNameLabel": {
+              "description": "The Dns label for the service.",
+              "type": "string"
+            },
+            "vnetConfiguration": {
+              "description": "VnetConfiguration",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/VnetConfiguration"
+                }
+              ]
+            },
+            "encryptionProperties": {
+              "description": "EncryptionProperties.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/EncryptionProperties"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ACI"
+    },
+    "AKSServiceCreateRequest": {
+      "description": "The request to create an AKS service.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateEndpointVariantRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "numReplicas": {
+              "format": "int32",
+              "description": "The number of replicas on the cluster.",
+              "type": "integer",
+              "example": 1
+            },
+            "dataCollection": {
+              "description": "Details of the data collection options specified.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ModelDataCollection"
+                }
+              ]
+            },
+            "computeName": {
+              "description": "The name of the compute resource.",
+              "type": "string"
+            },
+            "appInsightsEnabled": {
+              "description": "Whether or not Application Insights is enabled.",
+              "type": "boolean"
+            },
+            "autoScaler": {
+              "description": "The auto scaler properties.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/AutoScaler"
+                }
+              ]
+            },
+            "containerResourceRequirements": {
+              "description": "The container resource requirements.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ContainerResourceRequirements"
+                }
+              ]
+            },
+            "maxConcurrentRequestsPerContainer": {
+              "format": "int32",
+              "description": "The maximum number of concurrent requests per container.",
+              "type": "integer",
+              "example": 100
+            },
+            "maxQueueWaitMs": {
+              "format": "int32",
+              "description": "Maximum time a request will wait in the queue (in milliseconds). After this time, the service will return 503 (Service Unavailable)",
+              "type": "integer",
+              "example": 250
+            },
+            "namespace": {
+              "description": "Kubernetes namespace for the service.",
+              "type": "string",
+              "example": "default"
+            },
+            "scoringTimeoutMs": {
+              "format": "int32",
+              "description": "The scoring timeout in milliseconds.",
+              "type": "integer",
+              "example": 100
+            },
+            "authEnabled": {
+              "description": "Whether or not authentication is enabled.",
+              "type": "boolean"
+            },
+            "livenessProbeRequirements": {
+              "description": "The liveness probe requirements.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/LivenessProbeRequirements"
+                }
+              ]
+            },
+            "aadAuthEnabled": {
+              "description": "Whether or not AAD authentication is enabled.",
+              "type": "boolean"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AKS"
+    },
+    "CreateEndpointVariantRequest": {
+      "description": "The Variant properties.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "isDefault": {
+              "description": "Is this the default variant.",
+              "type": "boolean"
+            },
+            "trafficPercentile": {
+              "format": "float",
+              "description": "The amount of traffic variant receives.",
+              "type": "number",
+              "example": 100
+            },
+            "type": {
+              "description": "The type of the variant.",
+              "enum": [
+                "Control",
+                "Treatment"
+              ],
+              "type": "string",
+              "example": "Control",
+              "x-ms-enum": {
+                "name": "VariantType",
+                "modelAsString": false
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
     }
   }
 }

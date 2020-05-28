@@ -4,8 +4,8 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "api-version": "2020-05-01-preview",
-    "parameters": {
-      "Name": "service456",
+    "properties": {
+      "name": "service456",
       "computeType": "ACI",
       "environmentImageRequest": {
         "driverProgram": "score.py",
@@ -74,9 +74,9 @@
           "inferencingStackVersion": null
         }
       },
-      "ContainerResourceRequirements": {
-        "cpu": "1",
-        "memoryInGB": "1.0"
+      "containerResourceRequirements": {
+        "cpu": 1,
+        "memoryInGB": 1
       },
       "location": "eastus2",
       "authEnabled": true,
@@ -85,10 +85,10 @@
   },
   "responses": {
     "202": {
-      "description": "The request was accepted.  The header 'Operation-Location' contains the async operation location URL.  Accessing this URL with a GET call will return the status of the background task."
-    },
-    "headers": {
-      "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      "description": "The request was accepted.  The header 'Operation-Location' contains the async operation location URL.  Accessing this URL with a GET call will return the status of the background task.",
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
     }
   }
 }
