@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "$expand": "invoiceSections"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+        "name": "{billingProfileName}",
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles",
+        "properties": {
+          "displayName": "Billing Profile1",
+          "billTo": {
+            "companyName": "Contoso",
+            "firstName": "Test",
+            "lastName": "User",
+            "addressLine1": "Test Address1",
+            "addressLine2": "Test Address2",
+            "addressLine3": "Test Address3",
+            "city": "City",
+            "postalCode": "00000",
+            "region": "WA",
+            "country": "US",
+            "email": "abc@contoso.com",
+            "phoneNumber": "000-000-0000"
+          },
+          "currency": "USD",
+          "enabledAzurePlans": [
+            {
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Plan"
+            },
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Plan for DevTest"
+            }
+          ],
+          "invoiceDay": 5,
+          "invoiceEmailOptIn": true,
+          "poNumber": "ABC12345",
+          "hasReadAccess": true,
+          "systemId": "1XXX-11XX-XX1-XXXX-XXX",
+          "status": "Warned",
+          "statusReasonCode": "PastDue",
+          "spendingLimit": "On",
+          "invoiceSections": {
+            "hasMoreResults": false,
+            "value": [
+              {
+                "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/invoiceSectionId1",
+                "name": "invoiceSectionId1",
+                "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
+                "properties": {
+                  "displayName": "invoiceSectionName1",
+                  "labels": {
+                    "pcCode": "A123456",
+                    "costCategory": "Support"
+                  },
+                  "systemId": "9XXX-11XX-XX1-XXXX-XXX"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
