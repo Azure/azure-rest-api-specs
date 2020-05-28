@@ -33,7 +33,20 @@
               "triggerThreshold": 0,
               "suppressionDuration": "PT1H",
               "suppressionEnabled": false,
-              "lastModifiedUtc": "2019-01-01T13:15:30Z"
+              "lastModifiedUtc": "2019-01-01T13:15:30Z",
+              "incidentConfiguration": {
+                "createIncident": true,
+                "groupingConfiguration": {
+                  "enabled": true,
+                  "reopenClosedIncident": false,
+                  "lookbackDuration": "PT5H",
+                  "entitiesMatchingMethod": "Custom",
+                  "groupByEntities": [
+                    "Host",
+                    "Account"
+                  ]
+                }
+              }
             }
           },
           {
@@ -49,7 +62,6 @@
               "displayName": "testing displayname",
               "enabled": true,
               "description": null,
-              "tactics": [],
               "alertRuleTemplateName": null,
               "lastModifiedUtc": "2019-09-04T12:05:35.7296311Z"
             }
