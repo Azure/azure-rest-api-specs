@@ -273,6 +273,149 @@
         }
       }
     },
+    "/custom/models/{modelId}/copy": {
+      "post": {
+        "summary": "Copy Custom Model",
+        "description": "Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource.",
+        "operationId": "CopyCustomModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "copyRequest",
+            "in": "body",
+            "description": "Copy request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Copy request is queued successfully.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "URL containing the resultId used to track the progress and obtain the result of the copy operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy custom model": {
+            "$ref": "./examples/CopyModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/custom/models/{modelId}/copyResults/{resultId}": {
+      "get": {
+        "summary": "Get Custom Model Copy Result",
+        "description": "Obtain current status and the result of a custom model copy operation.",
+        "operationId": "GetCustomModelCopyResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Copy operation result identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CopyOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get copy custom model result": {
+            "$ref": "./examples/CopyOperationResult.json"
+          },
+          "Get copy custom model result with failures": {
+            "$ref": "./examples/CopyOperationResultWithErrors.json"
+          }
+        }
+      }
+    },
+    "/custom/models/copyAuthorization": {
+      "post": {
+        "summary": "Generate Copy Authorization",
+        "description": "Generate authorization to copy a model into the target Form Recognizer resource.",
+        "operationId": "GenerateModelCopyAuthorization",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Copy request is authorized successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location and ID of the model being copied. The status of model copy is specified in the status property at the model location."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CopyAuthorizationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy custom model": {
+            "$ref": "./examples/CopyModelAuthorization.json"
+          }
+        }
+      }
+    },
     "/prebuilt/receipt/analyze": {
       "post": {
         "summary": "Analyze Receipt",
@@ -558,6 +701,111 @@
         "modelAsString": false
       },
       "x-nullable": false
+    },
+    "CopyAuthorizationResult": {
+      "description": "Request parameter that contains authorization claims for copy operation.",
+      "required": [
+        "modelId",
+        "accessToken",
+        "expirationDateTimeTicks"
+      ],
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "description": "Model identifier.",
+          "type": "string"
+        },
+        "accessToken": {
+          "description": "Token claim used to authorize the request.",
+          "type": "string"
+        },
+        "expirationDateTimeTicks": {
+          "description": "The time when the access token expires. The date is represented as the number of seconds from 1970-01-01T0:0:0Z UTC until the expiration time.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CopyRequest": {
+      "description": "Request parameter to copy an existing custom model from the source resource to a target resource referenced by the resource ID.",
+      "required": [
+        "targetResourceId",
+        "targetResourceRegion",
+        "copyAuthorization"
+      ],
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "description": "Azure Resource Id of the target Form Recognizer resource where the model is copied to.",
+          "maxLength": 1024,
+          "type": "string",
+          "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.CognitiveServices/accounts/[^/]*$",
+          "x-ms-azure-resource": true
+        },
+        "targetResourceRegion": {
+          "description": "Location of the target Azure resource. A valid Azure region name supported by Cognitive Services.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+$",
+          "minLength": 1,
+          "maxLength": 24
+        },
+        "copyAuthorization": {
+          "description": "Entity that encodes claims to authorize the copy request.",
+          "$ref": "#/definitions/CopyAuthorizationResult"
+        }
+      }
+    },
+    "CopyOperationResult": {
+      "description": "Status and result of the queued copy operation.",
+      "type": "object",
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
+      "properties": {
+        "status": {
+          "description": "Operation status.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date and time (UTC) when the copy operation was submitted.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Date and time (UTC) when the status was last updated.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "copyResult": {
+          "description": "Results of the copy operation.",
+          "$ref": "#/definitions/CopyResult"
+        }
+      }
+    },
+    "CopyResult": {
+      "description": "Custom model copy result.",
+      "type": "object",
+      "required": [
+        "modelId"
+      ],
+      "properties": {
+        "modelId": {
+          "description": "Identifier of the target model.",
+          "type": "string",
+          "format": "uuid"
+        },
+        "errors": {
+          "description": "Errors returned during the copy operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorInformation"
+          }
+        }
+      }
     },
     "AnalyzeOperationResult": {
       "description": "Status and result of the queued analyze operation.",
