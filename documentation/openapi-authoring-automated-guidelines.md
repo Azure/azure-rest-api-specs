@@ -103,7 +103,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs |
 | [R4012](#r4012) | [XmsPageableMustHaveCorrespondingResponse](#r4012) | ARM OpenAPI(swagger) specs |
-| [R4013](#r4013) | [IntergerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
+| [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -2553,7 +2553,7 @@ The following would be valid:
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4013" ></a>R4013 IntergerTypeMustHaveFormat
+### <a name="r4013" ></a>R4013 IntegerTypeMustHaveFormat
 
 **Category** : SDK Error
 
