@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-07-01-preview",
-    "title": "azureadhealth",
+    "title": "azureADHealth",
     "description": "Metrics and Alerts for Azure Active Directory."
   },
   "host": "management.azure.com",
@@ -34,20 +34,17 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/azureADHealth/{azureADHealthName}": {
       "put": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADHealth"
         ],
-        "operationId": "privateLinkForAzureAd_Create",
+        "operationId": "azureADHealth_Create",
         "x-ms-long-running-operation": true,
-        "description": "Creates a private link policy.",
+        "description": "Creates a azureADHealth instance.",
         "x-ms-examples": {
-          "privateLinkPolicyCreate": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyCreate.json"
-          },
-          "privateLinkPolicyMinCreate": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyMinCreate.json"
+          "azureADHealthCreate": {
+            "$ref": "./examples/AzureADHealthCreate.json"
           }
         },
         "parameters": [
@@ -58,32 +55,32 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureAdHealthNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "privateLinkPolicy",
+            "name": "azureADHealth",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADHealth"
             },
-            "description": "private link Policy supplied to the operation."
+            "description": "AzureADHealth definition supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Created -- Private Link Policy created.",
+            "description": "Created -- AzureADHealth instance created.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADHealth"
             }
           },
           "201": {
-            "description": "OK -- Private Link Policy is updated.",
+            "description": "OK -- AzureADHealth instance is updated.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADHealth"
             }
           },
           "default": {
@@ -96,13 +93,13 @@
       },
       "patch": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADHealth"
         ],
-        "operationId": "privateLinkForAzureAd_Update",
-        "description": "Updates private link policy tags with specified values.",
+        "operationId": "azureADHealth_Update",
+        "description": "Updates azureADHealth tags with specified values.",
         "x-ms-examples": {
-          "privateLinkPolicyUpdate": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyUpdate.json"
+          "azureADHealthUpdate": {
+            "$ref": "./examples/AzureADHealthUpdate.json"
           }
         },
         "parameters": [
@@ -113,25 +110,25 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADHealthNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "privateLinkPolicy",
+            "name": "azureADHealth",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicyUpdateParameter"
+              "$ref": "#/definitions/azureADHealthUpdateParameter"
             },
-            "description": "Private Link Policy resource with the tags to be updated."
+            "description": "AzureADHealth resource with the tags to be updated."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Private Link Policy tags are updated.",
+            "description": "OK -- AzureADHealth tags are updated.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADHealth"
             }
           },
           "default": {
@@ -144,13 +141,13 @@
       },
       "get": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADHealth"
         ],
-        "operationId": "privateLinkForAzureAd_Get",
-        "description": "Gets a private link policy with a given name.",
+        "operationId": "azureADHealth_Get",
+        "description": "Gets a azureADHealth instance with a given name.",
         "x-ms-examples": {
-          "privateLinkPolicyGet": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyGet.json"
+          "azureADHealthGet": {
+            "$ref": "./examples/AzureADHealthGet.json"
           }
         },
         "parameters": [
@@ -161,7 +158,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADHealthNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -169,9 +166,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns information about the private link policy.",
+            "description": "OK -- Returns information about the azureADHealth resource.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADHealth"
             }
           },
           "default": {
@@ -184,13 +181,13 @@
       },
       "delete": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADHealth"
         ],
-        "operationId": "privateLinkForAzureAd_Delete",
-        "description": "Deletes a private link policy. When operation completes, status code 200 returned without content.",
+        "operationId": "azureADHealth_Delete",
+        "description": "Deletes a AzureADHealth resource. When operation completes, status code 200 returned without content.",
         "x-ms-examples": {
-          "privateLinkPolicyDelete": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyDelete.json"
+          "azureADHealthDelete": {
+            "$ref": "./examples/AzureADHealthDelete.json"
           }
         },
         "parameters": [
@@ -201,7 +198,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADHealthNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -209,10 +206,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- private link policy deleted."
+            "description": "OK -- azureADHealth resource deleted."
           },
           "204": {
-            "description": "private link policy does not exist."
+            "description": "azureADHealth does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -223,16 +220,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/privateLinkForAzureAd": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/azureADHealth": {
       "get": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADHealth"
         ],
-        "operationId": "privateLinkForAzureAd_ListBySubscription",
-        "description": "Lists all  Private Link Policies For AzureAD in the given subscription.",
+        "operationId": "azureADHealth_ListBySubscription",
+        "description": "Lists all AzureADHealth resources in the given subscription.",
         "x-ms-examples": {
-          "privateLinkPolicyListBySubscription": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyListBySubscription.json"
+          "azureADHealthListBySubscription": {
+            "$ref": "./examples/AzureADHealthListBySubscription.json"
           }
         },
         "parameters": [
@@ -245,9 +242,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns a list of private link policies.",
+            "description": "OK -- Returns a list azureADHealth resources.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicyListResult"
+              "$ref": "#/definitions/azureADHealthListResult"
             }
           },
           "default": {
@@ -262,18 +259,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/azureADHealth": {
       "get": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADHealth"
         ],
-        "operationId": "privateLinkForAzureAd_List",
+        "operationId": "azureADHealth_List",
         "x-ms-examples": {
-          "privateLinkPolicyGetList": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyList.json"
+          "azureADHealthGetList": {
+            "$ref": "./examples/AzureADHealthList.json"
           }
         },
-        "description": "Operation to return the list of Private Link Policies For AzureAD scoped to the resourceGroup.",
+        "description": "Operation to return the list of AzureADHealth resources scoped to the resourceGroup.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -290,13 +287,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
+            "description": "Successful request to get list of AzureADHealth resources For AzureAD.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicyListResult"
+              "$ref": "#/definitions/azureADHealthListResult"
             }
           },
           "default": {
-            "description": "Error, failed to get list of Private Links For AzureAD.",
+            "description": "Error, failed to get list of AzureADHealth resources.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -306,15 +303,15 @@
     }
   },
   "definitions": {
-    "privateLinkPolicyListResult": {
-      "description": "A list of private link policies",
+    "azureADHealthListResult": {
+      "description": "A list of AzureADHealth resources",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private link policies",
+          "description": "Array of AzureADHealth resources.",
           "items": {
-            "$ref": "#/definitions/privateLinkPolicy"
+            "$ref": "#/definitions/azureADHealth"
           }
         },
         "nextLink": {
@@ -323,31 +320,20 @@
         }
       }
     },
-    "privateLinkPolicy": {
-      "description": "PrivateLink Policy configuration object.",
+    "azureADHealth": {
+      "description": "AzureADHealth resource.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the Private Link Azure AD Policy.",
+          "description": "Name of the AzureADHealth configuration object.",
           "type": "string"
         },
         "ownerTenantId": {
           "description": "Guid of the owner tenant",
           "type": "string"
         },
-        "allTenants": {
-          "description": "Flag indicating whether all tenants are allowed",
-          "type": "boolean"
-        },
-        "tenants": {
-          "description": "The list of tenantIds.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "resourceName": {
-          "description": "Name of the private link policy resource",
+          "description": "Name of the AzureAdHealth resource",
           "type": "string"
         },
         "subscriptionId": {
@@ -394,9 +380,9 @@
         }
       }
     },
-    "privateLinkPolicyUpdateParameter": {
+    "azureADHealthUpdateParameter": {
       "type": "object",
-      "description": "private Link policy parameters to be updated. ",
+      "description": "AzureADHealth parameters to be updated. ",
       "properties": {
         "tags": {
           "type": "object",
@@ -468,13 +454,13 @@
       "x-ms-parameter-location": "method",
       "description": "Name of an Azure resource group."
     },
-    "policyNameParameter": {
-      "name": "policyName",
+    "azureADHealthNameParameter": {
+      "name": "azureAdHealthName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "name of the private link policy."
+      "description": "Name of the azureADHealth instance."
     }
   }
 }
