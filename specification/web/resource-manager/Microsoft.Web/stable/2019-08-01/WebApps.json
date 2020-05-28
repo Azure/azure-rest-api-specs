@@ -19886,12 +19886,23 @@
   "definitions": {
     "AllowedAudiencesValidation": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "allowedAudiences": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "AllowedAudiencesValidation resource specific properties",
+          "properties": {
+            "allowedAudiences": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19986,12 +19997,23 @@
     },
     "AppRegistration": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "appId": {
-          "type": "string"
-        },
-        "appSecretSettingName": {
-          "type": "string"
+        "properties": {
+          "description": "AppRegistration resource specific properties",
+          "properties": {
+            "appId": {
+              "type": "string"
+            },
+            "appSecretSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20007,80 +20029,135 @@
     },
     "AuthPlatform": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "runtimeVersion": {
-          "type": "string"
-        },
-        "configFilePath": {
-          "type": "string"
+        "properties": {
+          "description": "AuthPlatform resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "runtimeVersion": {
+              "type": "string"
+            },
+            "configFilePath": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "AzureActiveDirectory": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "registration": {
-          "$ref": "#/definitions/AzureActiveDirectoryRegistration"
-        },
-        "login": {
-          "$ref": "#/definitions/AzureActiveDirectoryLogin"
-        },
-        "validation": {
-          "$ref": "#/definitions/AzureActiveDirectoryValidation"
-        },
-        "isAutoProvisioned": {
-          "type": "boolean"
+        "properties": {
+          "description": "AzureActiveDirectory resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/AzureActiveDirectoryRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/AzureActiveDirectoryLogin"
+            },
+            "validation": {
+              "$ref": "#/definitions/AzureActiveDirectoryValidation"
+            },
+            "isAutoProvisioned": {
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "AzureActiveDirectoryLogin": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "disableWWWAuthenticate": {
-          "type": "boolean"
-        },
-        "loginParameters": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "AzureActiveDirectoryLogin resource specific properties",
+          "properties": {
+            "disableWWWAuthenticate": {
+              "type": "boolean"
+            },
+            "loginParameters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "AzureActiveDirectoryRegistration": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "openIdIssuer": {
-          "type": "string"
-        },
-        "clientId": {
-          "type": "string"
-        },
-        "clientSecretSettingName": {
-          "type": "string"
-        },
-        "clientSecretCertificateThumbprint": {
-          "type": "string"
+        "properties": {
+          "description": "AzureActiveDirectoryRegistration resource specific properties",
+          "properties": {
+            "openIdIssuer": {
+              "type": "string"
+            },
+            "clientId": {
+              "type": "string"
+            },
+            "clientSecretSettingName": {
+              "type": "string"
+            },
+            "clientSecretCertificateThumbprint": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "AzureActiveDirectoryValidation": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "jwtClaimChecks": {
-          "$ref": "#/definitions/JwtClaimChecksV2"
-        },
-        "allowedAudiences": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "AzureActiveDirectoryValidation resource specific properties",
+          "properties": {
+            "jwtClaimChecks": {
+              "$ref": "#/definitions/JwtClaimChecksV2"
+            },
+            "allowedAudiences": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20460,20 +20537,42 @@
     },
     "BlobStorageTokenStore": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "sasUrlSettingName": {
-          "type": "string"
+        "properties": {
+          "description": "BlobStorageTokenStore resource specific properties",
+          "properties": {
+            "sasUrlSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "ClientRegistration": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "clientId": {
-          "type": "string"
-        },
-        "clientSecretSettingName": {
-          "type": "string"
+        "properties": {
+          "description": "ClientRegistration resource specific properties",
+          "properties": {
+            "clientId": {
+              "type": "string"
+            },
+            "clientSecretSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20778,20 +20877,31 @@
     },
     "CookieExpiration": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "convention": {
-          "enum": [
-            "FixedTime",
-            "IdentityProviderDerived"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CookieExpirationConvention",
-            "modelAsString": false
-          }
-        },
-        "timeToExpiration": {
-          "type": "string"
+        "properties": {
+          "description": "CookieExpiration resource specific properties",
+          "properties": {
+            "convention": {
+              "enum": [
+                "FixedTime",
+                "IdentityProviderDerived"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CookieExpirationConvention",
+                "modelAsString": false
+              }
+            },
+            "timeToExpiration": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20947,15 +21057,26 @@
     },
     "CustomOpenIdConnectProvider": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "registration": {
-          "$ref": "#/definitions/OpenIdConnectRegistration"
-        },
-        "login": {
-          "$ref": "#/definitions/OpenIdConnectLogin"
+        "properties": {
+          "description": "CustomOpenIdConnectProvider resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/OpenIdConnectRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/OpenIdConnectLogin"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21115,18 +21236,29 @@
     },
     "Facebook": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "registration": {
-          "$ref": "#/definitions/AppRegistration"
-        },
-        "graphApiVersion": {
-          "type": "string"
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes"
+        "properties": {
+          "description": "Facebook resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/AppRegistration"
+            },
+            "graphApiVersion": {
+              "type": "string"
+            },
+            "login": {
+              "$ref": "#/definitions/LoginScopes"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21176,32 +21308,54 @@
     },
     "FileSystemTokenStore": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "directory": {
-          "type": "string"
+        "properties": {
+          "description": "FileSystemTokenStore resource specific properties",
+          "properties": {
+            "directory": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "ForwardProxy": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "convention": {
-          "enum": [
-            "NoProxy",
-            "Standard",
-            "Custom"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ForwardProxyConvention",
-            "modelAsString": false
-          }
-        },
-        "customHostHeaderName": {
-          "type": "string"
-        },
-        "customProtoHeadername": {
-          "type": "string"
+        "properties": {
+          "description": "ForwardProxy resource specific properties",
+          "properties": {
+            "convention": {
+              "enum": [
+                "NoProxy",
+                "Standard",
+                "Custom"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ForwardProxyConvention",
+                "modelAsString": false
+              }
+            },
+            "customHostHeaderName": {
+              "type": "string"
+            },
+            "customProtoHeaderName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21325,62 +21479,95 @@
     },
     "GitHub": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "registration": {
-          "$ref": "#/definitions/ClientRegistration"
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes"
+        "properties": {
+          "description": "GitHub resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/ClientRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/LoginScopes"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "GlobalValidation": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "requireAuthentication": {
-          "type": "boolean"
-        },
-        "unauthenticatedClientAction": {
-          "enum": [
-            "RedirectToLoginPage",
-            "AllowAnonymous",
-            "Return401",
-            "Return403"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UnauthenticatedClientActionV2",
-            "modelAsString": false
-          }
-        },
-        "redirectToProvider": {
-          "type": "string"
-        },
-        "excludedPaths": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "GlobalValidation resource specific properties",
+          "properties": {
+            "requireAuthentication": {
+              "type": "boolean"
+            },
+            "unauthenticatedClientAction": {
+              "enum": [
+                "RedirectToLoginPage",
+                "AllowAnonymous",
+                "Return401",
+                "Return403"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "UnauthenticatedClientActionV2",
+                "modelAsString": false
+              }
+            },
+            "redirectToProvider": {
+              "type": "string"
+            },
+            "excludedPaths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "Google": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "registration": {
-          "$ref": "#/definitions/ClientRegistration"
-        },
-        "login": {
-          "$ref": "#/definitions/LoginScopes"
-        },
-        "validation": {
-          "$ref": "#/definitions/AllowedAudiencesValidation"
+        "properties": {
+          "description": "Google resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/ClientRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/LoginScopes"
+            },
+            "validation": {
+              "$ref": "#/definitions/AllowedAudiencesValidation"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21564,66 +21751,110 @@
     },
     "HttpSettings": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "requireHttps": {
-          "type": "boolean"
-        },
-        "routes": {
-          "$ref": "#/definitions/HttpSettingsRoutes"
-        },
-        "forwardProxy": {
-          "$ref": "#/definitions/ForwardProxy"
+        "properties": {
+          "description": "HttpSettings resource specific properties",
+          "properties": {
+            "requireHttps": {
+              "type": "boolean"
+            },
+            "routes": {
+              "$ref": "#/definitions/HttpSettingsRoutes"
+            },
+            "forwardProxy": {
+              "$ref": "#/definitions/ForwardProxy"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "HttpSettingsRoutes": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "apiPrefix": {
-          "type": "string"
+        "properties": {
+          "description": "HttpSettingsRoutes resource specific properties",
+          "properties": {
+            "apiPrefix": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "IdentityProviders": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "azureActiveDirectory": {
-          "$ref": "#/definitions/AzureActiveDirectory"
-        },
-        "facebook": {
-          "$ref": "#/definitions/Facebook"
-        },
-        "gitHub": {
-          "$ref": "#/definitions/GitHub"
-        },
-        "google": {
-          "$ref": "#/definitions/Google"
-        },
-        "twitter": {
-          "$ref": "#/definitions/Twitter"
-        },
-        "customOpenIdConnectProviders": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/CustomOpenIdConnectProvider"
-          }
+        "properties": {
+          "description": "IdentityProviders resource specific properties",
+          "properties": {
+            "azureActiveDirectory": {
+              "$ref": "#/definitions/AzureActiveDirectory"
+            },
+            "facebook": {
+              "$ref": "#/definitions/Facebook"
+            },
+            "gitHub": {
+              "$ref": "#/definitions/GitHub"
+            },
+            "google": {
+              "$ref": "#/definitions/Google"
+            },
+            "twitter": {
+              "$ref": "#/definitions/Twitter"
+            },
+            "customOpenIdConnectProviders": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/CustomOpenIdConnectProvider"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "JwtClaimChecksV2": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "allowedGroups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "allowedClientApplications": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "JwtClaimChecksV2 resource specific properties",
+          "properties": {
+            "allowedGroups": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "allowedClientApplications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21749,46 +21980,79 @@
     },
     "Login": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "routes": {
-          "$ref": "#/definitions/LoginRoutes"
-        },
-        "tokenStore": {
-          "$ref": "#/definitions/TokenStore"
-        },
-        "preserveUrlFragmentsForLogins": {
-          "type": "boolean"
-        },
-        "allowedExternalRedirectUrls": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "cookieExpiration": {
-          "$ref": "#/definitions/CookieExpiration"
-        },
-        "nonce": {
-          "$ref": "#/definitions/Nonce"
+        "properties": {
+          "description": "Login resource specific properties",
+          "properties": {
+            "routes": {
+              "$ref": "#/definitions/LoginRoutes"
+            },
+            "tokenStore": {
+              "$ref": "#/definitions/TokenStore"
+            },
+            "preserveUrlFragmentsForLogins": {
+              "type": "boolean"
+            },
+            "allowedExternalRedirectUrls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cookieExpiration": {
+              "$ref": "#/definitions/CookieExpiration"
+            },
+            "nonce": {
+              "$ref": "#/definitions/Nonce"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "LoginRoutes": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "logoutEndpoint": {
-          "type": "string"
+        "properties": {
+          "description": "LoginRoutes resource specific properties",
+          "properties": {
+            "logoutEndpoint": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "LoginScopes": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "LoginScopes resource specific properties",
+          "properties": {
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -22108,78 +22372,133 @@
     },
     "Nonce": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "validateNonce": {
-          "type": "boolean"
-        },
-        "nonceExpirationInterval": {
-          "type": "string"
+        "properties": {
+          "description": "Nonce resource specific properties",
+          "properties": {
+            "validateNonce": {
+              "type": "boolean"
+            },
+            "nonceExpirationInterval": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "OpenIdConnectClientCredential": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "method": {
-          "enum": [
-            "ClientSecretPost"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ClientCredentialMethod",
-            "modelAsString": false
-          }
-        },
-        "clientSecretSettingName": {
-          "type": "string"
+        "properties": {
+          "description": "OpenIdConnectClientCredential resource specific properties",
+          "properties": {
+            "method": {
+              "enum": [
+                "ClientSecretPost"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ClientCredentialMethod",
+                "modelAsString": false
+              }
+            },
+            "clientSecretSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "OpenIdConnectConfig": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "authorizationEndpoint": {
-          "type": "string"
-        },
-        "tokenEndpoint": {
-          "type": "string"
-        },
-        "issuer": {
-          "type": "string"
-        },
-        "jwksUri": {
-          "type": "string"
-        },
-        "wellKnownOpenIdConfiguration": {
-          "type": "string"
+        "properties": {
+          "description": "OpenIdConnectConfig resource specific properties",
+          "properties": {
+            "authorizationEndpoint": {
+              "type": "string"
+            },
+            "tokenEndpoint": {
+              "type": "string"
+            },
+            "issuer": {
+              "type": "string"
+            },
+            "certificationUri": {
+              "type": "string"
+            },
+            "wellKnownOpenIdConfiguration": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "OpenIdConnectLogin": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "nameClaimType": {
-          "type": "string"
-        },
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "OpenIdConnectLogin resource specific properties",
+          "properties": {
+            "nameClaimType": {
+              "type": "string"
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "OpenIdConnectRegistration": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "clientId": {
-          "type": "string"
-        },
-        "clientCredential": {
-          "$ref": "#/definitions/OpenIdConnectClientCredential"
-        },
-        "openIdConnectConfiguration": {
-          "$ref": "#/definitions/OpenIdConnectConfig"
+        "properties": {
+          "description": "OpenIdConnectRegistration resource specific properties",
+          "properties": {
+            "clientId": {
+              "type": "string"
+            },
+            "clientCredential": {
+              "$ref": "#/definitions/OpenIdConnectClientCredential"
+            },
+            "openIdConnectConfiguration": {
+              "$ref": "#/definitions/OpenIdConnectConfig"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -23279,6 +23598,7 @@
               "type": "string"
             },
             "gitHubClientSecretSettingName": {
+              "description": "The app setting name that contains the client secret of the Github\napp used for GitHub Login.",
               "type": "string"
             },
             "gitHubOAuthScopes": {
@@ -23324,7 +23644,7 @@
               "type": "string"
             },
             "authFilePath": {
-              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will be %HOME%\\site\\wwwroot\\",
+              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will the site's root directory.",
               "type": "string"
             }
           },
@@ -23334,21 +23654,32 @@
     },
     "SiteAuthSettingsV2": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "platform": {
-          "$ref": "#/definitions/AuthPlatform"
-        },
-        "globalValidation": {
-          "$ref": "#/definitions/GlobalValidation"
-        },
-        "identityProviders": {
-          "$ref": "#/definitions/IdentityProviders"
-        },
-        "login": {
-          "$ref": "#/definitions/Login"
-        },
-        "httpSettings": {
-          "$ref": "#/definitions/HttpSettings"
+        "properties": {
+          "description": "SiteAuthSettingsV2 resource specific properties",
+          "properties": {
+            "platform": {
+              "$ref": "#/definitions/AuthPlatform"
+            },
+            "globalValidation": {
+              "$ref": "#/definitions/GlobalValidation"
+            },
+            "identityProviders": {
+              "$ref": "#/definitions/IdentityProviders"
+            },
+            "login": {
+              "$ref": "#/definitions/Login"
+            },
+            "httpSettings": {
+              "$ref": "#/definitions/HttpSettings"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -24335,19 +24666,30 @@
     },
     "TokenStore": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "tokenRefreshExtensionHours": {
-          "format": "double",
-          "type": "number"
-        },
-        "fileSystem": {
-          "$ref": "#/definitions/FileSystemTokenStore"
-        },
-        "azureBlobStorage": {
-          "$ref": "#/definitions/BlobStorageTokenStore"
+        "properties": {
+          "description": "TokenStore resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "tokenRefreshExtensionHours": {
+              "format": "double",
+              "type": "number"
+            },
+            "fileSystem": {
+              "$ref": "#/definitions/FileSystemTokenStore"
+            },
+            "azureBlobStorage": {
+              "$ref": "#/definitions/BlobStorageTokenStore"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -24559,23 +24901,45 @@
     },
     "Twitter": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "registration": {
-          "$ref": "#/definitions/TwitterRegistration"
+        "properties": {
+          "description": "Twitter resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/TwitterRegistration"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "TwitterRegistration": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "consumerKey": {
-          "type": "string"
-        },
-        "consumerSecretSettingName": {
-          "type": "string"
+        "properties": {
+          "description": "TwitterRegistration resource specific properties",
+          "properties": {
+            "consumerKey": {
+              "type": "string"
+            },
+            "consumerSecretSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
