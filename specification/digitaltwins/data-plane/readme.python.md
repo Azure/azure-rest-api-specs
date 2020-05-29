@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.DigitalTwins
-  package-name: azuredigitaltwins
+  namespace: Azure.DigitalTwins.Core
+  package-name: digitaltwins
   package-version: 2020-05-31-preview
   clear-output-folder: true
 ```
@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/azuredigitaltwins
+  output-folder: $(python-sdks-folder)/digitaltwins
 ```

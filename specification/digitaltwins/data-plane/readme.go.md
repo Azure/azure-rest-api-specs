@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-05-31-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-05-31-preview' && $(go)
-namespace: Microsoft.DigitalTwins
-output-folder: $(go-sdks-folder)/azuredigitaltwins/Generated
+namespace: Azure.DigitalTwins.Core
+output-folder: $(go-sdks-folder)/digitaltwins/Generated
 ```
