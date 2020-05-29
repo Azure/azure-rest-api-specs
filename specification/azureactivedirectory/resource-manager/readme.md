@@ -57,6 +57,23 @@ input-file:
   - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: BodyTopLevelProperties
+    from: azureADHealth.json
+    where: $.definitions.azureADHealthConfig.properties
+  - suppress: BodyTopLevelProperties
+    from: privateLinkForAzureAD.json
+    where: $.definitions.privateLinkPolicy.properties
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: azureADHealth.json
+    where: $.definitions.azureADHealthConfig
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: privateLinkForAzureAD.json
+    where: $.definitions.privateLinkPolicy
+```
+
 ---
 
 # Code Generation
