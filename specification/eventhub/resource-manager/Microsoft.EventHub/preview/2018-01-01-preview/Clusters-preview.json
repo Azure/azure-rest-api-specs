@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters": {
       "get": {
         "tags": [
-          "Event Hubs Clusters"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
@@ -79,7 +79,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}": {
       "get": {
         "tags": [
-          "Event Hubs Clusters"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_Get",
         "x-ms-examples": {
@@ -119,7 +119,7 @@
       },
       "put": {
         "tags": [
-          "Event Hubs Clusters"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_Put",
         "x-ms-examples": {
@@ -137,6 +137,18 @@
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster",
+              "required": [
+                "location"
+              ]
+            },
+            "description": "Parameters for creating a eventhub cluster resource."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -169,7 +181,7 @@
       },
       "patch": {
         "tags": [
-          "Event Hubs Clusters"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_Patch",
         "x-ms-examples": {
@@ -228,7 +240,7 @@
       },
       "delete": {
         "tags": [
-          "Event Hubs Clusters"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_Delete",
         "x-ms-examples": {
@@ -274,7 +286,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
       "get": {
         "tags": [
-          "Event Hubs Clusters Namespace"
+          "EventHubs Clusters Namespace"
         ],
         "operationId": "Clusters_ListNamespaces",
         "parameters": [
@@ -324,12 +336,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
-            "created": {
+            "createdAt": {
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was created."
             },
-            "updated": {
+            "updatedAt": {
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was last updated."
