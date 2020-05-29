@@ -798,6 +798,47 @@
         "location"
       ]
     },
+    "XmlDataset": {
+      "x-ms-discriminator-value": "Xml",
+      "description": "Xml dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Xml dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/XmlDatasetTypeProperties"
+        }
+      }
+    },
+    "XmlDatasetTypeProperties": {
+      "description": "Xml dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the json data storage."
+        },
+        "encodingName": {
+          "type": "object",
+          "description": "The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
+        },
+        "nullValue": {
+          "type": "object",
+          "description": "The null value string. Type: string (or Expression with resultType string)."
+        },
+        "compression": {
+          "description": "The data compression method used for the json dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "OrcDataset": {
       "x-ms-discriminator-value": "Orc",
       "description": "ORC dataset.",
