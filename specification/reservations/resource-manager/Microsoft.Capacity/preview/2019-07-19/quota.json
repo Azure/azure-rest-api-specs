@@ -91,8 +91,14 @@
         "description": "Create or update the service limits (quota) of a resource to requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
-          "Quotas_Request_listForCompute": {
+          "Quotas_Request_ForCompute": {
             "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
+          },
+          "Quotas_Request_ForMachineLearningServices_DedicatedResource": {
+            "$ref": "./examples/putMachineLearningServicesQuotaRequestDedicated.json"
+          },
+          "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
+            "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -195,7 +201,7 @@
             }
           },
           "201": {
-            "description": "The request is accepted and is being processed. Please use requestId to check the status.",
+            "description": "The request is accepted and is being processed. Use requestId to check the status.",
             "schema": {
               "$ref": "#/definitions/QuotaRequestSubmitResponse201"
             }
@@ -220,8 +226,8 @@
           "Quotas_listUsagesForCompute": {
             "$ref": "./examples/getComputeUsages.json"
           },
-          "Quotas_listUsagesForBatchAI": {
-            "$ref": "./examples/getBatchAIUsages.json"
+          "Quotas_listUsagesMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesUsages.json"
           },
           "Quotas_listUsagesForMsSql": {
             "$ref": "./examples/getMsSqlUsages.json"
@@ -488,7 +494,7 @@
       }
     },
     "QuotaProperties": {
-      "description": "Resource quota properties.",
+      "description": "Quota properties for the resource.",
       "type": "object",
       "properties": {
         "limit": {
@@ -1112,7 +1118,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Api version."
+      "description": "API version."
     },
     "LocationIdInParameters": {
       "name": "location",
@@ -1127,7 +1133,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Azure resource Provider id.",
+      "description": "Azure resource provider id.",
       "x-ms-parameter-location": "method"
     },
     "ResourceNameInParameters": {
@@ -1135,7 +1141,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Resource name for the specific resource provider, such as SKU name for Microsoft.Compute, pool for Microsoft.Batch.",
+      "description": "The resource name for a resource provider, such as SKU name for Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices",
       "x-ms-parameter-location": "method"
     },
     "RequestIdInParameters": {
