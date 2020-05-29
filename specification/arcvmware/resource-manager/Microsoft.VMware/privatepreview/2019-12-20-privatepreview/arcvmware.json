@@ -3098,6 +3098,27 @@
       ],
       "type": "string"
     },
+    "NicIPAddressSettings": {
+      "description": "IP address information for a virtual network adapter reported by the fabric.",
+      "type": "object",
+      "properties": {
+        "allocationMethod": {
+          "description": "Gets the ip address allocation method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "description": "Gets the ip address for the nic.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "description": "Gets the mask.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "NicIPSettings": {
       "description": "Defines the network interface ip settings.",
       "type": "object",
@@ -3137,6 +3158,14 @@
         "secondaryWinsServer": {
           "description": "Gets or sets the secondary server.",
           "type": "string",
+          "readOnly": true
+        },
+        "ipAddressInfo": {
+          "description": "Gets or sets the IP address information being reported for this NIC. This contains the same IPv4 information above plus IPV6 information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NicIPAddressSettings"
+          },
           "readOnly": true
         }
       }
