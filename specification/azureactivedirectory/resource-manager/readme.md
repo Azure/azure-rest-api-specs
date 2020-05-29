@@ -131,6 +131,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
   - $(this-folder)/Microsoft.Aadiam/preview/2020-07-01-preview/azureADHealth.json
+  - $(this-folder)/Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
+  - $(this-folder)/Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
 
 
 ```
