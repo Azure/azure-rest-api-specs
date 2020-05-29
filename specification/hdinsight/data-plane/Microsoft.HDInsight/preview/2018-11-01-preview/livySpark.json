@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HDInsightJobManagementClient",
+    "title": "HDInsightJobClient",
     "description": "The HDInsight Job Client.",
     "version": "2018-11-01-preview",
     "x-ms-code-generation-settings": {
@@ -41,13 +41,13 @@
     "/livy/batches": {
       "get": {
         "tags": [
-          "SparkBatch"
+          "Job"
         ],
         "description": "List all spark batch jobs",
-        "operationId": "SparkBatches_List",
+        "operationId": "Job_ListSparkBatchJob",
         "x-ms-examples": {
           "List all spark batch jobs": {
-            "$ref": "./examples/HDI_SparkBatch_List.json"
+            "$ref": "./examples/HDI_Job_ListSparkBatchJob.json"
           }
         },
         "produces": [
@@ -82,13 +82,13 @@
       },
       "post": {
         "tags": [
-          "SparkBatch"
+          "Job"
         ],
         "description": "Create a new spark batch job.",
-        "operationId": "SparkBatches_Create",
+        "operationId": "Job_SubmitSparkBatchJob",
         "x-ms-examples": {
           "Create a spark batch job": {
-            "$ref": "./examples/HDI_SparkBatch_Create.json"
+            "$ref": "./examples/HDI_Job_SubmitSparkBatchJob.json"
           }
         },
         "consumes": [
@@ -124,13 +124,13 @@
     "/livy/batches/{batchId}": {
       "get": {
         "tags": [
-          "SparkBatch"
+          "Job"
         ],
         "description": "Gets a single spark batch job.",
-        "operationId": "SparkBatches_Get",
+        "operationId": "Job_GetSparkBatchJob",
         "x-ms-examples": {
           "Gets a single spark batch job": {
-            "$ref": "./examples/HDI_SparkBatch_Get.json"
+            "$ref": "./examples/HDI_Job_GetSparkBatchJob.json"
           }
         },
         "produces": [
@@ -157,13 +157,13 @@
       },
       "delete": {
         "tags": [
-          "SparkBatch"
+          "Job"
         ],
         "description": "Cancels a running spark batch job.",
-        "operationId": "SparkBatches_Delete",
+        "operationId": "Job_DeleteSparkBatch",
         "x-ms-examples": {
           "Cancels a running spark batch job": {
-            "$ref": "./examples/HDI_SparkBatch_Delete.json"
+            "$ref": "./examples/HDI_Job_DeleteSparkBatch.json"
           }
         },
         "consumes": [
@@ -198,13 +198,13 @@
     "/livy/batches/{batchId}/log": {
       "get": {
         "tags": [
-          "SparkBatch"
+          "Job"
         ],
         "description": "Gets a single spark batch job logs.",
-        "operationId": "SparkBatches_GetLogs",
+        "operationId": "Job_GetSparkBatchLog",
         "x-ms-examples": {
           "Gets a single spark batch job logs": {
-            "$ref": "./examples/HDI_SparkBatch_GetLogs.json"
+            "$ref": "./examples/HDI_Job_GetSparkBatchLog.json"
           }
         },
         "produces": [
@@ -249,13 +249,13 @@
     "/livy/batches/{batchId}/state": {
       "get": {
         "tags": [
-          "SparkBatch"
+          "Job"
         ],
         "description": "Gets a single spark batch state.",
-        "operationId": "SparkBatches_GetState",
+        "operationId": "Job_GetSparkBatchState",
         "x-ms-examples": {
           "Gets a single spark batch state": {
-            "$ref": "./examples/HDI_SparkBatch_GetState.json"
+            "$ref": "./examples/HDI_Job_GetSparkBatchState.json"
           }
         },
         "produces": [
@@ -284,13 +284,13 @@
     "/livy/sessions": {
       "get": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "List all spark sessions.",
-        "operationId": "SparkSessions_List",
+        "operationId": "Job_ListSparkSessionJob",
         "x-ms-examples": {
           "List all spark sessions": {
-            "$ref": "./examples/HDI_SparkSession_List.json"
+            "$ref": "./examples/HDI_Job_ListSparkSessionJob.json"
           }
         },
         "produces": [
@@ -325,13 +325,13 @@
       },
       "post": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Create a new spark session.",
-        "operationId": "SparkSessions_Create",
+        "operationId": "Job_SubmitSparkSessionJob",
         "x-ms-examples": {
           "Create a new spark session": {
-            "$ref": "./examples/HDI_SparkSession_Create.json"
+            "$ref": "./examples/HDI_Job_SubmitSparkSessionJob.json"
           }
         },
         "consumes": [
@@ -367,13 +367,13 @@
     "/livy/sessions/{sessionId}": {
       "get": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Gets a single spark session.",
-        "operationId": "SparkSessions_Get",
+        "operationId": "Job_GetSparkSessionJob",
         "x-ms-examples": {
           "Gets a single spark session": {
-            "$ref": "./examples/HDI_SparkSession_Get.json"
+            "$ref": "./examples/HDI_Job_GetSparkSessionJob.json"
           }
         },
         "produces": [
@@ -400,13 +400,13 @@
       },
       "delete": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Cancels a running spark session.",
-        "operationId": "SparkSessions_Delete",
+        "operationId": "Job_DeleteSparkSessionJob",
         "x-ms-examples": {
           "Cancels a running spark session": {
-            "$ref": "./examples/HDI_SparkSession_Delete.json"
+            "$ref": "./examples/HDI_Job_DeleteSparkSessionJob.json"
           }
         },
         "consumes": [
@@ -441,13 +441,13 @@
     "/livy/sessions/{sessionId}/log": {
       "get": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Gets a single spark session job logs.",
-        "operationId": "SparkSessions_GetLogs",
+        "operationId": "Job_GetSparkSessionLog",
         "x-ms-examples": {
           "Gets a single spark session job logs": {
-            "$ref": "./examples/HDI_SparkSession_GetLogs.json"
+            "$ref": "./examples/HDI_Job_GetSparkSessionLog.json"
           }
         },
         "produces": [
@@ -492,13 +492,13 @@
     "/livy/sessions/{sessionId}/state": {
       "get": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Gets a single spark session job state.",
-        "operationId": "SparkSessions_GetState",
+        "operationId": "Job_GetSparkSessionState",
         "x-ms-examples": {
           "Gets a single spark session job state": {
-            "$ref": "./examples/HDI_SparkSession_GetState.json"
+            "$ref": "./examples/HDI_Job_GetSparkSessionState.json"
           }
         },
         "produces": [
@@ -527,13 +527,13 @@
     "/livy/sessions/{sessionId}/statements": {
       "get": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Gets a list of statements within a spark session.",
-        "operationId": "SparkSessions_ListStatements",
+        "operationId": "Job_ListSparkStatementJob",
         "x-ms-examples": {
           "Gets a list of statements within a spark session": {
-            "$ref": "./examples/HDI_SparkSession_ListStatements.json"
+            "$ref": "./examples/HDI_Job_ListSparkStatementJob.json"
           }
         },
         "produces": [
@@ -560,13 +560,13 @@
       },
       "post": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Create a statement within a spark session.",
-        "operationId": "SparkSessions_CreateStatement",
+        "operationId": "Job_SubmitSparkStatementJob",
         "x-ms-examples": {
           "Create a statement within a spark session": {
-            "$ref": "./examples/HDI_SparkSession_CreateStatement.json"
+            "$ref": "./examples/HDI_Job_SubmitSparkStatementJob.json"
           }
         },
         "consumes": [
@@ -610,13 +610,13 @@
     "/livy/sessions/{sessionId}/statements/{statementId}": {
       "get": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Gets a single statement within a spark session.",
-        "operationId": "SparkSessions_GetStatement",
+        "operationId": "Job_GetSparkStatementJob",
         "x-ms-examples": {
           "Gets a single statement within a spark session": {
-            "$ref": "./examples/HDI_SparkSession_GetStatement.json"
+            "$ref": "./examples/HDI_Job_GetSparkStatementJob.json"
           }
         },
         "produces": [
@@ -653,13 +653,13 @@
     "/livy/sessions/{sessionId}/statements/{statementId}/cancel": {
       "post": {
         "tags": [
-          "SparkSession"
+          "Job"
         ],
         "description": "Kill a statement within a session.",
-        "operationId": "SparkSessions_DeleteStatement",
+        "operationId": "Job_DeleteSparkStatementJob",
         "x-ms-examples": {
           "Kill a statement within a session": {
-            "$ref": "./examples/HDI_SparkSession_DeleteStatement.json"
+            "$ref": "./examples/HDI_Job_DeleteSparkStatementJob.json"
           }
         },
         "consumes": [
