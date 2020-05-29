@@ -46,6 +46,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
 - Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
 - Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
 ```
 
 ## Suppressions
@@ -128,7 +129,7 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
-
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
