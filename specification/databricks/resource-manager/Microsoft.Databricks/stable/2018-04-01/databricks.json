@@ -994,18 +994,24 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "databricksVirtualNetwork": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to the databricks virtual network. The remote virtual network can be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+          "properties":{
+            "id": {
+              "type": "string",
+              "description": "The Id of the databricks virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+            }          
+          }         
         },
         "databricksAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
           "description": "The reference to the databricks virtual network address space."
         },
         "remoteVirtualNetwork": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to the remote virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+          "properties":{
+            "id": {
+              "type": "string",
+              "description": "The Id of the remote virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+            }          
+          }
         },
         "remoteAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
@@ -1031,16 +1037,6 @@
         }
       },
       "description": "Properties of the virtual network peering."
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      },
-      "description": "Reference to another subresource.",
-      "x-ms-azure-resource": true
     },
     "AddressSpace": {
       "properties": {
