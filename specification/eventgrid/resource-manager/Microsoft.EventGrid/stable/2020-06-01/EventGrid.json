@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-06-01",
+    "version": "2020-06-01",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -225,6 +225,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Domain update request accepted.",
             "schema": {
@@ -1871,6 +1874,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Topic update request accepted.",
             "schema": {
@@ -2105,6 +2111,437 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Get a specific private endpoint connection.",
+        "description": "Get a specific private endpoint connection under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Update a specific private endpoint connection.",
+        "description": "Update a specific private endpoint connection under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection object to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Delete a specific private endpoint connection.",
+        "description": "Delete a specific private endpoint connection under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Lists all private endpoint connections under a resource.",
+        "description": "Get all private endpoint connections under a topic or domain.",
+        "operationId": "PrivateEndpointConnections_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByResource": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "Get a private link resource.",
+        "description": "Get properties of a private link resource.",
+        "operationId": "PrivateLinkResources_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of private link resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "List private link resources under specific topic or domain.",
+        "description": "List all the private link resources under a topic or domain.",
+        "operationId": "PrivateLinkResources_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByResource": {
+            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventTypes": {
       "get": {
         "tags": [
@@ -2305,6 +2742,13 @@
       "description": "Properties of the Domain.",
       "type": "object",
       "properties": {
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
         "provisioningState": {
           "description": "Provisioning state of the domain.",
           "enum": [
@@ -2326,6 +2770,83 @@
           "description": "Endpoint for the domain.",
           "type": "string",
           "readOnly": true
+        },
+        "inputSchema": {
+          "description": "This determines the format that Event Grid should expect for incoming events published to the domain.",
+          "enum": [
+            "EventGridSchema",
+            "CustomEventSchema",
+            "CloudEventSchemaV1_0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InputSchema",
+            "modelAsString": true
+          },
+          "default": "EventGridSchema"
+        },
+        "inputSchemaMapping": {
+          "$ref": "#/definitions/InputSchemaMapping",
+          "description": "Information about the InputSchemaMapping which specified the info about mapping event payload."
+        },
+        "metricResourceId": {
+          "description": "Metric resource id for the domain.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "inboundIpRules": {
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundIpRule"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of the PrivateEndpointConnection.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InboundIpRule": {
+      "type": "object",
+      "properties": {
+        "ipMask": {
+          "description": "IP Address in CIDR notation e.g., 10.0.0.0/8.",
+          "type": "string"
+        },
+        "action": {
+          "description": "Action to perform based on the match or no match of the IpMask.",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IpActionType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2350,6 +2871,173 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of the private endpoint connection resource.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The Private Endpoint resource for this Connection."
+        },
+        "groupIds": {
+          "description": "GroupIds from the private link service resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Details about the state of the connection."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Private Endpoint Connection.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "PrivateEndpoint information.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM identifier for Private Endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionState": {
+      "description": "ConnectionState information.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the connection.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PersistedConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Description of the connection state.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "Actions required (if any).",
+          "type": "string"
+        }
+      }
+    },
+    "JsonInputSchemaMappingProperties": {
+      "description": "This can be used to map properties of a source schema (or default values, for certain supported properties) to properties of the EventGridEvent schema.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/JsonField",
+          "description": "The mapping information for the Id property of the Event Grid Event."
+        },
+        "topic": {
+          "$ref": "#/definitions/JsonField",
+          "description": "The mapping information for the Topic property of the Event Grid Event."
+        },
+        "eventTime": {
+          "$ref": "#/definitions/JsonField",
+          "description": "The mapping information for the EventTime property of the Event Grid Event."
+        },
+        "eventType": {
+          "$ref": "#/definitions/JsonFieldWithDefault",
+          "description": "The mapping information for the EventType property of the Event Grid Event."
+        },
+        "subject": {
+          "$ref": "#/definitions/JsonFieldWithDefault",
+          "description": "The mapping information for the Subject property of the Event Grid Event."
+        },
+        "dataVersion": {
+          "$ref": "#/definitions/JsonFieldWithDefault",
+          "description": "The mapping information for the DataVersion property of the Event Grid Event."
+        }
+      }
+    },
+    "JsonField": {
+      "description": "This is used to express the source of an input schema mapping for a single target field in the Event Grid Event schema. This is currently used in the mappings for the 'id', 'topic' and 'eventtime' properties. This represents a field in the input event schema.",
+      "type": "object",
+      "properties": {
+        "sourceField": {
+          "description": "Name of a field in the input event schema that's to be used as the source of a mapping.",
+          "type": "string"
+        }
+      }
+    },
+    "JsonFieldWithDefault": {
+      "description": "This is used to express the source of an input schema mapping for a single target field\r\nin the Event Grid Event schema. This is currently used in the mappings for the 'subject',\r\n'eventtype' and 'dataversion' properties. This represents a field in the input event schema\r\nalong with a default value to be used, and at least one of these two properties should be provided.",
+      "type": "object",
+      "properties": {
+        "sourceField": {
+          "description": "Name of a field in the input event schema that's to be used as the source of a mapping.",
+          "type": "string"
+        },
+        "defaultValue": {
+          "description": "The default value to be used for mapping when a SourceField is not provided or if there's no property with the specified name in the published JSON event payload.",
+          "type": "string"
+        }
+      }
+    },
+    "JsonInputSchemaMapping": {
+      "description": "This enables publishing to Event Grid using a custom input schema. This can be used to map properties from a custom input JSON schema to the Event Grid event schema.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputSchemaMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JsonInputSchemaMappingProperties",
+          "description": "JSON Properties of the input schema mapping",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Json"
+    },
+    "InputSchemaMapping": {
+      "description": "By default, Event Grid expects events to be in the Event Grid event schema. Specifying an input schema mapping enables publishing to Event Grid using a custom input schema. Currently, the only supported type of InputSchemaMapping is 'JsonInputSchemaMapping'.",
+      "required": [
+        "inputSchemaMappingType"
+      ],
+      "type": "object",
+      "properties": {
+        "inputSchemaMappingType": {
+          "description": "Type of the custom mapping",
+          "enum": [
+            "Json"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InputSchemaMappingType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "inputSchemaMappingType"
     },
     "TrackedResource": {
       "description": "Definition of a Tracked Resource.",
@@ -2405,6 +3093,36 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DomainUpdateParameterProperties",
+          "description": "Properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DomainUpdateParameterProperties": {
+      "description": "Information of domain update parameter properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "inboundIpRules": {
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundIpRule"
           }
         }
       }
@@ -2509,7 +3227,7 @@
       }
     },
     "EventSubscriptionProperties": {
-      "description": "Properties of the Event Subscription",
+      "description": "Properties of the Event Subscription.",
       "type": "object",
       "properties": {
         "topic": {
@@ -2555,6 +3273,19 @@
           "description": "Expiration time of the event subscription.",
           "type": "string"
         },
+        "eventDeliverySchema": {
+          "description": "The event delivery schema for the event subscription.",
+          "enum": [
+            "EventGridSchema",
+            "CustomInputSchema",
+            "CloudEventSchemaV1_0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventDeliverySchema",
+            "modelAsString": true
+          }
+        },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
           "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events."
@@ -2570,7 +3301,7 @@
       "type": "object",
       "properties": {
         "subjectBeginsWith": {
-          "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events. \r\nWildcard characters are not supported in this path.",
+          "description": "An optional string to filter events for an event subscription based on a resource path prefix.\r\nThe format of this depends on the publisher of the events.\r\nWildcard characters are not supported in this path.",
           "type": "string"
         },
         "subjectEndsWith": {
@@ -2585,7 +3316,7 @@
           }
         },
         "isSubjectCaseSensitive": {
-          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter \r\nshould be compared in a case sensitive manner.",
+          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
           "default": false,
           "type": "boolean"
         },
@@ -2626,6 +3357,24 @@
           "description": "The base URL that represents the endpoint of the destination of an event subscription.",
           "type": "string",
           "readOnly": true
+        },
+        "maxEventsPerBatch": {
+          "format": "int32",
+          "description": "Maximum number of events per batch.",
+          "type": "integer"
+        },
+        "preferredBatchSizeInKilobytes": {
+          "format": "int32",
+          "description": "Preferred batch size in Kilobytes.",
+          "type": "integer"
+        },
+        "azureActiveDirectoryTenantId": {
+          "description": "The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        },
+        "azureActiveDirectoryApplicationIdOrUri": {
+          "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
         }
       }
     },
@@ -2916,7 +3665,7 @@
       "discriminator": "operatorType"
     },
     "WebHookEventSubscriptionDestination": {
-      "description": "Information about the webhook destination for an event subscription",
+      "description": "Information about the webhook destination for an event subscription.",
       "type": "object",
       "allOf": [
         {
@@ -2926,7 +3675,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WebHookEventSubscriptionDestinationProperties",
-          "description": "WebHook Properties of the event subscription destination",
+          "description": "WebHook Properties of the event subscription destination.",
           "x-ms-client-flatten": true
         }
       },
@@ -2964,7 +3713,7 @@
       }
     },
     "EventHubEventSubscriptionDestination": {
-      "description": "Information about the event hub destination for an event subscription",
+      "description": "Information about the event hub destination for an event subscription.",
       "type": "object",
       "allOf": [
         {
@@ -2974,7 +3723,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EventHubEventSubscriptionDestinationProperties",
-          "description": "Event Hub Properties of the event subscription destination",
+          "description": "Event Hub Properties of the event subscription destination.",
           "x-ms-client-flatten": true
         }
       },
@@ -3005,7 +3754,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageQueueEventSubscriptionDestinationProperties",
-          "description": "Storage Queue Properties of the event subscription destination",
+          "description": "Storage Queue Properties of the event subscription destination.",
           "x-ms-client-flatten": true
         }
       },
@@ -3032,7 +3781,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HybridConnectionEventSubscriptionDestinationProperties",
-          "description": "Hybrid connection Properties of the event subscription destination",
+          "description": "Hybrid connection Properties of the event subscription destination.",
           "x-ms-client-flatten": true
         }
       },
@@ -3049,7 +3798,7 @@
       }
     },
     "ServiceBusQueueEventSubscriptionDestination": {
-      "description": "Information about the service bus destination for an event subscription",
+      "description": "Information about the service bus destination for an event subscription.",
       "type": "object",
       "allOf": [
         {
@@ -3059,27 +3808,93 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceBusQueueEventSubscriptionDestinationProperties",
-          "description": "Service Bus Properties of the event subscription destination",
+          "description": "Service Bus Properties of the event subscription destination.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "ServiceBusQueue"
     },
-    "EventSubscriptionDestination": {
-      "description": "Information about the destination for an event subscription",
+    "ServiceBusTopicEventSubscriptionDestinationProperties": {
+      "description": "The properties that represent the Service Bus Topic destination of an event subscription.",
       "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
+          "type": "string"
+        }
+      }
+    },
+    "ServiceBusTopicEventSubscriptionDestination": {
+      "description": "Information about the service bus topic destination for an event subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventSubscriptionDestination"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceBusTopicEventSubscriptionDestinationProperties",
+          "description": "Service Bus Topic Properties of the event subscription destination.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "ServiceBusTopic"
+    },
+    "AzureFunctionEventSubscriptionDestinationProperties": {
+      "description": "The properties that represent the Azure Function destination of an event subscription.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The Azure Resource Id that represents the endpoint of the Azure Function destination of an event subscription.",
+          "type": "string"
+        },
+        "maxEventsPerBatch": {
+          "format": "int32",
+          "description": "Maximum number of events per batch.",
+          "type": "integer"
+        },
+        "preferredBatchSizeInKilobytes": {
+          "format": "int32",
+          "description": "Preferred batch size in Kilobytes.",
+          "type": "integer"
+        }
+      }
+    },
+    "AzureFunctionEventSubscriptionDestination": {
+      "description": "Information about the azure function destination for an event subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventSubscriptionDestination"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFunctionEventSubscriptionDestinationProperties",
+          "description": "Azure Function Properties of the event subscription destination.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureFunction"
+    },
+    "EventSubscriptionDestination": {
+      "description": "Information about the destination for an event subscription.",
       "required": [
         "endpointType"
       ],
+      "type": "object",
       "properties": {
         "endpointType": {
-          "description": "Type of the endpoint for the event subscription destination",
+          "description": "Type of the endpoint for the event subscription destination.",
           "enum": [
             "WebHook",
             "EventHub",
             "StorageQueue",
             "HybridConnection",
-            "ServiceBusQueue"
+            "ServiceBusQueue",
+            "ServiceBusTopic",
+            "AzureFunction"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3101,13 +3916,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EventSubscriptionProperties",
-          "description": "Properties of the event subscription",
+          "description": "Properties of the event subscription.",
           "x-ms-client-flatten": true
         }
       }
     },
     "EventSubscriptionUpdateParameters": {
-      "description": "Properties of the Event Subscription update",
+      "description": "Properties of the Event Subscription update.",
       "type": "object",
       "properties": {
         "destination": {
@@ -3129,6 +3944,19 @@
           "format": "date-time",
           "description": "Information about the expiration time for the event subscription.",
           "type": "string"
+        },
+        "eventDeliverySchema": {
+          "description": "The event delivery schema for the event subscription.",
+          "enum": [
+            "EventGridSchema",
+            "CustomInputSchema",
+            "CloudEventSchemaV1_0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EventDeliverySchema",
+            "modelAsString": true
+          }
         },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
@@ -3225,10 +4053,96 @@
         }
       }
     },
+    "PrivateEndpointConnectionListResult": {
+      "description": "Result of the list of all private endpoint connections operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of private endpoint connection resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private endpoint connection resources.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "Information of the private link resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of the private link resource.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourcesListResult": {
+      "description": "Result of the List private link resources operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of private link resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private link resources.",
+          "type": "string"
+        }
+      }
+    },
     "TopicProperties": {
       "description": "Properties of the Topic",
       "type": "object",
       "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
         "provisioningState": {
           "description": "Provisioning state of the topic.",
           "enum": [
@@ -3250,6 +4164,48 @@
           "description": "Endpoint for the topic.",
           "type": "string",
           "readOnly": true
+        },
+        "inputSchema": {
+          "description": "This determines the format that Event Grid should expect for incoming events published to the topic.",
+          "enum": [
+            "EventGridSchema",
+            "CustomEventSchema",
+            "CloudEventSchemaV1_0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InputSchema",
+            "modelAsString": true
+          },
+          "default": "EventGridSchema"
+        },
+        "inputSchemaMapping": {
+          "$ref": "#/definitions/InputSchemaMapping",
+          "description": "This enables publishing using custom event schemas. An InputSchemaMapping can be specified to map various properties of a source schema to various required properties of the EventGridEvent schema."
+        },
+        "metricResourceId": {
+          "description": "Metric resource id for the topic.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "inboundIpRules": {
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundIpRule"
+          }
         }
       }
     },
@@ -3264,7 +4220,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TopicProperties",
-          "description": "Properties of the topic",
+          "description": "Properties of the topic.",
           "x-ms-client-flatten": true
         }
       }
@@ -3274,10 +4230,40 @@
       "type": "object",
       "properties": {
         "tags": {
-          "description": "Tags of the resource",
+          "description": "Tags of the resource.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TopicUpdateParameterProperties",
+          "description": "Properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TopicUpdateParameterProperties": {
+      "description": "Information of topic update parameter properties.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicUpdateParameterProperties.InboundIpRules\" />",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "inboundIpRules": {
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundIpRule"
           }
         }
       }
@@ -3440,6 +4426,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "sourceResourceFormat": {
+          "description": "Source resource format.",
+          "type": "string"
         }
       }
     },
