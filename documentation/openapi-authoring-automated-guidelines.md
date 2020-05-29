@@ -2514,7 +2514,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The operation: '{operation name}' is defined with x-ms-pageable enabled,but can not find the corresponding nextLink property in the response, please add it.
 
-**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) When specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
+**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) ,when specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
 
 **CreatedAt**: May 21, 2020
 
