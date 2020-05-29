@@ -2688,6 +2688,15 @@
           },
           "Create a vm with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAVmWithEncryptionAtHost.json"
+          }, 
+          "Create a vm with a patch setting patchMode of AutomaticByOS.": {
+            "$ref": "./examples/CreateAVmWithPatchSettingModeOfAutomaticByOS.json"
+          },
+          "Create a vm with a patch setting patchMode of AutomaticByPlatform.": {
+            "$ref": "./examples/CreateAVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          },
+          "Create a vm with a patch setting patchMode of Manual.": {
+            "$ref": "./examples/CreateAVmWithPatchSettingModeOfManual.json"
           }
         }
       },
@@ -4909,6 +4918,9 @@
             "description": "The input object for ConvertToSinglePlacementGroup API."
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -6206,6 +6218,23 @@
       },
       "description": "Describes the properties of a Compute Operation Value Display."
     },
+    "DisallowedConfiguration": {
+      "properties": {
+        "vmDiskType": {
+          "type": "string",
+          "description": "VM disk types which are disallowed.",
+          "enum": [
+            "None",
+            "Unmanaged"
+          ],
+          "x-ms-enum": {
+            "name": "VmDiskTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies the disallowed configuration for a virtual machine image."
+    },
     "HyperVGenerationType": {
       "type": "string",
       "description": "Specifies the HyperVGeneration Type",
@@ -7134,6 +7163,10 @@
         },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGenerationType"
+        },
+        "disallowed": {
+          "$ref": "#/definitions/DisallowedConfiguration",
+          "description": "Specifies disallowed configuration for the VirtualMachine created from the image"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -7942,6 +7975,10 @@
             "$ref": "#/definitions/AdditionalUnattendContent"
           },
           "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
+        },
+        "patchSettings": {
+          "$ref": "#/definitions/PatchSettings",
+          "description": "Specifies settings related to in-guest patching (KBs)."
         },
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
@@ -11047,6 +11084,23 @@
         "serviceName",
         "action"
       ]
+    },
+    "PatchSettings": {
+      "properties": {
+        "patchMode": {
+          "type": "string",
+          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> ** AutomaticByPlatform** - the virtual machine will automatically updated by the OS. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
+          "enum": [
+            "Manual",
+            "AutomaticByOS",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "InGuestPatchMode",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
