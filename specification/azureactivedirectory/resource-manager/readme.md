@@ -72,6 +72,8 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: privateLinkForAzureAD.json
     where: $.definitions.privateLinkPolicy
+  - suppress: R3020
+  - suppress: R3023
 ```
 
 ---
