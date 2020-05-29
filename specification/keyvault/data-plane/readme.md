@@ -42,6 +42,7 @@ input-file:
 - Microsoft.KeyVault/preview/7.2/secrets.json
 - Microsoft.KeyVault/preview/7.2/storage.json
 - Microsoft.KeyVault/preview/7.2/backuprestore.json
+- Microsoft.KeyVault/preview/7.2/securitydomain.json
 ```
 
 ### Tag: package-7.2-preview
@@ -57,6 +58,7 @@ input-file:
 - Microsoft.KeyVault/preview/7.2/secrets.json
 - Microsoft.KeyVault/preview/7.2/storage.json
 - Microsoft.KeyVault/preview/7.2/backuprestore.json
+- Microsoft.KeyVault/preview/7.2/securitydomain.json
 ```
 
 
@@ -355,4 +357,16 @@ directive:
   - suppress: MISSING_REQUIRED_PARAMETER
     from: storage.json
     reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.TransferKey.properties.transfer_key
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.UploadPendingResponse.properties.status_details
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.status_details
+    reason: Consistency with other properties.
 ```
