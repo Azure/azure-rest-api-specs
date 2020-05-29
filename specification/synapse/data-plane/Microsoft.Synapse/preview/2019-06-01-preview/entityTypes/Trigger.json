@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DevelopmentClient",
+    "title": "ArtifactsClient",
     "version": "2019-06-01-preview"
   },
   "paths": {},
@@ -64,7 +64,7 @@
         "pipelines": {
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/TriggerPipelineReference"
+            "$ref": "../artifacts.json#/definitions/TriggerPipelineReference"
           },
           "description": "Pipelines that need to be started."
         }
@@ -268,7 +268,7 @@
             },
             "linkedService": {
               "description": "The Azure Storage linked service reference.",
-              "$ref": "../development.json#/definitions/LinkedServiceReference"
+              "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
             }
           },
           "required": [
@@ -351,7 +351,7 @@
       ],
       "properties": {
         "pipeline": {
-          "$ref": "../development.json#/definitions/TriggerPipelineReference",
+          "$ref": "../artifacts.json#/definitions/TriggerPipelineReference",
           "description": "Pipeline for which runs are created when an event is fired for trigger window that is ready."
         },
         "typeProperties": {
@@ -604,7 +604,7 @@
       ],
       "properties": {
         "pipeline": {
-          "$ref": "../development.json#/definitions/TriggerPipelineReference",
+          "$ref": "../artifacts.json#/definitions/TriggerPipelineReference",
           "description": "Pipeline for which runs are created when all upstream pipelines complete successfully."
         },
         "typeProperties": {
@@ -614,7 +614,7 @@
             "dependsOn": {
               "type": "array",
               "items": {
-                "$ref": "../development.json#/definitions/PipelineReference"
+                "$ref": "../artifacts.json#/definitions/PipelineReference"
               },
               "description": "Upstream Pipelines."
             },

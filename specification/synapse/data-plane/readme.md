@@ -31,8 +31,8 @@ openapi-type: data-plane
 tag: package-spark-2019-11-01-preview
 ```
 
-``` yaml $(package-development)
-tag: package-development-2019-06-01-preview
+``` yaml $(package-artifacts)
+tag: package-artifacts-2019-06-01-preview
 ```
 
 ``` yaml $(package-access-control)
@@ -52,13 +52,13 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
 ```
 
-### Tag: package-development-2019-06-01-preview
+### Tag: package-artifacts-2019-06-01-preview
 
-These settings apply only when `--tag=package-development-2019-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-artifacts-2019-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-development-2019-06-01-preview'
+``` yaml $(tag) == 'package-artifacts-2019-06-01-preview'
 input-file:
-- Microsoft.Synapse/preview/2019-06-01-preview/development.json
+- Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
 ```
 
 ### Tag: package-access-control-2020-02-01-preview
@@ -124,7 +124,7 @@ csharp:
   clear-output-folder: true
 batch:
   - package-spark: true
-  - package-development: true
+  - package-artifacts: true
   - package-access-control: true
 ```
 
@@ -143,7 +143,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/development.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roles.json

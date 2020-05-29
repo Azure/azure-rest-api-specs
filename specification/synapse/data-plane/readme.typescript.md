@@ -11,6 +11,6 @@ typescript:
   generate-metadata: true
 batch:
   - package-spark: true
-  - package-development: true
+  - package-artifacts: true
   - package-access-control: true
 ```

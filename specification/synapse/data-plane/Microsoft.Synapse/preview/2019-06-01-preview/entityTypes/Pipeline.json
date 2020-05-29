@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DevelopmentClient",
+    "title": "ArtifactsClient",
     "version": "2019-06-01-preview"
   },
   "paths": {},
@@ -22,11 +22,11 @@
           }
         },
         "parameters": {
-          "$ref": "../development.json#/definitions/ParameterDefinitionSpecification",
+          "$ref": "../artifacts.json#/definitions/ParameterDefinitionSpecification",
           "description": "List of parameters for pipeline."
         },
         "variables": {
-          "$ref": "../development.json#/definitions/VariableDefinitionSpecification",
+          "$ref": "../artifacts.json#/definitions/VariableDefinitionSpecification",
           "description": "List of variables for pipeline."
         },
         "concurrency": {
@@ -174,7 +174,7 @@
       "properties": {
         "linkedServiceName": {
           "description": "Linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "policy": {
           "$ref": "#/definitions/ActivityPolicy",
@@ -966,14 +966,14 @@
           "type": "array",
           "description": "List of inputs for the activity.",
           "items": {
-            "$ref": "../development.json#/definitions/DatasetReference"
+            "$ref": "../artifacts.json#/definitions/DatasetReference"
           }
         },
         "outputs": {
           "type": "array",
           "description": "List of outputs for the activity.",
           "items": {
-            "$ref": "../development.json#/definitions/DatasetReference"
+            "$ref": "../artifacts.json#/definitions/DatasetReference"
           }
         }
       },
@@ -2820,7 +2820,7 @@
       "properties": {
         "s3LinkedServiceName": {
           "description": "The name of the Amazon S3 linked service which will be used for the unload operation when copying from the Amazon Redshift source.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "bucketName": {
           "type": "object",
@@ -3362,7 +3362,7 @@
       "properties": {
         "linkedServiceName": {
           "description": "Log storage linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "path": {
           "type": "object",
@@ -3382,7 +3382,7 @@
       "properties": {
         "linkedServiceName": {
           "description": "Staging linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "path": {
           "type": "object",
@@ -3810,7 +3810,7 @@
           "description": "Storage linked service references.",
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/LinkedServiceReference"
+            "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
           }
         },
         "arguments": {
@@ -3831,7 +3831,7 @@
         },
         "scriptLinkedService": {
           "description": "Script linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "defines": {
           "description": "Allows user to specify defines for Hive job request.",
@@ -3894,7 +3894,7 @@
           "description": "Storage linked service references.",
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/LinkedServiceReference"
+            "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
           }
         },
         "arguments": {
@@ -3911,7 +3911,7 @@
         },
         "scriptLinkedService": {
           "description": "Script linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "defines": {
           "description": "Allows user to specify defines for Pig job request.",
@@ -3949,7 +3949,7 @@
           "description": "Storage linked service references.",
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/LinkedServiceReference"
+            "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
           }
         },
         "arguments": {
@@ -3974,7 +3974,7 @@
         },
         "jarLinkedService": {
           "description": "Jar linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "jarLibs": {
           "description": "Jar libs.",
@@ -4024,7 +4024,7 @@
           "description": "Storage linked service references.",
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/LinkedServiceReference"
+            "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
           }
         },
         "arguments": {
@@ -4065,7 +4065,7 @@
         },
         "fileLinkedService": {
           "description": "Linked service reference where the files are located.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "combiner": {
           "type": "object",
@@ -4140,7 +4140,7 @@
         },
         "sparkJobLinkedService": {
           "description": "The storage linked service for uploading the entry file and dependencies, and for receiving logs.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "className": {
           "description": "The application's Java/Spark main class.",
@@ -4208,7 +4208,7 @@
         },
         "connectVia": {
           "description": "The integration runtime reference.",
-          "$ref": "../development.json#/definitions/IntegrationRuntimeReference"
+          "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
         },
         "projectParameters": {
           "description": "The project level parameters to execute the SSIS package.",
@@ -4288,7 +4288,7 @@
       "type": "object",
       "properties": {
         "packagePassword": {
-          "$ref": "../development.json#/definitions/SecretBase",
+          "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "Password of the package."
         },
         "accessCredential": {
@@ -4370,7 +4370,7 @@
           "description": "UseName for windows authentication."
         },
         "password": {
-          "$ref": "../development.json#/definitions/SecureString",
+          "$ref": "../artifacts.json#/definitions/SecureString",
           "description": "Password for windows authentication."
         }
       },
@@ -4393,7 +4393,7 @@
           "description": "UseName for windows authentication."
         },
         "password": {
-          "$ref": "../development.json#/definitions/SecretBase",
+          "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "Password for windows authentication."
         }
       },
@@ -4502,7 +4502,7 @@
         },
         "resourceLinkedService": {
           "description": "Resource linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "folderPath": {
           "type": "object",
@@ -4536,14 +4536,14 @@
           "description": "Linked service references.",
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/LinkedServiceReference"
+            "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
           }
         },
         "datasets": {
           "description": "Dataset references.",
           "type": "array",
           "items": {
-            "$ref": "../development.json#/definitions/DatasetReference"
+            "$ref": "../artifacts.json#/definitions/DatasetReference"
           }
         }
       }
@@ -4611,11 +4611,11 @@
       "properties": {
         "pipeline": {
           "description": "Pipeline reference.",
-          "$ref": "../development.json#/definitions/PipelineReference"
+          "$ref": "../artifacts.json#/definitions/PipelineReference"
         },
         "parameters": {
           "description": "Pipeline parameters.",
-          "$ref": "../development.json#/definitions/ParameterValueSpecification"
+          "$ref": "../artifacts.json#/definitions/ParameterValueSpecification"
         },
         "waitOnCompletion": {
           "description": "Defines whether activity execution will wait for the dependent pipeline execution to finish. Default is false.",
@@ -4667,7 +4667,7 @@
         },
         "dataset": {
           "description": "Delete activity dataset reference.",
-          "$ref": "../development.json#/definitions/DatasetReference"
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
         }
       },
       "required": [
@@ -4737,7 +4737,7 @@
         },
         "dataset": {
           "description": "Lookup activity dataset reference.",
-          "$ref": "../development.json#/definitions/DatasetReference"
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
         },
         "firstRowOnly": {
           "type": "object",
@@ -4791,7 +4791,7 @@
         },
         "pfx": {
           "description": "Base64-encoded contents of a PFX file.",
-          "$ref": "../development.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "username": {
           "description": "Web activity authentication user name for basic authentication.",
@@ -4799,7 +4799,7 @@
         },
         "password": {
           "description": "Password for the PFX file or basic authentication.",
-          "$ref": "../development.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "resource": {
           "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
@@ -4837,19 +4837,19 @@
           "type": "array",
           "description": "List of datasets passed to web endpoint.",
           "items": {
-            "$ref": "../development.json#/definitions/DatasetReference"
+            "$ref": "../artifacts.json#/definitions/DatasetReference"
           }
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services passed to web endpoint.",
           "items": {
-            "$ref": "../development.json#/definitions/LinkedServiceReference"
+            "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
           }
         },
         "connectVia": {
           "description": "The integration runtime reference.",
-          "$ref": "../development.json#/definitions/IntegrationRuntimeReference"
+          "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
         }
       },
       "required": [
@@ -4881,7 +4881,7 @@
       "properties": {
         "dataset": {
           "description": "GetMetadata activity dataset reference.",
-          "$ref": "../development.json#/definitions/DatasetReference"
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
         },
         "fieldList": {
           "description": "Fields of metadata to get from dataset.",
@@ -4920,7 +4920,7 @@
       "properties": {
         "expression": {
           "description": "An expression that would evaluate to Boolean. This is used to determine the block of activities (ifTrueActivities or ifFalseActivities) that will be executed.",
-          "$ref": "../development.json#/definitions/Expression"
+          "$ref": "../artifacts.json#/definitions/Expression"
         },
         "ifTrueActivities": {
           "type": "array",
@@ -4965,7 +4965,7 @@
       "properties": {
         "on": {
           "description": "An expression that would evaluate to a string or integer. This is used to determine the block of activities in cases that will be executed.",
-          "$ref": "../development.json#/definitions/Expression"
+          "$ref": "../artifacts.json#/definitions/Expression"
         },
         "cases": {
           "type": "array",
@@ -5036,7 +5036,7 @@
         },
         "items": {
           "description": "Collection to iterate.",
-          "$ref": "../development.json#/definitions/Expression"
+          "$ref": "../artifacts.json#/definitions/Expression"
         },
         "activities": {
           "type": "array",
@@ -5107,7 +5107,7 @@
         },
         "linkedServiceName": {
           "description": "Reference to an Azure Storage LinkedService, where Azure ML WebService Input/Output file located.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         }
       },
       "required": [
@@ -5143,7 +5143,7 @@
         },
         "trainedModelLinkedServiceName": {
           "description": "Name of Azure Storage linked service holding the .ilearner file that will be uploaded by the update operation.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "trainedModelFilePath": {
           "type": "object",
@@ -5239,7 +5239,7 @@
         },
         "scriptLinkedService": {
           "description": "Script linked service reference.",
-          "$ref": "../development.json#/definitions/LinkedServiceReference"
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         },
         "degreeOfParallelism": {
           "type": "object",
@@ -5326,7 +5326,7 @@
       "properties": {
         "expression": {
           "description": "An expression that would evaluate to Boolean. The loop will continue until this expression evaluates to true",
-          "$ref": "../development.json#/definitions/Expression"
+          "$ref": "../artifacts.json#/definitions/Expression"
         },
         "timeout": {
           "type": "object",
@@ -5385,7 +5385,7 @@
         },
         "dataset": {
           "description": "Validation activity dataset reference.",
-          "$ref": "../development.json#/definitions/DatasetReference"
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
         }
       },
       "required": [
@@ -5416,11 +5416,11 @@
       "properties": {
         "items": {
           "description": "Input array on which filter should be applied.",
-          "$ref": "../development.json#/definitions/Expression"
+          "$ref": "../artifacts.json#/definitions/Expression"
         },
         "condition": {
           "description": "Condition to be used for filtering the input.",
-          "$ref": "../development.json#/definitions/Expression"
+          "$ref": "../artifacts.json#/definitions/Expression"
         }
       },
       "required": [
@@ -5794,15 +5794,15 @@
       "properties": {
         "dataFlow": {
           "description": "Data flow reference.",
-          "$ref": "../development.json#/definitions/DataFlowReference"
+          "$ref": "../artifacts.json#/definitions/DataFlowReference"
         },
         "staging": {
           "description": "Staging info for execute data flow activity.",
-          "$ref": "../development.json#/definitions/DataFlowStagingInfo"
+          "$ref": "../artifacts.json#/definitions/DataFlowStagingInfo"
         },
         "integrationRuntime": {
           "description": "The integration runtime reference.",
-          "$ref": "../development.json#/definitions/IntegrationRuntimeReference"
+          "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
         },
         "compute": {
           "description": "Compute properties for data flow activity.",

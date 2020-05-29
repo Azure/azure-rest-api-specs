@@ -14,7 +14,7 @@ clear-output-folder: true
 credential-scopes: https://dev.azuresynapse.net/.default
 batch:
   - package-spark: true
-  - package-development: true
+  - package-artifacts: true
   - package-access-control: true
 ```
 ``` yaml $(package-spark)
@@ -22,10 +22,10 @@ no-namespace-folders: true
 namespace: azure.synapse.spark
 output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/spark
 ```
-``` yaml $(package-development)
+``` yaml $(package-artifacts)
 no-namespace-folders: true
-namespace: azure.synapse.development
-output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/development
+namespace: azure.synapse.artifacts
+output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/artifacts
 ```
 ``` yaml $(package-access-control)
 no-namespace-folders: true
