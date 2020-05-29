@@ -6,13 +6,21 @@
     "description": "A service for managing and querying digital twins and digital twin models."
   },
   "host": "digitaltwins-name.digitaltwins.azure.net",
-  "schemes": ["https"],
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/models": {
       "post": {
-        "tags": ["Models"],
+        "tags": [
+          "Models"
+        ],
         "description": "Uploads one or more models. When any error occurs, no models are uploaded.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n409 (Conflict): One or more of the provided models already exist.",
         "operationId": "DigitalTwinModels_Add",
         "x-ms-examples": {
@@ -55,7 +63,9 @@
         }
       },
       "get": {
-        "tags": ["Models"],
+        "tags": [
+          "Models"
+        ],
         "description": "Retrieves model metadata and, optionally, model definitions.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -109,7 +119,9 @@
     },
     "/models/{id}": {
       "get": {
-        "tags": ["Models"],
+        "tags": [
+          "Models"
+        ],
         "description": "Retrieves model metadata and optionally the model definition.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no model with the provided id.",
         "operationId": "DigitalTwinModels_GetById",
         "x-ms-examples": {
@@ -147,7 +159,9 @@
         }
       },
       "patch": {
-        "tags": ["Models"],
+        "tags": [
+          "Models"
+        ],
         "description": "Updates the metadata for a model.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no model with the provided id.",
         "operationId": "DigitalTwinModels_Update",
         "consumes": [
@@ -191,7 +205,9 @@
         }
       },
       "delete": {
-        "tags": ["Models"],
+        "tags": [
+          "Models"
+        ],
         "operationId": "DigitalTwinModels_Delete",
         "description": "Deletes a model. A model can only be deleted if no other models reference it.\nStatus codes:\n204 (No Content): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no model with the provided id.\n409 (Conflict): There are dependencies on the model that prevent it from being deleted.",
         "x-ms-examples": {
@@ -222,7 +238,9 @@
     },
     "/query": {
       "post": {
-        "tags": ["Query"],
+        "tags": [
+          "Query"
+        ],
         "operationId": "Query_QueryTwins",
         "description": "Executes a query that allows traversing relationships and filtering by property values.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "x-ms-examples": {
@@ -274,7 +292,9 @@
     },
     "/digitaltwins/{id}": {
       "get": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_GetById",
         "description": "Retrieves a digital twin.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-examples": {
@@ -312,7 +332,9 @@
         }
       },
       "put": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_Add",
         "description": "Adds or replaces a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n412 (Precondition Failed): The model is decommissioned or the digital twin already exists (when using If-None-Match: *).",
         "x-ms-examples": {
@@ -368,7 +390,9 @@
         }
       },
       "delete": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_Delete",
         "description": "Deletes a digital twin. All relationships referencing the digital twin must already be deleted.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-examples": {
@@ -400,7 +424,9 @@
         }
       },
       "patch": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_Update",
         "description": "Updates a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no digital twin with the provided id.",
         "consumes": [
@@ -461,7 +487,9 @@
     },
     "/digitaltwins/{id}/relationships/{relationshipId}": {
       "get": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_GetRelationshipById",
         "description": "Retrieves a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is either no digital twin or relationship with the provided id.",
         "x-ms-examples": {
@@ -502,7 +530,9 @@
         }
       },
       "put": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_AddRelationship",
         "description": "Adds a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin, target digital twin, or relationship with the provided id.\n409 (Conflict): A relationship with the provided id already exists.",
         "x-ms-examples": {
@@ -558,7 +588,9 @@
         }
       },
       "delete": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_DeleteRelationship",
         "description": "Deletes a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is either no digital twin or relationship with the provided id.",
         "x-ms-examples": {
@@ -593,7 +625,9 @@
         }
       },
       "patch": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "consumes": [
           "application/json-patch+json"
         ],
@@ -654,7 +688,9 @@
     },
     "/digitaltwins/{id}/relationships": {
       "get": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_ListRelationships",
         "description": "Retrieves the relationships from a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-pageable": {
@@ -740,7 +776,9 @@
     },
     "/digitaltwins/{id}/telemetry": {
       "post": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_SendTelemetry",
         "description": "Sends telemetry on behalf of a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-examples": {
@@ -791,7 +829,9 @@
     },
     "/digitaltwins/{id}/components/{componentPath}/telemetry": {
       "post": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_SendComponentTelemetry",
         "description": "Sends telemetry on behalf of a component in a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin with the provided id or the component path is invalid.",
         "x-ms-examples": {
@@ -845,7 +885,9 @@
     },
     "/digitaltwins/{id}/components/{componentPath}": {
       "get": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_GetComponent",
         "description": "Retrieves a component from a digital twin.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is either no digital twin with the provided id or the component path is invalid.",
         "x-ms-examples": {
@@ -886,7 +928,9 @@
         }
       },
       "patch": {
-        "tags": ["Twins"],
+        "tags": [
+          "Twins"
+        ],
         "operationId": "DigitalTwins_UpdateComponent",
         "description": "Updates a component on a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin with the provided id or the component path is invalid.",
         "x-ms-examples": {
@@ -950,7 +994,9 @@
     },
     "/eventroutes": {
       "get": {
-        "tags": ["EventRoutes"],
+        "tags": [
+          "EventRoutes"
+        ],
         "description": "Retrieves all event routes.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "operationId": "EventRoutes_List",
         "x-ms-examples": {
@@ -987,7 +1033,9 @@
     },
     "/eventroutes/{id}": {
       "get": {
-        "tags": ["EventRoutes"],
+        "tags": [
+          "EventRoutes"
+        ],
         "description": "Retrieves an event route.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no event route with the provided id.",
         "operationId": "EventRoutes_GetById",
         "x-ms-examples": {
@@ -1019,7 +1067,9 @@
         }
       },
       "put": {
-        "tags": ["EventRoutes"],
+        "tags": [
+          "EventRoutes"
+        ],
         "description": "Adds or replaces an event route.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "operationId": "EventRoutes_Add",
         "x-ms-examples": {
@@ -1059,7 +1109,9 @@
         }
       },
       "delete": {
-        "tags": ["EventRoutes"],
+        "tags": [
+          "EventRoutes"
+        ],
         "description": "Deletes an event route.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no event route with the provided id.",
         "operationId": "EventRoutes_Delete",
         "x-ms-examples": {
@@ -1093,7 +1145,9 @@
     "EventRoute": {
       "description": "A route which directs notification and telemetry events to an endpoint. Endpoints are a destination outside of Azure Digital Twins such as an EventHub.",
       "type": "object",
-      "required": ["endpointName"],
+      "required": [
+        "endpointName"
+      ],
       "properties": {
         "id": {
           "description": "The id of the event route.",
@@ -1153,7 +1207,9 @@
     },
     "ModelData": {
       "description": "A model definition and metadata for that model.",
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "type": "object",
       "properties": {
         "displayName": {
@@ -1390,7 +1446,9 @@
       "description": "The requested API version.",
       "required": true,
       "type": "string",
-      "enum": ["2020-05-31-preview"]
+      "enum": [
+        "2020-05-31-preview"
+      ]
     },
     "max-item-count": {
       "name": "x-ms-max-item-count",
@@ -1411,7 +1469,9 @@
       "description": "Only perform the operation if the entity does not already exist.",
       "required": false,
       "type": "string",
-      "enum": [ "*" ],
+      "enum": [
+        "*"
+      ],
       "x-ms-parameter-location": "method"
     },
     "if-match": {
