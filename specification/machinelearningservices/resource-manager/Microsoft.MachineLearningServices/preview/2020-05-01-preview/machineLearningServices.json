@@ -2726,6 +2726,7 @@
                 "agentCount": {
                   "description": "Number of agents",
                   "type": "integer",
+                  "format": "int32",
                   "minimum": 1
                 },
                 "agentVMSize": {
@@ -2880,7 +2881,8 @@
                 },
                 "sshPort": {
                   "description": "Port open for ssh connections.",
-                  "type": "integer"
+                  "type": "integer",
+                  "format": "int32"
                 },
                 "address": {
                   "description": "Public IP address of the virtual machine.",
@@ -2911,7 +2913,8 @@
               "properties": {
                 "sshPort": {
                   "description": "Port open for ssh connections on the master node of the cluster.",
-                  "type": "integer"
+                  "type": "integer",
+                  "format": "int32"
                 },
                 "address": {
                   "description": "Public IP address of the master node of the cluster.",
@@ -3102,11 +3105,13 @@
       "properties": {
         "maxNodeCount": {
           "description": "Max number of nodes to use",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "minNodeCount": {
           "description": "Min number of nodes to use",
           "type": "integer",
+          "format": "int32",
           "default": 0
         },
         "nodeIdleTimeBeforeScaleDown": {
