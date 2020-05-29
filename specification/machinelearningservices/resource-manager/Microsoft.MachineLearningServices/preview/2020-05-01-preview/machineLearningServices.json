@@ -155,10 +155,7 @@
             }
           },
           "202": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -707,9 +704,6 @@
           },
           "Get a AML Compute": {
             "$ref": "./examples/getAmlCompute.json"
-          },
-          "Get a ComputeInstance": {
-            "$ref": "./examples/getComputeInstance.json"
           }
         },
         "parameters": [
@@ -755,12 +749,6 @@
         "x-ms-examples": {
           "Create a AML Compute": {
             "$ref": "./examples/createBasicAmlCompute.json"
-          },
-          "Create a ComputeInstance Compute with minimal inputs": {
-            "$ref": "./examples/createComputeInstanceMinimal.json"
-          },
-          "Create a ComputeInstance Compute": {
-            "$ref": "./examples/createComputeInstance.json"
           },
           "Create AKS Compute": {
             "$ref": "./examples/createBasicAKSCompute.json"
@@ -1241,19 +1229,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
+      "get": {
         "tags": [
-          "OperationalizationClusters",
-          "MachineLearningComputes"
+          "LinkedWorkspaces"
         ],
-        "operationId": "MachineLearningCompute_Start",
-        "description": "Posts a start action to a compute instance",
         "x-ms-examples": {
-          "Start ComputeInstance Compute": {
-            "$ref": "./examples/startComputeInstance.json"
+          "ListLinkedWorkspaces": {
+            "$ref": "./examples/listLinkedWorkspaces.json"
           }
         },
+        "operationId": "LinkedWorkspaces_List",
+        "description": "List all linked workspaces under a AML workspace.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1265,18 +1252,22 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ComputeNameParameter"
-          },
-          {
             "$ref": "#/parameters/APIVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success."
+            "description": "Successfully retrieved the linked workspaces.",
+            "schema": {
+              "type": "array",
+              "description": "array of linked workspaces.",
+              "items": {
+                "$ref": "#/definitions/LinkedWorkspace"
+              }
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/MachineLearningServiceError"
             }
@@ -1284,17 +1275,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
+      "put": {
         "tags": [
-          "OperationalizationClusters",
-          "MachineLearningComputes"
+          "LinkedWorkspaces"
         ],
-        "operationId": "MachineLearningCompute_Stop",
-        "description": "Posts a stop action to a compute instance",
+        "operationId": "LinkedWorkspaces_Create",
+        "description": "Add a new linked workspace.",
         "x-ms-examples": {
-          "Stop ComputeInstance Compute": {
-            "$ref": "./examples/stopComputeInstance.json"
+          "CreateLinkedWorkspace": {
+            "$ref": "./examples/createLinkedWorkspace.json"
           }
         },
         "parameters": [
@@ -1308,36 +1298,45 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ComputeNameParameter"
+            "$ref": "#/parameters/LinkName"
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for creating or updating a new linked workspace",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspaceDto"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success."
+            "description": "Successfully created the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspace"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart": {
-      "post": {
+      },
+      "get": {
         "tags": [
-          "OperationalizationClusters",
-          "MachineLearningComputes"
+          "LinkedWorkspaces"
         ],
-        "operationId": "MachineLearningCompute_Restart",
-        "description": "Posts a restart action to a compute instance",
+        "operationId": "LinkedWorkspaces_Get",
+        "description": "Get the detail of a linked workspace.",
         "x-ms-examples": {
-          "Restart ComputeInstance Compute": {
-            "$ref": "./examples/restartComputeInstance.json"
+          "GetLinkedWorkspace": {
+            "$ref": "./examples/getLinkedWorkspace.json"
           }
         },
         "parameters": [
@@ -1351,7 +1350,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ComputeNameParameter"
+            "$ref": "#/parameters/LinkName"
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -1359,10 +1358,56 @@
         ],
         "responses": {
           "200": {
-            "description": "Success."
+            "description": "Successfully retrieved the detail of the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspace"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LinkedWorkspaces"
+        ],
+        "operationId": "LinkedWorkspaces_Delete",
+        "description": "Delete a linked workspace.",
+        "x-ms-examples": {
+          "DeleteLinkedWorkspace": {
+            "$ref": "./examples/deleteLinkedWorkspace.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the linked workspace."
+          },
+          "204": {
+            "description": "Specific linked workspace not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/MachineLearningServiceError"
             }
@@ -1700,6 +1745,14 @@
       "description": "The name of the private endpoint connection associated with the workspace",
       "x-ms-parameter-location": "method"
     },
+    "LinkName": {
+      "name": "linkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Friendly name of the linked workspace",
+      "x-ms-parameter-location": "method"
+    },
     "ModelIdParameter": {
       "in": "query",
       "name": "modelId",
@@ -1919,6 +1972,36 @@
           "type": "string",
           "description": "The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace",
           "readOnly": true
+        },
+        "privateLinkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of private connections in the workspace",
+          "readOnly": true
+        },
+        "imageBuildCompute": {
+          "description": "The compute name for image build",
+          "type": "string"
+        },
+        "allowPublicAccessWhenBehindVnet": {
+          "type": "boolean",
+          "description": "The flag to indicate whether to allow public access when behind VNet.",
+          "default": false
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections in the workspace."
+        },
+        "sharedPrivateLinkResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "description": "The list of shared private link resources in this workspace."
         }
       }
     },
@@ -2363,15 +2446,47 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "SystemAssigned, UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentities",
+          "description": "The user assigned identities associated with the resource."
         }
       },
       "description": "Identity for the resource."
+    },
+    "UserAssignedIdentities": {
+      "description": "dictionary containing all the user assigned identities, with resourceId of the UAI as key.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "User Assigned Identity",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of the user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The clientId(aka appId) of the user assigned identity."
+        }
+      }
     },
     "Resource": {
       "description": "Azure Resource Manager resource envelope.",
@@ -2642,8 +2757,8 @@
           "type": "object",
           "properties": {
             "properties": {
-              "description": "AML Compute properties",
               "type": "object",
+              "description": "AML Compute properties",
               "properties": {
                 "vmSize": {
                   "description": "Virtual Machine Size",
@@ -2660,24 +2775,6 @@
                     "name": "VmPriority",
                     "modelAsString": true
                   }
-                },
-                "osType": {
-                  "type": "string",
-                  "description": "OS Type.",
-                  "default": "Linux",
-                  "enum": [
-                    "Linux",
-                    "Windows"
-                  ],
-                  "x-ms-enum": {
-                    "name": "osType",
-                    "modelAsString": true
-                  }
-                },
-                "virtualMachineImage": {
-                  "title": "Custom VM image.",
-                  "description": "The ARM resource identifier of the virtual machine image for the compute nodes. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{gallery name}/images/{image definition name}/versions/{version id}. The virtual machine image must be in the same region and subscription as the cluster.",
-                  "$ref": "#/definitions/ResourceId"
                 },
                 "scaleSettings": {
                   "description": "Scale settings for AML Compute",
@@ -2764,85 +2861,6 @@
         }
       ],
       "x-ms-discriminator-value": "AmlCompute"
-    },
-    "ComputeInstance": {
-      "description": "An Azure Machine Learning compute instance.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Compute Instance properties",
-              "type": "object",
-              "properties": {
-                "vmSize": {
-                  "description": "Virtual Machine Size",
-                  "type": "string"
-                },
-                "subnet": {
-                  "title": "Subnet.",
-                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
-                  "$ref": "#/definitions/ResourceId"
-                },
-                "applicationSharingPolicy": {
-                  "type": "string",
-                  "default": "Shared",
-                  "title": "Sharing policy for applications on this compute instance",
-                  "description": "Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.",
-                  "enum": [
-                    "Personal",
-                    "Shared"
-                  ],
-                  "x-ms-enum": {
-                    "name": "applicationSharingPolicy",
-                    "modelAsString": true
-                  }
-                },
-                "sshSettings": {
-                  "description": "Specifies policy and settings for SSH access.",
-                  "$ref": "#/definitions/ComputeInstanceSshSettings"
-                },
-                "connectivityEndpoints": {
-                  "readOnly": true,
-                  "description": "Describes all connectivity endpoints available for this ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
-                },
-                "applications": {
-                  "type": "array",
-                  "readOnly": true,
-                  "description": "Describes available applications and their endpoints on this ComputeInstance.",
-                  "items": {
-                    "$ref": "#/definitions/ComputeInstanceApplication"
-                  }
-                },
-                "createdBy": {
-                  "readOnly": true,
-                  "description": "Describes information on user who created this ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceCreatedBy"
-                },
-                "errors": {
-                  "readOnly": true,
-                  "title": "Errors.",
-                  "description": "Collection of errors encountered on this ComputeInstance.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/MachineLearningServiceError"
-                  }
-                },
-                "state": {
-                  "description": "The current state of this ComputeInstance.",
-                  "$ref": "#/definitions/ComputeInstanceState",
-                  "readOnly": true
-                }
-              }
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "ComputeInstance"
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -3065,7 +3083,7 @@
         "adminUserSshPublicKey": {
           "type": "string",
           "title": "SSH public key.",
-          "description": "SSH public key of the administrator user account. This property is only supported on Linux based clusters."
+          "description": "SSH public key of the administrator user account."
         },
         "adminUserPassword": {
           "type": "string",
@@ -3367,7 +3385,6 @@
       "enum": [
         "AKS",
         "AmlCompute",
-        "ComputeInstance",
         "DataFactory",
         "VirtualMachine",
         "HDInsight",
@@ -3660,7 +3677,7 @@
           "type": "string",
           "description": "The reason for approval/rejection of the connection."
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
@@ -3673,7 +3690,9 @@
       "enum": [
         "Pending",
         "Approved",
-        "Rejected"
+        "Rejected",
+        "Disconnected",
+        "Timeout"
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
@@ -3747,6 +3766,40 @@
       },
       "description": "Properties of a private link resource."
     },
+    "SharedPrivateLinkResource": {
+      "properties": {
+        "name": {
+          "description": "Unique name of the private link.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperty",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperty": {
+      "properties": {
+        "privateLinkResourceId": {
+          "description": "The resource id that private link links to.",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string"
+        },
+        "requestMessage": {
+          "description": "Request message.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        }
+      },
+      "description": "Properties of a shared private link resource."
+    },
     "EncryptionProperty": {
       "properties": {
         "status": {
@@ -3793,117 +3846,51 @@
       ],
       "type": "object"
     },
-    "ComputeInstanceSshSettings": {
+    "LinkedWorkspace": {
+      "description": "Linked workspace.",
       "type": "object",
-      "description": "Specifies policy and settings for SSH access.",
       "properties": {
-        "sshPublicAccess": {
+        "id": {
           "type": "string",
-          "default": "Disabled",
-          "title": "Access policy for SSH",
-          "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "sshPublicAccess",
-            "modelAsString": true
-          }
+          "description": "ResourceId of the link of the linked workspace."
         },
-        "adminUserName": {
+        "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Describes the admin user name."
+          "description": "Friendly name of the linked workspace."
         },
-        "sshPort": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "Describes the port for connecting through SSH."
-        },
-        "adminPublicKey": {
+        "type": {
           "type": "string",
-          "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
+          "description": "Resource type of linked workspace."
+        },
+        "properties": {
+          "$ref": "#/definitions/LinkedWorkspaceProps"
         }
       }
     },
-    "ComputeInstanceState": {
-      "type": "string",
-      "description": "Current state of a ComputeInstance.",
-      "enum": [
-        "Creating",
-        "CreateFailed",
-        "Deleting",
-        "Running",
-        "Restarting",
-        "RestartFailed",
-        "JobRunning",
-        "SettingUp",
-        "Starting",
-        "StartFailed",
-        "StopFailed",
-        "Stopped",
-        "Stopping",
-        "UserSettingUp",
-        "Unknown",
-        "Unusable"
-      ],
-      "x-ms-enum": {
-        "name": "ComputeInstanceState",
-        "modelAsString": true
-      }
-    },
-    "ComputeInstanceApplication": {
+    "LinkedWorkspaceDto": {
       "type": "object",
-      "description": "Defines an Aml Instance application and its connectivity endpoint URI.",
+      "description": "object used for creating linked workspace.",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Name of the ComputeInstance application."
+        "name": {
+          "description": "Friendly name of the linked workspace",
+          "type": "string"
         },
-        "endpointUri": {
-          "type": "string",
-          "description": "Application' endpoint URI."
+        "properties": {
+          "$ref": "#/definitions/LinkedWorkspaceProps"
         }
       }
     },
-    "ComputeInstanceConnectivityEndpoints": {
+    "LinkedWorkspaceProps": {
       "type": "object",
-      "readOnly": true,
-      "description": "Defines all connectivity endpoints and properties for a ComputeInstance.",
+      "description": "LinkedWorkspace specific properties.",
       "properties": {
-        "publicIpAddress": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Public IP Address of this ComputeInstance."
+        "linkedWorkspaceResourceId": {
+          "description": "ResourceId of the link target of the linked workspace.",
+          "type": "string"
         },
-        "privateIpAddress": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed)."
-        }
-      }
-    },
-    "ComputeInstanceCreatedBy": {
-      "type": "object",
-      "readOnly": true,
-      "description": "Describes information on user who created this ComputeInstance.",
-      "properties": {
-        "userName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the user."
-        },
-        "userOrgId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Uniquely identifies user' Azure Active Directory organization."
-        },
-        "userId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Uniquely identifies the user within his/her organization."
+        "userAssignedIdentityResourceId": {
+          "description": "ResourceId of the user assigned identity for the linked workspace.",
+          "type": "string"
         }
       }
     },
