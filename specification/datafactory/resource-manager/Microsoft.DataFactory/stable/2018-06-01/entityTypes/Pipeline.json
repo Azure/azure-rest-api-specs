@@ -900,6 +900,29 @@
         }
       }
     },
+    "XmlReadSettings": {
+      "description": "Xml read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        },
+        "validationMode": {
+          "type": "object",
+          "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
+        },
+        "namespacePrefixes": {
+          "type": "object",
+          "description": "Namespace uri to prefix mappings to override the prefixes in column names when namespace is enabled, if no prefix is defined for a namespace uri, the prefix of xml element/attribute name in the xml data file will be used. Example: \"{\"http://www.example.com/xml\":\"prefix\"}\" Type: object (or Expression with resultType object)."
+        }
+      }
+    },
     "BinaryReadSettings": {
       "description": "Binary read settings.",
       "type": "object",
@@ -1104,6 +1127,32 @@
         "formatSettings": {
           "$ref": "#/definitions/JsonReadSettings",
           "description": "Json format settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "XmlSource": {
+      "description": "A copy activity Xml source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Xml store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/XmlReadSettings",
+          "description": "Xml format settings."
         },
         "additionalColumns": {
           "type": "array",
