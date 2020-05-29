@@ -30,7 +30,7 @@ tag: package-2018-10
 ```
 
 
-### Tag: package-2018-02
+### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
@@ -67,6 +67,13 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 # Code Generation
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Trenton
+
+See configuration in [readme.trenton.md](./readme.trenton.md)
 
 ## Swagger to SDK
 
