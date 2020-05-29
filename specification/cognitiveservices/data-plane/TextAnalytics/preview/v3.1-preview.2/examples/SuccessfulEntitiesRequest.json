@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "4416 145th Ave NE Bellevue WA - 98007."
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "I work at Microsoft."
+        },
+        {
+          "language": "en",
+          "id": "3",
+          "text": "I visited Space Needle 2 times."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "entities": [
+              { 
+                "offset": 17,     
+                "length": 9,      
+                "text": "4416 145th Ave NE Bellevue WA - 98007",      
+                "category": "Address",      
+                "confidenceScore": 0.9959,      
+                "relations": [      
+                 {      
+                   "type": "has_a",      
+                   "ref": "#/documents/0/entities/1"      
+                 },      
+                 {      
+                  "type": "has_a",      
+                  "ref": "#/documents/0/entities/2"      
+                } 
+               ] 
+              },
+              { 
+                "offset": 10,      
+                "length": 8,     
+                "text": "Bellevue",     
+                "category": "City",    
+                "confidenceScore": 0.9959,   
+                "relations":[]   
+              },   
+              {     
+                "offset": 18,    
+                "length":2,     
+                "text": "WA",     
+                "category": "State",    
+                "confidenceScore": 0.9959,    
+                "relations":[]   
+              } 
+            ],
+            "warnings": []
+          },
+          {
+            "id": "2",
+            "entities": [
+              {
+                "text": "Microsoft",
+                "category": "Organization",
+                "offset": 10,
+                "length": 9,
+                "confidenceScore": 0.99,
+                "relations":[]  
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "3",
+            "entities": [
+              {
+                "text": "Space Needle",
+                "category": "Organization",
+                "offset": 10,
+                "length": 12,
+                "confidenceScore": 0.75,
+                "relations":[]  
+              },
+              {
+                "text": "2",
+                "category": "Quantity",
+                "subcategory": "Number",
+                "offset": 23,
+                "length": 1,
+                "confidenceScore": 0.8,
+                "relations":[]  
+              }
+            ],
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2019-10-01"
+      }
+    }
+  }
+}
