@@ -1442,6 +1442,136 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}": {
+      "put": {
+        "operationId": "HubVirtualNetworkConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionPut": {
+            "$ref": "./examples/HubVirtualNetworkConnectionPut.json"
+          }
+        },
+        "description": "Creates a hub virtual network connection if it doesn't exist else updates the existing one.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the HubVirtualNetworkConnection."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the HubVirtualNetworkConnection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "hubVirtualNetworkConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            },
+            "description": "Parameters supplied to create or update a hub virtual network connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the hub virtual network connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the hub virtual network connection retrieved.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "HubVirtualNetworkConnections_Delete",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionDelete": {
+            "$ref": "./examples/HubVirtualNetworkConnectionDelete.json"
+          }
+        },
+        "description": "Deletes a HubVirtualNetworkConnection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the HubVirtualNetworkConnection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. HubVirtualNetworkConnection deleted."
+          },
+          "202": {
+            "description": "Request received successfully. HubVirtualNetworkConnection deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No HubVirtualNetworkConnection exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
       "get": {
         "operationId": "HubVirtualNetworkConnections_Get",
         "x-ms-examples": {
@@ -4638,13 +4768,6 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The securityPartnerProvider associated with this VirtualHub."
         },
-        "virtualNetworkConnections": {
-          "type": "array",
-          "description": "List of all vnet connections with this VirtualHub.",
-          "items": {
-            "$ref": "#/definitions/HubVirtualNetworkConnection"
-          }
-        },
         "addressPrefix": {
           "type": "string",
           "description": "Address-prefix for this VirtualHub."
@@ -5221,11 +5344,11 @@
         },
         "allowHubToRemoteVnetTransit": {
           "type": "boolean",
-          "description": "VirtualHub to RemoteVnet transit to enabled or not."
+          "description": "Deprecated: VirtualHub to RemoteVnet transit to enabled or not."
         },
         "allowRemoteVnetToUseHubVnetGateways": {
           "type": "boolean",
-          "description": "Allow RemoteVnet to use Virtual Hub's gateways."
+          "description": "Deprecated: Allow RemoteVnet to use Virtual Hub's gateways."
         },
         "enableInternetSecurity": {
           "type": "boolean",
