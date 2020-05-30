@@ -74,6 +74,12 @@ batch:
   - multiapiscript: true
 ```
 
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
+clear-output-folder: false
+perform-load: false
+```
+
 ### Tag: package-2019-10-17-preview-only and python
 
 These settings apply only when `--tag=package-2019-10-17-preview-only --python` is specified on the command line.
