@@ -4419,8 +4419,49 @@
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
           "description": "Git repo information of the factory."
+        },
+        "globalParameters": {
+          "$ref": "#/definitions/GlobalParameterDefinitionSpecification",
+          "description": "List of parameters for factory."
         }
       }
+    },
+    "GlobalParameterDefinitionSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/GlobalParameterSpecification"
+      }
+    },
+    "GlobalParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Global Parameter type.",
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "GlobalParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "object",
+          "description": "Value of parameter."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
     },
     "PipelineResource": {
       "description": "Pipeline resource type.",
