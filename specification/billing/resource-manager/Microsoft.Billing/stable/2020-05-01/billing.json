@@ -490,6 +490,52 @@
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}": {
+      "delete": {
+
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "BillingProfile": {
+            "$ref": "./examples/DeleteBillingProfile.json"
+          }
+        },
+        "operationId": "BillingProfiles_Delete",
+        "description": "Deletes a billing profile by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {},
+            "schema": {
+              "$ref": "#/definitions/CanonicalSupportPlanResponseEnvelope"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "BillingProfiles"
@@ -1280,6 +1326,13 @@
           },
           {
             "$ref": "#/parameters/invoiceNameParameter"
+          },
+          {
+            "name": "downloadToken",
+            "description": "Download token with document source and document ID.",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
