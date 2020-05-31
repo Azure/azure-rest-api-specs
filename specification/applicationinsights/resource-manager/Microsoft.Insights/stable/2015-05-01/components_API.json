@@ -504,6 +504,20 @@
         "ImmediatePurgeDataOn30Days": {
           "type": "boolean",
           "description": "Purge data immediately after 30 days."
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "ApplicationInsights",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDignosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
