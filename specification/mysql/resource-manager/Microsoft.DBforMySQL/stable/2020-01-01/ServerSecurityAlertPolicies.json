@@ -96,6 +96,15 @@
             }
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "description": "The server security alert policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -176,14 +185,14 @@
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.",
+          "description": "Specifies the state of the policy, whether it is enabled or disabled.",
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SecurityAlertsPolicyState",
+            "name": "ServerSecurityAlertPolicyState",
             "modelAsString": false
           }
         },
