@@ -100,7 +100,27 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the provisioning state of the Just-in-Time policy."
+          "description": "Gets the provisioning state of the Just-in-Time policy.",
+          "enum": [
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Failed"
+              },
+              {
+                "value": "Succeeded"
+              },
+              {
+                "value": "Updating"
+              }
+            ]
+          }
         }
       },
       "required": [

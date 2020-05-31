@@ -170,6 +170,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/jitPolicies/jitTypes.json#/definitions/JitNetworkAccessPolicy"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -276,11 +282,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "./common/jitPolicies/jitTypes.json#/definitions/JitNetworkAccessRequest"
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
