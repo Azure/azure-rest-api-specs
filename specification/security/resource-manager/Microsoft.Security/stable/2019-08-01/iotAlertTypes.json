@@ -15,11 +15,13 @@
   "produces": [
     "application/json"
   ],
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -41,7 +43,8 @@
         },
         "operationId": "IotAlertTypes_Get",
         "description": "Get IoT alert type",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -66,16 +69,16 @@
             "description": "IoT alert type",
             "schema": {
               "$ref": "#/definitions/IotAlertType"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         }
+      }
     }
   },
   "definitions": {
@@ -89,9 +92,11 @@
           "$ref": "#/definitions/IotAlertTypeProperties"
         }
       },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "IotAlertTypeProperties": {
       "type": "object",
@@ -117,7 +122,8 @@
           "x-ms-enum": {
             "name": "alertSeverity",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "Informational"
               },
               {
@@ -176,7 +182,8 @@
           "x-ms-enum": {
             "name": "alertIntent",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "Unknown"
               },
               {
