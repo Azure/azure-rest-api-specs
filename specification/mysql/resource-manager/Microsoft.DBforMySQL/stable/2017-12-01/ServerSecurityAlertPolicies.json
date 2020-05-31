@@ -59,7 +59,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
+            "description": "Error response describing why the operation of getting security alert policies failed."
           }
         },
         "x-ms-examples": {
@@ -84,7 +84,7 @@
           {
             "name": "securityAlertPolicyName",
             "in": "path",
-            "description": "The name of the security alert policy.",
+            "description": "The name of the threat detection policy.",
             "required": true,
             "type": "string",
             "enum": [
@@ -119,7 +119,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later"
+            "description": "Error response describing why the operation of setting security alert policies failed."
           },
           "202": {
             "description": "Created request to set the server threat detection policy."
@@ -214,6 +214,17 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAlertPolicyNameParameter": {
+      "name": "securityAlertPolicyName",
+      "in": "path",
+      "description": "The name of the security alert policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     }
   },
