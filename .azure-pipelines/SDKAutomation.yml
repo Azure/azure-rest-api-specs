@@ -23,6 +23,7 @@ jobs:
       BLOB_STORAGE_PREFIX: sdkautomation-pipeline
       SPEC_REPO: $(Build.Repository.Name)
       PR_NUMBER: $(System.PullRequest.PullRequestNumber)
+      BUILD_ID: $(Build.BuildId)
   strategy:
     matrix:
       Net:
@@ -69,6 +70,8 @@ jobs:
         -e SPEC_REPO \
         -e PR_NUMBER \
         -e SDK_REPO_NAME \
+        -e AZURE_DEVOPS_EXT_PAT \
+        -e BUILD_ID \
         sdk-automation:latest npm start
     env:
       BLOB_STORAGE_NAME: $(blob-storage-name)
@@ -76,4 +79,5 @@ jobs:
       GITHUB_COMMENT_AUTHOR_NAME: $(github-comment-author-name)
       GITHUBAPP_ID: $(githubapp-id)
       GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
+      AZURE_DEVOPS_EXT_PAT: $(azure-devops-ext-pat)
     displayName: SDK Automation

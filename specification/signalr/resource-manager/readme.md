@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10-01
+tag: package-2020-05-01
 ```
 
 ### Suppression
@@ -41,10 +41,27 @@ directive:
     from: signalr.json
     where: $.definitions.Dimension.properties.toBeExportedForShoebox
     reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics.
-  - suppress: PutRequestResponseScheme
+  - suppress: EnumInsteadOfBoolean
     from: signalr.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}"].put
-    reason:  The schema of the PUT request body is a superset of the GET response body, we have a PATCH operation to make the resource updatable
+    where: $.definitions.Operation.properties.isDataAction
+    reason:  The boolean properties 'isDataAction' is a standard property for Azuer Operatoins.
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: AvoidNestedProperties
+    from: signalr.json
+    where:
+    - $.definitions.SignalRFeature.properties.properties
+    - $.definitions.PrivateEndpointConnection.properties.properties
+    reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
+```
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.SignalRService/stable/2020-05-01/signalr.json
 ```
 
 ### Tag: package-2018-10-01
@@ -123,6 +140,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.SignalRService/stable/2020-05-01/signalr.json
   - $(this-folder)/Microsoft.SignalRService/stable/2018-10-01/signalr.json
   - $(this-folder)/Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json
 
