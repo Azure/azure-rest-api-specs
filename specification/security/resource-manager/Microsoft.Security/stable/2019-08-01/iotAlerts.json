@@ -223,6 +223,19 @@
           "type": "string",
           "example": "2020-05-13T06:32:25Z"
         },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": [
+            {
+              "$id": "1",
+              "CommandLine": "docker run --privileged",
+              "Type": "process"
+            }
+          ]
+        },
         "extendedProperties": {
           "type": "object",
           "description": "A bag of fields which extends the alert information",
