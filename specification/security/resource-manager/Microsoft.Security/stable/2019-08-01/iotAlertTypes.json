@@ -32,47 +32,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/iotAlertTypes": {
-      "get": {
-        "x-ms-examples": {
-          "Get IoT Alert Types": {
-            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTAlertTypeList.json"
-          }
-        },
-        "tags": [
-          "IoT Security Solution Analytics"
-        ],
-        "description": "List IoT alert types",
-        "operationId": "IotAlertTypes_List",
-        "parameters": [{
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SolutionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/IotAlertTypeList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/iotAlertTypes/{iotAlertTypeName}": {
       "get": {
         "x-ms-examples": {
@@ -120,19 +79,6 @@
     }
   },
   "definitions": {
-    "IotAlertTypeList": {
-      "type": "object",
-      "description": "List of alert types",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List data",
-          "items": {
-            "$ref": "#/definitions/IotAlertType"
-          }
-        }
-      }
-    },
     "IotAlertType": {
       "type": "object",
       "description": "IoT alert type.",
