@@ -81,6 +81,13 @@
           },
           {
             "in": "query",
+            "name": "$limit",
+            "required": false,
+            "type": "string",
+            "description": "Limit the number of items returned in a single page"
+          },
+          {
+            "in": "query",
             "name": "$skipToken",
             "required": false,
             "type": "string",
@@ -91,7 +98,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotAlertPropertiesList"
+              "$ref": "#/definitions/IotAlertList"
             }
           },
           "default": {
@@ -139,7 +146,7 @@
           "200": {
             "description": "IoT alert",
             "schema": {
-              "$ref": "#/definitions/IotAlertProperties"
+              "$ref": "#/definitions/IotAlert"
             }
           },
           "default": {
@@ -153,8 +160,8 @@
     }
   },
   "definitions": {
-    "IotAlertPropertiesList": {
-      "description": "List of alerts",
+    "IotAlertList": {
+      "description": "List of IoT alerts",
       "type": "object",
       "properties": {
         "value": {
@@ -162,13 +169,22 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotAlertProperties"
+            "$ref": "#/definitions/IotAlert"
           }
         },
         "nextLink": {
           "readOnly": true,
           "type": "string",
           "description": "When available, follow the URI to get the next page of data"
+        }
+      }
+    },
+    "IotAlert": {
+      "type": "object",
+      "description": "IoT alert",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IotAlertProperties"
         }
       }
     },
