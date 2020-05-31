@@ -83,7 +83,7 @@
             "in": "query",
             "name": "$limit",
             "required": false,
-            "type": "string",
+            "type": "integer",
             "description": "Limit the number of items returned in a single page"
           },
           {
@@ -222,18 +222,16 @@
           "type": "string",
           "example": "2020-05-13T06:32:25Z"
         },
-        "entities": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "example": [
-            {
-              "$id": "1",
-              "CommandLine": "docker run --privileged",
-              "Type": "process"
-            }
-          ]
+        "extendedProperties": {
+          "type": "object",
+          "description": "A bag of fields which extends the alert information",
+          "example": {
+            "CommandLine": "docker run --privileged",
+            "User Name": "aUser",
+            "UserId": "",
+            "ParentProcessId": 1593,
+            "DeviceId": "device-1"
+          }
         }
       }
     }
