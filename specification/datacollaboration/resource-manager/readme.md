@@ -1,14 +1,14 @@
-# Ci
+# DataCollaboration
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Ci.
+This is the AutoRest configuration file for DataCollaboration.
 
 
 
 ---
 ## Getting Started 
-To build the SDK for Ci, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for DataCollaboration, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the Ci API.
+These are the global settings for the DataCollaboration API.
 
 ``` yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-05-04-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-05-04-preview'
 input-file:
-- Microsoft.Ci/preview/2020-05-04-preview/datacollaboration.json
+- Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
 ```
 
 ---
@@ -64,8 +64,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Ci
-  output-folder: $(csharp-sdks-folder)/ci/Microsoft.Azure.Management.Ci/src/Generated
+  namespace: Microsoft.Azure.Management.DataCollaboration
+  output-folder: $(csharp-sdks-folder)/datacollaboration/Microsoft.Azure.Management.DataCollaboration/src/Generated
   clear-output-folder: true
 ```
 
@@ -81,19 +81,19 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.ci
-  package-name: azure-mgmt-ci
+  namespace: azure.mgmt.datacollaboration
+  package-name: azure-mgmt-datacollaboration
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/ci/azure-mgmt-ci/azure/mgmt/ci
+  output-folder: $(python-sdks-folder)/datacollaboration/azure-mgmt-datacollaboration/azure/mgmt/datacollaboration
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/ci/azure-mgmt-ci
+  output-folder: $(python-sdks-folder)/datacollaboration/azure-mgmt-datacollaboration
 ```
 
 
@@ -113,7 +113,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Ci/preview/2020-05-04-preview/datacollaboration.json
+  - $(this-folder)/Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
 
 ```
 
