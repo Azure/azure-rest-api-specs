@@ -503,21 +503,21 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDetachPaymentInstrumentEligibility": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDetachPaymentMethodEligibility": {
       "get": {
         "tags": [
           "BillingProfiles"
         ],
         "x-ms-examples": {
-          "ValidateDetachPaymentInstrumentEligibilitySuccess": {
-            "$ref": "./examples/ValidateDetachPaymentInstrumentEligibilitySuccess.json"
+          "ValidateDetachPaymentMethodEligibilitySuccess": {
+            "$ref": "./examples/ValidateDetachPaymentMethodEligibilitySuccess.json"
           },
-          "ValidateDetachPaymentInstrumentEligibilityFailure": {
-            "$ref": "./examples/ValidateDetachPaymentInstrumentEligibilityFailure.json"
+          "ValidateDetachPaymentMethodEligibilityFailure": {
+            "$ref": "./examples/ValidateDetachPaymentMethodEligibilityFailure.json"
           }
         },
-        "operationId": "BillingProfiles_GetValidateDetachPaymentInstrumentEligibility",
-        "description": "Validates if the default payment instrument can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "operationId": "BillingProfiles_GetEligibilityToDetachPaymentMethod",
+        "description": "Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "parameters": [          
           {
             "$ref": "#/parameters/billingAccountNameParameter"
@@ -533,7 +533,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DetachPaymentInstrumentEligibilityResult"
+              "$ref": "#/definitions/DetachPaymentMethodEligibilityResult"
             }
           },
           "default": {
@@ -5212,42 +5212,42 @@
         }
       }
     },        
-    "DetachPaymentInstrumentEligibilityResult": {
+    "DetachPaymentMethodEligibilityResult": {
       "type": "object",
-      "description": "Result of the detach payment instrument eligibility validation.",
+      "description": "Result of the detach payment method eligibility validation.",
       "properties": {
         "isEligible": {
-          "description": "Specifies whether the payment instrument is eligible to be detached from the billing profile.",
+          "description": "Specifies whether the payment method is eligible to be detached from the billing profile.",
           "type": "boolean",
           "readOnly": true
         },
         "errorDetails": {
-          "description": "The list of detach payment instrument eligibility errors.",
+          "description": "The list of detach payment method eligibility errors.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/DetachPaymentInstrumentErrorDetails"
+            "$ref": "#/definitions/DetachPaymentMethodErrorDetails"
           }
         }
       }
     },
-    "DetachPaymentInstrumentErrorDetails": {
+    "DetachPaymentMethodErrorDetails": {
       "type": "object",
-      "description": "Error details of the detach payment instrument eligibility validation.",
+      "description": "Error details of the detach payment method eligibility validation.",
       "properties": {
         "code": {
-          "description": "Error code for the detach payment instrument eligibility validation.",
-          "$ref": "#/definitions/DetachPaymentInstrumentEligibilityErrorCode"
+          "description": "Error code for the detach payment method eligibility validation.",
+          "$ref": "#/definitions/DetachPaymentMethodEligibilityErrorCode"
         },
         "message": {
-          "description": "Error message for the detach payment instrument eligibility validation.",
+          "description": "Error message for the detach payment method eligibility validation.",
           "type": "string"
         }
       }
     },
-    "DetachPaymentInstrumentEligibilityErrorCode": {
+    "DetachPaymentMethodEligibilityErrorCode": {
       "type": "string",
-      "description": "Error code of the detach payment instrument eligibility validation response.",
+      "description": "Error code of the detach payment method eligibility validation response.",
       "enum": [
         "AzureSubscriptions",
         "RecurringCharges",
@@ -5256,7 +5256,7 @@
         "PendingCharges"
       ],
       "x-ms-enum": {
-        "name": "detachPaymentInstrumentEligibilityErrorCode",
+        "name": "detachPaymentMethodEligibilityErrorCode",
         "modelAsString": true
       }
     },
