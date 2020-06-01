@@ -202,13 +202,13 @@
           "200": {
             "description": "A successful call results in a list of recognized entities returned for each valid document",
             "schema": {
-              "$ref": "#/definitions/EntitiesBatchResult"
+              "$ref": "#/definitions/EntitiesBatchResultV2dot1"
             }
           },
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/EntitiesErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -323,36 +323,6 @@
       }
     },
     "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InternalError"
-        }
-      }
-    },
-    "EntitiesErrorRecord": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Input document unique identifier the error refers to.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        }
-      }
-    },
-    "EntitiesErrorResponse": {
       "type": "object",
       "properties": {
         "code": {
@@ -516,97 +486,97 @@
         }
       }
     },
-    "EntitiesBatchResult": {
+    "EntitiesBatchResultV2dot1": {
       "type": "object",
       "properties": {
-        "Documents": {
+        "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntitiesBatchResultItem"
+            "$ref": "#/definitions/EntitiesBatchResultItemV2dot1"
           },
           "readOnly": true
         },
-        "Errors": {
+        "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntitiesErrorRecord"
+            "$ref": "#/definitions/ErrorRecord"
           },
           "readOnly": true
         }
       }
     },
-    "EntitiesBatchResultItem": {
+    "EntitiesBatchResultItemV2dot1": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "description": "Unique document identifier.",
           "type": "string",
           "readOnly": true
         },
-        "Entities": {
+        "entities": {
           "description": "Recognized entities in the document.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntityRecord"
+            "$ref": "#/definitions/EntityRecordV2dot1"
           },
           "readOnly": true
         }
       }
     },
-    "EntityRecord": {
+    "EntityRecordV2dot1": {
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "description": "Entity formal name.",
           "type": "string"
         },
-        "Matches": {
+        "matches": {
           "description": "List of instances this entity appears in the text.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MatchRecord"
+            "$ref": "#/definitions/MatchRecordV2dot1"
           }
         },
-        "WikipediaLanguage": {
+        "wikipediaLanguage": {
           "description": "Wikipedia language for which the WikipediaId and WikipediaUrl refers to.",
           "type": "string"
         },
-        "WikipediaId": {
+        "wikipediaId": {
           "description": "Wikipedia unique identifier of the recognized entity.",
           "type": "string"
         },
-        "WikipediaUrl": {
+        "wikipediaUrl": {
           "description": "URL for the entity's English Wikipedia page.",
           "type": "string",
           "readOnly": true
         },
-        "BingId": {
+        "bingId": {
           "description": "Bing unique identifier of the recognized entity. Use in conjunction with the Bing Entity Search API to fetch additional relevant information.",
           "type": "string"
         },
-        "Type": {
+        "type": {
           "description": "Entity type from Named Entity Recognition model",
           "type": "string"
         },
-        "SubType": {
+        "subType": {
           "description": "Entity sub type from Named Entity Recognition model",
           "type": "string"
         }
       }
     },
-    "MatchRecord": {
+    "MatchRecordV2dot1": {
       "type": "object",
       "properties": {
-        "Text": {
+        "text": {
           "description": "Entity text as appears in the request.",
           "type": "string"
         },
-        "Offset": {
+        "offset": {
           "format": "int32",
           "description": "Start position (in Unicode characters) for the entity match text.",
           "type": "integer"
         },
-        "Length": {
+        "length": {
           "format": "int32",
           "description": "Length (in Unicode characters) for the entity match text.",
           "type": "integer"
