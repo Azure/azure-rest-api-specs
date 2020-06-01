@@ -2686,6 +2686,9 @@
           "Create a vm with ephemeral os disk provisioning in Cache disk using placement property.": {
             "$ref": "./examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsCacheDisk.json"
           },
+          "Create a vm with Host Encryption using encryptionAtHost property.": {
+            "$ref": "./examples/CreateAVmWithEncryptionAtHost.json"
+          },
           "Create a vm with a patch setting patchMode of AutomaticByOS.": {
             "$ref": "./examples/CreateAVmWithPatchSettingModeOfAutomaticByOS.json"
           },
@@ -3594,6 +3597,9 @@
           },
           "Create a scale set with ephemeral os disks using placement property.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDiskUsingDiffDiskPlacement.json"
+          },
+          "Create a scale set with Host Encryption using encryptionAtHost property.": {
+            "$ref": "./examples/CreateAScaleSetWithEncryptionAtHost.json"
           }
         }
       },
@@ -7855,6 +7861,15 @@
       },
       "description": "Specifies the storage settings for the virtual machine disks."
     },
+    "SecurityProfile": {
+      "properties": {
+        "encryptionAtHost": {
+          "type": "boolean",
+          "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. <br><br> Default: The Encryption at host will be disabled unless this property is set to true for the resource."
+        }
+      },
+      "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
+    },
     "AdditionalCapabilities": {
       "properties": {
         "ultraSSDEnabled": {
@@ -8467,6 +8482,10 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machine."
         },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
@@ -9770,6 +9789,10 @@
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
           "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
         },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machines in the scale set."
+        },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
           "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
@@ -9814,6 +9837,10 @@
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkProfile",
           "description": "The virtual machine scale set network profile."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "The virtual machine scale set Security profile"
         },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
@@ -10443,6 +10470,10 @@
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machine."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
