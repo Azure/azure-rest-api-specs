@@ -65,6 +65,9 @@
           },
           "Create cluster with TLS 1.2": {
             "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with network isolation options: RP private network access only": {
+            "$ref": "./examples/CreateClusterWithRPPrivateNetworkAccessOnlyEnabled.json"
           }
         },
         "parameters": [
@@ -924,6 +927,15 @@
       },
       "description": "The storage profile."
     },
+    "NetworkIsolationOptions": {
+      "description": "The network isolation options.",
+      "properties": {
+        "resourceProviderPrivateNetworkAccessOnly": {
+          "type": "boolean",
+          "description": "Indicates whether Azure HDInsight services should access the cluster over private network only."
+        }
+      }
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -982,6 +994,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkIsolationOptions": {
+          "$ref": "#/definitions/NetworkIsolationOptions",
+          "description": "The network isolation options."
         }
       }
     },
@@ -1162,6 +1178,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkIsolationOptions": {
+          "$ref": "#/definitions/NetworkIsolationOptions",
+          "description": "The network isolation options."
         }
       },
       "required": [
