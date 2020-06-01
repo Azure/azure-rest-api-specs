@@ -395,7 +395,7 @@
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
-          "204":{
+          "204": {
             "description": "NoContent"
           },
           "default": {
@@ -959,17 +959,17 @@
         "name": {
           "type": "string",
           "description": "Name of the virtual network peering resource",
-          "readOnly":true
+          "readOnly": true
         },
         "id": {
           "type": "string",
           "description": "Resource ID.",
-          "readOnly":true
+          "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "type of the virtual network peering resource",
-          "readOnly":true
+          "readOnly": true
         }
       },
       "description": "Peerings in a VirtualNetwork resource",
@@ -994,24 +994,26 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "databricksVirtualNetwork": {
-          "properties":{
+          "properties": {
             "id": {
               "type": "string",
-              "description": "The Id of the databricks virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
-            }          
-          }         
+              "description": "The Id of the databricks virtual network."
+            }
+          },
+          "description": " The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
         },
         "databricksAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
           "description": "The reference to the databricks virtual network address space."
         },
         "remoteVirtualNetwork": {
-          "properties":{
+          "properties": {
             "id": {
               "type": "string",
-              "description": "The Id of the remote virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
-            }          
-          }
+              "description": "The Id of the remote virtual network."
+            }
+          },
+          "description": " The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
         },
         "remoteAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
