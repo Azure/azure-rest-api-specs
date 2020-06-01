@@ -1,19 +1,19 @@
 {
   "parameters": {
     "deploymentName": "tenant-dep01",
-    "api-version": "2019-10-01",
+    "api-version": "2020-06-01",
     "parameters": {
       "location": "eastus",
       "properties": {
         "templateLink": {
-          "uri": "{templateUri}"
+          "uri": "https://example.com/exampleTemplate.json"
         },
         "parameters": {},
         "mode": "Incremental"
       },
       "tags": {
-        "tagKey1": "tagValue1",
-        "tagKey2": "tagValue2"
+        "tagKey1": "tag-value-1",
+        "tagKey2": "tag-value-2"
       }
     }
   },
@@ -30,7 +30,7 @@
           "provisioningState": "Accepted",
           "timestamp": "2019-04-24T22:52:38.7895563Z",
           "duration": "PT1.2970875S",
-          "correlationId": "{correlationId}",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
           "providers": [
             {
               "namespace": "Microsoft.Authorization",
@@ -65,9 +65,9 @@
             {
               "dependsOn": [
                 {
-                  "id": "/providers/Microsoft.Authorization/policyDefinitions/policy2",
+                  "id": "/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
                   "resourceType": "Microsoft.Authorization/policyDefinitions",
-                  "resourceName": "policy2"
+                  "resourceName": "policy-definition-name"
                 }
               ],
               "id": "/providers/Microsoft.Authorization/policyAssignments/location-lock",
@@ -77,8 +77,8 @@
           ]
         },
         "tags": {
-          "tagKey1": "tagValue1",
-          "tagKey2": "tagValue2"
+          "tagKey1": "tag-value-1",
+          "tagKey2": "tag-value-2"
         }
       }
     },
@@ -94,7 +94,7 @@
           "provisioningState": "Accepted",
           "timestamp": "2019-04-24T22:52:38.7895563Z",
           "duration": "PT1.2970875S",
-          "correlationId": "{correlationId}",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
           "providers": [
             {
               "namespace": "Microsoft.Authorization",
@@ -129,9 +129,9 @@
             {
               "dependsOn": [
                 {
-                  "id": "/providers/Microsoft.Authorization/policyDefinitions/policy2",
+                  "id": "/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
                   "resourceType": "Microsoft.Authorization/policyDefinitions",
-                  "resourceName": "policy2"
+                  "resourceName": "policy-definition-name"
                 }
               ],
               "id": "/providers/Microsoft.Authorization/policyAssignments/location-lock",
@@ -141,8 +141,8 @@
           ]
         },
         "tags": {
-          "tagKey1": "tagValue1",
-          "tagKey2": "tagValue2"
+          "tagKey1": "tag-value-1",
+          "tagKey2": "tag-value-2"
         }
       }
     }

@@ -1,19 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "myResourceGroup",
-    "deploymentName": "exampleDeploymentName",
-    "api-version": "2019-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "deploymentName": "my-deployment",
+    "api-version": "2020-06-01",
     "parameters": {
       "properties": {
         "templateLink": {
-          "uri": "{templateUri}"
+          "uri": "https://example.com/exampleTemplate.json"
         },
         "parameters": {},
         "mode": "Complete",
         "onErrorDeployment": {
           "type": "SpecificDeployment",
-          "deploymentName": "{nameOfDeploymentToUse}"
+          "deploymentName": "name-of-deployment-to-use"
         }
       }
     }
@@ -21,12 +21,12 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName",
-        "name": "exampleDeploymentName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
         "type": "Microsoft.Resources/deployments",
         "properties": {
           "templateLink": {
-            "uri": "{templateUri}",
+            "uri": "https://example.com/exampleTemplate.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {},
@@ -34,7 +34,7 @@
           "provisioningState": "Accepted",
           "timestamp": "2019-03-01T00:00:00.0000000Z",
           "duration": "PT0.8204881S",
-          "correlationId": "{correlationId}",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
           "providers": [
             {
               "namespace": "Microsoft.Network",
@@ -87,19 +87,19 @@
           ],
           "onErrorDeployment": {
             "type": "SpecificDeployment",
-            "deploymentName": "{nameOfDeploymentToUse}"
+            "deploymentName": "name-of-deployment-to-use"
           }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName",
-        "name": "exampleDeploymentName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
         "type": "Microsoft.Resources/deployments",
         "properties": {
           "templateLink": {
-            "uri": "{templateUri}",
+            "uri": "https://example.com/exampleTemplate.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {},
@@ -107,7 +107,7 @@
           "provisioningState": "Accepted",
           "timestamp": "2019-03-01T00:00:00.0000000Z",
           "duration": "PT0.8204881S",
-          "correlationId": "{correlationId}",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
           "providers": [
             {
               "namespace": "Microsoft.Network",
@@ -160,7 +160,7 @@
           ],
           "onErrorDeployment": {
             "type": "SpecificDeployment",
-            "deploymentName": "{nameOfDeploymentToUse}"
+            "deploymentName": "name-of-deployment-to-use"
           }
         }
       }
