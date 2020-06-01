@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "deviceName": "TestDevice"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestDevice",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/devices/TestDevice",
+        "type": "Microsoft.HybridNetwork/devices",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "dataBoxEdgeDevice": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+          },
+          "mecVNFs": [
+            {
+              "vnfRef": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.HybridNetwork/vnfs/TestVnf"
+            }
+          ],
+          "sku": "TestSku"
+        }
+      }
+    }
+  }
+}
