@@ -11,8 +11,8 @@
           "createOption": "Empty"
         },
         "diskSizeGB": 200,
-        "diskEncryptionSet": {
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+        "encryption": {
+          "diskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
         }
       }
     }
@@ -38,13 +38,13 @@
             "createOption": "Empty"
           },
           "diskSizeGB": 200,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "diskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          }
         },
         "location": "West US",
-        "name": "myDisk",
-        "diskEncryptionSet": {
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-        }
+        "name": "myDisk"
       }
     }
   }
