@@ -41,7 +41,7 @@ tag: package-policy-2019-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-10
+tag: package-resources-2020-06
 ```
 
 ``` yaml $(package-subscriptions)
@@ -58,6 +58,15 @@ tag: package-managedapplications-2018-06
 
 ``` yaml $(package-deploymentscripts)
 tag: package-deploymentscripts-2019-10-preview
+```
+
+### Tag: package-resources-2020-06
+
+These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-06'
+input-file:
+- Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-subscriptions-2020-01
