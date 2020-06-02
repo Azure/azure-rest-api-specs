@@ -1118,12 +1118,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationTransactions": {
+    "/{scope}/providers/Microsoft.Consumption/reservationTransactions": {
       "get": {
         "tags": [
           "ReservationTransactions"
         ],
-        "operationId": "ReservationTransactions_ListByBillingAccount",
+        "operationId": "ReservationTransactions_List",
         "description": "List of transactions for reserved instances on billing account scope",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1134,6 +1134,9 @@
           },
           "ReservationTransactionsByBillingAccountId": {
             "$ref": "./examples/ReservationTransactionsListByBillingAccountId.json"
+          },
+          "ReservationTransactionByBillingProfileId": {
+            "$ref": "./examples/ReservationTransactionsListByBillingProfileId.json"
           }
         },
         "parameters": [
@@ -1148,7 +1151,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/scopeReservationTransactionsParameter"
           }
         ],
         "responses": {
@@ -1167,55 +1170,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{{billingProfileId}}/providers/Microsoft.Consumption/reservationTransactions": {
-      "get": {
-        "tags": [
-          "GtmReservationTransactions"
-        ],
-        "operationId": "ReservationTransactions_ListByBillingProfile",
-        "description": "List of transactions for reserved instances on billing profile scope",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "ReservationTransaction": {
-            "$ref": "./examples/ReservationTransactionsListByBillingProfileId.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReservationTransactionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -4937,6 +4891,15 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}', /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationTransactionsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation transactions operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount/Enrollment scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
