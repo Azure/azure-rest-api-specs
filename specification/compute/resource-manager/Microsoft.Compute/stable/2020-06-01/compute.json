@@ -3439,7 +3439,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "SAS Expiration duration in minutes for the URIs."
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -6049,7 +6049,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "SAS Expiration duration in minutes for the URIs."
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -6372,7 +6372,8 @@
           "readOnly": true,
           "description": "The serial console log blob URI."
         }
-      }
+      },
+      "description": "The SAS URIs of the console screenshot and serial log blobs.",
     },
     "HyperVGenerationType": {
       "type": "string",
