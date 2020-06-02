@@ -390,7 +390,8 @@
           "type": "string",
           "enum": [
             "awsCreds",
-            "awsAssumeRole"
+            "awsAssumeRole",
+            "gcpCredential"
           ],
           "x-ms-enum": {
             "name": "authenticationType",
@@ -403,6 +404,10 @@
               {
                 "value": "awsAssumeRole",
                 "description": "AWS account connector assume role authentication"
+              },
+              {
+                "value": "gcpCredential",
+                "description": "GCP account connector service to service authentication"
               }
             ]
           }
@@ -468,6 +473,67 @@
       "required": [
         "awsAssumeRoleArn",
         "awsExternalId"
+      ]
+    },
+    "GcpCredentialDetailsProperties": {
+      "type": "object",
+      "description": "GCP cloud account connector based service to service credentials, the credentials is composed of organization id and json api key (write only)</a>",
+      "x-ms-discriminator-value": "gcpCredential",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
+        "organizationId": {
+          "description": "The Orginization ID of the GCP cloud account",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type in the API key"
+        },
+        "project_id": {
+          "type": "string",
+          "description": "Project Id in the API key"
+        },
+        "private_key_id": {
+          "type": "string",
+          "description": "Private key Id in the API key"
+        },
+        "private_key": {
+          "type": "string",
+          "description": "Private key in the API key"
+        },
+        "client_email": {
+          "type": "string",
+          "description": "Client email in the API key"
+        },
+        "client_id": {
+          "type": "string",
+          "description": "Client Id in the API key"
+        },
+        "auth_uri": {
+          "type": "string",
+          "description": "Auth Uri in the API key"
+        },
+        "token_uri": {
+          "type": "string",
+          "description": "Token Uri in the API key"
+        },
+        "auth_provider_x509_cert_url": {
+          "type": "string",
+          "description": "Auth provider x509 certificate url in the API key"
+        },
+        "client_x509_cert_url": {
+          "type": "string",
+          "description": "Client x509 certificate url in the API key"
+        }
+      },
+      "required": [
+        "awsAccessKeyId",
+        "awsSecretAccessKey"
       ]
     },
     "PermissionProperty": {
