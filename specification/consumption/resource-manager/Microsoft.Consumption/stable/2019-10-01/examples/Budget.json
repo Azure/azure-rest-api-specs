@@ -9,7 +9,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "subscriptions/{subscription-id}/providers/Microsoft.Consumption/budgets/TestBudget",
+        "id": "subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/TestBudget",
         "name": "TestBudget",
         "type": "Microsoft.Consumption/budgets",
         "eTag": "\"1d34d012214157f\"",
@@ -21,27 +21,39 @@
             "startDate": "2017-10-01T00:00:00Z",
             "endDate": "2018-10-31T00:00:00Z"
           },
-          "filters": {
-            "resourceGroups": [
-              "MPDEVTESTRG"
-            ],
-            "resources": [
-              "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSVM2",
-              "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
-            ],
-            "meters": [
-              "00000000-0000-0000-0000-000000000000"
-            ],
-            "tags": {
-              "category": [
-                "Dev",
-                "Prod"
-              ],
-              "department": [
-                "engineering",
-                "sales"
-              ]
-            }
+          "filter": {
+            "and": [
+              {
+                "dimensions": {
+                  "name": "ResourceId",
+                  "operator": "In",
+                  "values": [
+                    "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSVM2",
+                    "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "category",
+                  "operator": "In",
+                  "values": [
+                    "Dev",
+                    "Prod"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "department",
+                  "operator": "In",
+                  "values": [
+                    "engineering",
+                    "sales"
+                  ]
+                }
+              }
+            ]
           },
           "currentSpend": {
             "amount": 80.89,
@@ -62,7 +74,8 @@
               ],
               "contactGroups": [
                 "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
-              ]
+              ],
+              "thresholdType": "Actual"
             }
           }
         }

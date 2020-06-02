@@ -39,8 +39,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "summary": "Gets the current quota limit and usages for the resource provider for the specified location for the specific resource in the parameter.",
-        "description": "This API gets the current quota limit and usages for the specific resource for resource provider for the specified location. This response can be used to submit quotaRequests.",
+        "description": "Gets the current service limits (quotas) and usage of a resource. The response from Get API can be leveraged to submit quota update requests.",
         "operationId": "Quota_Get",
         "x-ms-examples": {
           "Quotas_Request_ForCompute": {
@@ -89,12 +88,17 @@
         "tags": [
           "QuotaInformation"
         ],
-        "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response. The Patch operation can be used also to update the quota.",
+        "description": "Create or update the service limits (quota) of a resource to requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
-          "Quotas_Request_listForCompute": {
+          "Quotas_Request_ForCompute": {
             "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
+          },
+          "Quotas_Request_ForMachineLearningServices_DedicatedResource": {
+            "$ref": "./examples/putMachineLearningServicesQuotaRequestDedicated.json"
+          },
+          "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
+            "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -152,8 +156,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response. The Put operation can be used also to update the quota.",
+        "description": "Create or update the service limits (quota) of a resource to requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
@@ -198,7 +201,7 @@
             }
           },
           "201": {
-            "description": "The request is accepted and is being processed. Please use requestId to check the status.",
+            "description": "The request is accepted and is being processed. Use requestId to check the status.",
             "schema": {
               "$ref": "#/definitions/QuotaRequestSubmitResponse201"
             }
@@ -217,15 +220,14 @@
         "tags": [
           "QuotaInformation"
         ],
-        "summary": "Gets the current quota limit and usages for all the resources by the resource provider at the specified location.",
-        "description": "This API gets the current quota limits and usages for the resource provider for the specified location. This response can be used to submit quotaRequests.",
+        "description": "Get a list of current service limits (quota) and usages of all the resources. The response from List API can be leveraged to submit quota update requests.",
         "operationId": "Quota_List",
         "x-ms-examples": {
           "Quotas_listUsagesForCompute": {
             "$ref": "./examples/getComputeUsages.json"
           },
-          "Quotas_listUsagesForBatchAI": {
-            "$ref": "./examples/getBatchAIUsages.json"
+          "Quotas_listUsagesMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesUsages.json"
           },
           "Quotas_listUsagesForMsSql": {
             "$ref": "./examples/getMsSqlUsages.json"
@@ -286,7 +288,6 @@
             "$ref": "./examples/getQuotaRequestStatusFailed.json"
           }
         },
-        "summary": "Gets the Quota request status by requestId, for the specified resource provider at specified location.",
         "description": "Gets the QuotaRequest details and status by the quota request Id for the resources for the resource provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
         "operationId": "QuotaRequestStatus_Get",
         "parameters": [
@@ -332,7 +333,6 @@
             "$ref": "./examples/getQuotaRequestsHistory.json"
           }
         },
-        "summary": "For the specified location and resource Provider, gets the quota requests under the subscription over the time\n period of one year ago from now to one year back, based on the filter specified.",
         "description": "For the specified location and Resource provider gets the current quota requests under the subscription over the time period of one year ago from now to one year back. oData filter can be used to select quota requests.",
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
@@ -386,7 +386,6 @@
         "tags": [
           "AutoQuotaIncrease"
         ],
-        "summary": "For the specified subscription, gets the Auto Quota Increase enrollment status.",
         "description": "Gets the Auto Quota Increase enrollment details for the specified subscription.",
         "operationId": "AutoQuotaIncrease_GetProperties",
         "x-ms-examples": {
@@ -421,7 +420,6 @@
         "tags": [
           "AutoQuotaIncrease"
         ],
-        "summary": "For the specified subscription, sets the Auto Quota Increase enrollment properties.",
         "description": "Sets the Auto Quota Increase enrollment properties for the specified subscription.",
         "operationId": "AutoQuotaIncrease_Create",
         "x-ms-examples": {
@@ -496,7 +494,7 @@
       }
     },
     "QuotaProperties": {
-      "description": "Resource quota properties.",
+      "description": "Quota properties for the resource.",
       "type": "object",
       "properties": {
         "limit": {
@@ -1120,7 +1118,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Api version."
+      "description": "API version."
     },
     "LocationIdInParameters": {
       "name": "location",
@@ -1135,7 +1133,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Azure resource Provider id.",
+      "description": "Azure resource provider id.",
       "x-ms-parameter-location": "method"
     },
     "ResourceNameInParameters": {
@@ -1143,7 +1141,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Resource name for the specific resource provider, such as SKU name for Microsoft.Compute, pool for Microsoft.Batch.",
+      "description": "The resource name for a resource provider, such as SKU name for Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices",
       "x-ms-parameter-location": "method"
     },
     "RequestIdInParameters": {
