@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-05-04-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-05-04-preview'
 input-file:
-- Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
+- Microsoft.DataCollaboration/preview/2020-05-04-preview/datacollaboration.json
 ```
 
 ---
@@ -113,7 +113,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
+  - $(this-folder)/Microsoft.DataCollaboration/preview/2020-05-04-preview/datacollaboration.json
 
 ```
 
