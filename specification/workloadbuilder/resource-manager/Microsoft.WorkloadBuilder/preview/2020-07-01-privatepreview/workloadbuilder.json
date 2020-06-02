@@ -1043,18 +1043,6 @@
       "description": "Resource base properties.",
       "type": "object",
       "properties": {
-        "creationTimeUtc": {
-          "format": "date-time",
-          "description": "Resource creation time in Utc.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedTimeUtc": {
-          "format": "date-time",
-          "description": "Last modified time of the resource in Utc.",
-          "type": "string",
-          "readOnly": true
-        },
         "provisioningState": {
           "description": "Resource provisioning state.",
           "$ref": "#/definitions/ResourceState",
@@ -1234,12 +1222,8 @@
       "description": "Prerequisites for version resource creation in migration scenario.",
       "type": "object",
       "properties": {
-        "storageAccountName": {
-          "description": "Customer storage account name where below referenced\r\nStorageQueueName and StorageTableName will be created.",
-          "type": "string"
-        },
-        "storageAccountResourceGroupName": {
-          "description": "Resource group name in which storage account has been created.",
+        "storageAccountId": {
+          "description": "Customer storage account arm Id where below referenced\r\nStorageQueueName and StorageTableName will be created.",
           "type": "string"
         },
         "storageQueueName": {
@@ -1343,11 +1327,6 @@
             "type": "string"
           },
           "readOnly": true
-        },
-        "isArtifactRunnable": {
-          "description": "Indicates if this artifact is runnable or holds only re-usable content such as 'AnsibleVarsFile' type.",
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -1405,7 +1384,6 @@
         },
         "versionId": {
           "description": "Workload version Id for this instance.",
-          "maxLength": 1024,
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -1414,7 +1392,6 @@
         },
         "userManagedIdentity": {
           "description": "User managed identity id used for deploying the artifacts. This is optional field.\r\nIf provided, then it will be used for deployment operations. And this identity\r\nshould have necessary (owner) permissions on the subscription.",
-          "maxLength": 1024,
           "type": "string"
         },
         "parameters": {
@@ -1531,7 +1508,6 @@
       "properties": {
         "keyVaultId": {
           "description": "Key vault Id.",
-          "maxLength": 1024,
           "type": "string"
         },
         "secretName": {
