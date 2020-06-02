@@ -4,8 +4,8 @@
 
 This is the AutoRest configuration file for Azure Communication Services.
 
-
 ---
+
 ## Getting Started
 
 To build the SDKs for Azure Communication Services, simply [Install AutoRest](https://aka.ms/autorest/install) or via `npm` (`npm install -g autorest`) and in this folder run:
@@ -37,13 +37,16 @@ These settings apply only when `--tag=package-2019-10-10-preview` is specified o
 ```yaml $(tag) == 'package-2019-10-10-preview'
 input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService.json
+```
+
+```yaml $(tag) == 'package-2019-10-10-preview' && $(generate-private)
+input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService-private.json
 ```
 
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -54,6 +57,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_vsonline']
 ```
@@ -65,3 +70,19 @@ See configuration in [readme.python.md](./readme.python.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Typescript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
+## Cli
+
+See configuration in [readme.cli.md](./readme.cli.md)

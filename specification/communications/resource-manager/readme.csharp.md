@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.Communication
-  output-folder: $(csharp-sdks-folder)/communicationservice/Microsoft.Azure.Management.Communication/src/Generated
+  output-folder: $(csharp-sdks-folder)/communication/Microsoft.Azure.Management.Communication/src/Generated
 ```
