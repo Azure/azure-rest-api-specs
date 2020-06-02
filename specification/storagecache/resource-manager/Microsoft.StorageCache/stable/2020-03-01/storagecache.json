@@ -1774,4 +1774,62 @@
       "description": "Client API version."
     }
   }
+  "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/forceGsi": {
+    "post": {
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "description": "Target resource group.",
+          "in": "path",
+          "name": "resourceGroupName",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+          "in": "path",
+          "name": "cacheName",
+          "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "GSI has been successfully created.",
+          "schema": {}
+        },
+          "204": {
+            "description": "GSI completed.",
+            "schema": {}
+          },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Caches_ForceGsi": {
+          "$ref": "./examples/Caches_forceGsi.json"
+        },
+      "x-ms-long-running-operation": true,
+      },
+      "tags": [
+        "Caches"
+      ],
+      "description": "Forces a GSI to complete on the specified cache.",
+      "operationId": "Caches_forceGsi"
+    }
+  }
+}
 }
