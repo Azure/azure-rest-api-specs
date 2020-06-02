@@ -42,6 +42,15 @@
             "schema": {
               "$ref": "#/definitions/ProductPackagesList"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -80,7 +89,13 @@
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "NOT FOUND"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -115,6 +130,15 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "NOT FOUND"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -146,7 +170,13 @@
             "description": "OK"
           },
           "404": {
-            "description": "Not found"
+            "description": "NOT FOUND"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
