@@ -1,24 +1,25 @@
 {
   "parameters": {
     "subscriptionId": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
-    "providerId": "Microsoft.Compute",
+    "providerId": "Microsoft.MachineLearningServices",
     "location": "eastus",
-    "resourceName": "standardFSv2Family",
+    "resourceName": "StandardDv2Family",
     "api-version": "2019-07-19-preview",
     "createQuotaRequest": {
       "properties": {
         "limit": 200,
         "unit": "Count",
         "name": {
-          "value": "standardFSv2Family"
-        }
+          "value": "StandardDv2Family"
+        },
+        "resourceType": "dedicated"
       }
     }
   },
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/resourceProviders/Microsoft.Compute/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/resourceProviders/Microsoft.MachineLearningServices/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "type": "Microsoft.Capacity/ServiceLimits",
         "properties": {
@@ -29,21 +30,22 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/resourceProviders/Microsoft.Compute/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/resourceProviders/Microsoft.MachineLearningServices/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "type": "Microsoft.Capacity/serviceLimits",
         "properties": {
           "provisioningState": "Succeeded",
-          "message": "",
+          "message": "Request succeeded",
           "properties": {
             "properties": {
               "limit": 200,
               "unit": "Count",
               "currentValue": 160,
               "name": {
-                "value": "standardFSv2Family",
-                "localizedValue": "Standard FSv2 Family vCPUs"
+                "value": "StandardDv2Family",
+                "localizedValue": "Standard Dv2 Family Cluster Dedicated vCPUs"
               },
+              "resourceType": "dedicated",
               "quotaPeriod": "",
               "properties": {}
             }
