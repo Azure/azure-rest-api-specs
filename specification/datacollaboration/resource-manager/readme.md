@@ -38,6 +38,14 @@ input-file:
 - Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
 ```
 
+## Suppressions
+
+``` yaml
+directive:
+  - suppress: UniqueXmsEnumName
+    reason: Following DataShare patterns. Will be resived later.
+```
+
 ---
 # Code Generation
 
@@ -52,6 +60,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-cli-extensions
 ```
 
 

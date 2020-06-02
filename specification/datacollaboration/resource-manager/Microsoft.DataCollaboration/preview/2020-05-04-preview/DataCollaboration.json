@@ -517,6 +517,20 @@
             "description": "Continuation Token",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1472,6 +1486,20 @@
             "description": "continuation token",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2236,7 +2264,7 @@
         "tags": [
           "Constraint"
         ],
-        "summary": "Get a constraint In an entitlement.",
+        "summary": "Get a constraint in an entitlement.",
         "description": "Get a constraint from an entitlement",
         "operationId": "Constraints_Get",
         "parameters": [
@@ -2437,6 +2465,283 @@
         "x-ms-examples": {
           "Constraints_Delete": {
             "$ref": "./examples/Constraints_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}/policies": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "List policies in an entitlement.",
+        "description": "List policies in an entitlement",
+        "operationId": "Policies_ListByEntitlement",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Policies_ListByEntitlement": {
+            "$ref": "./examples/Policies_ListByEntitlement.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}/policies/{policyName}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Get a policy in an entitlement.",
+        "description": "Get a policy from an entitlement",
+        "operationId": "Policies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Get": {
+            "$ref": "./examples/Policies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Adds a new policy to an entitlement.",
+        "description": "Create a policy in an entitlement ",
+        "operationId": "Policies_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "The new policy information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Create": {
+            "$ref": "./examples/Policies_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Delete a policy from an entitlement.",
+        "description": "Delete a policy from an entitlement",
+        "operationId": "Policies_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Policies_Delete": {
+            "$ref": "./examples/Policies_Delete.json"
           }
         }
       }
@@ -2960,6 +3265,20 @@
             "name": "$skipToken",
             "in": "query",
             "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
             "required": false,
             "type": "string"
           }
@@ -4042,6 +4361,55 @@
       },
       "x-ms-azure-resource": true
     },
+    "DiagnosticPolicy": {
+      "description": "A diagnostic policy.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Policy"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticPolicyProperties",
+          "description": "Properties for diagnostic policy",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "DiagnosticLevel"
+    },
+    "DiagnosticPolicyProperties": {
+      "description": "A diagnostic policy transfer object.",
+      "required": [
+        "logLevel"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the policy",
+          "type": "string"
+        },
+        "logLevel": {
+          "description": "The policy log level.",
+          "enum": [
+            "Verbose",
+            "Information",
+            "Warning",
+            "Error",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "logLevel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "DimensionProperties": {
       "description": "properties for dimension",
       "type": "object",
@@ -4623,6 +4991,53 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineStep"
+          }
+        }
+      }
+    },
+    "Policy": {
+      "description": "Policy for entitlement",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of policy.",
+          "enum": [
+            "DiagnosticLevel"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "PolicyList": {
+      "description": "List response for get Policies",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Policy"
           }
         }
       }
