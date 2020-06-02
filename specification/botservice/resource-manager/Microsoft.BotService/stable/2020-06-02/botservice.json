@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Bot Service",
     "description": "Azure Bot Service is a platform for creating smart conversational agents.",
-    "version": "2020-06-02"
+    "version": "2018-07-12"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -311,6 +311,12 @@
         "x-ms-examples": {
           "Create Bot": {
             "$ref": "./examples/PutChannel.json"
+          },
+          "Create Alexa Bot": {
+            "$ref": "./examples/PutAlexaChannel.json"
+          },
+          "Create Line Bot": {
+            "$ref": "./examples/PutLineChannel.json"
           }
         },
         "parameters": [
@@ -369,6 +375,12 @@
         "x-ms-examples": {
           "Update Bot": {
             "$ref": "./examples/UpdateChannel.json"
+          },
+          "Update Alexa":{
+            "$ref": "./examples/UpdateAlexaChannel.json"
+          },
+          "Update Line":{
+            "$ref": "./examples/UpdateLineChannel.json"
           }
         },
         "parameters": [
@@ -478,6 +490,12 @@
         "x-ms-examples": {
           "Get Bot": {
             "$ref": "./examples/GetChannel.json"
+          },
+          "Get Alexa Bot": {
+            "$ref": "./examples/GetAlexaChannel.json"
+          },
+          "Get Line Bot": {
+            "$ref": "./examples/GetLineChannel.json"
           }
         },
         "parameters": [
@@ -607,6 +625,63 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/regeneratekeys": {
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "description": "Regenerates secret keys and returns them for the DirectLine Channel of a particular BotService resource",
+        "operationId": "DirectLine_RegenerateKeys",
+        "x-ms-examples": {
+          "Regenerate Keys for DirectLine Channel Site": {
+            "$ref": "./examples/DirectlineRegenerateKeys.json"
+          },
+          "Regenerate Keys for WebChat Channel Site": {
+            "$ref": "./examples/WebChatRegenerateKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/regenerateKeyschannelNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteInfo"
+            },
+            "description": "The parameters to provide for the created bot."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "schema": {
+              "$ref": "#/definitions/BotChannel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
         }
       }
     },
@@ -1534,6 +1609,49 @@
         "channelName"
       ]
     },
+    "AlexaChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "AlexaChannel",
+      "description": "Alexa channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlexaChannelProperties",
+          "description": "The set of properties specific to Alexa channel resource"
+        }
+      }
+    },
+    "AlexaChannelProperties": {
+      "properties": {
+        "alexaSkillId": {
+          "type": "string",
+          "description": "The Alexa skill Id"
+        },
+        "urlFragment": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Url fragment used in part of the Uri configured in Alexa"
+        },
+        "serviceEndpointUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Full Uri used to configured the skill in Alexa"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether this channel is enabled for the bot"
+        }
+      },
+      "description": "The parameters to provide for the Alexa channel.",
+      "required": [
+        "alexaSkillId",
+        "isEnabled"
+      ]
+    },
     "FacebookChannel": {
       "type": "object",
       "description": "Facebook channel definition",
@@ -1984,6 +2102,10 @@
           "description": "Whether this channel is validated for the bot",
           "readOnly": true
         },
+        "signingSecret": {
+          "type": "string",
+          "description": "The Slack signing secret."
+        },
         "isEnabled": {
           "type": "boolean",
           "description": "Whether this channel is enabled for the bot"
@@ -1996,6 +2118,68 @@
         "verificationToken",
         "isEnabled"
       ]
+    },
+    "LineChannel": {
+      "type": "object",
+      "description": "Line channel definition",
+      "x-ms-discriminator-value": "LineChannel",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LineChannelProperties",
+          "description": "The set of properties specific to Slack channel resource"
+        }
+      }
+    },
+    "LineChannelProperties": {
+      "properties": {
+        "lineRegistrations": {
+          "type": "array",
+          "description": "The list of line channel registrations",
+          "items": {
+            "$ref": "#/definitions/LineRegistration"
+          }
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "Callback Url to enter in line registration.",
+          "readOnly": true
+        },
+        "isValidated": {
+          "type": "boolean",
+          "description": "Whether this channel is validated for the bot",
+          "readOnly": true
+        }
+      },
+      "description": "The parameters to provide for the Line channel.",
+      "required": [
+        "lineRegistrations"
+      ]
+    },
+    "LineRegistration": {
+      "properties": {
+        "generatedId": {
+          "x-ms-mutability": [
+            "read"
+          ],
+          "type": "string",
+          "description": "Id generated for the line channel registration",
+          "readOnly": true
+        },
+        "channelSecret": {
+          "type": "string",
+          "description": "Secret for the line channel registration"
+        },
+        "channelAccessToken": {
+          "type": "string",
+          "description": "Access token for the line channel registration"
+        }
+      },
+      "description": "The properties corresponding to a line channel registration"
     },
     "ChannelResponseList": {
       "properties": {
@@ -2120,6 +2304,32 @@
         "isV3Enabled",
         "isEnabled",
         "siteName"
+      ]
+    },
+    "SiteInfo": {
+      "properties": {
+        "siteName": {
+          "type": "string",
+          "description": "The site name"
+        },
+        "key": {
+          "type": "string",
+          "description": "Determines which key is to be regenerated",
+          "enum": [
+            "key1",
+            "key2"
+          ],
+          "x-ms-enum": {
+            "name": "key",
+            "modelAsString": false 
+          }
+        }
+      },
+      "description": "Site information for WebChat or DirectLine Channels to identify which site to regenerate keys for.",
+      "type": "object",
+      "required": [
+        "siteName",
+        "key"
       ]
     },
     "ConnectionItemName": {
@@ -2612,7 +2822,7 @@
       "type": "string",
       "maxLength": 64,
       "minLength": 2,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "pattern": "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$",
       "description": "The name of the Bot Service Connection Setting resource"
     },
     "channelNameParameter": {
@@ -2622,6 +2832,7 @@
       "required": true,
       "type": "string",
       "enum": [
+        "AlexaChannel",
         "FacebookChannel",
         "EmailChannel",
         "KikChannel",
@@ -2631,12 +2842,16 @@
         "SkypeChannel",
         "WebChatChannel",
         "DirectLineChannel",
-        "SmsChannel"
+        "SmsChannel",
+        "LineChannel"
       ],
       "x-ms-enum": {
         "name": "channelName",
         "modelAsString": false,
         "values": [
+          {
+            "value": "AlexaChannel"
+          },
           {
             "value": "FacebookChannel"
           },
@@ -2666,10 +2881,37 @@
           },
           {
             "value": "SmsChannel"
+          },
+          {
+            "value": "LineChannel"
           }
         ]
       },
       "description": "The name of the Channel resource."
+    },
+    "regenerateKeyschannelNameParameter": {
+      "name": "channelName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "WebChatChannel",
+        "DirectLineChannel"
+      ],
+      "x-ms-enum": {
+        "name": "channelName",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "WebChatChannel"
+          },
+          {
+            "value": "DirectLineChannel"
+          }
+        ]
+      },
+      "description": "The name of the Channel resource for which keys are to be regenerated."
     }
   }
 }
