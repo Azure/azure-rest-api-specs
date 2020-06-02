@@ -3334,7 +3334,7 @@
       }
     },
     "ModernReservationTransactionProperties": {
-      "description": "The properties of the reservation transaction.",
+      "description": "The properties of a modern reservation transaction.",
       "properties": {
         "amount": {
           "description": "The charge of the transaction.",
@@ -3443,9 +3443,9 @@
       }
     },
     "ModernReservationTransaction": {
-      "description": "Reservation transaction resource.",
+      "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "modern",
+      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransaction"
@@ -3457,12 +3457,15 @@
           "$ref": "#/definitions/ModernReservationTransactionProperties",
           "title": "Reservation Transaction properties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "LegacyReservationTransaction": {
-      "description": "Reservation transaction resource.",
+      "description": "Legacy Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "legacy",
+      "x-ms-discriminator-value": "Legacy",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransaction"
@@ -3474,10 +3477,13 @@
           "$ref": "#/definitions/LegacyReservationTransactionProperties",
           "title": "Reservation Transaction properties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "LegacyReservationTransactionProperties": {
-      "description": "The properties of the reservation transaction.",
+      "description": "The properties of a legacy reservation transaction.",
       "properties": {
         "eventDate": {
           "description": "The date of the transaction",
