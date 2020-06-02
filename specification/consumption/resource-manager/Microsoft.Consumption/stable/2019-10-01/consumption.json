@@ -3634,6 +3634,7 @@
     "ReservationTransaction": {
       "description": "Reservation transaction resource.",
       "type": "object",
+      "discriminator": "kind",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -3644,8 +3645,8 @@
           "type": "string",
           "description": "Specifies the kind of reservation transaction.",
           "enum": [
-            "legacy",
-            "modern"
+            "Legacy",
+            "Modern"
           ],
           "x-ms-enum": {
             "name": "ReservationTransactionKind",
