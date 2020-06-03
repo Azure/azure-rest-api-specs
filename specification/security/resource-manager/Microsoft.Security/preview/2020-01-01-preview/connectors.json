@@ -119,6 +119,10 @@
           "AwsAssumeRole - Create a cloud account connector for a subscription": {
             "$ref": "./examples/Connectors/CreateUpdateAwsAssumeRoleConnectorSubscription_example.json"
           }
+          ,
+          "gcpCredential - Create a cloud account connector for a subscription": {
+            "$ref": "./examples/Connectors/CreateUpdateGcpCredentialConnectorSubscription_example.json"
+          }
         },
         "tags": [
           "Connectors"
@@ -486,54 +490,63 @@
       ],
       "properties": {
         "organizationId": {
-          "description": "The Orginization ID of the GCP cloud account",
+          "description": "The Organization ID of the GCP cloud account",
           "type": "string",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Type in the API key"
+          "description": "Type field of the API key (write only)"
         },
         "project_id": {
           "type": "string",
-          "description": "Project Id in the API key"
+          "description": "Project Id field of the API key (write only)"
         },
         "private_key_id": {
           "type": "string",
-          "description": "Private key Id in the API key"
+          "description": "Private key Id field of the API key (write only)"
         },
         "private_key": {
           "type": "string",
-          "description": "Private key in the API key"
+          "description": "Private key field of the API key (write only)"
         },
         "client_email": {
           "type": "string",
-          "description": "Client email in the API key"
+          "description": "Client email field of the API key (write only)"
         },
         "client_id": {
           "type": "string",
-          "description": "Client Id in the API key"
+          "description": "Client Id field of the API key (write only)"
         },
         "auth_uri": {
           "type": "string",
-          "description": "Auth Uri in the API key"
+          "description": "Auth Uri field of the API key (write only)"
         },
         "token_uri": {
           "type": "string",
-          "description": "Token Uri in the API key"
+          "description": "Token Uri field of the API key (write only)"
         },
         "auth_provider_x509_cert_url": {
           "type": "string",
-          "description": "Auth provider x509 certificate url in the API key"
+          "description": "Auth provider x509 certificate url field of the API key (write only)"
         },
         "client_x509_cert_url": {
           "type": "string",
-          "description": "Client x509 certificate url in the API key"
+          "description": "Client x509 certificate url field of the API key (write only)"
         }
       },
       "required": [
-        "awsAccessKeyId",
-        "awsSecretAccessKey"
+        "organizationId",
+        "type",
+        "project_id",
+        "private_key_id",
+        "private_key",
+        "client_email",
+        "client_id",
+        "auth_uri",
+        "token_uri",
+        "auth_provider_x509_cert_url",
+        "client_x509_cert_url"
       ]
     },
     "PermissionProperty": {
@@ -543,7 +556,8 @@
       "enum": [
         "AWS::AWSSecurityHubReadOnlyAccess",
         "AWS::SecurityAudit",
-        "AWS::AmazonSSMAutomationRole"
+        "AWS::AmazonSSMAutomationRole",
+        "GCP::Security Center Admin Viewer"
       ],
       "x-ms-enum": {
         "name": "PermissionProperty",
