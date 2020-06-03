@@ -27,6 +27,7 @@ batch:
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2020-06
   - tag: package-resources-2019-08
   - tag: package-resources-2019-07
   - tag: package-resources-2019-0510
@@ -187,6 +188,19 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2020-06 and java
+
+These settings apply only when `--tag=package-resources-2020-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2020-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2020_06_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2020_06_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2019-08 and java
