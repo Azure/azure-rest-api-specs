@@ -1,0 +1,437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters": {
+      "get": {
+        "tags": [
+          "EventHubs Clusters"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "ClustersListByResourceGroup": {
+            "$ref": "./examples/Clusters/ClustersListByResourceGroup.json"
+          }
+        },
+        "description": "Lists the available Event Hubs Clusters within an ARM resource group",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusters returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Event Hub Cluster error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}": {
+      "get": {
+        "tags": [
+          "EventHubs Clusters"
+        ],
+        "operationId": "Clusters_Get",
+        "x-ms-examples": {
+          "ClusterGet": {
+            "$ref": "./examples/Clusters/ClusterGet.json"
+          }
+        },
+        "description": "Gets the resource description of the specified Event Hubs Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster resource description returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the cluster description get operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventHubs Clusters"
+        ],
+        "operationId": "Clusters_CreateOrUpdate",
+        "x-ms-examples": {
+          "ClusterPut": {
+            "$ref": "./examples/Clusters/ClusterPut.json"
+          }
+        },
+        "description": "Creates or updates an instance of an Event Hubs Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster",
+              "required": [
+                "location"
+              ]
+            },
+            "description": "Parameters for creating a eventhub cluster resource."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Event Hubs Cluster create or update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Event Hubs Cluster create or update request accepted."
+          },
+          "default": {
+            "description": "Event Hubs error response detailing why the Event Hubs Cluster create or update operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "EventHubs Clusters"
+        ],
+        "operationId": "Clusters_Update",
+        "x-ms-examples": {
+          "ClusterPatch": {
+            "$ref": "./examples/Clusters/ClusterPatch.json"
+          }
+        },
+        "description": "Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "description": "The properties of the Event Hubs Cluster which should be updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Event Hubs Cluster update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Event Hubs Cluster update request accepted."
+          },
+          "default": {
+            "description": "Event Hubs error response detailing why the Event Hubs Cluster update operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "EventHubs Clusters"
+        ],
+        "operationId": "Clusters_Delete",
+        "x-ms-examples": {
+          "ClusterDelete": {
+            "$ref": "./examples/Clusters/ClusterDelete.json"
+          }
+        },
+        "description": "Deletes an existing Event Hubs Cluster. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster successfully deleted."
+          },
+          "202": {
+            "description": "Event Hubs Cluster delete request accepted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Event Hubs error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
+      "get": {
+        "tags": [
+          "EventHubs Clusters Namespace"
+        ],
+        "operationId": "Clusters_ListNamespaces",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.",
+        "x-ms-examples": {
+          "ListNamespacesInCluster": {
+            "$ref": "./examples/Clusters/ListNamespacesInClusterGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of Namespace IDs in Cluster successfully delivered.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespaceIdListResult"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response detailing why this operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Cluster": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "Properties of the cluster SKU."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "createdAt": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The UTC time when the Event Hubs Cluster was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The UTC time when the Event Hubs Cluster was last updated."
+            },
+            "metricId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The metric ID of the cluster resource. Provided by the service and not modifiable by the user."
+            },
+            "status": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Status of the Cluster resource"
+            }
+          },
+          "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Single Event Hubs Cluster resource in List or Get operations."
+    },
+    "ClusterSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this SKU.",
+          "enum": [
+            "Dedicated"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterSkuName",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "format": "int32",
+          "maximum": 32,
+          "minimum": 1,
+          "type": "integer",
+          "description": "The quantity of Event Hubs Cluster Capacity Units contained in this cluster."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "SKU parameters particular to a cluster instance."
+    },
+    "ClusterListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "description": "The Event Hubs Clusters present in the List Event Hubs operation results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Empty unless the value parameter contains an incomplete list of Event Hubs Clusters."
+        }
+      },
+      "description": "The response of the List Event Hubs Clusters operation."
+    },
+    "EHNamespaceIdListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EHNamespaceIdContainer"
+          },
+          "description": "Result of the List Namespace IDs operation"
+        }
+      },
+      "description": "The response of the List Namespace IDs operation"
+    },
+    "EHNamespaceIdContainer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id parameter"
+        }
+      },
+      "description": "The full ARM ID of an Event Hubs Namespace"
+    }
+  },
+  "parameters": {}
+}
