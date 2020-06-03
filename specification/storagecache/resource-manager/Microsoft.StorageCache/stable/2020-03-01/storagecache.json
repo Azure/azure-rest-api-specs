@@ -715,12 +715,12 @@
           "type": "string"
         },
         {
-          "description": "Comment about the GSI.",
-          "in": "query",
+          "description": "Object containing the properties of the GSI.",
+          "in": "body",
           "name": "comment",
-          "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-          "required" : false,
-          "type": "string"
+          "schema": {
+            "$ref": "#/definitions/ForceGsiProperties"
+          }
         }
       ],
       "responses": {
@@ -747,7 +747,7 @@
       "tags": [
         "Caches"
       ],
-      "description": "Forces a Global Support Information (GSI) to complete on the specified cache.",
+      "description": "Forces a GSI to complete on the specified cache.",
       "operationId": "Caches_ForceGsi"
     }
   },
@@ -1328,6 +1328,15 @@
         "rootSquash": {
           "type": "boolean",
           "description": "root squash of cache property."
+        }
+      }
+    },
+    "ForceGsiProperties": {
+      "description": "Force GSI Properties.",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "The comment associated with the GSI."
         }
       }
     },
