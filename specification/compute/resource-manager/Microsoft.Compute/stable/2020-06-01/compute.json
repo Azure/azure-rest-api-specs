@@ -6498,10 +6498,12 @@
       "description": "The List Proximity Placement Group operation response."
     },
     "DedicatedHostGroupInstanceView": {
-      "hosts": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/DedicatedHostInstanceViewWithName"
+      "properties": {
+        "hosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHostInstanceViewWithName"
+          }
         }
       }
     },
@@ -6663,13 +6665,13 @@
         "name": {
           "type": "string",
           "description": "The name of the dedicated host."
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ]
+        }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "The instance view of a dedicated host."
     },
     "DedicatedHostProperties": {
