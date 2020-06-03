@@ -85,8 +85,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
-- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
@@ -127,16 +125,21 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+- Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+- Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -186,8 +189,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
-- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
@@ -227,15 +228,19 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+- Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -277,8 +282,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
-- Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
@@ -317,15 +320,19 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+- Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -492,6 +499,10 @@ input-file:
  - ./Microsoft.Sql/preview/2019-06-01-preview/servers.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -523,7 +534,9 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
- 
+ - ./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
@@ -810,8 +823,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/operations.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
-  - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
-  - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/usages.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
@@ -852,16 +863,21 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/usages.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/servers.json
-  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
@@ -873,6 +889,8 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/servers.json
+  - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
+  - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
@@ -885,6 +903,10 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
@@ -898,6 +920,8 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json

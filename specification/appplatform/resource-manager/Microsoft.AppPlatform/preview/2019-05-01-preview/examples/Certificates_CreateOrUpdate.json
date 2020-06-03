@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "certificateResource": {
+      "properties": {
+        "vaultUri": "https://myvault.vault.azure.net",
+        "keyVaultCertName": "mycert",
+        "certVersion": "08a219d06d874795a96db47e06fbb01e"
+      }
+    },
+    "api-version": "2019-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "certificateName": "mycertificate"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "thumbprint": "934367bf1c97033f877db0f15cb1b586957d3133",
+          "vaultUri": "https://myvault.vault.azure.net",
+          "keyVaultCertName": "mycert",
+          "certVersion": "08a219d06d874795a96db47e06fbb01e",
+          "issuer": "mydomain.com",
+          "issuedDate": "2019-02-20T07:40:42Z",
+          "expirationDate": "2019-02-21T07:40:42Z",
+          "activateDate": "2019-02-22T07:40:42Z",
+          "subjectName": "mysubjectname",
+          "dnsNames": [
+            "mydomain.com",
+            "mydomain.net",
+            "mydomain.io"
+          ]
+        },
+        "type": "Microsoft.AppPlatform/Spring/certificates",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/certificates/mycertificate",
+        "name": "mycertificate"
+      }
+    }
+  }
+}
