@@ -1498,13 +1498,15 @@
         "kind"
       ],
       "properties": {
-        "$ref": "#/definitions/AlertRuleKind",
-        "description": "The Kind of the alert rule"
+        "kind": {
+          "$ref": "#/definitions/AlertRuleKind",
+          "description": "The alert rule kind"
+        }
       },
       "type": "object"
     },
     "AlertRuleKind": {
-      "description": "Describes an Azure resource with kind.",
+      "description": "The alert rule kind",
       "properties": {
         "kind": {
           "description": "The kind of the alert rule",
@@ -1548,8 +1550,10 @@
         "kind"
       ],
       "properties": {
-        "$ref": "#/definitions/AlertRuleKind",
-        "description": "The Kind of the alert rule"
+        "kind": {
+          "$ref": "#/definitions/AlertRuleKind",
+          "description": "The alert rule kind"
+        }
       },
       "type": "object"
     },
@@ -1918,7 +1922,8 @@
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The error object of the CloudError response"
         }
       },
       "description": "An error response for a resource management request."
@@ -2141,6 +2146,7 @@
           "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
         }
       ],
+      "description": "Represents Fusion alert rule template properties",
       "properties": {
         "severity": {
           "$ref": "#/definitions/AlertSeverity",
@@ -2154,6 +2160,7 @@
           "type": "array"
         }
       },
+      "type": "object"
     },
     "Incident": {
       "allOf": [
@@ -2742,14 +2749,39 @@
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
-          "$ref": "#/definitions/AlertRuleTemplate"
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties"
         }
       ],
       "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateInnerProperties"
+        }
+      ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
-          "description": "MicrosoftSecurityIncidentCreation rule template properties",
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase",
+          "description": "alert rule template base properties",
+          "x-ms-client-flatten": true
+        }        
+      },
+      "description": "MicrosoftSecurityIncidentCreation rule template properties",
+      "type": "object"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateInnerProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
+          "description": "MicrosoftSecurityIncidentCreation rule template common properties",
           "required": [
             "displayName",
             "description",
@@ -2761,21 +2793,9 @@
           "x-ms-client-flatten": true
         }
       },
-      "type": "object",
-      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+      "description": "MicrosoftSecurityIncidentCreation rule template inner properties",
+      "type": "object"
     },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-        }
-      ],
-      "properties": {
-        "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
-        "description": "MicrosoftSecurityIncidentCreation rule template common properties"
-      },
-      "description": "MicrosoftSecurityIncidentCreation rule template properties"
-    }
     "OfficeConsent": {
       "allOf": [
         {
