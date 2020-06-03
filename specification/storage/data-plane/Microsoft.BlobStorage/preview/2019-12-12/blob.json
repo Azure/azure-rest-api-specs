@@ -9496,12 +9496,9 @@
         "BlobTags": {
           "$ref": "#/definitions/BlobTags"
         },
-        "ObjectReplicationPolicyId": {
-          "type": "string"
-        },
-        "ObjectReplicationRules": {
-          "$ref": "#/definitions/BlobObjectReplicationRules"
-        }
+		"OrMetadata": {
+		  "$ref": "#/definitions/OrMetadata"
+		}
       }
     },
     "BlobPropertiesInternal": {
@@ -10381,6 +10378,15 @@
             "attribute": true
           }
         }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+	"OrMetadata": {
+      "type": "object",
+      "xml": {
+        "name": "OrMetadata"
       },
       "additionalProperties": {
         "type": "string"
