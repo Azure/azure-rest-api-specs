@@ -2659,6 +2659,9 @@
           "Create a vm with boot diagnostics.": {
             "$ref": "./examples/CreateAVmWithBootDiagnostics.json"
           },
+          "Create a vm with managed boot diagnostics.": {
+            "$ref": "./examples/CreateAVmWithManagedBootDiagnostics.json"
+          },
           "Create a vm with empty data disks.": {
             "$ref": "./examples/CreateAVmWithEmptyDataDisks.json"
           },
@@ -3411,6 +3414,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/retrieveBootDiagnosticsData": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_RetrieveBootDiagnosticsData",
+        "description": "The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "sasUriExpirationTimeInMinutes",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "RetrieveBootDiagnosticsData of a virtual machine.": {
+            "$ref": "./examples/RetrieveBootDiagnosticsDataVirtualMachine.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/performMaintenance": {
       "post": {
         "tags": [
@@ -3567,6 +3629,9 @@
           },
           "Create a scale set with boot diagnostics.": {
             "$ref": "./examples/CreateAScaleSetWithBootDiagnostics.json"
+          },
+          "Create a scale set with managed boot diagnostics.": {
+            "$ref": "./examples/CreateAScaleSetWithManagedBootDiagnostics.json"
           },
           "Create a scale set with a marketplace image plan.": {
             "$ref": "./examples/CreateAScaleSetWithAMarketplaceImagePlan.json"
@@ -5955,6 +6020,72 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/retrieveBootDiagnosticsData": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData",
+        "description": "The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "sasUriExpirationTimeInMinutes",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "RetrieveBootDiagnosticsData of a virtual machine.": {
+            "$ref": "./examples/RetrieveBootDiagnosticsDataVMScaleSetVM.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance": {
       "post": {
         "tags": [
@@ -6234,6 +6365,21 @@
         }
       },
       "description": "Specifies the disallowed configuration for a virtual machine image."
+    },
+    "RetrieveBootDiagnosticsDataResult": {
+      "properties": {
+        "consoleScreenshotBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The console screenshot blob URI"
+        },
+        "serialConsoleLogBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The serial console log blob URI."
+        }
+      },
+      "description": "The SAS URIs of the console screenshot and serial log blobs."
     },
     "HyperVGenerationType": {
       "type": "string",
@@ -8158,7 +8304,7 @@
         },
         "storageUri": {
           "type": "string",
-          "description": "Uri of the storage account to use for placing the console output and screenshot."
+          "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
         }
       },
       "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
@@ -8275,12 +8421,12 @@
         "consoleScreenshotBlobUri": {
           "readOnly": true,
           "type": "string",
-          "description": "The console screenshot blob URI."
+          "description": "The console screenshot blob URI. <br><br>NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage."
         },
         "serialConsoleLogBlobUri": {
           "readOnly": true,
           "type": "string",
-          "description": "The Linux serial console log blob Uri."
+          "description": "The serial console log blob Uri. <br><br>NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage."
         },
         "status": {
           "readOnly": true,
