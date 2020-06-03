@@ -713,6 +713,14 @@
           "pattern": "^[-0-9a-zA-Z_]{1,80}$",
           "required": true,
           "type": "string"
+        },
+        {
+          "description": "Comment about the GSI.",
+          "in": "query",
+          "name": "comment",
+          "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+          "required" : false,
+          "type": "string"
         }
       ],
       "responses": {
@@ -739,8 +747,8 @@
       "tags": [
         "Caches"
       ],
-      "description": "Forces a GSI to complete on the specified cache.",
-      "operationId": "Caches_forceGsi"
+      "description": "Forces a Global Support Information (GSI) to complete on the specified cache.",
+      "operationId": "Caches_ForceGsi"
     }
   },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets": {
