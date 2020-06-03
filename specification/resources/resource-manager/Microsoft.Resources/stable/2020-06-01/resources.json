@@ -4221,16 +4221,21 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "The URI of the template to deploy."
+          "description": "The URI of the template to deploy. Use either the uri or id property, but not both."
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource id of a Template Spec. Use either the id or uri property, but not both."
+        },
+        "relativePath": {
+          "type": "string",
+          "description": "Applicable only if this template link references a Template Spec. This relativePath property can optionally be used to reference a Template Spec artifact by path."
         },
         "contentVersion": {
           "type": "string",
           "description": "If included, must match the ContentVersion in the template."
         }
       },
-      "required": [
-        "uri"
-      ],
       "description": "Entity representing the reference to the template."
     },
     "ParametersLink": {
