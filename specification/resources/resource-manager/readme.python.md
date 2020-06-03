@@ -63,9 +63,12 @@ batch:
 clear-output-folder: true
 batch:
   - tag: package-features-2015-12
+  - multiapiscript-features: true
   - tag: package-links-2016-09
+  - multiapiscript-links: true
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
+  - multiapiscript-locks: true
   - tag: package-managedapplications-2018-06
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
@@ -76,6 +79,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - multiapiscript-policy: true
   - tag: package-resources-2019-10
   - tag: package-resources-2019-08
   - tag: package-resources-2019-07
@@ -87,16 +91,61 @@ batch:
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
+  - multiapiscript-resources: true
   - tag: package-subscriptions-2019-11
   - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
+  - multiapiscript-subscriptions: true
   - tag: package-deploymentscripts-2019-10-preview
-  - multiapiscript: true
+  - multiapiscript-deploymentscripts: true
 ```
 
-``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/
+```yaml $(multiapiscript-features)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features
+clear-output-folder: false
+perform-load: false
+```
+
+```yaml $(multiapiscript-policy)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy
+clear-output-folder: false
+perform-load: false
+```
+
+```yaml $(multiapiscript-resources)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources
+clear-output-folder: false
+perform-load: false
+```
+
+```yaml $(multiapiscript-subscriptions)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions
+clear-output-folder: false
+perform-load: false
+```
+
+```yaml $(multiapiscript-deploymentscripts)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts
+clear-output-folder: false
+perform-load: false
+```
+
+```yaml $(multiapiscript-locks)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks
+clear-output-folder: false
+perform-load: false
+```
+
+```yaml $(multiapiscript-links)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
 clear-output-folder: false
 perform-load: false
 ```
