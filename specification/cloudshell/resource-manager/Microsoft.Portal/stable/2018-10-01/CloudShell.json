@@ -340,8 +340,15 @@
             "headers": {
               "x-ms-console-remaining-seconds": {
                 "type": "integer",
+                "format": "int32",
                 "description": "Remaining time left in session, in seconds."
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -639,8 +646,15 @@
             "headers": {
               "x-ms-console-remaining-seconds": {
                 "type": "integer",
+                "format": "int32",
                 "description": "Remaining time left in session, in seconds."
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -786,7 +800,12 @@
         "properties": {
           "$ref": "#/definitions/UserProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "CloudShellUserSettings": {
       "description": "Cloud shell user settings.",
@@ -876,6 +895,7 @@
         },
         "diskSizeInGB": {
           "type": "integer",
+          "format": "int32",
           "description": "Size of file share"
         }
       }
