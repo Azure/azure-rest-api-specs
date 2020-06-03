@@ -10,5 +10,5 @@ go:
 ```
 
 ``` yaml $(tag) == 'package-lva-1-0-0-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/mediaservices/package-lva-1-0-0-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/package-lva-1-0-0-preview/$(namespace)
 ```
