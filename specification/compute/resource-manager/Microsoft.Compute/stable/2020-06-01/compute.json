@@ -6497,6 +6497,14 @@
       ],
       "description": "The List Proximity Placement Group operation response."
     },
+    "DedicatedHostGroupInstanceView": {
+      "hosts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/DedicatedHostInstanceViewWithName"
+        }
+      }
+    },
     "DedicatedHostGroupProperties": {
       "properties": {
         "platformFaultDomainCount": {
@@ -6513,6 +6521,11 @@
           },
           "readOnly": true,
           "description": "A list of references to all dedicated hosts in the dedicated host group."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/DedicatedHostGroupInstanceView",
+          "readOnly": true,
+          "description": "The dedicated host group instance view."
         }
       },
       "required": [
@@ -6638,6 +6651,20 @@
           },
           "description": "The resource status information."
         }
+      },
+      "description": "The instance view of a dedicated host."
+    },
+    "DedicatedHostInstanceViewWithName": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the dedicated host."
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ]
       },
       "description": "The instance view of a dedicated host."
     },
