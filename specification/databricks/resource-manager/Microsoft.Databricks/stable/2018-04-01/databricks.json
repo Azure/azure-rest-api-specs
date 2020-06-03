@@ -414,11 +414,11 @@
         "tags": [
           "vNetPeering"
         ],
-        "operationId": "vNetPeering_Create",
+        "operationId": "vNetPeering_CreateOrUpdate",
         "description": "Creates vNet Peering for workspace.",
         "x-ms-examples": {
           "Create vNet Peering for Workspace": {
-            "$ref": "./examples/WorkspaceVirtualNetworkPeeringCreate.json"
+            "$ref": "./examples/WorkspaceVirtualNetworkPeeringCreateOrUpdate.json"
           }
         },
         "parameters": [
@@ -448,10 +448,58 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Created - Returns information about the workspace vNet peering, including provisioning status.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "200": {
+            "description": "Update succeeded - Returns information about the workspace vNet peering.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/virtualNetworkPeerings": {
+      "get": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_ListByWorkspace",
+        "description": "Lists the workspace vNet Peerings.",
+        "x-ms-examples": {
+          "List all vNet Peerings for the workspace": {
+            "$ref": "./examples/WorkspaceVirtualNetPeeringList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeeringList"
             }
           },
           "default": {
@@ -951,6 +999,18 @@
         }
       }
     },
+    "VirtualNetworkPeeringList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkPeering"
+          },
+          "description": "Gets the peerings in a virtual network"
+        }
+      },
+      "description": "Response for ListSubnets Api service callRetrieves all subnet that belongs to a virtual network"
+    },
     "VirtualNetworkPeering": {
       "properties": {
         "properties": {
@@ -1015,6 +1075,7 @@
               "description": "The Id of the remote virtual network."
             }
           },
+          "required": true,
           "description": " The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
         },
         "remoteAddressSpace": {
@@ -1030,9 +1091,10 @@
             "Disconnected"
           ],
           "x-ms-enum": {
-            "name": "VirtualNetworkPeeringState",
+            "name": "peeringState",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "readOnly": true,
