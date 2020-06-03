@@ -4,16 +4,16 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_vsonline
-package-version: 2019-07-01
+package-version: 2020-05-26
 azure-arm: true
 ```
 
-### Tag: package-2019-07-01 and ruby
+### Tag: package-2020-05-26 and ruby
 
-These settings apply only when `--tag=package-2019-07-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-26 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2019-07-01' && $(ruby)
+```yaml $(tag) == 'package-2020-05-26' && $(ruby)
 namespace: Microsoft.VSOnline
 output-folder: $(ruby-sdks-folder)/vsonline
 ```

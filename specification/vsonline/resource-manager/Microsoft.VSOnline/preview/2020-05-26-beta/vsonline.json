@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-07-01-alpha",
+    "version": "2020-05-26-beta",
     "title": "VSOnlineClient",
-    "description": "Microsoft VS Online REST API version 2019-07-01-alpha.",
+    "description": "Microsoft VS Online REST API version 2020-05-26-beta.",
     "x-ms-code-generation-settings": {
       "name": "VSOnlineClient"
     }
@@ -61,275 +61,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/accounts/{accountName}": {
-      "get": {
-        "tags": [
-          "VSOnlineAccount"
-        ],
-        "summary": "Retrieves information about a VS Online Account resource.",
-        "description": "Retrieves the properties of a VS Online Account.",
-        "operationId": "Account_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AcctNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the VS Online Account",
-            "schema": {
-              "$ref": "#/definitions/VSOnlineAccount"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Account does not exist.)",
-            "schema": {
-              "$ref": "#/definitions/VSOAccountErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VSOAccountGet": {
-            "$ref": "./examples/VSOAccountGet_example.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "VSOnlineAccount"
-        ],
-        "summary": "Deletes a VS Online Account resource.",
-        "description": "Deletes an existing VS Online Account.",
-        "operationId": "Account_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AcctNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the VS Online Account is deleted."
-          },
-          "204": {
-            "description": "The request was successful; VS Online Account does not exist."
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 409 - Conflict(VS Online Account is in a non-terminal state due to an ongoing operation.)",
-            "schema": {
-              "$ref": "#/definitions/VSOAccountErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VSOAccountDelete": {
-            "$ref": "./examples/VSOAccountDelete_example.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "VSOnlineAccount"
-        ],
-        "summary": "Creates a VS Online Account.",
-        "description": "Creates a VS Online Account with the specified create parameters.",
-        "operationId": "Account_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AcctNameParameter"
-          },
-          {
-            "name": "vsonlineAccount",
-            "in": "body",
-            "description": "VS Online Account create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VSOnlineAccount"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the VS Online Account",
-            "schema": {
-              "$ref": "#/definitions/VSOnlineAccount",
-              "x-ms-azure-resource": true
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Services Account could not be created/updated)",
-            "schema": {
-              "$ref": "#/definitions/VSOAccountErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VSOAccountCreate": {
-            "$ref": "./examples/VSOAccountCreate_example.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "VSOnlineAccount"
-        ],
-        "summary": "Updates a VS Online Account.",
-        "description": "Updates the properties of an existing VS Online Account with the specified update parameters.",
-        "operationId": "Account_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AcctNameParameter"
-          },
-          {
-            "name": "vsonlineAccountUpdateParameters",
-            "in": "body",
-            "description": "Parameters for updating the VS Online Account.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VSOAccountUpdateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the updated VS Online Account.",
-            "schema": {
-              "$ref": "#/definitions/VSOnlineAccount",
-              "x-ms-azure-resource": true
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Services Account does not exist.)",
-            "schema": {
-              "$ref": "#/definitions/VSOAccountErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VSOAccountUpdate": {
-            "$ref": "./examples/VSOAccountUpdate_example.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/accounts/": {
-      "get": {
-        "tags": [
-          "VSOnlineAccount"
-        ],
-        "summary": "Retrieves information about all VS Online Account resources under the given subscription and resource group",
-        "description": "Retrieves the properties of all VS Online Accounts.",
-        "operationId": "Account_ListByResourceGroup",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the VS Online Account",
-            "schema": {
-              "$ref": "#/definitions/VSOnlineAccountList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Account does not exist.)",
-            "schema": {
-              "$ref": "#/definitions/VSOAccountErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "VSOAccountGet": {
-            "$ref": "./examples/VSOAccountListGet_example.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VSOnline/accounts/": {
-      "get": {
-        "tags": [
-          "VSOnlineAccount"
-        ],
-        "summary": "Retrieves information about all VS Online Account resources under the given subscription",
-        "description": "Retrieves the properties of all VS Online Accounts.",
-        "operationId": "Account_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the list of VS Online Accounts",
-            "schema": {
-              "$ref": "#/definitions/VSOnlineAccountList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Account does not exist.)",
-            "schema": {
-              "$ref": "#/definitions/VSOAccountErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "VSOAccountGet": {
-            "$ref": "./examples/VSOAccountListBySub_example.json"
-          }
         }
       }
     },
@@ -887,48 +618,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "VSOnlineAccount": {
-      "type": "object",
-      "description": "VS Online Account. Represents the high level account needed to provision VS Online resources.",
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/VSOnlineAccountInfo"
-        }
-      ],
-      "properties": {
-        "properties":{
-          "type": "object",
-          "description": "Additional VS Online Account properties.",
-          "title": "VS Online Additional properties",
-          "properties": {
-            "userId": {
-              "type": "string",
-              "description": "unique user assigned id."
-            },
-            "serviceUri": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Service endpoint."
-            }
-          }
-        }
-      }
-    },
-    "VSOnlineAccountInfo": {
-      "description": "VS Online Account properties. Holds properties that describe the account.",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the service."
-        }
-      }
-    },
     "Sku": {
       "type": "object",
       "description": "Model representing SKU for VS Online Account.",
@@ -958,6 +647,16 @@
             "modelAsString": true
           }
         }
+      }
+    },
+    "VnetProperties": {
+      "type": "object",
+      "description": "Model representing Vnet Injection properties for VS Online Account.",
+      "properties": {
+        "SubnetId": {
+          "type": "string",
+          "description": "The ARM resource identifier of the virtual network subnet which the codespaces of the VSO Plan will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.The virtual network must be in the same region and subscription as the VSO Plan."
+         }
       }
     },
     "ResourceProviderOperationList": {
@@ -1011,23 +710,6 @@
         }
       }
     },
-    "VSOnlineAccountList": {
-      "description": "Object that includes an array of VS Online Accounts and a possible link for next set.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of VS Online Accounts",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VSOnlineAccount"
-          }
-        },
-        "nextLink": {
-          "description": "The URL the client should use to fetch the next page (per server side paging).",
-          "type": "string"
-        }
-      }
-    },
     "VSOPlanUpdateParameters": {
       "type": "object",
       "description": "Parameters for updating a VS Online Plan.",
@@ -1053,6 +735,10 @@
             "defaultEnvironmentSku": {
               "description": "Specifies the default environment sku name for this plan.",
               "type": "string"
+            },
+            "vnetProperties":{
+              "$ref": "#/definitions/VnetProperties",
+              "description": "Specifies the vnet injection properties for this plan."
             }
           }
         }
@@ -1076,13 +762,12 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/VSOnlinePlanInfo"
         }
       ],
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the service."
-        },
         "properties":{
           "type": "object",
           "description": "Additional VS Online Plan properties.",
@@ -1104,8 +789,21 @@
             "defaultEnvironmentSku": {
               "description": "Specifies the default environment sku name for this plan.",
               "type": "string"
+            },
+            "vnetProperties":{
+              "$ref": "#/definitions/VnetProperties",
+              "description": "Specifies the vnet injection properties for this plan."
             }
           }
+        }
+      }
+    },
+    "VSOnlinePlanInfo": {
+      "description": "VS Online Plan properties. Holds properties that describe the plan.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the service."
         }
       }
     },
@@ -1215,15 +913,6 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
-    },
-    "AcctNameParameter": {
-      "name": "accountName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the VS Online Plan",
-      "pattern": "^[a-zA-Z0-9]",
-      "x-ms-parameter-location": "method"
     },
     "PlanNameParameter": {
       "name": "planName",
