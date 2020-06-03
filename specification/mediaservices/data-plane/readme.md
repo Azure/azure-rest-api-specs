@@ -25,7 +25,7 @@ To see additional help and options, run:
 These are the global settings for the MediaServices API.
 
 ``` yaml
-openapi-type: arm
+openapi-type: data-plane
 tag: package-lva-1-0-0-preview
 opt-in-extensible-enums: true
 ```
@@ -68,7 +68,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ``` yaml $(csharp)
 csharp:
-  azure-arm: true
+  azure-arm: false
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Media.Edge.LiveVideoAnalytics.Client
