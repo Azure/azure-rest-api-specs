@@ -3186,18 +3186,14 @@
       "properties": {
         "cpu": {
           "format": "int32",
-          "description": "Required CPU",
+          "description": "Required CPU, basic tier should be 1, standard tier should be in range (1, 4)",
           "default": 1,
-          "maximum": 4.0,
-          "minimum": 1.0,
           "type": "integer"
         },
         "memoryInGB": {
           "format": "int32",
-          "description": "Required Memory size in GB",
+          "description": "Required Memory size in GB, basic tier should be in range (1, 2), standard tier should be in range (1, 8)",
           "default": 1,
-          "maximum": 8.0,
-          "minimum": 1.0,
           "type": "integer"
         },
         "jvmOptions": {
@@ -3206,10 +3202,8 @@
         },
         "instanceCount": {
           "format": "int32",
-          "description": "Instance count",
+          "description": "Instance count, basic tier should be in range (1, 25), standard tier should be in range (1, 500)",
           "default": 1,
-          "maximum": 20.0,
-          "minimum": 1.0,
           "type": "integer"
         },
         "environmentVariables": {
