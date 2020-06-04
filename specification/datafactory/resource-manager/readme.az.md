@@ -18,6 +18,28 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
 
+directive:
+    - from: ./entityTypes/Dataset.json
+      where: $.definitions.JsonFormatFilePattern
+      transform: >
+          $['type'] = 'string';
+    - from: ./entityTypes/Dataset.json
+      where: $.definitions.CompressionLevel
+      transform: >
+          $['type'] = 'string'; 
+    - from: ./entityTypes/LinkedService.json
+      where: $.definitions.DynamicsLinkedServiceTypeProperties.properties.servicePrincipalCredentialType
+      transform: >
+          $['type'] = 'string'; 
+    - from: ./entityTypes/LinkedService.json
+      where: $.definitions.ScriptAction.properties.roles
+      transform: >
+          $['type'] = 'string'; 
+    - where:
+          command: datafactory integration-runtime create-linked-integration-runtime
+      set:
+          command: datafactory integration-runtime linked-integration-runtime create
+
 cli:
     cli-directive:
     # directive on operationGroup
@@ -36,9 +58,14 @@ cli:
       - where:
             group: integrationRuntimeObjectMetadata
         hidden: true
-directive:
-    - where:
-          command: datafactory integration-runtime create-linked-integration-runtime
-      set:
-          command: datafactory integration-runtime linked-integration-runtime create
+      - where:
+            group: Factories
+            op: ConfigureFactoryRepo
+            param: locationId
+        name: location
+      - where:
+            group: IntegrationRuntimes
+            op: CreateLinkedIntegrationRuntime
+            param: dataFactoryLocation
+        name: location
 ```
