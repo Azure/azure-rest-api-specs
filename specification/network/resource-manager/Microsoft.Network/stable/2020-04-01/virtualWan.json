@@ -4201,12 +4201,48 @@
             "$ref": "#/definitions/VirtualHubRouteTableV2"
           }
         },
+        "natRules": {
+          "type": "array",
+          "description": "List of all NAT rules defined for use on this VirtualHub.",
+          "items": {
+            "$ref": "#/definitions/NatRule"
+          }
+        },
         "sku": {
           "type": "string",
           "description": "The sku of this VirtualHub."
         }
       },
       "description": "Parameters for VirtualHub."
+    },
+    "NatRule": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of NAT rule.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "NatRuleType",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "type": "string",
+          "description": "The source NAT direction of a NAT rule.",
+          "enum": [
+            "EgressSnat",
+            "IngressSnat"
+          ],
+          "x-ms-enum": {
+            "name": "NatRuleMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "VirtualHub route table."
     },
     "VirtualHubRouteTable": {
       "properties": {
