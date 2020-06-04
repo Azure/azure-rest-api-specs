@@ -1709,6 +1709,21 @@
         ]
       }
     },
+    "MicrosoftSecurityProductName": {
+      "description": "The alerts' productName on which the cases will be generated",
+      "enum": [
+        "Microsoft Cloud App Security",
+        "Azure Security Center",
+        "Azure Advanced Threat Protection",
+        "Azure Active Directory Identity Protection",
+        "Azure Security Center for IoT"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MicrosoftSecurityProductName"
+      }
+    },
     "AlertsDataTypeOfDataConnector": {
       "description": "Alerts data type for data connectors.",
       "properties": {
@@ -2672,19 +2687,8 @@
           "type": "array"
         },
         "productFilter": {
-          "description": "The alerts' productName on which the cases will be generated",
-          "enum": [
-            "Microsoft Cloud App Security",
-            "Azure Security Center",
-            "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "MicrosoftSecurityProductName"
-          }
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
@@ -2737,13 +2741,13 @@
       ],
       "type": "object"
     },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplateCommonProperties": {
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
       "allOf": [
         {
           "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
         }
       ],
-      "description": "MicrosoftSecurityIncidentCreation rule template common property bag.",
+      "description": "MicrosoftSecurityIncidentCreation rule template properties",
       "properties": {
         "displayNamesFilter": {
           "description": "the alerts' displayNames on which the cases will be generated",
@@ -2760,19 +2764,8 @@
           "type": "array"
         },
         "productFilter": {
-          "description": "The alerts' productName on which the cases will be generated",
-          "enum": [
-            "Microsoft Cloud App Security",
-            "Azure Security Center",
-            "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "MicrosoftSecurityProductName"
-          }
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
@@ -2811,15 +2804,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
-    },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateCommonProperties"
-        }
-      ],
-      "description": "MicrosoftSecurityIncidentCreation rule template properties",
-      "type": "object"
     },
     "OfficeConsent": {
       "allOf": [
