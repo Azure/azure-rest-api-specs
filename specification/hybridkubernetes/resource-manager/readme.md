@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2019-09-01-privatepreview` is spec
 
 ```yaml $(tag) == 'package-2019-09-01-privatepreview'
 input-file:
-- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-09-01-privatepreview/connectedClusters.json
 ```
 
 ---
@@ -112,7 +112,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
 - Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
 - Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
-- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-09-01-privatepreview/connectedClusters.json
 
 ```
 
@@ -121,5 +121,5 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
-#  - $(this-folder)/Microsoft.Example/privatepreview/2019-09-01-privatepreview/somefile.json
+#  - $(this-folder)/Microsoft.Example/preview/2019-09-01-privatepreview/somefile.json
 ```
