@@ -115,6 +115,10 @@
       "put": {
         "description": "Creates or updates account.",
         "operationId": "Accounts_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -139,8 +143,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Account created or updated successfully.",
+          "201": {
+            "description": "Async operation to create or update Account was created.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -161,6 +165,10 @@
       "delete": {
         "description": "Deletes account.",
         "operationId": "Accounts_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -176,8 +184,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Account deleted successfully."
+          "202": {
+            "description": "Async operation to delete Account was created."
           },
           "204": {
             "description": "Account has already been deleted."
@@ -328,6 +336,10 @@
       "put": {
         "description": "Creates or updates instance.",
         "operationId": "Instances_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -355,8 +367,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Instance created or updated successfully.",
+          "201": {
+            "description": "Async operation to create or update Instance was created.",
             "schema": {
               "$ref": "#/definitions/Instance"
             }
@@ -377,6 +389,10 @@
       "delete": {
         "description": "Deletes instance.",
         "operationId": "Instances_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -395,8 +411,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Instance deleted successfully."
+          "202": {
+            "description": "Async operation to delete Intance was created."
           },
           "204": {
             "description": "Instance has already been deleted."
@@ -621,12 +637,12 @@
       "description": "Device Update account integration with IoT Hub settings.",
       "properties": {
         "name": {
-           "description": "IoTHub name",
-           "type": "string"
+          "description": "IoTHub name",
+          "type": "string"
         },
         "resourceId": {
-           "description": "IoTHub resource ID",
-           "type": "string"
+          "description": "IoTHub resource ID",
+          "type": "string"
         },
         "ioTHubConnectionString": {
           "description": "IoTHub connection string.",
