@@ -34,17 +34,17 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/azureADHealth/{azureADHealthName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/azureADMetrics/{azureADMetricsName}": {
       "put": {
         "tags": [
-          "azureADHealth"
+          "azureADMetrics"
         ],
-        "operationId": "azureADHealth_Create",
+        "operationId": "azureADMetrics_Create",
         "x-ms-long-running-operation": true,
-        "description": "Creates a azureADHealth instance.",
+        "description": "Creates a azureADMetrics instance.",
         "x-ms-examples": {
-          "azureADHealthCreate": {
-            "$ref": "./examples/AzureADHealthCreate.json"
+          "azureADMetricsCreate": {
+            "$ref": "./examples/AzureADMetricsCreate.json"
           }
         },
         "parameters": [
@@ -55,32 +55,32 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/azureADHealthNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "azureADHealthConfig",
+            "name": "azureADMetricsConfig",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/azureADHealthConfig"
+              "$ref": "#/definitions/azureADMetricsConfig"
             },
-            "description": "AzureADHealth definition supplied to the operation."
+            "description": "AzureADMetrics definition supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Created -- AzureADHealth instance created.",
+            "description": "Created -- AzureADMetrics instance created.",
             "schema": {
-              "$ref": "#/definitions/azureADHealthConfig"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "201": {
-            "description": "OK -- AzureADHealth instance is updated.",
+            "description": "OK -- AzureADMetrics instance is updated.",
             "schema": {
-              "$ref": "#/definitions/azureADHealthConfig"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "default": {
@@ -93,13 +93,13 @@
       },
       "patch": {
         "tags": [
-          "azureADHealth"
+          "azureADMetrics"
         ],
-        "operationId": "azureADHealth_Update",
-        "description": "Updates azureADHealth tags with specified values.",
+        "operationId": "azureADMetrics_Update",
+        "description": "Updates azureADMetrics tags with specified values.",
         "x-ms-examples": {
-          "azureADHealthUpdate": {
-            "$ref": "./examples/AzureADHealthUpdate.json"
+          "azureADMetricsUpdate": {
+            "$ref": "./examples/AzureADMetricsUpdate.json"
           }
         },
         "parameters": [
@@ -110,25 +110,25 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/azureADHealthNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "azureADHealthConfig",
+            "name": "azureADMetricsConfig",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/azureADHealthUpdateParameter"
+              "$ref": "#/definitions/azureADMetricsUpdateParameter"
             },
-            "description": "AzureADHealth resource with the tags to be updated."
+            "description": "AzureADMetrics resource with the tags to be updated."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- AzureADHealth tags are updated.",
+            "description": "OK -- AzureADMetrics tags are updated.",
             "schema": {
-              "$ref": "#/definitions/azureADHealthConfig"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "default": {
@@ -141,13 +141,13 @@
       },
       "get": {
         "tags": [
-          "azureADHealth"
+          "azureADMetrics"
         ],
-        "operationId": "azureADHealth_Get",
-        "description": "Gets a azureADHealth instance with a given name.",
+        "operationId": "azureADMetrics_Get",
+        "description": "Gets a azureADMetrics instance with a given name.",
         "x-ms-examples": {
-          "azureADHealthGet": {
-            "$ref": "./examples/AzureADHealthGet.json"
+          "azureADMetricsGet": {
+            "$ref": "./examples/AzureADMetricsGet.json"
           }
         },
         "parameters": [
@@ -158,7 +158,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/azureADHealthNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -166,9 +166,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns information about the azureADHealth resource.",
+            "description": "OK -- Returns information about the azureADMetrics resource.",
             "schema": {
-              "$ref": "#/definitions/azureADHealthConfig"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "default": {
@@ -181,13 +181,13 @@
       },
       "delete": {
         "tags": [
-          "azureADHealth"
+          "azureADMetrics"
         ],
-        "operationId": "azureADHealth_Delete",
-        "description": "Deletes a AzureADHealth resource. When operation completes, status code 200 returned without content.",
+        "operationId": "azureADMetrics_Delete",
+        "description": "Deletes a AzureADMetrics resource. When operation completes, status code 200 returned without content.",
         "x-ms-examples": {
-          "azureADHealthDelete": {
-            "$ref": "./examples/AzureADHealthDelete.json"
+          "azureADMetricsDelete": {
+            "$ref": "./examples/AzureADMetricsDelete.json"
           }
         },
         "parameters": [
@@ -198,7 +198,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/azureADHealthNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -206,10 +206,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- azureADHealth resource deleted."
+            "description": "OK -- azureADMetrics resource deleted."
           },
           "204": {
-            "description": "azureADHealth does not exist."
+            "description": "azureADMetrics does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -220,16 +220,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/azureADHealth": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/azureADMetrics": {
       "get": {
         "tags": [
-          "azureADHealth"
+          "azureADMetrics"
         ],
-        "operationId": "azureADHealth_ListBySubscription",
-        "description": "Lists all AzureADHealth resources in the given subscription.",
+        "operationId": "azureADMetrics_ListBySubscription",
+        "description": "Lists all AzureADMetrics resources in the given subscription.",
         "x-ms-examples": {
-          "azureADHealthListBySubscription": {
-            "$ref": "./examples/AzureADHealthListBySubscription.json"
+          "azureADMetricsListBySubscription": {
+            "$ref": "./examples/AzureADMetricsListBySubscription.json"
           }
         },
         "parameters": [
@@ -242,9 +242,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns a list azureADHealth resources.",
+            "description": "OK -- Returns a list azureADMetrics resources.",
             "schema": {
-              "$ref": "#/definitions/azureADHealthListResult"
+              "$ref": "#/definitions/azureADMetricsListResult"
             }
           },
           "default": {
@@ -259,18 +259,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/azureADHealth": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/azureADMetrics": {
       "get": {
         "tags": [
-          "azureADHealth"
+          "azureADMetrics"
         ],
-        "operationId": "azureADHealth_List",
+        "operationId": "azureADMetrics_List",
         "x-ms-examples": {
-          "azureADHealthGetList": {
-            "$ref": "./examples/AzureADHealthList.json"
+          "azureADMetricsGetList": {
+            "$ref": "./examples/AzureADMetricsList.json"
           }
         },
-        "description": "Operation to return the list of AzureADHealth resources scoped to the resourceGroup.",
+        "description": "Operation to return the list of AzureADMetrics resources scoped to the resourceGroup.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -287,13 +287,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to get list of AzureADHealth resources For AzureAD.",
+            "description": "Successful request to get list of AzureADMetrics resources For AzureAD.",
             "schema": {
-              "$ref": "#/definitions/azureADHealthListResult"
+              "$ref": "#/definitions/azureADMetricsListResult"
             }
           },
           "default": {
-            "description": "Error, failed to get list of AzureADHealth resources.",
+            "description": "Error, failed to get list of AzureADMetrics resources.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -303,15 +303,15 @@
     }
   },
   "definitions": {
-    "azureADHealthListResult": {
-      "description": "A list of AzureADHealth resources",
+    "azureADMetricsListResult": {
+      "description": "A list of AzureADMetrics resources",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of AzureADHealth resources.",
+          "description": "Array of AzureADMetrics resources.",
           "items": {
-            "$ref": "#/definitions/azureADHealthConfig"
+            "$ref": "#/definitions/azureADMetricsConfig"
           }
         },
         "nextLink": {
@@ -320,12 +320,12 @@
         }
       }
     },
-    "azureADHealthConfig": {
-      "description": "AzureADHealth resource.",
+    "azureADMetricsConfig": {
+      "description": "AzureADMetrics resource.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the AzureADHealth configuration object.",
+          "description": "Name of the AzureADMetrics configuration object.",
           "type": "string"
         },
         "ownerTenantId": {
@@ -333,7 +333,7 @@
           "type": "string"
         },
         "resourceName": {
-          "description": "Name of the AzureAdHealth resource",
+          "description": "Name of the AzureAdMetrics resource",
           "type": "string"
         },
         "subscriptionId": {
@@ -380,9 +380,9 @@
         }
       }
     },
-    "azureADHealthUpdateParameter": {
+    "azureADMetricsUpdateParameter": {
       "type": "object",
-      "description": "AzureADHealth parameters to be updated. ",
+      "description": "AzureADMetrics parameters to be updated. ",
       "properties": {
         "tags": {
           "type": "object",
@@ -446,13 +446,13 @@
       "x-ms-parameter-location": "method",
       "description": "Name of an Azure resource group."
     },
-    "azureADHealthNameParameter": {
-      "name": "azureADHealthName",
+    "azureADMetricsNameParameter": {
+      "name": "azureADMetricsName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Name of the azureADHealth instance."
+      "description": "Name of the azureADMetrics instance."
     }
   }
 }
