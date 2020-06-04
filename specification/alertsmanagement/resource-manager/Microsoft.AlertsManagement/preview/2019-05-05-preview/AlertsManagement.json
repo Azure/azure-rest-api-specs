@@ -1689,7 +1689,13 @@
           "enum": [
             "AlertCreated",
             "StateChange",
-            "MonitorConditionChange"
+            "MonitorConditionChange",
+            "SeverityChange",
+            "ActionRuleTriggered",
+            "ActionRuleSuppressed",
+            "ActionsTriggered",
+            "ActionsSuppressed",
+            "ActionsFailed"
           ],
           "x-ms-enum": {
             "name": "AlertModificationEvent"
@@ -2023,7 +2029,8 @@
           "description": "type of target scope",
           "enum": [
             "ResourceGroup",
-            "Resource"
+            "Resource",
+            "Subscription"
           ],
           "x-ms-enum": {
             "name": "ScopeType",

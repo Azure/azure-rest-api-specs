@@ -188,7 +188,7 @@
     },
     "Granularity": {
       "type": "string",
-      "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
+      "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid.",
       "x-nullable": false,
       "x-ms-enum": {
         "name": "Granularity",
@@ -200,7 +200,8 @@
         "weekly",
         "daily",
         "hourly",
-        "minutely"
+        "minutely",
+        "secondly"
       ]
     },
     "CustomInterval": {
@@ -404,7 +405,7 @@
         },
         "granularity": {
           "$ref": "#/definitions/Granularity",
-          "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
+          "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid."
         },
         "customInterval": {
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",

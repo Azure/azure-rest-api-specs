@@ -1,0 +1,1121 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightJobClient",
+    "description": "The HDInsight Job Client.",
+    "version": "2018-11-01-preview",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpointParameter"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/livy/batches": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "List all spark batch jobs",
+        "operationId": "Job_ListSparkBatchJob",
+        "x-ms-examples": {
+          "List all spark batch jobs": {
+            "$ref": "./examples/HDI_Job_ListSparkBatchJob.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Optional param specifying which index the list should begin from.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Optional param specifying the size of the returned list.\r\n            By default it is 20 and that is the maximum.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkBatchJobCollection"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Create a new spark batch job.",
+        "operationId": "Job_SubmitSparkBatchJob",
+        "x-ms-examples": {
+          "Create a spark batch job": {
+            "$ref": "./examples/HDI_Job_SubmitSparkBatchJob.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestedByParameter"
+          },
+          {
+            "name": "sparkBatchJobRequest",
+            "in": "body",
+            "description": "Livy compatible batch job request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkBatchJobRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SparkBatchJob"
+            }
+          }
+        }
+      }
+    },
+    "/livy/batches/{batchId}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single spark batch job.",
+        "operationId": "Job_GetSparkBatchJob",
+        "x-ms-examples": {
+          "Gets a single spark batch job": {
+            "$ref": "./examples/HDI_Job_GetSparkBatchJob.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "Identifier for the batch job.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkBatchJob"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Cancels a running spark batch job.",
+        "operationId": "Job_DeleteSparkBatch",
+        "x-ms-examples": {
+          "Cancels a running spark batch job": {
+            "$ref": "./examples/HDI_Job_DeleteSparkBatch.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestedByParameter"
+          },
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "Identifier for the batch job.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDeletedResult"
+            }
+          }
+        }
+      }
+    },
+    "/livy/batches/{batchId}/log": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single spark batch job logs.",
+        "operationId": "Job_GetSparkBatchLog",
+        "x-ms-examples": {
+          "Gets a single spark batch job logs": {
+            "$ref": "./examples/HDI_Job_GetSparkBatchLog.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "Identifier for the batch job.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Optional param specifying which index the list should begin from.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Optional param specifying the size of the returned list.\r\n            By default it is 20 and that is the maximum.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobLog"
+            }
+          }
+        }
+      }
+    },
+    "/livy/batches/{batchId}/state": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single spark batch state.",
+        "operationId": "Job_GetSparkBatchState",
+        "x-ms-examples": {
+          "Gets a single spark batch state": {
+            "$ref": "./examples/HDI_Job_GetSparkBatchState.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "Identifier for the batch job.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobState"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "List all spark sessions.",
+        "operationId": "Job_ListSparkSessionJob",
+        "x-ms-examples": {
+          "List all spark sessions": {
+            "$ref": "./examples/HDI_Job_ListSparkSessionJob.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Optional param specifying which index the list should begin from.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Optional param specifying the size of the returned list.\r\n            By default it is 20 and that is the maximum.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkSessionCollection"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Create a new spark session.",
+        "operationId": "Job_SubmitSparkSessionJob",
+        "x-ms-examples": {
+          "Create a new spark session": {
+            "$ref": "./examples/HDI_Job_SubmitSparkSessionJob.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestedByParameter"
+          },
+          {
+            "name": "sparkSessionJobRequest",
+            "in": "body",
+            "description": "Livy compatible session job request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkSessionJobRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SparkSessionJob"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions/{sessionId}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single spark session.",
+        "operationId": "Job_GetSparkSessionJob",
+        "x-ms-examples": {
+          "Gets a single spark session": {
+            "$ref": "./examples/HDI_Job_GetSparkSessionJob.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkSessionJob"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Cancels a running spark session.",
+        "operationId": "Job_DeleteSparkSessionJob",
+        "x-ms-examples": {
+          "Cancels a running spark session": {
+            "$ref": "./examples/HDI_Job_DeleteSparkSessionJob.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestedByParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDeletedResult"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions/{sessionId}/log": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single spark session job logs.",
+        "operationId": "Job_GetSparkSessionLog",
+        "x-ms-examples": {
+          "Gets a single spark session job logs": {
+            "$ref": "./examples/HDI_Job_GetSparkSessionLog.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session job.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Optional param specifying which index the list should begin from.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Optional param specifying the size of the returned list.\r\n            By default it is 20 and that is the maximum.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobLog"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions/{sessionId}/state": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single spark session job state.",
+        "operationId": "Job_GetSparkSessionState",
+        "x-ms-examples": {
+          "Gets a single spark session job state": {
+            "$ref": "./examples/HDI_Job_GetSparkSessionState.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session job.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobState"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions/{sessionId}/statements": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a list of statements within a spark session.",
+        "operationId": "Job_ListSparkStatementJob",
+        "x-ms-examples": {
+          "Gets a list of statements within a spark session": {
+            "$ref": "./examples/HDI_Job_ListSparkStatementJob.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkStatementCollection"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Create a statement within a spark session.",
+        "operationId": "Job_SubmitSparkStatementJob",
+        "x-ms-examples": {
+          "Create a statement within a spark session": {
+            "$ref": "./examples/HDI_Job_SubmitSparkStatementJob.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestedByParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sparkStatementRequest",
+            "in": "body",
+            "description": "Livy compatible batch job request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkStatementRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SparkStatement"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions/{sessionId}/statements/{statementId}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Gets a single statement within a spark session.",
+        "operationId": "Job_GetSparkStatementJob",
+        "x-ms-examples": {
+          "Gets a single statement within a spark session": {
+            "$ref": "./examples/HDI_Job_GetSparkStatementJob.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "statementId",
+            "in": "path",
+            "description": "Identifier for the statement.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkStatement"
+            }
+          }
+        }
+      }
+    },
+    "/livy/sessions/{sessionId}/statements/{statementId}/cancel": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "description": "Kill a statement within a session.",
+        "operationId": "Job_DeleteSparkStatementJob",
+        "x-ms-examples": {
+          "Kill a statement within a session": {
+            "$ref": "./examples/HDI_Job_DeleteSparkStatementJob.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestedByParameter"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Identifier for the session.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "statementId",
+            "in": "path",
+            "description": "Identifier for the statement.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkStatementCancellationResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SparkBatchJobCollection": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "total": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sessions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkBatchJob"
+          }
+        }
+      }
+    },
+    "SparkBatchJob": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "appInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "log": {
+          "x-ms-client-name": "logLines",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SparkBatchJobRequest": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "proxyUser": {
+          "type": "string"
+        },
+        "className": {
+          "type": "string"
+        },
+        "args": {
+          "x-ms-client-name": "arguments",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "jars": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pyFiles": {
+          "x-ms-client-name": "pythonFiles",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "driverMemory": {
+          "type": "string"
+        },
+        "driverCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "executorMemory": {
+          "type": "string"
+        },
+        "executorCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numExecutors": {
+          "x-ms-client-name": "executorCount",
+          "format": "int32",
+          "type": "integer"
+        },
+        "archives": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queue": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "conf": {
+          "x-ms-client-name": "configuration",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SparkSessionCollection": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "total": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sessions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkSessionJob"
+          }
+        }
+      }
+    },
+    "SparkSessionJob": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "proxyUser": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "log": {
+          "x-ms-client-name": "logLines",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "appInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SparkSessionJobRequest": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SessionJobKind",
+            "modelAsString": true
+          },
+          "enum": [
+            "spark",
+            "pyspark",
+            "sparkr",
+            "sql"
+          ]
+        },
+        "proxyUser": {
+          "type": "string"
+        },
+        "jars": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pyFiles": {
+          "x-ms-client-name": "pythonFiles",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "driverMemory": {
+          "type": "string"
+        },
+        "driverCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "executorMemory": {
+          "type": "string"
+        },
+        "executorCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numExecutors": {
+          "x-ms-client-name": "executorCount",
+          "format": "int32",
+          "type": "integer"
+        },
+        "archives": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queue": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "conf": {
+          "x-ms-client-name": "configuration",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "heartbeatTimeoutInSecond": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SparkJobLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "from": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "log": {
+          "x-ms-client-name": "logLines",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SparkJobState": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "SparkStatementCollection": {
+      "type": "object",
+      "properties": {
+        "statements": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkStatement"
+          }
+        }
+      }
+    },
+    "SparkStatement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "output": {
+          "$ref": "#/definitions/SparkStatementOutput"
+        },
+        "progress": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SparkStatementOutput": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "execution_count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "SparkStatementRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        }
+      }
+    },
+    "SparkStatementCancellationResult": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "x-ms-client-name": "cancelMessage",
+          "type": "string"
+        }
+      }
+    },
+    "SparkJobDeletedResult": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "x-ms-client-name": "deletedMessage",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "requestedByParameter": {
+      "name": "X-Requested-By",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "requestedBy",
+      "description": "Add default value for X-Requested-By in header.",
+      "in": "header",
+      "required": false,
+      "default": "ambari",
+      "type": "string"
+    },
+    "endpointParameter": {
+      "name": "endpoint",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "description": "The cluster endpoint, for example https://clustername.azurehdinsight.net.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

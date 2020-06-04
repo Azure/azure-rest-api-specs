@@ -1,7 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Monitor Private Link Scopes",
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
     "description": "Azure Monitor API reference for Private Links Scopes management.",
     "version": "2019-10-17-preview"
   },
@@ -27,7 +30,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -40,19 +43,13 @@
         "operationId": "PrivateLinkScopes_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "A list containing 0 or more Azure Monitor PrivateLinkScope definitions.",
             "schema": {
@@ -76,22 +73,16 @@
         "operationId": "PrivateLinkScopes_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "A list containing 0 or more Azure Monitor PrivateLinkScope definitions.",
             "schema": {
@@ -115,25 +106,19 @@
         "operationId": "PrivateLinkScopes_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request when deleting a Azure Monitor PrivateLinkScope."
           },
@@ -156,25 +141,19 @@
         "operationId": "PrivateLinkScopes_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "An Azure Monitor PrivateLinkScope definition.",
             "schema": {
@@ -193,16 +172,16 @@
         "operationId": "PrivateLinkScopes_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "AzureMonitorPrivateLinkScopePayload",
@@ -215,14 +194,14 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request when creating or updating a Azure Monitor PrivateLinkScope. The updated PrivateLinkScope is returned.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
+            }
+          },
+          "201": {
+            "description": "Successful request when creating or updating a Azure Monitor PrivateLinkScope. The updated PrivateLinkScope was created and is returned.",
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
@@ -242,16 +221,16 @@
         "operationId": "PrivateLinkScopes_UpdateTags",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "PrivateLinkScopeTags",
@@ -264,12 +243,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Updating the Azure Monitor PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
             "schema": {
@@ -305,13 +278,13 @@
             "description": "The operation Id."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -336,20 +309,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           }
         ],
         "responses": {
@@ -376,20 +345,16 @@
         "operationId": "PrivateLinkResources_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "$ref": "#/parameters/GroupNameParameter"
@@ -419,20 +384,16 @@
         "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "privateEndpointConnectionName",
@@ -464,20 +425,16 @@
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "privateEndpointConnectionName",
@@ -521,20 +478,16 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "privateEndpointConnectionName",
@@ -572,20 +525,16 @@
         "operationId": "PrivateEndpointConnections_ListByPrivateLinkScope",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           }
         ],
         "responses": {
@@ -615,20 +564,16 @@
         "operationId": "PrivateLinkScopedResources_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "name",
@@ -660,20 +605,16 @@
         "operationId": "PrivateLinkScopedResources_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "name",
@@ -693,7 +634,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully scoped azure monitor resource in a private link scope.",
+            "description": "Successfully create or updated a new azure monitor scoped resource in a private link scope.",
+            "schema": {
+              "$ref": "#/definitions/ScopedResource"
+            }
+          },
+          "201": {
+            "description": "Successfully created a new azure monitor scoped resource in a private link scope.",
             "schema": {
               "$ref": "#/definitions/ScopedResource"
             }
@@ -717,20 +664,16 @@
         "operationId": "PrivateLinkScopedResources_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           },
           {
             "name": "name",
@@ -768,20 +711,16 @@
         "operationId": "PrivateLinkScopedResources_ListByPrivateLinkScope",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scopeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+            "$ref": "#/parameters/PrivateLinkScopeName"
           }
         ],
         "responses": {
@@ -835,7 +774,7 @@
         "error": {
           "type": "object",
           "description": "The error detail of the operation if any.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ErrorResponseCommon",
           "x-nullable": true
         }
       }
@@ -914,6 +853,14 @@
           "type": "string",
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
           "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
         }
       }
     },
@@ -1044,7 +991,6 @@
     },
     "PrivateEndpointConnection": {
       "description": "A private endpoint connection",
-      "x-ms-azure-resource": true,
       "type": "object",
       "allOf": [
         {
@@ -1099,7 +1045,6 @@
     },
     "ScopedResource": {
       "description": "A private link scoped resource",
-      "x-ms-azure-resource": true,
       "type": "object",
       "allOf": [
         {
@@ -1132,38 +1077,95 @@
     "ProxyResource": {
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource ID."
+          "readOnly": true,
+          "description": "Azure resource Id"
         },
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource name."
+          "readOnly": true,
+          "description": "Azure resource name"
         },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseCommon": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      ],
+      "properties": {
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseCommon"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      },
+      "description": "The resource management error response."
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type."
+          "description": "The additional info type."
         },
-        "tags": {
+        "info": {
+          "readOnly": true,
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+          "description": "The additional info."
         }
       },
-      "description": "Common properties of proxy resource."
+      "description": "The resource management error additional info."
     }
   },
   "parameters": {
-    "ResourceNameParameter": {
+    "PrivateLinkScopeName": {
       "name": "scopeName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of the Azure Monitor PrivateLinkScope resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
     "GroupNameParameter": {
@@ -1173,6 +1175,20 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
 }

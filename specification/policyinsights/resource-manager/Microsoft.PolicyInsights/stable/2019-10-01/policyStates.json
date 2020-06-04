@@ -67,6 +67,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -83,9 +86,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at management group scope": {
             "$ref": "./examples/PolicyStates_QueryManagementGroupScope.json"
+          },
+          "Query latest at management group scope with next link": {
+            "$ref": "./examples/PolicyStates_QueryManagementGroupScopeNextLink.json"
           }
         }
       }
@@ -175,6 +184,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -191,9 +203,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at subscription scope": {
             "$ref": "./examples/PolicyStates_QuerySubscriptionScope.json"
+          },
+          "Query latest at subscription scope with next link": {
+            "$ref": "./examples/PolicyStates_QuerySubscriptionScopeNextLink.json"
           },
           "Time range; sort, select and limit": {
             "$ref": "./examples/PolicyStates_TimeRangeSortSelectTop.json"
@@ -301,6 +319,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -317,9 +338,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at resource group scope": {
             "$ref": "./examples/PolicyStates_QueryResourceGroupScope.json"
+          },
+          "Query latest at resource group scope with next link": {
+            "$ref": "./examples/PolicyStates_QueryResourceGroupScopeNextLink.json"
           }
         }
       }
@@ -412,6 +439,9 @@
           },
           {
             "$ref": "#/parameters/expandParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -428,9 +458,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query all policy states at resource scope": {
             "$ref": "./examples/PolicyStates_QueryResourceScope.json"
+          },
+          "Query all policy states at resource scope with next link": {
+            "$ref": "./examples/PolicyStates_QueryResourceScopeNextLink.json"
           },
           "Query all policy states at subscription level resource scope": {
             "$ref": "./examples/PolicyStates_QuerySubscriptionLevelResourceScope.json"
@@ -443,6 +479,12 @@
           },
           "Query all policy states at resource scope and expand policyEvaluationDetails": {
             "$ref": "./examples/PolicyStates_QueryResourceScopeExpandPolicyEvaluationDetails.json"
+          },
+          "Query component policy compliance state at resource scope filtered by given assignment.": {
+            "$ref": "./examples/PolicyStates_QueryResourceScopeExpandComponents.json"
+          },
+          "Query component policy compliance state count grouped by state type at resource scope filtered by given assignment.": {
+            "$ref": "./examples/PolicyStates_QueryResourceScopeExpandComponentsGroupByWithAggregate.json"
           }
         }
       }
@@ -612,6 +654,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -628,9 +673,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at subscription level policy set definition scope": {
             "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicySetDefinitionScope.json"
+          },
+          "Query latest at subscription level policy set definition scope with next link": {
+            "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicySetDefinitionScopeNextLink.json"
           }
         }
       }
@@ -729,6 +780,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -745,9 +799,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at subscription level policy definition scope": {
             "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicyDefinitionScope.json"
+          },
+          "Query latest at subscription level policy definition scope with next link": {
+            "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicyDefinitionScopeNextLink.json"
           }
         }
       }
@@ -846,6 +906,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -862,9 +925,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at subscription level policy assignment scope": {
             "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicyAssignmentScope.json"
+          },
+          "Query latest at subscription level policy assignment scope with next link": {
+            "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicyAssignmentScopeNextLink.json"
           }
         }
       }
@@ -966,6 +1035,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -982,9 +1054,15 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at resource group level policy assignment scope": {
             "$ref": "./examples/PolicyStates_QueryResourceGroupLevelPolicyAssignmentScope.json"
+          },
+          "Query latest at resource group level policy assignment scope with next link": {
+            "$ref": "./examples/PolicyStates_QueryResourceGroupLevelPolicyAssignmentScopeNextLink.json"
           }
         }
       }
@@ -1090,6 +1168,10 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        },
+        "@odata.nextLink": {
+          "description": "Odata next link; URL to get the next set of results.",
+          "type": "string"
         },
         "value": {
           "description": "Query results.",
@@ -1229,6 +1311,13 @@
             "type": "string"
           }
         },
+        "components": {
+          "description": "Components state compliance records populated only when URL contains $expand=components clause.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentStateDetails"
+          }
+        },
         "policyDefinitionVersion": {
           "description": "Evaluated policy definition version.",
           "type": "string",
@@ -1265,6 +1354,36 @@
           "type": "object",
           "$ref": "#/definitions/IfNotExistsEvaluationDetails"
         }
+      }
+    },
+    "ComponentStateDetails": {
+      "type": "object",
+      "description": "Component state details.",
+      "properties": {
+        "id": {
+          "description": "Component Id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Component type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Component name.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Component compliance evaluation timestamp.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "complianceState": {
+          "description": "Component compliance state.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
     "ExpressionEvaluationDetails": {
@@ -1776,12 +1895,24 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails",
+      "description": "The $expand query parameter. For example, to expand components use $expand=components",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Expand"
+    },
+    "skipTokenParameter": {
+      "name": "$skiptoken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "SkipToken"
     }
   }
 }

@@ -43,18 +43,46 @@ directive:
       ]}
 
 cli:
-    cli-directive:
+  test-scenario:
+    - name: /Vaults/put/Create a new vault or update an existing vault
+    - name: /Vaults/put/Create or update a vault with network acls
+      disabled: true
+    - name: /Vaults/put/Add an access policy, or update an access policy with new permissions
+      disabled: true
+    - name: /PrivateEndpointConnections/put/KeyVaultPutPrivateEndpointConnection
+      disabled: true
+    - name: /PrivateEndpointConnections/get/KeyVaultGetPrivateEndpointConnection
+      disabled: true
+    - name: /PrivateLinkResources/get/KeyVaultListPrivateLinkResources
+      disabled: true
+    - name: /Vaults/get/Retrieve a vault
+    - name: /Vaults/get/List vaults in the specified resource group
+    - name: /Vaults/get/List deleted vaults in the specified subscription
+    - name: /Vaults/get/List vaults in the specified subscription
+    - name: /Vaults/get/List vaults in the specified subscription
+    - name: /Operations/get/Lists available Rest API operations.
+    - name: /Vaults/patch/Update an existing vault
+      disabled: true
+    - name: /Vaults/post/Validate a vault name
+    - name: /PrivateEndpointConnections/delete/KeyVaultDeletePrivateEndpointConnection
+      disabled: true
+    - name: /Vaults/delete/Delete a vault
+    - name: /Vaults/get/Retrieve a deleted vault
+      disabled: true
+    - name: /Vaults/post/Purge a deleted vault
+      disabled: true
+  cli-directive:
       - where:
             resource: 'vaults'
-            op: '^(get_deleted|purge_deleted)$'
+            op: '^(getDeleted|purgeDeleted)$'
         hidden: true
       - where:
-            enum: 'sku_name'
+            enum: 'skuName'
         alias: 'sku'
         name: 'sku'
       - where:
             resource: 'vaults'
-            op: 'check_name_availability'
+            op: 'checkNameAvailability'
         name: 'test'
         hidden: true
       - where:
@@ -62,7 +90,7 @@ cli:
             op: 'update'
         hidden: true
       - where:
-            type: 'vaults'
+            type: 'vault'
         formatTable:
             properties:
                 - Name
@@ -70,7 +98,7 @@ cli:
                 - Location
                 - Uri
       - where:
-            type: 'deleted_vault'
+            type: 'deletedVault'
         formatTable:
             properties:
               - Name
