@@ -1535,6 +1535,10 @@
             "type": "string"
           },
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
+        "proximityPlacementGroupID": {
+          "$ref": "#/definitions/PPGID",
+          "description": "The ID for Proximity Placement Group."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -2474,6 +2478,10 @@
       "type": "number",
       "default": -1,
       "description": "SpotMaxPrice to be used to specify the maximum price you are willing to pay in US Dollars. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand."
+    },
+    "PPGID": {
+      "type": "string",
+      "description": "The ID for Proximity Placement Group."
     },
     "CredentialResults": {
       "properties": {
