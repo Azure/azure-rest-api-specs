@@ -128,6 +128,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AVS/locations/{location}/checkTrialAvailability": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "Return trial status for subscription by region",
+        "operationId": "Locations_CheckTrialAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Azure region"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/Trial"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckQuotaAvailability": {
+            "$ref": "./examples/Locations_CheckTrialAvailability.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AVS/locations/{location}/checkQuotaAvailability": {
       "post": {
         "tags": [
@@ -753,6 +796,26 @@
     }
   },
   "definitions": {
+    "Trial": {
+      "description": "Subscription trial availability",
+      "properties": {
+        "status": {
+          "description": "Trial status",
+          "type": "string",
+          "enum": [
+            "TrialAvailable",
+            "TrialUsed",
+            "TrialDisabled"
+          ],
+          "readOnly": true
+        },
+        "availableHosts": {
+          "description": "Number of trial hosts available",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
     "Quota": {
       "description": "Subscription quotas",
       "properties": {
