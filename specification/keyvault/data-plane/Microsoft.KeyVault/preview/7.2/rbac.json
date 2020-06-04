@@ -153,7 +153,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+              "$ref": "#/definitions/RoleAssignmentProperties"
             },
             "description": "Parameters for the role assignment."
           },
@@ -349,6 +349,7 @@
       "description": "Role assignment list operation result."
     },
     "RoleAssignmentProperties": {
+      "type":"object",
       "properties": {
         "roleDefinitionId": {
           "type": "string",
@@ -364,18 +365,6 @@
         "principalId"
       ],
       "description": "Role assignment properties."
-    },
-    "RoleAssignmentCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoleAssignmentProperties",
-          "description": "Role assignment properties."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Role assignment create parameters."
     },
     "RoleDefinitionFilter": {
       "properties": {
