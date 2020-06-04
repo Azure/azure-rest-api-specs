@@ -2737,6 +2737,56 @@
       ],
       "type": "object"
     },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateCommonProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "MicrosoftSecurityIncidentCreation rule template common property bag.",
+      "properties": {
+        "displayNamesFilter": {
+          "description": "the alerts' displayNames on which the cases will be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "productFilter": {
+          "description": "The alerts' productName on which the cases will be generated",
+          "enum": [
+            "Microsoft Cloud App Security",
+            "Azure Security Center",
+            "Azure Advanced Threat Protection",
+            "Azure Active Directory Identity Protection",
+            "Azure Security Center for IoT"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "MicrosoftSecurityProductName"
+          }
+        },
+        "severitiesFilter": {
+          "description": "the alerts' severities on which the cases will be generated",
+          "items": {
+            "$ref": "#/definitions/AlertSeverity"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "productFilter"
+      ],
+      "type": "object"
+    },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
@@ -2765,16 +2815,9 @@
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateCommonProperties"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
-          "description": "MicrosoftSecurityIncidentCreation rule template common properties",
-          "x-ms-client-flatten": true
-        }        
-      },
       "description": "MicrosoftSecurityIncidentCreation rule template properties",
       "type": "object"
     },
