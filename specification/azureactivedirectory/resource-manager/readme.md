@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2020-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-07'
 input-file:
-  - Microsoft.Aadiam/preview/2020-07-01-preview/azureADHealth.json
+  - Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
 ```
 
 ### Tag: package-preview-2020-03
@@ -61,14 +61,14 @@ input-file:
 ``` yaml
 directive:
   - suppress: BodyTopLevelProperties
-    from: azureADHealth.json
-    where: $.definitions.azureADHealthConfig.properties
+    from: azureADMetrics.json
+    where: $.definitions.azureADMetricsConfig.properties
   - suppress: BodyTopLevelProperties
     from: privateLinkForAzureAD.json
     where: $.definitions.privateLinkPolicy.properties
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: azureADHealth.json
-    where: $.definitions.azureADHealthConfig
+    from: azureADMetrics.json
+    where: $.definitions.azureADMetricsConfig
   - suppress: RequiredPropertiesMissingInResourceModel
     from: privateLinkForAzureAD.json
     where: $.definitions.privateLinkPolicy
@@ -130,7 +130,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
-  - $(this-folder)/Microsoft.Aadiam/preview/2020-07-01-preview/azureADHealth.json
+  - $(this-folder)/Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
   - $(this-folder)/Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
   - $(this-folder)/Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
 
