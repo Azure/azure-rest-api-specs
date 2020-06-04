@@ -19,19 +19,19 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
 
 directive:
-    - from: ./entityTypes/Dataset.json
+    - from: swagger-document
       where: $.definitions.JsonFormatFilePattern
       transform: >
           $['type'] = 'string';
-    - from: ./entityTypes/Dataset.json
+    - from: swagger-document
       where: $.definitions.CompressionLevel
       transform: >
           $['type'] = 'string'; 
-    - from: ./entityTypes/LinkedService.json
+    - from: swagger-document
       where: $.definitions.DynamicsLinkedServiceTypeProperties.properties.servicePrincipalCredentialType
       transform: >
           $['type'] = 'string'; 
-    - from: ./entityTypes/LinkedService.json
+    - from: swagger-document
       where: $.definitions.ScriptAction.properties.roles
       transform: >
           $['type'] = 'string'; 
