@@ -1293,6 +1293,11 @@
             "$ref": "#/definitions/QueryKey"
           },
           "description": "The query keys for the Azure Cognitive Search service."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Request URL that can be used to query next page of query keys. Returned when the total number of requested query keys exceed maximum page size."
         }
       },
       "description": "Response containing the query API keys for a given Azure Cognitive Search service.",
@@ -1324,8 +1329,10 @@
       }
     },
     "PrivateEndpointConnection": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together.",
           "externalDocs": {
@@ -1425,19 +1432,36 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "The list of Private Endpoint connections."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size."
         }
       },
       "description": "Response containing a list of Private Endpoint connections.",
       "x-ms-external": true
     },
     "SharedPrivateLinkResource": {
+      "x-ms-azure-resource": true,
       "properties": {
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the shared private link resource.",
           "externalDocs": {
             "url": "https://aka.ms/search-naming-rules"
           }
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the shared private link resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
         },
         "properties": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
@@ -1738,6 +1762,11 @@
             "$ref": "#/definitions/SearchService"
           },
           "description": "The list of Search services."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Request URL that can be used to query next page of search services. Returned when the total number of requested search services exceed maximum page size."
         }
       },
       "description": "Response containing a list of Azure Cognitive Search services.",
