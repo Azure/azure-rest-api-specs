@@ -2740,39 +2740,14 @@
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties"
-        }
-      ],
-      "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
-      "type": "object",
-      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
-    },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateInnerProperties"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase",
-          "description": "alert rule template base properties",
-          "x-ms-client-flatten": true
-        }        
-      },
-      "description": "MicrosoftSecurityIncidentCreation rule template properties",
-      "type": "object"
-    },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplateInnerProperties": {
-      "allOf": [
-        {
           "$ref": "#/definitions/AlertRuleTemplate"
         }
       ],
+      "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
-          "description": "MicrosoftSecurityIncidentCreation rule template common properties",
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
+          "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "required": [
             "displayName",
             "description",
@@ -2784,7 +2759,23 @@
           "x-ms-client-flatten": true
         }
       },
-      "description": "MicrosoftSecurityIncidentCreation rule template inner properties",
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
+          "description": "MicrosoftSecurityIncidentCreation rule template common properties",
+          "x-ms-client-flatten": true
+        }        
+      },
+      "description": "MicrosoftSecurityIncidentCreation rule template properties",
       "type": "object"
     },
     "OfficeConsent": {
