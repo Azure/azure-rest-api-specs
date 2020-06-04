@@ -46,13 +46,13 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
             "name": "replicaType",
@@ -92,6 +92,14 @@
   },
   "definitions": {},
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
     "ManagedInstanceNameParameter": {
       "name": "managedInstanceName",
       "in": "path",
