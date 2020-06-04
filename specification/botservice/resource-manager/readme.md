@@ -26,15 +26,15 @@ These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2020-06-02
 ```
 
 
-### Tag: package-2020-06
+### Tag: package-2020-06-02
 
-These settings apply only when `--tag=package-2020-06` is specified on the command line.
+These settings apply only when `--tag=package-2020-06-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+```yaml $(tag) == 'package-2020-06-02'
 input-file:
   - Microsoft.BotService/stable/2020-06-02/botservice.json
 ```
