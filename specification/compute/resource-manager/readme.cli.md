@@ -1,0 +1,164 @@
+## CLI
+
+These settings apply only when `--cli` is specified on the command line.
+
+``` yaml $(cli)
+cli:
+  cli-name: compute
+  package-name: azure-mgmt-compute
+  namespace: azure.mgmt.compute
+  test-scenario:
+    - split: availabilitysets
+    - name: /AvailabilitySets/put/Create an availability set.
+    - name: /AvailabilitySets/get/List availability sets in a subscription.
+    - split: virtualmachine
+    - name: /VirtualMachines/put/Create a vm with password authentication.
+    - name: /VirtualMachines/get/Get Virtual Machine Instance View.
+    - name: /VirtualMachines/get/Lists all available virtual machine sizes to which the specified virtual machine can be resized
+    - name: /VirtualMachines/get/Get a Virtual Machine.
+    - name: /VirtualMachines/get/Lists all the virtual machines under the specified subscription for the specified location.
+    - split: disks
+    - name: /Disks/put/Create an empty managed disk.
+    - split: galleries
+    - name: /Disks/put/Create an empty managed disk.
+    - name: /Images/put/Create a virtual machine image from a managed disk.
+    - name: /Galleries/put/Create or update a simple gallery.
+    - name: /Galleries/get/Get a gallery.
+    - name: /Galleries/get/List galleries in a resource group.
+    - name: /Galleries/get/List galleries in a subscription.
+    - name: /Galleries/patch/Update a simple gallery.
+    - name: /GalleryImages/put/Create or update a simple gallery image.
+    - name: /GalleryImageVersions/put/Create or update a simple Gallery Image Version (Managed Image as source).
+    - name: /GalleryImageVersions/put/Create or update a simple Gallery Image Version using snapshots as a source.
+      disabled: true
+    - name: /GalleryImageVersions/get/Get a gallery Image Version with replication status.
+      disabled: true
+    - name: /GalleryImageVersions/get/Get a gallery Image Version with snapshots as a source.
+      disabled: true
+    - name: /GalleryImageVersions/get/Get a gallery Image Version.
+    - name: /GalleryImageVersions/get/List gallery Image Versions in a gallery Image Definition.
+    - name: /GalleryImages/get/Get a gallery image.
+    - name: /GalleryImages/get/List gallery images in a gallery.
+    - name: /GalleryImageVersions/patch/Update a simple Gallery Image Version (Managed Image as source).
+    - name: /GalleryImages/patch/Update a simple gallery image.
+    - name: /GalleryImageVersions/delete/Delete a gallery Image Version.
+    - name: /GalleryImages/delete/Delete a gallery image.
+    - name: /Galleries/delete/Delete a gallery.
+    - split: disks
+    - name: /Disks/put/Create a managed upload disk.
+    - name: /Disks/put/Create a managed disk by importing an unmanaged blob from the same subscription.
+    - name: /Disks/put/Create a managed disk from an existing managed disk in the same or different subscription.
+    - name: /Disks/put/Create a managed disk from a platform image.
+    - name: /Disks/put/Create a managed disk by importing an unmanaged blob from a different subscription.
+    - name: /Disks/put/Create a managed disk by copying a snapshot.
+    - split: images
+    - name: /Images/put/Create a virtual machine image from a managed disk with DiskEncryptionSet resource.
+    - name: /Images/put/Create a virtual machine image from a blob with DiskEncryptionSet resource.
+    - name: /Images/put/Create a virtual machine image that includes a data disk from a snapshot.
+    - name: /Images/put/Create a virtual machine image that includes a data disk from a blob.
+    - name: /Images/put/Create a virtual machine image from an existing virtual machine.
+    - name: /Images/put/Create a virtual machine image from a snapshot.
+    - name: /Images/put/Create a virtual machine image from a blob.
+    - name: /Images/put/Create a virtual machine image from a snapshot with DiskEncryptionSet resource.
+    - name: /Images/put/Create a virtual machine image that includes a data disk from a managed disk.
+    - split: vms
+    - name: /VirtualMachines/put/Create a platform-image vm with unmanaged os and data disks.
+    - name: /VirtualMachines/put/Create a custom-image vm from an unmanaged generalized os image.
+    - name: /VirtualMachines/put/Create a vm with ephemeral os disk.
+    - name: /VirtualMachines/put/Create a vm with DiskEncryptionSet resource id in the os disk and data disk.
+    - name: /VirtualMachines/put/Create a vm from a custom image.
+    - name: /VirtualMachines/put/Create a vm with boot diagnostics.
+    - name: /VirtualMachines/put/Create a vm with a marketplace image plan.
+    - name: /VirtualMachines/put/Create a vm with premium storage.
+    - name: /VirtualMachines/put/Create a vm with empty data disks.
+    - name: /VirtualMachines/put/Create a vm in an availability set.
+    - name: /VirtualMachines/put/Create a vm with ephemeral os disk provisioning in Resource disk using placement property.
+    - name: /VirtualMachines/put/Create a vm with ssh authentication.
+    - name: /VirtualMachines/put/Create a vm with ephemeral os disk provisioning in Cache disk using placement property.
+    - name: /Snapshots/put/Create a snapshot from an existing snapshot in the same or a different subscription.
+    - name: /Snapshots/put/Create a snapshot by importing an unmanaged blob from the same subscription.
+    - name: /Snapshots/put/Create a snapshot by importing an unmanaged blob from a different subscription.
+    - split: vmss
+    - name: /VirtualMachineScaleSets/put/Create a scale set with ssh authentication.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with terminate scheduled events enabled.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with ephemeral os disks.
+    - name: /VirtualMachineScaleSets/put/Create a custom-image scale set from an unmanaged generalized os image.
+    - name: /VirtualMachineScaleSets/put/Create a platform-image scale set with unmanaged os disks.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with automatic repairs enabled
+    - name: /VirtualMachineScaleSets/put/Create a scale set with a marketplace image plan.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with boot diagnostics.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with an azure application gateway.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with an azure load balancer.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with password authentication.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with DiskEncryptionSet resource in os disk and data disk.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with empty data disks on each vm.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with ephemeral os disks using placement property.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with premium storage.
+    - name: /VirtualMachineScaleSets/put/Create a scale set from a custom image.
+    - name: /VirtualMachineScaleSets/put/Create a scale set with virtual machines in different zones.
+    - name: /VirtualMachineScaleSetVMExtensions/put/Create VirtualMachineScaleSet VM extension.
+    - name: /VirtualMachineScaleSetVMExtensions/get/Get VirtualMachineScaleSet VM extension.
+    - name: /VirtualMachineScaleSetVMExtensions/get/List extensions in Vmss instance.
+    - split: dedicatedhosts
+    - name: /DedicatedHostGroups/put/Create or update a dedicated host group.
+    - name: /SshPublicKeys/put/Create a new SSH public key resource.
+    - name: /DiskEncryptionSets/put/Create a disk encryption set.
+    - name: /DedicatedHosts/put/Create or update a dedicated host .
+    - name: /ContainerServices/put/Create/Update Container Service
+    - name: /ProximityPlacementGroups/put/Create or Update a proximity placement group.
+    - name: /GalleryApplications/put/Create or update a simple gallery Application.
+    - name: /GalleryApplicationVersions/put/Create or update a simple gallery Application Version.
+    - name: /GalleryApplicationVersions/get/Get a gallery Application Version.
+    - name: /GalleryApplicationVersions/get/Get a gallery Application Version with replication status.
+    - name: /GalleryApplicationVersions/get/List gallery Application Versions in a gallery Application Definition.
+    - name: /GalleryApplications/get/Get a gallery Application.
+    - name: /ProximityPlacementGroups/get/Create a proximity placement group.
+    - name: /ContainerServices/get/Get Container Service
+    - name: /DedicatedHosts/get/Get a dedicated host.
+    - name: /DiskEncryptionSets/get/Get information about a disk encryption set.
+    - name: /GalleryApplications/get/List gallery Applications in a gallery.
+    - name: /SshPublicKeys/get/Get an ssh public key.
+    - name: /DedicatedHostGroups/get/Create a dedicated host group.
+    - name: /Snapshots/get/Get information about a snapshot.
+    - name: /ContainerServices/get/List Container Services by Resource Group
+    - name: /ProximityPlacementGroups/get/Create a proximity placement group.
+    - name: /Images/get/Get information about a virtual machine image.
+    - name: /VirtualMachineRunCommands/get/VirtualMachineRunCommandGet
+    - name: /Disks/get/Get information about a managed disk.
+    - name: /DiskEncryptionSets/get/List all disk encryption sets in a resource group.
+    - name: /Snapshots/get/List all snapshots in a resource group.
+    - name: /Images/get/List all virtual machine images in a resource group.
+    - name: /VirtualMachineRunCommands/get/VirtualMachineRunCommandList
+    - name: /Disks/get/List all managed disks in a resource group.
+    - name: /ContainerServices/get/List Container Services
+    - name: /ProximityPlacementGroups/get/Create a proximity placement group.
+    - name: /DiskEncryptionSets/get/List all disk encryption sets in a subscription.
+    - name: /Snapshots/get/List all snapshots in a subscription.
+    - name: /Images/get/List all virtual machine images in a subscription.
+    - name: /Disks/get/List all managed disks in a subscription.
+    - name: /ResourceSkus/get/Lists all available Resource SKUs
+    - name: /ResourceSkus/get/Lists all available Resource SKUs for the specified region
+    - name: /GalleryApplicationVersions/patch/Update a simple gallery Application Version.
+    - name: /VirtualMachineScaleSetVMExtensions/patch/Update VirtualMachineScaleSet VM extension.
+    - name: /VirtualMachineScaleSetVMs/post/Simulate Eviction a virtual machine.
+    - name: /GalleryApplications/patch/Update a simple gallery Application.
+    - name: /VirtualMachineScaleSetRollingUpgrades/post/Start an extension rolling upgrade.
+    - name: /ProximityPlacementGroups/patch/Create a proximity placement group.
+    - name: /LogAnalytics/post/Export logs which contain all Api requests made to Compute Resource Provider within the given time period broken down by intervals.
+    - name: /SshPublicKeys/post/Generate an SSH key pair.
+    - name: /LogAnalytics/post/Export logs which contain all throttled Api requests made to Compute Resource Provider within the given time period.
+    - name: /DiskEncryptionSets/patch/Update a disk encryption set.
+    - name: /VirtualMachines/post/Simulate Eviction a virtual machine.
+    - name: /VirtualMachines/post/Generalize a Virtual Machine.
+    - name: /VirtualMachines/post/VirtualMachineRunCommand
+    - name: /VirtualMachines/post/Reapply the state of a virtual machine.
+    - name: /VirtualMachines/post/Reimage a Virtual Machine.
+    - name: /VirtualMachines/patch/Update a VM by detaching data disk
+    - name: /Images/patch/Updates tags of an Image.
+    - name: /GalleryApplicationVersions/delete/Delete a gallery Application Version.
+    - name: /VirtualMachineScaleSetVMExtensions/delete/Delete VirtualMachineScaleSet VM extension.
+    - name: /GalleryApplications/delete/Delete a gallery Application.
+    - name: /ProximityPlacementGroups/delete/Create a proximity placement group.
+    - name: /ContainerServices/delete/Delete Container Service
+    - name: /DiskEncryptionSets/delete/Delete a disk encryption set.
+```
