@@ -1629,31 +1629,7 @@
           "description": "Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
         },
         "networkAccessPolicy": {
-          "type": "string",
-          "description": "Policy for accessing the disk via network.",
-          "enum": [
-            "AllowAll",
-            "AllowPrivate",
-            "DenyAll"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkAccessPolicy",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AllowAll",
-                "description": "The disk can be exported or uploaded, from any network."
-              },
-              {
-                "value": "AllowPrivate",
-                "description": "The disk can be exported or uploaded to using private endpoint associated with the disk access resource."
-              },
-              {
-                "value": "DenyAll",
-                "description": "BeginGetAccess calls on the disk are not permitted."
-              }
-            ]
-          }
+          "$ref": "#/definitions/NetworkAccessPolicy"
         },
         "diskAccessId": {
           "type": "string",
@@ -1735,31 +1711,7 @@
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
         },
         "networkAccessPolicy": {
-          "type": "string",
-          "description": "Policy for accessing the disk via network.",
-          "enum": [
-            "AllowAll",
-            "AllowPrivate",
-            "DenyAll"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkAccessPolicy",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AllowAll",
-                "description": "The disk can be exported or uploaded to from any network."
-              },
-              {
-                "value": "AllowPrivate",
-                "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
-              },
-              {
-                "value": "DenyAll",
-                "description": "The disk cannot be exported."
-              }
-            ]
-          }
+          "$ref": "#/definitions/NetworkAccessPolicy"
         },
         "diskAccessId": {
           "type": "string",
@@ -1783,31 +1735,7 @@
     "EncryptionSetProperties": {
       "properties": {
         "encryptionType": {
-          "type": "string",
-          "description": "The type of key used to encrypt the data of the disk. EncryptionType can't be changed once the disk encryption set has been created",
-          "enum": [
-            "EncryptionAtRestWithPlatformKey",
-            "EncryptionAtRestWithCustomerKey",
-            "EncryptionAtRestWithPlatformAndCustomerKeys"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "EncryptionAtRestWithPlatformKey",
-                "description": "Disk is encrypted at rest with platform managed key. It is the default encryption type."
-              },
-              {
-                "value": "EncryptionAtRestWithCustomerKey",
-                "description": "Disk is encrypted at rest with a customer managed key that can be changed and revoked by a customer."
-              },
-              {
-                "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-                "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
-              }
-            ]
-          }
+          "$ref": "#/definitions/EncryptionType"
         },
         "activeKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference",
@@ -1907,6 +1835,33 @@
       },
       "description": "The vault id is an Azure Resource Manager Resource id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
     },
+    "EncryptionType": {
+      "type": "string",
+      "description": "The type of key used to encrypt the data of the disk.",
+      "enum": [
+        "EncryptionAtRestWithPlatformKey",
+        "EncryptionAtRestWithCustomerKey",
+        "EncryptionAtRestWithPlatformAndCustomerKeys"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EncryptionAtRestWithPlatformKey",
+            "description": "Disk is encrypted at rest with Platform managed key. It is the default encryption type."
+          },
+          {
+            "value": "EncryptionAtRestWithCustomerKey",
+            "description": "Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+          },
+          {
+            "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+            "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          }
+        ]
+      }
+    },
     "Encryption": {
       "properties": {
         "diskEncryptionSetId": {
@@ -1914,34 +1869,37 @@
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
         },
         "type": {
-          "type": "string",
-          "description": "The type of key used to encrypt the data of the disk.",
-          "enum": [
-            "EncryptionAtRestWithPlatformKey",
-            "EncryptionAtRestWithCustomerKey",
-            "EncryptionAtRestWithPlatformAndCustomerKeys"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "EncryptionAtRestWithPlatformKey",
-                "description": "Disk is encrypted at rest with Platform managed key. It is the default encryption type."
-              },
-              {
-                "value": "EncryptionAtRestWithCustomerKey",
-                "description": "Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
-              },
-              {
-                "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-                "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
-              }
-            ]
-          }
+          "$ref": "#/definitions/EncryptionType"
         }
       },
       "description": "Encryption at rest settings for disk or snapshot"
+    },
+    "NetworkAccessPolicy": {
+      "type": "string",
+      "description": "Policy for accessing the disk via network.",
+      "enum": [
+        "AllowAll",
+        "AllowPrivate",
+        "DenyAll"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkAccessPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AllowAll",
+            "description": "The disk can be exported or uploaded to from any network."
+          },
+          {
+            "value": "AllowPrivate",
+            "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
+          },
+          {
+            "value": "DenyAll",
+            "description": "The disk cannot be exported."
+          }
+        ]
+      }
     },
     "DiskUpdateProperties": {
       "properties": {
@@ -1996,31 +1954,7 @@
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
         },
         "networkAccessPolicy": {
-          "type": "string",
-          "description": "Policy for accessing the disk via network.",
-          "enum": [
-            "AllowAll",
-            "AllowPrivate",
-            "DenyAll"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkAccessPolicy",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AllowAll",
-                "description": "The disk can be exported or uploaded to from any network."
-              },
-              {
-                "value": "AllowPrivate",
-                "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
-              },
-              {
-                "value": "DenyAll",
-                "description": "The disk cannot be exported."
-              }
-            ]
-          }
+          "$ref": "#/definitions/NetworkAccessPolicy"
         },
         "diskAccessId": {
           "type": "string",
@@ -2057,31 +1991,7 @@
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
         },
         "networkAccessPolicy": {
-          "type": "string",
-          "description": "Policy for accessing the disk via network.",
-          "enum": [
-            "AllowAll",
-            "AllowPrivate",
-            "DenyAll"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkAccessPolicy",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AllowAll",
-                "description": "The disk can be exported or uploaded to from any network."
-              },
-              {
-                "value": "AllowPrivate",
-                "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
-              },
-              {
-                "value": "DenyAll",
-                "description": "The disk cannot be exported."
-              }
-            ]
-          }
+          "$ref": "#/definitions/NetworkAccessPolicy"
         },
         "diskAccessId": {
           "type": "string",
