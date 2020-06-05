@@ -173,6 +173,7 @@
                 "tags": [
                     "MonitoredResources"
                 ],
+                "summary": "List the resources currently being monitored by the Datadog monitor resource.",
                 "operationId": "MonitoredResources_List",
                 "produces": [
                     "application/json"
@@ -739,6 +740,189 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations": {
+            "get": {
+                "tags": [
+                    "SingleSignOn"
+                ],
+                "summary": "List the single sign-on configurations for a given monitor resource.",
+                "operationId": "SingleSignOnConfigurations_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogSingleSignOnResourceListResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "SingleSignOnConfigurations_List": {
+                        "$ref": "./examples/SingleSignOnConfigurations_List.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}": {
+            "put": {
+                "tags": [
+                    "SingleSignOn"
+                ],
+                "summary": "Configures single-sign-on for this resource.",
+                "operationId": "SingleSignOnConfigurations_CreateOrUpdate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "configurationName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogSingleSignOnResource"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogSingleSignOnResource"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogSingleSignOnResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "SingleSignOnConfigurations_CreateOrUpdate": {
+                        "$ref": "./examples/SingleSignOnConfigurations_CreateOrUpdate.json"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SingleSignOn"
+                ],
+                "summary": "Gets the datadog single sign-on resource for the given Monitor.",
+                "operationId": "SingleSignOnConfigurations_Get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "configurationName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogSingleSignOnResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "SingleSignOnConfigurations_Get": {
+                        "$ref": "./examples/SingleSignOnConfigurations_Get.json"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -894,6 +1078,18 @@
                 }
             }
         },
+        "ResourceSku": {
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the SKU.",
+                    "type": "string"
+                }
+            }
+        },
         "ProvisioningState": {
             "enum": [
                 "Accepted",
@@ -902,11 +1098,13 @@
                 "Deleting",
                 "Succeeded",
                 "Failed",
-                "Canceled"
+                "Canceled",
+                "Deleted"
             ],
             "type": "string",
             "x-ms-enum": {
-                "modelAsString": true
+                "modelAsString": true,
+                "name": "ProvisioningState"
             }
         },
         "DatadogSubscriptionTypes": {
@@ -917,7 +1115,8 @@
             ],
             "type": "string",
             "x-ms-enum": {
-                "modelAsString": true
+                "modelAsString": true,
+                "name": "DatadogSubscriptionTypes"
             }
         },
         "DatadogOrganizationProperties": {
@@ -952,6 +1151,26 @@
                 }
             }
         },
+        "UserInfo": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the user",
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "emailAddress": {
+                    "description": "Email of the user used by Datadog for contacting them if needed",
+                    "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "description": "Phone number of the user used by Datadog for contacting them if needed",
+                    "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
+                    "type": "string"
+                }
+            }
+        },
         "MonitorProperties": {
             "description": "Properties specific to the monitor resource.",
             "type": "object",
@@ -961,6 +1180,9 @@
                 },
                 "datadogOrganizationProperties": {
                     "$ref": "#/definitions/DatadogOrganizationProperties"
+                },
+                "userInfo": {
+                    "$ref": "#/definitions/UserInfo"
                 }
             }
         },
@@ -971,14 +1193,15 @@
             ],
             "type": "string",
             "x-ms-enum": {
-                "modelAsString": true
+                "modelAsString": true,
+                "name": "ManagedIdentityTypes"
             }
         },
         "IdentityProperties": {
             "type": "object",
             "properties": {
                 "principalId": {
-                    "description": "The identity Id",
+                    "description": "The identity ID.",
                     "type": "string",
                     "readOnly": true
                 },
@@ -1012,6 +1235,9 @@
                     "description": "The type of the monitor resource.",
                     "type": "string",
                     "readOnly": true
+                },
+                "sku": {
+                    "$ref": "#/definitions/ResourceSku"
                 },
                 "properties": {
                     "$ref": "#/definitions/MonitorProperties"
@@ -1066,7 +1292,8 @@
             ],
             "type": "string",
             "x-ms-enum": {
-                "modelAsString": true
+                "modelAsString": true,
+                "name": "TagAction"
             }
         },
         "FilteringTag": {
@@ -1103,7 +1330,7 @@
                     "type": "boolean"
                 },
                 "filteringTags": {
-                    "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources.If Include actions are specified, the rules will only include resources with the associated tags.",
+                    "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/FilteringTag"
@@ -1142,15 +1369,18 @@
             "properties": {
                 "name": {
                     "description": "Name of the rule set.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "id": {
                     "description": "The id of the rule set.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "type": {
                     "description": "The type of the rule set.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "properties": {
                     "$ref": "#/definitions/MonitoringTagRulesProperties"
@@ -1166,6 +1396,68 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/MonitoringTagRules"
+                    }
+                },
+                "nextLink": {
+                    "description": "Link to the next set of results, if any.",
+                    "type": "string"
+                }
+            }
+        },
+        "DatadogSingleSignOnProperties": {
+            "type": "object",
+            "properties": {
+                "singleSignOnState": {
+                    "description": "This state of single sign-on funtionality, \"Enabled\"/\"Disabled\".",
+                    "type": "string"
+                },
+                "metadataXML": {
+                    "description": "The metadataXML from the Azure AD app to setup SSO.",
+                    "type": "string"
+                },
+                "enterpriseAppId": {
+                    "description": "The Id of the Enterprise App used for Single sign-on.",
+                    "type": "string"
+                },
+                "singleSignOnUrl": {
+                    "format": "uri",
+                    "description": "The login URL specific to this Datadog Organization.",
+                    "type": "string"
+                }
+            }
+        },
+        "DatadogSingleSignOnResource": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ARM id of the resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Name of the configuration.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "properties": {
+                    "$ref": "#/definitions/DatadogSingleSignOnProperties"
+                }
+            }
+        },
+        "DatadogSingleSignOnResourceListResponse": {
+            "description": "Response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of a list operation.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DatadogSingleSignOnResource"
                     }
                 },
                 "nextLink": {
