@@ -293,6 +293,159 @@
             "nextLinkName": "nextLink"
           }
         }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups/{edgeResourceGroupName}/edgeProviders/{edgeProviderName}/edgeResourceTypes": {
+        "get": {
+          "x-ms-examples": {
+            "Returns the list of resource groups in the edge suscription.": {
+              "$ref": "examples/EdgeSubscription/GetEdgeProvider.json"
+            }
+          },
+          "tags": [
+            "EdgeResourceTypes"
+          ],
+          "description": "Returns a list of edge resource types offered by an edge provider",
+          "operationId": "EdgeProviders_Get",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeProviderNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/EdgeProviderList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups/{edgeResourceGroupName}/edgeProviders/{edgeProviderName}/edgeResourceTypes/{edgeResourceTypeName}": {
+        "get": {
+          "x-ms-examples": {
+            "Returns the list of resource groups in the edge suscription.": {
+              "$ref": "examples/EdgeSubscription/GetEdgeProvider.json"
+            }
+          },
+          "tags": [
+            "EdgeResourceTypes"
+          ],
+          "description": "Returns list of resources of the type edgeResourceTypeName",
+          "operationId": "EdgeResourceTypes_List",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeProviderNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/EdgeProviderList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups/{edgeResourceGroupName}/edgeProviders/{edgeProviderName}/edgeResourceTypes/{edgeResourceTypeName}/{edgeResourceInstance}": {
+        "get": {
+          "x-ms-examples": {
+            "Returns the list of resource groups in the edge suscription.": {
+              "$ref": "examples/EdgeSubscription/GetEdgeProvider.json"
+            }
+          },
+          "tags": [
+            "EdgeResourceTypes"
+          ],
+          "description": "Returns resource object edgeResourceInstance of type edgeResourceTypeName",
+          "operationId": "EdgeResourceTypes_Get",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeProviderNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/EdgeProviderList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
       }
     },
     "definitions": {
