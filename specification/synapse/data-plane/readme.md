@@ -20,8 +20,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Azure Synapse Analytics API.
 
@@ -29,48 +27,48 @@ These are the global settings for the Azure Synapse Analytics API.
 openapi-type: data-plane
 ```
 
-``` yaml $(package-others)
-tag: package-2019-11-01-preview
+``` yaml $(package-spark)
+tag: package-spark-2019-11-01-preview
+```
+
+``` yaml $(package-artifacts)
+tag: package-artifacts-2019-06-01-preview
+```
+
+``` yaml $(package-access-control)
+tag: package-access-control-2020-02-01-preview
 ```
 
 ``` yaml $(package-vnet)
 tag: package-vnet-2019-06-01-preview
 ```
 
-## Suppression
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-    where:
-      - $.definitions.LivyStatementsResponseBody.properties.total_statements
-      - $.definitions.LivyStatementOutput.properties.execution_count
+### Tag: package-spark-2019-11-01-preview
 
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter notebook. Rp can't change these proeprties.
-    from: Microsoft.Synapse/preview/2019-11-01-preview/adf/entityTypes/NoteBook.json
-    where:
-      - $.definitions.NotebookCellOutputItem.properties.execution_count
-      - $.definitions.NotebookCellOutputItem.properties.output_type
-      - $.definitions.NotebookCell.properties.cell_type
-      - $.definitions.NotebookLanguageInfo.properties.codemirror_mode
-      - $.definitions.NotebookKernelSpec.properties.display_name
-      - $.definitions.NotebookMetadata.properties.language_info
-      - $.definitions.NoteBook.properties.nbformat_minor
+These settings apply only when `--tag=package-spark-2019-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-spark-2019-11-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
 ```
 
-### Tag: package-2019-11-01-preview
+### Tag: package-artifacts-2019-06-01-preview
 
-These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line
+These settings apply only when `--tag=package-artifacts-2019-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-11-01-preview'
+``` yaml $(tag) == 'package-artifacts-2019-06-01-preview'
 input-file:
-- Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
-- Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-- Microsoft.Synapse/preview/2019-11-01-preview/roles.json
-- Microsoft.Synapse/preview/2019-11-01-preview/roleAssignments.json
-- Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
+- Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
+```
+
+### Tag: package-access-control-2020-02-01-preview
+
+These settings apply only when `--tag=package-access-control-2020-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-access-control-2020-02-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-02-01-preview/roles.json
+- Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
 ```
 
 ### Tag: package-vnet-2019-06-01-preview
@@ -80,6 +78,29 @@ These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specif
 ``` yaml $(tag) == 'package-vnet-2019-06-01-preview'
 input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: sparkJob.json
+    where:
+      - $.definitions.SparkStatementCollection.properties.total_statements
+      - $.definitions.SparkStatementOutput.properties.execution_count
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    from: Notebook.json
+    where:
+      - $.definitions.NotebookCellOutputItem.properties.execution_count
+      - $.definitions.NotebookCellOutputItem.properties.output_type
+      - $.definitions.NotebookCell.properties.cell_type
+      - $.definitions.NotebookLanguageInfo.properties.codemirror_mode
+      - $.definitions.NotebookKernelSpec.properties.display_name
+      - $.definitions.NotebookMetadata.properties.language_info
+      - $.definitions.Notebook.properties.nbformat_minor
 ```
 
 ---
@@ -102,8 +123,9 @@ csharp:
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Synapse/src/Generated
   clear-output-folder: true
 batch:
-- package-others: true
-- package-vnet: true
+  - package-spark: true
+  - package-artifacts: true
+  - package-access-control: true
 ```
 
 ## TypeScript
@@ -121,13 +143,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/roles.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/roleAssignments.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
-
+  - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roles.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
