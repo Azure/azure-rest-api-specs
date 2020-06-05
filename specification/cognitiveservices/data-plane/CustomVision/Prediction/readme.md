@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Prediction SDK.
 
-The current release is `release_3_0`.
+The current release is `release_3_1`.
 
 ``` yaml
 
-tag: release_3_0
+tag: release_3_1
 openapi-type: data-plane
 ```
 # Releases
@@ -25,6 +25,14 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_3_0'
 input-file: stable/v3.0/Prediction.json
+add-credentials: true
+```
+
+### Release 3.1
+These settings apply only when `--tag=release_3_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1'
+input-file: stable/v3.1/Prediction.json
 add-credentials: true
 ```
 
