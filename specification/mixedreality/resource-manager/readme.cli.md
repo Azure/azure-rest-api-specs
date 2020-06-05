@@ -8,22 +8,26 @@ cli:
   package-name: azure-mgmt-mixedreality
   namespace: azure.mgmt.mixedreality
   test-scenario:
-    - name: ResourceCreate
-    - name: ResourceCreate
-    - name: ResourceGetKey
-    - name: ResourceGetKey
-    - name: ResourceGet
-    - name: ResourceGet
-    - name: ResourceGet
-    - name: ResourceGet
-    - name: RemoteRenderingAccountPageBySubscription
-    - name: SpatialAnchorsAccountPageBySubscription
-    - name: OperationPage
-    - name: ResourceRegenerateKey
-    - name: ResourceRegenerateKey
-    - name: ResourceCreateOrUpdate
-    - name: ResourceCreateOrUpdate
+    - name: Create spatial anchor account
+    - name: Create remote rendering account
+    - name: Get remote rendering account key
+    - name: Get spatial anchor account key
+    - name: List spatial anchor accounts by resource group
+    - name: List remote rendering accounts by resource group
+    - name: Get spatial anchors account
+    - name: Get remote rendering account
+    - name: List remote rendering accounts by subscription
+    - name: List spatial anchors accounts by subscription
+    - name: List available operations
+      disabled: true
+    - name: Regenerate remote rendering account keys
+    - name: Regenerate spatial anchors account keys
+    - name: Update remote rendering account
+      disabled: true
+    - name: Update spatial anchors account
+      disabled: true
     - name: CheckLocalNameAvailability
-    - name: ResourceDelete
-    - name: ResourceDelete
+      disabled: true
+    - name: Delete spatial anchors account
+    - name: Delete remote rendering account
 ```

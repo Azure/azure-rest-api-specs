@@ -26,9 +26,16 @@ These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-08
+tag: package-2020-03
 ```
 
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+- Microsoft.Search/stable/2020-03-13/search.json
+```
 
 ### Tag: package-2015-08
 
@@ -46,6 +53,14 @@ These settings apply only when `--tag=package-2015-02` is specified on the comma
 ``` yaml $(tag) == 'package-2015-02'
 input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
+```
+
+### Tag: package-2019-10-preview
+
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+``` yaml $(tag) == 'package-2019-10-preview'
+input-file:
+- Microsoft.Search/preview/2019-10-01-preview/search.json
 ```
 
 
@@ -110,6 +125,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-search
 batch:
   - tag: package-2015-02
   - tag: package-2015-08
+  - tag: package-2020-03
 ```
 
 ### Tag: package-2015-02 and java
@@ -138,6 +154,18 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-03 and java
+
+These settings apply only when `--tag=package-2020-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.search.v2020_03_13
+  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-resource-manager/v2020_03_13
+regenerate-manager: true
+generate-interface: true
+```
 
 
 ## Multi-API/Profile support for AutoRest v3 generators 
@@ -152,8 +180,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Search/stable/2020-03-13/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
+  - $(this-folder)/Microsoft.Search/preview/2019-10-01-preview/search.json
 
 ```
 

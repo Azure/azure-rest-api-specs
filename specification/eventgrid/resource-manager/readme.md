@@ -26,7 +26,25 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01-preview
+tag: package-2020-06
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+- Microsoft.EventGrid/stable/2020-06-01/EventGrid.json
+```
+
+### Tag: package-2020-04-preview
+
+These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-preview'
+input-file:
+- Microsoft.EventGrid/preview/2020-04-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2020-01-preview
@@ -37,7 +55,6 @@ These settings apply only when `--tag=package-2020-01-preview` is specified on t
 input-file:
 - Microsoft.EventGrid/preview/2020-01-01-preview/EventGrid.json
 ```
-
 
 ### Tag: package-2019-06
 
@@ -193,6 +210,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.EventGrid/stable/2020-06-01/EventGrid.json
+  - $(this-folder)/Microsoft.EventGrid/preview/2020-04-01-preview/EventGrid.json
   - $(this-folder)/Microsoft.EventGrid/preview/2020-01-01-preview/EventGrid.json
   - $(this-folder)/Microsoft.EventGrid/stable/2019-06-01/EventGrid.json
   - $(this-folder)/Microsoft.EventGrid/preview/2019-02-01-preview/EventGrid.json
@@ -205,11 +224,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

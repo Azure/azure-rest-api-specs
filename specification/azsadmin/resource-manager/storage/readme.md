@@ -39,23 +39,6 @@ input-file:
     - "Microsoft.Storage.Admin/preview/2019-08-08/storage.json"
     - "Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json"
 ```
-### Tag: package-2015-12-01
-
-These settings apply only when `--tag=package-2015-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-12-01'
-input-file:
-    - "Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/quotas.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/storage.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/blobServices.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/containers.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/farms.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/queueServices.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/shares.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json"
-```
 
 ---
 # Code Generation
@@ -92,16 +75,6 @@ input-file:
   - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/settings.json
   - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/storage.json
   - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/quotas.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/storage.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/blobServices.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/containers.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/farms.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/queueServices.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/shares.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json
 
 ```
 

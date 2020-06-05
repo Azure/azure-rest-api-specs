@@ -26,18 +26,36 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-2020-04
 ```
 
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04'
+input-file:
+  - Microsoft.Devices/stable/2020-04-01/iothub.json
+```
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Devices/stable/2020-03-01/iothub.json
+```
 
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11'
+``` yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.Devices/stable/2019-11-04/iothub.json
 ```
+
 ### Tag: package-preview-2019-07
 
 These settings apply only when `--tag=package-preview-2019-07` is specified on the command line.
@@ -132,6 +150,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-iothub
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -175,6 +195,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Devices/stable/2020-03-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2019-11-04/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2019-07-01-preview/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2019-03-22/iothub.json

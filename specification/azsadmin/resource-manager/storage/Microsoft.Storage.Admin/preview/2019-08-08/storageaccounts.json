@@ -5,7 +5,7 @@
     "title": "StorageManagementClient",
     "description": "The Admin Storage Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageAccounts": {
       "get": {
         "x-ms-examples": {
           "Returns a list of storage accounts.": {
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageAccounts/{accountId}": {
       "get": {
         "x-ms-examples": {
           "Returns the requested storage account.": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}/undelete": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageAccounts/{accountId}/undelete": {
       "post": {
         "x-ms-examples": {
           "Undelete a deleted storage account.": {
@@ -137,10 +137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Undelete either has been performed or account was not deleted.",
-            "schema": {
-              "$ref": "#/definitions/UndeleteStorageAccount"
-            }
+            "description": "OK -- Undelete either has been performed or account was not deleted."
           },
           "202": {
             "description": "Accepted -- undelete operation trigged; operation will complete asynchronously."
@@ -195,7 +192,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -377,6 +377,7 @@
         },
         "primaryEndpoints": {
           "description": "The URLs that are used to perform a retrieval of a public BLOB, queue, or table object.",
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -543,7 +544,8 @@
       "in": "query",
       "required": false,
       "type": "boolean",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "default": false
     },
     "FilterParameter": {
       "description": "Filter string",
