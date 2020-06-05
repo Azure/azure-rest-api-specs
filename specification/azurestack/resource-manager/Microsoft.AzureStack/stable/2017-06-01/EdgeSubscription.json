@@ -57,7 +57,7 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionId}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}": {
         "get": {
           "x-ms-examples": {
             "Returns the properties of an edge suscription.": {
@@ -87,7 +87,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/EdgeSubscriptionList"
+                "$ref": "#/definitions/EdgeSubscription"
               }
             },
             "default": {
@@ -102,18 +102,18 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionId}/edgeResourceGroups": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups": {
         "get": {
           "x-ms-examples": {
             "Returns the list of resource groups in the edge suscription.": {
-              "$ref": "examples/EdgeSubscription/GetResource.json"
+              "$ref": "examples/EdgeSubscription/ListEdgeResource.json"
             }
           },
           "tags": [
             "EdgeResourceGroups"
           ],
-          "description": "Returns a list of all edge resource groups.",
-          "operationId": "EdgeResourceGroups_Get",
+          "description": "Returns a list of edge resource groups in an edge subscription.",
+          "operationId": "EdgeResourceGroups_List",
           "parameters": [
             {
               "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
@@ -132,7 +132,7 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/EdgeSubscriptionList"
+                "$ref": "#/definitions/EdgeResourceGroupList"
               }
             },
             "default": {
@@ -147,18 +147,18 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionId}/edgeResourceGroups/{edgeResourceGroupName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups/{edgeResourceGroupName}": {
         "get": {
           "x-ms-examples": {
             "Returns the list of resource groups in the edge suscription.": {
-              "$ref": "examples/EdgeSubscription/GetResource.json"
+              "$ref": "examples/EdgeSubscription/GetEdgeResource.json"
             }
           },
           "tags": [
             "EdgeResourceGroups"
           ],
-          "description": "Returns a list of all edge resource groups.",
-          "operationId": "EdgeResourceGroups_Get",
+          "description": "Returns a list of edge resource groups in an edge subscription.",
+          "operationId": "EdgeResourceGroups_List",
           "parameters": [
             {
               "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
@@ -170,6 +170,9 @@
                 "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
             },
             {
+              "$ref": "AzureStack.json#/parameters/EdgeResourceGroupNameParameter"
+            },
+            {
               "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
             }
           ],
@@ -177,7 +180,106 @@
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": "#/definitions/EdgeSubscriptionList"
+                "$ref": "#/definitions/EdgeResourceGroupList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups/{edgeResourceGroupName}/edgeProviders": {
+        "get": {
+          "x-ms-examples": {
+            "Returns the list of resource groups in the edge suscription.": {
+              "$ref": "examples/EdgeSubscription/ListEdgeProvider.json"
+            }
+          },
+          "tags": [
+            "EdgeProviders"
+          ],
+          "description": "Returns a list of edge providers in a edge resource group.",
+          "operationId": "EdgeProviders_List",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/EdgeProviderList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions/{edgeSubscriptionName}/edgeResourceGroups/{edgeResourceGroupName}/edgeProviders/{edgeProviderName}": {
+        "get": {
+          "x-ms-examples": {
+            "Returns the list of resource groups in the edge suscription.": {
+              "$ref": "examples/EdgeSubscription/GetEdgeProvider.json"
+            }
+          },
+          "tags": [
+            "EdgeProviders"
+          ],
+          "description": "Returns a list of edge providers in a edge resource group.",
+          "operationId": "EdgeProviders_Get",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeProviderNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/EdgeProviderList"
               }
             },
             "default": {
@@ -210,9 +312,102 @@
             }
           }
         }
+      },
+      "EdgeSubscription": {
+        "description": "Edge Subscription information.",
+        "type": "object",
+        "properties": {
+          "properties": {
+            "description": "Edge subscription resource.",
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/EdgeSubscriptionProperties"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "AzureStack.json#/definitions/TrackedResource"
+          }
+        ]
+      },
+      "EdgeSubscriptionProperties": {
+        "description": "Properties portion of the edge subscription resource.",
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "description": "The AAD directory/tenant to which the subscription belongs.",
+            "type": "string"
+          },
+          "locationPlacementId": {
+            "description": "The placement requirement for the subscription based on its country of origin / offer type / offer category / etc. This is used in geo-fencing of certain regions or regulatory boundaries.",
+            "type": "string"
+          },
+          "quotaId": {
+            "description": "The quota requirement for the subscription based on the offer type / category (e.g. free vs. pay-as-you-go). This can be used to inform quota information for the subscription (e.g. max # of resource groups or max # of virtual machines.",
+            "type": "string"
+          }
+        }
+      },
+      "EdgeResourceGroupList": {
+        "description": "Pageable list of edge resource groups",
+        "type": "object",
+        "properties": {
+          "nextLink": {
+            "description": "URI to the next page.",
+            "type": "string"
+          },
+          "value": {
+            "description": "List of Edge Resource groups",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EdgeResouceGroup"
+            }
+          }
+        }
+      },
+      "EdgeProviderList": {
+        "description": "Pageable list of edge providers",
+        "type": "object",
+        "properties": {
+          "nextLink": {
+            "description": "URI to the next page.",
+            "type": "string"
+          },
+          "value": {
+            "description": "List of Edge providers",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EdgeProvider"
+            }
+          }
+        }
       }
+      
     },
     "parameters": {
+      "EdgeSubscriptionNameParameter": {
+        "description": "Name of the edge subscription",
+        "name": "edgeSubscriptionName",
+        "type": "string",
+        "in": "path",
+        "required": true,
+        "x-ms-parameter-location": "method"
+      },
+      "EdgeResourceGroupNameParameter": {
+        "description": "Name of the edge resource group",
+        "name": "edgeSResourceGroupName",
+        "type": "string",
+        "in": "path",
+        "required": true,
+        "x-ms-parameter-location": "method"
+      },
+      "EdgeProviderNameParameter": {
+        "description": "Name of the edge resource group",
+        "name": "edgeSResourceGroupName",
+        "type": "string",
+        "in": "path",
+        "required": true,
+        "x-ms-parameter-location": "method"
+      }
     },
     "securityDefinitions": {
       "azure_auth": {
