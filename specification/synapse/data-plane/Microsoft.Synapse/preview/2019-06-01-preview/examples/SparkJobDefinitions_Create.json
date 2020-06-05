@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "sparkJobDefinitionName": "exampleSparkJobDefinition",
+    "ifMatch": null,
+    "sparkJobDefinition": {
+      "properties": {
+        "description": "A sample spark job definition",
+        "targetBigDataPool": {
+          "referenceName": "exampleBigDataPool",
+          "type": "BigDataPoolReference"
+        },
+        "requiredSparkVersion": "2.4",
+        "jobProperties": {
+          "name": "exampleSparkJobDefinition",
+          "file": "abfss://test@test.dfs.core.windows.net/artefacts/sample.jar",
+          "className": "dev.test.tools.sample.Main",
+          "conf": {},
+          "args": [
+            "exampleArg"
+          ],
+          "jars": [],
+          "pyFiles": [],
+          "files": [],
+          "archives": [],
+          "driverMemory": "28g",
+          "driverCores": 4,
+          "executorMemory": "28g",
+          "executorCores": 4,
+          "numExecutors": 2
+        }
+      }
+    },
+    "api-version": "2019-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:41 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-writes": "1192",
+        "x-ms-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264",
+        "x-ms-correlation-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/sparkjobdefinitions/exampleSparkJobDefinition",
+        "name": "exampleSparkJobDefinition",
+        "type": "Microsoft.Synapse/workspaces/sparkjobdefinitions",
+        "properties": {
+          "description": "A sample spark job definition",
+          "targetBigDataPool": {
+            "referenceName": "exampleBigDataPool",
+            "type": "BigDataPoolReference"
+          },
+          "requiredSparkVersion": "2.4",
+          "jobProperties": {
+            "name": "exampleSparkJobDefinition",
+            "file": "abfss://test@test.dfs.core.windows.net/artefacts/sample.jar",
+            "className": "dev.test.tools.sample.Main",
+            "conf": {},
+            "args": [
+              "exampleArg"
+            ],
+            "jars": [],
+            "pyFiles": [],
+            "files": [],
+            "archives": [],
+            "driverMemory": "28g",
+            "driverCores": 4,
+            "executorMemory": "28g",
+            "executorCores": 4,
+            "numExecutors": 2
+          }
+        },
+        "etag": "0a0069d4-0000-0000-0000-5b245bd50000"
+      }
+    }
+  }
+}

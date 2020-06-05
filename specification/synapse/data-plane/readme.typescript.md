@@ -9,4 +9,8 @@ typescript:
   package-name: "@azure/synapse"
   output-folder: "$(typescript-sdks-folder)/sdk/synapse/synapse"
   generate-metadata: true
+batch:
+  - package-spark: true
+  - package-artifacts: true
+  - package-access-control: true
 ```
