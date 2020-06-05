@@ -251,7 +251,42 @@
               }
             }
           ],
-          "probes": []
+          "probes": [],
+          "privateLinkConfigurations": [
+            {
+              "name": "privateLink1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "ipConfigurations": [
+                  {
+                    "name": "natNicIpconfig1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1/privateLinkConfigurations/privateLink1/ipConfigurations/natNicIpconfig1",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "privateIPAllocationMethod": "Dynamic",
+                      "primary": true,
+                      "subnet": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
+                      }
+                    }
+                  },
+                  {
+                    "name": "natNicIpconfig2",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLink1/privateLinkConfigurations/privateLink1/ipConfigurations/natNicIpconfig2",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "privateIPAllocationMethod": "Dynamic",
+                      "subnet": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "privateEndpointConnections": []
         }
       }
     }
