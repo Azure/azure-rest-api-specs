@@ -512,6 +512,20 @@
             "$ref": "#/definitions/PrivateLinkScopedResource"
           },
           "description": "List of linked private link scope resources."
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "ApplicationInsights",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDiagnosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
