@@ -927,10 +927,6 @@
       "description": "The SupportRequest action.",
       "type": "object",
       "properties": {
-        "autoQuotaIncreaseState": {
-          "description": "Is support request action enabled.",
-          "$ref": "#/definitions/AqiState"
-        },
         "severity": {
           "description": "The support request severity.",
           "$ref": "#/definitions/SeverityTypes"
@@ -997,10 +993,9 @@
       }
     },
     "AqiState": {
-      "description": "The Auto quota increase feature state - enabled: feature is fully enabled, enabledForPreview: feature enabled for preview only, disabled: feature is disabled.",
+      "description": "The Auto quota increase feature state - enabled: feature is enabled, disabled: feature is disabled.",
       "enum": [
         "enabled",
-        "enabledForPreview",
         "disabled"
       ],
       "x-ms-enum": {
