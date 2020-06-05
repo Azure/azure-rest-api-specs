@@ -5945,6 +5945,9 @@
             "$ref": "#/parameters/SourceIfNoneMatch"
           },
           {
+            "$ref": "#/parameters/SourceIfTags"
+          },
+          {
             "$ref": "#/parameters/IfModifiedSince"
           },
           {
@@ -11859,6 +11862,18 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "A lease ID for the source path. If specified, the source path must have an active lease and the leaase ID must match."
+    },
+    "SourceIfTags": {
+      "name": "x-ms-source-if-tags",
+      "x-ms-client-name": "sourceIfTags",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "source-modified-access-conditions"
+      },
+      "description": "Specify a SQL where clause on blob tags to operate only on blobs with a matching value."
     },
     "SourceUrl": {
       "name": "x-ms-copy-source",
