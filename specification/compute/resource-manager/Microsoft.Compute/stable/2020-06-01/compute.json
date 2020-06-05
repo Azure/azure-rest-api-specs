@@ -787,7 +787,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.",
+            "description": "The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group.",
             "enum": [
               "instanceView"
             ],
@@ -6649,7 +6649,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DedicatedHostInstanceViewWithName"
-          }
+          },
+          "description": "List of instance view of the dedicated hosts under the dedicated host group."
         }
       }
     },
@@ -6673,11 +6674,11 @@
         "instanceView": {
           "$ref": "#/definitions/DedicatedHostGroupInstanceView",
           "readOnly": true,
-          "description": "The dedicated host group instance view."
+          "description": "The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group."
         },
         "supportAutomaticPlacement": {
           "type": "boolean",
-          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided."
+          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. <br><br>Minimum api-version: 2020-06-01."
         }
       },
       "required": [
@@ -6818,7 +6819,7 @@
           "$ref": "#/definitions/DedicatedHostInstanceView"
         }
       ],
-      "description": "The instance view of a dedicated host."
+      "description": "The instance view of a dedicated host that includes the name of the dedicated host. It is used for the response to the instance view of a dedicated host group."
     },
     "DedicatedHostProperties": {
       "properties": {
@@ -8646,7 +8647,7 @@
         },
         "assignedHost": {
           "type": "string",
-          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement."
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement. <br><br>Minimum api-version: 2020-06-01."
         },
         "statuses": {
           "type": "array",
@@ -8718,7 +8719,7 @@
         },
         "hostGroup": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01. NOTE: User cannot specify both host and hostGroup properties."
         },
         "provisioningState": {
           "readOnly": true,
@@ -10817,7 +10818,7 @@
         },
         "assignedHost": {
           "type": "string",
-          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement."
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled."
         },
         "placementGroupId": {
           "type": "string",
