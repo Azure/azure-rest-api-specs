@@ -497,7 +497,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "List succeeded. Returns the resulting resource objects in response body.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkPeeringList"
             }
@@ -508,6 +508,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1006,10 +1009,14 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkPeering"
           },
-          "description": "Gets the peerings in a virtual network"
+          "description": "List of virtual network peerings on workspace."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of virtual network peering list results if there are any."
         }
       },
-      "description": "Response for ListSubnets Api service callRetrieves all subnet that belongs to a virtual network"
+      "description": "Gets all virtual network peerings under a workspace."
     },
     "VirtualNetworkPeering": {
       "properties": {
@@ -1018,9 +1025,6 @@
           "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat",
           "description": "List of properties for vNet Peering"
         },
-        "required": [
-          "properties"
-        ],
         "name": {
           "type": "string",
           "description": "Name of the virtual network peering resource",
@@ -1037,6 +1041,9 @@
           "readOnly": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "description": "Peerings in a VirtualNetwork resource",
       "x-ms-azure-resource": true
     },
@@ -1078,7 +1085,6 @@
               "description": "The Id of the remote virtual network."
             }
           },
-          "required": true,
           "description": " The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
         },
         "remoteAddressSpace": {
@@ -1105,6 +1111,9 @@
           "description": "The provisioning state of the virtual network peering resource."
         }
       },
+      "required":[
+        "remoteVirtualNetwork"
+      ],
       "description": "Properties of the virtual network peering."
     },
     "AddressSpace": {
