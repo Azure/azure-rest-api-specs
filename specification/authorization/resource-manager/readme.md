@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview-only
+tag: package-preview-2020-04
 ```
 
 ## Suppression
@@ -78,6 +78,15 @@ input-file:
 - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
+
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+```
 ### Tag: package-2015-07-01
 
 These settings apply only when `--tag=package-2015-07-01` is specified on the command line.
@@ -239,10 +248,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
