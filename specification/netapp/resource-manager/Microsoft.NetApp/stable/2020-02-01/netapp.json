@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2019-11-01",
+    "version": "2020-02-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -1791,8 +1791,21 @@
         "site": {
           "type": "string",
           "description": "The Active Directory site the service will limit Domain Controller discovery to"
+        },
+        "backupOperators": {
+          "description": "Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": [
+              "user1",
+              "user2"
+            ]
+          }
         }
-      }
+      }        
     },
     "capacityPoolList": {
       "description": "List of capacity pool resources",
@@ -2199,12 +2212,20 @@
               "description": "Replication properties",
               "type": "object",
               "$ref": "#/definitions/replicationObject"
+            },
+            "snapshot": {
+              "$ref": "#/definitions/volumeSnapshotProperties"
+
             }
           }
         },
         "isRestoring": {
           "type": "boolean",
           "description": "Restoring"
+        },
+        "snapshotDirectoryVisible": {
+          "type": "boolean",
+          "description": "If enabled (true) the volume will contain a read-only .snapshot directory which provides access to each of the volume's snapshots (default to true)."
         }
       }
     },
@@ -2230,11 +2251,11 @@
         },
         "nfsv3": {
           "type": "boolean",
-          "description": "Allows NFSv3 protocol"
+          "description": "Allows NFSv3 protocol. Enable only for NFSv3 type volumes"
         },
         "nfsv41": {
           "type": "boolean",
-          "description": "Allows NFSv4.1 protocol"
+          "description": "Allows NFSv4.1 protocol. Enable only for NFSv4.1 type volumes"
         },
         "allowedClients": {
           "type": "string",
@@ -2288,6 +2309,16 @@
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },    
+    "volumeSnapshotProperties": {
+      "description": "Volume Snapshot Properties",
+      "type": "object",
+      "properties": {
+        "snapshotPolicyId": {
+          "type": "string",
+          "description": "Snapshot Policy ResourceId"
         }
       }
     },
@@ -2610,15 +2641,6 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
-        "fileSystemId": {
-          "title": "fileSystemId",
-          "type": "string",
-          "description": "UUID v4 used to identify the FileSystem",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
-        },
         "created": {
           "title": "name",
           "type": "string",
@@ -2734,7 +2756,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2019-11-01"
+      "default": "2020-02-01"
     }
   }
 }
