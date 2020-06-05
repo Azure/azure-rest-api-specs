@@ -72,13 +72,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Created -- AzureADMetrics instance created.",
+            "description": "OK -- AzureADMetrics instance is updated.",
             "schema": {
               "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "201": {
-            "description": "OK -- AzureADMetrics instance is updated.",
+            "description": "Created -- AzureADMetrics instance created.",
             "schema": {
               "$ref": "#/definitions/azureADMetricsConfig"
             }
@@ -312,11 +312,13 @@
           "description": "Array of AzureADMetrics resources.",
           "items": {
             "$ref": "#/definitions/azureADMetricsConfig"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -324,22 +326,17 @@
       "description": "AzureADMetrics resource.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "ID of the AzureADMetrics configuration object.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the AzureADMetrics configuration object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the AzureADMetrics configuration object.",
-          "type": "string"
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResourceBase"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ]
     },
