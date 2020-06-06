@@ -262,8 +262,45 @@
           "202": {
             "description": "ACCEPTED"
           },
-          "404": {
-            "description": "NOT FOUND"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/executeRunner": {
+      "post": {
+        "x-ms-examples": {
+          "Invokes rotate secrets action on the product deployment": {
+            "$ref": "./examples/ProductDeployment/ExecuteRunner.json"
+          }
+        },
+        "description": "Invokes execute runner action on the product deployment",
+        "tags": [
+          "ProductDeployments"
+        ],
+        "operationId": "ProductDeployments_ExecuteRunner",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
           },
           "default": {
             "description": "Default Response.",
