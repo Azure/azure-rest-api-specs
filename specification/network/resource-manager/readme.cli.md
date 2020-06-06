@@ -76,19 +76,76 @@ cli:
     - name: /NetworkInterfaces/post/Show network interface effective route tables
     - name: /NetworkInterfaces/patch/Update network interface tags
     - name: /NetworkInterfaces/delete/Delete network interface
-    - split: other
-    - name: /VpnSites/put/VpnSiteCreate
-    - name: /IpGroups/put/CreateOrUpdate_IpGroups
-    - name: /VpnGateways/put/VpnGatewayPut
+    - split: routetables
+    - name: /RouteTables/put/Create route table with route
+    - name: /RouteTables/put/Create route table
+    - name: /RouteTables/get/Get route table
+    - name: /RouteTables/get/List route tables in resource group
+    - name: /RouteTables/get/List all route tables
+    - name: /RouteTables/patch/Update route table tags
+    - name: /RouteTables/delete/Delete route table
+    - split: routes
+    - name: /RouteTables/put/Create route table
+    - name: /Routes/put/Create route
+    - name: /Routes/get/Get route
+    - name: /Routes/get/List routes
+    - name: /Routes/delete/Delete route
+    - split: routefilters
+    - name: /RouteFilters/put/RouteFilterCreate
+    - name: /RouteFilters/get/RouteFilterGet
+    - name: /RouteFilters/get/RouteFilterListByResourceGroup
+    - name: /RouteFilters/get/RouteFilterList
+    - name: /RouteFilters/patch/Update route filter tags
+    - name: /RouteFilters/delete/RouteFilterDelete
+    - split: virtualwans
     - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VirtualWans/get/VirtualWANGet
+    - name: /VirtualWans/get/VirtualWANListByResourceGroup
+    - name: /VirtualWans/get/VirtualWANList
+    - name: /VirtualWans/patch/VirtualWANUpdate
+    - name: /VirtualWans/delete/VirtualWANDelete
+    - split: virtualhubs
+    - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VirtualHubs/put/VirtualHubPut
+    - name: /VirtualHubs/get/VirtualHubGet
+    - name: /VirtualHubs/get/VirtualHubListByResourceGroup
+    - name: /VirtualHubs/get/VirtualHubList
+    - name: /VirtualHubs/patch/VirtualHubUpdate
+    - name: /VirtualHubs/delete/VirtualHubDelete
+    - split: vpnsites
+    - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VpnSites/put/VpnSiteCreate
+    - name: /VpnSites/get/VpnSiteGet
+    - name: /VpnSites/get/VpnSiteListByResourceGroup
+    - name: /VpnSites/get/VpnSiteList
+    - name: /VpnSites/patch/VpnSiteUpdate
+    - name: /VpnSites/delete/VpnSiteDelete
+    - split: ipgroups
+    - name: /IpGroups/put/CreateOrUpdate_IpGroups
+    - name: /IpGroups/get/Get_IpGroups
+    - name: /IpGroups/get/ListByResourceGroup_IpGroups
+    - name: /IpGroups/get/List_IpGroups
+    - name: /IpGroups/patch/Update_IpGroups
+    - name: /IpGroups/delete/Delete_IpGroups
+    - split: bastionhosts
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /BastionHosts/put/Create Bastion Host
+    - name: /BastionHosts/get/Get Bastion Host
+    - name: /BastionHosts/get/List all Bastion Hosts for a given resource group
+    - name: /BastionHosts/get/List all Bastion Hosts for a given subscription
+    - name: /BastionHosts/delete/Delete Bastion Host
+    - split: inboundnatrules
+    - name: /InboundNatRules/put/InboundNatRuleCreate
+    - name: /InboundNatRules/get/InboundNatRuleGet
+    - name: /InboundNatRules/get/InboundNatRuleList
+    - name: /InboundNatRules/delete/InboundNatRuleDelete
+    - split: other
+    - name: /VpnGateways/put/VpnGatewayPut
     - name: /VirtualNetworkTaps/put/Create Virtual Network Tap
     - name: /P2sVpnGateways/put/P2SVpnGatewayPut
     - name: /NatGateways/put/Create nat gateway
-    - name: /VirtualHubs/put/VirtualHubPut
-    - name: /RouteTables/put/Create route table with route
-    - name: /RouteTables/put/Create route table
-    - name: /BastionHosts/put/Create Bastion Host
-    - name: /RouteFilters/put/RouteFilterCreate
     - name: /PrivateLinkServices/put/Create private link service
     - name: /IpAllocations/put/Create IpAllocation
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
@@ -119,7 +176,6 @@ cli:
     - name: /ExpressRouteCrossConnections/put/UpdateExpressRouteCrossConnection
     - name: /VirtualNetworkGateways/put/UpdateVirtualNetworkGateway
     - name: /VirtualNetworkGatewayConnections/put/CreateVirtualNetworkGatewayConnection_S2S
-    - name: /Routes/put/Create route
     - name: /ServiceEndpointPolicies/put/Create service endpoint policy with definition
     - name: /ServiceEndpointPolicies/put/Create service endpoint policy
     - name: /VpnServerConfigurations/put/VpnServerConfigurationCreate
@@ -138,7 +194,6 @@ cli:
     - name: /FirewallPolicyRuleGroups/put/Create FirewallPolicyRuleGroup
     - name: /FirewallPolicyRuleGroups/put/Create FirewallPolicyRuleGroup With IpGroups
     - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
-    - name: /InboundNatRules/put/InboundNatRuleCreate
     - name: /PacketCaptures/put/Create packet capture
     - name: /ExpressRouteCrossConnectionPeerings/put/ExpressRouteCrossConnectionBgpPeeringCreate
     - name: /PrivateLinkServices/put/approve or reject private end point connection for a private link service
@@ -152,6 +207,7 @@ cli:
     - name: /ExpressRouteConnections/put/ExpressRouteConnectionCreate
     - name: /VirtualNetworkPeerings/put/Create peering
     - name: /ExpressRouteCircuitConnections/put/ExpressRouteCircuitConnectionCreate
+
     - name: /ServiceEndpointPolicyDefinitions/put/Create service endpoint policy definition
     - name: /ServiceEndpointPolicyDefinitions/get/Get service endpoint definition in service endpoint policy
     - name: /VpnSiteLinkConnections/get/VpnSiteLinkConnectionGet
@@ -179,7 +235,6 @@ cli:
     - name: /ExpressRouteCrossConnectionPeerings/get/GetExpressRouteCrossConnectionBgpPeering
     - name: /PacketCaptures/get/Get packet capture
     - name: /PeerExpressRouteCircuitConnections/get/List Peer ExpressRouteCircuit Connection
-    - name: /InboundNatRules/get/InboundNatRuleGet
     - name: /ExpressRouteCircuitConnections/get/List ExpressRouteCircuit Connection
     - name: /ExpressRouteCircuitAuthorizations/get/Get ExpressRouteCircuit Authorization
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionList
@@ -223,7 +278,6 @@ cli:
     - name: /ServiceEndpointPolicies/get/Get service endPoint Policy
     - name: /LoadBalancerBackendAddressPools/get/Load balancer with BackendAddressPool containing BackendAddresses
     - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolList
-    - name: /Routes/get/Get route
     - name: /PacketCaptures/get/List packet captures
     - name: /VirtualNetworkGatewayConnections/get/GetVirtualNetworkGatewayConnection
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleList
@@ -233,7 +287,6 @@ cli:
     - name: /ExpressRouteCrossConnections/get/GetExpressRouteCrossConnection
     - name: /NetworkSecurityGroups/get/Get network security group
     - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
-    - name: /InboundNatRules/get/InboundNatRuleList
     - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups for a given FirewallPolicy
     - name: /AvailableServiceAliases/get/Get available service aliases in the resource group
     - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups with IpGroups for a given FirewallPolicy
@@ -264,7 +317,6 @@ cli:
     - name: /NetworkProfiles/get/Get network profile with container network interfaces
     - name: /NetworkWatchers/get/Get network watcher
     - name: /NetworkProfiles/get/Get network profile
-    - name: /Routes/get/List routes
     - name: /VpnSiteLinks/get/VpnSiteLinkListByVpnSite
     - name: /VirtualRouters/get/Get VirtualRouter
     - name: /AzureFirewalls/get/Get Azure Firewall
@@ -275,18 +327,11 @@ cli:
     - name: /ExpressRouteCircuits/get/Get ExpressRouteCircuit
     - name: /IpAllocations/get/Get IpAllocation
     - name: /PrivateLinkServices/get/Get private link service
-    - name: /RouteFilters/get/RouteFilterGet
-    - name: /BastionHosts/get/Get Bastion Host
     - name: /AvailableEndpointServices/get/EndpointServicesList
     - name: /NatGateways/get/Get nat gateway
-    - name: /RouteTables/get/Get route table
-    - name: /VirtualHubs/get/VirtualHubGet
     - name: /P2sVpnGateways/get/P2SVpnGatewayGet
-    - name: /VirtualWans/get/VirtualWANGet
     - name: /VirtualNetworkTaps/get/Get Virtual Network Tap
     - name: /VpnGateways/get/VpnGatewayGet
-    - name: /IpGroups/get/Get_IpGroups
-    - name: /VpnSites/get/VpnSiteGet
     - name: /ExpressRouteCrossConnections/get/ExpressRouteCrossConnectionListByResourceGroup
     - name: /PrivateLinkServices/get/Get list of private link service id that can be linked to a private end point with auto approved
     - name: /ApplicationSecurityGroups/get/List load balancers in resource group
@@ -318,17 +363,10 @@ cli:
     - name: /AzureFirewalls/get/List all Azure Firewalls for a given resource group
     - name: /IpAllocations/get/List IpAllocations in resource group
     - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a subscription
-    - name: /BastionHosts/get/List all Bastion Hosts for a given resource group
-    - name: /RouteFilters/get/RouteFilterListByResourceGroup
     - name: /VpnGateways/get/VpnGatewayListByResourceGroup
-    - name: /VirtualHubs/get/VirtualHubListByResourceGroup
-    - name: /RouteTables/get/List route tables in resource group
-    - name: /VirtualWans/get/VirtualWANListByResourceGroup
     - name: /VirtualNetworkGatewayConnections/get/ListVirtualNetworkGatewayConnectionsinResourceGroup
     - name: /NatGateways/get/List nat gateways in resource group
     - name: /ExpressRoutePortsLocations/get/ExpressRoutePortsLocationGet
-    - name: /IpGroups/get/ListByResourceGroup_IpGroups
-    - name: /VpnSites/get/VpnSiteListByResourceGroup
     - name: /ServiceTags/get/Get list of service tags
     - name: /ApplicationGateways/get/Get Available Server Variables
     - name: /ApplicationGateways/get/Get Available Response Headers
@@ -363,15 +401,8 @@ cli:
     - name: /AzureFirewalls/get/List all Azure Firewalls for a given subscription
     - name: /VirtualRouters/get/List all Virtual Routers for a given subscription
     - name: /IpAllocations/get/List all IpAllocations
-    - name: /BastionHosts/get/List all Bastion Hosts for a given subscription
-    - name: /RouteFilters/get/RouteFilterList
-    - name: /RouteTables/get/List all route tables
     - name: /NatGateways/get/List all nat gateways
-    - name: /VirtualWans/get/VirtualWANList
-    - name: /VirtualHubs/get/VirtualHubList
     - name: /VpnGateways/get/VpnGatewayListBySubscription
-    - name: /IpGroups/get/List_IpGroups
-    - name: /VpnSites/get/VpnSiteList
     - name: /Operations/get/Get a list of operations for a resource provider
     - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTableSummary
     - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTable
@@ -456,17 +487,11 @@ cli:
     - name: /ExpressRouteCircuits/patch/Update Express Route Circuit Tags
     - name: /IpAllocations/patch/Update virtual network tags
     - name: /VpnGateways/post/ResetVpnGateway
-    - name: /RouteFilters/patch/Update route filter tags
-    - name: /VirtualHubs/patch/VirtualHubUpdate
     - name: /NatGateways/patch/Update nat gateway tags
-    - name: /RouteTables/patch/Update route table tags
     - name: /VirtualNetworkTaps/patch/Update virtual network tap tags
-    - name: /VirtualWans/patch/VirtualWANUpdate
     - name: /P2sVpnGateways/patch/P2SVpnGatewayUpdate
     - name: /VpnGateways/patch/VpnGatewayUpdate
-    - name: /IpGroups/patch/Update_IpGroups
     - name: /PrivateLinkServices/post/Check private link service visibility
-    - name: /VpnSites/patch/VpnSiteUpdate
     - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
     - name: /ExpressRouteCircuitConnections/delete/Delete ExpressRouteCircuit
     - name: /VirtualNetworkPeerings/delete/Delete peering
@@ -479,7 +504,6 @@ cli:
     - name: /PrivateLinkServices/delete/delete private end point connection for a private link service
     - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
     - name: /PacketCaptures/delete/Delete packet capture
-    - name: /InboundNatRules/delete/InboundNatRuleDelete
     - name: /ExpressRouteCircuitAuthorizations/delete/Delete ExpressRouteCircuit Authorization
     - name: /FirewallPolicyRuleGroups/delete/Delete FirewallPolicyRuleGroup
     - name: /HubRouteTables/delete/RouteTableDelete
@@ -494,7 +518,6 @@ cli:
     - name: /NetworkVirtualAppliances/delete/Delete NetworkVirtualAppliance
     - name: /SecurityPartnerProviders/delete/Delete Security Partner Provider
     - name: /VpnServerConfigurations/delete/VpnServerConfigurationDelete
-    - name: /Routes/delete/Delete route
     - name: /ServiceEndpointPolicies/delete/Delete service endpoint policy
     - name: /VirtualNetworkGatewayConnections/delete/DeleteVirtualNetworkGatewayConnection
     - name: /VirtualNetworkGateways/delete/DeleteVirtualNetworkGateway
@@ -515,15 +538,8 @@ cli:
     - name: /ExpressRouteCircuits/delete/Delete ExpressRouteCircuit
     - name: /IpAllocations/delete/Delete IpAllocation
     - name: /PrivateLinkServices/delete/Delete private link service
-    - name: /RouteFilters/delete/RouteFilterDelete
-    - name: /BastionHosts/delete/Delete Bastion Host
-    - name: /RouteTables/delete/Delete route table
     - name: /NatGateways/delete/Delete nat gateway
-    - name: /VirtualHubs/delete/VirtualHubDelete
-    - name: /VirtualWans/delete/VirtualWANDelete
     - name: /VirtualNetworkTaps/delete/Delete Virtual Network Tap resource
     - name: /P2sVpnGateways/delete/P2SVpnGatewayDelete
     - name: /VpnGateways/delete/VpnGatewayDelete
-    - name: /IpGroups/delete/Delete_IpGroups
-    - name: /VpnSites/delete/VpnSiteDelete
 ```
