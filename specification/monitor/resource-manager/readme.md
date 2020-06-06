@@ -446,6 +446,7 @@ input-file:
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json 
 ```
 
 
