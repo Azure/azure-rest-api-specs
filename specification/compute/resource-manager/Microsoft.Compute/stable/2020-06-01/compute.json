@@ -7117,22 +7117,27 @@
       "properties": {
         "patchId": {
           "type": "string",
+          "readOnly": true,
           "description": "A unique identifier for the patch."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The friendly name of the patch."
         },
         "version": {
           "type": "string",
+          "readOnly": true,
           "description": "The version number of the patch. This property applies only to Linux patches."
         },
         "kbid": {
           "type": "string",
+          "readOnly": true,
           "description": "The KBID of the patch. Only applies to Windows patches."
         },
         "classifications": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           },
@@ -7140,6 +7145,7 @@
         },
         "rebootBehavior": {
           "type": "string",
+          "readOnly": true,
           "description": "Describes the reboot requirements of the patch.",
           "enum": [
             "NeverReboots",
@@ -7153,20 +7159,24 @@
         },
         "activityId": {
           "type": "string",
+          "readOnly": true,
           "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
         },
         "publishedDate": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The UTC timestamp when the repository published this patch."
         },
         "lastModifiedDateTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The UTC timestamp of the last update to this patch record."
         },
         "assessmentState": {
           "type": "string",
+          "readOnly": true,
           "description": "Describes the outcome of an install operation for a given patch.",
           "enum": [
             "Installed",
@@ -7207,17 +7217,9 @@
           "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
         },
         "rebootPending": {
-          "type": "string",
+          "type": "boolean",
           "readOnly": true,
-          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "RebootPending",
-            "modelAsString": true
-          }
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
         },
         "criticalAndSecurityPatchCount": {
           "type": "integer",
