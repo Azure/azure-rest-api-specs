@@ -38,6 +38,7 @@ cli:
     - name: /VirtualNetworks/patch/Update virtual network tags
     - name: /VirtualNetworks/delete/Delete virtual network
     - split: subnets
+    - name: /VirtualNetworks/put/Create virtual network
     - name: /Subnets/put/Create subnet
     - name: /Subnets/put/Create subnet with service endpoints
     - name: /Subnets/put/Create subnet with a delegation
@@ -59,6 +60,9 @@ cli:
     - name: /LoadBalancers/patch/Update load balancer tags
     - name: /LoadBalancers/delete/Delete load balancer
     - split: networkinterfaces
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
     - name: /NetworkInterfaces/put/Create network interface
     - name: /NetworkInterfaces/get/Get virtual machine scale set network interface
     - name: /NetworkInterfaces/get/List virtual machine scale set network interface ip configurations
