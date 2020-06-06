@@ -141,6 +141,20 @@ cli:
     - name: /InboundNatRules/get/InboundNatRuleGet
     - name: /InboundNatRules/get/InboundNatRuleList
     - name: /InboundNatRules/delete/InboundNatRuleDelete
+    - split: networksecuritygroups
+    - name: /NetworkSecurityGroups/put/Create network security group
+    - name: /NetworkSecurityGroups/put/Create network security group with rule
+    - name: /NetworkSecurityGroups/get/Get network security group
+    - name: /NetworkSecurityGroups/get/List network security groups in resource group
+    - name: /NetworkSecurityGroups/get/List all network security groups
+    - name: /NetworkSecurityGroups/patch/Update network security group tags
+    - name: /NetworkSecurityGroups/delete/Delete network security group
+    - split: securityrules
+    - name: /NetworkSecurityGroups/put/Create network security group
+    - name: /SecurityRules/put/Create security rule
+    - name: /SecurityRules/get/List network security rules in network security group
+    - name: /SecurityRules/get/Get network security rule in network security group
+    - name: /SecurityRules/delete/Delete network security rule from network security group
     - split: other
     - name: /VpnGateways/put/VpnGatewayPut
     - name: /VirtualNetworkTaps/put/Create Virtual Network Tap
@@ -171,8 +185,6 @@ cli:
     - name: /DdosProtectionPlans/put/Create DDoS protection plan
     - name: /ExpressRouteGateways/put/ExpressRouteGatewayCreate
     - name: /LocalNetworkGateways/put/CreateLocalNetworkGateway
-    - name: /NetworkSecurityGroups/put/Create network security group
-    - name: /NetworkSecurityGroups/put/Create network security group with rule
     - name: /ExpressRouteCrossConnections/put/UpdateExpressRouteCrossConnection
     - name: /VirtualNetworkGateways/put/UpdateVirtualNetworkGateway
     - name: /VirtualNetworkGatewayConnections/put/CreateVirtualNetworkGatewayConnection_S2S
@@ -202,7 +214,6 @@ cli:
     - name: /ConnectionMonitors/put/Create connection monitor V2
     - name: /ConnectionMonitors/put/Create connection monitor V1
     - name: /NetworkInterfaceTapConfigurations/put/Create Network Interface Tap Configurations
-    - name: /SecurityRules/put/Create security rule
     - name: /PrivateDnsZoneGroups/put/Create private dns zone group
     - name: /ExpressRouteConnections/put/ExpressRouteConnectionCreate
     - name: /VirtualNetworkPeerings/put/Create peering
@@ -219,7 +230,6 @@ cli:
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionGet
     - name: /PrivateDnsZoneGroups/get/Get private dns zone group
     - name: /LoadBalancerFrontendIPConfigurations/get/LoadBalancerFrontendIPConfigurationGet
-    - name: /SecurityRules/get/Get network security rule in network security group
     - name: /NetworkInterfaceTapConfigurations/get/Get Network Interface Tap Configurations
     - name: /ResourceNavigationLinks/get/Get Resource Navigation Links
     - name: /ServiceAssociationLinks/get/Get Service Association Links
@@ -250,7 +260,6 @@ cli:
     - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
     - name: /RouteFilterRules/get/RouteFilterRuleGet
-    - name: /SecurityRules/get/List network security rules in network security group
     - name: /VirtualRouterPeerings/get/Get Virtual Router Peering
     - name: /ExpressRouteCircuitPeerings/get/Get ExpressRouteCircuit Peering
     - name: /VirtualNetworkGatewayConnections/get/GetVirtualNetworkGatewayConnectionSharedKey
@@ -285,7 +294,6 @@ cli:
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListVmss
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListSimple
     - name: /ExpressRouteCrossConnections/get/GetExpressRouteCrossConnection
-    - name: /NetworkSecurityGroups/get/Get network security group
     - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
     - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups for a given FirewallPolicy
     - name: /AvailableServiceAliases/get/Get available service aliases in the resource group
@@ -341,7 +349,6 @@ cli:
     - name: /VpnServerConfigurations/get/VpnServerConfigurationListByResourceGroup
     - name: /ServiceEndpointPolicies/get/List resource group service endpoint policies
     - name: /VirtualNetworkGateways/get/ListVirtualNetworkGatewaysinResourceGroup
-    - name: /NetworkSecurityGroups/get/List network security groups in resource group
     - name: /ExpressRouteGateways/get/ExpressRouteGatewayListByResourceGroup
     - name: /LocalNetworkGateways/get/ListLocalNetworkGateways
     - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a resource group
@@ -382,7 +389,6 @@ cli:
     - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given subscription
     - name: /ServiceEndpointPolicies/get/List all service endpoint policy
     - name: /VpnServerConfigurations/get/VpnServerConfigurationList
-    - name: /NetworkSecurityGroups/get/List all network security groups
     - name: /AzureFirewallFqdnTags/get/List all Azure Firewall FQDN Tags for a given subscription
     - name: /BgpServiceCommunities/get/ServiceCommunityList
     - name: /ExpressRouteGateways/get/ExpressRouteGatewayListBySubscription
@@ -467,7 +473,6 @@ cli:
     - name: /NetworkWatchers/post/Ip flow verify
     - name: /NetworkWatchers/post/Get troubleshooting
     - name: /ApplicationGateways/post/Stop Application Gateway
-    - name: /NetworkSecurityGroups/patch/Update network security group tags
     - name: //post/Returns the Bastion Shareable Links for the request VMs
     - name: //post/Returns a list of currently active sessions on the Bastion
     - name: /LocalNetworkGateways/patch/UpdateLocalNetworkGatewayTags
@@ -497,7 +502,6 @@ cli:
     - name: /VirtualNetworkPeerings/delete/Delete peering
     - name: /ExpressRouteConnections/delete/ExpressRouteConnectionDelete
     - name: /PrivateDnsZoneGroups/delete/Delete private dns zone group
-    - name: /SecurityRules/delete/Delete network security rule from network security group
     - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
     - name: /ConnectionMonitors/delete/Delete connection monitor
     - name: /LoadBalancerBackendAddressPools/delete/BackendAddressPoolDelete
@@ -521,7 +525,6 @@ cli:
     - name: /ServiceEndpointPolicies/delete/Delete service endpoint policy
     - name: /VirtualNetworkGatewayConnections/delete/DeleteVirtualNetworkGatewayConnection
     - name: /VirtualNetworkGateways/delete/DeleteVirtualNetworkGateway
-    - name: /NetworkSecurityGroups/delete/Delete network security group
     - name: /ExpressRouteGateways/delete/ExpressRouteGatewayDelete
     - name: /LocalNetworkGateways/delete/DeleteLocalNetworkGateway
     - name: /DdosProtectionPlans/delete/Delete DDoS protection plan
