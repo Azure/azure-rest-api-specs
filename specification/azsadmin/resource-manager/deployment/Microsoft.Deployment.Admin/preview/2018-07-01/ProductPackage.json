@@ -43,8 +43,11 @@
               "$ref": "#/definitions/ProductPackagesList"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -82,8 +85,11 @@
               "$ref": "#/definitions/ProductPackage"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -119,8 +125,11 @@
           "202": {
             "description": "Accepted"
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -151,8 +160,11 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -277,6 +289,24 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ProductLink"
+      }
+    },
+    "ExtendedErrorInfo": {
+      "description": "Error information",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error Code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error Message",
+          "type": "string"
+        },
+        "details": {
+          "description": "Error message details",
+          "$ref": "#/definitions/ExtendedErrorInfo"
+        }
       }
     }
   },
