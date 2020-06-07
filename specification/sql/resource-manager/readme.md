@@ -148,7 +148,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
-- Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
 
 # Needed when there is more than one input file
 override-info:
