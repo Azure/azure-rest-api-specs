@@ -1,4 +1,10 @@
 {
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client."
+  },
+  "paths": {},
   "definitions": {
     "InstanceViewStatus": {
       "properties": {
@@ -135,6 +141,19 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true
+    },
+    "UpdateResource": {
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
       "x-ms-azure-resource": true
     },
     "OperationStatusResponse": {
