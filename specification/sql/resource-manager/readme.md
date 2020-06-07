@@ -39,7 +39,6 @@ These settings apply only when `--tag=package-preview-2020-02` is specified on t
 ```yaml $(tag) == 'package-preview-2020-02'
 input-file:
   - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
-  - Microsoft.Sql/preview/2020-02-02-preview/operations.json
 ```
 ### Tag: package-composite-v3
 
@@ -125,7 +124,6 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
-- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
@@ -150,6 +148,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+- Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
 
 # Needed when there is more than one input file
 override-info:

@@ -62,7 +62,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidBackupRetentionDays - The retention days of {0} is not a valid configuration. Valid backup retention must be in 7-day increments (7, 14, 21, etc.)\n\n * 400 InvalidDifferentialBackupInterval - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -125,7 +125,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidBackupRetentionDays - The retention days of {0} is not a valid configuration. Valid backup retention must be in 7-day increments (7, 14, 21, etc.)\n\n * 400 InvalidDifferentialBackupInterval - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 UpdateShortTermRetentionFeatureNotSupportedForEdition - This feature is not available for the selected database's edition {0}.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -192,7 +192,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidBackupRetentionDays - The retention days of {0} is not a valid configuration. Valid backup retention must be in 7-day increments (7, 14, 21, etc.)\n\n * 400 InvalidDifferentialBackupInterval - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 UpdateShortTermRetentionFeatureNotSupportedForEdition - This feature is not available for the selected database's edition {0}.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -238,7 +238,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidBackupRetentionDays - The retention days of {0} is not a valid configuration. Valid backup retention must be in 7-day increments (7, 14, 21, etc.)\n\n * 400 InvalidDifferentialBackupInterval - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-pageable": {
@@ -246,7 +246,7 @@
         },
         "x-ms-examples": {
           "Get the short term retention policy for the database.": {
-            "$ref": "./examples/ListShortTermRetentionPoliciesByDatabase.json"
+            "$ref": "./examples/GetShortTermRetentionPolicy.json"
           }
         }
       }
@@ -264,21 +264,57 @@
         },
         "diffBackupIntervalInHours": {
           "format": "int32",
-          "description": "The differential backup interval in hours. This is cadence between each differential backups will be supported.",
-          "type": "integer",
+          "description": "The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.",
           "enum": [
-            12,
-            24
-          ]
+            "12",
+            "24"
+          ],
+          "type": "integer",
+          "x-ms-enum": {
+            "name": "DiffBackupIntervalInHours",
+            "modelAsString": true
+          }
         }
       }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
     },
     "BackupShortTermRetentionPolicy": {
       "description": "A short term retention policy.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
