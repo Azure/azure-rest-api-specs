@@ -155,27 +155,89 @@ cli:
     - name: /SecurityRules/get/List network security rules in network security group
     - name: /SecurityRules/get/Get network security rule in network security group
     - name: /SecurityRules/delete/Delete network security rule from network security group
-    - split: other
-    - name: /VpnGateways/put/VpnGatewayPut
-    - name: /VirtualNetworkTaps/put/Create Virtual Network Tap
-    - name: /P2sVpnGateways/put/P2SVpnGatewayPut
-    - name: /NatGateways/put/Create nat gateway
-    - name: /PrivateLinkServices/put/Create private link service
+    - split: ipallocations
+    - name: /VirtualNetworks/put/Create virtual network
     - name: /IpAllocations/put/Create IpAllocation
-    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
-    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit on ExpressRoutePort
+    - name: /IpAllocations/get/Get IpAllocation
+    - name: /IpAllocations/get/List IpAllocations in resource group
+    - name: /IpAllocations/get/List all IpAllocations
+    - name: /IpAllocations/patch/Update virtual network tags
+    - name: /IpAllocations/delete/Delete IpAllocation
+    - split: publicipprefixes
+    - name: /PublicIPPrefixes/put/Create public IP prefix defaults
+    - name: /PublicIPPrefixes/put/Create public IP prefix allocation method
+    - name: /PublicIPPrefixes/get/Get public IP prefix
+    - name: /PublicIPPrefixes/get/List resource group public IP prefixes
+    - name: /PublicIPPrefixes/get/List all public IP prefixes
+    - name: /PublicIPPrefixes/patch/Update public IP prefix tags
+    - name: /PublicIPPrefixes/delete/Delete public IP prefix
+    - split: firewallpolicies
+    - name: /FirewallPolicies/put/Create FirewallPolicy
+    - name: /FirewallPolicyRuleGroups/put/Create FirewallPolicyRuleGroup
+    - name: /FirewallPolicyRuleGroups/put/Create FirewallPolicyRuleGroup With IpGroups
+    - name: /FirewallPolicyRuleGroups/get/Get FirewallPolicyRuleGroup With IpGroups
+    - name: /FirewallPolicyRuleGroups/get/Get FirewallPolicyRuleGroup
+    - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups for a given FirewallPolicy
+    - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups with IpGroups for a given FirewallPolicy
+    - name: /FirewallPolicies/get/Get FirewallPolicy
+    - name: /FirewallPolicies/get/List all Firewall Policies for a given resource group
+    - name: /FirewallPolicies/get/List all Firewall Policies for a given subscription
+    - name: /FirewallPolicyRuleGroups/delete/Delete FirewallPolicyRuleGroup
+    - name: /FirewallPolicies/delete/Delete Firewall Policy
+    - split: virtualrouters
     - name: /VirtualRouters/put/Create VirtualRouter
+    - name: /VirtualRouters/get/Get VirtualRouter
+    - name: /VirtualRouters/get/List all Virtual Router for a given resource group
+    - name: /VirtualRouters/get/List all Virtual Routers for a given subscription
+    - name: /VirtualRouters/delete/Delete VirtualRouter
+    - split: azurefirewalls
     - name: /AzureFirewalls/put/Create Azure Firewall With IpGroups
     - name: /AzureFirewalls/put/Create Azure Firewall With Additional Properties
     - name: /AzureFirewalls/put/Create Azure Firewall in virtual Hub
     - name: /AzureFirewalls/put/Create Azure Firewall With management subnet
     - name: /AzureFirewalls/put/Create Azure Firewall With Zones
     - name: /AzureFirewalls/put/Create Azure Firewall
+    - name: /AzureFirewalls/get/Get Azure Firewall
+    - name: /AzureFirewalls/get/Get Azure Firewall With Zones
+    - name: /AzureFirewalls/get/Get Azure Firewall With management subnet
+    - name: /AzureFirewalls/get/Get Azure Firewall With Additional Properties
+    - name: /AzureFirewalls/get/Get Azure Firewall With IpGroups
+    - name: /AzureFirewalls/get/List all Azure Firewalls for a given resource group
+    - name: /AzureFirewalls/get/List all Azure Firewalls for a given subscription
+    - name: /AzureFirewalls/patch/Update Azure Firewall Tags
+    - name: /AzureFirewalls/delete/Delete Azure Firewall
+    - split: vpngateways
+    - name: /VpnGateways/put/VpnGatewayPut
+    - name: /VpnGateways/get/VpnGatewayGet
+    - name: /VpnGateways/get/VpnGatewayListByResourceGroup
+    - name: /VpnGateways/get/VpnGatewayListBySubscription
+    - name: /VpnGateways/post/ResetVpnGateway
+    - name: /VpnGateways/patch/VpnGatewayUpdate
+    - name: /VpnGateways/delete/VpnGatewayDelete
+    - split: natgateways
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /PublicIPPrefixes/put/Create public IP prefix defaults
+    - name: /NatGateways/put/Create nat gateway
+    - name: /NatGateways/get/Get nat gateway
+    - name: /NatGateways/get/List nat gateways in resource group
+    - name: /NatGateways/get/List all nat gateways
+    - name: /NatGateways/patch/Update nat gateway tags
+    - name: /NatGateways/delete/Delete nat gateway
+    - split: virtualnetworktaps
+    - name: /VirtualNetworkTaps/put/Create Virtual Network Tap
+    - name: /VirtualNetworkTaps/get/Get Virtual Network Tap
+    - name: /VirtualNetworkTaps/get/List virtual network taps in resource group
+    - name: /VirtualNetworkTaps/get/List all virtual network taps
+    - name: /VirtualNetworkTaps/patch/Update virtual network tap tags
+    - name: /VirtualNetworkTaps/delete/Delete Virtual Network Tap resource
+    - split: other
+
+    - name: /P2sVpnGateways/put/P2SVpnGatewayPut
+    - name: /PrivateLinkServices/put/Create private link service
+    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
+    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit on ExpressRoutePort
     - name: /NetworkWatchers/put/Create network watcher
     - name: /NetworkProfiles/put/Create network profile defaults
-    - name: /FirewallPolicies/put/Create FirewallPolicy
-    - name: /PublicIPPrefixes/put/Create public IP prefix defaults
-    - name: /PublicIPPrefixes/put/Create public IP prefix allocation method
     - name: /PrivateEndpoints/put/Create private endpoint with manual approval connection
     - name: /PrivateEndpoints/put/Create private endpoint
     - name: /ExpressRoutePorts/put/ExpressRoutePortCreate
@@ -203,8 +265,6 @@ cli:
     - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
     - name: /FlowLogs/put/Create or update flow log
     - name: /HubRouteTables/put/RouteTablePut
-    - name: /FirewallPolicyRuleGroups/put/Create FirewallPolicyRuleGroup
-    - name: /FirewallPolicyRuleGroups/put/Create FirewallPolicyRuleGroup With IpGroups
     - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
     - name: /PacketCaptures/put/Create packet capture
     - name: /ExpressRouteCrossConnectionPeerings/put/ExpressRouteCrossConnectionBgpPeeringCreate
@@ -249,9 +309,7 @@ cli:
     - name: /ExpressRouteCircuitAuthorizations/get/Get ExpressRouteCircuit Authorization
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionList
     - name: /LoadBalancerOutboundRules/get/LoadBalancerOutboundRuleGet
-    - name: /FirewallPolicyRuleGroups/get/Get FirewallPolicyRuleGroup With IpGroups
     - name: /DefaultSecurityRules/get/DefaultSecurityRuleList
-    - name: /FirewallPolicyRuleGroups/get/Get FirewallPolicyRuleGroup
     - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Peering Traffic Stats
     - name: /HubRouteTables/get/RouteTableGet
     - name: /ApplicationGateways/get/Get Available Ssl Predefined Policies
@@ -295,9 +353,7 @@ cli:
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListSimple
     - name: /ExpressRouteCrossConnections/get/GetExpressRouteCrossConnection
     - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
-    - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups for a given FirewallPolicy
     - name: /AvailableServiceAliases/get/Get available service aliases in the resource group
-    - name: /FirewallPolicyRuleGroups/get/List all FirewallPolicyRuleGroups with IpGroups for a given FirewallPolicy
     - name: /LocalNetworkGateways/get/GetLocalNetworkGateway
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
     - name: /ExpressRouteGateways/get/ExpressRouteGatewayGet
@@ -319,27 +375,15 @@ cli:
     - name: /LoadBalancerProbes/get/LoadBalancerProbeList
     - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Traffic Stats
     - name: /PrivateEndpoints/get/Get private endpoint
-    - name: /PublicIPPrefixes/get/Get public IP prefix
     - name: /PrivateEndpoints/get/Get private endpoint with manual approval connection
-    - name: /FirewallPolicies/get/Get FirewallPolicy
     - name: /NetworkProfiles/get/Get network profile with container network interfaces
     - name: /NetworkWatchers/get/Get network watcher
     - name: /NetworkProfiles/get/Get network profile
     - name: /VpnSiteLinks/get/VpnSiteLinkListByVpnSite
-    - name: /VirtualRouters/get/Get VirtualRouter
-    - name: /AzureFirewalls/get/Get Azure Firewall
-    - name: /AzureFirewalls/get/Get Azure Firewall With Zones
-    - name: /AzureFirewalls/get/Get Azure Firewall With management subnet
-    - name: /AzureFirewalls/get/Get Azure Firewall With Additional Properties
-    - name: /AzureFirewalls/get/Get Azure Firewall With IpGroups
     - name: /ExpressRouteCircuits/get/Get ExpressRouteCircuit
-    - name: /IpAllocations/get/Get IpAllocation
     - name: /PrivateLinkServices/get/Get private link service
     - name: /AvailableEndpointServices/get/EndpointServicesList
-    - name: /NatGateways/get/Get nat gateway
     - name: /P2sVpnGateways/get/P2SVpnGatewayGet
-    - name: /VirtualNetworkTaps/get/Get Virtual Network Tap
-    - name: /VpnGateways/get/VpnGatewayGet
     - name: /ExpressRouteCrossConnections/get/ExpressRouteCrossConnectionListByResourceGroup
     - name: /PrivateLinkServices/get/Get list of private link service id that can be linked to a private end point with auto approved
     - name: /ApplicationSecurityGroups/get/List load balancers in resource group
@@ -357,22 +401,14 @@ cli:
     - name: /PrivateLinkServices/get/List private link service in resource group
     - name: //get/Check Dns Name Availability
     - name: /AvailableServiceAliases/get/Get available service aliases
-    - name: /VirtualNetworkTaps/get/List virtual network taps in resource group
     - name: /ExpressRoutePorts/get/ExpressRoutePortListByResourceGroup
-    - name: /FirewallPolicies/get/List all Firewall Policies for a given resource group
-    - name: /PublicIPPrefixes/get/List resource group public IP prefixes
     - name: /PrivateEndpoints/get/List private endpoints in resource group
     - name: /NetworkWatchers/get/List network watchers
     - name: /NetworkProfiles/get/List resource group network profiles
     - name: /AvailableDelegations/get/Get available delegations
     - name: /P2sVpnGateways/get/P2SVpnGatewayListByResourceGroup
-    - name: /VirtualRouters/get/List all Virtual Router for a given resource group
-    - name: /AzureFirewalls/get/List all Azure Firewalls for a given resource group
-    - name: /IpAllocations/get/List IpAllocations in resource group
     - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a subscription
-    - name: /VpnGateways/get/VpnGatewayListByResourceGroup
     - name: /VirtualNetworkGatewayConnections/get/ListVirtualNetworkGatewayConnectionsinResourceGroup
-    - name: /NatGateways/get/List nat gateways in resource group
     - name: /ExpressRoutePortsLocations/get/ExpressRoutePortsLocationGet
     - name: /ServiceTags/get/Get list of service tags
     - name: /ApplicationGateways/get/Get Available Server Variables
@@ -396,19 +432,11 @@ cli:
     - name: /PrivateLinkServices/get/List all private list service
     - name: /DdosProtectionPlans/get/List all DDoS protection plans
     - name: /ApplicationGateways/get/Lists all application gateways in a subscription
-    - name: /VirtualNetworkTaps/get/List all virtual network taps
     - name: /ExpressRoutePorts/get/ExpressRoutePortList
-    - name: /PublicIPPrefixes/get/List all public IP prefixes
-    - name: /FirewallPolicies/get/List all Firewall Policies for a given subscription
     - name: /PrivateEndpoints/get/List all private endpoints
     - name: /NetworkProfiles/get/List all network profiles
     - name: /NetworkWatchers/get/List all network watchers
     - name: /P2sVpnGateways/get/P2SVpnGatewayListBySubscription
-    - name: /AzureFirewalls/get/List all Azure Firewalls for a given subscription
-    - name: /VirtualRouters/get/List all Virtual Routers for a given subscription
-    - name: /IpAllocations/get/List all IpAllocations
-    - name: /NatGateways/get/List all nat gateways
-    - name: /VpnGateways/get/VpnGatewayListBySubscription
     - name: /Operations/get/Get a list of operations for a resource provider
     - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTableSummary
     - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTable
@@ -485,17 +513,10 @@ cli:
     - name: /ApplicationGateways/patch/Update Application Gateway tags
     - name: /DdosCustomPolicies/patch/DDoS Custom policy Update tags
     - name: /ExpressRoutePorts/patch/ExpressRoutePortUpdateTags
-    - name: /PublicIPPrefixes/patch/Update public IP prefix tags
     - name: /NetworkProfiles/patch/Update network profile tags
     - name: /NetworkWatchers/patch/Update network watcher tags
-    - name: /AzureFirewalls/patch/Update Azure Firewall Tags
     - name: /ExpressRouteCircuits/patch/Update Express Route Circuit Tags
-    - name: /IpAllocations/patch/Update virtual network tags
-    - name: /VpnGateways/post/ResetVpnGateway
-    - name: /NatGateways/patch/Update nat gateway tags
-    - name: /VirtualNetworkTaps/patch/Update virtual network tap tags
     - name: /P2sVpnGateways/patch/P2SVpnGatewayUpdate
-    - name: /VpnGateways/patch/VpnGatewayUpdate
     - name: /PrivateLinkServices/post/Check private link service visibility
     - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
     - name: /ExpressRouteCircuitConnections/delete/Delete ExpressRouteCircuit
@@ -509,7 +530,6 @@ cli:
     - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
     - name: /PacketCaptures/delete/Delete packet capture
     - name: /ExpressRouteCircuitAuthorizations/delete/Delete ExpressRouteCircuit Authorization
-    - name: /FirewallPolicyRuleGroups/delete/Delete FirewallPolicyRuleGroup
     - name: /HubRouteTables/delete/RouteTableDelete
     - name: /FlowLogs/delete/Delete flow log
     - name: /VirtualHubRouteTableV2s/delete/VirtualHubRouteTableV2Delete
@@ -532,17 +552,9 @@ cli:
     - name: /DdosCustomPolicies/delete/Delete DDoS custom policy
     - name: /ExpressRoutePorts/delete/ExpressRoutePortDelete
     - name: /PrivateEndpoints/delete/Delete private endpoint
-    - name: /PublicIPPrefixes/delete/Delete public IP prefix
-    - name: /FirewallPolicies/delete/Delete Firewall Policy
     - name: /NetworkProfiles/delete/Delete network profile
     - name: /NetworkWatchers/delete/Delete network watcher
-    - name: /AzureFirewalls/delete/Delete Azure Firewall
-    - name: /VirtualRouters/delete/Delete VirtualRouter
     - name: /ExpressRouteCircuits/delete/Delete ExpressRouteCircuit
-    - name: /IpAllocations/delete/Delete IpAllocation
     - name: /PrivateLinkServices/delete/Delete private link service
-    - name: /NatGateways/delete/Delete nat gateway
-    - name: /VirtualNetworkTaps/delete/Delete Virtual Network Tap resource
     - name: /P2sVpnGateways/delete/P2SVpnGatewayDelete
-    - name: /VpnGateways/delete/VpnGatewayDelete
 ```
