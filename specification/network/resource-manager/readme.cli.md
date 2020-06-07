@@ -230,36 +230,197 @@ cli:
     - name: /VirtualNetworkTaps/get/List all virtual network taps
     - name: /VirtualNetworkTaps/patch/Update virtual network tap tags
     - name: /VirtualNetworkTaps/delete/Delete Virtual Network Tap resource
-    - split: other
-
+    - split: virtualnetworkgateways
+    - name: /VirtualNetworkGateways/put/UpdateVirtualNetworkGateway
+    - name: /VirtualNetworkGateways/get/VirtualNetworkGatewaysListConnections
+    - name: /VirtualNetworkGateways/get/GetVirtualNetworkGateway
+    - name: /VirtualNetworkGateways/get/ListVirtualNetworkGatewaysinResourceGroup
+    - name: /VirtualNetworkGateways/post/Disconnect VpnConnections from Virtual Network Gateway
+    - name: /VirtualNetworkGateways/post/GetVPNDeviceConfigurationScript
+    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayVpnclientConnectionHealth
+    - name: /VirtualNetworkGateways/post/Set VirtualNetworkGateway VpnClientIpsecParameters
+    - name: /VirtualNetworkGateways/post/Get VirtualNetworkGateway VpnClientIpsecParameters
+    - name: /VirtualNetworkGateways/post/GenerateVPNClientPackage
+    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayVPNProfilePackageURL
+    - name: /VirtualNetworkGateways/post/ResetVpnClientSharedKey
+    - name: /VirtualNetworkGateways/post/ListVirtualNetworkGatewaySupportedVPNDevices
+    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayAdvertisedRoutes
+    - name: /VirtualNetworkGateways/post/Start packet capture on virtual network gateway without filter
+    - name: /VirtualNetworkGateways/post/Start packet capture on virtual network gateway with filter
+    - name: /VirtualNetworkGateways/post/GenerateVirtualNetworkGatewayVPNProfile
+    - name: /VirtualNetworkGateways/post/Stop packet capture on virtual network gateway
+    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayLearnedRoutes
+    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayBGPPeerStatus
+    - name: /VirtualNetworkGateways/post/ResetVirtualNetworkGateway
+    - name: /VirtualNetworkGateways/patch/UpdateVirtualNetworkGatewayTags
+    - name: /VirtualNetworkGateways/delete/DeleteVirtualNetworkGateway
+    - split: p2svpngateways
     - name: /P2sVpnGateways/put/P2SVpnGatewayPut
+    - name: /P2sVpnGateways/get/P2SVpnGatewayGet
+    - name: /P2sVpnGateways/get/P2SVpnGatewayListByResourceGroup
+    - name: /P2sVpnGateways/get/P2SVpnGatewayListBySubscription
+    - name: /P2sVpnGateways/post/Disconnect VpnConnections from P2sVpn Gateway
+    - name: /P2sVpnGateways/post/P2SVpnGatewayGetConnectionHealthDetailed
+    - name: /P2sVpnGateways/post/P2SVpnGatewayGetConnectionHealth
+    - name: /P2sVpnGateways/post/GenerateP2SVpnGatewayVPNProfile
+    - name: /P2sVpnGateways/patch/P2SVpnGatewayUpdate
+    - name: /P2sVpnGateways/delete/P2SVpnGatewayDelete
+    - split: privatelinkservices
     - name: /PrivateLinkServices/put/Create private link service
+    - name: /PrivateLinkServices/put/approve or reject private end point connection for a private link service
+    - name: /PrivateLinkServices/get/Get private end point connection
+    - name: /PrivateLinkServices/get/List private link service in resource group
+    - name: /PrivateLinkServices/get/Get list of private link service id that can be linked to a private end point with auto approved
+    - name: /PrivateLinkServices/get/Get private link service
+    - name: /PrivateLinkServices/get/Get list of private link service id that can be linked to a private end point with auto approved
+    - name: /PrivateLinkServices/get/List private link service in resource group
+    - name: /PrivateLinkServices/get/List all private list service
+    - name: /PrivateLinkServices/post/Check private link service visibility
+    - name: /PrivateLinkServices/post/Check private link service visibility
+    - name: /PrivateLinkServices/delete/delete private end point connection for a private link service
+    - name: /PrivateLinkServices/delete/Delete private link service
+    - split: expressrourecircuits
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit on ExpressRoutePort
-    - name: /NetworkWatchers/put/Create network watcher
-    - name: /NetworkProfiles/put/Create network profile defaults
-    - name: /PrivateEndpoints/put/Create private endpoint with manual approval connection
-    - name: /PrivateEndpoints/put/Create private endpoint
+    - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Peering Traffic Stats
+    - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Traffic Stats
+    - name: /ExpressRouteCircuits/get/Get ExpressRouteCircuit
+    - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a resource group
+    - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a subscription
+    - name: /ExpressRouteCircuits/post/List Route Table Summary
+    - name: /ExpressRouteCircuits/post/List Route Tables
+    - name: /ExpressRouteCircuits/post/List ARP Table
+    - name: /ExpressRouteCircuits/patch/Update Express Route Circuit Tags
+    - name: /ExpressRouteCircuits/delete/Delete ExpressRouteCircuit
+    - split: expressrouteports
     - name: /ExpressRoutePorts/put/ExpressRoutePortCreate
     - name: /ExpressRoutePorts/put/ExpressRoutePortUpdateLink
-    - name: /DdosCustomPolicies/put/Create DDoS custom policy
+    - name: /ExpressRoutePorts/get/ExpressRoutePortGet
+    - name: /ExpressRoutePorts/get/ExpressRoutePortListByResourceGroup
+    - name: /ExpressRoutePorts/get/ExpressRoutePortList
+    - name: /ExpressRoutePorts/patch/ExpressRoutePortUpdateTags
+    - name: /ExpressRoutePorts/delete/ExpressRoutePortDelete
+    - split: networkwatchers
+    - name: /NetworkWatchers/put/Create network watcher
+    - name: /NetworkWatchers/get/Get network watcher
+    - name: /NetworkWatchers/get/List network watchers
+    - name: /NetworkWatchers/get/List all network watchers
+    - name: /NetworkWatchers/post/Network configuration diagnostic
+    - name: /NetworkWatchers/post/Get troubleshoot result
+    - name: /NetworkWatchers/post/Get Azure Reachability Report
+    - name: /NetworkWatchers/post/Get Available Providers List
+    - name: /NetworkWatchers/post/Get flow log status
+    - name: /NetworkWatchers/post/Get security group view
+    - name: /NetworkWatchers/post/Check connectivity
+    - name: /NetworkWatchers/post/Configure flow log
+    - name: /NetworkWatchers/post/Ip flow verify
+    - name: /NetworkWatchers/post/Get troubleshooting
+    - name: /NetworkWatchers/post/Get Topology
+    - name: /NetworkWatchers/post/Get next hop
+    - name: /NetworkWatchers/patch/Update network watcher tags
+    - name: /NetworkWatchers/delete/Delete network watcher
+    - split: privateendpoints
+    - name: /PrivateEndpoints/put/Create private endpoint with manual approval connection
+    - name: /PrivateEndpoints/put/Create private endpoint
+    - name: /PrivateEndpoints/get/Get private endpoint
+    - name: /PrivateEndpoints/get/Get private endpoint with manual approval connection
+    - name: /PrivateEndpoints/get/List private endpoints in resource group
+    - name: /PrivateEndpoints/get/List all private endpoints
+    - name: /PrivateEndpoints/delete/Delete private endpoint
+    - split: applicationgateways
     - name: /ApplicationGateways/put/Create Application Gateway
-    - name: /DdosProtectionPlans/put/Create DDoS protection plan
-    - name: /ExpressRouteGateways/put/ExpressRouteGatewayCreate
+    - name: /ApplicationGateways/get/Get Available Ssl Predefined Policy by name
+    - name: /ApplicationGateways/get/Get Available Ssl Predefined Policies
+    - name: /ApplicationGateways/get/Get Available Ssl Options
+    - name: /ApplicationGateways/get/Get ApplicationGateway
+    - name: /ApplicationGateways/get/Lists all application gateways in a resource group
+    - name: /ApplicationGateways/get/Get Available Server Variables
+    - name: /ApplicationGateways/get/Get Available Response Headers
+    - name: /ApplicationGateways/get/Get Available Request Headers
+    - name: /ApplicationGateways/get/Get Available Waf Rule Sets
+    - name: /ApplicationGateways/get/Lists all application gateways in a subscription
+    - name: /ApplicationGateways/post/Test Backend Health
+    - name: /ApplicationGateways/post/Get Backend Health
+    - name: /ApplicationGateways/post/Start Application Gateway
+    - name: /ApplicationGateways/post/Stop Application Gateway
+    - name: /ApplicationGateways/patch/Update Application Gateway tags
+    - name: /ApplicationGateways/delete/Delete ApplicationGateway
+    - split: networkprofiles
+    - name: /NetworkProfiles/put/Create network profile defaults
+    - name: /NetworkProfiles/get/Get network profile with container network interfaces
+    - name: /NetworkProfiles/get/Get network profile
+    - name: /NetworkProfiles/get/List resource group network profiles
+    - name: /NetworkProfiles/get/List all network profiles
+    - name: /NetworkProfiles/patch/Update network profile tags
+    - name: /NetworkProfiles/delete/Delete network profile
+    - split: localnetworkgateways
     - name: /LocalNetworkGateways/put/CreateLocalNetworkGateway
-    - name: /ExpressRouteCrossConnections/put/UpdateExpressRouteCrossConnection
-    - name: /VirtualNetworkGateways/put/UpdateVirtualNetworkGateway
-    - name: /VirtualNetworkGatewayConnections/put/CreateVirtualNetworkGatewayConnection_S2S
+    - name: /LocalNetworkGateways/get/GetLocalNetworkGateway
+    - name: /LocalNetworkGateways/get/ListLocalNetworkGateways
+    - name: /LocalNetworkGateways/patch/UpdateLocalNetworkGatewayTags
+    - name: /LocalNetworkGateways/delete/DeleteLocalNetworkGateway
+    - split: serviceendpointpolicies
     - name: /ServiceEndpointPolicies/put/Create service endpoint policy with definition
     - name: /ServiceEndpointPolicies/put/Create service endpoint policy
+    - name: /ServiceEndpointPolicies/get/Get service endPoint Policy
+    - name: /ServiceEndpointPolicies/get/List resource group service endpoint policies
+    - name: /ServiceEndpointPolicies/get/List all service endpoint policy
+    - name: /ServiceEndpointPolicies/patch/Update service endpoint policy tags
+    - name: /ServiceEndpointPolicies/delete/Delete service endpoint policy
+    - split: ddoscustompolicies
+    - name: /DdosCustomPolicies/put/Create DDoS custom policy
+    - name: /DdosCustomPolicies/get/Get DDoS custom policy
+    - name: /DdosCustomPolicies/patch/DDoS Custom policy Update tags
+    - name: /DdosCustomPolicies/delete/Delete DDoS custom policy
+    - split: ddosprotectionplans
+    - name: /DdosProtectionPlans/put/Create DDoS protection plan
+    - name: /DdosProtectionPlans/get/Get DDoS protection plan
+    - name: /DdosProtectionPlans/get/List DDoS protection plans in resource group
+    - name: /DdosProtectionPlans/get/List all DDoS protection plans
+    - name: /DdosProtectionPlans/patch/DDoS protection plan Update tags
+    - name: /DdosProtectionPlans/delete/Delete DDoS protection plan
+    - split: expressroutegateways
+    - name: /ExpressRouteGateways/put/ExpressRouteGatewayCreate
+    - name: /ExpressRouteGateways/get/ExpressRouteGatewayListByResourceGroup
+    - name: /ExpressRouteGateways/get/ExpressRouteGatewayListBySubscription
+    - name: /ExpressRouteGateways/get/ExpressRouteGatewayGet
+    - name: /ExpressRouteGateways/delete/ExpressRouteGatewayDelete
+    - split: expressroutecrossconnections
+    - name: /ExpressRouteCrossConnections/put/UpdateExpressRouteCrossConnection
+    - name: /ExpressRouteCrossConnections/get/GetExpressRouteCrossConnection
+    - name: /ExpressRouteCrossConnections/get/ExpressRouteCrossConnectionListByResourceGroup
+    - name: /ExpressRouteCrossConnections/get/ExpressRouteCrossConnectionList
+    - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTableSummary
+    - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTable
+    - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsArpTable
+    - name: /ExpressRouteCrossConnections/patch/UpdateExpressRouteCrossConnectionTags
+    - split: virtualnetworkgatewayconnections
+    - name: /VirtualNetworkGatewayConnections/put/CreateVirtualNetworkGatewayConnection_S2S
+    - name: /VirtualNetworkGatewayConnections/put/SetVirtualNetworkGatewayConnectionSharedKey
+    - name: /VirtualNetworkGatewayConnections/get/GetVirtualNetworkGatewayConnectionSharedKey
+    - name: /VirtualNetworkGatewayConnections/get/GetVirtualNetworkGatewayConnection
+    - name: /VirtualNetworkGatewayConnections/get/ListVirtualNetworkGatewayConnectionsinResourceGroup
+    - name: /VirtualNetworkGatewayConnections/post/ResetVirtualNetworkGatewayConnectionSharedKey
+    - name: /VirtualNetworkGatewayConnections/post/Start packet capture on virtual network gateway connection with filter
+    - name: /VirtualNetworkGatewayConnections/post/Start packet capture on virtual network gateway connection without filter
+    - name: /VirtualNetworkGatewayConnections/post/Stop packet capture on virtual network gateway connection
+    - name: /VirtualNetworkGatewayConnections/patch/UpdateVirtualNetworkGatewayConnectionTags
+    - name: /VirtualNetworkGatewayConnections/delete/DeleteVirtualNetworkGatewayConnection
+    - split: vpnserverconfigurations
     - name: /VpnServerConfigurations/put/VpnServerConfigurationCreate
+    - name: /VpnServerConfigurations/get/VpnServerConfigurationGet
+    - name: /VpnServerConfigurations/get/VpnServerConfigurationListByResourceGroup
+    - name: /VpnServerConfigurations/get/VpnServerConfigurationList
+    - name: /VpnServerConfigurations/patch/VpnServerConfigurationUpdate
+    - name: /VpnServerConfigurations/delete/VpnServerConfigurationDelete
+    - split: other
+
     - name: /NetworkVirtualAppliances/put/Create NetworkVirtualAppliance
     - name: /SecurityPartnerProviders/put/Create Security Partner Provider
     - name: /ApplicationSecurityGroups/put/Create application security group
     - name: /WebApplicationFirewallPolicies/put/Creates or updates a WAF policy within a resource group
     - name: /VpnConnections/put/VpnConnectionPut
     - name: /ExpressRouteCircuitPeerings/put/Create ExpressRouteCircuit Peerings
-    - name: /VirtualNetworkGatewayConnections/put/SetVirtualNetworkGatewayConnectionSharedKey
     - name: /VirtualRouterPeerings/put/Create Virtual Router Peering
     - name: /RouteFilterRules/put/RouteFilterRuleCreate
     - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
@@ -268,7 +429,6 @@ cli:
     - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
     - name: /PacketCaptures/put/Create packet capture
     - name: /ExpressRouteCrossConnectionPeerings/put/ExpressRouteCrossConnectionBgpPeeringCreate
-    - name: /PrivateLinkServices/put/approve or reject private end point connection for a private link service
     - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and IP address defined in network interfaces.
     - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and  IP address.
     - name: /ConnectionMonitors/put/Create connection monitor V2
@@ -285,7 +445,6 @@ cli:
     - name: /DefaultSecurityRules/get/DefaultSecurityRuleGet
     - name: /PeerExpressRouteCircuitConnections/get/PeerExpressRouteCircuitConnectionGet
     - name: /ExpressRouteCircuitConnections/get/ExpressRouteCircuitConnectionGet
-    - name: /ApplicationGateways/get/Get Available Ssl Predefined Policy by name
     - name: /VirtualNetworkPeerings/get/Get peering
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionGet
     - name: /PrivateDnsZoneGroups/get/Get private dns zone group
@@ -296,7 +455,6 @@ cli:
     - name: /ConnectionMonitors/get/Get connection monitor
     - name: /ServiceEndpointPolicyDefinitions/get/List service endpoint definitions in service end point policy
     - name: /NetworkInterfaceIPConfigurations/get/NetworkInterfaceIPConfigurationGet
-    - name: /PrivateLinkServices/get/Get private end point connection
     - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolGet
     - name: /LoadBalancerBackendAddressPools/get/LoadBalancer with BackendAddressPool with BackendAddresses
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleGet
@@ -310,21 +468,16 @@ cli:
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionList
     - name: /LoadBalancerOutboundRules/get/LoadBalancerOutboundRuleGet
     - name: /DefaultSecurityRules/get/DefaultSecurityRuleList
-    - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Peering Traffic Stats
     - name: /HubRouteTables/get/RouteTableGet
-    - name: /ApplicationGateways/get/Get Available Ssl Predefined Policies
     - name: /FlowLogs/get/Get flow log
-    - name: /VirtualNetworkGateways/get/VirtualNetworkGatewaysListConnections
     - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
     - name: /RouteFilterRules/get/RouteFilterRuleGet
     - name: /VirtualRouterPeerings/get/Get Virtual Router Peering
     - name: /ExpressRouteCircuitPeerings/get/Get ExpressRouteCircuit Peering
-    - name: /VirtualNetworkGatewayConnections/get/GetVirtualNetworkGatewayConnectionSharedKey
     - name: /VpnConnections/get/VpnConnectionGet
     - name: /VpnSiteLinks/get/VpnSiteGet
     - name: /WebApplicationFirewallPolicies/get/Gets a WAF policy within a resource group
-    - name: /PrivateLinkServices/get/List private link service in resource group
     - name: /PrivateDnsZoneGroups/get/List private endpoints in resource group
     - name: /ExpressRouteCrossConnectionPeerings/get/ExpressRouteCrossConnectionBgpPeeringList
     - name: /VirtualNetworkPeerings/get/List peerings
@@ -334,190 +487,71 @@ cli:
     - name: /HubVirtualNetworkConnections/get/HubVirtualNetworkConnectionList
     - name: /NetworkInterfaceIPConfigurations/get/NetworkInterfaceIPConfigurationList
     - name: /LoadBalancerProbes/get/LoadBalancerProbeGet
-    - name: /PrivateLinkServices/get/Get list of private link service id that can be linked to a private end point with auto approved
     - name: /SecurityPartnerProviders/get/Get Security Partner Provider
     - name: /NetworkVirtualAppliances/get/Get NetworkVirtualAppliance
     - name: /ConnectionMonitors/get/List connection monitors
     - name: /AvailablePrivateEndpointTypes/get/Get available PrivateEndpoint types in the resource group
     - name: //get/supportedSecurityProviders
     - name: /NetworkInterfaceLoadBalancers/get/NetworkInterfaceLoadBalancerList
-    - name: /VpnServerConfigurations/get/VpnServerConfigurationGet
-    - name: /ServiceEndpointPolicies/get/Get service endPoint Policy
     - name: /LoadBalancerBackendAddressPools/get/Load balancer with BackendAddressPool containing BackendAddresses
     - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolList
     - name: /PacketCaptures/get/List packet captures
-    - name: /VirtualNetworkGatewayConnections/get/GetVirtualNetworkGatewayConnection
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleList
-    - name: /VirtualNetworkGateways/get/GetVirtualNetworkGateway
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListVmss
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListSimple
-    - name: /ExpressRouteCrossConnections/get/GetExpressRouteCrossConnection
     - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
     - name: /AvailableServiceAliases/get/Get available service aliases in the resource group
-    - name: /LocalNetworkGateways/get/GetLocalNetworkGateway
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
-    - name: /ExpressRouteGateways/get/ExpressRouteGatewayGet
     - name: /RouteFilterRules/get/RouteFilterRuleListByRouteFilter
-    - name: /ApplicationGateways/get/Get Available Ssl Options
     - name: /LoadBalancerOutboundRules/get/LoadBalancerOutboundRuleList
-    - name: /DdosProtectionPlans/get/Get DDoS protection plan
     - name: /AvailableResourceGroupDelegations/get/Get available delegations in the resource group
     - name: /FlowLogs/get/List connection monitors
-    - name: /ApplicationGateways/get/Get ApplicationGateway
     - name: /HubRouteTables/get/RouteTableList
     - name: /VirtualRouterPeerings/get/List all Virtual Router Peerings for a given Virtual Router
     - name: /ExpressRouteCircuitPeerings/get/List ExpressRouteCircuit Peerings
     - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a resource group
-    - name: /DdosCustomPolicies/get/Get DDoS custom policy
-    - name: /ExpressRoutePorts/get/ExpressRoutePortGet
     - name: /VirtualHubRouteTableV2s/get/VirtualHubRouteTableV2List
     - name: /VpnConnections/get/VpnConnectionList
     - name: /LoadBalancerProbes/get/LoadBalancerProbeList
-    - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Traffic Stats
-    - name: /PrivateEndpoints/get/Get private endpoint
-    - name: /PrivateEndpoints/get/Get private endpoint with manual approval connection
-    - name: /NetworkProfiles/get/Get network profile with container network interfaces
-    - name: /NetworkWatchers/get/Get network watcher
-    - name: /NetworkProfiles/get/Get network profile
     - name: /VpnSiteLinks/get/VpnSiteLinkListByVpnSite
-    - name: /ExpressRouteCircuits/get/Get ExpressRouteCircuit
-    - name: /PrivateLinkServices/get/Get private link service
     - name: /AvailableEndpointServices/get/EndpointServicesList
-    - name: /P2sVpnGateways/get/P2SVpnGatewayGet
-    - name: /ExpressRouteCrossConnections/get/ExpressRouteCrossConnectionListByResourceGroup
-    - name: /PrivateLinkServices/get/Get list of private link service id that can be linked to a private end point with auto approved
     - name: /ApplicationSecurityGroups/get/List load balancers in resource group
     - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given resource group
     - name: /AvailablePrivateEndpointTypes/get/Get available PrivateEndpoint types
     - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliance for a given resource group
-    - name: /VpnServerConfigurations/get/VpnServerConfigurationListByResourceGroup
-    - name: /ServiceEndpointPolicies/get/List resource group service endpoint policies
-    - name: /VirtualNetworkGateways/get/ListVirtualNetworkGatewaysinResourceGroup
-    - name: /ExpressRouteGateways/get/ExpressRouteGatewayListByResourceGroup
-    - name: /LocalNetworkGateways/get/ListLocalNetworkGateways
-    - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a resource group
-    - name: /DdosProtectionPlans/get/List DDoS protection plans in resource group
-    - name: /ApplicationGateways/get/Lists all application gateways in a resource group
-    - name: /PrivateLinkServices/get/List private link service in resource group
     - name: //get/Check Dns Name Availability
     - name: /AvailableServiceAliases/get/Get available service aliases
-    - name: /ExpressRoutePorts/get/ExpressRoutePortListByResourceGroup
-    - name: /PrivateEndpoints/get/List private endpoints in resource group
-    - name: /NetworkWatchers/get/List network watchers
-    - name: /NetworkProfiles/get/List resource group network profiles
     - name: /AvailableDelegations/get/Get available delegations
-    - name: /P2sVpnGateways/get/P2SVpnGatewayListByResourceGroup
     - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a subscription
-    - name: /VirtualNetworkGatewayConnections/get/ListVirtualNetworkGatewayConnectionsinResourceGroup
     - name: /ExpressRoutePortsLocations/get/ExpressRoutePortsLocationGet
     - name: /ServiceTags/get/Get list of service tags
-    - name: /ApplicationGateways/get/Get Available Server Variables
-    - name: /ApplicationGateways/get/Get Available Response Headers
-    - name: /ApplicationGateways/get/Get Available Request Headers
-    - name: /ApplicationGateways/get/Get Available Waf Rule Sets
     - name: /Usages/get/List usages
     - name: /Usages/get/List usages spaced location
-    - name: /ExpressRouteCrossConnections/get/ExpressRouteCrossConnectionList
     - name: /ExpressRouteServiceProviders/get/List ExpressRoute providers
     - name: /ExpressRoutePortsLocations/get/ExpressRoutePortsLocationList
     - name: /ApplicationSecurityGroups/get/List all application security groups
     - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliances for a given subscription
     - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given subscription
-    - name: /ServiceEndpointPolicies/get/List all service endpoint policy
-    - name: /VpnServerConfigurations/get/VpnServerConfigurationList
     - name: /AzureFirewallFqdnTags/get/List all Azure Firewall FQDN Tags for a given subscription
     - name: /BgpServiceCommunities/get/ServiceCommunityList
-    - name: /ExpressRouteGateways/get/ExpressRouteGatewayListBySubscription
-    - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a subscription
-    - name: /PrivateLinkServices/get/List all private list service
-    - name: /DdosProtectionPlans/get/List all DDoS protection plans
-    - name: /ApplicationGateways/get/Lists all application gateways in a subscription
-    - name: /ExpressRoutePorts/get/ExpressRoutePortList
-    - name: /PrivateEndpoints/get/List all private endpoints
-    - name: /NetworkProfiles/get/List all network profiles
-    - name: /NetworkWatchers/get/List all network watchers
-    - name: /P2sVpnGateways/get/P2SVpnGatewayListBySubscription
     - name: /Operations/get/Get a list of operations for a resource provider
-    - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTableSummary
-    - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsRouteTable
-    - name: /ExpressRouteCrossConnections/post/GetExpressRouteCrossConnectionsArpTable
-    - name: /ExpressRouteCircuits/post/List Route Table Summary
-    - name: /VirtualNetworkGateways/post/Disconnect VpnConnections from Virtual Network Gateway
     - name: /ConnectionMonitors/post/Start connection monitor
-    - name: /ExpressRouteCircuits/post/List Route Tables
     - name: /ConnectionMonitors/post/Query connection monitor
     - name: /ConnectionMonitors/post/Stop connection monitor
-    - name: /ExpressRouteCircuits/post/List ARP Table
     - name: /PacketCaptures/post/Query packet capture status
     - name: /ConnectionMonitors/patch/Update connection monitor tags
-    - name: /VirtualNetworkGatewayConnections/post/ResetVirtualNetworkGatewayConnectionSharedKey
     - name: /PacketCaptures/post/Stop packet capture
-    - name: /VirtualNetworkGateways/post/GetVPNDeviceConfigurationScript
-    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayVpnclientConnectionHealth
-    - name: /VirtualNetworkGateways/post/Set VirtualNetworkGateway VpnClientIpsecParameters
-    - name: /VirtualNetworkGateways/post/Get VirtualNetworkGateway VpnClientIpsecParameters
-    - name: /VirtualNetworkGateways/post/GenerateVPNClientPackage
-    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayVPNProfilePackageURL
-    - name: /VirtualNetworkGateways/post/ResetVpnClientSharedKey
-    - name: /VirtualNetworkGateways/post/ListVirtualNetworkGatewaySupportedVPNDevices
-    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayAdvertisedRoutes
-    - name: /VirtualNetworkGatewayConnections/post/Start packet capture on virtual network gateway connection with filter
-    - name: /VirtualNetworkGatewayConnections/post/Start packet capture on virtual network gateway connection without filter
-    - name: /VirtualNetworkGateways/post/Start packet capture on virtual network gateway without filter
-    - name: /VirtualNetworkGateways/post/Start packet capture on virtual network gateway with filter
-    - name: /VirtualNetworkGateways/post/GenerateVirtualNetworkGatewayVPNProfile
-    - name: /VirtualNetworkGatewayConnections/post/Stop packet capture on virtual network gateway connection
-    - name: /VirtualNetworkGateways/post/Stop packet capture on virtual network gateway
-    - name: /ApplicationGateways/post/Test Backend Health
-    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayLearnedRoutes
-    - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayBGPPeerStatus
-    - name: /NetworkWatchers/post/Network configuration diagnostic
-    - name: /P2sVpnGateways/post/Disconnect VpnConnections from P2sVpn Gateway
-    - name: /P2sVpnGateways/post/P2SVpnGatewayGetConnectionHealthDetailed
-    - name: /NetworkWatchers/post/Get troubleshoot result
-    - name: /NetworkWatchers/post/Get Azure Reachability Report
-    - name: /NetworkWatchers/post/Get Available Providers List
-    - name: /ApplicationGateways/post/Get Backend Health
-    - name: /PrivateLinkServices/post/Check private link service visibility
-    - name: /VirtualNetworkGateways/post/ResetVirtualNetworkGateway
     - name: /ApplicationSecurityGroups/patch/Update application security group tags
     - name: /NetworkVirtualAppliances/patch/Update NetworkVirtualAppliance
     - name: //post/Deletes the specified active session
-    - name: /NetworkWatchers/post/Get flow log status
     - name: /SecurityPartnerProviders/patch/Update Security Partner Provider Tags
-    - name: /NetworkWatchers/post/Get security group view
-    - name: /NetworkWatchers/post/Check connectivity
-    - name: /NetworkWatchers/post/Configure flow log
-    - name: /VpnServerConfigurations/patch/VpnServerConfigurationUpdate
-    - name: /P2sVpnGateways/post/P2SVpnGatewayGetConnectionHealth
-    - name: /ServiceEndpointPolicies/patch/Update service endpoint policy tags
     - name: //post/Create Bastion Shareable Links for the request VMs
-    - name: /VirtualNetworkGatewayConnections/patch/UpdateVirtualNetworkGatewayConnectionTags
     - name: //post/Delete Bastion Shareable Links for the request VMs
     - name: /VpnServerConfigurationsAssociatedWithVirtualWan/post/GetVirtualWanVpnServerConfigurations
-    - name: /VirtualNetworkGateways/patch/UpdateVirtualNetworkGatewayTags
-    - name: /ApplicationGateways/post/Start Application Gateway
-    - name: /ExpressRouteCrossConnections/patch/UpdateExpressRouteCrossConnectionTags
-    - name: /NetworkWatchers/post/Ip flow verify
-    - name: /NetworkWatchers/post/Get troubleshooting
-    - name: /ApplicationGateways/post/Stop Application Gateway
     - name: //post/Returns the Bastion Shareable Links for the request VMs
     - name: //post/Returns a list of currently active sessions on the Bastion
-    - name: /LocalNetworkGateways/patch/UpdateLocalNetworkGatewayTags
-    - name: /P2sVpnGateways/post/GenerateP2SVpnGatewayVPNProfile
     - name: //post/GenerateVirtualWanVpnServerConfigurationVpnProfile
-    - name: /NetworkWatchers/post/Get Topology
-    - name: /DdosProtectionPlans/patch/DDoS protection plan Update tags
     - name: /VpnSitesConfiguration/post/VpnSitesConfigurationDownload
-    - name: /NetworkWatchers/post/Get next hop
-    - name: /ApplicationGateways/patch/Update Application Gateway tags
-    - name: /DdosCustomPolicies/patch/DDoS Custom policy Update tags
-    - name: /ExpressRoutePorts/patch/ExpressRoutePortUpdateTags
-    - name: /NetworkProfiles/patch/Update network profile tags
-    - name: /NetworkWatchers/patch/Update network watcher tags
-    - name: /ExpressRouteCircuits/patch/Update Express Route Circuit Tags
-    - name: /P2sVpnGateways/patch/P2SVpnGatewayUpdate
-    - name: /PrivateLinkServices/post/Check private link service visibility
     - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
     - name: /ExpressRouteCircuitConnections/delete/Delete ExpressRouteCircuit
     - name: /VirtualNetworkPeerings/delete/Delete peering
@@ -526,7 +560,6 @@ cli:
     - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
     - name: /ConnectionMonitors/delete/Delete connection monitor
     - name: /LoadBalancerBackendAddressPools/delete/BackendAddressPoolDelete
-    - name: /PrivateLinkServices/delete/delete private end point connection for a private link service
     - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
     - name: /PacketCaptures/delete/Delete packet capture
     - name: /ExpressRouteCircuitAuthorizations/delete/Delete ExpressRouteCircuit Authorization
@@ -541,20 +574,4 @@ cli:
     - name: /ApplicationSecurityGroups/delete/Delete application security group
     - name: /NetworkVirtualAppliances/delete/Delete NetworkVirtualAppliance
     - name: /SecurityPartnerProviders/delete/Delete Security Partner Provider
-    - name: /VpnServerConfigurations/delete/VpnServerConfigurationDelete
-    - name: /ServiceEndpointPolicies/delete/Delete service endpoint policy
-    - name: /VirtualNetworkGatewayConnections/delete/DeleteVirtualNetworkGatewayConnection
-    - name: /VirtualNetworkGateways/delete/DeleteVirtualNetworkGateway
-    - name: /ExpressRouteGateways/delete/ExpressRouteGatewayDelete
-    - name: /LocalNetworkGateways/delete/DeleteLocalNetworkGateway
-    - name: /DdosProtectionPlans/delete/Delete DDoS protection plan
-    - name: /ApplicationGateways/delete/Delete ApplicationGateway
-    - name: /DdosCustomPolicies/delete/Delete DDoS custom policy
-    - name: /ExpressRoutePorts/delete/ExpressRoutePortDelete
-    - name: /PrivateEndpoints/delete/Delete private endpoint
-    - name: /NetworkProfiles/delete/Delete network profile
-    - name: /NetworkWatchers/delete/Delete network watcher
-    - name: /ExpressRouteCircuits/delete/Delete ExpressRouteCircuit
-    - name: /PrivateLinkServices/delete/Delete private link service
-    - name: /P2sVpnGateways/delete/P2SVpnGatewayDelete
 ```
