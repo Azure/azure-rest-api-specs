@@ -463,84 +463,114 @@ cli:
     - name: /VirtualRouterPeerings/get/Get Virtual Router Peering
     - name: /VirtualRouterPeerings/get/List all Virtual Router Peerings for a given Virtual Router
     - name: /VirtualRouterPeerings/delete/Delete VirtualRouterPeering
-    - split: other
-
-
-
-
-    - name: /RouteFilterRules/put/RouteFilterRuleCreate
-    - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
-    - name: /FlowLogs/put/Create or update flow log
-    - name: /HubRouteTables/put/RouteTablePut
-    - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
-    - name: /PacketCaptures/put/Create packet capture
-    - name: /ExpressRouteCrossConnectionPeerings/put/ExpressRouteCrossConnectionBgpPeeringCreate
+    - split: connectionmonitors
     - name: /ConnectionMonitors/put/Create connection monitor V2
     - name: /ConnectionMonitors/put/Create connection monitor V1
+    - name: /ConnectionMonitors/get/Get connection monitor
+    - name: /ConnectionMonitors/get/List connection monitors
+    - name: /ConnectionMonitors/post/Start connection monitor
+    - name: /ConnectionMonitors/post/Query connection monitor
+    - name: /ConnectionMonitors/post/Stop connection monitor
+    - name: /ConnectionMonitors/patch/Update connection monitor tags
+    - name: /ConnectionMonitors/delete/Delete connection monitor
+    - split: packetcaptures
+    - name: /PacketCaptures/put/Create packet capture
+    - name: /PacketCaptures/get/Get packet capture
+    - name: /PacketCaptures/get/List packet captures
+    - name: /PacketCaptures/post/Query packet capture status
+    - name: /PacketCaptures/post/Stop packet capture
+    - name: /PacketCaptures/delete/Delete packet capture
+    - split: routefilterrules
+    - name: /RouteFilterRules/put/RouteFilterRuleCreate
+    - name: /RouteFilterRules/get/RouteFilterRuleGet
+    - name: /RouteFilterRules/get/RouteFilterRuleListByRouteFilter
+    - name: /RouteFilterRules/delete/RouteFilterRuleDelete
+    - split: virtualhubroutetablev2s
+    - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
+    - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
+    - name: /VirtualHubRouteTableV2s/get/VirtualHubRouteTableV2List
+    - name: /VirtualHubRouteTableV2s/delete/VirtualHubRouteTableV2Delete
+    - split: flowlogs
+    - name: /FlowLogs/put/Create or update flow log
+    - name: /FlowLogs/get/Get flow log
+    - name: /FlowLogs/get/List connection monitors
+    - name: /FlowLogs/delete/Delete flow log
+    - split: hubroutetables
+    - name: /HubRouteTables/put/RouteTablePut
+    - name: /HubRouteTables/get/RouteTableGet
+    - name: /HubRouteTables/get/RouteTableList
+    - name: /HubRouteTables/delete/RouteTableDelete
+    - split: expressroutecircuitauthorizations
+    - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
+    - name: /ExpressRouteCircuitAuthorizations/get/Get ExpressRouteCircuit Authorization
+    - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
+    - name: /ExpressRouteCircuitAuthorizations/delete/Delete ExpressRouteCircuit Authorization
+    - split: expressroutecrossconnectionpeerings
+    - name: /ExpressRouteCrossConnectionPeerings/put/ExpressRouteCrossConnectionBgpPeeringCreate
+    - name: /ExpressRouteCrossConnectionPeerings/get/GetExpressRouteCrossConnectionBgpPeering
+    - name: /ExpressRouteCrossConnectionPeerings/get/ExpressRouteCrossConnectionBgpPeeringList
+    - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
+    - split: networkinterfacetapconfigurations
     - name: /NetworkInterfaceTapConfigurations/put/Create Network Interface Tap Configurations
+    - name: /NetworkInterfaceTapConfigurations/get/Get Network Interface Tap Configurations
+    - name: /NetworkInterfaceTapConfigurations/get/List virtual network tap configurations
+    - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
+    - split: privatednszonegroups
     - name: /PrivateDnsZoneGroups/put/Create private dns zone group
+    - name: /PrivateDnsZoneGroups/get/Get private dns zone group
+    - name: /PrivateDnsZoneGroups/get/List private endpoints in resource group
+    - name: /PrivateDnsZoneGroups/delete/Delete private dns zone group
+    - split: expressrouteconnections
     - name: /ExpressRouteConnections/put/ExpressRouteConnectionCreate
+    - name: /ExpressRouteConnections/get/ExpressRouteConnectionGet
+    - name: /ExpressRouteConnections/get/ExpressRouteConnectionList
+    - name: /ExpressRouteConnections/delete/ExpressRouteConnectionDelete
+    - split: virtualnetworkpeerings
     - name: /VirtualNetworkPeerings/put/Create peering
+    - name: /VirtualNetworkPeerings/get/Get peering
+    - name: /VirtualNetworkPeerings/get/List peerings
+    - name: /VirtualNetworkPeerings/delete/Delete peering
+    - split: expressroutecircuitconnections
     - name: /ExpressRouteCircuitConnections/put/ExpressRouteCircuitConnectionCreate
+    - name: /ExpressRouteCircuitConnections/get/ExpressRouteCircuitConnectionGet
+    - name: /ExpressRouteCircuitConnections/get/List ExpressRouteCircuit Connection
+    - name: /ExpressRouteCircuitConnections/delete/Delete ExpressRouteCircuit
+    - split: serviceendpointpolicydefinitions
     - name: /ServiceEndpointPolicyDefinitions/put/Create service endpoint policy definition
-
     - name: /ServiceEndpointPolicyDefinitions/get/Get service endpoint definition in service endpoint policy
+    - name: /ServiceEndpointPolicyDefinitions/get/List service endpoint definitions in service end point policy
+    - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
+
+    - split: other
     - name: /VpnSiteLinkConnections/get/VpnSiteLinkConnectionGet
     - name: /DefaultSecurityRules/get/DefaultSecurityRuleGet
     - name: /PeerExpressRouteCircuitConnections/get/PeerExpressRouteCircuitConnectionGet
-    - name: /ExpressRouteCircuitConnections/get/ExpressRouteCircuitConnectionGet
-    - name: /VirtualNetworkPeerings/get/Get peering
-    - name: /ExpressRouteConnections/get/ExpressRouteConnectionGet
-    - name: /PrivateDnsZoneGroups/get/Get private dns zone group
     - name: /LoadBalancerFrontendIPConfigurations/get/LoadBalancerFrontendIPConfigurationGet
-    - name: /NetworkInterfaceTapConfigurations/get/Get Network Interface Tap Configurations
     - name: /ResourceNavigationLinks/get/Get Resource Navigation Links
     - name: /ServiceAssociationLinks/get/Get Service Association Links
-    - name: /ConnectionMonitors/get/Get connection monitor
-    - name: /ServiceEndpointPolicyDefinitions/get/List service endpoint definitions in service end point policy
     - name: /NetworkInterfaceIPConfigurations/get/NetworkInterfaceIPConfigurationGet
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleGet
     - name: /VpnLinkConnections/get/VpnSiteLinkConnectionList
     - name: /HubVirtualNetworkConnections/get/HubVirtualNetworkConnectionGet
-    - name: /ExpressRouteCrossConnectionPeerings/get/GetExpressRouteCrossConnectionBgpPeering
-    - name: /PacketCaptures/get/Get packet capture
     - name: /PeerExpressRouteCircuitConnections/get/List Peer ExpressRouteCircuit Connection
-    - name: /ExpressRouteCircuitConnections/get/List ExpressRouteCircuit Connection
-    - name: /ExpressRouteCircuitAuthorizations/get/Get ExpressRouteCircuit Authorization
-    - name: /ExpressRouteConnections/get/ExpressRouteConnectionList
     - name: /LoadBalancerOutboundRules/get/LoadBalancerOutboundRuleGet
     - name: /DefaultSecurityRules/get/DefaultSecurityRuleList
-    - name: /HubRouteTables/get/RouteTableGet
-    - name: /FlowLogs/get/Get flow log
-    - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
-    - name: /RouteFilterRules/get/RouteFilterRuleGet
     - name: /VpnSiteLinks/get/VpnSiteGet
-    - name: /PrivateDnsZoneGroups/get/List private endpoints in resource group
-    - name: /ExpressRouteCrossConnectionPeerings/get/ExpressRouteCrossConnectionBgpPeeringList
-    - name: /VirtualNetworkPeerings/get/List peerings
-    - name: /NetworkInterfaceTapConfigurations/get/List virtual network tap configurations
     - name: /LoadBalancerFrontendIPConfigurations/get/LoadBalancerFrontendIPConfigurationList
     - name: /HubVirtualNetworkConnections/get/HubVirtualNetworkConnectionList
     - name: /NetworkInterfaceIPConfigurations/get/NetworkInterfaceIPConfigurationList
     - name: /LoadBalancerProbes/get/LoadBalancerProbeGet
-    - name: /ConnectionMonitors/get/List connection monitors
     - name: /AvailablePrivateEndpointTypes/get/Get available PrivateEndpoint types in the resource group
     - name: //get/supportedSecurityProviders
     - name: /NetworkInterfaceLoadBalancers/get/NetworkInterfaceLoadBalancerList
-    - name: /PacketCaptures/get/List packet captures
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleList
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListVmss
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListSimple
-    - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
     - name: /AvailableServiceAliases/get/Get available service aliases in the resource group
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
-    - name: /RouteFilterRules/get/RouteFilterRuleListByRouteFilter
     - name: /LoadBalancerOutboundRules/get/LoadBalancerOutboundRuleList
     - name: /AvailableResourceGroupDelegations/get/Get available delegations in the resource group
-    - name: /FlowLogs/get/List connection monitors
-    - name: /HubRouteTables/get/RouteTableList
-    - name: /VirtualHubRouteTableV2s/get/VirtualHubRouteTableV2List
     - name: /LoadBalancerProbes/get/LoadBalancerProbeList
     - name: /VpnSiteLinks/get/VpnSiteLinkListByVpnSite
     - name: /AvailableEndpointServices/get/EndpointServicesList
@@ -557,12 +587,6 @@ cli:
     - name: /AzureFirewallFqdnTags/get/List all Azure Firewall FQDN Tags for a given subscription
     - name: /BgpServiceCommunities/get/ServiceCommunityList
     - name: /Operations/get/Get a list of operations for a resource provider
-    - name: /ConnectionMonitors/post/Start connection monitor
-    - name: /ConnectionMonitors/post/Query connection monitor
-    - name: /ConnectionMonitors/post/Stop connection monitor
-    - name: /PacketCaptures/post/Query packet capture status
-    - name: /ConnectionMonitors/patch/Update connection monitor tags
-    - name: /PacketCaptures/post/Stop packet capture
     - name: //post/Deletes the specified active session
     - name: //post/Create Bastion Shareable Links for the request VMs
     - name: //post/Delete Bastion Shareable Links for the request VMs
@@ -571,18 +595,4 @@ cli:
     - name: //post/Returns a list of currently active sessions on the Bastion
     - name: //post/GenerateVirtualWanVpnServerConfigurationVpnProfile
     - name: /VpnSitesConfiguration/post/VpnSitesConfigurationDownload
-    - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
-    - name: /ExpressRouteCircuitConnections/delete/Delete ExpressRouteCircuit
-    - name: /VirtualNetworkPeerings/delete/Delete peering
-    - name: /ExpressRouteConnections/delete/ExpressRouteConnectionDelete
-    - name: /PrivateDnsZoneGroups/delete/Delete private dns zone group
-    - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
-    - name: /ConnectionMonitors/delete/Delete connection monitor
-    - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
-    - name: /PacketCaptures/delete/Delete packet capture
-    - name: /ExpressRouteCircuitAuthorizations/delete/Delete ExpressRouteCircuit Authorization
-    - name: /HubRouteTables/delete/RouteTableDelete
-    - name: /FlowLogs/delete/Delete flow log
-    - name: /VirtualHubRouteTableV2s/delete/VirtualHubRouteTableV2Delete
-    - name: /RouteFilterRules/delete/RouteFilterRuleDelete
 ```
