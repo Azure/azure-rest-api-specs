@@ -413,15 +413,61 @@ cli:
     - name: /VpnServerConfigurations/get/VpnServerConfigurationList
     - name: /VpnServerConfigurations/patch/VpnServerConfigurationUpdate
     - name: /VpnServerConfigurations/delete/VpnServerConfigurationDelete
+    - split: networkvirtualappliances
+    - name: /NetworkVirtualAppliances/put/Create NetworkVirtualAppliance
+    - name: /NetworkVirtualAppliances/get/Get NetworkVirtualAppliance
+    - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliance for a given resource group
+    - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliances for a given subscription
+    - name: /NetworkVirtualAppliances/patch/Update NetworkVirtualAppliance
+    - name: /NetworkVirtualAppliances/delete/Delete NetworkVirtualAppliance
+    - split: securitypartnerproviders
+    - name: /SecurityPartnerProviders/put/Create Security Partner Provider
+    - name: /SecurityPartnerProviders/get/Get Security Partner Provider
+    - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given resource group
+    - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given subscription
+    - name: /SecurityPartnerProviders/patch/Update Security Partner Provider Tags
+    - name: /SecurityPartnerProviders/delete/Delete Security Partner Provider
+    - split: applicationsecuritygroups
+    - name: /ApplicationSecurityGroups/put/Create application security group
+    - name: /ApplicationSecurityGroups/get/Get application security group
+    - name: /ApplicationSecurityGroups/get/List load balancers in resource group
+    - name: /ApplicationSecurityGroups/get/List all application security groups
+    - name: /ApplicationSecurityGroups/patch/Update application security group tags
+    - name: /ApplicationSecurityGroups/delete/Delete application security group
+    - split: webapplicationfirewallpolicies
+    - name: /WebApplicationFirewallPolicies/put/Creates or updates a WAF policy within a resource group
+    - name: /WebApplicationFirewallPolicies/get/Gets a WAF policy within a resource group
+    - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a resource group
+    - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a subscription
+    - name: /WebApplicationFirewallPolicies/delete/Deletes a WAF policy within a resource group
+    - split: vpnconnections
+    - name: /VpnConnections/put/VpnConnectionPut
+    - name: /VpnConnections/get/VpnConnectionGet
+    - name: /VpnConnections/get/VpnConnectionList
+    - name: /VpnConnections/delete/VpnConnectionDelete
+    - split: loadbalancerbackendaddresspools
+    - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and IP address defined in network interfaces.
+    - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and  IP address.
+    - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolGet
+    - name: /LoadBalancerBackendAddressPools/get/LoadBalancer with BackendAddressPool with BackendAddresses
+    - name: /LoadBalancerBackendAddressPools/get/Load balancer with BackendAddressPool containing BackendAddresses
+    - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolList
+    - name: /LoadBalancerBackendAddressPools/delete/BackendAddressPoolDelete
+    - split: expressroutecircuitpeerings
+    - name: /ExpressRouteCircuitPeerings/put/Create ExpressRouteCircuit Peerings
+    - name: /ExpressRouteCircuitPeerings/get/Get ExpressRouteCircuit Peering
+    - name: /ExpressRouteCircuitPeerings/get/List ExpressRouteCircuit Peerings
+    - name: /ExpressRouteCircuitPeerings/delete/Delete ExpressRouteCircuit Peerings
+    - split: virtualrouterpeerings
+    - name: /VirtualRouterPeerings/put/Create Virtual Router Peering
+    - name: /VirtualRouterPeerings/get/Get Virtual Router Peering
+    - name: /VirtualRouterPeerings/get/List all Virtual Router Peerings for a given Virtual Router
+    - name: /VirtualRouterPeerings/delete/Delete VirtualRouterPeering
     - split: other
 
-    - name: /NetworkVirtualAppliances/put/Create NetworkVirtualAppliance
-    - name: /SecurityPartnerProviders/put/Create Security Partner Provider
-    - name: /ApplicationSecurityGroups/put/Create application security group
-    - name: /WebApplicationFirewallPolicies/put/Creates or updates a WAF policy within a resource group
-    - name: /VpnConnections/put/VpnConnectionPut
-    - name: /ExpressRouteCircuitPeerings/put/Create ExpressRouteCircuit Peerings
-    - name: /VirtualRouterPeerings/put/Create Virtual Router Peering
+
+
+
     - name: /RouteFilterRules/put/RouteFilterRuleCreate
     - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
     - name: /FlowLogs/put/Create or update flow log
@@ -429,8 +475,6 @@ cli:
     - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
     - name: /PacketCaptures/put/Create packet capture
     - name: /ExpressRouteCrossConnectionPeerings/put/ExpressRouteCrossConnectionBgpPeeringCreate
-    - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and IP address defined in network interfaces.
-    - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and  IP address.
     - name: /ConnectionMonitors/put/Create connection monitor V2
     - name: /ConnectionMonitors/put/Create connection monitor V1
     - name: /NetworkInterfaceTapConfigurations/put/Create Network Interface Tap Configurations
@@ -438,8 +482,8 @@ cli:
     - name: /ExpressRouteConnections/put/ExpressRouteConnectionCreate
     - name: /VirtualNetworkPeerings/put/Create peering
     - name: /ExpressRouteCircuitConnections/put/ExpressRouteCircuitConnectionCreate
-
     - name: /ServiceEndpointPolicyDefinitions/put/Create service endpoint policy definition
+
     - name: /ServiceEndpointPolicyDefinitions/get/Get service endpoint definition in service endpoint policy
     - name: /VpnSiteLinkConnections/get/VpnSiteLinkConnectionGet
     - name: /DefaultSecurityRules/get/DefaultSecurityRuleGet
@@ -455,8 +499,6 @@ cli:
     - name: /ConnectionMonitors/get/Get connection monitor
     - name: /ServiceEndpointPolicyDefinitions/get/List service endpoint definitions in service end point policy
     - name: /NetworkInterfaceIPConfigurations/get/NetworkInterfaceIPConfigurationGet
-    - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolGet
-    - name: /LoadBalancerBackendAddressPools/get/LoadBalancer with BackendAddressPool with BackendAddresses
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleGet
     - name: /VpnLinkConnections/get/VpnSiteLinkConnectionList
     - name: /HubVirtualNetworkConnections/get/HubVirtualNetworkConnectionGet
@@ -473,28 +515,19 @@ cli:
     - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
     - name: /ExpressRouteLinks/get/ExpressRouteLinkGet
     - name: /RouteFilterRules/get/RouteFilterRuleGet
-    - name: /VirtualRouterPeerings/get/Get Virtual Router Peering
-    - name: /ExpressRouteCircuitPeerings/get/Get ExpressRouteCircuit Peering
-    - name: /VpnConnections/get/VpnConnectionGet
     - name: /VpnSiteLinks/get/VpnSiteGet
-    - name: /WebApplicationFirewallPolicies/get/Gets a WAF policy within a resource group
     - name: /PrivateDnsZoneGroups/get/List private endpoints in resource group
     - name: /ExpressRouteCrossConnectionPeerings/get/ExpressRouteCrossConnectionBgpPeeringList
     - name: /VirtualNetworkPeerings/get/List peerings
     - name: /NetworkInterfaceTapConfigurations/get/List virtual network tap configurations
     - name: /LoadBalancerFrontendIPConfigurations/get/LoadBalancerFrontendIPConfigurationList
-    - name: /ApplicationSecurityGroups/get/Get application security group
     - name: /HubVirtualNetworkConnections/get/HubVirtualNetworkConnectionList
     - name: /NetworkInterfaceIPConfigurations/get/NetworkInterfaceIPConfigurationList
     - name: /LoadBalancerProbes/get/LoadBalancerProbeGet
-    - name: /SecurityPartnerProviders/get/Get Security Partner Provider
-    - name: /NetworkVirtualAppliances/get/Get NetworkVirtualAppliance
     - name: /ConnectionMonitors/get/List connection monitors
     - name: /AvailablePrivateEndpointTypes/get/Get available PrivateEndpoint types in the resource group
     - name: //get/supportedSecurityProviders
     - name: /NetworkInterfaceLoadBalancers/get/NetworkInterfaceLoadBalancerList
-    - name: /LoadBalancerBackendAddressPools/get/Load balancer with BackendAddressPool containing BackendAddresses
-    - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolList
     - name: /PacketCaptures/get/List packet captures
     - name: /LoadBalancerLoadBalancingRules/get/LoadBalancerLoadBalancingRuleList
     - name: /LoadBalancerNetworkInterfaces/get/LoadBalancerNetworkInterfaceListVmss
@@ -507,31 +540,20 @@ cli:
     - name: /AvailableResourceGroupDelegations/get/Get available delegations in the resource group
     - name: /FlowLogs/get/List connection monitors
     - name: /HubRouteTables/get/RouteTableList
-    - name: /VirtualRouterPeerings/get/List all Virtual Router Peerings for a given Virtual Router
-    - name: /ExpressRouteCircuitPeerings/get/List ExpressRouteCircuit Peerings
-    - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a resource group
     - name: /VirtualHubRouteTableV2s/get/VirtualHubRouteTableV2List
-    - name: /VpnConnections/get/VpnConnectionList
     - name: /LoadBalancerProbes/get/LoadBalancerProbeList
     - name: /VpnSiteLinks/get/VpnSiteLinkListByVpnSite
     - name: /AvailableEndpointServices/get/EndpointServicesList
-    - name: /ApplicationSecurityGroups/get/List load balancers in resource group
-    - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given resource group
     - name: /AvailablePrivateEndpointTypes/get/Get available PrivateEndpoint types
-    - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliance for a given resource group
     - name: //get/Check Dns Name Availability
     - name: /AvailableServiceAliases/get/Get available service aliases
     - name: /AvailableDelegations/get/Get available delegations
-    - name: /WebApplicationFirewallPolicies/get/Lists all WAF policies in a subscription
     - name: /ExpressRoutePortsLocations/get/ExpressRoutePortsLocationGet
     - name: /ServiceTags/get/Get list of service tags
     - name: /Usages/get/List usages
     - name: /Usages/get/List usages spaced location
     - name: /ExpressRouteServiceProviders/get/List ExpressRoute providers
     - name: /ExpressRoutePortsLocations/get/ExpressRoutePortsLocationList
-    - name: /ApplicationSecurityGroups/get/List all application security groups
-    - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliances for a given subscription
-    - name: /SecurityPartnerProviders/get/List all Security Partner Providers for a given subscription
     - name: /AzureFirewallFqdnTags/get/List all Azure Firewall FQDN Tags for a given subscription
     - name: /BgpServiceCommunities/get/ServiceCommunityList
     - name: /Operations/get/Get a list of operations for a resource provider
@@ -541,10 +563,7 @@ cli:
     - name: /PacketCaptures/post/Query packet capture status
     - name: /ConnectionMonitors/patch/Update connection monitor tags
     - name: /PacketCaptures/post/Stop packet capture
-    - name: /ApplicationSecurityGroups/patch/Update application security group tags
-    - name: /NetworkVirtualAppliances/patch/Update NetworkVirtualAppliance
     - name: //post/Deletes the specified active session
-    - name: /SecurityPartnerProviders/patch/Update Security Partner Provider Tags
     - name: //post/Create Bastion Shareable Links for the request VMs
     - name: //post/Delete Bastion Shareable Links for the request VMs
     - name: /VpnServerConfigurationsAssociatedWithVirtualWan/post/GetVirtualWanVpnServerConfigurations
@@ -559,7 +578,6 @@ cli:
     - name: /PrivateDnsZoneGroups/delete/Delete private dns zone group
     - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
     - name: /ConnectionMonitors/delete/Delete connection monitor
-    - name: /LoadBalancerBackendAddressPools/delete/BackendAddressPoolDelete
     - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
     - name: /PacketCaptures/delete/Delete packet capture
     - name: /ExpressRouteCircuitAuthorizations/delete/Delete ExpressRouteCircuit Authorization
@@ -567,11 +585,4 @@ cli:
     - name: /FlowLogs/delete/Delete flow log
     - name: /VirtualHubRouteTableV2s/delete/VirtualHubRouteTableV2Delete
     - name: /RouteFilterRules/delete/RouteFilterRuleDelete
-    - name: /VirtualRouterPeerings/delete/Delete VirtualRouterPeering
-    - name: /ExpressRouteCircuitPeerings/delete/Delete ExpressRouteCircuit Peerings
-    - name: /VpnConnections/delete/VpnConnectionDelete
-    - name: /WebApplicationFirewallPolicies/delete/Deletes a WAF policy within a resource group
-    - name: /ApplicationSecurityGroups/delete/Delete application security group
-    - name: /NetworkVirtualAppliances/delete/Delete NetworkVirtualAppliance
-    - name: /SecurityPartnerProviders/delete/Delete Security Partner Provider
 ```
