@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionInstanceName": "ClusterMonitor",
+    "api-version": "2020-07-01-preview",
+    "clusterName": "clusterName1",
+    "extensionInstance": {
+      "properties": {
+        "extensionType": "Microsoft.OperationInsights/containerMonitoring",
+        "autoUpgrade": "true",
+        "releaseTrain": "Preview",
+        "scope": "namespace",
+        "namspace": "insights",
+        "configuration": {
+          "settings": [
+            {
+              "name": "WorkspaceId",
+              "value": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/65b8a862-ad7f-48b9-a9de-7478682b1fb4"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "name": "ClusterMonitor",
+        "properties": {
+          "extensionType": "Microsoft.OperationInsights/containerMonitoring",
+          "autoUpgrade": "true",
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": "namespace",
+          "namspace": "insights",
+          "configuration": {
+            "settings": [
+              {
+                "name": "WorkspaceId",
+                "value": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/65b8a862-ad7f-48b9-a9de-7478682b1fb4"
+              }
+            ]
+          },
+          "installStatus": "InstallPending",
+          "statuses": [],
+          "creationTime": "2020-06-08T05:10:57.027Z",
+          "lastStatusTime": "2020-06-08T05:10:57.027Z",
+          "error":  {}
+        }
+      }
+    }
+  }
+}

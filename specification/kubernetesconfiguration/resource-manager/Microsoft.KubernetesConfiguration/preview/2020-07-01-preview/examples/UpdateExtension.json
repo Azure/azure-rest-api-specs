@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionInstanceName": "ClusterMonitor",
+    "api-version": "2020-07-01-preview",
+    "clusterName": "clusterName1",
+    "extensionInstance": {
+      "properties": {
+        "extensionType": "Microsoft.OperationInsights/containerMonitoring",
+        "autoUpgrade": "true",
+        "releaseTrain": "Stable",
+        "configuration": {
+          "settings": [
+            {
+              "name": "WorkspaceId",
+              "value": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/65b8a862-ad7f-48b9-a9de-7478682b1fb4"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "name": "ClusterMonitor",
+        "properties": {
+          "extensionType": "Microsoft.OperationInsights/containerMonitoring",
+          "autoUpgrade": "true",
+          "releaseTrain": "Stable",
+          "version": "0.0.9",
+          "scope": "namespace",
+          "namspace": "insights",
+          "configuration": {
+            "settings": [
+              {
+                "name": "WorkspaceId",
+                "value": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/65b8a862-ad7f-48b9-a9de-7478682b1fb4"
+              }
+            ]
+          },
+          "installStatus": "InstallPending",
+          "statuses": [
+            {
+              "code": "Configured",
+              "displayStatus": "Container Insights Configured",
+              "level": "Info",
+              "message": "Container Insights has been configured successfully.",
+              "time": "2020-06-08T06:02:11.045Z"
+            }
+          ],
+          "creationTime": "2020-06-08T05:10:57.027Z",
+          "lastStatusTime": "2020-06-09T12:04:36.034Z",
+          "error": {}
+        }
+      }
+    }
+  }
+}
