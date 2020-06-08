@@ -605,7 +605,7 @@
     "VehicleMaxSpeed": {
       "name": "vehicleMaxSpeed",
       "in": "query",
-      "description": "Maximum speed of the vehicle in km/hour. A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning. A non-zero value may be overridden during route planning.",
+      "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways. \n\n* A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\n* A non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle  maximum speed is set to 50 km/h, the routing engine will consider 60 km/hour as this is the current situation.  If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour.",
       "required": false,
       "type": "integer",
       "default": 0,
@@ -1436,7 +1436,7 @@
     "/route/range/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Route Range (Isochrone) API__\n\n\n**Applies to**: S1 pricing tier.\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  or time budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
+        "description": "__Route Range (Isochrone) API__\n\n\n**Applies to**: S1 pricing tier.\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
         "operationId": "Route_GetRouteRange",
         "x-ms-examples": {
           "GetRouteRange": {
@@ -1466,7 +1466,7 @@
           {
             "name": "fuelBudgetInLiters",
             "in": "query",
-            "description": "Fuel budget in liters that determines maximal range which can be travelled using the specified Combustion Consumption Model. This parameter is required if vehicleEngineType is Combustion and timeBudgetInSec is not used. Either fuelBudgetInLiters, energyBudgetInkWh or timeBudgetInSec must be provided.",
+            "description": "Fuel budget in liters that determines maximal range which can be travelled using the specified Combustion Consumption Model.<br> When fuelBudgetInLiters is used, it is mandatory to specify a detailed  Combustion Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "required": false,
             "type": "number",
             "format": "float"
@@ -1474,7 +1474,7 @@
           {
             "name": "energyBudgetInkWh",
             "in": "query",
-            "description": "Electric energy budget in kilowatt hours (kWh) that determines maximal range which can be travelled using the specified Electric Consumption Model. This parameter is required if vehicleEngineType is Electric and timeBudgetInSec is not used. Either fuelBudgetInLiters, energyBudgetInkWh or timeBudgetInSec must be provided.",
+            "description": "Electric energy budget in kilowatt hours (kWh) that determines maximal range which can be travelled using the specified Electric Consumption Model.<br> When energyBudgetInkWh is used, it is mandatory to specify a detailed Electric Consumption Model.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "required": false,
             "type": "number",
             "format": "float"
@@ -1482,7 +1482,15 @@
           {
             "name": "timeBudgetInSec",
             "in": "query",
-            "description": "Time budget in seconds that determines maximal range which can be travelled using driving time. The consumption parameters will only affect eco-routes and thereby indirectly the driving time. This parameter is required if fuelBudgetInLiters or energyBudgetInkWh are not used. Either fuelBudgetInLiters, energyBudgetInkWh or timeBudgetInSec must be provided.",
+            "description": "Time budget in seconds that determines maximal range which can be travelled using driving time. The Consumption Model will only affect the range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "distanceBudgetInMeters",
+            "in": "query",
+            "description": "Distance budget in meters that determines maximal range which can be travelled using driving distance.  The Consumption Model will only affect the range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be used.",
             "required": false,
             "type": "number",
             "format": "float"

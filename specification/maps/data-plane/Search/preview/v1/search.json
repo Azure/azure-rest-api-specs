@@ -347,6 +347,18 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
+    "CategorySet": {
+      "name": "categorySet",
+      "in": "query",
+      "description": "A comma-separated list of category set IDs which could be used to restrict the result to specific Points of Interest categories. ID order does not matter. When multiple category identifiers are provided, only POIs that belong to (at least) one of the categories from the provided list will be returned. The list of supported categories can be discovered using  [POI Categories API](https://aka.ms/AzureMapsPOICategoryTree). Usage examples: \n\n* **categorySet=7315** (Search Points of Interest from category Restaurant)\n\n* **categorySet=7315025,7315017** (Search Points of Interest of category either Italian or French Restaurant) ",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
     "CountrySet": {
       "name": "countrySet",
       "in": "query",
@@ -586,6 +598,9 @@
             "$ref": "#/parameters/Offset"
           },
           {
+            "$ref": "#/parameters/CategorySet"
+          },
+          {
             "$ref": "#/parameters/CountrySet"
           },
           {
@@ -711,6 +726,9 @@
             "$ref": "#/parameters/Offset"
           },
           {
+            "$ref": "#/parameters/CategorySet"
+          },
+          {
             "$ref": "#/parameters/CountrySet"
           },
           {
@@ -808,6 +826,9 @@
             "$ref": "#/parameters/Offset"
           },
           {
+            "$ref": "#/parameters/CategorySet"
+          },
+          {
             "$ref": "#/parameters/CountrySet"
           },
           {
@@ -899,6 +920,9 @@
             "$ref": "#/parameters/Offset"
           },
           {
+            "$ref": "#/parameters/CategorySet"
+          },
+          {
             "$ref": "#/parameters/CountrySet"
           },
           {
@@ -940,6 +964,63 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SearchPoiCategoryResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/search/poi/category/tree/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get POI Category Tree**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPOI Category API provides a full list of supported Points of Interest (POI) categories and subcategories together with their translations and synonyms. The returned content can be used to provide more meaningful results through other Search Service APIs, like [Get Search POI](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi).",
+        "operationId": "Search_GetPOICategoryTree",
+        "x-ms-examples": {
+          "Get the POI Category Tree (only partial response shown below)": {
+            "$ref": "./examples/GetPOICategoryTree.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language in which search results should be returned. Should be one of supported IETF language tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not available for a specific field, default language is used (English).\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PoiCategoryResponse"
             }
           },
           "400": {
@@ -1470,6 +1551,9 @@
             "$ref": "#/parameters/Language"
           },
           {
+            "$ref": "#/parameters/CategorySet"
+          },
+          {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
           },
           {
@@ -1535,6 +1619,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/CategorySet"
           },
           {
             "$ref": "#/parameters/PoiQuery"
@@ -2011,6 +2098,54 @@
       "items": {
         "type": "number",
         "format": "double"
+      }
+    },
+    "PoiCategoryResponse": {
+      "description": "This object is returned from a successful POI Category Tree call",
+      "type": "object",
+      "properties": {
+        "poiCategories": {
+          "description": "Categories array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PoiCategoryResult"
+          }
+        }
+      }
+    },
+    "PoiCategoryResult": {
+      "description": "POI category result",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the category",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the category",
+          "type": "string",
+          "readOnly": true
+        },
+        "childCategoryIds": {
+          "description": "Array of child category ids",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "readOnly": true
+        },
+        "synonyms": {
+          "description": "Array of alternative names of the category",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
+        }
       }
     },
     "SearchPolygonResponse": {
@@ -3017,23 +3152,31 @@
       }
     },
     "SearchResultPoi": {
-      "description": "Details of the poi including the name, phone, url, and categories.",
+      "description": "Details of the returned POI including information such as the name, phone, url address, and classifications.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name property",
+          "description": "Name of the POI property",
           "type": "string",
           "readOnly": true
         },
         "phone": {
-          "description": "Phone property",
+          "description": "Telephone number property",
           "type": "string",
           "readOnly": true
         },
         "url": {
-          "description": "URL property",
+          "description": "Website URL property",
           "type": "string",
           "readOnly": true
+        },
+        "categorySet": {
+          "description": "The list of the most specific POI categories",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchResultPoiCategorySet"
+          }
         },
         "categories": {
           "description": "__[Deprecated]__ Use classifications instead. Categories array",
@@ -3053,7 +3196,7 @@
           }
         },
         "brands": {
-          "description": "Brands array",
+          "description": "Brands array. The name of the brand for the POI being returned.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -3062,6 +3205,17 @@
         },
         "openingHours": {
           "$ref": "#/definitions/SearchResultPoiOpeningHours"
+        }
+      }
+    },
+    "SearchResultPoiCategorySet": {
+      "description": "POI category",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Category ID",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
