@@ -10,11 +10,4 @@ az:
 az-output-folder: $(azure-cli-extension-folder)/src/containerregistry
 python-sdk-output-folder: "$(az-output-folder)/azext_containerregistry/vendored_sdks/containerregistry"
 
-#cli:
-#    cli-directive:
-#      - where:
-#            group: MachineLearningCompute
-#            op: CreateOrUpdate
-#            param: properties
-#        poly-resource: true
 ```
