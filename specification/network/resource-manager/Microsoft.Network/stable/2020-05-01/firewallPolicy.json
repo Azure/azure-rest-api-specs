@@ -927,6 +927,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "terminateTLS": {
+          "type": "boolean",
+          "description": "Terminate TLS connections for this rule."
         }
       },
       "description": "Rule of type application."
@@ -982,10 +986,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "terminateTLS": {
-          "type": "boolean",
-          "description": "Terminate TLS connections for this rule."
         }
       }
     },
@@ -1036,6 +1036,13 @@
         "destinationIpGroups": {
           "type": "array",
           "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "description": "List of destination FQDNs.",
           "items": {
             "type": "string"
           }
@@ -1208,7 +1215,8 @@
         },
         "requireProxyForNetworkRules": {
           "type": "boolean",
-          "description": "FQDNs in Network Rules are supported when set to true."
+          "description": "FQDNs in Network Rules are supported when set to true.",
+          "x-nullable": true
         }
       }
     }

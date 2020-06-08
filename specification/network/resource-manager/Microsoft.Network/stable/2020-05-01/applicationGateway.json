@@ -593,6 +593,302 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "ApplicationGatewayPrivateLinkResources"
+        ],
+        "operationId": "ApplicationGatewayPrivateLinkResources_List",
+        "x-ms-examples": {
+          "Lists all private link resources on application gateway": {
+            "$ref": "./examples/ApplicationGatewayPrivateLinkResourceList.json"
+          }
+        },
+        "description": "Lists all private link resources on an application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of private link resources on application gateway.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}": {
+      "delete": {
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "Delete Application Gateway Private Endpoint Connection": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionDelete.json"
+          }
+        },
+        "description": "Deletes the specified private endpoint connection on application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway private endpoint connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource with the specified name does not exist."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_Update",
+        "description": "Updates the specified private endpoint connection on application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway private endpoint connection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+            },
+            "description": "Parameters supplied to update application gateway private endpoint connection operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting private endpoint connection on application gateway.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Application Gateway Private Endpoint Connection": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection on application gateway.",
+        "x-ms-examples": {
+          "Get Application Gateway Private Endpoint Connection": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway private endpoint connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns an application gateway private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_List",
+        "x-ms-examples": {
+          "Lists all private endpoint connections on application gateway": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionList.json"
+          }
+        },
+        "description": "Lists all private endpoint connections on an application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of private endpoint connections on application gateway.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {
       "get": {
         "tags": [
@@ -1271,6 +1567,10 @@
         "publicIPAddress": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to the PublicIP resource."
+        },
+        "privateLinkConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to the application gateway private link configuration."
         },
         "provisioningState": {
           "readOnly": true,
@@ -2076,6 +2376,246 @@
       ],
       "description": "Redirect configuration of an application gateway."
     },
+    "ApplicationGatewayPrivateLinkConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayPrivateLinkConfigurationProperties",
+          "description": "Properties of the application gateway private link configuration."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the private link configuration that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Private Link Configuration on an application gateway."
+    },
+    "ApplicationGatewayPrivateLinkConfigurationProperties": {
+      "properties": {
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateLinkIpConfiguration"
+          },
+          "description": "An array of application gateway private link ip configurations."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application gateway private link configuration."
+        }
+      },
+      "description": "Properties of private link configuration on an application gateway."
+    },
+    "ApplicationGatewayPrivateLinkIpConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayPrivateLinkIpConfigurationProperties",
+          "description": "Properties of an application gateway private link ip configuration."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of application gateway private link ip configuration."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "The application gateway private link ip configuration."
+    },
+    "ApplicationGatewayPrivateLinkIpConfigurationProperties": {
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private IP address of the IP configuration."
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
+        },
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to the subnet resource."
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Whether the ip configuration is primary or not."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application gateway private link IP configuration."
+        }
+      },
+      "description": "Properties of an application gateway private link IP configuration."
+    },
+    "ApplicationGatewayPrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayPrivateLinkResourceProperties",
+          "description": "Properties of the application gateway private link resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the private link resource that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "PrivateLink Resource of an application gateway."
+    },
+    "ApplicationGatewayPrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "Group identifier of private link resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "Required member names of private link resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required DNS zone names of the the private link resource."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
+    "ApplicationGatewayPrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateLinkResource"
+          },
+          "description": "List of private link resources of an application gateway."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListApplicationGatewayPrivateLinkResources API service call. Gets all private link resources for an application gateway."
+    },
+    "ApplicationGatewayPrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnectionProperties",
+          "description": "Properties of the application gateway private endpoint connection."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the private endpoint connection on an application gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Private Endpoint connection on an application gateway."
+    },
+    "ApplicationGatewayPrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "readOnly": true,
+          "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application gateway private endpoint connection resource."
+        },
+        "linkIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The consumer link id."
+        }
+      },
+      "description": "Properties of Private Link Resource of an application gateway."
+    },
+    "ApplicationGatewayPrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connections on an application gateway."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListApplicationGatewayPrivateEndpointConnection API service call. Gets all private endpoint connections for an application gateway."
+    },
     "ApplicationGatewayPropertiesFormat": {
       "properties": {
         "sku": {
@@ -2218,6 +2758,21 @@
         "autoscaleConfiguration": {
           "$ref": "#/definitions/ApplicationGatewayAutoscaleConfiguration",
           "description": "Autoscale Configuration."
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateLinkConfiguration"
+          },
+          "description": "PrivateLink configurations on application gateway."
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+          },
+          "description": "Private Endpoint connections on application gateway."
         },
         "resourceGuid": {
           "readOnly": true,

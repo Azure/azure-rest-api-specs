@@ -541,6 +541,9 @@
                 "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip"
+                },
+                "privateLinkConfiguration": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLinkConfig1"
                 }
               }
             }
@@ -737,7 +740,30 @@
               }
             }
           ],
-          "probes": []
+          "probes": [],
+          "privateLinkConfigurations": [
+            {
+              "name": "privateLinkConfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLinkConfig1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "ipConfigurations": [
+                  {
+                    "name": "natNicIpconfig1",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/privateLinkConfig1/ipConfigurations/natNicIpconfig1",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "privateIPAllocationMethod": "Dynamic",
+                      "primary": true,
+                      "subnet": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/appgwsubnet"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     }
