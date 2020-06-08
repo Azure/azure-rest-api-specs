@@ -109,7 +109,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
-- Microsoft.Sql/preview/2017-03-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
@@ -125,6 +124,7 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
+- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
