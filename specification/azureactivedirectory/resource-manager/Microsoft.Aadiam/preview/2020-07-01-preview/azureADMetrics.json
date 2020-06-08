@@ -326,9 +326,19 @@
       "description": "AzureADMetrics resource.",
       "type": "object",
       "properties": {
-        "provisioningState": {
-          "description": "The provisioning state of the resource.",
-          "type": "string"
+        "properties": {
+          "provisioningState": {
+            "type": "string",
+            "description": "The provisioning state of the resource.",
+            "enum": [
+              "Succeeded",
+              "Created"
+            ],
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          }
         }
       },
       "allOf": [
