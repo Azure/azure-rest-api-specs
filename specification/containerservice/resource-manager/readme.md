@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for ContainerServices (ACS/AKS/OpenShift).
+this is the AutoRest configuration file for ContainerServices (ACS/AKS/OpenShift).
 
 The ContainerServices RPv2 consists of two similar services: ContainerServices and ManagedClusters.
 Each service has its own swagger spec.
