@@ -1118,7 +1118,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationTransactions": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationTransactions": {
       "get": {
         "tags": [
           "ReservationTransactions"
@@ -1131,10 +1131,53 @@
         "x-ms-examples": {
           "ReservationTransactionsByEnrollmentNumber": {
             "$ref": "./examples/ReservationTransactionsListByEnrollmentNumber.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
-          "ReservationTransactionsByBillingAccountId": {
-            "$ref": "./examples/ReservationTransactionsListByBillingAccountId.json"
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationTransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/reservationTransactions": {
+      "get": {
+        "tags": [
+          "ReservationTransactions"
+        ],
+        "operationId": "ReservationTransactions_ListByBillingProfile",
+        "description": "List of transactions for reserved instances on billing account scope",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
           "ReservationTransactionsByBillingProfileId": {
             "$ref": "./examples/ReservationTransactionsListByBillingProfileId.json"
           }
@@ -1151,14 +1194,17 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/scopeReservationTransactionsParameter"
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ReservationTransactionsListResult"
+              "$ref": "#/definitions/ModernReservationTransactionsListResult"
             }
           },
           "default": {
@@ -3594,29 +3640,18 @@
     "ReservationTransaction": {
       "description": "Reservation transaction resource.",
       "type": "object",
-      "discriminator": "kind",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Specifies the kind of reservation transaction.",
-          "enum": [
-            "Legacy",
-            "Modern"
-          ],
-          "x-ms-enum": {
-            "name": "ReservationTransactionKind",
-            "modelAsString": true
-          }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LegacyReservationTransactionProperties",
+          "title": "Reservation Transaction properties"
         }
-      },
-      "required": [
-        "kind"
-      ]
+      }
     },
     "ReservationTransactionsListResult": {
       "description": "Result of listing reservation recommendations.",
@@ -3627,6 +3662,24 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ReservationTransaction"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernReservationTransactionsListResult": {
+      "description": "Result of listing reservation recommendations.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation recommendations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ModernReservationTransaction"
           }
         },
         "nextLink": {
