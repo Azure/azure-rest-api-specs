@@ -79,8 +79,11 @@
               "$ref": "#/definitions/FileContainer"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -155,8 +158,11 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }
