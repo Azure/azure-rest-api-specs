@@ -39,12 +39,12 @@
         "tags": [
           "azureADMetrics"
         ],
-        "operationId": "azureADMetrics_Create",
+        "operationId": "azureADMetrics_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "description": "Creates a azureADMetrics instance.",
         "x-ms-examples": {
           "azureADMetricsCreate": {
-            "$ref": "./examples/AzureADMetricsCreate.json"
+            "$ref": "./examples/AzureADMetricsCreateOrUpdate.json"
           }
         },
         "parameters": [
@@ -325,7 +325,12 @@
     "azureADMetricsConfig": {
       "description": "AzureADMetrics resource.",
       "type": "object",
-      "properties": {},
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource."
+        }
+      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
