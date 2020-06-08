@@ -5,11 +5,11 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ```yaml $(csharp)
 csharp:
-  package-version: 0.3.0
+  package-version: 0.1.0
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   clear-output-folder: true
-  namespace: Microsoft.Azure.Management.VMware
-  output-folder: $(csharp-sdks-folder)/VMware/Management.VMware/Generated
+  namespace: Microsoft.Azure.Management.AVS
+  output-folder: $(csharp-sdks-folder)/avs/Microsoft.Azure.Management.AVS/src/Generated
 ```
