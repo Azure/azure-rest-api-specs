@@ -302,9 +302,9 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./publicIPPrefix.json#/definitions/PublicIPPrefix"
+            "$ref": "#/definitions/ReferencedPublicIPPrefix"
           },
-          "description": "The corresponding PublicIPPrefix ranges."
+          "description": "The list of all referenced PublicIPPrefixes."
         },
         "resourceGuid": {
           "readOnly": true,
@@ -360,6 +360,15 @@
         }
       },
       "description": "Response for ListCustomIpPrefixes API service call."
+    },
+    "ReferencedPublicIPPrefix": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The PublicIpPrefix Reference."
+        }
+      },
+      "description": "Reference to a public IP prefix."
     }
   }
 }

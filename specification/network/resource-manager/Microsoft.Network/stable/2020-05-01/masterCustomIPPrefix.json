@@ -311,7 +311,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomIPPrefixes"
+            "$ref": "#/definitions/ReferencedCustomIPPrefix"
           },
           "description": "The list of corresponding Custom IP Prefixes."
         },
@@ -330,11 +330,6 @@
 		  "modelAsString": true
 		  }
 		},
-        "roaExpiryDate": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Expiration date of the Route Origin Authorization (ROA) request in YYYY-MM-DD format."
-        },
         "resourceGuid": {
           "readOnly": true,
           "type": "string",
@@ -382,6 +377,15 @@
         }
       },
       "description": "Response for ListMasterCustomIpPrefixes API service call."
+    },
+    "ReferencedCustomIPPrefix": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The CustomIpPrefix Reference."
+        }
+      },
+      "description": "Reference to a custom IP prefix."
     }
   }
 }
