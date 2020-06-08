@@ -3555,6 +3555,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/assessPatches": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_AssessPatches",
+        "x-ms-examples": {
+          "Assess patch state of a virtual machine.": {
+            "$ref": "./examples/VirtualMachineAssessPatches.json"
+          }
+        },
+        "description": "Assess patches on the VM.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineAssessPatchesResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
       "put": {
         "tags": [
@@ -7224,6 +7281,149 @@
         }
       },
       "description": "The List Extension operation response"
+    },
+    "VirtualMachineSoftwarePatchProperties": {
+      "properties": {
+        "patchId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique identifier for the patch."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The friendly name of the patch."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version number of the patch. This property applies only to Linux patches."
+        },
+        "kbid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The KBID of the patch. Only applies to Windows patches."
+        },
+        "classifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The classification(s) of the patch as provided by the patch publisher."
+        },
+        "rebootBehavior": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the reboot requirements of the patch.",
+          "enum": [
+            "NeverReboots",
+            "AlwaysRequiresReboot",
+            "CanRequestReboot"
+          ],
+          "x-ms-enum": {
+            "name": "SoftwareUpdateRebootBehavior",
+            "modelAsString": true
+          }
+        },
+        "activityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "publishedDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the repository published this patch."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp of the last update to this patch record."
+        },
+        "assessmentState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the outcome of an install operation for a given patch.",
+          "enum": [
+            "Installed",
+            "Failed",
+            "Excluded",
+            "NotSelected",
+            "Pending",
+            "Available"
+          ],
+          "x-ms-enum": {
+            "name": "PatchAssessmentState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine software patch."
+    },
+    "VirtualMachineAssessPatchesResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+        },
+        "criticalAndSecurityPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of critical or security patches that have been detected as available and not yet installed."
+        },
+        "otherPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches excluding critical and security."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "patches": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
+          },
+          "description": "The list of patches that have been detected as available for installation."
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of an AssessPatches result."
     },
     "PurchasePlan": {
       "properties": {
