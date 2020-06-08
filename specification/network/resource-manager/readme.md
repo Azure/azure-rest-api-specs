@@ -1370,6 +1370,9 @@ directive:
     from: checkDnsAvailability.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: customIpPrefix.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: ddosCustomPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -1398,6 +1401,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: masterCustomIpPrefix.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: natGateway.json
