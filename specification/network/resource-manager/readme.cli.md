@@ -97,6 +97,12 @@ cli:
     - name: /RouteFilters/get/RouteFilterList
     - name: /RouteFilters/patch/Update route filter tags
     - name: /RouteFilters/delete/RouteFilterDelete
+    - split: routefilterrules
+    - name: /RouteFilters/put/RouteFilterCreate
+    - name: /RouteFilterRules/put/RouteFilterRuleCreate
+    - name: /RouteFilterRules/get/RouteFilterRuleGet
+    - name: /RouteFilterRules/get/RouteFilterRuleListByRouteFilter
+    - name: /RouteFilterRules/delete/RouteFilterRuleDelete
     - split: virtualwans
     - name: /VirtualWans/put/VirtualWANCreate
     - name: /VirtualWans/get/VirtualWANGet
@@ -112,6 +118,13 @@ cli:
     - name: /VirtualHubs/get/VirtualHubList
     - name: /VirtualHubs/patch/VirtualHubUpdate
     - name: /VirtualHubs/delete/VirtualHubDelete
+    - split: virtualhubroutetablev2s
+    - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VirtualHubs/put/VirtualHubPut
+    - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
+    - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
+    - name: /VirtualHubRouteTableV2s/get/VirtualHubRouteTableV2List
+    - name: /VirtualHubRouteTableV2s/delete/VirtualHubRouteTableV2Delete
     - split: vpnsites
     - name: /VirtualWans/put/VirtualWANCreate
     - name: /VpnSites/put/VpnSiteCreate
@@ -224,13 +237,30 @@ cli:
     - name: /NatGateways/patch/Update nat gateway tags
     - name: /NatGateways/delete/Delete nat gateway
     - split: virtualnetworktaps
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /NetworkInterfaces/put/Create network interface
     - name: /VirtualNetworkTaps/put/Create Virtual Network Tap
     - name: /VirtualNetworkTaps/get/Get Virtual Network Tap
     - name: /VirtualNetworkTaps/get/List virtual network taps in resource group
     - name: /VirtualNetworkTaps/get/List all virtual network taps
     - name: /VirtualNetworkTaps/patch/Update virtual network tap tags
     - name: /VirtualNetworkTaps/delete/Delete Virtual Network Tap resource
+    - split: networkinterfacetapconfigurations
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /NetworkInterfaces/put/Create network interface
+    - name: /VirtualNetworkTaps/put/Create Virtual Network Tap
+    - name: /NetworkInterfaceTapConfigurations/put/Create Network Interface Tap Configurations
+    - name: /NetworkInterfaceTapConfigurations/get/Get Network Interface Tap Configurations
+    - name: /NetworkInterfaceTapConfigurations/get/List virtual network tap configurations
+    - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
     - split: virtualnetworkgateways
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
     - name: /VirtualNetworkGateways/put/UpdateVirtualNetworkGateway
     - name: /VirtualNetworkGateways/get/VirtualNetworkGatewaysListConnections
     - name: /VirtualNetworkGateways/get/GetVirtualNetworkGateway
@@ -346,6 +376,8 @@ cli:
     - name: /ApplicationGateways/patch/Update Application Gateway tags
     - name: /ApplicationGateways/delete/Delete ApplicationGateway
     - split: networkprofiles
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
     - name: /NetworkProfiles/put/Create network profile defaults
     - name: /NetworkProfiles/get/Get network profile with container network interfaces
     - name: /NetworkProfiles/get/Get network profile
@@ -480,16 +512,6 @@ cli:
     - name: /PacketCaptures/post/Query packet capture status
     - name: /PacketCaptures/post/Stop packet capture
     - name: /PacketCaptures/delete/Delete packet capture
-    - split: routefilterrules
-    - name: /RouteFilterRules/put/RouteFilterRuleCreate
-    - name: /RouteFilterRules/get/RouteFilterRuleGet
-    - name: /RouteFilterRules/get/RouteFilterRuleListByRouteFilter
-    - name: /RouteFilterRules/delete/RouteFilterRuleDelete
-    - split: virtualhubroutetablev2s
-    - name: /VirtualHubRouteTableV2s/put/VirtualHubRouteTableV2Put
-    - name: /VirtualHubRouteTableV2s/get/VirtualHubVirtualHubRouteTableV2Get
-    - name: /VirtualHubRouteTableV2s/get/VirtualHubRouteTableV2List
-    - name: /VirtualHubRouteTableV2s/delete/VirtualHubRouteTableV2Delete
     - split: flowlogs
     - name: /FlowLogs/put/Create or update flow log
     - name: /FlowLogs/get/Get flow log
@@ -510,11 +532,6 @@ cli:
     - name: /ExpressRouteCrossConnectionPeerings/get/GetExpressRouteCrossConnectionBgpPeering
     - name: /ExpressRouteCrossConnectionPeerings/get/ExpressRouteCrossConnectionBgpPeeringList
     - name: /ExpressRouteCrossConnectionPeerings/delete/DeleteExpressRouteCrossConnectionBgpPeering
-    - split: networkinterfacetapconfigurations
-    - name: /NetworkInterfaceTapConfigurations/put/Create Network Interface Tap Configurations
-    - name: /NetworkInterfaceTapConfigurations/get/Get Network Interface Tap Configurations
-    - name: /NetworkInterfaceTapConfigurations/get/List virtual network tap configurations
-    - name: /NetworkInterfaceTapConfigurations/delete/Delete tap configuration
     - split: privatednszonegroups
     - name: /PrivateDnsZoneGroups/put/Create private dns zone group
     - name: /PrivateDnsZoneGroups/get/Get private dns zone group
