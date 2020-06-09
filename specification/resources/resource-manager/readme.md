@@ -60,6 +60,10 @@ tag: package-managedapplications-2018-06
 tag: package-deploymentscripts-2019-10-preview
 ```
 
+``` yaml $(package-templatespecs)
+tag: package-templatespecs-2019-06-preview
+```
+
 ### Tag: package-resources-2020-06
 
 These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
@@ -216,6 +220,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2019-06-preview
+
+These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
+input-file:
+- Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
 ```
 
 ### Tag: package-policy-2016-12
@@ -560,6 +573,26 @@ directive:
     - $.definitions.AzureCliScript.properties
     - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
+  - suppress: OperationsAPIImplementation
+    from: templateSpecs.json
+    where: $.paths
+    reason: OperationsAPI will come from Resources
+  - suppress: R3006 #BodyTopLevelProperties
+    from: templateSpecs.json
+    where: 
+    - $.definitions.TemplateSpecModel.properties
+    - $.definitions.TemplateSpecVersionModel.properties
+    - $.definitions.TemplateSpecUpdateModel.properties
+    - $.definitions.TemplateSpecVersionUpdateModel.properties
+    reason: Currently systemData is not allowed
+  - suppress: TrackedResourceListByImmediateParent
+    from: templateSpecs.json
+    where: $.definitions
+    reason: Tooling issue
+  - suppress: TrackedResourceListByResourceGroup
+    from: templateSpecs.json
+    where: $.definitions.TemplateSpecVersionModel
+    reason: Tooling issue
 ```
 
 ---
@@ -612,6 +645,7 @@ batch:
   - package-links: true
   - package-managedapplications: true
   - package-deploymentscripts: true
+  - package-templatespecs: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
