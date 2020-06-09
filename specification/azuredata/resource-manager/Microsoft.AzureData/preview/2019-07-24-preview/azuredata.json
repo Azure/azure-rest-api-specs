@@ -856,6 +856,294 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlServerInstances": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_List",
+        "summary": "List sqlServerInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerInstances": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_ListByResourceGroup",
+        "description": "Gets all sqlServerInstances in a resource group.",
+        "summary": "List sqlServerInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerInstances/{sqlServerInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Get",
+        "description": "Retrieves a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "Name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/GetSqlServerInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Create",
+        "description": "Creates or replaces a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "The name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerInstance.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Delete",
+        "description": "Deletes a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "The name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Server Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Server Instance.": {
+            "$ref": "./examples/DeleteSqlServerInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Update",
+        "description": "Updates a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "Name of sqlServerInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/UpdateSqlServerInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/postgresInstances": {
       "get": {
         "tags": [
@@ -1984,6 +2272,97 @@
         }
       }
     },
+    "SqlServerInstanceProperties": {
+      "description": "Properties of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SQL Server version."
+        },
+        "edition": {
+          "type": "string",
+          "description": "SQL Server edition."
+        },
+        "containerResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers)"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the resource was created.",
+          "readOnly": true
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "The time when the resource was last updated.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The number of logical processors used by the SQL Server instance."
+        },
+        "status": {
+          "type": "string",
+          "description": "The cloud connectivity status."
+        }
+      },
+      "required": [
+        "version",
+        "edition",
+        "containerResourceId",
+        "vCore",
+        "status"
+      ]
+    },
+    "SqlServerInstance": {
+      "description": "A SqlServerInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlServerInstanceUpdate": {
+      "description": "An update to a SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlServerInstanceListResult": {
+      "description": "A list of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "HybridDataManagerProperties": {
       "description": "Hybrid data manager properties",
       "type": "object"
@@ -2179,6 +2558,14 @@
     "SqlInstanceNameParameter": {
       "in": "path",
       "name": "sqlInstanceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlServerInstanceNameParameter": {
+      "in": "path",
+      "name": "sqlServerInstanceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
