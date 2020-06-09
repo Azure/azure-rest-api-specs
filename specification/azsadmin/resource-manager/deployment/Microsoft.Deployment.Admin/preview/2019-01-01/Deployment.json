@@ -75,24 +75,23 @@
       "x-ms-azure-resource": true
     },
     "ExtendedErrorInfo": {
-      "description": "Error information",
+      "description": "Extended Error Information.",
       "type": "object",
       "properties": {
         "code": {
-          "description": "Error Code",
+          "description": "The error code.",
           "type": "string"
         },
         "message": {
-          "description": "Error Message",
+          "description": "The error message.",
           "type": "string"
         },
         "details": {
-          "description": "Internal error details.",
+          "description": "The detailed error messages.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExtendedErrorInfo"
-          },
-          "readOnly": true
+          }
         }
       }
     },
