@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-03-01-preview",
+    "version": "2020-07-01-preview",
     "title": "azureactivedirectory",
-    "description": "Private link Policy for Azure Active Directory."
+    "description": "Metrics and Alerts for Azure Active Directory."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,56 +34,53 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.aadiam/azureADMetrics/{azureADMetricsName}": {
       "put": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADMetrics"
         ],
-        "operationId": "privateLinkForAzureAd_Create",
+        "operationId": "azureADMetrics_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "description": "Creates a private link policy.",
+        "description": "Creates a azureADMetrics instance.",
         "x-ms-examples": {
-          "privateLinkPolicyCreate": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyCreate.json"
-          },
-          "privateLinkPolicyMinCreate": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyMinCreate.json"
+          "azureADMetricsCreate": {
+            "$ref": "./examples/AzureADMetricsCreateOrUpdate.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "privateLinkPolicy",
+            "name": "azureADMetricsConfig",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADMetricsConfig"
             },
-            "description": "private link Policy supplied to the operation."
+            "description": "AzureADMetrics definition supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Created -- Private Link Policy created.",
+            "description": "OK -- AzureADMetrics instance is updated.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "201": {
-            "description": "OK -- Private Link Policy is updated.",
+            "description": "Created -- AzureADMetrics instance created.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "default": {
@@ -96,42 +93,42 @@
       },
       "patch": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADMetrics"
         ],
-        "operationId": "privateLinkForAzureAd_Update",
-        "description": "Updates private link policy tags with specified values.",
+        "operationId": "azureADMetrics_Update",
+        "description": "Updates azureADMetrics tags with specified values.",
         "x-ms-examples": {
-          "privateLinkPolicyUpdate": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyUpdate.json"
+          "azureADMetricsUpdate": {
+            "$ref": "./examples/AzureADMetricsUpdate.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "privateLinkPolicy",
+            "name": "azureADMetricsConfig",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicyUpdateParameter"
+              "$ref": "#/definitions/azureADMetricsUpdateParameter"
             },
-            "description": "Private Link Policy resource with the tags to be updated."
+            "description": "AzureADMetrics resource with the tags to be updated."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Private Link Policy tags are updated.",
+            "description": "OK -- AzureADMetrics tags are updated.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "default": {
@@ -144,24 +141,24 @@
       },
       "get": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADMetrics"
         ],
-        "operationId": "privateLinkForAzureAd_Get",
-        "description": "Gets a private link policy with a given name.",
+        "operationId": "azureADMetrics_Get",
+        "description": "Gets a azureADMetrics instance with a given name.",
         "x-ms-examples": {
-          "privateLinkPolicyGet": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyGet.json"
+          "azureADMetricsGet": {
+            "$ref": "./examples/AzureADMetricsGet.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -169,9 +166,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns information about the private link policy.",
+            "description": "OK -- Returns information about the azureADMetrics resource.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/azureADMetricsConfig"
             }
           },
           "default": {
@@ -184,24 +181,24 @@
       },
       "delete": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADMetrics"
         ],
-        "operationId": "privateLinkForAzureAd_Delete",
-        "description": "Deletes a private link policy. When operation completes, status code 200 returned without content.",
+        "operationId": "azureADMetrics_Delete",
+        "description": "Deletes a AzureADMetrics resource. When operation completes, status code 200 returned without content.",
         "x-ms-examples": {
-          "privateLinkPolicyDelete": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyDelete.json"
+          "azureADMetricsDelete": {
+            "$ref": "./examples/AzureADMetricsDelete.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/policyNameParameter"
+            "$ref": "#/parameters/azureADMetricsNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -209,10 +206,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- private link policy deleted."
+            "description": "OK -- azureADMetrics resource deleted."
           },
           "204": {
-            "description": "private link policy does not exist."
+            "description": "azureADMetrics does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -223,21 +220,21 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/privateLinkForAzureAd": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.aadiam/azureADMetrics": {
       "get": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADMetrics"
         ],
-        "operationId": "privateLinkForAzureAd_ListBySubscription",
-        "description": "Lists all  Private Link Policies For AzureAD in the given subscription.",
+        "operationId": "azureADMetrics_ListBySubscription",
+        "description": "Lists all AzureADMetrics resources in the given subscription.",
         "x-ms-examples": {
-          "privateLinkPolicyListBySubscription": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyListBySubscription.json"
+          "azureADMetricsListBySubscription": {
+            "$ref": "./examples/AzureADMetricsListBySubscription.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -245,9 +242,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns a list of private link policies.",
+            "description": "OK -- Returns a list azureADMetrics resources.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicyListResult"
+              "$ref": "#/definitions/azureADMetricsListResult"
             }
           },
           "default": {
@@ -262,24 +259,24 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/azureADMetrics": {
       "get": {
         "tags": [
-          "privateLinkForAzureAd"
+          "azureADMetrics"
         ],
-        "operationId": "privateLinkForAzureAd_List",
+        "operationId": "azureADMetrics_List",
         "x-ms-examples": {
-          "privateLinkPolicyGetList": {
-            "$ref": "./examples/AzureADPrivateLinkPolicyList.json"
+          "azureADMetricsGetList": {
+            "$ref": "./examples/AzureADMetricsList.json"
           }
         },
-        "description": "Operation to return the list of Private Link Policies For AzureAD scoped to the resourceGroup.",
+        "description": "Operation to return the list of AzureADMetrics resources scoped to the resourceGroup.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../2020-03-01-preview/privateLinkForAzureAD.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -290,13 +287,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
+            "description": "Successful request to get list of AzureADMetrics resources For AzureAD.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicyListResult"
+              "$ref": "#/definitions/azureADMetricsListResult"
             }
           },
           "default": {
-            "description": "Error, failed to get list of Private Links For AzureAD.",
+            "description": "Error, failed to get list of AzureADMetrics resources.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -306,97 +303,60 @@
     }
   },
   "definitions": {
-    "privateLinkPolicyListResult": {
-      "description": "A list of private link policies",
+    "azureADMetricsListResult": {
+      "description": "A list of AzureADMetrics resources",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private link policies",
+          "description": "Array of AzureADMetrics resources.",
           "items": {
-            "$ref": "#/definitions/privateLinkPolicy"
-          }
+            "$ref": "#/definitions/azureADMetricsConfig"
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "privateLinkPolicy": {
-      "description": "PrivateLink Policy configuration object.",
+    "azureADMetricsConfig": {
+      "description": "AzureADMetrics resource.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Name of the Private Link Azure AD Policy.",
-          "type": "string"
-        },
-        "ownerTenantId": {
-          "description": "Guid of the owner tenant",
-          "type": "string"
-        },
-        "allTenants": {
-          "description": "Flag indicating whether all tenants are allowed",
-          "type": "boolean"
-        },
-        "tenants": {
-          "description": "The list of tenantIds.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resourceName": {
-          "description": "Name of the private link policy resource",
-          "type": "string"
-        },
-        "subscriptionId": {
-          "description": "Subscription Identifier",
-          "type": "string"
-        },
-        "resourceGroup": {
-          "description": "Name of the resource group",
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/AzureADMetricsPropertiesFormat"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResourceBase"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "AzureResourceBase": {
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "description": "Common properties for all Azure resources.",
+    "AzureADMetricsPropertiesFormat": {
       "properties": {
-        "id": {
-          "readOnly": true,
+        "provisioningState": {
           "type": "string",
-          "description": "String Id used to locate any resource on Azure."
-        },
-        "name": {
-          "readOnly": false,
-          "type": "string",
-          "description": "Name of this resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Type of this resource."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Created",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
-    "privateLinkPolicyUpdateParameter": {
+    "azureADMetricsUpdateParameter": {
       "type": "object",
-      "description": "private Link policy parameters to be updated. ",
+      "description": "AzureADMetrics parameters to be updated. ",
       "properties": {
         "tags": {
           "type": "object",
@@ -441,14 +401,6 @@
     }
   },
   "parameters": {
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Azure subscription ID.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -468,13 +420,13 @@
       "x-ms-parameter-location": "method",
       "description": "Name of an Azure resource group."
     },
-    "policyNameParameter": {
-      "name": "policyName",
+    "azureADMetricsNameParameter": {
+      "name": "azureADMetricsName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The name of the private link policy in Azure AD."
+      "description": "Name of the azureADMetrics instance."
     }
   }
 }
