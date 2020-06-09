@@ -327,18 +327,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "provisioningState": {
-            "type": "string",
-            "description": "The provisioning state of the resource.",
-            "enum": [
-              "Succeeded",
-              "Created"
-            ],
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": true
-            }
-          }
+          "$ref": "#/definitions/AzureADMetricsPropertiesFormat"
         }
       },
       "allOf": [
@@ -346,6 +335,24 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "AzureADMetricsPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Created",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
     },
     "azureADMetricsUpdateParameter": {
       "type": "object",
