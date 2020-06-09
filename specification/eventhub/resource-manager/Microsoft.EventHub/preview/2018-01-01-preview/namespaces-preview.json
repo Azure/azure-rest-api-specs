@@ -493,7 +493,11 @@
       "x-ms-client-flatten": true,
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyVaultProperties"
+          },
+          "x-ms-client-name": "KeyVaultProperties",
           "description": "Properties of KeyVault"
         },
         "keySource": {
@@ -515,11 +519,18 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "Name of the Key from KeyVault"
+          "description": "Name of the Key from KeyVault",
+          "x-ms-client-name": "KeyName"
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "Uri of KeyVault"
+          "description": "Uri of KeyVault",
+          "x-ms-client-name": "KeyVaultUri"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Key Version",
+          "x-ms-client-name": "KeyVersion"
         }
       },
       "description": "Properties to configure keyVault Properties"
