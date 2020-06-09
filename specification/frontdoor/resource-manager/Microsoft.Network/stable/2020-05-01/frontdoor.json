@@ -1124,6 +1124,16 @@
         "rulesEngine": {
           "description": "A reference to a specific Rules Engine Configuration to apply to this route.",
           "$ref": "./network.json#/definitions/SubResource"
+        },
+        "webApplicationFirewallPolicyLink": {
+          "description": "Defines the Web Application Firewall policy for each routing rule (if applicable)",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource ID."
+            }
+          }
         }
       }
     },
@@ -1262,7 +1272,7 @@
           ],
           "x-ms-enum": {
             "name": "PrivateEndpointStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "privateLinkApprovalMessage": {

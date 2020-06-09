@@ -1,8 +1,6 @@
-<!-- region Generated -->
-# Dns
-This directory contains the Cli common model for the Blockchain service.
+## CLI
 
-> Metadata
+These settings apply only when `--cli` is specified on the command line.
 
 ``` yaml
 # Migrated from Powershell's readme
@@ -29,18 +27,4 @@ cli:
             operationGroup: 'locations'
             operation: 'listConsortiums'
         name: 'list'
-      - select: 'operationGroup'
-        where:
-            operationGroup: 'blockchainMemberOperationResults'
-        hidden: true
-      - select: 'operation'
-        where:
-            operationGroup: 'blockchainMembers'
-            operation: '(create|update)'
-        hidden: true
-      - select: 'operation'
-        where:
-            operationGroup: 'transactionNodes'
-            operation: '(create|update)'
-        hidden: true
 ```
