@@ -1,0 +1,617 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Confluent",
+    "version": "2020-03-01-preview"
+  },
+  "paths": {
+    "/providers/Microsoft.Confluent/operations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all operations provided by Microsoft.Confluent for the 2020-03-01-preview api version.",
+        "operationId": "OrganizationOperations_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrganizationOperations_List": {
+            "$ref": "./examples/OrganizationOperations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all organizations under the specified subscription.",
+        "operationId": "Organization_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Azure subscription id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organization_ListBySubscription": {
+            "$ref": "./examples/Organization_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all Organizations under the specified resource group.",
+        "operationId": "Organization_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Azure subscription id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organization_ListByResourceGroup": {
+            "$ref": "./examples/Organization_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get the properties of a specific Organization resource.",
+        "operationId": "Organization_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "azure subscription id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "organizationName",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_Get": {
+            "$ref": "./examples/Organization_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Create Organization resource",
+        "operationId": "Organization_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "azure subscription id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "organizationName",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Organization resource model",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Organization_Create": {
+            "$ref": "./examples/Organization_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Update Organization resource",
+        "operationId": "Organization_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "azure subscription id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "organizationName",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated Organization resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Delete Organization resource",
+        "operationId": "Organization_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "azure subscription id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "organizationName",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.Confluent",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'clusters'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write confluent'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "An Confluent REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of GET request to list Confluent operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "OfferDetail": {
+      "description": "Confluent Offer detail",
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "Publisher Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "id": {
+          "description": "Offer Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planId": {
+          "description": "Offer Plan Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planName": {
+          "description": "Offer Plan Name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "termUnit": {
+          "description": "Offer Plan Term unit",
+          "maxLength": 25,
+          "type": "string"
+        }
+      }
+    },
+    "UserDetail": {
+      "description": "Subscriber detail",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "First name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email address",
+          "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number",
+          "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceProperties": {
+      "description": "Organization resource property",
+      "type": "object",
+      "properties": {
+        "createdTime": {
+          "format": "date-time",
+          "description": "The creation time of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "organizationId": {
+          "description": "Id of the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ssoUrl": {
+          "format": "uri",
+          "description": "SSO url for the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerDetail": {
+          "$ref": "#/definitions/OfferDetail"
+        },
+        "userDetail": {
+          "$ref": "#/definitions/UserDetail"
+        }
+      }
+    },
+    "OrganizationResource": {
+      "description": "Organization resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OrganizationResourceProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceListResult": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Result of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrganizationResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceUpdate": {
+      "description": "Organization Resource update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "ARM resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
