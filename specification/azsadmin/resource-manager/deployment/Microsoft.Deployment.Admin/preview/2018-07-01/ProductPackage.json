@@ -304,8 +304,12 @@
           "type": "string"
         },
         "details": {
-          "description": "Error message details",
-          "$ref": "#/definitions/ExtendedErrorInfo"
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          },
+          "readOnly": true
         }
       }
     }
