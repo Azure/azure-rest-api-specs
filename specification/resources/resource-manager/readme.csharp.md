@@ -24,6 +24,7 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-deploymentscripts: true
+  - package-templatespecs: true
 #  - package-managedapplications: true
 ```
 
