@@ -15,6 +15,7 @@ go:
 batch:
   - tag: release_1_0
   - tag: release_3_0
+  - tag: release_3_1
 ```
 
 ### Tag: release_1_0 and go
@@ -33,4 +34,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'release_3_0' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.0/customvision/$(namespace)
+```
+
+### Tag: release_3_1 and go
+
+These settings apply only when `--tag=release_3_1 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_3_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.1/customvision/$(namespace)
 ```
