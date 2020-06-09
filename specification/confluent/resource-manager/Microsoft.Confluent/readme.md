@@ -24,6 +24,12 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the Confluent API.
 
+``` yaml
+title: Microsoft Confluent Client
+openapi-type: arm
+tag: package-2020-03-preview
+```
+
 ### Tag: package-2020-03-preview
 
 These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
