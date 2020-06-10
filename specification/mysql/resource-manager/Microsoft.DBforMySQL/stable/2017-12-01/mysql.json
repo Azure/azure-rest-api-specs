@@ -1524,14 +1524,24 @@
     },
     "InfrastructureEncryption": {
       "type": "string",
-      "description": "Status showing whether the server enabled infrastructure encryption.",
+      "description": "Add a second layer of encryption for your data using new encryption algorithm which gives additional data protection. Value is optional but if passed in, must be 'Disabled' or 'Enabled'.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
         "name": "InfrastructureEncryption",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Default value for single layer of encryption for data at rest."
+          },
+          {
+            "value": "Disabled",
+            "description": "Additional (2nd) layer of encryption for data at rest"
+          }
+        ]
       }
     },
     "PublicNetworkAccess": {

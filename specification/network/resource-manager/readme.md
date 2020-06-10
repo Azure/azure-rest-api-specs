@@ -1576,6 +1576,7 @@ swagger-to-sdk:
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
       - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-network
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -1834,7 +1835,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkWatcher.json
-  - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
+  - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/privateLinkService.json
@@ -1877,6 +1878,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/privateLinkService.json
@@ -1918,6 +1920,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/privateLinkService.json
@@ -1959,6 +1962,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/privateLinkService.json
