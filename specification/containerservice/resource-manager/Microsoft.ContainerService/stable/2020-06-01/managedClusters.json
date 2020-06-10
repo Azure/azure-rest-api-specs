@@ -468,8 +468,11 @@
           "Create/Update Managed Cluster": {
             "$ref": "./examples/ManagedClustersCreate_Update.json"
           },
-          "Create/Update AAD Azure RBAC Managed Cluster": {
+          "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
+          },
+          "Create Managed Cluster with PPG": {
+            "$ref": "./examples/ManagedClustersCreate_PPG.json"
           }
         }
       },
@@ -729,6 +732,9 @@
           },
           "Create Spot Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Spot.json"
+          },
+          "Create Agent Pool with PPG": {
+            "$ref": "./examples/AgentPoolsCreate_PPG.json"
           }
         }
       },
@@ -1015,6 +1021,205 @@
         "x-ms-examples": {
           "Rotate Cluster Certificates": {
             "$ref": "./examples/ManagedClustersRotateClusterCertificates.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "summary": "Gets a list of private endpoint connections in the specified managed cluster.",
+        "description": "Gets a list of private endpoint connections in the specified managed cluster. The operation returns properties of each private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Private Endpoint Connections by Managed Cluster": {
+            "$ref": "./examples/PrivateEndpointConnectionsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "summary": "Gets the private endpoint connection.",
+        "description": "Gets the details of the private endpoint connection by managed cluster and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private endpoint connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private Endpoint Connection": {
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Update",
+        "summary": "Updates a private endpoint connection.",
+        "description": "Updates a private endpoint connection in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private endpoint connection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "Parameters supplied to the Update a private endpoint connection operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Private Endpoint Connection": {
+            "$ref": "./examples/PrivateEndpointConnectionsUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "summary": "Deletes a private endpoint connection.",
+        "description": "Deletes the private endpoint connection in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private endpoint connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Private Endpoint Connection": {
+            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
           }
         }
       }
@@ -1538,6 +1743,10 @@
             "type": "string"
           },
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
+        "proximityPlacementGroupID": {
+          "$ref": "#/definitions/ProximityPlacementGroupID",
+          "description": "The ID for Proximity Placement Group."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -2482,6 +2691,10 @@
       "default": -1,
       "description": "SpotMaxPrice to be used to specify the maximum price you are willing to pay in US Dollars. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand."
     },
+    "ProximityPlacementGroupID": {
+      "type": "string",
+      "description": "The ID for Proximity Placement Group."
+    },
     "CredentialResults": {
       "properties": {
         "kubeconfigs": {
@@ -2571,6 +2784,115 @@
             "name": "ManagedClusterSKUTier",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "A list of private endpoint connections",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the private endpoint connection."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the private endpoint connection.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The properties of a private endpoint connection.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private endpoint."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Private endpoint which a connection belongs to.",
+      "properties": {
+        "id": {
+          "description": "The resource Id for private endpoint",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The state of a private link service connection.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "description": "The private link service connection status.",
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
         }
       }
     }
