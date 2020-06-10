@@ -367,6 +367,21 @@
         "x-ms-examples": {
           "Registries_ScheduleRun": {
             "$ref": "./examples/RegistriesScheduleRun.json"
+          },
+          "Registries_ScheduleRun_EncodedTaskRun": {
+            "$ref": "./examples/RegistriesScheduleRun_EncodedTaskRun.json"
+          },
+          "Registries_ScheduleRun_FileTaskRun": {
+            "$ref": "./examples/RegistriesScheduleRun_FileTaskRun.json"
+          },
+          "Registries_ScheduleRun_Task": {
+            "$ref": "./examples/RegistriesScheduleRun_Task.json"
+          },
+          "Registries_ScheduleRun_Task_WithCustomCredentials": {
+            "$ref": "./examples/RegistriesScheduleRun_FileTask_WithCustomCredentials.json"
+          },
+          "Registries_ScheduleRun_WithCustomCredentials": {
+            "$ref": "./examples/RegistriesScheduleRun_WithCustomCredentials.json"
           }
         }
       }
@@ -1150,6 +1165,15 @@
         "x-ms-examples": {
           "Tasks_Create": {
             "$ref": "./examples/TasksCreate.json"
+          },
+          "Tasks_Create_WithSystemAndUserIdentities": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemAndUserIdentities.json"
+          },
+          "Tasks_Create_WithUserIdentities_WithSystemIdentity": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemIdentity.json"
+          },
+          "Tasks_Create_WithUserIdentities": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
           }
         }
       },
@@ -1256,6 +1280,15 @@
         "x-ms-examples": {
           "Tasks_Update": {
             "$ref": "./examples/TasksUpdate.json"
+          },
+          "Tasks_Update_WithKeyVaultCustomCredentials": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithKeyVaultCustomCredentials.json"
+          },
+          "Tasks_Update_WithMSICustomCredentials": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithMSICustomCredentials.json"
+          },
+          "Tasks_Update_WithOpaqueCustomCredentials": {
+            "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
           }
         }
       }
@@ -1372,7 +1405,7 @@
       }
     },
     "AgentPoolUpdateParameters": {
-      "description": "The parameters for updating an agentpool.",
+      "description": "The parameters for updating an agent pool.",
       "type": "object",
       "properties": {
         "properties": {
@@ -1870,10 +1903,6 @@
       "properties": {
         "logLink": {
           "description": "The link to logs for a run on a azure container registry.",
-          "type": "string"
-        },
-        "logArtifactLink": {
-          "description": "The link to logs in registry for a run on a azure container registry.",
           "type": "string"
         }
       }
@@ -3016,6 +3045,7 @@
     "DockerBuildRequest": {
       "description": "The parameters for a docker quick build.",
       "required": [
+        "type",
         "dockerFilePath",
         "platform"
       ],
@@ -3111,6 +3141,7 @@
     "FileTaskRunRequest": {
       "description": "The request parameters for a scheduling run against a task file.",
       "required": [
+        "type",
         "taskFilePath",
         "platform"
       ],
@@ -3189,6 +3220,7 @@
     "TaskRunRequest": {
       "description": "The parameters for a task run request.",
       "required": [
+        "type",
         "taskId"
       ],
       "type": "object",
@@ -3247,6 +3279,7 @@
     "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
       "required": [
+        "type",
         "encodedTaskContent",
         "platform"
       ],
