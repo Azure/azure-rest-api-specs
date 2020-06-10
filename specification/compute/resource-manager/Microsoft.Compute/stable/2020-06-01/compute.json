@@ -783,6 +783,20 @@
             "description": "The name of the dedicated host group."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2858,6 +2872,9 @@
         "x-ms-examples": {
           "Get a Virtual Machine.": {
             "$ref": "./examples/GetVirtualMachine.json"
+          },
+          "Get a virtual machine placed on a dedicated host group through automatic placement": {
+            "$ref": "./examples/GetVirtualMachineAutoPlacedOnDedicatedHostGroup.json"
           }
         }
       }
@@ -2902,6 +2919,9 @@
         "x-ms-examples": {
           "Get Virtual Machine Instance View.": {
             "$ref": "./examples/GetVirtualMachineInstanceView.json"
+          },
+          "Get instance view of a virtual machine placed on a dedicated host group through automatic placement.": {
+            "$ref": "./examples/GetVirtualMachineInstanceViewAutoPlacedOnDedicatedHostGroup.json"
           }
         }
       }
@@ -3853,6 +3873,11 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a virtual machine scale set placed on a dedicated host group through automatic placement.": {
+            "$ref": "./examples/GetVirtualMachineScaleSetAutoPlacedOnDedicatedHostGroup.json"
           }
         }
       }
@@ -5820,6 +5845,11 @@
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get instance view of a virtual machine from a VM scale set placed on a dedicated host group through automatic placement.": {
+            "$ref": "./examples/GetVirtualMachineScaleSetVMInstanceViewAutoPlacedOnDedicatedHostGroup.json"
+          }
         }
       }
     },
@@ -6692,6 +6722,17 @@
       ],
       "description": "The List Proximity Placement Group operation response."
     },
+    "DedicatedHostGroupInstanceView": {
+      "properties": {
+        "hosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHostInstanceViewWithName"
+          },
+          "description": "List of instance view of the dedicated hosts under the dedicated host group."
+        }
+      }
+    },
     "DedicatedHostGroupProperties": {
       "properties": {
         "platformFaultDomainCount": {
@@ -6708,6 +6749,15 @@
           },
           "readOnly": true,
           "description": "A list of references to all dedicated hosts in the dedicated host group."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/DedicatedHostGroupInstanceView",
+          "readOnly": true,
+          "description": "The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group."
+        },
+        "supportAutomaticPlacement": {
+          "type": "boolean",
+          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. <br><br>Minimum api-version: 2020-06-01."
         }
       },
       "required": [
@@ -6835,6 +6885,21 @@
         }
       },
       "description": "The instance view of a dedicated host."
+    },
+    "DedicatedHostInstanceViewWithName": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the dedicated host."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DedicatedHostInstanceView"
+        }
+      ],
+      "description": "The instance view of a dedicated host that includes the name of the dedicated host. It is used for the response to the instance view of a dedicated host group."
     },
     "DedicatedHostProperties": {
       "properties": {
@@ -8803,6 +8868,11 @@
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
           "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
+        "assignedHost": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
+        },
         "statuses": {
           "type": "array",
           "items": {
@@ -8870,6 +8940,10 @@
         "host": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01."
+        },
+        "hostGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01. <br><br>NOTE: User cannot specify both host and hostGroup properties."
         },
         "provisioningState": {
           "readOnly": true,
@@ -10274,6 +10348,10 @@
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         },
+        "hostGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the dedicated host group that the virtual machine scale set resides in. <br><br>Minimum api-version: 2020-06-01."
+        },
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
@@ -10969,6 +11047,11 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "description": "The resource status information."
+        },
+        "assignedHost": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
         },
         "placementGroupId": {
           "type": "string",

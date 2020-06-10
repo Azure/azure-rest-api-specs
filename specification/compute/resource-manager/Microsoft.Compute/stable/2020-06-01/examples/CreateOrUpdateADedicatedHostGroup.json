@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2018-10-01",
+    "api-version": "2020-06-01",
     "hostGroupName": "myDedicatedHostGroup",
     "parameters": {
       "location": "westus",
@@ -13,7 +13,8 @@
         "1"
       ],
       "properties": {
-        "platformFaultDomainCount": 3
+        "platformFaultDomainCount": 3,
+        "supportAutomaticPlacement": true
       }
     }
   },
@@ -31,7 +32,7 @@
         ],
         "properties": {
           "platformFaultDomainCount": 3,
-          "hosts": []
+          "supportAutomaticPlacement": true
         }
       }
     },
@@ -39,7 +40,7 @@
       "body": {
         "properties": {
           "platformFaultDomainCount": 3,
-          "hosts": []
+          "supportAutomaticPlacement": true
         },
         "location": "westus",
         "tags": {
