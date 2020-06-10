@@ -171,6 +171,7 @@
         ],
         "description": "Deletes a machine learning workspace.",
         "operationId": "Workspaces_Delete",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Workspace": {
             "$ref": "./examples/deleteWorkspace.json"
@@ -192,6 +193,9 @@
         ],
         "responses": {
           "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "204": {
