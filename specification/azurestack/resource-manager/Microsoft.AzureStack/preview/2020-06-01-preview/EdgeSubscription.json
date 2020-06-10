@@ -19,7 +19,7 @@
         "get": {
           "x-ms-examples": {
             "Returns a list of all edge suscriptions.": {
-              "$ref": "examples/EdgeSubscription/List.json"
+              "$ref": "examples/EdgeSubscription/ListEdgeSubs.json"
             }
           },
           "tags": [
@@ -61,7 +61,7 @@
         "get": {
           "x-ms-examples": {
             "Returns the properties of an edge suscription.": {
-              "$ref": "examples/EdgeSubscription/Get.json"
+              "$ref": "examples/EdgeSubscription/GetEdgeSub.json"
             }
           },
           "tags": [
@@ -78,6 +78,134 @@
             },
             {
                 "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/EdgeSubscription"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        },
+        "delete": {
+          "x-ms-examples": {
+            "Delete the requested Azure Stack edge subscription.": {
+              "$ref": "examples/EdgeSubscription/DeleteEdgeSub.json"
+            }
+          },
+          "tags": [
+            "EdgeSubscriptions"
+          ],
+          "description": "Delete the requested Azure Stack edge subscription.",
+          "operationId": "EdgeSubscriptions_Delete",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "204": {
+              "description": "NO CONTENT"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "put": {
+          "x-ms-examples": {
+            "Create or update an Azure Stack registration.": {
+              "$ref": "examples/EdgeSubscription/PutEdgeSub.json"
+            }
+          },
+          "tags": [
+            "Registrations"
+          ],
+          "description": "Create or update an Azure Stack registration.",
+          "operationId": "Registrations_CreateOrUpdate",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/EdgeSubscriptionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Registration"
+              }
+            },
+            "201": {
+              "description": "CREATED",
+              "schema": {
+                "$ref": "#/definitions/Registration"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions?deviceId={deviceId}": {
+        "get": {
+          "x-ms-examples": {
+            "Returns a list of edge suscriptions with a given deviceId.": {
+              "$ref": "examples/EdgeSubscription/ListDeviceId.json"
+            }
+          },
+          "tags": [
+            "EdgeSubscriptions"
+          ],
+          "description": "Returns the properties of an Azure Stack edge subscriptions.",
+          "operationId": "EdgeSubscriptions_GetDeviceSubs",
+          "parameters": [
+            {
+              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "AzureStack.json#/parameters/DeviceIdParameter"
             },
             {
               "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
@@ -141,16 +269,20 @@
         "description": "Properties portion of the edge subscription resource.",
         "type": "object",
         "properties": {
-          "tenantId": {
-            "description": "The AAD directory/tenant to which the subscription belongs.",
+          "remoteSubscriptionId": {
+            "description": "Guid of local subscription",
             "type": "string"
           },
-          "locationPlacementId": {
-            "description": "The placement requirement for the subscription based on its country of origin / offer type / offer category / etc. This is used in geo-fencing of certain regions or regulatory boundaries.",
+          "registrationResourceId": {
+            "description": "Registration Recource id",
             "type": "string"
           },
-          "quotaId": {
-            "description": "The quota requirement for the subscription based on the offer type / category (e.g. free vs. pay-as-you-go). This can be used to inform quota information for the subscription (e.g. max # of resource groups or max # of virtual machines.",
+          "deviceId": {
+            "description": "Edge device id",
+            "type": "string"
+          },
+          "deviceObjectId": {
+            "description": "Edge device object id",
             "type": "string"
           }
         }
@@ -165,22 +297,25 @@
         "required": true,
         "x-ms-parameter-location": "method"
       },
-      "EdgeResourceGroupNameParameter": {
-        "description": "Name of the edge resource group",
-        "name": "edgeSResourceGroupName",
+      "DeviceIdParameter": {
+        "description": "Device Id",
+        "name": "deviceId",
         "type": "string",
         "in": "path",
         "required": true,
         "x-ms-parameter-location": "method"
       },
-      "EdgeProviderNameParameter": {
-        "description": "Name of the edge resource group",
-        "name": "edgeSResourceGroupName",
-        "type": "string",
-        "in": "path",
+      "EdgeSubscriptionParameter": {
+        "description": "Parameters use to create a edge subscription.",
+        "name": "edgeSubscriptionParameters",
+        "schema": {
+          "$ref": "#/definitions/EdgeSubscription"
+        },
+        "in": "body",
         "required": true,
         "x-ms-parameter-location": "method"
       }
+      
     },
     "securityDefinitions": {
       "azure_auth": {
