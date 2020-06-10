@@ -536,7 +536,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionInstanceForList"
+              "$ref": "#/definitions/ExtenionInstancesList"
             }
           },
           "default": {
@@ -961,10 +961,6 @@
       }
     },
     "ExtensionInstance": {
-      "tags": [
-        "ClusterExtensions",
-        "Extensions"
-      ],
       "description": "The Extension Instance object.",
       "properties": {
         "properties": {
@@ -974,8 +970,7 @@
           "properties": {
             "extensionType": {
               "type": "string",
-              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher.",
-              "required": true
+              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
             },
             "autoUpgrade": {
               "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
@@ -1042,13 +1037,13 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/ProxyResource"
-          }
-        ]
-      }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "ExtensionInstanceForList": {
       "description": "The Extension Instance object.",
@@ -1160,12 +1155,7 @@
               "type": "string"
             }
           }
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/ProxyResource"
-          }
-        ]
+        }
       }
     }
   },
