@@ -1,0 +1,210 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Foundational ARM Client",
+    "description": "Autopilot Environment Provider",
+    "version": "2020-06-09"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.CIS/AutopilotEnvironment/{resourceName}": {
+      "put": {
+        "description": "Clone environment.",
+        "operationId": "Environment_Clone",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "EnvironmentResource",
+            "description": "Environment details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Environment details.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+      },
+      "get": {
+        "description": "Returns an Environment info",
+        "operationId": "EnvironmentInfo_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Environment info.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+    },
+  },
+  "definitions": {
+    "EnvironmentResource": {
+      "type": "object",
+      "description": "Environment details",
+      "properties": {
+        "ModelEnvironment": {
+          "type": "string",
+          "description": "Name of the source environment and cluster"
+        },
+        "Mode": {
+          "type": "string",
+          "description": "Basic or All Mode indicate clone customer config file or just basic file"
+        },
+        "EnlistmentType": {
+          "type": "string",
+          "description": "Indicate APGold or PFGold"
+        },
+        "Naming": {
+          "type": "object",
+          "description": "Target environment/Cluster name",
+          "properties": {
+            "Prefix": {
+              "type": "string",
+              "description": "Target environment prefix"
+            },
+            "Cluster": {
+              "type": "string",
+              "description": "Target cluster name"
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "ResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentNameParameter": {
+      "name": "Environment Name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of Environment.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
