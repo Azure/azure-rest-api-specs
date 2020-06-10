@@ -2814,9 +2814,19 @@
       "description": "Properties of a private endpoint connection.",
       "properties": {
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
-          "description": "The provisioning status of the private endpoint connection."
+          "readOnly": true,
+          "description": "The current provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
