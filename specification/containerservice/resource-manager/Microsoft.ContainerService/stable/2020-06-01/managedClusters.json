@@ -467,6 +467,9 @@
         "x-ms-examples": {
           "Create/Update Managed Cluster": {
             "$ref": "./examples/ManagedClustersCreate_Update.json"
+          },
+          "Create/Update AAD Azure RBAC Managed Cluster": {
+            "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
           }
         }
       },
@@ -2224,7 +2227,7 @@
         },
         "enableAzureRBAC": {
           "type": "boolean",
-          "description": "Whether AAD needs to be used for authorization checks on the AKS cluster"
+          "description": "Whether to enable Azure RBAC for Kubernetes authorization."
         },
         "adminGroupObjectIDs": {
           "type": "array",
