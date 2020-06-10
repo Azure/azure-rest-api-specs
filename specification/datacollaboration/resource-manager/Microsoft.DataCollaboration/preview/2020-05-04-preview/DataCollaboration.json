@@ -108,7 +108,7 @@
         }
       }
     },
-    "/providers/Microsoft.DataCollaboration/locations/{location}/rejectInvitation": {
+    "/providers/Microsoft.DataCollaboration/locations/{location}/consumerInvitations/{invitationId}/reject": {
       "post": {
         "tags": [
           "ConsumerInvitation"
@@ -125,13 +125,11 @@
             "type": "string"
           },
           {
-            "name": "invitation",
-            "in": "body",
-            "description": "An invitation payload",
+            "name": "invitationId",
+            "in": "path",
+            "description": "An invitation id",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConsumerInvitation"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -339,8 +337,8 @@
           "Workspace"
         ],
         "summary": "Create an workspace in the given resource group",
-        "description": "Create an workspace",
-        "operationId": "Workspaces_Create",
+        "description": "Create or update an workspace",
+        "operationId": "Workspaces_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -386,8 +384,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Workspaces_Create": {
-            "$ref": "./examples/Workspaces_Create.json"
+          "Workspaces_CreateOrUpdate": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate.json"
           }
         }
       },
@@ -611,8 +609,8 @@
           "DataAsset"
         ],
         "summary": "Adds a new DataAsset to an existing Workspace",
-        "description": "Create a DataAsset",
-        "operationId": "DataAssets_Create",
+        "description": "Create or update a DataAsset",
+        "operationId": "DataAssets_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -664,8 +662,8 @@
           }
         },
         "x-ms-examples": {
-          "DataAssets_Create": {
-            "$ref": "./examples/DataAssets_Create.json"
+          "DataAssets_CreateOrUpdate": {
+            "$ref": "./examples/DataAssets_CreateOrUpdate.json"
           }
         }
       },
@@ -850,8 +848,8 @@
           "DataSet"
         ],
         "summary": "Adds a new DataSet to an existing DataAsset",
-        "description": "Create a DataSet",
-        "operationId": "DataSets_Create",
+        "description": "Create or update a DataSet",
+        "operationId": "DataSets_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -914,8 +912,8 @@
           }
         },
         "x-ms-examples": {
-          "DataSets_Create": {
-            "$ref": "./examples/DataSets_Create.json"
+          "DataSets_CreateOrUpdate": {
+            "$ref": "./examples/DataSets_CreateOrUpdate.json"
           }
         }
       },
@@ -1093,8 +1091,8 @@
           "Pipeline"
         ],
         "summary": "Adds a new pipeline to an existing workspace.",
-        "description": "Create a Pipeline",
-        "operationId": "Pipelines_Create",
+        "description": "Create or update a Pipeline",
+        "operationId": "Pipelines_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1146,8 +1144,8 @@
           }
         },
         "x-ms-examples": {
-          "Pipelines_Create": {
-            "$ref": "./examples/Pipelines_Create.json"
+          "Pipelines_CreateOrUpdate": {
+            "$ref": "./examples/Pipelines_CreateOrUpdate.json"
           }
         }
       },
@@ -1207,12 +1205,327 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns": {
+      "get": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "List pipeline runs in a pipeline.",
+        "description": "List pipelines run of a pipeline",
+        "operationId": "PipelineRuns_ListByPipeline",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineRuns_ListByPipeline": {
+            "$ref": "./examples/PipelineRuns_ListByPipeline.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}": {
+      "get": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "Get pipeline run.",
+        "description": "Get a pipeline run in a pipeline",
+        "operationId": "PipelineRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "./examples/PipelineRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/cancelRun": {
+      "post": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "Request cancellation of a pipeline run",
+        "description": "Request to cancel a pipeline run.",
+        "operationId": "PipelineRuns_CancelRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PipelineRuns_CancelRun": {
+            "$ref": "./examples/PipelineRuns_CancelRun.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/listPipelineStepRuns": {
+      "get": {
+        "tags": [
+          "PipelineStepRun"
+        ],
+        "summary": "List pipeline step runs in a pipeline.",
+        "description": "List pipelines run of a pipeline",
+        "operationId": "PipelineStepRuns_ListByPipelineRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepRunList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineStepRuns_ListByPipelineRun": {
+            "$ref": "./examples/PipelineStepRuns_ListByPipelineRun.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns/{pipelineStepRunId}": {
+      "get": {
+        "tags": [
+          "PipelineStepRun"
+        ],
+        "summary": "Get pipeline step run.",
+        "description": "Get a pipeline run in a pipeline",
+        "operationId": "PipelineStepRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepRunId",
+            "in": "path",
+            "description": "The id of the pipeline step run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineStepRuns_Get": {
+            "$ref": "./examples/PipelineStepRuns_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineSteps": {
       "get": {
         "tags": [
           "PipelineStep"
         ],
-        "summary": "List PipelineSteps of a Pipeline.\r\n///",
+        "summary": "List PipelineSteps of a Pipeline.",
         "description": "List PipelineSteps of a Pipeline",
         "operationId": "PipelineSteps_ListByPipeline",
         "parameters": [
@@ -1328,8 +1641,8 @@
           "PipelineStep"
         ],
         "summary": "Adds a new PipelineStep to an existing Pipeline.",
-        "description": "Create a PipelineStep",
-        "operationId": "PipelineSteps_Create",
+        "description": "Create or update a PipelineStep",
+        "operationId": "PipelineSteps_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1388,11 +1701,11 @@
           }
         },
         "x-ms-examples": {
-          "PipelineSteps_Create": {
-            "$ref": "./examples/PipelineSteps_Create.json"
+          "PipelineSteps_CreateOrUpdate": {
+            "$ref": "./examples/PipelineSteps_CreateOrUpdate.json"
           },
-          "PipelineSteps_SynapseSpark_Create": {
-            "$ref": "./examples/PipelineSteps_SynapseSpark_Create.json"
+          "PipelineSteps_SynapseSpark_CreateOrUpdate": {
+            "$ref": "./examples/PipelineSteps_SynapseSpark_CreateOrUpdate.json"
           }
         }
       },
@@ -1455,6 +1768,62 @@
         "x-ms-examples": {
           "PipelineSteps_Delete": {
             "$ref": "./examples/PipelineSteps_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/run": {
+      "post": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Creates a run of a pipeline.",
+        "description": "Creates a run of a pipeline",
+        "operationId": "Pipelines_Run",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Run": {
+            "$ref": "./examples/Pipelines_Run.json"
           }
         }
       }
@@ -1580,8 +1949,8 @@
           "Proposal"
         ],
         "summary": "Adds a new Proposal to an existing Workspace.",
-        "description": "Create a Proposal in a Workspace ",
-        "operationId": "Proposals_Create",
+        "description": "Create or update a Proposal in a Workspace ",
+        "operationId": "Proposals_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1633,8 +2002,8 @@
           }
         },
         "x-ms-examples": {
-          "Proposals_Create": {
-            "$ref": "./examples/Proposals_Create.json"
+          "Proposals_CreateOrUpdate": {
+            "$ref": "./examples/Proposals_CreateOrUpdate.json"
           }
         }
       },
@@ -1815,8 +2184,8 @@
           "DataAssetReference"
         ],
         "summary": "Adds a new DataAssetReference to a Proposal.",
-        "description": "Create a DataAssetReference in a Workspace ",
-        "operationId": "DataAssetReferences_Create",
+        "description": "Create or update a DataAssetReference in a Workspace ",
+        "operationId": "DataAssetReferences_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1875,8 +2244,8 @@
           }
         },
         "x-ms-examples": {
-          "DataAssetReferences_Create": {
-            "$ref": "./examples/DataAssetReferences_Create.json"
+          "DataAssetReferences_CreateOrUpdate": {
+            "$ref": "./examples/DataAssetReferences_CreateOrUpdate.json"
           }
         }
       },
@@ -2064,8 +2433,8 @@
           "Entitlement"
         ],
         "summary": "Adds a new entitlement to a proposal.",
-        "description": "Create an entitlement in a proposal",
-        "operationId": "Entitlements_Create",
+        "description": "Create or update an entitlement in a proposal",
+        "operationId": "Entitlements_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2124,8 +2493,8 @@
           }
         },
         "x-ms-examples": {
-          "Entitlements_Create": {
-            "$ref": "./examples/Entitlements_Create.json"
+          "Entitlements_CreateOrUpdate": {
+            "$ref": "./examples/Entitlements_CreateOrUpdate.json"
           }
         }
       },
@@ -2327,8 +2696,8 @@
           "Constraint"
         ],
         "summary": "Adds a new constraint to an entitlement.",
-        "description": "Create a constraint in an entitlement ",
-        "operationId": "Constraints_Create",
+        "description": "Create or update a constraint in an entitlement ",
+        "operationId": "Constraints_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2394,8 +2763,8 @@
           }
         },
         "x-ms-examples": {
-          "Constraints_Create": {
-            "$ref": "./examples/Constraints_Create.json"
+          "Constraints_CreateOrUpdate": {
+            "$ref": "./examples/Constraints_CreateOrUpdate.json"
           }
         }
       },
@@ -2604,8 +2973,8 @@
           "Policy"
         ],
         "summary": "Adds a new policy to an entitlement.",
-        "description": "Create a policy in an entitlement ",
-        "operationId": "Policies_Create",
+        "description": "Create or update a policy in an entitlement ",
+        "operationId": "Policies_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2671,8 +3040,8 @@
           }
         },
         "x-ms-examples": {
-          "Policies_Create": {
-            "$ref": "./examples/Policies_Create.json"
+          "Policies_CreateOrUpdate": {
+            "$ref": "./examples/Policies_CreateOrUpdate.json"
           }
         }
       },
@@ -3112,8 +3481,8 @@
           "ScriptReference"
         ],
         "summary": "Adds a new ScriptReference to a Proposal.",
-        "description": "Create a ScriptReference in a Workspace ",
-        "operationId": "ScriptReferences_Create",
+        "description": "Create or update a ScriptReference in a Workspace ",
+        "operationId": "ScriptReferences_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3172,8 +3541,8 @@
           }
         },
         "x-ms-examples": {
-          "ScriptReferences_Create": {
-            "$ref": "./examples/ScriptReferences_Create.json"
+          "ScriptReferences_CreateOrUpdate": {
+            "$ref": "./examples/ScriptReferences_CreateOrUpdate.json"
           }
         }
       },
@@ -3361,8 +3730,8 @@
           "Script"
         ],
         "summary": "Adds a new script or update an existing script to an existing workspace.\r\nAlso, adds a new a revision for an existing script or create the first revision for a new script.",
-        "description": "Create a Script in a Workspace ",
-        "operationId": "Scripts_Create",
+        "description": "Create or update a Script in a Workspace ",
+        "operationId": "Scripts_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3414,11 +3783,11 @@
           }
         },
         "x-ms-examples": {
-          "Scripts_Create": {
-            "$ref": "./examples/Scripts_Create.json"
+          "Scripts_CreateOrUpdate": {
+            "$ref": "./examples/Scripts_CreateOrUpdate.json"
           },
-          "Scripts_SynapseSpark_Create": {
-            "$ref": "./examples/Scripts_SynapseSpark_Create.json"
+          "Scripts_SynapseSpark_CreateOrUpdate": {
+            "$ref": "./examples/Scripts_SynapseSpark_CreateOrUpdate.json"
           }
         }
       },
@@ -3483,7 +3852,7 @@
         "tags": [
           "Script"
         ],
-        "summary": "List revisions of a Script.\r\n///",
+        "summary": "List revisions of a Script.",
         "description": "List revisions of a Script",
         "operationId": "ScriptRevisions_ListByScript",
         "parameters": [
@@ -4002,6 +4371,11 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Invitation location",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/ConsumerInvitationProperties",
           "description": "Properties on the account",
@@ -4060,11 +4434,6 @@
             "name": "invitationStatus",
             "modelAsString": true
           }
-        },
-        "location": {
-          "description": "invitation location",
-          "type": "string",
-          "readOnly": true
         },
         "proposalName": {
           "description": "Gets the source proposal Name.",
@@ -4128,6 +4497,10 @@
           "$ref": "#/definitions/DataAssetProperties",
           "description": "The property bag of the DataAsset",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of dataAsset"
         }
       }
     },
@@ -4161,9 +4534,37 @@
           "type": "string",
           "readOnly": true
         },
+        "dataProcessingStrategy": {
+          "description": "Data processing strategy to use for the the child DataSets",
+          "enum": [
+            "CopyBased",
+            "InPlace"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dataProcessingStrategy",
+            "modelAsString": true
+          }
+        },
         "description": {
           "description": "General Description of the DataSet content",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the DataAsset",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4210,18 +4611,18 @@
     "DataAssetReferenceProperties": {
       "description": "Properties of data set reference data transfer object.",
       "required": [
-        "dataSetId"
+        "dataAssetId"
       ],
       "type": "object",
       "properties": {
+        "dataAssetId": {
+          "description": "The unique identifier of the referenced data asset",
+          "type": "string"
+        },
         "dataAssetReferenceId": {
           "description": "Unique id for identifying a dataset reference resource",
           "type": "string",
           "readOnly": true
-        },
-        "dataSetId": {
-          "description": "The unique identifier of the referenced dataset",
-          "type": "string"
         }
       }
     },
@@ -4425,7 +4826,7 @@
       }
     },
     "Entitlement": {
-      "description": "Entitlement data transfer object.",
+      "description": "Access granted to another shared resource in the same proposal, with some constraints.",
       "required": [
         "properties"
       ],
@@ -4465,7 +4866,7 @@
       }
     },
     "EntitlementProperties": {
-      "description": "Entitlement of proposal data transfer object.",
+      "description": "Entitlement data transfer object.",
       "required": [
         "subjectId",
         "resourceId"
@@ -4948,6 +5349,99 @@
         }
       }
     },
+    "PipelineRun": {
+      "description": "A pipeline run data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineRunProperties",
+          "description": "Properties on the pipeline",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineRunList": {
+      "description": "List response for get pipeline run.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        }
+      }
+    },
+    "PipelineRunProperties": {
+      "description": "A pipeline run property bag.",
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Pipeline run duration",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of pipeline",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunStatus": {
+          "description": "Pipeline run status",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Queued",
+            "Cancelled",
+            "Canceling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "pipelineRunStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of pipeline",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PipelineStep": {
       "description": "A pipeline step data transfer object",
       "required": [
@@ -4963,7 +5457,7 @@
         "kind": {
           "description": "Kind of pipeline step.",
           "enum": [
-            "SynapseSparkPipelineStep"
+            "SynapseSpark"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4992,6 +5486,94 @@
           "items": {
             "$ref": "#/definitions/PipelineStep"
           }
+        }
+      }
+    },
+    "PipelineStepRun": {
+      "description": "pipeline step run at data set level",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineStepRunProperties",
+          "description": "Properties on the pipeline step run",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineStepRunList": {
+      "description": "Details of pipeline run",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineStepRun"
+          }
+        }
+      }
+    },
+    "PipelineStepRunProperties": {
+      "description": "pipeline step run property bag.",
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Duration of pipeline step",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of pipeline step",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineStepId": {
+          "description": "The id of pipeline step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineStepRunStatus": {
+          "description": "Pipeline step run status",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Queued",
+            "Cancelled",
+            "Canceling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "pipelineStepRunStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of pipeline step",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5155,13 +5737,17 @@
         "kind": {
           "description": "Kind of script.",
           "enum": [
-            "SynapseSparkScript"
+            "SynapseSpark"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "kind",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of script"
         }
       },
       "discriminator": "kind"
@@ -5339,27 +5925,6 @@
         }
       }
     },
-    "StorageAccountDataSet": {
-      "description": "An Azure storage account data set.",
-      "required": [
-        "properties",
-        "kind"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSet"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "Blob data source properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "StorageAccount"
-    },
     "StorageAccountPath": {
       "description": "Defines a single storage account path.",
       "required": [
@@ -5377,51 +5942,6 @@
         },
         "providerPath": {
           "description": "Gets or sets the path to file/folder within the container.",
-          "type": "string"
-        }
-      }
-    },
-    "StorageAccountProperties": {
-      "description": "Properties of the Storage account data set.",
-      "required": [
-        "storageAccountResourceId",
-        "subscriptionId",
-        "resourceGroup",
-        "storageAccountName"
-      ],
-      "type": "object",
-      "properties": {
-        "dataSetId": {
-          "description": "Unique id for identifying a data set resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Location of the storage account.",
-          "type": "string"
-        },
-        "paths": {
-          "description": "A list of paths under a given storage account.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccountPath"
-          }
-        },
-        "resourceGroup": {
-          "description": "Resource group of storage account",
-          "type": "string"
-        },
-        "storageAccountName": {
-          "description": "Storage account name of the source data set",
-          "type": "string"
-        },
-        "storageAccountResourceId": {
-          "description": "Resource id of the storage account.",
-          "type": "string"
-        },
-        "subscriptionId": {
-          "description": "Subscription id of storage account",
           "type": "string"
         }
       }
@@ -5445,7 +5965,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "x-ms-discriminator-value": "SynapseSparkPipelineStep"
+      "x-ms-discriminator-value": "SynapseSpark"
     },
     "SynapseSparkPipelineStepProperties": {
       "description": "A Synapse Spark PipelineStep data transfer object.",
@@ -5517,7 +6037,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "x-ms-discriminator-value": "SynapseSparkScript"
+      "x-ms-discriminator-value": "SynapseSpark"
     },
     "SynapseSparkScriptProperties": {
       "description": "A Synapse Spark Script data transfer object.",
@@ -5586,6 +6106,64 @@
         }
       }
     },
+    "SystemData": {
+      "description": "SystemData of resource",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Workspace": {
       "description": "A workspace data transfer object.",
       "required": [
@@ -5606,6 +6184,10 @@
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "Properties on the workspace",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of Workspace"
         }
       }
     },
@@ -5634,12 +6216,6 @@
       "description": "Workspace property bag.",
       "type": "object",
       "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "Time at which the workspace was created.",
-          "type": "string",
-          "readOnly": true
-        },
         "provisioningState": {
           "description": "Provisioning state of the Workspace",
           "enum": [
