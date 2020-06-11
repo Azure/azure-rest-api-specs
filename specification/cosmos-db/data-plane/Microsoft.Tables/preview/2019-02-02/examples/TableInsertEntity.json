@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "x-ms-version": "2019-02-02",
+    "DataServiceVersion": "3.0",
+    "table": "Customer",
+    "url": "myaccount.table.core.windows.net",
+    "tableEntityProperties": {
+      "Address": "Mountain View",
+      "Age": 23,
+      "AmountDue": 200.23,
+      "CustomerCode@odata.type": "Edm.Guid",
+      "CustomerCode": "c9da6455-213d-42c9-9a79-3e9149a57833",
+      "CustomerSince@odata.type": "Edm.DateTime",
+      "CustomerSince": "2008-07-10T00:00:00",
+      "IsActive": true,
+      "NumberOfOrders@odata.type": "Edm.Int64",
+      "NumberOfOrders": "255",
+      "PartitionKey": "mypartitionkey",
+      "RowKey": "myrowkey"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "odata.metadata": "https://myaccount.table.core.windows.net/Customer/$metadata#Customers/@Element",
+        "odata.type": "myaccount.Customers",
+        "odata.id": " https://myaccount.table.core.windows.net/Customers(PartitionKey='mypartitionkey',RowKey='myrowkey')",
+        "odata.etag": "W/\"0x5B168C7B6E589D2\"",
+        "odata.editLink": "Customers(PartitionKey='mypartitionkey',RowKey='myrowkey')",
+        "PartitionKey": "mypartitionkey",
+        "RowKey": "myrowkey",
+        "Timestamp@odata.type": "Edm.DateTime",
+        "Timestamp": "2013-08-22T01:12:06.2608595Z",
+        "Address": "Mountain View",
+        "Age": 23,
+        "AmountDue": 200.23,
+        "CustomerCode@odata.type": "Edm.Guid",
+        "CustomerCode": "c9da6455-213d-42c9-9a79-3e9149a57833",
+        "CustomerSince@odata.type": "Edm.DateTime",
+        "CustomerSince": "2008-07-10T00:00:00",
+        "IsActive": true,
+        "NumberOfOrders@odata.type": "Edm.Int64",
+        "NumberOfOrders": "255"
+      }
+    },
+    "204": {}
+  }
+}

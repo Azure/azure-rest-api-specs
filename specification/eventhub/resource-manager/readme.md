@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2018-01-preview
 ```
 
 
@@ -36,7 +36,15 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.EventHub/stable/2017-04-01/EventHub.json
+- Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2017-04-01/consumergroups.json
+- Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+- Microsoft.EventHub/stable/2017-04-01/namespaces.json
+- Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
+- Microsoft.EventHub/stable/2017-04-01/operations.json
+- Microsoft.EventHub/stable/2017-04-01/sku.json
 ```
 
 
@@ -66,7 +74,20 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.EventHub/preview/2018-01-01-preview/EventHub-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/ipfilterrules-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2017-04-01/consumergroups.json
+- Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2017-04-01/operations.json
+- Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+- Microsoft.EventHub/stable/2017-04-01/sku.json
 ```
 
 
@@ -85,6 +106,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-eventhub
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -133,10 +155,24 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/EventHub.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/consumergroups.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/namespaces.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/operations.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/sku.json
   - $(this-folder)/Microsoft.EventHub/stable/2015-08-01/EventHub.json
   - $(this-folder)/Microsoft.EventHub/stable/2014-09-01/EventHub.json
-  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/EventHub-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/ipfilterrules-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
+  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/networkrulessets-preview.json
 
 ```
 

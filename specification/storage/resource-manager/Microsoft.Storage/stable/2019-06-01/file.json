@@ -164,6 +164,9 @@
         "x-ms-examples": {
           "ListShares": {
             "$ref": "./examples/FileSharesList.json"
+          },
+          "ListDeletedShares": {
+            "$ref": "./examples/DeletedFileSharesList.json"
           }
         },
         "description": "Lists all shares.",
@@ -191,6 +194,20 @@
             "in": "query",
             "type": "string",
             "description": "Optional. When specified, only share names starting with the filter will be listed."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "deleted"
+            ],
+            "x-ms-enum": {
+              "name": "ListSharesExpand",
+              "modelAsString": false
+            },
+            "description": "Optional, used to expand the properties within share's properties."
           }
         ],
         "responses": {
@@ -221,6 +238,12 @@
         "x-ms-examples": {
           "PutShares": {
             "$ref": "./examples/FileSharesPut.json"
+          },
+          "Create NFS Shares": {
+            "$ref": "./examples/FileSharesPut_NFS.json"
+          },
+          "PutShares with Access Tier": {
+            "$ref": "./examples/FileSharesPut_AccessTier.json"
           }
         },
         "description": "Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. ",
@@ -332,6 +355,9 @@
         "x-ms-examples": {
           "GetShares": {
             "$ref": "./examples/FileSharesGet.json"
+          },
+          "GetShareStats": {
+            "$ref": "./examples/FileSharesGet_Stats.json"
           }
         },
         "description": "Gets properties of a specified share.",
@@ -350,6 +376,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "stats"
+            ],
+            "x-ms-enum": {
+              "name": "GetShareExpand",
+              "modelAsString": false
+            },
+            "description": "Optional, used to expand the properties within share's properties."
           }
         ],
         "responses": {
@@ -401,6 +441,56 @@
           },
           "204": {
             "description": "No Content -- The Share not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore": {
+      "post": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_Restore",
+        "x-ms-examples": {
+          "RestoreShares": {
+            "$ref": "./examples/FileSharesRestore.json"
+          }
+        },
+        "description": "Restore a file share within a valid retention days if share soft delete is enabled",
+        "parameters": [
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/ShareName"
+          },
+          {
+            "name": "deletedShare",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeletedShare"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The Share is successfully restored."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -471,6 +561,23 @@
       ],
       "description": "Properties of the file share, including Id, resource name, resource type, Etag."
     },
+    "DeletedShare": {
+      "properties": {
+        "deletedShareName": {
+          "type": "string",
+          "description": "Required. Identify the name of the deleted share that will be restored."
+        },
+        "deletedShareVersion": {
+          "type": "string",
+          "description": "Required. Identify the version of the deleted share that will be restored."
+        }
+      },
+      "required": [
+        "deletedShareName",
+        "deletedShareVersion"
+      ],
+      "description": "The deleted share to be restored."
+    },
     "FileShareItem": {
       "properties": {
         "properties": {
@@ -524,6 +631,87 @@
           "minimum": 1,
           "maximum": 102400,
           "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400."
+        },
+        "enabledProtocols": {
+          "type": "string",
+          "enum": [
+            "SMB",
+            "NFS"
+          ],
+          "x-ms-enum": {
+            "name": "EnabledProtocols",
+            "modelAsString": true
+          },
+          "description": "The authentication protocol that is used for the file share. Can only be specified when creating a share.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "rootSquash": {
+          "type": "string",
+          "enum": [
+            "NoRootSquash",
+            "RootSquash",
+            "AllSquash"
+          ],
+          "x-ms-enum": {
+            "name": "RootSquashType",
+            "modelAsString": true
+          },
+          "description": "The property is for NFS share only. The default is NoRootSquash."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the share."
+        },
+        "deleted": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the share was deleted."
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The deleted time if the share was deleted."
+        },
+        "remainingRetentionDays": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Remaining retention days for share that was soft deleted."
+        },
+        "accessTier": {
+          "type": "string",
+          "enum": [
+            "TransactionOptimized",
+            "Hot",
+            "Cool",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "ShareAccessTier",
+            "modelAsString": true
+          },
+          "description": "Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium."
+        },
+        "accessTierChangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Indicates the last modification time for share access tier."
+        },
+        "accessTierStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Indicates if there is a pending transition for access tier."
+        },
+        "shareUsageBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files."
         }
       },
       "description": "The properties of the file share."
