@@ -291,7 +291,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtenionInstancesList"
+              "$ref": "#/definitions/ExtensionInstancesList"
             }
           },
           "default": {
@@ -382,7 +382,7 @@
       }
     },
     "AutoUpgrade": {
-      "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+      "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
       "type": "string",
       "enum": [
         "true",
@@ -441,7 +441,7 @@
         },
         "displayStatus": {
           "type": "string",
-          "description": "Short description of status of this instanace of the extension."
+          "description": "Short description of status of this instance of the extension."
         },
         "level": {
           "type": "string",
@@ -475,7 +475,7 @@
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
             },
             "autoUpgrade": {
-              "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+              "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
               "$ref": "#/definitions/AutoUpgrade"
             },
             "releaseTrain": {
@@ -561,7 +561,7 @@
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
             },
             "autoUpgrade": {
-              "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+              "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
               "$ref": "#/definitions/AutoUpgrade"
             },
             "releaseTrain": {
@@ -623,7 +623,7 @@
         }
       ]
     },
-    "ExtenionInstancesList": {
+    "ExtensionInstancesList": {
       "description": "Result of the request to list Extension Instances.  It contains a list of ExtensionInstance objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
@@ -637,7 +637,7 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "URL to get the next set of extension instanace objects, if any."
+          "description": "URL to get the next set of extension instance objects, if any."
         }
       }
     },
@@ -650,7 +650,7 @@
           "description": "Properties to update an Extension Instance resource",
           "properties": {
             "autoUpgrade": {
-              "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+              "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
               "$ref": "#/definitions/AutoUpgrade"
             },
             "releaseTrain": {
