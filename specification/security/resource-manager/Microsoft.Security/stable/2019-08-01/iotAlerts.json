@@ -198,6 +198,7 @@
       "description": "IoT alert",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "Alert properties",
           "$ref": "#/definitions/IotAlertProperties"
         }
@@ -238,6 +239,7 @@
           "example": "2020-05-13T06:32:25Z"
         },
         "entities": {
+          "description": "A list of entities related to the alert",
           "type": "array",
           "items": {
             "type": "object"
