@@ -26,18 +26,26 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-preview-2020-03
 azure-validator: false
 ```
 
 ---
 
 
+### Tag: package-preview-2020-03
+
+These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-03'
+input-file:
+  - Microsoft.CostManagement/preview/2020-03-01-preview/costmanagement.json
+```
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11'
+``` yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.CostManagement/stable/2019-11-01/costmanagement.json
 ```
@@ -46,10 +54,11 @@ input-file:
 
 These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-10'
+``` yaml $(tag) == 'package-2019-10'
 input-file:
   - Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
 ```
+
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -206,7 +215,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/cost-management/Microsoft.Azure.Management.CostManagement/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
