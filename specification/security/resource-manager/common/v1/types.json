@@ -241,6 +241,25 @@
         "sourceComputerId",
         "machineName"
       ]
+    },
+    "AzureResourceLinks": {
+      "description": "array of azure resource IDs",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureResourceLink"
+      }
+    },
+    "AzureResourceLink": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id"
+        }
+      }
     }
   },
   "parameters": {
@@ -284,7 +303,8 @@
       "required": true,
       "type": "string",
       "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "Scope": {
       "name": "scope",
@@ -292,7 +312,8 @@
       "required": true,
       "type": "string",
       "description": "Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "ODataFilter": {
       "name": "$filter",
