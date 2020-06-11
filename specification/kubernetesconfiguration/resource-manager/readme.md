@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2020-07` is specified on t
 ```yaml $(tag) == 'package-preview-2020-07'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
 ```
 ### Tag: package-2019-11-01-preview
 
@@ -100,6 +101,8 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.KubernetesConfiguration/preview/2019-11-01-preview/kubernetesconfiguration.json
+  - $(this-folder)/Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
+  - $(this-folder)/Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
 
 ```
 
