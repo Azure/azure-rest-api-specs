@@ -32,7 +32,7 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomainDownload",
+        "operationId": "HSMSecurityDomain_Download",
         "description": "Retrieves Security domain from HSM enclave",
         "parameters": [
           {
@@ -79,7 +79,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "operationId": "HSMSecurityDomainTransferKey",
+        "operationId": "HSMSecurityDomain_TransferKey",
         "description": "Retrieve security domain transfer key",
         "responses": {
           "200": {
@@ -107,7 +107,8 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomainUpload",
+        "operationId": "HSMSecurityDomain_Upload",
+        "x-ms-long-running-operation": true,
         "description": "Request Security domain upload operation",
         "parameters": [
           {
@@ -156,21 +157,11 @@
         "tags": [
           "HSMSecurityDomain"
         ],
-        "operationId": "HSMSecurityDomainUploadPending",
+        "operationId": "HSMSecurityDomain_UploadPending",
         "description": "Get Security domain upload operation status",
         "responses": {
           "200": {
             "description": "Security domain upload operation status",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
