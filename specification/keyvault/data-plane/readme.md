@@ -369,4 +369,12 @@ directive:
     from: securitydomain.json
     where: $.definitions.SecurityDomainOperationStatus.properties.status_details
     reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.key_ops
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.x5t#S256
+    reason: Consistency with other properties.
 ```
