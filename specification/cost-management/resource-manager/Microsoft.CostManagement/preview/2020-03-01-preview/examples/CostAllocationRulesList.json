@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01-preview",
+    "billingAccountId": "100"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
+            "name": "testRule",
+            "type": "Microsoft.CostManagement/costAllocationRules",
+            "properties": {
+              "description": "This is a testRule",
+              "status": "NotActive",
+              "details": {
+                "sourceResources" : [
+                  {
+                    "resourceType": "Dimension",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      "sampleRG"
+                    ]
+                  }
+                ],
+                "targetResources" : [
+                  {
+                    "resourceType": "Dimension",
+                    "policyType": "FixedProportion",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      {
+                        "name": "destinationRG",
+                        "percentage": 50
+                      },
+                      {
+                        "name": "destinationRG2",
+                        "percentage": 50
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule2",
+            "name": "testRule2",
+            "type": "Microsoft.CostManagement/costAllocationRules",
+            "properties": {
+              "description": "This is a second test Rule",
+              "status": "NotActive",
+              "details": {
+                "sourceResources" : [
+                  {
+                    "resourceType": "Dimension",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      "sampleRG2"
+                    ]
+                  }
+                ],
+                "targetResources" : [
+                  {
+                    "resourceType": "Dimension",
+                    "policyType": "FixedProportion",
+                    "name": "ResourceGroupName",
+                    "values": [
+                      {
+                        "name": "destination2RG",
+                        "percentage": 50
+                      },
+                      {
+                        "name": "destination2RG2",
+                        "percentage": 50
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}
