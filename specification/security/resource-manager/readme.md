@@ -38,7 +38,7 @@ directive:
     reason: The list returns limited number of items
   - suppress: PageableOperation
     from: alertTypes.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/alertTypes"].get'
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
     reason: The list returns limited number of items
 ```
 
