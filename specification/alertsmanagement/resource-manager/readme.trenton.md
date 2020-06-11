@@ -6,7 +6,7 @@ overrides:
   - where:
       resource: "*"
     set:
-      - NeedSeparated: false
+      - NeedSeparated: true
   - where:
       resource: "ActionRules"
       property: "properties"
@@ -18,6 +18,10 @@ overrides:
       property: "properties"
     set:
       - GoFieldName: "PatchProperties"
+  - where:
+      property: "status"
+    set:
+      - Hidden: false
   - where:
       property: "type"
     set:
@@ -33,6 +37,7 @@ overrides:
     set:
       - EnumValues/0/GoEnumMemberName: "ScopeTypeResourceGroup"
       - EnumValues/1/GoEnumMemberName: "ScopeTypeResource"
+      - EnumValues/2/GoEnumMemberName: "ScopeTypeSubscription"
 ```
 ## trenton
 
