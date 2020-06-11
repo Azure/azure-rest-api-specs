@@ -26,7 +26,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.CIS/AutopilotEnvironment/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/autopilotEnvironment/{resourceName}": {
       "put": {
         "description": "Clone environment.",
         "operationId": "Environment_Clone",
@@ -107,27 +107,27 @@
       "type": "object",
       "description": "Environment details",
       "properties": {
-        "ModelEnvironment": {
+        "modelEnvironment": {
           "type": "string",
           "description": "Name of the source environment and cluster"
         },
-        "Mode": {
+        "mode": {
           "type": "string",
           "description": "Basic or All Mode indicate clone customer config file or just basic file"
         },
-        "EnlistmentType": {
+        "enlistmentType": {
           "type": "string",
           "description": "Indicate APGold or PFGold"
         },
-        "Naming": {
+        "naming": {
           "type": "object",
           "description": "Target environment/Cluster name",
           "properties": {
-            "Prefix": {
+            "prefix": {
               "type": "string",
               "description": "Target environment prefix"
             },
-            "Cluster": {
+            "cluster": {
               "type": "string",
               "description": "Target cluster name"
             }
