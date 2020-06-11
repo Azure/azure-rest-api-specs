@@ -29,13 +29,16 @@
           "operationId": "EdgeSubscriptions_List",
           "parameters": [
             {
-              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+              "$ref": "#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+              "$ref": "#/parameters/DeviceIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
@@ -48,7 +51,7 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+                "$ref": "#/definitions/ErrorResponse"
               }
             }
           },
@@ -71,16 +74,16 @@
           "operationId": "EdgeSubscriptions_Get",
           "parameters": [
             {
-              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+              "$ref": "#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "#/parameters/ResourceGroupNameParameter"
             },
             {
-                "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+                "$ref": "#/parameters/EdgeSubscriptionNameParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+              "$ref": "#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
@@ -93,7 +96,7 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+                "$ref": "#/definitions/ErrorResponse"
               }
             }
           },
@@ -114,16 +117,16 @@
           "operationId": "EdgeSubscriptions_Delete",
           "parameters": [
             {
-              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+              "$ref": "#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
+              "$ref": "#/parameters/EdgeSubscriptionNameParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+              "$ref": "#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
@@ -136,7 +139,7 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+                "$ref": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -148,67 +151,22 @@
             }
           },
           "tags": [
-            "Registrations"
-          ],
-          "description": "Create or update an Azure Stack registration.",
-          "operationId": "Registrations_CreateOrUpdate",
-          "parameters": [
-            {
-              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "AzureStack.json#/parameters/EdgeSubscriptionNameParameter"
-            },
-            {
-              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/EdgeSubscriptionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/Registration"
-              }
-            },
-            "201": {
-              "description": "CREATED",
-              "schema": {
-                "$ref": "#/definitions/Registration"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/edgeSubscriptions?deviceId={deviceId}": {
-        "get": {
-          "x-ms-examples": {
-            "Returns a list of edge suscriptions with a given deviceId.": {
-              "$ref": "examples/EdgeSubscription/ListDeviceId.json"
-            }
-          },
-          "tags": [
             "EdgeSubscriptions"
           ],
-          "description": "Returns the properties of an Azure Stack edge subscriptions.",
-          "operationId": "EdgeSubscriptions_GetDeviceSubs",
+          "description": "Create a new edge subscription",
+          "operationId": "EdgeSubscriptions_Create",
           "parameters": [
             {
-              "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+              "$ref": "#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "#/parameters/ResourceGroupNameParameter"
             },
             {
-                "$ref": "AzureStack.json#/parameters/DeviceIdParameter"
+              "$ref": "#/parameters/EdgeSubscriptionNameParameter"
             },
             {
-              "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+              "$ref": "#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
@@ -218,20 +176,98 @@
                 "$ref": "#/definitions/EdgeSubscription"
               }
             },
-            "default": {
-              "description": "Error response describing why the operation failed.",
+            "201": {
+              "description": "CREATED",
               "schema": {
-                "$ref": "AzureStack.json#/definitions/ErrorResponse"
+                "$ref": "#/definitions/EdgeSubscription"
               }
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
         }
       }
     },
     "definitions": {
+      "TrackedResource": {
+        "description": "Base resource object.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "description": "ID of the resource.",
+            "type": "string"
+          },
+          "name": {
+            "readOnly": true,
+            "description": "Name of the resource.",
+            "type": "string"
+          },
+          "type": {
+            "readOnly": true,
+            "description": "Type of Resource.",
+            "type": "string"
+          },
+          "location": {
+            "description": "Location of the resource.",
+            "type": "string",
+            "enum": [
+              "global"
+            ],
+            "x-ms-enum": {
+              "name": "Location",
+              "modelAsString": true
+            },
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
+          },
+          "tags": {
+            "description": "Custom tags for the resource.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "etag": {
+            "description": "The entity tag used for optimistic concurrency when modifying the resource.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "location"
+        ],
+        "x-ms-azure-resource": true
+      },
+      "ErrorDetails": {
+        "description": "The details of the error.",
+        "properties": {
+          "code": {
+            "description": "Error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string",
+            "readOnly": true
+          },
+          "target": {
+            "description": "The target of the particular error.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ErrorResponse": {
+        "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "The details of the error.",
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      },
       "EdgeSubscriptionList": {
         "description": "Pageable list of edge subscriptions.",
         "type": "object",
@@ -261,7 +297,7 @@
         },
         "allOf": [
           {
-            "$ref": "AzureStack.json#/definitions/TrackedResource"
+            "$ref": "#/definitions/TrackedResource"
           }
         ]
       },
@@ -289,6 +325,29 @@
       }
     },
     "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+        "required": true,
+        "type": "string"
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Client API Version.",
+        "required": true,
+        "type": "string",
+        "default": "2020-06-01-preview"
+      },
+      "ResourceGroupNameParameter": {
+        "description": "Name of the resource group.",
+        "name": "resourceGroup",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
       "EdgeSubscriptionNameParameter": {
         "description": "Name of the edge subscription",
         "name": "edgeSubscriptionName",
@@ -301,8 +360,8 @@
         "description": "Device Id",
         "name": "deviceId",
         "type": "string",
-        "in": "path",
-        "required": true,
+        "in": "query",
+        "required": false,
         "x-ms-parameter-location": "method"
       },
       "EdgeSubscriptionParameter": {
