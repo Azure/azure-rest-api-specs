@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2020-02
+tag: package-preview-2020-06
 ```
 
 ## Suppression
@@ -238,6 +238,37 @@ directive:
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
 ```
 
+### Tag: package-preview-2020-06-only
+
+These settings apply only when `--tag=package-preview-2020-06-only` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-06-only'
+input-file:
+  - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
+```
+
+### Tag: package-preview-2020-06
+
+These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-06'
+input-file:
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
+```
 
 ### Tag: package-preview-2020-02
 
@@ -479,7 +510,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPacks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-02-02-preview/components_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
-
+  - $(this-folder)/Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
