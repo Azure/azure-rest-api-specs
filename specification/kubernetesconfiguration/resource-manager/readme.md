@@ -2,11 +2,11 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for kubernetesconfiguration.
+This is the AutoRest configuration file for KubernetesConfiguration.
 
 ## Getting Started
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for KubernetesConfiguration, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
@@ -25,10 +25,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the kubernetesconfiguration.
 
 ``` yaml
+title: SourceControlConfigurationClient
+description: KubernetesConfiguration Client
 openapi-type: arm
 tag: package-preview-2020-07
 ```
-
 
 ### Tag: package-preview-2020-07
 
@@ -39,6 +40,8 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
 ```
+
+
 ### Tag: package-2019-11-01-preview
 
 These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
@@ -68,6 +71,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_kubernetesconfiguration']
 ```
 
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -87,6 +91,8 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
