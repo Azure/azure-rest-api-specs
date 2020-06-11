@@ -882,7 +882,7 @@
     "/search/poi/category/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get POI by Category**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Category Search allows you to request POI results from given category. Search allows to query POIs from one category at a time.  Endpoint will only return POI results which are categorized as specified.  Response includes POI details such as address, coordinate location and category.<br><br>List of available categories can be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/search-categories).",
+        "description": "**Get POI by Category**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Category Search allows you to request POI results from given category. Search allows to query POIs from one category at a time.  Endpoint will only return POI results which are categorized as specified.  Response includes POI details such as address, coordinate location and classification.",
         "operationId": "Search_GetSearchPOICategory",
         "x-ms-examples": {
           "Search for atm's within 2 miles of Times Square NY and return the top 3 results": {
@@ -905,7 +905,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "The POI category to search for (e.g., \"AIRPORT\", \"BEACH\"), must be properly URL encoded.",
+            "description": "The POI category to search for (e.g., \"AIRPORT\", \"RESTAURANT\"), must be properly URL encoded. Supported main categories can be requested by calling [Get Search POI Category Tree API](https://aka.ms/AzureMapsPOICategoryTree). List of available categories can also be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/supported-search-categories). We recommend to use POI Search Category Tree API to request the supported categories.",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -988,7 +988,7 @@
       "get": {
         "x-publish": true,
         "description": "**Get POI Category Tree**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPOI Category API provides a full list of supported Points of Interest (POI) categories and subcategories together with their translations and synonyms. The returned content can be used to provide more meaningful results through other Search Service APIs, like [Get Search POI](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi).",
-        "operationId": "Search_GetPOICategoryTree",
+        "operationId": "Search_GetSearchPOICategoryTreePreview",
         "x-ms-examples": {
           "Get the POI Category Tree (only partial response shown below)": {
             "$ref": "./examples/GetPOICategoryTree.json"
@@ -2119,7 +2119,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique ID for the category",
+          "description": "Unique ID for the category. ID can be used to restrict search results to specific categories through other Search Service APIs, like [Get Search POI](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi).",
           "type": "integer",
           "readOnly": true
         },
