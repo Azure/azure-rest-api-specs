@@ -341,6 +341,76 @@
           }
         }
       }
+    },
+	"/providers/Microsoft.Attestation/defaultProviders": {
+      "get": {
+        "tags": ["AttestationProviders"],
+        "operationId": "AttestationProviders_GetDefault",
+        "description": "Get the default provider",
+        "x-ms-examples": {
+          "AttestationProviders_GetDefault": {
+            "$ref": "./examples/Get_DefaultProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about the default provider.",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "default": {
+            "description": "Attestation service error result",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Attestation/locations/{location}/defaultProviders": {
+      "get": {
+        "tags": ["AttestationProviders"],
+        "operationId": "AttestationProviders_GetDefaultByLocation",
+        "description": "Get the default provider by location.",
+        "x-ms-examples": {
+          "AttestationProviders_GetDefaultWithLocation": {
+            "$ref": "./examples/Get_DefaultProviderByLocation.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+			"minLength": 1,
+            "description": "The location of the default provider."
+          },		  
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about the default provider.",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "default": {
+            "description": "Attestation service error result",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
