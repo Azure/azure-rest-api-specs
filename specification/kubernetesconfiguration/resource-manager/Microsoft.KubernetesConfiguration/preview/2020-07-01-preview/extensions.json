@@ -1,0 +1,728 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-07-01-preview",
+    "title": "ExtensionsClient",
+    "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionInstanceName}": {
+      "put": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Create a new Kubernetes Cluster Extension Instance.",
+        "operationId": "Extensions_Create",
+        "x-ms-examples": {
+          "Create Extension": {
+            "$ref": "./examples/CreateExtension.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "extensionInstance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionInstance"
+            },
+            "description": "Properties necessary to Create an Extension Instance."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Gets details of the Kubernetes Cluster Extension Instance.",
+        "operationId": "Extensions_Get",
+        "x-ms-examples": {
+          "Get Extension": {
+            "$ref": "./examples/GetExtension.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Update an existing Kubernetes Cluster Extension Instance.",
+        "operationId": "Extensions_Update",
+        "x-ms-examples": {
+          "Create Extension": {
+            "$ref": "./examples/UpdateExtension.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "extensionInstance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionInstanceUpdate"
+            },
+            "description": "Properties to Update in the Extension Instance."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Delete a Kubernetes Cluster Extension Instance. This will cause the Agent to Uninstall the extension instance from the cluster.",
+        "operationId": "Extensions_Delete",
+        "x-ms-examples": {
+          "Get Extension": {
+            "$ref": "./examples/DeleteExtension.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.  The request has been completed successfully."
+          },
+          "204": {
+            "description": "No Content.  The request has been accepted but the extension instance was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions": {
+      "get": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "List all Source Control Configurations.",
+        "operationId": "SourceControlConfigurations_List",
+        "x-ms-examples": {
+          "List Source Control Configuration": {
+            "$ref": "./examples/ListSourceControlConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtenionInstancesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error definition.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "description": "Error definition.",
+      "readOnly": true,
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "minimum": 100,
+          "maximum": 600
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string"
+        }
+      }
+    },
+    "ConfigurationSettings": {
+      "description": "Name-value pairs for configuring the extensionInstance",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ConfigurationProtectedSettings": {
+      "description": "Name-value pairs of protected configuration settings for the extensionInstance",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "AutoUpgrade": {
+      "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "default": "true",
+      "x-ms-enum": {
+        "name": "autoUpgradeType",
+        "modelAsString": true
+      }
+    },
+    "ReleaseTrain": {
+      "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+      "type": "string",
+      "enum": [
+        "Stable",
+        "Preview"
+      ],
+      "default": "Stable",
+      "x-ms-enum": {
+        "name": "releaseTrainType",
+        "modelAsString": true
+      }
+    },
+    "Scope": {
+      "description": "Scope at which the extension instance is installed.",
+      "type": "string",
+      "enum": [
+        "cluster",
+        "namespace"
+      ],
+      "default": "namespace",
+      "x-ms-enum": {
+        "name": "extensionScope",
+        "modelAsString": true
+      }
+    },
+    "InstallStatus": {
+      "description": "Status of installation of this instance of the extension.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "InstallPending",
+        "Installed",
+        "InstallFailed"
+      ]
+    },
+    "ExtensionStatus": {
+      "description": "Status from this instance of the extension.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Status code provided by the Extension"
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "Short description of status of this instanace of the extension."
+        },
+        "level": {
+          "type": "string",
+          "description": "Level of the status.",
+          "enum": [
+            "Error",
+            "Warning",
+            "Information"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message of the status from the Extension instance."
+        },
+        "time": {
+          "type": "string",
+          "description": "DateLiteral (per ISO8601) noting the time of installation status."
+        }
+      }
+    },
+    "ExtensionInstance": {
+      "description": "The Extension Instance object.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties of an Extension Instance resource",
+          "properties": {
+            "extensionType": {
+              "type": "string",
+              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
+            },
+            "autoUpgrade": {
+              "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+              "$ref": "#/definitions/AutoUpgrade"
+            },
+            "releaseTrain": {
+              "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+              "$ref": "#/definitions/ReleaseTrain"
+            },
+            "version": {
+              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version.",
+              "type": "string"
+            },
+            "scope": {
+              "description": "Scope at which the extension instance is installed.",
+              "$ref": "#/definitions/Scope"
+            },
+            "namespace": {
+              "description": "The namespace to which this extension is installed.",
+              "type": "string",
+              "default": "default"
+            },
+            "configurationSettings": {
+              "description": "Configuration settings, as name-value pairs for configuring this instance of the extension..",
+              "type": "object",
+              "$ref": "#/definitions/ConfigurationSettings"
+            },
+            "configurationProtectedSettings": {
+              "description": "Configuration settings that are sensitive, as name-value pairs for configuring this instance of the extension..",
+              "type": "object",
+              "$ref": "#/definitions/ConfigurationProtectedSettings"
+            },
+            "installStatus": {
+              "type": "string",
+              "description": "Status of installation of this instance of the extension.",
+              "$ref": "#/definitions/InstallStatus"
+            },
+            "statuses": [
+              {
+                "type": "object",
+                "description": "Status from this instance of the extension.",
+                "$ref": "#/definitions/ExtensionStatus"
+              }
+            ],
+            "creationTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
+              "readOnly": true
+            },
+            "lastModifiedTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
+              "readOnly": true
+            },
+            "lastStatusTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time of last status from the agent.",
+              "readOnly": true
+            },
+            "error": {
+              "type": "object",
+              "description": "Error information from the Agent for errors during installation.",
+              "readOnly": true,
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionInstanceForList": {
+      "description": "The Extension Instance object.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties of an Extension Instance resource",
+          "readOnly": true,
+          "properties": {
+            "extensionType": {
+              "type": "string",
+              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
+            },
+            "autoUpgrade": {
+              "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+              "$ref": "#/definitions/AutoUpgrade"
+            },
+            "releaseTrain": {
+              "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+              "$ref": "#/definitions/ReleaseTrain"
+            },
+            "version": {
+              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version.",
+              "type": "string"
+            },
+            "scope": {
+              "description": "Scope at which the extension instance is installed.",
+              "$ref": "#/definitions/Scope"
+            },
+            "namespace": {
+              "description": "The namespace to which this extension is installed.",
+              "type": "string",
+              "default": "default"
+            },
+            "installStatus": {
+              "type": "string",
+              "description": "Status of installation of this instance of the extension.",
+              "$ref": "#/definitions/InstallStatus"
+            },
+            "statuses": [
+              {
+                "type": "object",
+                "description": "Status from this instance of the extension.",
+                "$ref": "#/definitions/ExtensionStatus"
+              }
+            ],
+            "creationTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
+              "readOnly": true
+            },
+            "lastModifiedTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
+              "readOnly": true
+            },
+            "lastStatusTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time of last status from the agent.",
+              "readOnly": true
+            },
+            "error": {
+              "type": "object",
+              "description": "Error information from the Agent for errors during installation.",
+              "readOnly": true,
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "ExtenionInstancesList": {
+      "description": "Result of the request to list Extension Instances.  It contains a list of ExtensionInstance objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ExtensionInstanceForList"
+          },
+          "description": "List of Extension Instances within a Kubernetes cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of extension instanace objects, if any."
+        }
+      }
+    },
+    "ExtensionInstanceUpdate": {
+      "description": "Update Extension Instance request object.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties to update an Extension Instance resource",
+          "properties": {
+            "autoUpgrade": {
+              "description": "Flag to note if this instance participates in Extension Lifecylce Management or not.",
+              "$ref": "#/definitions/AutoUpgrade"
+            },
+            "releaseTrain": {
+              "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+              "$ref": "#/definitions/ReleaseTrain"
+            },
+            "version": {
+              "description": "Version number of extension, to 'pin' to a specific version.  autoUpgrade must be 'false'.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterRpParameter": {
+      "name": "clusterRp",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.ContainerService",
+        "Microsoft.Kubernetes"
+      ],
+      "description": "The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterResourceNameParameter": {
+      "name": "clusterResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "managedClusters",
+        "connectedClusters"
+      ],
+      "description": "The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or connectedClusters (for OnPrem K8S clusters).",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the kubernetes cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "ExtensionInstanceNameParameter": {
+      "name": "extensionInstanceName",
+      "in": "path",
+      "description": "Name of an instance of the Extension.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
