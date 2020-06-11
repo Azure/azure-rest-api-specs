@@ -57,7 +57,7 @@
           "201": {
             "description": "Environment details.",
             "schema": {
-              "$ref": "#/definitions/EnvironmentResource"
+              "$ref": "#/definitions/EvironmentResponse"
             }
           },
           "default": {
@@ -133,6 +133,22 @@
             }
           }
         }
+      }
+    },
+    "EvironmentResponse" : {
+      "id": "/subscriptions/id/locations/westus/operationsStatus/sameguid",
+      "name": "sameguid",
+      "status" : "RP defined values | Succeeded | Failed | Canceled",
+      "startTime": "<DateLiteral per ISO8601>",
+      "endTime": "<DateLiteral per ISO8601>",
+      "percentComplete": "<double between 0 and 100>"
+      "properties": {
+          "$ref": "#/definitions/EnvironmentResource",
+          "description": "EnvironmentResource detail"
+      },
+      "error" : {
+      "code": "BadArgument",
+      "message": "The provided database &#39;foo&#39; has an invalid username."
       }
     },
     "ErrorResponse": {
