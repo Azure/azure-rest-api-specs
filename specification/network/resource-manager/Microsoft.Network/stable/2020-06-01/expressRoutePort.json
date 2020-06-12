@@ -542,6 +542,65 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa": {
+      "post": {
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "operationId": "ExpressRoutePorts_GenerateLOA",
+        "description": "Generate a letter of authorization for the requested ExpressRoutePort resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of ExpressRoutePort."
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRoutePortsLOARequest"
+            },
+            "description": "Request parameters supplied to generate a letter of authorization."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the content as a base64 encoded string.",
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRoutePortsLOAResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateExpressRoutePortLOA": {
+            "$ref": "./examples/GenerateExpressRoutePortsLOA.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -862,6 +921,27 @@
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "GenerateExpressRoutePortsLOARequest": {
+      "description": "The customer name to be printed on a letter of authorization.",
+      "properties": {
+        "customerName": {
+          "type": "string",
+          "description": "The customer name."
+        }
+      },
+      "required": [
+        "customerName"
+      ]
+    },
+    "GenerateExpressRoutePortsLOAResult": {
+      "description": "Response for GenerateExpressRoutePortsLOA API service call.",
+      "properties": {
+        "encodedContent": {
+          "type": "string",
+          "description": "The content as a base64 encoded string."
         }
       }
     }
