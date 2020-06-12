@@ -18,4 +18,8 @@ overrides:
       property: /parameters/properties/networkProfile/subnet/id
     set:
       - Hidden: false
+  - where:
+      property: //sku/name
+    set:
+      - ItemGoTypeName: "Name"
 ```
