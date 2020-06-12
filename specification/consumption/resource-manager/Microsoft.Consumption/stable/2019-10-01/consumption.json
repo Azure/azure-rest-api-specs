@@ -1129,8 +1129,8 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "ReservationTransaction": {
-            "$ref": "./examples/ReservationTransactionsListByBillingAccountId.json"
+          "ReservationTransactionsByEnrollmentNumber": {
+            "$ref": "./examples/ReservationTransactionsListByEnrollmentNumber.json"
           }
         },
         "parameters": [
@@ -1153,6 +1153,58 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ReservationTransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/reservationTransactions": {
+      "get": {
+        "tags": [
+          "ReservationTransactions"
+        ],
+        "operationId": "ReservationTransactions_ListByBillingProfile",
+        "description": "List of transactions for reserved instances on billing account scope",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationTransactionsByBillingProfileId": {
+            "$ref": "./examples/ReservationTransactionsListByBillingProfileId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModernReservationTransactionsListResult"
             }
           },
           "default": {
@@ -3327,8 +3379,156 @@
         }
       }
     },
-    "ReservationTransactionProperties": {
-      "default": "The properties of the reservation transaction.",
+    "ModernReservationTransactionProperties": {
+      "description": "The properties of a modern reservation transaction.",
+      "properties": {
+        "amount": {
+          "description": "The charge of the transaction.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "armSkuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The billing frequency, which can be either one-time or recurring.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing profile Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing profile name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the transaction is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventDate": {
+          "description": "The date of the transaction",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "eventType": {
+          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoice": {
+          "description": "Invoice Number",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceId": {
+          "description": "Invoice Id as on the invoice where the specific transaction appears.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice Section Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice Section Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchasingSubscriptionGuid": {
+          "description": "The subscription guid that makes the transaction.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "purchasingSubscriptionName": {
+          "description": "The subscription name that makes the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The quantity of the transaction.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "region": {
+          "description": "The region of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationOrderName": {
+          "description": "The name of the reservation order.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "This is the term of the transaction.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernReservationTransaction": {
+      "description": "Modern Reservation transaction resource.",
+      "type": "object",
+      "x-ms-discriminator-value": "Modern",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ModernReservationTransactionProperties",
+          "title": "Reservation Transaction properties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyReservationTransaction": {
+      "description": "Legacy Reservation transaction resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReservationTransaction"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LegacyReservationTransactionProperties",
+          "title": "Reservation Transaction properties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyReservationTransactionProperties": {
+      "description": "The properties of a legacy reservation transaction.",
       "properties": {
         "eventDate": {
           "description": "The date of the transaction",
@@ -3447,20 +3647,38 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationTransactionProperties",
+          "$ref": "#/definitions/LegacyReservationTransactionProperties",
           "title": "Reservation Transaction properties"
         }
       }
     },
     "ReservationTransactionsListResult": {
-      "description": "Result of listing reservation transactions",
+      "description": "Result of listing reservation recommendations.",
       "properties": {
         "value": {
-          "description": "The list of reservation transactions.",
+          "description": "The list of reservation recommendations.",
           "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ReservationTransaction"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernReservationTransactionsListResult": {
+      "description": "Result of listing reservation recommendations.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation recommendations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ModernReservationTransaction"
           }
         },
         "nextLink": {
@@ -4736,6 +4954,15 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}', /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationTransactionsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation transactions operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount/Enrollment scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
