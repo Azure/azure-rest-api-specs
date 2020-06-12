@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ContainerInstance.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2019-12
 ```
 
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12'
+input-file:
+  - Microsoft.ContainerInstance/stable/2019-12-01/containerInstance.json
+```
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
@@ -83,7 +92,6 @@ input-file:
 - Microsoft.ContainerInstance/preview/2017-12-01-preview/containerInstance.json
 ```
 
-
 ### Tag: package-2017-10-preview
 
 These settings apply only when `--tag=package-2017-10-preview` is specified on the command line.
@@ -92,7 +100,6 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 input-file:
 - Microsoft.ContainerInstance/preview/2017-10-01-preview/containerInstance.json
 ```
-
 
 ### Tag: package-2017-08-preview
 
@@ -113,8 +120,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -133,7 +140,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_instance']
 ```
-
 
 ## C#
 
@@ -258,7 +264,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -281,11 +287,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
