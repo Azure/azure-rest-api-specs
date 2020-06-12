@@ -140,6 +140,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 
 # Needed when there is more than one input file
 override-info:
@@ -241,6 +242,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 
 # Needed when there is more than one input file
 override-info:
@@ -331,6 +333,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 
 # Needed when there is more than one input file
 override-info:
@@ -497,6 +500,7 @@ input-file:
  - ./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 
 # Needed when there is more than one input file
 override-info:
