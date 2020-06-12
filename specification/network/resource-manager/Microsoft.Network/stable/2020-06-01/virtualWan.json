@@ -1828,6 +1828,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "200": {
             "description": "Request successful. Returns the details of the updated gateway.",
             "schema": {
@@ -1840,6 +1843,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -2536,6 +2543,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "200": {
             "description": "Request successful. Returns the details of the updated gateway.",
             "schema": {
@@ -2548,6 +2558,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
