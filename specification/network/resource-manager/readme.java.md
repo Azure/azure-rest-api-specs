@@ -10,6 +10,16 @@ namespace: com.microsoft.azure.management.network
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
+directive:
+  - rename-operation:
+      from: VirtualHubBgpConnection_Get
+      to: VirtualHubBgpConnections_Get
+  - rename-operation:
+      from: VirtualHubBgpConnection_CreateOrUpdate
+      to: VirtualHubBgpConnections_CreateOrUpdate
+  - rename-operation:
+      from: VirtualHubBgpConnection_Delete
+      to: VirtualHubBgpConnections_Delete
 ```
 
 ### Java multi-api
