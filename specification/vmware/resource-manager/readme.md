@@ -56,6 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-go
 ```
 
 ## TypeScript
@@ -69,6 +70,10 @@ See configuration in [readme.python.md](./readme.python.md)
 ## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
