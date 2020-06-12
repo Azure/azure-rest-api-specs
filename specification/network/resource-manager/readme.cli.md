@@ -211,6 +211,9 @@ cli:
     - name: /VirtualRouters/get/List all Virtual Routers for a given subscription
     - name: /VirtualRouters/delete/Delete VirtualRouter
     - split: azurefirewalls
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
     - name: /AzureFirewalls/put/Create Azure Firewall With IpGroups
     - name: /AzureFirewalls/put/Create Azure Firewall With Additional Properties
     - name: /AzureFirewalls/put/Create Azure Firewall in virtual Hub
@@ -305,6 +308,10 @@ cli:
     - name: /P2sVpnGateways/patch/P2SVpnGatewayUpdate
     - name: /P2sVpnGateways/delete/P2SVpnGatewayDelete
     - split: privatelinkservices
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /LoadBalancers/put/Create load balancer with Frontend IP in Zone 1
     - name: /PrivateLinkServices/put/Create private link service
     - name: /PrivateLinkServices/put/approve or reject private end point connection for a private link service
     - name: /PrivateLinkServices/get/Get private end point connection
@@ -318,7 +325,7 @@ cli:
     - name: /PrivateLinkServices/post/Check private link service visibility
     - name: /PrivateLinkServices/delete/delete private end point connection for a private link service
     - name: /PrivateLinkServices/delete/Delete private link service
-    - split: expressrourecircuits
+    - split: expressroutecircuits
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit on ExpressRoutePort
     - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Peering Traffic Stats
@@ -331,6 +338,8 @@ cli:
     - name: /ExpressRouteCircuits/post/List ARP Table
     - name: /ExpressRouteCircuits/patch/Update Express Route Circuit Tags
     - name: /ExpressRouteCircuits/delete/Delete ExpressRouteCircuit
+      disabled: true
+      comment: "Azure Error: AnotherOperationInProgress"
     - split: expressrouteports
     - name: /ExpressRoutePorts/put/ExpressRoutePortCreate
     - name: /ExpressRoutePorts/put/ExpressRoutePortUpdateLink
@@ -463,7 +472,10 @@ cli:
     - name: /VpnServerConfigurations/patch/VpnServerConfigurationUpdate
     - name: /VpnServerConfigurations/delete/VpnServerConfigurationDelete
     - split: networkvirtualappliances
+    - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VirtualHubs/put/VirtualHubPut
     - name: /NetworkVirtualAppliances/put/Create NetworkVirtualAppliance
+      comment: "The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'"
     - name: /NetworkVirtualAppliances/get/Get NetworkVirtualAppliance
     - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliance for a given resource group
     - name: /NetworkVirtualAppliances/get/List all Network Virtual Appliances for a given subscription
@@ -507,6 +519,7 @@ cli:
     - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolList
     - name: /LoadBalancerBackendAddressPools/delete/BackendAddressPoolDelete
     - split: expressroutecircuitpeerings
+    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
     - name: /ExpressRouteCircuitPeerings/put/Create ExpressRouteCircuit Peerings
     - name: /ExpressRouteCircuitPeerings/get/Get ExpressRouteCircuit Peering
     - name: /ExpressRouteCircuitPeerings/get/List ExpressRouteCircuit Peerings
@@ -544,6 +557,7 @@ cli:
     - name: /HubRouteTables/get/RouteTableList
     - name: /HubRouteTables/delete/RouteTableDelete
     - split: expressroutecircuitauthorizations
+    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
     - name: /ExpressRouteCircuitAuthorizations/put/Create ExpressRouteCircuit Authorization
     - name: /ExpressRouteCircuitAuthorizations/get/Get ExpressRouteCircuit Authorization
     - name: /ExpressRouteCircuitAuthorizations/get/List ExpressRouteCircuit Authorization
@@ -559,6 +573,11 @@ cli:
     - name: /PrivateDnsZoneGroups/get/List private endpoints in resource group
     - name: /PrivateDnsZoneGroups/delete/Delete private dns zone group
     - split: expressrouteconnections
+    - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
+    - name: /ExpressRouteCircuitPeerings/put/Create ExpressRouteCircuit Peerings
+    - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VirtualHubs/put/VirtualHubPut
+    - name: /ExpressRouteGateways/put/ExpressRouteGatewayCreate
     - name: /ExpressRouteConnections/put/ExpressRouteConnectionCreate
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionGet
     - name: /ExpressRouteConnections/get/ExpressRouteConnectionList
