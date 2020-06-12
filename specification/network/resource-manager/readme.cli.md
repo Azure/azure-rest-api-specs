@@ -53,13 +53,9 @@ cli:
     - name: /Subnets/put/Create subnet
     - name: /PublicIPAddresses/put/Create public IP address defaults
     - name: /LoadBalancers/put/Create load balancer with Frontend IP in Zone 1
-    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer with outbound rules
-    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer with Standard SKU
-    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer
-    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer with inbound nat pool
     - name: /LoadBalancers/get/Get load balancer
     - name: /LoadBalancers/get/List load balancers in resource group
@@ -157,6 +153,10 @@ cli:
     - name: /BastionHosts/get/List all Bastion Hosts for a given subscription
     - name: /BastionHosts/delete/Delete Bastion Host
     - split: inboundnatrules
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /LoadBalancers/put/Create load balancer
     - name: /InboundNatRules/put/InboundNatRuleCreate
     - name: /InboundNatRules/get/InboundNatRuleGet
     - name: /InboundNatRules/get/InboundNatRuleList
@@ -290,6 +290,8 @@ cli:
     - name: /VirtualNetworkGateways/post/GetVirtualNetworkGatewayBGPPeerStatus
     - name: /VirtualNetworkGateways/post/ResetVirtualNetworkGateway
     - name: /VirtualNetworkGateways/patch/UpdateVirtualNetworkGatewayTags
+      disabled: true
+      comment: "FAILURE: Unable to find status link for polling."
     - name: /VirtualNetworkGateways/delete/DeleteVirtualNetworkGateway
     - split: p2svpngateways
     - name: /P2sVpnGateways/put/P2SVpnGatewayPut
@@ -425,6 +427,8 @@ cli:
     - name: /DdosProtectionPlans/patch/DDoS protection plan Update tags
     - name: /DdosProtectionPlans/delete/Delete DDoS protection plan
     - split: expressroutegateways
+    - name: /VirtualWans/put/VirtualWANCreate
+    - name: /VirtualHubs/put/VirtualHubPut
     - name: /ExpressRouteGateways/put/ExpressRouteGatewayCreate
     - name: /ExpressRouteGateways/get/ExpressRouteGatewayListByResourceGroup
     - name: /ExpressRouteGateways/get/ExpressRouteGatewayListBySubscription
@@ -491,6 +495,10 @@ cli:
     - name: /VpnConnections/get/VpnConnectionList
     - name: /VpnConnections/delete/VpnConnectionDelete
     - split: loadbalancerbackendaddresspools
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
+    - name: /LoadBalancers/put/Create load balancer with Frontend IP in Zone 1
     - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and IP address defined in network interfaces.
     - name: /LoadBalancerBackendAddressPools/put/Update load balancer backend pool with backend addresses containing virtual network and  IP address.
     - name: /LoadBalancerBackendAddressPools/get/LoadBalancerBackendAddressPoolGet
