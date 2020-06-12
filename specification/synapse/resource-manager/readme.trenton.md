@@ -9,4 +9,9 @@ trenton:
     package-name: synapse
 clear-output-folder: true
 output-folder: $(trenton-output-folder)/synapse
+overrides:
+  - where:
+      resource: "SqlPools"
+    set:
+      - ModuleName: "SQLPools"
 ```
