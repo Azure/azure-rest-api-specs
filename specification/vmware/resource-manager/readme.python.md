@@ -7,7 +7,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ```yaml $(python)
 python-mode: create
 python:
-  package-version: 0.3.0
+  package-version: 0.1.0
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
