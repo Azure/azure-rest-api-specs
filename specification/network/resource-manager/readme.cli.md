@@ -178,6 +178,7 @@ cli:
     - split: ipallocations
     - name: /VirtualNetworks/put/Create virtual network
     - name: /IpAllocations/put/Create IpAllocation
+      comment: "Azure Error: HypernetIpAllocationSubscriptionNotOnboardHypernet"
     - name: /IpAllocations/get/Get IpAllocation
     - name: /IpAllocations/get/List IpAllocations in resource group
     - name: /IpAllocations/get/List all IpAllocations
@@ -547,6 +548,7 @@ cli:
     - name: /PacketCaptures/post/Stop packet capture
     - name: /PacketCaptures/delete/Delete packet capture
     - split: flowlogs
+    - name: /NetworkSecurityGroups/put/Create network security group
     - name: /FlowLogs/put/Create or update flow log
     - name: /FlowLogs/get/Get flow log
     - name: /FlowLogs/get/List connection monitors
