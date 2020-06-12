@@ -468,6 +468,9 @@
           "Create/Update Managed Cluster": {
             "$ref": "./examples/ManagedClustersCreate_Update.json"
           },
+          "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
+            "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
+          },
           "Create Managed Cluster with PPG": {
             "$ref": "./examples/ManagedClustersCreate_PPG.json"
           }
@@ -2430,6 +2433,10 @@
         "managed": {
           "type": "boolean",
           "description": "Whether to enable managed AAD."
+        },
+        "enableAzureRBAC": {
+          "type": "boolean",
+          "description": "Whether to enable Azure RBAC for Kubernetes authorization."
         },
         "adminGroupObjectIDs": {
           "type": "array",
