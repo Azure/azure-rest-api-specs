@@ -10,7 +10,7 @@ python:
   package-name: azure-mgmt-compute
   no-namespace-folders: true
   clear-output-folder: true
-  
+
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
   - from: compute.json
