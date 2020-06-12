@@ -1,0 +1,452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0",
+    "title": "Computer Vision Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "host": "westcentralus.api.cognitive.microsoft.com",
+  "basePath": "/vision/v3.0",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/read/analyze": {
+      "post": {
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
+        "operationId": "Read",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OcrDetectionLanguage"
+          },
+          {
+            "$ref": "#/parameters/ImageUrl"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Analyze request": {
+            "$ref": "./examples/SuccessfulReadWithUrl.json"
+          }
+        }
+      }
+    },
+    "/read/analyzeResults/{operationId}": {
+      "get": {
+        "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from 'Operation-Location' field returned from Read interface.",
+        "operationId": "GetReadResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of read operation returned in the response of the 'Read' interface.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the read operation status.",
+            "schema": {
+              "$ref": "#/definitions/ReadOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Read Result request": {
+            "$ref": "./examples/SuccessfulGetReadResult.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/read/analyze?overload=stream": {
+      "post": {
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
+        "operationId": "ReadInStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OcrDetectionLanguage"
+          },
+          {
+            "$ref": "#/parameters/ImageStream"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Analyze request": {
+            "$ref": "./examples/SuccessfulReadWithStream.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ReadOperationResult": {
+      "type": "object",
+      "description": "OCR result of the read operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the read operation.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Get UTC date time the batch operation was submitted.",
+          "x-nullable": false
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "description": "Get last updated UTC date time of this batch operation.",
+          "x-nullable": false
+        },
+        "analyzeResult": {
+          "description": "Analyze batch operation result.",
+          "type": "object",
+          "$ref": "#/definitions/analyzeResults"
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status code of the text operation.",
+      "enum": [
+        "notStarted",
+        "running",
+        "failed",
+        "succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "ReadResult": {
+      "description": "Text extracted from a page in the input document.",
+      "type": "object",
+      "required": [
+        "page",
+        "angle",
+        "width",
+        "height",
+        "unit",
+        "lines"
+      ],
+      "properties": {
+        "page": {
+          "description": "The 1-based page number of the recognition result.",
+          "type": "integer"
+        },
+        "language": {
+          "description": "The BCP-47 language code of the recognized text page.",
+          "type": "string"
+        },
+        "angle": {
+          "description": "The orientation of the image in degrees in the clockwise direction. Range between [-180, 180).",
+          "type": "number"
+        },
+        "width": {
+          "description": "The width of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "height": {
+          "description": "The height of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "unit": {
+          "description": "The unit used in the Width, Height and BoundingBox. For images, the unit is 'pixel'. For PDF, the unit is 'inch'.",
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultDimensionUnit",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        },
+        "lines": {
+          "description": "A list of recognized text lines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
+        }
+      }
+    },
+    "analyzeResults": {
+      "description": "Analyze batch operation result.",
+      "type": "object",
+      "required": [
+        "version",
+        "readResults"
+      ],
+      "properties": {
+        "version": {
+          "description": "Version of schema used for this result.",
+          "type": "string"
+        },
+        "readResults": {
+          "description": "Text extracted from the input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReadResult"
+          }
+        }
+      }
+    },
+    "Line": {
+      "description": "An object representing a recognized text line.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "text",
+        "words"
+      ],
+      "properties": {
+        "language": {
+          "description": "The BCP-47 language code of the recognized text line. Only provided where the language of the line differs from the page's.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of a recognized line.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the line.",
+          "type": "string"
+        },
+        "words": {
+          "description": "List of words in the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Word"
+          }
+        }
+      }
+    },
+    "Word": {
+      "description": "An object representing a recognized word.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "text",
+        "confidence"
+      ],
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized word.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the word.",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "x-nullable": false
+      }
+    },
+    "ComputerVisionError": {
+      "description": "Details about the API request error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "InvalidImageFormat",
+            "UnsupportedMediaType",
+            "InvalidImageUrl",
+            "NotSupportedFeature",
+            "NotSupportedImage",
+            "Timeout",
+            "InternalServerError",
+            "InvalidImageSize",
+            "BadArgument",
+            "DetectFaceError",
+            "NotSupportedLanguage",
+            "InvalidThumbnailSize",
+            "InvalidDetails",
+            "InvalidModel",
+            "CancelledRequest",
+            "NotSupportedVisualFeature",
+            "FailedToProcess",
+            "Unspecified",
+            "StorageException"
+          ],
+          "x-ms-enum": {
+            "name": "ComputerVisionErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        },
+        "requestId": {
+          "description": "A unique request identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OcrDetectionLanguage": {
+      "name": "language",
+      "in": "query",
+      "description": "The BCP-47 language code of the text in the document. Currently, only English ('en'), Dutch (‘nl’), French (‘fr’), German (‘de’), Italian (‘it’), Portuguese (‘pt), and Spanish ('es') are supported. Read supports auto language identification and multilanguage documents, so only provide a language code if you would like to force the documented to be processed as that specific language.",
+      "required": false,
+      "default": "en",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OcrDetectionLanguage",
+        "modelAsString": true
+      },
+      "enum": [
+        "en",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "nl",
+        "pt"
+      ]
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

@@ -41,7 +41,7 @@ tag: package-policy-2019-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-10
+tag: package-resources-2020-06
 ```
 
 ``` yaml $(package-subscriptions)
@@ -58,6 +58,19 @@ tag: package-managedapplications-2018-06
 
 ``` yaml $(package-deploymentscripts)
 tag: package-deploymentscripts-2019-10-preview
+```
+
+``` yaml $(package-templatespecs)
+tag: package-templatespecs-2019-06-preview
+```
+
+### Tag: package-resources-2020-06
+
+These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-06'
+input-file:
+- Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-subscriptions-2020-01
@@ -207,6 +220,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2019-06-preview
+
+These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
+input-file:
+- Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
 ```
 
 ### Tag: package-policy-2016-12
@@ -551,6 +573,26 @@ directive:
     - $.definitions.AzureCliScript.properties
     - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
+  - suppress: OperationsAPIImplementation
+    from: templateSpecs.json
+    where: $.paths
+    reason: OperationsAPI will come from Resources
+  - suppress: R3006 #BodyTopLevelProperties
+    from: templateSpecs.json
+    where: 
+    - $.definitions.TemplateSpecModel.properties
+    - $.definitions.TemplateSpecVersionModel.properties
+    - $.definitions.TemplateSpecUpdateModel.properties
+    - $.definitions.TemplateSpecVersionUpdateModel.properties
+    reason: Currently systemData is not allowed
+  - suppress: TrackedResourceListByImmediateParent
+    from: templateSpecs.json
+    where: $.definitions
+    reason: Tooling issue
+  - suppress: TrackedResourceListByResourceGroup
+    from: templateSpecs.json
+    where: $.definitions.TemplateSpecVersionModel
+    reason: Tooling issue
 ```
 
 ---
@@ -574,6 +616,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -602,6 +645,7 @@ batch:
   - package-links: true
   - package-managedapplications: true
   - package-deploymentscripts: true
+  - package-templatespecs: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
