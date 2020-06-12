@@ -334,24 +334,21 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "readOnly": true,
+      "required": [
+        "message",
+        "code"
+      ],
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "readOnly": true
+          "minimum": 100,
+          "maximum": 600
         },
         "message": {
           "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+          "type": "string"
         }
       }
     },
