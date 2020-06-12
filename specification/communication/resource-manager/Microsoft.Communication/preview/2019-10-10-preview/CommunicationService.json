@@ -776,6 +776,13 @@
     },
     "ApnsCredential": {
       "description": "Credentials for pushing through APNS",
+      "required": [
+        "endpoint",
+        "token",
+        "keyId",
+        "bundleId",
+        "teamId"
+      ],
       "properties": {
         "endpoint": {
           "description": "The endpoint of this credential",
@@ -801,6 +808,9 @@
     },
     "GcmCredential": {
       "description": "Credentials for pushing through Google",
+      "required": [
+        "googleApiKey"
+      ],
       "properties": {
         "googleApiKey": {
           "description": "The Google API key",
