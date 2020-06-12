@@ -40,7 +40,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2020-07-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2020_07_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2020_07_01_preview
   regenerate-manager: true
   generate-interface: true
