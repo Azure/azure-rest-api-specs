@@ -2285,6 +2285,20 @@
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group",
+          "x-nullable": false
         }
       }
     },
@@ -2371,6 +2385,20 @@
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group",
+          "x-nullable": false
         }
       }
     },
@@ -2819,6 +2847,10 @@
         "allowNewSession": {
           "type": "boolean",
           "description": "Allow a new session."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "Resource Id of SessionHost's underlining virtual machine."
         },
         "assignedUser": {
           "type": "string",
