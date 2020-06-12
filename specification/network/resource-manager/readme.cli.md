@@ -49,10 +49,17 @@ cli:
     - name: /Subnets/post/Prepare Network Policies
     - name: /Subnets/delete/Delete subnet
     - split: loadbalancers
+    - name: /VirtualNetworks/put/Create virtual network
+    - name: /Subnets/put/Create subnet
+    - name: /PublicIPAddresses/put/Create public IP address defaults
     - name: /LoadBalancers/put/Create load balancer with Frontend IP in Zone 1
+    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer with outbound rules
+    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer with Standard SKU
+    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer
+    - name: /LoadBalancers/delete/Delete load balancer
     - name: /LoadBalancers/put/Create load balancer with inbound nat pool
     - name: /LoadBalancers/get/Get load balancer
     - name: /LoadBalancers/get/List load balancers in resource group
@@ -399,6 +406,12 @@ cli:
     - name: /ServiceEndpointPolicies/get/List all service endpoint policy
     - name: /ServiceEndpointPolicies/patch/Update service endpoint policy tags
     - name: /ServiceEndpointPolicies/delete/Delete service endpoint policy
+    - split: serviceendpointpolicydefinitions
+    - name: /ServiceEndpointPolicies/put/Create service endpoint policy
+    - name: /ServiceEndpointPolicyDefinitions/put/Create service endpoint policy definition
+    - name: /ServiceEndpointPolicyDefinitions/get/Get service endpoint definition in service endpoint policy
+    - name: /ServiceEndpointPolicyDefinitions/get/List service endpoint definitions in service end point policy
+    - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
     - split: ddoscustompolicies
     - name: /DdosCustomPolicies/put/Create DDoS custom policy
     - name: /DdosCustomPolicies/get/Get DDoS custom policy
@@ -552,11 +565,6 @@ cli:
     - name: /ExpressRouteCircuitConnections/get/ExpressRouteCircuitConnectionGet
     - name: /ExpressRouteCircuitConnections/get/List ExpressRouteCircuit Connection
     - name: /ExpressRouteCircuitConnections/delete/Delete ExpressRouteCircuit
-    - split: serviceendpointpolicydefinitions
-    - name: /ServiceEndpointPolicyDefinitions/put/Create service endpoint policy definition
-    - name: /ServiceEndpointPolicyDefinitions/get/Get service endpoint definition in service endpoint policy
-    - name: /ServiceEndpointPolicyDefinitions/get/List service endpoint definitions in service end point policy
-    - name: /ServiceEndpointPolicyDefinitions/delete/Delete service endpoint policy definitions from service endpoint policy
 
     - split: other
     - name: /VpnSiteLinkConnections/get/VpnSiteLinkConnectionGet
