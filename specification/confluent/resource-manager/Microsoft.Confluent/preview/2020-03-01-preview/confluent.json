@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Confluent",
@@ -351,6 +351,9 @@
           "202": {
             "description": "Accepted"
           },
+          "204": {
+            "description": "The specified confluent resource does not exist in the subscription."
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -474,7 +477,8 @@
         "Deleting",
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Deleted"
       ],
       "type": "string",
       "description": "Provision states for confluent RP",
@@ -500,6 +504,11 @@
         },
         "planId": {
           "description": "Offer Plan Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planName": {
+          "description": "Offer Plan Name",
           "maxLength": 50,
           "type": "string"
         },
