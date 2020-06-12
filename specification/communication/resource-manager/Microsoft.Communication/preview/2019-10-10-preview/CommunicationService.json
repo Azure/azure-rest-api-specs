@@ -771,6 +771,53 @@
         }
       }
     },
+    "ApnsCredential": {
+      "description": "Credentials for pushing through APNS",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of this credential",
+          "type": "string"
+        },
+        "token": {
+          "description": "Provider Authentication Token, obtained through your developer account",
+          "type": "string"
+        },
+        "keyId": {
+          "description": "A 10-character key identifier (kid) key, obtained from your developer account",
+          "type": "string"
+        },
+        "bundleId": {
+          "description": "The name of the application",
+          "type": "string"
+        },
+        "teamId": {
+          "description": "The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account",
+          "type": "string"
+        }
+      }
+    },
+    "GcmCredential": {
+      "description": "Credentials for pushing through Google",
+      "properties": {
+        "googleApiKey": {
+          "description": "The Google API key",
+          "type": "string"
+        }
+      }
+    },
+    "PushNotificationCredentials": {
+      "description": "Credentials to enable push notifications",
+      "properties": {
+        "apnsCredential": {
+          "description": "Credentials for pushing through APNS",
+          "$ref": "#/definitions/ApnsCredential"
+        },
+        "gcmCredential": {
+          "description": "Credentials for pushing through Google",
+          "$ref": "#/definitions/GcmCredential"
+        }
+      }
+    },
     "CommunicationServiceProperties": {
       "description": "A class that describes the properties of the CommunicationService.",
       "type": "object",
@@ -800,6 +847,10 @@
           "type": "string",
           "readOnly": true
         },
+        "pushNotificationCredentials": {
+          "description": "Credentials used to enable push notifications. Setting any credential set will enable push notifications.",
+          "$ref": "#/definitions/PushNotificationCredentials"
+        },
         "version": {
           "description": "Version of the CommunicationService resource. Probably you need the same or higher version of client SDKs.",
           "type": "string",
@@ -809,21 +860,6 @@
           "description": "The immutable resource Id of the Spool resource.",
           "type": "string",
           "readOnly": true
-        },
-        "optionalFeatures": {
-          "description": "Features that may optionally be enabled on a CommunicationService instance.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "SMS",
-              "PSTN"
-            ],
-            "x-ms-enum": {
-              "name": "OptionalFeature",
-              "modelAsString": true
-            }
-          }
         }
       }
     },
