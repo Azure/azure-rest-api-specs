@@ -2,13 +2,13 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for ContainerInstance.
+This is the AutoRest configuration file for Confluent.
 
 
 
 ---
 ## Getting Started
-To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Confluent, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
