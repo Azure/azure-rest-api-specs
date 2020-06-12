@@ -55,9 +55,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Environment details.",
+            "description": "Environment Resource create response.",
             "schema": {
-              "$ref": "#/definitions/EvironmentResponse"
+              "$ref": "#/definitions/PutResponse"
+            }
+          },
+          "200": {
+            "description": "Environment Resource update response.",
+            "schema": {
+              "$ref": "#/definitions/PutResponse"
             }
           },
           "default": {
@@ -89,7 +95,7 @@
           "200": {
             "description": "Get Environment info.",
             "schema": {
-              "$ref": "#/definitions/EnvironmentResource"
+              "$ref": "#/definitions/GetResponse"
             }
           },
           "default": {
@@ -135,13 +141,13 @@
         }
       }
     },
-    "EvironmentResponse" : {
+    "GetResponse" : {
       "id": "/subscriptions/id/locations/westus/operationsStatus/sameguid",
       "name": "sameguid",
-      "status" : "RP defined values | Succeeded | Failed | Canceled",
+      "status" : "when not completed non-terminal value | Accepted | Created, when completed, terminal values | Succeeded | Failed | Canceled",
       "startTime": "<DateLiteral per ISO8601>",
       "endTime": "<DateLiteral per ISO8601>",
-      "percentComplete": "<double between 0 and 100>"
+      "percentComplete": "<double between 0 and 100>",
       "properties": {
           "$ref": "#/definitions/EnvironmentResource",
           "description": "EnvironmentResource detail"
@@ -150,6 +156,13 @@
       "code": "BadArgument",
       "message": "The provided database &#39;foo&#39; has an invalid username."
       }
+    },
+    "PutResponse" : {
+      "status" : "non-terminal value | Accepted | Created",
+      "properties": {
+          "$ref": "#/definitions/EnvironmentResource",
+          "description": "EnvironmentResource detail"
+      },
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
