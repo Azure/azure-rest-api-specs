@@ -786,27 +786,35 @@
       "properties": {
         "endpoint": {
           "description": "The endpoint of this credential",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Development",
+            "Production"
+          ],
+          "x-ms-enum": {
+            "name": "Endpoint",
+            "modelAsString": true
+          }
         },
         "token": {
           "description": "Provider Authentication Token, obtained through your developer account",
           "type": "string"
         },
         "keyId": {
-          "description": "A 10-character key identifier (kid) key, obtained from your developer account",
+          "description": "A 10-character key identifier (kid) key, obtained from your developer account.",
           "type": "string"
         },
         "bundleId": {
-          "description": "The name of the application",
+          "description": "The name of the application or BundleId.",
           "type": "string"
         },
         "teamId": {
-          "description": "The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account",
+          "description": "The issuer (iss) registered claim key. The value is a 10-character TeamId, obtained from your developer account.",
           "type": "string"
         }
       }
     },
-    "GcmCredential": {
+    "FcmLegacyCredential": {
       "description": "Credentials for pushing through Google",
       "required": [
         "googleApiKey"
@@ -825,9 +833,9 @@
           "description": "Credentials for pushing through APNS",
           "$ref": "#/definitions/ApnsCredential"
         },
-        "gcmCredential": {
+        "fcmLegacyCredential": {
           "description": "Credentials for pushing through Google",
-          "$ref": "#/definitions/GcmCredential"
+          "$ref": "#/definitions/FcmLegacyCredential"
         }
       }
     },
