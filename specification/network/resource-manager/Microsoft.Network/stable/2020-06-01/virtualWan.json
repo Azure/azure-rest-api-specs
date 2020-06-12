@@ -1952,6 +1952,141 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture": {
+      "post": {
+        "tags": [
+          "VpnGateways"
+        ],
+        "operationId": "VpnGateways_StartPacketCapture",
+        "description": "Starts packet capture on vpn gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayPacketCaptureStartParameters"
+            },
+            "description": "Vpn gateway packet capture parameters supplied to start packet capture on vpn gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation reset the primary of the VpnGateway.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on vpn gateway without filter": {
+            "$ref": "./examples/VpnGatewayStartPacketCapture.json"
+          },
+          "Start packet capture on vpn gateway with filter": {
+            "$ref": "./examples/VpnGatewayStartPacketCaptureFilterData.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture": {
+      "post": {
+        "tags": [
+          "VpnGateways"
+        ],
+        "operationId": "VpnGateways_StopPacketCapture",
+        "description": "Stops packet capture on vpn gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayPacketCaptureStopParameters"
+            },
+            "description": "Vpn gateway packet capture parameters supplied to stop packet capture on vpn gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation reset the primary of the VpnGateway.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture on vpn gateway": {
+            "$ref": "./examples/VpnGatewayStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways": {
       "get": {
         "operationId": "VpnGateways_ListByResourceGroup",
@@ -5304,6 +5439,23 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "VpnGatewayPacketCaptureStartParameters": {
+      "properties": {
+        "filterData": {
+          "type": "string",
+          "description": "Start Packet capture parameters on vpn gateway."
+        }
+      }
+    },
+    "VpnGatewayPacketCaptureStopParameters": {
+      "properties": {
+        "sasUrl": {
+          "type": "string",
+          "description": "SAS url for packet capture on vpn gateway."
+        }
+      },
+      "description": "Stop packet capture parameters."
     },
     "VpnSiteLinkConnectionProperties": {
       "properties": {
