@@ -40,6 +40,9 @@
         ],
         "operationId": "Get_Rules",
         "description": "Get the list of all cost allocation rules",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "CostAllocationRules_List": {
             "$ref": "./examples/CostAllocationRulesList.json"
@@ -57,7 +60,7 @@
           "200": {
             "description": "List of cost allocation rules for the billing account.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleListResponse"
+              "$ref": "#/definitions/CostAllocationRule_list"
             }
           },
           "default": {
@@ -74,7 +77,7 @@
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "Check_CostAllocationRuleNameAvailability",
+        "operationId": "Rule_CheckNameAvailability",
         "description": "Check if a given rule name is in use",
         "x-ms-examples": {
           "CostAllocationRuleCheckNameAvailability": {
@@ -253,7 +256,7 @@
         }
       }
     },
-    "CostAllocationRuleListResponse": {
+    "CostAllocationRule_list": {
       "type": "object",
       "description": "Result of listing cost allocation rules. It contains a list of available rules in the billing account provided.",
       "properties": {
@@ -291,7 +294,7 @@
       "description": "The cost allocation rule check name availability response",
       "properties": {
         "nameAvailable": {
-          "type": "boolean",
+          "$ref": "#/definitions/NameAvailable",
           "description": "Whether this rule name is available"
         },
         "reason": {
@@ -302,6 +305,18 @@
           "type": "string",
           "description": "Error message if the name is not available"
         }
+      }
+    },
+    "NameAvailable": {
+      "type": "string",
+      "description": "Whether this rule name is available",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "NameAvailable",
+        "modelAsString": true
       }
     },
     "Reason": {
