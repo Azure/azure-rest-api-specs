@@ -344,7 +344,9 @@
     },
     "/providers/Microsoft.Attestation/defaultProviders": {
       "get": {
-        "tags": ["AttestationProviders"],
+        "tags": [
+          "AttestationProviders"
+        ],
         "operationId": "AttestationProviders_GetDefault",
         "description": "Get the default provider",
         "x-ms-examples": {
@@ -375,7 +377,9 @@
     },
     "/providers/Microsoft.Attestation/locations/{location}/defaultProviders": {
       "get": {
-        "tags": ["AttestationProviders"],
+        "tags": [
+          "AttestationProviders"
+        ],
         "operationId": "AttestationProviders_GetDefaultByLocation",
         "description": "Get the default provider by location.",
         "x-ms-examples": {
@@ -389,9 +393,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-			"minLength": 1,
+            "minLength": 1,
             "description": "The location of the default provider."
-          },		  
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
