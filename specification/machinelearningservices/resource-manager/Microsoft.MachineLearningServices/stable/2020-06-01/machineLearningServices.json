@@ -717,6 +717,12 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
           }
         ],
         "responses": {
@@ -1579,6 +1585,22 @@
       "required": true,
       "type": "string",
       "description": "Friendly name of the workspace connection",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetParameter": {
+      "in": "query",
+      "name": "target",
+      "type": "string",
+      "description": "Target of the workspace connection.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "in": "query",
+      "name": "category",
+      "type": "string",
+      "description": "Category of the workspace connection.",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
