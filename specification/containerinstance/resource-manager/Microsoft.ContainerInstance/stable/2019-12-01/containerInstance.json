@@ -283,9 +283,6 @@
               "$ref": "#/definitions/ContainerGroup"
             }
           },
-          "202": {
-            "description": "Delete started."
-          },
           "204": {
             "description": "No Content - the specified container group was not found."
           },
@@ -295,8 +292,7 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart": {
@@ -383,7 +379,7 @@
           }
         },
         "summary": "Starts all containers in a container group.",
-        "description": "Starts all containers in a container group. Compute resources will be allocated and billing will start.",
+        "description": "Starts all containers in a container group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -442,15 +438,12 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/usages": {
       "get": {
-        "operationId": "Location_ListUsage",
+        "operationId": "ContainerGroupUsage_List",
         "x-ms-examples": {
           "ContainerUsage": {
             "$ref": "./examples/ContainerGroupUsage.json"
@@ -481,15 +474,12 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs": {
       "get": {
-        "operationId": "Containers_ListLogs",
+        "operationId": "Container_ListLogs",
         "x-ms-examples": {
           "ContainerListLogs": {
             "$ref": "./examples/ContainerListLogs.json"
@@ -542,7 +532,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec": {
       "post": {
-        "operationId": "Containers_ExecuteCommand",
+        "operationId": "Container_ExecuteCommand",
         "x-ms-examples": {
           "ContainerExec": {
             "$ref": "./examples/ContainerExec.json"
@@ -596,9 +586,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
+      "delete": {
+        "operationId": "ServiceAssociationLink_Delete",
+        "x-ms-examples": {
+          "ContainerGroupsDelete": {
+            "$ref": "./examples/ServiceAssociationLink_Delete.json"
+          }
+        },
+        "summary": "Delete the container instance service association link for the subnet.",
+        "description": "Delete the container instance service association link for the subnet. This operation unblocks user from deleting subnet.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubnetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - the specified service association link was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/cachedImages": {
       "get": {
-        "operationId": "Location_ListCachedImages",
+        "operationId": "ListCachedImages",
         "x-ms-examples": {
           "CachedImages": {
             "$ref": "./examples/CachedImagesList.json"
@@ -630,15 +663,12 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/capabilities": {
       "get": {
-        "operationId": "Location_ListCapabilities",
+        "operationId": "ListCapabilities",
         "x-ms-examples": {
           "GetCapabilities": {
             "$ref": "./examples/CapabilitiesList.json"
@@ -670,9 +700,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -784,72 +811,59 @@
     "ContainerState": {
       "description": "The container instance state.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "state": {
           "type": "string",
-          "readOnly": true,
           "description": "The state of the container instance."
         },
         "startTime": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
           "description": "The date-time when the container instance state started."
         },
         "exitCode": {
           "type": "integer",
-          "readOnly": true,
           "description": "The container instance exit codes correspond to those from the `docker run` command."
         },
         "finishTime": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
           "description": "The date-time when the container instance state finished."
         },
         "detailStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The human-readable status of the container instance state."
+          "description": "The human-readable status of the container instance state.",
+          "type": "string"
         }
       }
     },
     "Event": {
       "description": "A container group or container instance event.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "count": {
           "type": "integer",
-          "readOnly": true,
           "description": "The count of the event."
         },
         "firstTimestamp": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
           "description": "The date-time of the earliest logged event."
         },
         "lastTimestamp": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
           "description": "The date-time of the latest logged event."
         },
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "The event name."
         },
         "message": {
           "type": "string",
-          "readOnly": true,
           "description": "The event message."
         },
         "type": {
           "type": "string",
-          "readOnly": true,
           "description": "The event type."
         }
       }
@@ -1084,11 +1098,7 @@
           "enum": [
             "http",
             "https"
-          ],
-          "x-ms-enum": {
-            "name": "Scheme",
-            "modelAsString": true
-          }
+          ]
         }
       },
       "required": [
@@ -1153,7 +1163,6 @@
             "properties": {
               "x-ms-client-flatten": true,
               "type": "object",
-              "description": "The container group properties",
               "properties": {
                 "provisioningState": {
                   "readOnly": true,
@@ -1241,21 +1250,6 @@
                 "dnsConfig": {
                   "description": "The DNS config information for a container group.",
                   "$ref": "#/definitions/DnsConfiguration"
-                },
-                "sku": {
-                  "description": "The SKU for a container group.",
-                  "$ref": "#/definitions/ContainerGroupSku"
-                },
-                "encryptionProperties": {
-                  "description": "The encryption properties for a container group.",
-                  "$ref": "#/definitions/EncryptionProperties"
-                },
-                "initContainers": {
-                  "type": "array",
-                  "description": "The init containers for a container group.",
-                  "items": {
-                    "$ref": "#/definitions/InitContainerDefinition"
-                  }
                 }
               },
               "required": [
@@ -1561,8 +1555,7 @@
         },
         "properties": {
           "type": "object",
-          "description": "The additional properties.",
-          "x-ms-client-flatten": true
+          "description": "The additional properties."
         },
         "origin": {
           "type": "string",
@@ -1589,7 +1582,6 @@
         "value": {
           "readOnly": true,
           "type": "array",
-          "description": "The usage data.",
           "items": {
             "$ref": "#/definitions/Usage"
           }
@@ -1865,121 +1857,6 @@
         }
       }
     },
-    "ContainerGroupSku": {
-      "description": "The container group SKU.",
-      "type": "string",
-      "enum": [
-        "Standard",
-        "Dedicated"
-      ],
-      "x-ms-enum": {
-        "name": "ContainerGroupSku",
-        "modelAsString": true
-      }
-    },
-    "EncryptionProperties": {
-      "description": "The container group encryption properties.",
-      "type": "object",
-      "properties": {
-        "vaultBaseUrl": {
-          "description": "The keyvault base url.",
-          "type": "string"
-        },
-        "keyName": {
-          "description": "The encryption key name.",
-          "type": "string"
-        },
-        "keyVersion": {
-          "description": "The encryption key version.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "vaultBaseUrl",
-        "keyName",
-        "keyVersion"
-      ]
-    },
-    "InitContainerDefinition": {
-      "description": "The init container definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name for the init container.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "The properties for the init container.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InitContainerPropertiesDefinition"
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ]
-    },
-    "InitContainerPropertiesDefinition": {
-      "description": "The init container definition properties.",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "The image of the init container.",
-          "type": "string"
-        },
-        "command": {
-          "description": "The command to execute within the init container in exec form.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "environmentVariables": {
-          "description": "The environment variables to set in the init container.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVariable"
-          }
-        },
-        "instanceView": {
-          "description": "The instance view of the init container. Only valid in response.",
-          "readOnly": true,
-          "type": "object",
-          "properties": {
-            "restartCount": {
-              "readOnly": true,
-              "type": "integer",
-              "description": "The number of times that the init container has been restarted."
-            },
-            "currentState": {
-              "readOnly": true,
-              "description": "The current state of the init container.",
-              "$ref": "#/definitions/ContainerState"
-            },
-            "previousState": {
-              "readOnly": true,
-              "description": "The previous state of the init container.",
-              "$ref": "#/definitions/ContainerState"
-            },
-            "events": {
-              "readOnly": true,
-              "description": "The events of the init container.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Event"
-              }
-            }
-          }
-        },
-        "volumeMounts": {
-          "description": "The volume mounts available to the init container.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VolumeMount"
-          }
-        }
-      }
-    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -1987,7 +1864,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
-      "description": "An error response from the Container Instance service."
+      "description": "An error response from the Batch service."
     },
     "CloudErrorBody": {
       "x-ms-external": true,
@@ -2012,7 +1889,7 @@
           "description": "A list of additional details about the error."
         }
       },
-      "description": "An error response from the Container Instance service."
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
@@ -2046,6 +1923,22 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubnetNameParameter": {
+      "name": "subnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
     "ContainerGroupNameParameter": {
