@@ -1932,6 +1932,33 @@
         }
       }
     },
+    "/devices/{device_id}/modules/{module_name}/components": {
+      "get": {
+        "operationId": "Devices_ListModuleComponents",
+        "summary": "List the components present in a module",
+        "x-ms-examples": {
+          "List module components": {
+            "$ref": "./examples/devices_modules_components_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NamedEntityCollection"
+            }
+          }
+        }
+      }
+    },
     "/devices/{device_id}/modules/{module_name}/components/{component_name}/commands/{command_name}": {
       "get": {
         "operationId": "Devices_GetModuleComponentCommandHistory",
