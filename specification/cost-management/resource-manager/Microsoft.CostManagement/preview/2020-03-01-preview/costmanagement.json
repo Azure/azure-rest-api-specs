@@ -162,8 +162,11 @@
         "operationId": "CostAllocationRules_CreateOrUpdate",
         "description": "Create/Update cost allocation rule for billing account or enterprise enrollment.",
         "x-ms-examples": {
-          "CostAllocationRules": {
+          "CostAllocationRulesCreateResourceGroup": {
             "$ref": "./examples/CostAllocationRuleCreate.json"
+          },
+          "CostAllocationRulesCreateTag": {
+            "$ref": "./examples/CostAllocationRuleCreateTag.json"
           }
         },
         "parameters": [
@@ -497,7 +500,7 @@
         },
         "percentage": {
           "description" : "Percentage of source cost to allocate to this resource",
-          "type": "integer"
+          "type": "number"
         }
       }
     },
