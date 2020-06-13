@@ -36,9 +36,9 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules": {
       "get": {
         "tags": [
-          "CostAllocation"
+          "CostAllocationRules"
         ],
-        "operationId": "CostAllocation_List",
+        "operationId": "Rules_list",
         "description": "Get the list of all cost allocation rules",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -75,9 +75,9 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/checknameavailability": {
       "post": {
         "tags": [
-          "CostAllocation"
+          "CostAllocationRules"
         ],
-        "operationId": "CostAllocation_CheckNameAvailability",
+        "operationId": "Rule_CheckNameAvailability",
         "description": "Check if a given rule name is in use",
         "x-ms-examples": {
           "CostAllocationRuleCheckNameAvailability": {
@@ -117,13 +117,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/{ruleName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/{ruleId}": {
       "get": {
         "tags": [
-          "CostAllocation"
+          "CostAllocationRules"
         ],
-        "operationId": "CostAllocation_Get",
-        "description": "Get the cost allocation rule by rule name.",
+        "operationId": "Get_Rule",
+        "description": "Gets the cost allocation rule by rule name.",
         "x-ms-examples": {
           "CostAllocationRules": {
             "$ref": "./examples/CostAllocationRuleGet.json"
@@ -144,7 +144,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
             }
           },
           "default": {
@@ -157,16 +157,13 @@
       },
       "put": {
         "tags": [
-          "CostAllocation"
+          "CostAllocationRules"
         ],
-        "operationId": "CostAllocation_CreateOrUpdate",
-        "description": "Create/Update cost allocation rule for billing account or enterprise enrollment.",
+        "operationId": "Create_Rule",
+        "description": "Create/Update cost allocation rule for billing account.",
         "x-ms-examples": {
-          "CreateWithResourceGroup": {
-            "$ref": "./examples/CostAllocationRuleCreateResourceGroup.json"
-          },
-          "CreateWithTag": {
-            "$ref": "./examples/CostAllocationRuleCreateTag.json"
+          "CostAllocationRules": {
+            "$ref": "./examples/CostAllocationRuleCreate.json"
           }
         },
         "parameters": [
@@ -193,7 +190,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
             }
           },
           "default": {
@@ -206,10 +203,10 @@
       },
       "delete": {
         "tags": [
-          "CostAllocation"
+          "CostAllocationRules"
         ],
-        "operationId": "CostAllocation_Delete",
-        "description": "Delete cost allocation rule for billing account or enterprise enrollment.",
+        "operationId": "Delete_Rule",
+        "description": "Delete cost allocation rule for billing account.",
         "x-ms-examples": {
           "CostAllocationRules": {
             "$ref": "./examples/CostAllocationRuleDelete.json"
@@ -268,7 +265,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
+            "$ref": "#/definitions/CostAllocationRuleDefinition"
           }
         },
         "nextLink": {
@@ -360,58 +357,9 @@
       },
       "x-ms-azure-resource": true
     },
-    "CostAllocationRuleDefinitionResponse": {
-      "type": "object",
-      "description": "The cost allocation rule model definition response",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Rule id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Rule name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "properties": {
-          "$ref": "#/definitions/CostAllocationRulePropertiesResponse",
-          "description": "Cost allocation rule properties"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "CostAllocationRuleProperties": {
       "type": "object",
       "description": "The properties of a cost allocation rule",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "details"
-      ],
-      "properties": {
-        "description": {
-          "description": "Description of a cost allocation rule.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/InputRuleStatus",
-          "description": "Status of the rule"
-        },
-        "details": {
-          "description": "Resource information for the cost allocation rule",
-          "$ref": "#/definitions/CostAllocationRuleDetails"
-        }
-      }
-    },
-    "CostAllocationRulePropertiesResponse": {
-      "type": "object",
-      "description": "The properties of a cost allocation rule response",
       "additionalProperties": false,
       "required": [
         "status",
@@ -445,18 +393,6 @@
         "modelAsString": true
       }
     },
-    "InputRuleStatus": {
-      "type": "string",
-      "description": "Current status of the rule",
-      "enum": [
-        "NotActive",
-        "Active"
-      ],
-      "x-ms-enum": {
-        "name": "RuleStatus",
-        "modelAsString": true
-      }
-    },
     "CostAllocationRuleDetails": {
       "type": "object",
       "description": "Resource details of the cost allocation rule",
@@ -465,7 +401,7 @@
           "description": "Source resources for cost allocation",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SourceCostAllocationResource"
+            "$ref": "#/definitions/CostAllocationResource"
           }
         },
         "targetResources": {
@@ -477,7 +413,7 @@
         }
       }
     },
-    "SourceCostAllocationResource": {
+    "CostAllocationResource": {
       "type": "object",
       "description": "Source resources for cost allocation",
       "required": [
@@ -558,7 +494,7 @@
         },
         "percentage": {
           "description" : "Percentage of source cost to allocate to this resource",
-          "type": "number"
+          "type": "integer"
         }
       }
     },
@@ -585,13 +521,13 @@
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
-      "description": "Billing Account ID or Enterprise Enrollment",
+      "description": "Billing Account ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ruleNameParameter": {
-      "name": "ruleName",
+      "name": "ruleId",
       "in": "path",
       "description": "Cost allocation rule name",
       "required": true,
