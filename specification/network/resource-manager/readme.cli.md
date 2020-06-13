@@ -46,7 +46,11 @@ cli:
     - name: /Subnets/get/Get subnet
     - name: /Subnets/get/List subnets
     - name: /Subnets/post/Unprepare Network Policies
+      comment: "Azure Error: UnauthorizedOperation"
+      disabled: true
     - name: /Subnets/post/Prepare Network Policies
+      comment: "Azure Error: UnauthorizedOperation"
+      disabled: true
     - name: /Subnets/delete/Delete subnet
     - split: loadbalancers
     - name: /VirtualNetworks/put/Create virtual network
@@ -142,6 +146,8 @@ cli:
     - name: /IpGroups/get/ListByResourceGroup_IpGroups
     - name: /IpGroups/get/List_IpGroups
     - name: /IpGroups/patch/Update_IpGroups
+      comment: The requested resource does not support http method 'PATCH'.
+      disabled: true
     - name: /IpGroups/delete/Delete_IpGroups
     - split: bastionhosts
     - name: /VirtualNetworks/put/Create virtual network
@@ -328,27 +334,50 @@ cli:
     - name: /PrivateLinkServices/delete/Delete private link service
     - split: expressroutecircuits
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit
+    - name: /ExpressRouteCircuitPeerings/put/Create ExpressRouteCircuit Peerings
     - name: /ExpressRouteCircuits/put/Create ExpressRouteCircuit on ExpressRoutePort
+      disabled: true
+      comment: Disabled as express route port can't be created
     - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Peering Traffic Stats
     - name: /ExpressRouteCircuits/get/Get ExpressRoute Circuit Traffic Stats
     - name: /ExpressRouteCircuits/get/Get ExpressRouteCircuit
     - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a resource group
     - name: /ExpressRouteCircuits/get/List ExpressRouteCircuits in a subscription
     - name: /ExpressRouteCircuits/post/List Route Table Summary
+      disabled: true
+      comment: Disabled - not sure what device path should be
     - name: /ExpressRouteCircuits/post/List Route Tables
+      disabled: true
+      comment: Disabled - not sure what device path should be
     - name: /ExpressRouteCircuits/post/List ARP Table
+      disabled: true
+      comment: Disabled - not sure what device path should be
     - name: /ExpressRouteCircuits/patch/Update Express Route Circuit Tags
     - name: /ExpressRouteCircuits/delete/Delete ExpressRouteCircuit
       disabled: true
       comment: "Azure Error: AnotherOperationInProgress"
     - split: expressrouteports
     - name: /ExpressRoutePorts/put/ExpressRoutePortCreate
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - name: /ExpressRoutePorts/put/ExpressRoutePortUpdateLink
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - name: /ExpressRoutePorts/get/ExpressRoutePortGet
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - name: /ExpressRoutePorts/get/ExpressRoutePortListByResourceGroup
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - name: /ExpressRoutePorts/get/ExpressRoutePortList
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - name: /ExpressRoutePorts/patch/ExpressRoutePortUpdateTags
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - name: /ExpressRoutePorts/delete/ExpressRoutePortDelete
+      disabled: true
+      comment: The resource type could not be found in the namespace 'Microsoft.Network' for api version '2020-04-01'
     - split: networkwatchers
     - name: /NetworkWatchers/put/Create network watcher
     - name: /NetworkWatchers/get/Get network watcher
