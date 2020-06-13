@@ -39,8 +39,9 @@
           "CostAllocation",
           "Rules"
         ],
+        "summary": "List",
         "operationId": "CostAllocationRules_List",
-        "description": "Get the list of all cost allocation rules",
+        "description": "Get the list of all cost allocation rules for a billing account or enterprise enrollment.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -61,7 +62,7 @@
           "200": {
             "description": "List of cost allocation rules for the billing account.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRule_list"
+              "$ref": "#/definitions/CostAllocationRuleList"
             }
           },
           "default": {
@@ -78,6 +79,7 @@
         "tags": [
           "CostAllocationRules"
         ],
+        "summary": "Check Name Availability",
         "operationId": "CostAllocationRules_CheckNameAvailability",
         "description": "Check if a given rule name is in use",
         "x-ms-examples": {
@@ -124,7 +126,7 @@
           "CostAllocationRules"
         ],
         "operationId": "CostAllocationRules_Get",
-        "description": "Get the cost allocation rule by rule name.",
+        "description": "Get a cost allocation rule by rule name and billing account or enterprise enrollment.",
         "x-ms-examples": {
           "CostAllocationRules": {
             "$ref": "./examples/CostAllocationRuleGet.json"
@@ -161,7 +163,7 @@
           "CostAllocationRules"
         ],
         "operationId": "CostAllocationRules_CreateOrUpdate",
-        "description": "Create/Update cost allocation rule for billing account or enterprise enrollment.",
+        "description": "Create/Update a rule to allocate cost between different resources within a billing account or enterprise enrollment.",
         "x-ms-examples": {
           "CostAllocationRulesCreateResourceGroup": {
             "$ref": "./examples/CostAllocationRuleCreate.json"
@@ -260,7 +262,7 @@
         }
       }
     },
-    "CostAllocationRule_list": {
+    "CostAllocationRuleList": {
       "type": "object",
       "description": "Result of listing cost allocation rules. It contains a list of available rules in the billing account provided.",
       "properties": {
@@ -298,7 +300,7 @@
       "description": "The cost allocation rule check name availability response",
       "properties": {
         "nameAvailable": {
-          "$ref": "#/definitions/NameAvailable",
+          "type": "boolean",
           "description": "Whether this rule name is available"
         },
         "reason": {
@@ -311,24 +313,13 @@
         }
       }
     },
-    "NameAvailable": {
-      "type": "string",
-      "description": "Whether this rule name is available",
-      "enum": [
-        "True",
-        "False"
-      ],
-      "x-ms-enum": {
-        "name": "NameAvailable",
-        "modelAsString": true
-      }
-    },
     "Reason": {
       "type": "string",
       "description": "The reason this name is not available",
       "enum": [
         "Invalid",
-        "AlreadyExists"
+        "AlreadyExists",
+        "Valid"
       ],
       "x-ms-enum": {
         "name": "Reason",
@@ -342,20 +333,46 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "Rule id"
+          "description": "Azure Resource Manager Id for the rule. This is a read ony value."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "Rule name"
+          "description": "Name of the rule. This is a read only value."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource type"
+          "description": "Resource type of the rule. This is a read only value of Microsoft.CostManagement/CostAllocationRule."
         },
         "properties": {
           "$ref": "#/definitions/CostAllocationRuleProperties",
+          "description": "Cost allocation rule properties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CostAllocationRuleDefinitionRequest": {
+      "type": "object",
+      "description": "The cost allocation rule model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure Resource Manager Id for the rule. This is a read ony value."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the rule. This is a read only value."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type of the rule. This is a read only value of Microsoft.CostManagement/CostAllocationRule."
+        },
+        "properties": {
+          "$ref": "#/definitions/CostAllocationRulePropertiesRequest",
           "description": "Cost allocation rule properties"
         }
       },
@@ -384,6 +401,29 @@
         }
       }
     },
+    "CostAllocationRulePropertiesRequest": {
+      "type": "object",
+      "description": "The properties of a cost allocation rule",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "details"
+      ],
+      "properties": {
+        "description": {
+          "description": "Description of a cost allocation rule.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/InputRuleStatus",
+          "description": "Status of the rule"
+        },
+        "details": {
+          "description": "Resource information for the cost allocation rule",
+          "$ref": "#/definitions/CostAllocationRuleDetails"
+        }
+      }
+    },
     "RuleStatus": {
       "type": "string",
       "description": "Current status of the rule",
@@ -391,6 +431,18 @@
         "NotActive",
         "Active",
         "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "RuleStatus",
+        "modelAsString": true
+      }
+    },
+    "InputRuleStatus": {
+      "type": "string",
+      "description": "Current status of the rule",
+      "enum": [
+        "NotActive",
+        "Active"
       ],
       "x-ms-enum": {
         "name": "RuleStatus",
