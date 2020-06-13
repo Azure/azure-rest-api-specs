@@ -38,7 +38,7 @@
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "Rules_list",
+        "operationId": "CostAllocationRules_List",
         "description": "Get the list of all cost allocation rules",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -77,7 +77,7 @@
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "Rule_CheckNameAvailability",
+        "operationId": "CostAllocationRules_CheckNameAvailability",
         "description": "Check if a given rule name is in use",
         "x-ms-examples": {
           "CostAllocationRuleCheckNameAvailability": {
@@ -117,13 +117,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/{ruleId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/costAllocationRules/{ruleName}": {
       "get": {
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "Get_Rule",
-        "description": "Gets the cost allocation rule by rule name.",
+        "operationId": "CostAllocationRules_Get",
+        "description": "Get the cost allocation rule by rule name.",
         "x-ms-examples": {
           "CostAllocationRules": {
             "$ref": "./examples/CostAllocationRuleGet.json"
@@ -159,8 +159,8 @@
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "Create_Rule",
-        "description": "Create/Update cost allocation rule for billing account.",
+        "operationId": "CostAllocationRules_CreateOrUpdate",
+        "description": "Create/Update cost allocation rule for billing account or enterprise enrollment.",
         "x-ms-examples": {
           "CostAllocationRules": {
             "$ref": "./examples/CostAllocationRuleCreate.json"
@@ -205,8 +205,8 @@
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "Delete_Rule",
-        "description": "Delete cost allocation rule for billing account.",
+        "operationId": "CostAllocationRules_Delete",
+        "description": "Delete cost allocation rule for billing account or enterprise enrollment.",
         "x-ms-examples": {
           "CostAllocationRules": {
             "$ref": "./examples/CostAllocationRuleDelete.json"
@@ -401,7 +401,7 @@
           "description": "Source resources for cost allocation",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CostAllocationResource"
+            "$ref": "#/definitions/SourceCostAllocationResource"
           }
         },
         "targetResources": {
@@ -413,7 +413,7 @@
         }
       }
     },
-    "CostAllocationResource": {
+    "SourceCostAllocationResource": {
       "type": "object",
       "description": "Source resources for cost allocation",
       "required": [
@@ -441,32 +441,35 @@
       }
     },
     "TargetCostAllocationResource": {
+      "type": "object",
       "description": "Target resources for cost allocation",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CostAllocationResource"
+      "required": [
+        "resourceType",
+        "name",
+        "values",
+        "policyType"
+      ],
+      "properties": {
+        "resourceType": {
+          "description": "Type of resources contained in this cost allocation rule",
+          "$ref": "#/definitions/CostAllocationResourceType"
         },
-        {
-          "type": "object",
+        "name": {
+          "description": "If resource type is dimension, this must be either ResourceGroupName or SubscriptionId. If resource type is tag, this must be a valid Azure tag",
+          "type": "string"
+        },
+        "values": {
           "description": "Target resources for cost allocation",
-          "required": [
-            "policyType"
-          ],
-          "properties": {
-            "values": {
-              "description": "Target resources for cost allocation",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CostAllocationProportion"
-              }
-            },
-            "policyType": {
-              "description": "Method of cost allocation for the rule",
-              "$ref": "#/definitions/CostAllocationPolicyType"
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostAllocationProportion"
           }
+        },
+        "policyType": {
+          "description": "Method of cost allocation for the rule",
+          "$ref": "#/definitions/CostAllocationPolicyType"
         }
-      ]
+      }
     },
     "CostAllocationResourceType": {
       "type": "string",
@@ -521,13 +524,13 @@
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
-      "description": "Billing Account ID",
+      "description": "Billing Account ID or Enrollment Number",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ruleNameParameter": {
-      "name": "ruleId",
+      "name": "ruleName",
       "in": "path",
       "description": "Cost allocation rule name",
       "required": true,
