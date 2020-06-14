@@ -38,7 +38,7 @@
         "tags": [
           "CostAllocationRules"
         ],
-        "operationId": "List",
+        "operationId": "CostAllocationRules_List",
         "description": "Get the list of all cost allocation rules for a billing account or enterprise enrollment.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -380,17 +380,12 @@
       "description": "The properties of a cost allocation rule",
       "additionalProperties": false,
       "required": [
-        "status",
         "details"
       ],
       "properties": {
         "description": {
           "description": "Description of a cost allocation rule.",
           "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/RuleStatus",
-          "description": "Status of the rule"
         },
         "details": {
           "description": "Resource information for the cost allocation rule",
@@ -398,28 +393,45 @@
         }
       }
     },
-    "CostAllocationRulePropertiesRequest": {
-      "type": "object",
-      "description": "The properties of a cost allocation rule",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "details"
-      ],
-      "properties": {
-        "description": {
-          "description": "Description of a cost allocation rule.",
-          "type": "string"
+    "CostAllocationRulePropertiesResponse": {
+      "description": "The properties of a cost allocation rule response",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationRuleProperties"
         },
-        "status": {
-          "$ref": "#/definitions/InputRuleStatus",
-          "description": "Status of the rule"
-        },
-        "details": {
-          "description": "Resource information for the cost allocation rule",
-          "$ref": "#/definitions/CostAllocationRuleDetails"
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "$ref": "#/definitions/RuleStatus",
+              "description": "Status of the rule"
+            }
+          },
+          "required": [
+            "status"
+          ]
         }
-      }
+      ]
+    },
+    "CostAllocationRulePropertiesRequest": {
+      "description": "The properties of a cost allocation rule response",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationRuleProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "$ref": "#/definitions/InputRuleStatus",
+              "description": "Status of the rule"
+            }
+          },
+          "required": [
+            "status"
+          ]
+        }
+      ]
     },
     "RuleStatus": {
       "type": "string",
@@ -451,7 +463,7 @@
       "description": "Resource details of the cost allocation rule",
       "properties": {
         "sourceResources": {
-          "description": "Source resources for cost allocation",
+          "description": "Source resources for cost allocation. Only one type of resource can be used for sourcing cost per rule, so this list can contain no more than one element.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SourceCostAllocationResource"
@@ -459,20 +471,19 @@
         },
         "targetResources": {
           "type": "array",
-          "description": "Target resources for cost allocation",
+          "description": "Target resources for cost allocation. Only one type of resource can be used for targeting cost per rule, so this list can contain no more than one element.",
           "items": {
             "$ref": "#/definitions/TargetCostAllocationResource"
           }
         }
       }
     },
-    "SourceCostAllocationResource": {
+    "CostAllocationResource": {
       "type": "object",
-      "description": "Source resources for cost allocation",
+      "description": "Common values for resources for cost allocation",
       "required": [
         "resourceType",
-        "name",
-        "values"
+        "name"
       ],
       "properties": {
         "resourceType": {
@@ -482,47 +493,60 @@
         "name": {
           "description": "If resource type is dimension, this must be either ResourceGroupName or SubscriptionId. If resource type is tag, this must be a valid Azure tag",
           "type": "string"
-        },
-        "values": {
-          "description": "Source Resources for cost allocation",
-          "type": "array",
-          "items": {
-            "description": "Source resource for cost allocation",
-            "type": "string"
-          }
         }
       }
     },
-    "TargetCostAllocationResource": {
-      "type": "object",
-      "description": "Target resources for cost allocation",
-      "required": [
-        "resourceType",
-        "name",
-        "values",
-        "policyType"
-      ],
-      "properties": {
-        "resourceType": {
-          "description": "Type of resources contained in this cost allocation rule",
-          "$ref": "#/definitions/CostAllocationResourceType"
+    "SourceCostAllocationResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationResource"
         },
-        "name": {
-          "description": "If resource type is dimension, this must be either ResourceGroupName or SubscriptionId. If resource type is tag, this must be a valid Azure tag",
-          "type": "string"
-        },
-        "values": {
-          "description": "Target resources for cost allocation",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CostAllocationProportion"
-          }
-        },
-        "policyType": {
-          "description": "Method of cost allocation for the rule",
-          "$ref": "#/definitions/CostAllocationPolicyType"
+        {
+          "type": "object",
+          "properties": {
+            "values": {
+              "description": "Source Resources for cost allocation. This list cannot contain more than 25 values.",
+              "type": "array",
+              "items": {
+                "description": "Source resource for cost allocation",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "values"
+          ]
         }
-      }
+      ],
+      "description": "Source resources for cost allocation"
+    },
+    "TargetCostAllocationResource": {
+      "description": "Target resources for cost allocation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "values": {
+              "description": "Target resources for cost allocation. This list cannot contain more than 25 values.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CostAllocationProportion"
+              }
+            },
+            "policyType": {
+              "description": "Method of cost allocation for the rule",
+              "$ref": "#/definitions/CostAllocationPolicyType"
+            }
+          },
+          "required": [
+            "values",
+            "policyType"
+          ]
+        }
+      ]
     },
     "CostAllocationResourceType": {
       "type": "string",
@@ -549,7 +573,7 @@
           "type": "string"
         },
         "percentage": {
-          "description" : "Percentage of source cost to allocate to this resource",
+          "description" : "Percentage of source cost to allocate to this resource. This value can be specified to two decimal places and the total percentage of all resources in this rule must sum to 100.00.",
           "type": "number"
         }
       }
@@ -585,7 +609,7 @@
     "ruleNameParameter": {
       "name": "ruleName",
       "in": "path",
-      "description": "Cost allocation rule name",
+      "description": "Cost allocation rule name. The name cannot include spaces or any non alphanumeric characters other than '_' and '-'. The max length is 260 characters.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

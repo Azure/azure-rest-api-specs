@@ -50,14 +50,47 @@
             "type": "Microsoft.CostManagement/costAllocationRules",
             "properties": {
               "description": "This is a second test Rule",
-              "status": "NotActive",
+              "status": "Active",
               "details": {
                 "sourceResources" : [
                   {
                     "resourceType": "Dimension",
-                    "name": "ResourceGroupName",
+                    "name": "SubscriptionId",
                     "values": [
-                      "sampleRG2"
+                      "2A002F2D-536F-4D7C-90DA-3D0BAE879B0E"
+                    ]
+                  }
+                ],
+                "targetResources" : [
+                  {
+                    "resourceType": "Tag",
+                    "policyType": "FixedProportion",
+                    "name": "category",
+                    "values": [
+                      {
+                        "name": "devops",
+                        "percentage": 100
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule3",
+            "name": "testRule3",
+            "type": "Microsoft.CostManagement/costAllocationRules",
+            "properties": {
+              "description": "This is a third test Rule",
+              "status": "Active",
+              "details": {
+                "sourceResources" : [
+                  {
+                    "resourceType": "Tag",
+                    "name": "category",
+                    "values": [
+                      "devops"
                     ]
                   }
                 ],
@@ -68,12 +101,12 @@
                     "name": "ResourceGroupName",
                     "values": [
                       {
-                        "name": "destination2RG",
-                        "percentage": 50
+                        "name": "ResourceGroup",
+                        "percentage": 55.55
                       },
                       {
-                        "name": "destination2RG2",
-                        "percentage": 50
+                        "name": "ResourceGroupSecond",
+                        "percentage": 44.45
                       }
                     ]
                   }
