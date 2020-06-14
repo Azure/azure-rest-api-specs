@@ -419,7 +419,33 @@
           ],
           "x-ms-enum": {
             "name": "DataIngestionStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "RespectQuota",
+                "description": "Ingestion enabled following daily cap quota reset, or subscription enablement."
+              },
+              {
+                "value": "ForceOn",
+                "description": "Ingestion started following service setting change."
+              },
+              {
+                "value": "ForceOff",
+                "description": "Ingestion stopped following service setting change."
+              },
+              {
+                "value": "OverQuota",
+                "description": "Reached daily cap quota, ingestion stopped."
+              },
+              {
+                "value": "SubscriptionSuspended",
+                "description": "Ingestion stopped following suspended subscription."
+              },
+              {
+                "value": "ApproachingQuota",
+                "description": "80% of daily cap quota reached."
+              }
+            ]
           }
         }
       }
