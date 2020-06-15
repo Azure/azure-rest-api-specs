@@ -18,6 +18,154 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "ListPrivateLinkResources"
+        ],
+        "summary": "Returns the list of private link resources that need to be created for Backup and SiteRecovery",
+        "operationId": "PrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "List PrivateLinkResources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "GetPrivateLinkResources"
+        ],
+        "summary": "Returns a specified private link resource that need to be created for Backup and SiteRecovery",
+        "operationId": "PrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get PrivateLinkResource": {
+            "$ref": "./examples/GetPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "RecoveryServices"
+        ],
+        "summary": "API to check for resource name availability.\r\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\r\nor if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago",
+        "operationId": "RecoveryServices_CheckNameAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Contains information about Resource type and Resource name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Availability status of Resource Name when no resource with same name, type and subscription exists, nor has been deleted within last 24 hours": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "Availability status of Resource Name when resource with same name, type and subscription exists": {
+            "$ref": "./examples/CheckNameAvailability_NotAvailable.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "tags": [
@@ -123,7 +271,7 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName":"value"
+          "itemName": "value"
         },
         "x-ms-examples": {
           "List of Recovery Services Resources in ResourceGroup": {
@@ -256,7 +404,7 @@
           }
         },
         "deprecated": false,
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Delete Recovery Services Vault": {
             "$ref": "./examples/DeleteVault.json"
           }
@@ -461,6 +609,35 @@
     }
   },
   "definitions": {
+    "CheckNameAvailabilityParameters": {
+      "description": "Resource Name availability input parameters - Resource type and resource name",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name for which availability needs to be checked",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "ClientDiscoveryDisplay": {
       "description": "Localized display information of an operation.",
       "type": "object",
@@ -529,7 +706,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of available operationss.",
+          "description": "List of available operations.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
@@ -621,7 +798,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties":{
+      "properties": {
         "location": {
           "description": "Resource location.",
           "type": "string"
@@ -643,7 +820,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties":{
+      "properties": {
         "location": {
           "description": "Resource location.",
           "type": "string"
@@ -705,7 +882,7 @@
           "readOnly": true
         },
         "triggerType": {
-          "description": "The way the vault upgradation was triggered.",
+          "description": "The way the vault upgrade was triggered.",
           "enum": [
             "UserTriggered",
             "ForcedUpgrade"
@@ -738,6 +915,9 @@
         }
       ],
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityData"
+        },
         "properties": {
           "$ref": "#/definitions/VaultProperties"
         },
@@ -827,6 +1007,230 @@
         },
         "upgradeDetails": {
           "$ref": "#/definitions/UpgradeDetails"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionVaultProperties"
+          },
+          "description": "List of private endpoint connection.",
+          "readOnly": true
+        },
+        "privateEndpointStateForBackup": {
+          "description": "Private endpoint state for backup.",
+          "enum": [
+            "None",
+            "Enabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VaultPrivateEndpointState",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointStateForSiteRecovery": {
+          "description": "Private endpoint state for site recovery.",
+          "enum": [
+            "None",
+            "Enabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VaultPrivateEndpointState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "IdentityData": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionVaultProperties": {
+      "description": "Information to be stored in Vault properties as an element of privateEndpointConnections List.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Format of id subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.[Service]/{resource}/{resourceName}/privateEndpointConnections/{connectionName}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnection"
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "Private Endpoint Connection Response Properties.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Gets or sets provisioning state of the private endpoint connection.",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "Pending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "The Private Endpoint network resource that is linked to the Private Endpoint connection.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets id.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "Gets or sets private link service connection state.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Gets or sets the status.",
+          "readOnly": true,
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Gets or sets description.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "Gets or sets actions required.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResources": {
+      "description": "Class which represent the stamps associated with the vault.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of private link resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next chunk of the response",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "Information of the private link resource.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified identifier of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "e.g. Microsoft.RecoveryServices/vaults/privateLinkResources",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of the private link resource.",
+      "properties": {
+        "groupId": {
+          "description": "e.g. f9ad6492-33d4-4690-9999-6bfd52a0d081 (Backup) or f9ad6492-33d4-4690-9999-6bfd52a0d082 (SiteRecovery)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "requiredMembers": {
+          "description": "[backup-ecs1, backup-prot1, backup-prot1b, backup-prot1c, backup-id1]",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource Private link DNS zone name.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

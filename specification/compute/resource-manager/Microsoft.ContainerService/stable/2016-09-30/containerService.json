@@ -111,7 +111,7 @@
           "ContainerService"
         ],
         "operationId": "ContainerServices_Get",
-        "summary":"Gets the properties of the specified container service.",
+        "summary": "Gets the properties of the specified container service.",
         "description": "Gets the properties of the specified container service in the specified subscription and resource group. The operation returns the properties including state, orchestrator, number of masters and agents, and FQDNs of masters and agents. ",
         "parameters": [
           {
@@ -265,7 +265,9 @@
         }
       },
       "description": "Properties to configure a custom container service cluster.",
-      "required": ["orchestrator"]
+      "required": [
+        "orchestrator"
+      ]
     },
     "ContainerServiceServicePrincipalProfile": {
       "properties": {
@@ -302,7 +304,9 @@
         }
       },
       "description": "Profile for the container service orchestrator.",
-      "required": [ "orchestratorType" ]
+      "required": [
+        "orchestratorType"
+      ]
     },
     "ContainerServiceMasterProfile": {
       "properties": {
@@ -324,7 +328,7 @@
         "fqdn": {
           "readOnly": true,
           "type": "string",
-          "description": "FDQN for the master."
+          "description": "FQDN for the master."
         }
       },
       "required": [
@@ -410,7 +414,7 @@
         "fqdn": {
           "readOnly": true,
           "type": "string",
-          "description": "FDQN for the agent pool."
+          "description": "FQDN for the agent pool."
         }
       },
       "required": [
@@ -469,7 +473,9 @@
         }
       },
       "description": "SSH configuration for Linux-based VMs running on Azure.",
-      "required": ["publicKeys"]
+      "required": [
+        "publicKeys"
+      ]
     },
     "ContainerServiceSshPublicKey": {
       "properties": {
@@ -490,7 +496,9 @@
           "description": "Profile for the container service VM diagnostic agent."
         }
       },
-      "required": ["vmDiagnostics"]
+      "required": [
+        "vmDiagnostics"
+      ]
     },
     "ContainerServiceVMDiagnostics": {
       "properties": {
@@ -528,7 +536,7 @@
         "value": {
           "type": "array",
           "items": {
-             "$ref": "#/definitions/ContainerService"
+            "$ref": "#/definitions/ContainerService"
           },
           "description": "the list of container services."
         },

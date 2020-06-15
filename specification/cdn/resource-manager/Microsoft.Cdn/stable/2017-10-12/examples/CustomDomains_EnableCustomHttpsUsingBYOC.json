@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2017-10-12",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "customDomainName": "www-someDomain-net",
+    "customHttpsParameters": {
+      "certificateSource": "AzureKeyVault",
+      "protocolType": "ServerNameIndication",
+      "certificateSourceParameters": {
+        "OData.type": "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters",
+        "subscriptionId": "subid",
+        "resourceGroupName": "RG",
+        "vaultName": "kv",
+        "secretName": "secret1",
+        "secretVersion": "00000000-0000-0000-0000-000000000000",
+        "updateRule": "NoAction",
+        "deleteRule": "NoAction"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  }
+}

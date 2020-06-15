@@ -2,17 +2,17 @@
   "parameters": {
     "api-version": "2018-12-01-preview",
     "managementGroupId": "MyMgId",
-    "parameters":{
+    "parameters": {
       "type": "Usage",
       "timeframe": "Custom",
       "timePeriod": {
-        "from": "2018-10-01T00:00:00.000Z",
-        "to": "2018-12-31T00:00:00.000Z"
+        "from": "2018-11-01T00:00:00.000Z",
+        "to": "2019-01-31T00:00:00.000Z"
       },
       "dataset": {
-        "granularity": "Daily",        
-        "filter":{
-          "or":[
+        "granularity": "Daily",
+        "filter": {
+          "or": [
             {
               "dimension": {
                 "name": "SubscriptionName",
@@ -35,10 +35,10 @@
                 ]
               }
             }
-          ]                     
+          ]
         }
-      } 
-    }   
+      }
+    }
   },
   "responses": {
     "200": {
@@ -54,17 +54,9 @@
                 {
                   "name": "PreTaxCost",
                   "type": "Number"
-                },              
+                },
                 {
                   "name": "UsageDate",
-                  "type": "Number"
-                },
-                {
-                  "name": "ConfidenceLevelsLower",
-                  "type": "String"
-                },
-                {
-                  "name": "ConfidenceLevelsUpper",
                   "type": "Number"
                 },
                 {
@@ -74,45 +66,18 @@
               ],
               "rows": [
                 [
-                  19.545363672276512,                  
-                  20181031,
-                  0,
-                  0,
+                  19.545363672276512,
+                  20181131,
                   "USD"
                 ],
                 [
-                  173.41979241290323,                  
-                  20181031,
-                  0,
-                  0,
-                  "USD"
-                ],
-                [
-                  20.359416562625452,                  
-                  20181031,
-                  0,
-                  0,
-                  "USD"
-                ],
-                [
-                  19.545363672276512,                  
+                  173.41979241290323,
                   20181231,
-                  9.4567,
-                  37.9876,
                   "USD"
                 ],
                 [
-                  173.41979241290323,                  
-                  20181231,
-                  78.9887,
-                  316.87654,
-                  "USD"
-                ],
-                [
-                  20.359416562625452,                  
-                  20181231,
-                  10.4567,
-                  40.564433,
+                  20.359416562625452,
+                  20190131,
                   "USD"
                 ]
               ]

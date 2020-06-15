@@ -359,7 +359,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
-            "description": "The the number of rows to take."
+            "description": "The number of rows to take."
           },
           {
             "name": "$inlinecount",
@@ -837,7 +837,7 @@
           "description": "Gets or sets the id."
         }
       },
-      "description": "Definition of the agent registration infomration type."
+      "description": "Definition of the agent registration information type."
     },
     "AgentRegistrationKeys": {
       "properties": {
@@ -938,10 +938,10 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the dsc nodeconfiguration."
+          "description": "Gets or sets the name of the dsc node configuration."
         }
       },
-      "description": "The dsc nodeconfiguration property associated with the entity."
+      "description": "The dsc node configuration property associated with the entity."
     },
     "AgentRegistrationRegenerateKeyParameter": {
       "properties": {
@@ -971,11 +971,12 @@
         },
         "properties": {
           "properties": {
-          "nodeConfiguration": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
-            "description": "Gets or sets the configuration of the node."
-          }}
+            "nodeConfiguration": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
+              "description": "Gets or sets the configuration of the node."
+            }
+          }
         }
       },
       "description": "The parameters supplied to the update dsc node operation."

@@ -7,7 +7,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-commerce"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-commerce"
+  output-folder: "$(typescript-sdks-folder)/sdk/commerce/arm-commerce"
+  clear-output-folder: true
   payload-flattening-threshold: 2
   generate-metadata: true
 ```

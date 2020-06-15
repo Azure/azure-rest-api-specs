@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "resourceUri": "resourceUri",
+    "api-version": "2015-01-01",
+    "$expand": "recommendedactions"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current",
+        "name": "current",
+        "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+        "location": "southcentralus",
+        "properties": {
+          "availabilityState": "Available",
+          "summary": "There aren't any known Azure platform problems affecting this virtual machine",
+          "detailedStatus": "",
+          "reasonType": "",
+          "occuredTime": "2018-11-30T23:37:44Z",
+          "reasonChronicity": "Persistent",
+          "reportedTime": "2018-12-04T01:19:11.955255Z",
+          "recommendedActions": [
+            {
+              "action": "To start this virtual machine, open the resource blade and click Start",
+              "actionUrl": "<#ResourceBlade>",
+              "actionUrlText": "resource blade"
+            },
+            {
+              "action": "If you are experiencing problems you believe are caused by Azure, contact support",
+              "actionUrl": "<#SupportCase>",
+              "actionUrlText": "contact support"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

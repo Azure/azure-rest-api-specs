@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.devspaces
   package-name: azure-mgmt-devspaces
-  package-version: 0.1.0
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-devspaces/azure/mgmt/devspaces
+  output-folder: $(python-sdks-folder)/aks/azure-mgmt-devspaces/azure/mgmt/devspaces
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-devspaces
+  output-folder: $(python-sdks-folder)/aks/azure-mgmt-devspaces
 ```

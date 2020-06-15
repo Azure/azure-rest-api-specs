@@ -1497,6 +1497,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
         }
       }
     },
@@ -1535,6 +1539,94 @@
         }
       }
     },
+    "NetworkRuleSet": {
+      "description": "The network rule set for a container registry.",
+      "required": [
+        "defaultAction"
+      ],
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "description": "The default action of allow or deny when no other rules match.",
+          "default": "Allow",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkRules": {
+          "description": "The virtual network rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "ipRules": {
+          "description": "The IP ACL rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "Virtual network rule.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action of virtual network rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+          "type": "string",
+          "x-ms-client-name": "VirtualNetworkResourceId"
+        }
+      }
+    },
+    "IPRule": {
+      "description": "IP rule with specific IP or IP range in CIDR format.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action of IP ACL rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.",
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange"
+        }
+      }
+    },
     "RegistryUpdateParameters": {
       "description": "The parameters for updating a container registry.",
       "type": "object",
@@ -1568,6 +1660,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The parameters of a storage account for the container registry. Only applicable to Classic SKU. If specified, the storage account must be in the same physical location as the container registry."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
         }
       }
     },
@@ -1874,7 +1970,9 @@
             "enum": [
               "push",
               "delete",
-              "quarantine"
+              "quarantine",
+              "chart_push",
+              "chart_delete"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1969,7 +2067,9 @@
             "enum": [
               "push",
               "delete",
-              "quarantine"
+              "quarantine",
+              "chart_push",
+              "chart_delete"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -2036,7 +2136,9 @@
             "enum": [
               "push",
               "delete",
-              "quarantine"
+              "quarantine",
+              "chart_push",
+              "chart_delete"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -2256,6 +2358,14 @@
         "tag": {
           "description": "The tag name.",
           "type": "string"
+        },
+        "name": {
+          "description": "The name of the artifact.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the artifact.",
+          "type": "string"
         }
       }
     },
@@ -2370,6 +2480,7 @@
       "description": "The name of the resource group to which the container registry belongs.",
       "required": true,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "RegistryNameParameter": {

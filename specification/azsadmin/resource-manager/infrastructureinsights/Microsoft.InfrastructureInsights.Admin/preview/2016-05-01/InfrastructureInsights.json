@@ -1,353 +1,353 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2016-05-01",
-        "title": "InfrastructureInsightsManagementClient",
-        "description": "The Admin Infrastructure Insights Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/providers/Microsoft.InfrastructureInsights.Admin/operations": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns a list of support REST operations.": {
-                        "$ref": "./examples/Operations/List.json"
-                    }
-                },
-                "description": "Returns a list of support REST operations.",
-                "tags": [
-                    "InfrastructureInsights"
-                ],
-                "operationId": "Operations_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OperationList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-05-01",
+    "title": "InfrastructureInsightsManagementClient",
+    "description": "The Admin Infrastructure Insights Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.InfrastructureInsights.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of support REST operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Returns a list of support REST operations.",
+        "tags": [
+          "InfrastructureInsights"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Dictionary": {
+      "description": "Dictionary of string key-value pairs.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "BaseHealth": {
+      "description": "Models the base properties for health resource.",
+      "properties": {
+        "alertSummary": {
+          "description": "Alert summary.",
+          "$ref": "#/definitions/AlertSummary"
+        },
+        "healthState": {
+          "description": "Health state.",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Namespace of the health resource.",
+          "type": "string"
+        },
+        "registrationId": {
+          "description": "Registration ID.",
+          "type": "string"
+        },
+        "routePrefix": {
+          "description": "Route prefix.",
+          "type": "string"
         }
+      }
     },
-    "definitions": {
-        "Dictionary": {
-            "description": "Dictionary of string key-value pairs.",
-            "type": "object",
-            "additionalProperties": {
-                "type": "string"
-            }
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource"
         },
-        "BaseHealth": {
-            "description": "Models the base properties for health resource.",
-            "properties": {
-                "alertSummary": {
-                    "description": "Alert summary.",
-                    "$ref": "#/definitions/AlertSummary"
-                },
-                "healthState": {
-                    "description": "Health state.",
-                    "type": "string"
-                },
-                "namespace": {
-                    "description": "Namespace of the health resource.",
-                    "type": "string"
-                },
-                "registrationId": {
-                    "description": "Registration ID.",
-                    "type": "string"
-                },
-                "routePrefix": {
-                    "description": "Route prefix.",
-                    "type": "string"
-                }
-            }
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
         },
-        "Resource": {
-            "description": "The core properties of ARM resources",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Fully qualified resource Id for the resource"
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The name of the resource"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The type of the resource."
-                }
-            },
-            "x-ms-azure-resource": true
-        },
-        "TrackedResource": {
-            "description": "The resource model definition for a ARM tracked top level resource",
-            "properties": {
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "x-ms-mutability": [
-                        "read",
-                        "create",
-                        "update"
-                    ],
-                    "description": "Resource tags."
-                },
-                "location": {
-                    "type": "string",
-                    "x-ms-mutability": [
-                        "read",
-                        "create"
-                    ],
-                    "description": "The Azure Region where the resource lives"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
-        },
-        "AlertSummary": {
-            "description": "Summary of the alerts.",
-            "properties": {
-                "criticalAlertCount": {
-                    "description": "The number of critical alerts for the service.",
-                    "type": "integer"
-                },
-                "warningAlertCount": {
-                    "description": "The number of warning alerts for the service.",
-                    "type": "integer"
-                }
-            }
-        },
-        "Metrics": {
-            "description": "Metrics for a source.",
-            "properties": {
-                "name": {
-                    "description": "Name of the usage metric.",
-                    "type": "string"
-                },
-                "maCounterName": {
-                    "description": "Name of the counter.",
-                    "type": "string"
-                },
-                "observedTimestamp": {
-                    "description": "Time counter was observed.",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "sourceType": {
-                    "description": "Type of the source.",
-                    "type": "string"
-                },
-                "sourceName": {
-                    "description": "Name of the source.",
-                    "$ref": "#/definitions/MetricsSourceType"
-                },
-                "unit": {
-                    "description": "Unit for the metric.",
-                    "$ref": "#/definitions/MetricsUnit"
-                },
-                "value": {
-                    "description": "Name of the usage metric.",
-                    "type": "number",
-                    "format": "double"
-                }
-            }
-        },
-        "MetricsSourceType": {
-            "type": "string",
-            "description": "The origin of the metric.",
-            "enum": [
-                "PhysicalNode",
-                "VirtualMachine",
-                "ResourceProvider"
-            ],
-            "x-ms-enum": {
-                "name": "MetricsSourceType",
-                "modelAsString": true
-            }
-        },
-        "MetricsUnit": {
-            "type": "string",
-            "description": "The unit of the metric.",
-            "enum": [
-                "One",
-                "Percentage",
-                "B",
-                "KB",
-                "MB",
-                "GB",
-                "TB"
-            ],
-            "x-ms-enum": {
-                "name": "MetricsUnit",
-                "modelAsString": true
-            }
-        },
-        "UsageMetrics": {
-            "description": "Metrics of resource usage.",
-            "properties": {
-                "name": {
-                    "description": "Name of the usage metric.",
-                    "type": "string"
-                },
-                "metricsValue": {
-                    "description": "List of usage metrics.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Metrics"
-                    }
-                }
-            }
-        },
-        "Operation": {
-            "description": "Describes the supported REST operation.",
-            "properties": {
-                "name": {
-                    "description": "The name of the operation performed on the object. The name should match the action name that appears in RBAC or the event service.",
-                    "type": "string"
-                },
-                "display": {
-                    "description": "Contains the localized display information for this particular operation or action.",
-                    "$ref": "#/definitions/Display"
-                }
-            }
-        },
-        "Display": {
-            "description": "Contains the localized display information for this particular operation / action.",
-            "properties": {
-                "provider": {
-                    "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
-                    "type": "string"
-                },
-                "resource": {
-                    "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
-                    "type": "string"
-                },
-                "operation": {
-                    "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
-                    "type": "string"
-                }
-            }
-        },
-        "OperationList": {
-            "description": "List of Operations",
-            "properties": {
-                "value": {
-                    "description": "Array of operations",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to the next page of operations.",
-                    "type": "string"
-                }
-            }
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
         }
+      },
+      "x-ms-azure-resource": true
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-            "required": true,
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client API Version.",
-            "required": true,
-            "type": "string",
-            "default": "2016-05-01"
-        },
-        "FilterParameter": {
-            "description": "OData filter parameter.",
-            "name": "$filter",
-            "in": "query",
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "LocationParameter": {
-            "description": "Name of the region",
-            "name": "location",
-            "type": "string",
-            "required": true,
-            "in": "path",
-            "x-ms-parameter-location": "method"
-        },
-        "ResourceGroupParameter": {
-            "description": "The name of the resource group.",
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "ResourceRegistrationIdParameter": {
-            "description": "Resource registration ID.",
-            "name": "resourceRegistrationId",
-            "type": "string",
-            "required": true,
-            "in": "path",
-            "x-ms-parameter-location": "method"
-        },
-        "ServiceRegistrationIdParameter": {
-            "description": "Service registration ID.",
-            "name": "serviceRegistrationId",
-            "type": "string",
-            "required": true,
-            "in": "path",
-            "x-ms-parameter-location": "method"
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
         }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "security": [
+      },
+      "allOf": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+          "$ref": "#/definitions/Resource"
         }
-    ]
+      ]
+    },
+    "AlertSummary": {
+      "description": "Summary of the alerts.",
+      "properties": {
+        "criticalAlertCount": {
+          "description": "The number of critical alerts for the service.",
+          "type": "integer"
+        },
+        "warningAlertCount": {
+          "description": "The number of warning alerts for the service.",
+          "type": "integer"
+        }
+      }
+    },
+    "Metrics": {
+      "description": "Metrics for a source.",
+      "properties": {
+        "name": {
+          "description": "Name of the usage metric.",
+          "type": "string"
+        },
+        "maCounterName": {
+          "description": "Name of the counter.",
+          "type": "string"
+        },
+        "observedTimestamp": {
+          "description": "Time counter was observed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceType": {
+          "description": "Type of the source.",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "Name of the source.",
+          "$ref": "#/definitions/MetricsSourceType"
+        },
+        "unit": {
+          "description": "Unit for the metric.",
+          "$ref": "#/definitions/MetricsUnit"
+        },
+        "value": {
+          "description": "Name of the usage metric.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "MetricsSourceType": {
+      "type": "string",
+      "description": "The origin of the metric.",
+      "enum": [
+        "PhysicalNode",
+        "VirtualMachine",
+        "ResourceProvider"
+      ],
+      "x-ms-enum": {
+        "name": "MetricsSourceType",
+        "modelAsString": true
+      }
+    },
+    "MetricsUnit": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "One",
+        "Percentage",
+        "B",
+        "KB",
+        "MB",
+        "GB",
+        "TB"
+      ],
+      "x-ms-enum": {
+        "name": "MetricsUnit",
+        "modelAsString": true
+      }
+    },
+    "UsageMetrics": {
+      "description": "Metrics of resource usage.",
+      "properties": {
+        "name": {
+          "description": "Name of the usage metric.",
+          "type": "string"
+        },
+        "metricsValue": {
+          "description": "List of usage metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metrics"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation performed on the object. The name should match the action name that appears in RBAC or the event service.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation or action.",
+          "$ref": "#/definitions/Display"
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of Operations",
+      "properties": {
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2016-05-01"
+    },
+    "FilterParameter": {
+      "description": "OData filter parameter.",
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "description": "Name of the region",
+      "name": "location",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupParameter": {
+      "description": "The name of the resource group.",
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceRegistrationIdParameter": {
+      "description": "Resource registration ID.",
+      "name": "resourceRegistrationId",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceRegistrationIdParameter": {
+      "description": "Service registration ID.",
+      "name": "serviceRegistrationId",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

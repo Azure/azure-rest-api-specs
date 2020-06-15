@@ -56,7 +56,9 @@
           "type": "string"
         }
       },
-      "required": [ "resultType" ],
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlDbTaskOutputMigrationLevel": {
@@ -380,7 +382,7 @@
         {
           "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
         }
-       ],
+      ],
       "properties": {
         "migrationId": {
           "type": "string",
@@ -448,7 +450,6 @@
           "$ref": "./MigrationValidation.json#/definitions/SchemaComparisonValidationResult",
           "readOnly": true
         },
-
         "queryAnalysisValidationResult": {
           "description": "Results of some of the query execution result between source and target database",
           "$ref": "./MigrationValidation.json#/definitions/QueryAnalysisValidationResult",

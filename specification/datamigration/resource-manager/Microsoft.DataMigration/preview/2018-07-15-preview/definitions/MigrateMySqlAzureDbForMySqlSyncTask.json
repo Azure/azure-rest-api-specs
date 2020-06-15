@@ -54,10 +54,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel": {
@@ -333,6 +335,27 @@
         "targetDatabaseName": {
           "type": "string",
           "description": "Name of target database. Note: Target database will be truncated before starting migration."
+        },
+        "migrationSetting": {
+          "type": "object",
+          "description": "Migration settings which tune the migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sourceSetting": {
+          "type": "object",
+          "description": "Source settings to tune source endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetSetting": {
+          "type": "object",
+          "description": "Target settings to tune target endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

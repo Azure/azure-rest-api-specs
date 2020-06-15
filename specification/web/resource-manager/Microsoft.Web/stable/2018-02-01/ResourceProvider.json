@@ -578,6 +578,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validateContainerSettings": {
+      "post": {
+        "summary": "Validate if the container settings are correct.",
+        "description": "Validate if the container settings are correct.",
+        "operationId": "ValidateContainerSettings",
+        "parameters": [
+          {
+            "name": "validateContainerSettingsRequest",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateContainerSettingsRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
       "post": {
         "summary": "Validate whether a resource can be moved.",
@@ -913,7 +954,7 @@
       }
     },
     "ResourceNameAvailability": {
-      "description": "Information regarding availbility of a resource name.",
+      "description": "Information regarding availability of a resource name.",
       "type": "object",
       "properties": {
         "nameAvailable": {
@@ -1046,6 +1087,36 @@
         }
       }
     },
+    "ValidateContainerSettingsRequest": {
+      "description": "Container settings validation request context",
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "description": "Base URL of the container registry",
+          "type": "string"
+        },
+        "username": {
+          "description": "Username for to access the container registry",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password for to access the container registry",
+          "type": "string"
+        },
+        "repository": {
+          "description": "Repository name (image name)",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Image tag",
+          "type": "string"
+        },
+        "platform": {
+          "description": "Platform (windows or linux)",
+          "type": "string"
+        }
+      }
+    },
     "ValidateProperties": {
       "description": "App properties used for validation.",
       "type": "object",
@@ -1068,7 +1139,7 @@
         },
         "capacity": {
           "format": "int32",
-          "description": "Target capacity of the App Service plan (number of VM's).",
+          "description": "Target capacity of the App Service plan (number of VMs).",
           "minimum": 1,
           "type": "integer"
         },

@@ -1,0 +1,41 @@
+{
+  "title": "Summarize Query",
+  "description": "A summarizing query on resources.",
+  "parameters": {
+    "api-version": "2019-04-01",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "project id, name, type, location | summarize by location"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "resultTruncated": "false",
+        "data": {
+          "columns": [
+            {
+              "name": "location",
+              "type": "string"
+            }
+          ],
+          "rows": [
+            [
+              "centralus"
+            ],
+            [
+              "eastus"
+            ],
+            [
+              "westus"
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

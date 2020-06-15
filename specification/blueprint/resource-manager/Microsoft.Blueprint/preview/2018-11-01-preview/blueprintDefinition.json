@@ -1,0 +1,1348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BlueprintClient",
+    "description": "Azure Blueprints Client provides access to blueprint definitions, assignments, and artifacts, and related blueprint operations.",
+    "version": "2018-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}": {
+      "put": {
+        "tags": [
+          "Blueprint"
+        ],
+        "operationId": "Blueprints_CreateOrUpdate",
+        "description": "Create or update a blueprint definition.",
+        "x-ms-examples": {
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_Create.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_Create.json"
+          },
+          "ResourceGroupWithTags": {
+            "$ref": "./examples/ResourceGroupWithTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "name": "blueprint",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Blueprint"
+            },
+            "description": "Blueprint definition."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- blueprint definition saved.",
+            "schema": {
+              "$ref": "#/definitions/Blueprint"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Blueprint"
+        ],
+        "operationId": "Blueprints_Get",
+        "description": "Get a blueprint definition.",
+        "x-ms-examples": {
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_Get.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- blueprint definition retrieved.",
+            "schema": {
+              "$ref": "#/definitions/Blueprint"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Blueprint"
+        ],
+        "operationId": "Blueprints_Delete",
+        "description": "Delete a blueprint definition.",
+        "x-ms-examples": {
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_Delete.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- blueprint definition deleted.",
+            "schema": {
+              "$ref": "#/definitions/Blueprint"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints": {
+      "get": {
+        "tags": [
+          "Blueprint"
+        ],
+        "operationId": "Blueprints_List",
+        "description": "List blueprint definitions.",
+        "x-ms-examples": {
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_List.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- retrieved list of blueprint definitions.",
+            "schema": {
+              "$ref": "#/definitions/BlueprintList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts/{artifactName}": {
+      "put": {
+        "tags": [
+          "Artifact"
+        ],
+        "operationId": "Artifacts_CreateOrUpdate",
+        "description": "Create or update blueprint artifact.",
+        "x-ms-examples": {
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Create.json"
+          },
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Create.json"
+          },
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Create.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Create.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Create.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          },
+          {
+            "name": "artifact",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            },
+            "description": "Blueprint artifact to create or update."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- blueprint artifact created/updated.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "operationId": "Artifacts_Get",
+        "description": "Get a blueprint artifact.",
+        "x-ms-examples": {
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Get.json"
+          },
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Get.json"
+          },
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Get.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Get.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Get.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- blueprint artifact retrieved.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artifact"
+        ],
+        "operationId": "Artifacts_Delete",
+        "description": "Delete a blueprint artifact.",
+        "x-ms-examples": {
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Delete.json"
+          },
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Delete.json"
+          },
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Delete.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Delete.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Delete.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- blueprint artifact deleted.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "operationId": "Artifacts_List",
+        "description": "List artifacts for a given blueprint definition.",
+        "x-ms-examples": {
+          "Sub-ArtifactList": {
+            "$ref": "./examples/subscriptionBPDef/Artifact_List.json"
+          },
+          "MG-ArtifactList": {
+            "$ref": "./examples/managementGroupBPDef/Artifact_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- blueprint artifacts retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}": {
+      "put": {
+        "tags": [
+          "PublishedBlueprint"
+        ],
+        "operationId": "PublishedBlueprints_Create",
+        "description": "Publish a new version of the blueprint definition with the latest artifacts. Published blueprint definitions are immutable.",
+        "x-ms-examples": {
+          "PublishedSubscriptionBlueprint_Publish": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Publish.json"
+          },
+          "PublishedManagementGroupBlueprint_Publish": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_Publish.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishedBlueprintVersionIdParameter"
+          },
+          {
+            "name": "publishedBlueprint",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PublishedBlueprint"
+            },
+            "description": "Published Blueprint to create or update."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- blueprint definition published.",
+            "schema": {
+              "$ref": "#/definitions/PublishedBlueprint"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PublishedBlueprint"
+        ],
+        "operationId": "PublishedBlueprints_Get",
+        "description": "Get a published version of a blueprint definition.",
+        "x-ms-examples": {
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Get.json"
+          },
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishedBlueprintVersionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- published blueprint definition retrieved.",
+            "schema": {
+              "$ref": "#/definitions/PublishedBlueprint"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PublishedBlueprint"
+        ],
+        "operationId": "PublishedBlueprints_Delete",
+        "description": "Delete a published version of a blueprint definition.",
+        "x-ms-examples": {
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Delete.json"
+          },
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishedBlueprintVersionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- published version of blueprint definition deleted.",
+            "schema": {
+              "$ref": "#/definitions/PublishedBlueprint"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions": {
+      "get": {
+        "tags": [
+          "PublishedBlueprint"
+        ],
+        "operationId": "PublishedBlueprints_List",
+        "description": "List published versions of given blueprint definition.",
+        "x-ms-examples": {
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_List.json"
+          },
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- all published versions of blueprint definition retrieved.",
+            "schema": {
+              "$ref": "#/definitions/PublishedBlueprintList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts/{artifactName}": {
+      "get": {
+        "tags": [
+          "PublishedArtifact"
+        ],
+        "operationId": "PublishedArtifacts_Get",
+        "description": "Get an artifact for a published blueprint definition.",
+        "x-ms-examples": {
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/SealedARMTemplateArtifact_Get.json"
+          },
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/SealedPolicyAssignmentArtifact_Get.json"
+          },
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/SealedRoleAssignmentArtifact_Get.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/SealedARMTemplateArtifact_Get.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/SealedPolicyAssignmentArtifact_Get.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/SealedRoleAssignmentArtifact_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishedBlueprintVersionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- artifact of published blueprint definition retrieved.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts": {
+      "get": {
+        "tags": [
+          "PublishedArtifact"
+        ],
+        "operationId": "PublishedArtifacts_List",
+        "description": "List artifacts for a version of a published blueprint definition.",
+        "x-ms-examples": {
+          "Sub-ArtifactList": {
+            "$ref": "./examples/subscriptionBPDef/SealedArtifact_List.json"
+          },
+          "MG-ArtifactList": {
+            "$ref": "./examples/managementGroupBPDef/SealedArtifact_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/BlueprintNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishedBlueprintVersionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- artifacts of a version of published blueprint definition retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Blueprint": {
+      "type": "object",
+      "description": "Represents a Blueprint definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for blueprint definition.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BlueprintProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "Artifact": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Represents a blueprint artifact.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of blueprint artifact.",
+          "enum": [
+            "template",
+            "roleAssignment",
+            "policyAssignment"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "PublishedBlueprint": {
+      "type": "object",
+      "description": "Represents a published blueprint.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for published blueprint.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PublishedBlueprintProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "BlueprintList": {
+      "type": "object",
+      "title": "BlueprintList",
+      "description": "List of blueprint definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of blueprint definitions.",
+          "items": {
+            "$ref": "#/definitions/Blueprint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "PublishedBlueprintList": {
+      "type": "object",
+      "title": "BlueprintList",
+      "description": "List of published blueprint definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of published blueprint definitions.",
+          "items": {
+            "$ref": "#/definitions/PublishedBlueprint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ArtifactList": {
+      "type": "object",
+      "description": "List of blueprint artifacts.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of blueprint artifacts.",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "Results of the request to list operations.",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        }
+      }
+    },
+    "ResourceProviderOperation": {
+      "description": "Supported operations of this resource provider.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Operation name, in format of {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Resource provider: Microsoft Blueprint.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of this operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "SharedBlueprintProperties": {
+      "description": "Shared Schema for both blueprintProperties and publishedBlueprintProperties.",
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "status": {
+          "description": "Status of the blueprint. This field is readonly.",
+          "readOnly": true,
+          "$ref": "#/definitions/BlueprintStatus"
+        },
+        "targetScope": {
+          "type": "string",
+          "description": "The scope where this blueprint definition can be assigned.",
+          "enum": [
+            "subscription",
+            "managementGroup"
+          ],
+          "x-ms-enum": {
+            "name": "BlueprintTargetScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "subscription",
+                "description": "The blueprint targets a subscription during blueprint assignment."
+              },
+              {
+                "value": "managementGroup",
+                "description": "The blueprint targets a management group during blueprint assignment. This is reserved for future use."
+              }
+            ]
+          }
+        },
+        "parameters": {
+          "description": "Parameters required by this blueprint definition.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Named collection of parameter metadata.",
+            "$ref": "#/definitions/ParameterDefinition"
+          }
+        },
+        "resourceGroups": {
+          "description": "Resource group placeholders defined by this blueprint definition.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Named collection for resourceGroupDefinition.",
+            "$ref": "#/definitions/ResourceGroupDefinition"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourcePropertiesBase"
+        }
+      ]
+    },
+    "BlueprintProperties": {
+      "description": "Schema for blueprint definition properties.",
+      "type": "object",
+      "x-ms-external": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
+      ],
+      "properties": {
+        "versions": {
+          "type": "object",
+          "description": "Published versions of this blueprint definition."
+        },
+        "layout": {
+          "type": "object",
+          "description": "Layout view of the blueprint definition for UI reference."
+        }
+      },
+      "required": [
+        "targetScope"
+      ]
+    },
+    "PublishedBlueprintProperties": {
+      "description": "Schema for published blueprint definition properties.",
+      "type": "object",
+      "x-ms-external": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
+      ],
+      "properties": {
+        "blueprintName": {
+          "description": "Name of the published blueprint definition.",
+          "type": "string"
+        },
+        "changeNotes": {
+          "description": "Version-specific change notes.",
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    },
+    "BlueprintStatus": {
+      "description": "The status of the blueprint. This field is readonly.",
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
+      ]
+    },
+    "TemplateArtifactProperties": {
+      "type": "object",
+      "description": "Properties of a Resource Manager template blueprint artifact.",
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "The Resource Manager template blueprint artifact body."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Resource Manager template blueprint artifact parameter values.",
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourcePropertiesBase"
+        },
+        {
+          "$ref": "#/definitions/ArtifactPropertiesBase"
+        }
+      ],
+      "required": [
+        "template",
+        "parameters"
+      ]
+    },
+    "TemplateArtifact": {
+      "description": "Blueprint artifact that deploys a Resource Manager template.",
+      "type": "object",
+      "x-ms-discriminator-value": "template",
+      "properties": {
+        "properties": {
+          "description": "Properties for a Resource Manager template blueprint artifact.",
+          "$ref": "#/definitions/TemplateArtifactProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Artifact"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleAssignmentArtifactProperties": {
+      "type": "object",
+      "description": "Properties of a Role assignment blueprint artifact.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Azure resource ID of the RoleDefinition."
+        },
+        "principalIds": {
+          "description": "Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourcePropertiesBase"
+        },
+        {
+          "$ref": "#/definitions/ArtifactPropertiesBase"
+        }
+      ],
+      "required": [
+        "roleDefinitionId",
+        "principalIds"
+      ]
+    },
+    "RoleAssignmentArtifact": {
+      "description": "Blueprint artifact that applies a Role assignment.",
+      "type": "object",
+      "x-ms-discriminator-value": "roleAssignment",
+      "properties": {
+        "properties": {
+          "description": "Properties for a Role assignment blueprint artifact.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleAssignmentArtifactProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Artifact"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "PolicyAssignmentArtifactProperties": {
+      "type": "object",
+      "description": "Properties of a Policy assignment blueprint artifact.",
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "Azure resource ID of the policy definition."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameter values for the policy definition.",
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Name of the resource group placeholder to which the policy will be assigned."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourcePropertiesBase"
+        },
+        {
+          "$ref": "#/definitions/ArtifactPropertiesBase"
+        }
+      ],
+      "required": [
+        "policyDefinitionId",
+        "parameters"
+      ]
+    },
+    "PolicyAssignmentArtifact": {
+      "description": "Blueprint artifact that applies a Policy assignment.",
+      "type": "object",
+      "x-ms-discriminator-value": "policyAssignment",
+      "properties": {
+        "properties": {
+          "description": "properties for policyAssignment Artifact",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyAssignmentArtifactProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Artifact"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "ParameterValue": {
+      "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Parameter value. Any valid JSON value is allowed including objects, arrays, strings, numbers and booleans."
+        },
+        "reference": {
+          "type": "object",
+          "description": "Parameter value as reference type.",
+          "$ref": "#/definitions/SecretValueReference"
+        }
+      }
+    },
+    "SecretValueReference": {
+      "description": "Reference to a Key Vault secret.",
+      "type": "object",
+      "properties": {
+        "keyVault": {
+          "description": "Specifies the reference to a given Azure Key Vault.",
+          "$ref": "#/definitions/keyVaultReference"
+        },
+        "secretName": {
+          "description": "Name of the secret.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version of the secret to use. If left blank, the latest version of the secret is used.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "keyVault",
+        "secretName"
+      ]
+    },
+    "keyVaultReference": {
+      "description": "Specifies the link to a Key Vault.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Azure resource ID of the Key Vault.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ParameterDefinition": {
+      "description": "Represent a parameter with constrains and metadata.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Allowed data types for Resource Manager template parameters.",
+          "enum": [
+            "string",
+            "array",
+            "bool",
+            "int",
+            "object",
+            "secureObject",
+            "secureString"
+          ],
+          "x-ms-enum": {
+            "name": "TemplateParameterType",
+            "modelAsString": true
+          }
+        },
+        "metadata": {
+          "description": "User-friendly properties for this parameter.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ParameterDefinitionMetadata"
+        },
+        "defaultValue": {
+          "description": "Default Value for this parameter."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Array of allowed values for this parameter.",
+          "items": {
+            "description": "Allowed value."
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ResourceGroupDefinition": {
+      "description": "Represents an Azure resource group in a blueprint definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this resourceGroup. Leave empty if the resource group name will be specified during the blueprint assignment."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of this resourceGroup. Leave empty if the resource group location will be specified during the blueprint assignment."
+        },
+        "metadata": {
+          "description": "User-friendly properties for this resource group.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ParameterDefinitionMetadata"
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Artifacts which need to be deployed before this resource group.",
+          "items": {
+            "type": "string",
+            "description": "Name of peer artifact."
+          }
+        },
+        "tags": {
+          "description": "Tags to be assigned to this resource group.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ParameterDefinitionMetadata": {
+      "type": "object",
+      "description": "User-friendly properties for this parameter.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "DisplayName of this parameter/resourceGroup.",
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this parameter/resourceGroup.",
+          "maxLength": 500
+        },
+        "strongType": {
+          "type": "string",
+          "description": "StrongType for UI to render rich experience during blueprint assignment. Supported strong types are resourceType, principalId and location.",
+          "maxLength": 64
+        }
+      }
+    },
+    "AzureResourceBase": {
+      "description": "Common properties for all Azure resources.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "String Id used to locate any resource on Azure."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of this resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of this resource."
+        }
+      }
+    },
+    "ArtifactPropertiesBase": {
+      "description": "Common properties shared by different artifacts.",
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "dependsOn": {
+          "type": "array",
+          "description": "Artifacts which need to be deployed before the specified artifact.",
+          "items": {
+            "type": "string",
+            "description": "ID of peer artifact."
+          }
+        }
+      }
+    },
+    "BlueprintResourcePropertiesBase": {
+      "description": "Shared properties between all blueprint resources.",
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "One-liner string explain this resource.",
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string",
+          "description": "Multi-line explain this resource.",
+          "maxLength": 500
+        }
+      }
+    },
+    "BlueprintResourceStatusBase": {
+      "description": "Shared status properties between all blueprint resources.",
+      "type": "object",
+      "properties": {
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Creation time of this blueprint definition."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last modified time of this blueprint definition."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "resourceScope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "BlueprintNameParameter": {
+      "name": "blueprintName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the blueprint definition."
+    },
+    "ArtifactNameParameter": {
+      "name": "artifactName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the blueprint artifact."
+    },
+    "PublishedBlueprintVersionIdParameter": {
+      "name": "versionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Version of the published blueprint definition."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Client API Version."
+    }
+  }
+}

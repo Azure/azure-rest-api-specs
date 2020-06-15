@@ -7,6 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-devtestlabs"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-devtestlabs"
+  output-folder: "$(typescript-sdks-folder)/sdk/devtestlabs/arm-devtestlabs"
+  clear-output-folder: true
   generate-metadata: true
 ```

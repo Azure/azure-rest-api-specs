@@ -23,8 +23,8 @@ batch:
 These settings apply only when `--tag=package-2018-09 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2015-09-15/$(namespace)
+``` yaml $(tag) == 'package-2018-09' && $(go)
+output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2018-09-15/$(namespace)
 ```
 
 ### Tag: package-2016-05 and go

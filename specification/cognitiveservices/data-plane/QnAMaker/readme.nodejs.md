@@ -6,7 +6,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-qnamaker
-  output-folder: $(node-sdks-folder)/lib/services/cognitiveServices/qnamaker
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesQnAMaker
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true

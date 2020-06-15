@@ -71,7 +71,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -153,7 +153,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -235,7 +235,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -314,7 +314,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -387,7 +387,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -441,12 +441,57 @@
         "x-ms-examples": {
           "SubscriptionQuery": {
             "$ref": "./examples/SubscriptionQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "SubscriptionQueryUsage": {
-            "$ref": "./examples/SubscriptionQueryUsage.json"
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
-          "SubscriptionQueryForecast": {
-            "$ref": "./examples/SubscriptionQueryForecast.json"
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageBySubscription",
+        "description": "Forecast the usage data for subscriptionId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionForecast": {
+            "$ref": "./examples/SubscriptionForecast.json"
           }
         },
         "parameters": [
@@ -520,7 +565,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -574,12 +619,60 @@
         "x-ms-examples": {
           "ResourceGroupQuery": {
             "$ref": "./examples/ResourceGroupQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "ResourceGroupQueryGroupingUsage": {
-            "$ref": "./examples/ResourceGroupQueryUsage.json"
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
-          "ResourceGroupQueryGroupingForecast": {
-            "$ref": "./examples/ResourceGroupQueryForecast.json"
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByResourceGroup",
+        "description": "Forecast the usage data for subscriptionId and resource group.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupForecast": {
+            "$ref": "./examples/ResourceGroupForecast.json"
           }
         },
         "parameters": [
@@ -634,16 +727,61 @@
         "x-ms-examples": {
           "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
-          },          
-          "BillingAccountQueryUsage": {
-            "$ref": "./examples/BillingAccountQueryUsage.json"
           },
           "BillingAccountQueryGroupingUsage": {
-            "$ref": "./examples/BillingAccountQueryGroupingUsage.json"
+            "$ref": "./examples/BillingAccountQueryGrouping.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "BillingAccountQueryForecast": {
-            "$ref": "./examples/BillingAccountQueryForecast.json"
-          }         
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByBillingAccount",
+        "description": "Forecast the usage data for billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "BillingAccountForecast": {
+            "$ref": "./examples/BillingAccountForecast.json"
+          }
         },
         "parameters": [
           {
@@ -694,16 +832,64 @@
         "x-ms-examples": {
           "EnrollmentAccountQuery": {
             "$ref": "./examples/EnrollmentAccountQuery.json"
-          },          
-          "EnrollmentAccountQueryUsage": {
-            "$ref": "./examples/EnrollmentAccountQueryUsage.json"
           },
           "EnrollmentAccountQueryGroupingUsage": {
-            "$ref": "./examples/EnrollmentAccountQueryGroupingUsage.json"
+            "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "EnrollmentAccountQueryForecast": {
-            "$ref": "./examples/EnrollmentAccountQueryForecast.json"
-          }          
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByEnrollmentAccount",
+        "description": "Forecast the usage data for an enrollment account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountForecast": {
+            "$ref": "./examples/EnrollmentAccountForecast.json"
+          }
         },
         "parameters": [
           {
@@ -757,16 +943,64 @@
         "x-ms-examples": {
           "DepartmentQuery": {
             "$ref": "./examples/DepartmentQuery.json"
-          },          
-          "DepartmentQueryUsage": {
-            "$ref": "./examples/DepartmentQueryUsage.json"
           },
           "DepartmentQueryGroupingUsage": {
-            "$ref": "./examples/DepartmentQueryGroupingUsage.json"
+            "$ref": "./examples/DepartmentQueryGrouping.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "DepartmentQueryForecast": {
-            "$ref": "./examples/DepartmentQueryForecast.json"
-          }          
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByDepartment",
+        "description": "Forecast the usage data for department.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DepartmentForecast": {
+            "$ref": "./examples/DepartmentForecast.json"
+          }
         },
         "parameters": [
           {
@@ -813,22 +1047,67 @@
           "Query"
         ],
         "operationId": "Query_UsageByManagmentGroup",
-        "description": "Lists the usage data for managment group.",
+        "description": "Lists the usage data for management group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
           "ManagementGroupQuery": {
             "$ref": "./examples/ManagementGroupQuery.json"
-          },          
-          "ManagementGroupQueryUsage": {
-            "$ref": "./examples/ManagementGroupQueryUsage.json"
           },
           "ManagementGroupQueryGroupingUsage": {
-            "$ref": "./examples/ManagementGroupQueryGroupingUsage.json"
+            "$ref": "./examples/ManagementGroupQueryGrouping.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
-          "ManagementGroupQueryForecast": {
-            "$ref": "./examples/ManagementGroupQueryForecast.json"
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByManagmentGroup",
+        "description": "Lists the usage data for management group.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ManagementGroupForecast": {
+            "$ref": "./examples/ManagementGroupForecast.json"
           }
         },
         "parameters": [
@@ -961,9 +1240,7 @@
           "description": "The type of the report. Usage represents actual usage, forecast represents forecasted data and UsageAndForecast represents both usage and forecasted data. Actual usage and forecasted data can be differentiated based on dates.",
           "type": "string",
           "enum": [
-            "Usage",
-            "Forecast",
-            "UsageAndForecast"
+            "Usage"
           ],
           "x-ms-enum": {
             "name": "ReportType",
@@ -1038,7 +1315,7 @@
         },
         "aggregation": {
           "type": "object",
-          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
           "additionalProperties": {
             "type": "object",
             "$ref": "#/definitions/ReportConfigAggregation"
@@ -1046,7 +1323,7 @@
           "maxItems": 2
         },
         "grouping": {
-          "description": "Array of group by expression to use in the report. Report can have upto 2 group by clauses.",
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigGrouping"
@@ -1144,7 +1421,7 @@
       "description": "The filter expression to be used in the report.",
       "properties": {
         "and": {
-          "description": "The logical \"AND\" expression. Must have atleast 2 items.",
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
@@ -1152,7 +1429,7 @@
           "minItems": 2
         },
         "or": {
-          "description": "The logical \"OR\" expression. Must have atleast 2 items.",
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
@@ -1189,7 +1466,7 @@
       "description": "The comparison expression to be used in the report.",
       "properties": {
         "name": {
-          "description": "The name of the column to use in comaprison.",
+          "description": "The name of the column to use in comparison.",
           "type": "string"
         },
         "operator": {

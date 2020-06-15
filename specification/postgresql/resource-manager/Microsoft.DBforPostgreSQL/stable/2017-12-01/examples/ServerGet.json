@@ -23,9 +23,29 @@
           },
           "version": "9.5",
           "sslEnforcement": "Enabled",
+          "minimalTlsVersion": "TLS1_2",
           "userVisibleState": "Ready",
           "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
-          "earliestRestoreDate": "2018-03-04T21:00:58.9243541+00:00"
+          "earliestRestoreDate": "2018-03-04T21:00:58.9243541+00:00",
+          "replicationRole": "",
+          "masterServerId": "",
+          "publicNetworkAccess": "Enabled",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1/privateEndpointConnections/private-endpoint-name-00000000-1111-2222-3333-444444444444",
+              "properties": {
+                "provisioningState": "Ready",
+                "privateEndpoint": {
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
         },
         "location": "westus",
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",

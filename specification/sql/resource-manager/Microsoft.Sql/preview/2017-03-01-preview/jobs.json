@@ -147,7 +147,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is rerquired.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
           },
           "202": {
             "description": "Accepted"
@@ -887,7 +887,7 @@
         "tags": [
           "JobExecutions"
         ],
-        "description": "Creates or updatess a job execution.",
+        "description": "Creates or updates a job execution.",
         "operationId": "JobExecutions_CreateOrUpdate",
         "parameters": [
           {
@@ -2791,7 +2791,7 @@
           "type": "boolean"
         },
         "interval": {
-          "description": "Value of the schedule's recurring interval, if the scheduletype is recurring. ISO8601 duration format.",
+          "description": "Value of the schedule's recurring interval, if the schedule type is recurring. ISO8601 duration format.",
           "type": "string"
         }
       }

@@ -328,7 +328,7 @@
         ],
         "operationId": "OperationalizationClusters_UpdateSystem",
         "x-ms-examples": {
-          "Update System Services in an Operationalizaton Cluster": {
+          "Update System Services in an Operationalization Cluster": {
             "$ref": "examples/OperationalizationClusters_UpdateSystem.json"
           }
         },
@@ -685,7 +685,7 @@
             "modelAsString": true
           }
         },
-        "orchestratorProperties":{
+        "orchestratorProperties": {
           "description": "Orchestrator specific properties",
           "$ref": "#/definitions/KubernetesClusterProperties"
         },
@@ -759,12 +759,12 @@
           "x-ms-enum": {
             "name": "AgentVMSizeTypes",
             "modelAsString": true
-          }          
+          }
         }
       }
     },
-    "KubernetesClusterProperties" : {
-      "type":"object",
+    "KubernetesClusterProperties": {
+      "type": "object",
       "description": "Kubernetes cluster specific properties",
       "x-ms-discriminator-value": "Kubernetes",
       "required": [
@@ -826,7 +826,7 @@
       "properties": {
         "etag": {
           "type": "string",
-          "description": "The configuartion ETag for updates."
+          "description": "The configuration ETag for updates."
         },
         "ssl": {
           "description": "The SSL configuration properties",
@@ -925,7 +925,7 @@
           "description": "The target utilization."
         },
         "refreshPeriodInSeconds": {
-          "type":"integer",
+          "type": "integer",
           "description": "Refresh period in seconds."
         }
       }
@@ -955,12 +955,12 @@
           "$ref": "#/definitions/AppInsightsCredentials"
         },
         "serviceAuthConfiguration": {
-          "type":"object",
+          "type": "object",
           "description": "Global authorization keys for all user services deployed in cluster. These are used if the service does not have auth keys.",
           "$ref": "#/definitions/ServiceAuthConfiguration"
         },
-        "sslConfiguration":{
-          "type":"object",
+        "sslConfiguration": {
+          "type": "object",
           "description": "The SSL configuration for the services.",
           "$ref": "#/definitions/SslConfiguration"
         }

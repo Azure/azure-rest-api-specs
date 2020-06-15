@@ -1224,7 +1224,7 @@
             "$ref": "#/definitions/ApplicationGatewayCustomError"
           },
           "description": "Custom error configurations of the HTTP listener."
-         }
+        }
       },
       "description": "Properties of HTTP listener of an application gateway."
     },
@@ -1697,7 +1697,7 @@
             "$ref": "#/definitions/ApplicationGatewayCustomError"
           },
           "description": "Custom error configurations of the application gateway resource."
-         }
+        }
       },
       "description": "Properties of the application gateway."
     },
@@ -1840,7 +1840,7 @@
           "exclusiveMaximum": false,
           "minimum": 8,
           "exclusiveMinimum": false,
-          "description": "Maxium request body size for WAF."
+          "description": "Maximum request body size for WAF."
         },
         "maxRequestBodySizeInKb": {
           "type": "integer",
@@ -1849,7 +1849,7 @@
           "exclusiveMaximum": false,
           "minimum": 8,
           "exclusiveMinimum": false,
-          "description": "Maxium request body size in Kb for WAF."
+          "description": "Maximum request body size in Kb for WAF."
         },
         "fileUploadLimitInMb": {
           "type": "integer",
@@ -1858,7 +1858,7 @@
           "exclusiveMaximum": false,
           "minimum": 0,
           "exclusiveMinimum": false,
-          "description": "Maxium file upload size in Mb for WAF."
+          "description": "Maximum file upload size in Mb for WAF."
         },
         "exclusions": {
           "type": "array",
@@ -2146,7 +2146,7 @@
       },
       "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
     },
-	"ApplicationGatewayCustomError": {
+    "ApplicationGatewayCustomError": {
       "properties": {
         "statusCode": {
           "type": "string",
@@ -2221,7 +2221,10 @@
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
         "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
-        "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
+        "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+        "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewaySslCipherSuite",

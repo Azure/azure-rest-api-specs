@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2016-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}": {
+      "get": {
+        "description": "Gets an incident associated to an alert rule",
+        "tags": [
+          "AlertRuleIncidents"
+        ],
+        "operationId": "AlertRuleIncidents_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the incident to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request for one alert rule related incident",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single alert rule incident": {
+            "$ref": "./examples/getAlertRuleIncident.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents": {
+      "get": {
+        "description": "Gets a list of incidents associated to an alert rule",
+        "tags": [
+          "AlertRuleIncidents"
+        ],
+        "operationId": "AlertRuleIncidents_ListByAlertRule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of alert rule related incidents",
+            "schema": {
+              "$ref": "#/definitions/IncidentListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List alert rule incidents": {
+            "$ref": "./examples/listAlertRuleIncidents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Incident": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Incident name."
+        },
+        "ruleName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Rule name that is associated with the incident."
+        },
+        "isActive": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean to indicate whether the incident is active or resolved."
+        },
+        "activatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the incident was activated in ISO8601 format."
+        },
+        "resolvedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the incident was resolved in ISO8601 format. If null, it means the incident is still active."
+        }
+      },
+      "description": "An alert incident indicates the activation status of an alert rule."
+    },
+    "IncidentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Incident"
+          },
+          "description": "the incident collection."
+        }
+      },
+      "description": "The List incidents operation response."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the rule.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myRg1",
+    "ascLocation": "westeurope",
+    "alertName": "2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/westeurope/alerts/2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA",
+        "name": "2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA",
+        "type": "Microsoft.Security/Locations/alerts",
+        "properties": {
+          "vendorName": "Microsoft",
+          "alertDisplayName": "Threat Intelligence Alert",
+          "alertName": "ThreatIntelligence",
+          "detectedTimeUtc": "2018-05-01T19:50:47.083633Z",
+          "description": "Process was detected running on the host and is considered to be suspicious, verify that the user run it",
+          "remediationSteps": "verify that the user invoked this process\r\nrun antimalware scan of the VM",
+          "actionTaken": "Detected",
+          "reportedSeverity": "High",
+          "compromisedEntity": "vm1",
+          "associatedResource": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
+          "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+          "instanceId": "f144ee95-a3e5-42da-a279-967d115809aa",
+          "extendedProperties": {
+            "user Name": "administrator",
+            "domain Name": "Contoso",
+            "attacker IP": "192.0.2.1",
+            "resourceType": "Virtual Machine"
+          },
+          "state": "Dismissed",
+          "reportedTimeUtc": "2018-05-02T05:36:12.2089889Z",
+          "confidenceScore": 0.8,
+          "confidenceReasons": [
+            {
+              "type": "User",
+              "reason": "Some user reason"
+            },
+            {
+              "type": "Process",
+              "reason": "Some proccess reason"
+            },
+            {
+              "type": "Computer",
+              "reason": "Some computer reason"
+            }
+          ],
+          "canBeInvestigated": true,
+          "isIncident": false,
+          "entities": [
+            {
+              "address": "192.0.2.1",
+              "location": {
+                "countryCode": "gb",
+                "state": "wokingham",
+                "city": "sonning",
+                "longitude": -0.909,
+                "latitude": 51.468,
+                "asn": 6584
+              },
+              "threatIntelligence": [
+                {
+                  "providerName": "Team Cymru",
+                  "threatType": "C2",
+                  "threatName": "rarog",
+                  "confidence": 0.8,
+                  "reportLink": "http://www.microsoft.com",
+                  "threatDescription": "In bot armies, the controller is the server machine(s) that gives instructions to the controlled (zombied) hosts that connect to the command and control (C2) network. The controller host is usually running a botnet management application that is sending the commands to the zombied members of the bot army. These commands include, but are not limited to, the following: updating bitcoin wallet information, distributed denial-of-service (DDoS) target listings, updated C2 communication contact lists, and targeting data. C2 servers may be either directly controlled by the malware operators or run on hardware compromised by malware. There are multiple techniques for dynamically changing the control servers so that they are not isolated and brought down. Control servers utilize two general architectures: client-server and peer-to-peer. In a client-server model, all the hosts are controlled by a single server or a few control servers. In a peer-to-peer model, the infected hosts are both clients and servers, and they control other hosts so that instead of isolating the few control servers, all the hosts need to be removed."
+                }
+              ],
+              "type": "ip"
+            }
+          ],
+          "correlationKey": "Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk="
+        }
+      }
+    }
+  }
+}

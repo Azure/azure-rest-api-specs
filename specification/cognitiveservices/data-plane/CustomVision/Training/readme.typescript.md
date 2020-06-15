@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   package-name: "@azure/cognitiveservices-customvision-training"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-customvision-training"
+  output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-customvision-training"
   override-client-name: TrainingAPIClient
   azure-arm: false
   generate-metadata: true

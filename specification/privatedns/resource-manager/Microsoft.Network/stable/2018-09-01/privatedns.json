@@ -1,0 +1,1919 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PrivateDnsManagementClient",
+    "description": "The Private DNS Management Client.",
+    "version": "2018-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}": {
+      "put": {
+        "tags": [
+          "PrivateZones"
+        ],
+        "operationId": "PrivateZones_CreateOrUpdate",
+        "description": "Creates or updates a Private DNS zone. Does not modify Links to virtual networks or DNS records within the zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateZone"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Private DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new Private DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Private DNS zone has been created.",
+            "schema": {
+              "$ref": "#/definitions/PrivateZone"
+            }
+          },
+          "200": {
+            "description": "The Private DNS zone has been updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateZone"
+            }
+          },
+          "202": {
+            "description": "The Private DNS zone upsert operation has been accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PUT Private DNS Zone": {
+            "$ref": "./examples/PrivateZonePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PrivateZones"
+        ],
+        "operationId": "PrivateZones_Update",
+        "description": "Updates a Private DNS zone. Does not modify virtual network links or DNS records within the zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateZone"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Private DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private DNS zone has been updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateZone"
+            }
+          },
+          "202": {
+            "description": "The Private DNS zone update operation has been accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PATCH Private DNS Zone": {
+            "$ref": "./examples/PrivateZonePatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateZones"
+        ],
+        "operationId": "PrivateZones_Delete",
+        "description": "Deletes a Private DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone. Private DNS zone cannot be deleted unless all virtual network links to it are removed.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Private DNS zone. Omit this value to always delete the current zone. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private DNS zone has been deleted."
+          },
+          "202": {
+            "description": "The Private DNS zone delete operation has been accepted and will complete asynchronously."
+          },
+          "204": {
+            "description": "The Private DNS zone was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DELETE Private DNS Zone": {
+            "$ref": "./examples/PrivateZoneDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateZones"
+        ],
+        "operationId": "PrivateZones_Get",
+        "description": "Gets a Private DNS zone. Retrieves the zone properties, but not the virtual networks links or the record sets within the zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/PrivateZone"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone": {
+            "$ref": "./examples/PrivateZoneGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/privateDnsZones": {
+      "get": {
+        "tags": [
+          "PrivateZones"
+        ],
+        "operationId": "PrivateZones_List",
+        "description": "Lists the Private DNS zones in all resource groups in a subscription.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of Private DNS zones to return. If not specified, returns up to 100 zones."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/PrivateZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone by Subscription": {
+            "$ref": "./examples/PrivateZoneListInSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones": {
+      "get": {
+        "tags": [
+          "PrivateZones"
+        ],
+        "operationId": "PrivateZones_ListByResourceGroup",
+        "description": "Lists the Private DNS zones within a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/PrivateZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone by Resource Group": {
+            "$ref": "./examples/PrivateZoneListInResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/virtualNetworkLinks/{virtualNetworkLinkName}": {
+      "put": {
+        "tags": [
+          "VirtualNetworkLinks"
+        ],
+        "operationId": "VirtualNetworkLinks_CreateOrUpdate",
+        "description": "Creates or updates a virtual network link to the specified Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "virtualNetworkLinkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network link."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLink"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the virtual network link to the Private DNS zone. Omit this value to always overwrite the current virtual network link. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new virtual network link to the Private DNS zone to be created, but to prevent updating an existing link. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The virtual network link to the Private DNS zone has been created.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLink"
+            }
+          },
+          "200": {
+            "description": "The virtual network link to the Private DNS zone has been updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLink"
+            }
+          },
+          "202": {
+            "description": "The operation to upsert virtual network link to the Private DNS zone has been accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PUT Private DNS Zone Virtual Network Link": {
+            "$ref": "./examples/VirtualNetworkLinkPut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworkLinks"
+        ],
+        "operationId": "VirtualNetworkLinks_Update",
+        "description": "Updates a virtual network link to the specified Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "virtualNetworkLinkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network link."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLink"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the virtual network link to the Private DNS zone. Omit this value to always overwrite the current virtual network link. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The virtual network link to the Private DNS zone has been updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLink"
+            }
+          },
+          "202": {
+            "description": "The operation to link virtual network link to Private DNS zone has been accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PATCH Private DNS Zone Virtual Network Link": {
+            "$ref": "./examples/VirtualNetworkLinkPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworkLinks"
+        ],
+        "operationId": "VirtualNetworkLinks_Delete",
+        "description": "Deletes a virtual network link to the specified Private DNS zone. WARNING: In case of a registration virtual network, all auto-registered DNS records in the zone for the virtual network will also be deleted. This operation cannot be undone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "virtualNetworkLinkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network link."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the virtual network link to the Private DNS zone. Omit this value to always delete the current zone. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The virtual network link to the Private DNS zone has been deleted."
+          },
+          "202": {
+            "description": "The operation to delete virtual network link to the Private DNS zone has been accepted and will complete asynchronously."
+          },
+          "204": {
+            "description": "The virtual network link to the Private DNS zone was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DELETE Private DNS Zone Virtual Network Link": {
+            "$ref": "./examples/VirtualNetworkLinkDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualNetworkLinks"
+        ],
+        "operationId": "VirtualNetworkLinks_Get",
+        "description": "Gets a virtual network link to the specified Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "virtualNetworkLinkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network link."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLink"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone Virtual Network Link": {
+            "$ref": "./examples/VirtualNetworkLinkGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/virtualNetworkLinks": {
+      "get": {
+        "tags": [
+          "VirtualNetworkLinks"
+        ],
+        "operationId": "VirtualNetworkLinks_List",
+        "description": "Lists the virtual network links to the specified Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of virtual network links to return. If not specified, returns up to 100 virtual network links."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Private DNS Zone Virtual Network Links": {
+            "$ref": "./examples/VirtualNetworkLinkList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{relativeRecordSetName}": {
+      "put": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_CreateOrUpdate",
+        "description": "Creates or updates a record set within a Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the Private DNS zone is created).",
+            "enum": [
+              "A",
+              "AAAA",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The record set has been created.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "200": {
+            "description": "The record set has been updated.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PUT Private DNS Zone A Record Set": {
+            "$ref": "./examples/RecordSetAPut.json"
+          },
+          "PUT Private DNS Zone AAAA Record Set": {
+            "$ref": "./examples/RecordSetAAAAPut.json"
+          },
+          "PUT Private DNS Zone CNAME Record Set": {
+            "$ref": "./examples/RecordSetCNAMEPut.json"
+          },
+          "PUT Private DNS Zone MX Record Set": {
+            "$ref": "./examples/RecordSetMXPut.json"
+          },
+          "PUT Private DNS Zone PTR Record Set": {
+            "$ref": "./examples/RecordSetPTRPut.json"
+          },
+          "PUT Private DNS Zone SOA Record Set": {
+            "$ref": "./examples/RecordSetSOAPut.json"
+          },
+          "PUT Private DNS Zone SRV Record Set": {
+            "$ref": "./examples/RecordSetSRVPut.json"
+          },
+          "PUT Private DNS Zone TXT Record Set": {
+            "$ref": "./examples/RecordSetTXTPut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_Update",
+        "description": "Updates a record set within a Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            },
+            "description": "Parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record set has been updated.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PATCH Private DNS Zone A Record Set": {
+            "$ref": "./examples/RecordSetAPatch.json"
+          },
+          "PATCH Private DNS Zone AAAA Record Set": {
+            "$ref": "./examples/RecordSetAAAAPatch.json"
+          },
+          "PATCH Private DNS Zone CNAME Record Set": {
+            "$ref": "./examples/RecordSetCNAMEPatch.json"
+          },
+          "PATCH Private DNS Zone MX Record Set": {
+            "$ref": "./examples/RecordSetMXPatch.json"
+          },
+          "PATCH Private DNS Zone PTR Record Set": {
+            "$ref": "./examples/RecordSetPTRPatch.json"
+          },
+          "PATCH Private DNS Zone SOA Record Set": {
+            "$ref": "./examples/RecordSetSOAPatch.json"
+          },
+          "PATCH Private DNS Zone SRV Record Set": {
+            "$ref": "./examples/RecordSetSRVPatch.json"
+          },
+          "PATCH Private DNS Zone TXT Record Set": {
+            "$ref": "./examples/RecordSetTXTPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_Delete",
+        "description": "Deletes a record set from a Private DNS zone. This operation cannot be undone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the Private DNS zone is deleted).",
+            "enum": [
+              "A",
+              "AAAA",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the record set. Omit this value to always delete the current record set. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record set has been deleted."
+          },
+          "204": {
+            "description": "The record set was not found."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DELETE Private DNS Zone A Record Set": {
+            "$ref": "./examples/RecordSetADelete.json"
+          },
+          "DELETE Private DNS Zone AAAA Record Set": {
+            "$ref": "./examples/RecordSetAAAADelete.json"
+          },
+          "DELETE Private DNS Zone CNAME Record Set": {
+            "$ref": "./examples/RecordSetCNAMEDelete.json"
+          },
+          "DELETE Private DNS Zone MX Record Set": {
+            "$ref": "./examples/RecordSetMXDelete.json"
+          },
+          "DELETE Private DNS Zone PTR Record Set": {
+            "$ref": "./examples/RecordSetPTRDelete.json"
+          },
+          "DELETE Private DNS Zone SRV Record Set": {
+            "$ref": "./examples/RecordSetSRVDelete.json"
+          },
+          "DELETE Private DNS Zone TXT Record Set": {
+            "$ref": "./examples/RecordSetTXTDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_Get",
+        "description": "Gets a record set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the record set, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone A Record Set": {
+            "$ref": "./examples/RecordSetAGet.json"
+          },
+          "GET Private DNS Zone AAAA Record Set": {
+            "$ref": "./examples/RecordSetAAAAGet.json"
+          },
+          "GET Private DNS Zone CNAME Record Set": {
+            "$ref": "./examples/RecordSetCNAMEGet.json"
+          },
+          "GET Private DNS Zone MX Record Set": {
+            "$ref": "./examples/RecordSetMXGet.json"
+          },
+          "GET Private DNS Zone PTR Record Set": {
+            "$ref": "./examples/RecordSetPTRGet.json"
+          },
+          "GET Private DNS Zone SOA Record Set": {
+            "$ref": "./examples/RecordSetSOAGet.json"
+          },
+          "GET Private DNS Zone SRV Record Set": {
+            "$ref": "./examples/RecordSetSRVGet.json"
+          },
+          "GET Private DNS Zone TXT Record Set": {
+            "$ref": "./examples/RecordSetTXTGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}": {
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_ListByType",
+        "description": "Lists the record sets of a specified type in a Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of record sets to enumerate.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CNAME",
+              "MX",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name to be used to filter the record set enumeration. If this parameter is specified, the returned enumeration will only contain records that end with \".<recordsetnamesuffix>\"."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSetListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone A Record Sets": {
+            "$ref": "./examples/RecordSetAList.json"
+          },
+          "GET Private DNS Zone AAAA Record Sets": {
+            "$ref": "./examples/RecordSetAAAAList.json"
+          },
+          "GET Private DNS Zone CNAME Record Sets": {
+            "$ref": "./examples/RecordSetCNAMEList.json"
+          },
+          "GET Private DNS Zone MX Record Sets": {
+            "$ref": "./examples/RecordSetMXList.json"
+          },
+          "GET Private DNS Zone PTR Record Sets": {
+            "$ref": "./examples/RecordSetPTRList.json"
+          },
+          "GET Private DNS Zone SOA Record Sets": {
+            "$ref": "./examples/RecordSetSOAList.json"
+          },
+          "GET Private DNS Zone SRV Record Sets": {
+            "$ref": "./examples/RecordSetSRVList.json"
+          },
+          "GET Private DNS Zone TXT Record Sets": {
+            "$ref": "./examples/RecordSetTXTList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/ALL": {
+      "get": {
+        "tags": [
+          "RecordSets"
+        ],
+        "operationId": "RecordSets_List",
+        "description": "Lists all record sets in a Private DNS zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "privateZoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Private DNS zone (without a terminating dot)."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name to be used to filter the record set enumeration. If this parameter is specified, the returned enumeration will only contain records that end with \".<recordsetnamesuffix>\"."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/RecordSetListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET Private DNS Zone ALL Record Sets": {
+            "$ref": "./examples/RecordSetALLList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateZoneProperties": {
+      "properties": {
+        "maxNumberOfRecordSets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of record sets that can be created in this Private DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "numberOfRecordSets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current number of record sets in this Private DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "maxNumberOfVirtualNetworkLinks": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of virtual networks that can be linked to this Private DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "numberOfVirtualNetworkLinks": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current number of virtual networks that are linked to this Private DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "maxNumberOfVirtualNetworkLinksWithRegistration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of virtual networks that can be linked to this Private DNS zone with registration enabled. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "numberOfVirtualNetworkLinksWithRegistration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current number of virtual networks that are linked to this Private DNS zone with registration enabled. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "description": "The provisioning state of the resource. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        }
+      },
+      "description": "Represents the properties of the Private DNS zone."
+    },
+    "PrivateZone": {
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the zone."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateZoneProperties",
+          "description": "Properties of the Private DNS zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a Private DNS zone."
+    },
+    "PrivateZoneListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateZone"
+          },
+          "description": "Information about the Private DNS zones."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response to a Private DNS zone list operation."
+    },
+    "VirtualNetworkLinkProperties": {
+      "properties": {
+        "virtualNetwork": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference of the virtual network."
+        },
+        "registrationEnabled": {
+          "type": "boolean",
+          "description": "Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?"
+        },
+        "virtualNetworkLinkState": {
+          "type": "string",
+          "description": "The status of the virtual network link to the Private DNS zone. Possible values are 'InProgress' and 'Done'. This is a read-only property and any attempt to set this value will be ignored.",
+          "enum": [
+            "InProgress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkLinkState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "description": "The provisioning state of the resource. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        }
+      },
+      "description": "Represents the properties of the Private DNS zone."
+    },
+    "VirtualNetworkLink": {
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the virtual network link."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkLinkProperties",
+          "description": "Properties of the virtual network link to the Private DNS zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a link to virtual network for a Private DNS zone."
+    },
+    "VirtualNetworkLinkListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkLink"
+          },
+          "description": "Information about the virtual network links to the Private DNS zones."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response to a list virtual network link to Private DNS zone operation."
+    },
+    "ARecord": {
+      "properties": {
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address of this A record."
+        }
+      },
+      "description": "An A record."
+    },
+    "AaaaRecord": {
+      "properties": {
+        "ipv6Address": {
+          "type": "string",
+          "description": "The IPv6 address of this AAAA record."
+        }
+      },
+      "description": "An AAAA record."
+    },
+    "CnameRecord": {
+      "properties": {
+        "cname": {
+          "type": "string",
+          "description": "The canonical name for this CNAME record."
+        }
+      },
+      "description": "A CNAME record."
+    },
+    "MxRecord": {
+      "properties": {
+        "preference": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The preference value for this MX record."
+        },
+        "exchange": {
+          "type": "string",
+          "description": "The domain name of the mail host for this MX record."
+        }
+      },
+      "description": "An MX record."
+    },
+    "PtrRecord": {
+      "properties": {
+        "ptrdname": {
+          "type": "string",
+          "description": "The PTR target domain name for this PTR record."
+        }
+      },
+      "description": "A PTR record."
+    },
+    "SoaRecord": {
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The domain name of the authoritative name server for this SOA record."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email contact for this SOA record."
+        },
+        "serialNumber": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The serial number for this SOA record."
+        },
+        "refreshTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The refresh value for this SOA record."
+        },
+        "retryTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The retry time for this SOA record."
+        },
+        "expireTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expire time for this SOA record."
+        },
+        "minimumTtl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum value for this SOA record. By convention this is used to determine the negative caching duration."
+        }
+      },
+      "description": "An SOA record."
+    },
+    "SrvRecord": {
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority value for this SRV record."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight value for this SRV record."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port value for this SRV record."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target domain name for this SRV record."
+        }
+      },
+      "description": "An SRV record."
+    },
+    "TxtRecord": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The text value of this TXT record."
+        }
+      },
+      "description": "A TXT record."
+    },
+    "RecordSetProperties": {
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The metadata attached to the record set."
+        },
+        "ttl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The TTL (time-to-live) of the records in the record set."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Fully qualified domain name of the record set.",
+          "readOnly": true
+        },
+        "isAutoRegistered": {
+          "type": "boolean",
+          "description": "Is the record set auto-registered in the Private DNS zone through a virtual network link?",
+          "readOnly": true
+        },
+        "aRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ARecord"
+          },
+          "description": "The list of A records in the record set."
+        },
+        "aaaaRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AaaaRecord"
+          },
+          "description": "The list of AAAA records in the record set."
+        },
+        "cnameRecord": {
+          "$ref": "#/definitions/CnameRecord",
+          "description": "The CNAME record in the record set."
+        },
+        "mxRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MxRecord"
+          },
+          "description": "The list of MX records in the record set."
+        },
+        "ptrRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PtrRecord"
+          },
+          "description": "The list of PTR records in the record set."
+        },
+        "soaRecord": {
+          "$ref": "#/definitions/SoaRecord",
+          "description": "The SOA record in the record set."
+        },
+        "srvRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SrvRecord"
+          },
+          "description": "The list of SRV records in the record set."
+        },
+        "txtRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TxtRecord"
+          },
+          "description": "The list of TXT records in the record set."
+        }
+      },
+      "description": "Represents the properties of the records in the record set."
+    },
+    "RecordSet": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the record set.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the record set.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the record set.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the record set."
+        },
+        "properties": {
+          "$ref": "#/definitions/RecordSetProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the record set."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Describes a DNS record set (a collection of DNS records with the same name and type) in a Private DNS zone."
+    },
+    "RecordSetListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecordSet"
+          },
+          "description": "Information about the record sets in the response."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response to a record set list operation."
+    },
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified resource Id for the resource. Example - '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateDnsZoneName}'."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource. Example - 'Microsoft.Network/privateDnsZones'."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for an ARM proxy resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another subresource.",
+      "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error message body"
+        }
+      },
+      "x-ms-external": true,
+      "description": "An error message"
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "A description of what caused the error"
+        },
+        "target": {
+          "type": "string",
+          "description": "The target resource of the error message"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "Extra error information"
+        }
+      },
+      "x-ms-external": true,
+      "description": "The body of an error message"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

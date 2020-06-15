@@ -8,7 +8,14 @@ nodejs:
   azure-arm: true
   package-name: azure-arm-machinelearning
   output-folder: $(node-sdks-folder)/lib/services/machinelearning
-  generate-license-txt: true
-  generate-package-json: true
-  generate-readme-md: true
+  generate-license-txt: false
+  generate-package-json: false
+  generate-readme-md: false
+batch:
+  - package-commitmentPlans: true
+    source-code-folder-path: lib/commitmentPlan
+  - package-webservices: true
+    source-code-folder-path: lib/webservices
+  - package-workspaces: true
+    source-code-folder-path: lib/workspaces
 ```
