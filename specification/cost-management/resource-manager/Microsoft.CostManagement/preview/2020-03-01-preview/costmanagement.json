@@ -4,6 +4,12 @@
     "title": "CostManagementClient",
     "version": "2020-03-01-preview"
   },
+  "tags": [
+    {
+      "name": "CostAllocationRules",
+      "description": "An API for creating and managing cost allocation rules within a billing account or enterprise enrollment. These rules can be used to reallocate cost between resources, filtered by Resource Group, Subscription, or Tag."
+    }
+  ],
   "host": "management.azure.com",
   "schemes": [
     "https"
@@ -230,6 +236,9 @@
           "200": {
             "description": "OK. The request has succeeded."
           },
+          "204": {
+            "description": "NoContent. Rule did not exist."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -312,7 +321,7 @@
     },
     "Reason": {
       "type": "string",
-      "description": "The reason this name is not available",
+      "description": "The reason this name is not available.",
       "enum": [
         "Invalid",
         "AlreadyExists",
@@ -435,7 +444,7 @@
     },
     "RuleStatus": {
       "type": "string",
-      "description": "Current status of the rule",
+      "description": "Current status of the rule. The rule must be active to change billed values. Processing indicates that a saved change has not yet been applied to your account.",
       "enum": [
         "NotActive",
         "Active",
@@ -448,7 +457,7 @@
     },
     "InputRuleStatus": {
       "type": "string",
-      "description": "Current status of the rule",
+      "description": "Current status of the rule. The rule must be active to change billed values.",
       "enum": [
         "NotActive",
         "Active"
@@ -550,7 +559,7 @@
     },
     "CostAllocationResourceType": {
       "type": "string",
-      "description": "Category of resource to use for allocation",
+      "description": "Category of resource to use for allocation. Dimension indicates cost for either a resource group or subscription is being changed. Tag allocates cost based on Azure Tag key value pairs.",
       "enum": [
         "Dimension",
         "Tag"
@@ -580,7 +589,7 @@
     },
     "CostAllocationPolicyType": {
       "type": "string",
-      "description": "Method to use for allocating cost",
+      "description": "Method to use for allocating cost. FixedProportion indicates that cost will be split based on specified percentage values.",
       "enum": [
         "FixedProportion"
       ],
