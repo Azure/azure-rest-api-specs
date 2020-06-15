@@ -432,7 +432,7 @@
         ],
         "summary": "Compose trained with labels models into one composed model.",
         "description": "Compose request would include list of models ids.\r\nIt would validate what all models either trained with labels model or composed model.\r\nIt would validate limit of models put together.",
-        "operationId": "CustomModelsComposePost",
+        "operationId": "ComposeCustomModels",
         "consumes": [],
         "produces": [
           "application/json",
@@ -450,41 +450,33 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "BadArgument",
-                  "innerError": {
-                    "requestId": "00000000-0000-0000-0000-000000000000"
-                  },
-                  "message": "Request body is invalid."
+            "201": {
+              "description": "Request is queued successfully.",
+              "headers": {
+                "Location": {
+                  "type": "string",
+                  "description": "Location and ID of the composed model. The status of composed model is specified in the status property at the model location."
                 }
               }
+            },
+            "default": {
+              "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
-          }
         },
         "x-ms-examples": {
-          "Compose custom models": {
-            "$ref": "./examples/ComposeModels.json"
-          }
+            "Compose custom models": {
+              "$ref": "./examples/ComposeModels.json"
+            }
         }
       }
-    },    
+    },
     "/prebuilt/businessCard/analyze": {
       "post": {
         "summary": "Analyze Business Card",
-        "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeBusinessCardAsync",
         "consumes": [
           "application/pdf",
@@ -509,7 +501,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the business card.  Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
             "required": false,
             "type": "string"
           },          
@@ -583,9 +575,9 @@
     },
     "/prebuilt/invoice/analyze": {
       "post": {
-        "summary": "Analyze Business Card",
-        "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "AnalyzeBusinessCardAsync",
+        "summary": "Analyze Invoice",
+        "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
+        "operationId": "AnalyzeInvoiceAsync",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -609,7 +601,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the business card.  Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the invoice. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
             "required": false,
             "type": "string"
           },          
@@ -636,16 +628,16 @@
         },
         "x-ms-examples": {
           "Analyze receipt": {
-            "$ref": "./examples/BusinessCardBatch.json"
+            "$ref": "./examples/InvoiceBatch.json"
           }
         }
       }
     },
     "/prebuilt/invoice/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze Business Card Result",
-        "description": "Track the progress and obtain the result of the analyze business card operation.",
-        "operationId": "GetAnalyzeBusinessCardResult",
+        "summary": "Get Analyze Invoice Result",
+        "description": "Track the progress and obtain the result of the analyze invoice operation.",
+        "operationId": "GetAnalyzeInvoiceResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -676,7 +668,7 @@
         },
         "x-ms-examples": {
           "Get analyze receipt result": {
-            "$ref": "./examples/BusinessCardBatchResult.json"
+            "$ref": "./examples/InvoiceBatchResult.json"
           }
         }
       }
@@ -684,7 +676,7 @@
     "/prebuilt/receipt/analyze": {
       "post": {
         "summary": "Analyze Receipt",
-        "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeReceiptAsync",
         "consumes": [
           "application/pdf",
@@ -709,7 +701,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the business card.  Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
             "required": false,
             "type": "string"
           },          
