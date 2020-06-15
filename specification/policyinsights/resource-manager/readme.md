@@ -66,6 +66,10 @@ directive:
     where:
       - $.paths["/providers/Microsoft.PolicyInsights/operations"].get
 
+  - suppress: BodyTopLevelProperties
+    reason: systemData should be supported by all new resources
+    where:
+      - $.definitions.Attestation.properties
 ```
 
 ### Tag: package-2019-10
@@ -79,6 +83,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/stable/2019-10-01/attestations.json
 ```
 
 
