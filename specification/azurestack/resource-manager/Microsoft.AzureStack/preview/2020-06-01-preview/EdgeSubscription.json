@@ -164,6 +164,9 @@
             },
             {
               "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/NewEdgeSubscriptionParameter"
             }
           ],
           "responses": {
@@ -365,6 +368,16 @@
         "type": "string",
         "in": "query",
         "required": false,
+        "x-ms-parameter-location": "method"
+      },
+      "NewEdgeSubscriptionParameter": {
+        "description": "Edge subscription object",
+        "name": "edgeSubscription",
+        "in": "body",
+        "schema": {
+          "$ref": "#/definitions/EdgeSubscription"
+        },
+        "required": true,
         "x-ms-parameter-location": "method"
       }      
     },
