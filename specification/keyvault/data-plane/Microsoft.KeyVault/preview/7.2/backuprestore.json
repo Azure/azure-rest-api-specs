@@ -175,14 +175,14 @@
           "FullRestore"
         ],
         "operationId": "RestoreStatus",
-        "description": "Returns the status of full restore operation",
+        "description": "Returns the status of restore operation",
         "parameters": [
           {
             "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Job Id returned part of the full restore operation"
+            "description": "The Job Id returned part of the restore operation"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the full restore status",
+            "description": "OK - Returns the restore status",
             "schema": {
               "$ref": "#/definitions/RestoreOperation"
             }
@@ -203,8 +203,8 @@
           }
         },
         "x-ms-examples": {
-          "Full restore status": {
-            "$ref": "./examples/FullRestore-pending-example.json"
+          "Restore status": {
+            "$ref": "./examples/Restore-pending-example.json"
           }
         }
       }
@@ -393,7 +393,7 @@
         },
         "error": {
           "$ref": "common.json#/definitions/Error",
-          "description": "Error encountered, if any, during the full restore operation."
+          "description": "Error encountered, if any, during the restore operation."
         },
         "jobId": {
           "type": "string",
@@ -410,7 +410,7 @@
           "description": "The end time of the restore operation"
         }
       },
-      "description": "Full restore operation"
+      "description": "restore operation"
     }
   },
   "parameters": {
