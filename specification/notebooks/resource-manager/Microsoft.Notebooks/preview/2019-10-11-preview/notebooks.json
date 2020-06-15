@@ -1,0 +1,228 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2019-10-11-preview",
+      "title": "NotebookResourceManagementClient",
+      "description": "Azure Notebooks Resource Management Client"
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxy/{resourceName}": {
+        "get": {
+          "tags": [ "NotebookResource" ],
+          "operationId": "GetNotebookResouce",
+          "consumes": [],
+          "produces": [ "application/json" ],
+          "parameters": [
+              {
+                  "name": "subscriptionId",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+              },
+              {
+                  "name": "resourceGroupName",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+              },
+              {
+                  "name": "resourceName",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+              }
+          ],
+          "responses": { "200" : { "description": "Success" } } 
+        },
+        "put": {
+          "tags": [ "NotebookResource" ],
+          "operationId": "CreateOrUpdateNotebookResource",
+          "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+          "produces": [],
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "resourceRequest",
+              "in": "body",
+              "required": false,
+              "schema": { "$ref": "#/definitions/NotebookResource" }
+            }
+          ],
+          "responses": { 
+            "200": { 
+              "description": "Success" 
+            }, 
+            "201": {
+              "description": "Success"
+            } 
+          }
+        },
+        "delete": {
+          "tags": [ "NotebookResource" ],
+          "operationId": "DeleteNotebookResource",
+          "consumes": [],
+          "produces": [],
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": { 
+            "200": { 
+              "description": "Success" 
+            }, 
+            "204": {
+              "description": "Success"
+            } 
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/updatePrivateLinkId/{privateLinkId}": {
+        "post": {
+          "tags": [ "NotebookResource" ],
+          "operationId": "PostPrivateLinkIdNotebookResource",
+          "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+          "produces": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+          "parameters": [
+            {
+                "name": "subscriptionId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "resourceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "privateLinkId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }
+          ],
+          "responses": { "200": { "description": "Success" } }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/removePrivateLinkId/{privateLinkId}": {
+        "post": {
+          "tags": [ "NotebookResource" ],
+          "operationId": "RemovePrivateLinkIdNotebookResource",
+          "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+          "produces": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+          "parameters": [
+            {
+                "name": "subscriptionId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "resourceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }
+          ],
+          "responses": { "200": { "description": "Success" }
+        }
+      }
+    },
+    "definitions": {
+      "NotebookResource": {
+        "type": "object",
+        "properties": {
+          "location": { "type": "string" },
+          "properties": { "$ref": "#/definitions/NotebookResourceProperties" },
+          "hostname": { "type": "string" }
+        }
+      },
+      "NotebookResourceProperties": {
+        "type": "object",
+        "properties": {}
+      },
+      "AzureSubscription": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "format": "int32",
+            "enum": [ 0, 1, 2, 3, 4 ],
+            "type": "integer"
+          },
+          "registrationDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "properties": { "$ref": "#/definitions/AzureSubscriptionProperties" }
+        }
+      },
+      "AzureSubscriptionProperties": {
+        "type": "object",
+        "properties": {
+          "tenantId": { "type": "string" },
+          "locationPlacementId": { "type": "string" },
+          "quotaId": { "type": "string" },
+          "registeredFeatures": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": { "$ref": "#/definitions/RegisteredFeature" }
+          }
+        }
+      },
+      "RegisteredFeature": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "state": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+  
