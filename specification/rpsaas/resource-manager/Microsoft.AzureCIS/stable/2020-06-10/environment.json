@@ -141,28 +141,56 @@
         }
       }
     },
-    "GetResponse" : {
-      "id": "/subscriptions/id/locations/westus/operationsStatus/sameguid",
-      "name": "sameguid",
-      "status" : "when not completed non-terminal value | Accepted | Created, when completed, terminal values | Succeeded | Failed | Canceled",
-      "startTime": "<DateLiteral per ISO8601>",
-      "endTime": "<DateLiteral per ISO8601>",
-      "percentComplete": "<double between 0 and 100>",
+    "GetResponse": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "/subscriptions/id/locations/westus/operationsStatus/sameguid"
+        },
+        "name": {
+          "type": "string",
+          "description": "sameguid"
+        },
+        "status": {
+          "type": "string",
+          "description": "when not completed non-terminal value | Accepted | Created, when completed, terminal values | Succeeded | Failed | Canceled",
+          "enum": [
+            "Accepted",
+            "Created",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "description": "<DateLiteral per ISO8601>"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "<DateLiteral per ISO8601>"
+        },
+        "EnvironmentResource": {
           "$ref": "#/definitions/EnvironmentResource",
           "description": "EnvironmentResource detail"
-      },
-      "error" : {
-      "code": "BadArgument",
-      "message": "The provided database &#39;foo&#39; has an invalid username."
+        }
       }
     },
-    "PutResponse" : {
-      "status" : "non-terminal value | Accepted | Created",
+    "PutResponse": {
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Current status of the put.",
+          "enum": [
+            "Accepted",
+            "Created"
+          ]
+        },
+        "EnvironmentResource": {
           "$ref": "#/definitions/EnvironmentResource",
           "description": "EnvironmentResource detail"
-      },
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
