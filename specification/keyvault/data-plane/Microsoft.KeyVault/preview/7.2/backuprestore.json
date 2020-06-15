@@ -152,7 +152,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/FullRestoreOperation"
+              "$ref": "#/definitions/RestoreOperation"
             }
           },
           "default": {
@@ -174,7 +174,7 @@
         "tags": [
           "FullRestore"
         ],
-        "operationId": "FullRestoreStatus",
+        "operationId": "RestoreStatus",
         "description": "Returns the status of full restore operation",
         "parameters": [
           {
@@ -192,7 +192,7 @@
           "200": {
             "description": "OK - Returns the full restore status",
             "schema": {
-              "$ref": "#/definitions/FullRestoreOperation"
+              "$ref": "#/definitions/RestoreOperation"
             }
           },
           "default": {
@@ -381,7 +381,7 @@
       },
       "description": "Full backup operation"
     },
-    "FullRestoreOperation": {
+    "RestoreOperation": {
       "properties": {
         "status": {
           "type": "string",
@@ -397,7 +397,7 @@
         },
         "jobId": {
           "type": "string",
-          "description": "Identifier for the full restore operation."
+          "description": "Identifier for the restore operation."
         },
         "startTime": {
           "type": "integer",
