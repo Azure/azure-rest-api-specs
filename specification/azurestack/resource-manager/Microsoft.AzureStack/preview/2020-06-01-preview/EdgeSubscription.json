@@ -99,9 +99,6 @@
                 "$ref": "#/definitions/ErrorResponse"
               }
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
         },
         "delete": {
@@ -180,6 +177,12 @@
               "description": "CREATED",
               "schema": {
                 "$ref": "#/definitions/EdgeSubscription"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -363,18 +366,7 @@
         "in": "query",
         "required": false,
         "x-ms-parameter-location": "method"
-      },
-      "EdgeSubscriptionParameter": {
-        "description": "Parameters use to create a edge subscription.",
-        "name": "edgeSubscriptionParameters",
-        "schema": {
-          "$ref": "#/definitions/EdgeSubscription"
-        },
-        "in": "body",
-        "required": true,
-        "x-ms-parameter-location": "method"
-      }
-      
+      }      
     },
     "securityDefinitions": {
       "azure_auth": {
