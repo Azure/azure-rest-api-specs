@@ -53,6 +53,11 @@ cli:
             param: properties
         poly-resource: true
       - where:
+            group: IntegrationRuntimes
+            op: CreateOrUpdate#*
+            param: properties
+        poly-resource: true
+      - where:
             group: ExposureControl
         hidden: true
       - where:
@@ -68,4 +73,29 @@ cli:
             op: CreateLinkedIntegrationRuntime
             param: dataFactoryLocation
         name: location
+      - where:
+            group: LinkedServices
+            op: CreateOrUpdate#Update
+            param: properties
+        cli-flatten: true
+      - where:
+            group: Datasets
+            op: CreateOrUpdate#Update
+            param: properties
+        cli-flatten: true
+      - where:
+            group: Pipelines
+            op: CreateOrUpdate#Update
+            param: pipeline
+        cli-flatten: true
+      - where:
+            group: Triggers
+            op: CreateOrUpdate#Update
+            param: properties
+        cli-flatten: true
+      - where:
+            group: DataFlows
+            op: CreateOrUpdate#Update
+            param: properties
+        cli-flatten: true
 ```
