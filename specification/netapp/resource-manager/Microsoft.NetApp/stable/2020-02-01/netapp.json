@@ -371,13 +371,14 @@
             "schema": {
               "$ref": "#/definitions/netAppAccount"
             }
-          },
+          },          
           "202": {
             "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
           },
           "default": {
             "description": "Error response describing why the operation failed."
-          }
+          }, 
+          "x-ms-long-running-operation": true         
         },
         "x-ms-examples": {
           "Accounts_Update": {
@@ -995,7 +996,7 @@
         ],
         "summary": "Get volume replication status",
         "description": "Get the status of the replication",
-        "operationId": "Volumes_ReplicationStatus",
+        "operationId": "Volumes_ReplicationStatus_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -1029,7 +1030,7 @@
         },
         "x-ms-examples": {
           "Volumes_ReplicationStatus": {
-            "$ref": "examples/Volumes_ReplicationStatus.json"
+            "$ref": "examples/Volumes_ReplicationStatus_Get.json"
           }
         }
       }
@@ -2214,6 +2215,8 @@
               "$ref": "#/definitions/replicationObject"
             },
             "snapshot": {
+              "title": "Snapshot",
+              "description":"Snapshot properties.",
               "$ref": "#/definitions/volumeSnapshotProperties"
             }
           }
