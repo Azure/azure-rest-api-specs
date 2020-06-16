@@ -7,15 +7,19 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: Microsoft.DataCollaboration
-  package-name: datacollaboration
+  namespace: azure.mgmt.datacollaboration
+  package-name: azure-mgmt-datacollaboration
   package-version: 2020-05-04-preview
   clear-output-folder: true
 ```
 
-```yaml $(python)
+``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/datacollaboration
+  output-folder: $(python-sdks-folder)/datacollaboration/azure-mgmt-datacollaboration/azure/mgmt/datacollaboration
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/datacollaboration/azure-mgmt-datacollaboration
 ```

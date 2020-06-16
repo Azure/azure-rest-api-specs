@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
+    "resourceGroupName": "SampleResourceGroup",
+    "workspaceName": "Workspace1",
+    "pipelineName": "Pipeline1",
+    "pipelineStepName": "PipelineStep1",
+    "api-version": "2020-05-04-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "kind": "SynapseSpark",
+        "properties": {
+          "dependencies": [
+            "PipelineStep0"
+          ],
+          "scriptId": "284878c1-deb7-440a-9f87-28b6e58242a3",
+          "scriptRevision": 1,
+          "scriptSourceBindings": [
+            {
+              "dataAssetId": "093a76ba-a0f2-4a03-80b1-bec1d3368711",
+              "key": "source1"
+            },
+            {
+              "dataAssetId": "2aa367d4-839c-468c-95b9-f3e63c628111",
+              "key": "source2"
+            }
+          ],
+          "scriptSinkBindings": [
+            {
+              "dataAssetId": "2f5a9076-3372-4282-b52d-a382382930ee",
+              "key": "sink1"
+            },
+            {
+              "dataAssetId": "30ba4508-b74f-46b0-bc30-1d891cd19ba1",
+              "key": "sink2"
+            }
+          ],
+          "clusterSize": 2
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1/pipelineSteps/PipelineStep1",
+        "name": "PipelineStep1",
+        "type": "Microsoft.DataCollaboration/workspaces/pipelines/pipelineSteps"
+      }
+    }
+  }
+}

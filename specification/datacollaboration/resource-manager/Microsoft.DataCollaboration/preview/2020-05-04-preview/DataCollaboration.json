@@ -1,0 +1,6252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-05-04-preview",
+    "title": "DataCollaborationManagementClient",
+    "description": "Creates a Microsoft.DataCollaboration management client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.DataCollaboration/listInvitations": {
+      "get": {
+        "tags": [
+          "ConsumerInvitation"
+        ],
+        "summary": "List the invitations",
+        "description": "Lists invitations",
+        "operationId": "ConsumerInvitations_ListInvitations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConsumerInvitations_ListInvitations": {
+            "$ref": "./examples/ConsumerInvitations_ListInvitations.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataCollaboration/locations/{location}/consumerInvitations/{invitationId}": {
+      "get": {
+        "tags": [
+          "ConsumerInvitation"
+        ],
+        "summary": "Gets the invitation identified by invitationId",
+        "description": "Get an invitation",
+        "operationId": "ConsumerInvitations_Get",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the invitation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationId",
+            "in": "path",
+            "description": "An invitation id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConsumerInvitations_Get": {
+            "$ref": "./examples/ConsumerInvitations_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataCollaboration/locations/{location}/consumerInvitations/{invitationId}/reject": {
+      "post": {
+        "tags": [
+          "ConsumerInvitation"
+        ],
+        "summary": "Rejects the invitation identified by invitationId",
+        "description": "Reject an invitation",
+        "operationId": "ConsumerInvitations_RejectInvitation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the invitation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationId",
+            "in": "path",
+            "description": "An invitation id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConsumerInvitations_RejectInvitation": {
+            "$ref": "./examples/ConsumerInvitations_RejectInvitation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataCollaboration/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "summary": "Lists the available operations",
+        "description": "List of available operations",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataCollaboration/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "List Workspaces in a subscription",
+        "description": "List Workspaces in Subscription",
+        "operationId": "Workspaces_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces_ListBySubscription": {
+            "$ref": "./examples/Workspaces_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "List Workspaces in a resource group",
+        "description": "List Workspaces in ResourceGroup",
+        "operationId": "Workspaces_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces_ListByResourceGroup": {
+            "$ref": "./examples/Workspaces_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Get a workspace under a resource group",
+        "description": "Get a workspace",
+        "operationId": "Workspaces_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Get": {
+            "$ref": "./examples/Workspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Create an workspace in the given resource group",
+        "description": "Create or update an workspace",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "workspace",
+            "in": "body",
+            "description": "The workspace payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Workspaces_CreateOrUpdate": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Delete a workspace",
+        "description": "DeleteWorkspace",
+        "operationId": "Workspaces_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Workspaces_Delete": {
+            "$ref": "./examples/Workspaces_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Patch a given workspace",
+        "description": "Patch an workspace",
+        "operationId": "Workspaces_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "workspaceUpdateParameters",
+            "in": "body",
+            "description": "The workspace update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Update": {
+            "$ref": "./examples/Workspaces_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/dataAssets": {
+      "get": {
+        "tags": [
+          "DataAsset"
+        ],
+        "summary": "List of available DataAssets under a workspace.",
+        "description": "List data assets in a workspace",
+        "operationId": "DataAssets_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation Token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAssetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataAssets_ListByWorkspace": {
+            "$ref": "./examples/DataAssets_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/dataAssets/{dataAssetName}": {
+      "get": {
+        "tags": [
+          "DataAsset"
+        ],
+        "summary": "Get a DataAsset in a workspace.",
+        "description": "Get a DataAsset in a Workspace",
+        "operationId": "DataAssets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the dataAssetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAsset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_Get": {
+            "$ref": "./examples/DataAssets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataAsset"
+        ],
+        "summary": "Adds a new DataAsset to an existing Workspace",
+        "description": "Create or update a DataAsset",
+        "operationId": "DataAssets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the DataAsset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAsset",
+            "in": "body",
+            "description": "The new DataAsset information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAsset"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAsset"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAsset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_CreateOrUpdate": {
+            "$ref": "./examples/DataAssets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataAsset"
+        ],
+        "summary": "Delete a DataAsset in a workspace.",
+        "description": "Delete a DataAsset in a Workspace",
+        "operationId": "DataAssets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the DataAsset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataAssets_Delete": {
+            "$ref": "./examples/DataAssets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/dataAssets/{dataAssetName}/dataSets": {
+      "get": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "List DataSets in a DataAsset.",
+        "description": "List DataSets in a DataAsset",
+        "operationId": "DataSets_ListByDataAsset",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the DataAsset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataSets_ListByDataAsset": {
+            "$ref": "./examples/DataSets_ListByDataAsset.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/dataAssets/{dataAssetName}/dataSets/{dataSetCategory}": {
+      "get": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "Get a DataSet in a DataAsset.",
+        "description": "Get a DataSet in a DataAsset",
+        "operationId": "DataSets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the DataAsset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetCategory",
+            "in": "path",
+            "description": "The usage category name of the DataSet",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Production",
+              "Sample"
+            ]
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSets_Get": {
+            "$ref": "./examples/DataSets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "Adds a new DataSet to an existing DataAsset",
+        "description": "Create or update a DataSet",
+        "operationId": "DataSets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the DataAsset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetCategory",
+            "in": "path",
+            "description": "The usage category name of the DataSet",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Production",
+              "Sample"
+            ]
+          },
+          {
+            "name": "dataSet",
+            "in": "body",
+            "description": "The new DataSet information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSets_CreateOrUpdate": {
+            "$ref": "./examples/DataSets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "Delete a DataSet in a DataAsset.",
+        "description": "Delete a DataSet in a DataAsset",
+        "operationId": "DataSets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dataAssetName",
+            "in": "path",
+            "description": "The name of the DataAsset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetCategory",
+            "in": "path",
+            "description": "The usage category name of the DataSet",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Production",
+              "Sample"
+            ]
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataSets_Delete": {
+            "$ref": "./examples/DataSets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines": {
+      "get": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "List Pipelines in a Workspace.",
+        "description": "List Pipelines in a Workspace",
+        "operationId": "Pipelines_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Pipelines_ListByWorkspace": {
+            "$ref": "./examples/Pipelines_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}": {
+      "get": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Get Pipeline in a workspace.",
+        "description": "Get a Pipeline in a workspace",
+        "operationId": "Pipelines_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Get": {
+            "$ref": "./examples/Pipelines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Adds a new pipeline to an existing workspace.",
+        "description": "Create or update a Pipeline",
+        "operationId": "Pipelines_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipeline",
+            "in": "body",
+            "description": "The new pipeline information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_CreateOrUpdate": {
+            "$ref": "./examples/Pipelines_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Delete a Pipeline in a workspace.",
+        "description": "Delete a Pipeline in a Workspace",
+        "operationId": "Pipelines_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Pipelines_Delete": {
+            "$ref": "./examples/Pipelines_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns": {
+      "get": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "List pipeline runs in a pipeline.",
+        "description": "List pipelines run of a pipeline",
+        "operationId": "PipelineRuns_ListByPipeline",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineRuns_ListByPipeline": {
+            "$ref": "./examples/PipelineRuns_ListByPipeline.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}": {
+      "get": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "Get pipeline run.",
+        "description": "Get a pipeline run in a pipeline",
+        "operationId": "PipelineRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "./examples/PipelineRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/cancel": {
+      "post": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "Request cancellation of a pipeline run",
+        "description": "Request to cancel a pipeline run.",
+        "operationId": "PipelineRuns_Cancel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Cancel": {
+            "$ref": "./examples/PipelineRuns_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns": {
+      "get": {
+        "tags": [
+          "PipelineStepRun"
+        ],
+        "summary": "List pipeline step runs in a pipeline run.",
+        "description": "List pipelines run of a pipeline",
+        "operationId": "PipelineStepRuns_ListByPipelineRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepRunList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineStepRuns_ListByPipelineRun": {
+            "$ref": "./examples/PipelineStepRuns_ListByPipelineRun.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns/{pipelineStepRunId}": {
+      "get": {
+        "tags": [
+          "PipelineStepRun"
+        ],
+        "summary": "Get pipeline step run.",
+        "description": "Get a pipeline run in a pipeline",
+        "operationId": "PipelineStepRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepRunId",
+            "in": "path",
+            "description": "The id of the pipeline step run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineStepRuns_Get": {
+            "$ref": "./examples/PipelineStepRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineSteps": {
+      "get": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "List PipelineSteps of a Pipeline.",
+        "description": "List PipelineSteps of a Pipeline",
+        "operationId": "PipelineSteps_ListByPipeline",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineSteps_ListByPipeline": {
+            "$ref": "./examples/PipelineSteps_ListByPipeline.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineSteps/{pipelineStepName}": {
+      "get": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "Get a PipelineStep in a Pipeline.",
+        "description": "Get a PipelineStep in a Pipeline",
+        "operationId": "PipelineSteps_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepName",
+            "in": "path",
+            "description": "The name of the pipeline step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineSteps_Get": {
+            "$ref": "./examples/PipelineSteps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "Adds a new PipelineStep to an existing Pipeline.",
+        "description": "Create or update a PipelineStep",
+        "operationId": "PipelineSteps_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepName",
+            "in": "path",
+            "description": "The name of the pipeline step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStep",
+            "in": "body",
+            "description": "The new pipeline information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStep"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineSteps_CreateOrUpdate": {
+            "$ref": "./examples/PipelineSteps_CreateOrUpdate.json"
+          },
+          "PipelineSteps_SynapseSpark_CreateOrUpdate": {
+            "$ref": "./examples/PipelineSteps_SynapseSpark_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PipelineStep"
+        ],
+        "summary": "Delete a PipelineStep in a Pipeline.",
+        "description": "Delete a PipelineStep in a Pipeline",
+        "operationId": "PipelineSteps_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepName",
+            "in": "path",
+            "description": "The name of the pipeline step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PipelineSteps_Delete": {
+            "$ref": "./examples/PipelineSteps_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/run": {
+      "post": {
+        "tags": [
+          "Pipeline"
+        ],
+        "summary": "Creates a run of a pipeline.",
+        "description": "Creates a run of a pipeline",
+        "operationId": "Pipelines_Run",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Run": {
+            "$ref": "./examples/Pipelines_Run.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "List Proposals in a Workspace.",
+        "description": "List Proposals in a Workspace",
+        "operationId": "Proposals_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProposalList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Proposals_ListByWorkspace": {
+            "$ref": "./examples/Proposals_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Get a Proposal in a Workspace.",
+        "description": "Get a Proposal in a Workspace",
+        "operationId": "Proposals_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Proposals_Get": {
+            "$ref": "./examples/Proposals_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Adds a new Proposal to an existing Workspace.",
+        "description": "Create or update a Proposal in a Workspace ",
+        "operationId": "Proposals_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "proposal",
+            "in": "body",
+            "description": "The new proposal information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Proposals_CreateOrUpdate": {
+            "$ref": "./examples/Proposals_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Delete a Proposal in a Workspace.",
+        "description": "Delete a Proposal in a Workspace",
+        "operationId": "Proposals_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Proposals_Delete": {
+            "$ref": "./examples/Proposals_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/dataAssetReferences": {
+      "get": {
+        "tags": [
+          "DataAssetReference"
+        ],
+        "summary": "List DataAssetReference in a Proposal.",
+        "description": "List Proposals in a Workspace",
+        "operationId": "DataAssetReferences_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAssetReferenceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataAssetReferences_ListByProposal": {
+            "$ref": "./examples/DataAssetReferences_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/dataAssetReferences/{referenceName}": {
+      "get": {
+        "tags": [
+          "DataAssetReference"
+        ],
+        "summary": "Get a DataAssetReference in a Proposal.",
+        "description": "Get a DataAssetReference in a Proposal",
+        "operationId": "DataAssetReferences_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAssetReference"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssetReferences_Get": {
+            "$ref": "./examples/DataAssetReferences_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataAssetReference"
+        ],
+        "summary": "Adds a new DataAssetReference to a Proposal.",
+        "description": "Create or update a DataAssetReference in a Workspace ",
+        "operationId": "DataAssetReferences_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetReference",
+            "in": "body",
+            "description": "The new dataset reference information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAssetReference"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAssetReference"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAssetReference"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssetReferences_CreateOrUpdate": {
+            "$ref": "./examples/DataAssetReferences_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataAssetReference"
+        ],
+        "summary": "Delete a DataAssetReference in a Proposal.",
+        "description": "Delete a DataAssetReference in a Workspace",
+        "operationId": "DataAssetReferences_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataAssetReferences_Delete": {
+            "$ref": "./examples/DataAssetReferences_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements": {
+      "get": {
+        "tags": [
+          "Entitlement"
+        ],
+        "summary": "List entitlements in a proposal.",
+        "description": "List entitlements in a proposal",
+        "operationId": "Entitlements_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EntitlementList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Entitlements_ListByProposal": {
+            "$ref": "./examples/Entitlements_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}": {
+      "get": {
+        "tags": [
+          "Entitlement"
+        ],
+        "summary": "Get an entitlement from a proposal.",
+        "description": "Get an entitlement in a proposal",
+        "operationId": "Entitlements_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Entitlement"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entitlements_Get": {
+            "$ref": "./examples/Entitlements_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Entitlement"
+        ],
+        "summary": "Adds a new entitlement to a proposal.",
+        "description": "Create or update an entitlement in a proposal",
+        "operationId": "Entitlements_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlement",
+            "in": "body",
+            "description": "The new entitlement information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Entitlement"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Entitlement"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Entitlement"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entitlements_CreateOrUpdate": {
+            "$ref": "./examples/Entitlements_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Entitlement"
+        ],
+        "summary": "Delete an entitlement in a proposal.",
+        "description": "Delete an entitlement from a proposal",
+        "operationId": "Entitlements_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Entitlements_Delete": {
+            "$ref": "./examples/Entitlements_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}/constraints": {
+      "get": {
+        "tags": [
+          "Constraint"
+        ],
+        "summary": "List constraints in an entitlement.",
+        "description": "List constraints in an entitlement",
+        "operationId": "Constraints_ListByEntitlement",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConstraintList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Constraints_ListByEntitlement": {
+            "$ref": "./examples/Constraints_ListByEntitlement.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}/constraints/{constraintName}": {
+      "get": {
+        "tags": [
+          "Constraint"
+        ],
+        "summary": "Get a constraint in an entitlement.",
+        "description": "Get a constraint from an entitlement",
+        "operationId": "Constraints_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "constraintName",
+            "in": "path",
+            "description": "The name of the constraint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Constraint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Constraints_Get": {
+            "$ref": "./examples/Constraints_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Constraint"
+        ],
+        "summary": "Adds a new constraint to an entitlement.",
+        "description": "Create or update a constraint in an entitlement ",
+        "operationId": "Constraints_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "constraintName",
+            "in": "path",
+            "description": "The name of the constraint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "constraint",
+            "in": "body",
+            "description": "The new constraint information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Constraint"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Constraint"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Constraint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Constraints_CreateOrUpdate": {
+            "$ref": "./examples/Constraints_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Constraint"
+        ],
+        "summary": "Delete a constraint from an entitlement.",
+        "description": "Delete a constraint from an entitlement",
+        "operationId": "Constraints_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "constraintName",
+            "in": "path",
+            "description": "The name of the constraint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Constraints_Delete": {
+            "$ref": "./examples/Constraints_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}/policies": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "List policies in an entitlement.",
+        "description": "List policies in an entitlement",
+        "operationId": "Policies_ListByEntitlement",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Policies_ListByEntitlement": {
+            "$ref": "./examples/Policies_ListByEntitlement.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements/{entitlementName}/policies/{policyName}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Get a policy in an entitlement.",
+        "description": "Get a policy from an entitlement",
+        "operationId": "Policies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Get": {
+            "$ref": "./examples/Policies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Adds a new policy to an entitlement.",
+        "description": "Create or update a policy in an entitlement ",
+        "operationId": "Policies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "The new policy information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_CreateOrUpdate": {
+            "$ref": "./examples/Policies_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Delete a policy from an entitlement.",
+        "description": "Delete a policy from an entitlement",
+        "operationId": "Policies_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entitlementName",
+            "in": "path",
+            "description": "The name of the entitlement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Policies_Delete": {
+            "$ref": "./examples/Policies_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/invitations": {
+      "get": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "List all Invitations in a proposal.",
+        "description": "List invitations in a proposal",
+        "operationId": "Invitations_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InvitationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Invitations_ListByProposal": {
+            "$ref": "./examples/Invitations_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/invitations/{invitationName}": {
+      "get": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "Get Invitation in a proposal.",
+        "description": "Get an invitation in a proposal",
+        "operationId": "Invitations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationName",
+            "in": "path",
+            "description": "The name of the invitation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invitations_Get": {
+            "$ref": "./examples/Invitations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "Sends a new invitation to a recipient to access a proposal.",
+        "description": "Create an invitation ",
+        "operationId": "Invitations_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal to send the invitation for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationName",
+            "in": "path",
+            "description": "The name of the invitation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitation",
+            "in": "body",
+            "description": "Invitation details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invitations_Create": {
+            "$ref": "./examples/Invitations_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "Delete Invitation in a proposal.",
+        "description": "Delete an invitation in a proposal",
+        "operationId": "Invitations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationName",
+            "in": "path",
+            "description": "The name of the invitation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invitations_Delete": {
+            "$ref": "./examples/Invitations_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/scriptReferences": {
+      "get": {
+        "tags": [
+          "ScriptReference"
+        ],
+        "summary": "List ScriptReference in a Proposal.",
+        "description": "List Proposals in a Workspace",
+        "operationId": "ScriptReferences_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScriptReferenceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ScriptReferences_ListByProposal": {
+            "$ref": "./examples/ScriptReferences_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/scriptReferences/{referenceName}": {
+      "get": {
+        "tags": [
+          "ScriptReference"
+        ],
+        "summary": "Get a ScriptReference in a Proposal.",
+        "description": "Get a ScriptReference in a Proposal",
+        "operationId": "ScriptReferences_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScriptReference"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScriptReferences_Get": {
+            "$ref": "./examples/ScriptReferences_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScriptReference"
+        ],
+        "summary": "Adds a new ScriptReference to a Proposal.",
+        "description": "Create or update a ScriptReference in a Workspace ",
+        "operationId": "ScriptReferences_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scriptReference",
+            "in": "body",
+            "description": "The new script reference information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScriptReference"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScriptReference"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScriptReference"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScriptReferences_CreateOrUpdate": {
+            "$ref": "./examples/ScriptReferences_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScriptReference"
+        ],
+        "summary": "Delete a ScriptReference in a Proposal.",
+        "description": "Delete a ScriptReference in a Workspace",
+        "operationId": "ScriptReferences_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ScriptReferences_Delete": {
+            "$ref": "./examples/ScriptReferences_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/scripts": {
+      "get": {
+        "tags": [
+          "Script"
+        ],
+        "summary": "List Scripts in a Workspace.",
+        "description": "List Scripts in a Workspace",
+        "operationId": "Scripts_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScriptList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Scripts_ListByWorkspace": {
+            "$ref": "./examples/Scripts_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/scripts/{scriptName}": {
+      "get": {
+        "tags": [
+          "Script"
+        ],
+        "summary": "Get Script in a workspace.",
+        "description": "Get a Script in a Workspace",
+        "operationId": "Scripts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "The name of the script.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scripts_Get": {
+            "$ref": "./examples/Scripts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Script"
+        ],
+        "summary": "Adds a new script or update an existing script to an existing workspace.\r\nAlso, adds a new a revision for an existing script or create the first revision for a new script.",
+        "description": "Create or update a Script in a Workspace ",
+        "operationId": "Scripts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "The name of the script.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "script",
+            "in": "body",
+            "description": "The new script information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scripts_CreateOrUpdate": {
+            "$ref": "./examples/Scripts_CreateOrUpdate.json"
+          },
+          "Scripts_SynapseSpark_CreateOrUpdate": {
+            "$ref": "./examples/Scripts_SynapseSpark_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Script"
+        ],
+        "summary": "Delete a Script and all it's revisions in a workspace.",
+        "description": "Delete a Script in a Workspace",
+        "operationId": "Scripts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "The name of the script.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Scripts_Delete": {
+            "$ref": "./examples/Scripts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/scripts/{scriptName}/scriptRevisions": {
+      "get": {
+        "tags": [
+          "Script"
+        ],
+        "summary": "List revisions of a Script.",
+        "description": "List revisions of a Script",
+        "operationId": "ScriptRevisions_ListByScript",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "The name of the script.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScriptList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ScriptRevisions_ListByScript": {
+            "$ref": "./examples/ScriptRevisions_ListByScript.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/scripts/{scriptName}/scriptRevisions/{revision}": {
+      "get": {
+        "tags": [
+          "Script"
+        ],
+        "summary": "Get a Script's revision in a Workspace.",
+        "description": "Get a Script's revision in a Workspace",
+        "operationId": "ScriptRevisions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "The name of the script.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "description": "The revision of the script.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScriptRevisions_Get": {
+            "$ref": "./examples/ScriptRevisions_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ADLSGen2FileDataSet": {
+      "description": "An ADLS Gen 2 file data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FileProperties",
+          "description": "AdlsGen2File data source properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2File"
+    },
+    "ADLSGen2FileProperties": {
+      "description": "Properties of the ADLS Gen2 file data set.",
+      "required": [
+        "fileSystem",
+        "filePath",
+        "storageAccountId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePath": {
+          "description": "File path within the file system.",
+          "type": "string"
+        },
+        "fileSystem": {
+          "description": "File system to which the file belongs.",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FileSystemDataSet": {
+      "description": "An ADLS Gen 2 file system data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FileSystemProperties",
+          "description": "AdlsGen2FileSystem data source properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2FileSystem"
+    },
+    "ADLSGen2FileSystemProperties": {
+      "description": "Properties of the ADLS Gen2 file system data set.",
+      "required": [
+        "fileSystem",
+        "storageAccountId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileSystem": {
+          "description": "The file system name.",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FolderDataSet": {
+      "description": "An ADLS Gen 2 folder data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FolderProperties",
+          "description": "AdlsGen2FileSystem data source properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Folder"
+    },
+    "ADLSGen2FolderProperties": {
+      "description": "Properties of the ADLS Gen2 folder data set.",
+      "required": [
+        "fileSystem",
+        "folderPath",
+        "storageAccountId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileSystem": {
+          "description": "File system to which the folder belongs.",
+          "type": "string"
+        },
+        "folderPath": {
+          "description": "Folder path within the file system.",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobContainerDataSet": {
+      "description": "An Azure storage blob container data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobContainerProperties",
+          "description": "Blob container data source properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Container"
+    },
+    "BlobContainerProperties": {
+      "description": "Properties of the BLOB container data set.",
+      "required": [
+        "containerName",
+        "storageAccountId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "BLOB Container name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageAccountId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobDataSet": {
+      "description": "An Azure storage blob data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobProperties",
+          "description": "Blob data source properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Blob"
+    },
+    "BlobFolderDataSet": {
+      "description": "An Azure storage blob folder data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobFolderProperties",
+          "description": "Blob folder data source properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobFolder"
+    },
+    "BlobFolderProperties": {
+      "description": "Properties of the blob folder data set.",
+      "required": [
+        "containerName",
+        "prefix",
+        "storageAccountId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "prefix": {
+          "description": "Prefix for blob folder",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobProperties": {
+      "description": "Properties of the internal blob data set.",
+      "required": [
+        "containerName",
+        "filePath",
+        "storageAccountId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePath": {
+          "description": "File path within the source data source",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "Constraint": {
+      "description": "Constraint for entitlement, restricts the access granted by it.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of constraint.",
+          "enum": [
+            "Script",
+            "Location"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ConstraintList": {
+      "description": "List response for get Constraints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Constraint"
+          }
+        }
+      }
+    },
+    "ConsumerInvitation": {
+      "description": "A consumer Invitation data transfer object.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Invitation location",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ConsumerInvitationProperties",
+          "description": "Properties on the account",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConsumerInvitationList": {
+      "description": "List response for get InvitationList",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumerInvitation"
+          }
+        }
+      }
+    },
+    "ConsumerInvitationProperties": {
+      "description": "Properties of consumer invitation",
+      "required": [
+        "invitationId"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description shared when the invitation was created",
+          "type": "string",
+          "readOnly": true
+        },
+        "invitationId": {
+          "description": "Unique id of the invitation.",
+          "type": "string"
+        },
+        "invitationStatus": {
+          "description": "The status of the invitation.",
+          "enum": [
+            "Pending",
+            "Accepted",
+            "Rejected",
+            "Withdrawn"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "invitationStatus",
+            "modelAsString": true
+          }
+        },
+        "proposalName": {
+          "description": "Gets the source proposal Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerEmail": {
+          "description": "Email of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerTenantName": {
+          "description": "Tenant name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "respondedAt": {
+          "format": "date-time",
+          "description": "The time the recipient responded to the invitation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the invitation was sent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "termsOfUse": {
+          "description": "Terms of use proposal when the invitation was created",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataAsset": {
+      "description": "Data asset that can be referenced from a proposal.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataAssetProperties",
+          "description": "The property bag of the DataAsset",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of dataAsset"
+        }
+      }
+    },
+    "DataAssetList": {
+      "description": "List response for get data assets",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataAsset"
+          }
+        }
+      }
+    },
+    "DataAssetProperties": {
+      "description": "Properties of the DataAsset",
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "description": "Unique id for identifying a data asset resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataProcessingStrategy": {
+          "description": "Data processing strategy to use for the the child DataSets",
+          "enum": [
+            "CopyBased",
+            "InPlace"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dataProcessingStrategy",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "General Description of the DataSet content",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the DataAsset",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DataAssetReference": {
+      "description": "Reference to a data asset.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataAssetReferenceProperties",
+          "description": "Properties on the dataset reference",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataAssetReferenceList": {
+      "description": "List response for get dataSet references",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataAssetReference"
+          }
+        }
+      }
+    },
+    "DataAssetReferenceProperties": {
+      "description": "Properties of data set reference data transfer object.",
+      "required": [
+        "dataAssetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "description": "The unique identifier of the referenced data asset",
+          "type": "string"
+        },
+        "dataAssetReferenceId": {
+          "description": "Unique id for identifying a dataset reference resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataCollaborationError": {
+      "description": "The data collaboration error model.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DataCollaborationErrorInfo",
+          "description": "The data share error body"
+        }
+      }
+    },
+    "DataCollaborationErrorInfo": {
+      "description": "The data collaboration error body model.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code of the error",
+          "type": "string"
+        },
+        "details": {
+          "description": "Nested details of the error model",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollaborationErrorInfo"
+          }
+        },
+        "message": {
+          "description": "Message of the error",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error",
+          "type": "string"
+        }
+      }
+    },
+    "DataSet": {
+      "description": "A set of data from external storage",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of Data Set.",
+          "enum": [
+            "Blob",
+            "Container",
+            "BlobFolder",
+            "AdlsGen2FileSystem",
+            "AdlsGen2Folder",
+            "AdlsGen2File",
+            "AdlsGen1Folder",
+            "AdlsGen1File",
+            "StorageAccount",
+            "KustoCluster",
+            "KustoDatabase",
+            "SqlDBTable",
+            "SqlDWTable",
+            "CosmosDBSqlCollection"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DataSetList": {
+      "description": "List response for get data assets",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSet"
+          }
+        }
+      }
+    },
+    "DefaultDto": {
+      "description": "Base data transfer object implementation for default resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource id of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the azure resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Type of the azure resource",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DiagnosticPolicy": {
+      "description": "A diagnostic policy.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Policy"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticPolicyProperties",
+          "description": "Properties for diagnostic policy",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "DiagnosticLevel"
+    },
+    "DiagnosticPolicyProperties": {
+      "description": "A diagnostic policy transfer object.",
+      "required": [
+        "logLevel"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the policy",
+          "type": "string"
+        },
+        "logLevel": {
+          "description": "The policy log level.",
+          "enum": [
+            "Verbose",
+            "Information",
+            "Warning",
+            "Error",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "logLevel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "properties for dimension",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "localized display name of the dimension to customer",
+          "type": "string"
+        },
+        "name": {
+          "description": "dimension name",
+          "type": "string"
+        }
+      }
+    },
+    "Entitlement": {
+      "description": "Grants access to another shared resource in the same proposal, with optional constraints and policies",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EntitlementProperties",
+          "description": "Properties on the entitlement",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EntitlementList": {
+      "description": "List response for get Entitlements",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entitlement"
+          }
+        }
+      }
+    },
+    "EntitlementProperties": {
+      "description": "Grants access to another shared resource in the same proposal, with optional some constraints and policies",
+      "required": [
+        "subjectId",
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Textual description of the entitlement",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The unique identifier of the resource of the entitlement.\r\nMust be a reference resource from the same proposal.",
+          "type": "string"
+        },
+        "subjectId": {
+          "description": "The unique identifier of the subject of the entitlement.\r\nThe subject must be a participant in the same proposal.",
+          "type": "string"
+        }
+      }
+    },
+    "Identity": {
+      "description": "Identity of resource",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "service principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Identity Type",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Invitation": {
+      "description": "Invitation to participate in a shared proposal",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvitationProperties",
+          "description": "Properties on the Invitation",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InvitationList": {
+      "description": "List response for get InvitationList",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Invitation"
+          }
+        }
+      }
+    },
+    "InvitationProperties": {
+      "description": "Invitation property bag.",
+      "type": "object",
+      "properties": {
+        "invitationId": {
+          "description": "unique invitation id",
+          "type": "string",
+          "readOnly": true
+        },
+        "invitationStatus": {
+          "description": "The status of the invitation.",
+          "enum": [
+            "Pending",
+            "Accepted",
+            "Rejected",
+            "Withdrawn"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "invitationStatus",
+            "modelAsString": true
+          }
+        },
+        "respondedAt": {
+          "format": "date-time",
+          "description": "The time the recipient responded to the invitation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the invitation was sent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetActiveDirectoryId": {
+          "description": "The target Azure AD Id. Can't be combined with email.",
+          "type": "string"
+        },
+        "targetEmail": {
+          "description": "The email the invitation is directed to.",
+          "type": "string"
+        },
+        "targetObjectId": {
+          "description": "The target user or application Id that invitation is being sent to.\r\nMust be specified along TargetActiveDirectoryId. This enables sending\r\ninvitations to specific users or applications in an AD tenant.",
+          "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LocationConstraint": {
+      "description": "Constraint used to only allow access if the resource is used within the specified Azure location.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Constraint"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LocationConstraintProperties",
+          "description": "Properties for location constraint",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Location"
+    },
+    "LocationConstraintProperties": {
+      "description": "Properties for location constraint used to only allow access if the resource is used within the specified Azure location.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the constraint.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the Azure resource (e.g. West US 2)",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List response for get operations.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationModel"
+          }
+        }
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "description": "log specifications for operation api",
+      "type": "object",
+      "properties": {
+        "blobDuration": {
+          "description": "blob duration of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "localized name of the log category",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the log category",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "description": "metric specifications for the operation",
+      "type": "object",
+      "properties": {
+        "aggregationType": {
+          "description": "aggregation type of metric",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "properties for dimension",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          }
+        },
+        "displayDescription": {
+          "description": "description of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "localized name of the metric",
+          "type": "string"
+        },
+        "enableRegionalMdmAccount": {
+          "description": "enable regional mdm account",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "internal metric name",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the metric",
+          "type": "string"
+        },
+        "resourceIdDimensionNameOverride": {
+          "description": "dimension name use to replace resource id if specified",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unit": {
+          "description": "units for the metric",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetaPropertyInfo": {
+      "description": "properties on meta info",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "meta service specification"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "description": "The operation meta service specification",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "log specifications for the operation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "metric specifications for the operation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          }
+        }
+      }
+    },
+    "OperationModel": {
+      "description": "The response model for get operations",
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationModelProperties",
+          "description": "Properties on the operation"
+        },
+        "name": {
+          "description": "Operation name for display purposes",
+          "type": "string"
+        },
+        "origin": {
+          "description": "origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationMetaPropertyInfo",
+          "description": "properties for the operation meta info",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationModelProperties": {
+      "description": "Properties on operations",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResponse": {
+      "description": "Response for long running operation",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "endTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/DataCollaborationErrorInfo",
+          "description": "The error property when status is failed."
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation state of the long running operation.",
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Participant": {
+      "description": "Readonly participant information",
+      "type": "object",
+      "properties": {
+        "participantId": {
+          "description": "Unique id for identifying a participant",
+          "type": "string",
+          "readOnly": true
+        },
+        "proposalApprovalStatus": {
+          "description": "Current approval status",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Active",
+            "Revoked"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "proposalApprovalStatus",
+            "modelAsString": true
+          }
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Pipeline": {
+      "description": "A pipeline data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineProperties",
+          "description": "Properties on the pipeline",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineList": {
+      "description": "List response for get Pipelines",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          }
+        }
+      }
+    },
+    "PipelineProperties": {
+      "description": "Pipeline property bag.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "General Description of the pipeline content",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "A pipeline run data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineRunProperties",
+          "description": "Properties on the pipeline",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineRunList": {
+      "description": "List response for get pipeline run.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        }
+      }
+    },
+    "PipelineRunProperties": {
+      "description": "A pipeline run property bag.",
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Pipeline run duration",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of pipeline",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunStatus": {
+          "description": "Pipeline run status",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Queued",
+            "Cancelled",
+            "Canceling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "pipelineRunStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of pipeline",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PipelineStep": {
+      "description": "A single step of a pipeline.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of pipeline step.",
+          "enum": [
+            "SynapseSpark"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "PipelineStepList": {
+      "description": "List response for get Pipeline steps",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineStep"
+          }
+        }
+      }
+    },
+    "PipelineStepRun": {
+      "description": "pipeline step run at data set level",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineStepRunProperties",
+          "description": "Properties on the pipeline step run",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineStepRunList": {
+      "description": "Details of pipeline run",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineStepRun"
+          }
+        }
+      }
+    },
+    "PipelineStepRunProperties": {
+      "description": "pipeline step run property bag.",
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Duration of pipeline step",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of pipeline step",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineStepId": {
+          "description": "The id of pipeline step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineStepRunStatus": {
+          "description": "Pipeline step run status",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Queued",
+            "Cancelled",
+            "Canceling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "pipelineStepRunStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of pipeline step",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Policy": {
+      "description": "Policy for entitlement",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of policy.",
+          "enum": [
+            "DiagnosticLevel"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "PolicyList": {
+      "description": "List response for get Policies",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        }
+      }
+    },
+    "Proposal": {
+      "description": "A proposal for data collaboration contract, can be shared and edited by multiple participants before signing.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProposalProperties",
+          "description": "Properties on the proposal",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProposalList": {
+      "description": "List response for get proposals",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Proposal"
+          }
+        }
+      }
+    },
+    "ProposalProperties": {
+      "description": "Properties of proposal data transfer object.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Textual description of the proposal",
+          "type": "string"
+        },
+        "invitationId": {
+          "description": "The invitation id for joining a proposal",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "description": "Timestamp of the last time the proposal or any of its underlying resources were updated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "participants": {
+          "description": "The list of participants participating in the proposal",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Participant"
+          },
+          "readOnly": true
+        },
+        "terms": {
+          "description": "Terms of the proposal",
+          "type": "string"
+        }
+      }
+    },
+    "ProxyDto": {
+      "description": "Base data transfer object implementation for proxy resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource id of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the azure resource",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Script": {
+      "description": "A script data transfer object",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of script.",
+          "enum": [
+            "SynapseSpark"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of script"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ScriptConstraint": {
+      "description": "Constraint used to only allow access if the resource is used with a specific script.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Constraint"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScriptConstraintProperties",
+          "description": "Properties for script constraint",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Script"
+    },
+    "ScriptConstraintProperties": {
+      "description": "Properties for script constraint used to only allow access if the resource is used with a specific script.",
+      "required": [
+        "scriptReferenceId"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the constraint.",
+          "type": "string"
+        },
+        "scriptReferenceId": {
+          "description": "The unique identifier of the script reference.",
+          "type": "string"
+        }
+      }
+    },
+    "ScriptDataAssetBinding": {
+      "description": "Binds a data asset reference to a script source or sink by key.",
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "description": "The bounded data asset Id",
+          "type": "string"
+        },
+        "key": {
+          "description": "The key of script's source or sink",
+          "type": "string"
+        }
+      }
+    },
+    "ScriptList": {
+      "description": "List response for get Scripts",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Script"
+          }
+        }
+      }
+    },
+    "ScriptReference": {
+      "description": "Script reference dto.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScriptReferenceProperties",
+          "description": "Properties on the script reference",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScriptReferenceList": {
+      "description": "List response for get script references",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptReference"
+          }
+        }
+      }
+    },
+    "ScriptReferenceProperties": {
+      "description": "Properties of data set reference data transfer object.",
+      "required": [
+        "scriptId",
+        "revision"
+      ],
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "The content of the referenced script. null if Visibility is set to HiddenContent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "revision": {
+          "format": "int32",
+          "description": "The revision number of the script being referenced",
+          "type": "integer"
+        },
+        "scriptId": {
+          "description": "The unique identifier of the referenced script",
+          "type": "string"
+        },
+        "scriptReferenceId": {
+          "description": "Unique id for identifying a script reference resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "sinks": {
+          "description": "The list of sink parameters in the referenced script. null if Visibility is set to HiddenContent.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sources": {
+          "description": "The list of source parameters in the referenced script. null if Visibility is set to HiddenContent.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "visibility": {
+          "description": "The referenced script visibility modifier.",
+          "enum": [
+            "ShowAll",
+            "HiddenContent"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "visibility",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StorageAccountPath": {
+      "description": "Defines a single storage account path.",
+      "required": [
+        "containerName"
+      ],
+      "type": "object",
+      "properties": {
+        "consumerPath": {
+          "description": "Gets or sets the path on the consumer side where the dataset is to be mapped.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Gets or sets the container name to share.",
+          "type": "string"
+        },
+        "providerPath": {
+          "description": "Gets or sets the path to file/folder within the container.",
+          "type": "string"
+        }
+      }
+    },
+    "SynapseSparkPipelineStep": {
+      "description": "A Synapse Spark based pipeline step.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineStep"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseSparkPipelineStepProperties",
+          "description": "Properties of Synapse Spark pipelineStep",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SynapseSpark"
+    },
+    "SynapseSparkPipelineStepProperties": {
+      "description": "A Synapse Spark PipelineStep data transfer object.",
+      "required": [
+        "clusterSize",
+        "scriptId",
+        "scriptRevision",
+        "scriptSourceBindings",
+        "scriptSinkBindings"
+      ],
+      "type": "object",
+      "properties": {
+        "clusterSize": {
+          "format": "int32",
+          "description": "Defines the cluster size for running a SynapseSpark pipeline step",
+          "type": "integer"
+        },
+        "dependencies": {
+          "description": "List of other steps names, in the same pipeline, which this step is depended on\r\nand should run only when they finish.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scriptId": {
+          "description": "The script Id that the pipeline step should execute",
+          "type": "string"
+        },
+        "scriptRevision": {
+          "format": "int32",
+          "description": "The script's revision that the pipeline step should execute",
+          "type": "integer"
+        },
+        "scriptSinkBindings": {
+          "description": "Bindings between the script's sink keys and data assets",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptDataAssetBinding"
+          }
+        },
+        "scriptSourceBindings": {
+          "description": "Bindings between the script's source keys and data assets",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptDataAssetBinding"
+          }
+        }
+      }
+    },
+    "SynapseSparkScript": {
+      "description": "A type of script based on the compute engine",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Script"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseSparkScriptProperties",
+          "description": "Properties of Synapse Spark script",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SynapseSpark"
+    },
+    "SynapseSparkScriptProperties": {
+      "description": "A Synapse Spark Script data transfer object.",
+      "required": [
+        "language",
+        "visibility",
+        "sources",
+        "sinks",
+        "content"
+      ],
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "The script content",
+          "type": "string"
+        },
+        "language": {
+          "description": "The script language",
+          "enum": [
+            "Python"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "language",
+            "modelAsString": true
+          }
+        },
+        "revision": {
+          "format": "int32",
+          "description": "Latest script revision",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scriptId": {
+          "description": "Unique id for identifying a script resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "sinks": {
+          "description": "The list of parameters the script can use as it's data sinks",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "description": "The list of parameters the script can use as it's data sources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visibility": {
+          "description": "Script visibility mode",
+          "enum": [
+            "ShowAll",
+            "HiddenContent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "visibility",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "SystemData of resource",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Workspace": {
+      "description": "Workspace to hold data collaboration workloads.",
+      "required": [
+        "identity"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DefaultDto"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity Info on the Workspace"
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "Properties on the workspace",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of Workspace"
+        }
+      }
+    },
+    "WorkspaceList": {
+      "description": "List response for get Workspaces.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "description": "Workspace property bag.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Workspace",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceUpdateParameters": {
+      "description": "Update parameters for workspaces",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    },
+    "workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}

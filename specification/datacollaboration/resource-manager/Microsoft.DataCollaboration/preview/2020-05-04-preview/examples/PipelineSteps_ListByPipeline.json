@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
+    "resourceGroupName": "SampleResourceGroup",
+    "workspaceName": "Workspace1",
+    "pipelineName": "Pipeline1",
+    "api-version": "2020-05-04-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:33:55 GMT",
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "14993",
+        "x-ms-correlation-request-id": "5d862c55-4de9-4a46-969d-cf1ed3e235ed"
+      },
+      "body": {
+        "value": [
+          {
+            "kind": "SynapseSpark",
+            "properties": {
+              "dependencies": null,
+              "scriptId": "284878c1-deb7-440a-9f87-28b6e58242a3",
+              "scriptRevision": 1,
+              "scriptSourceBindings": [
+                {
+                  "dataAssetId": "b679f260-b146-46eb-a5bf-b95ae018e183",
+                  "key": "source01"
+                },
+                {
+                  "dataAssetId": "7e6a3019-7417-45ce-a3e8-e37fe266991f",
+                  "key": "source02"
+                }
+              ],
+              "scriptSinkBindings": [
+                {
+                  "dataAssetId": "d63d270b-0784-41ca-a0d7-57096a0bd670",
+                  "key": "sink01"
+                },
+                {
+                  "dataAssetId": "0194f3ad-cfc9-4d5a-9dcc-4bf7c2561f9c",
+                  "key": "sink02"
+                }
+              ],
+              "clusterSize": 2
+            },
+            "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1/pipelineSteps/PipelineStep0",
+            "name": "PipelineStep0",
+            "type": "Microsoft.DataCollaboration/workspaces/pipelines/pipelineSteps"
+          },
+          {
+            "kind": "SynapseSpark",
+            "properties": {
+              "dependencies": [
+                "PipelineStep0"
+              ],
+              "scriptId": "284878c1-deb7-440a-9f87-28b6e58242a3",
+              "scriptRevision": 1,
+              "scriptSourceBindings": [
+                {
+                  "dataAssetId": "093a76ba-a0f2-4a03-80b1-bec1d3368711",
+                  "key": "source11"
+                },
+                {
+                  "dataAssetId": "2aa367d4-839c-468c-95b9-f3e63c628111",
+                  "key": "source12"
+                }
+              ],
+              "scriptSinkBindings": [
+                {
+                  "dataAssetId": "2f5a9076-3372-4282-b52d-a382382930ee",
+                  "key": "sink11"
+                },
+                {
+                  "dataAssetId": "30ba4508-b74f-46b0-bc30-1d891cd19ba1",
+                  "key": "sink12"
+                }
+              ],
+              "clusterSize": 2
+            },
+            "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1/pipelineSteps/PipelineStep1",
+            "name": "PipelineStep1",
+            "type": "Microsoft.DataCollaboration/workspaces/pipelines/pipelineSteps"
+          }
+        ]
+      }
+    }
+  }
+}
