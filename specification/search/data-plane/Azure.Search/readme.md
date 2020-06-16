@@ -28,40 +28,40 @@ opt-in-extensible-enums: true
 openapi-type: data-plane
 ```
 
-### Tag: package-2019-05-searchservice-preview
+### Tag: package-2020-06-searchservice-preview
 
-These settings apply only when `--tag=package-2019-05-searchservice-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-06-searchservice-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-searchservice-preview'
+``` yaml $(tag) == 'package-2020-06-searchservice-preview'
 input-file:
-- preview/2019-05-06-preview/searchservice.json
+- preview/2020-06-30-preview/searchservice.json
 ```
 
-### Tag: package-2019-05-searchindex-preview
+### Tag: package-2020-06-searchindex-preview
 
-These settings apply only when `--tag=package-2019-05-searchindex-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-06-searchindex-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-searchindex-preview'
+``` yaml $(tag) == 'package-2020-06-searchindex-preview'
 input-file:
-- preview/2019-05-06-preview/searchindex.json
+- preview/2020-06-30-preview/searchindex.json
 ```
 
-### Tag: package-2019-05-searchservice
+### Tag: package-2020-06-searchservice
 
-These settings apply only when `--tag=package-2019-05-searchservice` is specified on the command line.
+These settings apply only when `--tag=package-2020-06-searchservice` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-searchservice'
+``` yaml $(tag) == 'package-2020-06-searchservice'
 input-file:
-- stable/2019-05-06/searchservice.json
+- stable/2020-06-30/searchservice.json
 ```
 
-### Tag: package-2019-05-searchindex
+### Tag: package-2020-06-searchindex
 
-These settings apply only when `--tag=package-2019-05-searchindex` is specified on the command line.
+These settings apply only when `--tag=package-2020-06-searchindex` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-searchindex'
+``` yaml $(tag) == 'package-2020-06-searchindex'
 input-file:
-- stable/2019-05-06/searchindex.json
+- stable/2020-06-30/searchindex.json
 ```
 
 ---
@@ -545,10 +545,10 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
-  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
-  - $(this-folder)/stable/2019-05-06/searchservice.json
-  - $(this-folder)/stable/2019-05-06/searchindex.json
+  - $(this-folder)/preview/2020-06-30-preview/searchservice.json
+  - $(this-folder)/preview/2020-06-30-preview/searchindex.json
+  - $(this-folder)/stable/2020-06-30/searchservice.json
+  - $(this-folder)/stable/2020-06-30/searchindex.json
 
 ```
 
