@@ -701,7 +701,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
             "required": false,
             "type": "string"
           },          
@@ -1126,7 +1126,7 @@
         },
         "modelName": {
           "description": "Optional user defined model name.",
-          "maxLength": 100,
+          "maxLength": 256,
           "type": "string"
         }
       }
@@ -1723,6 +1723,7 @@
       "type": "string",
       "description": "Semantic data type of the key value element.",
       "enum": [
+	"string",
         "selectionMark"
       ],
       "x-ms-enum": {
@@ -1966,7 +1967,8 @@
           "enum": [
             "selected",
             "unselected"
-          ]
+          ],
+          "x-nullable": false
         },
         "text": {
           "description": "Text content of the extracted field.",
