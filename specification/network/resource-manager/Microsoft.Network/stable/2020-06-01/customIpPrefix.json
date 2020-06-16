@@ -73,7 +73,7 @@
           "200": {
             "description": "Delete successful."
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -132,7 +132,7 @@
               "$ref": "#/definitions/CustomIPPrefix"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -195,7 +195,7 @@
               "$ref": "#/definitions/CustomIPPrefix"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -235,7 +235,7 @@
               "$ref": "#/definitions/CustomIPPrefixListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -281,7 +281,7 @@
               "$ref": "#/definitions/CustomIPPrefixListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -306,27 +306,27 @@
           "type": "string",
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length. Should be a subset of its master custom IP Prefix parent CIDR."
         },
-		"masterCustomIPPrefix" :
-		{
+        "masterCustomIPPrefix" :
+        {
           "type": "string",
           "description": "The name of the master custom IP Prefix parent."
-		},
+        },
         "commissionedState": {
           "readOnly": true,
           "type": "string",
           "description": "The commissioned state of the Custom IP Prefix. Possible values are: 'Provisioning', 'Provisioned', 'Commissioning', 'Commissioned', 'Decommissioning', 'Deprovisioning'.",
-		  "enum": [
-		    "Provisioning",
-			"Provisioned",
-			"Commissioning",
-			"Commissioned",
-			"Decommissioning",
-		    "Deprovisioning"
-		  ],
-		  "x-ms-enum": {
-		  "name": "CommissionedState",
-		  "modelAsString": true
-		  }
+          "enum": [
+            "Provisioning",
+            "Provisioned",
+            "Commissioning",
+            "Commissioned",
+            "Decommissioning",
+            "Deprovisioning"
+          ],
+          "x-ms-enum": {
+          "name": "CommissionedState",
+          "modelAsString": true
+          }
         },
         "publicIPPrefixes": {
           "readOnly": true,
