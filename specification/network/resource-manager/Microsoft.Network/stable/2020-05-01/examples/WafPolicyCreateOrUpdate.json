@@ -1,0 +1,258 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "policyName": "Policy1",
+    "parameters": {
+      "location": "WestUs",
+      "properties": {
+        "managedRules": {
+          "managedRuleSets": [
+            {
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.0"
+            }
+          ]
+        },
+        "customRules": [
+          {
+            "name": "Rule1",
+            "priority": 1,
+            "ruleType": "MatchRule",
+            "action": "Block",
+            "matchConditions": [
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RemoteAddr",
+                    "selector": null
+                  }
+                ],
+                "operator": "IPMatch",
+                "matchValues": [
+                  "192.168.1.0/24",
+                  "10.0.0.0/24"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Rule2",
+            "priority": 2,
+            "ruleType": "MatchRule",
+            "matchConditions": [
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RemoteAddr",
+                    "selector": null
+                  }
+                ],
+                "operator": "IPMatch",
+                "matchValues": [
+                  "192.168.1.0/24"
+                ]
+              },
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RequestHeaders",
+                    "selector": "UserAgent"
+                  }
+                ],
+                "operator": "Contains",
+                "matchValues": [
+                  "Windows"
+                ]
+              }
+            ],
+            "action": "Block"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Policy1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/Policy1",
+        "type": "Microsoft.Network/applicationgatewaywebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "state": "Enabled",
+            "mode": "Detection",
+            "maxRequestBodySizeInKb": 128,
+            "fileUploadLimitInMb": 750,
+            "requestBodyCheck": true
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "OWASP",
+                "ruleSetVersion": "3.0"
+              }
+            ]
+          },
+          "customRules": [
+            {
+              "name": "Rule1",
+              "priority": 1,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
+            },
+            {
+              "name": "Rule2",
+              "priority": 2,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24"
+                  ]
+                },
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RequestHeader",
+                      "selector": "UserAgent"
+                    }
+                  ],
+                  "operator": "Contains",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "Windows"
+                  ]
+                }
+              ],
+              "action": "Block"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "Policy1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/Policy1",
+        "type": "Microsoft.Network/applicationgatewaywebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "state": "Enabled",
+            "mode": "Detection",
+            "maxRequestBodySizeInKb": 128,
+            "fileUploadLimitInMb": 750,
+            "requestBodyCheck": true
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "OWASP",
+                "ruleSetVersion": "3.0"
+              }
+            ]
+          },
+          "customRules": [
+            {
+              "name": "Rule1",
+              "priority": 1,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
+            },
+            {
+              "name": "Rule2",
+              "priority": 2,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24"
+                  ]
+                },
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RequestHeader",
+                      "selector": "UserAgent"
+                    }
+                  ],
+                  "operator": "Contains",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "Windows"
+                  ]
+                }
+              ],
+              "action": "Block"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

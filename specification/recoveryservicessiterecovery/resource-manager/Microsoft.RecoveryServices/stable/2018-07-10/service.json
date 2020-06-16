@@ -242,7 +242,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets the validation errors in case the VM is unsuitable for protection.": {
             "$ref": "./examples/ReplicationEligibilityResults_List.json"
@@ -287,7 +286,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets the validation errors in case the VM is unsuitable for protection.": {
             "$ref": "./examples/ReplicationEligibilityResults_Get.json"
@@ -7499,6 +7497,10 @@
           "description": "The recovery availability set Id.",
           "type": "string"
         },
+        "recoveryProximityPlacementGroupId": {
+          "description": "The recovery proximity placement group Id.",
+          "type": "string"
+        },
         "vmDisks": {
           "description": "The list of vm disk details.",
           "type": "array",
@@ -7800,9 +7802,9 @@
           "type": "string"
         },
         "recoveryDiskEncryptionSetId": {
-	  "description": "The recovery disk encryption set Id.",
+          "description": "The recovery disk encryption set Id.",
           "type": "string"
-        },                
+        },
         "diskName": {
           "description": "The disk name.",
           "type": "string"
@@ -7879,12 +7881,12 @@
           "type": "string"
         },
         "failoverDiskName": {
-            "description": "The failover name for the managed disk.",
-            "type": "string"
+          "description": "The failover name for the managed disk.",
+          "type": "string"
         },
         "tfoDiskName": {
-            "description": "The test failover name for the managed disk.",
-            "type": "string"
+          "description": "The test failover name for the managed disk.",
+          "type": "string"
         }
       }
     },
@@ -8004,6 +8006,16 @@
           "type": "string",
           "readOnly": true
         },
+        "initialPrimaryZone": {
+          "description": "The initial primary availability zone.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialRecoveryZone": {
+          "description": "The initial recovery availability zone.",
+          "type": "string",
+          "readOnly": true
+        },
         "multiVmGroupId": {
           "description": "The multi vm group Id.",
           "type": "string"
@@ -8090,8 +8102,8 @@
           "type": "string"
         },
         "selectedTfoAzureNetworkId": {
-            "description": "The test failover virtual network.",
-            "type": "string"
+          "description": "The test failover virtual network.",
+          "type": "string"
         },
         "vmNics": {
           "description": "The virtual machine nic details.",
@@ -8175,8 +8187,12 @@
           }
         },
         "tfoAzureVMName": {
-            "description": "The test failover VM name.",
-            "type": "string"
+          "description": "The test failover VM name.",
+          "type": "string"
+        },
+        "recoveryProximityPlacementGroupId": {
+          "description": "The recovery proximity placement group Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8257,6 +8273,10 @@
         },
         "recoveryAvailabilitySetId": {
           "description": "The recovery availability set.",
+          "type": "string"
+        },
+        "recoveryProximityPlacementGroupId": {
+          "description": "The recovery proximity placement group Id.",
           "type": "string"
         },
         "policyId": {
@@ -8345,9 +8365,13 @@
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery os disk encryption information."
         },
+        "recoveryProximityPlacementGroupId": {
+          "description": "The recovery proximity placement group Id.",
+          "type": "string"
+        },
         "tfoAzureVMName": {
-            "description": "The user given name for test failover VM.",
-            "type": "string"
+          "description": "The user given name for test failover VM.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8425,12 +8449,12 @@
           "description": "The recovery disk encryption information (for one / single pass flows)."
         },
         "failoverDiskName": {
-            "description": "The target disk name for unplanned failover operation.",
-            "type": "string"
+          "description": "The target disk name for unplanned failover operation.",
+          "type": "string"
         },
         "tfoDiskName": {
-            "description": "The target disk name for test failover operation.",
-            "type": "string"
+          "description": "The target disk name for test failover operation.",
+          "type": "string"
         }
       }
     },
@@ -9122,6 +9146,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
+          }
+        },
+        "providerSpecificInput": {
+          "description": "The provider specific input.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
           }
         }
       }
@@ -10179,6 +10211,14 @@
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
           "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The proximity placement group ARM Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -10444,6 +10484,14 @@
           "description": "The recovery availability set Id.",
           "type": "string"
         },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
+          "type": "string"
+        },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
           "type": "string"
@@ -10518,6 +10566,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -11370,6 +11426,14 @@
         "diskEncryptionSetId": {
           "description": "The DiskEncryptionSet ARM ID.",
           "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The proximity placement group ARM Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -11709,6 +11773,11 @@
           "description": "The process server Id.",
           "type": "string"
         },
+        "processServerName": {
+          "description": "The process server name.",
+          "type": "string",
+          "readOnly": true
+        },
         "multiVmGroupId": {
           "description": "The multi vm group Id.",
           "type": "string"
@@ -11792,6 +11861,10 @@
           "description": "The selected recovery azure network Id.",
           "type": "string"
         },
+        "selectedTfoAzureNetworkId": {
+          "description": "The test failover virtual network.",
+          "type": "string"
+        },
         "selectedSourceNicId": {
           "description": "The selected source nic Id which will be used as the primary nic during failover.",
           "type": "string"
@@ -11821,6 +11894,14 @@
         },
         "recoveryAvailabilitySetId": {
           "description": "The recovery availability set Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
           "type": "string"
         },
         "useManagedDisks": {
@@ -11928,6 +12009,14 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
           "type": "string"
         }
       },
@@ -13836,6 +13925,60 @@
         "agentVersionDetails": {
           "$ref": "#/definitions/VersionDetails",
           "description": "The agent version details."
+        },
+        "health": {
+          "description": "The health of Process Server.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "psStatsRefreshTime": {
+          "format": "date-time",
+          "description": "The process server stats refresh time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "throughputUploadPendingDataInBytes": {
+          "format": "int64",
+          "description": "The uploading pending data in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputInMBps": {
+          "format": "int64",
+          "description": "The throughput in MBps.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputInBytes": {
+          "format": "int64",
+          "description": "The throughput in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputStatus": {
+          "description": "The throughput status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marsCommunicationStatus": {
+          "description": "The MARS communication status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marsRegistrationStatus": {
+          "description": "The MARS registration status.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -14280,6 +14423,46 @@
             "name": "MultiVmSyncPointOption",
             "modelAsString": true
           }
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
+    "RecoveryPlanA2ADetails": {
+      "description": "Recovery plan A2A specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "primaryZone": {
+          "description": "The primary zone.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The recovery zone.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
+    "RecoveryPlanA2AInput": {
+      "description": "Recovery plan A2A input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "primaryZone": {
+          "description": "The primary zone.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The recovery zone.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -14751,6 +14934,15 @@
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
           }
+        },
+        "providerSpecificDetails": {
+          "description": "The provider id and provider specific details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
+          },
+          "readOnly": true
         }
       }
     },
@@ -14767,6 +14959,29 @@
           "type": "string"
         }
       }
+    },
+    "RecoveryPlanProviderSpecificDetails": {
+      "description": "Recovery plan provider specific details.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "RecoveryPlanProviderSpecificInput": {
+      "description": "Recovery plan provider specific input base class.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "RecoveryPlanProviderSpecificFailoverInput": {
       "description": "Recovery plan provider specific failover input base class.",
@@ -16073,6 +16288,12 @@
           "description": "The maximum cpu cores count supported by target compute size.",
           "type": "integer"
         },
+        "vCPUsAvailable": {
+          "format": "int32",
+          "description": "The Available vCPUs supported by target compute size.",
+          "type": "integer",
+          "readOnly": true
+        },
         "memoryInGB": {
           "format": "double",
           "description": "The maximum memory in GB supported by target compute size.",
@@ -16098,6 +16319,14 @@
         "highIopsSupported": {
           "description": "The value indicating whether the target compute size supports high Iops.",
           "type": "string"
+        },
+        "hyperVGenerations": {
+          "description": "The supported HyperV Generations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -16473,8 +16702,8 @@
           "type": "string"
         },
         "selectedTfoAzureNetworkId": {
-            "description": "The Azure Network Id for test failover.",
-            "type": "string"
+          "description": "The Azure Network Id for test failover.",
+          "type": "string"
         },
         "selectedSourceNicId": {
           "description": "The selected source nic Id which will be used as the primary nic during failover.",
@@ -17028,27 +17257,53 @@
           "type": "boolean"
         },
         "tfoVMNetworkId": {
-            "description": "The network to be used by NIC during test failover.",
-            "type": "string"
+          "description": "The network to be used by NIC during test failover.",
+          "type": "string"
         },
         "tfoVMSubnetName": {
-            "description": "The subnet to be used by NIC during test failover.",
-            "type": "string"
+          "description": "The subnet to be used by NIC during test failover.",
+          "type": "string"
         },
         "tfoNetworkSecurityGroupId": {
-            "description": "The NSG to be used by NIC during test failover.",
-            "type": "string"
+          "description": "The NSG to be used by NIC during test failover.",
+          "type": "string"
         },
         "enableAcceleratedNetworkingOnTfo": {
-            "description": "Whether the test failover NIC has accelerated networking enabled.",
-            "type": "boolean"
+          "description": "Whether the test failover NIC has accelerated networking enabled.",
+          "type": "boolean"
         },
         "tfoIPConfigs": {
-            "description": "The IP configurations to be used by NIC during test failover.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/IPConfig"
-            }
+          "description": "The IP configurations to be used by NIC during test failover.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfig"
+          }
+        },
+        "recoveryNicName": {
+          "description": "The name of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "recoveryNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "reuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.",
+          "type": "boolean",
+          "default": false
+        },
+        "tfoRecoveryNicName": {
+          "description": "The name of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoRecoveryNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoReuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -17092,24 +17347,50 @@
           "type": "boolean"
         },
         "tfoVMSubnetName": {
-            "description": "The subnet to be used by NIC during test failover.",
-            "type": "string"
+          "description": "The subnet to be used by NIC during test failover.",
+          "type": "string"
         },
         "tfoNetworkSecurityGroupId": {
-            "description": "The NSG to be used by NIC during test failover.",
-            "type": "string"
+          "description": "The NSG to be used by NIC during test failover.",
+          "type": "string"
         },
         "enableAcceleratedNetworkingOnTfo": {
-            "description": "Whether the test NIC has accelerated networking enabled.",
-            "type": "boolean"
+          "description": "Whether the test NIC has accelerated networking enabled.",
+          "type": "boolean"
         },
         "tfoIPConfigs": {
-            "description": "The IP configurations to be used by NIC during test failover.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/IPConfig"
-            }
+          "description": "The IP configurations to be used by NIC during test failover.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfig"
+          }
+        },
+        "recoveryNicName": {
+          "description": "The name of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "recoveryNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "reuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.",
+          "type": "boolean",
+          "default": false
+        },
+        "tfoNicName": {
+          "description": "The name of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoReuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
+          "type": "boolean",
+          "default": false
         }
       }
     },

@@ -1,0 +1,51 @@
+{
+  "operationId": "MeshService_Get",
+  "description": "This example shows how to get a service resource for a given application. If the service resource exists, its description is returned along with an OK (200) status code. If the service resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sampleApplication",
+    "serviceResourceName": "helloWorldService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "helloWorldService",
+        "properties": {
+          "osType": "Linux",
+          "codePackages": [
+            {
+              "name": "helloWorldCode",
+              "image": "seabreeze/sbz-helloworld:1.0-alpine",
+              "endpoints": [
+                {
+                  "name": "helloWorldListener",
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1,
+                  "cpu": 1
+                }
+              }
+            }
+          ],
+          "networkRefs": [
+            {
+              "name": "sampleNetwork",
+              "endpointRefs": [
+                {
+                  "name": "helloWorldListener"
+                }
+              ]
+            }
+          ],
+          "description": "SeaBreeze Hello World Service.",
+          "replicaCount": 1,
+          "healthState": "Ok",
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}

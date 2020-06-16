@@ -28,15 +28,56 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2019-12
+tag: package-2019-12
 ```
 
 
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+  - Microsoft.ApiManagement/stable/2019-12-01/apimanagement.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimapis.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimapisByTags.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimapiversionsets.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimauthorizationservers.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimgateways.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimgroups.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimidentityprovider.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimissues.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimloggers.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimnamedvalues.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimnetworkstatus.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimnotifications.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimpolicies.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimportalsettings.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimproducts.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimproductsByTags.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimquotas.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimregions.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimsubscriptions.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimtagresources.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimtags.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimtenant.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimusers.json
+  - Microsoft.ApiManagement/stable/2019-12-01/definitions.json
+```
 ### Tag: package-preview-2019-12
 
 These settings apply only when `--tag=package-preview-2019-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-12'
+``` yaml $(tag) == 'package-preview-2019-12'
 input-file:
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
@@ -49,6 +90,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdeployment.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdiagnostics.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgateways.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgroups.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimidentityprovider.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimissues.json
@@ -72,11 +114,12 @@ input-file:
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimusers.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/definitions.json
 ```
+
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01'
+``` yaml $(tag) == 'package-2019-01'
 input-file:
   - Microsoft.ApiManagement/stable/2019-01-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2019-01-01/apimapis.json
@@ -341,6 +384,40 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimanagement.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimapis.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimapisByTags.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimapiversionsets.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimauthorizationservers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimgateways.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimgroups.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimidentityprovider.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimissues.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimloggers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimnamedvalues.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimnetworkstatus.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimnotifications.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimopenidconnectproviders.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimpolicies.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimpolicydescriptions.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimportalsettings.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimproducts.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimproductsByTags.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimquotas.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimregions.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimreports.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimsubscriptions.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtagresources.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtags.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtenant.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimusers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/definitions.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimapisByTags.json
@@ -352,6 +429,7 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimdeployment.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimdiagnostics.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimemailtemplates.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimgateways.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimgroups.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimidentityprovider.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimissues.json

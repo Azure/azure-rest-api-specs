@@ -1784,6 +1784,10 @@
           "$ref": "#/definitions/PipelineDiagnosticSettings",
           "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Backend"
         },
+        "enableHttpCorrelationHeaders": {
+          "type": "boolean",
+          "description": "Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true."
+        },
         "httpCorrelationProtocol": {
           "type": "string",
           "enum": [
@@ -4959,6 +4963,23 @@
         "password": {
           "type": "string",
           "description": "User Password. If no value is provided, a default password is generated."
+        },
+        "appType": {
+          "type": "string",
+          "description": "Determines the type of application which send the create user request. Default is old publisher portal.",
+          "enum": [
+            "developerPortal"
+          ],
+          "x-ms-enum": {
+            "name": "AppType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "developerPortal",
+                "description": "User create request was sent by new developer portal."
+              }
+            ]
+          }
         },
         "confirmation": {
           "type": "string",
