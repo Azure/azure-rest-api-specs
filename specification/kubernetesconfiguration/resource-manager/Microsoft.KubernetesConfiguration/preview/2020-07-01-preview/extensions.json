@@ -416,7 +416,7 @@
       ],
       "default": "namespace",
       "x-ms-enum": {
-        "name": "extensionScope",
+        "name": "extensionScopeType",
         "modelAsString": true
       }
     },
@@ -428,7 +428,11 @@
         "InstallPending",
         "Installed",
         "InstallFailed"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "installStatusType",
+        "modelAsString": true
+      }
     },
     "ExtensionStatus": {
       "description": "Status from this instance of the extension.",
@@ -450,7 +454,12 @@
             "Error",
             "Warning",
             "Information"
-          ]
+          ],
+          "default": "Information",
+          "x-ms-enum": {
+            "name": "statusMessageLevelType",
+            "modelAsString": true
+          }
         },
         "message": {
           "type": "string",
