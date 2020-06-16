@@ -84,7 +84,7 @@
           "CostAllocationRules"
         ],
         "operationId": "CostAllocationRules_CheckNameAvailability",
-        "description": "Check if a given rule name is in use",
+        "description": "Checks availability and correctness of a name for a cost allocation rule",
         "x-ms-examples": {
           "CostAllocationRuleCheckNameAvailability": {
             "$ref": "./examples/CostAllocationRuleCheckNameAvailability.json"
@@ -191,7 +191,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinition"
+              "$ref": "#/definitions/CostAllocationRuleDefinitionRequest"
             }
           }
         ],
@@ -297,7 +297,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Resource type"
+          "description": "Resource type. This is expected to be Microsoft.CostManagement/costAllocationRules"
         }
       }
     },
