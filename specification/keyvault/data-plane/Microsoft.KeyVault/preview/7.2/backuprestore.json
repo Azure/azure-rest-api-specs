@@ -5,6 +5,21 @@
     "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "version": "7.2-preview"
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
   "consumes": [
     "application/json"
   ],
@@ -193,6 +208,64 @@
           }
         }
       }
+    },
+    "/keys/{keyName}/restore": {
+      "put": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "SelectiveKeyRestoreOperation",
+        "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
+        "parameters": [
+          {
+            "name": "keyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key to be restored from the user supplied backup"
+          },
+          {
+            "name": "restoreBlobDetails",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperationParameters"
+            },
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started selective key restore operation from the previously stored backup",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Selectively restore key from a backup": {
+            "$ref": "./examples/SelectiveRestore-example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -210,6 +283,52 @@
         "folderToRestore",
         "sasTokenParameters"
       ]
+    },
+    "SelectiveKeyRestoreOperationParameters": {
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter"
+        },
+        "folder": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      },
+      "required": [
+        "folder",
+        "sasTokenParameters"
+      ]
+    },
+    "SelectiveKeyRestoreOperation": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the restore operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of restore operation."
+        },
+        "error": {
+          "$ref": "common.json#/definitions/Error",
+          "description": "Error encountered, if any, during the selective key restore operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the selective key restore operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the restore operation"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the restore operation"
+        }
+      },
+      "description": "Selective Key Restore operation"
     },
     "SASTokenParameter": {
       "properties": {

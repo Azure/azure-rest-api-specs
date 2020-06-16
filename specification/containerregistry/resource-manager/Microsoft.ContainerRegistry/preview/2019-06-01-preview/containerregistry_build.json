@@ -1904,6 +1904,10 @@
         "logLink": {
           "description": "The link to logs for a run on a azure container registry.",
           "type": "string"
+        },
+        "logArtifactLink": {
+          "description": "The link to logs in registry for a run on a azure container registry.",
+          "type": "string"
         }
       }
     },
@@ -2994,6 +2998,15 @@
         "message": {
           "description": "error message.",
           "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/definitions/InnerErrorDescription",
+          "description": "an array of additional nested error response info objects, as described by this contract.",
+          "type": "array"
         }
       }
     },
@@ -3003,6 +3016,27 @@
         "error": {
           "$ref": "#/definitions/ErrorResponseBody",
           "description": "Azure container registry build API error body."
+        }
+      }
+    },
+    "InnerErrorDescription": {
+      "description": "inner error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
         }
       }
     },
