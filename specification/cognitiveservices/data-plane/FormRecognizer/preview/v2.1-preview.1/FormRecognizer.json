@@ -441,21 +441,21 @@
           }
         ],
         "responses": {
-            "201": {
-              "description": "Request is queued successfully.",
-              "headers": {
-                "Location": {
-                  "type": "string",
-                  "description": "Location and ID of the composed model. The status of composed model is specified in the status property at the model location."
-                }
-              }
-            },
-            "default": {
-              "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
+          "201": {
+            "description": "Request is queued successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location and ID of the composed model. The status of composed model is specified in the status property at the model location."
               }
             }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         },
         "x-ms-examples": {
             "Compose custom models": {
@@ -521,7 +521,8 @@
           "Analyze receipt": {
             "$ref": "./examples/BusinessCardBatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/prebuilt/businessCard/analyzeResults/{resultId}": {
@@ -1614,7 +1615,7 @@
       "type": "string",
       "description": "Semantic data type of the key value element.",
       "enum": [
-	"string",
+        "string",
         "selectionMark"
       ],
       "x-ms-enum": {
