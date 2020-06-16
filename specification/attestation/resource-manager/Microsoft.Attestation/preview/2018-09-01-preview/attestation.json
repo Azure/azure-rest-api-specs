@@ -347,11 +347,11 @@
         "tags": [
           "AttestationProviders"
         ],
-        "operationId": "AttestationProviders_GetDefault",
+        "operationId": "AttestationProviders_ListDefault",
         "description": "Get the default provider",
         "x-ms-examples": {
           "AttestationProviders_GetDefault": {
-            "$ref": "./examples/Get_DefaultProvider.json"
+            "$ref": "./examples/Get_DefaultProviders.json"
           }
         },
         "parameters": [
@@ -363,7 +363,7 @@
           "200": {
             "description": "Retrieved information about the default provider.",
             "schema": {
-              "$ref": "#/definitions/AttestationProvider"
+              "$ref": "#/definitions/AttestationProviderListResult"
             }
           },
           "default": {
@@ -375,7 +375,7 @@
         }
       }
     },
-    "/providers/Microsoft.Attestation/locations/{location}/defaultProviders": {
+    "/providers/Microsoft.Attestation/locations/{location}/defaultProvider": {
       "get": {
         "tags": [
           "AttestationProviders"
