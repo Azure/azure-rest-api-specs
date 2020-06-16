@@ -175,7 +175,7 @@ override-info:
 
 ### Tag: package-2015-06-preview-only
 
-These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2015-06-preview-only'
 input-file:
@@ -198,7 +198,7 @@ override-info:
 
 ### Tag: package-2017-08-preview-only
 
-These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2017-08-preview-only'
 input-file:
@@ -221,7 +221,7 @@ override-info:
 
 ### Tag: package-2019-01-preview-only
 
-These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
@@ -237,7 +237,7 @@ override-info:
 
 ### Tag: package-2020-01-preview-only
 
-These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
@@ -250,7 +250,7 @@ override-info:
 
 ### Tag: package-2017-08-only
 
-These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
@@ -263,7 +263,7 @@ override-info:
 
 ### Tag: package-2018-06-only
 
-These settings apply only when `--tag=package-2018-06-only` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2018-06-only'
 input-file:
@@ -276,7 +276,7 @@ override-info:
 
 ### Tag: package-2019-01-only
 
-These settings apply only when `--tag=package-2019-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-01-only'
 input-file:
@@ -290,7 +290,7 @@ override-info:
 
 ### Tag: package-2019-08-only
 
-These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-08-only'
 input-file:
@@ -304,7 +304,7 @@ override-info:
 
 ### Tag: package-2020-01-preview-only
 
-These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-package-2020-01-preview-only'
 input-file:
@@ -317,7 +317,7 @@ override-info:
 
 ### Tag: package-2020-01-only
 
-These settings apply only when `--tag=package-2020-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2020-01-only'
 input-file:
