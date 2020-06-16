@@ -150,7 +150,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinition"
+              "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
             }
           },
           "default": {
@@ -199,7 +199,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinition"
+              "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
             }
           },
           "default": {
@@ -277,7 +277,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/CostAllocationRuleDefinition"
+            "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
           }
         },
         "nextLink": {
@@ -350,39 +350,43 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource type of the rule. This is a read only value of Microsoft.CostManagement/CostAllocationRule."
-        },
-        "properties": {
-          "$ref": "#/definitions/CostAllocationRulePropertiesResponse",
-          "description": "Cost allocation rule properties"
         }
       },
       "x-ms-azure-resource": true
     },
-    "CostAllocationRuleDefinitionRequest": {
-      "type": "object",
-      "description": "The cost allocation rule model definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure Resource Manager Id for the rule. This is a read ony value."
+    "CostAllocationRuleDefinitionResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationRuleDefinition"
         },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the rule. This is a read only value."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type of the rule. This is a read only value of Microsoft.CostManagement/CostAllocationRule."
-        },
-        "properties": {
-          "$ref": "#/definitions/CostAllocationRulePropertiesRequest",
-          "description": "Cost allocation rule properties"
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/CostAllocationRulePropertiesResponse",
+              "description": "Cost allocation rule properties"
+            }
+          }
         }
-      },
-      "x-ms-azure-resource": true
+      ],
+      "description": "The cost allocation rule model definition"
+    },
+    "CostAllocationRuleDefinitionRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CostAllocationRuleDefinition"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/CostAllocationRulePropertiesRequest",
+              "description": "Cost allocation rule properties"
+            }
+          }
+        }
+      ],
+      "description": "The cost allocation rule model definition"
     },
     "CostAllocationRuleProperties": {
       "type": "object",
@@ -423,7 +427,7 @@
       ]
     },
     "CostAllocationRulePropertiesRequest": {
-      "description": "The properties of a cost allocation rule response",
+      "description": "The properties of a cost allocation rule request",
       "allOf": [
         {
           "$ref": "#/definitions/CostAllocationRuleProperties"
