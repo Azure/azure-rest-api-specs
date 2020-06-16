@@ -501,7 +501,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
             "required": false,
             "type": "string"
           },          
@@ -601,7 +601,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the invoice. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the invoice. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
             "required": false,
             "type": "string"
           },          
@@ -701,7 +701,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
             "required": false,
             "type": "string"
           },          
@@ -1543,6 +1543,13 @@
           "items": {
             "$ref": "#/definitions/TextLine"
           }
+        },
+        "selectionMarks": {
+          "description": "List of selection marks extracted from the page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelectionMark"
+          }
         }
       }
     },
@@ -1655,13 +1662,6 @@
           "items": {
             "$ref": "#/definitions/DataTable"
           }
-        },
-        "selectionMarks": {
-          "description": "List of selection marks extracted from the page.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SelectionMark"
-          }
         }
       }
     },
@@ -1733,7 +1733,7 @@
       "x-nullable": false
     },
     "ElementReference": {
-      "description": "Reference to a line or word.",
+      "description": "Reference to a line, word or selection mark.",
       "type": "string"
     },
     "SelectionMark": {

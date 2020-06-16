@@ -492,7 +492,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
             "required": false,
             "type": "string"
           },          
@@ -567,7 +567,7 @@
     "/prebuilt/receipt/analyze": {
       "post": {
         "summary": "Analyze Receipt",
-        "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeReceiptAsync",
         "consumes": [
           "application/pdf",
@@ -592,7 +592,7 @@
           {
             "name": "locale",
             "in": "query",
-            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US.",
+            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
             "required": false,
             "type": "string"
           },          
@@ -1434,6 +1434,13 @@
           "items": {
             "$ref": "#/definitions/TextLine"
           }
+        },
+        "selectionMarks": {
+          "description": "List of selection marks extracted from the page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelectionMark"
+          }
         }
       }
     },
@@ -1546,13 +1553,6 @@
           "items": {
             "$ref": "#/definitions/DataTable"
           }
-        },
-        "selectionMarks": {
-          "description": "List of selection marks extracted from the page.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SelectionMark"
-          }
         }
       }
     },
@@ -1624,7 +1624,7 @@
       "x-nullable": false
     },
     "ElementReference": {
-      "description": "Reference to a line or word.",
+      "description": "Reference to a line, word or selection mark.",
       "type": "string"
     },
     "SelectionMark": {
