@@ -1152,7 +1152,7 @@
       "description": "Workload version resource properties.",
       "required": [
         "contentType",
-        "keyVaultUri",
+        "keyVaultId",
         "appInsightsInstrumentationKey"
       ],
       "type": "object",
@@ -1183,7 +1183,7 @@
             ],
           "$ref": "#/definitions/ContentType"
         },
-        "keyVaultUri": {
+        "keyVaultId": {
           "description": "Key-vault resource id.\r\n\r\nKey-vault will be used to store secrets like private ssh keys or\r\npasswords for the vms created in user's subscription.",
           "type": "string",
           "x-ms-mutability": [
@@ -1243,10 +1243,6 @@
         },
         "assessmentId": {
           "description": "Migrating VMs assessment Id.",
-          "type": "string"
-        },
-        "deploymentResourceGroupName": {
-          "description": "Deployment resource group name where migrating workload infra resources will be created.",
           "type": "string"
         }
       }
@@ -1373,7 +1369,8 @@
     "InstanceProperties": {
       "description": "Instance resource properties.",
       "required": [
-        "versionId"
+        "versionId",
+        "targetResourceGroupId"
       ],
       "type": "object",
       "properties": {
@@ -1384,6 +1381,14 @@
         },
         "versionId": {
           "description": "Workload version Id for this instance.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "targetResourceGroupId": {
+          "description": "Target resource group Id where workload infra resources will be created.",
           "type": "string",
           "x-ms-mutability": [
             "create",
