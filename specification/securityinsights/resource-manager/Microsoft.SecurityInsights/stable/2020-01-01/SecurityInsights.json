@@ -1490,6 +1490,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
+        },
+        {
+          "$ref": "#/definitions/AlertRuleKind"
         }
       ],
       "description": "Alert rule.",
@@ -1497,42 +1500,49 @@
       "required": [
         "kind"
       ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AlertRuleKind",
-          "description": "The alert rule kind"
-        }
-      },
       "type": "object"
     },
     "AlertRuleKind": {
       "description": "The kind of the alert rule",
-      "enum": [
-        "Scheduled",
-        "MicrosoftSecurityIncidentCreation",
-        "Fusion"
+      "discriminator": "kind",
+      "required": [
+        "kind"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AlertRuleKind",
-        "values": [
-          {
-            "value": "Scheduled"
-          },
-          {
-            "value": "MicrosoftSecurityIncidentCreation"
-          },
-          {
-            "value": "Fusion"
+      "properties": {
+        "kind": {
+          "description": "The kind of the alert rule",
+          "enum": [
+            "Scheduled",
+            "MicrosoftSecurityIncidentCreation",
+            "Fusion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AlertRuleKind",
+            "values": [
+              {
+                "value": "Scheduled"
+              },
+              {
+                "value": "MicrosoftSecurityIncidentCreation"
+              },
+              {
+                "value": "Fusion"
+              }
+            ]
           }
-        ]
-      }
+        }
+      },
+      "type": "object"
     },
     "AlertRuleTemplate": {
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/AlertRuleKind"
         }
       ],
       "description": "Alert rule template.",
@@ -1540,12 +1550,6 @@
       "required": [
         "kind"
       ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AlertRuleKind",
-          "description": "The alert rule kind"
-        }
-      },
       "type": "object"
     },
     "AlertRuleTemplateDataSource": {
@@ -1707,21 +1711,6 @@
             "value": "Informational"
           }
         ]
-      }
-    },
-    "MicrosoftSecurityProductName": {
-      "description": "The alerts' productName on which the cases will be generated",
-      "enum": [
-        "Microsoft Cloud App Security",
-        "Azure Security Center",
-        "Azure Advanced Threat Protection",
-        "Azure Active Directory Identity Protection",
-        "Azure Security Center for IoT"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "MicrosoftSecurityProductName"
       }
     },
     "AlertsDataTypeOfDataConnector": {
@@ -1925,14 +1914,33 @@
       "type": "object"
     },
     "CloudError": {
-      "x-ms-external": true,
+      "description": "Error response structure.",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The error object of the CloudError response"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Error data",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "An error response for a resource management request."
+      "type": "object",
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-ms-external": true
     },
     "DataConnector": {
       "allOf": [
@@ -2135,8 +2143,25 @@
       "description": "Represents Fusion alert rule template.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FusionAlertRuleTemplateProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            }
+          ],
           "description": "Fusion alert rule template properties",
+          "properties": {
+            "severity": {
+              "$ref": "#/definitions/AlertSeverity",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
           "required": [
             "displayName",
             "description",
@@ -2149,28 +2174,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
-    },
-    "FusionAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-        }
-      ],
-      "description": "Represents Fusion alert rule template properties",
-      "properties": {
-        "severity": {
-          "$ref": "#/definitions/AlertSeverity",
-          "description": "The severity for alerts created by this alert rule."
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule template",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
     },
     "Incident": {
       "allOf": [
@@ -2691,8 +2694,19 @@
           "type": "array"
         },
         "productFilter": {
-          "$ref": "#/definitions/MicrosoftSecurityProductName",
-          "description": "The alerts' productName on which the cases will be generated"
+          "description": "The alerts' productName on which the cases will be generated",
+          "enum": [
+            "Microsoft Cloud App Security",
+            "Azure Security Center",
+            "Azure Advanced Threat Protection",
+            "Azure Active Directory Identity Protection",
+            "Azure Security Center for IoT"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "MicrosoftSecurityProductName"
+          }
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
@@ -2745,45 +2759,6 @@
       ],
       "type": "object"
     },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-        }
-      ],
-      "description": "MicrosoftSecurityIncidentCreation rule template properties",
-      "properties": {
-        "displayNamesFilter": {
-          "description": "the alerts' displayNames on which the cases will be generated",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "displayNamesExcludeFilter": {
-          "description": "the alerts' displayNames on which the cases will not be generated",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "productFilter": {
-          "$ref": "#/definitions/MicrosoftSecurityProductName",
-          "description": "The alerts' productName on which the cases will be generated"
-        },
-        "severitiesFilter": {
-          "description": "the alerts' severities on which the cases will be generated",
-          "items": {
-            "$ref": "#/definitions/AlertSeverity"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "productFilter"
-      ],
-      "type": "object"
-    },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
@@ -2793,7 +2768,14 @@
       "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            },
+            {
+              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
+            }
+          ],
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "required": [
             "displayName",
