@@ -57,13 +57,7 @@
           "201": {
             "description": "Environment Resource create response.",
             "schema": {
-              "$ref": "#/definitions/PutResponse"
-            }
-          },
-          "200": {
-            "description": "Environment Resource update response.",
-            "schema": {
-              "$ref": "#/definitions/PutResponse"
+              "$ref": "#/definitions/Response"
             }
           },
           "default": {
@@ -89,9 +83,6 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
         "responses": {
@@ -109,6 +100,38 @@
           }
         }
       },
+      "delete": {
+        "description": "Delete Environment",
+        "operationId": "Environment_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Delete Environment.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     },
   },
   "definitions": {
@@ -148,22 +171,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "/subscriptions/id/locations/westus/operationsStatus/sameguid"
-        },
-        "name": {
-          "type": "string",
-          "description": "sameguid"
+          "description": "subscriptions/{id}/providers/{providerName}/locations/{location}/operationsStatus/{id}"
         },
         "status": {
           "type": "string",
-          "description": "when not completed non-terminal value | Accepted | Created, when completed, terminal values | Succeeded | Failed | Canceled",
-          "enum": [
-            "Accepted",
-            "Created",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ]
+          "description": "RP defined values | Succeeded | Failed | Canceled"
         },
         "startTime": {
           "type": "string",
@@ -173,23 +185,27 @@
           "type": "string",
           "description": "<DateLiteral per ISO8601>"
         },
-        "EnvironmentResource": {
+        "percentComplete": {
+          "type": "string",
+          "description": "<double between 0 and 100>"
+        },
+        "environmentResource": {
           "$ref": "#/definitions/EnvironmentResource",
           "description": "EnvironmentResource detail"
         }
       }
     },
-    "PutResponse": {
+    "Response": {
       "properties": {
-        "status": {
+        "location": {
           "type": "string",
-          "description": "Current status of the put.",
-          "enum": [
-            "Accepted",
-            "Created"
-          ]
+          "description": "Location such as North US"
         },
-        "EnvironmentResource": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Succeeded, Failed and Canceled"
+        },
+        "environmentResource": {
           "$ref": "#/definitions/EnvironmentResource",
           "description": "EnvironmentResource detail"
         }
