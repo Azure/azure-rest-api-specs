@@ -257,6 +257,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_ValidateAtScope",
+        "x-ms-long-running-operation": true,
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
@@ -284,6 +285,9 @@
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
+          },
+          "202": {
+            "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
             "description": "Returns the validation result.",
@@ -561,6 +565,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_ValidateAtTenantScope",
+        "x-ms-long-running-operation": true,
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
@@ -585,6 +590,9 @@
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
+          },
+          "202": {
+            "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
             "description": "Returns the validation result.",
@@ -871,6 +879,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_ValidateAtManagementGroupScope",
+        "x-ms-long-running-operation": true,
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
@@ -898,6 +907,9 @@
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
+          },
+          "202": {
+            "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
             "description": "Returns the validation result.",
@@ -1185,6 +1197,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_ValidateAtSubscriptionScope",
+        "x-ms-long-running-operation": true,
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
@@ -1212,6 +1225,9 @@
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
+          },
+          "202": {
+            "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
             "description": "Returns the validation result.",
@@ -1622,6 +1638,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_Validate",
+        "x-ms-long-running-operation": true,
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
@@ -1659,6 +1676,9 @@
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
+          },
+          "202": {
+            "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
           },
           "400": {
             "description": "Returns the validation result.",
@@ -2142,7 +2162,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter. You can expand createdTime and changedTime. For example, to expand both properties, use $expand=changedTime,createdTime"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -2640,7 +2660,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter. You can expand createdTime and changedTime. For example, to expand both properties, use $expand=changedTime,createdTime"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -2726,7 +2746,12 @@
             "description": "The name of the resource to check whether it exists."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2795,7 +2820,12 @@
             "description": "The name of the resource to delete."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2868,7 +2898,12 @@
             "description": "The name of the resource to create."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -2956,7 +2991,12 @@
             "description": "The name of the resource to update."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3038,7 +3078,12 @@
             "description": "The name of the resource to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3077,7 +3122,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3111,7 +3161,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3149,7 +3204,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3202,7 +3262,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3249,7 +3314,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3274,7 +3344,8 @@
           "Tags"
         ],
         "operationId": "Tags_DeleteValue",
-        "description": "Deletes a tag value.",
+        "summary": "Deletes a predefined tag value for a predefined tag name.",
+        "description": "This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.",
         "parameters": [
           {
             "name": "tagName",
@@ -3299,10 +3370,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Predefined tag value successfully deleted."
           },
           "204": {
-            "description": "No Content"
+            "description": "Predefined tag value did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3317,7 +3388,8 @@
           "Tags"
         ],
         "operationId": "Tags_CreateOrUpdateValue",
-        "description": "Creates a tag value. The name of the tag must already exist.",
+        "summary": "Creates a predefined value for a predefined tag name.",
+        "description": "This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.",
         "parameters": [
           {
             "name": "tagName",
@@ -3342,13 +3414,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the tag value.",
+            "description": "Predefined tag value already exists. Returns information about the predefined tag value.",
             "schema": {
               "$ref": "#/definitions/TagValue"
             }
           },
           "201": {
-            "description": "Created - Returns information about the tag value.",
+            "description": "Predefined tag value successfully created. Returns information about the predefined tag value.",
             "schema": {
               "$ref": "#/definitions/TagValue"
             }
@@ -3368,8 +3440,8 @@
           "Tags"
         ],
         "operationId": "Tags_CreateOrUpdate",
-        "summary": "Creates a tag in the subscription.",
-        "description": "The tag name can have a maximum of 512 characters and is case insensitive. Tag names created by Azure have prefixes of microsoft, azure, or windows. You cannot create tags with one of these prefixes.",
+        "summary": "Creates a predefined tag name.",
+        "description": "This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.",
         "parameters": [
           {
             "name": "tagName",
@@ -3387,13 +3459,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the tag.",
+            "description": "Predefined tag name already exists. Returns information about the predefined tag name.",
             "schema": {
               "$ref": "#/definitions/TagDetails"
             }
           },
           "201": {
-            "description": "Created - Returns information about the tag.",
+            "description": "Predefined tag name successfully created. Returns information about the predefined tag name.",
             "schema": {
               "$ref": "#/definitions/TagDetails"
             }
@@ -3411,8 +3483,8 @@
           "Tags"
         ],
         "operationId": "Tags_Delete",
-        "summary": "Deletes a tag from the subscription.",
-        "description": "You must remove all values from a resource tag before you can delete it.",
+        "summary": "Deletes a predefined tag name.",
+        "description": "This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.",
         "parameters": [
           {
             "name": "tagName",
@@ -3430,10 +3502,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Predefined tag name successfully deleted."
           },
           "204": {
-            "description": "No Content"
+            "description": "Predefined tag name did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3450,7 +3522,8 @@
           "Tags"
         ],
         "operationId": "Tags_List",
-        "description": "Gets the names and values of all resource tags that are defined in a subscription.",
+        "summary": "Gets a summary of tag usage under the subscription.",
+        "description": "This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3969,8 +4042,9 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceCreate",
-        "description": "Create or Replace existing tags with passing in tags.",
+        "operationId": "Tags_CreateOrUpdateAtScope",
+        "summary": "Creates or updates the entire set of tags on a resource or subscription.",
+        "description": "This operation allows adding or replacing the entire set of tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -3984,13 +4058,12 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/TagsResource"
-            },
-            "description": "Parameters for creating multiple tags."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns added tag information about the resource.",
+            "description": "Tags updated successfully. Returns tags from the specified object.",
             "schema": {
               "$ref": "#/definitions/TagsResource"
             }
@@ -4003,10 +4076,10 @@
           }
         },
         "x-ms-examples": {
-          "Creates multiple tags for a tracked resource.": {
+          "Update tags on a resource": {
             "$ref": "./examples/PutTagsResource.json"
           },
-          "Create multiple tags for a subscription.": {
+          "Update tags on a subscription": {
             "$ref": "./examples/PutTagsSubscription.json"
           }
         }
@@ -4015,8 +4088,9 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceUpdate",
-        "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
+        "operationId": "Tags_UpdateAtScope",
+        "summary": "Selectively updates the set of tags on a resource or subscription.",
+        "description": "This operation allows replacing, merging or selectively deleting tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4029,14 +4103,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagPatchRequest"
-            },
-            "description": "Parameters for updating multiple tags."
+              "$ref": "#/definitions/TagsPatchResource"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns updated tag information about the resource.",
+            "description": "Tags updated successfully. Returns tags from the specified object.",
             "schema": {
               "$ref": "#/definitions/TagsResource"
             }
@@ -4053,8 +4126,8 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceGet",
-        "description": "Gets all the tags for the resource.",
+        "operationId": "Tags_GetAtScope",
+        "summary": "Gets the entire set of tags on a resource or subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4065,7 +4138,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns tag information about the resource.",
+            "description": "Returns tags from the specified object.",
             "schema": {
               "$ref": "#/definitions/TagsResource"
             }
@@ -4078,10 +4151,10 @@
           }
         },
         "x-ms-examples": {
-          "Gets all the tags for a tracked resource.": {
+          "Get tags on a resource": {
             "$ref": "./examples/GetTagsResource.json"
           },
-          "Gets all the tags for a subscription.": {
+          "Get tags on a subscription": {
             "$ref": "./examples/GetTagsSubscription.json"
           }
         }
@@ -4090,8 +4163,8 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceDelete",
-        "description": "Deletes all the tags for the resource.",
+        "operationId": "Tags_DeleteAtScope",
+        "summary": "Deletes the entire set of tags on a resource or subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4102,7 +4175,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Tags successfully deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4248,6 +4321,13 @@
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
           "description": "The deployment properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Deployment tags"
         }
       },
       "required": [
@@ -4264,6 +4344,13 @@
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
           "description": "The deployment properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Deployment tags"
         }
       },
       "required": [
@@ -4337,7 +4424,7 @@
       },
       "description": "An error response for a resource management request."
     },
-    "AliasPathType": {
+    "AliasPath": {
       "properties": {
         "path": {
           "type": "string",
@@ -4349,11 +4436,50 @@
             "type": "string"
           },
           "description": "The API versions."
+        },
+        "pattern": {
+          "$ref": "#/definitions/AliasPattern",
+          "description": "The pattern for an alias path."
         }
       },
-      "description": "The type of the paths for alias. "
+      "description": "The type of the paths for alias."
     },
-    "AliasType": {
+    "AliasPattern": {
+      "properties": {
+        "phrase": {
+          "type": "string",
+          "description": "The alias pattern phrase."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The alias pattern variable."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Extract"
+          ],
+          "x-ms-enum": {
+            "name": "AliasPatternType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "NotSpecified is not allowed."
+              },
+              {
+                "value": "Extract",
+                "description": "Extract is the only allowed value."
+              }
+            ]
+          },
+          "description": "The type of alias pattern"
+        }
+      },
+      "description": "The type of the pattern for an alias path."
+    },
+    "Alias": {
       "properties": {
         "name": {
           "type": "string",
@@ -4362,9 +4488,44 @@
         "paths": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AliasPathType"
+            "$ref": "#/definitions/AliasPath"
           },
           "description": "The paths for an alias."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the alias.",
+          "enum": [
+            "NotSpecified",
+            "PlainText",
+            "Mask"
+          ],
+          "x-ms-enum": {
+            "name": "AliasType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "Alias type is unknown (same as not providing alias type)."
+              },
+              {
+                "value": "PlainText",
+                "description": "Alias value is not secret."
+              },
+              {
+                "value": "Mask",
+                "description": "Alias value is secret."
+              }
+            ]
+          }
+        },
+        "defaultPath": {
+          "type": "string",
+          "description": "The default path for an alias."
+        },
+        "defaultPattern": {
+          "$ref": "#/definitions/AliasPattern",
+          "description": "The default pattern for an alias."
         }
       },
       "description": "The alias type. "
@@ -4385,7 +4546,7 @@
         "aliases": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AliasType"
+            "$ref": "#/definitions/Alias"
           },
           "description": "The aliases that are supported by this resource type."
         },
@@ -4508,10 +4669,12 @@
           "description": "The duration of the template deployment."
         },
         "outputs": {
+          "readOnly": true,
           "type": "object",
           "description": "Key/value pairs that represent deployment output."
         },
         "providers": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Provider"
@@ -4519,29 +4682,30 @@
           "description": "The list of resource providers needed for the deployment."
         },
         "dependencies": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dependency"
           },
           "description": "The list of deployment dependencies."
         },
-        "template": {
-          "type": "object",
-          "description": "The template content. Use only one of Template or TemplateLink."
-        },
         "templateLink": {
+          "readOnly": true,
           "$ref": "#/definitions/TemplateLink",
-          "description": "The URI referencing the template. Use only one of Template or TemplateLink."
+          "description": "The URI referencing the template."
         },
         "parameters": {
+          "readOnly": true,
           "type": "object",
-          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
+          "description": "Deployment parameters. "
         },
         "parametersLink": {
+          "readOnly": true,
           "$ref": "#/definitions/ParametersLink",
-          "description": "The URI referencing the parameters. Use only one of Parameters or ParametersLink."
+          "description": "The URI referencing the parameters. "
         },
         "mode": {
+          "readOnly": true,
           "type": "string",
           "description": "The deployment mode. Possible values are Incremental and Complete.",
           "enum": [
@@ -4554,15 +4718,55 @@
           }
         },
         "debugSetting": {
+          "readOnly": true,
           "$ref": "#/definitions/DebugSetting",
           "description": "The debug setting of the deployment."
         },
         "onErrorDeployment": {
+          "readOnly": true,
           "$ref": "#/definitions/OnErrorDeploymentExtended",
           "description": "The deployment on error behavior."
+        },
+        "templateHash": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hash produced for the template."
+        },
+        "outputResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of provisioned resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of provisioned resources."
+          }
+        },
+        "validatedResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of validated resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of validated resources."
+          }
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment error."
         }
       },
       "description": "Deployment properties with additional details."
+    },
+    "ResourceReference": {
+      "description": "The resource Id model.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified resource Id."
+        }
+      }
     },
     "OnErrorDeployment": {
       "properties": {
@@ -4614,6 +4818,7 @@
     "DeploymentValidateResult": {
       "properties": {
         "error": {
+          "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "The deployment validation error."
         },
@@ -4648,6 +4853,13 @@
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
           "description": "Deployment properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Deployment tags"
         }
       },
       "x-ms-azure-resource": true,
@@ -4718,6 +4930,33 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Resource information."
+    },
+    "GenericResourceExpanded": {
+      "properties": {
+        "createdTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "changedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource. This is only present if requested via the $expand query parameter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericResource"
         }
       ],
       "description": "Resource information."
@@ -4807,6 +5046,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "IdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
@@ -4830,7 +5070,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenericResource"
+            "$ref": "#/definitions/GenericResourceExpanded"
           },
           "description": "An array of resources."
         },
@@ -4988,7 +5228,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The tag ID."
+          "description": "The tag value ID."
         },
         "tagValue": {
           "type": "string",
@@ -5007,7 +5247,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The tag ID."
+          "description": "The tag name ID."
         },
         "tagName": {
           "type": "string",
@@ -5025,6 +5265,7 @@
           "description": "The list of tag values."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "Tag details."
     },
     "TagsListResult": {
@@ -5072,6 +5313,69 @@
     },
     "DeploymentOperationProperties": {
       "properties": {
+        "provisioningOperation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the current provisioning operation.",
+          "enum": [
+            "NotSpecified",
+            "Create",
+            "Delete",
+            "Waiting",
+            "AzureAsyncOperationWaiting",
+            "ResourceCacheWaiting",
+            "Action",
+            "Read",
+            "EvaluateDeploymentOutput",
+            "DeploymentCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningOperation",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "The provisioning operation is not specified."
+              },
+              {
+                "value": "Create",
+                "description": "The provisioning operation is create."
+              },
+              {
+                "value": "Delete",
+                "description": "The provisioning operation is delete."
+              },
+              {
+                "value": "Waiting",
+                "description": "The provisioning operation is waiting."
+              },
+              {
+                "value": "AzureAsyncOperationWaiting",
+                "description": "The provisioning operation is waiting Azure async operation."
+              },
+              {
+                "value": "ResourceCacheWaiting",
+                "description": "The provisioning operation is waiting for resource cache."
+              },
+              {
+                "value": "Action",
+                "description": "The provisioning operation is action."
+              },
+              {
+                "value": "Read",
+                "description": "The provisioning operation is read."
+              },
+              {
+                "value": "EvaluateDeploymentOutput",
+                "description": "The provisioning operation is evaluate output."
+              },
+              {
+                "value": "DeploymentCleanup",
+                "description": "The provisioning operation is cleanup. This operation is part of the 'complete' mode deployment."
+              }
+            ]
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -5458,7 +5762,7 @@
       }
     },
     "Tags": {
-      "description": "key and value pairs for tags",
+      "description": "A dictionary of name and value pairs.",
       "properties": {
         "tags": {
           "type": "object",
@@ -5469,13 +5773,13 @@
         }
       }
     },
-    "TagPatchRequest": {
+    "TagsPatchResource": {
       "type": "object",
-      "description": "Tag Request for Patch operation.",
+      "description": "Wrapper resource for tags patch API request only.",
       "properties": {
         "operation": {
           "type": "string",
-          "description": "The operation type for the patch api.",
+          "description": "The operation type for the patch API.",
           "enum": [
             "Replace",
             "Merge",
@@ -5484,27 +5788,38 @@
         },
         "properties": {
           "$ref": "#/definitions/Tags",
-          "description": "tags object passing in the request."
+          "description": "The set of tags."
         }
       }
     },
     "TagsResource": {
       "type": "object",
-      "description": "Tags for the resource.",
+      "description": "Wrapper resource for tags API requests and responses.",
       "required": [
         "properties"
       ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the tags wrapper resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the tags wrapper resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the tags wrapper resource."
+        },
         "properties": {
           "$ref": "#/definitions/Tags",
-          "description": "tags property."
+          "description": "The set of tags."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ]
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -5514,7 +5829,8 @@
       "required": true,
       "type": "string",
       "description": "The resource scope.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "GroupIdParameter": {
       "name": "groupId",

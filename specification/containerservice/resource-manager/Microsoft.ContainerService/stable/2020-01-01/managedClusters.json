@@ -327,6 +327,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterMonitoringUserCredential": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListClusterMonitoringUserCredentials",
+        "summary": "Gets cluster monitoring user credential of a managed cluster.",
+        "description": "Gets cluster monitoring user credential of the managed cluster with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersListClusterCredentialResult.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}": {
       "get": {
         "tags": [
@@ -676,6 +719,9 @@
         "x-ms-examples": {
           "Create/Update Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Update.json"
+          },
+          "Update Agent Pool": {
+            "$ref": "./examples/AgentPools_Update.json"
           }
         }
       },
@@ -1380,10 +1426,7 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "maximum": 100,
-          "minimum": 1,
-          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. ",
-          "default": 1
+          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1."
         },
         "vmSize": {
           "$ref": "#/definitions/ContainerServiceVMSize",
@@ -1474,10 +1517,6 @@
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
         }
       },
-      "required": [
-        "vmSize",
-        "count"
-      ],
       "description": "Properties for the container service agent pool profile."
     },
     "ManagedClusterAgentPoolProfile": {

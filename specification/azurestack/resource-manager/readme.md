@@ -131,6 +131,9 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 
 ## Multi-API/Profile support for AutoRest v3 generators 

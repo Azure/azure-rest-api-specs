@@ -12,76 +12,66 @@
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {},
-        "location": "Central US",
-        "etag": "AAAAAAAYP5M=",
+        "location": "West Europe",
+        "etag": "AAAAAAAENfI=",
         "properties": {
           "publisherEmail": "contoso@microsoft.com",
-          "publisherName": "admin",
-          "notificationSenderEmail": "contoso@live.com",
+          "publisherName": "Microsoft",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2017-06-28T23:01:33.0667959Z",
+          "createdAtUtc": "2016-04-12T00:20:15.6018952Z",
           "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-westeurope-01.regional.azure-api.net",
           "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
           "managementApiUrl": "https://apimService1.management.azure-api.net",
           "scmUrl": "https://apimService1.scm.azure-api.net",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
-              "hostName": "proxyhostname4.contoso.net",
-              "negotiateClientCertificate": false,
-              "defaultSslBinding": true,
-              "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=*.contoso.net"
-              }
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
             },
             {
               "type": "Proxy",
-              "hostName": "proxyhostname9.contoso.net",
+              "hostName": "proxy.contoso.net",
+              "keyVaultId": "https://contoso.vault.azure.net/secrets/msicertificate",
               "negotiateClientCertificate": false,
-              "defaultSslBinding": true,
               "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
+                "expiry": "2020-12-18T11:11:47+00:00",
+                "thumbprint": "9833D5CXXXXXXXXF2A85908BD3692E0BD3F",
                 "subject": "CN=*.contoso.net"
-              }
-            },
-            {
-              "type": "Portal",
-              "hostName": "portalhostname2.contoso.net",
-              "negotiateClientCertificate": false,
-              "defaultSslBinding": false,
-              "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=*.contoso.net"
-              }
+              },
+              "defaultSslBinding": true
             }
           ],
           "publicIPAddresses": [
-            "52.173.22.222"
+            "13.94.XXX.188"
           ],
-          "additionalLocations": [
-            {
-              "location": "West US",
-              "sku": {
-                "name": "Premium",
-                "capacity": 1
-              },
-              "publicIPAddresses": [
-                "40.78.99.244"
-              ],
-              "gatewayRegionalUrl": "https://apimService1-westus-01.regional.azure-api.net"
-            }
-          ],
-          "virtualNetworkType": "None"
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/APIMVNet/subnets/apim-internal-sub"
+          },
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "virtualNetworkType": "External"
         },
         "sku": {
           "name": "Premium",
           "capacity": 1
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "ca1d33f7-3cf9-42ec-b3e9-d526a1ee953a",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
         }
       }
     }
