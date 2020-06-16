@@ -131,6 +131,11 @@ batch:
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
