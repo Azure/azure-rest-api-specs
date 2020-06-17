@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/MasterCustomIPPrefixes/{MasterCustomIpPrefixName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/MasterCustomIpPrefixes/{MasterCustomIpPrefixName}": {
       "delete": {
         "tags": [
           "MasterCustomIPPrefixes"
@@ -213,7 +213,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/MasterCustomIPPrefixes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/MasterCustomIpPrefixes": {
       "get": {
         "tags": [
           "MasterCustomIPPrefixes"
@@ -252,7 +252,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/MasterCustomIPPrefixes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/MasterCustomIpPrefixes": {
       "get": {
         "tags": [
           "MasterCustomIPPrefixes"
@@ -302,10 +302,6 @@
   "definitions": {
     "MasterCustomIPPrefixPropertiesFormat": {
       "properties": {
-        "publicIpAddressVersion": {
-          "$ref": "./network.json#/definitions/IPVersion",
-          "description": "The master custom IP address version. Could be 'IPv4' or 'IPv6'."
-        },
         "cidr": {
           "type": "string",
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length."
