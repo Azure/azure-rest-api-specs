@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2020-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-02-preview'
 input-file:
-- Microsoft.Confluent/preview/2020-02-01-preview/datadog.json
+- Microsoft.Datadog/preview/2020-02-01-preview/datadog.json
 ```
