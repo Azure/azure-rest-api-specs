@@ -21,7 +21,8 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-override-client-name: AVSClient
+override-info:
+  title: AVSClient
 tag: package-2019-08-09-preview
 ```
 
