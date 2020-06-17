@@ -342,7 +342,7 @@
         }
       }
     },
-    "/providers/Microsoft.Attestation/defaultProviders": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/defaultProviders": {
       "get": {
         "tags": [
           "AttestationProviders"
@@ -357,6 +357,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -375,7 +378,7 @@
         }
       }
     },
-    "/providers/Microsoft.Attestation/locations/{location}/defaultProvider": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/locations/{location}/defaultProvider": {
       "get": {
         "tags": [
           "AttestationProviders"
@@ -398,6 +401,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
