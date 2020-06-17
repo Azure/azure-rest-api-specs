@@ -392,6 +392,228 @@
           }
         ]
       }
+    },
+    "subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeDirectory": {
+      "put": {
+        "description": "Initiate change directory transfer.",
+        "operationId": "Subscription_InitiateChangeDirectory",
+        "x-ms-examples": {
+          "initiateChangeDirectory": {
+            "$ref": "./examples/initiateChangeDirectory.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get initiate change directory transfer status.",
+        "operationId": "Subscription_GetInitiateChangeDirectoryStatus",
+        "x-ms-examples": {
+          "GetInitiateChangeDirectory": {
+            "$ref": "./examples/GetInitiateChangeDirectory.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Cancel change directory transfer.",
+        "operationId": "Subscription_CancelChangeDirectoryTransfer",
+        "x-ms-examples": {
+          "CancelChangeDirectory": {
+            "$ref": "./examples/CancelChangeDirectoryTransfer.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/changeDirectory": {
+      "put": {
+        "description": "Accept change directory transfer.",
+        "operationId": "Subscription_AcceptChangeDirectory",
+        "x-ms-examples": {
+          "AcceptChangeDirectory": {
+            "$ref": "./examples/AcceptChangeDirectory.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get accept change directory transfer status.",
+        "operationId": "Subscription_GetAcceptChangeDirectoryStatus",
+        "x-ms-examples": {
+          "GetAcceptChangeDirectory": {
+            "$ref": "./examples/GetAcceptChangeDirectory.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Reject change directory transfer.",
+        "operationId": "Subscription_RejectChangeDirectoryTransfer",
+        "x-ms-examples": {
+          "RejectChangeDirectory": {
+            "$ref": "./examples/RejectChangeDirectoryTransfer.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -606,6 +828,63 @@
         "resellerId": {
           "description": "Reseller ID, basically MPN Id.",
           "type": "string"
+        }
+      }
+    },
+    "ChangeDirectoryRequest": {
+      "description": "The parameters required to perform change directory operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeDirectoryProperties"
+        }
+      }
+    },
+    "ChangeDirectoryProperties":{
+      "description": "The paramters required to perform change directory operation",
+      "required": [
+        "destinationEmailid",
+        "action"
+      ],
+      "properties": {
+        "destinationEmailid": {
+          "description": "Eamil Id of the destination user",
+          "type": "string"
+        },
+        "action": {
+          "description": "The Action on the change directory operation.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          },
+          "enum": [
+            "Initiate",
+            "Accept",
+            "Reject",
+            "Cancel"
+          ]
+        },
+      }
+    },
+    "ChangeDirectoryResponse": {
+      "description": "The parameters required to perform change directory operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "transferStatus": {
+          "description": "Current transfer Status.",
+          "type": "string"
+        },
+        "expiry": {
+          "description": "Expiry time of the transfer",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ChangeDirectoryProperties"
         }
       }
     }
