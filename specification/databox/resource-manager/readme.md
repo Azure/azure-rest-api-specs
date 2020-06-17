@@ -26,7 +26,7 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2020-04
 ```
 
 ### Tag: package-2018-01
@@ -44,6 +44,14 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 ``` yaml $(tag) == 'package-2019-09'
 input-file:
 - Microsoft.DataBox/stable/2019-09-01/databox.json
+```
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.DataBox/stable/2020-04-01/databox.json
 ```
 ---
 # Code Generation
@@ -76,7 +84,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataBox
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DataBox/Management.DataBox/Generated
+  output-folder: $(csharp-sdks-folder)/DataBox/Microsoft.Azure.Management.DataBox/Generated
   clear-output-folder: true
 ```
 
