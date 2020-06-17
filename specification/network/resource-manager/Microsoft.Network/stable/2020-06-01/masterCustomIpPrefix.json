@@ -50,7 +50,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "MasterCustomIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -73,7 +73,7 @@
           "200": {
             "description": "Delete successful."
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -105,7 +105,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "MasterCustomIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -132,7 +132,7 @@
               "$ref": "#/definitions/MasterCustomIPPrefix"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -160,7 +160,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "MasterCustomIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -195,7 +195,7 @@
               "$ref": "#/definitions/MasterCustomIPPrefix"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -235,7 +235,7 @@
               "$ref": "#/definitions/MasterCustomIPPrefixListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -281,7 +281,7 @@
               "$ref": "#/definitions/MasterCustomIPPrefixListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -306,31 +306,28 @@
           "type": "string",
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length."
         },
-		"originalValidationMessage" :
-		{
+        "originalValidationMessage": {
           "type": "string",
           "description": "Original message used to request creation of master custom IP Prefix."
-		},
-		"signedValidationMessage" :
-		{
+        },
+        "signedValidationMessage": {
           "type": "string",
           "description": "Signed message used to request creation of master custom IP Prefix."
-		},
-		"geography" :
-		{
+        },
+        "geography": {
           "type": "string",
           "description": "Geography of edge routers this CIDR can be reflected on. Related to geographies covered by the 5 International RIRs (ARIN/RIPE/APNIC/LACNIC/AFRINIC. Possible values are: 'NorthAmerica', 'Europe', 'Asia', 'SouthAmerica', 'Africa', and 'Global'. 'Global' means 'NorthAmerica', 'Europe', 'Asia'.",
-		  "enum": [
-		    "NorthAmerica",
-			"Europe",
-			"Asia",
+          "enum": [
+            "NorthAmerica",
+            "Europe",
+            "Asia",
             "SouthAmerica",
             "Africa",
             "Global"
-		  ],
-		  "x-ms-enum": {
-		  "name": "RIR",
-		  "modelAsString": true
+          ],
+          "x-ms-enum": {
+            "name": "RIR",
+            "modelAsString": true
           }
         },
         "customIpPrefixes": {
@@ -341,21 +338,20 @@
           },
           "description": "The list of corresponding Custom IP Prefixes."
         },
-		"validationState" :
-		{
+        "validationState": {
           "readOnly": true,
           "type": "string",
           "description": "The state of the ARIN / ROA authentication for master custom IP prefix resource. Possible values are: 'Validating', 'Valid', and 'Invalid'.",
-		  "enum": [
-		    "Validating",
-			"Valid",
-			"Invalid"
-		  ],
-		  "x-ms-enum": {
-		  "name": "ValidationStatus",
-		  "modelAsString": true
-		  }
-		},
+          "enum": [
+            "Validating",
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsString": true
+          }
+        },
         "resourceGuid": {
           "readOnly": true,
           "type": "string",
