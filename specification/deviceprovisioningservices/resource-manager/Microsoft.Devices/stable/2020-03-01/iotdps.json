@@ -1304,6 +1304,304 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "List private link resources",
+        "description": "List private link resources for the given provisioning service",
+        "operationId": "IotDpsResource_ListPrivateLinkResources",
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/DPSListPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of private link resources",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources/{groupId}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the specified private link resource",
+        "description": "Get the specified private link resource for the given provisioning service",
+        "operationId": "IotDpsResource_GetPrivateLinkResources",
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/DPSGetPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/groupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the specified of private link resource",
+            "schema": {
+              "$ref": "#/definitions/GroupIdInformation"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "List private endpoint connections",
+        "description": "List private endpoint connection properties",
+        "operationId": "IotDpsResource_ListPrivateEndpointConnections",
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/DPSListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of private endpoint connection properties",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionsList"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get private endpoint connection",
+        "description": "Get private endpoint connection properties",
+        "operationId": "IotDpsResource_GetPrivateEndpointConnection",
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Get": {
+            "$ref": "./examples/DPSGetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the private endpoint connection properties",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Update private endpoint connection",
+        "description": "Update the status of a private endpoint connection with the specified name",
+        "operationId": "IotDpsResource_UpdatePrivateEndpointConnection",
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Update": {
+            "$ref": "./examples/DPSUpdatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection with updated properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "200": {
+            "description": "This is returned as a response to the status polling request for the update operation.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete private endpoint connection",
+        "description": "Delete private endpoint connection with the specified name",
+        "operationId": "IotDpsResource_DeletePrivateEndpointConnection",
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Delete": {
+            "$ref": "./examples/DPSDeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "200": {
+            "description": "This is returned as a response to the status polling request for the delete operation.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "204": {
+            "description": "PrivateEndpoint does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -1512,11 +1810,30 @@
             "modelAsString": true
           }
         },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether requests from Public Network are allowed",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PublicNetworkAccess"
+          }
+        },
         "ipFilterRules": {
           "description": "The IP filter rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpFilterRule"
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections created on this IotHub",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
         },
         "provisioningState": {
@@ -1587,7 +1904,7 @@
         },
         "connectionString": {
           "type": "string",
-          "description": "Connection string og the IoT hub."
+          "description": "Connection string of the IoT hub."
         },
         "location": {
           "type": "string",
@@ -1600,7 +1917,7 @@
       ]
     },
     "IpFilterRule": {
-      "description": "The IP filter rules for the IoT dps.",
+      "description": "The IP filter rules for a provisioning Service.",
       "type": "object",
       "properties": {
         "filterName": {
@@ -1641,6 +1958,165 @@
         "filterName",
         "action",
         "ipMask"
+      ]
+    },
+    "PrivateLinkResources": {
+      "description": "The available private link resources for a provisioning service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private link resources for a provisioning service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupIdInformation"
+          }
+        }
+      }
+    },
+    "GroupIdInformation": {
+      "description": "The group information for creating a private endpoint on a provisioning service",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/GroupIdInformationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GroupIdInformationProperties": {
+      "description": "The properties for a group information object",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group id"
+        },
+        "requiredMembers": {
+          "description": "The required members for a specific group id",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "The required DNS zones for a specific group id",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionsList": {
+      "description": "The list of private endpoint connections for a provisioning service",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PrivateEndpointConnection"
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "The private endpoint connection of a provisioning service",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "The properties of a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateEndpoint": {
+      "description": "The private endpoint property of a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The current state of a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of a private endpoint connection",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for the current state of a private endpoint connection"
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Actions required for a private endpoint connection"
+        }
+      },
+      "required": [
+        "status",
+        "description"
       ]
     },
     "SharedAccessSignatureAuthorizationRule[AccessRightsDescription]": {
@@ -1718,10 +2194,10 @@
       ]
     },
     "OperationListResult": {
-      "description": "Result of the request to list IoT Hub operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list provisioning service operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "List of IoT Hub operations supported by the Microsoft.Devices resource provider.",
+          "description": "Provisioning service operations supported by the Microsoft.Devices resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1736,7 +2212,7 @@
       }
     },
     "Operation": {
-      "description": "IoT Hub REST API operation.",
+      "description": "Provisioning Service REST API operation.",
       "type": "object",
       "properties": {
         "name": {
@@ -1998,6 +2474,22 @@
       "description": "The version of the API.",
       "required": true,
       "type": "string"
+    },
+    "groupId": {
+      "name": "groupId",
+      "in": "path",
+      "description": "The name of the private link resource",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "description": "The name of the private endpoint connection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
