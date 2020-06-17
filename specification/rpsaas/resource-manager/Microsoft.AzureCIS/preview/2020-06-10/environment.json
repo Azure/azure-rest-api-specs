@@ -150,6 +150,75 @@
         }
       }
     },
+    "/providers/Microsoft.AzureCIS/locations/{location}/operationsStatus/{operationId}": {
+      "get": {
+        "description": "Get Operation Status",
+        "operationId": "OperationStatus_Get",
+        "x-ms-examples": {
+          "Get environment": {
+            "$ref": "./examples/getOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Operation ID",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCIS/Operations": {
+      "get": {
+        "description": "List operations",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get environment": {
+            "$ref": "./examples/getOperationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List Operations",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
   },
   "definitions": {
     "EnvironmentResource": {
@@ -203,7 +272,11 @@
           "type": "string",
           "description": "subscriptions/{id}/providers/{providerName}/locations/{location}/operationsStatus/{id}"
         },
-        "status": {
+        "location": {
+          "type": "string",
+          "description": "Location"
+        }
+        "provisioningState": {
           "type": "string",
           "description": "RP defined values | Succeeded | Failed | Canceled"
         },
@@ -229,6 +302,11 @@
       }
     },
     "AutopilotEnvironmentResponse": {
+      "required": [
+        "location",
+        "provisioningState",
+        "environmentResource"
+      ],
       "type": "object",
       "description": "Autopilot Environment Response",
       "properties": {
@@ -244,6 +322,73 @@
           "$ref": "#/definitions/EnvironmentResource",
           "description": "EnvironmentResource detail"
         }
+      }
+    },
+    "OperationListResult": {
+      "required": [
+        "nextLink",
+        "value"
+      ],
+      "type": "object",
+      "description": "Autopilot Environment Response",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        },
+        "value": {
+          "description": "List of Microsoft.AzureCIS operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "required": [
+        "name",
+        "display"
+      ],
+      "type": "object",
+      "description": "Autopilot Environment Response",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "The object that represents the operation."
+        }
+      }
+    },
+    "Display": {
+      "required": [
+        "description",
+        "operation",
+        "provider",
+        "resource"
+      ],
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation type: Read, write, delete, etc."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft.AzureCIS"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc."
+        },
       }
     },
     "ErrorResponse": {
@@ -315,6 +460,22 @@
       "required": true,
       "type": "string",
       "description": "The name of Environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "Operation ID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "Location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Location.",
       "x-ms-parameter-location": "method"
     }
   }
