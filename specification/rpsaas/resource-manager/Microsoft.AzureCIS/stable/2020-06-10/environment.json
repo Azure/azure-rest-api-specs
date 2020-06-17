@@ -26,10 +26,11 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/autopilotEnvironment/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/autopilotEnvironments/{resourceName}": {
       "put": {
-        "description": "Clone environment.",
-        "operationId": "Environment_Clone",
+        "description": "Create Update environment.",
+        "operationId": "Environment_CreateUpdate",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -103,6 +104,7 @@
       "delete": {
         "description": "Delete Environment",
         "operationId": "Environment_Delete",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
