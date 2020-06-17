@@ -321,8 +321,11 @@
         "produces": [ "application/json" ],
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or udate resource": {
+          "Create or update resource": {
             "$ref": "./examples/createOrUpdate.json"
+          },
+          "Create or update resource with push notification credentials": {
+            "$ref": "./examples/createOrUpdateNotificationCredentials.json"
           }
         }
       },
@@ -771,6 +774,71 @@
         }
       }
     },
+    "ApnsCredential": {
+      "description": "Credentials for pushing through APNS",
+      "required": [
+        "endpoint",
+        "token",
+        "keyId",
+        "bundleId",
+        "teamId"
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of this credential",
+          "type": "string",
+          "enum": [
+            "Development",
+            "Production"
+          ],
+          "x-ms-enum": {
+            "name": "Endpoint",
+            "modelAsString": true
+          }
+        },
+        "token": {
+          "description": "Provider Authentication Token, obtained through your developer account",
+          "type": "string"
+        },
+        "keyId": {
+          "description": "A 10-character key identifier (kid) key, obtained from your developer account.",
+          "type": "string"
+        },
+        "bundleId": {
+          "description": "The name of the application or BundleId.",
+          "type": "string"
+        },
+        "teamId": {
+          "description": "A 10 character TeamId, also referred to as the App ID Prefix, obtained from your developer account.",
+          "type": "string"
+        }
+      }
+    },
+    "FcmLegacyCredential": {
+      "description": "Credentials for pushing through GCM (Google Cloud Messaging)",
+      "required": [
+        "apiKey"
+      ],
+      "properties": {
+        "apiKey": {
+          "description": "The Google API key",
+          "type": "string"
+        }
+      }
+    },
+    "PushNotificationCredentials": {
+      "description": "Credentials to enable push notifications",
+      "properties": {
+        "apnsCredential": {
+          "description": "Credentials for pushing through APNS",
+          "$ref": "#/definitions/ApnsCredential"
+        },
+        "fcmLegacyCredential": {
+          "description": "Credentials for pushing through Google",
+          "$ref": "#/definitions/FcmLegacyCredential"
+        }
+      }
+    },
     "CommunicationServiceProperties": {
       "description": "A class that describes the properties of the CommunicationService.",
       "type": "object",
@@ -800,6 +868,10 @@
           "type": "string",
           "readOnly": true
         },
+        "pushNotificationCredentials": {
+          "description": "Credentials used to enable push notifications. Setting any credential set will enable push notifications.",
+          "$ref": "#/definitions/PushNotificationCredentials"
+        },
         "version": {
           "description": "Version of the CommunicationService resource. Probably you need the same or higher version of client SDKs.",
           "type": "string",
@@ -809,21 +881,6 @@
           "description": "The immutable resource Id of the Spool resource.",
           "type": "string",
           "readOnly": true
-        },
-        "optionalFeatures": {
-          "description": "Features that may optionally be enabled on a CommunicationService instance.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "SMS",
-              "PSTN"
-            ],
-            "x-ms-enum": {
-              "name": "OptionalFeature",
-              "modelAsString": true
-            }
-          }
         }
       }
     },
