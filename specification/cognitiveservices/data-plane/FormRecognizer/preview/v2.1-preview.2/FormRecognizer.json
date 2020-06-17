@@ -432,7 +432,7 @@
         ],
         "summary": "Compose trained with labels models into one composed model.",
         "description": "Compose request would include list of models ids.\r\nIt would validate what all models either trained with labels model or composed model.\r\nIt would validate limit of models put together.",
-        "operationId": "ComposeCustomModels",
+        "operationId": "ComposeCustomModelsAsync",
         "consumes": [],
         "produces": [
           "application/json",
@@ -470,7 +470,8 @@
             "Compose custom models": {
               "$ref": "./examples/ComposeModels.json"
             }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/prebuilt/businessCard/analyze": {
@@ -1304,10 +1305,12 @@
           "$ref": "#/definitions/KeysResult"
         },
         "trainResult": {
+          "description": "Training result for custom model.",
           "$ref": "#/definitions/TrainResult"
         },
-        "composedTrainedResults": {
+        "composedTrainResults": {
           "type": "object",
+          "description": "Training result for composed model.",
           "additionalProperties": {
             "$ref": "#/definitions/TrainResult"
           }
