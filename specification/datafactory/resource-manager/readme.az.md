@@ -64,6 +64,12 @@ cli:
             group: integrationRuntimeObjectMetadata
         hidden: true
       - where:
+            group: DataFlows
+        hidden: true
+      - where:
+            group: DataFlowDebugSession
+        hidden: true
+      - where:
             group: Factories
             op: ConfigureFactoryRepo
             param: locationId
