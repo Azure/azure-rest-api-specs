@@ -153,6 +153,12 @@
   },
   "definitions": {
     "EnvironmentResource": {
+      "required": [
+        "modelEnvironment",
+        "mode",
+        "enlistmentType",
+        "naming"
+      ],
       "type": "object",
       "description": "Environment details",
       "properties": {
@@ -185,6 +191,13 @@
       }
     },
     "OperationStatusResponse": {
+      "required": [
+        "id",
+        "status",
+        "environmentResource"
+      ],
+      "type": "object",
+      "description": "Operation Status response",
       "properties": {
         "id": {
           "type": "string",
@@ -196,15 +209,18 @@
         },
         "startTime": {
           "type": "string",
-          "description": "<DateLiteral per ISO8601>"
+          "description": "<DateLiteral per ISO8601>",
+          "default": "2020-01-01T00:00:00+00:00"
         },
         "endTime": {
           "type": "string",
-          "description": "<DateLiteral per ISO8601>"
+          "description": "<DateLiteral per ISO8601>",
+          "default": "2020-01-01T00:00:00+00:00"
         },
         "percentComplete": {
           "type": "string",
-          "description": "<double between 0 and 100>"
+          "description": "<double between 0 and 100>",
+          "default": "0.0"
         },
         "environmentResource": {
           "$ref": "#/definitions/EnvironmentResource",
@@ -213,6 +229,8 @@
       }
     },
     "AutopilotEnvironmentResponse": {
+      "type": "object",
+      "description": "Autopilot Environment Response",
       "properties": {
         "location": {
           "type": "string",
@@ -220,7 +238,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Succeeded, Failed and Canceled"
+          "description": "accept"
         },
         "environmentResource": {
           "$ref": "#/definitions/EnvironmentResource",
