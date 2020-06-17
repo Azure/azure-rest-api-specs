@@ -1604,7 +1604,7 @@
           }
         },
         "operationId": "Invoices_ListByBillingAccount",
-        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1632,6 +1632,45 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "EnterpriseAgreementInvoice": {
+            "$ref": "./examples/BillingAccountInvoice.json"
+          }
+        },
+        "operationId": "Invoices_GetBillingAccountInvoice",
+        "description": "Gets an invoice by billing account name and ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
             }
           },
           "default": {
@@ -6245,7 +6284,8 @@
           "enum": [
             "Due",
             "OverDue",
-            "Paid"
+            "Paid",
+            "Void"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -6359,6 +6399,11 @@
           "description": "The ID of the subscription for which the invoice is generated.",
           "type": "string",
           "readOnly": true
+        },
+        "rebillDetails": {
+          "description": "Rebill details of an Enterprise Agreement invoice.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InvoiceRebillDetails"
         }
       }
     },
@@ -6402,6 +6447,34 @@
         }
       }
     },
+    "InvoiceRebillDetails": {
+      "description": "The rebill details of an invoice.",
+      "properties": {
+        "rebillDocumentType": {
+          "description": "The type of the document generated when an Enterprise Agreement invoice is rebilled.",
+          "type": "string",
+          "enum": [
+            "Credit",
+            "Rebill",
+            "Original"
+          ],
+          "x-ms-enum": {
+            "name": "rebillDocumentType",
+            "modelAsString": true
+          }
+        },
+        "rebilledInvoiceId": {
+          "description": "The ID of the invoice generated when an Enterprise Agreement invoice is rebilled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestInvoiceId": {
+          "description": "The ID of the latest invoice generated when an Enterprise Agreement invoice is rebilled.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Document": {
       "description": "The properties of a document.",
       "properties": {
@@ -6424,6 +6497,14 @@
           "description": "Document URL.",
           "type": "string",
           "readOnly": true
+        },
+        "documentNumbers": {
+          "description": "Document numbers for an Enterprise Agreement invoice.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
