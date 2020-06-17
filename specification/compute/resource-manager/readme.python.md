@@ -10,23 +10,6 @@ python:
   package-name: azure-mgmt-compute
   no-namespace-folders: true
   clear-output-folder: true
-
-directive:
-    # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: compute.json
-    where: $..enum
-    transform: >-
-      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
-        $.push('DummyOrchestrationServiceName');
-      }
-      return $;
-
-  - from: source-file-python
-    where: $ 
-    transform: >-
-      return $.
-        replace(/, 'DummyOrchestrationServiceName'/g,'').
-        replace(/dummy_orchestration_service_name = "DummyOrchestrationServiceName"/g,'');
 ```
 
 These settings apply only when `--track2` is specified on the command line.
