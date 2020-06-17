@@ -1,0 +1,82 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "ErrorDetail": {
+      "description": "Error details",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error target",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorContract": {
+      "title": "Error details.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "Sku": {
+      "description": "An ARM Resource SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "description": "The name of the sql pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlDatabaseNameParameter": {
+      "name": "sqlDatabaseName",
+      "in": "path",
+      "description": "The name of the sql database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
