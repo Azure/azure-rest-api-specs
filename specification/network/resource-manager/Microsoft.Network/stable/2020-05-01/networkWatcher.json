@@ -3397,10 +3397,10 @@
         },
         "context": {
           "readOnly": true,
-          "type": "array",
-          "description": "Provides additional context on the issue.",
-          "items": {
-            "$ref": "#/definitions/IssueContext"
+          "type": "object",
+          "description": "Provides additional context on links.",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "resourceId": {
@@ -3416,19 +3416,16 @@
         "roundTripTimeMin": {
           "description": "Minimum roundtrip time in milliseconds.",
           "readOnly": true,
-          "format": "int32",
           "type": "integer"
         },
         "roundTripTimeAvg": {
           "description": "Average roundtrip time in milliseconds.",
           "readOnly": true,
-          "format": "int32",
           "type": "integer"
         },
         "roundTripTimeMax": {
           "description": "Maximum roundtrip time in milliseconds.",
           "readOnly": true,
-          "format": "int32",
           "type": "integer"
         }
       }
