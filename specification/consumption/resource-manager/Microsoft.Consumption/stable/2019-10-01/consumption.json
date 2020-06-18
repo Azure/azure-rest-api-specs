@@ -1030,6 +1030,9 @@
           "ReservationRecommendationsBySubscription-Legacy": {
             "$ref": "./examples/ReservationRecommendationsBySubscription.json"
           },
+          "ReservationRecommendationsByResourceGroup-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsByResourceGroup.json"
+          },
           "ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod-Legacy": {
             "$ref": "./examples/ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod.json"
           },
@@ -1084,6 +1087,9 @@
           "ReservationRecommendationsBySubscription-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsBySubscription.json"
           },
+          "ReservationRecommendationsByResourceGroup-Legacy": {
+            "$ref": "./examples/ReservationRecommendationDetailsByResourceGroup.json"
+          },
           "ReservationRecommendationsByBillingAccount-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsByBillingAccount.json"
           },
@@ -1097,6 +1103,21 @@
           },
           {
             "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/LookBackPeriodParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductParameter"
+          },
+          {
+            "$ref": "#/parameters/RegionParameter"
+          },
+          {
+            "$ref": "#/parameters/TermParameter"
           }
         ],
         "responses": {
@@ -4944,7 +4965,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -4953,7 +4974,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}', /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -5153,6 +5174,85 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "lookBackPeriodParameter": {
+      "name": "lookBackPeriod",
+      "in": "path",
+      "description": "Filter the time period on which reservation recommendation results are based.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "lookBackPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Last7Days",
+            "description": "Use 7 days of data for recommendations"
+          },
+          {
+            "value": "Last30Days",
+            "description": "Use 30 days of data for recommendations"
+          },
+          {
+            "value": "Last60Days",
+            "description": "Use 60 days of data for recommendations"
+          }
+        ]
+      }
+    },
+    "organizationIdParameter": {
+      "name": "organizationId",
+      "in": "path",
+      "description": "Filter the organization id used to generate reservation recommendation results.",
+      "required": true,
+      "type": "string"
+    },
+    "productParameter": {
+      "name": "product",
+      "in": "path",
+      "description": "Filter the product types for which reservation recommendation results are generated.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "VirtualMachines",
+        "SQLDatabases",
+        "PostgreSQL",
+        "ManagedDisk",
+        "MySQL",
+        "RedHat",
+        "MariaDB",
+        "RedisCache",
+        "CosmosDB",
+        "SqlDataWarehouse",
+        "SUSELinux",
+        "AppService",
+        "BlockBlob",
+        "AzureDataExplorer",
+        "VMwareCloudSimple"
+      ],
+      "x-ms-enum": {
+        "name": "product",
+        "modelAsString": true
+      }
+    },
+    "termParameter": {
+      "description": "Specify length of reservation recommendation term (in months). 1 month for monthly recurring purchase. 12 months for a 1 year reservation. 36 months for a 3 year reservation.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "name": "term"
+    },
+    "regionParameter": {
+      "name": "region",
+      "in": "path",
+      "description": "Used to select the region of resources used to generate reservation recommendation results.",
+      "required": true,
+      "type": "string"
     }
   }
 }
