@@ -14,6 +14,17 @@
   "produces": [
     "application/json"
   ],
+  "securityDefinitions": {
+    "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+            "user_impersonation": "impersonate your user account"
+        }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
@@ -27,22 +38,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -81,22 +83,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -135,22 +128,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "body",
@@ -190,22 +174,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -278,10 +253,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -320,16 +292,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -368,22 +334,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -420,22 +377,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "body",
@@ -486,22 +434,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "body",
@@ -524,6 +463,11 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Monitors_Create": {
+            "$ref": "./examples/Monitors_Create.json"
+          }
         }
       },
       "delete": {
@@ -537,22 +481,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -572,7 +507,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_Create": {
+            "$ref": "./examples/Monitors_Delete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/tagRules": {
@@ -587,22 +527,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -644,22 +575,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "path",
@@ -706,22 +628,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "path",
@@ -763,22 +676,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           }
         ],
         "responses": {
@@ -820,22 +724,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "path",
@@ -889,22 +784,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "monitorName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MonitorNameParameter"
           },
           {
             "in": "path",
@@ -1238,6 +1124,7 @@
         "location"
       ],
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "ARM id of the monitor resource.",
@@ -1384,6 +1271,7 @@
     "MonitoringTagRules": {
       "description": "Capture logs and metrics of Azure resources based on ARM tags.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "name": {
           "description": "Name of the rule set.",
@@ -1446,6 +1334,7 @@
     },
     "DatadogSingleSignOnResource": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "ARM id of the resource.",
@@ -1483,6 +1372,31 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the Datadog resource belongs.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MonitorNameParameter": {
+      "in": "path",
+      "name": "monitorName",
+      "description": "Monitor resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
