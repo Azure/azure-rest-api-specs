@@ -307,8 +307,8 @@
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length. Should be a subset of its master custom IP Prefix parent CIDR."
         },
         "masterCustomIpPrefix": {
-          "type": "string",
-          "description": "The name of the master custom IP Prefix parent."
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The master custom IP Prefix parent."
         },
         "commissionedState": {
           "readOnly": true,
