@@ -1939,9 +1939,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorKind"
         }
       ],
       "description": "Data connector.",
@@ -1949,6 +1946,12 @@
       "required": [
         "kind"
       ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorKind",
+          "description": "The data connector kind"
+        }
+      },
       "type": "object"
     },
     "DataConnectorDataTypeCommon": {
@@ -1970,58 +1973,48 @@
       "type": "object"
     },
     "DataConnectorKind": {
-      "description": "Describes an Azure resource with kind.",
-      "discriminator": "kind",
-      "required": [
-        "kind"
+      "description": "The kind of the data connector",
+      "enum": [
+        "AzureActiveDirectory",
+        "AzureSecurityCenter",
+        "MicrosoftCloudAppSecurity",
+        "ThreatIntelligence",
+        "Office365",
+        "AmazonWebServicesCloudTrail",
+        "AzureAdvancedThreatProtection",
+        "MicrosoftDefenderAdvancedThreatProtection"
       ],
-      "properties": {
-        "kind": {
-          "description": "The kind of the data connector",
-          "enum": [
-            "AzureActiveDirectory",
-            "AzureSecurityCenter",
-            "MicrosoftCloudAppSecurity",
-            "ThreatIntelligence",
-            "Office365",
-            "AmazonWebServicesCloudTrail",
-            "AzureAdvancedThreatProtection",
-            "MicrosoftDefenderAdvancedThreatProtection"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "DataConnectorKind",
-            "values": [
-              {
-                "value": "AzureActiveDirectory"
-              },
-              {
-                "value": "AzureSecurityCenter"
-              },
-              {
-                "value": "MicrosoftCloudAppSecurity"
-              },
-              {
-                "value": "ThreatIntelligence"
-              },
-              {
-                "value": "Office365"
-              },
-              {
-                "value": "AmazonWebServicesCloudTrail"
-              },
-              {
-                "value": "AzureAdvancedThreatProtection"
-              },
-              {
-                "value": "MicrosoftDefenderAdvancedThreatProtection"
-              }
-            ]
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorKind",
+        "values": [
+          {
+            "value": "AzureActiveDirectory"
+          },
+          {
+            "value": "AzureSecurityCenter"
+          },
+          {
+            "value": "MicrosoftCloudAppSecurity"
+          },
+          {
+            "value": "ThreatIntelligence"
+          },
+          {
+            "value": "Office365"
+          },
+          {
+            "value": "AmazonWebServicesCloudTrail"
+          },
+          {
+            "value": "AzureAdvancedThreatProtection"
+          },
+          {
+            "value": "MicrosoftDefenderAdvancedThreatProtection"
           }
-        }
-      },
-      "type": "object"
+        ]
+      }
     },
     "DataConnectorList": {
       "description": "List all the data connectors.",
