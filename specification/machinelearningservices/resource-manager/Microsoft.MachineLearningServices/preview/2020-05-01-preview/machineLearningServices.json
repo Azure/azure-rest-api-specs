@@ -1527,7 +1527,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ServiceResponseBase"
+              "$ref": "#/definitions/ServiceResource"
             }
           },
           "default": {
@@ -3910,6 +3910,24 @@
         }
       }
     },
+    "ServiceResource": {
+      "type": "object",
+      "description": "Machine Learning service object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Service properties",
+              "$ref": "#/definitions/ServiceResponseBase"
+            }
+          }
+        }
+      ]
+    },
     "ServiceResponseBase": {
       "description": "The base service response. The correct inherited response based on computeType will be returned (ex. ACIServiceResponse)",
       "required": [
@@ -3917,14 +3935,6 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The service Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The service name.",
-          "type": "string"
-        },
         "description": {
           "description": "The service description.",
           "type": "string"
@@ -4020,7 +4030,7 @@
           "type": "array",
           "description": "An array of Machine Learning compute objects wrapped in ARM resource envelope.",
           "items": {
-            "$ref": "#/definitions/ServiceResponseBase"
+            "$ref": "#/definitions/ServiceResource"
           }
         },
         "nextLink": {
