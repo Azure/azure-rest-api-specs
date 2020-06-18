@@ -208,6 +208,12 @@
             "schema": {
               "$ref": "#/definitions/CheckResourceNameResult"
             }
+          },
+          "default": {
+            "description": "Error response saying resource name is invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
           }
         },
         "x-ms-examples": {
@@ -593,6 +599,25 @@
         }
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
+    },
+    "ErrorDefinition":{
+      "type": "object",
+      "title": "Error",
+      "description": "Error description and code explaining why an operation failed.",
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Code of the error."
+        }
+      }
     },
     "Operation": {
       "description": "Microsoft.Resources operation",

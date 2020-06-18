@@ -203,6 +203,12 @@
             "schema": {
               "$ref": "#/definitions/CheckResourceNameResult"
             }
+          },
+          "default": {
+            "description": "Error response saying resource name is invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
           }
         },
         "x-ms-examples": {
@@ -546,6 +552,25 @@
         "type": {
           "type": "string",
           "description": "The type of the resource"
+        }
+      }
+    },
+    "ErrorDefinition":{
+      "type": "object",
+      "title": "Error",
+      "description": "Error description and code explaining why an operation failed.",
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Code of the error."
         }
       }
     },
