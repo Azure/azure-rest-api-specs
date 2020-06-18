@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/customIpPrefixes/{customIpPrefixName}": {
       "delete": {
         "tags": [
-          "CustomIPPrefixes"
+          "CustomIpPrefixes"
         ],
         "operationId": "CustomIPPrefixes_Delete",
         "description": "Deletes the specified custom IP prefix.",
@@ -92,7 +92,7 @@
       },
       "get": {
         "tags": [
-          "CustomIPPrefixes"
+          "CustomIpPrefixes"
         ],
         "operationId": "CustomIPPrefixes_Get",
         "description": "Gets the specified custom IP prefix in a specified resource group.",
@@ -127,9 +127,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting CustomIPPrefix resource.",
+            "description": "Request successful. The operation returns the resulting CustomIpPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/CustomIPPrefix"
+              "$ref": "#/definitions/CustomIpPrefix"
             }
           },
           "default": {
@@ -147,7 +147,7 @@
       },
       "put": {
         "tags": [
-          "CustomIPPrefixes"
+          "CustomIpPrefixes"
         ],
         "operationId": "CustomIPPrefixes_CreateOrUpdate",
         "description": "Creates or updates a custom IP prefix.",
@@ -171,7 +171,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomIPPrefix"
+              "$ref": "#/definitions/CustomIpPrefix"
             },
             "description": "Parameters supplied to the create or update custom IP prefix operation."
           },
@@ -184,15 +184,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Create successful. The operation returns the resulting CustomIPPrefix resource.",
+            "description": "Create successful. The operation returns the resulting CustomIpPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/CustomIPPrefix"
+              "$ref": "#/definitions/CustomIpPrefix"
             }
           },
           "200": {
-            "description": "Update successful. The operation returns the resulting CustomIPPrefix resource.",
+            "description": "Update successful. The operation returns the resulting CustomIpPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/CustomIPPrefix"
+              "$ref": "#/definitions/CustomIpPrefix"
             }
           },
           "default": {
@@ -216,7 +216,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/customIpPrefixes": {
       "get": {
         "tags": [
-          "CustomIPPrefixes"
+          "CustomIpPrefixes"
         ],
         "operationId": "CustomIPPrefixes_ListAll",
         "description": "Gets all the custom IP prefixes in a subscription.",
@@ -232,7 +232,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of CustomIpPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/CustomIPPrefixListResult"
+              "$ref": "#/definitions/CustomIpPrefixListResult"
             }
           },
           "default": {
@@ -255,7 +255,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/customIpPrefixes": {
       "get": {
         "tags": [
-          "CustomIPPrefixes"
+          "CustomIpPrefixes"
         ],
         "operationId": "CustomIPPrefixes_List",
         "description": "Gets all custom IP prefixes in a resource group.",
@@ -276,9 +276,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of CustomIPPrefix resources.",
+            "description": "Request successful. The operation returns a list of CustomIpPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/CustomIPPrefixListResult"
+              "$ref": "#/definitions/CustomIpPrefixListResult"
             }
           },
           "default": {
@@ -300,13 +300,13 @@
     }
   },
   "definitions": {
-    "CustomIPPrefixPropertiesFormat": {
+    "CustomIpPrefixPropertiesFormat": {
       "properties": {
         "cidr": {
           "type": "string",
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length. Should be a subset of its master custom IP Prefix parent CIDR."
         },
-        "masterCustomIPPrefix": {
+        "masterCustomIpPrefix": {
           "type": "string",
           "description": "The name of the master custom IP Prefix parent."
         },
@@ -348,11 +348,11 @@
       },
       "description": "Custom IP prefix properties."
     },
-    "CustomIPPrefix": {
+    "CustomIpPrefix": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomIPPrefixPropertiesFormat",
+          "$ref": "#/definitions/CustomIpPrefixPropertiesFormat",
           "description": "Custom IP prefix properties."
         },
         "etag": {
@@ -375,12 +375,12 @@
       ],
       "description": "Custom IP prefix resource."
     },
-    "CustomIPPrefixListResult": {
+    "CustomIpPrefixListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomIPPrefix"
+            "$ref": "#/definitions/CustomIpPrefix"
           },
           "description": "A list of Custom IP prefixes that exists in a resource group."
         },
