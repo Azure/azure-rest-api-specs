@@ -313,7 +313,7 @@
         "commissionedState": {
           "readOnly": true,
           "type": "string",
-          "description": "The commissioned state of the Custom IP Prefix. Possible values are: 'Provisioning', 'Provisioned', 'Commissioning', 'Commissioned', 'Decommissioning', 'Deprovisioning'.",
+          "description": "The commissioned state of the Custom IP Prefix.",
           "enum": [
             "Provisioning",
             "Provisioned",
@@ -331,9 +331,9 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ReferencedPublicIPPrefix"
+            "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "The list of all referenced PublicIPPrefixes."
+          "description": "The list of all referenced PublicIpPrefixes."
         },
         "resourceGuid": {
           "readOnly": true,
@@ -390,15 +390,6 @@
         }
       },
       "description": "Response for ListCustomIpPrefixes API service call."
-    },
-    "ReferencedPublicIPPrefix": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The PublicIpPrefix Reference."
-        }
-      },
-      "description": "Reference to a public IP prefix."
     }
   }
 }

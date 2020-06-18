@@ -129,7 +129,7 @@
           "200": {
             "description": "Request successful. The operation returns the resulting MasterCustomIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "default": {
@@ -171,7 +171,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             },
             "description": "Parameters supplied to the create or update master custom IP prefix operation."
           },
@@ -186,13 +186,13 @@
           "201": {
             "description": "Create successful. The operation returns the resulting MasterCustomIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "200": {
             "description": "Update successful. The operation returns the resulting MasterCustomIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "default": {
@@ -232,7 +232,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of MasterCustomIPPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefixListResult"
+              "$ref": "#/definitions/MasterCustomIpPrefixListResult"
             }
           },
           "default": {
@@ -278,7 +278,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of MasterCustomIPPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefixListResult"
+              "$ref": "#/definitions/MasterCustomIpPrefixListResult"
             }
           },
           "default": {
@@ -300,7 +300,7 @@
     }
   },
   "definitions": {
-    "MasterCustomIPPrefixPropertiesFormat": {
+    "MasterCustomIpPrefixPropertiesFormat": {
       "properties": {
         "cidr": {
           "type": "string",
@@ -334,14 +334,14 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ReferencedCustomIPPrefix"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The list of corresponding Custom IP Prefixes."
         },
         "validationState": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the ARIN / ROA authentication for master custom IP prefix resource. Possible values are: 'Validating', 'Valid', and 'Invalid'.",
+          "description": "The state of the ARIN / ROA authentication for master custom IP prefix resource.",
           "enum": [
             "Validating",
             "Valid",
@@ -365,11 +365,11 @@
       },
       "description": "Master custom IP prefix properties."
     },
-    "MasterCustomIPPrefix": {
+    "MasterCustomIpPrefix": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MasterCustomIPPrefixPropertiesFormat",
+          "$ref": "#/definitions/MasterCustomIpPrefixPropertiesFormat",
           "description": "Master Custom IP prefix properties."
         },
         "etag": {
@@ -385,12 +385,12 @@
       ],
       "description": "Master Custom IP prefix resource."
     },
-    "MasterCustomIPPrefixListResult": {
+    "MasterCustomIpPrefixListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MasterCustomIPPrefix"
+            "$ref": "#/definitions/MasterCustomIpPrefix"
           },
           "description": "A list of master custom IP prefixes that exists in a resource group."
         },
@@ -400,15 +400,6 @@
         }
       },
       "description": "Response for ListMasterCustomIpPrefixes API service call."
-    },
-    "ReferencedCustomIPPrefix": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The CustomIpPrefix Reference."
-        }
-      },
-      "description": "Reference to a custom IP prefix."
     }
   }
 }
