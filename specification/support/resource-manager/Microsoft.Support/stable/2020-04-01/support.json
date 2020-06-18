@@ -286,7 +286,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_List",
         "parameters": [
           {
@@ -345,7 +345,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Get ticket details for an Azure subscription. Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Get ticket details for an Azure subscription. Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_Get",
         "parameters": [
           {
@@ -535,6 +535,9 @@
           "Create a ticket to request Quota increase for Low-priority cores for Machine Learning service": {
             "$ref": "./examples/CreateMachineLearningQuotaTicketForLowPriorityCores.json"
           },
+          "Create a ticket to request Quota increase for Azure SQL managed instance": {
+            "$ref": "./examples/CreateSqlManagedInstanceQuotaTicket.json"
+          },
           "Create a ticket to request Quota increase for services that do not require additional details in the quotaTicketDetails object": {
             "$ref": "./examples/CreateGenericQuotaTicket.json"
           }
@@ -598,7 +601,7 @@
         "tags": [
           "Communications"
         ],
-        "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by _CreatedDate_ or _CommunicationType_ using the $filter parameter. The only type of communication supported today is _Web_. Output will be a paged result with _nextLink_, using which you can retrieve the next set of Communication results. <br/><br/>Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by _CreatedDate_ or _CommunicationType_ using the $filter parameter. The only type of communication supported today is _Web_. Output will be a paged result with _nextLink_, using which you can retrieve the next set of Communication results. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
         "operationId": "Communications_List",
         "parameters": [
           {
@@ -1147,7 +1150,7 @@
           "readOnly": true
         },
         "severity": {
-          "description": "A value that indicates the urgency of the case, which in turn determines the response time according to the service level agreement of the technical support plan you have with Azure. Note: 'Highest critical impact' severity is reserved only for our Premium customers.",
+          "description": "A value that indicates the urgency of the case, which in turn determines the response time according to the service level agreement of the technical support plan you have with Azure. Note: 'Highest critical impact', also known as the 'Emergency - Severe impact' level in the Azure portal is reserved only for our Premium customers.",
           "enum": [
             "minimal",
             "moderate",
