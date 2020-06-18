@@ -111,7 +111,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.storsimple.v2017_06_01
-  output-folder: $(azure-libraries-for-java-folder)/storsimple/resource-manager/v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storsimple/mgmt-v2017_06_01
 regenerate-manager: true
 generate-interface: true
 ```

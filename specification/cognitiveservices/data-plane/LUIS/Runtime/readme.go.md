@@ -14,7 +14,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: runtime_2_0
-  - tag: runtime_3_0_preview
+  - tag: runtime_3_0
 ```
 
 ### Tag: runtime_2_0 and go
@@ -26,11 +26,11 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/$(namespace)
 ```
 
-### Tag: runtime_3_0_preview and go
+### Tag: runtime_3_0 and go
 
-These settings apply only when `--tag=runtime_3_0_preview --go` is specified on the command line.
+These settings apply only when `--tag=runtime_3_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'runtime_3_0_preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.0/luis/$(namespace)
+``` yaml $(tag) == 'runtime_3_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.0/luis/$(namespace)
 ```

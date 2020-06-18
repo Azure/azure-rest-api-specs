@@ -737,21 +737,12 @@
           "readOnly": true
         },
         "billingPlans": {
-          "type": "array",
+          "type": "object",
           "description": "The billing plan options available for this SKU.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "$ref": "#/definitions/ReservationTerm",
-                "description": "The term for the billing SKU is available for."
-              }
-            },
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ReservationBillingPlan"
-              }
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ReservationBillingPlan"
             }
           }
         },

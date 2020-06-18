@@ -5,7 +5,7 @@
     "version": "3.0-preview"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/luis/api/v3.0-preview",
+    "hostTemplate": "{Endpoint}/luis/authoring/v3.0-preview",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -26,96 +26,6 @@
     }
   ],
   "paths": {
-    "/apps/{appId}/versions/{versionId}/patterns": {
-      "post": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Creates a new pattern feature in a version of the application.",
-        "operationId": "Features_CreatePatternFeature",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternCreateObject",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatternCreateObject"
-            },
-            "description": "The Name and Pattern of the feature."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "201": {
-            "description": "The ID of the created feature.",
-            "schema": {
-              "$ref": "#/definitions/FeatureIDResponse"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Create Pattern Feature request": {
-            "$ref": "./examples/features/SuccessfulCreatePatternFeatureRequest.json"
-          }
-        }
-      },
-      "get": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets all the pattern features.",
-        "operationId": "Features_ListApplicationVersionPatternFeatures",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "$ref": "#/parameters/SkipInPath"
-          },
-          {
-            "$ref": "#/parameters/TakeInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of pattern features.",
-            "schema": {
-              "$ref": "#/definitions/PatternFeatureInfoList"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Application Version Pattern Features request": {
-            "$ref": "./examples/features/SuccessfulGetApplicationVersionPatternFeaturesRequest.json"
-          }
-        }
-      }
-    },
     "/apps/{appId}/versions/{versionId}/phraselists": {
       "post": {
         "description": "Creates a new phraselist feature in a version of the application.",
@@ -242,146 +152,6 @@
         "x-ms-examples": {
           "Successful Get Application Version Features request": {
             "$ref": "./examples/features/SuccessfulGetApplicationVersionFeaturesRequest.json"
-          }
-        }
-      }
-    },
-    "/apps/{appId}/versions/{versionId}/patterns/{patternId}": {
-      "get": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets the specified pattern feature's info in a version of the application.",
-        "operationId": "Features_GetPatternFeatureInfo",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternId",
-            "in": "path",
-            "description": "The pattern feature ID.",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The pattern feature info.",
-            "schema": {
-              "$ref": "#/definitions/PatternFeatureInfo"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Pattern Feature Info request": {
-            "$ref": "./examples/features/SuccessfulGetPatternFeatureInfoRequest.json"
-          }
-        }
-      },
-      "put": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Updates the pattern, the name and the state of the pattern feature in a version of the application.",
-        "operationId": "Features_UpdatePatternFeature",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternId",
-            "in": "path",
-            "description": "The pattern feature ID.",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "patternUpdateObject",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatternUpdateObject"
-            },
-            "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern and a boolean called IsActive to update the feature."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Update Pattern Feature Info request": {
-            "$ref": "./examples/features/SuccessfulUpdatePatternFeatureInfoRequest.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Deletes a pattern feature in a version of the application.",
-        "operationId": "Features_DeletePatternFeature",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternId",
-            "in": "path",
-            "description": "The pattern feature ID.",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Delete Pattern Feature Info request": {
-            "$ref": "./examples/features/SuccessfulDeletePatternFeatureInfoRequest.json"
           }
         }
       }
@@ -534,6 +304,9 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
+            "$ref": "#/parameters/EnableNestedChildren"
+          },
+          {
             "name": "exampleLabelObject",
             "in": "body",
             "required": true,
@@ -580,6 +353,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           },
           {
             "name": "exampleLabelObjectArray",
@@ -638,6 +414,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -1546,6 +1325,372 @@
         }
       }
     },
+    "/apps/{appId}/versions/{versionId}/intents/{intentId}/features": {
+      "post": {
+        "description": "Adds a new feature relation to be used by the intent in a version of the application.",
+        "operationId": "Features_AddIntentFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationCreateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A Feature relation information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Add Feature Relation request": {
+            "$ref": "./examples/model/SuccessfulAddIntentFeatureRelationRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the information of the features used by the intent in a version of the application.",
+        "operationId": "Model_GetIntentFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of feature information objects for the intent.",
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Features information request": {
+            "$ref": "./examples/model/SuccessfulGetIntentFeaturesInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the information of the features used by the intent in a version of the application.",
+        "operationId": "Model_ReplaceIntentFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationsUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            },
+            "description": "A list of feature information objects containing the new feature relations."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Replace Features request": {
+            "$ref": "./examples/model/SuccessfulReplaceIntentFeaturesRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a relation from the feature relations used by the intent in a version of the application.",
+        "operationId": "Model_DeleteIntentFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationDeleteObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A feature information object containing the feature relation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Delete feature relation request": {
+            "$ref": "./examples/model/SuccessfulDeleteIntentFeatureRelationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}/features": {
+      "post": {
+        "description": "Adds a new feature relation to be used by the entity in a version of the application.",
+        "operationId": "Features_AddEntityFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          },
+          {
+            "name": "featureRelationCreateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A Feature relation information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Add Feature Relation request": {
+            "$ref": "./examples/model/SuccessfulAddEntityFeatureRelationRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the information of the features used by the entity in a version of the application.",
+        "operationId": "Model_GetEntityFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of feature information objects for the entity.",
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Features information request": {
+            "$ref": "./examples/model/SuccessfulGetEntityFeaturesInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the information of the features used by the entity in a version of the application.",
+        "operationId": "Model_ReplaceEntityFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          },
+          {
+            "name": "featureRelationsUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            },
+            "description": "A list of feature information objects containing the new feature relations."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Replace Features request": {
+            "$ref": "./examples/model/SuccessfulReplaceEntityFeaturesRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a relation from the feature relations used by the entity in a version of the application.",
+        "operationId": "Model_DeleteEntityFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          },
+          {
+            "name": "featureRelationDeleteObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A feature information object containing the feature relation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Delete feature relation request": {
+            "$ref": "./examples/model/SuccessfulDeleteEntityFeatureRelationRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}": {
       "get": {
         "description": "Gets information about a hierarchical entity in a version of the application.",
@@ -2206,6 +2351,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -2253,6 +2401,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -3273,168 +3424,6 @@
         "x-ms-examples": {
           "Successful Delete Unlabelled Utterance": {
             "$ref": "./examples/versions/SuccessfulDeleteUnlabelledUtteranceRequest.json"
-          }
-        }
-      }
-    },
-    "/apps/{appId}/permissions": {
-      "get": {
-        "description": "Gets the list of user emails that have permissions to access your application.",
-        "operationId": "Permissions_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list includes a single owner. All collaborators are listed in the emails array.",
-            "schema": {
-              "$ref": "#/definitions/UserAccessList"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Application User Access List": {
-            "$ref": "./examples/permissions/SuccessfulGetApplicationUserAccessListRequest.json"
-          }
-        }
-      },
-      "post": {
-        "description": "Adds a user to the allowed list of users to access this LUIS application. Users are added using their email address.",
-        "operationId": "Permissions_Add",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "name": "userToAdd",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserCollaborator"
-            },
-            "description": "A model containing the user's email address."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Add User To Access List": {
-            "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "Removes a user from the allowed list of users to access this LUIS application. Users are removed using their email address.",
-        "operationId": "Permissions_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "name": "userToDelete",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserCollaborator"
-            },
-            "description": "A model containing the user's email address."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Remove User From Access List": {
-            "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
-          }
-        }
-      },
-      "put": {
-        "description": "Replaces the current user access list with the new list sent in the body. If an empty list is sent, all access to other users will be removed.",
-        "operationId": "Permissions_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "name": "collaborators",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CollaboratorsArray"
-            },
-            "description": "A model containing a list of user email addresses."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Replaces Users From Access List": {
-            "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
           }
         }
       }
@@ -7499,6 +7488,9 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
+            "$ref": "#/parameters/ArmTokenParamter"
+          },
+          {
             "name": "azureAccountInfoObject",
             "in": "body",
             "schema": {
@@ -7543,6 +7535,9 @@
           },
           {
             "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "$ref": "#/parameters/ArmTokenParamter"
           }
         ],
         "responses": {
@@ -7578,6 +7573,9 @@
           },
           {
             "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "$ref": "#/parameters/ArmTokenParamter"
           },
           {
             "name": "azureAccountInfoObject",
@@ -7623,6 +7621,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "$ref": "#/parameters/ArmTokenParamter"
           }
         ],
         "responses": {
@@ -7726,6 +7727,256 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/apps/import?JsonVersion=V2": {
+      "post": {
+        "description": "Imports an application to LUIS, the application's structure is included in the request body.",
+        "operationId": "Apps_ImportV2App",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "description": "The application name to create. If not specified, the application name will be read from the imported object. If the application name already exists, an error is returned.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppV2",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LuisAppV2"
+            },
+            "description": "A LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the imported application.",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/apps/SuccessfulImportV2ApplicationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/import?format=lu": {
+      "post": {
+        "description": "Imports an application to LUIS, the application's structure is included in the request body.",
+        "operationId": "Apps_ImportLuFormat",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "description": "The application name to create. If not specified, the application name will be read from the imported object. If the application name already exists, an error is returned.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppLu",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the imported application.",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/apps/SuccessfulImportLuApplicationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/import?JsonVersion=V2": {
+      "post": {
+        "description": "Imports a new version into a LUIS application.",
+        "operationId": "Versions_ImportV2App",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The new versionId to import. If not specified, the versionId will be read from the imported object.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppV2",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LuisAppV2"
+            },
+            "description": "A LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The created application version.",
+            "schema": {
+              "$ref": "#/definitions/VersionResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/versions/SuccessfulImportV2ApplicationVersionRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/import?format=lu": {
+      "post": {
+        "description": "Imports a new version into a LUIS application.",
+        "operationId": "Versions_ImportLuFormat",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The new versionId to import. If not specified, the versionId will be read from the imported object.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppLu",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "An LU representing the LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "201": {
+            "description": "The created application version.",
+            "schema": {
+              "$ref": "#/definitions/VersionResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/versions/SuccessfulImportLuApplicationVersionRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/export?format=lu": {
+      "get": {
+        "description": "Exports a LUIS application to text format.",
+        "operationId": "Versions_ExportLuFormat",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "format",
+            "required": true,
+            "description": "Lu format extension",
+            "type": "string",
+            "enum": [
+              "lu"
+            ]
+          },
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The LUIS application structure in LU format.",
+            "schema": {
+              "description": "The LUIS application structure in LU format.",
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/octet-stream"
+        ],
+        "x-ms-examples": {
+          "Successful Export Application Version": {
+            "$ref": "./examples/versions/SuccessfulExportLuApplicationVersionRequest.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
@@ -7751,6 +8002,22 @@
         "role": {
           "description": "The role the entity plays in the utterance.",
           "type": "string"
+        },
+        "children": {
+          "description": "The identified entities within the example utterance.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabelObject"
+          },
+          "type": "array",
+          "example": [
+            {
+              "entityName": "child",
+              "startCharIndex": 0,
+              "endCharIndex": 0,
+              "children": []
+            }
+          ]
         }
       }
     },
@@ -7921,6 +8188,21 @@
         "role": {
           "description": "The role the entity plays in the utterance.",
           "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONEntity"
+          },
+          "example": [
+            {
+              "entity": "child1",
+              "startPos": 0,
+              "endPos": 0,
+              "children": []
+            }
+          ]
         }
       }
     },
@@ -7993,6 +8275,11 @@
         },
         "isExchangeable": {
           "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
           "default": true,
           "type": "boolean"
         }
@@ -8070,25 +8357,6 @@
         }
       }
     },
-    "PatternUpdateObject": {
-      "description": "Object model for updating an existing Pattern feature.",
-      "type": "object",
-      "properties": {
-        "pattern": {
-          "description": "The Regular Expression to match.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the feature.",
-          "type": "string"
-        },
-        "isActive": {
-          "description": "Indicates if the Pattern feature is enabled.",
-          "default": true,
-          "type": "boolean"
-        }
-      }
-    },
     "ClosedList": {
       "description": "Exported Model - A list entity.",
       "type": "object",
@@ -8146,6 +8414,11 @@
         "mode": {
           "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8155,20 +8428,6 @@
       "properties": {
         "name": {
           "description": "Name of the new entity extractor.",
-          "type": "string"
-        }
-      }
-    },
-    "PatternCreateObject": {
-      "description": "Object model for creating a Pattern feature.",
-      "type": "object",
-      "properties": {
-        "pattern": {
-          "description": "The Regular Expression to match.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the feature.",
           "type": "string"
         }
       }
@@ -8387,6 +8646,11 @@
           "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "default": true,
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8401,7 +8665,64 @@
         }
       }
     },
+    "JsonChild": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "instanceOf": {
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonChild"
+          },
+          "type": "array"
+        },
+        "features": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonModelFeatureInformation"
+          },
+          "type": "array"
+        }
+      }
+    },
     "HierarchicalModel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonChild"
+          },
+          "type": "array"
+        },
+        "features": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonModelFeatureInformation"
+          },
+          "type": "array"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inherits": {
+          "type": "object",
+          "$ref": "#/definitions/PrebuiltDomainObject"
+        }
+      }
+    },
+    "HierarchicalModelV2": {
       "type": "object",
       "properties": {
         "name": {
@@ -8437,6 +8758,121 @@
           "description": "Indicates if the staging slot should be used, instead of the Production one.",
           "default": false,
           "type": "boolean"
+        }
+      }
+    },
+    "LuisAppV2": {
+      "description": "Exported Model - An exported LUIS Application.",
+      "additionalProperties": true,
+      "type": "object",
+      "properties": {
+        "luis_schema_version": {
+          "description": "Luis schema deserialization version.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the application.",
+          "type": "string"
+        },
+        "versionId": {
+          "description": "The version ID of the application that was exported.",
+          "type": "string"
+        },
+        "desc": {
+          "description": "The description of the application.",
+          "type": "string"
+        },
+        "culture": {
+          "description": "The culture of the application. E.g.: en-us.",
+          "type": "string"
+        },
+        "intents": {
+          "description": "List of intents.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModelV2"
+          },
+          "type": "array"
+        },
+        "entities": {
+          "description": "List of entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModelV2"
+          },
+          "type": "array"
+        },
+        "closedLists": {
+          "description": "List of list entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ClosedList"
+          },
+          "type": "array"
+        },
+        "composites": {
+          "description": "List of composite entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModelV2"
+          },
+          "type": "array"
+        },
+        "patternAnyEntities": {
+          "description": "List of Pattern.Any entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PatternAny"
+          },
+          "type": "array"
+        },
+        "regex_entities": {
+          "description": "List of regular expression entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/RegexEntity"
+          },
+          "type": "array"
+        },
+        "prebuiltEntities": {
+          "description": "List of prebuilt entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PrebuiltEntity"
+          },
+          "type": "array"
+        },
+        "regex_features": {
+          "description": "List of pattern features.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONRegexFeature"
+          },
+          "type": "array"
+        },
+        "model_features": {
+          "description": "List of model features.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONModelFeature"
+          },
+          "type": "array"
+        },
+        "patterns": {
+          "description": "List of patterns.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PatternRule"
+          },
+          "type": "array"
+        },
+        "utterances": {
+          "description": "List of example utterances.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONUtterance"
+          },
+          "type": "array"
         }
       }
     },
@@ -8493,6 +8929,14 @@
           },
           "type": "array"
         },
+        "hierarchicals": {
+          "description": "List of hierarchical entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
         "patternAnyEntities": {
           "description": "List of Pattern.Any entities.",
           "items": {
@@ -8525,7 +8969,7 @@
           },
           "type": "array"
         },
-        "model_features": {
+        "phraselists": {
           "description": "List of model features.",
           "items": {
             "type": "object",
@@ -8718,6 +9162,21 @@
           "type": "string",
           "format": "uuid",
           "description": "The role id for the predicted entity."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabel"
+          },
+          "example": [
+            {
+              "entityName": "child",
+              "startTokenIndex": 0,
+              "endTokenIndex": 0,
+              "children": []
+            }
+          ]
         }
       },
       "required": [
@@ -8765,6 +9224,21 @@
         "phrase": {
           "type": "string",
           "description": "The actual token(s) that comprise the entity."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityPrediction"
+          },
+          "example": [
+            {
+              "entityName": "child",
+              "startTokenIndex": 0,
+              "endTokenIndex": 0,
+              "phrase": "string"
+            }
+          ]
         }
       }
     },
@@ -9212,6 +9686,10 @@
         },
         "isActive": {
           "description": "Indicates if the feature is enabled.",
+          "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the feature is enabled for all models in the application.",
           "type": "boolean"
         }
       }
@@ -10022,6 +10500,44 @@
         }
       }
     },
+    "FeaturesPerModelResponseObject": {
+      "description": "A list of feature information objects per model.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ModelFeatureInformation"
+      }
+    },
+    "ModelFeatureInformation": {
+      "description": "An object containing the model feature information either the model name or feature name.",
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature used."
+        },
+        "isRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "JsonModelFeatureInformation": {
+      "description": "An object containing the model feature information either the model name or feature name.",
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature used."
+        }
+      }
+    },
     "PatternAny": {
       "description": "Pattern.Any Entity Extractor.",
       "type": "object",
@@ -10180,6 +10696,15 @@
       "format": "uuid",
       "x-ms-parameter-location": "method"
     },
+    "EntityIdInPath": {
+      "name": "entityId",
+      "in": "path",
+      "description": "The entity extractor ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
     "SlotNameInPath": {
       "name": "slotName",
       "in": "path",
@@ -10223,6 +10748,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "ArmTokenParamter": {
+      "in": "header",
+      "name": "ArmToken",
+      "required": false,
+      "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
@@ -10231,6 +10764,14 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "EnableNestedChildren": {
+      "name": "enableNestedChildren",
+      "in": "query",
+      "type": "boolean",
+      "default": false,
+      "description": "Toggles nested/flat format",
+      "x-ms-parameter-location": "method"
     }
   }
 }

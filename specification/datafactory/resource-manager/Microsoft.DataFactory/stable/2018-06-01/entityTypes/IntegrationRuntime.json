@@ -155,6 +155,14 @@
         "subnet": {
           "description": "The name of the subnet this integration runtime will join.",
           "type": "string"
+        },
+        "publicIPs": {
+          "description": "Resource IDs of the public IP addresses that this integration runtime will use.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The ID of the public IP address."
+          }
         }
       },
       "additionalProperties": {
@@ -206,6 +214,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomSetupBase"
+          }
+        },
+        "packageStores": {
+          "description": "Package stores for the SSIS Integration Runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageStore"
           }
         }
       },
@@ -281,6 +296,24 @@
           "type": "string"
         }
       }
+    },
+    "PackageStore": {
+      "description": "Package store for the SSIS integration runtime.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the package store",
+          "type": "string"
+        },
+        "packageStoreLinkedService": {
+          "description": "The package store linked service reference.",
+          "$ref": "#/definitions/EntityReference"
+        }
+      },
+      "required": [
+        "name",
+        "packageStoreLinkedService"
+      ]
     },
     "CustomSetupBase": {
       "description": "The base definition of the custom setup.",
@@ -408,8 +441,7 @@
         }
       },
       "required": [
-        "componentName",
-        "licenseKey"
+        "componentName"
       ]
     },
     "EntityReference": {
