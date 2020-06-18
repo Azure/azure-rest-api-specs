@@ -446,7 +446,11 @@
           "format": "password",
           "description": "Secret key element of the AWS credential object (write only)"
         }
-      }
+      },
+      "required": [
+        "awsAccessKeyId",
+        "awsSecretAccessKey"
+      ]
     },
     "AwAssumeRoleAuthenticationDetailsProperties": {
       "type": "object",
@@ -543,7 +547,17 @@
         }
       },
       "required": [
-        "organizationId"
+        "organizationId",
+        "type",
+        "projectId",
+        "privateKeyId",
+        "privateKey",
+        "clientEmail",
+        "clientId",
+        "authUri",
+        "tokenUri",
+        "authProviderX509CertUrl",
+        "clientX509CertUrl"
       ]
     },
     "PermissionProperty": {
