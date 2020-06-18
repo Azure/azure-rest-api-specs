@@ -39,50 +39,13 @@ directive:
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
     reason: the full operationId value is "ProviderOperationsMetadata_Get" the linter does not seem to be picking what's after the '_'
-  - suppress: OperationIdNounConflictingModelNames
-    where: '$.paths["/providers/Microsoft.Authorization/providerOperations"].get.operationId'
-    from: authorization-ProviderOperationsCalls.json
-    reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentPropertiesWithScope.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentProperties.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.ProviderOperation.properties.isDataAction
-    from: authorization-ProviderOperationsCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.DenyAssignmentProperties.properties.doNotApplyToChildScopes
-    from: authorization-DenyAssignmentGetCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
-    from: authorization-DenyAssignmentGetCalls.json
-    reason: for this case the result of the proposed change would resemble a boolean anyways
-```
-
-### Tag: package-2020-04-01-preview-only
-
-These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-04-01-preview-only'
-input-file:
-- Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-preview-2020-04'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
