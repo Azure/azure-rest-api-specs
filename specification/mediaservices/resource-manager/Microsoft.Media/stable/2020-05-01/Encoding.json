@@ -264,7 +264,7 @@
         "keyFrameInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The distance between two key frames, thereby defining a group of pictures (GOP). The value should be a non-zero integer in the range [1, 30] seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S)."
+          "description": "The distance between two key frames. The value should be non-zero in the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S). Note that this setting is ignored if VideoSyncMode.Passthrough is set, where the KeyFrameInterval value will follow the input source setting."
         },
         "stretchMode": {
           "type": "string",
@@ -292,6 +292,38 @@
             "modelAsString": true
           },
           "description": "The resizing mode - how the input video will be resized to fit the desired output resolution(s). Default is AutoSize"
+        },
+        "syncMode": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Passthrough",
+            "Cfr",
+            "Vfr"
+          ],
+          "x-ms-enum": {
+            "name": "VideoSyncMode",
+            "values": [
+              {
+                "value": "Auto",
+                "description": "This is the default method. Chooses between Cfr and Vfr depending on muxer capabilities. For output format MP4, the default mode is Cfr."
+              },
+              {
+                "value": "Passthrough",
+                "description": "The presentation timestamps on frames are passed through from the input file to the output file writer. Recommended when the input source has variable frame rate, and are attempting to produce multiple layers for adaptive streaming in the output which have aligned GOP boundaries. Note: if two or more frames in the input have duplicate timestamps, then the output will also have the same behavior"
+              },
+              {
+                "value": "Cfr",
+                "description": "Input frames will be repeated and/or dropped as needed to achieve exactly the requested constant frame rate. Recommended when the output frame rate is explicitly set at a specified value"
+              },
+              {
+                "value": "Vfr",
+                "description": "Similar to the Passthrough mode, but if the input has frames that have duplicate timestamps, then only one frame is passed through to the output, and others are dropped. Recommended when the number of output frames is expected to be equal to the number of input frames. For example, the output is used to calculate a quality metric like PSNR against the input"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The Video Sync Mode"
         }
       },
       "type": "object",
@@ -875,15 +907,15 @@
             "values": [
               {
                 "value": "H264SingleBitrateSD",
-                "description": "Produces an MP4 file where the video is encoded with H.264 codec at 2200 kbps and a picture height of 480 pixels, and the stereo audio is encoded with AAC-LC codec at 64 kbps."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at 2200 kbps and a picture height of 480 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
               },
               {
                 "value": "H264SingleBitrate720p",
-                "description": "Produces an MP4 file where the video is encoded with H.264 codec at 4500 kbps and a picture height of 720 pixels, and the stereo audio is encoded with AAC-LC codec at 64 kbps."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at 4500 kbps and a picture height of 720 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
               },
               {
                 "value": "H264SingleBitrate1080p",
-                "description": "Produces an MP4 file where the video is encoded with H.264 codec at 6750 kbps and a picture height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 64 kbps."
+                "description": "Produces an MP4 file where the video is encoded with H.264 codec at 6750 kbps and a picture height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
               },
               {
                 "value": "AdaptiveStreaming",
@@ -903,15 +935,15 @@
               },
               {
                 "value": "H264MultipleBitrate1080p",
-                "description": "Produces a set of 8 GOP-aligned MP4 files, ranging from 6000 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 1080p and goes down to 360p."
+                "description": "Produces a set of 8 GOP-aligned MP4 files, ranging from 6000 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 1080p and goes down to 180p."
               },
               {
                 "value": "H264MultipleBitrate720p",
-                "description": "Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 720p and goes down to 360p."
+                "description": "Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 720p and goes down to 180p."
               },
               {
                 "value": "H264MultipleBitrateSD",
-                "description": "Produces a set of 5 GOP-aligned MP4 files, ranging from 1600kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 360p."
+                "description": "Produces a set of 5 GOP-aligned MP4 files, ranging from 1900kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 240p."
               }
             ],
             "modelAsString": true
@@ -1133,7 +1165,7 @@
     "Transform": {
       "allOf": [
         {
-          "$ref": "./Common.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1687,7 +1719,7 @@
     "Job": {
       "allOf": [
         {
-          "$ref": "./Common.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {

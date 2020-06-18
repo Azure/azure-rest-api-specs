@@ -27,6 +27,10 @@
     }
   },
   "definitions": {
+    "Tags": {
+      "properties": {},
+      "type": "object"
+    },
     "Provider": {
       "description": "A resource provider.",
       "properties": {
@@ -84,7 +88,7 @@
       "type": "object",
       "description": "A metric dimension."
     },
-    "Metric": {
+    "MetricSpecification": {
       "properties": {
         "name": {
           "type": "string",
@@ -171,21 +175,7 @@
       "type": "object",
       "description": "A metric emitted by service."
     },
-    "ServiceSpecification": {
-      "properties": {
-        "metricSpecifications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Metric"
-          },
-          "description": "List of metric specifications.",
-          "readOnly": true
-        }
-      },
-      "type": "object",
-      "description": "The service metric specifications."
-    },
-    "MetricProperties": {
+    "Properties": {
       "properties": {
         "serviceSpecification": {
           "$ref": "#/definitions/ServiceSpecification",
@@ -195,6 +185,49 @@
       },
       "type": "object",
       "description": "Metric properties."
+    },
+    "ServiceSpecification": {
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "description": "List of log specifications.",
+          "readOnly": true
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "description": "List of metric specifications.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The service metric specifications."
+    },
+    "LogSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The diagnostic log category name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The diagnostic log category display name.",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "The time range for requests in each blob.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "A diagnostic log emitted by service."
     },
     "Operation": {
       "description": "An operation.",
@@ -212,7 +245,7 @@
           "description": "Origin of the operation."
         },
         "properties": {
-          "$ref": "#/definitions/MetricProperties",
+          "$ref": "#/definitions/Properties",
           "description": "Operation properties format."
         }
       },
@@ -313,6 +346,32 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "The storage accounts for this resource."
+        },
+        "storageAuthentication": {
+          "type": "string",
+          "enum": [
+            "System",
+            "ManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAuthentication",
+            "values": [
+              {
+                "value": "System",
+                "description": "System authentication."
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "Managed Identity authentication."
+              }
+            ],
+            "modelAsString": true
+          },
+          "x-nullable": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/AccountEncryption",
+          "description": "The account encryption properties."
         }
       },
       "type": "object",
@@ -322,7 +381,7 @@
       "description": "A Media Services account.",
       "allOf": [
         {
-          "$ref": "./Common.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -330,6 +389,10 @@
           "$ref": "#/definitions/MediaServiceProperties",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/MediaServiceIdentity",
+          "description": "The Managed Identity for the Media Services account."
         }
       },
       "type": "object"
@@ -389,11 +452,99 @@
       },
       "type": "object"
     },
+    "MediaServiceIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "values": [
+              {
+                "value": "SystemAssigned",
+                "description": "A system-assigned managed identity."
+              },
+              {
+                "value": "None",
+                "description": "No managed identity."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The identity type."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The Principal ID of the identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Tenant ID of the identity.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyIdentifier": {
+          "type": "string",
+          "description": "The URL of the Key Vault key used to encrypt the account. The key may either be versioned (for example https://vault/keys/mykey/version1) or reference a key without a version (for example https://vault/keys/mykey)."
+        },
+        "currentKeyIdentifier": {
+          "type": "string",
+          "description": "The current key used to encrypt the Media Services account, including the key version.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "AccountEncryption": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemKey",
+            "CustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "AccountEncryptionKeyType",
+            "values": [
+              {
+                "value": "SystemKey",
+                "description": "The Account Key is encrypted with a System Key."
+              },
+              {
+                "value": "CustomerKey",
+                "description": "The Account Key is encrypted with a Customer Key."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The type of key used to encrypt the Account Key."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "The properties of the key used to encrypt the account."
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
     "SubscriptionMediaService": {
       "description": "A Media Services account.",
       "allOf": [
         {
-          "$ref": "./Common.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -875,6 +1026,266 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources": {
+      "get": {
+        "summary": "Get list of group IDs.",
+        "description": "Get list of group Ids.",
+        "operationId": "PrivateLinkResources_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}": {
+      "get": {
+        "summary": "Get group ID.",
+        "description": "Get group Id.",
+        "operationId": "PrivateLinkResources_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections": {
+      "get": {
+        "summary": "Get all private endpoint connections.",
+        "description": "Get all private endpoint connections.",
+        "operationId": "PrivateEndpointConnections_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}": {
+      "get": {
+        "summary": "Get private endpoint connection.",
+        "description": "Get private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete private endpoint connection.",
+        "description": "Delete private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update private endpoint connection.",
+        "description": "Update private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/checkNameAvailability": {
       "post": {
         "summary": "Check Name Availability",
@@ -966,7 +1377,7 @@
       "get": {
         "summary": "Get a Media Services account",
         "description": "Get the details of a Media Services account",
-        "operationId": "Mediaservices_GetBySubscription",
+        "operationId": "Mediaservices_Get",
         "responses": {
           "200": {
             "description": "OK",
@@ -1017,8 +1428,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group within the Azure subscription.",
-      "x-ms-parameter-location": "method"
+      "description": "The unique identifier for a Microsoft Azure subscription."
     },
     "ApiVersion": {
       "name": "api-version",
