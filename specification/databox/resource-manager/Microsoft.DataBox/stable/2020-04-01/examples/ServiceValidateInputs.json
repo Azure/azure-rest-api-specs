@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
     "location": "westus",
-    "api-version": "2019-09-01",
+    "api-version": "2020-04-01",
     "x-ms-client-request-id": [
       "ee686d79-42c2-4b01-9afe-5e99f4cabfee"
     ],
@@ -23,14 +23,7 @@
       "validationCategory": "JobCreationValidation",
       "individualRequestDetails": [
         {
-          "validationType": "ValidateDataDestinationDetails",
-          "location": "westus",
-          "destinationAccountDetails": [
-            {
-              "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
-              "dataDestinationType": "StorageAccount"
-            }
-          ]
+          "validationType": "ValidateDataDestinationDetails"
         },
         {
           "validationType": "ValidateAddress",
@@ -53,7 +46,6 @@
     "200": {
       "body": {
         "properties": {
-          "status": "AllValidToProceed",
           "individualResponseDetails": [
             {
               "validationType": "ValidateDataDestinationDetails",

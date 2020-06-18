@@ -3,7 +3,7 @@
     "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
     "resourceGroupName": "SdkRg4981",
     "jobName": "SdkJob3971",
-    "api-version": "2019-09-01",
+    "api-version": "2020-04-01",
     "x-ms-client-request-id": [
       "f0ce17be-5da4-4184-88c9-50a701ad7d11"
     ],
@@ -26,6 +26,7 @@
       "properties": {
         "details": {
           "jobDetailsType": "DataBox",
+          "transferType": "ImportToAzure",
           "contactDetails": {
             "contactName": "Public SDK Test",
             "phone": "1234567890",
@@ -43,13 +44,7 @@
             "postalCode": "94107",
             "companyName": "Microsoft",
             "addressType": "Commercial"
-          },
-          "destinationAccountDetails": [
-            {
-              "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
-              "dataDestinationType": "StorageAccount"
-            }
-          ]
+          }
         }
       },
       "location": "westus",
@@ -64,6 +59,7 @@
     "200": {
       "body": {
         "properties": {
+          "transferType": "ImportToAzure",
           "isCancellable": true,
           "isDeletable": false,
           "isShippingAddressEditable": true,
@@ -158,14 +154,6 @@
               "companyName": "Microsoft",
               "addressType": "Commercial"
             },
-            "destinationAccountDetails": [
-              {
-                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
-                "dataDestinationType": "StorageAccount",
-                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
-              }
-            ],
-            "errorDetails": [],
             "jobDetailsType": "DataBox",
             "copyLogDetails": []
           },
