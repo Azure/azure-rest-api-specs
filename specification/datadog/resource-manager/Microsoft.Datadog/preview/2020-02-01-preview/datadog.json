@@ -5,37 +5,27 @@
     "version": "2020-02-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "securityDefinitions": {
     "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-            "user_impersonation": "impersonate your user account"
-        }
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
-        "tags": [
-          "ApiKey"
-        ],
+        "tags": ["ApiKey"],
         "summary": "List the api keys for a given monitor resource.",
         "operationId": "ApiKeys_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -73,14 +63,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultKey": {
       "post": {
-        "tags": [
-          "ApiKey"
-        ],
+        "tags": ["ApiKey"],
         "summary": "Get the default api key.",
         "operationId": "ApiKeys_GetDefaultKey",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -115,17 +101,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/setDefaultKey": {
       "post": {
-        "tags": [
-          "ApiKey"
-        ],
+        "tags": ["ApiKey"],
         "summary": "Set the default api key.",
         "operationId": "ApiKeys_SetDefaultKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -164,14 +144,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listMonitoredResources": {
       "post": {
-        "tags": [
-          "MonitoredResources"
-        ],
+        "tags": ["MonitoredResources"],
         "summary": "List the resources currently being monitored by the Datadog monitor resource.",
         "operationId": "MonitoredResources_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -209,14 +185,10 @@
     },
     "/providers/Microsoft.Datadog/operations": {
       "get": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "List all operations provided by Microsoft.Datadog for the 2020-02-01-preview api version.",
         "operationId": "Operations_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Success",
@@ -243,14 +215,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/monitors": {
       "get": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "List all monitors under the specified subscription.",
         "operationId": "Monitors_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -282,14 +250,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors": {
       "get": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "List all monitors under the specified resource group.",
         "operationId": "Monitors_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -324,14 +288,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}": {
       "get": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "Get the properties of a specific monitor resource.",
         "operationId": "Monitors_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -364,17 +324,11 @@
         }
       },
       "put": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "Create a monitor resource.",
         "operationId": "Monitors_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -421,17 +375,11 @@
         }
       },
       "patch": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "Update a monitor resource.",
         "operationId": "Monitors_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -465,20 +413,16 @@
           }
         },
         "x-ms-examples": {
-          "Monitors_Create": {
-            "$ref": "./examples/Monitors_Create.json"
+          "Monitors_Update": {
+            "$ref": "./examples/Monitors_Update.json"
           }
         }
       },
       "delete": {
-        "tags": [
-          "MonitorsResource"
-        ],
+        "tags": ["MonitorsResource"],
         "summary": "Delete a monitor resource.",
         "operationId": "Monitors_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -517,14 +461,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/tagRules": {
       "get": {
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "summary": "List the tag rules for a given monitor resource.",
         "operationId": "TagRules_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -562,17 +502,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/tagRules/{ruleSetName}": {
       "put": {
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "summary": "Create or update a tag rule set for a given monitor resource.",
         "operationId": "TagRules_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -618,14 +552,10 @@
         }
       },
       "get": {
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "summary": "Get a tag rule set for a given monitor resource.",
         "operationId": "TagRules_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -666,14 +596,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations": {
       "get": {
-        "tags": [
-          "SingleSignOn"
-        ],
+        "tags": ["SingleSignOn"],
         "summary": "List the single sign-on configurations for a given monitor resource.",
         "operationId": "SingleSignOnConfigurations_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -711,17 +637,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}": {
       "put": {
-        "tags": [
-          "SingleSignOn"
-        ],
+        "tags": ["SingleSignOn"],
         "summary": "Configures single-sign-on for this resource.",
         "operationId": "SingleSignOnConfigurations_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -774,14 +694,10 @@
         }
       },
       "get": {
-        "tags": [
-          "SingleSignOn"
-        ],
+        "tags": ["SingleSignOn"],
         "summary": "Gets the datadog single sign-on resource for the given Monitor.",
         "operationId": "SingleSignOnConfigurations_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -823,12 +739,10 @@
   },
   "definitions": {
     "DatadogApiKey": {
-      "required": [
-        "key"
-      ],
+      "required": ["key"],
       "type": "object",
       "properties": {
-        "created_by": {
+        "createdBy": {
           "description": "The user that created the API key.",
           "type": "string"
         },
@@ -975,9 +889,7 @@
       }
     },
     "ResourceSku": {
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "name": {
@@ -1004,11 +916,7 @@
       }
     },
     "DatadogSubscriptionTypes": {
-      "enum": [
-        "trial",
-        "free",
-        "pro"
-      ],
+      "enum": ["trial", "free", "pro"],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
@@ -1034,16 +942,12 @@
         "apiKey": {
           "description": "Api key associated to the Datadog organization.",
           "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "x-ms-mutability": ["create"]
         },
         "applicationKey": {
           "description": "Application key associated to the Datadog organization.",
           "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "x-ms-mutability": ["create"]
         },
         "idpMetadata": {
           "description": "The XML metadata required to setup single sign on during organization creation.",
@@ -1091,10 +995,7 @@
       }
     },
     "ManagedIdentityTypes": {
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
+      "enum": ["SystemAssigned", "UserAssigned"],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
@@ -1120,9 +1021,7 @@
       }
     },
     "DatadogMonitorResource": {
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -1191,10 +1090,7 @@
     },
     "TagAction": {
       "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
-      "enum": [
-        "Include",
-        "Exclude"
-      ],
+      "enum": ["Include", "Exclude"],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
@@ -1314,7 +1210,7 @@
       "type": "object",
       "properties": {
         "singleSignOnState": {
-          "description": "This state of single sign-on funtionality, \"Enabled\"/\"Disabled\".",
+          "description": "This state of single sign-on functionality, \"Enabled\"/\"Disabled\".",
           "type": "string"
         },
         "metadataXML": {
@@ -1326,7 +1222,6 @@
           "type": "string"
         },
         "singleSignOnUrl": {
-          "format": "uri",
           "description": "The login URL specific to this Datadog Organization.",
           "type": "string"
         }
