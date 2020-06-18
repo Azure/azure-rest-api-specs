@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "udid": "[udid]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "udid": "[udid from request]",
+          "information": "1 geometry processed in user data"
+        },
+        "result": {
+            "feature": {
+                "type": "Feature",
+                "bbox": [
+                    -121.9267386,
+                    32.5362475,
+                    -111.9267386,
+                    33.5362475
+                ],
+                "properties": {},
+                "geometry": {
+                    "coordinates": [
+                        [
+                            [
+                                -121.9267386,
+                                32.5362475
+                            ],
+                            [
+                                -121.9267386,
+                                33.5362475
+                            ],
+                            [
+                                -111.9267386,
+                                33.5362475
+                            ],
+                            [
+                                -111.9267386,
+                                32.5362475
+                            ],
+                            [
+                                -121.9267386,
+                                32.5362475
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                }
+            }
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ClientParams",
+          "message": "One or more parameters are missing.",
+          "innererror": {
+            "code": "MissingQueryParameter",
+            "message": "Input parameter udid is missing."
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
