@@ -39,6 +39,10 @@ directive:
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
     reason: the full operationId value is "ProviderOperationsMetadata_Get" the linter does not seem to be picking what's after the '_'
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/providers/Microsoft.Authorization/providerOperations"].get.operationId'
+    from: authorization-ProviderOperationsCalls.json
+    reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
 ```
 
 ### Tag: package-preview-2020-04
