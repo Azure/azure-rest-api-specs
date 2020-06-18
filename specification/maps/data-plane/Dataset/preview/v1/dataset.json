@@ -80,12 +80,6 @@
       "description": "The operation's status response.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
-      },
-      "headers": {
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
-        }
       }
     },
     "201Async": {
@@ -97,10 +91,6 @@
         "Location": {
           "type": "string",
           "description": "A URI where details on the newly created resource can be found."
-        },
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
         }
       }
     },
@@ -110,10 +100,6 @@
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
-        },
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
         }
       }
     }
@@ -179,7 +165,7 @@
         "outdoor"
       ],
       "x-ms-enum": {
-        "name": "type",
+        "name": "DatasetType",
         "modelAsString": false,
         "values": [
           {
@@ -199,6 +185,14 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
+    "ImportUdid": {
+      "name": "udid",
+      "description": "The unique data ID used to import data into the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
     "ImportType": {
       "name": "type",
       "type": "string",
@@ -208,7 +202,7 @@
         "fixture"
       ],
       "x-ms-enum": {
-        "name": "type",
+        "name": "ImportDataType",
         "modelAsString": false,
         "values": [
           {
@@ -321,7 +315,7 @@
             "$ref": "#/parameters/DatasetId"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/ImportUdid"
           },
           {
             "$ref": "#/parameters/ImportType"
@@ -577,6 +571,11 @@
         },
         "datasetSources": {
           "$ref": "#/definitions/DatasetSources"
+        },
+        "featureCounts": {
+          "description": "The feature counts for the dataset.",
+          "type": "object",
+          "readOnly": true
         }
       }
     },
