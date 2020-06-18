@@ -1539,13 +1539,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{serviceName}": {
       "get": {
         "tags": [
           "MachineLearningServices"
         ],
         "operationId": "MachineLearningService_Get",
-        "description": "Get a Service by Id.",
+        "description": "Get a Service by name.",
         "x-ms-examples": {
           "Get Service": {
             "$ref": "./examples/getService.json"
@@ -1562,11 +1562,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "id",
-            "description": "The Service Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/WebServiceNameParameter"
           },
           {
             "in": "query",
@@ -1613,11 +1609,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "id",
-            "description": "The Service Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/WebServiceNameParameter"
           }
         ],
         "responses": {
@@ -1767,6 +1759,14 @@
       "type": "string",
       "description": "The Model name.",
       "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "WebServiceNameParameter": {
+      "name": "serviceName",
+      "description": "Name of the Azure Machine Learning service.",
+      "in": "path",
+      "type": "string",
+      "required": true,
       "x-ms-parameter-location": "method"
     },
     "WebServiceTagParameter": {
