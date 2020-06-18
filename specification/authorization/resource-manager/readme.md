@@ -35,16 +35,17 @@ tag: package-preview-2020-04
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
-    #where:
-    #  -   $.paths["/providers/Microsoft.Authorization/operations"]
-
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
+    from: authorization-ProviderOperationsCalls.json
+    reason: the full operationId value is "ProviderOperationsMetadata_Get" the linter does not seem to be picking what's after the '_'
 ```
 
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-preview-2020-04'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
