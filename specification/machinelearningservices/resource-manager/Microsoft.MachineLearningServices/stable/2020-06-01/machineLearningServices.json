@@ -3653,23 +3653,30 @@
       "type": "object"
     },
     "WorkspaceConnection": {
+      "x-ms-azure-resource": true,
       "description": "Workspace connection.",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "ResourceId of the workspace connection."
+          "description": "ResourceId of the workspace connection.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Friendly name of the workspace connection."
+          "description": "Friendly name of the workspace connection.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Resource type of workspace connection."
+          "description": "Resource type of workspace connection.",
+          "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/WorkspaceConnectionProps"
+          "type": "object",
+          "description": "Properties of workspace connection.",
+          "$ref": "#/definitions/WorkspaceConnectionProps",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -3682,7 +3689,10 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/WorkspaceConnectionProps"
+          "type": "object",
+          "description": "Properties of workspace connection.",
+          "$ref": "#/definitions/WorkspaceConnectionProps",
+          "x-ms-client-flatten": true
         }
       }
     },
