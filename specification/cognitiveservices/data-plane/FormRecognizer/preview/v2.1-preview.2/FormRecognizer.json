@@ -76,7 +76,8 @@
           "Train custom model with subfolder filter options": {
             "$ref": "./examples/TrainBatchWithSubFolders.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/custom/models/{modelId}": {
@@ -1244,6 +1245,10 @@
         "modelName": {
           "type": "string",
           "description": "Optional user defined model name."
+        },
+        "modelType": {
+          "type": "string",
+          "description": "Optional model type. "
         }
       }
     },
@@ -1313,6 +1318,13 @@
           "description": "Training result for composed model.",
           "additionalProperties": {
             "$ref": "#/definitions/TrainResult"
+          }
+        },
+        "composedNames": {
+          "type": "object",
+          "description": "List of names of custom models used to compose model.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
