@@ -3998,14 +3998,6 @@
             "name": "DeploymentType",
             "modelAsString": false
           }
-        },
-        "createdBy": {
-          "description": "The individual last responsible for creating or updating the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User"
-            }
-          ]
         }
       },
       "discriminator": "computeType"
@@ -4026,32 +4018,6 @@
           "readOnly": true,
           "type": "string",
           "description": "A continuation link (absolute URI) to the next page of results in the list."
-        }
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "userObjectId": {
-          "type": "string"
-        },
-        "userPuId": {
-          "type": "string"
-        },
-        "userIdp": {
-          "type": "string"
-        },
-        "userAltSecId": {
-          "type": "string"
-        },
-        "userIss": {
-          "type": "string"
-        },
-        "userTenantId": {
-          "type": "string"
-        },
-        "userName": {
-          "type": "string"
         }
       }
     },
@@ -4354,14 +4320,6 @@
           "allOf": [
             {
               "$ref": "#/definitions/ContainerResourceRequirements"
-            }
-          ]
-        },
-        "createdBy": {
-          "description": "The User who created this entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User"
             }
           ]
         }
