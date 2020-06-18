@@ -996,6 +996,12 @@
         }
       }
     },
+    "ModelName": {
+      "description": "Optional user defined model name.",
+      "maxLength": 256,
+      "type": "string",
+      "x-nullable": false
+    },
     "TrainRequest": {
       "description": "Request parameter to train a new custom model.",
       "required": [
@@ -1019,9 +1025,7 @@
           "default": false
         },
         "modelName": {
-          "description": "Optional user defined model name.",
-          "maxLength": 256,
-          "type": "string"
+          "$ref": "#/definitions/ModelName"
         }
       }
     },
@@ -1133,8 +1137,7 @@
           "x-nullable": false
         },
         "modelName": {
-          "type": "string",
-          "description": "Optional user defined model name."
+          "$ref": "#/definitions/ModelName"
         },
         "modelType": {
           "description": "Optional custom model type.",
@@ -1217,13 +1220,6 @@
           "description": "Training result for composed model.",
           "additionalProperties": {
             "$ref": "#/definitions/TrainResult"
-          }
-        },
-        "composedNames": {
-          "type": "object",
-          "description": "List of names of custom models used to compose model.",
-          "additionalProperties": {
-            "type": "string"
           }
         }
       }
@@ -1348,12 +1344,12 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         },
         "modelName": {
-          "description": "Optional user-defined model name.",
-          "type": "string"
+          "$ref": "#/definitions/ModelName"
         }
       }
     },
