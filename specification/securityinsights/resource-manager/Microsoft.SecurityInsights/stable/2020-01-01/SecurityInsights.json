@@ -3170,35 +3170,32 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/SettingsKind"
         }
       ],
-      "description": "The Setting.",
+      "description": "The Settings.",
       "discriminator": "kind",
       "required": [
         "kind"
       ],
-      "type": "object"
-    },
-    "SettingsKind": {
-      "description": "Describes an Azure resource with kind.",
       "properties": {
         "kind": {
-          "description": "The kind of the setting",
-          "enum": [
-            "UebaSettings",
-            "ToggleSettings"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SettingKind"
-          }
+          "$ref": "#/definitions/SettingsKind",
+          "description": "The data connector kind"
         }
       },
       "type": "object"
+    },
+    "SettingsKind": {
+      "description": "The kind of the setting",
+      "enum": [
+        "UebaSettings",
+        "ToggleSettings"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SettingKind"
+      }
     },
     "TIDataConnector": {
       "allOf": [
