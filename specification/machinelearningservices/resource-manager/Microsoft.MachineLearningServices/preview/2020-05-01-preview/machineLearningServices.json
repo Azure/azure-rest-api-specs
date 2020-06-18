@@ -1485,58 +1485,6 @@
             }
           }
         }
-      },
-      "put": {
-        "tags": [
-          "MachineLearningServices"
-        ],
-        "description": "Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If your intent is to create a new service, do a GET first to verify that it does not exist yet.",
-        "operationId": "MachineLearningService_CreateOrUpdate",
-        "x-ms-examples": {
-          "Create Services": {
-            "$ref": "./examples/createService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "properties",
-            "description": "The payload that is used to create or update the Service.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateServiceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request was accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{serviceName}": {
@@ -1562,10 +1510,10 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "#/parameters/WebServiceNameParameter"
           },
           {
             "in": "query",
@@ -1612,10 +1560,10 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "#/parameters/WebServiceNameParameter"
           }
         ],
         "responses": {
@@ -1630,6 +1578,61 @@
           },
           "default": {
             "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningServices"
+        ],
+        "description": "Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If your intent is to create a new service, do a GET first to verify that it does not exist yet.",
+        "operationId": "MachineLearningService_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Services": {
+            "$ref": "./examples/createService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Service.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/MachineLearningServiceError"
             }
@@ -4932,15 +4935,10 @@
     "CreateServiceRequest": {
       "description": "The base class for creating a service.",
       "required": [
-        "computeType",
-        "name"
+        "computeType"
       ],
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The service name.",
-          "type": "string"
-        },
         "description": {
           "description": "The description of the service.",
           "type": "string"
@@ -4996,9 +4994,6 @@
       "discriminator": "computeType"
     },
     "ACIServiceCreateRequest": {
-      "required": [
-        "name"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5077,9 +5072,6 @@
     },
     "AKSServiceCreateRequest": {
       "description": "The request to create an AKS service.",
-      "required": [
-        "name"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5172,9 +5164,6 @@
     },
     "CreateEndpointVariantRequest": {
       "description": "The Variant properties.",
-      "required": [
-        "name"
-      ],
       "type": "object",
       "allOf": [
         {
