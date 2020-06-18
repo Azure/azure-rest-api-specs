@@ -1137,8 +1137,17 @@
           "description": "Optional user defined model name."
         },
         "modelType": {
+          "description": "Optional custom model type.",
+          "enum": [
+            "Custom",
+            "CustomComposed"
+          ],
           "type": "string",
-          "description": "Optional model type. "
+          "x-ms-enum": {
+            "name": "ModelType",
+            "modelAsString": true
+          },
+          "x-nullable": true
         }
       }
     },
