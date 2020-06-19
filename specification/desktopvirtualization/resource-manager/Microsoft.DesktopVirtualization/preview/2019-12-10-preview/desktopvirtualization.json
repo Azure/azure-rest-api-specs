@@ -2092,7 +2092,8 @@
       "required": [
         "hostPoolType",
         "personalDesktopAssignmentType",
-        "loadBalancerType"
+        "loadBalancerType",
+        "preferredAppGroupType"
       ],
       "properties": {
         "friendlyName": {
@@ -2290,8 +2291,7 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of preferred application group type, default to Desktop Application Group",
-          "x-nullable": false
+          "description": "The type of preferred application group type, default to Desktop Application Group"
         }
       }
     },
@@ -2743,7 +2743,8 @@
         },
         "virtualMachineId": {
           "type": "string",
-          "description": "Resource Id of SessionHost's underlying virtual machine."
+          "description": "Resource Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
         },
         "assignedUser": {
           "type": "string",
