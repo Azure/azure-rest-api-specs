@@ -3879,11 +3879,44 @@
             "Purgeable",
             "Recoverable+Purgeable",
             "Recoverable",
-            "Recoverable+ProtectedSubscription"
+            "Recoverable+ProtectedSubscription",
+            "CustomizedRecoverable+Purgeable",
+            "CustomizedRecoverable",
+            "CustomizedRecoverable+ProtectedSubscription"
           ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Purgeable",
+                "description": "It can be purged by a priviliged user after 90 days"
+              },
+              {
+                "value": "Recoverable+Purgeable",
+                "description": "It can be recovered by a priviliged user until is purged.It can be purged by a priviliged user after 90 days"
+              },
+              {
+                "value": "Recoverable",
+                "description": "It can be recovered by priviliged user until is purged. System purge after 90 days"
+              },
+              {
+                "value": "Recoverable+ProtectedSubscription",
+                "description": ""
+              },
+              {
+                "value": "CustomizedRecoverable+Purgeable",
+                "description": "It can be recovered by a priviliged user until is purged. It can be purged by a priviliged user after number of days specified in 'softDeleteRetentionInDays' "
+              },
+              {
+                "value": "CustomizedRecoverable",
+                "description": "It can be recovered by priviliged user until is purged. System purge after number of days specificed in 'softDeleteRetentionInDays'"
+              },
+              {
+                "value": "CustomizedRecoverable+ProtectedSubscription",
+                "description": ""
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false
