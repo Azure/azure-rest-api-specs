@@ -192,7 +192,7 @@
           "default": {
             "description": "Error response saying resource name is invalid",
             "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -424,14 +424,17 @@
         }
       }
     },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
     "ErrorDefinition": {
-      "type": "object",
-      "title": "Error",
-      "description": "Error description and code explaining why an operation failed.",
-      "required": [
-        "message",
-        "code"
-      ],
+      "description": "Error description and code explaining why resource name is invalid.",
       "properties": {
         "message": {
           "type": "string",
