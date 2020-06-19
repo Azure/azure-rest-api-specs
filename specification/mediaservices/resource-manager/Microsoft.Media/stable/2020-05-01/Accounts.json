@@ -27,10 +27,6 @@
     }
   },
   "definitions": {
-    "Tags": {
-      "properties": {},
-      "type": "object"
-    },
     "Provider": {
       "description": "A resource provider.",
       "properties": {
@@ -1029,7 +1025,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources": {
       "get": {
         "summary": "Get list of group IDs.",
-        "description": "Get list of group Ids.",
+        "description": "Get list of group IDs.",
         "operationId": "PrivateLinkResources_List",
         "responses": {
           "200": {
@@ -1062,13 +1058,18 @@
           {
             "$ref": "#/parameters/ApiVersion"
           }
-        ]
+        ],
+        "x-ms-examples": {
+          "Get list of all group IDs.": {
+            "$ref": "examples/privatelinkresources-list.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}": {
       "get": {
         "summary": "Get group ID.",
-        "description": "Get group Id.",
+        "description": "Get group ID.",
         "operationId": "PrivateLinkResources_Get",
         "responses": {
           "200": {
@@ -1107,7 +1108,12 @@
           {
             "$ref": "#/parameters/ApiVersion"
           }
-        ]
+        ],
+        "x-ms-examples": {
+          "Get details of a group ID.": {
+            "$ref": "examples/privatelinkresources-get-by-name.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections": {
@@ -1146,7 +1152,12 @@
           {
             "$ref": "#/parameters/ApiVersion"
           }
-        ]
+        ],
+        "x-ms-examples": {
+          "Get all private endpoint connections.": {
+            "$ref": "examples/privateendpointconnection-list.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}": {
@@ -1191,7 +1202,12 @@
           {
             "$ref": "#/parameters/ApiVersion"
           }
-        ]
+        ],
+        "x-ms-examples": {
+          "Get private endpoint connection.": {
+            "$ref": "examples/privateendpointconnection-get-by-name.json"
+          }
+        }
       },
       "delete": {
         "summary": "Delete private endpoint connection.",
@@ -1231,7 +1247,12 @@
           {
             "$ref": "#/parameters/ApiVersion"
           }
-        ]
+        ],
+        "x-ms-examples": {
+          "Delete private endpoint connection.": {
+            "$ref": "examples/privateendpointconnection-delete.json"
+          }
+        }
       },
       "patch": {
         "summary": "Update private endpoint connection.",
@@ -1283,7 +1304,12 @@
           {
             "$ref": "#/parameters/ApiVersion"
           }
-        ]
+        ],
+        "x-ms-examples": {
+          "Update private endpoint connection.": {
+            "$ref": "examples/privateendpointconnection-put.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}/checkNameAvailability": {
@@ -1377,7 +1403,7 @@
       "get": {
         "summary": "Get a Media Services account",
         "description": "Get the details of a Media Services account",
-        "operationId": "Mediaservices_Get",
+        "operationId": "Mediaservices_GetBySubscription",
         "responses": {
           "200": {
             "description": "OK",
