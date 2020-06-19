@@ -3890,31 +3890,31 @@
             "values": [
               {
                 "value": "Purgeable",
-                "description": "It can be purged by a priviliged user after 90 days"
+                "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
               },
               {
                 "value": "Recoverable+Purgeable",
-                "description": "It can be recovered by a priviliged user until is purged.It can be purged by a priviliged user after 90 days"
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
               },
               {
                 "value": "Recoverable",
-                "description": "It can be recovered by priviliged user until is purged. System purge after 90 days"
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
               },
               {
                 "value": "Recoverable+ProtectedSubscription",
-                "description": ""
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled."
               },
               {
                 "value": "CustomizedRecoverable+Purgeable",
-                "description": "It can be recovered by a priviliged user until is purged. It can be purged by a priviliged user after number of days specified in 'softDeleteRetentionInDays' "
+                "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
               },
               {
                 "value": "CustomizedRecoverable",
-                "description": "It can be recovered by priviliged user until is purged. System purge after number of days specificed in 'softDeleteRetentionInDays'"
+                "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
               },
               {
                 "value": "CustomizedRecoverable+ProtectedSubscription",
-                "description": ""
+                "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7<= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
               }
             ]
           },
