@@ -680,6 +680,9 @@
             "type": "integer"
           },
           {
+            "$ref": "#/parameters/ForceFlag"
+          },
+          {
             "name": "continuation",
             "in": "query",
             "description": "Optional. The number of paths processed with each invocation is limited. If the number of paths to be processed exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is  returned in the response, it must be percent-encoded and specified in a subsequent invocation of setAcessControlRecursive operation.",
@@ -687,7 +690,7 @@
             "type": "string"
           },
           {
-           "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
+            "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
           },
           {
             "$ref": "#/parameters/Position"
@@ -1691,8 +1694,11 @@
             "$ref": "#/parameters/Continuation"
           },
           {
-           "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
+            "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
           },
+		  {
+			"$ref": "#/parameters/ForceFlag"
+		  },
           {
             "name": "maxRecords",
             "in": "query",
@@ -2273,6 +2279,15 @@
         "name": "PathSetAccessControlRecursiveMode",
         "modelAsString": false
       }
+    },
+	  "ForceFlag": {
+      "name": "forceFlag",
+      "x-ms-client-name": "forceFlag",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "description": "Optional. Valid for \"SetAccessControlRecursive\" operation. If set to false, the operation will terminate quickly on encountering user errors (4XX). If true, the operation will ignore user errors and proceed with the operation on other sub-entities of the directory. Continuation token will only be returned when forceFlag is true in case of user errors. If not set the default value is false for this.",
+      "required": false,
+      "type": "boolean"
     },
     "Directory": {
       "name": "directory",
