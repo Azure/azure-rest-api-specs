@@ -43,26 +43,6 @@ directive:
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
     reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentPropertiesWithScope.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentProperties.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
-    from: authorization-RoleAssignmentsCalls.json
-    reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
 ```
 
 ### Tag: package-preview-2020-04
