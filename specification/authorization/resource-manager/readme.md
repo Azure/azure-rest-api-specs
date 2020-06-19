@@ -59,6 +59,10 @@ directive:
     where: $.definitions.RoleAssignmentFilter.properties.canDelegate
     from: authorization-RoleAssignmentsCalls.json
     reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: replacing boolean with enum would produce exactly the same result for the user but a relatively simple but extensive refactor from our part
 ```
 
 ### Tag: package-preview-2020-04
