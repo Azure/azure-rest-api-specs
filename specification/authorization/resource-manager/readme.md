@@ -43,6 +43,10 @@ directive:
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
     reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
 ```
 
 ### Tag: package-preview-2020-04
