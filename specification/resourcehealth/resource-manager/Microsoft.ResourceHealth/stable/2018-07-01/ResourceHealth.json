@@ -343,6 +343,78 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ResourceHealth/emergingIssues/{issueName}": {
+      "get": {
+        "tags": [
+          "EmergingIssues"
+        ],
+        "operationId": "EmergingIssues_Get",
+        "description": "Gets Azure services' emerging issues.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains properties of azure emerging issues, which includes a list of status banner and status active events.",
+            "schema": {
+              "$ref": "#/definitions/emergingIssuesGetResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEmergingIssues": {
+            "$ref": "./examples/EmergingIssues_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/emergingIssues": {
+      "get": {
+        "tags": [
+          "EmergingIssues"
+        ],
+        "operationId": "EmergingIssues_List",
+        "description": "Lists Azure services' emerging issues.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains a list of azure emerging issues.",
+            "schema": {
+              "$ref": "#/definitions/emergingIssueListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEmergingIssues": {
+            "$ref": "./examples/EmergingIssues_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -910,6 +982,188 @@
         }
       }
     },
+    "statusBanner": {
+      "description": "Banner type of emerging issue.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The banner title."
+        },
+        "message": {
+          "type": "string",
+          "description": "The details of banner."
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud type of this banner."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "The last time modified on this banner.",
+          "format": "date-time"
+        }
+      }
+    },
+    "impactedRegion": {
+      "description": "Object of impacted region.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The impacted region id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The impacted region name."
+        }
+      }
+    },
+    "emergingIssueImpact": {
+      "type": "object",
+      "description": "Object of the emerging issue impact on services and regions.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The impacted service id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The impacted service name."
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/impactedRegion"
+          },
+          "description": "The list of impacted regions for corresponding emerging issues."
+        }
+      }
+    },
+    "statusActiveEvent": {
+      "description": "Active event type of emerging issue.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The active event title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The details of active event."
+        },
+        "trackingId": {
+          "type": "string",
+          "description": "The tracking id of this active event."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The impact start time on this active event.",
+          "format": "date-time"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud type of this active event."
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity level of this active event.",
+          "enum": [
+            "Information",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityValues",
+            "modelAsString": true
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "The stage of this active event.",
+          "enum": [
+            "Active",
+            "Resolve",
+            "Archived"
+          ],
+          "x-ms-enum": {
+            "name": "StageValues",
+            "modelAsString": true
+          }
+        },
+        "published": {
+          "type": "boolean",
+          "description": "The boolean value of this active event if published or not."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "The last time modified on this banner.",
+          "format": "date-time"
+        },
+        "impacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingIssueImpact"
+          },
+          "description": "The list of emerging issues impacts."
+        }
+      }
+    },
+    "emergingIssuesGetResult": {
+      "description": "The Get EmergingIssues operation response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/emergingIssue",
+          "description": "The emerging issue entity properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "emergingIssue": {
+      "type": "object",
+      "description": "On-going emerging issue from azure status.",
+      "properties": {
+        "refreshTimestamp": {
+          "type": "string",
+          "description": "Timestamp for when last time refreshed for ongoing emerging issue.",
+          "format": "date-time"
+        },
+        "statusBanners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statusBanner"
+          },
+          "description": "The list of emerging issues of banner type."
+        },
+        "statusActiveEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statusActiveEvent"
+          },
+          "description": "The list of emerging issues of active event type."
+        }
+      }
+    },
+    "emergingIssueListResult": {
+      "description": "The list of emerging issues.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of emerging issues.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingIssuesGetResult"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of emerging issues.",
+          "type": "string"
+        }
+      }
+    },
     "operationListResult": {
       "properties": {
         "value": {
@@ -1077,6 +1331,17 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "IssueNameParameter": {
+      "name": "issueName",
+      "in": "path",
+      "description": "The name of the emerging issue.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",

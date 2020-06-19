@@ -103,7 +103,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.privatedns.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/privatedns/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "privatedns"}'

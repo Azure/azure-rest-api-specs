@@ -188,7 +188,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerinstance.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -201,7 +201,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerinstance.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -214,7 +214,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerinstance.v2018_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2018_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2018_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -227,7 +227,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-12-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerinstance.v2017_12_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2017_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -240,7 +240,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerinstance.v2017_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2017_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -253,7 +253,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerinstance.v2017_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2017_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
