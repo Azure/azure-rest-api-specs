@@ -4,7 +4,15 @@
     "resourceGroupName": "contoso",
     "accountName": "contososports",
     "name": "connectionName1",
-    "api-version": "2020-05-01"
+    "api-version": "2020-05-01",
+    "parameters": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Test description."
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -15,7 +23,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "privateLinkServiceConnectionState": {
-            "status": "Accepted",
+            "status": "Approved",
             "description": "Test description."
           },
           "privateEndpoint": {

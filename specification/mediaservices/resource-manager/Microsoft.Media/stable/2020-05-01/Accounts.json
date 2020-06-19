@@ -159,6 +159,13 @@
           "readOnly": true,
           "x-nullable": false
         },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported aggregation types."
+        },
         "dimensions": {
           "type": "array",
           "items": {
@@ -180,7 +187,7 @@
         }
       },
       "type": "object",
-      "description": "Metric properties."
+      "description": "The service specification property."
     },
     "ServiceSpecification": {
       "properties": {
@@ -536,22 +543,6 @@
         "type"
       ]
     },
-    "SubscriptionMediaService": {
-      "description": "A Media Services account.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MediaServiceProperties",
-          "description": "The resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
     "ODataError": {
       "properties": {
         "code": {
@@ -634,23 +625,6 @@
         }
       },
       "type": "object"
-    },
-    "SubscriptionMediaServiceCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubscriptionMediaService"
-          },
-          "description": "A collection of SubscriptionMediaService items."
-        },
-        "@odata.nextLink": {
-          "type": "string",
-          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
-        }
-      },
-      "type": "object",
-      "description": "A collection of SubscriptionMediaService items."
     }
   },
   "paths": {
@@ -1209,55 +1183,10 @@
           }
         }
       },
-      "delete": {
-        "summary": "Delete private endpoint connection.",
-        "description": "Delete private endpoint connection.",
-        "operationId": "PrivateEndpointConnections_Delete",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Detailed error information.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Media Services account name."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "x-ms-examples": {
-          "Delete private endpoint connection.": {
-            "$ref": "examples/private-endpoint-connection-delete.json"
-          }
-        }
-      },
-      "patch": {
+      "put": {
         "summary": "Update private endpoint connection.",
         "description": "Update private endpoint connection.",
-        "operationId": "PrivateEndpointConnections_Update",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "responses": {
           "200": {
             "description": "OK",
@@ -1308,6 +1237,51 @@
         "x-ms-examples": {
           "Update private endpoint connection.": {
             "$ref": "examples/private-endpoint-connection-put.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete private endpoint connection.",
+        "description": "Delete private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete private endpoint connection.": {
+            "$ref": "examples/private-endpoint-connection-delete.json"
           }
         }
       }
@@ -1371,7 +1345,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SubscriptionMediaServiceCollection"
+              "$ref": "#/definitions/MediaServiceCollection"
             }
           },
           "default": {
@@ -1408,7 +1382,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SubscriptionMediaService"
+              "$ref": "#/definitions/MediaService"
             }
           },
           "default": {
