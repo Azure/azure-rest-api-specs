@@ -1288,7 +1288,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachines/{virtualMachineName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/stop": {
       "post": {
         "tags": [
           "VirtualMachines"
@@ -1353,7 +1353,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachines/{virtualMachineName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/start": {
       "post": {
         "tags": [
           "VirtualMachines"
@@ -1407,7 +1407,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachines/{virtualMachineName}/Restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/restart": {
       "post": {
         "tags": [
           "VirtualMachines"
@@ -2931,8 +2931,15 @@
       "properties": {
         "skipShutdown": {
           "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.",
-          "type": "boolean",
-          "default": false
+          "type": "string",
+          "enum": [
+            "false",
+            "true"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SkipShutdown"
+          }
         }
       }
     },
