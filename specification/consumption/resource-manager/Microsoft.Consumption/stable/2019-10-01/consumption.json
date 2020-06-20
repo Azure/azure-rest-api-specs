@@ -1103,6 +1103,15 @@
           },
           {
             "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/RegionParameter"
+          },
+          {
+            "$ref": "#/parameters/TermParameter"
           }
         ],
         "responses": {
@@ -5159,6 +5168,30 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
-    }
+    },
+    "termParameter": {
+      "description": "Specify length of reservation recommendation term (in months). 1 month for monthly recurring purchase. 12 months for a 1 year reservation. 36 months for a 3 year reservation.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "name": "term",
+      "x-ms-parameter-location": "method"
+    },
+    "regionParameter": {
+      "name": "region",
+      "in": "path",
+      "description": "Used to select the region of resources used to generate reservation recommendation results.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "organizationIdParameter": {
+      "name": "organizationId",
+      "in": "path",
+      "description": "Filter the organization id used to generate reservation recommendation results.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
   }
 }
