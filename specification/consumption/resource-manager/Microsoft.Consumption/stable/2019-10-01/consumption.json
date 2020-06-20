@@ -1103,21 +1103,6 @@
           },
           {
             "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
-          },
-          {
-            "$ref": "#/parameters/LookBackPeriodParameter"
-          },
-          {
-            "$ref": "#/parameters/OrganizationIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ProductParameter"
-          },
-          {
-            "$ref": "#/parameters/RegionParameter"
-          },
-          {
-            "$ref": "#/parameters/TermParameter"
           }
         ],
         "responses": {
@@ -5172,93 +5157,6 @@
       "in": "query",
       "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
       "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "lookBackPeriodParameter": {
-      "name": "lookBackPeriod",
-      "in": "path",
-      "description": "Filter the time period on which reservation recommendation results are based.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "Last7Days",
-        "Last30Days",
-        "Last60Days"
-      ],
-      "x-ms-enum": {
-        "name": "lookBackPeriod",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Last7Days",
-            "description": "Use 7 days of data for recommendations",
-            "name": "Last7Days"
-          },
-          {
-            "value": "Last30Days",
-            "description": "Use 30 days of data for recommendations",
-            "name": "Last30Days"
-          },
-          {
-            "value": "Last60Days",
-            "description": "Use 60 days of data for recommendations",
-            "name": "Last60Days"
-          }
-        ]
-      }
-    },
-    "organizationIdParameter": {
-      "name": "organizationId",
-      "in": "path",
-      "description": "Filter the organization id used to generate reservation recommendation results.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "productParameter": {
-      "name": "product",
-      "in": "path",
-      "description": "Filter the product types for which reservation recommendation results are generated.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "VirtualMachines",
-        "SQLDatabases",
-        "PostgreSQL",
-        "ManagedDisk",
-        "MySQL",
-        "RedHat",
-        "MariaDB",
-        "RedisCache",
-        "CosmosDB",
-        "SqlDataWarehouse",
-        "SUSELinux",
-        "AppService",
-        "BlockBlob",
-        "AzureDataExplorer",
-        "VMwareCloudSimple"
-      ],
-      "x-ms-enum": {
-        "name": "product",
-        "modelAsString": true
-      }
-    },
-    "termParameter": {
-      "description": "Specify length of reservation recommendation term (in months). 1 month for monthly recurring purchase. 12 months for a 1 year reservation. 36 months for a 3 year reservation.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "name": "term",
-      "x-ms-parameter-location": "method"
-    },
-    "regionParameter": {
-      "name": "region",
-      "in": "path",
-      "description": "Used to select the region of resources used to generate reservation recommendation results.",
-      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     }
