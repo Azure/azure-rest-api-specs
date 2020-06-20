@@ -3632,14 +3632,28 @@
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BudgetComparisonExpression"
+            "$ref": "#/definitions/BudgetFilterDimensionsOrTags"
           },
           "minItems": 2
         },
         "not": {
           "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/BudgetFilterDimensionsOrTags"
+        },
+        "dimensions": {
+          "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/BudgetComparisonExpression"
         },
+        "tags": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        }
+      }
+    },
+    "BudgetFilterDimensionsOrTags": {
+      "description": "The Dimensions or Tags to filter a budget by",
+      "type": "object",
+      "properties": {        
         "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/BudgetComparisonExpression"
