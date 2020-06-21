@@ -181,7 +181,7 @@ override-info:
 
 ### Tag: package-2015-06-preview-only
 
-These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2015-06-preview-only'
 input-file:
@@ -204,7 +204,7 @@ override-info:
 
 ### Tag: package-2017-08-preview-only
 
-These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2017-08-preview-only'
 input-file:
@@ -227,7 +227,7 @@ override-info:
 
 ### Tag: package-2019-01-preview-only
 
-These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
@@ -243,7 +243,7 @@ override-info:
 
 ### Tag: package-2020-01-preview-only
 
-These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
@@ -256,7 +256,7 @@ override-info:
 
 ### Tag: package-2017-08-only
 
-These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
@@ -269,7 +269,7 @@ override-info:
 
 ### Tag: package-2018-06-only
 
-These settings apply only when `--tag=package-2018-06-only` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2018-06-only'
 input-file:
@@ -282,7 +282,7 @@ override-info:
 
 ### Tag: package-2019-01-only
 
-These settings apply only when `--tag=package-2019-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-01-only'
 input-file:
@@ -296,7 +296,7 @@ override-info:
 
 ### Tag: package-2019-08-only
 
-These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-08-only'
 input-file:
@@ -304,6 +304,41 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-package-2020-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-01-only
+
+These settings apply only when `--tag=package-2020-01-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-01-only'
+input-file:
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
+- Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
+- Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
+- Microsoft.Security/stable/2020-01-01/topologies.json
 
 # Needed when there is more than one input file
 override-info:
