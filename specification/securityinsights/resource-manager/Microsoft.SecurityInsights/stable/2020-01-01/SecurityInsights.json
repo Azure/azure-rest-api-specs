@@ -3127,6 +3127,51 @@
       ],
       "type": "object"
     },
+    "ScheduledAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "Scheduled alert rule template properties",
+      "properties": {
+        "query": {
+          "description": "The query that creates alerts for this rule.",
+          "type": "string"
+        },
+        "queryFrequency": {
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run.",
+          "format": "duration",
+          "type": "string"
+        },
+        "queryPeriod": {
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at.",
+          "format": "duration",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "triggerOperator": {
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
+          "description": "The operation against the threshold that triggers alert rule."
+        },
+        "triggerThreshold": {
+          "description": "The threshold triggers this alert rule.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule template",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ScheduledAlertRuleTemplate": {
       "allOf": [
         {
@@ -3136,24 +3181,8 @@
       "description": "Represents scheduled alert rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
-            }
-          ],
+          "$ref": "#/definitions/ScheduledAlertRuleTemplateProperties",
           "description": "Scheduled alert rule template properties",
-          "properties": {
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "#/definitions/AttackTactic"
-              },
-              "type": "array"
-            }
-          },
           "required": [
             "displayName",
             "description",
