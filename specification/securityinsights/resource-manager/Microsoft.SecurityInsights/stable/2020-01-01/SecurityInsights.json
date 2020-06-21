@@ -1315,15 +1315,17 @@
       "x-ms-discriminator-value": "AzureActiveDirectory"
     },
     "AADDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
       "description": "AAD (Azure Active Directory) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties",
+          "description": "Data connector properties with alerts data type"
+        }
+      },
       "type": "object"
     },
     "AATPDataConnector": {
@@ -1344,15 +1346,17 @@
       "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
     },
     "AATPDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
       "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties",
+          "description": "Data connector properties with alerts data type"
+        }
+      },
       "type": "object"
     },
     "ASCDataConnector": {
@@ -2643,15 +2647,17 @@
       "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
     },
     "MDATPDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
       "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties",
+          "description": "Data connector properties with alerts data type"
+        }
+      },
       "type": "object"
     },
     "MicrosoftSecurityIncidentCreationAlertRule": {
