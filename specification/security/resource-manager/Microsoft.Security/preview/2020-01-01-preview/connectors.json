@@ -422,7 +422,7 @@
     },
     "AwsCredsAuthenticationDetailsProperties": {
       "type": "object",
-      "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+      "description": "AWS cloud account connector based credentials.</a>",
       "x-ms-discriminator-value": "awsCreds",
       "allOf": [
         {
@@ -434,7 +434,19 @@
           "description": "The ID of the cloud account",
           "type": "string",
           "readOnly": true
-        },
+        }
+      }
+    },
+    "AwsCredsAuthenticationDetailsWithSecretsProperties": {
+      "type": "object",
+      "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+      "x-ms-discriminator-value": "awsCreds",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AwsCredsAuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
         "awsAccessKeyId": {
           "type": "string",
           "description": "Public key element of the AWS credential object (write only)"
@@ -491,7 +503,22 @@
         "organizationId": {
           "description": "The Organization ID of the GCP cloud account",
           "type": "string"
-        },
+        }
+      },
+      "required": [
+        "organizationId"
+      ]
+    },
+    "GcpCredentialsDetailsWithKeyProperties": {
+      "type": "object",
+      "description": "GCP cloud account connector based service to service credentials, the credentials is composed of organization id and json api key (write only)</a>",
+      "x-ms-discriminator-value": "gcpCredentials",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GcpCredentialsDetailsProperties"
+        }
+      ],
+      "properties": {
         "type": {
           "type": "string",
           "description": "Type field of the API key (write only)"
@@ -534,7 +561,6 @@
         }
       },
       "required": [
-        "organizationId",
         "type",
         "projectId",
         "privateKeyId",
