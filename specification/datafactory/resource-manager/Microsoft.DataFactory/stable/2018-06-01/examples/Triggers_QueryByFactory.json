@@ -1,12 +1,12 @@
 {
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-12345678abc",
-    "resourceGroupName": "myResourceGroup",
-    "factoryName": "myFactoryName",
-    "triggerName": "myTrigger",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "triggerName": "exampleTrigger",
     "api-version": "2018-06-01",
     "filterParameters": {
-      "parentTriggerName": "myTrigger"
+      "parentTriggerName": "exampleTrigger"
     }
   },
   "responses": {
@@ -21,13 +21,13 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/myResourceGroup/providers/Microsoft.DataFactory/factories/myFactoryName/triggers/myTrigger",
-            "name": "myTrigger",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleRerunTrigger",
+            "name": "exampleRerunTrigger",
             "type": "Microsoft.DataFactory/factories/triggers",
             "properties": {
               "type": "RerunTumblingWindowTrigger",
               "typeProperties": {
-                "parentTrigger": "myTrigger",
+                "parentTrigger": "exampleTrigger",
                 "requestedStartTime": "2018-06-16T00:39:14.905167Z",
                 "requestedEndTime": "2018-06-16T00:55:14.905167Z",
                 "rerunConcurrency": 4
