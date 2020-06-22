@@ -623,9 +623,9 @@
           "description": "ThreatIntel Whitelist for Firewall Policy.",
           "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
         },
-        "intrusionSystemMode": {
-          "description": "The operation mode for Intrusion system.",
-          "$ref": "#/definitions/FirewallPolicyIntrusionSystemMode"
+        "intrusionSystem": {
+          "description": "The configuration for Intrusion system.",
+          "$ref": "#/definitions/FirewallPolicyIntrusionSystem"
         },
         "transportSecurity": {
           "description": "TLS Configuration definition.",
@@ -1166,15 +1166,63 @@
       },
       "description": "Response for ListFirewallPolicyRuleCollectionGroups API service call."
     },
-    "FirewallPolicyIntrusionSystemMode": {
+    "FirewallPolicyIntrusionSystem": {
+      "description": "Configuration for Intrusion system mode and rules.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "The operation mode for Intrusion system mode.",
+          "enum": [
+            "Off",
+            "Alert",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallPolicyIntrusionSystemMode",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "The intrusion system configuration properties.",
+          "$ref": "#/definitions/FirewallPolicyIntrusionSystemConfiguration"
+        }
+      }
+    },
+    "FirewallPolicyIntrusionSystemConfiguration": {
+      "description": "The operation for configuring intrusion system.",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "List of specific rules states.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionSystemRuleSpecifications"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionSystemRuleSpecifications": {
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Rule id (sid)."
+        },
+        "state": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionSystemStateOptions",
+          "description": "The rule state."
+        }
+      },
+      "description": "Intrusion system rules specification states."
+    },
+    "FirewallPolicyIntrusionSystemStateOptions": {
       "type": "string",
-      "description": "The operation mode for Intrusion system mode.",
+      "description": "Possible rule state values.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Off",
+        "Alert",
+        "Deny"
       ],
       "x-ms-enum": {
-        "name": "FirewallPolicyIntrusionSystemMode",
+        "name": "FirewallPolicyIntrusionSystemStateType",
         "modelAsString": true
       }
     },
