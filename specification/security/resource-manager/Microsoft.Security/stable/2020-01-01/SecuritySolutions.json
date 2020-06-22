@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/discoveredSecuritySolutions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/SecuritySolutions": {
       "get": {
         "x-ms-examples": {
-          "Get discovered security solutions": {
-            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscription_example.json"
+          "Get security solutions": {
+            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsSubscription_example.json"
           }
         },
         "tags": [
-          "DiscoveredSecuritySolutions"
+          "SecuritySolutions"
         ],
-        "description": "Gets a list of discovered Security Solutions for the subscription.",
-        "operationId": "DiscoveredSecuritySolutions_List",
+        "description": "Gets a list of Security Solutions for the subscription.",
+        "operationId": "SecuritySolutions_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DiscoveredSecuritySolutionList"
+              "$ref": "#/definitions/SecuritySolutionList"
             }
           },
           "default": {
@@ -67,24 +67,21 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/SecuritySolutions": {
       "get": {
         "x-ms-examples": {
-          "Get discovered security solutions from a security data location": {
-            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscriptionLocation_example.json"
+          "Get security solutions from a security data location": {
+            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsResourceGroupLocation_example.json"
           }
         },
         "tags": [
-          "DiscoveredSecuritySolutions"
+          "SecuritySolutions"
         ],
-        "description": "Gets a list of discovered Security Solutions for the subscription and location.",
-        "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
+        "description": "Gets list of Security Solutions for the subscription and location.",
+        "operationId": "SecuritySolutions_ListByHomeRegion",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
@@ -100,7 +97,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DiscoveredSecuritySolutionList"
+              "$ref": "#/definitions/SecuritySolutionList"
             }
           },
           "default": {
@@ -109,24 +106,21 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/SecuritySolutions/{SecuritySolutionName}": {
       "get": {
         "x-ms-examples": {
-          "Get discovered security solution from a security data location": {
-            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsResourceGroupLocation_example.json"
+          "Get a security solution from a security data location": {
+            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsResourceGroupLocation_example.json"
           }
         },
         "tags": [
-          "DiscoveredSecuritySolutions"
+          "SecuritySolutions"
         ],
-        "description": "Gets a specific discovered Security Solution.",
-        "operationId": "DiscoveredSecuritySolutions_Get",
+        "description": "Gets a specific Security Solution.",
+        "operationId": "SecuritySolutions_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
@@ -138,7 +132,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
           },
           {
-            "$ref": "#/parameters/DiscoveredSecuritySolutionName"
+            "$ref": "#/parameters/SecuritySolutionName"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -148,7 +142,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DiscoveredSecuritySolution"
+              "$ref": "#/definitions/SecuritySolution"
             }
           },
           "default": {
@@ -162,28 +156,23 @@
     }
   },
   "definitions": {
-    "DiscoveredSecuritySolutionList": {
+    "SecuritySolutionList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DiscoveredSecuritySolution"
+            "$ref": "#/definitions/SecuritySolution"
           }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
         }
       }
     },
-    "DiscoveredSecuritySolution": {
+    "SecuritySolution": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DiscoveredSecuritySolutionProperties"
+          "$ref": "#/definitions/SecuritySolutionProperties"
         }
       },
       "required": [
@@ -198,12 +187,12 @@
         }
       ]
     },
-    "DiscoveredSecuritySolutionProperties": {
+    "SecuritySolutionProperties": {
       "type": "object",
       "properties": {
         "securityFamily": {
           "type": "string",
-          "description": "The security family of the discovered solution",
+          "description": "The security family of the security solution",
           "enum": [
             "Waf",
             "Ngfw",
@@ -229,34 +218,54 @@
             ]
           }
         },
-        "offer": {
+        "provisioningState": {
           "type": "string",
-          "description": "The security solutions' image offer"
+          "description": "The security family provisioning State",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded"
+              },
+              {
+                "value": "Failed"
+              },
+              {
+                "value": "Updating"
+              }
+            ]
+          }
         },
-        "publisher": {
+        "template": {
           "type": "string",
-          "description": "The security solutions' image publisher"
+          "description": "The security solutions' template"
         },
-        "sku": {
+        "protectionStatus": {
           "type": "string",
-          "description": "The security solutions' image sku"
+          "description": "The security solutions' status"
         }
       },
       "required": [
         "securityFamily",
-        "offer",
-        "publisher",
-        "sku"
+        "provisioningState",
+        "template",
+        "protectionStatus"
       ]
     }
   },
   "parameters": {
-    "DiscoveredSecuritySolutionName": {
-      "name": "discoveredSecuritySolutionName",
+    "SecuritySolutionName": {
+      "name": "SecuritySolutionName",
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "Name of a discovered security solution.",
+      "description": "Name of security solution.",
       "x-ms-parameter-location": "method"
     }
   }
