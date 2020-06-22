@@ -274,6 +274,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This API provides configuration details specific to given region/location at Resource group level.",
+        "operationId": "Service_RegionConfigurationByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionConfigurationRequest",
+            "in": "body",
+            "description": "Request body to get the configuration for the region at resource group level.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Region configuration response.",
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceRegionConfigurationByResourceGroup": {
+            "$ref": "./examples/ServiceRegionConfigurationByResourceGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/validateAddress": {
       "post": {
         "tags": [
