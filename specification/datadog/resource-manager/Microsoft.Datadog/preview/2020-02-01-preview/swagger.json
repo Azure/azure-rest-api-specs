@@ -1151,11 +1151,17 @@
                 },
                 "idpMetadata": {
                     "description": "The XML metadata required to setup single sign on during organization creation.",
-                    "type": "string"
+                    "type": "string",
+                    "x-ms-mutability": [
+                        "create"
+                    ]
                 },
                 "enterpriseAppId": {
                     "description": "The Id of the Enterprise App used for Single sign on.",
-                    "type": "string"
+                    "type": "string",
+                    "x-ms-mutability": [
+                        "create"
+                    ]
                 }
             }
         },
@@ -1169,12 +1175,12 @@
                 },
                 "emailAddress": {
                     "description": "Email of the user used by Datadog for contacting them if needed",
-                    "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+                    "pattern": "^.+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
                     "type": "string"
                 },
                 "phoneNumber": {
                     "description": "Phone number of the user used by Datadog for contacting them if needed",
-                    "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
+                    "maxLength": 20,
                     "type": "string"
                 }
             }
@@ -1191,8 +1197,29 @@
                 },
                 "userInfo": {
                     "$ref": "#/definitions/UserInfo"
+                },
+                "liftrResourceCategory": {
+
+                    "$ref": "#/definitions/LiftrResourceCategories"
+                },
+                "liftrResourcePreference": {
+                    "description": "The priority of the resource.",
+                    "type": "integer",
+                    "readOnly": true
                 }
             }
+        },
+        "LiftrResourceCategories": {
+            "enum": [
+                "Unknown",
+                "MonitorLogs"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+                "modelAsString": true,
+                "name": "LiftrResourceCategories"
+            },
+            "readOnly": true
         },
         "ManagedIdentityTypes": {
             "enum": [
@@ -1416,7 +1443,7 @@
             "type": "object",
             "properties": {
                 "singleSignOnState": {
-                    "description": "This state of single sign-on funtionality, \"Enabled\"/\"Disabled\".",
+                    "description": "This state of single sign-on funtionality.",
                     "type": "string"
                 },
                 "metadataXML": {
