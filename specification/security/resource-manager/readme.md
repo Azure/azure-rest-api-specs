@@ -139,9 +139,6 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -156,6 +153,7 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
@@ -374,6 +372,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json

@@ -7,7 +7,8 @@ az:
   extensions: storagesync
   namespace: azure.mgmt.storagesync
   package-name: azure-mgmt-storagesync
-python-sdk-output-folder: "$(output-folder)/src/storagesync/azext_storagesync/vendored_sdks/storagesync"
+az-output-folder: $(azure-cli-extension-folder)/src/storagesync
+python-sdk-output-folder: "$(az-output-folder)/azext_storagesync/vendored_sdks/storagesync"
   
 #cli:
 #    cli-directive:

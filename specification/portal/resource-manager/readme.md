@@ -73,9 +73,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
-  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_portal']
+  - repo: azure-cli-extensions
 ```
 
 ## Go

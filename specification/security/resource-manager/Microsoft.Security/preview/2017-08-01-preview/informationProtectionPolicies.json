@@ -208,6 +208,11 @@
           "readOnly": true,
           "description": "Describes the last UTC time the policy was modified."
         },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the version of the policy."
+        },
         "labels": {
           "type": "object",
           "description": "Dictionary of sensitivity labels.",
@@ -254,8 +259,9 @@
           }
         },
         "order": {
-          "type": "number",
-          "description": "The order of the sensitivity label."
+          "format": "int32",
+          "description": "The order of the sensitivity label.",
+          "type": "integer"
         },
         "enabled": {
           "type": "boolean",
@@ -276,8 +282,9 @@
           "description": "The description of the information type."
         },
         "order": {
-          "type": "number",
-          "description": "The order of the information type."
+          "format": "int32",
+          "description": "The order of the information type.",
+          "type": "integer"
         },
         "recommendedLabelId": {
           "type": "string",

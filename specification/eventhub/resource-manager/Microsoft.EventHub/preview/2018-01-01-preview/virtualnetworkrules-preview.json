@@ -1,0 +1,262 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListVirtualNetworkRules",
+        "x-ms-examples": {
+          "ListIpFilterRules": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleListAll.json"
+          }
+        },
+        "description": "Gets a list of VirtualNetwork rules for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace VirtualNetworkRule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules/{virtualNetworkRuleName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdateVirtualNetworkRule",
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleCreate": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleCreateorUpdate.json"
+          }
+        },
+        "description": "Creates or updates an VirtualNetworkRule for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VirtualNetworkRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            },
+            "description": "The Namespace VirtualNetworkRule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace VirtualNetworkRule created",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_DeleteVirtualNetworkRule",
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleDelete": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleDelete.json"
+          }
+        },
+        "description": "Deletes an VirtualNetworkRule for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VirtualNetworkRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace VirtualNetworkRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_GetVirtualNetworkRule",
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleGet": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleGet.json"
+          }
+        },
+        "description": "Gets an VirtualNetworkRule for a Namespace by rule name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VirtualNetworkRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace VirtualNetworkRule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualNetworkRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "virtualNetworkSubnetId": {
+              "type": "string",
+              "description": "ARM ID of Virtual Network Subnet"
+            }
+          },
+          "description": "Properties supplied to create or update VirtualNetworkRules"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in a List or Get VirtualNetworkRules operation"
+    },
+    "VirtualNetworkRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "Result of the List VirtualNetwork Rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains an incomplete list of VirtualNetwork Rules"
+        }
+      },
+      "description": "The response from the List namespace operation."
+    }
+  },
+  "parameters": {}
+}
