@@ -8,7 +8,7 @@ trenton:
     cli-name: HardwareSecurityModules
     package-name: hardwaresecuritymodules
 clear-output-folder: true
-output-folder: $(trenton-output-folder)/hardwaresecuritymodules
+output-folder: $(trenton-output-folder)/hardwaresecuritymodule
 overrides:
   - where:
       property: /parameters/sku/name
