@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-lva-1-0-0-preview` is specified on
 
 ``` yaml $(tag) == 'package-lva-1-0-0-preview'
 input-file:
-  - Microsoft.LVAEdge/preview/1.0.0/swagger.json
+  - Microsoft.LVAEdge/preview/1.0.0/AzureMediaServicesEdge.json
 ```
 
 ---

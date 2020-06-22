@@ -8,11 +8,6 @@
       "email": "amshelp@microsoft.com"
     }
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/rodrigb/AzureEdge/1.0.0",
-  "schemes": [
-    "https"
-  ],
   "security": [
     {
       "sharedAccessSignature": []
@@ -34,6 +29,11 @@
             "schema": {
               "$ref": "#/definitions/MediaGraphTopologyCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all Graph Topologies": {
+            "$ref": "examples/GraphTopologyList.json"
           }
         }
       },
@@ -67,6 +67,11 @@
               "$ref": "#/definitions/MediaGraphTopology"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or Update a Graph Topology": {
+            "$ref": "examples/GraphTopologySet.json"
+          }
         }
       }
     },
@@ -97,6 +102,11 @@
           "404": {
             "description": "Graph topology was not found."
           }
+        },
+        "x-ms-examples": {
+          "Get a Graph Topology": {
+            "$ref": "examples/GraphTopologyGet.json"
+          }
         }
       },
       "delete": {
@@ -119,6 +129,11 @@
           "204": {
             "description": "Graph topology not found."
           }
+        },
+        "x-ms-examples": {
+          "Delete a Graph Topology": {
+            "$ref": "examples/GraphTopologyDelete.json"
+          }
         }
       }
     },
@@ -137,6 +152,11 @@
             "schema": {
               "$ref": "#/definitions/MediaGraphInstanceCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all Graph Instances": {
+            "$ref": "examples/GraphInstanceList.json"
           }
         }
       },
@@ -170,6 +190,11 @@
               "$ref": "#/definitions/MediaGraphInstance"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or Update a Graph Instance": {
+            "$ref": "examples/GraphInstanceSet.json"
+          }
         }
       }
     },
@@ -200,6 +225,11 @@
           "404": {
             "description": "Graph instance not found."
           }
+        },
+        "x-ms-examples": {
+          "Get a Graph Instance": {
+            "$ref": "examples/GraphInstanceGet.json"
+          }
         }
       },
       "delete": {
@@ -222,6 +252,11 @@
           "204": {
             "description": "Graph instance not found."
           }
+        },
+        "x-ms-examples": {
+          "Delete a Graph Instance": {
+            "$ref": "examples/GraphInstanceDelete.json"
+          }
         }
       }
     },
@@ -242,6 +277,11 @@
         "responses": {
           "200": {
             "description": "Graph instance activated successfully."
+          }
+        },
+        "x-ms-examples": {
+          "Activate a Graph Instance": {
+            "$ref": "examples/GraphInstanceStateChange.json"
           }
         }
       }
@@ -267,6 +307,11 @@
           "200": {
             "description": "Graph instance deactivated successfully."
           }
+        },
+        "x-ms-examples": {
+          "Deactivate a Graph Instance": {
+            "$ref": "examples/GraphInstanceStateChange.json"
+          }
         }
       }
     }
@@ -286,6 +331,9 @@
       ],
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "@apiVersion": {
           "type": "string"
         },
         "systemData": {
@@ -407,6 +455,9 @@
       ],
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "@apiVersion": {
           "type": "string"
         },
         "systemData": {
@@ -575,8 +626,7 @@
         }
       },
       "required": [
-        "endpoint",
-        "transport"
+        "endpoint"
       ],
       "allOf": [
         {
@@ -668,7 +718,6 @@
         }
       },
       "required": [
-        "password",
         "username"
       ],
       "allOf": [
@@ -1080,6 +1129,9 @@
       "description": "The scaling mode for the image."
     },
     "MediaGraphImageFormat": {
+      "required": [
+        "@type"
+      ],
       "type": "object",
       "discriminator": "@type",
       "properties": {
