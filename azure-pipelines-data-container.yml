@@ -14,7 +14,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  IMAGE_NAME_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
+  IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
 
 steps:
 - task: Docker@2
