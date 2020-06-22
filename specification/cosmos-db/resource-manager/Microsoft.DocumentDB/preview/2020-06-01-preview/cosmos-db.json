@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB",
     "description": "Azure Cosmos DB Database Service Resource Provider REST API",
-    "version": "2020-04-01"
+    "version": "2020-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -4519,14 +4519,16 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountGetProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ARMResourceProperties"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       ]
     },
