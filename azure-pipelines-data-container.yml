@@ -1,0 +1,30 @@
+trigger:
+  - master
+
+schedules:
+- cron: "0 0 * * *"
+  displayName: Nightly build
+  branches:
+    include:
+    - master
+  always: true
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: Docker@2
+  displayName: Login to ACR
+  inputs:
+    command: login
+    containerRegistry: $(CONTAINER_REGISTRY_NAME)
+- task: Docker@2
+  displayName: Build and Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: $(CONTAINER_REGISTRY_NAME)
+    repository: $(IMAGE_NAME_PREFIX)-$(Build.SourceBranchName)
+    Dockerfile: scripts/datacontainer/Dockerfile
+    tags: |
+      latest
+      $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
