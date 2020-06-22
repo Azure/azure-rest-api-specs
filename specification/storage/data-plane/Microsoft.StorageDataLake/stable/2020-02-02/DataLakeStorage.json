@@ -687,7 +687,10 @@
             "type": "string"
           },
           {
-           "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
+            "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
+          },
+          {
+            "$ref": "#/parameters/ForceFlag"
           },
           {
             "$ref": "#/parameters/Position"
@@ -1691,7 +1694,10 @@
             "$ref": "#/parameters/Continuation"
           },
           {
-           "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
+            "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
+          },
+          {
+            "$ref": "#/parameters/ForceFlag"
           },
           {
             "name": "maxRecords",
@@ -2273,6 +2279,15 @@
         "name": "PathSetAccessControlRecursiveMode",
         "modelAsString": false
       }
+    },
+    "ForceFlag": {
+      "name": "forceFlag",
+      "x-ms-client-name": "forceFlag",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "description": "Optional. Valid for \"SetAccessControlRecursive\" operation. If set to false, the operation will terminate quickly on encountering user errors (4XX). If true, the operation will ignore user errors and proceed with the operation on other sub-entities of the directory. Continuation token will only be returned when forceFlag is true in case of user errors. If not set the default value is false for this.",
+      "required": false,
+      "type": "boolean"
     },
     "Directory": {
       "name": "directory",
