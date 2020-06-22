@@ -115,6 +115,9 @@
           },
           "CosmosDBDatabaseAccountCreateMax": {
             "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json"
+          },
+          "CosmosDBRestoreDatabaseAccountCreateUpdate.json": {
+            "$ref": "./examples/CosmosDBRestoreDatabaseAccountCreateUpdate.json"
           }
         },
         "description": "Creates or updates an Azure Cosmos DB database account. The \"Update\" method is preferred when performing updates on an account.",
@@ -5228,6 +5231,7 @@
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
+      "discriminator": "createMode",
       "properties": {
         "consistencyPolicy": {
           "description": "The consistency policy for the Cosmos DB account.",
@@ -5310,6 +5314,7 @@
         "createMode" :{
           "description": "Enum to indicate the mode of account creation.",
           "type": "string" ,
+          "default": "Default",
           "$ref": "#/definitions/createMode"
         },
         "backupPolicy": {
@@ -5323,6 +5328,15 @@
         "databaseAccountOfferType",
         "createMode"
       ]
+    },
+    "DefaultRequestDatabaseAccountCreateUpdateProperties":{
+      "description": "Properties for non-restore Azure Cosmos DB database account requests.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
     },
     "RestoreReqeustDatabaseAccountCreateUpdateProperties": {
       "description": "Properties to restore Azure Cosmos DB database account.",
