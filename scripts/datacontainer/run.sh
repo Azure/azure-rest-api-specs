@@ -12,4 +12,4 @@ echo "[$timestamp] Deleting directory /usr/data/specrepo"
 rm -R /usr/data/specrepo/
 
 timestamp=`date +%Y/%m/%d-%H:%M:%S`
-echo "[$timestamp] Init completed successfully.OpenAPI specs are present in /usr/data/openapispecs."
+echo "[$timestamp] Init completed successfully. OpenAPI specs are present in /usr/data/openapispecs."
