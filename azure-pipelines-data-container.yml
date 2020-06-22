@@ -27,7 +27,7 @@ steps:
   inputs:
     command: buildAndPush
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
-    repository: $(IMAGE_NAME_PREFIX)-$(Build.SourceBranchName)
+    repository: $(REPOSITORY_NAME_PREFIX)-$(Build.SourceBranchName)
     Dockerfile: scripts/datacontainer/Dockerfile
     tags: |
       latest
