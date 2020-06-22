@@ -7,6 +7,7 @@
         "capacity": 1
       },
       "properties": {
+        "tls": null,
         "hostNamePrefix": null,
         "features": [
           {
@@ -37,7 +38,13 @@
               "hubPattern": "*",
               "eventPattern": "connect,disconnect",
               "categoryPattern": "*",
-              "urlTemplate": "https://example.com/chat/api/connect"
+              "urlTemplate": "https://example.com/chat/api/connect",
+              "auth": {
+                "Type": "ManagedIdentity",
+                "ManagedIdentity": {
+                  "Resource": "api://example"
+                }
+              }
             }
           ]
         },
@@ -105,6 +112,7 @@
               "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
             }
           ],
+          "tls": null,
           "hostNamePrefix": "mysignalrservice",
           "features": [
             {
@@ -135,7 +143,8 @@
                 "hubPattern": null,
                 "eventPattern": null,
                 "categoryPattern": null,
-                "urlTemplate": "http://foo.com"
+                "urlTemplate": "http://foo.com",
+                "auth": null
               }
             ]
           },
@@ -201,6 +210,7 @@
               "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
             }
           ],
+          "tls": null,
           "hostNamePrefix": "mysignalrservice",
           "features": [
             {
@@ -231,7 +241,8 @@
                 "hubPattern": null,
                 "eventPattern": null,
                 "categoryPattern": null,
-                "urlTemplate": "http://foo.com"
+                "urlTemplate": "http://foo.com",
+                "auth": null
               }
             ]
           },
