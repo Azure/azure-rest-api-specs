@@ -7424,6 +7424,7 @@
     },
     "RestoreParams": {
       "type": "object",
+      "description": "Parameters to indicate the information about the restore.",
       "properties": {
         "restoreMode": {
           "type": "string",
@@ -7458,7 +7459,11 @@
             "Periodic",
             "Continuous"
           ],
-          "description": "Describes the mode of backups."
+          "description": "Describes the mode of backups.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BackupType"
+          }
         }
       },
       "required": [
