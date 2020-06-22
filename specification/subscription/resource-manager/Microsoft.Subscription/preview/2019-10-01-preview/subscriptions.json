@@ -393,7 +393,7 @@
         ]
       }
     },
-    "subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeDirectory": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeDirectory": {
       "put": {
         "description": "Initiate change directory transfer.",
         "operationId": "Subscription_InitiateChangeDirectory",
@@ -867,13 +867,26 @@
         }
       }
     },
-    "ChangeDirectoryResponse": {
-      "description": "The parameters required to perform change directory operation.",
-      "type": "object",
+    "ChangeDirectoryResponseProperties": {
+      "description": "The response body for change directory operation",
       "properties": {
-        "id": {
-          "description": "Subscription Id",
+        "destinationEmailid": {
+          "description": "Eamil Id of the destination user",
           "type": "string"
+        },
+        "action": {
+          "description": "The Action on the change directory operation.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          },
+          "enum": [
+            "Initiate",
+            "Accept",
+            "Reject",
+            "Cancel"
+          ]
         },
         "transferStatus": {
           "description": "Current transfer Status.",
@@ -882,9 +895,31 @@
         "expiry": {
           "description": "Expiry time of the transfer",
           "type": "string"
+        }
+      }
+    },
+    "ChangeDirectoryResponse": {
+      "description": "The parameters required to perform change directory operation.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Subscription Name",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Resource type",
+          "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ChangeDirectoryProperties"
+          "$ref": "#/definitions/ChangeDirectoryResponseProperties"
         }
       }
     }
