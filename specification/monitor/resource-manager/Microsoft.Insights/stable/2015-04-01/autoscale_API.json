@@ -442,6 +442,13 @@
           "type": "number",
           "format": "double",
           "description": "the threshold of the metric that triggers the scale action."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "List of dimension conditions."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -803,6 +810,31 @@
           "type": "string"
         }
       }
+    },
+    "MetricDimension": {
+      "required": [
+        "dimensionName",
+        "operator",
+        "values"
+      ],
+      "properties": {
+        "dimensionName": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "operator": {
+          "type": "string",
+          "description": "the dimension operator. Only 'Equals' and 'NotEquals' are supported"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "list of dimension values."
+        }
+      },
+      "description": "Specifies a metric dimension."
     }
   },
   "parameters": {
