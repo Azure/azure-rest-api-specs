@@ -111,6 +111,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-trenton
 ```
 
 
@@ -164,3 +165,17 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+    cli-name: netapp
+    azure_arm: true
+    license_header: MICROSOFT_MIT_NO_VERSION
+    payload_flattening_threshold: 2
+    namespace: netapp
+    package-name: netapp
+    clear_output_folder: false
+```
