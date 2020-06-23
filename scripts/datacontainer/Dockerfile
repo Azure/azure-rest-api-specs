@@ -1,15 +1,10 @@
 FROM alpine:3.8
-ARG SOURCE_DIRECTORY
 
 RUN apk update && \
     apk add git
 
-RUN echo 'the source directory is: '
-RUN echo ${SOURCE_DIRECTORY}
-RUN echo '--end'
-
 RUN mkdir -p /usr/data/specrepo/
-COPY ${SOURCE_DIRECTORY}/.git /usr/data/specrepo/.git
+COPY .git /usr/data/specrepo/.git
 
 RUN mkdir -p /usr/data/openapispecs/
 WORKDIR /usr/data/openapispecs
