@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{Subscription Key}",
+    "appId": "{Application Id}",
+    "slotName": "{Slot Name}",
+    "predictionRequest": {
+      "query": "forward to frank 30 dollars through HSBC",
+      "options": {
+        "datetimeReference": "2015-02-13T13:15:00.000Z"
+      },
+      "externalEntities": [
+        {
+          "entityName": "Bank",
+          "startIndex": 36,
+          "entityLength": 4,
+          "resolution": {
+            "text": "International Bank"
+          }
+        }
+      ],
+      "dynamicLists": [
+        {
+          "listEntityName": "Employees",
+          "requestLists": [
+            {
+              "name": "Management",
+              "canonicalForm": "Frank",
+              "synonyms": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "query": "forward to frank 30 dollars through HSBC",
+        "prediction": {
+          "topIntent": "give",
+          "intents": {
+            "give": {
+              "score": 0.943442
+            }
+          },
+          "entities": {
+            "Employees": [
+              [
+                "frank"
+              ]
+            ],
+            "number": [
+              30
+            ],
+            "money": [
+              {
+                "units": "Dollar",
+                "value": 30
+              }
+            ],
+            "Bank": [
+              {
+                "text": "International Bank"
+              }
+            ]
+          },
+          "sentiment": {
+            "label": "positive",
+            "score": 0.9163064
+          }
+        }
+      }
+    }
+  }
+}

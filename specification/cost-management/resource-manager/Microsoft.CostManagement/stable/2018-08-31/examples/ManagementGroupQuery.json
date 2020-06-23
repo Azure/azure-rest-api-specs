@@ -2,22 +2,15 @@
   "parameters": {
     "api-version": "2018-08-31",
     "managementGroupId": "MyMgId",
-    "parameters":{
+    "parameters": {
       "type": "Usage",
       "timeframe": "MonthToDate",
       "dataset": {
         "granularity": "Daily",
-        "configuration": {
-          "columns": [
-            "PreTaxCost",
-            "ResourceGroup",
-            "UsageDate"
-          ]
-        },
-        "filter":{
+        "filter": {
           "and": [
             {
-              "or":[
+              "or": [
                 {
                   "dimension": {
                     "name": "ResourceLocation",
@@ -49,7 +42,7 @@
                 ]
               }
             }
-          ]                      
+          ]
         }
       }
     }

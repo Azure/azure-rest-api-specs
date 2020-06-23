@@ -1,5 +1,5 @@
 # SignalR
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for SignalR.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for SignalR.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for SignalR, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,14 +21,57 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-01-preview
+tag: package-2020-05-01
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.NameAvailability.properties.nameAvailable
+    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Dimension.properties.toBeExportedForShoebox
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics.
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Operation.properties.isDataAction
+    reason:  The boolean properties 'isDataAction' is a standard property for Azuer Operatoins.
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: AvoidNestedProperties
+    from: signalr.json
+    where:
+    - $.definitions.SignalRFeature.properties.properties
+    - $.definitions.PrivateEndpointConnection.properties.properties
+    reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
+```
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.SignalRService/stable/2020-05-01/signalr.json
+```
+
+### Tag: package-2018-10-01
+
+These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10-01'
+input-file:
+- Microsoft.SignalRService/stable/2018-10-01/signalr.json
+```
 
 ### Tag: package-2018-03-01-preview
 
@@ -50,9 +93,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -60,97 +105,15 @@ swagger-to-sdk:
 ```
 
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.signalr
-  package-name: azure-mgmt-signalr
-  package-version: 0.1.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-signalr/azure/mgmt/signalr
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-signalr
-```
-
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: signalr
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03-01-preview
-```
-
-### Tag: package-2018-03-01-preview and go
-
-These settings apply only when `--tag=package-2018-03-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/signalr/mgmt/2018-03-01-preview/signalr
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.signalr
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-signalr
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-03-01-preview
-```
-
-### Tag: package-2018-03-01-preview and java
-
-These settings apply only when `--tag=package-2018-03-01-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-03-01-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.signalr.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -161,6 +124,33 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.SignalR
-  output-folder: $(csharp-sdks-folder)/SignalR/Management.SignalR/Generated
+  output-folder: $(csharp-sdks-folder)/signalr/Microsoft.Azure.Management.SignalR/src/Generated
   clear-output-folder: true
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.SignalRService/stable/2020-05-01/signalr.json
+  - $(this-folder)/Microsoft.SignalRService/stable/2018-10-01/signalr.json
+  - $(this-folder)/Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

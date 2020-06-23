@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2017-11-15-preview"
+    "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -54,10 +54,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel": {
@@ -94,6 +96,21 @@
         "targetServer": {
           "type": "string",
           "description": "Target server name",
+          "readOnly": true
+        },
+        "sourceServerType": {
+          "$ref": "./TasksCommon.json#/definitions/ScenarioSource",
+          "description": "Source server type.",
+          "readOnly": true
+        },
+        "targetServerType": {
+          "$ref": "./TasksCommon.json#/definitions/ScenarioTarget",
+          "description": "Target server type.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/ReplicateMigrationState",
+          "description": "Migration status",
           "readOnly": true
         }
       },
@@ -336,6 +353,27 @@
         "targetDatabaseName": {
           "type": "string",
           "description": "Name of target database. Note: Target database will be truncated before starting migration."
+        },
+        "migrationSetting": {
+          "type": "object",
+          "description": "Migration settings which tune the migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sourceSetting": {
+          "type": "object",
+          "description": "Source settings to tune source endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetSetting": {
+          "type": "object",
+          "description": "Target settings to tune target endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

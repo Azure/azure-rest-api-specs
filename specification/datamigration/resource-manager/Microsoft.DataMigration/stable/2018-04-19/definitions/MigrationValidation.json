@@ -51,34 +51,6 @@
         }
       }
     },
-    "MigrationValidationResult": {
-      "type": "object",
-      "description": "Migration Validation Result",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Migration validation result identifier",
-          "readOnly": true
-        },
-        "migrationId": {
-          "type": "string",
-          "description": "Migration Identifier",
-          "readOnly": true
-        },
-        "summaryResults": {
-          "type": "object",
-          "description": "Validation summary results for each database",
-          "additionalProperties": {
-            "$ref": "#/definitions/MigrationValidationDatabaseSummaryResult"
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "Current status of validation at the migration level. Status from the database validation result status will be aggregated here.",
-          "readOnly": true
-        }
-      }
-    },
     "MigrationValidationDatabaseSummaryResult": {
       "type": "object",
       "description": "Migration Validation Database level summary result",
@@ -103,7 +75,6 @@
           "description": "Name of the target database",
           "readOnly": true
         },
-
         "startedOn": {
           "type": "string",
           "format": "date-time",
@@ -114,65 +85,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Validation end time",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "Current status of validation at the database level",
-          "readOnly": true
-        }
-      }
-    },
-    "MigrationValidationDatabaseLevelResult": {
-      "type": "object",
-      "description": "Database level validation results",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Result identifier",
-          "readOnly": true
-        },
-        "migrationId": {
-          "type": "string",
-          "description": "Migration Identifier",
-          "readOnly": true
-        },
-        "sourceDatabaseName": {
-          "type": "string",
-          "description": "Name of the source database",
-          "readOnly": true
-        },
-        "targetDatabaseName": {
-          "type": "string",
-          "description": "Name of the target database",
-          "readOnly": true
-        },
-        "startedOn": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Validation start time",
-          "readOnly": true
-        },
-        "endedOn": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Validation end time",
-          "readOnly": true
-        },
-        "dataIntegrityValidationResult": {
-          "description": "Provides data integrity validation result between the source and target tables that are migrated.",
-          "$ref": "#/definitions/DataIntegrityValidationResult",
-          "readOnly": true
-        },
-        "schemaValidationResult": {
-          "description": "Provides schema comparison result between source and target database",
-          "$ref": "#/definitions/SchemaComparisonValidationResult",
-          "readOnly": true
-        },
-
-        "queryAnalysisValidationResult": {
-          "description": "Results of some of the query execution result between source and target database",
-          "$ref": "#/definitions/QueryAnalysisValidationResult",
           "readOnly": true
         },
         "status": {

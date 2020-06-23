@@ -1,159 +1,156 @@
 {
-    "swagger":"2.0",
-    "info":{
-       "version":"1.0",
-       "title":"Common types"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     },
-    "paths":{
-
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
     },
-    "definitions":{
-       "Resource":{
-          "description":"ARM resource.",
-          "type":"object",
-          "properties":{
-             "id":{
-                "description":"Resource ID.",
-                "type":"string",
-                "readOnly":true
-             },
-             "name":{
-                "description":"Resource name.",
-                "type":"string",
-                "readOnly":true
-             },
-             "type":{
-                "description":"Resource type.",
-                "type":"string",
-                "readOnly":true
-             }
-          },
-          "x-ms-azure-resource":true
-       },
-       "ProxyResource":{
-          "description":"ARM proxy resource.",
-          "type":"object",
-          "allOf":[
-             {
-                "$ref":"#/definitions/Resource"
-             }
-          ],
-          "properties":{
-
-          }
-       },
-       "TrackedResource":{
-          "description":"ARM tracked top level resource.",
-          "required":[
-             "location"
-          ],
-          "type":"object",
-          "allOf":[
-             {
-                "$ref":"#/definitions/Resource"
-             }
-          ],
-          "properties":{
-             "location":{
-                "description":"Resource location.",
-                "type":"string",
-                "x-ms-mutability":[
-                   "read",
-                   "create"
-                ]
-             },
-             "tags":{
-                "description":"Resource tags.",
-                "type":"object",
-                "additionalProperties":{
-                   "type":"string"
-                }
-             }
-          }
-       },
-       "Sku":{
-          "description":"The resource model definition representing SKU",
-          "properties":{
-             "name":{
-                "type":"string",
-                "description":"The name of the SKU. Ex - P3. It is typically a letter+number code"
-             },
-             "tier":{
-                "type":"string",
-                "description":"This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
-             },
-             "size":{
-                "type":"string",
-                "description":"The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
-             },
-             "family":{
-                "type":"string",
-                "description":"If the service has different generations of hardware, for the same SKU, then that can be captured here."
-             },
-             "capacity":{
-                "type":"integer",
-                "format":"int32",
-                "description":"If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
-             }
-          },
-          "required":[
-             "name"
+    "TrackedResource": {
+      "description": "ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
           ]
-       },
-       "ResourceIdentity":{
-          "description":"Azure Active Directory identity configuration for a resource.",
-          "type":"object",
-          "properties":{
-             "principalId":{
-                "format":"uuid",
-                "description":"The Azure Active Directory principal id.",
-                "type":"string",
-                "readOnly":true
-             },
-             "type":{
-                "description":"The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
-                "enum":[
-                   "SystemAssigned"
-                ],
-                "type":"string",
-                "x-ms-enum":{
-                   "name":"IdentityType",
-                   "modelAsString":true
-                }
-             },
-             "tenantId":{
-                "format":"uuid",
-                "description":"The Azure Active Directory tenant id.",
-                "type":"string",
-                "readOnly":true
-             }
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
-       }
+        }
+      }
     },
-    "parameters":{
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The subscription ID that identifies an Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "client"
-          },
-          "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for the request.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "client"
-          },
-          "ResourceGroupParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+    "Sku": {
+      "description": "An ARM Resource SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the particular SKU",
+          "type": "string"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Capacity of the particular SKU.",
+          "type": "integer"
+        }
+      }
+    },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
           }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
- }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

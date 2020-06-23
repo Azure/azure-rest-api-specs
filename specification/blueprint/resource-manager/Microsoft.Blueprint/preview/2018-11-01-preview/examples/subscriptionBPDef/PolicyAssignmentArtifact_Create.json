@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "blueprintName": "simpleBlueprint",
+    "artifactName": "costCenterPolicy",
+    "artifact": {
+      "properties": {
+        "displayName": "force costCenter tag on all resources",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62",
+        "parameters": {
+          "tagName": {
+            "value": "costCenter"
+          },
+          "tagValue": {
+            "value": "[parameter('costCenter')]"
+          }
+        }
+      },
+      "kind": "policyAssignment"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "displayName": "force costCenter tag on all resources",
+          "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62",
+          "parameters": {
+            "tagName": {
+              "value": "costCenter"
+            },
+            "tagValue": {
+              "value": "[parameter('costCenter')]"
+            }
+          }
+        },
+        "kind": "policyAssignment",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy",
+        "type": "Microsoft.Blueprint/blueprints/artifacts",
+        "name": "costCenterPolicy"
+      }
+    }
+  }
+}

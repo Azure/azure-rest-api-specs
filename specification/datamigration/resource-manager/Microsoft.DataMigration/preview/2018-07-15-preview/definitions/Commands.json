@@ -20,7 +20,6 @@
     "CommandProperties": {
       "type": "object",
       "description": "Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "commandType": {
           "description": "Command type.",
@@ -51,7 +50,9 @@
           "readOnly": true
         }
       },
-      "required": [ "commandType" ],
+      "required": [
+        "commandType"
+      ],
       "discriminator": "commandType"
     },
     "MigrateSyncCompleteCommandProperties": {
@@ -96,6 +97,59 @@
     "MigrateSyncCompleteCommandOutput": {
       "type": "object",
       "description": "Output for command that completes sync migration for a database.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "List of errors that happened during the command execution",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MigrateMISyncCompleteCommandProperties": {
+      "x-ms-discriminator-value": "Migrate.SqlServer.AzureDbSqlMi.Complete",
+      "type": "object",
+      "description": "Properties for the command that completes online migration for an Azure SQL Database Managed Instance.",
+      "properties": {
+        "input": {
+          "description": "Command input",
+          "$ref": "#/definitions/MigrateMISyncCompleteCommandInput"
+        },
+        "output": {
+          "description": "Command output. This is ignored if submitted.",
+          "$ref": "#/definitions/MigrateMISyncCompleteCommandOutput",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommandProperties"
+        }
+      ]
+    },
+    "MigrateMISyncCompleteCommandInput": {
+      "type": "object",
+      "description": "Input for command that completes online migration for an Azure SQL Database Managed Instance.",
+      "properties": {
+        "sourceDatabaseName": {
+          "description": "Name of managed instance database",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceDatabaseName"
+      ]
+    },
+    "MigrateMISyncCompleteCommandOutput": {
+      "type": "object",
+      "description": "Output for command that completes online migration for an Azure SQL Database Managed Instance.",
       "properties": {
         "errors": {
           "description": "List of errors that happened during the command execution",

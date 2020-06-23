@@ -274,7 +274,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",      
+            "description": "Name of the CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -307,7 +307,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
+        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
         "operationId": "Profiles_GenerateSsoUri",
         "parameters": [
           {
@@ -816,7 +816,7 @@
           {
             "name": "endpointName",
             "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.", 
+            "description": "Name of the endpoint under the profile which is unique globally.",
             "required": true,
             "type": "string"
           },
@@ -878,7 +878,7 @@
           {
             "name": "contentFilePaths",
             "in": "body",
-            "description": "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictires/city.png' which loads a single file ",
+            "description": "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictures/city.png' which loads a single file ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadParameters"
@@ -1244,7 +1244,7 @@
         "tags": [
           "CustomDomains"
         ],
-        "description": "Gets an exisitng custom domain within an endpoint.",
+        "description": "Gets an existing custom domain within an endpoint.",
         "operationId": "CustomDomains_Get",
         "parameters": [
           {
@@ -1721,14 +1721,14 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the profile.",
           "type": "string"
         }
       }
     },
     "ProfileListResult": {
-      "description":"Result of the request to list profiles. It contains a list of profile objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1799,7 +1799,7 @@
       }
     },
     "EndpointProperties": {
-      "description":"The JSON object that contains the properties required to create an endpoint.",
+      "description": "The JSON object that contains the properties required to create an endpoint.",
       "required": [
         "origins"
       ],
@@ -1807,10 +1807,10 @@
         {
           "$ref": "#/definitions/EndpointPropertiesUpdateParameters"
         }
-      ],      
+      ],
       "properties": {
         "hostName": {
-          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. consoto.azureedge.net",
+          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net",
           "type": "string",
           "readOnly": true
         },
@@ -1839,14 +1839,14 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the endpoint.",
           "type": "string"
         }
       }
     },
     "EndpointListResult": {
-      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1880,7 +1880,7 @@
       "x-ms-azure-resource": true
     },
     "EndpointPropertiesUpdateParameters": {
-      "description":"Result of the request to list endpoints. It contains a list of endpoints and a URL link to get the next set of results.",
+      "description": "Result of the request to list endpoints. It contains a list of endpoints and a URL link to get the next set of results.",
       "properties": {
         "originHostHeader": {
           "description": "The host header CDN sends along with content requests to origin. The default value is the host name of the origin.",
@@ -1918,7 +1918,7 @@
           "$ref": "#/definitions/OptimizationType"
         },
         "geoFilters": {
-          "description": "List of rules defining user geo access within a CDN endpoint. Each geo filter defines an acess rule to a specified path or content, e.g. block APAC for path /pictures/",
+          "description": "List of rules defining user geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/",
           "type": "array",
           "items": {
             "$ref": "#/definitions/GeoFilter"
@@ -1995,11 +1995,11 @@
           ],
           "type": "string",
           "x-ms-enum": {
-          "name": "GeoFilterActions",
+            "name": "GeoFilterActions",
             "modelAsString": false
           }
         },
-        "countryCodes":    {
+        "countryCodes": {
           "description": "Two letter country codes defining user country access in a geo filter, e.g. AU, MX, US.",
           "type": "array",
           "items": {
@@ -2056,7 +2056,7 @@
       }
     },
     "OriginProperties": {
-      "description":"The JSON object that contains the properties of the origin to create.",
+      "description": "The JSON object that contains the properties of the origin to create.",
       "required": [
         "hostName"
       ],
@@ -2096,7 +2096,7 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the origin.",
           "type": "string"
         }
@@ -2139,7 +2139,7 @@
       }
     },
     "OriginListResult": {
-      "description":"Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
+      "description": "Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2155,7 +2155,7 @@
       }
     },
     "CustomDomain": {
-      "description": "Customer provided domain for branding purposes, e.g. www.consoto.com.",
+      "description": "Customer provided domain for branding purposes, e.g. www.contoso.com.",
       "type": "object",
       "allOf": [
         {
@@ -2214,7 +2214,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the custom domain.",
           "type": "string"
         }
@@ -2402,7 +2402,7 @@
       }
     },
     "OperationListResult": {
-     "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2418,7 +2418,7 @@
       }
     },
     "EdgenodeResult": {
-     "description": "Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.",
+      "description": "Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2449,10 +2449,10 @@
       }
     },
     "EdgeNodeProperties": {
-      "description":"The JSON object that contains the properties required to create an edgenode.",
+      "description": "The JSON object that contains the properties required to create an edgenode.",
       "required": [
         "ipAddressGroups"
-      ],    
+      ],
       "properties": {
         "ipAddressGroups": {
           "description": "List of ip address groups.",
@@ -2492,7 +2492,7 @@
       "type": "object",
       "properties": {
         "baseIpAddress": {
-          "description": "Ip adress itself.",
+          "description": "IP address itself.",
           "type": "string"
         },
         "prefixLength": {
@@ -2587,7 +2587,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
@@ -2621,9 +2621,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$", 
-      "minLength": 1, 
-      "maxLength": 90 ,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
     }

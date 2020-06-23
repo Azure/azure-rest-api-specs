@@ -126,10 +126,10 @@
           "200": {
             "description": "Specified backend entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Backends"
         ],
@@ -593,7 +593,7 @@
           "type": "string"
         },
         "maxPartitionResolutionRetries": {
-          "description": "Maximum number of retries while attempting resolve the parition.",
+          "description": "Maximum number of retries while attempting resolve the partition.",
           "format": "int32",
           "type": "integer"
         },
@@ -732,7 +732,7 @@
     },
     "BackendReconnectContract": {
       "properties": {
-        "properties":{
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BackendReconnectProperties",
           "description": "Reconnect request properties."

@@ -1,9 +1,9 @@
 {
-  "parameters" : {
-    "api-version" : "2017-10-01",
-    "subscriptionId" : "subid",
-    "resourceGroupName" : "rg1",
-    "networkSecurityGroupName" : "testnsg",
+  "parameters": {
+    "api-version": "2017-10-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkSecurityGroupName": "testnsg",
     "parameters": {
       "tags": {
         "tag1": "value1",
@@ -11,9 +11,9 @@
       }
     }
   },
-  "responses" : {
-    "200" : {
-      "body" : {
+  "responses": {
+    "200": {
+      "body": {
         "name": "testnsg",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg",
         "type": "Microsoft.Network/networkSecurityGroups",
@@ -24,7 +24,7 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "securityRules": [ ],
+          "securityRules": [],
           "defaultSecurityRules": [
             {
               "name": "AllowVnetInBound",
@@ -43,7 +43,7 @@
               }
             },
             {
-            "name": "AllowAzureLoadBalancerInBound",
+              "name": "AllowAzureLoadBalancerInBound",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/defaultSecurityRules/AllowAzureLoadBalancerInBound",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -90,7 +90,7 @@
                 "direction": "Outbound"
               }
             },
-           {
+            {
               "name": "AllowInternetOutBound",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/defaultSecurityRules/AllowInternetOutBound",
               "properties": {
@@ -109,7 +109,7 @@
             {
               "name": "DenyAllOutBound",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/defaultSecurityRules/DenyAllOutBound",
-             "properties": {
+              "properties": {
                 "provisioningState": "Succeeded",
                 "description": "Deny all outbound traffic",
                 "protocol": "*",

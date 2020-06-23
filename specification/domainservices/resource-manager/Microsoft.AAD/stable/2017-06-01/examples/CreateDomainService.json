@@ -4,10 +4,32 @@
     "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d",
     "resourceGroupName": "sva-tt-WUS",
     "domainServiceName": "zdomain.zforest.com",
-    "location": "westus",
-    "properties": {
-      "domainName": "zdomain.zforest.com",
-      "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1"
+    "domainService": {
+      "location": "westus",
+      "properties": {
+        "domainName": "zdomain.zforest.com",
+        "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1",
+        "domainSecuritySettings": {
+          "ntlmV1": "Enabled",
+          "tlsV1": "Disabled",
+          "syncNtlmPasswords": "Enabled"
+        },
+        "notificationSettings": {
+          "notifyGlobalAdmins": "Enabled",
+          "notifyDcAdmins": "Enabled",
+          "additionalRecipients": [
+            "jicha@microsoft.com",
+            "caalmont@microsoft.com"
+          ]
+        },
+        "filteredSync": "Enabled",
+        "ldapsSettings": {
+          "ldaps": "Enabled",
+          "pfxCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+          "pfxCertificatePassword": "Password01",
+          "externalAccess": "Enabled"
+        }
+      }
     }
   },
   "responses": {
@@ -24,6 +46,28 @@
           "domainName": "zdomain.zforest.com",
           "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c",
           "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1",
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+            "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+            "certificateNotAfter": "2018-02-15T21:43:21Z",
+            "externalAccess": "Enabled",
+            "externalAccessIpAddress": "13.64.148.151"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "filteredSync": "Enabled",
           "domainControllerIpAddress": [
             "10.0.0.5",
             "10.0.0.8"
@@ -46,6 +90,28 @@
           "domainName": "zdomain.zforest.com",
           "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c",
           "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1",
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+            "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+            "certificateNotAfter": "2018-02-15T21:43:21Z",
+            "externalAccess": "Enabled",
+            "externalAccessIpAddress": "13.64.148.151"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "filteredSync": "Enabled",
           "domainControllerIpAddress": [
             "10.0.0.5",
             "10.0.0.8"
@@ -66,6 +132,24 @@
         "properties": {
           "domainName": "zdomain.zforest.com",
           "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.Network/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1",
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "externalAccess": "Enabled"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "filteredSync": "Enabled",
           "provisioningState": "Accepted"
         }
       }

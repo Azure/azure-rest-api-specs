@@ -4,13 +4,29 @@
     "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d",
     "resourceGroupName": "sva-tt-WUS",
     "domainServiceName": "zdomain.zforest.com",
-    "location": "westus",
-    "properties": {
-      "ldapsSettings": {
-        "ldaps": "Enabled",
-        "pfxCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
-        "pfxCertificatePassword": "Password01",
-        "externalAccess": "Enabled"
+    "domainService": {
+      "location": "westus",
+      "properties": {
+        "domainSecuritySettings": {
+          "ntlmV1": "Enabled",
+          "tlsV1": "Disabled",
+          "syncNtlmPasswords": "Enabled"
+        },
+        "notificationSettings": {
+          "notifyGlobalAdmins": "Enabled",
+          "notifyDcAdmins": "Enabled",
+          "additionalRecipients": [
+            "jicha@microsoft.com",
+            "caalmont@microsoft.com"
+          ]
+        },
+        "filteredSync": "Enabled",
+        "ldapsSettings": {
+          "ldaps": "Enabled",
+          "pfxCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+          "pfxCertificatePassword": "Password01",
+          "externalAccess": "Enabled"
+        }
       }
     }
   },
@@ -39,6 +55,20 @@
             "externalAccess": "Enabled",
             "externalAccessIpAddress": "13.64.148.151"
           },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "filteredSync": "Enabled",
           "domainControllerIpAddress": [
             "10.0.0.5",
             "10.0.0.8"
@@ -63,6 +93,20 @@
             "pfxCertificatePassword": "Password01",
             "externalAccess": "Enabled"
           },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "filteredSync": "Enabled",
           "provisioningState": "Accepted"
         }
       }

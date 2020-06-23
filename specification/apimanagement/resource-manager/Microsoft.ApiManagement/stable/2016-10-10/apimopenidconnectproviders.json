@@ -112,11 +112,11 @@
             "schema": {
               "$ref": "#/definitions/OpenidConnectProviderContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -124,7 +124,7 @@
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
-          }      
+          }
         }
       },
       "put": {
@@ -142,7 +142,7 @@
           },
           {
             "$ref": "#/parameters/OpenIdConnectIdParameter"
-          },          
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -161,7 +161,7 @@
         ],
         "responses": {
           "201": {
-            "description": "OpenIdConnect Provider was successfully created."            
+            "description": "OpenIdConnect Provider was successfully created."
           },
           "204": {
             "description": "OpenIdConnect Provider was successfully updated."
@@ -262,7 +262,7 @@
           "405": {
             "description": "The specified OpenIdConnect Provider cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"              
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -276,130 +276,130 @@
     }
   },
   "definitions": {
-		"OpenIdConnectProviderCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/OpenidConnectProviderContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged OpenIdProviders list representation."
-		},
-		"OpenidConnectProviderContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "OpenID Connect Provider identifier."
-			},
-			"name": {
-			  "type": "string",
-			  "description": "User-friendly OpenID Connect Provider name.",
-			  "maxLength": 50
-			},
-			"description": {
-			  "type": "string",
-			  "description": "User-friendly description of OpenID Connect Provider."
-			},
-			"metadataEndpoint": {
-			  "type": "string",
-			  "description": "Metadata endpoint URI."
-			},
-			"clientId": {
-			  "type": "string",
-			  "description": "Client ID of developer console which is the client application."
-			},
-			"clientSecret": {
-			  "type": "string",
-			  "description": "Client Secret of developer console which is the client application."
-			}
-		  },
-		  "required": [
-			"name",
-			"metadataEndpoint",
-			"clientId"
-		  ],
-		  "description": "OpenID Connect Providers Contract."
-		},
-		"OpenidConnectProviderCreateContract": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "User-friendly OpenID Connect Provider name.",
-			  "maxLength": 50
-			},
-			"description": {
-			  "type": "string",
-			  "description": "User-friendly description of OpenID Connect Provider."
-			},
-			"metadataEndpoint": {
-			  "type": "string",
-			  "description": "Metadata endpoint URI."
-			},
-			"clientId": {
-			  "type": "string",
-			  "description": "Client ID of developer console which is the client application."
-			},
-			"clientSecret": {
-			  "type": "string",
-			  "description": "Client Secret of developer console which is the client application."
-			}
-		  },
-		  "required": [
-			"name",
-			"metadataEndpoint",
-			"clientId"
-		  ],
-		  "description": "Parameters supplied to the Create OpenID Connect Provider operation."
-		},
-		"OpenidConnectProviderUpdateContract": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "User-friendly OpenID Connect Provider name.",
-			  "maxLength": 50
-			},
-			"description": {
-			  "type": "string",
-			  "description": "User-friendly description of OpenID Connect Provider."
-			},
-			"metadataEndpoint": {
-			  "type": "string",
-			  "description": "Metadata endpoint URI."
-			},
-			"clientId": {
-			  "type": "string",
-			  "description": "Client ID of developer console which is the client application."
-			},
-			"clientSecret": {
-			  "type": "string",
-			  "description": "Client Secret of developer console which is the client application."
-			}
-		  },
-		  "description": "Parameters supplied to the Update OpenID Connect Provider operation."
-		}
+    "OpenIdConnectProviderCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenidConnectProviderContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged OpenIdProviders list representation."
+    },
+    "OpenidConnectProviderContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "OpenID Connect Provider identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "required": [
+        "name",
+        "metadataEndpoint",
+        "clientId"
+      ],
+      "description": "OpenID Connect Providers Contract."
+    },
+    "OpenidConnectProviderCreateContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "required": [
+        "name",
+        "metadataEndpoint",
+        "clientId"
+      ],
+      "description": "Parameters supplied to the Create OpenID Connect Provider operation."
+    },
+    "OpenidConnectProviderUpdateContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "description": "Parameters supplied to the Update OpenID Connect Provider operation."
+    }
   },
   "parameters": {
-		"OpenIdConnectIdParameter": {
-		  "name": "opid",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Identifier of the OpenID Connect Provider.",
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "OpenIdConnectIdParameter": {
+      "name": "opid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the OpenID Connect Provider.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

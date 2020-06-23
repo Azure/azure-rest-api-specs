@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "expressRouteGatewayName": "expressRouteGatewayName",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2018-11-01",
+    "subscriptionId": "subid",
+    "connectionName": "connectionName",
+    "putExpressRouteConnectionParameters": {
+      "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
+      "name": "connectionName",
+      "properties": {
+        "routingWeight": 2,
+        "authorizationKey": "authorizationKey",
+        "expressRouteCircuitPeering": {
+          "id": "/subscriptions/subid2/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connectionName",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
+        "properties": {
+          "provisioningState": "Provisioned",
+          "expressRouteCircuitPeering": {
+            "id": "/subscriptions/subid2/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+          },
+          "authorizationKey": "authorizationKey",
+          "routingWeight": 2
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "connectionName",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
+        "properties": {
+          "provisioningState": "Provisioned",
+          "expressRouteCircuitPeering": {
+            "id": "/subscriptions/subid2/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+          },
+          "authorizationKey": "authorizationKey",
+          "routingWeight": 2
+        }
+      }
+    }
+  }
+}

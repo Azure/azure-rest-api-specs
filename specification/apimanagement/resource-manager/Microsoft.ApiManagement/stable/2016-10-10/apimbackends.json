@@ -121,11 +121,11 @@
             "schema": {
               "$ref": "#/definitions/BackendResponse"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -223,7 +223,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The existing backend was successfully updated."
           },
           "default": {
@@ -278,255 +278,255 @@
       }
     }
   },
-  "definitions": {    
-		"BackendAuthorizationHeaderCredentials": {
-		  "properties": {
-			"scheme": {
-			  "type": "string",
-			  "description": "Authentication Scheme name.",
-			  "minLength": 1,
-			  "maxLength": 100
-			},
-			"parameter": {
-			  "type": "string",
-			  "description": "Authentication Parameter value.",
-			  "minLength": 1,
-			  "maxLength": 300
-			}
-		  },
-		  "required": [
-			"scheme",
-			"parameter"
-		  ],
-		  "description": "Authorization header information."
-		},
-		"BackendBaseParameters": {
-		  "properties": {
-			"title": {
-			  "type": "string",
-			  "description": "Backend Title.",
-			  "minLength": 1,
-			  "maxLength": 300
-			},
-			"description": {
-			  "type": "string",
-			  "description": "Backend Description.",
-			  "minLength": 1,
-			  "maxLength": 2000
-			},
-			"resourceId": {
-			  "type": "string",
-			  "description": "Management Uri of the Resource in External System. This url can be the Arm Resource Id of Logic Apps, Function Apps or Api Apps.",
-			  "minLength": 1,
-			  "maxLength": 2000
-			},
-			"properties": {
-			  "x-ms-client-flatten": true,
-			  "$ref": "#/definitions/BackendProperties"
-			}
-		  },
-		  "allOf": [
-			{
-			  "$ref": "#/definitions/BackendCredentialsContract"
-			},
-			{
-			  "$ref": "#/definitions/BackendProxyContract"
-			}
-		  ],
-		  "description": "Backend entity base Parameter set."
-		},
-		"BackendCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/BackendResponse"
-			  },
-			  "description": "Backend values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Backend list representation."
-		},
-		"BackendContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
-			  "readOnly": true
-			},
-			"url": {
-			  "type": "string",
-			  "description": "Runtime Url of the Backend.",
-			  "minLength": 1,
-			  "maxLength": 2000
-			},
-			"protocol": {
-			  "type": "string",
-			  "enum": [
-				"http",
-				"soap"
-			  ],
-			  "x-ms-enum": {
-				"name": "BackendProtocol",
-				"modelAsString": true
-			  },
-			  "description": "Backend communication protocol."
-			}
-		  },
-		  "allOf": [
-			{
-			  "$ref": "#/definitions/BackendBaseParameters"
-			}
-		  ],
-		  "required": [
-			"url",
-			"protocol"
-		  ],
-		  "description": "Parameters supplied to the Create Backend operation."
-		},
-		"BackendCredentialsContract": {
-		  "properties": {
-			"certificate": {
-			  "type": "array",
-			  "items": {
-				"type": "string"
-			  },
-			  "maxItems": 32,
-			  "description": "List of Client Certificate Thumbprint."
-			},
-			"query": {
-			  "type": "object",
-			  "additionalProperties": {
-				"type": "array",
-				"items": {
-				  "type": "string"
-				}
-			  },
-			  "description": "Query Parameter description."
-			},
-			"header": {
-			  "type": "object",
-			  "additionalProperties": {
-				"type": "array",
-				"items": {
-				  "type": "string"
-				}
-			  },
-			  "description": "Header Parameter description."
-			}
-		  },
-		  "allOf": [
-			{
-			  "$ref": "#/definitions/BackendAuthorizationHeaderCredentials"
-			}
-		  ],
-		  "description": "Details of the Credentials used to connect to Backend."
-		},
-		"BackendProperties": {
-		  "properties": {
-			"skipCertificateChainValidation": {
-			  "type": "boolean",
-			  "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
-			  "default": false
-			},
-			"skipCertificateNameValidation": {
-			  "type": "boolean",
-			  "description": "Flag indicating whether SSL certificate name validation should be skipped when using self-signed certificates for this backend host.",
-			  "default": false
-			}
-		  },
-		  "description": "Properties specific to a Backend."
-		},
-		"BackendProxyContract": {
-		  "externalDocs": {
-			"url": "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx",
-			"description": "Backend entity uses these details to connect to a WebProxy."
-		  },
-		  "properties": {
-			"url": {
-			  "type": "string",
-			  "description": "WebProxy Server AbsoluteUri property which includes the entire URI stored in the Uri instance, including all fragments and query strings.",
-			  "minLength": 1,
-			  "maxLength": 2000
-			},
-			"username": {
-			  "type": "string",
-			  "description": "Username to connect to the WebProxy server"
-			},
-			"password": {
-			  "type": "string",
-			  "description": "Password to connect to the WebProxy Server"
-			}
-		  },
-		  "required": [
-			"url"
-		  ],
-		  "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
-		},
-		"BackendResponse": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
-			  "readOnly": true
-			}
-		  },
-		  "allOf": [
-			{
-			  "$ref": "#/definitions/BackendContract"
-			}
-		  ],
-		  "description": "The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication."
-		},
-		"BackendUpdateParameters": {
-		  "properties": {
-			"url": {
-			  "type": "string",
-			  "description": "Runtime Url of the Backend.",
-			  "minLength": 1,
-			  "maxLength": 2000
-			},
-			"protocol": {
-			  "type": "string",
-			  "enum": [
-				"http",
-				"soap"
-			  ],
-			  "x-ms-enum": {
-				"name": "BackendProtocol",
-				"modelAsString": true
-			  },
-			  "description": "Backend communication protocol."
-			}
-		  },
-		  "allOf": [
-			{
-			  "$ref": "#/definitions/BackendBaseParameters"
-			}
-		  ],
-		  "description": "Parameters supplied to the Update Backend operation."
-		}
+  "definitions": {
+    "BackendAuthorizationHeaderCredentials": {
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "Authentication Scheme name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "parameter": {
+          "type": "string",
+          "description": "Authentication Parameter value.",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      },
+      "required": [
+        "scheme",
+        "parameter"
+      ],
+      "description": "Authorization header information."
+    },
+    "BackendBaseParameters": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Backend Title.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Backend Description.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Management Uri of the Resource in External System. This url can be the Arm Resource Id of Logic Apps, Function Apps or Api Apps.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendCredentialsContract"
+        },
+        {
+          "$ref": "#/definitions/BackendProxyContract"
+        }
+      ],
+      "description": "Backend entity base Parameter set."
+    },
+    "BackendCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendResponse"
+          },
+          "description": "Backend values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Backend list representation."
+    },
+    "BackendContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
+          "readOnly": true
+        },
+        "url": {
+          "type": "string",
+          "description": "Runtime Url of the Backend.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "http",
+            "soap"
+          ],
+          "x-ms-enum": {
+            "name": "BackendProtocol",
+            "modelAsString": true
+          },
+          "description": "Backend communication protocol."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendBaseParameters"
+        }
+      ],
+      "required": [
+        "url",
+        "protocol"
+      ],
+      "description": "Parameters supplied to the Create Backend operation."
+    },
+    "BackendCredentialsContract": {
+      "properties": {
+        "certificate": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Client Certificate Thumbprint."
+        },
+        "query": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Query Parameter description."
+        },
+        "header": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Header Parameter description."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendAuthorizationHeaderCredentials"
+        }
+      ],
+      "description": "Details of the Credentials used to connect to Backend."
+    },
+    "BackendProperties": {
+      "properties": {
+        "skipCertificateChainValidation": {
+          "type": "boolean",
+          "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
+          "default": false
+        },
+        "skipCertificateNameValidation": {
+          "type": "boolean",
+          "description": "Flag indicating whether SSL certificate name validation should be skipped when using self-signed certificates for this backend host.",
+          "default": false
+        }
+      },
+      "description": "Properties specific to a Backend."
+    },
+    "BackendProxyContract": {
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx",
+        "description": "Backend entity uses these details to connect to a WebProxy."
+      },
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "WebProxy Server AbsoluteUri property which includes the entire URI stored in the Uri instance, including all fragments and query strings.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "username": {
+          "type": "string",
+          "description": "Username to connect to the WebProxy server"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password to connect to the WebProxy Server"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
+    },
+    "BackendResponse": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendContract"
+        }
+      ],
+      "description": "The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication."
+    },
+    "BackendUpdateParameters": {
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Runtime Url of the Backend.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "http",
+            "soap"
+          ],
+          "x-ms-enum": {
+            "name": "BackendProtocol",
+            "modelAsString": true
+          },
+          "description": "Backend communication protocol."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendBaseParameters"
+        }
+      ],
+      "description": "Parameters supplied to the Update Backend operation."
+    }
   },
   "parameters": {
-		"BackendIdParameter": {
-		  "name": "backendid",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
-		  "minLength": 1,
-		  "maxLength": 255,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "BackendIdParameter": {
+      "name": "backendid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

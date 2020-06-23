@@ -2,7 +2,7 @@
   "parameters": {
     "api-version": "2017-06-01-preview",
     "policyAssignmentName": "costManagement",
-    "scope": "/subscriptions/subId"
+    "scope": "subscriptions/subId"
   },
   "responses": {
     "200": {
@@ -18,9 +18,15 @@
             "category": "Cost Management"
           },
           "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
-          "parameters": { "allowedSkus": { "type": "Array" } },
-          "notScopes": [ "/subscriptions/subId/resourcegroups/testingResourceGroup" ],
-          "scope":  "/subscriptions/subId" 
+          "parameters": {
+            "allowedSkus": {
+              "type": "Array"
+            }
+          },
+          "notScopes": [
+            "/subscriptions/subId/resourcegroups/testingResourceGroup"
+          ],
+          "scope": "/subscriptions/subId"
         },
         "sku": {
           "name": "A0",

@@ -223,6 +223,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "geoReplicationStats"
+            ],
+            "x-ms-enum": {
+              "name": "StorageAccountExpand",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -436,7 +450,9 @@
         "operationId": "Usages_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "x-ms-examples": {
-          "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
+          "UsageList": {
+            "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
         },
         "parameters": [
           {
@@ -451,7 +467,7 @@
             "required": true,
             "type": "string",
             "description": "The location of the Azure Storage resource."
-          }         
+          }
         ],
         "responses": {
           "200": {
@@ -553,6 +569,46 @@
               "$ref": "#/definitions/ListServiceSasResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_Failover",
+        "description": "Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account's primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover.",
+        "x-ms-examples": {
+          "StorageAccountCreate": {
+            "$ref": "./examples/StorageAccountFailover.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the storage account failover is completed, and the secondary cluster has become primary."
+          },
+          "202": {
+            "description": "Accepted -- Failover request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
@@ -677,7 +733,7 @@
       }
     },
     "Dimension": {
-      "description": "Dimension of blobs, possiblly be blob type or access tier.",
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
       "properties": {
         "name": {
           "type": "string",
@@ -711,14 +767,14 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of the storage account name."
+      "description": "The parameters used to check the availability of the storage account name."
     },
     "SKUCapability": {
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of capability, The capability information in the specified sku, including file encryption, network acls, change notification, etc."
+          "description": "The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc."
         },
         "value": {
           "readOnly": true,
@@ -726,7 +782,7 @@
           "description": "A string value to indicate states of given capability. Possibly 'true' or 'false'."
         }
       },
-      "description": "The capability information in the specified sku, including file encryption, network acls, change notification, etc."
+      "description": "The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc."
     },
     "Restriction": {
       "properties": {
@@ -803,7 +859,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the sku name. Required for account creation; optional for update. Note that in older versions, sku name was called accountType.",
+          "description": "Gets or sets the SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
           "enum": [
             "Standard_LRS",
             "Standard_GRS",
@@ -820,7 +876,7 @@
         "tier": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the sku tier. This is based on the SKU name.",
+          "description": "Gets the SKU tier. This is based on the SKU name.",
           "enum": [
             "Standard",
             "Premium"
@@ -865,7 +921,7 @@
           "items": {
             "$ref": "#/definitions/SKUCapability"
           },
-          "description": "The capability information in the specified sku, including file encryption, network acls, change notification, etc."
+          "description": "The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc."
         },
         "restrictions": {
           "type": "array",
@@ -886,7 +942,7 @@
           "type": "string",
           "description": "Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source."
         },
-        "useSubDomain": {
+        "useSubDomainName": {
           "type": "boolean",
           "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates."
         }
@@ -1141,8 +1197,8 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1180,7 +1236,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Required. Gets or sets the sku name."
+          "description": "Required. Gets or sets the SKU name."
         },
         "kind": {
           "type": "string",
@@ -1259,6 +1315,36 @@
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
+    },
+    "GeoReplicationStats": {
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable.",
+          "enum": [
+            "Live",
+            "Bootstrap",
+            "Unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "GeoReplicationStatus",
+            "modelAsString": true
+          }
+        },
+        "lastSyncTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap."
+        },
+        "canFailover": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether or not account failover is supported for the account."
+        }
+      },
+      "description": "Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account."
     },
     "StorageAccountProperties": {
       "properties": {
@@ -1375,8 +1461,20 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
+        },
+        "geoReplicationStats": {
+          "$ref": "#/definitions/GeoReplicationStats",
+          "x-ms-client-name": "GeoReplicationStats",
+          "description": "Geo Replication Stats",
+          "readOnly": true
+        },
+        "failoverInProgress": {
+          "type": "boolean",
+          "x-ms-client-name": "FailoverInProgress",
+          "description": "If the failover is in progress, the value will be true, otherwise, it will be null.",
+          "readOnly": true
         }
       },
       "description": "Properties of the storage account."
@@ -1479,7 +1577,7 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of storage keys that want to be regenerated, possible vaules are key1, key2."
+          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2."
         }
       },
       "required": [
@@ -1531,7 +1629,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those sku names be updated to any other value."
+          "description": "Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value."
         },
         "tags": {
           "type": "object",
@@ -1865,14 +1963,14 @@
       "required": [
         "canonicalizedResource"
       ],
-      "description": "The parameters to list service SAS credentials of a speicific resource."
+      "description": "The parameters to list service SAS credentials of a specific resource."
     },
     "ListServiceSasResponse": {
       "properties": {
         "serviceSasToken": {
           "readOnly": true,
           "type": "string",
-          "description": "List service SAS credentials of speicific resource."
+          "description": "List service SAS credentials of specific resource."
         }
       },
       "description": "The List service SAS credentials operation response."

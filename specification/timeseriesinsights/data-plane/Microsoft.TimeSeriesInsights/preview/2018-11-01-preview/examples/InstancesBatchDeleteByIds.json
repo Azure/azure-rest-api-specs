@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "parameters": {
+      "delete": {
+        "timeSeriesIds": [
+          [
+            "2da181d7-8346-4cf2-bd94-a17742237429",
+            "T1"
+          ],
+          [
+            "18672e3d-2beb-4007-9846-042b09ef3c72",
+            "T2"
+          ]
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "delete": [
+          null,
+          {
+            "code": "InvalidInput",
+            "message": "Time series instance with ID '[\"18672e3d-2beb-4007-9846-042b09ef3c72\", \"T2\"]' cannot be deleted. There are already ingested events associated with this time series ID.",
+            "innerError": {
+              "code": "CannotDeleteInstance"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

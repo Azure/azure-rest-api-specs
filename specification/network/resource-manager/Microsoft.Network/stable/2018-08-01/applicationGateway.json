@@ -1217,6 +1217,13 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the HTTP listener resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+        "customErrorConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayCustomError"
+          },
+          "description": "Custom error configurations of the HTTP listener."
         }
       },
       "description": "Properties of HTTP listener of an application gateway."
@@ -1683,6 +1690,13 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the application gateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+        "customErrorConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayCustomError"
+          },
+          "description": "Custom error configurations of the application gateway resource."
         }
       },
       "description": "Properties of the application gateway."
@@ -1826,7 +1840,32 @@
           "exclusiveMaximum": false,
           "minimum": 8,
           "exclusiveMinimum": false,
-          "description": "Maxium request body size for WAF."
+          "description": "Maximum request body size for WAF."
+        },
+        "maxRequestBodySizeInKb": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 128,
+          "exclusiveMaximum": false,
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "description": "Maximum request body size in Kb for WAF."
+        },
+        "fileUploadLimitInMb": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 500,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "description": "Maximum file upload size in Mb for WAF."
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallExclusion"
+          },
+          "description": "The exclusion list."
         }
       },
       "required": [
@@ -1894,6 +1933,28 @@
         "ruleGroupName"
       ],
       "description": "Allows to disable rules within a rule group or an entire rule group."
+    },
+    "ApplicationGatewayFirewallExclusion": {
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "description": "The variable to be excluded."
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator",
+        "selector"
+      ],
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check"
     },
     "ApplicationGatewayAvailableWafRuleSetsResult": {
       "properties": {
@@ -2085,6 +2146,27 @@
       },
       "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
     },
+    "ApplicationGatewayCustomError": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "Status code of the application gateway customer error.",
+          "enum": [
+            "HttpStatus403",
+            "HttpStatus502"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayCustomErrorStatusCode",
+            "modelAsString": true
+          }
+        },
+        "customErrorPageUrl": {
+          "type": "string",
+          "description": "Error page URL of the application gateway customer error."
+        }
+      },
+      "description": "Customer error of an application gateway."
+    },
     "PolicyNameEnum": {
       "type": "string",
       "description": "Ssl predefined policy name enums.",
@@ -2139,7 +2221,10 @@
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
         "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
-        "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
+        "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+        "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewaySslCipherSuite",

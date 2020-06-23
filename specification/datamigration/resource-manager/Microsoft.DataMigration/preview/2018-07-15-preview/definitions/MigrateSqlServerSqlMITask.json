@@ -58,6 +58,10 @@
         "backupMode": {
           "$ref": "./TasksCommon.json#/definitions/BackupMode",
           "description": "Backup Mode to specify whether to use existing backup or create new backup. If using existing backups, backup file paths are required to be provided in selectedDatabases."
+        },
+        "aadDomainName": {
+          "type": "string",
+          "description": "Azure Active Directory domain name in the format of 'contoso.com' for federated Azure AD or 'contoso.onmicrosoft.com' for managed domain, required if and only if Windows logins are selected"
         }
       },
       "required": [
@@ -76,10 +80,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlMITaskOutputMigrationLevel": {
@@ -139,11 +145,11 @@
           },
           "readOnly": true
         },
-        "orphanedUsers": {
-          "type": "string",
-          "description": "Map of users to database name of orphaned users.",
-          "additionalProperties": {
-            "type": "string"
+        "orphanedUsersInfo": {
+          "type": "array",
+          "description": "List of orphaned users.",
+          "items": {
+            "$ref": "./Common.json#/definitions/OrphanedUserInfo"
           },
           "readOnly": true
         },
@@ -256,7 +262,7 @@
           "description": "Agent Job name.",
           "readOnly": true
         },
-        "isEnabled" : {
+        "isEnabled": {
           "type": "boolean",
           "description": "The state of the original Agent Job.",
           "readOnly": true
@@ -307,7 +313,7 @@
           "description": "Login name.",
           "readOnly": true
         },
-        "state" : {
+        "state": {
           "$ref": "TasksCommon.json#/definitions/MigrationState",
           "description": "Current state of login",
           "readOnly": true

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "CNAME",
+    "relativeRecordSetName": "recordCNAME",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/CNAME/recordcname",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "recordcname",
+        "type": "Microsoft.Network/privateDnsZones/CNAME",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "fqdn": "recordcname.privatezone1.com.",
+          "isAutoRegistered": false,
+          "cnameRecord": {
+            "cname": "contoso.com"
+          }
+        }
+      }
+    }
+  }
+}

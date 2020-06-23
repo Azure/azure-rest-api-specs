@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "a7f23fdb-e626-4f95-89aa-3a360a90861e",
+    "$select": "OSType",
+    "$filter": "HealthStateCategory eq 'Identity' and (ComponentTypeName eq 'Microsoft.Windows.Server.10.0.Full.Computer' or ComponentTypeName eq 'Microsoft.Linux.Universal.Computer') and WorkloadType eq 'BaseOS' and (ResourceGroupId eq 'viv_rg')",
+    "$apply": "groupby((OperatingSystem,HealthState),aggregate(VmId with countdistinct as VmCount))",
+    "$orderby": "Error",
+    "api-version": "2018-08-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "componentTypeGroupCategory": null,
+              "vmId": null,
+              "vmName": null,
+              "vmTags": null,
+              "children": null,
+              "workspaceId": null,
+              "solutionId": null,
+              "workloadType": null,
+              "componentName": null,
+              "componentTypeId": null,
+              "componentTypeName": null,
+              "healthState": "Uninitialized",
+              "healthStateCategory": null,
+              "healthStateChangesStartTime": null,
+              "healthStateChangesEndTime": null,
+              "lastHealthStateChangeTime": null,
+              "aggregateProperties": {
+                "operatingSystem": "Ubuntu 16.04 (x86_64)",
+                "errorVmCount": "0",
+                "warningVmCount": "0",
+                "successVmCount": "1",
+                "unknownVmCount": "0",
+                "osType": "Linux"
+              }
+            },
+            "etag": null,
+            "id": "/providers/Microsoft.WorkloadMonitor/componentsSummary",
+            "name": "componentsSummary",
+            "type": "Microsoft.WorkloadMonitor/componentsSummary"
+          },
+          {
+            "properties": {
+              "componentTypeGroupCategory": null,
+              "vmId": null,
+              "vmName": null,
+              "vmTags": null,
+              "children": null,
+              "workspaceId": null,
+              "solutionId": null,
+              "workloadType": null,
+              "componentName": null,
+              "componentTypeId": null,
+              "componentTypeName": null,
+              "healthState": "Uninitialized",
+              "healthStateCategory": null,
+              "healthStateChangesStartTime": null,
+              "healthStateChangesEndTime": null,
+              "lastHealthStateChangeTime": null,
+              "aggregateProperties": {
+                "operatingSystem": "Microsoft Windows Server 2016 Datacenter",
+                "errorVmCount": "2",
+                "warningVmCount": "0",
+                "successVmCount": "0",
+                "unknownVmCount": "4",
+                "osType": "Windows"
+              }
+            },
+            "etag": null,
+            "id": "/providers/Microsoft.WorkloadMonitor/componentsSummary",
+            "name": "componentsSummary",
+            "type": "Microsoft.WorkloadMonitor/componentsSummary"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

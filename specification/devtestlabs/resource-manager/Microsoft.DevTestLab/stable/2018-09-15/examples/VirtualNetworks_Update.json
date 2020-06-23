@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "labName": "{devtestlab-name}",
+    "name": "{virtualnetwork-name}",
+    "api-version": "2018-09-15",
+    "virtualNetwork": {
+      "properties": {
+        "subnetOverrides": [
+          {
+            "resourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{virtualnetwork-name}/subnets/{virtualnetwork-name}Subnet",
+            "useInVmCreationPermission": "Allow",
+            "usePublicIpAddressPermission": "Deny",
+            "sharedPublicIpAddressConfiguration": {
+              "allowedPorts": [
+                {
+                  "transportProtocol": "Tcp",
+                  "backendPort": 3389
+                },
+                {
+                  "transportProtocol": "Tcp",
+                  "backendPort": 22
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "externalProviderResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{virtualnetwork-name}",
+          "subnetOverrides": [
+            {
+              "resourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{virtualnetwork-name}/subnets/{virtualnetwork-name}Subnet",
+              "labSubnetName": "{virtualnetwork-name}Subnet",
+              "useInVmCreationPermission": "Allow",
+              "usePublicIpAddressPermission": "Allow",
+              "sharedPublicIpAddressConfiguration": {
+                "allowedPorts": [
+                  {
+                    "transportProtocol": "Tcp",
+                    "backendPort": 3389
+                  },
+                  {
+                    "transportProtocol": "Tcp",
+                    "backendPort": 22
+                  }
+                ]
+              }
+            }
+          ],
+          "createdDate": "2018-10-01T13:01:44.6005134-07:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{unique-identifier}"
+        },
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+        "name": "{virtualnetwork-name}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks",
+        "tags": {
+          "MyTag": "MyValue"
+        }
+      }
+    }
+  }
+}

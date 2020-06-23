@@ -505,7 +505,9 @@
         "operationId": "Usage_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "x-ms-examples": {
-          "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
+          "UsageList": {
+            "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
         },
         "parameters": [
           {
@@ -520,7 +522,7 @@
             "required": true,
             "type": "string",
             "description": "The location of the Azure Storage resource."
-          }         
+          }
         ],
         "responses": {
           "200": {
@@ -758,7 +760,7 @@
       }
     },
     "Dimension": {
-      "description": "Dimension of blobs, possiblly be blob type or access tier.",
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
       "properties": {
         "name": {
           "type": "string",
@@ -792,7 +794,7 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of the storage account name."
+      "description": "The parameters used to check the availability of the storage account name."
     },
     "SKUCapability": {
       "properties": {
@@ -964,7 +966,7 @@
           "type": "string",
           "description": "Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source."
         },
-        "useSubDomain": {
+        "useSubDomainName": {
           "type": "boolean",
           "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates."
         }
@@ -1216,8 +1218,8 @@
         "isHnsEnabled": {
           "type": "boolean",
           "default": false,
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1445,8 +1447,8 @@
         "isHnsEnabled": {
           "type": "boolean",
           "default": false,
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "Properties of the storage account."
@@ -1547,7 +1549,7 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of storage keys that want to be regenerated, possible vaules are key1, key2."
+          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2."
         }
       },
       "required": [
@@ -1927,14 +1929,14 @@
       "required": [
         "canonicalizedResource"
       ],
-      "description": "The parameters to list service SAS credentials of a speicific resource."
+      "description": "The parameters to list service SAS credentials of a specific resource."
     },
     "ListServiceSasResponse": {
       "properties": {
         "serviceSasToken": {
           "readOnly": true,
           "type": "string",
-          "description": "List service SAS credentials of speicific resource."
+          "description": "List service SAS credentials of specific resource."
         }
       },
       "description": "The List service SAS credentials operation response."

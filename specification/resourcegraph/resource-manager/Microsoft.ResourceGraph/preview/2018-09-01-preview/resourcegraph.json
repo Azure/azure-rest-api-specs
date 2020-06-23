@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -74,17 +74,129 @@
           }
         },
         "x-ms-examples": {
-          "Basic query": { "$ref": "./examples/ResourcesBasicQuery.json" },
-          "Filter resources": { "$ref": "./examples/ResourcesFilterQuery.json" },
-          "Summarize resources by location": { "$ref": "./examples/ResourcesSummarizeQuery.json" },
-          "Complex query": { "$ref": "./examples/ResourcesComplexQuery.json" },
-          "Access a properties field": { "$ref": "./examples/ResourcesPropertiesQuery.json" },
-          "Access a properties field through alias": { "$ref": "./examples/ResourcesAliasQuery.json" },
-          "Query with a facet request": { "$ref": "./examples/ResourcesFacetQuery.json" },
-          "Query options": { "$ref": "./examples/ResourcesQueryOptions.json" },
-          "First page query": { "$ref": "./examples/ResourcesFirstPageQuery.json" },
-          "Next page query": { "$ref": "./examples/ResourcesNextPageQuery.json" },
-          "Random page query": { "$ref": "./examples/ResourcesRandomPageQuery.json" }
+          "Basic query": {
+            "$ref": "./examples/ResourcesBasicQuery.json"
+          },
+          "Filter resources": {
+            "$ref": "./examples/ResourcesFilterQuery.json"
+          },
+          "Summarize resources by location": {
+            "$ref": "./examples/ResourcesSummarizeQuery.json"
+          },
+          "Complex query": {
+            "$ref": "./examples/ResourcesComplexQuery.json"
+          },
+          "Access a properties field": {
+            "$ref": "./examples/ResourcesPropertiesQuery.json"
+          },
+          "Access a properties field through alias": {
+            "$ref": "./examples/ResourcesAliasQuery.json"
+          },
+          "Query with a facet request": {
+            "$ref": "./examples/ResourcesFacetQuery.json"
+          },
+          "Query options": {
+            "$ref": "./examples/ResourcesQueryOptions.json"
+          },
+          "First page query": {
+            "$ref": "./examples/ResourcesFirstPageQuery.json"
+          },
+          "Next page query": {
+            "$ref": "./examples/ResourcesNextPageQuery.json"
+          },
+          "Random page query": {
+            "$ref": "./examples/ResourcesRandomPageQuery.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceGraph/resourceChanges": {
+      "post": {
+        "description": "List changes to a resource for a given time interval.",
+        "operationId": "ResourceChanges",
+        "tags": [
+          "Changes"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "the parameters for this request for changes.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceChangesRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of changes associated with a resource over a specific time interval.",
+            "schema": {
+              "$ref": "#/definitions/ResourceChangeList"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Basic query": {
+            "$ref": "./examples/ResourceChanges.json"
+          },
+          "First page query": {
+            "$ref": "./examples/ResourceChangesFirstPage.json"
+          },
+          "Next page query": {
+            "$ref": "./examples/ResourceChangesNextPage.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceGraph/resourceChangeDetails": {
+      "post": {
+        "description": "Get resource change details.",
+        "operationId": "ResourceChangeDetails",
+        "tags": [
+          "Changes"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The parameters for this request for resource change details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceChangeDetailsRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource change details.",
+            "schema": {
+              "$ref": "#/definitions/ResourceChangeData"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Basic query": {
+            "$ref": "./examples/ResourceChangeDetails.json"
+          }
         }
       }
     },
@@ -96,7 +208,9 @@
         "description": "Lists all of the available REST API operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "OperationsList": { "$ref": "./examples/OperationsList.json" }
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
         },
         "parameters": [
           {
@@ -112,7 +226,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -193,8 +307,12 @@
     "FacetRequestOptions": {
       "description": "The options for facet evaluation",
       "properties": {
+        "sortBy": {
+          "description": "The column name or query expression to sort on. Defaults to count if not present.",
+          "type": "string"
+        },
         "sortOrder": {
-          "description": "The sorting order by the hit count",
+          "description": "The sorting order by the selected column (count by default).",
           "type": "string",
           "default": "desc",
           "enum": [
@@ -205,6 +323,10 @@
             "name": "FacetSortOrder",
             "modelAsString": false
           }
+        },
+        "filter": {
+          "description": "Specifies the filter condition for the 'where' clause which will be run on main query's result, just before the actual faceting.",
+          "type": "string"
         },
         "$top": {
           "description": "The maximum number of facet rows that should be returned.",
@@ -350,7 +472,7 @@
       ],
       "discriminator": "resultType"
     },
-    "FacetResult" : {
+    "FacetResult": {
       "x-ms-discriminator-value": "FacetResult",
       "description": "Successfully executed facet containing additional statistics on the response of a query.",
       "type": "object",
@@ -381,7 +503,7 @@
         }
       ]
     },
-    "FacetError" : {
+    "FacetError": {
       "x-ms-discriminator-value": "FacetError",
       "description": "A facet whose execution resulted in an error.",
       "type": "object",
@@ -401,6 +523,142 @@
         {
           "$ref": "#/definitions/Facet"
         }
+      ]
+    },
+    "ResourceChangesRequestParameters": {
+      "description": "The parameters for a specific changes request.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Specifies the resource for a changes request.",
+          "type": "string"
+        },
+        "interval": {
+          "description": "Specifies the date and time interval for a changes request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DateTimeInterval"
+            }
+          ]
+        },
+        "$skipToken": {
+          "description": "Acts as the continuation token for paged responses.",
+          "type": "string"
+        },
+        "$top": {
+          "description": "The maximum number of changes the client can accept in a paged response.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      },
+      "required": [
+        "resourceId",
+        "interval"
+      ]
+    },
+    "ResourceChangeList": {
+      "description": "A list of changes associated with a resource over a specific time interval.",
+      "type": "object",
+      "properties": {
+        "changes": {
+          "description": "The pageable value returned by the operation, i.e. a list of changes to the resource.\n\n- The list is ordered from the most recent changes to the least recent changes.\n- This list will be empty if there were no changes during the requested interval.\n- The `Before` snapshot timestamp value of the oldest change can be outside of the specified time interval.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceChangeData"
+          }
+        },
+        "$skipToken": {
+          "description": "Skip token that encodes the skip information while executing the current request"
+        }
+      }
+    },
+    "ResourceChangeData": {
+      "description": "Data on a specific change, represented by a pair of before and after resource snapshots.",
+      "type": "object",
+      "properties": {
+        "changeId": {
+          "description": "The change ID. Valid and unique within the specified resource only.",
+          "type": "string"
+        },
+        "beforeSnapshot": {
+          "description": "The snapshot before the change.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSnapshotData"
+            }
+          ]
+        },
+        "afterSnapshot": {
+          "description": "The snapshot after the change.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSnapshotData"
+            }
+          ]
+        }
+      },
+      "required": [
+        "changeId",
+        "beforeSnapshot",
+        "afterSnapshot"
+      ]
+    },
+    "ResourceSnapshotData": {
+      "description": "Data on a specific resource snapshot.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "content": {
+          "description": "The resource snapshot content (in resourceChangeDetails response only).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "ResourceChangeDetailsRequestParameters": {
+      "description": "The parameters for a specific change details request.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Specifies the resource for a change details request.",
+          "type": "string"
+        },
+        "changeId": {
+          "description": "Specifies the change ID.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId",
+        "changeId"
+      ]
+    },
+    "DateTimeInterval": {
+      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "start",
+        "end"
       ]
     },
     "ErrorResponse": {
@@ -465,7 +723,7 @@
       ]
     },
     "OperationListResult": {
-     "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -473,6 +731,10 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "List of Resource Graph operations supported by the Resource Graph resource provider."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string"
         }
       }
     },
@@ -505,7 +767,7 @@
           }
         },
         "origin": {
-          "type" : "string",
+          "type": "string",
           "description": "The origin of operations."
         }
       }
@@ -517,7 +779,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "API version."
+      "description": "Client Api Version."
     }
   }
 }

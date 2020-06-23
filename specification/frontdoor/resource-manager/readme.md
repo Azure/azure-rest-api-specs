@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Network.
 
 ---
 ## Getting Started
-To build the SDK for Frontdoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for FrontDoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,13 +22,148 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Frontdoor API.
+These are the global settings for the FrontDoor API.
 
 ``` yaml
-title: FrontdoorManagementClient
-description: Frontdoor Client
+title: FrontDoorManagementClient
+description: FrontDoor Client
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2020-05
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Network/stable/2020-05-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-05-01/frontdoor.json
+- Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Network/stable/2020-04-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-04-01/frontdoor.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.Network/stable/2020-01-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-01-01/frontdoor.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+- Microsoft.Network/stable/2019-11-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-05-01/network.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-05-01/network.json
+- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+- Microsoft.Network/stable/2019-04-01/frontdoor.json
+- Microsoft.Network/stable/2019-04-01/network.json
+- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-03-preview
+
+These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-preview'
+input-file:
+- Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
+- Microsoft.Network/preview/2018-08-01-preview/network.json
+- Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
 ```
 
 ### Tag: package-2018-08-preview
@@ -58,9 +193,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -74,40 +211,18 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Frontdoor
-  output-folder: $(csharp-sdks-folder)/Frontdoor/Management.Frontdoor/Generated
+  namespace: Microsoft.Azure.Management.FrontDoor
+  output-folder: $(csharp-sdks-folder)/frontdoor/Microsoft.Azure.Management.FrontDoor/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: frontdoor
-  clear-output-folder: true
-```
+## CLI
 
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-08-preview
-```
-
-
-### Tag: package-2018-08-preview and go
-
-These settings apply only when `--tag=package-2018-08-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/frontdoor/mgmt/2018-08-01-preview/frontdoor
-```
-
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Java
 
@@ -141,3 +256,47 @@ directive:
     suppress: EnumInsteadOfBoolean
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-01-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-01-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2019-05-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2019-05-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2019-04-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2019-04-01/network.json
+  - $(this-folder)/Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
+  - $(this-folder)/Microsoft.Network/preview/2018-08-01-preview/network.json
+  - $(this-folder)/Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/preview/2018-08-01-preview/webapplicationfirewall.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

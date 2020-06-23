@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2019-06-01-preview",
+    "runRequest": {
+      "type": "EncodedTaskRunRequest",
+      "values": [
+        {
+          "name": "mytestargument",
+          "value": "mytestvalue",
+          "isSecret": false
+        },
+        {
+          "name": "mysecrettestargument",
+          "value": "mysecrettestvalue",
+          "isSecret": true
+        }
+      ],
+      "platform": {
+        "os": "Linux"
+      },
+      "agentConfiguration": {
+        "cpu": 2
+      },
+      "encodedTaskContent": "c3RlcHM6Cnt7IGlmIFZhbHVlcy5lbnZpcm9ubWVudCA9PSAncHJvZCcgfX0KICAtIHJ1bjogcHJvZCBzZXR1cAp7eyBlbHNlIGlmIFZhbHVlcy5lbnZpcm9ubWVudCA9PSAnc3RhZ2luZycgfX0KICAtIHJ1bjogc3RhZ2luZyBzZXR1cAp7eyBlbHNlIH19CiAgLSBydW46IGRlZmF1bHQgc2V0dXAKe3sgZW5kIH19CgogIC0gcnVuOiBidWlsZCAtdCBGYW5jeVRoaW5nOnt7LlZhbHVlcy5lbnZpcm9ubWVudH19LXt7LlZhbHVlcy52ZXJzaW9ufX0gLgoKcHVzaDogWydGYW5jeVRoaW5nOnt7LlZhbHVlcy5lbnZpcm9ubWVudH19LXt7LlZhbHVlcy52ZXJzaW9ufX0nXQ==",
+      "encodedValuesContent": "ZW52aXJvbm1lbnQ6IHByb2QKdmVyc2lvbjogMQ=="
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runId": "0accec26-d6de-4757-8e74-d080f38eaaab",
+          "status": "Succeeded",
+          "lastUpdatedTime": "2018-01-25T05:13:51.617Z"
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/0accec26-d6de-4757-8e74-d080f38eaaab",
+        "name": "0accec26-d6de-4757-8e74-d080f38eaaab",
+        "type": "Microsoft.ContainerRegistry/registries/run"
+      }
+    },
+    "202": {}
+  }
+}

@@ -121,11 +121,11 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -188,7 +188,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Update",
-        "description": "Updates the details of a subscription specificied by its identifier.",
+        "description": "Updates the details of a subscription specified by its identifier.",
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -223,7 +223,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The subscription details were successfully updated."
           },
           "default": {
@@ -265,7 +265,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The subscription details were successfully deleted."
           },
           "default": {
@@ -339,7 +339,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The secondary key was successfully regenerated."
           },
           "default": {
@@ -353,226 +353,226 @@
     }
   },
   "definitions": {
-		"SubscriptionCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/SubscriptionContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Subscriptions list representation."
-		},
-		"SubscriptionContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Uniquely identifies the subscription within the current API Management service instance. The value is a valid relative URL in the format of /subscriptions/{sid} where {sid} is a subscription identifier.",
-			  "readOnly": true
-			},
-			"userId": {
-			  "type": "string",
-			  "description": "The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier."
-			},
-			"productId": {
-			  "type": "string",
-			  "description": "The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier."
-			},
-			"name": {
-			  "type": "string",
-			  "description": "The name of the subscription, or null if the subscription has no name.",
-			  "minLength": 0,
-			  "maxLength": 100
-			},
-			"state": {
-			  "type": "string",
-			  "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-			  "enum": [
-				"Suspended",
-				"Active",
-				"Expired",
-				"Submitted",
-				"Rejected",
-				"Cancelled"
-			  ],
-			  "x-ms-enum": {
-				"name": "SubscriptionStateContract",
-				"modelAsString": false
-			  }
-			},
-			"createdDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n",
-			  "readOnly": true
-			},
-			"startDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Subscription activation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"expirationDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Subscription expiration date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"endDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Date when subscription was cancelled or expired. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"notificationDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"primaryKey": {
-			  "type": "string",
-			  "description": "Subscription primary key.",
-			  "minLength": 1,
-			  "maxLength": 256
-			},
-			"secondaryKey": {
-			  "type": "string",
-			  "description": "Subscription secondary key.",
-			  "minLength": 1,
-			  "maxLength": 256
-			},
-			"stateComment": {
-			  "type": "string",
-			  "description": "Optional subscription comment added by an administrator."
-			}
-		  },
-		  "description": "Subscription details."
-		},
-		"SubscriptionCreateParameters": {
-		  "properties": {
-			"userId": {
-			  "type": "string",
-			  "description": "User (user id path) for whom subscription is being created in form /users/{uid}"
-			},
-			"productId": {
-			  "type": "string",
-			  "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
-			},
-			"name": {
-			  "type": "string",
-			  "description": "Subscription name.",
-			  "minLength": 1,
-			  "maxLength": 100
-			},
-			"primaryKey": {
-			  "type": "string",
-			  "description": "Primary subscription key. If not specified during request key will be generated automatically.",
-			  "minLength": 1,
-			  "maxLength": 256
-			},
-			"secondaryKey": {
-			  "type": "string",
-			  "description": "Secondary subscription key. If not specified during request key will be generated automatically.",
-			  "minLength": 1,
-			  "maxLength": 256
-			},
-			"state": {
-			  "type": "string",
-			  "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-			  "enum": [
-				"Suspended",
-				"Active",
-				"Expired",
-				"Submitted",
-				"Rejected",
-				"Cancelled"
-			  ],
-			  "x-ms-enum": {
-				"name": "SubscriptionStateContract",
-				"modelAsString": false
-			  }
-			}
-		  },
-		  "required": [
-			"userId",
-			"productId",
-			"name"
-		  ],
-		  "description": "Parameters supplied to the Create subscription operation."
-		},
-		"SubscriptionUpdateParameters": {
-		  "properties": {
-			"userId": {
-			  "type": "string",
-			  "description": "User identifier path: /users/{uid}"
-			},
-			"productId": {
-			  "type": "string",
-			  "description": "Product identifier path: /products/{productId}"
-			},
-			"expirationDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "New subscription expiration date."
-			},
-			"name": {
-			  "type": "string",
-			  "description": "Subscription name."
-			},
-			"primaryKey": {
-			  "type": "string",
-			  "description": "Primary subscription key.",
-			  "minLength": 1,
-			  "maxLength": 256
-			},
-			"secondaryKey": {
-			  "type": "string",
-			  "description": "Secondary subscription key.",
-			  "minLength": 1,
-			  "maxLength": 256
-			},
-			"state": {
-			  "type": "string",
-			  "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-			  "enum": [
-				"Suspended",
-				"Active",
-				"Expired",
-				"Submitted",
-				"Rejected",
-				"Cancelled"
-			  ],
-			  "x-ms-enum": {
-				"name": "SubscriptionStateContract",
-				"modelAsString": false
-			  }
-			},
-			"stateComment": {
-			  "type": "string",
-			  "description": "Comments describing subscription state change by the administrator."
-			}
-		  },
-		  "description": "Parameters supplied to the Update subscription operation."
-		}
+    "SubscriptionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Subscriptions list representation."
+    },
+    "SubscriptionContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the subscription within the current API Management service instance. The value is a valid relative URL in the format of /subscriptions/{sid} where {sid} is a subscription identifier.",
+          "readOnly": true
+        },
+        "userId": {
+          "type": "string",
+          "description": "The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier."
+        },
+        "productId": {
+          "type": "string",
+          "description": "The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the subscription, or null if the subscription has no name.",
+          "minLength": 0,
+          "maxLength": 100
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "Suspended",
+            "Active",
+            "Expired",
+            "Submitted",
+            "Rejected",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionStateContract",
+            "modelAsString": false
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription activation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription expiration date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when subscription was cancelled or expired. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "notificationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Subscription primary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Subscription secondary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Optional subscription comment added by an administrator."
+        }
+      },
+      "description": "Subscription details."
+    },
+    "SubscriptionCreateParameters": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User (user id path) for whom subscription is being created in form /users/{uid}"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product (product id path) for which subscription is being created in form /products/{productId}"
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "state": {
+          "type": "string",
+          "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "Suspended",
+            "Active",
+            "Expired",
+            "Submitted",
+            "Rejected",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionStateContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "userId",
+        "productId",
+        "name"
+      ],
+      "description": "Parameters supplied to the Create subscription operation."
+    },
+    "SubscriptionUpdateParameters": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User identifier path: /users/{uid}"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product identifier path: /products/{productId}"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "New subscription expiration date."
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary subscription key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary subscription key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "Suspended",
+            "Active",
+            "Expired",
+            "Submitted",
+            "Rejected",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionStateContract",
+            "modelAsString": false
+          }
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Comments describing subscription state change by the administrator."
+        }
+      },
+      "description": "Parameters supplied to the Update subscription operation."
+    }
   },
   "parameters": {
-		"SubscriptionEntityIdParameter": {
-		  "name": "sid",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Subscription entity Identifier. The entity represents the association between a user and a product in API Management.",
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "SubscriptionEntityIdParameter": {
+      "name": "sid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription entity Identifier. The entity represents the association between a user and a product in API Management.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

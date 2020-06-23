@@ -86,8 +86,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "format": "duration",          
-            "description": "By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, secconds))"
+            "format": "duration",
+            "description": "By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds))"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -111,156 +111,155 @@
       }
     }
   },
-  "definitions": {    
-		"ReportCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/ReportRecordContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Report records list representation."
-		},
-		"ReportRecordContract": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "Name depending on report endpoint specifies product, API, operation or developer name."
-			},
-			"timestamp": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Start of aggregation period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"interval": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Length of agregation period."
-			},
-			"country": {
-			  "type": "string",
-			  "description": "Country to which this record data is related."
-			},
-			"region": {
-			  "type": "string",
-			  "description": "Country region to which this record data is related."
-			},
-			"zip": {
-			  "type": "string",
-			  "description": "Zip code to which this record data is related."
-			},
-			"userId": {
-			  "readOnly": true,
-			  "type": "string",
-			  "description": "User identifier path. /users/{userId}"
-			},
-			"productId": {
-			  "readOnly": true,
-			  "type": "string",
-			  "description": "Product identifier path. /products/{productId}"
-			},
-			"apiId": {
-			  "type": "string",
-			  "description": "API identifier path. /apis/{apiId}"
-			},
-			"operationId": {
-			  "type": "string",
-			  "description": "Operation identifier path. /apis/{apiId}/operations/{operationId}"
-			},
-			"apiRegion": {
-			  "type": "string",
-			  "description": "API region identifier."
-			},
-			"subscriptionId": {
-			  "type": "string",
-			  "description": "Subscription identifier path. /subscriptions/{subscriptionId}"
-			},
-			"callCountSuccess": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of succesful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect"
-			},
-			"callCountBlocked": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorize and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests"
-			},
-			"callCountFailed": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of calls failed due to proxy or backend errors. This includes calls returning HttpStatusCode.BadRequest(400) and any Code between HttpStatusCode.InternalServerError (500) and 600"
-			},
-			"callCountOther": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of other calls."
-			},
-			"callCountTotal": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Total number of calls."
-			},
-			"bandwidth": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Bandwidth consumed."
-			},
-			"cacheHitCount": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of times when content was served from cache policy."
-			},
-			"cacheMissCount": {
-			  "type": "integer",
-			  "format": "int32",
-			  "description": "Number of times content was fetched from backend."
-			},
-			"apiTimeAvg": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Average time it took to process request."
-			},
-			"apiTimeMin": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Minimum time it took to process request."
-			},
-			"apiTimeMax": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Maximum time it took to process request."
-			},
-			"serviceTimeAvg": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Average time it took to process request on backend."
-			},
-			"serviceTimeMin": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Minimum time it took to process request on backend."
-			},
-			"serviceTimeMax": {
-			  "type": "number",
-			  "format": "double",
-			  "description": "Maximum time it took to process request on backend."
-			}
-		  },
-		  "description": "Report data."
-		}
+  "definitions": {
+    "ReportCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportRecordContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Report records list representation."
+    },
+    "ReportRecordContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name depending on report endpoint specifies product, API, operation or developer name."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of aggregation period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Length of aggregation period."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country to which this record data is related."
+        },
+        "region": {
+          "type": "string",
+          "description": "Country region to which this record data is related."
+        },
+        "zip": {
+          "type": "string",
+          "description": "Zip code to which this record data is related."
+        },
+        "userId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "User identifier path. /users/{userId}"
+        },
+        "productId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Product identifier path. /products/{productId}"
+        },
+        "apiId": {
+          "type": "string",
+          "description": "API identifier path. /apis/{apiId}"
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Operation identifier path. /apis/{apiId}/operations/{operationId}"
+        },
+        "apiRegion": {
+          "type": "string",
+          "description": "API region identifier."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription identifier path. /subscriptions/{subscriptionId}"
+        },
+        "callCountSuccess": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of successful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect"
+        },
+        "callCountBlocked": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorized and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests"
+        },
+        "callCountFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of calls failed due to proxy or backend errors. This includes calls returning HttpStatusCode.BadRequest(400) and any Code between HttpStatusCode.InternalServerError (500) and 600"
+        },
+        "callCountOther": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of other calls."
+        },
+        "callCountTotal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of calls."
+        },
+        "bandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bandwidth consumed."
+        },
+        "cacheHitCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times when content was served from cache policy."
+        },
+        "cacheMissCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times content was fetched from backend."
+        },
+        "apiTimeAvg": {
+          "type": "number",
+          "format": "double",
+          "description": "Average time it took to process request."
+        },
+        "apiTimeMin": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum time it took to process request."
+        },
+        "apiTimeMax": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum time it took to process request."
+        },
+        "serviceTimeAvg": {
+          "type": "number",
+          "format": "double",
+          "description": "Average time it took to process request on backend."
+        },
+        "serviceTimeMin": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum time it took to process request on backend."
+        },
+        "serviceTimeMax": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum time it took to process request on backend."
+        }
+      },
+      "description": "Report data."
+    }
   },
-  "parameters": {
-  }
+  "parameters": {}
 }

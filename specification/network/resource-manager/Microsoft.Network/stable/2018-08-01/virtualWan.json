@@ -342,7 +342,7 @@
             "$ref": "./examples/VpnSiteGet.json"
           }
         },
-        "description": "Retrieves the details of a VPNsite.",
+        "description": "Retrieves the details of a VPN site.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -2248,11 +2248,13 @@
           }
         },
         "x-ms-examples": {
-          "GenerateP2SVpnGatewayVPNProfile": { "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json" }
+          "GenerateP2SVpnGatewayVPNProfile": {
+            "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
-    }	
+    }
   },
   "definitions": {
     "VirtualWanProperties": {
@@ -2298,7 +2300,7 @@
           "items": {
             "$ref": "#/definitions/P2SVpnServerConfiguration"
           }
-        },		
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "$ref": "#/definitions/ProvisioningState"
@@ -2448,7 +2450,7 @@
         "p2SVpnGateway": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The P2SVpnGateway associated with this VirtualHub"
-        },		
+        },
         "expressRouteGateway": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The expressRouteGateway associated with this VirtualHub"
@@ -2476,32 +2478,32 @@
       "description": "Parameters for VirtualHub"
     },
     "VirtualHubRouteTable": {
-      "properties" : {
+      "properties": {
         "routes": {
-            "type": "array",
-            "description": "list of all routes.",
-            "items": {
-                "$ref": "#/definitions/VirtualHubRoute"
-            }
+          "type": "array",
+          "description": "list of all routes.",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRoute"
+          }
         }
       },
-      "description" : "VirtualHub route table"
+      "description": "VirtualHub route table"
     },
     "VirtualHubRoute": {
-      "properties" : {
+      "properties": {
         "addressPrefixes": {
-            "type": "array",
-            "description": "list of all addressPrefixes.",
-            "items": {
-                "type": "string"
-            }
+          "type": "array",
+          "description": "list of all addressPrefixes.",
+          "items": {
+            "type": "string"
+          }
         },
         "nextHopIpAddress": {
-            "type": "string",
-            "description": "NextHop ip address."
+          "type": "string",
+          "description": "NextHop ip address."
         }
       },
-      "description" : "VirtualHub route"
+      "description": "VirtualHub route"
     },
     "VirtualHub": {
       "required": [
@@ -2625,7 +2627,7 @@
         },
         "vpnConnectionProtocolType": {
           "description": "Connection protocol used for this connection",
-          "$ref":  "./virtualNetworkGateway.json#/definitions/ConnectionProtocol"
+          "$ref": "./virtualNetworkGateway.json#/definitions/ConnectionProtocol"
         },
         "ingressBytesTransferred": {
           "type": "integer",
@@ -2836,7 +2838,7 @@
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
-      "description": "The current provisisoning state.",
+      "description": "The current provisioning state.",
       "enum": [
         "Succeeded",
         "Updating",
@@ -2996,8 +2998,8 @@
         "publicCertData"
       ],
       "description": "Properties of Radius Server root certificate of P2SVpnServerConfiguration."
-    },	
-	"P2SVpnServerConfigRadiusServerRootCertificate": {
+    },
+    "P2SVpnServerConfigRadiusServerRootCertificate": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3096,13 +3098,13 @@
         }
       ],
       "description": "Radius client root certificate of P2SVpnServerConfiguration."
-    },	
-	"P2SVpnServerConfigurationProperties": {
+    },
+    "P2SVpnServerConfigurationProperties": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the P2SVpnServerConfiguration that is unique within a VirtualWan in a resource group. This name can be used to access the resource along with Paren VirtualWan resource name."
-        },	  
+          "description": "The name of the P2SVpnServerConfiguration that is unique within a VirtualWan in a resource group. This name can be used to access the resource along with Parent VirtualWan resource name."
+        },
         "vpnProtocols": {
           "type": "array",
           "items": {
@@ -3160,7 +3162,7 @@
         },
         "radiusServerSecret": {
           "type": "string",
-          "description": "The radius secret property of the P2SVpnServerConfiguration resource for for point to site client connection."
+          "description": "The radius secret property of the P2SVpnServerConfiguration resource for point to site client connection."
         },
         "provisioningState": {
           "readOnly": true,
@@ -3219,7 +3221,7 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
-    },	
+    },
     "VpnClientConnectionHealth": {
       "properties": {
         "totalIngressBytesTransferred": {
@@ -3239,7 +3241,7 @@
           "format": "int32",
           "description": "The total of p2s vpn clients connected at this time to this P2SVpnGateway."
         },
-		"allocatedIpAddresses": {
+        "allocatedIpAddresses": {
           "type": "array",
           "items": {
             "type": "string"
@@ -3248,8 +3250,8 @@
         }
       },
       "description": "VpnClientConnectionHealth properties"
-    },    
-	"P2SVpnGatewayProperties": {
+    },
+    "P2SVpnGatewayProperties": {
       "properties": {
         "virtualHub": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -3274,8 +3276,8 @@
         },
         "vpnClientConnectionHealth": {
           "readOnly": true,
-		  "$ref": "#/definitions/VpnClientConnectionHealth",
-		  "description": "All P2S vpnclients' connection health status."
+          "$ref": "#/definitions/VpnClientConnectionHealth",
+          "description": "All P2S VPN clients' connection health status."
         }
       },
       "description": "Parameters for P2SVpnGateway"
@@ -3301,7 +3303,7 @@
         }
       ],
       "description": "P2SVpnGateway Resource."
-    },	
+    },
     "ListP2SVpnGatewaysResult": {
       "description": "Result of the request to list P2SVpnGateways. It contains a list of P2SVpnGateways and a URL nextLink to get the next set of results.",
       "properties": {
@@ -3343,6 +3345,6 @@
         }
       },
       "description": "Vpn Profile Response for package generation"
-    }	
+    }
   }
 }

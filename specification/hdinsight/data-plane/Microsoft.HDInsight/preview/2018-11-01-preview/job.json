@@ -1,0 +1,932 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightJobClient",
+    "description": "The HDInsight Job Client.",
+    "version": "2018-11-01-preview",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpointParameter"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/templeton/v1/jobs/{jobId}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Get",
+        "description": "Gets job details from the specified HDInsight cluster.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets job details from the specified HDInsight cluster": {
+            "$ref": "./examples/HDI_Job_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the job."
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "*"
+            ],
+            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobDetailRootJsonObject"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Kill",
+        "description": "Initiates cancel on given running job in the specified HDInsight.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Initiates cancel on given running job in the specified HDInsight.": {
+            "$ref": "./examples/HDI_Job_Kill.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "description": "The id of the job."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobDetailRootJsonObject"
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/jobs": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_List",
+        "description": "Gets the list of jobs from the specified HDInsight cluster.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets the list of jobs from the specified HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "showall",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "true"
+            ],
+            "description": "If showall is set to 'true', the request will return all jobs the user has permission to view, not only the jobs belonging to the user."
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "*"
+            ],
+            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/JobListJsonObject"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/jobs?op=LISTAFTERID": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_ListAfterJobId",
+        "description": "Gets numrecords Of Jobs after jobid from the specified HDInsight cluster.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets numOfJobs after jobId from the specified HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_ListAfterJobId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "jobid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "JobId from where to list jobs."
+          },
+          {
+            "name": "numrecords",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Number of jobs to fetch."
+          },
+          {
+            "name": "showall",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "true"
+            ],
+            "description": "If showall is set to 'true', the request will return all jobs the user has permission to view, not only the jobs belonging to the user."
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "*"
+            ],
+            "description": "If fields set to '*', the request will return full details of the job. Currently the value can only be '*'."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/JobListJsonObject"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/hive": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_SubmitHiveJob",
+        "description": "Submits a Hive job to an HDInsight cluster.",
+        "consumes": [
+          "application/text"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Submits a Hive job to an HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_SubmitHiveJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The content of the Hive job request."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/mapreduce/jar": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_SubmitMapReduceJob",
+        "description": "Submits a MapReduce job to an HDInsight cluster.",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Submits a MapReduce job to an HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_SubmitMapReduceJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The content of the MapReduce job request."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/mapreduce/streaming": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_SubmitMapReduceStreamingJob",
+        "description": "Submits a MapReduce streaming job to an HDInsight cluster.",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Submits a MapReduce streaming job to an HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_SubmitMapReduceStreamingJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The content of the MapReduce job request."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/pig": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_SubmitPigJob",
+        "description": "Submits a Pig job to an HDInsight cluster.",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Submits a Pig job to an HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_SubmitPigJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The content of the Pig job request."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/templeton/v1/sqoop": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_SubmitSqoopJob",
+        "description": "Submits a Sqoop job to an HDInsight cluster.",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Submits a Sqoop job to an HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_SubmitSqoopJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The content of the Sqoop job request."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionJsonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ws/v1/cluster/apps/{appId}/state": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_GetAppState",
+        "description": "Gets application state from the specified HDInsight cluster.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets application state from the specified HDInsight cluster.": {
+            "$ref": "./examples/HDI_Job_GetAppState.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the job."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/AppState"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppState": {
+      "description": "The State of the application.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "NEW",
+            "NEW_SAVING",
+            "SUBMITTED",
+            "ACCEPTED",
+            "RUNNING",
+            "FINISHED",
+            "FINISHING",
+            "FAILED",
+            "KILLED"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationState",
+            "modelAsString": false
+          },
+          "description": "The State of the application."
+        }
+      }
+    },
+    "JobOperationsErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "JobACLs": {
+      "description": "The object containing the job ACLs."
+    },
+    "JobDetailRootJsonObject": {
+      "description": "The object containing the job details.",
+      "properties": {
+        "callback": {
+          "type": "object",
+          "description": "The callback URL, if any."
+        },
+        "completed": {
+          "type": "string",
+          "description": "The string representing completed status, for example 'done'."
+        },
+        "exitValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The job's exit value."
+        },
+        "id": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "msg": {
+          "type": "object",
+          "description": "The message returned."
+        },
+        "parentId": {
+          "type": "string",
+          "description": "The parent job ID."
+        },
+        "percentComplete": {
+          "type": "string",
+          "description": "The job completion percentage, for example '75% complete'."
+        },
+        "profile": {
+          "$ref": "#/definitions/Profile",
+          "description": "The object containing the job profile information."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The object containing the job status information."
+        },
+        "user": {
+          "type": "string",
+          "description": "The user name of the job creator."
+        },
+        "userargs": {
+          "$ref": "#/definitions/Userargs",
+          "description": "The arguments passed in by the user."
+        }
+      }
+    },
+    "JobID": {
+      "description": "The object with the Job ID.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The job number."
+        },
+        "jtIdentifier": {
+          "type": "string",
+          "description": "The jobTracker identifier."
+        }
+      }
+    },
+    "JobListJsonObject": {
+      "description": "The List Job operation response.",
+      "properties": {
+        "detail": {
+          "$ref": "#/definitions/JobDetailRootJsonObject",
+          "description": "The detail of the job."
+        },
+        "id": {
+          "type": "string",
+          "description": "The Id of the job."
+        }
+      }
+    },
+    "JobSubmissionJsonResponse": {
+      "description": "The job submission json response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Id of the created job."
+        }
+      }
+    },
+    "Profile": {
+      "description": "The object containing the job profile information.",
+      "properties": {
+        "jobFile": {
+          "type": "string",
+          "description": "The job configuration file."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The full ID of the job."
+        },
+        "jobID": {
+          "$ref": "#/definitions/JobID",
+          "description": "The ID of the job."
+        },
+        "jobName": {
+          "type": "string",
+          "description": "The user-specified job name."
+        },
+        "queueName": {
+          "type": "string",
+          "description": "The name of the queue to which the job is submitted."
+        },
+        "url": {
+          "type": "string",
+          "description": "The link to the web-ui for details of the job."
+        },
+        "user": {
+          "type": "string",
+          "description": "The userid of the person who submitted the job."
+        }
+      }
+    },
+    "Status": {
+      "description": "Gets or sets the object containing the job status information.",
+      "properties": {
+        "cleanupProgress": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made on the cleanup."
+        },
+        "failureInfo": {
+          "type": "string",
+          "description": "The information about any failures that have occurred."
+        },
+        "finishTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The time at which the job completed. It is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
+        },
+        "historyFile": {
+          "type": "string",
+          "description": "The history file of the job."
+        },
+        "jobACLs": {
+          "$ref": "#/definitions/JobACLs",
+          "description": "The ACLs of the job."
+        },
+        "jobComplete": {
+          "type": "boolean",
+          "description": "Whether or not the job has completed."
+        },
+        "jobFile": {
+          "type": "string",
+          "description": "The job configuration file."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The full ID of the job."
+        },
+        "jobID": {
+          "$ref": "#/definitions/JobID",
+          "description": "The ID of the job."
+        },
+        "jobName": {
+          "type": "string",
+          "description": "The user-specified job name."
+        },
+        "jobPriority": {
+          "type": "string",
+          "description": "The priority of the job."
+        },
+        "mapProgress": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made on the maps."
+        },
+        "neededMem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of memory needed for the job."
+        },
+        "numReservedSlots": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of slots reserved."
+        },
+        "numUsedSlots": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of slots used for the job."
+        },
+        "priority": {
+          "type": "string",
+          "description": "The priority of the job."
+        },
+        "queue": {
+          "type": "string",
+          "description": "The job queue name."
+        },
+        "reduceProgress": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made on the reduces."
+        },
+        "reservedMem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of memory reserved for the job."
+        },
+        "retired": {
+          "type": "boolean",
+          "description": "Whether or not the job has been retired. "
+        },
+        "runState": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current state of the job."
+        },
+        "schedulingInfo": {
+          "type": "string",
+          "description": "The information about the scheduling of the job."
+        },
+        "setupProgress": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made on the setup."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The time at which the job started. It is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the job."
+        },
+        "trackingUrl": {
+          "type": "string",
+          "description": "The link to the web-ui for details of the job."
+        },
+        "uber": {
+          "type": "boolean",
+          "description": "Whether job running in uber mode."
+        },
+        "usedMem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of memory used by the job."
+        },
+        "username": {
+          "type": "string",
+          "description": "The userid of the person who submitted the job."
+        }
+      }
+    },
+    "Userargs": {
+      "description": "Gets or sets the object containing the user arguments.",
+      "properties": {
+        "arg": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of args defined by the user."
+        },
+        "callback": {
+          "type": "object",
+          "description": "The callback URL, if any."
+        },
+        "define": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The define properties defined by the user."
+        },
+        "enablelog": {
+          "type": "string",
+          "description": "Whether or not the user enabled logs."
+        },
+        "execute": {
+          "type": "string",
+          "description": "The query defined by the user."
+        },
+        "file": {
+          "type": "object",
+          "description": "The query file provided by the user."
+        },
+        "files": {
+          "type": "object",
+          "description": "The files defined by the user."
+        },
+        "jar": {
+          "type": "string",
+          "description": "The JAR file provided by the user."
+        },
+        "statusdir": {
+          "type": "object",
+          "description": "The status directory defined by the user."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "endpointParameter": {
+      "name": "endpoint",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "description": "The cluster endpoint, for example https://clustername.azurehdinsight.net.",
+      "x-ms-parameter-location": "client"
+    },
+    "UserNameParameter": {
+      "name": "user.name",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The user name used for running job.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

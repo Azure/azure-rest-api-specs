@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2019-04-01",
+    "$filter": "startswith(name, 'po') or (properties/allocationState eq 'Steady' and properties/provisioningStateTransitionTime lt datetime'2017-02-02')",
+    "$select": "properties/allocationState,properties/provisioningStateTransitionTime,properties/currentDedicatedNodes,properties/currentLowPriorityNodes",
+    "maxResults": "50"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+            "name": "testpool",
+            "type": "Microsoft.Batch/batchAccounts/pools",
+            "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+            "properties": {
+              "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+              "allocationState": "Steady",
+              "currentDedicatedNodes": 0,
+              "currentLowPriorityNodes": 2
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/pooltest",
+            "name": "pooltest",
+            "type": "Microsoft.Batch/batchAccounts/pools",
+            "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+            "properties": {
+              "provisioningStateTransitionTime": "2017-08-26T10:22:55.9407275Z",
+              "allocationState": "Resizing",
+              "currentDedicatedNodes": 4,
+              "currentLowPriorityNodes": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

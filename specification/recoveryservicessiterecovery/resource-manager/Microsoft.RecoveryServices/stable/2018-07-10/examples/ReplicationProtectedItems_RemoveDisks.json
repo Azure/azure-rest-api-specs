@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2018-07-10",
+    "replicatedProtectedItemName": "f8491e4f-817a-40dd-a90c-af773978c75b",
+    "protectionContainerName": "cloud_6d224fc6-f326-5d35-96de-fbf51efb3179",
+    "fabricName": "cloud1",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "removeDisksInput": {
+      "properties": {
+        "providerSpecificDetails": {
+          "instanceType": "A2A",
+          "vmDisksUris": [
+            "https://vmstorage.blob.core.windows.net/vhds/datadisk1.vhd"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationProtectionContainers/cloud_6d224fc6-f326-5d35-96de-fbf51efb3179/replicationProtectedItems/f8491e4f-817a-40dd-a90c-af773978c75b",
+        "name": "f8491e4f-817a-40dd-a90c-af773978c75b",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems",
+        "properties": {
+          "friendlyName": "f8491e4f-817a-40dd-a90c-af773978c75b",
+          "protectedItemType": "",
+          "protectableItemId": null,
+          "recoveryServicesProviderId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationRecoveryServicesProviders/6d2940f9-4c34-5989-9f56-1243a6e76ecf",
+          "primaryFabricFriendlyName": "cloud1",
+          "primaryFabricProvider": "AzureFabric",
+          "recoveryFabricFriendlyName": "cloud2",
+          "recoveryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud2",
+          "primaryProtectionContainerFriendlyName": "cloud_6d224fc6-f326-5d35-96de-fbf51efb3179",
+          "recoveryProtectionContainerFriendlyName": "cloud_81224fc6-f326-5d35-96de-fbf51efb3188",
+          "protectionState": "Protected",
+          "protectionStateDescription": "Protected",
+          "activeLocation": "Primary",
+          "testFailoverState": "None",
+          "testFailoverStateDescription": "None",
+          "allowedOperations": [
+            "RepairReplication",
+            "UnplannedFailover",
+            "DisableProtection",
+            "TestFailover"
+          ],
+          "replicationHealth": "Normal",
+          "failoverHealth": "Normal",
+          "healthErrors": [],
+          "policyId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/A2APolicy",
+          "policyFriendlyName": "A2APolicy",
+          "currentScenario": {
+            "scenarioName": "None",
+            "jobId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationJobs/None",
+            "startTime": "1752-12-31T19:31:01Z"
+          },
+          "failoverRecoveryPointId": null,
+          "providerSpecificDetails": {
+            "instanceType": "A2A"
+          },
+          "recoveryContainerId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud2/replicationProtectionContainers/cloud_81224fc6-f326-5d35-96de-fbf51efb3188"
+        }
+      }
+    },
+    "202": {}
+  }
+}

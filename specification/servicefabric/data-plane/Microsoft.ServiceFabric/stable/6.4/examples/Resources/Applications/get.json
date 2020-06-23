@@ -1,0 +1,23 @@
+{
+  "operationId": "MeshApplication_Get",
+  "description": "This example shows how to get a application resource. If the application resource exists, its description is returned along with an OK (200) status code. If the application resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sampleApplication"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleApplication",
+        "properties": {
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Ok",
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}

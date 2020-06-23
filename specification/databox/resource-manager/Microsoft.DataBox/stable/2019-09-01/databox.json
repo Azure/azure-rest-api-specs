@@ -378,7 +378,7 @@
               "$ref": "#/definitions/ValidationResponse"
             }
           },
-         "default": {
+          "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/CloudError"
@@ -488,7 +488,7 @@
               "$ref": "#/definitions/JobResource"
             }
           },
-         "default": {
+          "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/CloudError"
@@ -513,7 +513,7 @@
           },
           "JobsGet5": {
             "$ref": "./examples/JobsGet5.json"
-          }          
+          }
         }
       },
       "put": {
@@ -967,7 +967,7 @@
     },
     "AddressValidationProperties": {
       "description": "The address validation output.",
-       "required": [
+      "required": [
         "validationType"
       ],
       "type": "object",
@@ -1500,7 +1500,7 @@
             "values": [
               {
                 "value": "NotStarted",
-                "description": "Data copy hasnt started yet."
+                "description": "Data copy hasn't started yet."
               },
               {
                 "value": "InProgress",
@@ -1596,7 +1596,7 @@
     },
     "DataBoxDiskJobSecrets": {
       "description": "The secrets related to disk job.",
-       "required": [
+      "required": [
         "jobSecretsType"
       ],
       "type": "object",
@@ -1925,8 +1925,8 @@
       "type": "object",
       "properties": {
         "forwardDcAccessCode": {
-        "description": "Dc Access Code for dispatching from DC.",
-        "type": "string"
+          "description": "Dc Access Code for dispatching from DC.",
+          "type": "string"
         },
         "reverseDcAccessCode": {
           "description": "Dc Access code for dropping off at DC.",
@@ -2038,7 +2038,7 @@
     "DiskScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling disk orders.",
       "required": [
-        "expectedDataSizeInTeraBytes",
+        "expectedDataSizeInTerabytes",
         "storageLocation",
         "skuName"
       ],
@@ -2049,9 +2049,9 @@
         }
       ],
       "properties": {
-        "expectedDataSizeInTeraBytes": {
+        "expectedDataSizeInTerabytes": {
           "format": "int32",
-          "description": "The expected size of the data, which needs to be transfered in this job, in tera bytes.",
+          "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
         }
       },
@@ -2125,9 +2125,9 @@
       ],
       "type": "object",
       "properties": {
-        "expectedDataSizeInTeraBytes": {
+        "expectedDataSizeInTerabytes": {
           "format": "int32",
-          "description": "The expected size of the data, which needs to be transfered in this job, in tera bytes.",
+          "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
         },
         "jobStages": {
@@ -2517,12 +2517,12 @@
               }
             ]
           }
-    },
-    "dcAccessSecurityCode": {
-      "$ref": "#/definitions/DcAccessSecurityCode",
-      "description": "Dc Access Security Code for Customer Managed Shipping"
-     }
-    },
+        },
+        "dcAccessSecurityCode": {
+          "$ref": "#/definitions/DcAccessSecurityCode",
+          "description": "Dc Access Security Code for Customer Managed Shipping"
+        }
+      },
       "discriminator": "jobSecretsType"
     },
     "JobStages": {
@@ -2876,7 +2876,7 @@
       ],
       "properties": {
         "preference": {
-          "description":"Preference requested with respect to transport type and data center",
+          "description": "Preference requested with respect to transport type and data center",
           "$ref": "#/definitions/Preferences"
         },
         "deviceType": {
@@ -2974,14 +2974,14 @@
           "$ref": "#/definitions/ScheduleAvailabilityResponse",
           "description": "Schedule availability for given sku in a region.",
           "readOnly": true
-      },
+        },
         "transportAvailabilityResponse": {
           "$ref": "#/definitions/TransportAvailabilityResponse",
           "description": "Transport options available for given sku in a region.",
           "readOnly": true
+        }
       }
-     }
-   },
+    },
     "Resource": {
       "description": "Model of the Resource.",
       "required": [
@@ -3011,7 +3011,7 @@
         }
       },
       "x-ms-azure-resource": true
-    }, 
+    },
     "ScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling orders.",
       "required": [
@@ -3068,7 +3068,7 @@
           "readOnly": true
         }
       }
-    },   
+    },
     "ShareCredentialDetails": {
       "description": "Credential details of the shares in account.",
       "type": "object",
@@ -3631,7 +3631,7 @@
         }
       },
       "x-ms-discriminator-value": "ValidateSubscriptionIsAllowedToCreateJob"
-      },
+    },
     "TransportAvailabilityRequest": {
       "description": "Request body to get the transport availability for given sku.",
       "type": "object",
@@ -3645,39 +3645,39 @@
           ],
           "type": "string",
           "x-ms-enum": {
-          "name": "SkuName",
-          "modelAsExtensible": true,
-          "values": [
-          {
-            "value": "DataBox",
-            "description": "Data Box."
-          },
-          {
-            "value": "DataBoxDisk",
-            "description": "Data Box Disk."
-          },
-          {
-            "value": "DataBoxHeavy",
-            "description": "Data Box Heavy."
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
           }
-         ]
         }
-       }
       }
     },
     "TransportAvailabilityResponse": {
       "description": "Transport options available for given sku in a region.",
       "type": "object",
       "properties": {
-      "transportAvailabilityDetails": {
-        "description": "List of transport availability details for given region",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/TransportAvailabilityDetails"
-         },
-        "readOnly": true
+        "transportAvailabilityDetails": {
+          "description": "List of transport availability details for given region",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransportAvailabilityDetails"
+          },
+          "readOnly": true
+        }
       }
-     }
     },
     "TransportAvailabilityDetails": {
       "description": "Transport options availability details for given region.",
@@ -3686,15 +3686,15 @@
         "shipmentType": {
           "description": "Transport Shipment Type supported for given region.",
           "enum": [
-          "CustomerManaged",
-          "MicrosoftManaged"
-         ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "TransportShipmentTypes",
-              "modelAsExtensible": true,
-              "values": [
+            "CustomerManaged",
+            "MicrosoftManaged"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TransportShipmentTypes",
+            "modelAsExtensible": true,
+            "values": [
               {
                 "value": "CustomerManaged",
                 "description": "Shipment Logistics is handled by the customer."
@@ -3863,7 +3863,7 @@
       "type": "object",
       "properties": {
         "validationType": {
-        "description": "Identifies the type of validation request.",
+          "description": "Identifies the type of validation request.",
           "enum": [
             "ValidateAddress",
             "ValidateDataDestinationDetails",
@@ -3899,12 +3899,12 @@
               },
               {
                 "value": "ValidateSkuAvailability",
-                "description": "Identify request and response of active job limit for sku availibility."
+                "description": "Identify request and response of active job limit for sku availability."
               }
             ]
           }
         }
-       },
+      },
       "discriminator": "validationType"
     },
     "ValidationInputResponse": {
@@ -3951,7 +3951,7 @@
               },
               {
                 "value": "ValidateSkuAvailability",
-                "description": "Identify request and response of active job limit for sku availibility."
+                "description": "Identify request and response of active job limit for sku availability."
               }
             ]
           }
@@ -3982,22 +3982,22 @@
         "validationCategory": {
           "description": "Identify the nature of validation.",
           "enum": [
-           "JobCreationValidation"
+            "JobCreationValidation"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "ValidationCategory",
             "modelAsExtensible": true,
             "values": [
-            {
-              "value": "JobCreationValidation",
-              "description": "Identify request of pre-job creation validations."
-            }
-          ]
+              {
+                "value": "JobCreationValidation",
+                "description": "Identify request of pre-job creation validations."
+              }
+            ]
+          }
         }
-     }
-    },
-     "discriminator": "validationCategory"
+      },
+      "discriminator": "validationCategory"
     },
     "CreateJobValidations": {
       "description": "It does all pre-job creation validations.",
@@ -4068,7 +4068,7 @@
         }
       }
     },
-     "CloudError": {
+    "CloudError": {
       "description": "The error information object.",
       "x-ms-external": true,
       "properties": {

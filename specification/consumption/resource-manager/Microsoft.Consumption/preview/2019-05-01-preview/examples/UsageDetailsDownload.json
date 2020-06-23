@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01-preview",
+    "scope": "providers/Microsoft.Billing/billingAccounts/1234"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/1234/providers/Microsoft.Consumption/operationStatus/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "properties": {
+          "downloadUrl": "https://account.blob.core.windows.net/usageReports/20190409/00000000-0000-0000-0000-000000000000?sv=2016-05-31&sr=b&st=2019-04-10T00%3A04%3A27Z&se=2019-04-10T06%3A09%3A27Z&sp=r",
+          "validTill": "03/05/2019 20:13:06"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/1234/providers/Microsoft.Consumption/operationResults/00000000-0000-0000-0000-000000000000?api-version=2019-05-01-preview",
+        "Retry-After": "10",
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/1234/providers/Microsoft.Consumption/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2019-05-01-preview"
+      }
+    }
+  }
+}

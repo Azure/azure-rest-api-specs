@@ -51,6 +51,9 @@
           "Get Operations": {
             "$ref": "./examples/GetOperations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -83,7 +86,9 @@
             "$ref": "./examples/ListDomainServicesBySubscription.json"
           }
         },
-        "x-ms-pageable": {}
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
@@ -118,7 +123,9 @@
             "$ref": "./examples/ListDomainServicesByResourceGroup.json"
           }
         },
-        "x-ms-pageable": {}
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
@@ -140,18 +147,14 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           },
           {
-            "name": "properties",
+            "name": "domainService",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainServiceProperties"
+              "$ref": "#/definitions/DomainService"
             },
             "description": "Properties supplied to the Create or Update a Domain Service operation."
           }
@@ -201,11 +204,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           }
         ],
         "responses": {
@@ -240,19 +239,12 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           }
         ],
         "responses": {
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DomainService"
-            }
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
@@ -283,18 +275,14 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           },
           {
-            "name": "properties",
+            "name": "domainService",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainServicePatchProperties"
+              "$ref": "#/definitions/DomainService"
             },
             "description": "Properties supplied to the Update a Domain Service operation."
           }
@@ -343,7 +331,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -357,9 +349,6 @@
           "description": "Resource etag"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "DomainService": {
@@ -385,6 +374,11 @@
             "$ref": "#/definitions/DomainService"
           },
           "description": "the list of domain services."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
         }
       },
       "description": "The response from the List Domain Services operation."
@@ -414,6 +408,50 @@
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
         },
+        "healthLastEvaluated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last domain evaluation run DateTime"
+        },
+        "healthMonitors": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthMonitor",
+            "description": "Domain Health Monitors"
+          },
+          "description": "List of Domain Health Monitors"
+        },
+        "healthAlerts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthAlert",
+            "description": "Domain Health Alerts"
+          },
+          "description": "List of Domain Health Alerts"
+        },
+        "notificationSettings": {
+          "$ref": "#/definitions/NotificationSettings",
+          "description": "Notification Settings"
+        },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "filteredSync": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Enabled or Disabled flag to turn on Group-based filtered sync",
+          "x-ms-enum": {
+            "name": "filteredSync",
+            "modelAsString": true
+          }
+        },
         "domainControllerIpAddress": {
           "readOnly": true,
           "type": "array",
@@ -432,15 +470,6 @@
           "readOnly": true,
           "type": "string",
           "description": "the current deployment or provisioning state, which only appears in the response."
-        }
-      }
-    },
-    "DomainServicePatchProperties": {
-      "description": "Update Properties of the Domain Service.",
-      "properties": {
-        "ldapsSettings": {
-          "$ref": "#/definitions/LdapsSettings",
-          "description": "Secure LDAP Settings"
         }
       }
     },
@@ -502,6 +531,146 @@
         }
       }
     },
+    "HealthMonitor": {
+      "description": "Health Monitor Description",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Name"
+        },
+        "details": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Details"
+        }
+      }
+    },
+    "HealthAlert": {
+      "description": "Health Alert Description",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Name"
+        },
+        "issue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Issue"
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Severity"
+        },
+        "raised": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Raised DateTime"
+        },
+        "lastDetected": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Last Detected DateTime"
+        },
+        "resolutionUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert TSG Link"
+        }
+      }
+    },
+    "NotificationSettings": {
+      "description": "Settings for notification",
+      "properties": {
+        "notifyGlobalAdmins": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Should global admins be notified",
+          "x-ms-enum": {
+            "name": "notifyGlobalAdmins",
+            "modelAsString": true
+          }
+        },
+        "notifyDcAdmins": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Should domain controller admins be notified",
+          "x-ms-enum": {
+            "name": "notifyDcAdmins",
+            "modelAsString": true
+          }
+        },
+        "additionalRecipients": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Email address for additional recipient"
+          },
+          "description": "The list of additional recipients"
+        }
+      }
+    },
+    "DomainSecuritySettings": {
+      "description": "Domain Security Settings",
+      "properties": {
+        "ntlmV1": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "NtlmV1",
+            "modelAsString": true
+          }
+        },
+        "tlsV1": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "TlsV1",
+            "modelAsString": true
+          }
+        },
+        "syncNtlmPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "OperationEntityListResult": {
       "description": "The list of domain service operation response.",
       "type": "object",
@@ -512,6 +681,11 @@
           "items": {
             "$ref": "#/definitions/OperationEntity"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
         }
       }
     },
@@ -580,6 +754,14 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "DomainServiceNameParameter": {
+      "name": "domainServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the domain service.",
       "x-ms-parameter-location": "method"
     }
   }

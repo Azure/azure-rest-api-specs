@@ -23,8 +23,8 @@
             "imageNames": [
               "azurerest:testtag"
             ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
+            "dockerFilePath": "subfolder/Dockerfile",
+            "contextPath": "dockerfiles",
             "isPushEnabled": true,
             "noCache": false,
             "arguments": [
@@ -40,7 +40,7 @@
               }
             ]
           },
-          "trigger":{
+          "trigger": {
             "sourceTriggers": [
               {
                 "name": "mySourceTrigger",
@@ -53,9 +53,10 @@
                     "token": "xxxxx"
                   }
                 },
-                "sourceTriggerEvents":[
+                "sourceTriggerEvents": [
                   "commit"
-                ]
+                ],
+                "status": "Enabled"
               }
             ],
             "baseImageTrigger": {

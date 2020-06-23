@@ -61,11 +61,11 @@
             "schema": {
               "$ref": "#/definitions/AccessInformationContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           }
         }
@@ -107,7 +107,7 @@
           }
         ],
         "responses": {
-           "201": {
+          "201": {
             "description": "Tenant's access information updated successfully."
           },
           "default": {
@@ -175,7 +175,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The secondary key was successfully regenerated."
           },
           "default": {
@@ -214,11 +214,11 @@
             "schema": {
               "$ref": "#/definitions/AccessInformationContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -334,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Result of appplying changes from Git branch to database.",
+            "description": "Result of applying changes from Git branch to database.",
             "schema": {
               "$ref": "#/definitions/OperationResultContract"
             }
@@ -503,16 +503,16 @@
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "Tenant Global Policy information.",
             "schema": {
               "type": "file"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           }
         }
@@ -561,7 +561,7 @@
           "201": {
             "description": "Global policy configuration was successfully created."
           },
-          "204":{
+          "204": {
             "description": "Global policy configuration of the tenant was successfully updated."
           },
           "default": {
@@ -571,7 +571,7 @@
             }
           }
         }
-      },      
+      },
       "delete": {
         "tags": [
           "TenantPolicy"
@@ -600,7 +600,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "Successfully deleted the global policy configuration of the Tenant."
           },
           "default": {
@@ -613,148 +613,147 @@
       }
     }
   },
-  "definitions": {    
- 		"AccessInformationContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Identifier."
-			},
-			"primaryKey": {
-			  "type": "string",
-			  "description": "Primary access key."
-			},
-			"secondaryKey": {
-			  "type": "string",
-			  "description": "Secondary access key."
-			},
-			"enabled": {
-			  "type": "boolean",
-			  "description": "Tenant access information of the API Management service."
-			}
-		  },
-		  "description": "Tenant access information contract of the API Management service."
-		},
-		"AccessInformationUpdateParameters": {
-		  "properties": {
-			"enabled": {
-			  "type": "boolean",
-			  "description": "Tenant access information of the API Management service."
-			}
-		  },
-		  "required": [
-			"enabled"
-		  ],
-		  "description": "Tenant access information update parameters of the API Management service."
-		},
-		"DeployConfigurationParameters": {
-		  "properties": {
-			"branch": {
-			  "type": "string",
-			  "description": "The name of the Git branch from which the configuration is to be deployed to the configuration database."
-			},
-			"force": {
-			  "type": "boolean",
-			  "description": "The value enforcing deleting subscriptions to products that are deleted in this update."
-			}
-		  },
-		  "required": [
-			"branch"
-		  ],
-		  "description": "Parameters supplied to the Deploy Configuration operation."
-		},    
-		"OperationResultContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Operation result identifier."
-			},
-			"status": {
-			  "type": "string",
-			  "description": "Status of an async operation.",
-			  "enum": [
-				"Started",
-				"InProgress",
-				"Succeeded",
-				"Failed"
-			  ],
-			  "x-ms-enum": {
-				"name": "AsyncOperationState",
-				"modelAsString": false
-			  }
-			},
-			"started": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"updated": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"resultInfo": {
-			  "type": "string",
-			  "description": "Optional result info."
-			},
-			"error": {
-			  "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
-			}
-		  },
-		  "description": "Operation Result."
-		},
-		"SaveConfigurationParameter": {
-		  "properties": {
-			"branch": {
-			  "type": "string",
-			  "description": "The name of the Git branch in which to commit the current configuration snapshot."
-			},
-			"force": {
-			  "type": "boolean",
-			  "description": "The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten."
-			}
-		  },
-		  "required": [
-			"branch"
-		  ],
-		  "description": "Parameters supplied to the Save Tenant Configuration operation."
-		},
-		"TenantConfigurationSyncStateContract": {
-		  "properties": {
-			"branch": {
-			  "type": "string",
-			  "description": "The name of Git branch."
-			},
-			"commitId": {
-			  "type": "string",
-			  "description": "The latest commit Id."
-			},
-			"isExport": {
-			  "type": "boolean",
-			  "description": "value indicating if last sync was save (true) or deploy (false) operation."
-			},
-			"isSynced": {
-			  "type": "boolean",
-			  "description": "value indicating if last synchronization was later than the configuration change."
-			},
-			"isGitEnabled": {
-			  "type": "boolean",
-			  "description": "value indicating whether Git configuration access is enabled."
-			},
-			"syncDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"configurationChangeDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			}
-		  },
-		  "description": "Tenant Configuration Synchronization State."
-		}    
+  "definitions": {
+    "AccessInformationContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary access key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary access key."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Tenant access information of the API Management service."
+        }
+      },
+      "description": "Tenant access information contract of the API Management service."
+    },
+    "AccessInformationUpdateParameters": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Tenant access information of the API Management service."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Tenant access information update parameters of the API Management service."
+    },
+    "DeployConfigurationParameters": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The name of the Git branch from which the configuration is to be deployed to the configuration database."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "The value enforcing deleting subscriptions to products that are deleted in this update."
+        }
+      },
+      "required": [
+        "branch"
+      ],
+      "description": "Parameters supplied to the Deploy Configuration operation."
+    },
+    "OperationResultContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation result identifier."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of an async operation.",
+          "enum": [
+            "Started",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AsyncOperationState",
+            "modelAsString": false
+          }
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "resultInfo": {
+          "type": "string",
+          "description": "Optional result info."
+        },
+        "error": {
+          "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+        }
+      },
+      "description": "Operation Result."
+    },
+    "SaveConfigurationParameter": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The name of the Git branch in which to commit the current configuration snapshot."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten."
+        }
+      },
+      "required": [
+        "branch"
+      ],
+      "description": "Parameters supplied to the Save Tenant Configuration operation."
+    },
+    "TenantConfigurationSyncStateContract": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The name of Git branch."
+        },
+        "commitId": {
+          "type": "string",
+          "description": "The latest commit Id."
+        },
+        "isExport": {
+          "type": "boolean",
+          "description": "value indicating if last sync was save (true) or deploy (false) operation."
+        },
+        "isSynced": {
+          "type": "boolean",
+          "description": "value indicating if last synchronization was later than the configuration change."
+        },
+        "isGitEnabled": {
+          "type": "boolean",
+          "description": "value indicating whether Git configuration access is enabled."
+        },
+        "syncDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "configurationChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "description": "Tenant Configuration Synchronization State."
+    }
   },
-  "parameters": {   
-  }
+  "parameters": {}
 }
