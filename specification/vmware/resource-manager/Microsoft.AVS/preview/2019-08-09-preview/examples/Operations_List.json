@@ -4,18 +4,227 @@
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "display": {
-            "description": "Creates a private cloud",
-            "operation": "Create Private Cloud",
-            "provider": "Azure VMware Solution",
-            "resource": "Private Cloud"
+      "body": {
+        "value": [
+          {
+            "display": {
+              "description": "Creates a private cloud",
+              "operation": "Create Private Cloud",
+              "provider": "Azure VMware Solution",
+              "resource": "Private Cloud"
+            },
+            "name": "Microsoft.AVS/privateClouds/create",
+            "origin": "user,system"
           },
-          "name": "Microsoft.AVS/privateClouds/create",
-          "origin": "user,system"
-        }
-      ],
+          {
+            "origin": "system",
+            "name": "Microsoft.AVS/privateClouds/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Azure Dedicated",
+              "resource": "Private Cloud",
+              "operation": "Read Private Cloud metric definitions",
+              "description": "Gets the available metrics for Private Cloud"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "UsedLatest",
+                    "displayName": "Datastore disk used",
+                    "displayDescription": "The total amount of disk used in SDDC",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Datastore.Disk"
+                  },
+                  {
+                    "name": "CapacityLatest",
+                    "displayName": "Datastore disk total capacity",
+                    "displayDescription": "The total capacity of disk in SDDC",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Datastore.Disk"
+                  },
+                  {
+                    "name": "EffectiveMemAverage",
+                    "displayName": "Average Effective Memory",
+                    "displayDescription": "Total amount of machine memory in cluster that is available",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.ClusterServices"
+                  },
+                  {
+                    "name": "EffectiveCpuAverage",
+                    "displayName": "Average Effective CPU",
+                    "displayDescription": "Total available CPU resources in cluster",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.ClusterServices"
+                  },
+                  {
+                    "name": "FailoverLatest",
+                    "displayName": "Failover",
+                    "displayDescription": "vSphere HA number of failures that can be tolerated",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.ClusterServices"
+                  },
+                  {
+                    "name": "TotalMhzAverage",
+                    "displayName": "Average Total CPU",
+                    "displayDescription": "Total CPU resources in cluster",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.Cpu"
+                  },
+                  {
+                    "name": "TotalMbAverage",
+                    "displayName": "Average Total Memory",
+                    "displayDescription": "Total memory in cluster",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.Mem"
+                  },
+                  {
+                    "name": "OverheadAverage",
+                    "displayName": "Average Memory Overhead",
+                    "displayDescription": "Host physical memory consumed by the virtualization infrastructure",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.Mem"
+                  },
+                  {
+                    "name": "UsageAverage",
+                    "displayName": "Average Memory Usage",
+                    "displayDescription": "Memory usage as percentage of total configured or available memory",
+                    "unit": "Average",
+                    "aggregationType": "Total",
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "AVSShoebox2WestEurope",
+                    "sourceMdmNamespace": "Vsphere.Cluster.Mem"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.AVS/privateClouds/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft.AVS",
+              "resource": "Private Cloud",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource"
+            }
+          },
+          {
+            "origin": "system",
+            "name": "Microsoft.AVS/privateClouds/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft.AVS",
+              "resource": "Private Cloud",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource"
+            }
+          }
+        ]
+      },
       "nextLink": "string"
     }
   }
