@@ -204,6 +204,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Kusto/stable/2020-06-14/kusto.json
   - $(this-folder)/Microsoft.Kusto/stable/2020-02-15/kusto.json
   - $(this-folder)/Microsoft.Kusto/stable/2019-11-09/kusto.json
   - $(this-folder)/Microsoft.Kusto/stable/2019-09-07/kusto.json
