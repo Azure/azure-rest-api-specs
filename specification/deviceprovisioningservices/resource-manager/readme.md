@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2020-03
 ```
 
-
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-03'
+``` yaml $(tag) == 'package-2020-03'
 input-file:
   - Microsoft.Devices/stable/2020-03-01/iotdps.json
 ```
+
 ### Tag: package-2017-08
 
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
@@ -227,4 +227,14 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: PageableOperation
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources"].get'
+    from: iotdps.json
+    reason: We only allow 10 operations
 ```
