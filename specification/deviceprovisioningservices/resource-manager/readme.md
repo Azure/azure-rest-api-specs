@@ -237,4 +237,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources"].get'
     from: iotdps.json
     reason: We only allow 10 operations
+  - suppress: AvoidNestedProperties
+    where: $.definitions.GroupIdInformation.properties.properties
+    from: iotdps.json
+    reason: Data structure defined by Networking Private links team. Cannot be changed
 ```
