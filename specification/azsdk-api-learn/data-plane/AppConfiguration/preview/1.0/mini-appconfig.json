@@ -1,0 +1,112 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "1.0",
+      "title": "Mini App Config"
+  },
+  "paths": {
+      "/kv/{key}": {
+          "get": {
+              "tags": [
+                  "KeyValues"
+              ],
+              "summary": "Gets a single key-value.",
+              "operationId": "GetKeyValue",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "name": "key",
+                      "in": "path",
+                      "description": "The key of the key-value to retrieve.",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "$ref": "#/parameters/ApiVersion"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Success",
+                      "schema": {
+                          "$ref": "#/definitions/KeyValue"
+                      }
+                  },
+                  "default": {
+                      "description": "Error response describing why the operation failed",
+                      "schema": {
+                          "$ref": "#/definitions/Error"
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+      "KeyValue": {
+          "type": "object",
+          "properties": {
+              "key": {
+                  "type": "string"
+              },
+              "content_type": {
+                  "type": "string"
+              },
+              "value": {
+                  "type": "string"
+              },
+              "last_modified": {
+                  "format": "date-time",
+                  "type": "string"
+              }
+          }
+      },
+      "Error": {
+          "type": "object",
+          "required": [
+              "code",
+              "message"
+          ],
+          "properties": {
+              "code": {
+                  "type": "string"
+              },
+              "message": {
+                  "type": "string"
+              }
+          }
+      }
+  },
+  "parameters": {
+      "ApiVersion": {
+          "name": "api-version",
+          "in": "query",
+          "description": "The API version to be used with the HTTP request.",
+          "required": true,
+          "type": "string"
+      },
+      "Endpoint": {
+          "name": "endpoint",
+          "in": "path",
+          "description": "The endpoint of the App Configuration instance to send requests to.",
+          "required": true,
+          "type": "string",
+          "x-ms-skip-url-encoding": true,
+          "x-ms-parameter-location": "client"
+      }
+  },
+  "x-ms-parameterized-host": {
+      "hostTemplate": "{endpoint}",
+      "useSchemePrefix": false,
+      "parameters": [
+          {
+              "$ref": "#/parameters/Endpoint"
+          }
+      ]
+  }
+}
