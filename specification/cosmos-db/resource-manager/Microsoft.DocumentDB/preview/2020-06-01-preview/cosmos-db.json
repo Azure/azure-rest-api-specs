@@ -4211,6 +4211,12 @@
             "schema": {
               "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -4246,6 +4252,12 @@
             "description": "The restorable database account properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -7618,6 +7630,7 @@
       "properties": {
         "properties": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "description": "The properties of a restorable database account.",
           "$ref": "#/definitions/RestorableDatabaseAccountProperties"
         }
