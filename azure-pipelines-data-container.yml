@@ -1,10 +1,6 @@
-trigger:
-  - master
-  - datacontainerpipelinereview
-
 schedules:
 - cron: "0 0 * * *"
-  displayName: Nightly build
+  displayName: Daily build
   branches:
     include:
     - master
@@ -22,13 +18,24 @@ steps:
   inputs:
     command: login
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
+
 - task: Docker@2
-  displayName: Build and Push
+  displayName: Build
   inputs:
-    command: buildAndPush
+    command: build
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
-    repository: $(REPOSITORY_NAME_PREFIX)-$(Build.SourceBranchName)
+    repository: $(REPOSITORY_NAME_PREFIX)-single
     Dockerfile: scripts/datacontainer/Dockerfile
+    arguments: --label SOURCE_DIRECTORY=$(Build.SourcesDirectory)
+    tags: |
+      latest
+      $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
+
+- task: Docker@2
+  displayName: Push
+  inputs:
+    containerRegistry: $(CONTAINER_REGISTRY_NAME)
+    repository: $(REPOSITORY_NAME_PREFIX)-single
     tags: |
       latest
       $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
