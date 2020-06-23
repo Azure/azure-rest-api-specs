@@ -29,22 +29,6 @@ openapi-type: arm
 tag: package-2020-04
 ```
 
-### Tag: package-2018-01
-
-These settings apply only when `--tag=package-2018-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-01'
-input-file:
-- Microsoft.DataBox/stable/2018-01-01/databox.json
-```
-### Tag: package-2019-09
-
-These settings apply only when `--tag=package-2019-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-09'
-input-file:
-- Microsoft.DataBox/stable/2019-09-01/databox.json
-```
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -53,6 +37,25 @@ These settings apply only when `--tag=package-2020-04` is specified on the comma
 input-file:
 - Microsoft.DataBox/stable/2020-04-01/databox.json
 ```
+
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.DataBox/stable/2019-09-01/databox.json
+```
+
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.DataBox/stable/2018-01-01/databox.json
+```
+
 ---
 # Code Generation
 
@@ -95,15 +98,6 @@ csharp:
 
 See configuration in [readme.python.md](./readme.python.md)
 
-### Tag: package-2019-09 and go
-
-These settings apply only when `--tag=package-2019-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2019-09' && $(go)
-output-folder: $(go-sdk-folder)/services/databox/mgmt/2019-09-01/databox
-```
-
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
@@ -111,16 +105,6 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-### Tag: package-2019-09 and ruby
-
-These settings apply only when `--tag=package-2019-09 --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == 'package-2019-09' && $(ruby)
-namespace: "Azure::Compute::Mgmt::V2019_09_01"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_databox/lib
-```
 
 ## Java
 
@@ -143,6 +127,7 @@ java:
 batch:
   - tag: package-2018-01
   - tag: package-2019-09
+  - tag: package-2020-04
 ```
 
 ### Tag: package-2018-01 and java
@@ -171,6 +156,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-04 and java
+
+These settings apply only when `--tag=package-2020-04-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2020_04-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2020_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -183,9 +181,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DataBox/stable/2020-04-01/databox.json
   - $(this-folder)/Microsoft.DataBox/stable/2019-09-01/databox.json
   - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
-
+  
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
