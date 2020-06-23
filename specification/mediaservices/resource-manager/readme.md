@@ -44,6 +44,7 @@ input-file:
   - Microsoft.Media/stable/2020-05-01/Encoding.json
   - Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2020-05-01/streamingservice.json
+  - Microsoft.Media/stable/2020-05-01/Common.json
 directive:
   - suppress: R2016
     where: $.definitions.TrackedResource.required
