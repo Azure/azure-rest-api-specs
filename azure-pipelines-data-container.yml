@@ -26,7 +26,7 @@ steps:
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
     repository: $(REPOSITORY_NAME_PREFIX)-single
     Dockerfile: scripts/datacontainer/Dockerfile
-    arguments: --build-arg SOURCE_DIRECTORY=/home/vsts/work/1/s
+    arguments: --build-arg SOURCE_DIRECTORY=$(Build.SourcesDirectory)
     tags: |
       latest
       $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
