@@ -8,7 +8,7 @@ cp -R /usr/data/specrepo/.git/* /usr/data/openapispecs/.git/
 
 timestamp=`date +%Y/%m/%d-%H:%M:%S`
 echo "[$timestamp] Running git checkout master"
-git checkout master -f
+git checkout $specRetrievalGitBranch -f
 
 timestamp=`date +%Y/%m/%d-%H:%M:%S`
 echo "[$timestamp] Deleting directory /usr/data/specrepo"
