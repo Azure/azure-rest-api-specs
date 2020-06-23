@@ -8,7 +8,6 @@ COPY .git /usr/data/specrepo/.git
 
 WORKDIR /usr/data/scripts/
 COPY run.sh run.sh
-RUN chmod +x run.sh
 
 RUN mkdir -p /usr/data/openapispecs/
 WORKDIR /usr/data/openapispecs
