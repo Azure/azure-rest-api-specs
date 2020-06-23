@@ -87,6 +87,7 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
 
 ---
@@ -133,7 +134,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 directive:
     - from: swagger-document
       where: $.info
@@ -151,12 +152,12 @@ python:
   package-name: azure-mgmt-loganalytics
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create'  && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
@@ -216,6 +217,7 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 
 ```
 

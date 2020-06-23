@@ -10,18 +10,18 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.DesktopVirtualization
-  package-name: azure-mgmt-DesktopVirtualization
+  namespace: azure.mgmt.desktopvirtualization
+  package-name: azure-mgmt-desktopvirtualization
   package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-DesktopVirtualization/azure/mgmt/DesktopVirtualization
+  output-folder: $(python-sdks-folder)/azure-mgmt-desktopvirtualization/azure/mgmt/desktopvirtualization
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-DesktopVirtualization
+  output-folder: $(python-sdks-folder)/azure-mgmt-desktopvirtualization
 ```
