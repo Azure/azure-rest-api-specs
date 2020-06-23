@@ -1,5 +1,5 @@
 FROM alpine:3.8
-ARG SOURCE_DIRECTORY=/home/vsts/work/1/s
+ARG SOURCE_DIRECTORY
 
 RUN apk update && \
     apk add git
