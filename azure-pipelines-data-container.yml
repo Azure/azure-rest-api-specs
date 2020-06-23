@@ -18,17 +18,17 @@ steps:
   inputs:
     command: login
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
-
+- task: CopyFiles@2
+  inputs:
+    contents: $(Build.SourcesDirectory)/scripts/datacontainer/Dockerfile
+    targetFolder: $(Build.SourcesDirectory)
 - task: Docker@2
   displayName: Build
   inputs:
     command: build
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
     repository: $(REPOSITORY_NAME_PREFIX)-single
-    Dockerfile: scripts/datacontainer/Dockerfile
-    arguments:
-      --build-arg SOURCE_DIRECTORY=repocontents
-      -v $(Build.SourcesDirectory):/repocontents
+    Dockerfile: Dockerfile
     tags: |
       latest
       $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
