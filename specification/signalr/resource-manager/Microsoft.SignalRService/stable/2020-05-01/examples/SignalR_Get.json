@@ -39,7 +39,9 @@
               "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
             }
           ],
-          "tls": null,
+          "tls": {
+            "clientCertEnabled": true
+          },
           "hostNamePrefix": "mysignalrservice",
           "features": [
             {
@@ -95,6 +97,11 @@
           }
         },
         "kind": "SignalR",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
         "location": "eastus",
         "tags": {
           "key1": "value1"

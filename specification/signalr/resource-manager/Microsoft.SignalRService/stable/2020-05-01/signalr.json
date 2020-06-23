@@ -1493,8 +1493,8 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "Represent the identity type: systemAssigned, userAssigned, None",
-          "type": "string"
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Represent the identity type: systemAssigned, userAssigned, None"
         },
         "userAssignedIdentities": {
           "description": "Get or set the user assigned identities",
@@ -1504,13 +1504,28 @@
           }
         },
         "principalId": {
-          "description": "Get or set the principal id for the system assigned identity.\r\nOnly be used in response.",
-          "type": "string"
+          "description": "Get the principal id for the system assigned identity.\r\nOnly be used in response.",
+          "type": "string",
+          "readOnly": true
         },
         "tenantId": {
-          "description": "Get or set the tenant id for the system assigned identity.\r\nOnly be used in response",
-          "type": "string"
+          "description": "Get the tenant id for the system assigned identity.\r\nOnly be used in response",
+          "type": "string",
+          "readOnly": true
         }
+      }
+    },
+    "ManagedIdentityType": {
+      "description": "Represent the identity type: systemAssigned, userAssigned, None",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true
       }
     },
     "PrivateEndpointConnection": {
@@ -1554,12 +1569,14 @@
       "type": "object",
       "properties": {
         "principalId": {
-          "description": "Get or set the principal id for the user assigned identity",
-          "type": "string"
+          "description": "Get the principal id for the user assigned identity",
+          "type": "string",
+          "readOnly": true
         },
         "clientId": {
-          "description": "Get or set the client id for the user assigned identity",
-          "type": "string"
+          "description": "Get the client id for the user assigned identity",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
