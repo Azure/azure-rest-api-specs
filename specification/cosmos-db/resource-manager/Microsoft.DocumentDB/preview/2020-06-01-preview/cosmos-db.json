@@ -4184,6 +4184,72 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts": {
+      "get": {
+        "operationId": "RestorableDatabaseAccounts_ListByLocation",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBRestorableDatabaseAccountList.json"
+          }
+        },
+        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}": {
+      "get": {
+        "operationId": "RestorableDatabaseAccounts_GetByLocation",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountGet": {
+            "$ref": "./examples/CosmosDBRestorableDatabaseAccountGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB restorable database account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restorable database account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7532,6 +7598,55 @@
           "description": "An integer representing the time (in hours) that each backup is retained"
         }
       }
+    },
+    "RestorableDatabaseAccountsListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
+          },
+          "description": "List of restorable database accounts and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the restorable database accounts and their properties."
+    },
+    "RestorableDatabaseAccountGetResult": {
+      "description": "A Azure Cosmos DB restorable database account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of a restorable database account.",
+          "$ref": "#/definitions/RestorableDatabaseAccountProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "RestorableDatabaseAccountProperties": {
+      "type": "object",
+      "description": "The properties of a restorable database account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the global database account"
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the restorable database account (ISO-8601 format)."
+        },
+        "deletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
+        }
+      }
     }
   },
   "parameters": {
@@ -7692,6 +7807,22 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Partition Key Range Id for which to get data."
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "instanceIdParameter": {
+      "name": "instanceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The instanceId GUID of a restorable database account."
     }
   }
 }
