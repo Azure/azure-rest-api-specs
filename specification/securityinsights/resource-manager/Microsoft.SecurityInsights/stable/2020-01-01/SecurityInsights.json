@@ -1533,6 +1533,33 @@
         ]
       }
     },
+    "AlertRuleTemplateStatus": {
+      "description": "The alert rule template status.",
+      "enum": [
+        "Installed",
+        "Available",
+        "NotAvailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TemplateStatus",
+        "values": [
+          {
+            "description": "Alert rule template installed. and can not use more then once",
+            "value": "Installed"
+          },
+          {
+            "description": "Alert rule template is available.",
+            "value": "Available"
+          },
+          {
+            "description": "Alert rule template is not available",
+            "value": "NotAvailable"
+          }
+        ]
+      }
+    },
     "AlertRuleTemplate": {
       "allOf": [
         {
@@ -1547,7 +1574,8 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/AlertRuleKind",
-          "description": "The alert rule kind"
+          "description": "The alert rule kind",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1565,65 +1593,6 @@
             "type": "string"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AlertRuleTemplatePropertiesBase": {
-      "description": "Base alert rule template property bag.",
-      "properties": {
-        "alertRulesCreatedByTemplateCount": {
-          "description": "the number of alert rules that were created by this template",
-          "format": "int32",
-          "type": "integer"
-        },
-        "createdDateUTC": {
-          "description": "The time that this alert rule template has been added.",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the alert rule template.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name for alert rule template.",
-          "type": "string"
-        },
-        "requiredDataConnectors": {
-          "description": "The required data connectors for this template",
-          "items": {
-            "$ref": "#/definitions/AlertRuleTemplateDataSource"
-          },
-          "type": "array"
-        },
-        "status": {
-          "description": "The alert rule template status.",
-          "enum": [
-            "Installed",
-            "Available",
-            "NotAvailable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "TemplateStatus",
-            "values": [
-              {
-                "description": "Alert rule template installed. and can not use more then once",
-                "value": "Installed"
-              },
-              {
-                "description": "Alert rule template is available.",
-                "value": "Available"
-              },
-              {
-                "description": "Alert rule template is not available",
-                "value": "NotAvailable"
-              }
-            ]
-          }
         }
       },
       "type": "object"
@@ -2149,13 +2118,39 @@
       "x-ms-discriminator-value": "Fusion"
     },
     "FusionAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-        }
-      ],
       "description": "Represents Fusion alert rule template properties",
       "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data connectors for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status.",
+          "type": "string"
+        },
         "severity": {
           "$ref": "#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule."
@@ -2748,13 +2743,39 @@
       "type": "object"
     },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-        }
-      ],
       "description": "MicrosoftSecurityIncidentCreation rule template properties",
       "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data connectors for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status.",
+          "type": "string"
+        },
         "displayNamesFilter": {
           "description": "the alerts' displayNames on which the cases will be generated",
           "items": {
@@ -3125,13 +3146,39 @@
       "type": "object"
     },
     "ScheduledAlertRuleTemplateProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-        }
-      ],
       "description": "Scheduled alert rule template properties",
       "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data connectors for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status.",
+          "type": "string"
+        },
         "query": {
           "description": "The query that creates alerts for this rule.",
           "type": "string"
