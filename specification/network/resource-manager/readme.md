@@ -1443,6 +1443,9 @@ directive:
     from: expressRoutePort.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteProviderPort.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: firewallPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
