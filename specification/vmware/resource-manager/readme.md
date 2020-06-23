@@ -108,6 +108,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AVS/stable/2020-03-20/vmware.json
   - $(this-folder)/Microsoft.AVS/preview/2019-08-09-preview/vmware.json
 
 ```
