@@ -111,6 +111,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.StorageCache/stable/2020-03-01/storagecache.json
   - $(this-folder)/Microsoft.StorageCache/stable/2019-11-01/storagecache.json
   - $(this-folder)/Microsoft.StorageCache/preview/2019-08-01-preview/storagecache.json
 
