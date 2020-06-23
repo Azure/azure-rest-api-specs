@@ -1490,12 +1490,12 @@
         "tags": [
           "PUT"
         ],
-        "summary": "Update private endpoint connection",
-        "description": "Update the status of a private endpoint connection with the specified name",
-        "operationId": "IotDpsResource_UpdatePrivateEndpointConnection",
+        "summary": "Create or update private endpoint connection",
+        "description": "Create or update the status of a private endpoint connection with the specified name",
+        "operationId": "IotDpsResource_CreateOrUpdatePrivateEndpointConnection",
         "x-ms-examples": {
-          "PrivateEndpointConnection_Update": {
-            "$ref": "./examples/DPSUpdatePrivateEndpointConnection.json"
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/DPSCreateOrUpdatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1994,6 +1994,7 @@
           "description": "The resource type."
         },
         "properties": {
+          "description": "The properties for a group information object",
           "$ref": "#/definitions/GroupIdInformationProperties"
         }
       },
@@ -2054,6 +2055,7 @@
           "description": "The resource type."
         },
         "properties": {
+          "description": "The properties of a private endpoint connection",
           "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         }
       },
@@ -2066,9 +2068,11 @@
       "type": "object",
       "properties": {
         "privateEndpoint": {
+          "description": "The private endpoint property of a private endpoint connection",
           "$ref": "#/definitions/PrivateEndpoint"
         },
         "privateLinkServiceConnectionState": {
+          "description": "The current state of a private endpoint connection",
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         }
       },
