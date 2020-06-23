@@ -1197,6 +1197,17 @@
           "items": {
             "$ref": "#/definitions/FirewallPolicyIntrusionSystemRuleSpecifications"
           }
+        },
+        "ignoredTraffic": {
+          "type": "array",
+          "description": "List of rules for traffic to ignore.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionSystemIgnoredTrafficSpecifications"
+          }
+        },
+        "allowChildPolicyToIgnoreTraffic": {
+          "type": "boolean",
+          "description": "Boolean indicating whether child policies are allowed to have ignoredTraffic."
         }
       }
     },
@@ -1223,6 +1234,73 @@
       ],
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionSystemStateType",
+        "modelAsString": true
+      }
+    },
+    "FirewallPolicyIntrusionSystemIgnoredTrafficSpecifications": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ignored traffic rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the ignored traffic rule."
+        },
+        "protocol": {
+          "type": "string",
+          "$ref": "#/definitions/FirewallPolicyIntrusionSystemIgnoredTrafficProtocol",
+          "description": "The FirewallPolicyIntrusionSystemIgnoredTrafficProtocol."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports or ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Intrusion system ignored traffic specification."
+    },
+    "FirewallPolicyIntrusionSystemIgnoredTrafficProtocol": {
+      "type": "string",
+      "description": "Possible intrusion system ignored traffic protocols.",
+      "enum": [
+        "TCP",
+        "UDP",
+        "ICMP",
+        "ANY"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyIntrusionSystemProtocol",
         "modelAsString": true
       }
     },
