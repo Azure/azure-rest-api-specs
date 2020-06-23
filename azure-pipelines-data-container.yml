@@ -21,8 +21,8 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: $(Build.SourcesDirectory)
-    contents: scripts/datacontainer/Dockerfile
-    targetFolder: $(Build.SourcesDirectory)
+    contents: .git/**
+    targetFolder: $(Build.SourcesDirectory)/scripts/datacontainer
 - task: Docker@2
   displayName: Build
   inputs:
