@@ -2602,26 +2602,24 @@
       ],
       "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
       "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts data type connection."
+        },
         "discoveryLogs": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ],
-          "description": "Discovery log data type connection.",
-          "type": "object"
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Discovery log data type connection."
         }
       },
       "type": "object"
     },
     "MCASDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
       "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
         "dataTypes": {
           "$ref": "#/definitions/MCASDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -2906,13 +2904,12 @@
       "type": "object"
     },
     "OfficeDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
       "description": "Office data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
         "dataTypes": {
           "$ref": "#/definitions/OfficeDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -3265,13 +3262,12 @@
       "type": "object"
     },
     "TIDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
       "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
