@@ -4215,7 +4215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         },
@@ -4257,7 +4257,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         }
@@ -4446,6 +4446,30 @@
         }
       },
       "description": "Error Response."
+    },
+    "ErrorResponseUpdatedFormat": {
+      "description": "An error response from the service.",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "Details of error response.",
+          "x-ms-external": true,
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code, intended to be consumed programmatically."
+            },
+            "message": {
+              "type": "string",
+              "description": "Description of the error, intended for display in user interface."
+            },
+            "target": {
+              "type": "string",
+              "description": "Target of the particular error, for example name of the property."
+            }
+          }
+        }
+      }
     },
     "FailoverPolicies": {
       "properties": {
