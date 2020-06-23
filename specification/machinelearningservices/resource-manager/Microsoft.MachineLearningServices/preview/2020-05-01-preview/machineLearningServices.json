@@ -1589,8 +1589,8 @@
         "operationId": "MachineLearningService_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Services": {
-            "$ref": "./examples/createService.json"
+          "Create Or Update service": {
+            "$ref": "./examples/createOrUpdateService.json"
           }
         },
         "parameters": [
@@ -1620,8 +1620,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Service creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
           "201": {
-            "description": "The request was accepted.",
+            "description": "Service creation or update initiated.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation status.",
