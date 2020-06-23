@@ -1,4 +1,4 @@
-ARG SOURCE_DIRECTORY
+ARG SOURCE_DIRECTORY=/home/vsts/work/1/s
 FROM alpine:3.8
 
 RUN apk update && \
