@@ -14,4 +14,8 @@ overrides:
       resource: "SqlPools"
     set:
       - ModuleName: "SQLPools"
+  - where:
+      resource: BigDataPools/CreateOrUpdate
+    set:
+      - BodyPosition: 3
 ```
