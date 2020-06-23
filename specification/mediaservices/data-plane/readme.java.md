@@ -4,8 +4,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.microsoft.azure.mediaservices.edge.lva.client
+namespace: com.microsoft.azure.media.edge.lva.client
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mediaservices-edge-lva-client
+output-folder: $(azure-libraries-for-java-folder)/azure-media.edge-lva-client
 ```
