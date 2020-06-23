@@ -234,9 +234,59 @@
       },
       "DscpConfigurationPropertiesFormat": {
         "properties": {
-          "qosTrafficProfiler": {
-            "$ref": "#/definitions/QosTrafficProfilerFormat",
-            "description": "Traffic Profiler format."
+          "markings": {
+            "type": "array",
+            "items":{
+              "type": "int"
+            },
+            "description": "List of markings to be used in the configuration."
+          },
+          "sourceIpRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/QosIpRange"
+            },
+            "description": "Source IP ranges"
+          },
+          "destinationIpRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/QosIpRange"
+            },
+            "description": "Destination IP ranges"
+          },
+          "sourcePortRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/QosPortRange"
+            },
+            "description": "Sources port ranges"
+          },
+          "destinationPortRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/QosPortRange"
+            },
+            "description": "Destination port ranges."
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "DoNotUse",
+              "Icmp",
+              "Tcp",
+              "Udp",
+              "Gre",
+              "Esp",
+              "Ah",
+              "Vxlan",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ProtocolType",
+              "modelAsString": true
+            },
+            "description": "RNM supported protocol types."
           },
           "qosCollectionId": {
             "type": "string",
@@ -263,65 +313,6 @@
           }
         },
         "description": "DSCP Configuration properties"
-      },
-      "QosTrafficProfilerFormat": {
-        "properties": {
-          "markings": {
-            "type": "array",
-            "items":{
-              "type": "int"
-            },
-            "description": "List of markings to be used in the configuration."
-          },
-          "sourceIpRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/QosIpRange"
-            },
-            "description": "The reference to the NetworkSecurityGroup resource."
-          },
-          "destinationIpRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/QosIpRange"
-            },
-            "description": "The reference to the NetworkSecurityGroup resource."
-          },
-          "sourcePortRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/QosPortRange"
-            },
-            "description": "The reference to the NetworkSecurityGroup resource."
-          },
-          "destinationPortRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/QosPortRange"
-            },
-            "description": "The reference to the NetworkSecurityGroup resource."
-          },
-          "protocol": {
-            "type": "string",
-            "enum": [
-              "DoNotUse",
-              "Icmp",
-              "Tcp",
-              "Udp",
-              "Gre",
-              "Esp",
-              "Ah",
-              "Vxlan",
-              "All"
-            ],
-            "x-ms-enum": {
-              "name": "ProtocolType",
-              "modelAsString": true
-            },
-            "description": "The reference to the NetworkSecurityGroup resource."
-          }
-        },
-        "description": "Qos Traffic Profiler properties."
       },
       "QosIpRange": {
         "properties": {
