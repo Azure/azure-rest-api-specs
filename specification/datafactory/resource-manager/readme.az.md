@@ -82,13 +82,11 @@ cli:
       - where:
             group: LinkedServices
             op: CreateOrUpdate#Update
-            param: properties
-        cli-flatten: true
+        hidden: true
       - where:
             group: Datasets
             op: CreateOrUpdate#Update
-            param: properties
-        cli-flatten: true
+        hidden: true
       - where:
             group: Pipelines
             op: CreateOrUpdate#Update
@@ -97,11 +95,5 @@ cli:
       - where:
             group: Triggers
             op: CreateOrUpdate#Update
-            param: properties
-        cli-flatten: true
-      - where:
-            group: DataFlows
-            op: CreateOrUpdate#Update
-            param: properties
-        cli-flatten: true
+        hidden: true
 ```
