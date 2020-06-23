@@ -762,6 +762,8 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/preview/2020-01-01-preview/SecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
