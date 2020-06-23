@@ -14,2576 +14,2576 @@
   "produces": [
     "application/json"
   ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}": {
-            "get": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_Get",
-                "x-ms-examples": {
-                    "KustoClustersGet": {
-                        "$ref": "./examples/KustoClustersGet.json"
-                    }
-                },
-                "description": "Gets a Kusto cluster.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The Kusto cluster.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_CreateOrUpdate",
-                "x-ms-examples": {
-                    "KustoClustersCreateOrUpdate": {
-                        "$ref": "./examples/KustoClustersCreateOrUpdate.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Create or update a Kusto cluster.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        },
-                        "description": "The Kusto cluster parameters supplied to the CreateOrUpdate operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the Cluster.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully created the cluster.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_Update",
-                "x-ms-examples": {
-                    "KustoClustersUpdate": {
-                        "$ref": "./examples/KustoClustersUpdate.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Update a Kusto cluster.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ClusterUpdate"
-                        },
-                        "description": "The Kusto cluster parameters supplied to the Update operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the Cluster.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully updated the cluster.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    },
-                    "202": {
-                        "description": "Successfully updated the cluster.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_Delete",
-                "x-ms-examples": {
-                    "KustoClustersDelete": {
-                        "$ref": "./examples/KustoClustersDelete.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Deletes a Kusto cluster.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- cluster deleted successfully."
-                    },
-                    "202": {
-                        "description": "Accepted the delete cluster request."
-                    },
-                    "204": {
-                        "description": "NoContent -- cluster does not exist in the subscription."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Get",
+        "x-ms-examples": {
+          "KustoClustersGet": {
+            "$ref": "./examples/KustoClustersGet.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/stop": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_Stop",
-                "x-ms-examples": {
-                    "KustoClustersStop": {
-                        "$ref": "./examples/KustoClustersStop.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Stops a Kusto cluster.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK."
-                    },
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
+        "description": "Gets a Kusto cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/start": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_Start",
-                "x-ms-examples": {
-                    "KustoClustersStart": {
-                        "$ref": "./examples/KustoClustersStart.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Starts a Kusto cluster.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK."
-                    },
-                    "202": {
-                        "description": "Accepted."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkPrincipalAssignmentNameAvailability": {
-            "post": {
-                "tags": [
-                    "ClusterPrincipalAssignments"
-                ],
-                "operationId": "ClusterPrincipalAssignments_CheckNameAvailability",
-                "x-ms-examples": {
-                    "KustoClusterPrincipalAssignmentsCheckNameAvailability": {
-                        "$ref": "./examples/KustoClusterPrincipalAssignmentsCheckNameAvailability.json"
-                    }
-                },
-                "description": "Checks that the principal assignment name is valid and is not already in use.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "principalAssignmentName",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPrincipalAssignmentCheckNameRequest"
-                        },
-                        "description": "The name of the principal assignment."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/principalAssignments/{principalAssignmentName}": {
-            "get": {
-                "tags": [
-                    "ClusterPrincipalAssignments"
-                ],
-                "operationId": "ClusterPrincipalAssignments_Get",
-                "x-ms-examples": {
-                    "KustoClusterPrincipalAssignmentsGet": {
-                        "$ref": "./examples/KustoClusterPrincipalAssignmentsGet.json"
-                    }
-                },
-                "description": "Gets a Kusto cluster principalAssignment.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PrincipalAssignmentNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The Kusto cluster principal assignment object.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPrincipalAssignment"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "ClusterPrincipalAssignments"
-                ],
-                "operationId": "ClusterPrincipalAssignments_CreateOrUpdate",
-                "x-ms-examples": {
-                    "KustoClusterPrincipalAssignmentsCreateOrUpdate": {
-                        "$ref": "./examples/KustoClusterPrincipalAssignmentsCreateOrUpdate.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Create a Kusto cluster principalAssignment.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PrincipalAssignmentNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPrincipalAssignment"
-                        },
-                        "description": "The Kusto cluster principalAssignment's parameters supplied for the operation."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the PrincipalAssignment.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPrincipalAssignment"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully created the principalAssignment.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPrincipalAssignment"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "ClusterPrincipalAssignments"
-                ],
-                "operationId": "ClusterPrincipalAssignments_Delete",
-                "x-ms-examples": {
-                    "KustoClusterPrincipalAssignmentsDelete": {
-                        "$ref": "./examples/KustoClusterPrincipalAssignmentsDelete.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Deletes a Kusto cluster principalAssignment.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PrincipalAssignmentNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- principalAssignments deleted successfully."
-                    },
-                    "202": {
-                        "description": "Accepted the delete principalAssignments request."
-                    },
-                    "204": {
-                        "description": "NoContent -- principalAssignments does not exist in the subscription."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/principalAssignments": {
-            "get": {
-                "tags": [
-                    "ClusterPrincipalAssignments"
-                ],
-                "operationId": "ClusterPrincipalAssignments_List",
-                "x-ms-examples": {
-                    "KustoPrincipalAssignmentsList": {
-                        "$ref": "./examples/KustoClusterPrincipalAssignmentsList.json"
-                    }
-                },
-                "description": "Lists all Kusto cluster principalAssignments.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPrincipalAssignmentListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/listFollowerDatabases": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "description": "Returns a list of databases that are owned by this cluster and were followed by another cluster.",
-                "operationId": "Clusters_ListFollowerDatabases",
-                "x-ms-examples": {
-                    "KustoClusterListFollowerDatabases": {
-                        "$ref": "./examples/KustoClusterListFollowerDatabases.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of followed databases.",
-                        "schema": {
-                            "$ref": "#/definitions/FollowerDatabaseListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/detachFollowerDatabases": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "description": "Detaches all followers of a database owned by this cluster.",
-                "operationId": "Clusters_DetachFollowerDatabases",
-                "x-ms-examples": {
-                    "KustoClusterDetachFollowerDatabases": {
-                        "$ref": "./examples/KustoClusterDetachFollowerDatabases.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "followerDatabaseToRemove",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/FollowerDatabaseDefinition"
-                        },
-                        "description": "The follower databases properties to remove."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK."
-                    },
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/diagnoseVirtualNetwork": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "description": "Diagnoses network connectivity status for external resources on which the service is dependent on.",
-                "operationId": "Clusters_DiagnoseVirtualNetwork",
-                "x-ms-examples": {
-                    "KustoClusterDiagnoseVirtualNetwork": {
-                        "$ref": "./examples/KustoClustersDiagnoseVirtualNetwork.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/DiagnoseVirtualNetworkResult"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters": {
-            "get": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_ListByResourceGroup",
-                "x-ms-examples": {
-                    "KustoClustersListByResourceGroup": {
-                        "$ref": "./examples/KustoClustersListByResourceGroup.json"
-                    }
-                },
-                "description": "Lists all Kusto clusters within a resource group.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/clusters": {
-            "get": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_List",
-                "x-ms-examples": {
-                    "KustoClustersList": {
-                        "$ref": "./examples/KustoClustersList.json"
-                    }
-                },
-                "description": "Lists all Kusto clusters within a subscription.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/ClusterListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/skus": {
-            "get": {
-                "description": "Lists eligible SKUs for Kusto resource provider.",
-                "x-ms-examples": {
-                    "KustoClustersListSkus": {
-                        "$ref": "./examples/KustoClustersListSkus.json"
-                    }
-                },
-                "operationId": "Clusters_ListSkus",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/SkuDescriptionList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/checkNameAvailability": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_CheckNameAvailability",
-                "x-ms-examples": {
-                    "KustoClustersCheckNameAvailability": {
-                        "$ref": "./examples/KustoClustersCheckNameAvailability.json"
-                    }
-                },
-                "description": "Checks that the cluster name is valid and is not already in use.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "location",
-                        "in": "path",
-                        "description": "Azure location.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ClusterCheckNameRequest"
-                        },
-                        "description": "The name of the cluster."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
-            "post": {
-                "tags": [
-                    "Databases"
-                ],
-                "operationId": "Databases_CheckNameAvailability",
-                "x-ms-examples": {
-                    "KustoDatabaseCheckNameAvailability": {
-                        "$ref": "./examples/KustoDatabasesCheckNameAvailability.json"
-                    }
-                },
-                "description": "Checks that the database name is valid and is not already in use.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceName",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameRequest"
-                        },
-                        "description": "The name of the resource."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/skus": {
-            "get": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_ListSkusByResource",
-                "x-ms-examples": {
-                    "KustoClustersListResourceSkus": {
-                        "$ref": "./examples/KustoClustersListResourceSkus.json"
-                    }
-                },
-                "description": "Returns the SKUs available for the provided resource.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/ListResourceSkusResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases": {
-            "get": {
-                "tags": [
-                    "Databases"
-                ],
-                "description": "Returns the list of databases of the given Kusto cluster.",
-                "operationId": "Databases_ListByCluster",
-                "x-ms-examples": {
-                    "KustoDatabasesListByCluster": {
-                        "$ref": "./examples/KustoDatabasesListByCluster.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of databases.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabaseListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}": {
-            "get": {
-                "tags": [
-                    "Databases"
-                ],
-                "description": "Returns a database.",
-                "operationId": "Databases_Get",
-                "x-ms-examples": {
-                    "KustoDatabasesGet": {
-                        "$ref": "./examples/KustoDatabasesGet.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the specified database.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Databases"
-                ],
-                "description": "Creates or updates a database.",
-                "operationId": "Databases_CreateOrUpdate",
-                "x-ms-examples": {
-                    "KustoDatabasesCreateOrUpdate": {
-                        "$ref": "./examples/KustoDatabasesCreateOrUpdate.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        },
-                        "description": "The database parameters supplied to the CreateOrUpdate operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the database.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully created the database.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted the create database request.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "patch": {
-                "tags": [
-                    "Databases"
-                ],
-                "description": "Updates a database.",
-                "operationId": "Databases_Update",
-                "x-ms-examples": {
-                    "KustoDatabasesUpdate": {
-                        "$ref": "./examples/KustoDatabasesUpdate.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        },
-                        "description": "The database parameters supplied to the Update operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the database.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully updated the database.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted the update database request.",
-                        "schema": {
-                            "$ref": "#/definitions/Database"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "delete": {
-                "tags": [
-                    "Databases"
-                ],
-                "description": "Deletes the database with the given name.",
-                "operationId": "Databases_Delete",
-                "x-ms-examples": {
-                    "KustoDatabasesDelete": {
-                        "$ref": "./examples/KustoDatabasesDelete.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully deleted the database."
-                    },
-                    "202": {
-                        "description": "Accepted."
-                    },
-                    "204": {
-                        "description": "The specified database does not exist."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkPrincipalAssignmentNameAvailability": {
-            "post": {
-                "tags": [
-                    "DatabasePrincipalAssignments"
-                ],
-                "operationId": "DatabasePrincipalAssignments_CheckNameAvailability",
-                "x-ms-examples": {
-                    "KustoDatabaseCheckNameAvailability": {
-                        "$ref": "./examples/KustoDatabasePrincipalAssignmentsCheckNameAvailability.json"
-                    }
-                },
-                "description": "Checks that the database principal assignment is valid and is not already in use.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "principalAssignmentName",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalAssignmentCheckNameRequest"
-                        },
-                        "description": "The name of the resource."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/principalAssignments/{principalAssignmentName}": {
-            "get": {
-                "tags": [
-                    "DatabasePrincipalAssignments"
-                ],
-                "operationId": "DatabasePrincipalAssignments_Get",
-                "x-ms-examples": {
-                    "KustoDatabasePrincipalAssignmentsGet": {
-                        "$ref": "./examples/KustoDatabasePrincipalAssignmentsGet.json"
-                    }
-                },
-                "description": "Gets a Kusto cluster database principalAssignment.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PrincipalAssignmentNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The Kusto cluster database principal assignment object.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalAssignment"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "DatabasePrincipalAssignments"
-                ],
-                "operationId": "DatabasePrincipalAssignments_CreateOrUpdate",
-                "x-ms-examples": {
-                    "KustoDatabasePrincipalAssignmentsCreateOrUpdate": {
-                        "$ref": "./examples/KustoDatabasePrincipalAssignmentsCreateOrUpdate.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Creates a Kusto cluster database principalAssignment.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PrincipalAssignmentNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalAssignment"
-                        },
-                        "description": "The Kusto principalAssignments parameters supplied for the operation."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the PrincipalAssignments.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalAssignment"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully created the principalAssignments.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalAssignment"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "DatabasePrincipalAssignments"
-                ],
-                "operationId": "DatabasePrincipalAssignments_Delete",
-                "x-ms-examples": {
-                    "KustoDatabasePrincipalAssignmentsDelete": {
-                        "$ref": "./examples/KustoDatabasePrincipalAssignmentsDelete.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "description": "Deletes a Kusto principalAssignment.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PrincipalAssignmentNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- principalAssignments deleted successfully."
-                    },
-                    "202": {
-                        "description": "Accepted the delete principalAssignments request."
-                    },
-                    "204": {
-                        "description": "NoContent -- principalAssignments does not exist in the subscription."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/principalAssignments": {
-            "get": {
-                "tags": [
-                    "DatabasePrincipalAssignments"
-                ],
-                "operationId": "DatabasePrincipalAssignments_List",
-                "x-ms-examples": {
-                    "KustoPrincipalAssignmentsList": {
-                        "$ref": "./examples/KustoDatabasePrincipalAssignmentsList.json"
-                    }
-                },
-                "description": "Lists all Kusto cluster database principalAssignments.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalAssignmentListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/listPrincipals": {
-            "post": {
-                "tags": [
-                    "Databases"
-                ],
-                "description": "Returns a list of database principals of the given Kusto cluster and database.",
-                "operationId": "Databases_ListPrincipals",
-                "x-ms-examples": {
-                    "KustoDatabaseListPrincipals": {
-                        "$ref": "./examples/KustoDatabaseListPrincipals.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of database principals.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/addPrincipals": {
-            "post": {
-                "tags": [
-                    "Databases"
-                ],
-                "operationId": "Databases_AddPrincipals",
-                "x-ms-examples": {
-                    "KustoDatabaseAddPrincipals": {
-                        "$ref": "./examples/KustoDatabaseAddPrincipals.json"
-                    }
-                },
-                "description": "Add Database principals permissions.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "databasePrincipalsToAdd",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalListRequest"
-                        },
-                        "description": "List of database principals to add."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Successfully added the list of database principals. Returns the updated list of principals.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations": {
-            "get": {
-                "tags": [
-                    "AttachedDatabaseConfigurations"
-                ],
-                "description": "Returns the list of attached database configurations of the given Kusto cluster.",
-                "operationId": "AttachedDatabaseConfigurations_ListByCluster",
-                "x-ms-examples": {
-                    "KustoAttachedDatabaseConfigurationsListByCluster": {
-                        "$ref": "./examples/KustoAttachedDatabaseConfigurationsListByCluster.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of attached database configurations.",
-                        "schema": {
-                            "$ref": "#/definitions/AttachedDatabaseConfigurationListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations/{attachedDatabaseConfigurationName}": {
-            "get": {
-                "tags": [
-                    "AttachedDatabaseConfigurations"
-                ],
-                "description": "Returns an attached database configuration.",
-                "operationId": "AttachedDatabaseConfigurations_Get",
-                "x-ms-examples": {
-                    "AttachedDatabaseConfigurationsGet": {
-                        "$ref": "./examples/KustoAttachedDatabaseConfigurationsGet.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the specified attached database configuration.",
-                        "schema": {
-                            "$ref": "#/definitions/AttachedDatabaseConfiguration"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "AttachedDatabaseConfigurations"
-                ],
-                "description": "Creates or updates an attached database configuration.",
-                "operationId": "AttachedDatabaseConfigurations_CreateOrUpdate",
-                "x-ms-examples": {
-                    "AttachedDatabaseConfigurationsCreateOrUpdate": {
-                        "$ref": "./examples/KustoAttachedDatabaseConfigurationsCreateOrUpdate.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AttachedDatabaseConfiguration"
-                        },
-                        "description": "The database parameters supplied to the CreateOrUpdate operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the database.",
-                        "schema": {
-                            "$ref": "#/definitions/AttachedDatabaseConfiguration"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully created the database.",
-                        "schema": {
-                            "$ref": "#/definitions/AttachedDatabaseConfiguration"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted the create database request.",
-                        "schema": {
-                            "$ref": "#/definitions/AttachedDatabaseConfiguration"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "delete": {
-                "tags": [
-                    "AttachedDatabaseConfigurations"
-                ],
-                "description": "Deletes the attached database configuration with the given name.",
-                "operationId": "AttachedDatabaseConfigurations_Delete",
-                "x-ms-examples": {
-                    "AttachedDatabaseConfigurationsDelete": {
-                        "$ref": "./examples/KustoAttachedDatabaseConfigurationsDelete.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully deleted the database."
-                    },
-                    "202": {
-                        "description": "Accepted."
-                    },
-                    "204": {
-                        "description": "The specified database does not exist."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals": {
-            "post": {
-                "tags": [
-                    "Databases"
-                ],
-                "operationId": "Databases_RemovePrincipals",
-                "x-ms-examples": {
-                    "KustoDatabaseRemovePrincipals": {
-                        "$ref": "./examples/KustoDatabaseRemovePrincipals.json"
-                    }
-                },
-                "description": "Remove Database principals permissions.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "databasePrincipalsToRemove",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalListRequest"
-                        },
-                        "description": "List of database principals to remove."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Successfully removed the list of database principals. Returns the updated list of principals.",
-                        "schema": {
-                            "$ref": "#/definitions/DatabasePrincipalListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections": {
-            "get": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "description": "Returns the list of data connections of the given Kusto database.",
-                "operationId": "DataConnections_ListByDatabase",
-                "x-ms-examples": {
-                    "KustoDatabasesListByCluster": {
-                        "$ref": "./examples/KustoDataConnectionsListByDatabase.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of data connections.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectionListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnectionValidation": {
-            "post": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "operationId": "DataConnections_dataConnectionValidation",
-                "x-ms-examples": {
-                    "KustoDataConnectionValidation": {
-                        "$ref": "./examples/KustoDataConnectionValidation.json"
-                    }
-                },
-                "description": "Checks that the data connection parameters are valid.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectionValidation"
-                        },
-                        "description": "The data connection parameters supplied to the CreateOrUpdate operation."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectionValidationListResult"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnectionValidationAsync": {
-            "post": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "operationId": "DataConnections_dataConnectionValidationAsync",
-                "x-ms-examples": {
-                    "KustoDataConnectionValidation": {
-                        "$ref": "./examples/KustoDataConnectionValidationAsync.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
-                },
-                "description": "Checks that the data connection parameters are valid.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectionValidation"
-                        },
-                        "description": "The data connection parameters supplied to the CreateOrUpdate operation."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectionValidationListResult"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
-            "post": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "operationId": "DataConnections_CheckNameAvailability",
-                "x-ms-examples": {
-                    "KustoDataConnectionsCheckNameAvailability": {
-                        "$ref": "./examples/KustoDataConnectionsCheckNameAvailability.json"
-                    }
-                },
-                "description": "Checks that the data connection name is valid and is not already in use.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "dataConnectionName",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectionCheckNameRequest"
-                        },
-                        "description": "The name of the data connection."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK -- Operation to check the Kusto resource name availability was successful.",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections/{dataConnectionName}": {
-            "get": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "description": "Returns a data connection.",
-                "operationId": "DataConnections_Get",
-                "x-ms-examples": {
-                    "KustoDataConnectionsGet": {
-                        "$ref": "./examples/KustoDataConnectionsGet.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectionNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the specified data connection.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "description": "Creates or updates a data connection.",
-                "operationId": "DataConnections_CreateOrUpdate",
-                "x-ms-examples": {
-                    "KustoDataConnectionsCreateOrUpdate": {
-                        "$ref": "./examples/KustoDataConnectionsCreateOrUpdate.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectionNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        },
-                        "description": "The data connection parameters supplied to the CreateOrUpdate operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the data connection.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully created the data connection.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted the create data connection request.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "patch": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "description": "Updates a data connection.",
-                "operationId": "DataConnections_Update",
-                "x-ms-examples": {
-                    "KustoDataConnectionsUpdate": {
-                        "$ref": "./examples/KustoDataConnectionsUpdate.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectionNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        },
-                        "description": "The data connection parameters supplied to the Update operation."
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully updated the data connection.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "201": {
-                        "description": "Successfully updated the data connection.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "202": {
-                        "description": "Accepted the update data connection request.",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnection"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "delete": {
-                "tags": [
-                    "DataConnections"
-                ],
-                "description": "Deletes the data connection with the given name.",
-                "operationId": "DataConnections_Delete",
-                "x-ms-examples": {
-                    "KustoDataConnectionsDelete": {
-                        "$ref": "./examples/KustoDataConnectionsDelete.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DatabaseNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectionNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully deleted the data connection."
-                    },
-                    "202": {
-                        "description": "Accepted."
-                    },
-                    "204": {
-                        "description": "The specified data connection does not exist."
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/providers/Microsoft.Kusto/operations": {
-            "get": {
-                "tags": [
-                    "Operations"
-                ],
-                "operationId": "Operations_List",
-                "x-ms-examples": {
-                    "KustoOperationsList": {
-                        "$ref": "./examples/KustoOperationsList.json"
-                    }
-                },
-                "description": "Lists available operations for the Microsoft.Kusto provider.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The operation was successful. The response contains the list of available operations.",
-                        "schema": {
-                            "$ref": "#/definitions/OperationListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/listLanguageExtensions": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "description": "Returns a list of language extensions that can run within KQL queries.",
-                "operationId": "Clusters_ListLanguageExtensions",
-                "x-ms-examples": {
-                    "KustoClusterListLanguageExtensions": {
-                        "$ref": "./examples/KustoClusterListLanguageExtensions.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of language extensions.",
-                        "schema": {
-                            "$ref": "#/definitions/LanguageExtensionsList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/addLanguageExtensions": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "description": "Add a list of language extensions that can run within KQL queries.",
-                "operationId": "Clusters_AddLanguageExtensions",
-                "x-ms-examples": {
-                    "KustoClusterAddLanguageExtensions": {
-                        "$ref": "./examples/KustoClusterAddLanguageExtensions.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "languageExtensionsToAdd",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/LanguageExtensionsList"
-                        },
-                        "description": "The language extensions to add."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK."
-                    },
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/removeLanguageExtensions": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "description": "Remove a list of language extensions that can run within KQL queries.",
-                "operationId": "Clusters_RemoveLanguageExtensions",
-                "x-ms-examples": {
-                    "KustoClusterRemoveLanguageExtensions": {
-                        "$ref": "./examples/KustoClusterRemoveLanguageExtensions.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ClusterNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "languageExtensionsToRemove",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/LanguageExtensionsList"
-                        },
-                        "description": "The language extensions to remove."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK."
-                    },
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
+          }
         }
+      },
+      "put": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoClustersCreateOrUpdate": {
+            "$ref": "./examples/KustoClustersCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Create or update a Kusto cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "description": "The Kusto cluster parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Successfully created the cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Update",
+        "x-ms-examples": {
+          "KustoClustersUpdate": {
+            "$ref": "./examples/KustoClustersUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Update a Kusto cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdate"
+            },
+            "description": "The Kusto cluster parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Successfully updated the cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Delete",
+        "x-ms-examples": {
+          "KustoClustersDelete": {
+            "$ref": "./examples/KustoClustersDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- cluster deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete cluster request."
+          },
+          "204": {
+            "description": "NoContent -- cluster does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/stop": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Stop",
+        "x-ms-examples": {
+          "KustoClustersStop": {
+            "$ref": "./examples/KustoClustersStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Stops a Kusto cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/start": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Start",
+        "x-ms-examples": {
+          "KustoClustersStart": {
+            "$ref": "./examples/KustoClustersStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Starts a Kusto cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkPrincipalAssignmentNameAvailability": {
+      "post": {
+        "tags": [
+          "ClusterPrincipalAssignments"
+        ],
+        "operationId": "ClusterPrincipalAssignments_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsCheckNameAvailability": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the principal assignment name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "principalAssignmentName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignmentCheckNameRequest"
+            },
+            "description": "The name of the principal assignment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/principalAssignments/{principalAssignmentName}": {
+      "get": {
+        "tags": [
+          "ClusterPrincipalAssignments"
+        ],
+        "operationId": "ClusterPrincipalAssignments_Get",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsGet": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsGet.json"
+          }
+        },
+        "description": "Gets a Kusto cluster principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto cluster principal assignment object.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ClusterPrincipalAssignments"
+        ],
+        "operationId": "ClusterPrincipalAssignments_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsCreateOrUpdate": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Create a Kusto cluster principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            },
+            "description": "The Kusto cluster principalAssignment's parameters supplied for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the PrincipalAssignment.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "201": {
+            "description": "Successfully created the principalAssignment.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ClusterPrincipalAssignments"
+        ],
+        "operationId": "ClusterPrincipalAssignments_Delete",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsDelete": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto cluster principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- principalAssignments deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete principalAssignments request."
+          },
+          "204": {
+            "description": "NoContent -- principalAssignments does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/principalAssignments": {
+      "get": {
+        "tags": [
+          "ClusterPrincipalAssignments"
+        ],
+        "operationId": "ClusterPrincipalAssignments_List",
+        "x-ms-examples": {
+          "KustoPrincipalAssignmentsList": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsList.json"
+          }
+        },
+        "description": "Lists all Kusto cluster principalAssignments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/listFollowerDatabases": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns a list of databases that are owned by this cluster and were followed by another cluster.",
+        "operationId": "Clusters_ListFollowerDatabases",
+        "x-ms-examples": {
+          "KustoClusterListFollowerDatabases": {
+            "$ref": "./examples/KustoClusterListFollowerDatabases.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of followed databases.",
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/detachFollowerDatabases": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Detaches all followers of a database owned by this cluster.",
+        "operationId": "Clusters_DetachFollowerDatabases",
+        "x-ms-examples": {
+          "KustoClusterDetachFollowerDatabases": {
+            "$ref": "./examples/KustoClusterDetachFollowerDatabases.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "followerDatabaseToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseDefinition"
+            },
+            "description": "The follower databases properties to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/diagnoseVirtualNetwork": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Diagnoses network connectivity status for external resources on which the service is dependent on.",
+        "operationId": "Clusters_DiagnoseVirtualNetwork",
+        "x-ms-examples": {
+          "KustoClusterDiagnoseVirtualNetwork": {
+            "$ref": "./examples/KustoClustersDiagnoseVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DiagnoseVirtualNetworkResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "KustoClustersListByResourceGroup": {
+            "$ref": "./examples/KustoClustersListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all Kusto clusters within a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_List",
+        "x-ms-examples": {
+          "KustoClustersList": {
+            "$ref": "./examples/KustoClustersList.json"
+          }
+        },
+        "description": "Lists all Kusto clusters within a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/skus": {
+      "get": {
+        "description": "Lists eligible SKUs for Kusto resource provider.",
+        "x-ms-examples": {
+          "KustoClustersListSkus": {
+            "$ref": "./examples/KustoClustersListSkus.json"
+          }
+        },
+        "operationId": "Clusters_ListSkus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SkuDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoClustersCheckNameAvailability": {
+            "$ref": "./examples/KustoClustersCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the cluster name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Azure location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterCheckNameRequest"
+            },
+            "description": "The name of the cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoDatabaseCheckNameAvailability": {
+            "$ref": "./examples/KustoDatabasesCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the database name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameRequest"
+            },
+            "description": "The name of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/skus": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_ListSkusByResource",
+        "x-ms-examples": {
+          "KustoClustersListResourceSkus": {
+            "$ref": "./examples/KustoClustersListResourceSkus.json"
+          }
+        },
+        "description": "Returns the SKUs available for the provided resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ListResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Returns the list of databases of the given Kusto cluster.",
+        "operationId": "Databases_ListByCluster",
+        "x-ms-examples": {
+          "KustoDatabasesListByCluster": {
+            "$ref": "./examples/KustoDatabasesListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of databases.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Returns a database.",
+        "operationId": "Databases_Get",
+        "x-ms-examples": {
+          "KustoDatabasesGet": {
+            "$ref": "./examples/KustoDatabasesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Creates or updates a database.",
+        "operationId": "Databases_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoDatabasesCreateOrUpdate": {
+            "$ref": "./examples/KustoDatabasesCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The database parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted the create database request.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Updates a database.",
+        "operationId": "Databases_Update",
+        "x-ms-examples": {
+          "KustoDatabasesUpdate": {
+            "$ref": "./examples/KustoDatabasesUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The database parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted the update database request.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Deletes the database with the given name.",
+        "operationId": "Databases_Delete",
+        "x-ms-examples": {
+          "KustoDatabasesDelete": {
+            "$ref": "./examples/KustoDatabasesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the database."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The specified database does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkPrincipalAssignmentNameAvailability": {
+      "post": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoDatabaseCheckNameAvailability": {
+            "$ref": "./examples/KustoDatabasePrincipalAssignmentsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the database principal assignment is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "principalAssignmentName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignmentCheckNameRequest"
+            },
+            "description": "The name of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/principalAssignments/{principalAssignmentName}": {
+      "get": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_Get",
+        "x-ms-examples": {
+          "KustoDatabasePrincipalAssignmentsGet": {
+            "$ref": "./examples/KustoDatabasePrincipalAssignmentsGet.json"
+          }
+        },
+        "description": "Gets a Kusto cluster database principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto cluster database principal assignment object.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoDatabasePrincipalAssignmentsCreateOrUpdate": {
+            "$ref": "./examples/KustoDatabasePrincipalAssignmentsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates a Kusto cluster database principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            },
+            "description": "The Kusto principalAssignments parameters supplied for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the PrincipalAssignments.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            }
+          },
+          "201": {
+            "description": "Successfully created the principalAssignments.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_Delete",
+        "x-ms-examples": {
+          "KustoDatabasePrincipalAssignmentsDelete": {
+            "$ref": "./examples/KustoDatabasePrincipalAssignmentsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- principalAssignments deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete principalAssignments request."
+          },
+          "204": {
+            "description": "NoContent -- principalAssignments does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/principalAssignments": {
+      "get": {
+        "tags": [
+          "DatabasePrincipalAssignments"
+        ],
+        "operationId": "DatabasePrincipalAssignments_List",
+        "x-ms-examples": {
+          "KustoPrincipalAssignmentsList": {
+            "$ref": "./examples/KustoDatabasePrincipalAssignmentsList.json"
+          }
+        },
+        "description": "Lists all Kusto cluster database principalAssignments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/listPrincipals": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Returns a list of database principals of the given Kusto cluster and database.",
+        "operationId": "Databases_ListPrincipals",
+        "x-ms-examples": {
+          "KustoDatabaseListPrincipals": {
+            "$ref": "./examples/KustoDatabaseListPrincipals.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of database principals.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/addPrincipals": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_AddPrincipals",
+        "x-ms-examples": {
+          "KustoDatabaseAddPrincipals": {
+            "$ref": "./examples/KustoDatabaseAddPrincipals.json"
+          }
+        },
+        "description": "Add Database principals permissions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "databasePrincipalsToAdd",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListRequest"
+            },
+            "description": "List of database principals to add."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully added the list of database principals. Returns the updated list of principals.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations": {
+      "get": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Returns the list of attached database configurations of the given Kusto cluster.",
+        "operationId": "AttachedDatabaseConfigurations_ListByCluster",
+        "x-ms-examples": {
+          "KustoAttachedDatabaseConfigurationsListByCluster": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of attached database configurations.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations/{attachedDatabaseConfigurationName}": {
+      "get": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Returns an attached database configuration.",
+        "operationId": "AttachedDatabaseConfigurations_Get",
+        "x-ms-examples": {
+          "AttachedDatabaseConfigurationsGet": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified attached database configuration.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Creates or updates an attached database configuration.",
+        "operationId": "AttachedDatabaseConfigurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "AttachedDatabaseConfigurationsCreateOrUpdate": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            },
+            "description": "The database parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted the create database request.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Deletes the attached database configuration with the given name.",
+        "operationId": "AttachedDatabaseConfigurations_Delete",
+        "x-ms-examples": {
+          "AttachedDatabaseConfigurationsDelete": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the database."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The specified database does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_RemovePrincipals",
+        "x-ms-examples": {
+          "KustoDatabaseRemovePrincipals": {
+            "$ref": "./examples/KustoDatabaseRemovePrincipals.json"
+          }
+        },
+        "description": "Remove Database principals permissions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "databasePrincipalsToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListRequest"
+            },
+            "description": "List of database principals to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully removed the list of database principals. Returns the updated list of principals.",
+            "schema": {
+              "$ref": "#/definitions/DatabasePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections": {
+      "get": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Returns the list of data connections of the given Kusto database.",
+        "operationId": "DataConnections_ListByDatabase",
+        "x-ms-examples": {
+          "KustoDatabasesListByCluster": {
+            "$ref": "./examples/KustoDataConnectionsListByDatabase.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of data connections.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnectionValidation": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_dataConnectionValidation",
+        "x-ms-examples": {
+          "KustoDataConnectionValidation": {
+            "$ref": "./examples/KustoDataConnectionValidation.json"
+          }
+        },
+        "description": "Checks that the data connection parameters are valid.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidation"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidationListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnectionValidationAsync": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_dataConnectionValidationAsync",
+        "x-ms-examples": {
+          "KustoDataConnectionValidation": {
+            "$ref": "./examples/KustoDataConnectionValidationAsync.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Checks that the data connection parameters are valid.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidation"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionValidationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoDataConnectionsCheckNameAvailability": {
+            "$ref": "./examples/KustoDataConnectionsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the data connection name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionCheckNameRequest"
+            },
+            "description": "The name of the data connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the Kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections/{dataConnectionName}": {
+      "get": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Returns a data connection.",
+        "operationId": "DataConnections_Get",
+        "x-ms-examples": {
+          "KustoDataConnectionsGet": {
+            "$ref": "./examples/KustoDataConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Creates or updates a data connection.",
+        "operationId": "DataConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoDataConnectionsCreateOrUpdate": {
+            "$ref": "./examples/KustoDataConnectionsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Successfully created the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted the create data connection request.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Updates a data connection.",
+        "operationId": "DataConnections_Update",
+        "x-ms-examples": {
+          "KustoDataConnectionsUpdate": {
+            "$ref": "./examples/KustoDataConnectionsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            },
+            "description": "The data connection parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted the update data connection request.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Deletes the data connection with the given name.",
+        "operationId": "DataConnections_Delete",
+        "x-ms-examples": {
+          "KustoDataConnectionsDelete": {
+            "$ref": "./examples/KustoDataConnectionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the data connection."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The specified data connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Kusto/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "KustoOperationsList": {
+            "$ref": "./examples/KustoOperationsList.json"
+          }
+        },
+        "description": "Lists available operations for the Microsoft.Kusto provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/listLanguageExtensions": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns a list of language extensions that can run within KQL queries.",
+        "operationId": "Clusters_ListLanguageExtensions",
+        "x-ms-examples": {
+          "KustoClusterListLanguageExtensions": {
+            "$ref": "./examples/KustoClusterListLanguageExtensions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of language extensions.",
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/addLanguageExtensions": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Add a list of language extensions that can run within KQL queries.",
+        "operationId": "Clusters_AddLanguageExtensions",
+        "x-ms-examples": {
+          "KustoClusterAddLanguageExtensions": {
+            "$ref": "./examples/KustoClusterAddLanguageExtensions.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToAdd",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to add."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/removeLanguageExtensions": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Remove a list of language extensions that can run within KQL queries.",
+        "operationId": "Clusters_RemoveLanguageExtensions",
+        "x-ms-examples": {
+          "KustoClusterRemoveLanguageExtensions": {
+            "$ref": "./examples/KustoClusterRemoveLanguageExtensions.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "ClusterProperties": {
-        "properties": {
-            "state": {
-                "type": "string",
-                "readOnly": true,
-                "description": "The state of the resource.",
-                "enum": [
-                    "Creating",
-                    "Unavailable",
-                    "Running",
-                    "Deleting",
-                    "Deleted",
-                    "Stopping",
-                    "Stopped",
-                    "Starting",
-                    "Updating"
-                ],
-                "x-ms-enum": {
-                    "name": "State",
-                    "modelAsString": true
-                }
-            },
-            "provisioningState": {
-                "type": "string",
-                "readOnly": true,
-                "description": "The provisioned state of the resource.",
-                "enum": [
-                    "Running",
-                    "Creating",
-                    "Deleting",
-                    "Succeeded",
-                    "Failed",
-                    "Moving"
-                ],
-                "x-ms-enum": {
-                    "name": "ProvisioningState",
-                    "modelAsString": true
-                }
-            },
-            "uri": {
-                "type": "string",
-                "readOnly": true,
-                "description": "The cluster URI."
-            },
-            "dataIngestionUri": {
-                "type": "string",
-                "readOnly": true,
-                "description": "The cluster data ingestion URI."
-            },
-            "stateReason": {
-                "type": "string",
-                "readOnly": true,
-                "description": "The reason for the cluster's current state."
-            },
-            "trustedExternalTenants": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/TrustedExternalTenant"
-                },
-                "description": "The cluster's external tenants."
-            },
-            "optimizedAutoscale": {
-                "type": "object",
-                "$ref": "#/definitions/OptimizedAutoscale",
-                "description": "Optimized auto scale definition."
-            },
-            "enableDiskEncryption": {
-                "description": "A boolean value that indicates if the cluster's disks are encrypted.",
-                "type": "boolean"
-            },
-            "enableStreamingIngest": {
-                "description": "A boolean value that indicates if the streaming ingest is enabled.",
-                "default": false,
-                "type": "boolean"
-            },
-            "virtualNetworkConfiguration": {
-                "type": "object",
-                "$ref": "#/definitions/VirtualNetworkConfiguration",
-                "description": "Virtual network definition."
-            },
-            "keyVaultProperties": {
-                "type": "object",
-                "$ref": "#/definitions/KeyVaultProperties",
-                "description": "KeyVault properties for the cluster encryption."
-            },
-            "enablePurge": {
-                "description": "A boolean value that indicates if the purge operations are enabled.",
-                "default": false,
-                "type": "boolean"
-            },
-            "languageExtensions": {
-                "type": "object",
-                "$ref": "#/definitions/LanguageExtensionsList",
-                "readOnly": true,
-                "description": "List of the cluster's language extensions."
-            },
-            "enableDoubleEncryption": {
-                "description": "A boolean value that indicates if double encryption is enabled.",
-                "default": false,
-                "type": "boolean"
-            }
+      "properties": {
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of the resource.",
+          "enum": [
+            "Creating",
+            "Unavailable",
+            "Running",
+            "Deleting",
+            "Deleted",
+            "Stopping",
+            "Stopped",
+            "Starting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
         },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioned state of the resource.",
+          "enum": [
+            "Running",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Moving"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The cluster URI."
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The cluster data ingestion URI."
+        },
+        "stateReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for the cluster's current state."
+        },
+        "trustedExternalTenants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedExternalTenant"
+          },
+          "description": "The cluster's external tenants."
+        },
+        "optimizedAutoscale": {
+          "type": "object",
+          "$ref": "#/definitions/OptimizedAutoscale",
+          "description": "Optimized auto scale definition."
+        },
+        "enableDiskEncryption": {
+          "description": "A boolean value that indicates if the cluster's disks are encrypted.",
+          "type": "boolean"
+        },
+        "enableStreamingIngest": {
+          "description": "A boolean value that indicates if the streaming ingest is enabled.",
+          "default": false,
+          "type": "boolean"
+        },
+        "virtualNetworkConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/VirtualNetworkConfiguration",
+          "description": "Virtual network definition."
+        },
+        "keyVaultProperties": {
+          "type": "object",
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "KeyVault properties for the cluster encryption."
+        },
+        "enablePurge": {
+          "description": "A boolean value that indicates if the purge operations are enabled.",
+          "default": false,
+          "type": "boolean"
+        },
+        "languageExtensions": {
+          "type": "object",
+          "$ref": "#/definitions/LanguageExtensionsList",
+          "readOnly": true,
+          "description": "List of the cluster's language extensions."
+        },
+        "enableDoubleEncryption": {
+          "description": "A boolean value that indicates if double encryption is enabled.",
+          "default": false,
+          "type": "boolean"
+        }
+      },
       "description": "Class representing the Kusto cluster properties."
     },
     "TrustedExternalTenant": {
