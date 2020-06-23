@@ -29,7 +29,7 @@ steps:
     command: build
     containerRegistry: $(CONTAINER_REGISTRY_NAME)
     repository: $(REPOSITORY_NAME_PREFIX)-single
-    Dockerfile: Dockerfile
+    Dockerfile: scripts/datacontainer/Dockerfile
     tags: |
       latest
       $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
