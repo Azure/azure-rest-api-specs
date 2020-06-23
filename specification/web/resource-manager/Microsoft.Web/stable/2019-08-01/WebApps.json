@@ -22638,7 +22638,8 @@
                 "Facebook",
                 "Google",
                 "MicrosoftAccount",
-                "Twitter"
+                "Twitter",
+                "Github"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -22657,6 +22658,10 @@
             },
             "clientSecret": {
               "description": "The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).\nThis setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.\nOtherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.\nMore information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+              "type": "string"
+            },
+            "clientSecretSettingName": {
+              "description": "The app setting name that contains the client secret of the relying party application.",
               "type": "string"
             },
             "clientSecretCertificateThumbprint": {
@@ -22685,12 +22690,20 @@
                 "type": "string"
               }
             },
+            "aadClaimsAuthorization": {
+              "description": "Gets a JSON string containing the Azure AD Acl settings.",
+              "type": "string"
+            },
             "googleClientId": {
               "description": "The OpenID Connect Client ID for the Google web application.\nThis setting is required for enabling Google Sign-In.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
               "type": "string"
             },
             "googleClientSecret": {
               "description": "The client secret associated with the Google web application.\nThis setting is required for enabling Google Sign-In.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
+              "type": "string"
+            },
+            "googleClientSecretSettingName": {
+              "description": "The app setting name that contains the client secret associated with \nthe Google web application.",
               "type": "string"
             },
             "googleOAuthScopes": {
@@ -22708,8 +22721,31 @@
               "description": "The App Secret of the Facebook app used for Facebook Login.\nThis setting is required for enabling Facebook Login.\nFacebook Login documentation: https://developers.facebook.com/docs/facebook-login",
               "type": "string"
             },
+            "facebookAppSecretSettingName": {
+              "description": "The app setting name that contains the app secret used for Facebook Login.",
+              "type": "string"
+            },
             "facebookOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.\nThis setting is optional.\nFacebook Login documentation: https://developers.facebook.com/docs/facebook-login",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gitHubClientId": {
+              "description": "The Client Id of the GitHub app used for login.\nThis setting is required for enabling Github login",
+              "type": "string"
+            },
+            "gitHubClientSecret": {
+              "description": "The Client Secret of the GitHub app used for Github Login.\nThis setting is required for enabling Github login.",
+              "type": "string"
+            },
+            "gitHubClientSecretSettingName": {
+              "description": "The app setting name that contains the client secret of the Github\napp used for GitHub Login.",
+              "type": "string"
+            },
+            "gitHubOAuthScopes": {
+              "description": "The OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.\nThis setting is optional",
               "type": "array",
               "items": {
                 "type": "string"
@@ -22723,6 +22759,10 @@
               "description": "The OAuth 1.0a consumer secret of the Twitter application used for sign-in.\nThis setting is required for enabling Twitter Sign-In.\nTwitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
               "type": "string"
             },
+            "twitterConsumerSecretSettingName": {
+              "description": "The app setting name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
+              "type": "string"
+            },
             "microsoftAccountClientId": {
               "description": "The OAuth 2.0 client ID that was created for the app used for authentication.\nThis setting is required for enabling Microsoft Account authentication.\nMicrosoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
               "type": "string"
@@ -22731,12 +22771,24 @@
               "description": "The OAuth 2.0 client secret that was created for the app used for authentication.\nThis setting is required for enabling Microsoft Account authentication.\nMicrosoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
               "type": "string"
             },
+            "microsoftAccountClientSecretSettingName": {
+              "description": "The app setting name containing the OAuth 2.0 client secret that was created for the\napp used for authentication.",
+              "type": "string"
+            },
             "microsoftAccountOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.\nThis setting is optional. If not specified, \"wl.basic\" is used as the default scope.\nMicrosoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx",
               "type": "array",
               "items": {
                 "type": "string"
               }
+            },
+            "isAuthFromFile": {
+              "description": "\"true\" if the auth config settings should be read from a file,\n\"false\" otherwise",
+              "type": "string"
+            },
+            "authFilePath": {
+              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will the site's root directory.",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
