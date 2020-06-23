@@ -203,29 +203,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.tables
-  package-name: azure-tables
-  clear-output-folder: true
-  no-namespace-folders: true
-```
-
-### Tag: package-2019-02 and python
-
-These settings apply only when `--tag=package-2019-02 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-02' && $(python)
-python:
-  namespace: azure.tables.storage.v2019_02_02
-  output-folder: $(python-sdks-folder)/azure-tables-storage/azure/tables/storage/v2019_02_02
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
