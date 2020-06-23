@@ -1,38 +1,38 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "NetworkManagementClient",
-		"description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-		"version": "2020-06-01"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
-		}
-	],
-	"securityDefinitions": {
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2020-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
     "azure_auth": {
-			"type": "oauth2",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"flow": "implicit",
-			"description": "Azure Active Directory OAuth2 Flow.",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	},
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts": {
       "get": {
@@ -56,7 +56,7 @@
               "$ref": "#/definitions/ExpressRouteProviderPortListResult"
             }
           },
-          "default": { 
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -102,7 +102,7 @@
               "$ref": "#/definitions/ExpressRouteProviderPortListResult"
             }
           },
-          "default": { 
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -118,9 +118,9 @@
           "nextLinkName": "nextLink"
         }
       }
-    }    
+    }
   },
-	"definitions": {
+  "definitions": {
     "ExpressRouteProviderPortProperties": {
       "properties": {
         "portPairDescriptor": {
@@ -165,26 +165,26 @@
       },
       "description": "Properties of ExpressRouteProviderPort."
     },
-		"ExpressRouteProviderPort": {
-			"properties": {
-				"properties": {
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/ExpressRouteProviderPortProperties",
-					"description": "Properties of the express route Service Provider Port."
-				},
-				"etag": {
-					"readOnly": true,
-					"type": "string",
-					"description": "A unique read-only string that changes whenever the resource is updated."
-				}
-			},
-			"allOf": [
-				{
-					"$ref": "./network.json#/definitions/Resource"
-				}
-			],
-			"description": "ExpressRouteProviderPort resource."
-		},
+    "ExpressRouteProviderPort": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteProviderPortProperties",
+          "description": "Properties of the express route Service Provider Port."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "ExpressRouteProviderPort resource."
+    },
     "ExpressRouteProviderPortListResult": {
       "properties": {
         "value": {
@@ -201,6 +201,6 @@
         }
       },
       "description": "Response for ListExpressRouteProviderPort API service call."
-    }   
-	}
-} 
+    }
+  }
+}
