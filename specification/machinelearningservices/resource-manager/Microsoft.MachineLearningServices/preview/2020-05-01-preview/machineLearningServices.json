@@ -3965,17 +3965,8 @@
           "x-ms-enum": {
             "name": "WebServiceState",
             "modelAsString": true
-          }
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "The time the service was created.",
-          "type": "string"
-        },
-        "updatedTime": {
-          "format": "date-time",
-          "description": "The time the service was updated.",
-          "type": "string"
+          },
+          "readOnly": true
         },
         "error": {
           "description": "The error details.",
@@ -3983,7 +3974,8 @@
             {
               "$ref": "#/definitions/ErrorResponse"
             }
-          ]
+          ],
+          "readOnly": true
         },
         "computeType": {
           "description": "The compute environment type for the service.",
@@ -4050,7 +4042,8 @@
             },
             "scoringUri": {
               "description": "The Uri for sending scoring requests.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "location": {
               "description": "The name of the Azure location/region.",
@@ -4098,14 +4091,16 @@
             },
             "swaggerUri": {
               "description": "The Uri for sending swagger requests.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "modelConfigMap": {
               "description": "Details on the models and configurations.",
               "type": "object",
               "additionalProperties": {
                 "type": "object"
-              }
+              },
+              "readOnly": true
             },
             "models": {
               "description": "The list of models.",
@@ -4860,10 +4855,12 @@
             },
             "scoringUri": {
               "description": "The Uri for sending scoring requests.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "deploymentStatus": {
               "description": "The deployment status.",
+              "readOnly": true,
               "allOf": [
                 {
                   "$ref": "#/definitions/AKSReplicaStatus"
@@ -4894,14 +4891,16 @@
             },
             "swaggerUri": {
               "description": "The Uri for sending swagger requests.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "modelConfigMap": {
               "description": "Details on the models and configurations.",
               "type": "object",
               "additionalProperties": {
                 "type": "object"
-              }
+              },
+              "readOnly": true
             },
             "environmentImageRequest": {
               "description": "The Environment, models and assets used for inferencing.",
