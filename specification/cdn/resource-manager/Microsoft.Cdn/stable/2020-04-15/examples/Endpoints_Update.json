@@ -22,6 +22,7 @@
         },
         "location": "WestCentralUs",
         "properties": {
+          "hostName": "endpoint1.azureedge.net",
           "originHostHeader": null,
           "provisioningState": "Creating",
           "resourceState": "Creating",
@@ -29,6 +30,41 @@
           "isHttpsAllowed": true,
           "queryStringCachingBehavior": "IgnoreQueryString",
           "originPath": null,
+          "origins": [
+            {
+              "name": "www-bing-com",
+              "properties": {
+                "hostName": "www.bing.com",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true,
+                "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
+                "privateLinkLocation": "eastus",
+                "privateLinkApprovalMessage": "Please approve the connection request for this Private Link"
+              }
+            }
+          ],
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
+                  "probePath": "/health.aspx",
+                  "probeRequestType": "GET",
+                  "probeProtocol": "Http",
+                  "probeIntervalInSeconds": 120
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
+                  }
+                ]
+              }
+            }
+          ],
           "defaultOriginGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
           },
