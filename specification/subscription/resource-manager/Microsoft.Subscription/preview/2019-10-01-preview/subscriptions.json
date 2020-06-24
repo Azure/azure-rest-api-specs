@@ -788,12 +788,22 @@
         "status": {
           "readOnly": true,
           "description": "Current transfer Status.",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          },
+          "enum": [
+            "Initiated",
+            "InProgress",
+            "Completed"
+          ]
         },
         "expiresOn": {
           "readOnly": true,
           "description": "Expiry time of the transfer",
-          "type": "string"
+          "type": "string",
+          "format":"date-time"
         }
       }
     },
