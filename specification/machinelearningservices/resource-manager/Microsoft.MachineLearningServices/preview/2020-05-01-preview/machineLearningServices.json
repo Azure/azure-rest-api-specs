@@ -4122,7 +4122,7 @@
               "description": "The Environment, models and assets used for inferencing.",
               "allOf": [
                 {
-                  "$ref": "#/definitions/EnvironmentImageRequest"
+                  "$ref": "#/definitions/EnvironmentImageResponse"
                 }
               ]
             },
@@ -4386,6 +4386,53 @@
         }
       }
     },
+    "EnvironmentImageResponse": {
+      "description": "Request to create a Docker image based on Environment.",
+      "type": "object",
+      "properties": {
+        "driverProgram": {
+          "description": "The name of the driver file.",
+          "type": "string"
+        },
+        "assets": {
+          "description": "The list of assets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageAsset"
+          }
+        },
+        "modelIds": {
+          "description": "The list of model Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "models": {
+          "description": "The list of models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "environment": {
+          "description": "The details of the AZURE ML environment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelEnvironmentDefinitionResponse"
+            }
+          ]
+        },
+        "environmentReference": {
+          "description": "The unique identifying details of the AZURE ML environment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentReference"
+            }
+          ]
+        }
+      }
+    },
     "ImageAsset": {
       "description": "An Image asset.",
       "type": "object",
@@ -4467,6 +4514,65 @@
         }
       }
     },
+    "ModelEnvironmentDefinitionResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the environment.",
+          "type": "string",
+          "example": "mydevenvironment"
+        },
+        "version": {
+          "description": "The environment version.",
+          "type": "string",
+          "example": "1"
+        },
+        "python": {
+          "description": "Settings for a Python environment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelPythonSection"
+            }
+          ]
+        },
+        "environmentVariables": {
+          "description": "Definition of environment variables to be defined in the environment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "docker": {
+          "description": "The definition of a Docker container.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelDockerSectionResponse"
+            }
+          ]
+        },
+        "spark": {
+          "description": "The configuration for a Spark environment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelSparkSection"
+            }
+          ]
+        },
+        "r": {
+          "description": "Settings for a R environment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RSectionResponse"
+            }
+          ]
+        },
+        "inferencingStackVersion": {
+          "description": "The inferencing stack version added to the image. To avoid adding an inferencing stack, do not set this value. Valid values: \"latest\".",
+          "type": "string",
+          "example": "latest"
+        }
+      }
+    },
     "EnvironmentReference": {
       "type": "object",
       "properties": {
@@ -4516,6 +4622,14 @@
         }
       }
     },
+    "ContainerRegistryResponse": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
     "ModelDockerSection": {
       "type": "object",
       "properties": {
@@ -4534,6 +4648,29 @@
           "allOf": [
             {
               "$ref": "#/definitions/ContainerRegistry"
+            }
+          ]
+        }
+      }
+    },
+    "ModelDockerSectionResponse": {
+      "type": "object",
+      "properties": {
+        "baseImage": {
+          "description": "Base image used for Docker-based runs. Mutually exclusive with BaseDockerfile.",
+          "type": "string",
+          "example": "ubuntu:latest"
+        },
+        "baseDockerfile": {
+          "description": "Base Dockerfile used for Docker-based runs. Mutually exclusive with BaseImage.",
+          "type": "string",
+          "example": "FROM ubuntu:latest\r\nRUN echo \"Hello world!\""
+        },
+        "baseImageRegistry": {
+          "description": "Image registry that contains the base image.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ContainerRegistryResponse"
             }
           ]
         }
@@ -4603,6 +4740,15 @@
         }
       }
     },
+    "RGitHubPackageResponse": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "description": "Repository address in the format username/repo[/subdir][@ref|#pull].",
+          "type": "string"
+        }
+      }
+    },
     "RSection": {
       "type": "object",
       "properties": {
@@ -4634,6 +4780,55 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RGitHubPackage"
+          }
+        },
+        "customUrlPackages": {
+          "description": "The packages from custom urls.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bioConductorPackages": {
+          "description": "The packages from Bioconductor.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RSectionResponse": {
+      "type": "object",
+      "properties": {
+        "rVersion": {
+          "description": "The version of R to be installed",
+          "type": "string"
+        },
+        "userManaged": {
+          "description": "Indicates whether the environment is managed by user or by AzureML.",
+          "type": "boolean"
+        },
+        "rscriptPath": {
+          "description": "The Rscript path to use if an environment build is not required.\r\nThe path specified gets used to call the user script.",
+          "type": "string"
+        },
+        "snapshotDate": {
+          "description": "Date of MRAN snapshot to use in YYYY-MM-DD format, e.g. \"2019-04-17\"",
+          "type": "string"
+        },
+        "cranPackages": {
+          "description": "The CRAN packages to use.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RCranPackage"
+          }
+        },
+        "gitHubPackages": {
+          "description": "The packages directly from GitHub.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RGitHubPackageResponse"
           }
         },
         "customUrlPackages": {
@@ -4921,7 +5116,7 @@
               "description": "The Environment, models and assets used for inferencing.",
               "allOf": [
                 {
-                  "$ref": "#/definitions/EnvironmentImageRequest"
+                  "$ref": "#/definitions/EnvironmentImageResponse"
                 }
               ]
             }
