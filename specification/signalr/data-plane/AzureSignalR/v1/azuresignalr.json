@@ -1,0 +1,710 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Azure SignalR Service REST API",
+      "version": "v1"
+    },
+    "paths": {
+      "/api/v1/health": {
+        "get": {
+          "description": "Get service health status",
+          "tags": [],
+          "responses": {
+            "200": {
+              "description": "Ok"
+            },
+            "503": {
+              "description": "ServiceUnavailable"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}": {
+        "post": {
+          "description": "Broadcast a message to all clients connected to target hub.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayloadMessage"
+                }
+              }
+            }
+          },
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/users/{id}": {
+        "post": {
+          "description": "Broadcast a message to all clients within the target group.",
+           "tags": [],
+           "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayloadMessage"
+                }
+              }
+            }
+          },
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/connections/{connectionId}": {
+        "post": {
+          "description": "Send message to a single connection Id.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "connectionId",
+              "in": "path",
+              "required": true,
+              "description": "Target connection Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayloadMessage"
+                }
+              }
+            }
+          },
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        },
+        "delete": {
+          "description": "Close a target client connection Id with reason.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "connectionId",
+              "in": "path",
+              "required": true,
+              "description": "Target connection Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "reason",
+              "in": "query",
+              "description": "Close reason.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/groups/{group}": {
+        "post": {
+          "description": "Broadcast a message to all clients within the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayloadMessage"
+                }
+              }
+            }
+          },
+          "responses": {
+            "202": {
+              "description": "Ok"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/groups/{group}/users/{user}": {
+        "get": {
+          "description": "Check whether a user exists in the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ok"
+            },
+            "404": {
+              "description": "NotFound"
+            }
+          }
+        },
+        "put": {
+          "description": "Add a user to the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "ttl",
+              "in": "query",
+              "description": "Time to live in seconds for the user Id. Optional for live forever.",
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        },
+        "delete": {
+          "description": "Remove a user from the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/users/{user}/groups/{group}": {
+        "get": {
+          "description": "Check whether a user exists in the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ok"
+            },
+            "404": {
+              "description": "NotFound"
+            }
+          }
+        },
+        "put": {
+          "description": "Add a user to the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "ttl",
+              "in": "query",
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        },
+        "delete": {
+          "description": "Remove a user from the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}": {
+        "put": {
+          "description": "Add a connection to the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "connectionId",
+              "in": "path",
+              "required": true,
+              "description": "Target connection Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        },
+        "delete": {
+          "description": "Remove a connection from the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "connectionId",
+              "in": "path",
+              "required": true,
+              "description": "Target connection Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/connections/{connectionId}/groups/{group}": {
+        "put": {
+          "description": "Add a connection to the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "connectionId",
+              "in": "path",
+              "required": true,
+              "description": "Target connection Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        },
+        "delete": {
+          "description": "Remove a connection from the target group.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "group",
+              "in": "path",
+              "required": true,
+              "description": "Target group name, which length should be greater than 0 and less than 1025.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "connectionId",
+              "in": "path",
+              "required": true,
+              "description": "Target connection Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      },
+      "/api/v1/hubs/{hub}/users/{user}/groups": {
+        "delete": {
+          "description": "Remove a user from all groups.",
+          "tags": [],
+          "parameters": [
+            {
+              "name": "hub",
+              "in": "path",
+              "required": true,
+              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "user",
+              "in": "path",
+              "required": true,
+              "description": "Target user Id.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Accepted"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "IActionResult": {
+          "type": "object",
+          "additionalProperties": false
+        },
+        "IActionResultValueTask": {
+          "type": "object",
+          "properties": {
+            "IsCompleted": {
+              "type": "boolean",
+              "readOnly": true
+            },
+            "IsCompletedSuccessfully": {
+              "type": "boolean",
+              "readOnly": true
+            },
+            "IsFaulted": {
+              "type": "boolean",
+              "readOnly": true
+            },
+            "IsCanceled": {
+              "type": "boolean",
+              "readOnly": true
+            },
+            "Result": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              ],
+              "nullable": true,
+              "readOnly": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "PayloadMessage": {
+          "type": "object",
+          "properties": {
+            "Target": {
+              "type": "string",
+              "nullable": true
+            },
+            "Arguments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
