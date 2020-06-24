@@ -241,4 +241,8 @@ directive:
     where: $.definitions.GroupIdInformation.properties.properties
     from: iotdps.json
     reason: Data structure defined by Networking Private links team. Cannot be changed
+  - suppress: AvoidNestedProperties
+    where: $.definitions.PrivateEndpointConnection.properties.properties
+    from: iotdps.json
+    reason: This API is defined by Azure Networking team and cannot be changed
 ```
