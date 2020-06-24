@@ -448,7 +448,7 @@
     },
     "RuleStatus": {
       "type": "string",
-      "description": "Current status of the rule. The rule must be active to change billed values. Processing indicates that a saved change has not yet been applied to your account.",
+      "description": "Current status of the rule.",
       "enum": [
         "NotActive",
         "Active",
@@ -456,19 +456,48 @@
       ],
       "x-ms-enum": {
         "name": "RuleStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotActive",
+            "description": "Rule is saved but not used to allocate costs.",
+            "name": "NotActive"
+          },
+          {
+            "value": "Active",
+            "description": "Rule is saved and impacting cost allocation.",
+            "name": "Active"
+          },
+          {
+            "value": "Processing",
+            "description": "Rule is saved and cost allocation is being updated.",
+            "name": "Processing"
+          }
+        ]
       }
     },
     "InputRuleStatus": {
       "type": "string",
-      "description": "Current status of the rule. The rule must be active to change billed values.",
+      "description": "Desired status of the rule.",
       "enum": [
         "NotActive",
         "Active"
       ],
       "x-ms-enum": {
         "name": "InputRuleStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotActive",
+            "description": "Rule will be saved but not used to allocate costs.",
+            "name": "NotActive"
+          },
+          {
+            "value": "Active",
+            "description": "Rule will be saved and impacting cost allocation.",
+            "name": "Active"
+          }
+        ]
       }
     },
     "CostAllocationRuleDetails": {
@@ -563,14 +592,26 @@
     },
     "CostAllocationResourceType": {
       "type": "string",
-      "description": "Category of resource to use for allocation. Dimension indicates cost for either a resource group or subscription is being changed. Tag allocates cost based on Azure Tag key value pairs.",
+      "description": "Category of resource to use for allocation.",
       "enum": [
         "Dimension",
         "Tag"
       ],
       "x-ms-enum": {
         "name": "CostAllocationResourceType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Dimension",
+            "description": "Indicates an Azure dimension such as a subscription id or resource group name is being used for allocation.",
+            "name": "Dimension"
+          },
+          {
+            "value": "Tag",
+            "description": "Allocates cost based on Azure Tag key value pairs.",
+            "name": "Tag"
+          }
+        ]
       }
     },
     "CostAllocationProportion": {
