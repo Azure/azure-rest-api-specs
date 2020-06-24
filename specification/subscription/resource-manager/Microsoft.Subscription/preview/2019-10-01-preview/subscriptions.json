@@ -393,13 +393,13 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeDirectory": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/targetDirectory/default": {
       "put": {
-        "description": "Initiate change directory transfer.",
-        "operationId": "Subscription_InitiateChangeDirectory",
+        "description": "Change target directory.",
+        "operationId": "Subscription_ChangeTargetDirectory",
         "x-ms-examples": {
-          "initiateChangeDirectory": {
-            "$ref": "./examples/initiateChangeDirectory.json"
+          "ChangeTargetDirectory": {
+            "$ref": "./examples/ChangeTargetDirectory.json"
           }
         },
         "responses": {
@@ -434,11 +434,11 @@
         ]
       },
       "get": {
-        "description": "Get initiate change directory transfer status.",
-        "operationId": "Subscription_GetInitiateChangeDirectoryStatus",
+        "description": "Get change target directory status.",
+        "operationId": "Subscription_GetChangeTargetDirectory",
         "x-ms-examples": {
-          "GetInitiateChangeDirectory": {
-            "$ref": "./examples/GetInitiateChangeDirectory.json"
+          "GetChangeTargetDirectory": {
+            "$ref": "./examples/GetChangeTargetDirectory.json"
           }
         },
         "responses": {
@@ -465,11 +465,11 @@
         ]
       },
       "delete": {
-        "description": "Cancel change directory transfer.",
-        "operationId": "Subscription_CancelChangeDirectoryTransfer",
+        "description": "Cancel change target directory.",
+        "operationId": "Subscription_CancelChangeTargetDirectory",
         "x-ms-examples": {
           "CancelChangeDirectory": {
-            "$ref": "./examples/CancelChangeDirectory.json"
+            "$ref": "./examples/CancelChangeTargetDirectory.json"
           }
         },
         "responses": {
@@ -496,10 +496,10 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/changeDirectory": {
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptTargetDirectory": {
       "post": {
-        "description": "Accept change directory transfer.",
-        "operationId": "Subscription_AcceptChangeDirectory",
+        "description": "Accept change target directory.",
+        "operationId": "Subscription_AcceptChangeTargetDirectory",
         "x-ms-examples": {
           "AcceptChangeDirectory": {
             "$ref": "./examples/AcceptChangeDirectory.json"
@@ -527,7 +527,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           }
         ]
-      },
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/targetDirectoryStatus": {
       "get": {
         "description": "Get accept change directory transfer status.",
         "operationId": "Subscription_GetAcceptChangeDirectoryStatus",
@@ -788,8 +790,7 @@
     "ChangeDirectoryProperties": {
       "description": "The parameters required to perform change directory operation",
       "required": [
-        "destinationEmailId",
-        "action"
+        "destinationEmailId"
       ],
       "properties": {
         "destinationEmailId": {
