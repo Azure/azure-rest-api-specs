@@ -31,11 +31,11 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
-### Tag: package-2020-01-01-preview
+### Tag: package-2020-01-01-preview-only
 
-These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-01-01-preview'
+```yaml $(tag) == 'package-2020-01-01-preview-only'
 input-file:
 - Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
 ```
