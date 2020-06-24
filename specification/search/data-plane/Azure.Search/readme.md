@@ -27,41 +27,7 @@ title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
 ```
-### Tag: package-2019-05-searchservice-preview
 
-These settings apply only when `--tag=package-2019-05-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-searchservice-preview'
-input-file:
-- preview/2019-05-06-preview/searchservice.json
-```
-
-### Tag: package-2019-05-searchindex-preview
-
-These settings apply only when `--tag=package-2019-05-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-searchindex-preview'
-input-file:
-- preview/2019-05-06-preview/searchindex.json
-```
-
-### Tag: package-2019-05-searchservice
-
-These settings apply only when `--tag=package-2019-05-searchservice` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-searchservice'
-input-file:
-- stable/2019-05-06/searchservice.json
-```
-
-### Tag: package-2019-05-searchindex
-
-These settings apply only when `--tag=package-2019-05-searchindex` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-searchindex'
-input-file:
-- stable/2019-05-06/searchindex.json
-```
 ### Tag: package-2020-06-searchservice-preview
 
 These settings apply only when `--tag=package-2020-06-searchservice-preview` is specified on the command line.
@@ -96,6 +62,42 @@ These settings apply only when `--tag=package-2020-06-searchindex` is specified 
 ``` yaml $(tag) == 'package-2020-06-searchindex'
 input-file:
 - stable/2020-06-30/searchindex.json
+```
+
+### Tag: package-2019-05-searchservice-preview
+
+These settings apply only when `--tag=package-2019-05-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-searchservice-preview'
+input-file:
+- preview/2019-05-06-preview/searchservice.json
+```
+
+### Tag: package-2019-05-searchindex-preview
+
+These settings apply only when `--tag=package-2019-05-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-searchindex-preview'
+input-file:
+- preview/2019-05-06-preview/searchindex.json
+```
+
+### Tag: package-2019-05-searchservice
+
+These settings apply only when `--tag=package-2019-05-searchservice` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-searchservice'
+input-file:
+- stable/2019-05-06/searchservice.json
+```
+
+### Tag: package-2019-05-searchindex
+
+These settings apply only when `--tag=package-2019-05-searchindex` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-searchindex'
+input-file:
+- stable/2019-05-06/searchindex.json
 ```
 
 ---
