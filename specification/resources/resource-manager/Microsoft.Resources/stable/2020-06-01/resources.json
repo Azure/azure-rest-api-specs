@@ -2628,7 +2628,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SourceSubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2758,7 +2758,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2831,7 +2832,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2908,7 +2910,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3000,7 +3003,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3086,7 +3090,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3129,7 +3134,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3167,7 +3173,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3209,7 +3216,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3266,7 +3274,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3317,7 +3326,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3341,7 +3351,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_DeleteValue",
+        "operationId": "Tags_DeleteValue",
         "summary": "Deletes a predefined tag value for a predefined tag name.",
         "description": "This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.",
         "parameters": [
@@ -3385,7 +3395,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_CreateOrUpdateValue",
+        "operationId": "Tags_CreateOrUpdateValue",
         "summary": "Creates a predefined value for a predefined tag name.",
         "description": "This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.",
         "parameters": [
@@ -3437,7 +3447,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_CreateOrUpdate",
+        "operationId": "Tags_CreateOrUpdate",
         "summary": "Creates a predefined tag name.",
         "description": "This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.",
         "parameters": [
@@ -3480,7 +3490,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_Delete",
+        "operationId": "Tags_Delete",
         "summary": "Deletes a predefined tag name.",
         "description": "This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.",
         "parameters": [
@@ -3519,7 +3529,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_List",
+        "operationId": "Tags_List",
         "summary": "Gets a summary of tag usage under the subscription.",
         "description": "This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.",
         "parameters": [
@@ -4040,7 +4050,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_CreateOrUpdateAtScope",
+        "operationId": "Tags_CreateOrUpdateAtScope",
         "summary": "Creates or updates the entire set of tags on a resource or subscription.",
         "description": "This operation allows adding or replacing the entire set of tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags.",
         "parameters": [
@@ -4086,7 +4096,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_UpdateAtScope",
+        "operationId": "Tags_UpdateAtScope",
         "summary": "Selectively updates the set of tags on a resource or subscription.",
         "description": "This operation allows replacing, merging or selectively deleting tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
         "parameters": [
@@ -4124,7 +4134,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_GetAtScope",
+        "operationId": "Tags_GetAtScope",
         "summary": "Gets the entire set of tags on a resource or subscription.",
         "parameters": [
           {
@@ -4161,7 +4171,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_DeleteAtScope",
+        "operationId": "Tags_DeleteAtScope",
         "summary": "Deletes the entire set of tags on a resource or subscription.",
         "parameters": [
           {
@@ -5883,13 +5893,6 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription."
-    },
-    "SourceSubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the source subscription."
     },
     "DeploymentNameParameter": {
       "name": "deploymentName",
