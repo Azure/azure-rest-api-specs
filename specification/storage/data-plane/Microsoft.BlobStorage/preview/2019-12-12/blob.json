@@ -3760,6 +3760,11 @@
                 "x-ms-client-name": "IsSealed",
                 "type": "boolean",
                 "description": "If this blob has been sealed"
+              },
+              "x-ms-rehydrate-priority": {
+                "x-ms-client-name": "RehydratePriority",
+                "description": "If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard.",
+                "type": "string"
               }
             }
           },
@@ -9642,6 +9647,9 @@
         },
         "IsSealed": {
           "type": "boolean"
+        },
+        "RehydratePriority": {
+          "$ref": "#/definitions/RehydratePriority"
         }
       }
     },
@@ -10574,6 +10582,21 @@
       },
       "xml": {
         "name": "Type"
+      }
+    },
+    "RehydratePriority": {
+      "description": "If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard.",
+      "type": "string",
+      "enum": [
+        "High",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "RehydratePriority",
+        "modelAsString": false
+      },
+      "xml": {
+        "name": "RehydratePriority"
       }
     },
     "RetentionPolicy": {
