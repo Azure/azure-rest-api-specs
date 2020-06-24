@@ -83,6 +83,7 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-06-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-06-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2020-06-01/dscpConfiguration.json
 ```
 ### Tag: package-2020-05
 
@@ -1518,6 +1519,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: availableDelegations.json
+    reason: name, id and type properties are inherited from the upper level
+    suppress: RequiredPropertiesMissingInResourceModel
+    from: dscpConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
