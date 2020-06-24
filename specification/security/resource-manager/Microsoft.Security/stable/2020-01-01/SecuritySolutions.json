@@ -115,7 +115,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutions/{SecuritySolutionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}": {
       "get": {
         "x-ms-examples": {
           "Get a security solution from a security data location": {
@@ -138,7 +138,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
           },
           {
-            "$ref": "#/parameters/SecuritySolutionName"
+            "$ref": "#/parameters/securitySolutionName"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -271,8 +271,8 @@
     }
   },
   "parameters": {
-    "SecuritySolutionName": {
-      "name": "SecuritySolutionName",
+    "securitySolutionName": {
+      "name": "securitySolutionName",
       "type": "string",
       "in": "path",
       "required": true,
