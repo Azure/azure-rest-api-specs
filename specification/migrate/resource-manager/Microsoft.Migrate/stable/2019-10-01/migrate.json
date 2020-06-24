@@ -108,12 +108,6 @@
       "enum": [
         "2019-10-01"
       ]
-    },
-    "acceptLanguage": {
-      "description": "Standard request header. Used by service to respond to client in appropriate language.",
-      "name": "Accept-Language",
-      "type": "string",
-      "in": "header"
     }
   },
   "securityDefinitions": {
@@ -1922,6 +1916,7 @@
     },
     "HyperVCollector": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "eTag": {
           "type": "string"
@@ -1989,6 +1984,7 @@
     },
     "VMwareCollector": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "eTag": {
           "type": "string"
@@ -2184,9 +2180,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2208,9 +2201,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Projects_List": {
@@ -2233,9 +2223,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2257,9 +2244,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Projects_List": {
@@ -2285,9 +2269,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2332,9 +2313,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "name": "project",
@@ -2401,9 +2379,6 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "name": "project",
             "description": "Updated project object.",
             "in": "body",
@@ -2454,9 +2429,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2506,9 +2478,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2555,9 +2524,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2580,9 +2546,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "AssessmentOptions_Get": {
             "$ref": "./examples/AssessmentOptions_List.json"
@@ -2604,9 +2567,6 @@
           },
           {
             "$ref": "#/parameters/projectName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2661,9 +2621,6 @@
             "$ref": "#/parameters/machineName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2710,9 +2667,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2735,9 +2689,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Groups_ListByProject": {
@@ -2763,9 +2714,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2813,9 +2761,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2885,9 +2830,6 @@
             "$ref": "#/parameters/groupName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2940,9 +2882,6 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "name": "groupUpdateProperties",
             "description": "Machines list to be added or removed from group.",
             "in": "body",
@@ -2970,6 +2909,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Groups_UpdateMachines": {
+            "$ref": "./examples/Groups_UpdateMachines.json"
+          }
         }
       }
     },
@@ -2990,9 +2934,6 @@
           },
           {
             "$ref": "#/parameters/groupName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3017,9 +2958,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Assessments_ListByGroup": {
@@ -3044,9 +2982,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3069,9 +3004,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Assessments_ListByProject": {
@@ -3100,9 +3032,6 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3153,9 +3082,6 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3228,9 +3154,6 @@
             "$ref": "#/parameters/assessmentName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3284,9 +3207,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -3336,9 +3256,6 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3399,9 +3316,6 @@
             "$ref": "#/parameters/assessedMachineName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3448,9 +3362,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3473,9 +3384,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "HyperVCollectors_ListByProject": {
@@ -3501,9 +3409,6 @@
           },
           {
             "$ref": "#/parameters/hyperVCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3551,9 +3456,6 @@
           },
           {
             "$ref": "#/parameters/hyperVCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3623,9 +3525,6 @@
             "$ref": "#/parameters/hyperVCollectorName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3672,9 +3571,6 @@
             "$ref": "#/parameters/projectName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3697,9 +3593,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "VMwareCollectors_ListByProject": {
@@ -3725,9 +3618,6 @@
           },
           {
             "$ref": "#/parameters/vmWareCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3775,9 +3665,6 @@
           },
           {
             "$ref": "#/parameters/vmWareCollectorName"
-          },
-          {
-            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3847,9 +3734,6 @@
             "$ref": "#/parameters/vmWareCollectorName"
           },
           {
-            "$ref": "#/parameters/acceptLanguage"
-          },
-          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3892,9 +3776,6 @@
               "$ref": "#/definitions/OperationResultList"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Operations_List": {
