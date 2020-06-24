@@ -5319,7 +5319,7 @@
           "description": "Enum to indicate the mode of account creation.",
           "type": "string",
           "default": "Default",
-          "$ref": "#/definitions/createMode"
+          "$ref": "#/definitions/CreateMode"
         },
         "restoreParams": {
           "description": "Parameters to indicate the information about the restore.",
@@ -5420,7 +5420,7 @@
           "description": "Enum to indicate the mode of account creation.",
           "type": "string",
           "default": "Default",
-          "$ref": "#/definitions/createMode"
+          "$ref": "#/definitions/CreateMode"
         },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
@@ -7551,7 +7551,7 @@
         }
       }
     },
-    "createMode": {
+    "CreateMode": {
       "description": "Enum to indicate the mode of account creation.",
       "type": "string",
       "default": "Default",
@@ -7579,16 +7579,44 @@
             "name": "RestoreMode"
           }
         },
-        "resourceSource": {
+        "restoreSource": {
           "type": "string",
           "description": "Path of the source account from which the restore has to be initiated"
         },
-        "restoreTime": {
+        "restoreTimestampInUtc": {
           "type": "string",
           "format": "date-time",
           "description": "Time to which the account has to be restored (ISO-8601 format)."
+        },
+        "databasesToRestore": {
+          "type": "array",
+          "description": "List of specific databases to restore.",
+          "items": {
+            "$ref": "#/definitions/DatabaseRestoreResource"
+          }
         }
       }
+    },
+    "DatabaseRestoreResource": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database to restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "description": "The names of the collections to restore.",
+          "items": {
+            "$ref": "#/definitions/CollectionName"
+          }
+        }
+      }
+    },
+    "CollectionName": {
+      "type": "string",
+      "description": "The name of the collection."
     },
     "BackupPolicy": {
       "type": "object",
