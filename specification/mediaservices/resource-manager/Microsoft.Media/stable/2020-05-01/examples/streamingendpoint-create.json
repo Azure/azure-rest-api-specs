@@ -1,0 +1,155 @@
+{
+  "parameters": {
+    "subscriptionId": "0a6ec948-5a62-437d-b9df-934dc7c1b722",
+    "resourceGroupName": "mediaresources",
+    "accountName": "slitestmedia10",
+    "streamingEndpointName": "myStreamingEndpoint1",
+    "api-version": "2020-05-01",
+    "parameters": {
+      "id": null,
+      "location": "West US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "description": "test event 1",
+        "scaleUnits": 1,
+        "availabilitySetName": "availableset",
+        "accessControl": {
+          "akamai": {
+            "akamaiSignatureHeaderAuthenticationKeyList": [
+              {
+                "identifier": "id1",
+                "expiration": "2029-12-31T16:00:00-08:00",
+                "base64Key": "dGVzdGlkMQ=="
+              },
+              {
+                "identifier": "id2",
+                "expiration": "2030-12-31T16:00:00-08:00",
+                "base64Key": "dGVzdGlkMQ=="
+              }
+            ]
+          },
+          "ip": {
+            "allow": [
+              {
+                "name": "AllowedIp",
+                "address": "192.168.1.1"
+              }
+            ]
+          }
+        },
+        "cdnEnabled": false
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myStreamingEndpoint1",
+        "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/streamingendpoints/myStreamingEndpoint1",
+        "type": "Microsoft.Media/mediaservices/streamingEndpoints",
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "description": "test event 1",
+          "scaleUnits": 1,
+          "availabilitySetName": "availableset",
+          "cdnEnabled": false,
+          "cdnProvider": null,
+          "cdnProfile": "",
+          "customHostNames": [],
+          "accessControl": {
+            "akamai": {
+              "akamaiSignatureHeaderAuthenticationKeyList": [
+                {
+                  "identifier": "id1",
+                  "expiration": "2030-01-01T00:00:00Z",
+                  "base64Key": "dGVzdGlkMQ=="
+                },
+                {
+                  "identifier": "id2",
+                  "expiration": "2031-01-01T00:00:00Z",
+                  "base64Key": "dGVzdGlkMQ=="
+                }
+              ]
+            },
+            "ip": {
+              "allow": [
+                {
+                  "name": "AllowedIp",
+                  "address": "192.168.1.1",
+                  "subnetPrefixLength": null
+                }
+              ]
+            }
+          },
+          "maxCacheAge": null,
+          "hostName": "mystreamingendpoint1-slitestmedia10.streaming.mediaservices.windows.net",
+          "freeTrialEndTime": "0001-01-01T00:00:00-08:00",
+          "provisioningState": "InProgress",
+          "resourceState": "Stopped",
+          "created": "2018-03-03T02:25:09.7561389Z",
+          "lastModified": "2018-03-03T02:25:09.7561389Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myStreamingEndpoint1",
+        "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/streamingendpoints/myStreamingEndpoint1",
+        "type": "Microsoft.Media/mediaservices/streamingEndpoints",
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "description": "test event 1",
+          "scaleUnits": 1,
+          "availabilitySetName": "availableset",
+          "cdnEnabled": false,
+          "cdnProvider": null,
+          "cdnProfile": "",
+          "customHostNames": [],
+          "accessControl": {
+            "akamai": {
+              "akamaiSignatureHeaderAuthenticationKeyList": [
+                {
+                  "identifier": "id1",
+                  "expiration": "2030-01-01T00:00:00Z",
+                  "base64Key": "dGVzdGlkMQ=="
+                },
+                {
+                  "identifier": "id2",
+                  "expiration": "2031-01-01T00:00:00Z",
+                  "base64Key": "dGVzdGlkMQ=="
+                }
+              ]
+            },
+            "ip": {
+              "allow": [
+                {
+                  "name": "AllowedIp",
+                  "address": "192.168.1.1",
+                  "subnetPrefixLength": null
+                }
+              ]
+            }
+          },
+          "maxCacheAge": null,
+          "hostName": "mystreamingendpoint1-slitestmedia10.streaming.mediaservices.windows.net",
+          "freeTrialEndTime": "0001-01-01T00:00:00-08:00",
+          "provisioningState": "InProgress",
+          "resourceState": "Stopped",
+          "created": "2018-03-03T02:25:09.7561389Z",
+          "lastModified": "2018-03-03T02:25:09.7561389Z"
+        }
+      }
+    }
+  }
+}
