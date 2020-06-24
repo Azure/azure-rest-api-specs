@@ -103,6 +103,7 @@ batch:
   - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
   - tag: package-templatespecs-2019-06-preview 
+  - multiapiscript-templatespecs: true
 ```
 
 ```yaml $(multiapiscript-features)
@@ -139,6 +140,15 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 clear-output-folder: false
 perform-load: false
 ```
+
+
+```yaml $(multiapiscript-templatespecs)
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs
+clear-output-folder: false
+perform-load: false
+```
+
 
 ```yaml $(multiapiscript-locks)
 multiapiscript: true
@@ -549,7 +559,7 @@ python:
 These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-templatespecs-2019-10-preview'
+``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
 namespace: azure.mgmt.resource.templatespecs.v2019_06_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2019_06_preview
 python:
