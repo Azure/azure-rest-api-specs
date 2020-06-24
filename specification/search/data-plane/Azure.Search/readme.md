@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-2020-06-searchservice` is specifie
 
 ``` yaml $(tag) == 'package-2020-06-searchservice'
 input-file:
-- stable/2020-06-30/searchservice.json
+- preview/2020-06-30/searchservice.json
 ```
 
 ### Tag: package-2020-06-searchindex
@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2020-06-searchindex` is specified 
 
 ``` yaml $(tag) == 'package-2020-06-searchindex'
 input-file:
-- stable/2020-06-30/searchindex.json
+- preview/2020-06-30/searchindex.json
 ```
 
 ### Tag: package-2019-05-searchservice-preview
@@ -583,8 +583,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/preview/2020-06-30-preview/searchservice.json
   - $(this-folder)/preview/2020-06-30-preview/searchindex.json
-  - $(this-folder)/stable/2020-06-30/searchservice.json
-  - $(this-folder)/stable/2020-06-30/searchindex.json
+  - $(this-folder)/preview/2020-06-30/searchservice.json
+  - $(this-folder)/preview/2020-06-30/searchindex.json
 
 ```
 
