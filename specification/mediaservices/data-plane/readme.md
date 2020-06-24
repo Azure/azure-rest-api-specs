@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-lva-1-0-0-preview` is specified on
 
 ``` yaml $(tag) == 'package-lva-1-0-0-preview'
 input-file:
-  - Microsoft.LvaEdge/stable/1.0.0/LiveVideoAnalytics.json
+  - Microsoft.LvaEdge/preview/1.0.0/LiveVideoAnalytics.json
 ```
 
 ---
@@ -51,12 +51,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_media_edge_lva_client']
 ```
@@ -75,27 +69,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Media.Edge.LiveVideoAnalytics.Client/src/Generated
   clear-output-folder: true
 ```
-
-## Python
-
-See configuration in [readme.go.md](./readme.python.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-See configuration in [readme.go.md](./readme.java.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## Node
-
-See configuration in [readme.nodejs.md](./readme.nodejs.md)
