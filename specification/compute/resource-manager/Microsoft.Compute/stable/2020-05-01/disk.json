@@ -1735,7 +1735,7 @@
     "EncryptionSetProperties": {
       "properties": {
         "encryptionType": {
-          "$ref": "#/definitions/DiskEncryptionSetEncryptionType"
+          "$ref": "#/definitions/EncryptionType"
         },
         "activeKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference",
@@ -1849,7 +1849,7 @@
         "values": [
           {
             "value": "EncryptionAtRestWithPlatformKey",
-            "description": "Disk is encrypted at rest with Platform managed key. It is the default encryption type."
+            "description": "Disk is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets."
           },
           {
             "value": "EncryptionAtRestWithCustomerKey",
@@ -1858,28 +1858,6 @@
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
             "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
-          }
-        ]
-      }
-    },
-    "DiskEncryptionSetEncryptionType": {
-      "type": "string",
-      "description": "The type of key used to encrypt the data of resources associated with a disk encryption set.",
-      "enum": [
-        "EncryptionAtRestWithCustomerKey",
-        "EncryptionAtRestWithPlatformAndCustomerKeys"
-      ],
-      "x-ms-enum": {
-        "name": "DiskEncryptionSetEncryptionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "EncryptionAtRestWithCustomerKey",
-            "description": "Resources associated with disk encryption set are encrypted at rest with Customer managed key that can be changed and revoked by a customer."
-          },
-          {
-            "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-            "description": "Resources associated with disk encryption set are encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
           }
         ]
       }
@@ -2025,7 +2003,7 @@
     "DiskEncryptionSetUpdateProperties": {
       "properties": {
         "encryptionType": {
-          "$ref": "#/definitions/DiskEncryptionSetEncryptionType"
+          "$ref": "#/definitions/EncryptionType"
         },
         "activeKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference"
