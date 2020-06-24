@@ -406,7 +406,7 @@
           "200": {
             "description": "Normal response for a successful query.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryResponse"
+              "$ref": "#/definitions/ChangeDirectoryBody"
             }
           },
           "default": {
@@ -425,7 +425,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryRequest"
+              "$ref": "#/definitions/ChangeDirectoryBody"
             }
           },
           {
@@ -445,7 +445,7 @@
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryResponse"
+              "$ref": "#/definitions/ChangeDirectoryBody"
             }
           },
           "default": {
@@ -476,7 +476,7 @@
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryResponse"
+              "$ref": "#/definitions/ChangeDirectoryBody"
             }
           },
           "default": {
@@ -509,7 +509,7 @@
           "200": {
             "description": "Normal response for a successful query.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryResponse"
+              "$ref": "#/definitions/ChangeDirectoryBody"
             }
           },
           "default": {
@@ -542,7 +542,7 @@
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryResponse"
+              "$ref": "#/definitions/ChangeDirectoryBody"
             }
           },
           "default": {
@@ -778,28 +778,7 @@
         }
       }
     },
-    "ChangeDirectoryRequest": {
-      "description": "The parameters required to perform change directory operation.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ChangeDirectoryProperties"
-        }
-      }
-    },
     "ChangeDirectoryProperties": {
-      "description": "The parameters required to perform change directory operation",
-      "required": [
-        "destinationEmailId"
-      ],
-      "properties": {
-        "destinationEmailId": {
-          "description": "Email Id of the destination user",
-          "type": "string"
-        }
-      }
-    },
-    "ChangeDirectoryResponseProperties": {
       "description": "The response body for change directory operation",
       "properties": {
         "destinationEmailId": {
@@ -807,16 +786,18 @@
           "type": "string"
         },
         "status": {
+          "readOnly": true,
           "description": "Current transfer Status.",
           "type": "string"
         },
         "expiresOn": {
+          "readOnly": true,
           "description": "Expiry time of the transfer",
           "type": "string"
         }
       }
     },
-    "ChangeDirectoryResponse": {
+    "ChangeDirectoryBody": {
       "description": "The parameters required to perform change directory operation.",
       "type": "object",
       "x-ms-azure-resource": true,
@@ -837,7 +818,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ChangeDirectoryResponseProperties"
+          "$ref": "#/definitions/ChangeDirectoryProperties"
         }
       }
     }
