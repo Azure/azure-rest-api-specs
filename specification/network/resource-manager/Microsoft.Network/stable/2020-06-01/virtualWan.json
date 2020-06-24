@@ -2466,7 +2466,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -2539,7 +2539,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -5584,12 +5584,13 @@
       }
     },
     "VpnConnectionPacketCaptureStartParameters": {
+      "description": "Vpn Connection packet capture parameters supplied to start packet capture on gateway connection.",
       "properties": {
         "filterData": {
           "type": "string",
           "description": "Start Packet capture parameters on vpn connection."
         },
-        "LinkConnectionNames":{
+        "linkConnectionNames":{
           "type": "array",
           "description": "List of site link connection names.",
           "items":{
@@ -5599,12 +5600,13 @@
       }
     },
     "VpnConnectionPacketCaptureStopParameters": {
+      "description": "Vpn Connection packet capture parameters supplied to stop packet capture on gateway connection.",
       "properties": {
         "sasUrl": {
           "type": "string",
           "description": "SAS url for packet capture on vpn connection."
         },
-        "LinkConnectionNames":{
+        "linkConnectionNames":{
           "type": "array",
           "description": "List of site link connection names.",
           "items":{
@@ -5618,7 +5620,8 @@
         "filterData": {
           "type": "string",
           "description": "Start Packet capture parameters on vpn gateway."
-        }
+        },
+        "description": "Start packet capture parameters."
       }
     },
     "VpnGatewayPacketCaptureStopParameters": {
