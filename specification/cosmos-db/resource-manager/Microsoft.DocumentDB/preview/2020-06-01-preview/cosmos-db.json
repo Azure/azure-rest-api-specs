@@ -6942,8 +6942,17 @@
       "description": "Cosmos DB managed service identity (MSI) object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ManagedServiceIdentityType",
-          "description": "Type of the Cosmos DB Managed Service Identity. For example, \"type\": \"SystemAssigned\". Current values also include \"None\" and \"UserAssigned\"."
+          "description": "The Managed Service Identity type for the Cosmos DB database account.",
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "None",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -7505,19 +7514,6 @@
       ],
       "x-ms-enum": {
         "name": "ConnectorOffer",
-        "modelAsString": true
-      }
-    },
-    "ManagedServiceIdentityType": {
-      "description": "The Managed Service Identity type for the Cosmos DB database account.",
-      "type": "string",
-      "enum": [
-        "SystemAssigned",
-        "None",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
         "modelAsString": true
       }
     },
