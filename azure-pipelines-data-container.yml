@@ -18,13 +18,7 @@ steps:
 #   inputs:
 #     command: login
 #     containerRegistry: $(CONTAINER_REGISTRY_NAME)
-
-- task: DockerCompose@0
-  displayName: Container registry login
-  inputs:
-    containerregistrytype: Azure Container Registry
-    azureSubscriptionEndpoint: $(CONTAINER_REGISTRY_CONNECTION_NAME)
-    azureContainerRegistry: $(CONTAINER_REGISTRY_NAME)
+- bash: docker login -u $CONTAINER_REGISTRY_USER_NAME -p  $CONTAINER_REGISTRY_PASSWORD fedten.azurecr.io
 
 - task: CopyFiles@2
   inputs:
