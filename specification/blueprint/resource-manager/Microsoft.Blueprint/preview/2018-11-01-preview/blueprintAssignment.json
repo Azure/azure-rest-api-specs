@@ -147,6 +147,14 @@
             "in": "query",
             "required": false,
             "type": "string",
+            "enum": [
+              "None",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "AssignmentDeleteBehavior",
+              "modelAsString": true
+            },
             "description": "When deleteBehavior=all, the resources that were created by the blueprint assignment will be deleted."
           }
         ],
@@ -160,8 +168,7 @@
           "204": {
             "description": "No Content"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
