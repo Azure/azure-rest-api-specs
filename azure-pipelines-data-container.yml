@@ -12,13 +12,18 @@ pool:
 variables:
   IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
 
+
+
 steps:
 # - task: Docker@2
 #   displayName: Login to ACR
 #   inputs:
 #     command: login
 #     containerRegistry: $(CONTAINER_REGISTRY_NAME)
-- bash: docker login -u $CONTAINER_REGISTRY_USER_NAME -p  $CONTAINER_REGISTRY_PASSWORD fedten.azurecr.io
+- bash: docker login -u $ENV_CONTAINER_REGISTRY_USER_NAME -p  $ENV_CONTAINER_REGISTRY_PASSWORD fedten.azurecr.io
+  env:
+    ENV_CONTAINER_REGISTRY_USER_NAME: $(CONTAINER_REGISTRY_USER_NAME)
+    ENV_CONTAINER_REGISTRY_PASSWORD: $(CONTAINER_REGISTRY_PASSWORD)
 
 - task: CopyFiles@2
   inputs:
