@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.IntelligentITDigitalTwin
   package-name: azureiidt
-  package-version: 2020-06-10
+  package-version: 2020-06-10-privatepreview
   clear-output-folder: true
 ```
 
