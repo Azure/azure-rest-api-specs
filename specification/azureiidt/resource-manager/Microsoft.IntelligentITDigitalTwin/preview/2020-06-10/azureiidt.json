@@ -3,7 +3,7 @@
   "info": {
     "title": "IIDTManagementClient",
     "description": "Intelligent IT Digital Twin (IIDT) uses our proprietary discovery tool for corporate on-prem infrastructure and provisions its light-weight twin in Azure.",
-    "version": "2020-06-10"
+    "version": "2020-06-10-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/intelligentITDigitalTwin/{iidtName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}": {
       "put": {
         "tags": [
           "ITDigitalTwins"
@@ -264,7 +264,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/intelligentITDigitalTwin": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins": {
       "get": {
         "tags": [
           "ITDigitalTwins"
@@ -310,7 +310,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IntelligentITDigitalTwin/intelligentITDigitalTwin": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins": {
       "get": {
         "tags": [
           "ITDigitalTwins"
@@ -439,7 +439,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state.",
-          "enum": [ "Created", "Configured", "Deployed", "Failed" ],
+          "enum": [ "succeeded", "Created", "Configured", "Deployed", "Failed" ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
