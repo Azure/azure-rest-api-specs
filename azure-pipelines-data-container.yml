@@ -29,6 +29,7 @@ steps:
   inputs:
     command: build
     Dockerfile: scripts/datacontainer/Dockerfile
+    repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
       $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
@@ -36,6 +37,7 @@ steps:
 - task: Docker@2
   displayName: Push
   inputs:
+    repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
       $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)
