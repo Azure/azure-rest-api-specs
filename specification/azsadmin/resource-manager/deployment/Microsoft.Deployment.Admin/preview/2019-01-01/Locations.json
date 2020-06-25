@@ -100,7 +100,7 @@
           "description": "Array of locations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LocationsResourceEntity"
+            "$ref": "#/definitions/LocationEntity"
           }
         },
         "nextLink": {
@@ -109,42 +109,13 @@
         }
       }
     },
-    "LocationsResourceEntity": {
-      "type": "object",
-      "description": "Location Resource Entity",
-      "properties": {
-        "properties": {
-          "description": "Location Properties",
-          "$ref": "#/definitions/LocationAdminProperties",
-          "x-ms-client-flatten": true
-        },
-        "eTag": {
-          "description": "Entity tag of the resource",
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "Deployment.json#/definitions/Resource"
-        }
-      ]
-    },
-    "LocationAdminProperties": {
-      "description": "Location Admin Properties",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "the location name",
-          "title": "location",
-          "type": "string"
-        }
-      }
-    },
     "LocationEntity": {
       "type": "object",
       "description": "Location Entity",
       "properties": {
-        "properties": {}
+        "properties": {
+          "description": "Location Properties"
+        }
       },
       "allOf": [
         {
