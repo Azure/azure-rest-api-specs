@@ -163,6 +163,7 @@
   },
   "definitions": {
     "SecuritySolutionList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -182,12 +183,10 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
+          "readOnly": true,
           "$ref": "#/definitions/SecuritySolutionProperties"
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
