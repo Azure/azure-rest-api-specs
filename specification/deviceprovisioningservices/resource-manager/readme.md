@@ -245,4 +245,8 @@ directive:
     where: $.definitions.PrivateEndpointConnection.properties.properties
     from: iotdps.json
     reason: This API is defined by Azure Networking team and cannot be changed
+  - suppress: TrackedResourceListByImmediateParent
+    where: $.definitions
+    from: iotdps.json
+    reason: These are defined by Azure Networking Private Links team
 ```
