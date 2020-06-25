@@ -5775,7 +5775,6 @@
           "type": "object",
           "properties": {
             "parsingMode": {
-              "type": "string",
               "required": false,
               "$ref": "#/definitions/ParsingMode"
             },
@@ -5792,13 +5791,13 @@
             "failOnUnsupportedContentType": {
               "type": "boolean",
               "required": false,
-              "default": true,
+              "default": false,
               "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
             },
             "failOnUnprocessableDocument": {
               "type": "boolean",
               "required": false,
-              "default": true,
+              "default": false,
               "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
             },
             "indexStorageMetadataOnlyForOversizedDocuments": {
@@ -5829,12 +5828,10 @@
               "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
             },
             "dataToExtract": {
-              "type": "string",
               "required": false,
               "$ref": "#/definitions/DataToExtract"
             },
             "imageAction": {
-              "type": "string",
               "required": false,
               "$ref": "#/definitions/ImageAction"
             },
@@ -5845,7 +5842,6 @@
               "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source.  This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
             },
             "pdfTextRotationAlgorithm": {
-              "type": "string",
               "required": false,
               "$ref": "#/definitions/PdfTextRotationAlgorithm"
             },
@@ -5863,7 +5859,7 @@
       },
       "description": "Represents parameters for indexer execution.",
       "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/rest/api/searchservice/create-indexer#parameters"
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
       }
     },
     "ParsingMode": {
