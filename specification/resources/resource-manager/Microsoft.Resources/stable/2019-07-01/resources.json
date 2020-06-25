@@ -617,7 +617,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeploymentWhatIf"
+              "$ref": "#/definitions/ScopedDeploymentWhatIf"
             },
             "description": "Parameters to validate."
           },
@@ -995,7 +995,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeploymentWhatIf"
+              "$ref": "#/definitions/ScopedDeploymentWhatIf"
             },
             "description": "Parameters to validate."
           },
@@ -4294,6 +4294,23 @@
         }
       },
       "required": [
+        "properties"
+      ],
+      "description": "Deployment What-if operation parameters."
+    },
+    "ScopedDeploymentWhatIf": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location to store the deployment data."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentWhatIfProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "location",
         "properties"
       ],
       "description": "Deployment What-if operation parameters."
