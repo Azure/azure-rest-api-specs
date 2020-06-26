@@ -1,0 +1,618 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connectors": {
+      "get": {
+        "x-ms-examples": {
+          "Get all Cloud accounts connectors of a subscription": {
+            "$ref": "./examples/Connectors/GetListConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Cloud accounts connectors of a subscription",
+        "operationId": "Connectors_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectorSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connectors/{connectorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Details of a specific cloud account connector": {
+            "$ref": "./examples/Connectors/GetConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Details of a specific cloud account connector",
+        "operationId": "Connectors_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectorSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "AwsCred -  Create a cloud account connector for a subscription": {
+            "$ref": "./examples/Connectors/CreateUpdateAwsCredConnectorSubscription_example.json"
+          },
+          "AwsAssumeRole - Create a cloud account connector for a subscription": {
+            "$ref": "./examples/Connectors/CreateUpdateAwsAssumeRoleConnectorSubscription_example.json"
+          },
+          "gcpCredentials - Create a cloud account connector for a subscription": {
+            "$ref": "./examples/Connectors/CreateUpdateGcpCredentialsConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Create a cloud account connector or update an existing one. Connect to your AWS cloud account using either account credentials or role-based authentication.",
+        "operationId": "Connectors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          },
+          {
+            "$ref": "#/parameters/ConnectorSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectorSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a cloud account connector from a subscription": {
+            "$ref": "./examples/Connectors/DeleteConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Delete a cloud account connector from a subscription",
+        "operationId": "Connectors_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "The connector is not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectorSettingList": {
+      "type": "object",
+      "description": "For a subscription, list of all cloud account connectors and their settings",
+      "properties": {
+        "value": {
+          "description": "List of all the cloud account connector settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "ConnectorSetting": {
+      "type": "object",
+      "description": "The connector setting",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Connector setting data",
+          "$ref": "#/definitions/ConnectorSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ConnectorSettingProperties": {
+      "type": "object",
+      "description": "Describes properties of an connector setting",
+      "properties": {
+        "hybridComputeSettings": {
+          "description": "Settings for hybrid compute management, these settings are relevant only Arc autoProvision (Hybrid Compute).",
+          "type": "object",
+          "$ref": "#/definitions/HybridComputeSettingsProperties"
+        },
+        "authenticationDetails": {
+          "description": "Settings for authentication management, these settings are relevant only for the cloud connector.",
+          "type": "object",
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      }
+    },
+    "HybridComputeSettingsProperties": {
+      "type": "object",
+      "description": "Settings for hybrid compute management",
+      "properties": {
+        "hybridComputeProvisioningState": {
+          "description": "State of the service principal and its secret",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "hybridComputeProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Valid service principal details."
+              },
+              {
+                "value": "Invalid",
+                "description": "Invalid service principal details."
+              },
+              {
+                "value": "Expired",
+                "description": "the service principal details are expired"
+              }
+            ]
+          }
+        },
+        "autoProvision": {
+          "type": "string",
+          "description": "Whether or not to automatically install Azure Arc (hybrid compute) agents on machines",
+          "enum": [
+            "On",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "autoProvision",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "On",
+                "description": "Install missing Azure Arc agent on VMs automatically"
+              },
+              {
+                "value": "Off",
+                "description": "Do not install Azure Arc agent on the VMs automatically"
+              }
+            ]
+          }
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group where Arc (Hybrid Compute) connectors are connected."
+        },
+        "region": {
+          "type": "string",
+          "description": "The location where the meta data of machines will be stored",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "proxyServer": {
+          "type": "object",
+          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+          "$ref": "#/definitions/ProxyServerProperties"
+        },
+        "servicePrincipal": {
+          "description": "An object to access resources that are secured by an Azure AD tenant.",
+          "type": "object",
+          "$ref": "#/definitions/ServicePrincipalProperties"
+        }
+      },
+      "required": [
+        "autoProvision"
+      ]
+    },
+    "ServicePrincipalProperties": {
+      "type": "object",
+      "description": "Details of the service principal.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application id of service principal."
+        },
+        "secret": {
+          "type": "string",
+          "description": "A secret string that the application uses to prove its identity, also can be referred to as application password (write only)."
+        }
+      }
+    },
+    "AuthenticationDetailsProperties": {
+      "type": "object",
+      "description": "Settings for cloud authentication management",
+      "discriminator": "authenticationType",
+      "properties": {
+        "authenticationProvisioningState": {
+          "description": "State of the multi-cloud connector",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Expired",
+            "IncorrectPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "authenticationProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Valid connector"
+              },
+              {
+                "value": "Invalid",
+                "description": "Invalid connector"
+              },
+              {
+                "value": "Expired",
+                "description": "the connection is expired"
+              },
+              {
+                "value": "IncorrectPolicy",
+                "description": "Incorrect policy of the connector"
+              }
+            ]
+          }
+        },
+        "grantedPermissions": {
+          "description": "The permissions detected in the cloud account.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PermissionProperty"
+          }
+        },
+        "authenticationType": {
+          "description": "Connect to your cloud account, for AWS use either account credentials or role-based authentication. For GCP use account organization credentials.",
+          "type": "string",
+          "enum": [
+            "awsCreds",
+            "awsAssumeRole",
+            "gcpCredentials"
+          ],
+          "x-ms-enum": {
+            "name": "authenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "awsCreds",
+                "description": "AWS cloud account connector user credentials authentication"
+              },
+              {
+                "value": "awsAssumeRole",
+                "description": "AWS account connector assume role authentication"
+              },
+              {
+                "value": "gcpCredentials",
+                "description": "GCP account connector service to service authentication"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "authenticationType"
+      ]
+    },
+    "AwsCredsAuthenticationDetailsProperties": {
+      "type": "object",
+      "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+      "x-ms-discriminator-value": "awsCreds",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
+        "accountId": {
+          "description": "The ID of the cloud account",
+          "type": "string",
+          "readOnly": true
+        },
+        "awsAccessKeyId": {
+          "type": "string",
+          "description": "Public key element of the AWS credential object (write only)"
+        },
+        "awsSecretAccessKey": {
+          "type": "string",
+          "description": "Secret key element of the AWS credential object (write only)"
+        }
+      },
+      "required": [
+        "awsAccessKeyId",
+        "awsSecretAccessKey"
+      ]
+    },
+    "AwAssumeRoleAuthenticationDetailsProperties": {
+      "type": "object",
+      "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
+      "x-ms-discriminator-value": "awsAssumeRole",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
+        "accountId": {
+          "description": "The ID of the cloud account",
+          "type": "string",
+          "readOnly": true
+        },
+        "awsAssumeRoleArn": {
+          "type": "string",
+          "description": "Assumed role ID is an identifier that you can use to create temporary security credentials."
+        },
+        "awsExternalId": {
+          "type": "string",
+          "description": "A unique identifier that is required when you assume a role in another account."
+        }
+      },
+      "required": [
+        "awsAssumeRoleArn",
+        "awsExternalId"
+      ]
+    },
+    "GcpCredentialsDetailsProperties": {
+      "type": "object",
+      "description": "GCP cloud account connector based service to service credentials, the credentials is composed of organization id and json api key (write only)</a>",
+      "x-ms-discriminator-value": "gcpCredentials",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
+        "organizationId": {
+          "description": "The Organization ID of the GCP cloud account",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type field of the API key (write only)"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project Id field of the API key (write only)"
+        },
+        "privateKeyId": {
+          "type": "string",
+          "description": "Private key Id field of the API key (write only)"
+        },
+        "privateKey": {
+          "type": "string",
+          "description": "Private key field of the API key (write only)"
+        },
+        "clientEmail": {
+          "type": "string",
+          "description": "Client email field of the API key (write only)"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client Id field of the API key (write only)"
+        },
+        "authUri": {
+          "type": "string",
+          "description": "Auth Uri field of the API key (write only)"
+        },
+        "tokenUri": {
+          "type": "string",
+          "description": "Token Uri field of the API key (write only)"
+        },
+        "authProviderX509CertUrl": {
+          "type": "string",
+          "description": "Auth provider x509 certificate url field of the API key (write only)"
+        },
+        "clientX509CertUrl": {
+          "type": "string",
+          "description": "Client x509 certificate url field of the API key (write only)"
+        }
+      },
+      "required": [
+        "organizationId",
+        "type",
+        "projectId",
+        "privateKeyId",
+        "privateKey",
+        "clientEmail",
+        "clientId",
+        "authUri",
+        "tokenUri",
+        "authProviderX509CertUrl",
+        "clientX509CertUrl"
+      ]
+    },
+    "PermissionProperty": {
+      "description": "A permission detected in the cloud account.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "AWS::AWSSecurityHubReadOnlyAccess",
+        "AWS::SecurityAudit",
+        "AWS::AmazonSSMAutomationRole",
+        "GCP::Security Center Admin Viewer"
+      ],
+      "x-ms-enum": {
+        "name": "PermissionProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AWS::AWSSecurityHubReadOnlyAccess",
+            "description": "This permission provides read only access to AWS Security Hub resources."
+          },
+          {
+            "value": "AWS::SecurityAudit",
+            "description": "This permission grants access to read security configuration metadata."
+          },
+          {
+            "value": "AWS::AmazonSSMAutomationRole",
+            "description": "The permission provides for EC2 Automation service to execute activities defined within Automation documents."
+          },
+          {
+            "value": "GCP::Security Center Admin Viewer",
+            "description": "This permission provides read only access to GCP Security Command Center."
+          }
+        ]
+      }
+    },
+    "ProxyServerProperties": {
+      "type": "object",
+      "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "Proxy server IP"
+        },
+        "port": {
+          "type": "string",
+          "description": "Proxy server port"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConnectorName": {
+      "name": "connectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the cloud account connector",
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectorSetting": {
+      "name": "connectorSetting",
+      "in": "body",
+      "required": true,
+      "description": "Settings for the cloud account connector",
+      "schema": {
+        "$ref": "#/definitions/ConnectorSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
