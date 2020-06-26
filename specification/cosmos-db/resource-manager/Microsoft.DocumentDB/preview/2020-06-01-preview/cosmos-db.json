@@ -4224,6 +4224,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/restorableDatabaseAccounts": {
+      "get": {
+        "operationId": "RestorableDatabaseAccounts_List",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBRestorableDatabaseAccountNoLocationList.json"
+          }
+        },
+        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}": {
       "get": {
         "operationId": "RestorableDatabaseAccounts_GetByLocation",
