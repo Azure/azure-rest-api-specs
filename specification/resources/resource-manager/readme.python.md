@@ -563,6 +563,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.resource.templatespecs.v2019_06_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2019_06_preview
 python:
-  namespace: azure.mgmt.resource.tempaltespecs.v2019_06_preview
+  namespace: azure.mgmt.resource.templatespecs.v2019_06_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2019_06_preview
 ```
