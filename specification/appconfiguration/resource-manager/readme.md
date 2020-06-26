@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-06-01'
 input-file:
-- Microsoft.AppConfiguration/preview/2020-06-01/appconfiguration.json
+- Microsoft.AppConfiguration/stable/2020-06-01/appconfiguration.json
 ```
 
 ### Tag: package-2019-11-01-preview
