@@ -47,6 +47,26 @@ directive:
     where: $.definitions.RoleAssignmentFilter.properties.canDelegate
     from: authorization-RoleAssignmentsCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentPropertiesWithScope.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentProperties.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ProviderOperation.properties.isDataAction
+    from: authorization-ProviderOperationsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DenyAssignmentProperties.properties.doNotApplyToChildScopes
+    from: authorization-DenyAssignmentGetCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
+    from: authorization-DenyAssignmentGetCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
 ```
 
 ### Tag: package-preview-2020-04
