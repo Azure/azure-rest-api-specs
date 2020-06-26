@@ -72,7 +72,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -130,7 +130,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -178,7 +178,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -242,7 +242,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -253,7 +253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/InitiateMove": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/initiateMove": {
       "post": {
         "tags": [
           "MoveCollections"
@@ -306,7 +306,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -317,7 +317,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MoveCollections/{moveCollectionName}/Commit": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/commit": {
       "post": {
         "tags": [
           "MoveCollections"
@@ -370,7 +370,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -381,7 +381,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MoveCollections/{moveCollectionName}/Discard": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/discard": {
       "post": {
         "tags": [
           "MoveCollections"
@@ -434,7 +434,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -491,7 +491,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -548,7 +548,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -563,7 +563,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MoveCollections/{moveCollectionName}/UnresolvedDependencies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/unresolvedDependencies": {
       "get": {
         "tags": [
           "MoveCollections"
@@ -602,7 +602,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -675,7 +675,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -739,7 +739,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -793,7 +793,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -828,7 +828,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -865,7 +865,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -911,7 +911,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -1019,7 +1019,7 @@
           "$ref": "#/definitions/JobStatus"
         },
         "errors": {
-          "$ref": "#/definitions/CloudError"
+          "$ref": "#/definitions/MoveResourceError"
         },
         "targetId": {
           "description": "Gets the Target ARM Id of the resource.",
@@ -1149,6 +1149,9 @@
           "items": {
             "$ref": "#/definitions/MoveResourceDependencyOverride"
           }
+        },
+        "errors": {
+          "$ref": "#/definitions/MoveResourceError"
         }
       }
     },
@@ -1331,15 +1334,15 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MoveResourceFilterProperties"
-          }
         }
+      }
     },
     "MoveResourceFilterProperties": {
       "properties": {
-        "ProvisioningState": {
+        "provisioningState": {
           "type": "string",
           "description": "The provisioning state."
-          }
+        }
       }
     },
     "MoveResourceCollection": {
@@ -1425,7 +1428,7 @@
           "type": "string"
         },
         "description": {
-          "description": "Gets or sets the description.\r\nThe localized friendly description for the operation, as it should be shown to the\r\nuser.\r\nIt should be thorough, yet concise – it will be used in tool tips and detailed views.\r\nPrescriptive guidance for namespace:\r\nRead any 'display.provider'  resource\r\nCreate or Update any  'display.provider'  resource\r\nDelete any  'display.provider'  resource\r\nPerform any other action on any  'display.provider'  resource\r\nPrescriptive guidance for namespace:\r\nRead any 'display.resource' Create or Update any  'display.resource' Delete any\r\n'display.resource' 'ActionName' any 'display.resources'.",
+          "description": "Gets or sets the description.\r\nThe localized friendly description for the operation, as it should be shown to the\r\nuser.\r\nIt should be thorough, yet concise – it will be used in tool tips and detailed views.\r\nPrescriptive guidance for namespace:\r\nRead any 'display.provider'  resource\r\nCreate or Update any  'display.provider'  resource\r\nDelete any  'display.provider'  resource\r\nPerform any other action on any  'display.provider'  resource\r\nPrescriptive guidance for namespace:\r\nRead any 'display.resource' Create or Update any  'display.resource' Delete any\r\n 'display.resource' 'ActionName' any 'display.resources'.",
           "type": "string"
         }
       }
@@ -1471,17 +1474,17 @@
         }
       }
     },
-    "CloudError": {
+    "MoveResourceError": {
       "properties": {
         "properties": {
           "type": "object",
-          "description": "The cloud error body.",
-          "$ref": "#/definitions/CloudErrorBody"
+          "description": "The move resource error body.",
+          "$ref": "#/definitions/MoveResourceErrorBody"
         }
       },
       "description": "An error response from the azure region move service."
     },
-    "CloudErrorBody": {
+    "MoveResourceErrorBody": {
       "properties": {
         "code": {
           "type": "string",
@@ -1498,7 +1501,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/MoveResourceErrorBody"
           },
           "description": "A list of additional details about the error."
         }
@@ -1764,8 +1767,7 @@
     "OperationStatusProperties": {
       "description": "Class for operation result properties.",
       "type": "object",
-      "properties": {
-      }
+      "properties": {}
     }
   },
   "parameters": {
