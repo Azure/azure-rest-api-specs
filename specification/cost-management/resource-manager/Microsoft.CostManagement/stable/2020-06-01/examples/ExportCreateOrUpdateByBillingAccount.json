@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-10-01",
+    "api-version": "2020-06-01",
     "billingAccountId": "123456",
     "scope": "providers/Microsoft.Billing/billingAccounts/123456",
     "exportName": "TestExport",
@@ -10,8 +10,8 @@
           "status": "Active",
           "recurrence": "Weekly",
           "recurrencePeriod": {
-            "from": "2018-06-01T00:00:00Z",
-            "to": "2018-10-31T00:00:00Z"
+            "from": "2020-06-01T00:00:00Z",
+            "to": "2020-10-31T00:00:00Z"
           }
         },
         "format": "Csv",
@@ -23,70 +23,17 @@
           }
         },
         "definition": {
-          "type": "Usage",
+          "type": "ActualCost",
           "timeframe": "MonthToDate",
           "dataset": {
             "granularity": "Daily",
             "configuration": {
               "columns": [
-                "Date",
-                "MeterId",
-                "InstanceId",
-                "ResourceLocation",
-                "PreTaxCost"
-              ]
-            },
-            "aggregation": {
-              "costSum": {
-                "name": "PreTaxCost",
-                "function": "Sum"
-              }
-            },
-            "grouping": [
-              {
-                "type": "Dimension",
-                "name": "SubscriptionName"
-              },
-              {
-                "type": "Tag",
-                "name": "Environment"
-              }
-            ],
-            "filter": {
-              "and": [
-                {
-                  "or": [
-                    {
-                      "dimension": {
-                        "name": "ResourceLocation",
-                        "operator": "In",
-                        "values": [
-                          "East US",
-                          "West Europe"
-                        ]
-                      }
-                    },
-                    {
-                      "tag": {
-                        "name": "Environment",
-                        "operator": "In",
-                        "values": [
-                          "UAT",
-                          "Prod"
-                        ]
-                      }
-                    }
-                  ]
-                },
-                {
-                  "dimension": {
-                    "name": "ResourceGroup",
-                    "operator": "In",
-                    "values": [
-                      "API"
-                    ]
-                  }
-                }
+                  "Date",
+                  "MeterId",
+                  "ResourceId",
+                  "ResourceLocation",
+                  "Quantity"
               ]
             }
           }
@@ -105,8 +52,8 @@
             "status": "Active",
             "recurrence": "Weekly",
             "recurrencePeriod": {
-              "from": "2018-06-01T00:00:00Z",
-              "to": "2018-10-31T00:00:00Z"
+              "from": "2020-06-01T00:00:00Z",
+              "to": "2020-10-31T00:00:00Z"
             }
           },
           "format": "Csv",
@@ -118,7 +65,7 @@
             }
           },
           "definition": {
-            "type": "Usage",
+            "type": "ActualCost",
             "timeframe": "MonthToDate",
             "dataset": {
               "granularity": "Daily",
@@ -126,62 +73,9 @@
                 "columns": [
                   "Date",
                   "MeterId",
-                  "InstanceId",
+                  "ResourceId",
                   "ResourceLocation",
-                  "PreTaxCost"
-                ]
-              },
-              "aggregation": {
-                "costSum": {
-                  "name": "PreTaxCost",
-                  "function": "Sum"
-                }
-              },
-              "grouping": [
-                {
-                  "type": "Dimension",
-                  "name": "SubscriptionName"
-                },
-                {
-                  "type": "Tag",
-                  "name": "Environment"
-                }
-              ],
-              "filter": {
-                "and": [
-                  {
-                    "or": [
-                      {
-                        "dimension": {
-                          "name": "ResourceLocation",
-                          "operator": "In",
-                          "values": [
-                            "East US",
-                            "West Europe"
-                          ]
-                        }
-                      },
-                      {
-                        "tag": {
-                          "name": "Environment",
-                          "operator": "In",
-                          "values": [
-                            "UAT",
-                            "Prod"
-                          ]
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "dimension": {
-                      "name": "ResourceGroup",
-                      "operator": "In",
-                      "values": [
-                        "API"
-                      ]
-                    }
-                  }
+                  "Quantity"
                 ]
               }
             }
@@ -199,8 +93,8 @@
             "status": "Active",
             "recurrence": "Weekly",
             "recurrencePeriod": {
-              "from": "2018-06-01T00:00:00Z",
-              "to": "2018-10-31T00:00:00Z"
+              "from": "2020-06-01T00:00:00Z",
+              "to": "2020-10-31T00:00:00Z"
             }
           },
           "format": "Csv",
@@ -212,7 +106,7 @@
             }
           },
           "definition": {
-            "type": "Usage",
+            "type": "ActualCost",
             "timeframe": "MonthToDate",
             "dataset": {
               "granularity": "Daily",
@@ -220,62 +114,9 @@
                 "columns": [
                   "Date",
                   "MeterId",
-                  "InstanceId",
+                  "ResourceId",
                   "ResourceLocation",
-                  "PreTaxCost"
-                ]
-              },
-              "aggregation": {
-                "costSum": {
-                  "name": "PreTaxCost",
-                  "function": "Sum"
-                }
-              },
-              "grouping": [
-                {
-                  "type": "Dimension",
-                  "name": "SubscriptionName"
-                },
-                {
-                  "type": "Tag",
-                  "name": "Environment"
-                }
-              ],
-              "filter": {
-                "and": [
-                  {
-                    "or": [
-                      {
-                        "dimension": {
-                          "name": "ResourceLocation",
-                          "operator": "In",
-                          "values": [
-                            "East US",
-                            "West Europe"
-                          ]
-                        }
-                      },
-                      {
-                        "tag": {
-                          "name": "Environment",
-                          "operator": "In",
-                          "values": [
-                            "UAT",
-                            "Prod"
-                          ]
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "dimension": {
-                      "name": "ResourceGroup",
-                      "operator": "In",
-                      "values": [
-                        "API"
-                      ]
-                    }
-                  }
+                  "Quantity"
                 ]
               }
             }

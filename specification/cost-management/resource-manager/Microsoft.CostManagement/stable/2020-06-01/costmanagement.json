@@ -1110,22 +1110,22 @@
         },
         "x-ms-examples": {
           "SubscriptionExportList": {
-            "$ref": "./examples/ExportListBySubscription.json"
+            "$ref": "./examples/ExportsGetBySubscription.json"
           },
           "ResourceGroupExportList": {
-            "$ref": "./examples/ExportListByResourceGroup.json"
+            "$ref": "./examples/ExportsGetByResourceGroup.json"
           },
           "BillingAccountExportList": {
-            "$ref": "./examples/ExportListByBillingAccount.json"
+            "$ref": "./examples/ExportsGetByBillingAccount.json"
           },
           "DepartmentExportList": {
-            "$ref": "./examples/ExportListByDepartment.json"
+            "$ref": "./examples/ExportsGetByDepartment.json"
           },
           "EnrollmentAccountExportList": {
-            "$ref": "./examples/ExportListByEnrollmentAccount.json"
+            "$ref": "./examples/ExportsGetByEnrollmentAccount.json"
           },
           "ManagementGroupExportList": {
-            "$ref": "./examples/ExportListByManagementGroup.json"
+            "$ref": "./examples/ExportsGetByManagementGroup.json"
           }
         },
         "parameters": [
@@ -1134,6 +1134,13 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last run of each export.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1164,22 +1171,22 @@
         },
         "x-ms-examples": {
           "SubscriptionExport": {
-            "$ref": "./examples/ExportBySubscription.json"
+            "$ref": "./examples/ExportGetBySubscription.json"
           },
           "ResourceGroupExport": {
-            "$ref": "./examples/ExportByResourceGroup.json"
+            "$ref": "./examples/ExportGetByResourceGroup.json"
           },
           "BillingAccountExport": {
-            "$ref": "./examples/ExportByBillingAccount.json"
+            "$ref": "./examples/ExportGetByBillingAccount.json"
           },
           "DepartmentExport": {
-            "$ref": "./examples/ExportByDepartment.json"
+            "$ref": "./examples/ExportGetByDepartment.json"
           },
           "EnrollmentAccountExport": {
-            "$ref": "./examples/ExportByEnrollmentAccount.json"
+            "$ref": "./examples/ExportGetByEnrollmentAccount.json"
           },
           "ManagementGroupExport": {
-            "$ref": "./examples/ExportByManagementGroup.json"
+            "$ref": "./examples/ExportGetByManagementGroup.json"
           }
         },
         "parameters": [
@@ -1191,6 +1198,13 @@
           },
           {
             "$ref": "#/parameters/exportNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last 10 runs of the export.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1343,22 +1357,22 @@
         },
         "x-ms-examples": {
           "SubscriptionExecuteExport": {
-            "$ref": "./examples/ExportExecutionBySubscription.json"
+            "$ref": "./examples/ExportRunBySubscription.json"
           },
           "ResourceGroupExecuteExport": {
-            "$ref": "./examples/ExportExecutionByResourceGroup.json"
+            "$ref": "./examples/ExportRunByResourceGroup.json"
           },
           "BillingAccountExecuteExport": {
-            "$ref": "./examples/ExportExecutionByBillingAccount.json"
+            "$ref": "./examples/ExportRunByBillingAccount.json"
           },
           "DepartmentExecuteExport": {
-            "$ref": "./examples/ExportExecutionByDepartment.json"
+            "$ref": "./examples/ExportRunByDepartment.json"
           },
           "EnrollmentAccountExecuteExport": {
-            "$ref": "./examples/ExportExecutionByEnrollmentAccount.json"
+            "$ref": "./examples/ExportRunByEnrollmentAccount.json"
           },
           "ManagementGroupExecuteExport": {
-            "$ref": "./examples/ExportExecutionByManagementGroup.json"
+            "$ref": "./examples/ExportRunByManagementGroup.json"
           }
         },
         "parameters": [
@@ -1397,22 +1411,22 @@
         },
         "x-ms-examples": {
           "SubscriptionExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListBySubscription.json"
+            "$ref": "./examples/ExportRunHistoryGetBySubscription.json"
           },
           "ResourceGroupExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByResourceGroup.json"
+            "$ref": "./examples/ExportRunHistoryGetByResourceGroup.json"
           },
           "BillingAccountExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByBillingAccount.json"
+            "$ref": "./examples/ExportRunHistoryGetByBillingAccount.json"
           },
           "DepartmentExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByDepartment.json"
+            "$ref": "./examples/ExportRunHistoryGetByDepartment.json"
           },
           "EnrollmentAccountExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByEnrollmentAccount.json"
+            "$ref": "./examples/ExportRunHistoryGetByEnrollmentAccount.json"
           },
           "ManagementGroupExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByManagementGroup.json"
+            "$ref": "./examples/ExportRunHistoryGetByManagementGroup.json"
           }
         },
         "parameters": [
@@ -2756,11 +2770,11 @@
       }
     },
     "Export": {
-      "description": "A export resource.",
+      "description": "An export resource.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2790,7 +2804,7 @@
       "description": "The common properties of the export.",
       "properties": {
         "format": {
-          "description": "The format of the export being delivered.",
+          "description": "The format of the export being delivered. Currently only 'Csv' is supported.",
           "type": "string",
           "enum": [
             "Csv"
@@ -2805,8 +2819,8 @@
           "$ref": "#/definitions/ExportDeliveryInfo"
         },
         "definition": {
-          "description": "Has definition for the export.",
-          "$ref": "#/definitions/QueryDefinition"
+          "description": "Has the definition for the export.",
+          "$ref": "#/definitions/ExportDefinition"
         }
       },
       "required": [
@@ -2815,10 +2829,10 @@
       ]
     },
     "ExportSchedule": {
-      "description": "The schedule associated with a export.",
+      "description": "The schedule associated with the export.",
       "properties": {
         "status": {
-          "description": "The status of the schedule. Whether active or not. If inactive, the export's scheduled execution is paused.",
+          "description": "The status of the schedule. If 'Inactive', the export's scheduled execution is paused.",
           "type": "string",
           "enum": [
             "Active",
@@ -2901,6 +2915,103 @@
       "required": [
         "resourceId",
         "container"
+      ]
+    },
+    "ExportDefinition": {
+      "description": "The definition of an export.",
+      "properties": {
+        "type": {
+          "description": "The type of the export. Note that 'Usage' is equivalent to 'ActualCost' and is applicable to exports that do not yet provide data for charges or amortization for service reservations.",
+          "type": "string",
+          "enum": [
+            "Usage",
+            "ActualCost",
+            "AmortizedCost"
+          ],
+          "x-ms-enum": {
+            "name": "ExportType",
+            "modelAsString": true
+          }
+        },
+        "timeframe": {
+          "description": "The time frame for pulling data for the export. If custom, then a specific time period must be provided.",
+          "type": "string",
+          "enum": [
+            "MonthToDate",
+            "BillingMonthToDate",
+            "TheLastMonth",
+            "TheLastBillingMonth",
+            "WeekToDate",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "TimeframeType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the export.",
+          "$ref": "#/definitions/ExportTimePeriod"
+        },
+        "dataSet": {
+          "description": "The definition for data in the export.",
+          "$ref": "#/definitions/ExportDataset"
+        }
+      },
+      "required": [
+        "type",
+        "timeframe"
+      ]
+    },
+    "ExportDataset": {
+      "description": "The definition for data in the export.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the export. Currently only 'Daily' is supported.",
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "The export dataset configuration.",
+          "$ref": "#/definitions/ExportDatasetConfiguration"
+        }
+      }
+    },
+    "ExportDatasetConfiguration": {
+      "description": "The export dataset configuration. Allows columns to be selected for the export. If not provided then the export will include all available columns.",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the export. If not provided then the export will include all available columns. The available columns can vary by customer channel (see examples).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExportTimePeriod": {
+      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 3 months.",
+      "properties": {
+        "from": {
+          "description": "The start date for export data.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date for export data.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
       ]
     },
     "ExportExecutionListResult": {
@@ -3051,7 +3162,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2020-06-01."
+      "description": "Version of the API to be used with the client request (e.g. '2020-06-01')."
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
