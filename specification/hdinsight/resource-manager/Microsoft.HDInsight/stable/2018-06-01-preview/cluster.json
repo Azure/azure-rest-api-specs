@@ -65,6 +65,9 @@
           },
           "Create cluster with TLS 1.2": {
             "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with custom network settings": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
           }
         },
         "parameters": [
@@ -924,6 +927,35 @@
       },
       "description": "The storage profile."
     },
+    "NetworkSettings": {
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "enum": [
+            "InboundAndOutbound",
+            "OutboundOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "outboundOnlyPublicNetworkAccessType": {
+          "type": "string",
+          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "enum": [
+            "PublicLoadBalancer",
+            "UDR"
+          ],
+          "x-ms-enum": {
+            "name": "OutboundOnlyPublicNetworkAccessType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The network settings."
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -982,6 +1014,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       }
     },
@@ -1162,6 +1198,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       },
       "required": [
