@@ -20,5 +20,4 @@ python-sdk-output-folder: "$(az-output-folder)/azext_portal/vendored_sdks/portal
 #       - where:
 #             parameter: location
 #         required: true
-
 ```
