@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-mediaservices"
   output-folder: "$(typescript-sdks-folder)/sdk/mediaservices/arm-mediaservices"
+  clear-output-folder: true
   generate-metadata: true
 ```

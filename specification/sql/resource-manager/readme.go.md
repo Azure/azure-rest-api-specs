@@ -23,13 +23,13 @@ batch:
   - tag: package-pure-2014-04
 ```
 
-#### Tag: package-composite-v3
+#### Tag: package-composite-v3 and go
 
 These settings apply only when `--tag=package-composite-v3 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-composite-v3' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-06-15-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/v3.0/$(namespace)
 ```
 
 #### Tag: package-pure-2018-06-preview and go

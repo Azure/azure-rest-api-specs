@@ -28,7 +28,34 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2019-07-01
+tag: package-netapp-2019-11-01
+```
+
+### Tag: package-netapp-2019-11-01
+
+These settings apply only when `--tag=package-netapp-2019-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2019-11-01'
+input-file:
+- Microsoft.NetApp/stable/2019-11-01/netapp.json
+```
+
+### Tag: package-netapp-2019-10-01
+
+These settings apply only when `--tag=package-netapp-2019-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2019-10-01'
+input-file:
+- Microsoft.NetApp/stable/2019-10-01/netapp.json
+```
+
+### Tag: package-netapp-2019-08-01
+
+These settings apply only when `--tag=package-netapp-2019-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2019-08-01'
+input-file:
+- Microsoft.NetApp/stable/2019-08-01/netapp.json
 ```
 
 ### Tag: package-netapp-2019-07-01
@@ -84,6 +111,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-trenton
 ```
 
 
@@ -119,6 +147,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.NetApp/stable/2019-11-01/netapp.json
+  - $(this-folder)/Microsoft.NetApp/stable/2019-10-01/netapp.json
+  - $(this-folder)/Microsoft.NetApp/stable/2019-08-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-07-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-06-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-05-01/netapp.json
@@ -134,3 +165,17 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+    cli-name: netapp
+    azure_arm: true
+    license_header: MICROSOFT_MIT_NO_VERSION
+    payload_flattening_threshold: 2
+    namespace: netapp
+    package-name: netapp
+    clear_output_folder: false
+```

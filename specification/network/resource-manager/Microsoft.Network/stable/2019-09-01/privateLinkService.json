@@ -488,7 +488,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "PrivateLinkServices"
@@ -579,12 +579,19 @@
               "$ref": "#/definitions/PrivateLinkServiceVisibility"
             }
           },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Check private link service visibility": {
@@ -638,12 +645,19 @@
               "$ref": "#/definitions/PrivateLinkServiceVisibility"
             }
           },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Check private link service visibility": {
@@ -979,7 +993,7 @@
           "type": "string",
           "description": "The reason for approval/rejection of the connection."
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }

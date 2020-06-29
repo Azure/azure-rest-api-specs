@@ -5,7 +5,7 @@
     "title": "StorageManagementClient",
     "description": "The Admin Storage Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -38,6 +38,205 @@
             "description": "OK -- The list of operations has been returned.",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/asyncOperations/{asyncOperationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the async operation specified by asyncOperationId.": {
+            "$ref": "./examples/AsyncOperations/Get.json"
+          }
+        },
+        "tags": [
+          "AsyncOperations"
+        ],
+        "operationId": "AsyncOperations_Get",
+        "description": "Returns the async operation specified by asyncOperationId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/AsyncOperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The async operation has been returned.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationModel"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Storage.Admin/storageServices": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the storage services list under the specified resource group and subscription.": {
+            "$ref": "./examples/StorageServices/ListResourceGroup.json"
+          }
+        },
+        "tags": [
+          "StorageServices"
+        ],
+        "operationId": "StorageServices_ListRG",
+        "description": "Returns the storage services list under the specified resource group and subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of storage services has been returned.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/storageServices": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the storage services list under the specified subscription.": {
+            "$ref": "./examples/StorageServices/ListSubscription.json"
+          }
+        },
+        "tags": [
+          "StorageServices"
+        ],
+        "operationId": "StorageServices_ListSub",
+        "description": "Returns the storage services list under the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of storage services has been returned.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}resourceGroups/{resourceGroup}/providers/Microsoft.Storage.Admin/storageServices/{serviceName}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the specified storage service.": {
+            "$ref": "./examples/StorageServices/Get.json"
+          }
+        },
+        "tags": [
+          "StorageServices"
+        ],
+        "operationId": "StorageServices_Get",
+        "description": "Returns the specified storage service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The specified storage service has been returned.",
+            "schema": {
+              "$ref": "#/definitions/StorageService"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create the specified storage resource.": {
+            "$ref": "./examples/StorageServices/Put.json"
+          }
+        },
+        "tags": [
+          "StorageServices"
+        ],
+        "operationId": "StorageServices_Create",
+        "description": "Create the specified storage resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The specified storage service has been created.",
+            "schema": {
+              "$ref": "#/definitions/StorageService"
             }
           },
           "default": {
@@ -100,6 +299,141 @@
           "items": {
             "$ref": "#/definitions/Operation"
           }
+        }
+      }
+    },
+    "ServiceNameProperties": {
+      "description": "The properties for service name.",
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "description": "Service Name for Storage Service.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageService": {
+      "description": "MDM storage service resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties for service name.",
+          "$ref": "#/definitions/ServiceNameProperties",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "StorageServiceList": {
+      "description": "List for storage services.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/StorageService"
+      }
+    },
+    "AsyncOperationModel": {
+      "description": "The async operation body for srp request.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The operation id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationStartTime": {
+          "description": "Operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationEndTime": {
+          "description": "Operation end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription id for async operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locationHeader": {
+          "description": "Location header for async operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "httpStatus": {
+          "description": "Http status for the async operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "response": {
+          "description": "Response for the async operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "context": {
+          "description": "Operation context.",
+          "$ref": "#/definitions/OperationRequestContext",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Async operation content.",
+          "$ref": "#/definitions/AsyncOperation",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      }
+    },
+    "OperationRequestContext": {
+      "description": "Operation request context.",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "Operation api version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityId": {
+          "description": "Activity id for the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationName": {
+          "description": "Async operation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Async operation error code if operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "runtimeException": {
+          "description": "Runtime exception if operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time for the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AsyncOperation": {
+      "description": "Async operation content",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Async operation name",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -181,7 +515,32 @@
       "name": "subscriptionId",
       "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "AsyncOperationIdParameter": {
+      "description": "Async Operation Id.",
+      "name": "asyncOperationId",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "description": "Resource group name.",
+      "name": "resourceGroup",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StorageServiceNameParameter": {
+      "description": "Storage service name.",
+      "name": "serviceName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

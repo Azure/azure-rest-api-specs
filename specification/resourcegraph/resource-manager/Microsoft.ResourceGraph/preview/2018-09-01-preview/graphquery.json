@@ -34,8 +34,11 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries": {
       "get": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Get all graph queries defined within a specified subscription and resource group.",
         "operationId": "GraphQuery_List",
         "parameters": [
@@ -73,8 +76,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}": {
       "get": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Get a single graph query by its resourceName.",
         "operationId": "GraphQuery_Get",
         "parameters": [
@@ -112,6 +118,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Delete a graph query.",
         "operationId": "GraphQuery_Delete",
         "parameters": [
@@ -149,6 +158,9 @@
         }
       },
       "put": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Create a new graph query.",
         "operationId": "GraphQuery_CreateOrUpdate",
         "parameters": [
@@ -240,36 +252,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.ResourceGraph/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available REST API operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "resourcegraph.json#/definitions/OperationListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -285,6 +267,11 @@
           "readOnly": true,
           "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
         },
+        "location": {
+          "type": "string",
+          "readOnly": false,
+          "description": "The location of the resource"
+        },
         "type": {
           "type": "string",
           "readOnly": true,
@@ -292,7 +279,6 @@
         },
         "eTag": {
           "type": "string",
-          "readOnly": true,
           "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
         },
         "tags": {
@@ -361,7 +347,6 @@
         "resultKind": {
           "description": "Enum indicating a type of graph query.",
           "readOnly": true,
-          "default": "basic",
           "type": "string",
           "enum": [
             "basic"
@@ -384,7 +369,6 @@
         },
         "eTag": {
           "type": "string",
-          "readOnly": true,
           "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
         },
         "properties": {
@@ -405,18 +389,6 @@
         "query": {
           "type": "string",
           "description": "KQL query that will be graph."
-        },
-        "resultKind": {
-          "description": "Enum indicating a type of graph query.",
-          "default": "basic",
-          "type": "string",
-          "enum": [
-            "basic"
-          ],
-          "x-ms-enum": {
-            "name": "ResultKind",
-            "modelAsString": true
-          }
         }
       }
     },

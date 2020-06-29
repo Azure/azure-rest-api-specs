@@ -10,24 +10,70 @@ namespace: com.microsoft.azure.management.network
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
+directive:
+  - rename-operation:
+      from: VirtualHubBgpConnection_Get
+      to: VirtualHubBgpConnections_Get
+  - rename-operation:
+      from: VirtualHubBgpConnection_CreateOrUpdate
+      to: VirtualHubBgpConnections_CreateOrUpdate
+  - rename-operation:
+      from: VirtualHubBgpConnection_Delete
+      to: VirtualHubBgpConnections_Delete
 ```
 
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-05
+  - tag: package-2020-04
+  - tag: package-2020-03
   - tag: package-2019-09
   - tag: package-2019-08
   - tag: package-2019-07
   - tag: package-2019-06
   - tag: package-2019-04
   - tag: package-2019-02
-  - tag: package-2018-12
-  - tag: package-2018-08
-  - tag: package-2018-07
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2017-10
+```
+
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2020_05_01
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2020-04 and java
+
+These settings apply only when `--tag=package-2020-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2020_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2020_04_01
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2020-03 and java
+
+These settings apply only when `--tag=package-2020-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2020_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2020_03_01
+  regenerate-manager: true
+  generate-interface: true
 ```
 
 ### Tag: package-2019-09 and java
@@ -38,7 +84,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2019_09_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2019_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2019_09_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -51,7 +97,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2019_08_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -64,7 +110,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2019_07_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -77,7 +123,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2019_06_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -90,7 +136,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2019_04_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2019_04_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -103,7 +149,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2019_02_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2019_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2019_02_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -116,7 +162,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2018_12_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_12_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -129,7 +175,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2018_08_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_08_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -142,7 +188,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2018_07_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_07_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -155,7 +201,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_06_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -168,7 +214,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_04_01
   regenerate-manager: true
   generate-interface: true
 ```
@@ -181,7 +227,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.network.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2017_10_01
   regenerate-manager: true
   generate-interface: true
 ```

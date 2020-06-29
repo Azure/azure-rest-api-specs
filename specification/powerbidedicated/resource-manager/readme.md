@@ -54,6 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
 ```
 
 ## C#
@@ -103,10 +104,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-10-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.powerbidedicated.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/powerbidedicated/resource-manager/v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/powerbidedicated/mgmt-v2017_10_01
 regenerate-manager: true
 generate-interface: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 
 

@@ -52,6 +52,7 @@
           "ipRangeFilter": "10.10.10.10",
           "isVirtualNetworkFilterEnabled": true,
           "databaseAccountOfferType": "Standard",
+          "disableKeyBasedMetadataWriteAccess": false,
           "consistencyPolicy": {
             "defaultConsistencyLevel": "BoundedStaleness",
             "maxIntervalInSeconds": 10,
@@ -67,6 +68,22 @@
             }
           ],
           "readLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            },
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 1,
+              "isZoneRedundant": false
+            }
+          ],
+          "locations": [
             {
               "id": "ddb1-southcentralus",
               "locationName": "South Central US",

@@ -19,6 +19,90 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-08
   - tag: package-2019-10
+  - tag: package-2019-11
+  - tag: package-2020-01
+  - tag: package-2020-02
+  - tag: package-2020-03
+  - tag: package-2020-04
+  - tag: package-2020-06
+```
+
+### Tag: package-2020-06 and java
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-04 and java
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-03 and java
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-02 and java
+
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_02_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-01 and java
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-11 and java
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2019_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_11_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-10 and java
@@ -29,7 +113,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_10_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -42,7 +126,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -55,7 +139,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -68,7 +152,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-04-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_04_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -81,7 +165,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-09-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2017_09_30
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_09_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_09_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -94,7 +178,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-08-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2017_08_31
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_08_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_08_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -107,7 +191,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2017_07_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_07_01
 regenerate-manager: true
 generate-interface: true
 ```

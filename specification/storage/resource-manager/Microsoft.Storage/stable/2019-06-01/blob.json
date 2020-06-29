@@ -149,6 +149,9 @@
         "x-ms-examples": {
           "ListContainers": {
             "$ref": "./examples/BlobContainersList.json"
+          },
+          "ListDeletedContainers": {
+            "$ref": "./examples/DeletedBlobContainersList.json"
           }
         },
         "description": "Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.",
@@ -176,6 +179,20 @@
             "in": "query",
             "type": "string",
             "description": "Optional. When specified, only container names starting with the filter will be listed."
+          },
+          {
+            "name": "$include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "deleted"
+            ],
+            "x-ms-enum": {
+              "name": "ListContainersInclude",
+              "modelAsString": true
+            },
+            "description": "Optional, used to include the properties for soft deleted blob containers."
           }
         ],
         "responses": {
@@ -200,6 +217,9 @@
         "x-ms-examples": {
           "PutContainers": {
             "$ref": "./examples/BlobContainersPut.json"
+          },
+          "PutContainerWithDefaultEncryptionScope": {
+            "$ref": "./examples/BlobContainersPutDefaultEncryptionScope.json"
           }
         },
         "description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ",
@@ -797,6 +817,35 @@
   "definitions": {
     "ContainerProperties": {
       "properties": {
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the deleted blob container."
+        },
+        "deleted": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the blob container was deleted."
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Blob container deletion time."
+        },
+        "remainingRetentionDays": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Remaining retention days for soft deleted blob container."
+        },
+        "defaultEncryptionScope": {
+          "type": "string",
+          "description": "Default the container to use specified encryption scope for all writes."
+        },
+        "denyEncryptionScopeOverride": {
+          "type": "boolean",
+          "description": "Block override of encryption scope from the container default."
+        },
         "publicAccess": {
           "type": "string",
           "enum": [
@@ -923,11 +972,12 @@
             "modelAsString": true
           },
           "description": "The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked."
+        },
+        "allowProtectedAppendWrites": {
+          "type": "boolean",
+          "description": "This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API"
         }
       },
-      "required": [
-        "immutabilityPeriodSinceCreationInDays"
-      ],
       "description": "The properties of an ImmutabilityPolicy of a blob container."
     },
     "ImmutabilityPolicyProperties": {
@@ -1132,21 +1182,38 @@
               "description": "DefaultServiceVersion indicates the default version to use for requests to the Blob service if an incoming request’s version is not specified. Possible values include version 2008-10-27 and all more recent versions."
             },
             "deleteRetentionPolicy": {
-              "$ref": "#/definitions/DeleteRetentionPolicy",
-              "description": "The blob service properties for soft delete."
+              "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
+              "description": "The blob service properties for blob soft delete."
+            },
+            "isVersioningEnabled": {
+              "type": "boolean",
+              "description": "Versioning is enabled if set to true."
             },
             "automaticSnapshotPolicyEnabled": {
               "type": "boolean",
-              "description": "Automatic Snapshot is enabled if set to true."
+              "description": "Deprecated in favor of isVersioningEnabled property."
             },
             "changeFeed": {
               "$ref": "#/definitions/ChangeFeed",
               "description": "The blob service properties for change feed events."
+            },
+            "restorePolicy": {
+              "$ref": "#/definitions/RestorePolicyProperties",
+              "description": "The blob service properties for blob restore policy."
+            },
+            "containerDeleteRetentionPolicy": {
+              "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
+              "description": "The blob service properties for container soft delete."
             }
           },
           "x-ms-client-flatten": true,
           "x-ms-client-name": "BlobServiceProperties",
           "description": "The properties of a storage account’s Blob service."
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "readOnly": true,
+          "description": "Sku name and tier."
         }
       },
       "allOf": [
@@ -1177,20 +1244,29 @@
       },
       "description": "The blob service properties for change feed events."
     },
-    "DeleteRetentionPolicy": {
+    "RestorePolicyProperties": {
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates whether DeleteRetentionPolicy is enabled for the Blob service."
+          "description": "Blob restore is enabled if set to true."
         },
         "days": {
           "type": "integer",
           "minimum": 1,
           "maximum": 365,
-          "description": "Indicates the number of days that the deleted blob should be retained. The minimum specified value can be 1 and the maximum value can be 365."
+          "description": "how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days."
+        },
+        "lastEnabledTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Returns the date and time the restore policy was last enabled."
         }
       },
-      "description": "The blob service properties for soft delete."
+      "required": [
+        "enabled"
+      ],
+      "description": "The blob service properties for blob restore policy"
     },
     "LeaseContainerRequest": {
       "properties": {
