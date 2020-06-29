@@ -78,6 +78,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
 ## CLI
 
 See configuration in [readme.cli.md](./readme.cli.md)
