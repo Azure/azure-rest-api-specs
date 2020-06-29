@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "TimeSeriesInsightsClient",
-    "description": "Time Series Insights environment data plane client for PAYG (Preview L1 SKU) environments.",
-    "version": "2018-11-01-preview"
+    "description": "Time Series Insights environment data plane client for GA (GA L1 SKU) environments.",
+    "version": "2020-07-31"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{environmentFqdn}",
@@ -464,17 +464,17 @@
         "tags": [
           "TimeSeriesInstances"
         ],
-        "operationId": "TimeSeriesInstances_Get",
+        "operationId": "TimeSeriesInstances_List",
         "description": "Gets time series instances in pages.",
         "x-ms-examples": {
-          "InstancesGetPage1": {
-            "$ref": "./examples/InstancesGetPage1.json"
+          "InstancesListPage1": {
+            "$ref": "./examples/InstancesListPage1.json"
           },
-          "InstancesGetPage2": {
-            "$ref": "./examples/InstancesGetPage2.json"
+          "InstancesListPage2": {
+            "$ref": "./examples/InstancesListPage2.json"
           },
-          "InstancesGetPage3": {
-            "$ref": "./examples/InstancesGetPage3.json"
+          "InstancesListPage3": {
+            "$ref": "./examples/InstancesListPage3.json"
           }
         },
         "parameters": [
@@ -751,17 +751,17 @@
         "tags": [
           "TimeSeriesTypes"
         ],
-        "operationId": "TimeSeriesTypes_Get",
+        "operationId": "TimeSeriesTypes_List",
         "description": "Gets time series types in pages.",
         "x-ms-examples": {
-          "TypesGetPage1": {
-            "$ref": "./examples/TypesGetPage1.json"
+          "TypesListPage1": {
+            "$ref": "./examples/TypesListPage1.json"
           },
-          "TypesGetPage2": {
-            "$ref": "./examples/TypesGetPage2.json"
+          "TypesListPage2": {
+            "$ref": "./examples/TypesListPage2.json"
           },
-          "TypesGetPage3": {
-            "$ref": "./examples/TypesGetPage3.json"
+          "TypesListPage3": {
+            "$ref": "./examples/TypesListPage3.json"
           }
         },
         "parameters": [
@@ -887,17 +887,17 @@
         "tags": [
           "TimeSeriesHierarchies"
         ],
-        "operationId": "TimeSeriesHierarchies_Get",
+        "operationId": "TimeSeriesHierarchies_List",
         "description": "Returns time series hierarchies definitions in pages.",
         "x-ms-examples": {
-          "HierarchiesGetPage1": {
-            "$ref": "./examples/HierarchiesGetPage1.json"
+          "HierarchiesListPage1": {
+            "$ref": "./examples/HierarchiesListPage1.json"
           },
-          "HierarchiesGetPage2": {
-            "$ref": "./examples/HierarchiesGetPage2.json"
+          "HierarchiesListPage2": {
+            "$ref": "./examples/HierarchiesListPage2.json"
           },
-          "HierarchiesGetPage3": {
-            "$ref": "./examples/HierarchiesGetPage3.json"
+          "HierarchiesListPage3": {
+            "$ref": "./examples/HierarchiesListPage3.json"
           }
         },
         "parameters": [
@@ -1512,8 +1512,7 @@
         },
         "typeId": {
           "description": "This represents the type that this instance belongs to. Never null.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "name": {
           "description": "Optional name of the instance which is unique in an environment. Names acts as a mutable alias or display name of the time series instance. Mutable, may be null.",
@@ -1527,8 +1526,7 @@
           "description": "Set of time series hierarchy IDs that the instance belong to. May be null.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "instanceFields": {
@@ -1670,9 +1668,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. Mutable, not null.",
@@ -1723,8 +1720,7 @@
           "description": "List of IDs of time series types to return or delete.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1808,9 +1804,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique hierarchy identifier that is a immutable GUID. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique hierarchy identifier. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. It is mutable and not null.",
@@ -1864,8 +1859,7 @@
           "description": "List of hierarchy IDs.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1951,8 +1945,7 @@
         "defaultTypeId": {
           "description": "Default type ID of the model that new time series instances will automatically belong to.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -1997,8 +1990,7 @@
         },
         "defaultTypeId": {
           "description": "Default type id of the model that new instances will automatically belong to.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -2217,16 +2209,14 @@
         "typeId": {
           "description": "Represents the type that time series instance which matched the search request belongs to. Never null.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "hierarchyIds": {
           "description": "List of time series hierarchy IDs that time series instance which matched the search request belongs to. Cannot be used to lookup hierarchies. May be null.",
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "highlights": {
@@ -2262,8 +2252,7 @@
               "readOnly": true,
               "type": "array",
               "items": {
-                "type": "string",
-                "format": "uuid"
+                "type": "string"
               }
             },
             "hierarchyNames": {
@@ -2476,9 +2465,9 @@
       "name": "api-version",
       "in": "query",
       "required": true,
-      "default": "2018-11-01-preview",
+      "default": "2020-07-31",
       "type": "string",
-      "description": "Version of the API to be used with the client request. Currently supported version is \"2018-11-01-preview\"."
+      "description": "Version of the API to be used with the client request. Currently supported version is \"2020-07-31\"."
     },
     "StoreType": {
       "name": "storeType",
