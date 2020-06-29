@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-05-01",
+    "version": "2020-07-01-preview",
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
@@ -1059,6 +1059,10 @@
             "read",
             "create"
           ]
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The managed identity response"
         }
       }
     },
@@ -1214,6 +1218,10 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
+        },
+        "tls": {
+          "$ref": "#/definitions/SignalRTlsSettings",
+          "description": "TLS settings."
         }
       }
     },
@@ -1240,10 +1248,6 @@
       "description": "Settings used to provision or configure the resource.",
       "type": "object",
       "properties": {
-        "hostNamePrefix": {
-          "description": "Prefix for the hostName of the SignalR service. Retained for future use.\r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.service.signalr.net.",
-          "type": "string"
-        },
         "features": {
           "description": "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, SignalR service will use its globally default value. \r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
           "type": "array",
@@ -1386,6 +1390,10 @@
         "urlTemplate": {
           "description": "Gets or sets the Upstream URL template. You can use 3 predefined parameters {hub}, {category} {event} inside the template, the value of the Upstream URL is dynamically calculated when the client request comes in.\r\nFor example, if the urlTemplate is `http://example.com/{hub}/api/{event}`, with a client request from hub `chat` connects, it will first POST to this URL: `http://example.com/chat/api/connect`.",
           "type": "string"
+        },
+        "auth": {
+          "$ref": "#/definitions/UpstreamAuthSettings",
+          "description": "Gets or sets the auth settings for an upstream. If not set, no auth is used for upstream messages."
         }
       }
     },
@@ -1440,6 +1448,82 @@
         }
       }
     },
+    "UpstreamAuthSettings": {
+      "description": "Upstream auth settings.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UpstreamAuthType",
+          "description": "Gets or sets the type of auth. None or ManagedIdentity is supported now."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/ManagedIdentitySettings",
+          "description": "Gets or sets the managed identity settings. It's required if the auth type is set to ManagedIdentity."
+        }
+      }
+    },
+    "UpstreamAuthType": {
+      "description": "Gets or sets the type of auth. None or ManagedIdentity is supported now.",
+      "enum": [
+        "None",
+        "ManagedIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "UpstreamAuthType",
+        "modelAsString": true
+      }
+    },
+    "ManagedIdentitySettings": {
+      "description": "Managed identity settings for upstream.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The Resource indicating the App ID URI of the target resource.\r\nIt also appears in the aud (audience) claim of the issued token.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "A class represent managed identities used for request and response",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Represent the identity type: systemAssigned, userAssigned, None"
+        },
+        "userAssignedIdentities": {
+          "description": "Get or set the user assigned identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityProperty"
+          }
+        },
+        "principalId": {
+          "description": "Get the principal id for the system assigned identity.\r\nOnly be used in response.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Get the tenant id for the system assigned identity.\r\nOnly be used in response",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "description": "Represent the identity type: systemAssigned, userAssigned, None",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true
+      }
+    },
     "PrivateEndpointConnection": {
       "description": "A private endpoint connection to SignalR resource",
       "type": "object",
@@ -1465,6 +1549,32 @@
         }
       ],
       "properties": {}
+    },
+    "SignalRTlsSettings": {
+      "description": "TLS settings for SignalR",
+      "type": "object",
+      "properties": {
+        "clientCertEnabled": {
+          "description": "Request client certificate during TLS handshake if enabled",
+          "type": "boolean"
+        }
+      }
+    },
+    "UserAssignedIdentityProperty": {
+      "description": "Properties of user assigned identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Get the principal id for the user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Get the client id for the user assigned identity",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "description": "Private endpoint connection properties",

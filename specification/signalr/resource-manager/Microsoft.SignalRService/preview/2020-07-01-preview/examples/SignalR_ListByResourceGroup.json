@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
+    "api-version": "2020-07-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup"
   },
@@ -40,7 +40,9 @@
                   "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
                 }
               ],
-              "hostNamePrefix": "mysignalrservice",
+              "tls": {
+                "clientCertEnabled": true
+              },
               "features": [
                 {
                   "flag": "ServiceMode",
@@ -70,7 +72,8 @@
                     "hubPattern": null,
                     "eventPattern": null,
                     "categoryPattern": null,
-                    "urlTemplate": "http://foo.com"
+                    "urlTemplate": "http://foo.com",
+                    "auth": null
                   }
                 ]
               },
@@ -94,6 +97,11 @@
               }
             },
             "kind": "SignalR",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
             "location": "eastus",
             "tags": {
               "key1": "value1"
