@@ -27,5 +27,5 @@ cli:
 ```
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-cli-extensions
+  - repo: azure-sdk-for-js
 ```
