@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "deploymentName": "exampleDeploymentName",
+    "api-version": "2019-10-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "templateLink": "https://example.com/exampleTemplate.json",
+        "parameters": {},
+        "mode": "Incremental"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "properties": {
+          "changes": [
+            {
+              "resourceId": "/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+              "changeType": "Modify",
+              "before": {
+                "apiVersion": "2019-06-01",
+                "id": "/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                "type": "Microsoft.Authorization/policyAssignments",
+                "name": "myPolicyAssignment",
+                "location": "westus2",
+                "properties": {
+                  "policyDefinitionId": "/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
+                  "scope": "/subscriptions/00000000-0000-0000-0000-000000000001",
+                  "enforcementMode": "Default"
+                }
+              },
+              "after": {
+                "resourceId": "/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                "changeType": "Modify",
+                "before": {
+                  "apiVersion": "2019-06-01",
+                  "id": "/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                  "type": "Microsoft.Authorization/policyAssignments",
+                  "name": "myPolicyAssignment",
+                  "location": "westus2",
+                  "properties": {
+                    "policyDefinitionId": "/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
+                    "scope": "/subscriptions/00000000-0000-0000-0000-000000000001",
+                    "enforcementMode": "DoNotEnforce"
+                  }
+                },
+                "delta": [
+                  {
+                    "path": "properties.enforcementMode",
+                    "propertyChangeType": "Modify",
+                    "before": "Default",
+                    "after": "DoNotEnforce"
+                  }
+                ]
+              }
+            },
+            {
+              "resourceId": "/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment2",
+              "changeType": "Create",
+              "after": {
+                "apiVersion": "2019-06-01",
+                "id": "/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment2",
+                "type": "Microsoft.Authorization/policyAssignments",
+                "name": "myPolicyAssignment2",
+                "location": "westus2",
+                "properties": {
+                  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyDefinition",
+                  "scope": "/subscriptions/00000000-0000-0000-0000-000000000002",
+                  "enforcementMode": "Default"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/4d0ca63b-7939-4c9c-afbe-5fafae501724/operationresults/ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+      }
+    }
+  }
+}
