@@ -91,7 +91,8 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -140,7 +141,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "./common.json#/definitions/ErrorDetails"
             }
           }
         }
@@ -910,32 +911,6 @@
         "modelAsString": true,
         "name": "UnitType"
       }
-    },
-    "Error": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorBody",
-          "description": "The error body."
-        }
-      },
-      "description": "Bing error object."
-    },
-    "ErrorBody": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "error message"
-        }
-      },
-      "description": "Bing error body.",
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "OperationEntityListResult": {
       "description": "The list of Bing accounts operation response.",
