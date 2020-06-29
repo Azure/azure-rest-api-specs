@@ -2758,6 +2758,7 @@
     },
     "ExportListResult": {
       "description": "Result of listing exports. It contains a list of available exports in the scope provided.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of exports.",
@@ -2802,6 +2803,7 @@
     },
     "CommonExportProperties": {
       "description": "The common properties of the export.",
+      "type": "object",
       "properties": {
         "format": {
           "description": "The format of the export being delivered. Currently only 'Csv' is supported.",
@@ -2840,6 +2842,7 @@
     },
     "ExportSchedule": {
       "description": "The schedule associated with the export.",
+      "type": "object",
       "properties": {
         "status": {
           "description": "The status of the export's schedule. If 'Inactive', the export's schedule is paused.",
@@ -2878,6 +2881,7 @@
     },
     "ExportDeliveryInfo": {
       "description": "The delivery information associated with a export.",
+      "type": "object",
       "properties": {
         "destination": {
           "description": "Has destination for the export being delivered.",
@@ -2890,6 +2894,7 @@
     },
     "ExportRecurrencePeriod": {
       "description": "The start and end date for recurrence schedule.",
+      "type": "object",
       "properties": {
         "from": {
           "description": "The start date of recurrence.",
@@ -2908,6 +2913,7 @@
     },
     "ExportDeliveryDestination": {
       "description": "The destination information for the delivery of the export. To allow access to a storage account, you must register the account's subscription with the Microsoft.CostManagementExports resource provider. This is required once per subscription. When creating an export in the Azure portal, it is done automatically, however API users need to register the subscription. For more information see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services .",
+      "type": "object",
       "properties": {
         "resourceId": {
           "description": "The resource id of the storage account where exports will be delivered.",
@@ -2929,6 +2935,7 @@
     },
     "ExportDefinition": {
       "description": "The definition of an export.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the export. Note that 'Usage' is equivalent to 'ActualCost' and is applicable to exports that do not yet provide data for charges or amortization for service reservations.",
@@ -2975,6 +2982,7 @@
     },
     "ExportDataset": {
       "description": "The definition for data in the export.",
+      "type": "object",
       "properties": {
         "granularity": {
           "description": "The granularity of rows in the export. Currently only 'Daily' is supported.",
@@ -2995,6 +3003,7 @@
     },
     "ExportDatasetConfiguration": {
       "description": "The export dataset configuration. Allows columns to be selected for the export. If not provided then the export will include all available columns.",
+      "type": "object",
       "properties": {
         "columns": {
           "description": "Array of column names to be included in the export. If not provided then the export will include all available columns. The available columns can vary by customer channel (see examples).",
@@ -3007,6 +3016,7 @@
     },
     "ExportTimePeriod": {
       "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 3 months.",
+      "type": "object",
       "properties": {
         "from": {
           "description": "The start date for export data.",
@@ -3026,6 +3036,7 @@
     },
     "ExportExecutionListResult": {
       "description": "Result of listing the execution history of an export.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "A list of export executions.",
@@ -3055,6 +3066,7 @@
     },
     "ExportExecutionProperties": {
       "description": "The properties of the export execution.",
+      "type": "object",
       "properties": {
         "executionType": {
           "description": "The type of the export execution.",
