@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "countryCode": "US",
+    "streetName": "NE%2024th%20Street",
+    "streetNumber": "15127",
+    "municipality": "Redmond",
+    "countrySubdivision": "WA",
+    "postalCode": "98052",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "query": "15127 98052 ne redmond wa",
+          "queryType": "NON_NEAR",
+          "queryTime": 57,
+          "numResults": 1,
+          "offset": 0,
+          "totalResults": 34,
+          "fuzzyLevel": 1,
+          "geoBias": {
+            "lat": 47.30129317913035,
+            "lon": -120.88247999999997
+          }
+        },
+        "results": [
+          {
+            "type": "Point Address",
+            "id": "US/PAD/p0/37974392",
+            "score": 8.074,
+            "dist": 101274.64693865852,
+            "address": {
+              "streetNumber": "15127",
+              "streetName": "NE 24th St",
+              "municipalitySubdivision": "Redmond",
+              "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
+              "countrySecondarySubdivision": "King",
+              "countryTertiarySubdivision": "Seattle East",
+              "countrySubdivision": "WA",
+              "postalCode": "98052",
+              "extendedPostalCode": "980525544",
+              "countryCode": "US",
+              "country": "United States Of America",
+              "countryCodeISO3": "USA",
+              "freeformAddress": "15127 NE 24th St, Redmond, WA 98052",
+              "countrySubdivisionName": "Washington"
+            },
+            "position": {
+              "lat": 47.6308,
+              "lon": -122.1385
+            },
+            "viewport": {
+              "topLeftPoint": {
+                "lat": 47.6317,
+                "lon": -122.13983
+              },
+              "btmRightPoint": {
+                "lat": 47.6299,
+                "lon": -122.13717
+              }
+            },
+            "entryPoints": [
+              {
+                "type": "main",
+                "position": {
+                  "lat": 47.6315,
+                  "lon": -122.13852
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
