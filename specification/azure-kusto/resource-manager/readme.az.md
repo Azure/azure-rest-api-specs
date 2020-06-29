@@ -25,3 +25,7 @@ cli:
         poly-resource: true
 
 ```
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-cli-extensions
+```
