@@ -1137,7 +1137,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last run of each export.",
+            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last execution of each export.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1201,7 +1201,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last 10 runs of the export.",
+            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last 10 executions of the export.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1351,7 +1351,7 @@
           "Exports"
         ],
         "operationId": "Exports_Execute",
-        "description": "The operation to run an export.",
+        "description": "The operation to execute an export.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1405,7 +1405,7 @@
           "Exports"
         ],
         "operationId": "Exports_GetExecutionHistory",
-        "description": "The operation to get the run history of an export for the defined scope and export name.",
+        "description": "The operation to get the execution history of an export for the defined scope and export name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -2823,11 +2823,11 @@
           "$ref": "#/definitions/ExportDefinition"
         },
         "runHistory": {
-          "description": "If requested, has run history for the export.",
+          "description": "If requested, has the most recent execution history for the export.",
           "$ref": "#/definitions/ExportExecutionListResult"
         },
 		"nextRunTimeEstimate": {
-          "description": "If the export has an active schedule, provides an estimate of the next run time.",
+          "description": "If the export has an active schedule, provides an estimate of the next execution time.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -3025,10 +3025,10 @@
       ]
     },
     "ExportExecutionListResult": {
-      "description": "Result of listing the run history of an export by name",
+      "description": "Result of listing the execution history of an export.",
       "properties": {
         "value": {
-          "description": "The list of export runs.",
+          "description": "A list of export executions.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -3038,7 +3038,7 @@
       }
     },
     "ExportExecution": {
-      "description": "An export run.",
+      "description": "An export execution.",
       "type": "object",
       "allOf": [
         {
@@ -3049,15 +3049,15 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExportExecutionProperties",
-          "title": "Export run properties"
+          "title": "Export execution properties"
         }
       }
     },
     "ExportExecutionProperties": {
-      "description": "The properties of the export run.",
+      "description": "The properties of the export execution.",
       "properties": {
         "executionType": {
-          "description": "The type of the export run.",
+          "description": "The type of the export execution.",
           "type": "string",
           "enum": [
             "OnDemand",
@@ -3069,7 +3069,7 @@
           }
         },
         "status": {
-          "description": "The status of the export run.",
+          "description": "The last known status of the export execution.",
           "type": "string",
           "enum": [
             "Queued",
@@ -3082,25 +3082,25 @@
           ],
           "x-ms-enum": {
             "name": "ExecutionStatus",
-            "modelAsString": true
           }
+            "modelAsString": true
         },
         "submittedBy": {
-          "description": "The identifier for the entity that ran the export. For OnDemand runs, it is the user email. For scheduled runs, it is 'System'.",
+          "description": "The identifier for the entity that executed the export. For OnDemand executions it is the user email. For scheduled executions it is 'System'.",
           "type": "string"
         },
         "submittedTime": {
-          "description": "The time when export was queued to be run.",
+          "description": "The time when export was queued to be executed.",
           "type": "string",
           "format": "date-time"
         },
         "processingStartTime": {
-          "description": "The time when export was picked up to be run.",
+          "description": "The time when export was picked up to be executed.",
           "type": "string",
           "format": "date-time"
         },
         "processingEndTime": {
-          "description": "The time when export run finished.",
+          "description": "The time when the export execution finished.",
           "type": "string",
           "format": "date-time"
         },
@@ -3109,15 +3109,15 @@
           "type": "string"
         },
         "runSettings": {
-          "description": "The export settings that were in effect for this run.",
+          "description": "The export settings that were in effect for this execution.",
           "$ref": "#/definitions/CommonExportProperties"
         },
         "errorCode": {
-          "description": "If the export run failed this will have an error code.",
+          "description": "If the export execution failed this will have an error code.",
           "type": "string"
         },
         "errorMessage": {
-          "description": "If the export run failed this will have a description of the error.",
+          "description": "If the export execution failed this will have a description of the error.",
           "type": "string"
         }
       }
