@@ -30,7 +30,7 @@ tag: package-2018-10
 ```
 
 
-### Tag: package-2018-02
+### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
