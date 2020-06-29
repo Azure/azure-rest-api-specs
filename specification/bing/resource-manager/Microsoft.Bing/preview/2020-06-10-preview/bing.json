@@ -41,6 +41,7 @@
         ],
         "description": "Create Bing Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
         "operationId": "BingAccounts_CreateAndUpdate",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Account": {
             "$ref": "./examples/CreateAccount.json"
@@ -78,12 +79,6 @@
           },
           "201": {
             "description": "If resource is created successfully, the service should return 201 (OK).",
-            "schema": {
-              "$ref": "#/definitions/BingAccount"
-            }
-          },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
@@ -141,7 +136,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -185,7 +180,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -225,7 +220,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -264,7 +259,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         },
@@ -303,7 +298,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         },
@@ -348,7 +343,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -400,7 +395,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -437,7 +432,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         },
@@ -482,7 +477,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -527,7 +522,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
@@ -560,7 +555,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         },
@@ -613,7 +608,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse/properties"
             }
           }
         }
