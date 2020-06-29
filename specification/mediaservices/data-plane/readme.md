@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-lva-1-0-0-preview` is specified on
 
 ``` yaml $(tag) == 'package-lva-1-0-0-preview'
 input-file:
-  - Microsoft.LvaEdge/preview/1.0.0/LiveVideoAnalytics.json
+  - LiveVideoAnalytics.Edge/preview/1.0.0/LiveVideoAnalytics.json
 ```
 
 ---
@@ -52,7 +52,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_media_edge_lva_client']
+      - bundle install && rake arm:regen_all_profiles['azure_media_lva_edge']
 ```
 
 ## C#
@@ -65,7 +65,7 @@ csharp:
   azure-arm: false
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Media.Edge.LiveVideoAnalytics.Client
-  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Media.Edge.LiveVideoAnalytics.Client/src/Generated
+  namespace: Azure.Media.LiveVideoAnalytics.Edge
+  output-folder: $(csharp-sdks-folder)/mediaservices/Azure.Media.LiveVideoAnalytics.Edge/src/Generated
   clear-output-folder: true
 ```
