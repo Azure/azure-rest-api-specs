@@ -31,6 +31,7 @@ directive:
 
 ```yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2020-06-01
   - tag: package-2019-12-01
   - tag: package-2019-07
   - tag: package-2019-03-01
