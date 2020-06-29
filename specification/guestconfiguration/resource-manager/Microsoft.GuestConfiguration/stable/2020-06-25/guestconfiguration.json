@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-06-25",
+    "version": "2018-11-20",
     "title": "GuestConfiguration"
   },
   "host": "management.azure.com",
@@ -914,82 +914,8 @@
       },
       "description": "Configuration setting of LCM (Local Configuration Manager)."
     },
-    "AssignmentReport": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ARM resource id of the report for the guest configuration assignment."
-        },
-        "reportId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "GUID that identifies the guest configuration assignment report under a subscription, resource group."
-        },
-        "assignment": {
-          "$ref": "#/definitions/AssignmentInfo",
-          "description": "Configuration details of the guest configuration assignment."
-        },
-        "vm": {
-          "$ref": "#/definitions/VMInfo",
-          "description": "Information about the VM."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Start date and time of the guest configuration assignment compliance status check."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "End date and time of the guest configuration assignment compliance status check."
-        },
-        "complianceStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
-          "x-ms-enum": {
-            "name": "complianceStatus",
-            "modelAsString": true
-          },
-          "enum": [
-            "Compliant",
-            "NonCompliant",
-            "Pending"
-          ]
-        },
-        "operationType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of report, Consistency or Initial",
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          },
-          "enum": [
-            "Consistency",
-            "Initial"
-          ]
-        },
-        "resources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssignmentReportResource"
-          },
-          "description": "The list of resources for which guest configuration assignment compliance is checked."
-        }
-      }
-    },
     "GuestConfigurationAssignmentProperties": {
       "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "VM resource Id.",
-          "x-nullable": true
-        },
         "guestConfiguration": {
           "$ref": "#/definitions/GuestConfigurationNavigation",
           "description": "The guest configuration to assign."
@@ -1020,10 +946,6 @@
           "readOnly": true,
           "description": "Id of the latest report for the guest configuration assignment. ",
           "x-nullable": true
-        },
-        "latestAssignmentReport": {
-          "$ref": "#/definitions/AssignmentReport",
-          "description": "Last reported guest configuration assignment report."
         },
         "context": {
           "type": "string",
