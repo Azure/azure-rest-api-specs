@@ -1351,7 +1351,7 @@
           "Exports"
         ],
         "operationId": "Exports_Execute",
-        "description": "The operation to execute a export.",
+        "description": "The operation to run an export.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1405,7 +1405,7 @@
           "Exports"
         ],
         "operationId": "Exports_GetExecutionHistory",
-        "description": "The operation to get the execution history of an export for the defined scope by export name.",
+        "description": "The operation to get the run history of an export for the defined scope and export name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -2821,7 +2821,17 @@
         "definition": {
           "description": "Has the definition for the export.",
           "$ref": "#/definitions/ExportDefinition"
-        }
+        },
+        "runHistory": {
+          "description": "If requested, has run history for the export.",
+          "$ref": "#/definitions/ExportExecutionListResult"
+        },
+		"nextRunTimeEstimate": {
+          "description": "If the export has an active schedule, provides an estimate of the next run time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+		}
       },
       "required": [
         "deliveryInfo",
@@ -2832,7 +2842,7 @@
       "description": "The schedule associated with the export.",
       "properties": {
         "status": {
-          "description": "The status of the schedule. If 'Inactive', the export's scheduled execution is paused.",
+          "description": "The status of the export's schedule. If 'Inactive', the export's schedule is paused.",
           "type": "string",
           "enum": [
             "Active",
@@ -3015,10 +3025,10 @@
       ]
     },
     "ExportExecutionListResult": {
-      "description": "Result of listing exports execution history of a export by name",
+      "description": "Result of listing the run history of an export by name",
       "properties": {
         "value": {
-          "description": "The list of export executions.",
+          "description": "The list of export runs.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -3028,7 +3038,7 @@
       }
     },
     "ExportExecution": {
-      "description": "A export execution.",
+      "description": "An export run.",
       "type": "object",
       "allOf": [
         {
@@ -3039,15 +3049,15 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExportExecutionProperties",
-          "title": "Export execution properties"
+          "title": "Export run properties"
         }
       }
     },
     "ExportExecutionProperties": {
-      "description": "The properties of the export execution.",
+      "description": "The properties of the export run.",
       "properties": {
         "executionType": {
-          "description": "The type of the export execution.",
+          "description": "The type of the export run.",
           "type": "string",
           "enum": [
             "OnDemand",
@@ -3059,7 +3069,7 @@
           }
         },
         "status": {
-          "description": "The status of the export execution.",
+          "description": "The status of the export run.",
           "type": "string",
           "enum": [
             "Queued",
@@ -3076,30 +3086,39 @@
           }
         },
         "submittedBy": {
-          "description": "The identifier for the entity that executed the export. For OnDemand executions, it is the email id. For Scheduled executions, it is the constant value - System.",
+          "description": "The identifier for the entity that ran the export. For OnDemand runs, it is the user email. For scheduled runs, it is 'System'.",
           "type": "string"
         },
         "submittedTime": {
-          "description": "The time when export was queued to be executed.",
+          "description": "The time when export was queued to be run.",
           "type": "string",
           "format": "date-time"
         },
         "processingStartTime": {
-          "description": "The time when export was picked up to be executed.",
+          "description": "The time when export was picked up to be run.",
           "type": "string",
           "format": "date-time"
         },
         "processingEndTime": {
-          "description": "The time when export execution finished.",
+          "description": "The time when export run finished.",
           "type": "string",
           "format": "date-time"
         },
         "fileName": {
-          "description": "The name of the file export got written to.",
+          "description": "The name of the exported file.",
           "type": "string"
         },
         "runSettings": {
+          "description": "The export settings that were in effect for this run.",
           "$ref": "#/definitions/CommonExportProperties"
+        },
+        "ErrorCode": {
+          "description": "If the export run failed this will have an error code.",
+          "type": "string"
+        },
+        "ErrorMessage": {
+          "description": "If the export run failed this will have a description of the error.",
+          "type": "string"
         }
       }
     }
