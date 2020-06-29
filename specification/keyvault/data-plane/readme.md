@@ -36,13 +36,6 @@ These settings apply only when `--tag=package-7.2-preview` is specified on the c
 ```yaml $(tag) == 'package-7.2-preview'
 input-file:
 - Microsoft.KeyVault/preview/7.2-preview/certificates.json
-- Microsoft.KeyVault/preview/7.2-preview/common.json
-- Microsoft.KeyVault/preview/7.2-preview/keys.json
-- Microsoft.KeyVault/preview/7.2-preview/rbac.json
-- Microsoft.KeyVault/preview/7.2-preview/secrets.json
-- Microsoft.KeyVault/preview/7.2-preview/storage.json
-- Microsoft.KeyVault/preview/7.2-preview/backuprestore.json
-- Microsoft.KeyVault/preview/7.2-preview/securitydomain.json
 ```
 
 ### Tag: package-7.1-preview
@@ -52,10 +45,6 @@ These settings apply only when `--tag=package-7.1-preview` is specified on the c
 ```yaml $(tag) == 'package-7.1-preview'
 input-file:
 - Microsoft.KeyVault/preview/7.1/certificates.json
-- Microsoft.KeyVault/preview/7.1/common.json
-- Microsoft.KeyVault/preview/7.1/keys.json
-- Microsoft.KeyVault/preview/7.1/secrets.json
-- Microsoft.KeyVault/preview/7.1/storage.json
 ```
 
 ### Tag: package-7.0
@@ -177,7 +166,7 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 

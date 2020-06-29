@@ -6,8 +6,8 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
 package-name: azure-keyvault
+payload-flattening-threshold: 0
 clear-output-folder: true
 no-namespace-folders: true
 ```
