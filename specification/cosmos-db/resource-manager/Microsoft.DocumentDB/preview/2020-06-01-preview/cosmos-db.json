@@ -4485,7 +4485,12 @@
     },
     "ErrorResponseUpdatedFormat": {
       "description": "An error response from the service.",
-      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
     },
     "FailoverPolicies": {
       "properties": {
