@@ -399,7 +399,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/AdvisorScore": {
       "get": {
         "tags": [
@@ -418,7 +417,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref" : "#/definitions/advisorScore"
+                "$ref": "#/definitions/advisorScore"
               }
             }
           }
@@ -429,7 +428,7 @@
         }
       }
     }
-  },  
+  },
   "definitions": {
     "ResourceRecommendationBaseListResult": {
       "description": "The list of Advisor recommendations.",
@@ -673,41 +672,41 @@
     },
     "score": {
       "description": "Details of one Advisor Score",
-      "type" : "object",
+      "type": "object",
       "properties": {
-        "impactedResources" : {
+        "impactedResources": {
           "description": "Number of impacted resources",
-          "type" : "string"
+          "type": "string"
         },
-        "date" : {
+        "date": {
           "description": "Date of the score",
-          "type" : "string"
+          "type": "string"
         },
-        "score" : {
+        "score": {
           "description": "Score",
-          "type" : "number"
+          "type": "number"
         },
-        "consumptionUnits" : {
+        "consumptionUnits": {
           "description": "Consumption units for the score",
-          "type" : "number"
+          "type": "number"
         }
       }
     },
     "timeSeries": {
       "description": "Details of past Advisor scores",
       "type": "array",
-      "items" : {
+      "items": {
         "description": "Past advisor scores of one grain",
-        "type" : "object",
+        "type": "object",
         "properties": {
-          "AggregationLevel" : {
+          "AggregationLevel": {
             "description": "Aggregation level of the score",
-            "type" : "string"
+            "type": "string"
           },
-          "Data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/definitions/score"
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/score"
             }
           }
         }
@@ -715,36 +714,42 @@
     },
     "advisorScore": {
       "description": "Details of Adivsor score for a single category",
-      "type" : "object",
+      "type": "object",
       "properties": {
-          "id" : {
-            "description": "Id of the resource",
-            "type" : "string"
-          },
-          "name" : {
-            "description": "Category",
-            "type" : "string",
-            "enum" : ["Cost", "Performance", "Security", "HighAvailability", "OperationalExcellence", "Advisor"]
-
-          },
-          "type" : {
-            "description": "The type of resource",
-            "type" : "string"
-          },
-          "properties" : {
-            "type": "object",
-            "properties" : {
-              "currentScore" : {
-                "description": "Latest score for the category",
-                "$ref": "#/definitions/score"
-              },
-              "timeSeries" : {
-                "description": "Historic data for the score",
-                "$ref": "#/definitions/timeSeries"
-              }
+        "id": {
+          "description": "Id of the resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Category",
+          "type": "string",
+          "enum": [
+            "Cost",
+            "Performance",
+            "Security",
+            "HighAvailability",
+            "OperationalExcellence",
+            "Advisor"
+          ]
+        },
+        "type": {
+          "description": "The type of resource",
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "currentScore": {
+              "description": "Latest score for the category",
+              "$ref": "#/definitions/score"
+            },
+            "timeSeries": {
+              "description": "Historic data for the score",
+              "$ref": "#/definitions/timeSeries"
             }
           }
-        } 
+        }
+      }
     }
   },
   "parameters": {
