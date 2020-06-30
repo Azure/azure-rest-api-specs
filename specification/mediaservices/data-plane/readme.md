@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-lva-1-0-0-preview` is specified on
 
 ``` yaml $(tag) == 'package-lva-1-0-0-preview'
 input-file:
-  - LiveVideoAnalytics.Edge/preview/1.0.0/LiveVideoAnalytics.json
+  - LiveVideoAnalytics.Edge/preview/1.0/LiveVideoAnalytics.json
 ```
 
 ---
@@ -68,4 +68,7 @@ csharp:
   namespace: Azure.Media.LiveVideoAnalytics.Edge
   output-folder: $(csharp-sdks-folder)/mediaservices/Azure.Media.LiveVideoAnalytics.Edge/src/Generated
   clear-output-folder: true
+  use-internal-constructors: true
+  override-client-name: LiveVideoAnalyticsEdgeClient
+  use-datetimeoffset: true
 ```
