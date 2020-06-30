@@ -464,9 +464,6 @@
             "$ref": "#/parameters/frontendEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/customHttpsConfigurationNameParameter"
-          },
-          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -510,9 +507,6 @@
             "$ref": "#/parameters/frontendEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/customHttpsConfigurationNameParameter"
-          },
-          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -554,9 +548,6 @@
           },
           {
             "$ref": "#/parameters/frontendEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/customHttpsConfigurationNameParameter"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2482,18 +2473,6 @@
       "maxLength": 255,
       "x-ms-parameter-location": "method",
       "description": "Name of the Frontend endpoint which is unique within the Front Door."
-    },
-    "customHttpsConfigurationNameParameter": {
-      "name": "customHttpsConfigurationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^default$",
-      "x-previous-pattern": "^[-\\w\\d\\._]+$",
-      "minLength": 7,
-      "maxLength": 7,
-      "x-ms-parameter-location": "method",
-      "description": "Name of the Custom HTTPS Configuration within the Frontend Endpoint."
     },
     "rulesEngineNameParameter": {
       "name": "rulesEngineName",
