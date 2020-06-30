@@ -14,8 +14,8 @@
   "responses": {
     "200": {
       "body": {
-        "name": "TestDevice",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/devices/TestDevice",
+        "name": "TestDevice",
         "type": "Microsoft.HybridNetwork/devices",
         "location": "eastus",
         "tags": {
@@ -23,13 +23,17 @@
           "tag2": "value2"
         },
         "properties": {
+          "status": "NotRegistered",
           "provisioningState": "Succeeded",
-          "dataBoxEdgeDevice": {
-            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+          "deviceType": "AzureStackEdge",
+          "azureStackEdge": {
+            "id": "/subscriptions/subid1/resourcegroups/rg2/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
           },
-          "mecVNFs": [],
-          "sku": "",
-          "mecRegistrationKey": ""
+          "virtualNetworkFunctions": [
+            {
+              "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.HybridNetwork/virtualNetworkFunctions/TestVirtualNetworkFunction"
+            }
+          ]
         }
       }
     }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed using hybrid network",
+    "description": "The defintions in this swagger specification will be used to manage the hybrid network resources.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -36,21 +36,23 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
+          "description": "Error code.",
+          "type": "string"
         },
         "message": {
-          "type": "string",
-          "description": "Error message."
+          "description": "Error message.",
+          "type": "string"
         }
-      },
-      "description": "Common error details representation."
+      }
     },
     "Resource": {
       "properties": {
@@ -99,13 +101,32 @@
       "readOnly": true,
       "description": "The current provisioning state.",
       "enum": [
+        "Unknown",
         "Succeeded",
-        "Updating",
+        "Accepted",
         "Deleting",
-        "Failed"
+        "Failed",
+        "Canceled",
+        "Deleted"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "VendorProvisioningState": {
+      "type": "string",
+      "description": "The current vendor provisioning state.",
+      "enum": [
+        "Unknown",
+        "NotProvisioned",
+        "Provisioning",
+        "Provisioned",
+        "Deprovisioned",
+        "UserDataValidationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "VendorProvisioningState",
         "modelAsString": true
       }
     },
@@ -120,6 +141,115 @@
         }
       },
       "description": "Tags object for patch operations."
+    },
+    "NetworkInterface": {
+      "description": "Network interface properties.",
+      "properties": {
+        "networkInterfaceName": {
+          "type": "string",
+          "description": "The name of the network interface."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the network interface."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "A list of IP configurations of the network interface."
+        },
+        "vmSwitchType": {
+          "type": "string",
+          "description": "The type of VM switch",
+          "enum": [
+            "Unknown",
+            "Management",
+            "Wan",
+            "Lan",
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "VMSwitchType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NetworkInterfaceIPConfiguration": {
+      "description": "Network interface IP configuration properties.",
+      "properties": {
+        "ipAllocationMethod": {
+          "type": "string",
+          "description": "IP address allocation method.",
+          "enum": [
+            "Unknown",
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The value of the IP address."
+        },
+        "subnet": {
+          "type": "string",
+          "description": "The value of the subnet."
+        },
+        "gateway": {
+          "type": "string",
+          "description": "The value of the gateway."
+        },
+        "ipVersion": {
+          "type": "string",
+          "description": "IP address version.",
+          "enum": [
+            "Unknown",
+            "IPv4"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersion",
+            "modelAsString": true
+          }
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "The list of DNS servers IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserDataTemplate": {
+      "type": "object",
+      "description": "The user data template."
+    },
+    "UserDataParameters": {
+      "type": "object",
+      "description": "The user data parameters."
+    },
+    "ManagedApplicationParameters": {
+      "type": "object",
+      "description": "The parameters for the managed application."
+    },
+    "SkuType": {
+      "type": "string",
+      "description": "Sku type",
+      "enum": [
+        "Unknown",
+        "EvolvedPacketCore",
+        "SDWAN"
+      ],
+      "x-ms-enum": {
+        "name": "SkuType",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -128,7 +258,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The subscription ID which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

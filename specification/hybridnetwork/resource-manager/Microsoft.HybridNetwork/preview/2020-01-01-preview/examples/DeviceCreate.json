@@ -5,37 +5,47 @@
     "resourceGroupName": "rg1",
     "deviceName": "TestDevice",
     "parameters": {
+      "location": "eastus",
       "properties": {
-        "sku": "Mec_DataboxEdge"
+        "deviceType": "AzureStackEdge",
+        "azureStackEdge": {
+          "id": "/subscriptions/subid1/resourcegroups/rg2/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+        }
       }
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "name": "TestDevice",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/devices/TestDevice",
+        "name": "TestDevice",
         "type": "Microsoft.HybridNetwork/devices",
         "location": "eastus",
-        "tags": {},
         "properties": {
-          "provisioningState": "Accepted",
-          "sku": "Mec_DataboxEdge",
-          "mecRegistrationKey": ""
+          "status": "NotRegistered",
+          "provisioningState": "Succeeded",
+          "deviceType": "AzureStackEdge",
+          "azureStackEdge": {
+            "id": "/subscriptions/subid1/resourcegroups/rg2/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+          },
+          "virtualNetworkFunctions": null
         }
       }
     },
-    "202": {
+    "201": {
       "body": {
-        "name": "TestDevice",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/devices/TestDevice",
+        "name": "TestDevice",
         "type": "Microsoft.HybridNetwork/devices",
         "location": "eastus",
-        "tags": {},
         "properties": {
+          "status": "NotRegistered",
           "provisioningState": "Accepted",
-          "sku": "Mec_DataboxEdge",
-          "mecRegistrationKey": ""
+          "deviceType": "AzureStackEdge",
+          "azureStackEdge": {
+            "id": "/subscriptions/subid1/resourcegroups/rg2/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+          },
+          "virtualNetworkFunctions": null
         }
       }
     }

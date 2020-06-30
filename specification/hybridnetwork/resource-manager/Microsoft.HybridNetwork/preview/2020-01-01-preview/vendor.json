@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The resources in this swagger specification will be used by Vnf vendors to on-board Skus and manage Vnfs",
+    "description": "The resources in this swagger specification will be used by vendors to on-board offerings and manage virtual network functions.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}": {
       "delete": {
         "tags": [
-          "Vendor"
+          "Vendors"
         ],
         "operationId": "Vendors_Delete",
         "description": "Deletes the specified vendor.",
@@ -57,8 +57,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. Request is successful."
+          },
           "202": {
-            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+            "description": "Accepted. Sets provisiningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation."
           },
           "204": {
             "description": "Request successful. Resource does not exist."
@@ -82,7 +85,7 @@
       },
       "get": {
         "tags": [
-          "Vendor"
+          "Vendors"
         ],
         "operationId": "Vendors_Get",
         "description": "Gets information about the specified vendor.",
@@ -123,7 +126,7 @@
       },
       "put": {
         "tags": [
-          "Vendor"
+          "Vendors"
         ],
         "operationId": "Vendors_CreateOrUpdate",
         "description": "Creates or updates a vendor.",
@@ -141,7 +144,7 @@
             "schema": {
               "$ref": "#/definitions/Vendor"
             },
-            "description": "Parameters supplied to the create or update sku."
+            "description": "Parameters supplied to the create vendor."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -151,14 +154,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation Uri can be queried to find the current state of the operation.",
+          "200": {
+            "description": "OK. Request is successful.",
             "schema": {
               "$ref": "#/definitions/Vendor"
             }
           },
-          "202": {
-            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation Uri can be queried to find the current state of the operation.",
+          "201": {
+            "description": "Created. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
             "schema": {
               "$ref": "#/definitions/Vendor"
             }
@@ -184,10 +187,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors": {
       "get": {
         "tags": [
-          "Vendor"
+          "Vendors"
         ],
         "operationId": "Vendors_ListBySubscription",
-        "description": "Gets all the vendors in a subscription.",
+        "description": "Lists all the vendors in a subscription.",
         "parameters": [
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -211,7 +214,7 @@
           }
         },
         "x-ms-examples": {
-          "Get all Vendor resources in subscription": {
+          "Lists all vendor resources in subscription": {
             "$ref": "./examples/VendorListAll.json"
           }
         },
@@ -220,13 +223,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/skus/{skuName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}": {
       "delete": {
         "tags": [
-          "Vendor"
+          "VendorSkus"
         ],
         "operationId": "VendorSkus_Delete",
-        "description": "Deletes the specified Sku.",
+        "description": "Deletes the specified sku.",
         "parameters": [
           {
             "name": "vendorName",
@@ -250,8 +253,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. Request is successful."
+          },
           "202": {
-            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed.. Returns an operation URI that can be queried to find the current state of the operation."
           },
           "204": {
             "description": "Request successful. Resource does not exist."
@@ -264,7 +270,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete the sku of Vendor resource": {
+          "Delete the sku of vendor resource": {
             "$ref": "./examples/VendorSkuDelete.json"
           }
         },
@@ -275,10 +281,10 @@
       },
       "get": {
         "tags": [
-          "Vendor"
+          "VendorSkus"
         ],
         "operationId": "VendorSkus_Get",
-        "description": "Gets information about the specified Sku.",
+        "description": "Gets information about the specified sku.",
         "parameters": [
           {
             "name": "vendorName",
@@ -323,10 +329,10 @@
       },
       "put": {
         "tags": [
-          "Vendor"
+          "VendorSkus"
         ],
         "operationId": "VendorSkus_CreateOrUpdate",
-        "description": "Creates or updates a SKU",
+        "description": "Creates or updates a sku",
         "parameters": [
           {
             "name": "vendorName",
@@ -359,14 +365,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Update successful. The operation returns the resulting Vendor Sku sub resource.",
+          "200": {
+            "description": "Update or creation successful. The operation returns the resulting vendor sku sub resource.",
             "schema": {
               "$ref": "#/definitions/VendorSku"
             }
           },
-          "202": {
-            "description": "Create successful. The operation returns the resulting Vendor Sku sub resource.",
+          "201": {
+            "description": "Created. The operation returns the resulting vendor sku sub resource.",
             "schema": {
               "$ref": "#/definitions/VendorSku"
             }
@@ -389,13 +395,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus": {
       "get": {
         "tags": [
-          "Vendors"
+          "VendorSkus"
         ],
         "operationId": "VendorSkus_List",
-        "description": "Gets all the Skus in a Vendor.",
+        "description": "Lists all the skus of a vendor.",
         "parameters": [
           {
             "name": "vendorName",
@@ -413,7 +419,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of Vnf Manager Vendor resources.",
+            "description": "Request successful. The operation returns a list of vendor sku resources.",
             "schema": {
               "$ref": "#/definitions/VendorSkuListResult"
             }
@@ -426,7 +432,7 @@
           }
         },
         "x-ms-examples": {
-          "Get all the Skus of vendor resource": {
+          "Lists all the vendor skus of vendor resource": {
             "$ref": "./examples/VendorSkuListAll.json"
           }
         },
@@ -435,20 +441,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/vnfs/{vnfServiceKey}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}": {
       "get": {
         "tags": [
-          "Vendor"
+          "VendorVirtualNetworkFunctions"
         ],
-        "operationId": "VendorVnfs_Get",
-        "description": "Gets information about the specified Vnf.",
+        "operationId": "VendorVirtualNetworkFunctions_Get",
+        "description": "Gets information about the specified virtual network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The azure region where the Vnf resource was created by customer."
+            "description": "The azure region where the virtual network function sub resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -458,11 +464,11 @@
             "description": "The name of the vendor."
           },
           {
-            "name": "vnfServiceKey",
+            "name": "serviceKey",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The unique Guid for the Vnf."
+            "description": "The unique GUID for the virtual network function."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -473,9 +479,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting hybrid network vendor resource.",
+            "description": "Request successful. The operation returns the resulting vendor virtual network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVnf"
+              "$ref": "#/definitions/VendorVirtualNetworkFunction"
             }
           },
           "default": {
@@ -486,24 +492,24 @@
           }
         },
         "x-ms-examples": {
-          "Get vnf service key of Vendor resource": {
-            "$ref": "./examples/VendorGetVnfServiceKey.json"
+          "Get vendor virtual network function sub resource by service key of virtual network function.": {
+            "$ref": "./examples/VendorVnfGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Vendor"
+          "VendorVirtualNetworkFunctions"
         ],
-        "operationId": "VendorVnfs_CreateOrUpdate",
-        "description": "Update a VNF",
+        "operationId": "VendorVirtualNetworkFunctions_CreateOrUpdate",
+        "description": "Create or update a virtual network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The azure region where the Vnf resource was created by customer."
+            "description": "The azure region where the virtual network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -513,20 +519,20 @@
             "description": "The name of the vendor."
           },
           {
-            "name": "vnfServiceKey",
+            "name": "serviceKey",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The unique Guid for the Vnf."
+            "description": "The unique GUID for the virtual network function."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VendorVnf"
+              "$ref": "#/definitions/VendorVirtualNetworkFunction"
             },
-            "description": "Parameters supplied to the create or update sku."
+            "description": "Parameters supplied to the update vendor virtual network function."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -536,16 +542,16 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Update successful. The operation returns the resulting vendor Vnf sub resource.",
+          "200": {
+            "description": "Create or update is successful. The operation returns the resulting vendor virtual network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVnf"
+              "$ref": "#/definitions/VendorVirtualNetworkFunction"
             }
           },
-          "202": {
-            "description": "Update successful. The operation returns the resulting vendor Vnf sub resource.",
+          "201": {
+            "description": "Created. The operation returns the resulting vendor virtual network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVnf"
+              "$ref": "#/definitions/VendorVirtualNetworkFunction"
             }
           },
           "default": {
@@ -556,8 +562,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update vnf of vendor resource": {
-            "$ref": "./examples/VendorCreateVnfServiceKey.json"
+          "Update vendor virtual network function sub resource": {
+            "$ref": "./examples/VendorVnfCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -566,20 +572,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/vnfs": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions": {
       "get": {
         "tags": [
-          "Vendor"
+          "VendorVirtualNetworkFunctions"
         ],
         "operationId": "VendorVnfs_List",
-        "description": "List all the VNFs in an azure region. Filter by skuType, skuName, vendorProvisioningState",
+        "description": "List all the vendor virtual network function sub resources in an azure region. Filter by skuType, skuName, vendorProvisioningState",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The azure region where the Vnf resource was created by customer."
+            "description": "The azure region where the virtual network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -593,7 +599,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) are: skuType, skuName."
+            "description": "The filter to apply on the operation. The properties you can use for eq (equals) are: skuType, skuName and vendorProvisioningState."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -604,9 +610,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting hybrid network vendor resource.",
+            "description": "Request successful. The operation returns the resulting hybrid network vendor virtual network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVnfListResult"
+              "$ref": "#/definitions/VendorVirtualNetworkFunctionListResult"
             }
           },
           "default": {
@@ -618,11 +624,257 @@
         },
         "x-ms-examples": {
           "Get all vnf of Vendor resource": {
-            "$ref": "./examples/VendorListAllVnfs.json"
+            "$ref": "./examples/VendorVnfList.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}/previewSubscriptions": {
+      "get": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_List",
+        "description": "Gets preview information of a vendor sku",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscriptionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all preview subscriptions of vendor skub sub resource": {
+            "$ref": "./examples/GetVendorSkuPreviews.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vendors/{vendorName}/vendorSkus/{skuName}/previewSubscriptions/{previewSubscription}": {
+      "put": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_CreateOrUpdate",
+        "description": "Creates or updates preview information of a vendor sku",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor sku."
+          },
+          {
+            "name": "previewSubscription",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Preview subscription id."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            },
+            "description": "Parameters supplied to the update vendor virtual network function."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request accepted. The operation is updating or creating the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation updated the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Creates or updates preview subscription of vendor sku sub resource": {
+            "$ref": "./examples/CreateVendorSkuPreview.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_Get",
+        "description": "Gets preview information of a vendor sku",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor sku."
+          },
+          {
+            "name": "previewSubscription",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Preview subscription id."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation updated the preview information of the vendor sku sub resource.",
+            "schema": {
+              "$ref": "#/definitions/PreviewSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets preview subscription of vendor sku sub resource": {
+            "$ref": "./examples/GetVendorSkuPreview.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VendorSkuPreview"
+        ],
+        "operationId": "VendorSkuPreview_Delete",
+        "description": "Deletes preview information of a vendor sku",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor sku."
+          },
+          {
+            "name": "previewSubscription",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Preview subscription id."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation deleted the vendor sku preview resource."
+          },
+          "202": {
+            "description": "Request is accepted. The operation is deleting the vendor sku preview resource."
+          },
+          "204": {
+            "description": "Request successful. The vendor sku preview resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Deletes preview subscription of vendor sku sub resource": {
+            "$ref": "./examples/DeleteVendorSkuPreview.json"
+          }
         }
       }
     }
@@ -633,7 +885,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorPropertiesFormat",
-          "description": "Vendor Properties."
+          "description": "Vendor properties."
         }
       },
       "allOf": [
@@ -654,9 +906,10 @@
         "skus": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VendorSku"
+            "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "A list of Sku details offered by the vendor."
+          "readOnly": true,
+          "description": "A list of ids of the vendor skus offered by the vendor."
         }
       }
     },
@@ -665,11 +918,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorSkuPropertiesFormat",
-          "description": "SKU Details."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the sku resource."
+          "description": "Vendor sku details."
         }
       },
       "allOf": [
@@ -685,64 +934,40 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the Sku sub resource."
+          "description": "The provisioning state of the vendor sku sub resource."
         },
         "skuType": {
+          "$ref": "./common.json#/definitions/SkuType",
+          "description": "Sku type."
+        },
+        "deploymentMode": {
           "type": "string",
-          "description": "sku Type",
+          "description": "Sku deployment mode.",
           "enum": [
-            "Packetcore"
+            "Unknown",
+            "Azure",
+            "PrivateEdgeZone"
           ],
           "x-ms-enum": {
-            "name": "VendorSkuType",
+            "name": "SkuDeploymentMode",
             "modelAsString": true
           }
         },
         "preview": {
           "type": "boolean",
-          "description": "Preview mode or general available."
+          "description": "Indicates if the vendor sku is in preview mode."
         },
-        "previewSubscriptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of customer subscriptions enrolled for the preview."
+        "managedApplicationParameters": {
+          "$ref": "./common.json#/definitions/ManagedApplicationParameters",
+          "description": "The parameters for the managed application to be supplied by vendor."
         },
-        "regions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of Azure regions supported by the Sku. If All is specified then all the regions will be available for the customer to deploy the Vnf"
-        },
-        "deploymentMode": {
-          "type": "string",
-          "description": "sku deployment mode",
-          "enum": [
-            "Azure",
-            "Edgedevice"
-          ],
-          "x-ms-enum": {
-            "name": "VendorSkuDeploymentMode",
-            "modelAsString": true
-          }
-        },
-        "managedAppParameters": {
+        "managedApplicationTemplate": {
           "type": "object",
-          "description": "The parameters template for the managed app."
+          "description": "The template for the managed application deployment."
         },
-        "managedAppTemplate": {
-          "type": "object",
-          "description": "The template for the managed app deployment."
-        },
-        "vnfTemplate": {
-          "type": "object",
-          "description": "The vm template for edge device deployment."
-        },
-        "customDataParameters": {
-          "type": "object",
-          "description": "The template to collect cloud init  parameters from the user"
+        "virtualNetworkFunctionTemplate": {
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate",
+          "description": "The template definition of the virtual network function."
         }
       }
     },
@@ -753,15 +978,15 @@
           "items": {
             "$ref": "#/definitions/VendorSku"
           },
-          "description": "A list of Skus offered by the vendor."
+          "description": "A list of vendor skus offered by the vendor."
         },
         "nextLink": {
           "readOnly": true,
           "type": "string",
-          "description": "The Url to get the next set of results."
+          "description": "The URI to get the next set of results."
         }
       },
-      "description": "Response for list vendor sku api service call."
+      "description": "Response for list vendor sku API service call."
     },
     "VendorListResult": {
       "properties": {
@@ -770,24 +995,24 @@
           "items": {
             "$ref": "#/definitions/Vendor"
           },
-          "description": "A list of vendors ."
+          "description": "A list of vendors."
         },
         "nextLink": {
           "readOnly": true,
           "type": "string",
-          "description": "The Url to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for Vendors Api service call."
+      "description": "Response for Vendors API service call."
     },
-    "VendorVnfListResult": {
+    "VendorVirtualNetworkFunctionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VendorVnf"
+            "$ref": "#/definitions/VendorVirtualNetworkFunction"
           },
-          "description": "A list of vendor Vnfs ."
+          "description": "A list of vendor virtual network function."
         },
         "nextLink": {
           "readOnly": true,
@@ -797,16 +1022,12 @@
       },
       "description": "Response for vendors API service call."
     },
-    "VendorVnf": {
+    "VendorVirtualNetworkFunction": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VendorVnfPropertiesFormat",
-          "description": "Vnf Details."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the vnf resource."
+          "$ref": "#/definitions/VendorVirtualNetworkFunctionPropertiesFormat",
+          "description": "Virtual network function details."
         }
       },
       "allOf": [
@@ -814,52 +1035,244 @@
           "$ref": "./common.json#/definitions/Resource"
         }
       ],
-      "description": "Sku sub resource."
+      "description": "Vendor virtual network function sub resource."
     },
-    "VendorVnfPropertiesFormat": {
-      "description": "Vnf  properties",
+    "VendorVirtualNetworkFunctionPropertiesFormat": {
+      "description": "Vendor virtual network function properties",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the Sku sub resource."
+          "description": "The provisioning state of the vendor virtual network function sub resource."
         },
         "vendorProvisioningState": {
+          "$ref": "./common.json#/definitions/VendorProvisioningState",
+          "description": "Vendor controlled provisioning state of the vendor virtual network function."
+        },
+        "skuName": {
+          "readOnly": true,
           "type": "string",
-          "description": "SkuType.",
+          "description": "Name of the sku"
+        },
+        "skuType": {
+          "$ref": "./common.json#/definitions/SkuType",
+          "description": "Sku type.",
+          "readOnly": true
+        },
+        "virtualNetworkFunctionVendorConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkFunctionVendorConfiguration"
+          },
+          "description": "An array of virtual network function vendor configurations."
+        }
+      }
+    },
+    "VirtualNetworkFunctionTemplate": {
+      "properties": {
+        "virutalNetworkFunctionRoleConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkFunctionRoleConfiguration"
+          },
+          "description": "An array of virtual network function role definitions."
+        }
+      },
+      "description": "The virtual network function template."
+    },
+    "VirtualNetworkFunctionRoleConfiguration": {
+      "description": "Virtual network function role configuration.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The name of the virtual network function role."
+        },
+        "roleType": {
+          "type": "string",
+          "description": "Role type.",
           "enum": [
-            "Not Provisioned",
-            "Provisioning",
-            "Provisioned"
+            "Unknown",
+            "VirtualMachine"
           ],
           "x-ms-enum": {
-            "name": "vendorProvisioningState",
+            "name": "VirtualNetworkFunctionRoleConfigurationType",
             "modelAsString": true
           }
         },
-        "serviceKey": {
-          "readOnly": true,
+        "virtualMachineSize": {
           "type": "string",
-          "description": "The unique guid for the Vnf."
+          "description": "The size of the virtual machine.",
+          "enum": [
+            "Unknown",
+            "Standard_D1_v2",
+            "Standard_D2_v2",
+            "Standard_D3_v2",
+            "Standard_D4_v2",
+            "Standard_D5_v2",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_D13_v2",
+            "Standard_DS1_v2",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS11_v2",
+            "Standard_DS12_v2",
+            "Standard_DS13_v2"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineSizeTypes",
+            "modelAsString": true
+          }
         },
-        "sku": {
-          "readOnly": true,
-          "$ref": "#/definitions/VendorSku",
-          "description": "The Sku details for the Vnf."
+        "imageReference": {
+          "description": "The definition of image reference.",
+          "$ref": "#/definitions/ImageReference"
         },
-        "customDataParameters": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The cloud init parameters from the user."
+        "osProfile": {
+          "description": "Specifies the operating system settings for the role instance. This value can be updated during the deployment of virtual network function.",
+          "$ref": "#/definitions/OsProfile"
+        },
+        "userDataTemplate": {
+          "$ref": "./common.json#/definitions/UserDataTemplate",
+          "description": "The user data template for customers. This is json scheme template describing the format and data type of user data parameters."
+        },
+        "userDataParameters": {
+          "$ref": "./common.json#/definitions/UserDataParameters",
+          "description": "The user parameters for customers. The format of user data parameters has to be matched with the provided user data template."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/NetworkInterface"
+          },
+          "description": "The network interface configurations."
+        }
+      }
+    },
+    "VirtualNetworkFunctionVendorConfiguration": {
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The name of the virtual network function role."
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the virtual machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
         },
-        "managedApp": {
+        "osProfile": {
+          "description": "Specifies the operating system settings for the role instance.",
+          "$ref": "#/definitions/OsProfile"
+        },
+        "userDataParameters": {
+          "$ref": "./common.json#/definitions/UserDataParameters",
           "readOnly": true,
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "The  reference to the managed app."
+          "description": "The user parameters from the customer."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/NetworkInterface"
+          },
+          "description": "The network interface configurations."
+        }
+      },
+      "description": "Virtual network function vendor configuration."
+    },
+    "ImageReference": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "The OS type.",
+          "enum": [
+            "Unknown",
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": true
+          }
+        },
+        "vhdName": {
+          "type": "string",
+          "description": "The VHD name."
+        },
+        "vhdType": {
+          "type": "string",
+          "description": "The VHD type.",
+          "enum": [
+            "Unknown",
+            "VHD",
+            "VHDX"
+          ],
+          "x-ms-enum": {
+            "name": "VHDType",
+            "modelAsString": true
+          }
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "The VHD SAS URI."
+        }
+      },
+      "description": "The image reference properties."
+    },
+    "OsProfile": {
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+        },
+        "adminPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [ "create", "update" ],
+          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)."
+        },
+        "sshPublicKey": {
+          "type": "string",
+          "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
+        }
+      },
+      "description": "Specifies the operating system settings for the role instance."
+    },
+    "PreviewSubscription": {
+      "x-ms-azure-resource": true,
+      "description": "Customer subscription which can use a sku.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Preview subscription id"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM id of the resource"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of the resource"
+        }
+      }
+    },
+    "PreviewSubscriptionsList": {
+      "description": "List of customer subscriptions which can use a sku.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreviewSubscription"
+          },
+          "description": "A list of preview subscriptions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     }

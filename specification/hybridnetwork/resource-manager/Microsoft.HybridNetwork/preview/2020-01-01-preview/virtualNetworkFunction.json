@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed in a hybrid network Vnf",
+    "description": "The resources in this swagger specification will be used to manage the virtual network function deployment in a hybrid network resource provider.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/vnfs/{vnfName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/virtualNetworkFunctions/{virtualNetworkFunctionName}": {
       "delete": {
         "tags": [
-          "HybridNetworkVnf"
+          "VirtualNetworkFunctions"
         ],
-        "operationId": "HybridNetworkVnfs_Delete",
-        "description": "Deletes the specified hybrid network Vnf.",
+        "operationId": "VirtualNetworkFunctions_Delete",
+        "description": "Deletes the specified hybrid network virtual network function resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -50,8 +50,8 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "vnfName",
-            "description": "The name of the hybrid network Vnf.",
+            "name": "virtualNetworkFunctionName",
+            "description": "The name of the hybrid network virtual network function.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -64,8 +64,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The operation is completed successfully."
+          },
           "202": {
-            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation Uri can be queried to find the current state of the operation."
+            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation."
           },
           "204": {
             "description": "Request successful. Resource with the specified name does not exist."
@@ -78,8 +81,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete hybrid network Vnf resource": {
-            "$ref": "./examples/VnfDelete.json"
+          "Delete hybrid network virtual network function resource": {
+            "$ref": "./examples/VirtualNetworkFunctionDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -89,10 +92,10 @@
       },
       "get": {
         "tags": [
-          "HybridNetworkVnf"
+          "VirtualNetworkFunctions"
         ],
-        "operationId": "HybridNetworkVnfs_Get",
-        "description": "Gets information about the specified hybrid network Vnf.",
+        "operationId": "VirtualNetworkFunctions_Get",
+        "description": "Gets information about the specified hybrid network virtual network function resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -102,11 +105,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "vnfName",
+            "name": "virtualNetworkFunctionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of hybrid network Vnf."
+            "description": "The name of hybrid network virtual network function resource."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -117,9 +120,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation successful. The operation returns the resulting hybrid network Vnf resource.",
+            "description": "Operation successful. The operation returns the resulting hybrid network virtual network function resource.",
             "schema": {
-              "$ref": "#/definitions/HybridNetworkVnf"
+              "$ref": "#/definitions/VirtualNetworkFunction"
             }
           },
           "default": {
@@ -130,17 +133,17 @@
           }
         },
         "x-ms-examples": {
-          "Get hybrid network Vnf resource": {
-            "$ref": "./examples/VnfGet.json"
+          "Get hybrid network virtual network function resource": {
+            "$ref": "./examples/VirtualNetworkFunctionGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "HybridNetworkVnf"
+          "VirtualNetworkFunctions"
         ],
-        "operationId": "VnfMangerVnf_CreateOrUpdate",
-        "description": "Creates or updates a hybrid network Vnf.",
+        "operationId": "VirtualNetworkFunctions_CreateOrUpdate",
+        "description": "Creates or updates a hybrid network virtual network function resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -150,20 +153,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "vnfName",
+            "name": "virtualNetworkFunctionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource Name for the hybrid network Vnf resource."
+            "description": "Resource name for the hybrid network virtual network function resource."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HybridNetworkVnf"
+              "$ref": "#/definitions/VirtualNetworkFunction"
             },
-            "description": "Parameters supplied in the body to create or update hybrid network vnf operation."
+            "description": "Parameters supplied in the body to create or update hybrid network virtual network function operation."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -173,16 +176,16 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. The header also contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+          "200": {
+            "description": "The operation is completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HybridNetworkVnf"
+              "$ref": "#/definitions/VirtualNetworkFunction"
             }
           },
-          "202": {
-            "description": "Accepted. The header also contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+          "201": {
+            "description": "Created or Updated. The header contains ‘Azure-AsyncOperation’ header pointing to an operation resource. The operation URI can be queried to find the current state of the operation.",
             "schema": {
-              "$ref": "#/definitions/HybridNetworkVnf"
+              "$ref": "#/definitions/VirtualNetworkFunction"
             }
           },
           "default": {
@@ -193,8 +196,8 @@
           }
         },
         "x-ms-examples": {
-          "Create Vnf Manager Vnf resource": {
-            "$ref": "./examples/VnfCreate.json"
+          "Create hybrid network virtual network function resource": {
+            "$ref": "./examples/VirtualNetworkFunctionCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -204,10 +207,10 @@
       },
       "patch": {
         "tags": [
-          "HybridNetworkVnf"
+          "VirtualNetworkFunctions"
         ],
-        "operationId": "HybridNetworkVnfs_Update",
-        "description": "Creates or updates a hybrid network Vnf.",
+        "operationId": "VirtualNetworkFunctions_UpdateTags",
+        "description": "Updates the tags for hybrid network virtual network function resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -217,11 +220,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "vnfName",
+            "name": "virtualNetworkFunctionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource Name for the vnf resource."
+            "description": "Resource name for the virtual network function resource."
           },
           {
             "name": "parameters",
@@ -230,7 +233,7 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update hybrid network Vnf tags."
+            "description": "Parameters supplied to update hybrid network virtual network function tags."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -241,9 +244,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting hybrid network vnf resource.",
+            "description": "Update is completed successfully. The operation returns the resulting hybrid network virtual network function resource.",
             "schema": {
-              "$ref": "#/definitions/HybridNetworkVnf"
+              "$ref": "#/definitions/VirtualNetworkFunction"
             }
           },
           "default": {
@@ -254,16 +257,16 @@
           }
         },
         "x-ms-examples": {
-          "Update tags for Vnf Manager Vnf resource": {
-            "$ref": "./examples/VnfUpdateTags.json"
+          "Update tags for hybrid network virtual network function resource": {
+            "$ref": "./examples/VirtualNetworkFunctionUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/vnfs": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/virtualNetworkFunctions": {
       "get": {
-        "description": "Gets all the hybrid network Vnfs in a subscription.",
-        "operationId": "HybridNetworkVnfs_ListBySubscription",
+        "description": "List all the hybrid network virtual network functions in a subscription.",
+        "operationId": "VirtualNetworkFunctions_ListBySubscription",
         "parameters": [
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -274,7 +277,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of hybrid network vnf resources.",
+            "description": "Request successful. The operation returns a list of hybrid network virtual network function resources.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunctionListResult"
             }
@@ -290,8 +293,8 @@
           "VirtualNetworkFunctions"
         ],
         "x-ms-examples": {
-          "List all Vnf Manager Vnfs": {
-            "$ref": "./examples/VnfListAll.json"
+          "List all hybrid network virtual network function resources in subscription.": {
+            "$ref": "./examples/VirtualNetworkFunctionListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -299,13 +302,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/vnfs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/virtualNetworkFunctions": {
       "get": {
         "tags": [
-          "HybridNetworkVnf"
+          "VirtualNetworkFunctions"
         ],
-        "operationId": "HybridNetworkVnfs_ListByResourceGroup",
-        "description": "Gets all the hybrid network Vnfs in a resource Group.",
+        "operationId": "VirtualNetworkFunctions_ListByResourceGroup",
+        "description": "List all the hybrid network virtual network function resources in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -323,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of hybrid network vnf resources.",
+            "description": "Request successful. The operation returns a list of hybrid network virtual network function resources.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunctionListResult"
             }
@@ -336,47 +339,8 @@
           }
         },
         "x-ms-examples": {
-          "List VnfManager vnf in resource group": {
-            "$ref": "./examples/VnfList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/virtualNetworkFunctionSkus": {
-      "get": {
-        "tags": [
-          "HybridNetworkVnf"
-        ],
-        "operationId": "VirtualNetworkFunctionsSkus_List",
-        "description": "Get all the available vendor information.",
-        "parameters": [
-          {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of hybrid network vendors.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionVendorListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List VnfManager vnf in resource group": {
-            "$ref": "./examples/VirtualNetworkFunctionsSkusGet.json"
+          "List hybrid network virtual network function in resource group": {
+            "$ref": "./examples/VirtualNetworkFunctionListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -386,12 +350,12 @@
     }
   },
   "definitions": {
-    "HybridNetworkVnf": {
+    "VirtualNetworkFunction": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HybridNetworkVnfFormat",
-          "description": "Vnf Manager vnf Properties."
+          "$ref": "#/definitions/VirtualNetworkFunctionPropertiesFormat",
+          "description": "Hybrid network virtual network function properties."
         },
         "etag": {
           "type": "string",
@@ -403,124 +367,97 @@
           "$ref": "./common.json#/definitions/Resource"
         }
       ],
-      "description": "Hybrid network Vnf resource response."
+      "description": "Hybrid network virtual network function resource response."
     },
-    "HybridNetworkVnfFormat": {
-      "description": "Hybrid network Vnf response properties.",
+    "VirtualNetworkFunctionPropertiesFormat": {
+      "description": "Hybrid network virtual network function properties.",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the hybrid network Vnf resource."
+          "description": "The provisioning state of the hybrid network virtual network function resource."
         },
-        "mecDevice": {
-          "$ref": "#/definitions/MecDevice",
-          "description": "The reference to the hybrid network Device."
+        "device": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the hybrid network device."
         },
-        "sku": {
+        "skuName": {
           "type": "string",
-          "description": "The sku for the hybrid network Vnf."
+          "description": "The sku name for the hybrid network virtual network function."
         },
-        "vendor": {
+        "skuType": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/SkuType",
+          "description": "The sku type for the hybrid network virtual network function."
+        },
+        "vendorName": {
           "type": "string",
-          "description": "The vendor for the hybrid network Vnf."
+          "description": "The vendor name for the hybrid network virtual network function."
         },
-        "vnfServiceKey": {
+        "serviceKey": {
           "type": "string",
           "readOnly": true,
-          "description": "The service key for the Vnf vendor."
+          "description": "The service key for the virtual network function resource."
         },
         "vendorProvisioningState": {
           "readOnly": true,
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The vendor provisioning state for the Vnf."
+          "$ref": "./common.json#/definitions/VendorProvisioningState",
+          "description": "The vendor provisioning state for the virtual network function resource."
         },
-        "managedApp": {
+        "managedApplication": {
           "readOnly": true,
-          "$ref": "#/definitions/ManagedApp",
-          "description": "The reference to the managed App."
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The resource URI of the managed application."
+        },
+        "managedApplicationParameters": {
+          "$ref": "./common.json#/definitions/ManagedApplicationParameters",
+          "description": "The parameters for the managed application."
+        },
+        "virtualNetworkFunctionUserConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkFunctionUserConfiguration"
+          },
+          "description": "The virtual network function configurations from the user."
         }
       }
-    },
-    "MecDevice": {
-      "description": "The reference to the hybrid network device.",
-      "$ref": "./common.json#/definitions/SubResource"
-    },
-    "ManagedApp": {
-      "description": "The resource Uri of the managed App.",
-      "$ref": "./common.json#/definitions/SubResource"
     },
     "VirtualNetworkFunctionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HybridNetworkVnf"
+            "$ref": "#/definitions/VirtualNetworkFunction"
           },
-          "description": "A list of hybrid network Vnfs in a resource group or in a subscription."
+          "description": "A list of hybrid network virtual network function resources in a subscription or resource group."
         },
         "nextLink": {
           "type": "string",
-          "description": "The Url to get the next set of results."
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for hybrid network Vnfs Api service call."
+      "description": "Response for hybrid network virtual network function API service call."
     },
-    "SKUNameType": {
+    "VirtualNetworkFunctionUserConfiguration": {
       "properties": {
-        "skuName": {
+        "roleName": {
           "type": "string",
-          "description": "The vendor Sku name"
+          "description": "The name of the virtual network function role."
         },
-        "skuType": {
-          "type": "string",
-          "description": "The vendor Sku type"
-        }
-      },
-      "description": "The vendor Sku."
-    },
-    "VirtualNetworkFunctionVendorPropertiesFormat": {
-      "properties": {
-        "skuNameType": {
-		  "description": "The vendor Sku name type",
+        "userDataParameters": {
+          "$ref": "./common.json#/definitions/UserDataParameters",
+          "description": "The user data parameters from the customer."
+        },
+        "networkInterfaces": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SKUNameType"
-          }
-        }
-      },
-      "description": "Vnf property format."
-    },
-    "VirtualNetworkFunctionVendor": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkFunctionVendorPropertiesFormat",
-          "description": "Vendors of the hybrid network service provider."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Resource"
-        }
-      ],	  
-	  "description": "Vendor vnf."
-    },
-    "VirtualNetworkFunctionVendorListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkFunctionVendor"
+            "$ref": "./common.json#/definitions/NetworkInterface"
           },
-          "description": "A list of hybrid network vendors that are available."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The Url to get the next set of results."
+          "description": "The network interface configuration."
         }
-      },	  
-	  "description": "Vnf vendor list."
+      },
+      "description": "The virtual network function user configuration."
     }
   }
 }

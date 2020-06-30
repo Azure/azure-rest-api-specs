@@ -36,10 +36,11 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/common.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/vnf.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunction.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/device.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/operations.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendor.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunctionVendors.json
 ```
 
 # Code Generation
