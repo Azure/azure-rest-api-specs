@@ -398,8 +398,38 @@
           }
         }
       }
+    },
+
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/AdvisorScore": {
+      "get": {
+        "tags": [
+          "AdvisorScore"
+        ],
+        "description": "Retrieves data about the advisor score of the subscription",
+        "operationId": "AdvisorScore_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref" : "#/definitions/advisorScore"
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
-  },
+  },  
   "definitions": {
     "ResourceRecommendationBaseListResult": {
       "description": "The list of Advisor recommendations.",
@@ -640,6 +670,81 @@
           "type": "string"
         }
       }
+    },
+    "score": {
+      "description": "Details of one Advisor Score",
+      "type" : "object",
+      "properties": {
+        "impactedResources" : {
+          "description": "Number of impacted resources",
+          "type" : "string"
+        },
+        "date" : {
+          "description": "Date of the score",
+          "type" : "string"
+        },
+        "score" : {
+          "description": "Score",
+          "type" : "number"
+        },
+        "consumptionUnits" : {
+          "description": "Consumption units for the score",
+          "type" : "number"
+        }
+      }
+    },
+    "timeSeries": {
+      "description": "Details of past Advisor scores",
+      "type": "array",
+      "items" : {
+        "description": "Past advisor scores of one grain",
+        "type" : "object",
+        "properties": {
+          "AggregationLevel" : {
+            "description": "Aggregation level of the score",
+            "type" : "string"
+          },
+          "Data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/score"
+            }
+          }
+        }
+      }
+    },
+    "advisorScore": {
+      "description": "Details of Adivsor score for a single category",
+      "type" : "object",
+      "properties": {
+          "id" : {
+            "description": "Id of the resource",
+            "type" : "string"
+          },
+          "name" : {
+            "description": "Category",
+            "type" : "string",
+            "enum" : ["Cost", "Performance", "Security", "HighAvailability", "OperationalExcellence", "Advisor"]
+
+          },
+          "type" : {
+            "description": "The type of resource",
+            "type" : "string"
+          },
+          "properties" : {
+            "type": "object",
+            "properties" : {
+              "currentScore" : {
+                "description": "Latest score for the category",
+                "$ref": "#/definitions/score"
+              },
+              "timeSeries" : {
+                "description": "Historic data for the score",
+                "$ref": "#/definitions/timeSeries"
+              }
+            }
+          }
+        } 
     }
   },
   "parameters": {
