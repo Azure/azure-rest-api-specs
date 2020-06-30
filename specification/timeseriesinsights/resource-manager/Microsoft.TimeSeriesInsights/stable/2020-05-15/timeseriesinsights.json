@@ -1248,7 +1248,7 @@
         "name",
         "capacity"
       ],
-      "description": "The sku determines the type of environment, either Gen1 (S1 or S2) or long-term (L1). For Gen1 environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+      "description": "The sku determines the type of environment, either Gen1 (S1 or S2) or Gen2 (L1). For Gen1 environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
     },
     "WarmStoreConfigurationProperties": {
       "type": "object",
@@ -1348,7 +1348,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The sku determines the type of environment, either Gen1 (S1 or S2) or long-term (L1). For Gen1 environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+          "description": "The sku determines the type of environment, either Gen1 (S1 or S2) or Gen2 (L1). For Gen1 environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
         }
       },
       "required": [
@@ -1396,7 +1396,7 @@
           "$ref": "#/definitions/EnvironmentCreateOrUpdateParameters"
         }
       ],
-      "description": "Parameters supplied to the Create or Update Environment operation for a long-term environment."
+      "description": "Parameters supplied to the Create or Update Environment operation for a Gen2 environment."
     },
     "EnvironmentUpdateParameters": {
       "type": "object",
@@ -1437,7 +1437,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/Gen2EnvironmentMutableProperties",
-          "description": "Properties of the long-term environment."
+          "description": "Properties of the Gen2 environment."
         }
       },
       "allOf": [
@@ -1445,7 +1445,7 @@
           "$ref": "#/definitions/EnvironmentUpdateParameters"
         }
       ],
-      "description": "Parameters supplied to the Update Environment operation to update a long-term environment."
+      "description": "Parameters supplied to the Update Environment operation to update a Gen2 environment."
     },
     "EnvironmentListResponse": {
       "properties": {
@@ -1465,7 +1465,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The sku determines the type of environment, either Gen1 (S1 or S2) or long-term (L1). For Gen1 environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+          "description": "The sku determines the type of environment, either Gen1 (S1 or S2) or Gen2 (L1). For Gen1 environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
         },
         "kind": {
           "type": "string",
@@ -1578,7 +1578,7 @@
         "timeSeriesIdProperties",
         "storageConfiguration"
       ],
-      "description": "Properties used to create a long-term environment."
+      "description": "Properties used to create a Gen2 environment."
     },
     "EnvironmentResourceProperties": {
       "properties": {
@@ -1653,7 +1653,7 @@
           "$ref": "#/definitions/ResourceProperties"
         }
       ],
-      "description": "Properties of the long-term environment."
+      "description": "Properties of the Gen2 environment."
     },
     "Gen1EnvironmentMutableProperties": {
       "description": "An object that represents a set of mutable Gen1 environment resource properties.",
@@ -1679,7 +1679,7 @@
       }
     },
     "Gen2EnvironmentMutableProperties": {
-      "description": "An object that represents a set of mutable long-term environment resource properties.",
+      "description": "An object that represents a set of mutable Gen2 environment resource properties.",
       "type": "object",
       "properties": {
         "storageConfiguration": {
