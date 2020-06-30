@@ -399,13 +399,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/AdvisorScore": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore": {
       "get": {
         "tags": [
           "AdvisorScore"
         ],
         "description": "Retrieves data about the advisor score of the subscription",
-        "operationId": "AdvisorScore_Get",
+        "operationId": "AdvisorScore_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -423,8 +423,45 @@
           }
         },
         "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-examples": {
+          "ListAdvisorScore": {
+            "$ref": "./examples/ListAdvisorScore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore/{name}": {
+      "get": {
+        "tags": [
+          "AdvisorScore"
+        ],
+        "description": "Retrieves data about the advisor score of the subscription",
+        "operationId": "AdvisorScore_Get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Category to get advisor score of",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/advisorScore"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetAdvisorScoreDetail": {
+            "$ref": "./examples/GetAdvisorScoreDetail.json"
+          }
         }
       }
     }
@@ -674,20 +711,20 @@
       "description": "Details of one Advisor Score",
       "type": "object",
       "properties": {
-        "impactedResources": {
-          "description": "Number of impacted resources",
-          "type": "string"
-        },
         "date": {
           "description": "Date of the score",
           "type": "string"
         },
         "score": {
-          "description": "Score",
+          "description": "Azure score",
           "type": "number"
         },
         "consumptionUnits": {
           "description": "Consumption units for the score",
+          "type": "number"
+        },
+        "impactedResourceCount": {
+          "description": "Number of impacted resources",
           "type": "number"
         }
       }
@@ -699,11 +736,11 @@
         "description": "Past advisor scores of one grain",
         "type": "object",
         "properties": {
-          "AggregationLevel": {
+          "aggregationLevel": {
             "description": "Aggregation level of the score",
             "type": "string"
           },
-          "Data": {
+          "data": {
             "type": "array",
             "items": {
               "$ref": "#/definitions/score"
@@ -713,7 +750,7 @@
       }
     },
     "advisorScore": {
-      "description": "Details of Adivsor score for a single category",
+      "description": "Details of Advisor score for a single category",
       "type": "object",
       "properties": {
         "id": {
