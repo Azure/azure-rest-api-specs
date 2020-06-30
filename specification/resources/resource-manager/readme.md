@@ -616,6 +616,12 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
 - Microsoft.Resources/stable/2016-06-01/subscriptions.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
+
+override-info:
+  title: PolicyClient
+  title: ResourceManagementClient
+  title: SubscriptionClient
+  title: ManagementLockClient
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
