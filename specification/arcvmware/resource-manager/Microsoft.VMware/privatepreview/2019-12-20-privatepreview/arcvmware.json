@@ -2591,6 +2591,36 @@
         }
       }
     },
+    "Condition": {
+      "description": "Condition defines an extension to status.",
+      "properties": {
+        "type": {
+          "description": "Type of condition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the condition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for the condition's status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human readable message indicating details about the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity": {
+          "description": "Severity with which to treat failures of this type of condition.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "VCenter": {
       "description": "Define the vCenter.",
       "required": [
@@ -2846,6 +2876,14 @@
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
+          "readOnly": true
+        },
+        "conditions": {
+          "description": "Defines a list of readiness conditions for the vm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
           "readOnly": true
         },
         "provisioningState": {
