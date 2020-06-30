@@ -1711,9 +1711,99 @@
           "title": "Premium IO supported",
           "description": "Specifies if the virtual machine size supports premium IO.",
           "readOnly": true
+        },
+        "estimatedVMPrices": {
+          "title": "Estimated VM prices",
+          "description": "The estimated price information for using a VM.",
+          "$ref": "#/definitions/EstimatedVMPrices"
         }
       },
       "description": "Describes the properties of a VM size."
+    },
+    "EstimatedVMPrices": {
+      "properties": {
+        "billingCurrency": {
+          "type": "string",
+          "title": "Billing currency",
+          "description": "Three lettered code specifying the currency of the VM price. Example: USD",
+          "enum": [
+            "USD"
+          ],
+          "x-ms-enum": {
+            "name": "BillingCurrency",
+            "modelAsString": true
+          }
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "title": "Unit of time measure",
+          "description": "The unit of time measurement for the specified VM price. Example: OneHour",
+          "enum": [
+            "OneHour"
+          ],
+          "x-ms-enum": {
+            "name": "UnitOfMeasure",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EstimatedVMPrice"
+          },
+          "title": "List of estimated VM prices.",
+          "description": "The list of estimated prices for using a VM of a particular OS type, tier, etc."
+        }
+      },
+      "required": [
+        "billingCurrency",
+        "unitOfMeasure",
+        "values"
+      ],
+      "description": "The estimated price info for using a VM."
+    },
+    "EstimatedVMPrice": {
+      "properties": {
+        "retailPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "Retail price",
+          "description": "The price charged for using the VM."
+        },
+        "osType": {
+          "type": "string",
+          "title": "OS type",
+          "description": "Operating system type used by the VM.",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "VMPriceOSType",
+            "modelAsString": true
+          }
+        },
+        "vmTier": {
+          "type": "string",
+          "title": "VM tier",
+          "description": "The type of the VM.",
+          "enum": [
+            "Standard",
+            "LowPriority",
+            "Spot"
+          ],
+          "x-ms-enum": {
+            "name": "VMTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "retailPrice",
+        "osType",
+        "vmTier"
+      ],
+      "description": "The estimated price info for using a VM of a particular OS type, tier, etc."
     },
     "VirtualMachineSizeListResult": {
       "properties": {
