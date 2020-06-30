@@ -43,6 +43,13 @@
         "description": "Retrieves all the ExpressRouteProviderPorts in a subscription.",
         "parameters": [
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "can be used to filter on peering location. Suppoprts only eq"
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
@@ -66,52 +73,6 @@
         "x-ms-examples": {
           "ExpressRouteProviderPortList": {
             "$ref": "./examples/expressRouteProviderPortList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts/{locationName}": {
-      "get": {
-        "tags": [
-          "ExpressRouteProviderPorts"
-        ],
-        "operationId": "ExpressRouteProviderPorts_ListByLocation",
-        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription at a given location.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the requested ExpressRoutePort peering location."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of ExpressRouteProviderPort resources at a location. If there are no ports for the provider, an empty list is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteProviderPortListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteProviderPortList": {
-            "$ref": "./examples/expressRouteProviderPortListByLocation.json"
           }
         },
         "x-ms-pageable": {
