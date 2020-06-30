@@ -568,6 +568,294 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_List",
+        "summary": "List sqlManagedInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_ListByResourceGroup",
+        "description": "Gets all sqlManagedInstances in a resource group.",
+        "summary": "List sqlManagedInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlManagedInstances/{sqlManagedInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Get",
+        "description": "Retrieves a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of SQL Managed Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Instance tags.": {
+            "$ref": "./examples/GetSqlManagedInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Create",
+        "description": "Creates or replaces a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of SQL Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Managed Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Managed Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlManagedInstance.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Delete",
+        "description": "Deletes a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of Sql Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Managed Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Managed Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Instance.": {
+            "$ref": "./examples/DeleteSqlManagedInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Update",
+        "description": "Updates a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of sqlManagedInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Managed Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a sql Instance tags.": {
+            "$ref": "./examples/UpdateSqlManagedInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlInstances": {
       "get": {
         "tags": [
@@ -1423,6 +1711,271 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInSubscription",
+        "summary": "List dataController resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a subscription.": {
+            "$ref": "./examples/ListSubscriptionDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInGroup",
+        "summary": "List dataController resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/dataControllers/{dataControllerName}": {
+      "put": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PutDataController",
+        "description": "Creates or replaces a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a dataControllers tags.": {
+            "$ref": "./examples/CreateOrUpdateDataController.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_DeleteDataController",
+        "description": "Deletes a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the DataController."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified DataController does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a dataController.": {
+            "$ref": "./examples/DeleteDataController.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_GetDataController",
+        "description": "Retrieves a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a dataController tags.": {
+            "$ref": "./examples/GetDataController.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PatchDataController",
+        "description": "Updates a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a dataController tags.": {
+            "$ref": "./examples/UpdateDataController.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/hybridDataManagers": {
       "get": {
         "tags": [
@@ -2151,6 +2704,261 @@
         }
       }
     },
+    "PageOfDataControllerResource": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/DataControllerResource"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results."
+        }
+      }
+    },
+    "DataControllerResource": {
+      "description": "Data controller resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataControllerProperties",
+          "description": "The data controller's properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureResource": {
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "family": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        }
+      }
+    },
+    "DataControllerProperties": {
+      "type": "object",
+      "properties": {
+        "dataController": {
+          "$ref": "#/definitions/DataController"
+        },
+        "requestType": {
+          "$ref": "#/definitions/RequestType"
+        },
+        "uploadRequest": {
+          "$ref": "#/definitions/UsageUploadRequest"
+        },
+        "uploadResponse": {
+          "$ref": "#/definitions/UsageUploadResponse"
+        },
+        "handshakeRequest": {
+          "$ref": "#/definitions/HandshakeRequest"
+        },
+        "handshakeResponse": {
+          "$ref": "#/definitions/HandshakeResponse"
+        }
+      }
+    },
+    "DataController": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "azureResourceType": {
+          "type": "string"
+        },
+        "subscription": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Handshake",
+        "UsageUpload"
+      ],
+      "x-ms-enum": {
+        "name": "RequestType",
+        "modelAsString": true
+      }
+    },
+    "UsageUploadRequest": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string"
+        },
+        "dataTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data": {
+          "items": {
+            "$ref": "#/definitions/UsageRecord"
+          },
+          "type": "array"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "eventSeq": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "tags": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageUploadResponse": {
+      "type": "object",
+      "properties": {
+        "usageUploadStatus": {
+          "$ref": "#/definitions/UsageUploadStatus"
+        },
+        "usageWaterMark": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "UsageUploadStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Failed",
+        "PartialSuccess",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "UsageUploadStatus",
+        "modelAsString": true
+      }
+    },
+    "HandshakeRequest": {
+      "type": "object"
+    },
+    "HandshakeResponse": {
+      "type": "object",
+      "properties": {
+        "usageUploadUrl": {
+          "type": "string"
+        },
+        "usageResultUrl": {
+          "type": "string"
+        }
+      }
+    },
     "PostgresInstanceProperties": {
       "description": "Postgres Instance properties.",
       "type": "object",
@@ -2224,6 +3032,16 @@
         }
       }
     },
+    "SqlManagedInstanceProperties": {
+      "description": "Properties of sqlManagedInstance.",
+      "type": "object",
+      "properties": {
+        "dataControllerId": {
+          "type": "string",
+          "description": "null"
+        }
+      }
+    },
     "SqlInstance": {
       "description": "A SqlInstance.",
       "type": "object",
@@ -2240,8 +3058,37 @@
         }
       }
     },
+    "SqlManagedInstance": {
+      "description": "A SqlManagedInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlManagedInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "SqlInstanceUpdate": {
       "description": "An update to a SQL Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlManagedInstanceUpdate": {
+      "description": "An update to a SQL Managed Instance.",
       "type": "object",
       "properties": {
         "tags": {
@@ -2262,6 +3109,25 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlManagedInstanceListResult": {
+      "description": "A list of SqlManagedInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlManagedInstance"
           },
           "readOnly": true
         },
@@ -2558,6 +3424,14 @@
     "SqlInstanceNameParameter": {
       "in": "path",
       "name": "sqlInstanceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlManagedInstanceNameParameter": {
+      "in": "path",
+      "name": "sqlManagedInstanceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
