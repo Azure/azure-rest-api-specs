@@ -28,7 +28,16 @@ These are the global settings for the Guest Configuration API.
 title: GuestConfigurationClient
 description: Guest Configuration Client
 openapi-type: arm
-tag: package-2018-11-20
+tag: package-2020-06-25
+```
+
+### Tag: package-2020-06-25
+
+These settings apply only when `--tag=package-2020-06-25` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-25'
+input-file:
+  - Microsoft.GuestConfiguration/stable/2020-06-25/guestconfiguration.json
 ```
 
 ### Tag: package-2018-11-20
@@ -133,6 +142,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.GuestConfiguration/stable/2020-06-25/guestconfiguration.json
   - $(this-folder)/Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json
   - $(this-folder)/Microsoft.GuestConfiguration/preview/2018-06-30-preview/guestconfiguration.json
   - $(this-folder)/Microsoft.GuestConfiguration/preview/2018-01-20-preview/guestconfiguration.json
