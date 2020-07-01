@@ -104,6 +104,14 @@ input-file:
 - Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+```
+
 ---
 # Code Generation
 

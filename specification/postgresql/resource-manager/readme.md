@@ -103,6 +103,13 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is DBforPostgreSQL
+```
 
 ---
 # Code Generation
