@@ -1361,6 +1361,15 @@
       },
       "description": "Application Gateway Ssl policy."
     },
+    "ApplicationGatewayClientAuthConfiguration": {
+      "properties": {
+        "verifyClientCertIssuerDN": {
+          "type": "boolean",
+          "description": "Verify client certificate issuer name on the application gateway."
+        }
+      },
+      "description": "Application gateway client authentication configuration."
+    },
     "ApplicationGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "subnet": {
@@ -1493,6 +1502,49 @@
         }
       ],
       "description": "Trusted Root certificates of an application gateway."
+    },
+    "ApplicationGatewayTrustedClientCertificatePropertiesFormat": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Certificate public data."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the trusted client certificate resource."
+        }
+      },
+      "description": "Trusted client certificates properties of an application gateway."
+    },
+    "ApplicationGatewayTrustedClientCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayTrustedClientCertificatePropertiesFormat",
+          "description": "Properties of the application gateway trusted client certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trusted client certificate that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Trusted client certificates of an application gateway."
     },
     "ApplicationGatewaySslCertificatePropertiesFormat": {
       "properties": {
@@ -1827,6 +1879,60 @@
       ],
       "description": "Backend address pool settings of an application gateway."
     },
+    "ApplicationGatewaySslProfilePropertiesFormat": {
+      "properties": {
+        "trustedClientCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Array of references to application gateway trusted client certificates."
+        },
+        "sslPolicy": {
+          "$ref": "#/definitions/ApplicationGatewaySslPolicy",
+          "description": "SSL policy of the application gateway resource."
+        },
+        "clientAuthConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayClientAuthConfiguration",
+          "description": "Client authentication configuration of the application gateway resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the HTTP listener resource."
+        }
+      },
+      "description": "Properties of SSL profile of an application gateway."
+    },
+    "ApplicationGatewaySslProfile": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewaySslProfilePropertiesFormat",
+          "description": "Properties of the application gateway SSL profile."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the SSL profile that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "SSL profile of an application gateway."
+    },
     "ApplicationGatewayHttpListenerPropertiesFormat": {
       "properties": {
         "frontendIPConfiguration": {
@@ -1848,6 +1954,10 @@
         "sslCertificate": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "SSL certificate resource of an application gateway."
+        },
+        "sslProfile": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "SSL profile resource of the application gateway."
         },
         "requireServerNameIndication": {
           "type": "boolean",
@@ -2662,6 +2772,13 @@
           },
           "description": "Trusted Root certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
         },
+        "trustedClientCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayTrustedClientCertificate"
+          },
+          "description": "Trusted client certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
+        },
         "sslCertificates": {
           "type": "array",
           "items": {
@@ -2710,6 +2827,13 @@
             "$ref": "#/definitions/ApplicationGatewayHttpListener"
           },
           "description": "Http listeners of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
+        },
+        "sslProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslProfile"
+          },
+          "description": "SSL profiles of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits)."
         },
         "urlPathMaps": {
           "type": "array",

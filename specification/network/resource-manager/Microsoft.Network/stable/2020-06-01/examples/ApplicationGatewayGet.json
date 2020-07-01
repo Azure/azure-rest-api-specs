@@ -42,6 +42,16 @@
               }
             }
           ],
+          "trustedClientCertificates": [
+            {
+              "name": "clientcert",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/trustedClientCertificates/clientcert",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "data": "****"
+              }
+            }
+          ],
           "authenticationCertificates": [],
           "frontendIPConfigurations": [
             {
@@ -97,6 +107,30 @@
               }
             }
           ],
+          "sslProfiles": [
+            {
+              "name": "sslProfile1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslProfiles/sslProfile1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "sslPolicy": {
+                  "policyType": "Custom",
+                  "minProtocolVersion": "TLSv1_1",
+                  "cipherSuites": [
+                    "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+                  ]
+                },
+                "clientAuthConfiguration": {
+                  "verifyClientCertIssuerDN": true
+                },
+                "trustedClientCertificates": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/trustedClientCertificates/clientcert"
+                  }
+                ]
+              }
+            }
+          ],
           "httpListeners": [
             {
               "name": "appgwhl",
@@ -112,6 +146,9 @@
                 "protocol": "Https",
                 "sslCertificate": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert"
+                },
+                "sslProfile": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslProfiles/sslProfile1"
                 },
                 "requireServerNameIndication": false
               }
