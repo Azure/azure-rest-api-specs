@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Authorization.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Authorization, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for Authorization, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Authorization API.
 
 ``` yaml
@@ -30,6 +30,7 @@ tag: package-2018-09-01-preview
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
@@ -38,6 +39,7 @@ directive:
     #  -   $.paths["/providers/Microsoft.Authorization/operations"]
 
 ```
+
 
 ### Tag: package-2015-07-01
 
@@ -97,6 +99,15 @@ These settings apply only when `--tag=package-2018-09-01-preview-only` is specif
 ``` yaml $(tag) == 'package-2018-09-01-preview-only'
 input-file:
 - Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+```
+
+### Tag: package-2018-05-01-preview-only
+
+These settings apply only when `--tag=package-2018-05-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
@@ -167,8 +178,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -198,7 +209,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -222,14 +233,14 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
