@@ -82,6 +82,48 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts/{expressRouteProviderPortName}": {
+      "get": {
+        "tags": [
+          "ExpressRouteProviderPorts"
+        ],
+        "operationId": "ExpressRouteProviderPorts_Get",
+        "description": "Retrieves the requested ExpressRouteProviderPort resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "expressRouteProviderPortName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of ExpressRouteProviderPort."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the requested ExpressRouteProviderPort resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteProviderPort"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteProviderPortGet": {
+            "$ref": "./examples/ExpressRouteProviderPortGet.json"
+          }
+        }
     }
   },
   "definitions": {
@@ -142,11 +184,6 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
       "description": "ExpressRouteProviderPort resource."
     },
     "ExpressRouteProviderPortListResult": {
