@@ -4355,7 +4355,15 @@
         },
         "destinationPortBehavior": {
           "type": "string",
-          "description": "Destination port behavior."
+          "description": "Destination port behavior.",
+          "enum": [
+            "None",
+            "ListenIfAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationPortBehavior",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the TCP configuration."
