@@ -404,8 +404,8 @@
         "tags": [
           "AdvisorScore"
         ],
-        "description": "Retrieves data about the advisor score of the subscription",
-        "operationId": "AdvisorScore_List",
+        "description": "Gets the list of advisor scores.",
+        "operationId": "AdvisorScores_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -435,18 +435,18 @@
         "tags": [
           "AdvisorScore"
         ],
-        "description": "Retrieves data about the advisor score of the subscription",
-        "operationId": "AdvisorScore_Get",
+        "description": "Gets the advisor score.",
+        "operationId": "AdvisorScores_Get",
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Category to get advisor score of",
+            "description": "The name of Advisor score entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -697,50 +697,60 @@
         }
       ],
       "properties": {
-        "suppressionId": {
-          "description": "The GUID of the suppression.",
-          "type": "string"
-        },
-        "ttl": {
-          "description": "The duration for which the suppression is valid.",
-          "type": "string"
+        "properties": {
+          "properties": {
+            "suppressionId": {
+              "description": "The GUID of the suppression.",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "The duration for which the suppression is valid.",
+              "type": "string"
+            }
+          }
         }
       }
     },
     "score": {
-      "description": "Details of one Advisor Score",
+      "description": "The details of Advisor Score",
       "type": "object",
       "properties": {
         "date": {
-          "description": "Date of the score",
+          "description": "The date score is applied.",
           "type": "string"
         },
         "score": {
-          "description": "Azure score",
+          "description": "The score.",
           "type": "number"
         },
         "consumptionUnits": {
-          "description": "Consumption units for the score",
+          "description": "The consumption units for the score.",
           "type": "number"
         },
         "impactedResourceCount": {
-          "description": "Number of impacted resources",
+          "description": "The number of impacted resources.",
           "type": "number"
         }
       }
     },
     "timeSeries": {
-      "description": "Details of past Advisor scores",
+      "description": "The trend details of advisor score.",
       "type": "array",
       "items": {
-        "description": "Past advisor scores of one grain",
+        "description": "The data from different aggregation levels.",
         "type": "object",
         "properties": {
           "aggregationLevel": {
-            "description": "Aggregation level of the score",
-            "type": "string"
+            "description": "The aggregation level of the score.",
+            "type": "string",
+            "enum": [
+              "weekly",
+              "daily",
+              "monthly"
+            ]
           },
           "data": {
+            "description": "The past score data",
             "type": "array",
             "items": {
               "$ref": "#/definitions/score"
@@ -750,38 +760,31 @@
       }
     },
     "advisorScore": {
-      "description": "Details of Advisor score for a single category",
+      "description": "The details of Advisor score for a single category.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of the resource",
+          "description": "The ID of the resource.",
           "type": "string"
         },
         "name": {
-          "description": "Category",
-          "type": "string",
-          "enum": [
-            "Cost",
-            "Performance",
-            "Security",
-            "HighAvailability",
-            "OperationalExcellence",
-            "Advisor"
-          ]
+          "description": "The category.",
+          "type": "string"
         },
         "type": {
-          "description": "The type of resource",
+          "description": "The type of resource.",
           "type": "string"
         },
         "properties": {
+          "description": "The Advisor score data.",
           "type": "object",
           "properties": {
-            "currentScore": {
-              "description": "Latest score for the category",
+            "lastRefreshedScore": {
+              "description": "The latest score for the category.",
               "$ref": "#/definitions/score"
             },
             "timeSeries": {
-              "description": "Historic data for the score",
+              "description": "The historic data for the score.",
               "$ref": "#/definitions/timeSeries"
             }
           }
