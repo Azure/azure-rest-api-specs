@@ -68,6 +68,9 @@
           },
           "Create cluster with custom network settings": {
             "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
+          },
+          "Create cluster with encryption in transit": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
           }
         },
         "parameters": [
@@ -1011,6 +1014,10 @@
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
         },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
@@ -1194,6 +1201,10 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
         },
         "minSupportedTlsVersion": {
           "type": "string",
@@ -1507,6 +1518,21 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not resource disk encryption is enabled."
+        }
+      }
+    },
+    "EncryptionInTransitProperties": {
+      "description": "The encryption-in-transit properties.",
+      "properties": {
+        "isEncryptionInTransitEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not inter cluster node communication is encrypted in transit."
         }
       }
     },
