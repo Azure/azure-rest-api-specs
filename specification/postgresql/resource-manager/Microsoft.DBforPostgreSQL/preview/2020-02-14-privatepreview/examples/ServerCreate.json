@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc4",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2020-02-14-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "password",
+        "serverEdition": "GeneralPurpose",
+        "vCores": 4,
+        "storageQuotaInMb": 524288,
+        "version": "12",
+        "firewallRules": {},
+        "standbyCount": 0,
+        "backupRetentionDays": 7,
+        "vnetInjArgs": {
+          "delegatedSubnetName": "autobot-subnet-pg-ss",
+          "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
+          "delegatedVnetName": "autobot-orcas-vnet"
+        }
+      },
+      "tags": {
+        "ElasticServer": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "version": "12",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+          "displayName": "demosingleserver",
+          "publicIpAddressRequested": true,
+          "serverEdition": "GeneralPurpose",
+          "vCores": 4,
+          "storageQuotaInMb": 524288,
+          "standbyCount": 0,
+          "backupRetentionDays": 7,
+          "vnetInjArgs": {
+            "delegatedSubnetName": "subnet-pg-ss",
+            "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
+            "delegatedVnetName": "orcas-vnet"
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/singleServers/pgtestsvc4",
+        "name": "pgtestsvc4",
+        "type": "Microsoft.DBforPostgreSQL/singleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "version": "12",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+          "displayName": "demosingleserver",
+          "publicIpAddressRequested": true,
+          "serverEdition": "GeneralPurpose",
+          "vCores": 4,
+          "storageQuotaInMb": 524288,
+          "standbyCount": 0,
+          "backupRetentionDays": 7,
+          "vnetInjArgs": {
+            "delegatedSubnetName": "subnet-pg-ss",
+            "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
+            "delegatedVnetName": "orcas-vnet"
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/singleServers/pgtestsvc4",
+        "name": "pgtestsvc4",
+        "type": "Microsoft.DBforPostgreSQL/singleServers"
+      }
+    },
+    "202": {}
+  }
+}

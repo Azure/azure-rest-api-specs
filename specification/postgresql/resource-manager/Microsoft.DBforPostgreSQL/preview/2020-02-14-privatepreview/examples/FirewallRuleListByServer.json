@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "serverName": "testserver",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2020-02-14-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "rule1",
+            "type": "Microsoft.DBforPostgreSQL/singleServers/firewallRules",
+            "properties": {
+              "startIpAddress": "0.0.0.0",
+              "endIpAddress": "255.255.255.255"
+            }
+          },
+          {
+            "name": "rule2",
+            "type": "Microsoft.DBforPostgreSQL/singleServers/firewallRules",
+            "properties": {
+              "startIpAddress": "1.0.0.0",
+              "endIpAddress": "255.0.0.0"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
