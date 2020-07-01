@@ -619,9 +619,6 @@ input-file:
 
 override-info:
   title: PolicyClient
-  title: ResourceManagementClient
-  title: SubscriptionClient
-  title: ManagementLockClient
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
