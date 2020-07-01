@@ -856,294 +856,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlInstances": {
-      "get": {
-        "tags": [
-          "SqlInstances"
-        ],
-        "operationId": "SqlInstances_List",
-        "summary": "List sqlInstance resources in the subscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SqlInstanceListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets all SQL Instance in a subscription.": {
-            "$ref": "./examples/ListSubscriptionSqlIInstance.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlInstances": {
-      "get": {
-        "tags": [
-          "SqlInstances"
-        ],
-        "operationId": "SqlInstances_ListByResourceGroup",
-        "description": "Gets all sqlInstances in a resource group.",
-        "summary": "List sqlInstance resources in the resource group",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SqlInstanceListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets all SQL Instance in a resource group.": {
-            "$ref": "./examples/ListByResourceGroupSqlInstance.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlInstances/{sqlInstanceName}": {
-      "get": {
-        "tags": [
-          "SqlInstances"
-        ],
-        "operationId": "SqlInstances_Get",
-        "description": "Retrieves a SQL Instance resource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "sqlInstanceName",
-            "description": "Name of SQL Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SqlInstance"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates a SQL Instance tags.": {
-            "$ref": "./examples/GetSqlInstance.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "SqlInstances"
-        ],
-        "operationId": "SqlInstances_Create",
-        "description": "Creates or replaces a SQL Instance resource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "sqlInstanceName",
-            "description": "The name of SQL Instances",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The SQL Instance to be created or updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SqlInstance"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SqlInstance"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/SqlInstance"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates a SQL Instance tags.": {
-            "$ref": "./examples/CreateOrUpdateSqlInstance.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "SqlInstances"
-        ],
-        "operationId": "SqlInstances_Delete",
-        "description": "Deletes a SQL Instance resource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "sqlInstanceName",
-            "description": "The name of Sql Instances",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the SQL Instance."
-          },
-          "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "204": {
-            "description": "The specified SQL Instance does not exist."
-          }
-        },
-        "x-ms-examples": {
-          "Delete a SQL Instance.": {
-            "$ref": "./examples/DeleteSqlInstance.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "SqlInstances"
-        ],
-        "operationId": "SqlInstances_Update",
-        "description": "Updates a SQL Instance resource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "sqlInstanceName",
-            "description": "Name of sqlInstance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The SQL Instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SqlInstanceUpdate"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SqlInstance"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates a sql Instance tags.": {
-            "$ref": "./examples/UpdateSqlInstance.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlServerInstances": {
       "get": {
         "tags": [
@@ -3022,16 +2734,6 @@
         }
       }
     },
-    "SqlInstanceProperties": {
-      "description": "Properties of PostgresInstance.",
-      "type": "object",
-      "properties": {
-        "hybridDataManagerId": {
-          "type": "string",
-          "description": "null"
-        }
-      }
-    },
     "SqlManagedInstanceProperties": {
       "description": "Properties of sqlManagedInstance.",
       "type": "object",
@@ -3039,22 +2741,6 @@
         "dataControllerId": {
           "type": "string",
           "description": "null"
-        }
-      }
-    },
-    "SqlInstance": {
-      "description": "A SqlInstance.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlInstanceProperties",
-          "description": "null",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -3074,19 +2760,6 @@
         }
       }
     },
-    "SqlInstanceUpdate": {
-      "description": "An update to a SQL Instance.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "SqlManagedInstanceUpdate": {
       "description": "An update to a SQL Managed Instance.",
       "type": "object",
@@ -3097,25 +2770,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "SqlInstanceListResult": {
-      "description": "A list of SqlInstance.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SqlInstance"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -3416,14 +3070,6 @@
     "PostgresInstanceNameParameter": {
       "in": "path",
       "name": "postgresInstanceName",
-      "description": "The name of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlInstanceNameParameter": {
-      "in": "path",
-      "name": "sqlInstanceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
