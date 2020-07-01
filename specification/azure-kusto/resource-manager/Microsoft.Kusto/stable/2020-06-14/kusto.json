@@ -1909,58 +1909,10 @@
             "$ref": "./examples/KustoDataConnectionValidation.json"
           }
         },
-        "description": "Checks that the data connection parameters are valid.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataConnectionValidation"
-            },
-            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Operation to check the kusto resource name availability was successful.",
-            "schema": {
-              "$ref": "#/definitions/DataConnectionValidationListResult"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnectionValidationAsync": {
-      "post": {
-        "tags": [
-          "DataConnections"
-        ],
-        "operationId": "DataConnections_dataConnectionValidationAsync",
-        "x-ms-examples": {
-          "KustoDataConnectionValidation": {
-            "$ref": "./examples/KustoDataConnectionValidationAsync.json"
-          }
-        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        },
+        }
         "description": "Checks that the data connection parameters are valid.",
         "parameters": [
           {
