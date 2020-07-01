@@ -1,710 +1,972 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "Azure SignalR Service REST API",
-      "version": "v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Azure SignalR Service REST API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "head": {
+        "tags": [
+          "HealthApi"
+        ],
+        "summary": "Get service health status.",
+        "operationId": "HealthApi_Head_Index",
+        "responses": {
+          "200": {
+            "description": "The service is healthy"
+          }
+        }
+      }
     },
-    "paths": {
-      "/api/v1/health": {
-        "get": {
-          "description": "Get service health status",
-          "tags": [],
-          "responses": {
-            "200": {
-              "description": "Ok"
-            },
-            "503": {
-              "description": "ServiceUnavailable"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}": {
-        "post": {
-          "description": "Broadcast a message to all clients connected to target hub.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PayloadMessage"
-                }
-              }
+    "/api/v1/hubs/{hub}": {
+      "post": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Broadcast a message to all clients connected to target hub.",
+        "operationId": "HubProxyControllerV1_Post_Broadcast",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           },
-          "responses": {
-            "202": {
-              "description": "Accepted"
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Excluded connection Ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
-        }
-      },
-      "/api/v1/hubs/{hub}/users/{id}": {
-        "post": {
-          "description": "Broadcast a message to all clients within the target group.",
-           "tags": [],
-           "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+        ],
+        "requestBody": {
+          "description": "The message body.",
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/PayloadMessage"
               }
             }
-          ],
-          "requestBody": {
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PayloadMessage"
+                  "type": "string"
                 }
               }
-            }
-          },
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/connections/{connectionId}": {
-        "post": {
-          "description": "Send message to a single connection Id.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "connectionId",
-              "in": "path",
-              "required": true,
-              "description": "Target connection Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PayloadMessage"
-                }
-              }
-            }
-          },
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        },
-        "delete": {
-          "description": "Close a target client connection Id with reason.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "connectionId",
-              "in": "path",
-              "required": true,
-              "description": "Target connection Id.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "reason",
-              "in": "query",
-              "description": "Close reason.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/groups/{group}": {
-        "post": {
-          "description": "Broadcast a message to all clients within the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PayloadMessage"
-                }
-              }
-            }
-          },
-          "responses": {
-            "202": {
-              "description": "Ok"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/groups/{group}/users/{user}": {
-        "get": {
-          "description": "Check whether a user exists in the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Ok"
-            },
-            "404": {
-              "description": "NotFound"
-            }
-          }
-        },
-        "put": {
-          "description": "Add a user to the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ttl",
-              "in": "query",
-              "description": "Time to live in seconds for the user Id. Optional for live forever.",
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        },
-        "delete": {
-          "description": "Remove a user from the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/users/{user}/groups/{group}": {
-        "get": {
-          "description": "Check whether a user exists in the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Ok"
-            },
-            "404": {
-              "description": "NotFound"
-            }
-          }
-        },
-        "put": {
-          "description": "Add a user to the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ttl",
-              "in": "query",
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        },
-        "delete": {
-          "description": "Remove a user from the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}": {
-        "put": {
-          "description": "Add a connection to the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "connectionId",
-              "in": "path",
-              "required": true,
-              "description": "Target connection Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        },
-        "delete": {
-          "description": "Remove a connection from the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "connectionId",
-              "in": "path",
-              "required": true,
-              "description": "Target connection Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/connections/{connectionId}/groups/{group}": {
-        "put": {
-          "description": "Add a connection to the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "connectionId",
-              "in": "path",
-              "required": true,
-              "description": "Target connection Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        },
-        "delete": {
-          "description": "Remove a connection from the target group.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "group",
-              "in": "path",
-              "required": true,
-              "description": "Target group name, which length should be greater than 0 and less than 1025.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "connectionId",
-              "in": "path",
-              "required": true,
-              "description": "Target connection Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
-            }
-          }
-        }
-      },
-      "/api/v1/hubs/{hub}/users/{user}/groups": {
-        "delete": {
-          "description": "Remove a user from all groups.",
-          "tags": [],
-          "parameters": [
-            {
-              "name": "hub",
-              "in": "path",
-              "required": true,
-              "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "user",
-              "in": "path",
-              "required": true,
-              "description": "Target user Id.",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted"
             }
           }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "IActionResult": {
-          "type": "object",
-          "additionalProperties": false
-        },
-        "IActionResultValueTask": {
-          "type": "object",
-          "properties": {
-            "IsCompleted": {
-              "type": "boolean",
-              "readOnly": true
-            },
-            "IsCompletedSuccessfully": {
-              "type": "boolean",
-              "readOnly": true
-            },
-            "IsFaulted": {
-              "type": "boolean",
-              "readOnly": true
-            },
-            "IsCanceled": {
-              "type": "boolean",
-              "readOnly": true
-            },
-            "Result": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/IActionResult"
-                }
-              ],
-              "nullable": true,
-              "readOnly": true
+    "/api/v1/hubs/{hub}/users/{id}": {
+      "post": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Broadcast a message to all clients belong to the target user.",
+        "operationId": "HubProxyControllerV1_Post_SendToUser",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The user Id.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The message body.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayloadMessage"
+              }
+            }
+          }
         },
-        "PayloadMessage": {
-          "type": "object",
-          "properties": {
-            "Target": {
-              "type": "string",
-              "nullable": true
-            },
-            "Arguments": {
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hubs/{hub}/connections/{connectionId}": {
+      "post": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Send message to the specific connection.",
+        "operationId": "HubProxyControllerV1_Post_SendToConnection",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "The connection Id.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The message body.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayloadMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check if the connection with the given connectionId exists",
+        "operationId": "HubProxyControllerV1_Get_CheckConnectionExistence",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check if the connection with the given connectionId exists",
+        "operationId": "HubProxyControllerV1_Head_CheckConnectionExistence",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Close the client connection",
+        "operationId": "HubProxyControllerV1_Delete_CloseClientConnection",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hubs/{hub}/groups/{group}": {
+      "post": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Broadcast a message to all clients within the target group.",
+        "operationId": "HubProxyControllerV1_Post_GroupBroadcast",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Excluded connection Ids",
+            "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "additionalProperties": false
-              },
-              "nullable": true
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The message body.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayloadMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check if there are any client connections inside the given group",
+        "operationId": "HubProxyControllerV1_Get_CheckGroupExistence",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
+          {
+            "name": "group",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check if there are any client connections inside the given group",
+        "operationId": "HubProxyControllerV1_Head_CheckGroupExistence",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hubs/{hub}/users/{user}": {
+      "get": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check if there are any client connections connected for the given user",
+        "operationId": "HubProxyControllerV1_Get_CheckUserExistence",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check if there are any client connections connected for the given user",
+        "operationId": "HubProxyControllerV1_Head_CheckUserExistence",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}": {
+      "put": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Add a connection to the target group.",
+        "operationId": "HubProxyControllerV1_Put_AddConnectionToGroup",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Remove a connection from the target group.",
+        "operationId": "HubProxyControllerV1_Delete_RemoveConnectionFromGroup",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hubs/{hub}/groups/{group}/users/{user}": {
+      "get": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check whether a user exists in the target group.",
+        "operationId": "HubProxyControllerV1_Get_CheckUserExistenceInGroup",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Target user Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Check whether a user exists in the target group.",
+        "operationId": "HubProxyControllerV1_Head_CheckUserExistenceInGroup",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Target user Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Add a user to the target group.",
+        "operationId": "HubProxyControllerV1_Put_AddUserToGroup",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Target user Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ttl",
+            "in": "query",
+            "description": "Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Remove a user from the target group.",
+        "operationId": "HubProxyControllerV1_Delete_RemoveUserFromGroup",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Target user Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hubs/{hub}/users/{user}/groups": {
+      "delete": {
+        "tags": [
+          "HubProxyControllerV1"
+        ],
+        "summary": "Remove a user from all groups.",
+        "operationId": "HubProxyControllerV1_Delete_RemoveUserFromAllGroups",
+        "parameters": [
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Target user Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user is deleted"
+          },
+          "202": {
+            "description": "The delete request is accepted and service is handling the request int the background"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
         }
       }
     }
-  }
+  },
+  "components": {
+    "schemas": {
+      "PayloadMessage": {
+        "type": "object",
+        "properties": {
+          "Target": {
+            "type": "string",
+            "nullable": true
+          },
+          "Arguments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
