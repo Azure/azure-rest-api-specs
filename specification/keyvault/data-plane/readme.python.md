@@ -18,7 +18,6 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi)
 batch:
-  - tag: package-7.2-preview
   - tag: package-7.1-preview
   - tag: package-7.0
   - tag: package-2016-10
