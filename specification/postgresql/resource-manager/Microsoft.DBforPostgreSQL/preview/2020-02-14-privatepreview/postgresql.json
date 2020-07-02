@@ -445,7 +445,152 @@
           "x-ms-long-running-operation": true
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleservers/{serverName}/firewallRules": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleservers/{serverName}/firewallRules/{firewallRuleName}": {
+        "put": {
+          "tags": [
+            "FirewallRules"
+          ],
+          "operationId": "FirewallRules_CreateOrUpdate",
+          "x-ms-examples": {
+            "FirewallRuleCreate": {
+              "$ref": "./examples/FirewallRuleCreate.json"
+            }
+          },
+          "description": "Creates a new firewall rule or updates an existing firewall rule.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ServerNameParameter"
+            },
+            {
+              "$ref": "#/parameters/FirewallRuleNameParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/FirewallRule"
+              },
+              "description": "The required parameters for creating or updating a firewall rule."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/FirewallRule"
+              }
+            },
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/definitions/FirewallRule"
+              }
+            },
+            "202": {
+              "description": "Accepted"
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
+        "delete": {
+          "tags": [
+            "FirewallRules"
+          ],
+          "operationId": "FirewallRules_Delete",
+          "x-ms-examples": {
+            "FirewallRuleDelete": {
+              "$ref": "./examples/FirewallRuleDelete.json"
+            }
+          },
+          "description": "Deletes a PostgreSQL server firewall rule.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ServerNameParameter"
+            },
+            {
+              "$ref": "#/parameters/FirewallRuleNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "202": {
+              "description": "Accepted"
+            },
+            "204": {
+              "description": "NoContent"
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
+        "get": {
+          "tags": [
+            "FirewallRules"
+          ],
+          "operationId": "FirewallRules_Get",
+          "x-ms-examples": {
+            "FirewallRuleList": {
+              "$ref": "./examples/FirewallRuleGet.json"
+            }
+          },
+          "description": "List all the firewall rules in a given server.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ServerNameParameter"
+            },
+            {
+              "$ref": "#/parameters/FirewallRuleNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/FirewallRuleListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules": {
         "get": {
           "tags": [
             "FirewallRules"
@@ -456,7 +601,7 @@
               "$ref": "./examples/FirewallRuleListByServer.json"
             }
           },
-          "description": "List all the firewall rules in a given server.",
+          "description": "List all the firewall rules in a given PostgreSQL server.",
           "parameters": [
             {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -477,16 +622,10 @@
               "schema": {
                 "$ref": "#/definitions/FirewallRuleListResult"
               }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
             }
           },
           "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+            "nextLinkName": null
           }
         }
       },
@@ -1208,6 +1347,14 @@
         "required": true,
         "type": "string",
         "description": "The name of the server.",
+        "x-ms-parameter-location": "method"
+      },
+      "FirewallRuleNameParameter": {
+        "name": "firewallRuleName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the server firewall rule.",
         "x-ms-parameter-location": "method"
       }
     }
