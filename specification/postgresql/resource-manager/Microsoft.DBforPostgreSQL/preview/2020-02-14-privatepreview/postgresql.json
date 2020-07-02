@@ -126,7 +126,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/ServerUpdateParameters"
+                "$ref": "#/definitions/ServerForUpdate"
               },
               "description": "The required parameters for updating a server."
             }
@@ -692,7 +692,8 @@
               "Disabled",
               "Starting",
               "Stopping",
-              "Stopped"
+              "Stopped",
+              "Updating"
             ],
             "x-ms-enum": {
               "name": "ServerState",
@@ -774,18 +775,92 @@
         "description": "Represents a server."
       },
       "ServerPropertiesForCreate": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/ServerProperties"
+        "properties": {
+          "administratorLogin": {
+            "type": "string",
+            "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
+          },
+          "administratorLoginPassword": {
+            "type": "string",
+            "format": "password",
+            "description": "The password of the administrator login."
+          },
+          "version": {
+            "$ref": "#/definitions/ServerVersion",
+            "description": "PostgreSQL Server version."
+          },
+          "vCores": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Max compute of a server is 64vCores."
+          },
+          "standbyCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "stand by count value can be either 0 or 1"
+          },
+          "backupRetentionDays": {
+            "type": "integer",
+            "format": "int32",
+            "description": "backup retention days range from min 1 to max 35"
+          },
+          "serverEdition": {
+            "type": "string",
+            "description": "server edition default to general purpose"
+          },
+          "publicIpAddressRequested": {
+            "description": "public IP requested as true",
+            "type": "boolean"
+          },
+          "vnetInjArgs": {
+            "properties": {
+              "delegatedVnetID": {
+                "type": "string",
+                "description": "delegated vNet ID"
+              },
+              "delegatedSubnetName": {
+                "type": "string",
+                "description": "delegated subnet name"
+              },
+              "delegatedVnetName": {
+                "type": "string",
+                "description": "delegated vNet name"
+              }
+            }
           }
-        ],
+        }
+      },
+      "ServerPropertiesForUpdate": {
         "properties": {
           "administratorLoginPassword": {
             "type": "string",
             "format": "password",
             "description": "The password of the administrator login."
+          },
+          "version": {
+            "$ref": "#/definitions/ServerVersion",
+            "description": "PostgreSQL Server version."
+          },
+          "vCores": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Max compute of a server is 64vCores."
+          },
+          "standbyCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "stand by count value can be either 0 or 1"
+          },
+          "backupRetentionDays": {
+            "type": "integer",
+            "format": "int32",
+            "description": "backup retention days range from min 1 to max 35"
+          },
+          "serverEdition": {
+            "type": "string",
+            "description": "server edition default to general purpose"
           }
-        }
+        } 
       },
       "ServerForCreate": {
         "properties": {
@@ -812,14 +887,14 @@
         ],
         "description": "Represents a server to be created."
       },
-      "ServerUpdateParameters": {
+      "ServerForUpdate": {
         "properties": {
           "location": {
             "type": "string",
             "description": "The location the resource resides in."
           },
           "properties": {
-            "$ref": "#/definitions/ServerPropertiesForCreate",
+            "$ref": "#/definitions/ServerPropertiesForUpdate",
             "x-ms-client-flatten": false,
             "description": "Properties of the server."
           },
