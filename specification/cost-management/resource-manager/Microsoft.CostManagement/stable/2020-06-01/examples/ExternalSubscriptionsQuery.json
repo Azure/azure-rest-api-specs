@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2020-06-01",
+    "externalCloudProviderId": "100",
+    "externalCloudProviderType": "externalSubscriptions",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "MonthToDate",
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimension": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.CostManagement/externalSubscriptions/100/query/d99477af-7510-40ee-aca2-e59bdca0d10d",
+        "name": "d99477af-7510-40ee-aca2-e59bdca0d10d",
+        "type": "Microsoft.CostManagement/query",
+        "properties": {
+          "nextLink": null,
+          "columns": [
+            {
+              "name": "PreTaxCost",
+              "type": "Number"
+            },
+            {
+              "name": "UsageDate",
+              "type": "Number"
+            },
+            {
+              "name": "Currency",
+              "type": "String"
+            }
+          ],
+          "rows": []
+        }
+      }
+    }
+  }
+}

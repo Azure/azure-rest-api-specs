@@ -26,18 +26,30 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-2020-06
 azure-validator: false
 ```
 
 ---
 
 
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+```
+
+=======
+
+>>>>>>> Stashed changes
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11'
+``` yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.CostManagement/stable/2019-11-01/costmanagement.json
 ```
@@ -46,10 +58,11 @@ input-file:
 
 These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-10'
+``` yaml $(tag) == 'package-2019-10'
 input-file:
   - Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
 ```
+
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -207,7 +220,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -327,6 +339,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-11-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-09-01/costmanagement.json
