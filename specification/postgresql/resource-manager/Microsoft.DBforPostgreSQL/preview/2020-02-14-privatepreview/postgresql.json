@@ -727,6 +727,51 @@
           "x-ms-long-running-operation": true
         }
       },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleservers/{serverName}/maintenanceWindows/customerMaintenanceWindow": {
+        "get": {
+          "tags": [
+            "CustomerMaintenanceWindow"
+          ],
+          "operationId": "CustomerMaintenanceWindow_Get",
+          "x-ms-examples": {
+            "FirewallRuleList": {
+              "$ref": "./examples/CustomerMaintenanceWindowGet.json"
+            }
+          },
+          "description": "List all the Customer maintenance windows of a given PostgreSQL server.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ServerNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/CustomerMaintenanceWindowListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
       "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
         "post": {
           "tags": [
@@ -1113,6 +1158,67 @@
               "$ref": "#/definitions/FirewallRule"
             },
             "description": "The list of firewall rules in a server."
+          },
+          "nextLink": {
+            "description": "Link to retrieve next page of results.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "description": "A list of firewall rules."
+      },
+      "CustomerMaintenanceWindowProperties": {
+        "properties": {
+          "dayOfWeek": {
+            "type": "integer",
+            "description": "The day of week of the customer maintenance window to start"
+          },
+          "durationInMinutes": {
+            "type": "integer",
+            "description": "The duration of the customer maintenance window to run."
+          },
+          "startHour": {
+            "type": "integer",
+            "description": "The starting hour of the customer maintenance window."
+          },
+          "startMinute": {
+            "type": "integer",
+            "description": "The starting minutes of the customer maintenance window."
+          }
+        },
+        "required": [
+          "dayOfWeek",
+          "startHour",
+          "startMinute"
+        ],
+        "description": "The properties of a server firewall rule."
+      },
+      "CustomerMaintenanceWindow": {
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/CustomerMaintenanceWindowProperties",
+            "x-ms-client-flatten": true,
+            "description": "The properties of a customer maintenance window."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          }
+        ],
+        "required": [
+          "properties"
+        ],
+        "description": "Represents a server firewall rule."
+      },
+      "CustomerMaintenanceWindowListResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/CustomerMaintenanceWindow"
+            },
+            "description": "The list of CustomerMaintenanceWindows in a PostgreSQL server."
           },
           "nextLink": {
             "description": "Link to retrieve next page of results.",
