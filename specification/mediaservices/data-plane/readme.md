@@ -27,7 +27,6 @@ These are the global settings for the Live video analytics API.
 ``` yaml
 openapi-type: data-plane
 tag: package-lva-1-0-0-preview
-opt-in-extensible-enums: true
 ```
 
 ### Tag: package-2018-07
@@ -65,8 +64,8 @@ csharp:
   azure-arm: false
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Azure.Media.LiveVideoAnalytics.Edge
-  output-folder: $(csharp-sdks-folder)/mediaservices/Azure.Media.LiveVideoAnalytics.Edge/src/Generated
+  namespace: Microsoft.Azure.Media.LiveVideoAnalytics.Edge
+  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Media.LiveVideoAnalytics.Edge/src/Generated
   clear-output-folder: true
   use-internal-constructors: true
   override-client-name: LiveVideoAnalyticsEdgeClient
