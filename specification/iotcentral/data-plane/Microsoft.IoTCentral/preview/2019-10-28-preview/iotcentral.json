@@ -9,18 +9,30 @@
   "x-ms-parameterized-host": {
     "hostTemplate": "{subdomain}.{centralDnsSuffixInPath}",
     "parameters": [
-      { "$ref": "#/parameters/CentralDnsSuffixInPath" },
-      { "$ref": "#/parameters/Subdomain" }
+      {
+        "$ref": "#/parameters/CentralDnsSuffixInPath"
+      },
+      {
+        "$ref": "#/parameters/Subdomain"
+      }
     ]
   },
   "basePath": "/api/preview",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "definitions": {
     "ApiToken": {
       "allOf": [
-        { "$ref": "#/definitions/Permission" },
+        {
+          "$ref": "#/definitions/Permission"
+        },
         {
           "type": "object",
           "properties": {
@@ -49,18 +61,24 @@
         "value": {
           "description": "The collection of API tokens.",
           "type": "array",
-          "items": { "$ref": "#/definitions/ApiToken" }
+          "items": {
+            "$ref": "#/definitions/ApiToken"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of API tokens.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ArraySchema": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -68,25 +86,36 @@
               "description": "The schema for values of this array type."
             }
           },
-          "required": ["elementSchema"]
+          "required": [
+            "elementSchema"
+          ]
         }
       ]
     },
     "Attestation": {
       "type": "object",
       "properties": {
-        "type": { "description": "Type of the attestation.", "type": "string" }
+        "type": {
+          "description": "Type of the attestation.",
+          "type": "string"
+        }
       },
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "discriminator": "type"
     },
     "Capability": {
       "allOf": [
-        { "$ref": "#/definitions/NamedEntity" },
+        {
+          "$ref": "#/definitions/NamedEntity"
+        },
         {
           "type": "object",
           "properties": {
-            "schema": { "description": "The schema of this field." },
+            "schema": {
+              "description": "The schema of this field."
+            },
             "displayUnit": {
               "description": "The display name of the unit of this field.",
               "type": "string"
@@ -98,7 +127,10 @@
             "commandType": {
               "description": "The call pattern of this command.",
               "type": "string",
-              "enum": ["synchronous", "asynchronous"]
+              "enum": [
+                "synchronous",
+                "asynchronous"
+              ]
             },
             "request": {
               "description": "The request definition for this command.",
@@ -128,14 +160,18 @@
     },
     "CapabilityModel": {
       "allOf": [
-        { "$ref": "#/definitions/Interface" },
+        {
+          "$ref": "#/definitions/Interface"
+        },
         {
           "type": "object",
           "properties": {
             "implements": {
               "description": "The component implemented by the capability model.",
               "type": "array",
-              "items": { "$ref": "#/definitions/Component" }
+              "items": {
+                "$ref": "#/definitions/Component"
+              }
             }
           }
         }
@@ -143,7 +179,9 @@
     },
     "CapabilityReference": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -156,13 +194,18 @@
               "type": "string"
             }
           },
-          "required": ["component", "reference"]
+          "required": [
+            "component",
+            "reference"
+          ]
         }
       ]
     },
     "Component": {
       "allOf": [
-        { "$ref": "#/definitions/NamedEntity" },
+        {
+          "$ref": "#/definitions/NamedEntity"
+        },
         {
           "type": "object",
           "properties": {
@@ -171,7 +214,9 @@
               "$ref": "#/definitions/Interface"
             }
           },
-          "required": ["schema"]
+          "required": [
+            "schema"
+          ]
         }
       ]
     },
@@ -209,12 +254,20 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["devices", "deviceTemplates", "telemetry"]
+            "enum": [
+              "devices",
+              "deviceTemplates",
+              "telemetry"
+            ]
           },
           "minItems": 1
         }
       },
-      "required": ["endpoint", "enabled", "sources"]
+      "required": [
+        "endpoint",
+        "enabled",
+        "sources"
+      ]
     },
     "ContinuousDataExportCollection": {
       "type": "object",
@@ -222,14 +275,18 @@
         "value": {
           "description": "The collection of continuous data exports.",
           "type": "array",
-          "items": { "$ref": "#/definitions/ContinuousDataExport" }
+          "items": {
+            "$ref": "#/definitions/ContinuousDataExport"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of continuous data exports.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "Device": {
       "type": "object",
@@ -281,14 +338,18 @@
         "value": {
           "description": "The collection of devices.",
           "type": "array",
-          "items": { "$ref": "#/definitions/Device" }
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of devices.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "DeviceCommand": {
       "type": "object",
@@ -298,7 +359,9 @@
           "type": "string",
           "readOnly": true
         },
-        "request": { "description": "The payload for the device command." },
+        "request": {
+          "description": "The payload for the device command."
+        },
         "response": {
           "description": "The payload of the device command response.",
           "readOnly": true
@@ -316,14 +379,18 @@
         "value": {
           "description": "The collection of device command executions.",
           "type": "array",
-          "items": { "$ref": "#/definitions/DeviceCommand" }
+          "items": {
+            "$ref": "#/definitions/DeviceCommand"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of device command executions.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "DeviceCredentials": {
       "type": "object",
@@ -345,7 +412,9 @@
           "$ref": "#/definitions/Tpm"
         }
       },
-      "required": ["idScope"]
+      "required": [
+        "idScope"
+      ]
     },
     "DeviceProperties": {
       "description": "Property values associated with the device.",
@@ -380,7 +449,9 @@
         "types": {
           "description": "The types of device to which this template applies.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "displayName": {
           "description": "Display name of the device template.",
@@ -399,7 +470,10 @@
           "$ref": "#/definitions/SolutionModel"
         }
       },
-      "required": ["types", "capabilityModel"]
+      "required": [
+        "types",
+        "capabilityModel"
+      ]
     },
     "DeviceTemplateCollection": {
       "type": "object",
@@ -407,18 +481,24 @@
         "value": {
           "description": "The collection of device templates.",
           "type": "array",
-          "items": { "$ref": "#/definitions/DeviceTemplate" }
+          "items": {
+            "$ref": "#/definitions/DeviceTemplate"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of device templates.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "EmailUser": {
       "allOf": [
-        { "$ref": "#/definitions/User" },
+        {
+          "$ref": "#/definitions/User"
+        },
         {
           "type": "object",
           "properties": {
@@ -428,14 +508,19 @@
               "format": "email"
             }
           },
-          "required": ["email"]
+          "required": [
+            "email"
+          ]
         }
       ]
     },
     "Endpoint": {
       "type": "object",
       "properties": {
-        "type": { "description": "Type of the endpoint.", "type": "string" },
+        "type": {
+          "description": "Type of the endpoint.",
+          "type": "string"
+        },
         "connectionString": {
           "description": "Information for connecting to the endpoint.",
           "type": "string"
@@ -445,18 +530,29 @@
           "type": "string"
         }
       },
-      "required": ["type", "connectionString", "name"],
+      "required": [
+        "type",
+        "connectionString",
+        "name"
+      ],
       "discriminator": "type"
     },
     "Entity": {
       "type": "object",
       "properties": {
-        "@context": { "description": "JSON-LD context for the entity." },
-        "@id": { "description": "Unique ID of the entity.", "type": "string" },
+        "@context": {
+          "description": "JSON-LD context for the entity."
+        },
+        "@id": {
+          "description": "Unique ID of the entity.",
+          "type": "string"
+        },
         "@type": {
           "description": "Type of the entity.",
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "minItems": 1
         },
         "displayName": {
@@ -472,11 +568,15 @@
           "type": "string"
         }
       },
-      "required": ["@type"]
+      "required": [
+        "@type"
+      ]
     },
     "EnumSchema": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -486,16 +586,23 @@
             "enumValues": {
               "description": "The discreet named values of this enum type.",
               "type": "array",
-              "items": { "$ref": "#/definitions/EnumValue" }
+              "items": {
+                "$ref": "#/definitions/EnumValue"
+              }
             }
           },
-          "required": ["valueSchema", "enumValues"]
+          "required": [
+            "valueSchema",
+            "enumValues"
+          ]
         }
       ]
     },
     "EnumValue": {
       "allOf": [
-        { "$ref": "#/definitions/NamedEntity" },
+        {
+          "$ref": "#/definitions/NamedEntity"
+        },
         {
           "type": "object",
           "properties": {
@@ -503,14 +610,24 @@
               "description": "The resolved value of this enum entry."
             }
           },
-          "required": ["enumValue"]
+          "required": [
+            "enumValue"
+          ]
         }
       ]
     },
-    "EventHubsEndpoint": { "allOf": [{ "$ref": "#/definitions/Endpoint" }] },
+    "EventHubsEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
+      ]
+    },
     "InitialValue": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -518,22 +635,31 @@
               "description": "The reference to the capability for which an initial value is being provided.",
               "$ref": "#/definitions/CapabilityReference"
             },
-            "value": { "description": "The initial value of the capability." }
+            "value": {
+              "description": "The initial value of the capability."
+            }
           },
-          "required": ["capability", "value"]
+          "required": [
+            "capability",
+            "value"
+          ]
         }
       ]
     },
     "Interface": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
             "contents": {
               "description": "The data definitions contained by the interface.",
               "type": "array",
-              "items": { "$ref": "#/definitions/Capability" }
+              "items": {
+                "$ref": "#/definitions/Capability"
+              }
             }
           }
         }
@@ -541,7 +667,9 @@
     },
     "MapSchema": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -552,13 +680,18 @@
               "description": "The schema for values of this map type."
             }
           },
-          "required": ["mapKey", "mapValue"]
+          "required": [
+            "mapKey",
+            "mapValue"
+          ]
         }
       ]
     },
     "NamedEntity": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -567,7 +700,9 @@
               "type": "string"
             }
           },
-          "required": ["name"]
+          "required": [
+            "name"
+          ]
         }
       ]
     },
@@ -577,34 +712,46 @@
         "value": {
           "description": "The collection of named entities.",
           "type": "array",
-          "items": { "$ref": "#/definitions/NamedEntity" }
+          "items": {
+            "$ref": "#/definitions/NamedEntity"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of named entities.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ObjectSchema": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
             "fields": {
               "description": "The property fields of this object type.",
               "type": "array",
-              "items": { "$ref": "#/definitions/SchemaField" }
+              "items": {
+                "$ref": "#/definitions/SchemaField"
+              }
             }
           },
-          "required": ["fields"]
+          "required": [
+            "fields"
+          ]
         }
       ]
     },
     "Override": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -629,7 +776,9 @@
               "$ref": "#/definitions/ValueDetail"
             }
           },
-          "required": ["capability"]
+          "required": [
+            "capability"
+          ]
         }
       ]
     },
@@ -647,12 +796,16 @@
                 "type": "string"
               }
             },
-            "required": ["role"]
+            "required": [
+              "role"
+            ]
           },
           "minItems": 1
         }
       },
-      "required": ["roles"]
+      "required": [
+        "roles"
+      ]
     },
     "Role": {
       "type": "object",
@@ -674,22 +827,30 @@
         "value": {
           "description": "The collection of roles.",
           "type": "array",
-          "items": { "$ref": "#/definitions/Role" }
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of roles.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SchemaField": {
       "allOf": [
-        { "$ref": "#/definitions/NamedEntity" },
+        {
+          "$ref": "#/definitions/NamedEntity"
+        },
         {
           "type": "object",
           "properties": {
-            "schema": { "description": "The schema of this field." },
+            "schema": {
+              "description": "The schema of this field."
+            },
             "displayUnit": {
               "description": "The display name of the unit of this field.",
               "type": "string"
@@ -699,19 +860,31 @@
               "type": "string"
             }
           },
-          "required": ["schema"]
+          "required": [
+            "schema"
+          ]
         }
       ]
     },
     "ServiceBusQueueEndpoint": {
-      "allOf": [{ "$ref": "#/definitions/Endpoint" }]
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
+      ]
     },
     "ServiceBusTopicEndpoint": {
-      "allOf": [{ "$ref": "#/definitions/Endpoint" }]
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
+      ]
     },
     "ServicePrincipalUser": {
       "allOf": [
-        { "$ref": "#/definitions/User" },
+        {
+          "$ref": "#/definitions/User"
+        },
         {
           "type": "object",
           "properties": {
@@ -724,36 +897,53 @@
               "type": "string"
             }
           },
-          "required": ["tenantId", "objectId"]
+          "required": [
+            "tenantId",
+            "objectId"
+          ]
         }
       ]
     },
     "SolutionModel": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
             "cloudProperties": {
               "description": "The cloud properties defined by the solution model.",
               "type": "array",
-              "items": { "$ref": "#/definitions/Capability" }
+              "items": {
+                "$ref": "#/definitions/Capability"
+              }
             },
             "initialValues": {
               "description": "The initial values defined by the solution model.",
               "type": "array",
-              "items": { "$ref": "#/definitions/InitialValue" }
+              "items": {
+                "$ref": "#/definitions/InitialValue"
+              }
             },
             "overrides": {
               "description": "The overrides defined by the solution model.",
               "type": "array",
-              "items": { "$ref": "#/definitions/Override" }
+              "items": {
+                "$ref": "#/definitions/Override"
+              }
             }
           }
         }
       ]
     },
-    "StorageEndpoint": { "allOf": [{ "$ref": "#/definitions/Endpoint" }] },
+    "StorageEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
+      ]
+    },
     "SymmetricKey": {
       "type": "object",
       "properties": {
@@ -766,11 +956,16 @@
           "type": "string"
         }
       },
-      "required": ["primaryKey", "secondaryKey"]
+      "required": [
+        "primaryKey",
+        "secondaryKey"
+      ]
     },
     "SymmetricKeyAttestation": {
       "allOf": [
-        { "$ref": "#/definitions/Attestation" },
+        {
+          "$ref": "#/definitions/Attestation"
+        },
         {
           "type": "object",
           "properties": {
@@ -779,7 +974,9 @@
               "$ref": "#/definitions/SymmetricKey"
             }
           },
-          "required": ["symmetricKey"]
+          "required": [
+            "symmetricKey"
+          ]
         }
       ]
     },
@@ -791,11 +988,15 @@
           "type": "string"
         }
       },
-      "required": ["endorsementKey"]
+      "required": [
+        "endorsementKey"
+      ]
     },
     "TpmAttestation": {
       "allOf": [
-        { "$ref": "#/definitions/Attestation" },
+        {
+          "$ref": "#/definitions/Attestation"
+        },
         {
           "type": "object",
           "properties": {
@@ -804,13 +1005,17 @@
               "$ref": "#/definitions/Tpm"
             }
           },
-          "required": ["tpm"]
+          "required": [
+            "tpm"
+          ]
         }
       ]
     },
     "User": {
       "allOf": [
-        { "$ref": "#/definitions/Permission" },
+        {
+          "$ref": "#/definitions/Permission"
+        },
         {
           "type": "object",
           "properties": {
@@ -819,9 +1024,14 @@
               "type": "string",
               "readOnly": true
             },
-            "type": { "description": "Type of the user.", "type": "string" }
+            "type": {
+              "description": "Type of the user.",
+              "type": "string"
+            }
           },
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "discriminator": "type"
         }
       ]
@@ -832,18 +1042,24 @@
         "value": {
           "description": "The collection of users.",
           "type": "array",
-          "items": { "$ref": "#/definitions/User" }
+          "items": {
+            "$ref": "#/definitions/User"
+          }
         },
         "nextLink": {
           "description": "URL to get the next page of users.",
           "type": "string"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ValueDetail": {
       "allOf": [
-        { "$ref": "#/definitions/Entity" },
+        {
+          "$ref": "#/definitions/Entity"
+        },
         {
           "type": "object",
           "properties": {
@@ -862,7 +1078,11 @@
             "severity": {
               "description": "Specifies the severity of the event.",
               "type": "string",
-              "enum": ["error", "warning", "information"]
+              "enum": [
+                "error",
+                "warning",
+                "information"
+              ]
             },
             "decimalPlaces": {
               "description": "The number of decimal places that should be displayed for the number.",
@@ -903,7 +1123,9 @@
     },
     "X509Attestation": {
       "allOf": [
-        { "$ref": "#/definitions/Attestation" },
+        {
+          "$ref": "#/definitions/Attestation"
+        },
         {
           "type": "object",
           "properties": {
@@ -912,7 +1134,9 @@
               "$ref": "#/definitions/X509"
             }
           },
-          "required": ["x509"]
+          "required": [
+            "x509"
+          ]
         }
       ]
     },
@@ -938,7 +1162,9 @@
           "type": "string"
         }
       },
-      "required": ["sha1Thumbprint"]
+      "required": [
+        "sha1Thumbprint"
+      ]
     },
     "X509Certificates": {
       "type": "object",
@@ -952,7 +1178,9 @@
           "$ref": "#/definitions/X509Certificate"
         }
       },
-      "required": ["primary"]
+      "required": [
+        "primary"
+      ]
     }
   },
   "paths": {
@@ -961,13 +1189,19 @@
         "operationId": "ApiTokens_List",
         "summary": "Get the list of API tokens in an application.",
         "x-ms-examples": {
-          "List API tokens": { "$ref": "./examples/apitoken_list.json" }
+          "List API tokens": {
+            "$ref": "./examples/apitoken_list.json"
+          }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ApiTokenCollection" }
+            "schema": {
+              "$ref": "#/definitions/ApiTokenCollection"
+            }
           }
         }
       }
@@ -977,7 +1211,9 @@
         "operationId": "ApiTokens_Get",
         "summary": "Get an API token by ID.",
         "x-ms-examples": {
-          "Get API token by ID": { "$ref": "./examples/apitoken_get.json" }
+          "Get API token by ID": {
+            "$ref": "./examples/apitoken_get.json"
+          }
         },
         "parameters": [
           {
@@ -991,7 +1227,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ApiToken" }
+            "schema": {
+              "$ref": "#/definitions/ApiToken"
+            }
           }
         }
       },
@@ -999,7 +1237,9 @@
         "operationId": "ApiTokens_Set",
         "summary": "Create a new API token in the application.",
         "x-ms-examples": {
-          "Create API token": { "$ref": "./examples/apitoken_create.json" }
+          "Create API token": {
+            "$ref": "./examples/apitoken_create.json"
+          }
         },
         "parameters": [
           {
@@ -1013,14 +1253,18 @@
             "in": "body",
             "name": "body",
             "description": "API token body.",
-            "schema": { "$ref": "#/definitions/ApiToken" },
+            "schema": {
+              "$ref": "#/definitions/ApiToken"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ApiToken" }
+            "schema": {
+              "$ref": "#/definitions/ApiToken"
+            }
           }
         }
       },
@@ -1028,7 +1272,9 @@
         "operationId": "ApiTokens_Remove",
         "summary": "Delete an API token.",
         "x-ms-examples": {
-          "Delete API token": { "$ref": "./examples/apitoken_delete.json" }
+          "Delete API token": {
+            "$ref": "./examples/apitoken_delete.json"
+          }
         },
         "parameters": [
           {
@@ -1039,7 +1285,11 @@
             "required": true
           }
         ],
-        "responses": { "204": { "description": "Success" } }
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/continuousDataExports": {
@@ -1051,11 +1301,15 @@
             "$ref": "./examples/continuousdataexports_list.json"
           }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ContinuousDataExportCollection" }
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExportCollection"
+            }
           }
         }
       }
@@ -1065,7 +1319,9 @@
         "operationId": "ContinuousDataExports_Get",
         "summary": "Get a continuous data export by ID.",
         "x-ms-examples": {
-          "Get export": { "$ref": "./examples/continuousdataexports_get.json" }
+          "Get export": {
+            "$ref": "./examples/continuousdataexports_get.json"
+          }
         },
         "parameters": [
           {
@@ -1079,7 +1335,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ContinuousDataExport" }
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
+            }
           }
         }
       },
@@ -1103,14 +1361,18 @@
             "in": "body",
             "name": "body",
             "description": "Data export body.",
-            "schema": { "$ref": "#/definitions/ContinuousDataExport" },
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ContinuousDataExport" }
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
+            }
           }
         }
       },
@@ -1131,7 +1393,11 @@
             "required": true
           }
         ],
-        "responses": { "204": { "description": "Success" } }
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/deviceTemplates": {
@@ -1143,11 +1409,15 @@
             "$ref": "./examples/devicetemplates_list.json"
           }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceTemplateCollection" }
+            "schema": {
+              "$ref": "#/definitions/DeviceTemplateCollection"
+            }
           }
         }
       }
@@ -1161,11 +1431,17 @@
             "$ref": "./examples/devicetemplates_get.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceTemplateId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceTemplateId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceTemplate" }
+            "schema": {
+              "$ref": "#/definitions/DeviceTemplate"
+            }
           }
         }
       },
@@ -1178,19 +1454,25 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceTemplateId" },
+          {
+            "$ref": "#/parameters/DeviceTemplateId"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device template body.",
-            "schema": { "$ref": "#/definitions/DeviceTemplate" },
+            "schema": {
+              "$ref": "#/definitions/DeviceTemplate"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceTemplate" }
+            "schema": {
+              "$ref": "#/definitions/DeviceTemplate"
+            }
           }
         }
       },
@@ -1203,8 +1485,16 @@
             "$ref": "./examples/devicetemplates_delete.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceTemplateId" }],
-        "responses": { "204": { "description": "Success" } }
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceTemplateId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/deviceTemplates/{device_template_id}/devices": {
@@ -1216,12 +1506,20 @@
             "$ref": "./examples/devices_list_by_template.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceTemplateId" }],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceTemplateId"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCollection" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCollection"
+            }
           }
         }
       }
@@ -1235,11 +1533,17 @@
             "$ref": "./examples/devicetemplates_get_merged.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceTemplateId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceTemplateId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceTemplate" }
+            "schema": {
+              "$ref": "#/definitions/DeviceTemplate"
+            }
           }
         }
       }
@@ -1249,13 +1553,19 @@
         "operationId": "Devices_List",
         "summary": "Get the list of devices in an application",
         "x-ms-examples": {
-          "List devices": { "$ref": "./examples/devices_list.json" }
+          "List devices": {
+            "$ref": "./examples/devices_list.json"
+          }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCollection" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCollection"
+            }
           }
         }
       }
@@ -1266,13 +1576,21 @@
         "summary": "Get a device by ID",
         "description": "Get details about an existing device by device ID.",
         "x-ms-examples": {
-          "Get device by Id": { "$ref": "./examples/devices_get.json" }
+          "Get device by Id": {
+            "$ref": "./examples/devices_get.json"
+          }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/Device" }
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
           }
         }
       },
@@ -1281,22 +1599,30 @@
         "summary": "Create or update a device",
         "description": "Create a new device or update an existing one by device ID.",
         "x-ms-examples": {
-          "Create device": { "$ref": "./examples/devices_create.json" }
+          "Create device": {
+            "$ref": "./examples/devices_create.json"
+          }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device body.",
-            "schema": { "$ref": "#/definitions/Device" },
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/Device" }
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
           }
         }
       },
@@ -1305,10 +1631,20 @@
         "summary": "Delete a device",
         "description": "Delete an existing device by device ID.",
         "x-ms-examples": {
-          "Delete device": { "$ref": "./examples/devices_delete.json" }
+          "Delete device": {
+            "$ref": "./examples/devices_delete.json"
+          }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
-        "responses": { "204": { "description": "Success" } }
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/devices/{device_id}/attestation": {
@@ -1320,11 +1656,17 @@
             "$ref": "./examples/devices_attestations_get.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/Attestation" }
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
           }
         }
       },
@@ -1343,19 +1685,25 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Individual device attestation body.",
-            "schema": { "$ref": "#/definitions/Attestation" },
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/Attestation" }
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
           }
         }
       },
@@ -1367,8 +1715,16 @@
             "$ref": "./examples/devices_attestations_delete.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
-        "responses": { "204": { "description": "Success" } }
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/devices/{device_id}/cloudProperties": {
@@ -1381,11 +1737,17 @@
             "$ref": "./examples/devices_cloudproperties_get.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCloudProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCloudProperties"
+            }
           }
         }
       },
@@ -1399,19 +1761,25 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
-            "schema": { "$ref": "#/definitions/DeviceCloudProperties" },
+            "schema": {
+              "$ref": "#/definitions/DeviceCloudProperties"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCloudProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCloudProperties"
+            }
           }
         }
       }
@@ -1425,11 +1793,17 @@
             "$ref": "./examples/devices_components_get.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/NamedEntityCollection" }
+            "schema": {
+              "$ref": "#/definitions/NamedEntityCollection"
+            }
           }
         }
       }
@@ -1444,15 +1818,25 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ComponentName" },
-          { "$ref": "#/parameters/CommandName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "$ref": "#/parameters/CommandName"
+          }
         ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCommandCollection" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandCollection"
+            }
           }
         }
       },
@@ -1461,24 +1845,36 @@
         "summary": "Execute a device command",
         "description": "Execute a command on a device.",
         "x-ms-examples": {
-          "Send command": { "$ref": "./examples/devices_commands_send.json" }
+          "Send command": {
+            "$ref": "./examples/devices_commands_send.json"
+          }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ComponentName" },
-          { "$ref": "#/parameters/CommandName" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "$ref": "#/parameters/CommandName"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device command body.",
-            "schema": { "$ref": "#/definitions/DeviceCommand" },
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCommand" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
           }
         }
       }
@@ -1493,13 +1889,19 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ComponentName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       },
@@ -1512,20 +1914,28 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ComponentName" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
-            "schema": { "$ref": "#/definitions/DeviceProperties" },
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            },
             "required": true
           }
         ],
         "responses": {
           "202": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       }
@@ -1535,17 +1945,27 @@
         "operationId": "Devices_GetComponentTelemetryValue",
         "summary": "Get device telemetry value",
         "x-ms-examples": {
-          "Get telemetry": { "$ref": "./examples/devices_telemetry_get.json" }
+          "Get telemetry": {
+            "$ref": "./examples/devices_telemetry_get.json"
+          }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ComponentName" },
-          { "$ref": "#/parameters/TelemetryName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "$ref": "#/parameters/TelemetryName"
+          }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceTelemetry" }
+            "schema": {
+              "$ref": "#/definitions/DeviceTelemetry"
+            }
           }
         }
       }
@@ -1559,11 +1979,17 @@
             "$ref": "./examples/devicecredentials_get.json"
           }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCredentials" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCredentials"
+            }
           }
         }
       }
@@ -1573,13 +1999,21 @@
         "operationId": "Devices_ListModules",
         "summary": "List the modules present in a device",
         "x-ms-examples": {
-          "List modules": { "$ref": "./examples/devices_modules_get.json" }
+          "List modules": {
+            "$ref": "./examples/devices_modules_get.json"
+          }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/NamedEntityCollection" }
+            "schema": {
+              "$ref": "#/definitions/NamedEntityCollection"
+            }
           }
         }
       }
@@ -1594,13 +2028,19 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/NamedEntityCollection" }
+            "schema": {
+              "$ref": "#/definitions/NamedEntityCollection"
+            }
           }
         }
       }
@@ -1615,16 +2055,28 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" },
-          { "$ref": "#/parameters/ComponentName" },
-          { "$ref": "#/parameters/CommandName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "$ref": "#/parameters/CommandName"
+          }
         ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCommandCollection" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandCollection"
+            }
           }
         }
       },
@@ -1638,22 +2090,34 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" },
-          { "$ref": "#/parameters/ComponentName" },
-          { "$ref": "#/parameters/CommandName" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "$ref": "#/parameters/CommandName"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device command body.",
-            "schema": { "$ref": "#/definitions/DeviceCommand" },
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceCommand" }
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
           }
         }
       }
@@ -1668,14 +2132,22 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" },
-          { "$ref": "#/parameters/ComponentName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       },
@@ -1688,21 +2160,31 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" },
-          { "$ref": "#/parameters/ComponentName" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Module properties.",
-            "schema": { "$ref": "#/definitions/DeviceProperties" },
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            },
             "required": true
           }
         ],
         "responses": {
           "202": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       }
@@ -1717,15 +2199,25 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" },
-          { "$ref": "#/parameters/ComponentName" },
-          { "$ref": "#/parameters/TelemetryName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "$ref": "#/parameters/TelemetryName"
+          }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceTelemetry" }
+            "schema": {
+              "$ref": "#/definitions/DeviceTelemetry"
+            }
           }
         }
       }
@@ -1741,13 +2233,19 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" }
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       },
@@ -1761,20 +2259,28 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
-          { "$ref": "#/parameters/ModuleName" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Module properties.",
-            "schema": { "$ref": "#/definitions/DeviceProperties" },
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            },
             "required": true
           }
         ],
         "responses": {
           "202": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       }
@@ -1785,13 +2291,21 @@
         "summary": "Get device properties",
         "description": "Get all property values of a device by device ID.",
         "x-ms-examples": {
-          "Get properties": { "$ref": "./examples/devices_properties_get.json" }
+          "Get properties": {
+            "$ref": "./examples/devices_properties_get.json"
+          }
         },
-        "parameters": [{ "$ref": "#/parameters/DeviceId" }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       },
@@ -1805,19 +2319,25 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/DeviceId" },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
           {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
-            "schema": { "$ref": "#/definitions/DeviceProperties" },
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            },
             "required": true
           }
         ],
         "responses": {
           "202": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/DeviceProperties" }
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
           }
         }
       }
@@ -1827,13 +2347,19 @@
         "operationId": "Roles_List",
         "summary": "Get the list of roles in an application.",
         "x-ms-examples": {
-          "List roles": { "$ref": "./examples/roles_list.json" }
+          "List roles": {
+            "$ref": "./examples/roles_list.json"
+          }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/RoleCollection" }
+            "schema": {
+              "$ref": "#/definitions/RoleCollection"
+            }
           }
         }
       }
@@ -1843,7 +2369,9 @@
         "operationId": "Roles_Get",
         "summary": "Get a role by ID.",
         "x-ms-examples": {
-          "Get role by Id": { "$ref": "./examples/roles_get.json" }
+          "Get role by Id": {
+            "$ref": "./examples/roles_get.json"
+          }
         },
         "parameters": [
           {
@@ -1857,7 +2385,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/Role" }
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
           }
         }
       }
@@ -1867,13 +2397,19 @@
         "operationId": "Users_List",
         "summary": "Get the list of users in an application",
         "x-ms-examples": {
-          "List users": { "$ref": "./examples/users_list.json" }
+          "List users": {
+            "$ref": "./examples/users_list.json"
+          }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/UserCollection" }
+            "schema": {
+              "$ref": "#/definitions/UserCollection"
+            }
           }
         }
       }
@@ -1883,7 +2419,9 @@
         "operationId": "Users_Get",
         "summary": "Get a user by ID",
         "x-ms-examples": {
-          "Get a user by ID": { "$ref": "./examples/users_get.json" }
+          "Get a user by ID": {
+            "$ref": "./examples/users_get.json"
+          }
         },
         "parameters": [
           {
@@ -1897,7 +2435,9 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         }
       },
@@ -1908,7 +2448,9 @@
           "Add or update a service principal user": {
             "$ref": "./examples/users_set_serviceprincipal.json"
           },
-          "Add or update an email user": { "$ref": "./examples/users_set.json" }
+          "Add or update an email user": {
+            "$ref": "./examples/users_set.json"
+          }
         },
         "parameters": [
           {
@@ -1922,14 +2464,18 @@
             "in": "body",
             "name": "body",
             "description": "User body.",
-            "schema": { "$ref": "#/definitions/User" },
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
             "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         }
       },
@@ -1937,7 +2483,9 @@
         "operationId": "Users_Remove",
         "summary": "Delete a user",
         "x-ms-examples": {
-          "Delete a user": { "$ref": "./examples/users_delete.json" }
+          "Delete a user": {
+            "$ref": "./examples/users_delete.json"
+          }
         },
         "parameters": [
           {
@@ -1948,7 +2496,11 @@
             "required": true
           }
         ],
-        "responses": { "204": { "description": "Success" } }
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
     }
   },
@@ -2026,7 +2578,9 @@
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": { "user_impersonation": "impersonate your user account" }
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "security": []
