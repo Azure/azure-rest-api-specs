@@ -26,14 +26,14 @@ These are the global settings for the Live video analytics API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-lva-1-0-0-preview
+tag: package-lva-1-0-preview
 ```
 
 ### Tag: package-2018-07
 
-These settings apply only when `--tag=package-lva-1-0-0-preview` is specified on the command line.
+These settings apply only when `--tag=package-lva-1-0-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-lva-1-0-0-preview'
+``` yaml $(tag) == 'package-lva-1-0-preview'
 input-file:
   - LiveVideoAnalytics.Edge/preview/1.0/LiveVideoAnalytics.json
 ```
