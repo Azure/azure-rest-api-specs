@@ -1,0 +1,374 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-04-01-preview",
+    "title": "SynapseSqlManagementClient",
+    "description": "The Azure Synapse SQL management API provides a RESTful set of web APIs that interact with Azure Synapse SQL services to manage your resources. The API enables users to create, retrieve, update, and delete SqlPools, SqlDatabases, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlDatabases/{sqlDatabaseName}": {
+      "get": {
+        "tags": [
+          "SqlDatabases"
+        ],
+        "description": "Gets a SqlDatabase.",
+        "operationId": "SqlDatabases_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlDatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified SqlDatabase.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Gets a sqldatabase.": {
+            "$ref": "./examples/GetSqlDatabase.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlDatabases"
+        ],
+        "description": "Creates a new SqlDatabase or updates an existing SqlDatabase.",
+        "operationId": "SqlDatabases_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlDatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested SqlDatabase resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SqlDatabase.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          },
+          "202": {
+            "description": "Creating or updating the SqlDatabase is in progress."
+          },
+          "201": {
+            "description": "Successfully created the SqlDatabase.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates a sqldatabase.": {
+            "$ref": "./examples/PutSqlDatabase.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlDatabases"
+        ],
+        "description": "Deletes the SqlDatabase.",
+        "operationId": "SqlDatabases_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlDatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SqlDatabase."
+          },
+          "202": {
+            "description": "Deleting the SqlDatabase is in progress."
+          },
+          "204": {
+            "description": "The specified SqlDatabase does not exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a sqldatabase.": {
+            "$ref": "./examples/DeleteSqlDatabase.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlDatabases"
+        ],
+        "description": "Updates an existing database.",
+        "operationId": "SqlDatabases_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlDatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested SqlDatabase resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlDatabaseUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          },
+          "202": {
+            "description": "Updating the database is in progress."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a sqldatabase.": {
+            "$ref": "./examples/PatchSqlDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlDatabases": {
+      "get": {
+        "tags": [
+          "SqlDatabases"
+        ],
+        "description": "Gets a list of sql databases.",
+        "operationId": "SqlDatabases_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of sql databases.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabaseListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of sql databases.": {
+            "$ref": "./examples/ListSqlDatabasesByWorkspace.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SqlDatabaseProperties": {
+      "description": "The sql database's properties.",
+      "type": "object",
+      "properties": {
+        "collation": {
+          "description": "The collation of the database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "maxSizeBytes": {
+          "format": "int64",
+          "description": "The max size of the database expressed in bytes.",
+          "type": "integer"
+        },
+        "databaseGuid": {
+          "format": "uuid",
+          "description": "The Guid of the database.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlDatabase": {
+      "description": "A sql database resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../common/v1/types.json#/definitions/SystemData",
+          "description": "SystemData of SqlDatabase.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlDatabaseUpdate": {
+      "description": "A sql database resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlDatabaseListResult": {
+      "description": "A list of databases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlDatabase"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

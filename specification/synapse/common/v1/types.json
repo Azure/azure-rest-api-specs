@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "ErrorContract": {
+      "title": "Error details.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "Sku": {
+      "description": "An ARM Resource SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "description": "ARM System Data.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: <User|Application|ManagedIdentity|Key>",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: <User|Application|ManagedIdentity|Key>",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of last modification (UTC).",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "description": "The name of the sql pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlDatabaseNameParameter": {
+      "name": "sqlDatabaseName",
+      "in": "path",
+      "description": "The name of the sql database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

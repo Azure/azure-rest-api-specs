@@ -49,6 +49,18 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
 ```
 
+### Tag: package-2020-04-01-preview
+
+These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-04-01-preview/operations.json
+- Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
+- Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
+
+```
+
 ## Suppressions
 
 ``` yaml
@@ -130,6 +142,9 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/operations.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
 
 ```
 
