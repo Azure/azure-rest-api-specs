@@ -21,7 +21,23 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08-09-preview
+tag: package-2020-03-20
+```
+
+### Tag: package-2020-03-20
+
+These settings apply only when `--tag=package-2020-03-20` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-20'
+input-file:
+- Microsoft.AVS/stable/2020-03-20/vmware.json
+directive:
+  - suppress: R3020
+    from: vmware.json
+    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
+  - suppress: R3010
+    from: vmware.json
+    reason: list by immediate parent operations are defined
 ```
 
 ### Tag: package-2019-08-09-preview
@@ -92,6 +108,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AVS/stable/2020-03-20/vmware.json
   - $(this-folder)/Microsoft.AVS/preview/2019-08-09-preview/vmware.json
 
 ```
