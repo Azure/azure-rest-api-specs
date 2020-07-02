@@ -71,7 +71,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -141,6 +140,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+- Microsoft.Sql/preview/2020-02-02-preview/importExport.json
 
 # Needed when there is more than one input file
 override-info:
@@ -176,7 +176,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/elasticPools.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -243,6 +242,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+- Microsoft.Sql/preview/2020-02-02-preview/importExport.json
 
 # Needed when there is more than one input file
 override-info:
@@ -268,7 +268,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/elasticPools.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -334,6 +333,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+- Microsoft.Sql/preview/2020-02-02-preview/importExport.json
 
 # Needed when there is more than one input file
 override-info:
@@ -494,6 +494,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/operations.json
+- Microsoft.Sql/preview/2020-02-02-preview/importExport.json
 
 # Needed when there is more than one input file
 override-info:
