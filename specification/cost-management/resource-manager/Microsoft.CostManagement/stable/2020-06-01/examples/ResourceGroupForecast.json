@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2020-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "MonthToDate",
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimension": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "includeActualCost": false,
+      "includeFreshPartialCost": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/query/00000000-0000-0000-0000-000000000000",
+        "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
+        "type": "microsoft.costmanagement/Query",
+        "properties": {
+          "nextLink": null,
+          "columns": [
+            {
+              "name": "PreTaxCost",
+              "type": "Number"
+            },
+            {
+              "name": "ResourceGroup",
+              "type": "String"
+            },
+            {
+              "name": "UsageDate",
+              "type": "Number"
+            },
+            {
+              "name": "CostStatus",
+              "type": "String"
+            },
+            {
+              "name": "Currency",
+              "type": "String"
+            }
+          ],
+          "rows": [
+            [
+              2.10333307059661,
+              "ScreenSharingTest-peer",
+              20180331,
+              "Forecast",
+              "USD"
+            ]
+          ]
+        }
+      }
+    }
+  }
+}
