@@ -1154,6 +1154,11 @@
     },
     "ServerPropertiesForRestore": {
       "x-ms-discriminator-value": "PointInTimeRestore",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
       "properties": {
         "sourceServerName": {
           "type": "string",
