@@ -566,6 +566,72 @@
           }
         }
       }
+    },
+    "/weather/severe/alerts/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get Severe Weather Alerts**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Severe Weather Alerts service returns the severe weather alerts that are available worldwide from official Government Meteorological Agencies and leading global weather alert providers. Details such as alert type, category and level are returned. For example, the service can return details about severe thunderstorms or forest fires.",
+        "operationId": "Weather_GetSevereWeatherAlertsPreview",
+        "x-ms-examples": {
+          "SevereWeatherAlert": {
+            "$ref": "./examples/GetSevereWeatherAlerts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which severe weather alerts are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "details",
+            "description": "Return full details for the severe weather alerts. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the alerts data, which excludes the area-specific full description of alert details (alertDetails).",
+            "default": "true",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SevereWeatherAlertsResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1761,6 +1827,182 @@
           "type": "string",
           "description": "A displayable short phrase describing the forecasted conditions and precipitation intensity/type."
         }
+      }
+    },
+    "SevereWeatherAlertsResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SevereWeatherAlert"
+          },
+          "description":  "A list of all severe weather alerts for the queried location."
+        }
+      }
+    },
+    "SevereWeatherAlert": {
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string",
+          "description": "2-character ISO 3166-1 Alpha-2 country code, for example, \"US\"."
+        },
+        "alertId": {
+          "type": "string",
+          "description": "A unique numerical identifier for a weather alert."
+        },
+        "description": {
+          "$ref": "#/definitions/Description",
+          "description": "Description of the alert."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the alert."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number signifying the importance or ranking order of the given alert within the country/region it has originated. A lower number signifies a higher priority. For example, 1 is the highest priority. The number varies by country/region and can change over time as each country/region evolves their alert systems."
+        },
+        "class": {
+          "type": "string",
+          "description": "Classification of the alert. This field is not available for all countries and therefore not always returned."
+        },
+        "level": {
+          "type": "string",
+          "description": "Severity level of the alert. This field is not available for all countries and therefore not always returned."
+        },
+        "source": {
+          "type": "string",
+          "description": "The provider of the alert information. By default the source is returned in English (en-US). The alerts are from official Government Meteorological Agencies and leading global weather alert providers."
+        },
+        "sourceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A numerical identifier associated with the source provider name of the alert data."
+        },
+        "disclaimer": {
+          "type": "string",
+          "description": "A disclaimer regarding the source of the alert information. This field is not always available. For example, disclaimer may include details about the delays or potential issues related to the alarm."
+        },
+        "alertAreas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertArea"
+          },
+          "description": "Information about the alert specific to the affected area(s)."
+        }
+      }
+    },
+    "Description": {
+      "type": "object",
+      "properties": {
+        "localized": {
+          "type": "string",
+          "description": "Description of the alert in the specified language. By default English (en-US) is returned, if the language parameter is not specified in the request."
+        },
+        "english": {
+          "type": "string",
+          "description": "Description of the alert in English (en-US)."
+        }
+      }
+    },
+    "AlertArea": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of an area which is affected by the alert. The location that was requested falls under the alert area."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Text summarizing the alert in the returned area."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones, the returned time in the response is the local time to the requested coordinate location."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones, the returned time in the response is the local time to the requested coordinate location."
+        },
+        "latestStatus": {
+          "$ref": "#/definitions/LatestStatus",
+          "description": "The latest status of the alert in the current area."
+        },
+        "alertDetails": {
+          "type": "string",
+          "description": "Full details associated with the alert. Returned if details=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
+        },
+        "alertDetailsLanguageCode": {
+          "type": "string",
+          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language paramater. Returned if details=True. Language code has been derived from the ISO 639-1 Alpha-2 codes. "
+        }
+      }
+    },
+    "LatestStatus": {
+      "type": "object",
+      "properties": {
+        "localized": {
+          "type": "string",
+          "description": "The latest status keyword for the alert, in the specified language. By default, returned in English (en-US)."
+        },
+        "english": {
+          "$ref": "#/definitions/LatestStatusKeyword",
+          "description": "Latest status keyword for the alert, in English (en-US)."
+        }
+      }
+    },
+    "LatestStatusKeyword": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Extend",
+        "Cancel",
+        "Correct",
+        "Expire",
+        "Upgrade",
+        "Continue",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "LatestStatusKeyword",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "New",
+            "description": "'New' - the status of an alert upon initial issuance."
+          },
+          {
+            "value": "Extend",
+            "description": "'Extend' - the alert has been extended in time, in area, or both since its initial issuance."
+          },
+          {
+            "value": "Cancel",
+            "description": "'Cancel' - the alert has been canceled prior to its original expiration time."
+          },
+          {
+            "value": "Correct",
+            "description": "'Correct' - the alert has been modified to correct a previous error."
+          },
+          {
+            "value": "Expire",
+            "description": "'Expire' - the alert has expired and is no longer active."
+          },
+          {
+            "value": "Upgrade",
+            "description": "'Upgrade' - the alert has been upgraded to a higher class or category since its initial issuance."
+          },
+          {
+            "value": "Continue",
+            "description": "'Continue' - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
+          },
+          {
+            "value": "Update",
+            "description": "'Update' - the alert has been updated since its initial issuance."
+          }
+        ]
       }
     }
   }
