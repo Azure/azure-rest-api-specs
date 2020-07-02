@@ -728,6 +728,44 @@
         }
       },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleservers/{serverName}/maintenanceWindows/customerMaintenanceWindow": {
+        "delete": {
+          "tags": [
+            "CustomerMaintenanceWindow"
+          ],
+          "operationId": "CustomerMaintenanceWindow_Delete",
+          "x-ms-examples": {
+            "FirewallRuleDelete": {
+              "$ref": "./examples/CustomerMaintenanceWindowDelete.json"
+            }
+          },
+          "description": "Deletes a PostgreSQL server Customer maintenance window.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ServerNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "202": {
+              "description": "Accepted"
+            },
+            "204": {
+              "description": "NoContent"
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
         "get": {
           "tags": [
             "CustomerMaintenanceWindow"
