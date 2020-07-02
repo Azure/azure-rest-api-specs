@@ -90,6 +90,16 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 ```
 
+### Tag: package-2020-02-14-privatepreview
+
+These settings apply only when `--tag=package-2020-02-14-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-02-14-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
+```
+
 ### Tag: package-2017-12-01
 
 These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
