@@ -704,7 +704,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
+              "$ref": "#/definitions/ConfigurationUpdateList"
             },
             "description": "The required parameters for updating a server configuration."
           }
@@ -1448,6 +1448,21 @@
       ],
       "description": "Represents a Configuration."
     },
+    "ConfigurationUpdate": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Value of the configuration."
+          }
+        }
+      },
+      "description": "Represents a Configuration."
+    },
     "ConfigurationListResult": {
       "properties": {
         "value": {
@@ -1464,6 +1479,18 @@
         }
       },
       "description": "A list of server configurations."
+    },
+    "ConfigurationUpdateList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationUpdate"
+          },
+          "description": "The list of server configurations."
+        }
+      },
+      "description": "A list of PostgreSQL server configurations to update."
     },
     "OperationDisplay": {
       "properties": {
