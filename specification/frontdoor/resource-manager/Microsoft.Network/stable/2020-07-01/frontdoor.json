@@ -448,7 +448,7 @@
         "tags": [
           "FrontDoors"
         ],
-        "description": "Gets the Custom Https Configuration for the specified Frontend endpoint within the specified Front Door.",
+        "description": "Gets the default custom https configuration for the specified frontend endpoint.",
         "operationId": "CustomHttpsConfiguration_Get",
         "parameters": [
           {
@@ -471,7 +471,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomHttpsConfiguration"
+              "$ref": "#/definitions/CustomHttpsConfigurationEntity"
             }
           },
           "default": {
@@ -482,7 +482,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Frontend Endpoint": {
+          "Get custom https configuration": {
             "$ref": "./examples/CustomHttpsConfigurationGet.json"
           }
         }
@@ -491,8 +491,8 @@
         "tags": [
           "FrontDoors"
         ],
-        "description": "Creates or Updates the Custom Https Configuration for the specified Frontend endpoint within the specified Front Door.",
-        "operationId": "CustomHttpsConfiguration_CreateOrUpdate",
+        "description": "Creates the default custom https configuration for the specified frontend endpoint.",
+        "operationId": "CustomHttpsConfiguration_Put",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -511,10 +511,16 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/CustomHttpsConfigurationEntity"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomHttpsConfiguration"
+              "$ref": "#/definitions/CustomHttpsConfigurationEntity"
             }
           },
           "default": {
@@ -525,7 +531,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Frontend Endpoint": {
+          "Create custom https configuration": {
             "$ref": "./examples/CustomHttpsConfigurationCreate.json"
           }
         }
@@ -534,7 +540,7 @@
         "tags": [
           "FrontDoors"
         ],
-        "description": "Deletes an existing Custom Https Configuration for the specified Frontend endpoint within the specified Front Door.",
+        "description": "Deletes the default custom https configuration for the specified frontend endpoint.",
         "operationId": "CustomHttpsConfiguration_Delete",
         "parameters": [
           {
@@ -554,10 +560,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CustomHttpsConfiguration"
+              "$ref": "#/definitions/CustomHttpsConfigurationEntity"
             }
           },
           "default": {
@@ -568,13 +574,12 @@
           }
         },
         "x-ms-examples": {
-          "Get Frontend Endpoint": {
+          "Delete custom https configuration": {
             "$ref": "./examples/CustomHttpsConfigurationDelete.json"
           }
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/purge": {
       "post": {
         "tags": [
@@ -1847,6 +1852,111 @@
           "description": "Parameters required for enabling SSL with Front Door-managed certificates (if certificateSource=FrontDoor)",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FrontDoorCertificateSourceParameters"
+        }
+      }
+    },
+    "CustomHttpsConfigurationEntity": {
+      "description": "Custom Https settings Entity for a domain",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        },
+        "properties": {
+          "description": "Properties of the Frontend endpoint",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomHttpsConfigurationEntityProperties"
+        }
+      }
+    },
+    "CustomHttpsConfigurationEntityProperties": {
+      "description": "The JSON object that contains the properties required to create a frontend endpoint.",
+      "required": [
+        "minimumTlsVersion",
+        "certificateSource",
+        "protocolType"
+      ],
+      "properties": {
+        "certificateSource": {
+          "description": "Defines the source of the SSL certificate",
+          "enum": [
+            "AzureKeyVault",
+            "FrontDoor"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorCertificateSource",
+            "modelAsString": true
+          }
+        },
+        "protocolType": {
+          "description": "Defines the TLS extension protocol that is used for secure delivery",
+          "enum": [
+            "ServerNameIndication"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorTlsProtocolType",
+            "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "The minimum TLS version required from the clients to establish an SSL handshake with Front Door.",
+          "enum": [
+            "1.0",
+            "1.2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MinimumTLSVersion",
+            "modelAsString": true
+          }
+        },
+        "keyVaultCertificateSourceParameters": {
+          "description": "KeyVault certificate source parameters (if certificateSource=AzureKeyVault)",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/KeyVaultCertificateSourceParameters"
+        },
+        "frontDoorCertificateSourceParameters": {
+          "description": "Parameters required for enabling SSL with Front Door-managed certificates (if certificateSource=FrontDoor)",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FrontDoorCertificateSourceParameters"
+        },
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        },
+        "subState": {
+          "description": "Provisioning substate shows the progress of custom HTTPS enabling/disabling process step by step.",
+          "readOnly": true,
+          "enum": [
+            "SubmittingDomainControlValidationRequest",
+            "PendingDomainControlValidationREquestApproval",
+            "DomainControlValidationRequestApproved",
+            "DomainControlValidationRequestRejected",
+            "DomainControlValidationRequestTimedOut",
+            "IssuingCertificate",
+            "DeployingCertificate",
+            "CertificateDeployed",
+            "DeletingCertificate",
+            "CertificateDeleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHttpsProvisioningSubstate",
+            "modelAsString": true
+          }
         }
       }
     },

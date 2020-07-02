@@ -8,7 +8,24 @@
     "configurationName": "default"
   },
   "responses": {
-    "200": {},
-    "202": {}
+    "202": {
+      "body": {
+        "name": "default",
+        "properties": {
+          "certificateSource": "AzureKeyVault",
+          "protocolType": "ServerNameIndication",
+          "minimumTlsVersion": "1.0",
+          "keyVaultCertificateSourceParameters": {
+            "vault": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1"
+            },
+            "secretName": "secret1",
+            "secretVersion": "00000000-0000-0000-0000-000000000000"
+          },
+          "resourceState": "Deleting",
+          "subState": "None"
+        }
+      }
+    }
   }
 }

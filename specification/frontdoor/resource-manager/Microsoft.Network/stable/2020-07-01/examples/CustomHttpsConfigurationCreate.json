@@ -6,22 +6,68 @@
     "frontDoorName": "frontDoor1",
     "frontendEndpointName": "frontendEndpoint1",
     "customHttpsConfiguration": {
-        "properties": {
-            "certificateSource": "AzureKeyVault",
-            "protocolType": "ServerNameIndication",
-            "minimumTlsVersion": "1.0",
-            "keyVaultCertificateSourceParameters": {
-                "vault": {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1"
-                },
-                "secretName": "secret1",
-                "secretVersion": "00000000-0000-0000-0000-000000000000"
-            }
+      "properties": {
+        "certificateSource": "AzureKeyVault",
+        "protocolType": "ServerNameIndication",
+        "minimumTlsVersion": "1.0",
+        "keyVaultCertificateSourceParameters": {
+          "vault": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1"
+          },
+          "secretName": "secret1",
+          "secretVersion": "00000000-0000-0000-0000-000000000000"
         }
+      }
     }
   },
   "responses": {
-    "200": {},
-    "202": {}
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/subid/providers/Microsoft.Network/frontdoors/frontDoor1/frontendendpoints/frontendEndpoint1/customhttpsconfiguration/default",
+        "type": "Microsoft.Network/frontdoors/frontendendpoints/customhttpsconfiguration",
+        "properties": {
+          "certificateSource": "AzureKeyVault",
+          "frontDoorCertificateSourceParameters": {
+            "certificateType": null
+          },
+          "keyVaultCertificateSourceParameters": {
+            "vault": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1"
+            },
+            "secretName": "secret1",
+            "secretVersion": "00000000-0000-0000-0000-000000000000"
+          },
+          "minimumTlsVersion": "1.0",
+          "protocolType": "ServerNameIndication",
+          "resourceState": "Enabling",
+          "subState": "SubmittingDomainControlValidationRequest"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/subid/providers/Microsoft.Network/frontdoors/frontDoor1/frontendendpoints/frontendEndpoint1/customhttpsconfiguration/default",
+        "type": "Microsoft.Network/frontdoors/frontendendpoints/customhttpsconfiguration",
+        "properties": {
+          "certificateSource": "AzureKeyVault",
+          "frontDoorCertificateSourceParameters": {
+            "certificateType": null
+          },
+          "keyVaultCertificateSourceParameters": {
+            "vault": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1"
+            },
+            "secretName": "secret1",
+            "secretVersion": "00000000-0000-0000-0000-000000000000"
+          },
+          "minimumTlsVersion": "1.0",
+          "protocolType": "ServerNameIndication",
+          "resourceState": "Enabling",
+          "subState": "SubmittingDomainControlValidationRequest"
+        }
+      }
+    }
   }
 }
