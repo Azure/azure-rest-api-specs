@@ -728,6 +728,59 @@
         }
       },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleservers/{serverName}/maintenanceWindows/customerMaintenanceWindow": {
+        "put": {
+          "tags": [
+            "CustomerMaintenanceWindow"
+          ],
+          "operationId": "CustomerMaintenanceWindow_CreateOrUpdate",
+          "x-ms-examples": {
+            "FirewallRuleCreate": {
+              "$ref": "./examples/CustomerMaintenanceWindowCreate.json"
+            }
+          },
+          "description": "Creates a new customer m aintenance window.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ServerNameParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CustomerMaintenanceWindow"
+              },
+              "description": "The required parameters for creating or updating a customer maintenance window."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/CustomerMaintenanceWindow"
+              }
+            },
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/definitions/CustomerMaintenanceWindow"
+              }
+            },
+            "202": {
+              "description": "Accepted"
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
         "delete": {
           "tags": [
             "CustomerMaintenanceWindow"
