@@ -1050,6 +1050,10 @@
         "description": "Represents a server."
       },
       "ServerPropertiesForCreate": {
+        "discriminator": "createMode",
+        "required": [
+          "createMode"
+        ],
         "properties": {
           "administratorLogin": {
             "type": "string",
@@ -1102,8 +1106,63 @@
                 "description": "delegated vNet name"
               }
             }
+          },
+          "createMode": {
+            "type": "string",
+            "description": "The mode to create a new PostgreSQL server.",
+            "enum": [
+              "Default",
+              "PointInTimeRestore"
+            ],
+            "x-ms-enum": {
+              "name": "CreateMode",
+              "modelAsString": true
+            }
           }
         }
+      },
+      "ServerPropertiesForDefaultCreate": {
+        "x-ms-discriminator-value": "Default",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ServerPropertiesForCreate"
+          }
+        ],
+        "properties": {
+          "administratorLogin": {
+            "type": "string",
+            "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
+          },
+          "administratorLoginPassword": {
+            "type": "string",
+            "format": "password",
+            "description": "The password of the administrator login."
+          }
+        },
+        "required": [
+          "administratorLogin",
+          "administratorLoginPassword"
+        ],
+        "description": "The properties used to create a new server."
+      },
+      "ServerPropertiesForRestore": {
+        "x-ms-discriminator-value": "PointInTimeRestore",
+        "properties": {
+          "sourceServerName": {
+            "type": "string",
+            "description": "The source PostgreSQL server name to restore from."
+          },
+          "restorePointInTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+          }
+        },
+        "required": [
+          "sourceServerName",
+          "restorePointInTime"
+        ],
+        "description": "The properties used to create a new server by restoring from a backup."
       },
       "ServerPropertiesForUpdate": {
         "properties": {
