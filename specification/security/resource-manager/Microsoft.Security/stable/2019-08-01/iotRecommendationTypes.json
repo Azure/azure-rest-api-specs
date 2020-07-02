@@ -214,11 +214,17 @@
           "description": "Description of the suspected vulnerability and meaning.",
           "example": "Insecure TLS configurations detected. Immediate TLS cipher suite upgrade recommended."
         },
-        "providerName": {
+        "productName": {
           "readOnly": true,
           "type": "string",
-          "example": "IoTSecurity",
-          "description": "The name of the recommendation provider or internal partner"
+          "example": "Azure Security Center for IoT",
+          "description": "The name of the product which published this alert"
+        },
+        "productComponentName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "IoT Hub",
+          "description": "The name of a component inside the product which generated the alert"
         },
         "vendorName": {
           "readOnly": true,
