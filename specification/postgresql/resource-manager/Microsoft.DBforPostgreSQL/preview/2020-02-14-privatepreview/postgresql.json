@@ -1073,6 +1073,11 @@
           "format": "int32",
           "description": "Max compute of a server is 64vCores."
         },
+        "storageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Storage in MB of a server is 2097152MB(2TiB)."
+        },
         "standbyCount": {
           "type": "integer",
           "format": "int32",
@@ -1152,7 +1157,7 @@
           "type": "string",
           "description": "The source PostgreSQL server name to restore from."
         },
-        "restorePointInTime": {
+        "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
           "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
@@ -1160,7 +1165,7 @@
       },
       "required": [
         "sourceServerName",
-        "restorePointInTime"
+        "pointInTimeUTC"
       ],
       "description": "The properties used to create a new server by restoring from a backup."
     },
@@ -1179,6 +1184,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Max compute of a server is 64vCores."
+        },
+        "storageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Storage in MB of a server is 2097152MB(2TiB)."
         },
         "standbyCount": {
           "type": "integer",
@@ -1554,9 +1564,13 @@
           "type": "boolean",
           "description": "Indicates whether the resource name is available."
         },
-        "reason": {
+        "name": {
           "type": "string",
-          "description": "Reason for name being unavailable."
+          "description": "name of the PostgreSQL server."
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the server"
         }
       },
       "description": "Represents a resource name availability."
