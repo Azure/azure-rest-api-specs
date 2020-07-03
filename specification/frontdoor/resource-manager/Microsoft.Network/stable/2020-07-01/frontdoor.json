@@ -443,6 +443,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/customHttpsConfiguration": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Lists all of the custom Https Configuration within the Frontend Endpoint.",
+        "operationId": "CustomHttpsConfiguration_ListByFrontendEndpoint",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontendEndpointNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomHttpsConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Custom Https Configuration in the Frontend endpoints": {
+            "$ref": "./examples/CustomHttpsConfigurationList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/customHttpsConfiguration/default": {
       "get": {
         "tags": [
@@ -2090,6 +2138,23 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of frontend endpoints if there are any."
+        }
+      }
+    },
+    "CustomHttpsConfigurationListResult": {
+      "description": "Result of the request to list custom Https configuration. It contains a list of custom Https Configuration objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CustomHttpsConfigurationEntity"
+          },
+          "description": "List of custom Https configuration within a Frontend Endpoint."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of custom Https configurations if there are any."
         }
       }
     },
