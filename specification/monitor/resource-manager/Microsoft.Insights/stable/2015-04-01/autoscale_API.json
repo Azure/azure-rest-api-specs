@@ -378,6 +378,10 @@
           "type": "string",
           "description": "the name of the metric that defines what the rule monitors."
         },
+        "metricNamespace": {
+          "type": "string",
+          "description": "the namespace of the metric that defines what the rule monitors."
+        },
         "metricResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors."
@@ -448,7 +452,7 @@
           "items": {
             "$ref": "#/definitions/ScaleRuleMetricDimension"
           },
-          "description": "List of dimension conditions."
+          "description": "List of dimension conditions. For example: [{\"dimensionName\":\"AppName\",\"operator\":\"Equals\",\"values\":[\"App1\"]},{\"dimensionName\":\"Deployment\",\"operator\":\"Equals\",\"values\":[\"default\"]}]."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -839,7 +843,7 @@
           "items": {
             "type": "string"
           },
-          "description": "list of dimension values."
+          "description": "list of dimension values. For example: [\"App1\",\"App2\"]."
         }
       },
       "description": "Specifies an auto scale rule metric dimension."
