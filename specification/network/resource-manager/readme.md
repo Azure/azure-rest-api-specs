@@ -1602,6 +1602,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ipAllocation.json
     reason: name, id and type properties are inherited from the upper level
+    suppress: RequieredPropertiesMissingInResourceModel
+    from: dscpConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ---
