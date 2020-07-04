@@ -40,7 +40,7 @@ input-file:
 - Microsoft.Network/stable/2020-05-01/network.json
 - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 - Microsoft.Network/stable/2020-05-01/frontdoor.json
-- Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -272,7 +272,6 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/frontdoor.json
-  - $(this-folder)/Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
