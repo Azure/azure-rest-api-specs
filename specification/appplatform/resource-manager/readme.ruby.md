@@ -12,15 +12,15 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
-  - tag: package-2019-05-01-preview
+  - tag: package-2020-07-01
 ```
 
-### Tag: package-2019-05-01-preview and ruby
+### Tag: package-2020-07-01 and ruby
 
-These settings apply only when `--tag=package-2019-05-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2020-07-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2019-05-01-preview' && $(ruby)
+``` yaml $(tag) == 'package-2020-07-01' && $(ruby)
 namespace: "Azure::AppPlatform::Mgmt::V2019_05_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_appplatform/lib
 ```

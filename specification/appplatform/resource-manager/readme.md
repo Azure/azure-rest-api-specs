@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-01-preview
+tag: package-2020-07-01
 ```
 
 ### Suppression
@@ -43,13 +43,13 @@ directive:
     reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
 ```
 
-### Tag: package-2019-05-01-preview
+### Tag: package-2020-07-01
 
-These settings apply only when `--tag=package-2019-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-01-preview'
+``` yaml $(tag) == 'package-2020-07-01'
 input-file:
-- Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
+- Microsoft.AppPlatform/preview/2020-07-01/appplatform.json
 ```
 
 ---
@@ -110,7 +110,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
+  - $(this-folder)/Microsoft.AppPlatform/preview/2020-07-01/appplatform.json
 
 ```
 
