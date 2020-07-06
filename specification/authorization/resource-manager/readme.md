@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-04
+tag: package-2020-04-preview
 ```
 
 ## Suppression
@@ -69,11 +69,11 @@ directive:
     reason: for this case the result of the proposed change would resemble a boolean anyways
 ```
 
-### Tag: package-preview-2020-04
+### Tag: package-2020-04-preview
 
-These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-2020-04-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
