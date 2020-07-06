@@ -178,13 +178,13 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExpressRouteProviderPortProperties",
           "description": "Properties of the express route Service Provider Port."
-        },
-        "etag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "description": "ExpressRouteProviderPort resource."
     },
     "ExpressRouteProviderPortListResult": {
