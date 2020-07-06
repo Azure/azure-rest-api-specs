@@ -366,7 +366,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUnderManagementGroup"
+            }
           },
           "default": {
             "description": "Error",
@@ -440,7 +443,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUnderManagementGroup"
+            }
           },
           "default": {
             "description": "Error",
@@ -476,7 +482,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListSubscriptionUnderManagementGroup"
+            }
           },
           "default": {
             "description": "Error",
@@ -1093,6 +1102,71 @@
         }
       }
     },
+    "ListSubscriptionUnderManagementGroup": {
+      "description": "The details of all subscriptions under management group.",
+      "properties": {
+        "value": {
+          "description": "The list of subscriptions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionUnderManagementGroup"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionUnderManagementGroup":{
+      "description": "The details of subscription under management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the subscription.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000/subscriptions/0000000-0000-0000-0000-000000000001",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups/subscriptions",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The stringified id of the subscription. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionUnderManagementGroupProperties"
+        }
+      }
+    },
+    "SubscriptionUnderManagementGroupProperties": {
+      "description": "The generic properties of subscription under a management group.",
+      "type": "object",
+      "properties": {
+        "tenant": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the subscription. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the subscription."
+        },
+        "parent": {
+          "title": "Parent",
+          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "x-nullable": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the subscription."
+        }
+      }
+    },
     "ManagementGroup": {
       "description": "The management group details.",
       "x-ms-azure-resource": true,
@@ -1130,14 +1204,6 @@
         "displayName": {
           "type": "string",
           "description": "The friendly name of the management group."
-        },
-        "roles": {
-          "description": "The role definitions associated with the management group.",
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "type": "string"
-          }
         },
         "details": {
           "title": "Details",
@@ -1204,13 +1270,6 @@
         "displayName": {
           "type": "string",
           "description": "The friendly name of the child resource."
-        },
-        "roles": {
-          "description": "The roles definitions associated with the management group.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "children": {
           "description": "The list of children.",
@@ -1677,7 +1736,7 @@
           "description": "The friendly name of the management group.",
           "x-nullable": true
         },
-        "parentId": {
+        "parentGroupId": {
           "type": "string",
           "description": "(Optional) The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
           "x-nullable": true
@@ -1723,15 +1782,6 @@
           "type": "string",
           "description": "The friendly name of the management group. If no value is passed then this  field will be set to the groupId.",
           "x-nullable": true
-        },
-        "roles": {
-          "description": "The roles definitions associated with the management group.",
-          "readOnly": true,
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "type": "string"
-          }
         },
         "details": {
           "title": "Details",
@@ -1798,14 +1848,6 @@
           "type": "string",
           "readOnly": true,
           "description": "The friendly name of the child resource."
-        },
-        "roles": {
-          "description": "The roles definitions associated with the management group.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "children": {
           "description": "The list of children.",
