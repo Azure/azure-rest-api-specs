@@ -1,0 +1,212 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securitySolutionsReferenceData": {
+      "get": {
+        "x-ms-examples": {
+          "Get security solutions": {
+            "$ref": "./examples/SecuritySolutionsReferenceData/GetSecuritySolutionsReferenceDataSubscription_example.json"
+          }
+        },
+        "tags": [
+          "securitySolutionsReferenceData"
+        ],
+        "description": "Gets a list of all supported Security Solutions for the subscription.",
+        "operationId": "securitySolutionsReferenceData_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/securitySolutionsReferenceDataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData": {
+      "get": {
+        "x-ms-examples": {
+          "Get security solutions from a security data location": {
+            "$ref": "./examples/SecuritySolutionsReferenceData/GetSecuritySolutionsReferenceDataSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "SecuritySolutionsReferenceData"
+        ],
+        "description": "Gets list of all supported Security Solutions for subscription and location.",
+        "operationId": "SecuritySolutionsReferenceData_ListByHomeRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/securitySolutionsReferenceDataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "securitySolutionsReferenceDataList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/securitySolutionsReferenceData"
+          }
+        }
+      }
+    },
+    "securitySolutionsReferenceData": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/securitySolutionsReferenceDataProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "securitySolutionsReferenceDataProperties": {
+      "type": "object",
+      "properties": {
+        "securityFamily": {
+          "type": "string",
+          "description": "The security family of the security solution",
+          "enum": [
+            "Waf",
+            "Ngfw",
+            "SaasWaf",
+            "Va"
+          ],
+          "x-ms-enum": {
+            "name": "securityFamily",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Waf"
+              },
+              {
+                "value": "Ngfw"
+              },
+              {
+                "value": "SaasWaf"
+              },
+              {
+                "value": "Va"
+              }
+            ]
+          }
+        },
+        "alertVendorName": {
+          "type": "string",
+          "description": "The security solutions' vendor name"
+        },
+        "packageInfoUrl": {
+          "type": "string",
+          "description": "The security solutions' package info url"
+        },
+        "productName": {
+          "type": "string",
+          "description": "The security solutions' product name"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The security solutions' publisher"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The security solutions' publisher display name"
+        },
+        "template": {
+          "type": "string",
+          "description": "The security solutions' template"
+        }
+      },
+      "required": [
+        "securityFamily",
+        "alertVendorName",
+        "packageInfoUrl",
+        "productName",
+        "publisher",
+        "publisherDisplayName",
+        "template"
+      ]
+    }
+  }
+}
