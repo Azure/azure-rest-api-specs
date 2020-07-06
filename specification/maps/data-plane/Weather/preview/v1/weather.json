@@ -511,7 +511,7 @@
     "/weather/route/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
+        "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
         "operationId": "Weather_GetWeatherAlongRoutePreview",
         "x-ms-examples": {
           "WeatherAlongRoute": {
@@ -533,7 +533,7 @@
           },
           {
             "name": "query",
-            "description": "Coordinates through which the route is calculated, separated by colon (:) and entered in chronological order. A minimum of two waypoints is required. A single API call may contain up to 60 waypoints. \nA waypoint indicates location, ETA, and optional heading: latitude,longitude,ETA,heading, where\n  * `Latitude` - Latitude coordinate in decimal degrees.\n  * `Longitude` - Longitude coordinate in decimal degrees.\n  * `ETA (estimated time of arrival)` - The number of minutes from the present time that it will take for the vehicle to reach the waypoint. Allowed range is from 0.0 to 120.0 minutes.\n  * `Heading` - An optional value indicating the vehicle heading as it passes the waypoint. Expressed in clockwise degrees relative to true north. This is issued to calculate sun glare as a driving hazard. Allowed range is from 0.0 to 360.0 degrees. If not provided, a heading will automatically be derived based on the position of neighboring waypoints.",
+            "description": "Coordinates through which the route is calculated, separated by colon (:) and entered in chronological order. A minimum of two waypoints is required. A single API call may contain up to 60 waypoints. \nA waypoint indicates location, ETA, and optional heading: latitude,longitude,ETA,heading, where\n  * `Latitude` - Latitude coordinate in decimal degrees.\n  * `Longitude` - Longitude coordinate in decimal degrees.\n  * `ETA (estimated time of arrival)` - The number of minutes from the present time that it will take for the vehicle to reach the waypoint. Allowed range is from 0.0 to 120.0 minutes.\n  * `Heading` - An optional value indicating the vehicle heading as it passes the waypoint. Expressed in clockwise degrees relative to true north. This is issued to calculate sun glare as a driving hazard. Allowed range is from 0.0 to 360.0 degrees. If not provided, a heading will automatically be derived based on the position of neighboring waypoints. \nIt is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. This way a more accurate assessment can be provided for the trip and prevent isolated events not being captured between waypoints. Information can and should be updated along the route (especially for trips greater than 2 hours) to continuously pull new waypoints moving forward, but also to ensure that forecast information for content such as precipitation type and intensity is accurate as storms develop and dissipate over time.",
             "in": "query",
             "type": "string",
             "required": true
@@ -1831,18 +1831,20 @@
     },
     "SevereWeatherAlertsResponse": {
       "type": "object",
+      "description": "This object is returned from a successful Get Severe Weather Alerts call.",
       "properties": {
         "results": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SevereWeatherAlert"
           },
-          "description":  "A list of all severe weather alerts for the queried location."
+          "description": "A list of all severe weather alerts for the queried location."
         }
       }
     },
     "SevereWeatherAlert": {
       "type": "object",
+      "description": "Information about a severe weather alert.",
       "properties": {
         "countryCode": {
           "type": "string",
@@ -1897,6 +1899,7 @@
     },
     "Description": {
       "type": "object",
+      "description": "Description of a severe weather alert.",
       "properties": {
         "localized": {
           "type": "string",
@@ -1910,6 +1913,7 @@
     },
     "AlertArea": {
       "type": "object",
+      "description": "Information about a severe weather alert issued within an affected area(s). If multiple alerts are active for the same location, the alerts will be returned in order of \"Priority\" within the API response, with the highest \"Priority\" alert being returned at the top of the response.",
       "properties": {
         "name": {
           "type": "string",
@@ -1943,6 +1947,7 @@
     },
     "LatestStatus": {
       "type": "object",
+      "description": "The latest status on the alert in the current area.",
       "properties": {
         "localized": {
           "type": "string",
@@ -1972,35 +1977,35 @@
         "values": [
           {
             "value": "New",
-            "description": "'New' - the status of an alert upon initial issuance."
+            "description": "\"New\" - the status of an alert upon initial issuance."
           },
           {
             "value": "Extend",
-            "description": "'Extend' - the alert has been extended in time, in area, or both since its initial issuance."
+            "description": "\"Extend\" - the alert has been extended in time, in area, or both since its initial issuance."
           },
           {
             "value": "Cancel",
-            "description": "'Cancel' - the alert has been canceled prior to its original expiration time."
+            "description": "\"Cancel\" - the alert has been canceled prior to its original expiration time."
           },
           {
             "value": "Correct",
-            "description": "'Correct' - the alert has been modified to correct a previous error."
+            "description": "\"Correct\" - the alert has been modified to correct a previous error."
           },
           {
             "value": "Expire",
-            "description": "'Expire' - the alert has expired and is no longer active."
+            "description": "\"Expire\" - the alert has expired and is no longer active."
           },
           {
             "value": "Upgrade",
-            "description": "'Upgrade' - the alert has been upgraded to a higher class or category since its initial issuance."
+            "description": "\"Upgrade\" - the alert has been upgraded to a higher class or category since its initial issuance."
           },
           {
             "value": "Continue",
-            "description": "'Continue' - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
+            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
           },
           {
             "value": "Update",
-            "description": "'Update' - the alert has been updated since its initial issuance."
+            "description": "\"Update\" - the alert has been updated since its initial issuance."
           }
         ]
       }
