@@ -418,6 +418,16 @@
             "status": {
               "$ref": "#/definitions/RuleStatus",
               "description": "Status of the rule"
+            },
+            "createdDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Time at which the rule was created. Rules that change cost for the same resource are applied in order of creation."
+            },
+            "updatedDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Time at which the rule was last updated."
             }
           },
           "required": [
