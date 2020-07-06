@@ -31,6 +31,15 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
+### Tag: package-2020-01-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
+```
+
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
@@ -625,6 +634,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2019-03-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-03-01/actionGroups_API.json
