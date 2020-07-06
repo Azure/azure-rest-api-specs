@@ -173,8 +173,10 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 
 # Needed when there is more than one input file
@@ -339,6 +341,8 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
@@ -451,6 +455,8 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json

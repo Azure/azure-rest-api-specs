@@ -580,8 +580,8 @@ directive:
   - suppress: R3006 #BodyTopLevelProperties
     from: templateSpecs.json
     where: 
-    - $.definitions.TemplateSpecModel.properties
-    - $.definitions.TemplateSpecVersionModel.properties
+    - $.definitions.TemplateSpec.properties
+    - $.definitions.TemplateSpecVersion.properties
     - $.definitions.TemplateSpecUpdateModel.properties
     - $.definitions.TemplateSpecVersionUpdateModel.properties
     reason: Currently systemData is not allowed
@@ -591,7 +591,7 @@ directive:
     reason: Tooling issue
   - suppress: TrackedResourceListByResourceGroup
     from: templateSpecs.json
-    where: $.definitions.TemplateSpecVersionModel
+    where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
 ```
 
