@@ -39,7 +39,7 @@ tag: package-artifacts-2019-06-01-preview
 tag: package-access-control-2020-02-01-preview
 ```
 
-``` yaml $(package-managedVirtualNetwork)
+``` yaml $(package-vnet)
 tag: package-vnet-2019-06-01-preview
 ```
 
