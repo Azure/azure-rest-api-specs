@@ -31,6 +31,24 @@ openapi-type: arm
 tag: package-2020-05
 ```
 
+### Tag: package-2020-07
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07'
+input-file:
+- Microsoft.Network/stable/2020-07-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-07-01/frontdoor.json
+- Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
