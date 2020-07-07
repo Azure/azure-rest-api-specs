@@ -93,7 +93,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/AlertRulesList"
             }
@@ -147,7 +147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/AlertRule"
             }
@@ -199,7 +199,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/AlertRule"
             }
@@ -248,7 +248,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK, Operation successfully completed"
           },
           "204": {
             "description": "No Content"
@@ -293,7 +293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/ActionsList"
             }
@@ -344,7 +344,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/ActionResponse"
             }
@@ -393,7 +393,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/ActionResponse"
             }
@@ -445,7 +445,282 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK, Operation successfully completed"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all alert rule templates.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets all alert rule templates.",
+        "operationId": "AlertRuleTemplates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert rule template by Id.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets the alert rule template.",
+        "operationId": "AlertRuleTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
+      "get": {
+        "x-ms-examples": {
+          "Get all bookmarks.": {
+            "$ref": "./examples/bookmarks/GetBookmarks.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Gets all bookmarks.",
+        "operationId": "Bookmarks_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/BookmarkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a bookmark.": {
+            "$ref": "./examples/bookmarks/GetBookmarkById.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Gets a bookmark.",
+        "operationId": "Bookmarks_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/Bookmark"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a bookmark.": {
+            "$ref": "./examples/bookmarks/CreateBookmark.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Creates or updates the bookmark.",
+        "operationId": "Bookmarks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/Bookmark"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/Bookmark"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Bookmark"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a bookmark.": {
+            "$ref": "./examples/bookmarks/DeleteBookmark.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Delete the bookmark.",
+        "operationId": "Bookmarks_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed"
           },
           "204": {
             "description": "No Content"
@@ -487,7 +762,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/DataConnectorList"
             }
@@ -556,7 +831,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/DataConnector"
             }
@@ -602,7 +877,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/DataConnector"
             }
@@ -651,10 +926,365 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK, Operation successfully completed"
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incidents.": {
+            "$ref": "./examples/incidents/GetIncidents.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Gets all incidents.",
+        "operationId": "Incidents_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/IncidentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident.": {
+            "$ref": "./examples/incidents/GetIncidentById.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Gets an incident.",
+        "operationId": "Incidents_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an incident.": {
+            "$ref": "./examples/incidents/CreateIncident.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Creates or updates the incident.",
+        "operationId": "Incidents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/Incident"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an incident.": {
+            "$ref": "./examples/incidents/DeleteIncident.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Delete the incident.",
+        "operationId": "Incidents_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incident comments.": {
+            "$ref": "./examples/incidents/comments/GetAllIncidentComments.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Gets all incident comments.",
+        "operationId": "IncidentComments_ListByIncident",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/IncidentCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/IncidentComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident comment.": {
+            "$ref": "./examples/incidents/comments/GetIncidentCommentById.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Gets an incident comment.",
+        "operationId": "IncidentComments_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates an incident comment.": {
+            "$ref": "./examples/incidents/comments/CreateIncidentComment.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Creates the incident comment.",
+        "operationId": "IncidentComments_CreateComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentComment"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -685,15 +1315,17 @@
       "x-ms-discriminator-value": "AzureActiveDirectory"
     },
     "AADDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
       "description": "AAD (Azure Active Directory) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
       "type": "object"
     },
     "AATPDataConnector": {
@@ -714,15 +1346,17 @@
       "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
     },
     "AATPDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
       "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
       "type": "object"
     },
     "ASCDataConnector": {
@@ -777,7 +1411,7 @@
       "description": "Action property bag base.",
       "properties": {
         "logicAppResourceId": {
-          "description": "Logic App Resource Id, providers/Microsoft.Logic/workflows/{WorkflowID}.",
+          "description": "Logic App Resource Id, /subscriptions/{my-subscription}/resourceGroups/{my-resource-group}/providers/Microsoft.Logic/workflows/{my-workflow-id}.",
           "type": "string"
         }
       },
@@ -860,9 +1494,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/AlertRuleKind"
         }
       ],
       "description": "Alert rule.",
@@ -870,48 +1501,69 @@
       "required": [
         "kind"
       ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AlertRuleKind",
+          "description": "The alert rule kind"
+        }
+      },
       "type": "object"
     },
     "AlertRuleKind": {
-      "description": "Describes an Azure resource with kind.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the alert rule",
-          "enum": [
-            "Scheduled",
-            "MicrosoftSecurityIncidentCreation",
-            "Fusion"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "AlertRuleKind",
-            "values": [
-              {
-                "value": "Scheduled"
-              },
-              {
-                "value": "MicrosoftSecurityIncidentCreation"
-              },
-              {
-                "value": "Fusion"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "kind"
+      "description": "The kind of the alert rule",
+      "enum": [
+        "Scheduled",
+        "MicrosoftSecurityIncidentCreation",
+        "Fusion"
       ],
-      "type": "object"
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AlertRuleKind",
+        "values": [
+          {
+            "value": "Scheduled"
+          },
+          {
+            "value": "MicrosoftSecurityIncidentCreation"
+          },
+          {
+            "value": "Fusion"
+          }
+        ]
+      }
+    },
+    "AlertRuleTemplateStatus": {
+      "description": "The alert rule template status.",
+      "enum": [
+        "Installed",
+        "Available",
+        "NotAvailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TemplateStatus",
+        "values": [
+          {
+            "description": "Alert rule template installed. and can not use more then once",
+            "value": "Installed"
+          },
+          {
+            "description": "Alert rule template is available.",
+            "value": "Available"
+          },
+          {
+            "description": "Alert rule template is not available",
+            "value": "NotAvailable"
+          }
+        ]
+      }
     },
     "AlertRuleTemplate": {
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/AlertRuleKind"
         }
       ],
       "description": "Alert rule template.",
@@ -919,6 +1571,13 @@
       "required": [
         "kind"
       ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AlertRuleKind",
+          "description": "The alert rule kind",
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "AlertRuleTemplateDataSource": {
@@ -938,63 +1597,25 @@
       },
       "type": "object"
     },
-    "AlertRuleTemplatePropertiesBase": {
-      "description": "Base alert rule template property bag.",
+    "AlertRuleTemplatesList": {
+      "description": "List all the alert rule templates.",
       "properties": {
-        "alertRulesCreatedByTemplateCount": {
-          "description": "the number of alert rules that were created by this template",
-          "type": "integer"
-        },
-        "createdDateUTC": {
-          "description": "The time that this alert rule template has been added.",
-          "format": "date-time",
+        "nextLink": {
+          "description": "URL to fetch the next set of alert rule templates.",
           "readOnly": true,
           "type": "string"
         },
-        "description": {
-          "description": "The description of the alert rule template.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name for alert rule template.",
-          "type": "string"
-        },
-        "requiredDataConnectors": {
-          "description": "The required data connectors for this template",
+        "value": {
+          "description": "Array of alert rule templates.",
           "items": {
-            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+            "$ref": "#/definitions/AlertRuleTemplate"
           },
           "type": "array"
-        },
-        "status": {
-          "description": "The alert rule template status.",
-          "enum": [
-            "Installed",
-            "Available",
-            "NotAvailable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "TemplateStatus",
-            "values": [
-              {
-                "description": "Alert rule template installed. and can not use more then once",
-                "value": "Installed"
-              },
-              {
-                "description": "Alert rule template is available.",
-                "value": "Available"
-              },
-              {
-                "description": "Alert rule template is not available",
-                "value": "NotAvailable"
-              }
-            ]
-          }
         }
       },
-      "type": "object"
+      "required": [
+        "value"
+      ]
     },
     "AlertRuleTriggerOperator": {
       "description": "The operation against the threshold that triggers alert rule.",
@@ -1060,6 +1681,21 @@
             "value": "Informational"
           }
         ]
+      }
+    },
+    "MicrosoftSecurityProductName": {
+      "description": "The alerts' productName on which the cases will be generated",
+      "enum": [
+        "Microsoft Cloud App Security",
+        "Azure Security Center",
+        "Azure Advanced Threat Protection",
+        "Azure Active Directory Identity Protection",
+        "Azure Security Center for IoT"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MicrosoftSecurityProductName"
       }
     },
     "AlertsDataTypeOfDataConnector": {
@@ -1145,42 +1781,137 @@
       },
       "type": "object"
     },
-    "CloudError": {
-      "description": "Error response structure.",
+    "Bookmark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a bookmark in Azure Security Insights.",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error data",
+        "properties": {
+          "$ref": "#/definitions/BookmarkProperties",
+          "description": "Bookmark properties",
           "x-ms-client-flatten": true
         }
       },
-      "type": "object",
-      "x-ms-external": true
+      "type": "object"
     },
-    "CloudErrorBody": {
-      "description": "Error details.",
+    "BookmarkList": {
+      "description": "List all the bookmarks.",
       "properties": {
-        "code": {
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+        "nextLink": {
+          "description": "URL to fetch the next set of cases.",
           "readOnly": true,
           "type": "string"
         },
-        "message": {
-          "description": "A message describing the error, intended to be suitable for display in a user interface.",
-          "readOnly": true,
+        "value": {
+          "description": "Array of bookmarks.",
+          "items": {
+            "$ref": "#/definitions/Bookmark"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BookmarkProperties": {
+      "description": "Describes bookmark properties",
+      "properties": {
+        "created": {
+          "description": "The time the bookmark was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the bookmark",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the bookmark",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query of the bookmark.",
+          "type": "string"
+        },
+        "queryResult": {
+          "description": "The query result of the bookmark.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the bookmark was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "query"
+      ],
+      "type": "object"
+    },
+    "ClientInfo": {
+      "description": "Information on the client (user or application) that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the client.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the client.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the client.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the client.",
           "type": "string"
         }
       },
-      "type": "object",
-      "x-ms-external": true
+      "type": "object"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The error object of the CloudError response"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "DataConnector": {
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorKind"
         }
       ],
       "description": "Data connector.",
@@ -1188,6 +1919,12 @@
       "required": [
         "kind"
       ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorKind",
+          "description": "The data connector kind"
+        }
+      },
       "type": "object"
     },
     "DataConnectorDataTypeCommon": {
@@ -1209,54 +1946,48 @@
       "type": "object"
     },
     "DataConnectorKind": {
-      "description": "Describes an Azure resource with kind.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the data connector",
-          "enum": [
-            "AzureActiveDirectory",
-            "AzureSecurityCenter",
-            "MicrosoftCloudAppSecurity",
-            "ThreatIntelligence",
-            "Office365",
-            "AmazonWebServicesCloudTrail",
-            "AzureAdvancedThreatProtection",
-            "MicrosoftDefenderAdvancedThreatProtection"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "DataConnectorKind",
-            "values": [
-              {
-                "value": "AzureActiveDirectory"
-              },
-              {
-                "value": "AzureSecurityCenter"
-              },
-              {
-                "value": "MicrosoftCloudAppSecurity"
-              },
-              {
-                "value": "ThreatIntelligence"
-              },
-              {
-                "value": "Office365"
-              },
-              {
-                "value": "AmazonWebServicesCloudTrail"
-              },
-              {
-                "value": "AzureAdvancedThreatProtection"
-              },
-              {
-                "value": "MicrosoftDefenderAdvancedThreatProtection"
-              }
-            ]
+      "description": "The kind of the data connector",
+      "enum": [
+        "AzureActiveDirectory",
+        "AzureSecurityCenter",
+        "MicrosoftCloudAppSecurity",
+        "ThreatIntelligence",
+        "Office365",
+        "AmazonWebServicesCloudTrail",
+        "AzureAdvancedThreatProtection",
+        "MicrosoftDefenderAdvancedThreatProtection"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorKind",
+        "values": [
+          {
+            "value": "AzureActiveDirectory"
+          },
+          {
+            "value": "AzureSecurityCenter"
+          },
+          {
+            "value": "MicrosoftCloudAppSecurity"
+          },
+          {
+            "value": "ThreatIntelligence"
+          },
+          {
+            "value": "Office365"
+          },
+          {
+            "value": "AmazonWebServicesCloudTrail"
+          },
+          {
+            "value": "AzureAdvancedThreatProtection"
+          },
+          {
+            "value": "MicrosoftDefenderAdvancedThreatProtection"
           }
-        }
-      },
-      "type": "object"
+        ]
+      }
     },
     "DataConnectorList": {
       "description": "List all the data connectors.",
@@ -1371,25 +2102,8 @@
       "description": "Represents Fusion alert rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            }
-          ],
+          "$ref": "#/definitions/FusionAlertRuleTemplateProperties",
           "description": "Fusion alert rule template properties",
-          "properties": {
-            "severity": {
-              "$ref": "#/definitions/AlertSeverity",
-              "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "#/definitions/AttackTactic"
-              },
-              "type": "array"
-            }
-          },
           "required": [
             "displayName",
             "description",
@@ -1402,6 +2116,457 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "FusionAlertRuleTemplateProperties": {
+      "description": "Represents Fusion alert rule template properties",
+      "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data connectors for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status.",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule template",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Incident": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents an incident in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncidentProperties",
+          "description": "Incident properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "IncidentAdditionalData": {
+      "description": "Incident additional data property bag.",
+      "properties": {
+        "alertsCount": {
+          "description": "The number of alerts in the incident",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "bookmarksCount": {
+          "description": "The number of bookmarks in the incident",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "commentsCount": {
+          "description": "The number of comments in the incident",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "alertProductNames": {
+          "description": "List of product names of alerts in the incident",
+          "items": {
+            "description": "Alert product name",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "tactics": {
+          "description": "The tactics associated with incident",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentComment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an incident comment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncidentCommentProperties",
+          "description": "Incident comment properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "IncidentCommentList": {
+      "description": "List of incident comments.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of comments.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of comments.",
+          "items": {
+            "$ref": "#/definitions/IncidentComment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentCommentProperties": {
+      "description": "Incident comment property bag.",
+      "properties": {
+        "createdTimeUtc": {
+          "description": "The time the comment was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "The comment message",
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/ClientInfo",
+          "description": "Describes the client that created the comment",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "IncidentLabel": {
+      "description": "Represents an incident label",
+      "properties": {
+        "labelName": {
+          "description": "The name of the label",
+          "type": "string"
+        },
+        "labelType": {
+          "description": "The type of the label",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentLabelType",
+            "values": [
+              {
+                "description": "Label manually created by a user",
+                "value": "User"
+              },
+              {
+                "description": "Label automatically created by the system",
+                "value": "System"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "labelName"
+      ],
+      "type": "object"
+    },
+    "IncidentList": {
+      "description": "List all the incidents.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of incidents.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of incidents.",
+          "items": {
+            "$ref": "#/definitions/Incident"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentOwnerInfo": {
+      "description": "Information on the user an incident is assigned to",
+      "properties": {
+        "email": {
+          "description": "The email of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the incident is assigned to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the incident is assigned to.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentProperties": {
+      "description": "Describes incident properties",
+      "properties": {
+        "additionalData": {
+          "$ref": "#/definitions/IncidentAdditionalData",
+          "description": "Additional data on the incident",
+          "readOnly": true,
+          "type": "object"
+        },
+        "classification": {
+          "description": "The reason the incident was closed",
+          "enum": [
+            "Undetermined",
+            "TruePositive",
+            "BenignPositive",
+            "FalsePositive"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentClassification",
+            "values": [
+              {
+                "description": "Incident classification was undetermined",
+                "value": "Undetermined"
+              },
+              {
+                "description": "Incident was true positive",
+                "value": "TruePositive"
+              },
+              {
+                "description": "Incident was benign positive",
+                "value": "BenignPositive"
+              },
+              {
+                "description": "Incident was false positive",
+                "value": "FalsePositive"
+              }
+            ]
+          }
+        },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
+        "classificationReason": {
+          "description": "The classification reason the incident was closed with",
+          "enum": [
+            "SuspiciousActivity",
+            "SuspiciousButExpected",
+            "IncorrectAlertLogic",
+            "InaccurateData"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentClassificationReason",
+            "values": [
+              {
+                "description": "Classification reason was suspicious activity",
+                "value": "SuspiciousActivity"
+              },
+              {
+                "description": "Classification reason was suspicious but expected",
+                "value": "SuspiciousButExpected"
+              },
+              {
+                "description": "Classification reason was incorrect alert logic",
+                "value": "IncorrectAlertLogic"
+              },
+              {
+                "description": "Classification reason was inaccurate data",
+                "value": "InaccurateData"
+              }
+            ]
+          }
+        },
+        "createdTimeUtc": {
+          "description": "The time the incident was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the incident",
+          "type": "string"
+        },
+        "firstActivityTimeUtc": {
+          "description": "The time of the first activity in the incident",
+          "format": "date-time",
+          "type": "string"
+        },
+        "incidentUrl": {
+          "description": "The deep-link url to the incident in Azure portal",
+          "readOnly": true,
+          "type": "string"
+        },
+        "incidentNumber": {
+          "description": "A sequential number",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "labels": {
+          "description": "List of labels relevant to this incident",
+          "items": {
+            "$ref": "#/definitions/IncidentLabel"
+          },
+          "type": "array"
+        },
+        "lastActivityTimeUtc": {
+          "description": "The time of the last activity in the incident",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The last time the incident was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/definitions/IncidentOwnerInfo",
+          "description": "Describes a user that the incident is assigned to",
+          "type": "object"
+        },
+        "relatedAnalyticRuleIds": {
+          "description": "List of resource ids of Analytic rules related to the incident",
+          "items": {
+            "description": "Related Analytic rule resource id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "enum": [
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentSeverity",
+            "values": [
+              {
+                "description": "High severity",
+                "value": "High"
+              },
+              {
+                "description": "Medium severity",
+                "value": "Medium"
+              },
+              {
+                "description": "Low severity",
+                "value": "Low"
+              },
+              {
+                "description": "Informational severity",
+                "value": "Informational"
+              }
+            ]
+          }
+        },
+        "status": {
+          "description": "The status of the incident",
+          "enum": [
+            "New",
+            "Active",
+            "Closed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentStatus",
+            "values": [
+              {
+                "description": "An active incident which isn't being handled currently",
+                "value": "New"
+              },
+              {
+                "description": "An active incident which is being handled",
+                "value": "Active"
+              },
+              {
+                "description": "A non-active incident",
+                "value": "Closed"
+              }
+            ]
+          }
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "severity",
+        "status"
+      ],
+      "type": "object"
     },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
@@ -1432,26 +2597,24 @@
       ],
       "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
       "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts data type connection."
+        },
         "discoveryLogs": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ],
-          "description": "Discovery log data type connection.",
-          "type": "object"
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Discovery log data type connection."
         }
       },
       "type": "object"
     },
     "MCASDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
       "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
         "dataTypes": {
           "$ref": "#/definitions/MCASDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -1477,15 +2640,17 @@
       "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
     },
     "MDATPDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
       "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
       "type": "object"
     },
     "MicrosoftSecurityIncidentCreationAlertRule": {
@@ -1515,20 +2680,16 @@
           },
           "type": "array"
         },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "productFilter": {
-          "description": "The alerts' productName on which the cases will be generated",
-          "enum": [
-            "Microsoft Cloud App Security",
-            "Azure Security Center",
-            "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "MicrosoftSecurityProductName"
-          }
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
@@ -1581,6 +2742,71 @@
       ],
       "type": "object"
     },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
+      "description": "MicrosoftSecurityIncidentCreation rule template properties",
+      "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data connectors for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status.",
+          "type": "string"
+        },
+        "displayNamesFilter": {
+          "description": "the alerts' displayNames on which the cases will be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "productFilter": {
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
+        },
+        "severitiesFilter": {
+          "description": "the alerts' severities on which the cases will be generated",
+          "items": {
+            "$ref": "#/definitions/AlertSeverity"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "productFilter"
+      ],
+      "type": "object"
+    },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
@@ -1590,14 +2816,7 @@
       "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
-            }
-          ],
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "required": [
             "displayName",
@@ -1706,13 +2925,12 @@
       "type": "object"
     },
     "OfficeDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
       "description": "Office data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
         "dataTypes": {
           "$ref": "#/definitions/OfficeDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -1860,6 +3078,7 @@
         },
         "triggerThreshold": {
           "description": "The threshold triggers this alert rule.",
+          "format": "int32",
           "type": "integer"
         }
       },
@@ -1926,6 +3145,77 @@
       ],
       "type": "object"
     },
+    "ScheduledAlertRuleTemplateProperties": {
+      "description": "Scheduled alert rule template properties",
+      "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "description": "the number of alert rules that were created by this template",
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDateUTC": {
+          "description": "The time that this alert rule template has been added.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule template.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alert rule template.",
+          "type": "string"
+        },
+        "requiredDataConnectors": {
+          "description": "The required data connectors for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status.",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query that creates alerts for this rule.",
+          "type": "string"
+        },
+        "queryFrequency": {
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run.",
+          "format": "duration",
+          "type": "string"
+        },
+        "queryPeriod": {
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at.",
+          "format": "duration",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "triggerOperator": {
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
+          "description": "The operation against the threshold that triggers alert rule."
+        },
+        "triggerThreshold": {
+          "description": "The threshold triggers this alert rule.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule template",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ScheduledAlertRuleTemplate": {
       "allOf": [
         {
@@ -1935,24 +3225,8 @@
       "description": "Represents scheduled alert rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
-            }
-          ],
+          "$ref": "#/definitions/ScheduledAlertRuleTemplateProperties",
           "description": "Scheduled alert rule template properties",
-          "properties": {
-            "tactics": {
-              "description": "The tactics of the alert rule template",
-              "items": {
-                "$ref": "#/definitions/AttackTactic"
-              },
-              "type": "array"
-            }
-          },
           "required": [
             "displayName",
             "description",
@@ -1975,35 +3249,32 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/SettingsKind"
         }
       ],
-      "description": "The Setting.",
+      "description": "The Settings.",
       "discriminator": "kind",
       "required": [
         "kind"
       ],
-      "type": "object"
-    },
-    "SettingsKind": {
-      "description": "Describes an Azure resource with kind.",
       "properties": {
         "kind": {
-          "description": "The kind of the setting",
-          "enum": [
-            "UebaSettings",
-            "ToggleSettings"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SettingKind"
-          }
+          "$ref": "#/definitions/SettingsKind",
+          "description": "The data connector kind"
         }
       },
       "type": "object"
+    },
+    "SettingsKind": {
+      "description": "The kind of the setting",
+      "enum": [
+        "UebaSettings",
+        "ToggleSettings"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SettingKind"
+      }
     },
     "TIDataConnector": {
       "allOf": [
@@ -2038,13 +3309,12 @@
       "type": "object"
     },
     "TIDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
       "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -2213,7 +3483,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "IncidentSeverity",
+            "name": "CaseSeverity",
             "values": [
               {
                 "description": "Critical severity",
@@ -2311,6 +3581,24 @@
       "required": true,
       "type": "string"
     },
+    "Bookmark": {
+      "description": "The bookmark",
+      "in": "body",
+      "name": "bookmark",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Bookmark"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "BookmarkId": {
+      "description": "Bookmark ID",
+      "in": "path",
+      "name": "bookmarkId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ConsentId": {
       "description": "consent ID",
       "in": "path",
@@ -2349,6 +3637,42 @@
       "description": "entity query ID",
       "in": "path",
       "name": "entityQueryId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Incident": {
+      "description": "The incident",
+      "in": "body",
+      "name": "incident",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Incident"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentComment": {
+      "description": "The incident comment",
+      "in": "body",
+      "name": "incidentComment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/IncidentComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentCommentId": {
+      "description": "Incident comment ID",
+      "in": "path",
+      "name": "incidentCommentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentId": {
+      "description": "Incident ID",
+      "in": "path",
+      "name": "incidentId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
