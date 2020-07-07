@@ -80,7 +80,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EnrollmentAccount"
+              "$ref": "#/definitions/EnrollmentAccountSummary"
             }
           },
           "default": {
@@ -202,7 +202,7 @@
     }
   },
   "definitions": {
-    "EnrollmentAccount": {
+    "EnrollmentAccountSummary": {
       "description": "An enrollment account resource.",
       "type": "object",
       "allOf": [
@@ -214,7 +214,7 @@
         "properties": {
           "description": "An enrollment account.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnrollmentAccountProperties"
+          "$ref": "#/definitions/EnrollmentAccountSummaryProperties"
         }
       }
     },
@@ -226,7 +226,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/EnrollmentAccount"
+            "$ref": "#/definitions/EnrollmentAccountSummary"
           }
         },
         "nextLink": {
@@ -236,7 +236,7 @@
         }
       }
     },
-    "EnrollmentAccountProperties": {
+    "EnrollmentAccountSummaryProperties": {
       "description": "The properties of the enrollment account.",
       "properties": {
         "principalName": {
@@ -364,13 +364,6 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
-    },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Azure Subscription ID.",
-      "required": true,
-      "type": "string"
     }
   },
   "security": [
