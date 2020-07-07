@@ -1,0 +1,394 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-03-01-preview",
+    "title": "BillingManagementClient",
+    "description": "Billing client provides access to billing resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/enrollmentAccounts": {
+      "get": {
+        "tags": [
+          "EnrollmentAccounts"
+        ],
+        "x-ms-examples": {
+          "EnrollmentAccountsList": {
+            "$ref": "./examples/EnrollmentAccountsList.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_List",
+        "description": "Lists the enrollment accounts the caller has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{name}": {
+      "get": {
+        "tags": [
+          "EnrollmentAccounts"
+        ],
+        "x-ms-examples": {
+          "EnrollmentAccountsGet": {
+            "$ref": "./examples/EnrollmentAccountsGet.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_Get",
+        "description": "Gets a enrollment account by name.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Enrollment Account name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccountSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods": {
+      "get": {
+        "tags": [
+          "BillingPeriods"
+        ],
+        "operationId": "BillingPeriods_List",
+        "description": "Lists the available billing periods for a subscription in reverse chronological order. This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
+        "externalDocs": {
+          "url": "https://go.microsoft.com/fwlink/?linkid=844490"
+        },
+        "x-ms-examples": {
+          "BillingPeriodsList": {
+            "$ref": "./examples/BillingPeriodsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter billing periods by billingPeriodEndDate. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N billing periods.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingPeriodsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}": {
+      "get": {
+        "tags": [
+          "BillingPeriods"
+        ],
+        "operationId": "BillingPeriods_Get",
+        "description": "Gets a named billing period.  This is only supported for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API.",
+        "x-ms-examples": {
+          "BillingPeriodsGet": {
+            "$ref": "./examples/BillingPeriodsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "billingPeriodName",
+            "description": "The name of a BillingPeriod resource.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingPeriod"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EnrollmentAccountSummary": {
+      "description": "An enrollment account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An enrollment account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnrollmentAccountSummaryProperties"
+        }
+      }
+    },
+    "EnrollmentAccountListResult": {
+      "description": "Result of listing enrollment accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of enrollment accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccountSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentAccountSummaryProperties": {
+      "description": "The properties of the enrollment account.",
+      "properties": {
+        "principalName": {
+          "description": "The account owner's principal name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingPeriod": {
+      "description": "A billing period resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing period.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingPeriodProperties"
+        }
+      }
+    },
+    "BillingPeriodsListResult": {
+      "description": "Result of listing billing periods. It contains a list of available billing periods in reverse chronological order.",
+      "properties": {
+        "value": {
+          "description": "The list of billing periods.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingPeriod"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingPeriodProperties": {
+      "description": "The properties of the billing period.",
+      "properties": {
+        "billingPeriodStartDate": {
+          "description": "The start of the date range covered by the billing period.",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "billingPeriodEndDate": {
+          "description": "The end of the date range covered by the billing period.",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "invoiceIds": {
+          "description": "Array of invoice ids that associated with.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
+    },
+    "subscriptionGuidParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
