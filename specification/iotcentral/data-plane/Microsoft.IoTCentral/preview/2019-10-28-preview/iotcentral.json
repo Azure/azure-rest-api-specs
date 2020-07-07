@@ -494,6 +494,25 @@
         "value"
       ]
     },
+    "EmailUser": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/User"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "email": {
+              "description": "Email address of the user.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "email"
+          ]
+        }
+      ]
+    },
     "Endpoint": {
       "type": "object",
       "properties": {
@@ -766,10 +785,19 @@
       "type": "object",
       "properties": {
         "roles": {
-          "description": "List of role IDs that specify the permissions to access the application.",
+          "description": "List of roles that specify the permissions to access the application.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "role": {
+                "description": "ID that specifies the role assignment for this role.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "role"
+            ]
           },
           "minItems": 1
         }
@@ -851,6 +879,30 @@
         }
       ]
     },
+    "ServicePrincipalUser": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/User"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tenantId": {
+              "description": "The AAD tenant ID of the service principal.",
+              "type": "string"
+            },
+            "objectId": {
+              "description": "The AAD object ID of the service principal.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tenantId",
+            "objectId"
+          ]
+        }
+      ]
+    },
     "SolutionModel": {
       "allOf": [
         {
@@ -909,7 +961,6 @@
       ]
     },
     "SymmetricKeyAttestation": {
-      "x-ms-discriminator-value": "SymmetricKeyAttestation",
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
@@ -941,7 +992,6 @@
       ]
     },
     "TpmAttestation": {
-      "x-ms-discriminator-value": "TpmAttestation",
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
@@ -958,6 +1008,50 @@
             "tpm"
           ]
         }
+      ]
+    },
+    "User": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Permission"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "Unique ID of the user.",
+              "type": "string",
+              "readOnly": true
+            },
+            "type": {
+              "description": "Type of the user.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "discriminator": "type"
+        }
+      ]
+    },
+    "UserCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of users.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of users.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ValueDetail": {
@@ -1027,7 +1121,6 @@
       }
     },
     "X509Attestation": {
-      "x-ms-discriminator-value": "X509Attestation",
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
@@ -2297,6 +2390,117 @@
           }
         }
       }
+    },
+    "/users": {
+      "get": {
+        "operationId": "Users_List",
+        "summary": "Get the list of users in an application",
+        "x-ms-examples": {
+          "List users": {
+            "$ref": "./examples/users_list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserCollection"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "operationId": "Users_Get",
+        "summary": "Get a user by ID",
+        "x-ms-examples": {
+          "Get a user by ID": {
+            "$ref": "./examples/users_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Unique ID of the user.",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Users_Set",
+        "summary": "Create or update a user in the application",
+        "x-ms-examples": {
+          "Add or update a service principal user": {
+            "$ref": "./examples/users_set_serviceprincipal.json"
+          },
+          "Add or update an email user": {
+            "$ref": "./examples/users_set.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Unique ID of the user.",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User body.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Users_Remove",
+        "summary": "Delete a user",
+        "x-ms-examples": {
+          "Delete a user": {
+            "$ref": "./examples/users_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Unique ID of the user.",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2368,11 +2572,6 @@
     }
   },
   "securityDefinitions": {
-    "APIKeyHeader": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "Authorization"
-    },
     "azure_auth": {
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
@@ -2383,9 +2582,5 @@
       }
     }
   },
-  "security": [
-    {
-      "APIKeyHeader": []
-    }
-  ]
+  "security": []
 }
