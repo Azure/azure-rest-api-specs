@@ -74,6 +74,8 @@ directive:
       - $.definitions.LongTermEnvironmentResource
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.Gen1EnvironmentResource
+      - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource. Similarly, the Environments_Get operation returns an EnvironmentResource, from which both StandardEnvironmentResource and LongTermEnvironmentResource inherit.
 
@@ -83,6 +85,8 @@ directive:
       - $.definitions.LongTermEnvironmentResource 
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.Gen1EnvironmentResource
+      - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
 ```
