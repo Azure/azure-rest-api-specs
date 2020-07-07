@@ -1796,6 +1796,11 @@
           "type": "integer",
           "format": "int32",
           "description": "If clustering is enabled, the Shard ID of Redis Instance"
+        },
+        "isMaster": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the instance is a master node."
         }
       },
       "description": "Details of single instance of redis."
@@ -1856,11 +1861,15 @@
           "type": "integer",
           "format": "int32",
           "description": "If clustering is enabled, the ID of the shard to be rebooted."
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "A list of redis instances to reboot, specified by per-instance SSL ports or non-SSL ports."
         }
       },
-      "required": [
-        "rebootType"
-      ],
       "description": "Specifies which Redis node(s) to reboot."
     },
     "ExportRDBParameters": {
