@@ -2697,7 +2697,9 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
-          "$ref": "#/definitions/UrlSigningKey"
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
