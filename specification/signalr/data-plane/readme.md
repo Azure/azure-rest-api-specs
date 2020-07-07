@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-1-0` is specified on the command l
 
 ``` yaml $(tag) == 'package-1-0'
 input-file:
-- AzureSignalR/1.0/azuresignalr.json
+- AzureSignalR/v1/azuresignalr.json
 ```
 
 ---
@@ -94,7 +94,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/AzureSignalR/1.0/azuresignalr.json
+  - $(this-folder)/AzureSignalR/v1/azuresignalr.json
 
 ```
 
