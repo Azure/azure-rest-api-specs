@@ -137,10 +137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Undelete either has been performed or account was not deleted.",
-            "schema": {
-              "$ref": "#/definitions/UndeleteStorageAccount"
-            }
+            "description": "OK -- Undelete either has been performed or account was not deleted."
           },
           "202": {
             "description": "Accepted -- undelete operation trigged; operation will complete asynchronously."
@@ -195,7 +192,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -377,6 +377,7 @@
         },
         "primaryEndpoints": {
           "description": "The URLs that are used to perform a retrieval of a public BLOB, queue, or table object.",
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -543,7 +544,8 @@
       "in": "query",
       "required": false,
       "type": "boolean",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "default": false
     },
     "FilterParameter": {
       "description": "Filter string",
