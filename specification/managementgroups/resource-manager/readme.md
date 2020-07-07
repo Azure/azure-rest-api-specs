@@ -226,6 +226,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2019-11 and java
 
 These settings apply only when `--tag=package-2019-11 --java` is specified on the command line.
@@ -238,6 +239,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2020-02 and java
 
 These settings apply only when `--tag=package-2020-02 --java` is specified on the command line.
