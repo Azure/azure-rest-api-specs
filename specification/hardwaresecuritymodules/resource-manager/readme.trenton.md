@@ -42,6 +42,11 @@ overrides:
       - SchemaName: subnet_id
       - Hidden: false
   - where:
+      property: //properties/networkProfile/subnet/id
+    set:
+      - SchemaName: subnet_id
+      - Hidden: false
+  - where:
       property: statusMessage
     set:
       - Hidden: true
