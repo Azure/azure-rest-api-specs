@@ -1,0 +1,644 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-07-01-preview",
+    "title": "RecoveryServicesBackupClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/operationStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "DataMove"
+        ],
+        "description": "Common Controller for getting data move operation status",
+        "operationId": "GetOperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/BackupDataMove/BackupDataMoveOperationStatus_Get.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare": {
+      "post": {
+        "tags": [
+          "DataMove"
+        ],
+        "description": "Prepare Data Move controller",
+        "operationId": "BMSPrepareDataMove",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Prepare data move request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrepareDataMoveRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Prepare Data Move": {
+            "$ref": "./examples/BackupDataMove/PrepareDataMove_Post.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare/operationResult/{operationId}": {
+      "get": {
+        "tags": [
+          "BMSPrepareDataMoveOperationResult"
+        ],
+        "description": "Prepare Data Move Operation Result",
+        "operationId": "BMSPrepareDataMoveOperationResult_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrepareDataMoveResponseResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Get operation result for PrepareDataMove": {
+            "$ref": "./examples/BackupDataMove/PrepareDataMoveOperationResult_Get.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/trigger": {
+      "post": {
+        "tags": [
+          "DataMove"
+        ],
+        "description": "Trigger Data Move controller",
+        "operationId": "BMSTriggerDataMove",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Trigger data move request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerDataMoveRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Trigger Data Move": {
+            "$ref": "./examples/BackupDataMove/TriggerDataMove_Post.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClientScriptForConnect": {
+      "description": "Client script details for file / folder restore.",
+      "type": "object",
+      "properties": {
+        "scriptContent": {
+          "description": "File content of the client script for file / folder restore.",
+          "type": "string"
+        },
+        "scriptExtension": {
+          "description": "File extension of the client script for file / folder restore - .ps1 , .sh , etc.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "OS type - Windows, Linux etc. for which this file / folder restore client script works.",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL of Executable from where to source the content. If this is not null then ScriptContent should not be used",
+          "type": "string"
+        },
+        "scriptNameSuffix": {
+          "description": "Mandatory suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
+          "type": "string"
+        }
+      }
+    },
+    "InstantItemRecoveryTarget": {
+      "description": "Target details for file / folder restore.",
+      "type": "object",
+      "properties": {
+        "clientScripts": {
+          "description": "List of client scripts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientScriptForConnect"
+          }
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Operation status.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "enum": [
+            "Invalid",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationStatusValues",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Operation start time. Format: ISO-8601.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Operation end time. Format: ISO-8601.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationStatusError",
+          "description": "Error information related to this operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationStatusExtendedInfo",
+          "description": "Additional information associated with this operation."
+        }
+      }
+    },
+    "OperationStatusError": {
+      "description": "Error information associated with operation status call.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code of the operation failure.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message displayed if the operation failure.",
+          "type": "string"
+        },
+        "recommendation": {
+          "description": "Recommended action displayed in case operation fails.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatusExtendedInfo": {
+      "description": "Base class for additional information of operation status.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "OperationStatusJobExtendedInfo": {
+      "description": "Operation status job extended info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobId": {
+          "description": "ID of the job created for this protected item.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
+    },
+    "OperationStatusJobsExtendedInfo": {
+      "description": "Operation status extended info for list of jobs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobIds": {
+          "description": "IDs of the jobs created for the protected item.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failedJobsError": {
+          "description": "Stores all the failed jobs along with the corresponding error codes.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
+    },
+    "OperationStatusProvisionILRExtendedInfo": {
+      "description": "Operation status extended info for ILR provision action.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "recoveryTarget": {
+          "$ref": "#/definitions/InstantItemRecoveryTarget",
+          "description": "Target details for file / folder restore."
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusProvisionILRExtendedInfo"
+    },
+    "OperationStatusRecoveryPointExtendedInfo": {
+      "description": "Operation status extended info for Updated Recovery Point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "updatedRecoveryPoint": {
+          "$ref": "#/definitions/RecoveryPoint",
+          "description": "Recovery Point info with updated source snapshot URI"
+        },
+        "deletedBackupItemVersion": {
+          "description": "In case the share is in soft-deleted state, populate this field with deleted backup item",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusRecoveryPointExtendedInfo"
+    },
+    "PrepareDataMoveRequest": {
+      "description": "Prepare DataMove Request",
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "description": "ARM Id of target vault",
+          "type": "string"
+        },
+        "targetRegion": {
+          "description": "Target Region",
+          "type": "string"
+        },
+        "targetCloud": {
+          "description": "Target Cloud",
+          "type": "string"
+        },
+        "dataMoveLevel": {
+          "description": "DataMove Level",
+          "enum": [
+            "Invalid",
+            "Vault",
+            "Container"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataMoveLevel",
+            "modelAsString": true
+          }
+        },
+        "sourceContainerArmIds": {
+          "description": "Source Container ArmIds",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ignoreMoved": {
+          "description": "Ignore the artifacts which are already moved.",
+          "type": "boolean"
+        }
+      }
+    },
+    "PrepareDataMoveRequestResource": {
+      "description": "Prepare DataMove Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrepareDataMoveRequest",
+          "description": "PrepareDataMoveRequestResource properties"
+        }
+      }
+    },
+    "PrepareDataMoveResponse": {
+      "description": "Prepare DataMove Response",
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "description": "Co-relationId for move operation",
+          "type": "string"
+        },
+        "sourceVaultProperties": {
+          "description": "Source Vault Properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrepareDataMoveResponseResource": {
+      "description": "Prepare DataMove Response",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrepareDataMoveResponse",
+          "description": "PrepareDataMoveResponseResource properties"
+        }
+      }
+    },
+    "RecoveryPoint": {
+      "description": "Base class for backup copies. Workload-specific backup copies are derived from this class.",
+      "type": "object"
+    },
+    "Resource": {
+      "description": "ARM Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "description": "Optional ETag.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TriggerDataMoveRequest": {
+      "description": "Trigger DataMove Request",
+      "type": "object",
+      "properties": {
+        "sourceResourceId": {
+          "description": "ARM Id of source vault",
+          "type": "string"
+        },
+        "sourceRegion": {
+          "description": "Source Region",
+          "type": "string"
+        },
+        "sourceCloud": {
+          "description": "Source Cloud",
+          "type": "string"
+        },
+        "dataMoveLevel": {
+          "description": "DataMove Level",
+          "enum": [
+            "Invalid",
+            "Vault",
+            "Container"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataMoveLevel",
+            "modelAsString": true
+          }
+        },
+        "correlationId": {
+          "description": "CorrelationId",
+          "type": "string"
+        },
+        "sourceContainerArmIds": {
+          "description": "Source Container ArmIds",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pauseGC": {
+          "description": "Pause GC",
+          "type": "boolean"
+        }
+      }
+    },
+    "TriggerDataMoveRequestResource": {
+      "description": "Trigger DataMove Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriggerDataMoveRequest",
+          "description": "TriggerDataMoveRequestResource properties"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

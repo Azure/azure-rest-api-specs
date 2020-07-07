@@ -702,7 +702,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous\r\noperation. Status of the operation can be fetched using GetPolicyOperationResult API.",
+        "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous\r\noperation. Status of the operation can be fetched using GetProtectionPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_Get",
         "produces": [
           "application/json"
@@ -736,6 +736,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get Azure IaasVm Protection Policy Details": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Get.json"
@@ -746,7 +747,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched\r\nusing GetPolicyOperationResult API.",
+        "description": "Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched\r\nusing GetProtectionPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -792,6 +793,7 @@
             "description": "Accepted"
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or Update Simple Azure Vm Protection Policy": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_CreateOrUpdate_Simple.json"
