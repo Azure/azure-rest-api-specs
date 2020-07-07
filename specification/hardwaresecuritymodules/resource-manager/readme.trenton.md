@@ -37,6 +37,10 @@ overrides:
     set:
       - IsFlatten: true
   - where:
+      property: //properties/networkProfile/subnet
+    set:
+      - IsFlatten: true
+  - where:
       property: /parameters/properties/networkProfile/subnet/id
     set:
       - SchemaName: subnet_id
