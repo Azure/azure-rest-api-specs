@@ -1173,7 +1173,8 @@
           "description": "Defines what this IP filter will be used for. This is to support IP filtering on proxies.",
           "enum": [
             "Default",
-            "XffProxy"
+            "XffProxy",
+            "ServiceTag"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1193,6 +1194,16 @@
         "description": {
           "description": "IP restriction rule description.",
           "type": "string"
+        },
+        "headers": {
+          "description": "IP restriction rule headers.\nX-Forwarded-Host (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples). \nThe matching logic is ..\n- If the property is null or empty (default), all hosts(or lack of) are allowed.\n- A value is compared using ordinal-ignore-case (excluding port number).\n- Subdomain wildcards are permitted but don't match the root domain. For example, *.contoso.com matches the subdomain foo.contoso.com\n but not the root domain contoso.com or multi-level foo.bar.contoso.com\n- Unicode host names are allowed but are converted to Punycode for matching.\n\nX-Forwarded-For (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples).\nThe matching logic is ..\n- If the property is null or empty (default), any forwarded-for chains (or lack of) are allowed.\n- If any address (excluding port number) in the chain (comma separated) matches the CIDR defined by the property.\n\nX-Azure-FDID and X-FD-HealthProbe.\nThe matching logic is exact match.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -1787,6 +1798,18 @@
             "clientCertEnabled": {
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
+            },
+            "clientCertMode": {
+              "description": "This composes with ClientCertEnabled setting.\n- ClientCertEnabled: false means ClientCert is ignored.\n- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.\n- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.",
+              "enum": [
+                "Required",
+                "Optional"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ClientCertMode",
+                "modelAsString": false
+              }
             },
             "clientCertExclusionPaths": {
               "description": "client certificate authentication comma-separated exclusion paths",
