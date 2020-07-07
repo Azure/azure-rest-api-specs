@@ -698,6 +698,9 @@
         "tags": [
           "WorkspaceConnections"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "ListWorkspaceConnections": {
             "$ref": "./examples/listWorkspaceConnections.json"
@@ -729,10 +732,9 @@
           "200": {
             "description": "Successfully retrieved the connections.",
             "schema": {
-              "type": "array",
-              "description": "array of connections.",
-              "items": {
-                "$ref": "#/definitions/WorkspaceConnection"
+              "description": "The response includes a paginated array of Workspace connections and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+              "schema": {
+                "$ref": "#/definitions/PaginatedWorkspaceConnectionsList"
               }
             }
           },
@@ -3651,6 +3653,23 @@
         "keyVaultArmId"
       ],
       "type": "object"
+    },
+    "PaginatedWorkspaceConnectionsList": {
+      "type": "object",
+      "description": "Paginated list of Workspace connection objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of Workspace connection objects.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
     },
     "WorkspaceConnection": {
       "x-ms-azure-resource": true,
