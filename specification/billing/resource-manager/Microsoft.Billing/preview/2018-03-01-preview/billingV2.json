@@ -109,7 +109,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionGuidParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -171,7 +171,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionGuidParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -364,6 +364,13 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
+    },
+    "subscriptionGuidParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
     }
   },
   "security": [
