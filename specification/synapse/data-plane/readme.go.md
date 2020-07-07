@@ -70,6 +70,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-vnet-2019-06-01-preview' && $(go)
 go:  
-    namespace: vnet
+    namespace: managedVirtualNetwork
 output-folder: $(go-sdk-folder)/services/preview/synapse/2019-06-01-preview/$(namespace)
 ```
