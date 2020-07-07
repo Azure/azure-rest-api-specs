@@ -2901,7 +2901,11 @@
         },
         "storageProfile": {
           "description": "Storage properties.",
-          "$ref": "#/definitions/StorageProfile"
+          "allOf": [
+            {
+              "$ref": "#/definitions/StorageProfile"
+            }
+          ]         
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
