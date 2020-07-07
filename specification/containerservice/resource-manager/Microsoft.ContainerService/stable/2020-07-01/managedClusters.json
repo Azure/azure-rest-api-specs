@@ -473,6 +473,9 @@
           },
           "Create Managed Cluster with PPG": {
             "$ref": "./examples/ManagedClustersCreate_PPG.json"
+          },
+          "Create/Update Managed Cluster with EnableAHUB": {
+            "$ref": "./examples/ManagedClustersCreate_UpdateWithAHUB.json"
           }
         }
       },
@@ -1849,6 +1852,18 @@
           "type": "string",
           "description": "The administrator password to use for Windows VMs.",
           "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\\^&\\*\\(\\)])[a-zA-Z\\d!@#$%\\^&\\*\\(\\)]{12,123}$"
+        },
+        "licenseType": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Windows_Server"
+          ],
+          "x-ms-enum": {
+            "name": "licenseType",
+            "modelAsString": true
+          },
+          "description": "The licenseType to use for Windows VMs. Windows_Server is used to enable Azure Hybrid User Benefits for Windows VMs."
         }
       },
       "required": [
