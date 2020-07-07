@@ -963,7 +963,7 @@
           "$ref": "#/definitions/ServerVersion",
           "description": "PostgreSQL Server version."
         },
-        "state": {
+        "userVisibleState": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
           "enum": [
@@ -977,6 +977,22 @@
           ],
           "x-ms-enum": {
             "name": "ServerState",
+            "modelAsString": true
+          }
+        },
+        "userVisibleHAState": {
+          "type": "string",
+          "description": "A state of a HA server that is visible to user.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
+          ],
+          "x-ms-enum": {
+            "name": "ServerHAState",
             "modelAsString": true
           }
         },
