@@ -510,7 +510,7 @@
     },
     "/weather/route/{format}": {
       "get": {
-        "x-publish": false,
+        "x-publish": true,
         "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
         "operationId": "Weather_GetWeatherAlongRoutePreview",
         "x-ms-examples": {
@@ -569,7 +569,7 @@
     },
     "/weather/severe/alerts/{format}": {
       "get": {
-        "x-publish": true,
+        "x-publish": false,
         "description": "**Get Severe Weather Alerts**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Severe Weather Alerts service returns the severe weather alerts that are available worldwide from official Government Meteorological Agencies and leading global weather alert providers. Details such as alert type, category and level are returned. For example, the service can return details about severe thunderstorms or forest fires.",
         "operationId": "Weather_GetSevereWeatherAlertsPreview",
         "x-ms-examples": {
@@ -602,7 +602,7 @@
           },
           {
             "name": "details",
-            "description": "Return full details for the severe weather alerts. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the alerts data, which excludes the area-specific full description of alert details (alertDetails).",
+            "description": "Return full details for the severe weather alerts. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the alerts data, which excludes the area-specific full description of alert details (`alertDetails`).",
             "default": "true",
             "in": "query",
             "type": "string"
@@ -1913,7 +1913,7 @@
     },
     "AlertArea": {
       "type": "object",
-      "description": "Information about a severe weather alert issued within an affected area(s). If multiple alerts are active for the same location, the alerts will be returned in order of \"Priority\" within the API response, with the highest \"Priority\" alert being returned at the top of the response.",
+      "description": "Information about a severe weather alert issued within an affected area(s). If multiple alerts are active for the same location, the alerts will be returned in order of `priority` within the API response, with the highest priority alert being returned at the top of the response.",
       "properties": {
         "name": {
           "type": "string",
@@ -1937,11 +1937,11 @@
         },
         "alertDetails": {
           "type": "string",
-          "description": "Full details associated with the alert. Returned if details=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
+          "description": "Full details associated with the alert. Returned if `details`=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
         },
         "alertDetailsLanguageCode": {
           "type": "string",
-          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language paramater. Returned if details=True. Language code has been derived from the ISO 639-1 Alpha-2 codes. "
+          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language paramater. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
         }
       }
     },
@@ -1961,6 +1961,7 @@
     },
     "LatestStatusKeyword": {
       "type": "string",
+      "description": "Keyword for the latest status of the alert.",
       "enum": [
         "New",
         "Extend",
