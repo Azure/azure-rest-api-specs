@@ -1,11 +1,10 @@
-# AzureSignalR
+# Azure SignalR Data Plane APIs
 
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for AzureSignalR.
 
 ---
-
 ## Getting Started
 
 To build the SDK for AzureSignalR, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -26,14 +25,22 @@ These are the global settings for the AzureSignalR API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-1-0
+tag: 1.0
 ```
 
-### Tag: package-2020-07
+### Suppression
 
-These settings apply only when `--tag=package-1-0` is specified on the command line.
+``` yaml
+directive:
+  - suppress: XmsExamplesRequired
+    reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
+```
 
-``` yaml $(tag) == 'package-1-0'
+### Tag: 1.0
+
+These settings apply only when `--tag=1.0` is specified on the command line.
+
+``` yaml $(tag) == '1.0'
 input-file:
 - AzureSignalR/v1/azuresignalr.json
 ```
@@ -65,23 +72,7 @@ csharp:
   clear-output-folder: true
   add-credentials: true
 ```
-## Suppression
 
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: appconfiguration.json
-    where: $.definitions.KeyValue.properties.content_type
-    reason: Existing property names. The service uses snake casing for json properties.
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: appconfiguration.json
-    where: $.definitions.KeyValue.properties.last_modified
-    reason: Existing property names. The service uses snake casing for json properties.
-  - suppress: XmsParameterLocation
-    from: appconfiguration.json
-    where: $.parameters.SyncTokens
-    reason: The latest sync token should be used on every request. It is more proper to be globally stored per client rather than passed in for individual requests.
-```
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
