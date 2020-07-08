@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dscpConfiguration/{dscpConfigurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dscpConfigurations/{dscpConfigurationName}": {
       "put": {
         "tags": [
           "DscpConfiguration"
@@ -205,6 +205,88 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dscpConfigurations": {
+      "get": {
+        "tags": [
+          "DscpConfigurations"
+        ],
+        "operationId": "DscpConfiguration_List",
+        "description": "Gets a DSCP Configuration.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting DSCP Configuration resource.",
+            "schema": {
+              "$ref": "#/definitions/DscpConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Dscp Configuration": {
+            "$ref": "./examples/DscpConfigurationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dscpConfigurations": {
+      "get": {
+        "tags": [
+          "DscpConfigurations"
+        ],
+        "operationId": "NetworkInterfaces_ListAll",
+        "description": "Gets all dscp configurations in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of NetworkInterface resources.",
+            "schema": {
+              "$ref": "#/definitions/DscpConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all network interfaces": {
+            "$ref": "./examples/DscpConfigurationListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -338,6 +420,23 @@
         }
       },
       "description": "Qos Traffic Profiler Port range properties."
+    },
+    "DscpConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DscpConfiguration"
+          },
+          "description": "A list of dscp configurations in a resource group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for the DscpConfigurationList API service call."
     }
   }
 }

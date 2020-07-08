@@ -1140,8 +1140,9 @@
           "description": "A list of references to linked BareMetal resources."
         },
         "dscpConfiguration": {
-          "$ref": "./dscpConfiguration.json#/definitions/DscpConfiguration",
-          "description": "A reference to the dscp configuration to which the network interface is linked."
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to the dscp configuration to which the network interface is linked.",
+          "readOnly": true
         },
         "resourceGuid": {
           "readOnly": true,
