@@ -32,6 +32,8 @@ tag: 1.0
 
 ``` yaml
 directive:
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: For this data plane API, it is not a long run operation and the status code indicates the results.
   - suppress: XmsExamplesRequired
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
 ```
