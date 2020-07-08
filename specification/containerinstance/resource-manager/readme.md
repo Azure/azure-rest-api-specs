@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ContainerInstance.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,28 @@ To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2019-12
+```
+
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12'
+input-file:
+  - Microsoft.ContainerInstance/stable/2019-12-01/containerInstance.json
 ```
 
 ### Tag: package-2018-10
@@ -83,7 +93,6 @@ input-file:
 - Microsoft.ContainerInstance/preview/2017-12-01-preview/containerInstance.json
 ```
 
-
 ### Tag: package-2017-10-preview
 
 These settings apply only when `--tag=package-2017-10-preview` is specified on the command line.
@@ -92,7 +101,6 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 input-file:
 - Microsoft.ContainerInstance/preview/2017-10-01-preview/containerInstance.json
 ```
-
 
 ### Tag: package-2017-08-preview
 
@@ -113,8 +121,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -134,21 +142,9 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_instance']
 ```
 
-
 ## C#
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerInstance
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/containerinstance/Microsoft.Azure.Management.ContainerInstance/src/Generated
-  clear-output-folder: true
-```
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
@@ -156,109 +152,26 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.containerinstance
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerinstance
-```
+## Node.js
 
-### Java multi-api
+See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-10
-  - tag: package-2018-04
-  - tag: package-2018-02-preview
-  - tag: package-2017-12-preview
-  - tag: package-2017-10-preview
-  - tag: package-2017-08-preview
-```
+## Python
 
-### Tag: package-2018-10 and java
+See configuration in [readme.python.md](./readme.python.md)
 
-These settings apply only when `--tag=package-2018-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+## Ruby
 
-``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2018_10_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
-### Tag: package-2018-04 and java
+## TypeScript
 
-These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
-``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2018_04_01
-regenerate-manager: true
-generate-interface: true
-```
 
-### Tag: package-2018-02-preview and java
-
-These settings apply only when `--tag=package-2018-02-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2018_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2018_02_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-12-preview and java
-
-These settings apply only when `--tag=package-2017-12-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-12-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2017_12_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2017_12_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-10-preview and java
-
-These settings apply only when `--tag=package-2017-10-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2017_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2017_10_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-08-preview and java
-
-These settings apply only when `--tag=package-2017-08-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-08-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2017_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2017_08_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -281,11 +194,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
