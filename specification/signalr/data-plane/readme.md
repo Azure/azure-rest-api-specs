@@ -94,7 +94,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/AzureSignalR/v1/azuresignalr.json
+  - AzureSignalR/v1/azuresignalr.json
 
 ```
 

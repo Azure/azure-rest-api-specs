@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Azure SignalR Service REST API",
     "version": "v1"
@@ -8,7 +8,7 @@
     "/api/v1/health": {
       "head": {
         "tags": [
-          "HealthApi"
+          "general"
         ],
         "summary": "Get service health status.",
         "operationId": "HealthApi_Head_Index",
@@ -22,108 +22,176 @@
     "/api/v1/hubs/{hub}": {
       "post": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Broadcast a message to all clients connected to target hub.",
         "operationId": "HubProxyControllerV1_Post_Broadcast",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "excluded",
+            "description": "Excluded connection Ids",
+            "type": "array",
+            "items": {
               "type": "string"
             }
           },
           {
-            "name": "excluded",
-            "in": "query",
-            "description": "Excluded connection Ids",
+            "in": "body",
+            "name": "body",
+            "description": "The message body.",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/PayloadMessage"
             }
           }
         ],
-        "requestBody": {
-          "description": "The message body.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PayloadMessage"
-              }
-            }
-          }
-        },
         "responses": {
           "202": {
             "description": "Success"
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       }
     },
-    "/api/v1/hubs/{hub}/users/{id}": {
+    "/api/v1/hubs/{hub}/users/{user}": {
       "post": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Broadcast a message to all clients belong to the target user.",
         "operationId": "HubProxyControllerV1_Post_SendToUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "id",
             "in": "path",
+            "name": "user",
             "description": "The user Id.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The message body.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/PayloadMessage"
             }
           }
         ],
-        "requestBody": {
-          "description": "The message body.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PayloadMessage"
-              }
-            }
-          }
-        },
         "responses": {
           "202": {
             "description": "Success"
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "signalr.v1"
+        ],
+        "summary": "Check if there are any client connections connected for the given user",
+        "operationId": "HubProxyControllerV1_Get_CheckUserExistence",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "signalr.v1"
+        ],
+        "summary": "Check if there are any client connections connected for the given user",
+        "operationId": "HubProxyControllerV1_Head_CheckUserExistence",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -132,78 +200,73 @@
     "/api/v1/hubs/{hub}/connections/{connectionId}": {
       "post": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Send message to the specific connection.",
         "operationId": "HubProxyControllerV1_Post_SendToConnection",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "connectionId",
             "in": "path",
+            "name": "connectionId",
             "description": "The connection Id.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The message body.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/PayloadMessage"
             }
           }
         ],
-        "requestBody": {
-          "description": "The message body.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PayloadMessage"
-              }
-            }
-          }
-        },
         "responses": {
           "202": {
             "description": "Success"
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "get": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Check if the connection with the given connectionId exists",
         "operationId": "HubProxyControllerV1_Get_CheckConnectionExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "connectionId",
             "in": "path",
+            "name": "connectionId",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -215,38 +278,33 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "head": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Check if the connection with the given connectionId exists",
         "operationId": "HubProxyControllerV1_Head_CheckConnectionExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "connectionId",
             "in": "path",
+            "name": "connectionId",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -258,45 +316,38 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Close the client connection",
         "operationId": "HubProxyControllerV1_Delete_CloseClientConnection",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
+            "in": "path",
             "name": "hub",
-            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
+            "in": "path",
             "name": "connectionId",
-            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "reason",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "name": "reason",
+            "type": "string"
           }
         ],
         "responses": {
@@ -305,12 +356,8 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -319,89 +366,82 @@
     "/api/v1/hubs/{hub}/groups/{group}": {
       "post": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Broadcast a message to all clients within the target group.",
         "operationId": "HubProxyControllerV1_Post_GroupBroadcast",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "excluded",
+            "description": "Excluded connection Ids",
+            "type": "array",
+            "items": {
               "type": "string"
             }
           },
           {
-            "name": "excluded",
-            "in": "query",
-            "description": "Excluded connection Ids",
+            "in": "body",
+            "name": "body",
+            "description": "The message body.",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/PayloadMessage"
             }
           }
         ],
-        "requestBody": {
-          "description": "The message body.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PayloadMessage"
-              }
-            }
-          }
-        },
         "responses": {
           "202": {
             "description": "Success"
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "get": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Check if there are any client connections inside the given group",
         "operationId": "HubProxyControllerV1_Get_CheckGroupExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -413,38 +453,33 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "head": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Check if there are any client connections inside the given group",
         "operationId": "HubProxyControllerV1_Head_CheckGroupExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
+            "in": "path",
             "name": "group",
-            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -456,100 +491,8 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/hubs/{hub}/users/{user}": {
-      "get": {
-        "tags": [
-          "HubProxyControllerV1"
-        ],
-        "summary": "Check if there are any client connections connected for the given user",
-        "operationId": "HubProxyControllerV1_Get_CheckUserExistence",
-        "parameters": [
-          {
-            "name": "hub",
-            "in": "path",
-            "required": true,
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "user",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "HubProxyControllerV1"
-        ],
-        "summary": "Check if there are any client connections connected for the given user",
-        "operationId": "HubProxyControllerV1_Head_CheckUserExistence",
-        "parameters": [
-          {
-            "name": "hub",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "user",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
             }
           }
         }
@@ -558,37 +501,34 @@
     "/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}": {
       "put": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Add a connection to the target group.",
         "operationId": "HubProxyControllerV1_Put_AddConnectionToGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "connectionId",
             "in": "path",
+            "name": "connectionId",
             "description": "Target connection Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -600,49 +540,42 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Remove a connection from the target group.",
         "operationId": "HubProxyControllerV1_Delete_RemoveConnectionFromGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "connectionId",
             "in": "path",
+            "name": "connectionId",
             "description": "Target connection Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -654,12 +587,8 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -668,37 +597,34 @@
     "/api/v1/hubs/{hub}/groups/{group}/users/{user}": {
       "get": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Check whether a user exists in the target group.",
         "operationId": "HubProxyControllerV1_Get_CheckUserExistenceInGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "user",
             "in": "path",
+            "name": "user",
             "description": "Target user Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -710,49 +636,42 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "head": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Check whether a user exists in the target group.",
         "operationId": "HubProxyControllerV1_Head_CheckUserExistenceInGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "user",
             "in": "path",
+            "name": "user",
             "description": "Target user Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -764,58 +683,49 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "put": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Add a user to the target group.",
         "operationId": "HubProxyControllerV1_Put_AddUserToGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "user",
             "in": "path",
+            "name": "user",
             "description": "Target user Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "ttl",
             "in": "query",
+            "name": "ttl",
             "description": "Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -824,49 +734,42 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Remove a user from the target group.",
         "operationId": "HubProxyControllerV1_Delete_RemoveUserFromGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "group",
             "in": "path",
+            "name": "group",
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "user",
             "in": "path",
+            "name": "user",
             "description": "Target user Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -875,12 +778,8 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -889,28 +788,27 @@
     "/api/v1/hubs/{hub}/users/{user}/groups": {
       "delete": {
         "tags": [
-          "HubProxyControllerV1"
+          "signalr.v1"
         ],
         "summary": "Remove a user from all groups.",
         "operationId": "HubProxyControllerV1_Delete_RemoveUserFromAllGroups",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
-            "name": "hub",
             "in": "path",
+            "name": "hub",
             "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "user",
             "in": "path",
+            "name": "user",
             "description": "Target user Id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -922,51 +820,41 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "PayloadMessage": {
-        "type": "object",
-        "properties": {
-          "Target": {
-            "type": "string",
-            "nullable": true
-          },
-          "Arguments": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false
-            },
-            "nullable": true
-          }
+  "definitions": {
+    "PayloadMessage": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string"
         },
-        "additionalProperties": false
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
       }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "apiKey",
-        "description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
-        "name": "Authorization",
-        "in": "header"
-      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
     }
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }
