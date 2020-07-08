@@ -179,6 +179,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-05-15 and java
+
+These settings apply only when `--tag=package-2020-05-15 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05-15' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.timeseriesinsights.v2020_05_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2020_05_15
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -191,6 +204,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2020-05-15/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
