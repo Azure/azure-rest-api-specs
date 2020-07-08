@@ -11,7 +11,7 @@
           "general"
         ],
         "summary": "Get service health status.",
-        "operationId": "HealthApi_Head_Index",
+        "operationId": "HealthApiIndex_Head",
         "responses": {
           "200": {
             "description": "The service is healthy"
@@ -25,7 +25,7 @@
           "signalr.v1"
         ],
         "summary": "Broadcast a message to all clients connected to target hub.",
-        "operationId": "HubProxyControllerV1_Post_Broadcast",
+        "operationId": "HubProxyControllerV1Broadcast_Post",
         "consumes": [
           "application/json"
         ],
@@ -77,7 +77,7 @@
           "signalr.v1"
         ],
         "summary": "Broadcast a message to all clients belong to the target user.",
-        "operationId": "HubProxyControllerV1_Post_SendToUser",
+        "operationId": "HubProxyControllerV1SendToUser_Post",
         "consumes": [
           "application/json"
         ],
@@ -125,7 +125,7 @@
           "signalr.v1"
         ],
         "summary": "Check if there are any client connections connected for the given user",
-        "operationId": "HubProxyControllerV1_Get_CheckUserExistence",
+        "operationId": "HubProxyControllerV1CheckUserExistence_Get",
         "produces": [
           "text/plain"
         ],
@@ -163,7 +163,7 @@
           "signalr.v1"
         ],
         "summary": "Check if there are any client connections connected for the given user",
-        "operationId": "HubProxyControllerV1_Head_CheckUserExistence",
+        "operationId": "HubProxyControllerV1CheckUserExistence_Head",
         "produces": [
           "text/plain"
         ],
@@ -203,7 +203,7 @@
           "signalr.v1"
         ],
         "summary": "Send message to the specific connection.",
-        "operationId": "HubProxyControllerV1_Post_SendToConnection",
+        "operationId": "HubProxyControllerV1SendToConnection_Post",
         "consumes": [
           "application/json"
         ],
@@ -251,7 +251,7 @@
           "signalr.v1"
         ],
         "summary": "Check if the connection with the given connectionId exists",
-        "operationId": "HubProxyControllerV1_Get_CheckConnectionExistence",
+        "operationId": "HubProxyControllerV1CheckConnectionExistence_Get",
         "produces": [
           "text/plain"
         ],
@@ -289,7 +289,7 @@
           "signalr.v1"
         ],
         "summary": "Check if the connection with the given connectionId exists",
-        "operationId": "HubProxyControllerV1_Head_CheckConnectionExistence",
+        "operationId": "HubProxyControllerV1CheckConnectionExistence_Head",
         "produces": [
           "text/plain"
         ],
@@ -327,7 +327,7 @@
           "signalr.v1"
         ],
         "summary": "Close the client connection",
-        "operationId": "HubProxyControllerV1_Delete_CloseClientConnection",
+        "operationId": "HubProxyControllerV1CloseClientConnection_Delete",
         "produces": [
           "text/plain"
         ],
@@ -369,7 +369,7 @@
           "signalr.v1"
         ],
         "summary": "Broadcast a message to all clients within the target group.",
-        "operationId": "HubProxyControllerV1_Post_GroupBroadcast",
+        "operationId": "HubProxyControllerV1GroupBroadcast_Post",
         "consumes": [
           "application/json"
         ],
@@ -426,7 +426,7 @@
           "signalr.v1"
         ],
         "summary": "Check if there are any client connections inside the given group",
-        "operationId": "HubProxyControllerV1_Get_CheckGroupExistence",
+        "operationId": "HubProxyControllerV1CheckGroupExistence_Get",
         "produces": [
           "text/plain"
         ],
@@ -464,7 +464,7 @@
           "signalr.v1"
         ],
         "summary": "Check if there are any client connections inside the given group",
-        "operationId": "HubProxyControllerV1_Head_CheckGroupExistence",
+        "operationId": "HubProxyControllerV1CheckGroupExistence_Head",
         "produces": [
           "text/plain"
         ],
@@ -504,7 +504,7 @@
           "signalr.v1"
         ],
         "summary": "Add a connection to the target group.",
-        "operationId": "HubProxyControllerV1_Put_AddConnectionToGroup",
+        "operationId": "HubProxyControllerV1AddConnectionToGroup_Put",
         "produces": [
           "text/plain"
         ],
@@ -551,7 +551,7 @@
           "signalr.v1"
         ],
         "summary": "Remove a connection from the target group.",
-        "operationId": "HubProxyControllerV1_Delete_RemoveConnectionFromGroup",
+        "operationId": "HubProxyControllerV1RemoveConnectionFromGroup_Delete",
         "produces": [
           "text/plain"
         ],
@@ -600,7 +600,7 @@
           "signalr.v1"
         ],
         "summary": "Check whether a user exists in the target group.",
-        "operationId": "HubProxyControllerV1_Get_CheckUserExistenceInGroup",
+        "operationId": "HubProxyControllerV1CheckUserExistenceInGroup_Get",
         "produces": [
           "text/plain"
         ],
@@ -647,7 +647,7 @@
           "signalr.v1"
         ],
         "summary": "Check whether a user exists in the target group.",
-        "operationId": "HubProxyControllerV1_Head_CheckUserExistenceInGroup",
+        "operationId": "HubProxyControllerV1CheckUserExistenceInGroup_Head",
         "produces": [
           "text/plain"
         ],
@@ -694,7 +694,7 @@
           "signalr.v1"
         ],
         "summary": "Add a user to the target group.",
-        "operationId": "HubProxyControllerV1_Put_AddUserToGroup",
+        "operationId": "HubProxyControllerV1AddUserToGroup_Put",
         "produces": [
           "text/plain"
         ],
@@ -745,7 +745,7 @@
           "signalr.v1"
         ],
         "summary": "Remove a user from the target group.",
-        "operationId": "HubProxyControllerV1_Delete_RemoveUserFromGroup",
+        "operationId": "HubProxyControllerV1RemoveUserFromGroup_Delete",
         "produces": [
           "text/plain"
         ],
@@ -791,7 +791,7 @@
           "signalr.v1"
         ],
         "summary": "Remove a user from all groups.",
-        "operationId": "HubProxyControllerV1_Delete_RemoveUserFromAllGroups",
+        "operationId": "HubProxyControllerV1RemoveUserFromAllGroups_Delete",
         "produces": [
           "text/plain"
         ],
@@ -854,7 +854,7 @@
   },
   "security": [
     {
-      "Bearer": []
+      "Bearer": [ ]
     }
   ]
 }
