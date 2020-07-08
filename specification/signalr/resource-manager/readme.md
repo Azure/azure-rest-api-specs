@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05-01
+tag: package-2020-07-01-preview
 ```
 
 ### Suppression
@@ -53,6 +53,15 @@ directive:
     - $.definitions.SignalRFeature.properties.properties
     - $.definitions.PrivateEndpointConnection.properties.properties
     reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
+```
+
+### Tag: package-2020-07-01-preview
+
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2020-07-01-preview/signalr.json
 ```
 
 ### Tag: package-2020-05-01
