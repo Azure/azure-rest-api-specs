@@ -162,6 +162,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roles.json
