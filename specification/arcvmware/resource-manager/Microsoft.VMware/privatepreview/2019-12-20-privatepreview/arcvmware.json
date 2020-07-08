@@ -2624,9 +2624,16 @@
           "description": "Gets or sets the disk mode.",
           "$ref": "#/definitions/DiskMode"
         },
-        "controllerId": {
+        "controllerKey": {
           "description": "Gets or sets the controller id.",
-          "type": "string",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "unitNumber": {
+          "description": "Gets or sets the unit number of the disk on the controller.",
+          "format": "int32",
+          "type": "integer",
           "readOnly": true
         }
       }
