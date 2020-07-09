@@ -103,23 +103,26 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+           "202": {
+              "description": "Accepted"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-examples": {
+            "Prepare Data Move": {
+              "$ref": "./examples/BackupDataMove/PrepareDataMove_Post.json"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Prepare Data Move": {
-            "$ref": "./examples/BackupDataMove/PrepareDataMove_Post.json"
-          }
         }
-      }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare/operationResult/{operationId}": {
       "get": {
@@ -210,23 +213,26 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "OK"
+          },            
+           "202": {
+              "description": "Accepted"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              }
+            }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "x-ms-long-running-operation": true,
+          "x-ms-examples": {
+            "Trigger Data Move": {
+              "$ref": "./examples/BackupDataMove/TriggerDataMove_Post.json"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Trigger Data Move": {
-            "$ref": "./examples/BackupDataMove/TriggerDataMove_Post.json"
-          }
         }
-      }
     }
   },
   "definitions": {
