@@ -276,7 +276,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -315,7 +315,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -625,7 +625,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -670,7 +670,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1326,6 +1326,7 @@
       "description": "Represents a server to be updated."
     },
     "ServerListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1333,6 +1334,10 @@
             "$ref": "#/definitions/Server"
           },
           "description": "The list of servers"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       },
       "description": "A list of servers."
@@ -1375,6 +1380,7 @@
       "description": "Represents a server firewall rule."
     },
     "FirewallRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1382,6 +1388,10 @@
             "$ref": "#/definitions/FirewallRule"
           },
           "description": "The list of firewall rules in a server."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       },
       "description": "A list of firewall rules."
@@ -1523,6 +1533,7 @@
       "description": "Represents a Configuration."
     },
     "ConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1530,6 +1541,10 @@
             "$ref": "#/definitions/Configuration"
           },
           "description": "The list of server configurations."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       },
       "description": "A list of server configurations."
