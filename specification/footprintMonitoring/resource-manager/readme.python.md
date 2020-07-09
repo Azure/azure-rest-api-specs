@@ -27,12 +27,3 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(tag) == 'package-2020-02-01-preview' && $(python)
   package-version: 2020-02-01-preview
 ```
-
-### Tag: package-2020-06-15 and python
-
-These settings apply only when `--tag=package-2020-06-15 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-```yaml $(tag) == 'package-2020-06-15' && $(python)
-  package-version: 2020-06-15
-```

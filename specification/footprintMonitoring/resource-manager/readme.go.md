@@ -13,7 +13,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2020-02-01-preview
-  - tag: package-2020-06-15
 ```
 
 ### Tag: package-2020-02-01-preview and go
@@ -22,16 +21,6 @@ These settings apply only when `--tag=package-2020-02-01-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-02-01-preview' && $(go)
-namespace: Microsoft.FootprintMonitoring
-output-folder: $(go-sdks-folder)/footprintMonitoring/Generated
-```
-
-### Tag: package-2020-06-15 and go
-
-These settings apply only when `--tag=package-2020-06-15 --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2020-06-15' && $(go)
 namespace: Microsoft.FootprintMonitoring
 output-folder: $(go-sdks-folder)/footprintMonitoring/Generated
 ```

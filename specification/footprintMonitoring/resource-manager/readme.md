@@ -28,7 +28,7 @@ These are the global settings for the Footprint Monitoring API.
 ```yaml
 title: FootprintMonitoringManagementClient
 openapi-type: arm
-tag: package-2020-06-15
+tag: package-2020-02-01-preview
 ```
 
 ### Tag: package-2020-02-01-preview
@@ -38,11 +38,6 @@ These settings apply only when `--tag=package-2020-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-02-01-preview'
 input-file:
   - Microsoft.FootprintMonitoring/preview/2020-02-01-preview/footprintProfiles.json
-```
-
-```yaml $(tag) == 'package-2020-06-15'
-input-file:
-  - Microsoft.FootprintMonitoring/stable/2020-06-15/footprintProfiles.json
 ```
 
 ---
