@@ -204,7 +204,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.RecoveryServices/stable/2020-07-01-preview/bms.json
+  - $(this-folder)/Microsoft.RecoveryServices/stable/2020-07-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2020-02-02/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2019-06-15/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2017-07-01/bms.json
