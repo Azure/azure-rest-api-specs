@@ -54,6 +54,12 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -99,6 +105,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -148,6 +160,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -194,6 +212,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -285,10 +309,6 @@
         "error": {
           "$ref": "#/definitions/OperationStatusError",
           "description": "Error information related to this operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationStatusExtendedInfo",
-          "description": "Additional information associated with this operation."
         }
       }
     },
@@ -303,26 +323,8 @@
         "message": {
           "description": "Error message displayed if the operation failure.",
           "type": "string"
-        },
-        "recommendation": {
-          "description": "Recommended action displayed in case operation fails.",
-          "type": "string"
         }
       }
-    },
-    "OperationStatusExtendedInfo": {
-      "description": "Base class for additional information of operation status.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
-          "type": "string"
-        }
-      },
-      "discriminator": "objectType"
     },
     "OperationStatusJobExtendedInfo": {
       "description": "Operation status job extended info.",
@@ -560,7 +562,7 @@
           }
         },
         "correlationId": {
-          "description": "CorrelationId",
+          "description": "Correlation Id",
           "type": "string"
         },
         "sourceContainerArmIds": {
