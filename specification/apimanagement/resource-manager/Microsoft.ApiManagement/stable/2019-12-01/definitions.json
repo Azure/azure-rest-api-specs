@@ -5565,6 +5565,75 @@
         }
       ],
       "description": "Association entity details."
+    },
+    "ContentTypeCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentTypeContract"
+          },
+          "description": "Collection of content types.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content types."
+    },
+    "ContentTypeContract": {
+      "type": "object",
+      "description": "Content type",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Content type identifier",
+          "x-apim-code-resourceId": "/contentTypes/{contentTypeName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "Content type name. Must be 1 to 250 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Content type description."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Content type schema."
+        },
+        "version": {
+          "type": "string",
+          "description": "Content type version."
+        }
+      }
+    },
+    "ContentItemCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItemContract"
+          },
+          "description": "Collection of content items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content items."
+    },
+    "ContentItemContract": {
+      "type": "object",
+      "description": "Content item",
+      "properties": {},
+      "additionalProperties": true
     }
   },
   "parameters": {}
