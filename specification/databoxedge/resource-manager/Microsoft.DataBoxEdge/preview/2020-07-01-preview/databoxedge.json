@@ -4187,9 +4187,21 @@
     "DCAccessCode": {
       "description": "DC Access code in the case of Self Managed Shipping",
       "type": "object",
-      "authCode": {
-        "description": "DCAccess Code for the device",
-        "type": "string"
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DCAccessCodeProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DCAccessCodeProperties": {
+      "description": "DCAccessCode Properties",
+      "type": "object",
+      "properties": {
+        "authCode": {
+          "description": "DCAccess Code for the device",
+          "type": "string"
+        }
       }
     },
     "FileEventTrigger": {
