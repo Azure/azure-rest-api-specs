@@ -774,14 +774,14 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleServers/{serverName}/maintenanceWindows/customerMaintenanceWindow": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
       "put": {
         "tags": [
           "CustomerMaintenanceWindow"
         ],
         "operationId": "CustomerMaintenanceWindow_CreateOrUpdate",
         "x-ms-examples": {
-          "FirewallRuleCreate": {
+          "CustomerMaintenanceWindowCreate": {
             "$ref": "./examples/CustomerMaintenanceWindowCreate.json"
           }
         },
@@ -798,6 +798,9 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaintenanceWindowNameParameter"
           },
           {
             "name": "parameters",
@@ -834,7 +837,7 @@
         ],
         "operationId": "CustomerMaintenanceWindow_Delete",
         "x-ms-examples": {
-          "FirewallRuleDelete": {
+          "CustomerMaintenanceWindowDelete": {
             "$ref": "./examples/CustomerMaintenanceWindowDelete.json"
           }
         },
@@ -851,6 +854,9 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaintenanceWindowNameParameter"
           }
         ],
         "responses": {
@@ -872,11 +878,56 @@
         ],
         "operationId": "CustomerMaintenanceWindow_Get",
         "x-ms-examples": {
-          "FirewallRuleList": {
+          "CustomerMaintenanceWindowGet": {
             "$ref": "./examples/CustomerMaintenanceWindowGet.json"
           }
         },
-        "description": "List all the Customer maintenance windows of a given PostgreSQL server.",
+        "description": "Get the Customer maintenance windows of a given PostgreSQL server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerMaintenanceWindow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/singleServers/{serverName}/maintenanceWindows": {
+      "get": {
+        "tags": [
+          "CustomerMaintenanceWindow"
+        ],
+        "operationId": "CustomerMaintenanceWindow_ListByServer",
+        "x-ms-examples": {
+          "CustomerMaintenanceWindowList": {
+            "$ref": "./examples/CustomerMaintenanceWindowListByServer.json"
+          }
+        },
+        "description": "List all the Customer Maintenance Windows in a given PostgreSQL server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -897,16 +948,7 @@
             "schema": {
               "$ref": "#/definitions/CustomerMaintenanceWindowListResult"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -1731,6 +1773,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "MaintenanceWindowNameParameter": {
+      "name": "maintenanceWindowName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the maintenance window.",
       "x-ms-parameter-location": "method"
     }
   }
