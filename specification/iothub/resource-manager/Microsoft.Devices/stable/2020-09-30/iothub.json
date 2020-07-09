@@ -2281,6 +2281,9 @@
             "$ref": "#/definitions/IpFilterRule"
           }
         },
+        "networkRuleSets": {
+          "$ref": "#/definitions/NetworkRuleSetProperties"
+        },
         "minTlsVersion": {
           "type": "string",
           "description": "Specifies the minimum TLS version to support for this hub. Can be set to \"1.2\" to have clients that use a TLS version below 1.2 to be rejected."
@@ -2552,6 +2555,58 @@
         "action",
         "ipMask"
       ]
+    },
+    "NetworkRuleSetProperties" : {
+        "description": "Network Rule Set Properties of IotHub",
+        "type": "object",
+        "properties": {
+          "defaultAction" : {
+            "type": "string",
+            "description": "Default Action for Network Rule Set",
+            "enum": [
+              "Allow",
+              "Deny"
+            ],
+            "x-ms-enum": {
+              "name": "DefaultAction",
+              "modelAsString": false
+            }
+          },
+          "applyToBuiltInEventHubEndpoint" : {
+            "type" :"boolean",
+            "description": "If True, then Network Rule Set is also applied to BuiltIn EventHub EndPoint of IotHub"
+          },
+          "ipRules" : {
+            "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkRuleSetIpRule"
+              },
+              "description": "List of IP Rules"
+          }
+        }
+    },
+    "NetworkRuleSetIpRule" : {
+      "description": "IP Rule to be applied as part of Network Rule Set",
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "ipMask": {
+          "type": "string",
+          "description": "IP Mask"
+        },
+        "action": {
+          "type": "string",
+          "description": "IP Filter Action",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleIPAction",
+            "modelAsString": false
+          },
+          "default": "Allow"
+        }
+      }
     },
     "PrivateLinkResources": {
       "description": "The available private link resources for an IotHub",
