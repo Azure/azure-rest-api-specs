@@ -2557,42 +2557,51 @@
       ]
     },
     "NetworkRuleSetProperties" : {
-        "description": "Network Rule Set Properties of IotHub",
-        "type": "object",
-        "properties": {
-          "defaultAction" : {
-            "type": "string",
-            "description": "Default Action for Network Rule Set",
-            "enum": [
-              "Allow",
-              "Deny"
-            ],
-            "x-ms-enum": {
-              "name": "DefaultAction",
-              "modelAsString": false
-            }
+      "description": "Network Rule Set Properties of IotHub",
+      "type": "object",
+      "properties": {
+        "defaultAction" : {
+          "type": "string",
+          "description": "Default Action for Network Rule Set",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": false
           },
-          "applyToBuiltInEventHubEndpoint" : {
-            "type" :"boolean",
-            "description": "If True, then Network Rule Set is also applied to BuiltIn EventHub EndPoint of IotHub"
+          "default": "Deny"
+        },
+        "applyToBuiltInEventHubEndpoint" : {
+          "type" :"boolean",
+          "description": "If True, then Network Rule Set is also applied to BuiltIn EventHub EndPoint of IotHub"
+        },
+        "ipRules" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkRuleSetIpRule"
           },
-          "ipRules" : {
-            "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkRuleSetIpRule"
-              },
-              "description": "List of IP Rules"
-          }
-        }
+          "description": "List of IP Rules"
+        }    
+      },
+      "required": [
+        "applyToBuiltInEventHubEndpoint",
+        "ipRules"
+      ]
     },
     "NetworkRuleSetIpRule" : {
       "description": "IP Rule to be applied as part of Network Rule Set",
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
+        "filterName": {
+          "type": "string",
+          "description": "Name of the IP filter rule."
+        },
         "ipMask": {
           "type": "string",
-          "description": "IP Mask"
+          "description": "A string that contains the IP address range in CIDR notation for the rule."
         },
         "action": {
           "type": "string",
@@ -2606,7 +2615,11 @@
           },
           "default": "Allow"
         }
-      }
+      },
+      "required": [
+        "filterName",
+        "ipMask"
+      ]
     },
     "PrivateLinkResources": {
       "description": "The available private link resources for an IotHub",
