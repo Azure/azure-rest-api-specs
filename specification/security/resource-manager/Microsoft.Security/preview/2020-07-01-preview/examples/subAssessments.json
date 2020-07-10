@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2020-07-01-preview"
+    "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -236,7 +236,7 @@
           "description": "The date and time the sub-assessment was generated"
         },
         "resourceDetails": {
-          "$ref": "../../../common/v1/types.json#/definitions/ResourceDetails"
+          "$ref": "#/definitions/ResourceDetails"
         },
         "additionalData": {
           "$ref": "#/definitions/AdditionalData"
@@ -269,9 +269,6 @@
               },
               {
                 "value": "ServerVulnerability"
-              },
-              {
-                "value": "SqlVirtualMachine"
               }
             ]
           }
@@ -350,6 +347,43 @@
         }
       }
     },
+    "ResourceDetails": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "discriminator": "source",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The platform where the assessed resource resides",
+          "enum": [
+            "Azure",
+            "OnPremise",
+            "OnPremiseSql"
+          ],
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Azure",
+                "description": "Resource is in Azure"
+              },
+              {
+                "value": "OnPremise",
+                "description": "Resource in an on premise machine connected to Azure cloud"
+              },
+              {
+                "value": "OnPremiseSql",
+                "description": "SQL Resource in an on premise machine connected to Azure cloud"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
     "SqlServerVulnerabilityProperties": {
       "type": "object",
       "description": "Details of the resource that was assessed",
@@ -369,28 +403,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The T-SQL query that runs on your SQL database to perform the particular check"
-        }
-      }
-    },
-    "SqlVirtualMachineVulnerabilityProperties": {
-      "type": "object",
-      "description": "Additional Data of the resource that was assessed",
-      "x-ms-discriminator-value": "SqlVirtualMachine",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlServerVulnerabilityProperties"
-        }
-      ],
-      "WorkspaceId": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The Workspace Id of the resource type"
-        },
-        "WorkspaceSubscriptionId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The Workspace Subscription Id"
         }
       }
     },
@@ -455,6 +467,81 @@
         }
       }
     },
+    "AzureResourceDetails": {
+      "type": "object",
+      "description": "Details of the Azure resource that was assessed",
+      "x-ms-discriminator-value": "Azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id of the assessed resource"
+        }
+      }
+    },
+    "OnPremiseResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise resource that was assessed",
+      "x-ms-discriminator-value": "OnPremise",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Azure resource Id of the workspace the machine is attached to"
+        },
+        "vmuuid": {
+          "type": "string",
+          "description": "The unique Id of the machine"
+        },
+        "sourceComputerId": {
+          "type": "string",
+          "description": "The oms agent Id installed on the machine"
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The name of the machine"
+        }
+      },
+      "required": [
+        "workspaceId",
+        "vmuuid",
+        "sourceComputerId",
+        "machineName"
+      ]
+    }    ,
+    "OnPremiseSqlResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise Sql resource that was assessed",
+      "x-ms-discriminator-value": "OnPremiseSql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremiseResourceDetails"
+        }
+      ],
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The Sql server name installed on the machine"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The Sql database name installed on the machine"
+        }
+      },
+      "required": [
+        "serverName",
+        "databaseName"
+      ]
+    },
     "ServerVulnerabilityProperties": {
       "type": "object",
       "description": "Additional context fields for server vulnerability assessment",
@@ -508,6 +595,28 @@
           "items": {
             "$ref": "#/definitions/VendorReference"
           }
+        }
+      }
+    },
+    "SqlVirtualMachineVulnerabilityProperties": {
+      "type": "object",
+      "description": "Additional Data of the resource that was assessed",
+      "x-ms-discriminator-value": "SqlVirtualMachine",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlServerVulnerabilityProperties"
+        }
+      ],
+      "WorkspaceId": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Workspace Id of the resource type"
+        },
+        "WorkspaceSubscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Workspace Subscription Id"
         }
       }
     },
