@@ -5586,6 +5586,21 @@
     },
     "ContentTypeContract": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentTypeContractPropertie",
+          "description": "Properties of the content type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentTypeContractProperties": {
+      "properties": {
         "id": {
           "type": "string",
           "description": "Content type identifier",
@@ -5628,6 +5643,21 @@
       "description": "Paged list of content items."
     },
     "ContentItemContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentItemContractProperties",
+          "description": "Properties of the content item."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentItemContractProperties": {
       "properties": {},
       "additionalProperties": true
     }
