@@ -10,6 +10,37 @@
     "https"
   ],
   "paths": {
+   "/providers/Microsoft.Notebooks/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Notebooks REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}": {
       "get": {
         "tags": [
@@ -629,6 +660,49 @@
             "$ref": "#/definitions/CloudError"
           },
           "description": "A list of additional details about the error."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Azure Notebooks Proxy REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display name of operation",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.Notebooks",
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation that users can perform.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "An array of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Notebook Proxy operations supported by the Azure Notebooks resource provider."
         }
       }
     },
