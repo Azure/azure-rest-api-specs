@@ -4337,6 +4337,10 @@
     "QuickBooksLinkedServiceTypeProperties": {
       "description": "QuickBooks server linked service properties.",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to QuickBooks. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "endpoint": {
           "description": "The endpoint of the QuickBooks server. (i.e. quickbooks.api.intuit.com)",
           "type": "object"
@@ -4369,15 +4373,7 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      },
-      "required": [
-        "endpoint",
-        "companyId",
-        "consumerKey",
-        "consumerSecret",
-        "accessToken",
-        "accessTokenSecret"
-      ]
+      }
     },
     "ServiceNowLinkedService": {
       "x-ms-discriminator-value": "ServiceNow",
