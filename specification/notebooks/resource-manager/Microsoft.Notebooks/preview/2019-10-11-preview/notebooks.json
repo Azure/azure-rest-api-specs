@@ -1,715 +1,705 @@
 {
-  "swagger":"2.0",
-  "info":{
-     "description":"Azure Notebooks Resource Management Client",
-     "version":"2019-10-11-preview",
-     "title":"NotebookResourceManagementClient"
+  "swagger": "2.0",
+  "info": {
+    "description": "Azure Notebooks Resource Management Client",
+    "version": "2019-10-11-preview",
+    "title": "NotebookResourceManagementClient"
   },
-  "host":"management.azure.com",
-  "schemes":[
-     "https"
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
   ],
-  "paths":{
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}":{
-        "get":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"NotebookProxies_Get",
-           "consumes":[
-
-           ],
-           "produces":[
-              "application/json"
-           ],
-           "summary":"Get the properties of the specified NotebookProxy.",
-           "description":"Gets the properties of the specified NotebookProxy resource in the specified subscription and resource group. This operation returns properties of specified NotebookProxy resource including resourceId, credentials, and systemData.",
-           "parameters":[
-              {
-                 "$ref":"#/parameters/SubscriptionIdParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceNameParameter"
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"OK",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxy"
-                 }
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           }
-        },
-        "put":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"NotebookProxies_CreateOrUpdate",
-           "consumes":[
-              "application/json"
-           ],
-           "produces":[
-              "application/json"
-           ],
-           "summary":"Create or update NotebookProxy resource.",
-           "description":"Create or update NotebookProxy resource with specified configuration.",
-           "parameters":[
-              {
-                 "$ref":"#/parameters/SubscriptionIdParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceNameParameter"
-              },
-              {
-                 "name":"parameters",
-                 "description":"The properties of the NotebookProxy to be created or updated.",
-                 "in":"body",
-                 "required":true,
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxy"
-                 }
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"OK",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxy"
-                 }
-              },
-              "201":{
-                 "description":"Created",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxy"
-                 }
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           }
-        },
-        "delete":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"NotebookProxies_Delete",
-           "consumes":[
-
-           ],
-           "produces":[
-              "application/json"
-           ],
-           "summary":"Delete the specified NotebookProxy.",
-           "description":"Delete the specified NotebookProxy in the specified subscription and resource group.",
-           "parameters":[
-              {
-                 "$ref":"#/parameters/SubscriptionIdParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceNameParameter"
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"OK",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxy"
-                 }
-              },
-              "204":{
-                 "description":"No Content"
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           }
-        }
-     },
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies":{
-        "get":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"NotebookProxies_ListByResourceGroup",
-           "consumes":[
-
-           ],
-           "produces":[
-              "application/json"
-           ],
-           "summary":"Get a list of NotebookProxy resources in the specified subscription and resource group.",
-           "description":"Get a list of NotebookProxy resources in the specified subscription and resource group. This operation returns properties of each NotebookProxy including resourceId, credentials, and systemData.",
-           "parameters":[
-              {
-                 "$ref":"#/parameters/SubscriptionIdParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceGroupNameParameter"
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"OK",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxyListResult"
-                 }
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           },
-           "x-ms-pageable":{
-              "nextLinkName":"nextLink"
-           }
-        }
-     },
-     "/subscriptions/{subscriptionId}/providers/Microsoft.Notebooks/NotebookProxies":{
-        "get":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"NotebookProxies_List",
-           "consumes":[
-
-           ],
-           "produces":[
-              "application/json"
-           ],
-           "summary":"Get a list of NotebookProxy resources in the specified subscription.",
-           "description":"Get a list of NotebookProxy resources in the specified subscription. This operation returns properties of each NotebookProxy including resourceId, credentials, and systemData.",
-           "parameters":[
-              {
-                 "$ref":"#/parameters/SubscriptionIdParameter"
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"OK",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxyListResult"
-                 }
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           },
-           "x-ms-pageable":{
-              "nextLinkName":"nextLink"
-           }
-        }
-     },
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/listCredentials":{
-        "post":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"NotebookProxies_ListCredentials",
-           "consumes":[
-
-           ],
-           "produces":[
-              "application/json"
-           ],
-           "summary":"Get the access keys of the specified NotebookProxy.",
-           "description":"Get the access keys of the specified NotebookProxy. in the specified subscription and resource group. This operation returns resourceId, primaryAccessKey and secondaryAccessKey.",
-           "parameters":[
-              {
-                 "$ref":"#/parameters/SubscriptionIdParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                 "$ref":"#/parameters/ResourceNameParameter"
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"OK",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookProxyCredentials"
-                 }
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           }
-        }
-     },
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/updatePrivateLinkId/{privateLinkId}":{
-        "post":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"PostPrivateLinkIdNotebookResource",
-           "consumes":[
-              "application/json-patch+json",
-              "application/json",
-              "text/json",
-              "application/*+json"
-           ],
-           "produces":[
-              "application/json-patch+json",
-              "application/json",
-              "text/json",
-              "application/*+json"
-           ],
-           "parameters":[
-              {
-                 "name":"subscriptionId",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"resourceGroupName",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"resourceName",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"privateLinkId",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"resourceRequest",
-                 "in":"body",
-                 "required":false,
-                 "schema":{
-                    "$ref":"#/definitions/NotebookPEResource"
-                 }
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"Success",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookPrivateEndpoint"
-                 }
-              },
-              "201":{
-                 "description":"Success",
-                 "schema":{
-                    "$ref":"#/definitions/NotebookPrivateEndpoint"
-                 }
-              },
-              "default":{
-                 "description":"Error response describing why the operation failed.",
-                 "schema":{
-                    "$ref":"#/definitions/CloudError"
-                 }
-              }
-           }
-        }
-     },
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/removePrivateLinkId/{privateLinkId}":{
-        "post":{
-           "tags":[
-              "NotebookProxy"
-           ],
-           "operationId":"RemovePrivateLinkIdNotebookResource",
-           "consumes":[
-              "application/json-patch+json",
-              "application/json",
-              "text/json",
-              "application/*+json"
-           ],
-           "produces":[
-              "application/json-patch+json",
-              "application/json",
-              "text/json",
-              "application/*+json"
-           ],
-           "parameters":[
-              {
-                 "name":"subscriptionId",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"resourceGroupName",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"resourceName",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"privateLinkId",
-                 "in":"path",
-                 "required":true,
-                 "type":"string"
-              },
-              {
-                 "name":"resourceRequest",
-                 "in":"body",
-                 "required":false,
-                 "schema":{
-                    "$ref":"#/definitions/NotebookPEResponse"
-                 }
-              }
-           ],
-           "responses":{
-              "200":{
-                 "description":"Success"
-              }
-           }
-        }
-     }
-  },
-  "definitions":{
-     "NotebookProxy":{
-        "description":"A NotebookProxy resource.",
-        "type":"object",
-        "allOf":[
-           {
-              "$ref":"#/definitions/Resource"
-           },
-           {
-              "$ref":"#/definitions/NotebookResourceSystemData"
-           }
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}": {
+      "get": {
+        "tags": [
+          "NotebookProxy"
         ],
-        "properties":{
-           "properties":{
-              "$ref":"#/definitions/NotebookResourceEntity",
-              "description":"The properties of NotebookProxy resource.",
-              "x-ms-client-flatten":true
-           }
-        }
-     },
-     "NotebookResourceEntity":{
-        "description":"Properties of NotebookProxy resource",
-        "type":"object",
-        "properties":{
-           "resourceId":{
-              "description":"The unique identifier (a GUID) generated for every resource.",
-              "type":"string",
-              "readOnly":true
-           },
-           "hostname":{
-              "description":"The friendly string identifier of the creator of the NotebookProxy resource.",
-              "type":"string"
-           }
-        }
-     },
-     "NotebookPEResource":{
-        "description":"Notebooks Proxy resource with Private Link",
-        "type":"object",
-        "properties":{
-          "hostname":{
-            "description":"The friendly string identifier of the creator of the NotebookProxy resource.",
-            "type":"string"
+        "operationId": "NotebookProxies_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Get the properties of the specified NotebookProxy.",
+        "description": "Gets the properties of the specified NotebookProxy resource in the specified subscription and resource group. This operation returns properties of specified NotebookProxy resource including resourceId, credentials, and systemData.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "connectionDetails": {
-            "description": "Private link connection details",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ConnectionDetail"
-            }
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
           }
-        }
-     },
-     "NotebookPEResponse":{
-        "description":"Private Endpoint details for a Notebook Proxy resource",
-        "type":"object",
-        "properties":{
-          "id":{
-            "description":"Private endpoint id",
-            "type":"string"
-          },
-          "privateLinkServiceProxies":{
-            "description":"Private endpoint service proxies",
-            "type":"array",
-            "items": {
-              "$ref": "#/definitions/PrivateEndpointServiceProxy"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxy"
             }
           },
-          "connectionDetails": {
-            "description": "Private link connection details",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ConnectionDetail"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       },
-      "PrivateEndpointServiceProxy":{
-        "description":"Private Endpoint service proxy details",
-        "type":"object",
-        "properties":{
-          "id":{
-            "description":"Service proxy id",
-            "type":"string"
+      "put": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Create or update NotebookProxy resource.",
+        "description": "Create or update NotebookProxy resource with specified configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "groupConnectivityInformation": {
-            "description": "Group connectivity information",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/GroupConnectivityInformation"
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the NotebookProxy to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotebookProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxy"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       },
-      "GroupConnectivityInformation":{
-        "description": "Private link Group Connectivity Detail",
-        "type": "object",
-        "properties": {
-           "internalFqdn":{
-             "description": "Internal fully qualified domain name",
-             "type": "string"
-           },
-           "customerVisibleFqdns":{
-             "description": "Customer visible fully qualified domain names",
-             "type": "array",
-             "items": {
-               "type":"string"
-             }
-           },
-           "groupId": {
-             "description": "Private link group Id",
-             "type": "string"
-           },
-           "memberName": {
-             "description": "Private link member name",
-             "type": "string"
-           }
-        }
-      },
-      "ConnectionDetail":{
-       "description": "Private link Connection Detail",
-       "type": "object",
-       "properties": {
-          "id":{
-            "description": "Private link connection id",
-            "type": "string"
+      "delete": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Delete the specified NotebookProxy.",
+        "description": "Delete the specified NotebookProxy in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "privateIpAddress":{
-            "description": "Private endpoint IP address",
-            "type": "string"
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
-          "linkIdentifies":{
-            "description": "Link Id for the private link",
-            "type": "integer"
-          },
-          "groupId": {
-            "description": "Private link group Id",
-            "type": "string"
-          },
-          "memberName": {
-            "description": "Private link member name",
-            "type": "string"
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
           }
-       }
-     },
-     "Resource":{
-        "properties":{
-           "id":{
-              "readOnly":true,
-              "type":"string",
-              "description":"Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-           },
-           "name":{
-              "readOnly":true,
-              "type":"string",
-              "description":"The name of the resource"
-           },
-           "type":{
-              "readOnly":true,
-              "type":"string",
-              "description":"The type of the resource. Ex- Microsoft.Storage/storageAccounts or Microsoft.Notebooks/NotebookProxies."
-           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxy"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies": {
+      "get": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_ListByResourceGroup",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Get a list of NotebookProxy resources in the specified subscription and resource group.",
+        "description": "Get a list of NotebookProxy resources in the specified subscription and resource group. This operation returns properties of each NotebookProxy including resourceId, credentials, and systemData.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         },
-        "x-ms-azure-resource":true
-     },
-     "NotebookResourceSystemData":{
-        "description":"Metadata pertaining to creation and last modification of the resource.",
-        "type":"object",
-        "readOnly":true,
-        "properties":{
-           "createdBy":{
-              "type":"string",
-              "description":"The identity that created the resource."
-           },
-           "createdByType":{
-              "type":"string",
-              "description":"The type of identity that created the resource.",
-              "enum":[
-                 "User",
-                 "Application",
-                 "ManagedIdentity",
-                 "Key"
-              ],
-              "x-ms-enum":{
-                 "name":"createdByType",
-                 "modelAsString":true
-              }
-           },
-           "createdAt":{
-              "type":"string",
-              "format":"date-time",
-              "description":"The timestamp of resource creation (UTC)."
-           },
-           "lastModifiedBy":{
-              "type":"string",
-              "description":"The identity that last modified the resource."
-           },
-           "lastModifiedByType":{
-              "type":"string",
-              "description":"The type of identity that last modified the resource.",
-              "enum":[
-                 "User",
-                 "Application",
-                 "ManagedIdentity",
-                 "Key"
-              ],
-              "x-ms-enum":{
-                 "name":"createdByType",
-                 "modelAsString":true
-              }
-           },
-           "lastModifiedByAt":{
-              "type":"string",
-              "format":"date-time",
-              "description":"The type of identity that last modified the resource."
-           }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-     },
-     "CloudError":{
-        "type":"object",
-        "properties":{
-           "message":{
-              "type":"string",
-              "description":"A message describing the error, intended to be suitable for display in a user interface."
-           },
-           "code":{
-              "type":"string",
-              "description":"An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-           },
-           "target":{
-              "type":"string",
-              "description":"The target of the particular error. For example, the name of the property in error."
-           },
-           "details":{
-              "type":"array",
-              "items":{
-                 "$ref":"#/definitions/CloudError"
-              },
-              "description":"A list of additional details about the error."
-           }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Notebooks/NotebookProxies": {
+      "get": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Get a list of NotebookProxy resources in the specified subscription.",
+        "description": "Get a list of NotebookProxy resources in the specified subscription. This operation returns properties of each NotebookProxy including resourceId, credentials, and systemData.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-     },
-     "NotebookProxyListResult":{
-        "description":"The response containing list of NotebookProxy resources.",
-        "type":"object",
-        "properties":{
-           "value":{
-              "type":"array",
-              "items":{
-                 "$ref":"#/definitions/NotebookProxy"
-              },
-              "description":"The list of NotebookProxy resources."
-           },
-           "nextLink":{
-              "description":"The URI that can be used to request the next list of NotebookProxy resources.",
-              "type":"string"
-           }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/listCredentials": {
+      "post": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "NotebookProxies_ListCredentials",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Get the access keys of the specified NotebookProxy.",
+        "description": "Get the access keys of the specified NotebookProxy. in the specified subscription and resource group. This operation returns resourceId, primaryAccessKey and secondaryAccessKey.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NotebookProxyCredentials"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
-     },
-     "NotebookProxyCredentials":{
-        "description":"Credentials and other properties of NotebookProxy resource",
-        "type":"object",
-        "readOnly":true,
-        "properties":{
-           "primaryAccessKey":{
-              "description":"The primary key of the NotebookProxy resource.",
-              "type":"string"
-           },
-           "secondaryAccessKey":{
-              "description":"The secondary key of the NotebookProxy resource.",
-              "type":"string"
-           }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/privateEndpointConnectionProxies/{privateLinkId}": {
+      "post": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "PostPrivateLinkIdNotebookResource",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceRequest",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/NotebookPEResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotebookPEResponse"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotebookPEResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
-     }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Notebooks/NotebookProxies/{resourceName}/removePrivateLinkId/{privateLinkId}": {
+      "post": {
+        "tags": [
+          "NotebookProxy"
+        ],
+        "operationId": "RemovePrivateLinkIdNotebookResource",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceRequest",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/NotebookPEResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
   },
-  "parameters":{
-     "SubscriptionIdParameter":{
-        "name":"subscriptionId",
-        "in":"path",
-        "required":true,
-        "type":"string",
-        "description":"The ID of the target subscription.",
-        "minLength":1
-     },
-     "ApiVersionParameter":{
-        "name":"api-version",
-        "in":"query",
-        "required":true,
-        "type":"string",
-        "description":"The API version to use for this operation.",
-        "minLength":1
-     },
-     "ResourceGroupNameParameter":{
-        "name":"resourceGroupName",
-        "in":"path",
-        "required":true,
-        "type":"string",
-        "description":"The name of the resource group. The name is case insensitive.",
-        "pattern":"^[-\\w\\._\\(\\)]+$",
-        "minLength":1,
-        "maxLength":90,
-        "x-ms-parameter-location":"method"
-     },
-     "ResourceNameParameter":{
-        "name":"resourceName",
-        "in":"path",
-        "required":true,
-        "type":"string",
-        "description":"The name of the resource.",
-        "minLength":1
-     }
+  "definitions": {
+    "NotebookProxy": {
+      "description": "A NotebookProxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/NotebookResourceSystemData"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NotebookResourceEntity",
+          "description": "The properties of NotebookProxy resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NotebookResourceEntity": {
+      "description": "Properties of NotebookProxy resource",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The unique identifier (a GUID) generated for every resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostname": {
+          "description": "The friendly string identifier of the creator of the NotebookProxy resource.",
+          "type": "string"
+        }
+      }
+    },
+    "NotebookPEResource": {
+      "description": "Notebooks Proxy resource with Private Link",
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "description": "The friendly string identifier of the creator of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "connectionDetails": {
+          "description": "Private link connection details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetail"
+          }
+        }
+      }
+    },
+    "NotebookPEResponse": {
+      "description": "Private Endpoint details for a Notebook Proxy resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Private endpoint id",
+          "type": "string"
+        },
+        "privateLinkServiceProxies": {
+          "description": "Private endpoint service proxies",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointServiceProxy"
+          }
+        },
+        "connectionDetails": {
+          "description": "Private link connection details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetail"
+          }
+        }
+      }
+    },
+    "PrivateEndpointServiceProxy": {
+      "description": "Private Endpoint service proxy details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Service proxy id",
+          "type": "string"
+        },
+        "groupConnectivityInformation": {
+          "description": "Group connectivity information",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          }
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "description": "Private link Group Connectivity Detail",
+      "type": "object",
+      "properties": {
+        "internalFqdn": {
+          "description": "Internal fully qualified domain name",
+          "type": "string"
+        },
+        "customerVisibleFqdns": {
+          "description": "Customer visible fully qualified domain names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupId": {
+          "description": "Private link group Id",
+          "type": "string"
+        },
+        "memberName": {
+          "description": "Private link member name",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionDetail": {
+      "description": "Private link Connection Detail",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Private link connection id",
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "description": "Private endpoint IP address",
+          "type": "string"
+        },
+        "linkIdentifies": {
+          "description": "Link Id for the private link",
+          "type": "integer"
+        },
+        "groupId": {
+          "description": "Private link group Id",
+          "type": "string"
+        },
+        "memberName": {
+          "description": "Private link member name",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Storage/storageAccounts or Microsoft.Notebooks/NotebookProxies."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NotebookResourceSystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedByAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          },
+          "description": "A list of additional details about the error."
+        }
+      }
+    },
+    "NotebookProxyListResult": {
+      "description": "The response containing list of NotebookProxy resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotebookProxy"
+          },
+          "description": "The list of NotebookProxy resources."
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of NotebookProxy resources.",
+          "type": "string"
+        }
+      }
+    },
+    "NotebookProxyCredentials": {
+      "description": "Credentials and other properties of NotebookProxy resource",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "primaryAccessKey": {
+          "description": "The primary key of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "description": "The secondary key of the NotebookProxy resource.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource.",
+      "minLength": 1
+    }
   }
 }
