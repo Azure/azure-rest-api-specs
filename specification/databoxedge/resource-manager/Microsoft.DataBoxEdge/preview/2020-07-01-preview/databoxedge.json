@@ -81,7 +81,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AvailableSkus": {
@@ -151,9 +151,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
-            "description": "Specify $filter='location eq <location>' to filter on location resource or Specify $skipToken=<token> to populate the next page in the list.",
+            "description": "Specify $filter='location eq <location>' to filter on location.",
             "required": false,
             "type": "string"
           }
@@ -3982,7 +3982,8 @@
         },
         "resourceMoveDetails": {
           "$ref": "#/definitions/ResourceMoveDetails",
-          "description": "The details of the move operation on this resource."
+          "description": "The details of the move operation on this resource.",
+          "readOnly": true
         }
       }
     },
