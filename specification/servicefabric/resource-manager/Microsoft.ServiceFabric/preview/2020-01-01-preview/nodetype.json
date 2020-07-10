@@ -72,7 +72,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes": {
       "get": {
-        "operationId": "NodeTypes_List",
+        "operationId": "NodeTypes_ListByManagedClusters",
         "summary": "Gets the list of Node types of the specified managed cluster.",
         "description": "Gets all Node types of the specified managed cluster.",
         "parameters": [
@@ -106,6 +106,186 @@
             "schema": {
               "$ref": "#/definitions/NodeTypeListResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/restart": {
+      "post": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Restart",
+        "summary": "Restarts one or more nodes on the node type.",
+        "description": "Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for restart action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Restart nodes": {
+            "$ref": "./examples/RestartNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/reimage": {
+      "post": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Reimage",
+        "summary": "Reimages one or more nodes on the node type.",
+        "description": "Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for reimage action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Reimage nodes": {
+            "$ref": "./examples/ReimageNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/deleteNode": {
+      "post": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_DeleteNode",
+        "summary": "Deletes one or more nodes on the node type.",
+        "description": "Deletes one or more nodes on the node type. It will disable the fabric nodes, trigger a delete on the VMs and removes the state from the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for delete action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete nodes": {
+            "$ref": "./examples/DeleteNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -165,7 +345,7 @@
         "tags": [
           "NodeType"
         ],
-        "operationId": "NodeTypes_Create",
+        "operationId": "NodeTypes_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric node type.",
         "description": "Create or update a Service Fabric node type of a given managed cluster.",
         "parameters": [
@@ -187,7 +367,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The cluster resource.",
+            "description": "The node type resource.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NodeType"
@@ -204,6 +384,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "responses": {
           "201": {
             "description": "The request was accepted and the operation will complete asynchronously.",
@@ -266,6 +449,9 @@
           }
         ],
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Patch a node type": {
             "$ref": "./examples/NodeTypePatchOperation_example.json"
@@ -322,6 +508,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "responses": {
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
@@ -357,6 +546,25 @@
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
+    },
+    "NodeTypeActionParameters": {
+      "required": [
+        "nodes"
+      ],
+      "properties": {
+        "nodes": {
+          "description": "List of node names from the node type.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "force": {
+          "description": "Force the action to go through.",
+          "type": "boolean"
+        }
+      },
+      "description": "Parameters for Node type action."
     },
     "NodeTypeProperties": {
       "required": [

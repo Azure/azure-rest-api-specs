@@ -9,8 +9,8 @@
       "properties": {
         "clusterCodeVersion": "7.1.168.9494",
         "dnsName": "myCluster",
-        "vmAdminUser": "vmadmin",
-        "vmPassword": "{vm-password}",
+        "adminUserName": "vmadmin",
+        "adminPassword": "{vm-password}",
         "fabricSettings": [
           {
             "name": "ManagedIdentityTokenService",
@@ -28,7 +28,6 @@
   "responses": {
     "201": {
       "headers": {
-        "Retry-After": "10",
         "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview",
         "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview"
       },
@@ -39,20 +38,21 @@
         "name": "myCluster",
         "tags": {},
         "etag": "W/\"636462502169240745\"",
+        "sku" : {
+          "name" : "Basic"
+        }, 
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
           "clusterCodeVersion": "7.1.168.9494",
           "clusterState": "WaitingForNodes",
           "dnsName": "myCluster",
-          "fqdn": "myCluster.eastus.cloudapp.azure.com",
-          "clusterCertificateCommonName": "sfc-92584666-9889-4ae8-8d02-91902923d37f",
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
           "clusterCertificateThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622",
           "clientConnectionPort": 19000,
           "httpGatewayConnectionPort": 19080,
-          "loadBalancePorts": [],
-          "natPorts": [],
-          "vmAdminUser": "vmadmin",
+          "loadBalancingRules": [],
+          "adminUserName": "vmadmin",
           "fabricSettings": [
             {
               "name": "ManagedIdentityTokenService",
@@ -88,7 +88,6 @@
     },
     "202": {
       "headers": {
-        "Retry-After": "10",
         "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview",
         "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview"
       },
@@ -99,20 +98,21 @@
         "name": "myCluster",
         "tags": {},
         "etag": "W/\"636462502169240745\"",
+        "sku" : {
+          "name" : "Basic"
+        }, 
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
           "clusterCodeVersion": "7.1.168.9494",
           "clusterState": "WaitingForNodes",
           "dnsName": "myCluster",
-          "fqdn": "myCluster.eastus.cloudapp.azure.com",
-          "clusterCertificateCommonName": "sfc-92584666-9889-4ae8-8d02-91902923d37f",
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
           "clusterCertificateThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622",
           "clientConnectionPort": 19000,
           "httpGatewayConnectionPort": 19080,
-          "loadBalancePorts": [],
-          "natPorts": [],
-          "vmAdminUser": "vmadmin",
+          "loadBalancingRules": [],
+          "adminUserName": "vmadmin",
           "fabricSettings": [
             {
               "name": "ManagedIdentityTokenService",
@@ -148,7 +148,6 @@
     },
     "200": {
       "headers": {
-        "Retry-After": "10",
         "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview",
         "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview"
       },
@@ -159,20 +158,21 @@
         "name": "myCluster",
         "tags": {},
         "etag": "W/\"636462502169240745\"",
+        "sku" : {
+          "name" : "Basic"
+        }, 
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
           "clusterCodeVersion": "7.1.168.9494",
           "clusterState": "WaitingForNodes",
           "dnsName": "myCluster",
-          "fqdn": "myCluster.eastus.cloudapp.azure.com",
-          "clusterCertificateCommonName": "sfc-92584666-9889-4ae8-8d02-91902923d37f",
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
           "clusterCertificateThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622",
           "clientConnectionPort": 19000,
           "httpGatewayConnectionPort": 19080,
-          "loadBalancePorts": [],
-          "natPorts": [],
-          "vmAdminUser": "vmadmin",
+          "loadBalancingRules": [],
+          "adminUserName": "vmadmin",
           "fabricSettings": [
             {
               "name": "ManagedIdentityTokenService",
