@@ -83,6 +83,7 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-06-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-06-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2020-06-01/expressRouteProviderPort.json
 ```
 ### Tag: package-2020-05
 
@@ -1440,6 +1441,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: expressRoutePort.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteProviderPort.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: firewallPolicy.json
