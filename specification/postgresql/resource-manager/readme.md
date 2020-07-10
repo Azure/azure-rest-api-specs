@@ -53,6 +53,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforPostgreSQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -75,6 +76,7 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 ```
@@ -98,8 +100,16 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is DBforPostgreSQL
+```
 
 ---
 # Code Generation
@@ -184,9 +194,11 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
