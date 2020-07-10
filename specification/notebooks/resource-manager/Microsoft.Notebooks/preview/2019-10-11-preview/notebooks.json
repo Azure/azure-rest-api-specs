@@ -9,6 +9,24 @@
   "schemes": [
     "https"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/providers/Microsoft.Notebooks/operations": {
       "get": {
@@ -47,6 +65,11 @@
           "NotebookProxy"
         ],
         "operationId": "NotebookProxies_Get",
+        "x-ms-examples": {
+          "Get Notebook Proxy": {
+            "$ref": "./examples/NBResourceGet.json"
+          }
+        },
         "consumes": [],
         "produces": [
           "application/json"
@@ -84,6 +107,11 @@
           "NotebookProxy"
         ],
         "operationId": "NotebookProxies_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Notebook Proxy": {
+            "$ref": "./examples/NBResourceCreate.json"
+          }
+        },
         "consumes": [
           "application/json"
         ],
@@ -138,6 +166,11 @@
           "NotebookProxy"
         ],
         "operationId": "NotebookProxies_Delete",
+        "x-ms-examples": {
+          "Delete Notebook Proxy": {
+            "$ref": "./examples/NBResourceDelete.json"
+          }
+        },
         "consumes": [],
         "produces": [
           "application/json"
@@ -180,6 +213,11 @@
           "NotebookProxy"
         ],
         "operationId": "NotebookProxies_ListByResourceGroup",
+        "x-ms-examples": {
+          "List Notebook Proxy by Resource Group": {
+            "$ref": "./examples/NBResourceList.json"
+          }
+        },
         "consumes": [],
         "produces": [
           "application/json"
@@ -219,6 +257,11 @@
           "NotebookProxy"
         ],
         "operationId": "NotebookProxies_List",
+        "x-ms-examples": {
+          "List Notebook Proxy by Subscription": {
+            "$ref": "./examples/NBResourceList.json"
+          }
+        },
         "consumes": [],
         "produces": [
           "application/json"
@@ -255,6 +298,11 @@
           "NotebookProxy"
         ],
         "operationId": "NotebookProxies_ListCredentials",
+        "x-ms-examples": {
+          "List Notebook Proxy Credentials": {
+            "$ref": "./examples/NBResourceListCredentials.json"
+          }
+        },
         "consumes": [],
         "produces": [
           "application/json"
@@ -294,6 +342,11 @@
           "NotebookProxy"
         ],
         "operationId": "PostPrivateLinkIdNotebookResource",
+        "x-ms-examples": {
+          "Create Notebook Proxy Private Endpoint": {
+            "$ref": "./examples/NBResourcePEUpdate.json"
+          }
+        },
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -308,10 +361,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resourceGroupName",
@@ -368,6 +418,11 @@
           "NotebookProxy"
         ],
         "operationId": "RemovePrivateLinkIdNotebookResource",
+        "x-ms-examples": {
+          "Remove Notebook Proxy Private Endpoint": {
+            "$ref": "./examples/NBResourcePEDelete.json"
+          }
+        },
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -382,10 +437,7 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resourceGroupName",
@@ -429,9 +481,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/NotebookResourceSystemData"
         }
       ],
       "properties": {
@@ -586,59 +635,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "NotebookResourceSystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedByAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
-    },
     "CloudError": {
       "type": "object",
       "properties": {
@@ -773,7 +769,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource.",
-      "minLength": 1
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
     }
   }
 }

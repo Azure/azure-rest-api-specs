@@ -31,7 +31,7 @@ These settings apply only when `--tag=package-2019-10-11-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-10-11-preview'
 input-file:
-- Microsoft.Notebooks/preview/2019-10-11-preview/notebooks.json
+- notebooks.json
 ```
 
 ---
@@ -59,7 +59,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Notebooks/preview/2019-10-11-preview/notebooks.json
+  - notebooks.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
