@@ -6316,7 +6316,7 @@
     },
     "/{containerName}/{blob}?comp=tier": {
       "put": {
-        "tags": [
+        "tags": 
           "blobs"
         ],
         "operationId": "Blob_SetTier",
@@ -6345,6 +6345,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+		  {
+            "$ref": "#/parameters/IfTags"
           }
         ],
         "responses": {
