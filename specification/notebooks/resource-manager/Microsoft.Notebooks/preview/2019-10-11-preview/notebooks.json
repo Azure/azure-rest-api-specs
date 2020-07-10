@@ -94,6 +94,12 @@
               "$ref": "#/definitions/NotebookProxy"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -239,6 +245,12 @@
               "$ref": "#/definitions/NotebookProxyListResult"
             }
           },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -278,6 +290,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/NotebookProxyListResult"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           },
           "default": {
@@ -348,16 +366,10 @@
           }
         },
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -424,16 +436,10 @@
           }
         },
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -601,7 +607,7 @@
           "description": "Private endpoint IP address",
           "type": "string"
         },
-        "linkIdentifies": {
+        "linkIdentifier": {
           "description": "Link Id for the private link",
           "type": "integer"
         },
@@ -724,12 +730,20 @@
       "type": "object",
       "readOnly": true,
       "properties": {
+        "resourceId": {
+          "description": "Notebook Proxy resource id",
+          "type": "string"
+        },
         "primaryAccessKey": {
           "description": "The primary key of the NotebookProxy resource.",
           "type": "string"
         },
         "secondaryAccessKey": {
           "description": "The secondary key of the NotebookProxy resource.",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "Hostname for the Notebook Proxy resource",
           "type": "string"
         }
       }
