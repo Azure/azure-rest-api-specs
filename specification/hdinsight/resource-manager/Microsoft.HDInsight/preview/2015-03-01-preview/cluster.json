@@ -59,6 +59,18 @@
           },
           "Create HDInsight cluster with Autoscale configuration": {
             "$ref": "./examples/CreateHDInsightClusterWithAutoscaleConfig.json"
+          },
+          "Create Kafka cluster with Kafka Rest Proxy": {
+            "$ref": "./examples/CreateKafkaClusterWithKafkaRestProxy.json"
+          },
+          "Create cluster with TLS 1.2": {
+            "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with custom network settings": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
+          },
+          "Create cluster with encryption in transit": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
           }
         },
         "parameters": [
@@ -553,6 +565,28 @@
         }
       }
     },
+    "ClientGroupInfo": {
+      "description": "The information of AAD security group.",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The AAD security group name."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The AAD security group id."
+        }
+      }
+    },
+    "KafkaRestProperties": {
+      "description": "The kafka rest proxy configuration which contains AAD security group information.",
+      "properties": {
+        "clientGroupInfo": {
+          "$ref": "#/definitions/ClientGroupInfo",
+          "description": "The information of AAD security group."
+        }
+      }
+    },
     "SecurityProfile": {
       "description": "The security profile which contains Ssh public key for the HDInsight cluster.",
       "properties": {
@@ -896,6 +930,35 @@
       },
       "description": "The storage profile."
     },
+    "NetworkSettings": {
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "enum": [
+            "InboundAndOutbound",
+            "OutboundOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "outboundOnlyPublicNetworkAccessType": {
+          "type": "string",
+          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "enum": [
+            "PublicLoadBalancer",
+            "UDR"
+          ],
+          "x-ms-enum": {
+            "name": "OutboundOnlyPublicNetworkAccessType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The network settings."
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -931,6 +994,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -946,6 +1013,18 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       }
     },
@@ -1066,6 +1145,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -1118,6 +1201,18 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       },
       "required": [
@@ -1423,6 +1518,21 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not resource disk encryption is enabled."
+        }
+      }
+    },
+    "EncryptionInTransitProperties": {
+      "description": "The encryption-in-transit properties.",
+      "properties": {
+        "isEncryptionInTransitEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not inter cluster node communication is encrypted in transit."
         }
       }
     },

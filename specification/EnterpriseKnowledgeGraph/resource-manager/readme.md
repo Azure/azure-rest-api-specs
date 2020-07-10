@@ -23,7 +23,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-12-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.EnterpriseKnowledgeGraphService.v2018-12-03
-  output-folder: $(azure-libraries-for-java-folder)/EnterpriseKnowledgeGraphService/resource-manager/v2018-12-03
+  output-folder: $(azure-libraries-for-java-folder)/sdk/EnterpriseKnowledgeGraphService/mgmt-v2018-12-03
 regenerate-manager: true
 generate-interface: true
 ```

@@ -41,11 +41,11 @@ tag: package-policy-2019-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-08
+tag: package-resources-2020-06
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2019-06
+tag: package-subscriptions-2019-11
 ```
 
 ``` yaml $(package-links)
@@ -60,9 +60,32 @@ tag: package-managedapplications-2018-06
 tag: package-deploymentscripts-2019-10-preview
 ```
 
-### Tag: package-resources-2019-10-preview
+``` yaml $(package-templatespecs)
+tag: package-templatespecs-2019-06-preview
+```
+
+### Tag: package-resources-2020-06
+
+These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-06'
+input-file:
+- Microsoft.Resources/stable/2020-06-01/resources.json
+```
+
+### Tag: package-subscriptions-2020-01
+
+These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-subscriptions-2020-01'
+input-file:
+  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+```
+
+### Tag: package-deploymentscripts-2019-10-preview
+
 These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
- 
+
 ``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
 input-file:
 - Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
@@ -199,6 +222,15 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-templatespecs-2019-06-preview
+
+These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
+input-file:
+- Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
+```
+
 ### Tag: package-policy-2016-12
 
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
@@ -229,6 +261,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2019-10
+
+These settings apply only when `--tag=package-resources-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-10'
+input-file:
+- Microsoft.Resources/stable/2019-10-01/resources.json
 ```
 
 ### Tag: package-resources-2019-08
@@ -339,6 +380,15 @@ input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
 ```
 
+### Tag: package-subscriptions-2019-11
+
+These settings apply only when `--tag=package-subscriptions-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2019-11'
+input-file:
+- Microsoft.Resources/stable/2019-11-01/subscriptions.json
+```
+
 ### Tag: package-subscriptions-2019-06
 
 These settings apply only when `--tag=package-subscriptions-2019-06` is specified on the command line.
@@ -384,6 +434,15 @@ input-file:
 - Microsoft.Resources/stable/2016-09-01/links.json
 ```
 
+### Tag: package-managedapplications-2019-07
+
+These settings apply only when `--tag=package-managedapplications-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07'
+input-file:
+- Microsoft.Solutions/stable/2019-07-01/managedapplications.json
+```
+
 ### Tag: package-managedapplications-2018-06
 
 These settings apply only when `--tag=package-managedapplications-2018-06` is specified on the command line.
@@ -423,6 +482,10 @@ directive:
     from: policyDefinitions.json
     where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyAssignments.json
+    where: $.paths
+    reason: policy assignment under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -443,6 +506,10 @@ directive:
     from: resources.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.GenericResourceExpanded.properties
+    reason: createdTime,changedTime & provisioningState are top-level properties
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.TagDetails.properties
@@ -499,6 +566,33 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - from: deploymentScripts.json
+    suppress: R3006 #BodyTopLevelProperties
+    where: 
+    - $.definitions.DeploymentScript.properties
+    - $.definitions.AzureCliScript.properties
+    - $.definitions.AzurePowerShellScript.properties
+    reason: Currently systemData is not allowed
+  - suppress: OperationsAPIImplementation
+    from: templateSpecs.json
+    where: $.paths
+    reason: OperationsAPI will come from Resources
+  - suppress: R3006 #BodyTopLevelProperties
+    from: templateSpecs.json
+    where: 
+    - $.definitions.TemplateSpec.properties
+    - $.definitions.TemplateSpecVersion.properties
+    - $.definitions.TemplateSpecUpdateModel.properties
+    - $.definitions.TemplateSpecVersionUpdateModel.properties
+    reason: Currently systemData is not allowed
+  - suppress: TrackedResourceListByImmediateParent
+    from: templateSpecs.json
+    where: $.definitions
+    reason: Tooling issue
+  - suppress: TrackedResourceListByResourceGroup
+    from: templateSpecs.json
+    where: $.definitions.TemplateSpecVersion
+    reason: Tooling issue
 ```
 
 ---
@@ -521,6 +615,9 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#templatespecs
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -548,6 +645,8 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
+  - package-deploymentscripts: true
+  - package-templatespecs: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -564,7 +663,7 @@ input-file:
 - Microsoft.Resources/stable/2018-05-01/resources.json
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -576,7 +675,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+  - $(this-folder)/Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
@@ -601,6 +702,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-10-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-08-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-05-10/resources.json
@@ -613,22 +715,23 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2016-02-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2018-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json
+  - $(this-folder)/Microsoft.Solutions/stable/2019-07-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
