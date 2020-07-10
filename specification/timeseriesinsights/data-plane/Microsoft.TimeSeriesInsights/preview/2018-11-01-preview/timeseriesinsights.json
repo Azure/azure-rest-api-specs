@@ -1512,8 +1512,7 @@
         },
         "typeId": {
           "description": "This represents the type that this instance belongs to. Never null.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "name": {
           "description": "Optional name of the instance which is unique in an environment. Names acts as a mutable alias or display name of the time series instance. Mutable, may be null.",
@@ -1527,8 +1526,7 @@
           "description": "Set of time series hierarchy IDs that the instance belong to. May be null.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "instanceFields": {
@@ -1670,9 +1668,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. Mutable, not null.",
@@ -1723,8 +1720,7 @@
           "description": "List of IDs of time series types to return or delete.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1808,9 +1804,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique hierarchy identifier that is a immutable GUID. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique hierarchy identifier. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. It is mutable and not null.",
@@ -1864,8 +1859,7 @@
           "description": "List of hierarchy IDs.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1951,8 +1945,7 @@
         "defaultTypeId": {
           "description": "Default type ID of the model that new time series instances will automatically belong to.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -1997,8 +1990,7 @@
         },
         "defaultTypeId": {
           "description": "Default type id of the model that new instances will automatically belong to.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -2217,16 +2209,14 @@
         "typeId": {
           "description": "Represents the type that time series instance which matched the search request belongs to. Never null.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "hierarchyIds": {
           "description": "List of time series hierarchy IDs that time series instance which matched the search request belongs to. Cannot be used to lookup hierarchies. May be null.",
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "highlights": {
@@ -2262,8 +2252,7 @@
               "readOnly": true,
               "type": "array",
               "items": {
-                "type": "string",
-                "format": "uuid"
+                "type": "string"
               }
             },
             "hierarchyNames": {
