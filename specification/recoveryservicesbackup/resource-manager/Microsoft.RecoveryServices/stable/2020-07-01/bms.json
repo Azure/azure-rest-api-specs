@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/operationStatus/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/operationStatus/{operationId}": {
       "get": {
         "tags": [
           "DataMove"
@@ -69,7 +69,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare": {
       "post": {
         "tags": [
           "DataMove"
@@ -106,25 +106,25 @@
           "200": {
             "description": "OK"
           },
-           "202": {
-              "description": "Accepted"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-              }
-            }
+          "202": {
+            "description": "Accepted"
           },
-          "x-ms-long-running-operation": true,
-          "x-ms-examples": {
-            "Prepare Data Move": {
-              "$ref": "./examples/BackupDataMove/PrepareDataMove_Post.json"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Prepare Data Move": {
+            "$ref": "./examples/BackupDataMove/PrepareDataMove_Post.json"
+          }
         }
+      }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare/operationResult/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare/operationResult/{operationId}": {
       "get": {
         "tags": [
           "BMSPrepareDataMoveOperationResult"
@@ -179,7 +179,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/trigger": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/trigger": {
       "post": {
         "tags": [
           "DataMove"
@@ -215,24 +215,24 @@
         "responses": {
           "200": {
             "description": "OK"
-          },            
-           "202": {
-              "description": "Accepted"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-              }
-            }
           },
-          "x-ms-long-running-operation": true,
-          "x-ms-examples": {
-            "Trigger Data Move": {
-              "$ref": "./examples/BackupDataMove/TriggerDataMove_Post.json"
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Trigger Data Move": {
+            "$ref": "./examples/BackupDataMove/TriggerDataMove_Post.json"
+          }
         }
+      }
     }
   },
   "definitions": {
