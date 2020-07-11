@@ -172,6 +172,46 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/checkResourceName": {
+      "post": {
+        "tags": [
+          "Tenants"
+        ],
+        "operationId": "checkResourceName",
+        "description": "A resource name is valid if it is not a reserved word, does not contains a reserved word and does not start with a reserved word",
+        "summary": "Checks resource name validity",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/CheckResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns status as allowed or not.",
+            "schema": {
+              "$ref": "#/definitions/CheckResourceNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response saying resource name is invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check validity for a resource name.": {
+            "$ref": "./examples/CheckResourceName.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -408,6 +448,70 @@
       ],
       "description": "Tenant Ids information."
     },
+    "ResourceName": {
+      "description": "Name and Type of the Resource",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error description and code explaining why resource name is invalid.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Code of the error."
+        }
+      }
+    },
+    "CheckResourceNameResult": {
+      "properties": {
+        "name": {
+          "description": "Name of Resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Resource",
+          "type": "string"
+        },
+        "status": {
+          "description": "Is the resource name Allowed or Reserved",
+          "type": "string",
+          "enum": [
+            "Allowed",
+            "Reserved"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceNameStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
+    },
     "Operation": {
       "description": "Microsoft.Resources operation",
       "type": "object",
@@ -463,6 +567,15 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "CheckResourceNameParameter": {
+      "description": "Resource object with values for resource name and resource type",
+      "in": "body",
+      "name": "Resource Name Definition",
+      "schema": {
+        "$ref": "#/definitions/ResourceName"
+      },
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
