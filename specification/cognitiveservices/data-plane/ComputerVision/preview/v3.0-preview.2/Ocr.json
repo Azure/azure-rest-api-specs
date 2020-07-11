@@ -278,6 +278,7 @@
       "type": "object",
       "required": [
         "boundingBox",
+        "appearance",
         "text",
         "words"
       ],
@@ -289,6 +290,12 @@
         "boundingBox": {
           "description": "Bounding box of a recognized line.",
           "$ref": "#/definitions/BoundingBox"
+        },
+        "appearance": {
+          "description": "Style and styleConfidence of the text line.",
+          "type": "object",
+          "$ref": "#/definitions/Appearance"
+          }
         },
         "text": {
           "description": "The text content of the line.",
@@ -333,6 +340,30 @@
       "items": {
         "type": "number",
         "x-nullable": false
+      }
+    },
+    "Appearance": {
+      "description": "An object representing the style and styleConfidence.",
+      "type": "object",
+      "required": [
+        "style",
+        "styleConfidence"
+      ],
+      "properties": {
+        "style": {
+          "description": "The text line style.",
+          "type": "string",
+          "enum": [
+            "handwriting",
+            "print",
+            null
+          ]
+        },
+        "styleConfidence": {
+          "description": "The confidence of text line style.",
+          "type": "number",
+          "format": "float"
+        }
       }
     },
     "ComputerVisionError": {
