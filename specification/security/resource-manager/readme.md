@@ -266,7 +266,6 @@ These settings apply only when `--tag=package-2020-07-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2020-07-preview-only'
 input-file:
-- Microsoft.Security/preview/2020-07-01-preview/assessments.json
 - Microsoft.Security/preview/2020-07-01-preview/subAssessments.json
 
 # Needed when there is more than one input file
@@ -474,6 +473,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
+  - $(this-folder)/Microsoft.Security/preview/2020-07-01-preview/subAssessments.json
 
 ```
 
