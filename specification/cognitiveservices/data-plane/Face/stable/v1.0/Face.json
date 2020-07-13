@@ -206,15 +206,40 @@
         "parameters": [
           {
             "name": "detectionModel",
-            "description": "The model to be used to detect faces.",
+            "description": "Name of detection model. Detection model is used to detect faces in the submitted image.",
+            "default": "detection_02",
+            "required": false,
+            "type": "string",
             "in": "query",
-            "required": false
+            "x-ms-parameter-location": "method",
+            "x-nullable": false,
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true
+            },
+            "enum": [
+              "detection_01",
+              "detection_02"
+            ]
           },
           {
             "name": "recognitionModel",
-            "description": "The model to be used for face comparison.",
+            "description": "Name of recognition model.",
+            "default": "recognition_03",
+            "required": false,
+            "type": "string",
             "in": "query",
-            "required": false
+            "x-ms-parameter-location": "method",
+            "x-nullable": false,
+            "x-ms-enum": {
+              "name": "RecognitionModel",
+              "modelAsString": true
+            },
+            "enum": [
+              "recognition_01",
+              "recognition_02",
+              "recognition_03"
+            ]
           },
           {
             "name": "body",
@@ -3690,18 +3715,12 @@
       "description": "Result of the compare operation.",
       "properties": {
         "targetImageFace": {
-          "type": "object",
           "description": "The face used for comparison from source image. along with confidence and isIdentical flag.",
-          "schema": {
-            "$ref": "#/definitions/TargetImageFace"
-          }
+          "$ref": "#/definitions/TargetImageFace"
         },
         "sourceImageFace": {
-          "type": "object",
           "description": "The face used for comparison from target image.",
-          "schema": {
-            "$ref": "#/definitions/FaceRectangle"
-          }
+          "$ref": "#/definitions/FaceRectangle"
         },
         "detectionModel": {
           "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override \"isIdentical\" and fine-tune the result on their own data.",
