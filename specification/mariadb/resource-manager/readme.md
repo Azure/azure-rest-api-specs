@@ -86,6 +86,7 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
 - Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
+```
 
 ---
 # Code Generation
