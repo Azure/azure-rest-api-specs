@@ -56,6 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_mobility']
+  - repo: azure-cli-extensions
 ```
 
 ## Go
@@ -77,3 +78,11 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
