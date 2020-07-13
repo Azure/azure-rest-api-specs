@@ -1,0 +1,618 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Dataset Service",
+    "version": "1.0",
+    "description": "APIs for managing datasets from uploaded data in Azure Maps."
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "200Async": {
+      "description": "The operation's status response.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      }
+    },
+    "201Async": {
+      "description": "The resource has been created successfully.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "A URI where details on the newly created resource can be found."
+        }
+      }
+    },
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "ConversionIdQuery": {
+      "name": "conversionId",
+      "description": "The unique ID used to create the dataset. The `conversionId` must have been obtained from a successful call to the Conversion Service Convert API and must be provided with multiple query parameters with same name (if more than one is provided). May not be provided in conjunction with the `udid` query parameter.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "UdidDataset": {
+      "name": "udid",
+      "description": "The unique data ID used to create the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API and must be provided with multiple query parameters with the same name (if more than one is provided). May not be provided in conjunction with `conversionId` query parameter.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "DescriptionDataset": {
+      "name": "description",
+      "description": "The description to be given to the dataset.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "DatasetId": {
+      "name": "datasetId",
+      "type": "string",
+      "in": "path",
+      "description": "The identifier for the dataset to query from.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "Type": {
+      "name": "type",
+      "type": "string",
+      "in": "query",
+      "description": "The type of data to create the dataset with.",
+      "enum": [
+        "facility",
+        "raster",
+        "outdoor"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "facility",
+            "description": "Facility Maps data type."
+          },
+          {
+            "value": "raster",
+            "description": "Raster image data."
+          },
+          {
+            "value": "outdoor",
+            "description": "Outdoor Maps data type."
+          }
+        ]
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ImportUdid": {
+      "name": "udid",
+      "description": "The unique data ID used to import data into the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "ImportType": {
+      "name": "type",
+      "type": "string",
+      "in": "query",
+      "description": "The type of data to import into the dataset with.",
+      "enum": [
+        "fixture"
+      ],
+      "x-ms-enum": {
+        "name": "ImportDataType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "fixture",
+            "description": "Area and point element data."
+          }
+        ]
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "AppendDatasetId": {
+      "name": "datasetId",
+      "type": "string",
+      "in": "query",
+      "description": "The ID for the dataset to append to.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "StatusId": {
+      "name": "statusId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID to query the status for the dataset create/import request.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/dataset/create": {
+      "post": {
+        "x-publish": true,
+        "description": "**Dataset Create API**\n\n**Applies to:** S1 pricing tier.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Dataset APIs are part of Creator. This API allows the caller to create a dataset from data that \nwas uploaded to the Azure Maps Data Service.\n\nYou can use this API in a scenario like uploading a DWG zip package for a building, converting the zip package using \nthe Azure Maps Conversion Service, creating a dataset from the converted zip package. The created dataset can be \nused to create tilesets using the Azure Maps Tileset Service and can be queried via the Azure Maps WFS Service.\n\n## Submit Create Request\n\nTo create your dataset, you will use a `POST` request where the `conversionId` query parameter is an id that represents \nthe converted DWG zip package, the `type` parameter will describe the data type to use for the dataset, the `datasetId`\nparameter will describe if the provided data should be appended to a current dataset and, optionally, the \n`description` query parameter will contain a description (if description is not provided a default description will be \ngiven).\n\nThe Create API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
+        "operationId": "Dataset_CreatePreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create dataset from a converted CAD file provided by conversionId": {
+            "$ref": "./examples/Dataset_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ConversionIdQuery"
+          },
+          {
+            "$ref": "#/parameters/UdidDataset"
+          },
+          {
+            "$ref": "#/parameters/Type"
+          },
+          {
+            "$ref": "#/parameters/AppendDatasetId"
+          },
+          {
+            "$ref": "#/parameters/DescriptionDataset"
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/201Async"
+          },
+          "202": {
+            "$ref": "#/responses/202Async"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/dataset/import/{datasetId}": {
+      "patch": {
+        "x-publish": true,
+        "description": "**Dataset Import API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Dataset APIs are part of Creator. This API allows the caller to bulk import data into a dataset \nfrom data that was uploaded to the Azure Maps Data service.<br>\n\n### Submit Import Request\n\nTo import data into your dataset, you will use a `PATCH` request where the `datasetId` query parameter is the \ndataset you want to import your data into, the `udid` query parameter is the data you want to import, and the `type` \nparameter will describe the data type to use for the import data.<br>       \n\nThe Import API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
+        "operationId": "Dataset_ImportPreview",
+        "x-ms-examples": {
+          "Import data into previously created dataset": {
+            "$ref": "./examples/Dataset_Import.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetId"
+          },
+          {
+            "$ref": "#/parameters/ImportUdid"
+          },
+          {
+            "$ref": "#/parameters/ImportType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/200Async"
+          },
+          "202": {
+            "$ref": "#/responses/202Async"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/dataset/{datasetId}": {
+      "delete": {
+        "x-publish": true,
+        "description": "**Dataset Delete API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Dataset APIs are part of Creator.\nThis API allows the caller to delete a previously created dataset.<br>    \nYou can also use this API to delete old/unused datasets to create space for new Creator content.\n\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `datasetId` of the dataset to delete.<br> \n\n\n### Delete Data Response\n\nThe Delete API returns a HTTP `204 No Content` response if the dataset resource was deleted successfully.<br>",
+        "operationId": "Dataset_DeletePreview",
+        "x-ms-examples": {
+          "Delete previously created dataset": {
+            "$ref": "./examples/Dataset_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The dataset delete request completed successfully. The resource referenced by the `datasetId` was deleted from the server.",
+            "schema": {
+              "$ref": "#/definitions/DatasetDeleteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/dataset": {
+      "get": {
+        "x-publish": true,
+        "description": "**Dataset List API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Dataset APIs are part of Creator.\nThis API allows the caller to fetch a list of all previously successfully created datasets.\n\n\n### Submit List Request\n\nTo list all your datasets, you will issue a `GET` request with no additional parameters.<br>\n\n\n### List Data Response\n\nThe List API returns the complete list of all datasets in `json` format. The response contains the following fields (if they are not null or empty):\n  > created - The timestamp the dataset was created.\n  > datasetId - The id for the dataset.\n  > description - The description for the dataset.\n  > datasetSources - The source data that was used when the create request was issued.\n\nThe `datasetSources` describes the source data that was used when the create request was issued and contains the following elements (if they are not null or empty):\n  > conversionIds - The list of `conversionId` (null if none were provided).\n  > udids - The list of `udid` (null if none were provided).\n  > appendDatasetId - The `datasetId` that was used for an append operation (null if none was used).\n  > type - The type of data stored in the dataset that was created.\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, and `datasetSources` of 3 dataset resources:\n\n<br>\n\n```json\n{\n  \"datasets\": [\n    {\n      \"timestamp\": \"2020-01-01T22:50:48+00:00\",\n      \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n      \"description\": \"Some description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],\n        \"type\": \"facility\"\n      },\n      \"status\": \"Succeeded\"\n    },\n    {\n      \"timestamp\": \"2020-01-01T22:57:53+00:00\",\n      \"datasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n      \"description\": \"Create from upload '0c1288fa-2058-4a1b-b68d-13a5f5af7d7c'.\",\n      \"datasetSources\": {\n        \"udids\": [\n          \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n        ],\n        \"type\": \"facility\"\n      },\n      \"status\": \"Succeeded\"\n    },\n    {\n      \"timestamp\": \"2020-01-01T20:39:36+00:00\",\n      \"datasetId\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n      \"description\": \"Some other description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],\n        \"appendDatasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n        \"type\": \"facility\"\n      },\n      \"status\": \"Succeeded\"\n    }\n  ]\n}\n```\n<br>",
+        "operationId": "Dataset_ListPreview",
+        "x-ms-examples": {
+          "List all the previously created datasets": {
+            "$ref": "./examples/Dataset_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list dataset request completed successfully. The response body contains a list of all the previously created datasets.",
+            "schema": {
+              "$ref": "#/definitions/DatasetListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The Id for this long-running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status state of the request.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The request has not started processing yet."
+              },
+              {
+                "value": "Running",
+                "description": "The request has started processing."
+              },
+              {
+                "value": "Failed",
+                "description": "The request has one or more failures."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The request has successfully completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        },
+        "warning": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "DatasetDeleteResponse": {
+      "description": "The response model for the Dataset Delete API. The response body will be empty signifying there's no content available for the `datasetId` anymore.",
+      "type": "object"
+    },
+    "DatasetListResponse": {
+      "description": "The response model for the Dataset List API. The response body will contain a list of all the previously created datasets.",
+      "type": "object",
+      "properties": {
+        "datasets": {
+          "description": "A list of all the previously created datasets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DatasetDetailInfo"
+          }
+        }
+      }
+    },
+    "DatasetDetailInfo": {
+      "description": "Detail information for the dataset.",
+      "type": "object",
+      "properties": {
+        "created": {
+          "description": "The created timestamp for the dataset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datasetId": {
+          "description": "The id for the dataset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description for the dataset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datasetSources": {
+          "$ref": "#/definitions/DatasetSources"
+        },
+        "featureCounts": {
+          "description": "The feature counts for the dataset.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "DatasetSources": {
+      "description": "Information about the details of the create request for the dataset.",
+      "type": "object",
+      "properties": {
+        "conversionIds": {
+          "description": "The list of `conversionId` that were used to create the dataset.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "udids": {
+          "description": "The list of `conversionId` that were used to create the dataset.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "appendDatasetId": {
+          "description": "The dataset that was appended to to create the current dataset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of data stored in the dataset.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatasetGetDetailsResponse": {
+      "$ref": "#/definitions/DatasetDetailInfo"
+    }
+  }
+}
