@@ -199,6 +199,76 @@
         }
       }
     },
+    "/compare": {
+      "post": {
+        "description": "Compare faces from two images based on similarity.\n<br/>\nRemarks:<br />\n* Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* For the scenarios that are sensitive to accuracy please make your own judgment.\n",
+        "operationId": "Face_CompareFaceToFace",
+        "parameters": [
+          {
+            "name": "detectionModel",
+            "description": "The model to be used to detect faces.",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "recognitionModel",
+            "description": "The model to be used for face comparison.",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "body",
+            "description": "Request body for face to face comparison.",
+            "in": "body",
+            "required": false,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CompareFaceToFaceRequest"
+            }
+          },
+          {
+            "name": "source",
+            "description": "Source image files for face to face comparison.",
+            "in": "formData",
+            "type": "file",
+            "required": false
+          },
+          {
+            "name": "target",
+            "description": "Target image files for face to face comparison.",
+            "in": "formData",
+            "type": "file",
+            "required": false
+          }
+        ],
+        "consumes": [
+          "application/json",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the comparison result.",
+            "schema": {
+              "$ref": "#/definitions/CompareResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Verify faces example": {
+            "$ref": "./examples/CompareFaceToFace.json"
+          }
+        }
+      }
+    },
     "/persongroups/{personGroupId}/persons": {
       "post": {
         "description": "Create a new person in a specified person group.",
@@ -3591,6 +3661,80 @@
         }
       }
     },
+    "CompareFaceToFaceRequest": {
+      "type": "object",
+      "required": [
+        "sourceImageUrl",
+        "targetImageUrl"
+      ],
+      "description": "Request body for face to face comparison.",
+      "properties": {
+        "sourceImageUrl": {
+          "type": "string",
+          "description": "Publicly reachable URL of the source image"
+        },
+        "targetImageUrl": {
+          "type": "string",
+          "description": "Publicly reachable URL of the target image"
+        }
+      }
+    },
+    "CompareResult": {
+      "type": "object",
+      "required": [
+        "targetImageFace",
+        "sourceImageFace",
+        "detectionModel",
+        "recognitionModel"
+      ],
+      "description": "Result of the compare operation.",
+      "properties": {
+        "targetImageFace": {
+          "type": "object",
+          "description": "The face used for comparison from source image. along with confidence and isIdentical flag.",
+          "schema": {
+            "$ref": "#/definitions/TargetImageFace"
+          }
+        },
+        "sourceImageFace": {
+          "type": "object",
+          "description": "The face used for comparison from target image.",
+          "schema": {
+            "$ref": "#/definitions/FaceRectangle"
+          }
+        },
+        "detectionModel": {
+          "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override \"isIdentical\" and fine-tune the result on their own data.",
+          "$ref": "#/definitions/DetectionModel"
+        },
+        "recognitionModel": {
+          "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override \"isIdentical\" and fine-tune the result on their own data.",
+          "$ref": "#/definitions/RecognitionModel"
+        }
+      }
+    },
+    "TargetImageFace": {
+      "type": "object",
+      "required": [
+        "faceRectangle",
+        "confidence",
+        "isIdentical"
+      ],
+      "description": "The face used for comparison from target image.",
+      "properties": {
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle"
+        },
+        "confidence": {
+          "description": "A number indicates the similarity confidence two faces. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override \"isIdentical\" and fine-tune the result on their own data.",
+          "$ref": "#/definitions/Confidence"
+        },
+        "isIdentical": {
+          "type": "boolean",
+          "description": "True if the two faces belong to the same person, otherwise false."
+        }
+      }
+    },
     "FaceList": {
       "description": "Face list object.",
       "type": "object",
@@ -3861,6 +4005,20 @@
         {
           "$ref": "#/definitions/NameAndUserDataContract"
         }
+      ]
+    },
+    "DetectionModel": {
+      "type": "string",
+      "description": "Name of detection model. Detection model is used to detect faces from a given image. Dtection mdoel is returned by /compare API",
+      "default": "detection_02",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "DetectionModel",
+        "modelAsString": true
+      },
+      "enum": [
+        "detection_01",
+        "detection_02"
       ]
     },
     "RecognitionModel": {
