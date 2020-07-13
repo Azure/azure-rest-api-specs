@@ -260,19 +260,6 @@ override-info:
   title: SecurityCenter
 ```
 
-### Tag: package-2020-07-preview-only
-
-These settings apply only when `--tag=package-2020-07-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-07-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-07-01-preview/subAssessments.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
 ### Tag: package-2017-08-only
 
 These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -360,6 +347,19 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-07-only
+
+These settings apply only when `--tag=package-2020-07-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-07-only'
+input-file:
+- Microsoft.Security/stable/2020-07-01/subAssessments.json
 
 # Needed when there is more than one input file
 override-info:
@@ -473,7 +473,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
-  - $(this-folder)/Microsoft.Security/preview/2020-07-01-preview/subAssessments.json
+  - $(this-folder)/Microsoft.Security/stable/2020-07-01/subAssessments.json
 
 ```
 
