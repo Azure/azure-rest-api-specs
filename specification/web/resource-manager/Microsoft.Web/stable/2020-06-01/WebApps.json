@@ -24278,6 +24278,18 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertMode": {
+              "description": "This composes with ClientCertEnabled setting.\n- ClientCertEnabled: false means ClientCert is ignored.\n- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.\n- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.",
+              "enum": [
+                "Required",
+                "Optional"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ClientCertMode",
+                "modelAsString": false
+              }
+            },
             "clientCertExclusionPaths": {
               "description": "client certificate authentication comma-separated exclusion paths",
               "type": "string"
@@ -24285,6 +24297,10 @@
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
+            },
+            "customDomainVerificationId": {
+              "description": "Unique identifier that verifies the custom domains assigned to the app. Customer will add this id to a txt record for verification.",
+              "type": "string"
             },
             "outboundIpAddresses": {
               "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.",
@@ -24732,25 +24748,6 @@
               "type": "string",
               "readOnly": true
             }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StringDictionary": {
-      "description": "String dictionary resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Settings.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
           },
           "x-ms-client-flatten": true
         }

@@ -1809,6 +1809,18 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertMode": {
+              "description": "This composes with ClientCertEnabled setting.\n- ClientCertEnabled: false means ClientCert is ignored.\n- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.\n- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.",
+              "enum": [
+                "Required",
+                "Optional"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ClientCertMode",
+                "modelAsString": false
+              }
+            },
             "clientCertExclusionPaths": {
               "description": "client certificate authentication comma-separated exclusion paths",
               "type": "string"
