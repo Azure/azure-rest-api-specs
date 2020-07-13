@@ -2083,7 +2083,6 @@
       "type": "object",
       "required": [
         "hostPoolType",
-        "personalDesktopAssignmentType",
         "loadBalancerType",
         "preferredAppGroupType"
       ],
@@ -2719,6 +2718,11 @@
           "description": "Allow a new session."
         },
         "virtualMachineId": {
+          "type": "string",
+          "description": "Virtual Machine Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
+        },
+        "resourceId": {
           "type": "string",
           "description": "Resource Id of SessionHost's underlying virtual machine.",
           "readOnly": true
