@@ -3720,7 +3720,7 @@
         },
         "sourceImageFace": {
           "description": "The face used for comparison from target image.",
-          "$ref": "#/definitions/FaceRectangle"
+          "$ref": "#/definitions/SourceImageFace"
         },
         "detectionModel": {
           "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override \"isIdentical\" and fine-tune the result on their own data.",
@@ -3751,6 +3751,18 @@
         "isIdentical": {
           "type": "boolean",
           "description": "True if the two faces belong to the same person, otherwise false."
+        }
+      }
+    },
+    "SourceImageFace": {
+      "type": "object",
+      "required": [
+        "faceRectangle"
+      ],
+      "description": "The face used for comparison from source image.",
+      "properties": {
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle"
         }
       }
     },
