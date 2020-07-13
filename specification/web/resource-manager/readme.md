@@ -55,6 +55,30 @@ directive:
     reason: Model type is not an Azure resource
 ```
 
+### Tag: package-2020-06
+These settings apply only when `--tag=package-2020-06` or `--tag=package-2020-06-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2019-08-01 are included.
+``` yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only' 
+input-file:
+- Microsoft.CertificateRegistration/stable/2020-06-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-06-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2020-06-01/Domains.json
+- Microsoft.DomainRegistration/stable/2020-06-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2020-06-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2020-06-01/Certificates.json
+- Microsoft.Web/stable/2020-06-01/CommonDefinitions.json
+- Microsoft.Web/stable/2020-06-01/DeletedWebApps.json
+- Microsoft.Web/stable/2020-06-01/Diagnostics.json
+- Microsoft.Web/stable/2020-06-01/Provider.json
+- Microsoft.Web/stable/2020-06-01/Recommendations.json
+- Microsoft.Web/stable/2020-06-01/ResourceProvider.json
+- Microsoft.Web/stable/2020-06-01/WebApps.json
+- Microsoft.Web/stable/2020-06-01/StaticSites.json
+- Microsoft.Web/stable/2020-06-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2020-06-01/AppServicePlans.json
+- Microsoft.Web/stable/2020-06-01/ResourceHealthMetadata.json
+```
+
 ### Tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` or `--tag=package-2019-08-only` is specified on the command line.
