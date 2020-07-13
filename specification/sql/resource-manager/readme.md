@@ -495,6 +495,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/operations.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
 
 # Needed when there is more than one input file
 override-info:
