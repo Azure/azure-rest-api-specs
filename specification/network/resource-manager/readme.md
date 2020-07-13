@@ -48,6 +48,7 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2020-06-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2020-06-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2020-06-01/dscpConfiguration.json
   - Microsoft.Network/stable/2020-06-01/endpointService.json
   - Microsoft.Network/stable/2020-06-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2020-06-01/expressRouteCrossConnection.json
@@ -1604,6 +1605,9 @@ directive:
     reason: Customized verb is used for API
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ipAllocation.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: dscpConfiguration.json
     reason: name, id and type properties are inherited from the upper level
 ```
 
