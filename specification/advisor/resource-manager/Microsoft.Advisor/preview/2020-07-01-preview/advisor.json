@@ -68,7 +68,7 @@
                   "description": "The list of operations.",
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/advisorScore"
+                    "$ref": "#/definitions/advisorScoreEntity"
                   }
                 }
               }
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/advisorScore"
+              "$ref": "#/definitions/advisorScoreEntity"
             }
           },
           "default": {
@@ -207,7 +207,7 @@
         }
       }
     },
-    "score": {
+    "scoreEntity": {
       "description": "The details of Advisor Score",
       "type": "object",
       "properties": {
@@ -233,7 +233,7 @@
         }
       }
     },
-    "timeSeries": {
+    "timeSeriesEntity": {
       "description": "The historic data at different aggregation levels.",
       "type": "array",
       "items": {
@@ -244,22 +244,22 @@
             "description": "The aggregation level of the score.",
             "type": "string",
             "enum": [
-              "weekly",
-              "daily",
-              "monthly"
+              "week",
+              "day",
+              "month"
             ]
           },
           "data": {
             "description": "The past score data",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/score"
+              "$ref": "#/definitions/scoreEntity"
             }
           }
         }
       }
     },
-    "advisorScore": {
+    "advisorScoreEntity": {
       "description": "The details of Advisor score for a single category.",
       "type": "object",
       "properties": {
@@ -281,11 +281,11 @@
           "properties": {
             "lastRefreshedScore": {
               "description": "The details of latest available score.",
-              "$ref": "#/definitions/score"
+              "$ref": "#/definitions/scoreEntity"
             },
             "timeSeries": {
               "description": "The historic Advisor score data.",
-              "$ref": "#/definitions/timeSeries"
+              "$ref": "#/definitions/timeSeriesEntity"
             }
           }
         }
