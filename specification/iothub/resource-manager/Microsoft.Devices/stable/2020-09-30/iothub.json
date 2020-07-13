@@ -2556,11 +2556,11 @@
         "ipMask"
       ]
     },
-    "NetworkRuleSetProperties" : {
+    "NetworkRuleSetProperties": {
       "description": "Network Rule Set Properties of IotHub",
       "type": "object",
       "properties": {
-        "defaultAction" : {
+        "defaultAction": {
           "type": "string",
           "description": "Default Action for Network Rule Set",
           "enum": [
@@ -2573,24 +2573,24 @@
           },
           "default": "Deny"
         },
-        "applyToBuiltInEventHubEndpoint" : {
-          "type" :"boolean",
+        "applyToBuiltInEventHubEndpoint": {
+          "type": "boolean",
           "description": "If True, then Network Rule Set is also applied to BuiltIn EventHub EndPoint of IotHub"
         },
-        "ipRules" : {
+        "ipRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkRuleSetIpRule"
           },
           "description": "List of IP Rules"
-        }    
+        }
       },
       "required": [
         "applyToBuiltInEventHubEndpoint",
         "ipRules"
       ]
     },
-    "NetworkRuleSetIpRule" : {
+    "NetworkRuleSetIpRule": {
       "description": "IP Rule to be applied as part of Network Rule Set",
       "type": "object",
       "x-ms-client-flatten": true,
