@@ -65,6 +65,18 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
 ```
 
+### Tag: package-access-control-2020-01-01-preview
+
+These settings apply only when `--tag=package-access-control-2020-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-access-control-2020-01-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-01-01-preview/workspace.json
+- Microsoft.Synapse/preview/2020-01-01-preview/sqlPools.json
+- Microsoft.Synapse/preview/2020-01-01-preview/bigDataPools.json
+- Microsoft.Synapse/preview/2020-01-01-preview/integrationRuntimes.json
+```
+
 ### Tag: package-access-control-2020-02-01-preview
 
 These settings apply only when `--tag=package-access-control-2020-02-01-preview` is specified on the command line.
