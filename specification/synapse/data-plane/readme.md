@@ -65,7 +65,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
 ```
 
-### Tag: package-access-control-2020-01-01-preview
+### Tag: package-arm-artifacts-2020-01-01-preview
 
 These settings apply only when `--tag=package-access-control-2020-01-01-preview` is specified on the command line.
 
