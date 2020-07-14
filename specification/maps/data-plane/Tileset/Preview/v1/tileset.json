@@ -84,23 +84,15 @@
         "Location": {
           "type": "string",
           "description": "A URI where details on the newly created resource can be found."
-        },
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
         }
       }
     },
     "202Async": {
-      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "headers": {
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
-        },
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
         }
       }
     }
@@ -152,7 +144,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "DatasetId": {
+    "DatasetIdQuery": {
       "name": "datasetId",
       "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](/en-us/rest/api/maps/dataset/createpreview) call.",
       "type": "string",
@@ -167,14 +159,6 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
-    },
-    "Description": {
-      "name": "description",
-      "description": "A description for the tileset.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
     },
     "MinZoom": {
       "name": "minZoom",
@@ -191,13 +175,21 @@
       "required": false,
       "type": "integer",
       "x-ms-parameter-location": "method"
+    },
+    "DescriptionTileset": {
+      "name": "description",
+      "description": "User provided description of the tileset.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
     "/tileset/create/vector": {
       "post": {
         "x-publish": true,
-        "description": "**Tileset Create API**\n\n**Applies to**: S1 pricing tiers.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Tileset API is part of Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
+        "description": "**Tileset Create API**\n\n**Applies to**: S1 pricing tier.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Tileset API is part of Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/dataset/createpreview).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an empty body. The `datasetId` query parameter will be \nused as the source of the tileset data.\n\nThe Create Tileset API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
         "operationId": "Tileset_CreatePreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -219,13 +211,16 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/DatasetId"
+            "$ref": "#/parameters/DatasetIdQuery"
           },
           {
             "$ref": "#/parameters/MinZoom"
           },
           {
             "$ref": "#/parameters/MaxZoom"
+          },
+          {
+            "$ref": "#/parameters/DescriptionTileset"
           }
         ],
         "responses": {
