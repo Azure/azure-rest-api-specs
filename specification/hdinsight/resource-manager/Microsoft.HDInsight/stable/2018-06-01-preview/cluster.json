@@ -65,6 +65,12 @@
           },
           "Create cluster with TLS 1.2": {
             "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with custom network settings": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
+          },
+          "Create cluster with encryption in transit": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
           }
         },
         "parameters": [
@@ -924,6 +930,35 @@
       },
       "description": "The storage profile."
     },
+    "NetworkSettings": {
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "enum": [
+            "InboundAndOutbound",
+            "OutboundOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "outboundOnlyPublicNetworkAccessType": {
+          "type": "string",
+          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "enum": [
+            "PublicLoadBalancer",
+            "UDR"
+          ],
+          "x-ms-enum": {
+            "name": "OutboundOnlyPublicNetworkAccessType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The network settings."
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -979,9 +1014,17 @@
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
         },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       }
     },
@@ -1159,9 +1202,17 @@
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
         },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       },
       "required": [
@@ -1467,6 +1518,16 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        }
+      }
+    },
+    "EncryptionInTransitProperties": {
+      "description": "The encryption-in-transit properties.",
+      "properties": {
+        "isEncryptionInTransitEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not inter cluster node communication is encrypted in transit."
         }
       }
     },

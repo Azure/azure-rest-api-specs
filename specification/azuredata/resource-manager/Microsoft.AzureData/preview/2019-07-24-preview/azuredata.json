@@ -568,13 +568,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlInstances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlManagedInstances": {
       "get": {
         "tags": [
-          "SqlInstances"
+          "SqlManagedInstances"
         ],
-        "operationId": "SqlInstances_List",
-        "summary": "List sqlInstance resources in the subscription",
+        "operationId": "SqlManagedInstances_List",
+        "summary": "List sqlManagedInstance resources in the subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -587,7 +587,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SqlInstanceListResult"
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
             }
           },
           "default": {
@@ -602,19 +602,19 @@
         },
         "x-ms-examples": {
           "Gets all SQL Instance in a subscription.": {
-            "$ref": "./examples/ListSubscriptionSqlIInstance.json"
+            "$ref": "./examples/ListSubscriptionSqlManagedInstance.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlInstances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlManagedInstances": {
       "get": {
         "tags": [
-          "SqlInstances"
+          "SqlManagedInstances"
         ],
-        "operationId": "SqlInstances_ListByResourceGroup",
-        "description": "Gets all sqlInstances in a resource group.",
-        "summary": "List sqlInstance resources in the resource group",
+        "operationId": "SqlManagedInstances_ListByResourceGroup",
+        "description": "Gets all sqlManagedInstances in a resource group.",
+        "summary": "List sqlManagedInstance resources in the resource group",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -630,7 +630,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SqlInstanceListResult"
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
             }
           },
           "default": {
@@ -645,18 +645,18 @@
         },
         "x-ms-examples": {
           "Gets all SQL Instance in a resource group.": {
-            "$ref": "./examples/ListByResourceGroupSqlInstance.json"
+            "$ref": "./examples/ListByResourceGroupSqlManagedInstance.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlInstances/{sqlInstanceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlManagedInstances/{sqlManagedInstanceName}": {
       "get": {
         "tags": [
-          "SqlInstances"
+          "SqlManagedInstances"
         ],
-        "operationId": "SqlInstances_Get",
-        "description": "Retrieves a SQL Instance resource",
+        "operationId": "SqlManagedInstances_Get",
+        "description": "Retrieves a SQL Managed Instance resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -665,8 +665,8 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlInstanceName",
-            "description": "Name of SQL Instance",
+            "name": "sqlManagedInstanceName",
+            "description": "Name of SQL Managed Instance",
             "in": "path",
             "required": true,
             "type": "string",
@@ -680,7 +680,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SqlInstance"
+              "$ref": "#/definitions/SqlManagedInstance"
             }
           },
           "default": {
@@ -692,16 +692,16 @@
         },
         "x-ms-examples": {
           "Updates a SQL Instance tags.": {
-            "$ref": "./examples/GetSqlInstance.json"
+            "$ref": "./examples/GetSqlManagedInstance.json"
           }
         }
       },
       "put": {
         "tags": [
-          "SqlInstances"
+          "SqlManagedInstances"
         ],
-        "operationId": "SqlInstances_Create",
-        "description": "Creates or replaces a SQL Instance resource",
+        "operationId": "SqlManagedInstances_Create",
+        "description": "Creates or replaces a SQL Managed Instance resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -710,8 +710,8 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlInstanceName",
-            "description": "The name of SQL Instances",
+            "name": "sqlManagedInstanceName",
+            "description": "The name of SQL Managed Instances",
             "in": "path",
             "required": true,
             "type": "string",
@@ -720,10 +720,10 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The SQL Instance to be created or updated.",
+            "description": "The SQL Managed Instance to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SqlInstance"
+              "$ref": "#/definitions/SqlManagedInstance"
             }
           },
           {
@@ -734,13 +734,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SqlInstance"
+              "$ref": "#/definitions/SqlManagedInstance"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/SqlInstance"
+              "$ref": "#/definitions/SqlManagedInstance"
             }
           },
           "default": {
@@ -751,17 +751,17 @@
           }
         },
         "x-ms-examples": {
-          "Updates a SQL Instance tags.": {
-            "$ref": "./examples/CreateOrUpdateSqlInstance.json"
+          "Updates a SQL Managed Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlManagedInstance.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "SqlInstances"
+          "SqlManagedInstances"
         ],
-        "operationId": "SqlInstances_Delete",
-        "description": "Deletes a SQL Instance resource",
+        "operationId": "SqlManagedInstances_Delete",
+        "description": "Deletes a SQL Managed Instance resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -770,8 +770,8 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlInstanceName",
-            "description": "The name of Sql Instances",
+            "name": "sqlManagedInstanceName",
+            "description": "The name of Sql Managed Instances",
             "in": "path",
             "required": true,
             "type": "string",
@@ -783,7 +783,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the SQL Instance."
+            "description": "Successfully deleted the SQL Managed Instance."
           },
           "default": {
             "description": "*** Error Responses: ***",
@@ -792,21 +792,21 @@
             }
           },
           "204": {
-            "description": "The specified SQL Instance does not exist."
+            "description": "The specified SQL Managed Instance does not exist."
           }
         },
         "x-ms-examples": {
           "Delete a SQL Instance.": {
-            "$ref": "./examples/DeleteSqlInstance.json"
+            "$ref": "./examples/DeleteSqlManagedInstance.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "SqlInstances"
+          "SqlManagedInstances"
         ],
-        "operationId": "SqlInstances_Update",
-        "description": "Updates a SQL Instance resource",
+        "operationId": "SqlManagedInstances_Update",
+        "description": "Updates a SQL Managed Instance resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -815,8 +815,8 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlInstanceName",
-            "description": "Name of sqlInstance",
+            "name": "sqlManagedInstanceName",
+            "description": "Name of sqlManagedInstance",
             "in": "path",
             "required": true,
             "type": "string",
@@ -825,10 +825,10 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The SQL Instance.",
+            "description": "The SQL Managed Instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SqlInstanceUpdate"
+              "$ref": "#/definitions/SqlManagedInstanceUpdate"
             }
           },
           {
@@ -839,7 +839,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SqlInstance"
+              "$ref": "#/definitions/SqlManagedInstance"
             }
           },
           "default": {
@@ -851,7 +851,7 @@
         },
         "x-ms-examples": {
           "Updates a sql Instance tags.": {
-            "$ref": "./examples/UpdateSqlInstance.json"
+            "$ref": "./examples/UpdateSqlManagedInstance.json"
           }
         }
       }
@@ -1423,13 +1423,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/hybridDataManagers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/dataControllers": {
       "get": {
         "tags": [
-          "HybridDataManagers"
+          "DataControllers"
         ],
-        "operationId": "HybridDataManagers_List",
-        "summary": "List hybridDataManager resources in the subscription",
+        "operationId": "DataControllers_ListInSubscription",
+        "summary": "List dataController resources in the subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1442,7 +1442,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridDataManagerListResult"
+              "$ref": "#/definitions/PageOfDataControllerResource"
             }
           },
           "default": {
@@ -1456,20 +1456,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets all hybridDataManagers in a subscription.": {
-            "$ref": "./examples/ListSubscriptionHybridDataManager.json"
+          "Gets all dataControllers in a subscription.": {
+            "$ref": "./examples/ListSubscriptionDataController.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/hybridDataManagers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/dataControllers": {
       "get": {
         "tags": [
-          "HybridDataManagers"
+          "DataControllers"
         ],
-        "operationId": "HybridDataManagers_ListByResourceGroup",
-        "summary": "List hybridDataManager resources in the resource group",
-        "description": "Get a hybridDataManager list by Resource group name.",
+        "operationId": "DataControllers_ListInGroup",
+        "summary": "List dataController resources in the resource group",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1485,7 +1484,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridDataManagerListResult"
+              "$ref": "#/definitions/PageOfDataControllerResource"
             }
           },
           "default": {
@@ -1499,19 +1498,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets all hybridDataManagers in a resource group.": {
-            "$ref": "./examples/ListByResourceGroupHybridDataManager.json"
+          "Gets all dataControllers in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupDataController.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/hybridDataManagers/{hybridDataManagerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/dataControllers/{dataControllerName}": {
       "put": {
         "tags": [
-          "HybridDataManagers"
+          "DataControllers"
         ],
-        "operationId": "HybridDataManagers_Create",
-        "description": "Creates or replaces a hybridDataManager resource",
+        "operationId": "DataControllers_PutDataController",
+        "description": "Creates or replaces a dataController resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1520,8 +1519,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "hybridDataManagerName",
-            "description": "Name of HybridDataManagerName",
+            "name": "dataControllerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1535,28 +1533,34 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridDataManager"
+              "$ref": "#/definitions/DataControllerResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/HybridDataManager"
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
-          "Updates a hybridDataManager tags.": {
-            "$ref": "./examples/CreateOrUpdateHybridDataManager.json"
+          "Updates a dataControllers tags.": {
+            "$ref": "./examples/CreateOrUpdateDataController.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "HybridDataManagers"
+          "DataControllers"
         ],
-        "operationId": "HybridDataManagers_Delete",
-        "description": "Deletes a hybridDataManager resource",
+        "operationId": "DataControllers_DeleteDataController",
+        "description": "Deletes a dataController resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1565,8 +1569,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "hybridDataManagerName",
-            "description": "Name of HybridDataManager",
+            "name": "dataControllerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1578,7 +1581,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the HybridDataManager."
+            "description": "Successfully deleted the DataController."
           },
           "default": {
             "description": "*** Error Responses: ***",
@@ -1587,21 +1590,21 @@
             }
           },
           "204": {
-            "description": "The specified HybridDataManager does not exist."
+            "description": "The specified DataController does not exist."
           }
         },
         "x-ms-examples": {
-          "Delete a HybridDataManagers.": {
-            "$ref": "./examples/DeleteHybridDataManager.json"
+          "Delete a dataController.": {
+            "$ref": "./examples/DeleteDataController.json"
           }
         }
       },
       "get": {
         "tags": [
-          "HybridDataManagers"
+          "DataControllers"
         ],
-        "operationId": "HybridDataManagers_Get",
-        "description": "Retrieves a hybridDataManager resource",
+        "operationId": "DataControllers_GetDataController",
+        "description": "Retrieves a dataController resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1610,8 +1613,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "hybridDataManagerName",
-            "description": "Name of HybridDataManager",
+            "name": "dataControllerName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1625,22 +1627,28 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridDataManager"
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
-          "Updates a hybridDataManager tags.": {
-            "$ref": "./examples/GetHybridDataManager.json"
+          "Updates a dataController tags.": {
+            "$ref": "./examples/GetDataController.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "HybridDataManagers"
+          "DataControllers"
         ],
-        "operationId": "HybridDataManagers_Update",
-        "description": "Updates a hybridDataManager resource",
+        "operationId": "DataControllers_PatchDataController",
+        "description": "Updates a dataController resource",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1649,21 +1657,11 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "hybridDataManagerName",
-            "description": "Name of HybridDataManager",
+            "name": "dataControllerName",
             "in": "path",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The HybridDataManager.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridDataManagerUpdate"
-            }
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -1673,13 +1671,19 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridDataManager"
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
-          "Updates a hybridDataManager tags.": {
-            "$ref": "./examples/UpdateHybridDataManager.json"
+          "Updates a dataController tags.": {
+            "$ref": "./examples/UpdateDataController.json"
           }
         }
       }
@@ -2151,6 +2155,261 @@
         }
       }
     },
+    "PageOfDataControllerResource": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/DataControllerResource"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results."
+        }
+      }
+    },
+    "DataControllerResource": {
+      "description": "Data controller resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataControllerProperties",
+          "description": "The data controller's properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureResource": {
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "family": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        }
+      }
+    },
+    "DataControllerProperties": {
+      "type": "object",
+      "properties": {
+        "dataController": {
+          "$ref": "#/definitions/DataController"
+        },
+        "requestType": {
+          "$ref": "#/definitions/RequestType"
+        },
+        "uploadRequest": {
+          "$ref": "#/definitions/UsageUploadRequest"
+        },
+        "uploadResponse": {
+          "$ref": "#/definitions/UsageUploadResponse"
+        },
+        "handshakeRequest": {
+          "$ref": "#/definitions/HandshakeRequest"
+        },
+        "handshakeResponse": {
+          "$ref": "#/definitions/HandshakeResponse"
+        }
+      }
+    },
+    "DataController": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "azureResourceType": {
+          "type": "string"
+        },
+        "subscription": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Handshake",
+        "UsageUpload"
+      ],
+      "x-ms-enum": {
+        "name": "RequestType",
+        "modelAsString": true
+      }
+    },
+    "UsageUploadRequest": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string"
+        },
+        "dataTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data": {
+          "items": {
+            "$ref": "#/definitions/UsageRecord"
+          },
+          "type": "array"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "eventSeq": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "tags": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageUploadResponse": {
+      "type": "object",
+      "properties": {
+        "usageUploadStatus": {
+          "$ref": "#/definitions/UsageUploadStatus"
+        },
+        "usageWaterMark": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "UsageUploadStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Failed",
+        "PartialSuccess",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "UsageUploadStatus",
+        "modelAsString": true
+      }
+    },
+    "HandshakeRequest": {
+      "type": "object"
+    },
+    "HandshakeResponse": {
+      "type": "object",
+      "properties": {
+        "usageUploadUrl": {
+          "type": "string"
+        },
+        "usageResultUrl": {
+          "type": "string"
+        }
+      }
+    },
     "PostgresInstanceProperties": {
       "description": "Postgres Instance properties.",
       "type": "object",
@@ -2214,18 +2473,18 @@
         }
       }
     },
-    "SqlInstanceProperties": {
-      "description": "Properties of PostgresInstance.",
+    "SqlManagedInstanceProperties": {
+      "description": "Properties of sqlManagedInstance.",
       "type": "object",
       "properties": {
-        "hybridDataManagerId": {
+        "dataControllerId": {
           "type": "string",
           "description": "null"
         }
       }
     },
-    "SqlInstance": {
-      "description": "A SqlInstance.",
+    "SqlManagedInstance": {
+      "description": "A SqlManagedInstance.",
       "type": "object",
       "allOf": [
         {
@@ -2234,14 +2493,14 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SqlInstanceProperties",
+          "$ref": "#/definitions/SqlManagedInstanceProperties",
           "description": "null",
           "x-ms-client-flatten": true
         }
       }
     },
-    "SqlInstanceUpdate": {
-      "description": "An update to a SQL Instance.",
+    "SqlManagedInstanceUpdate": {
+      "description": "An update to a SQL Managed Instance.",
       "type": "object",
       "properties": {
         "tags": {
@@ -2253,15 +2512,15 @@
         }
       }
     },
-    "SqlInstanceListResult": {
-      "description": "A list of SqlInstance.",
+    "SqlManagedInstanceListResult": {
+      "description": "A list of SqlManagedInstance.",
       "type": "object",
       "properties": {
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlInstance"
+            "$ref": "#/definitions/SqlManagedInstance"
           },
           "readOnly": true
         },
@@ -2353,58 +2612,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlServerInstance"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "HybridDataManagerProperties": {
-      "description": "Hybrid data manager properties",
-      "type": "object"
-    },
-    "HybridDataManager": {
-      "description": "Hybrid data manager resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HybridDataManagerProperties",
-          "description": "null",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "HybridDataManagerUpdate": {
-      "description": "An update to a HybridDataManager.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "HybridDataManagerListResult": {
-      "description": "A list of HybridDataManager.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HybridDataManager"
           },
           "readOnly": true
         },
@@ -2555,9 +2762,9 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SqlInstanceNameParameter": {
+    "SqlManagedInstanceNameParameter": {
       "in": "path",
-      "name": "sqlInstanceName",
+      "name": "sqlManagedInstanceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
@@ -2566,14 +2773,6 @@
     "SqlServerInstanceNameParameter": {
       "in": "path",
       "name": "sqlServerInstanceName",
-      "description": "The name of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "HybridDataManagerNameParameter": {
-      "in": "path",
-      "name": "hybridDataManagerName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",

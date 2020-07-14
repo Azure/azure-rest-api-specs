@@ -2131,6 +2131,24 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -2566,6 +2584,24 @@
           "x-ms-client-name": "BlobRestoreStatus",
           "description": "Blob restore status",
           "readOnly": true
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "Properties of the storage account."
@@ -2733,6 +2769,24 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "The parameters used when updating a storage account."
