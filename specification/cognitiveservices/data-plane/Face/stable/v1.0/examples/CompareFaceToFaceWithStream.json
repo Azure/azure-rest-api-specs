@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "multipart/form-data",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "source": "{Image binary in base 64 format}",
+    "target": "{Image binary in base 64 format}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "targetImageFace": {
+          "faceRectangle": {
+            "top": 0,
+            "left": 0,
+            "width": 100,
+            "height": 100
+          },
+          "confidence": 0.75,
+          "isIdentical": true
+        },
+        "sourceImageFace": {
+          "faceRectangle": {
+            "top": 20,
+            "left": 50,
+            "width": 36,
+            "height": 48
+          }
+        },
+        "detectionModel": "detection_02",
+        "recognitionModel": "recognition_03"
+      }
+    }
+  }
+}
