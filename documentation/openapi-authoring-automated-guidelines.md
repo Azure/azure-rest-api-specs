@@ -59,7 +59,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
 | [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs |
 | [R4016](#r4016) | [ToplevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
-| [R4017](#r4017) | [ToplevelResourceListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
+| [R4017](#r4017) | [ToplevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
 | [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
 | [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
 
@@ -2702,7 +2702,7 @@ For example:
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4017" ></a>R4017 ToplevelResourceListBySubscription
+### <a name="r4017" ></a>R4017 ToplevelResourcesListBySubscription
 
 **Category** : ARM Error
 
