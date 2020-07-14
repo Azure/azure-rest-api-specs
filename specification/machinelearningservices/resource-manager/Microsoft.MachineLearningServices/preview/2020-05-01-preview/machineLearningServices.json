@@ -1229,7 +1229,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
       "get": {
         "tags": [
           "LinkedWorkspaces"
@@ -1275,7 +1275,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
       "put": {
         "tags": [
           "LinkedWorkspaces"
@@ -1645,6 +1645,58 @@
       }
     },
     //////////////////////////////////////////////////
+    // Inference Endpoints List
+    ////////////////////////////////////////////////////
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints": {
+      "get": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningInferenceEndpoints_ListInferenceEndpoints",
+        "description": "Gets Inference Endpoints.",
+        "x-ms-examples": {
+          "Get Services": {
+            // TODO: update
+            "$ref": "./examples/getServices.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInferenceDeploymentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+        //////////////////////////////////////////////////
     // Inference Deployment List
     ////////////////////////////////////////////////////
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
@@ -4320,6 +4372,25 @@
         }
       }
     },
+    "PaginatedInferenceEndpointsList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning Inference Deployment objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of Machine Learning Inference Deployment  objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/InferenceDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
     "PaginatedInferenceDeploymentList": {
       "type": "object",
       "description": "Paginated list of Machine Learning Inference Deployment objects wrapped in ARM resource envelope.",
@@ -5309,7 +5380,6 @@
     // "identityManagement": {
     //   "type": "SystemAssigned, UserAssigned"
     // }
-
     "InferenceEndpointResponse": {
       "description": "The response for an Inference Endpoint.",
       "type": "object",
@@ -6135,43 +6205,52 @@
     "InferenceEndpointCreateRequest": {
       "description": "The request to create an Inference Endpoint.",
       "type": "object",
-      "allOf": [
-        {
-          // TODO: Note - this sadly includes environmentImageRequest
-          "$ref": "#/definitions/CreateServiceRequest"
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint.",
+          "type": "string"
         },
-        {
+        "description": {
+          "description": "The description of the endpoint.",
+          "type": "string"
+        },
+        "kvTags": {
+          "description": "The endpoint tag dictionary. Tags are mutable.",
           "type": "object",
-          "properties": {            
-            // TODO: FYI this comes from base
-            // "name": {
-            //   "description": "The name of the Inference Endpoint. This name must be a valid regionally unique",
-            //   "type": "string"
-            // },
-
-            // TODO: will this do the trick? It is not included in CreateServiceRequest
-            "identity": {
-              "$ref": "#/definitions/Identity",
-              "description": "The identity of the resource."
-            },
-
-            // TODO: does not make sense on endpoint
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The endpoint properties dictionary. Properties are immutable.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "authEnabled": {
+          "description": "Whether or not authentication is enabled.",
+          "type": "boolean"
+        },
+        "authSettings": {
+          "$ref": "#/definitions/InferenceEndpointAuthSettings",
+          "description": "Authentication settings for the Inference Endpoint."
+        }
+        "location": {
+          "description": "The name of the Azure location/region.",
+          "type": "string"
+        },
+        // TODO: will this do the trick? It is not included in CreateServiceRequest
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+        // TODO: does not make sense on endpoint
             // "appInsightsEnabled": {
             //   "description": "Whether or not Application Insights is enabled.",
             //   "type": "boolean"
             // },
-
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled.",
-              "type": "boolean"
-            },
-            "authSettings": {
-              "$ref": "#/definitions/InferenceEndpointAuthSettings",
-              "description": "Authentication settings for the Inference Endpoint."
-            }
-          }
-        }
-      ],
+      },
       "x-ms-discriminator-value": "InferenceEndpoint"
     }
   }
