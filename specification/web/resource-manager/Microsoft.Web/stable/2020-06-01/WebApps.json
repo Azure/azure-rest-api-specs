@@ -21516,6 +21516,31 @@
         }
       }
     },
+    "CustomOpenIdConnectProvider": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CustomOpenIdConnectProvider resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/OpenIdConnectRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/OpenIdConnectLogin"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "DatabaseBackupSetting": {
       "description": "Database backup settings.",
       "required": [
@@ -25489,7 +25514,11 @@
               "type": "string"
             },
             "consoleUrl": {
-              "description": "Link to the Diagnose and Solve Portal",
+              "description": "Link to the console to webapp instance",
+              "type": "string"
+            },
+            "healthCheckUrl": {
+              "description": "Link to the console to webapp instance",
               "type": "string"
             },
             "containers": {
