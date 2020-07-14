@@ -948,13 +948,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default/getDCAccessCode": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default/listDCAccessCode": {
       "post": {
         "tags": [
           "Orders"
         ],
         "summary": "Gets the DCAccess Code",
-        "operationId": "Orders_GetDCAccessCode",
+        "operationId": "Orders_ListDCAccessCode",
         "parameters": [
           {
             "name": "deviceName",
@@ -975,7 +975,7 @@
         ],
         "responses": {
           "200": {
-            "description": "DC Access code for the device",
+            "description": "DCAccess Code for the order",
             "schema": {
               "$ref": "#/definitions/DCAccessCode"
             }
