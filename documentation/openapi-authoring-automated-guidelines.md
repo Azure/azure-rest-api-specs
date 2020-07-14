@@ -1916,7 +1916,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Missing operationId. path:'${operation path}' operation:'${operation}'.
 
-**Description** : Each operation must haave a unique operationId.
+**Description** : Each operation must have a unique operationId.
 
 **CreatedAt** : February 18, 2020
 
@@ -1950,7 +1950,7 @@ For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/v
 
 Rename resource provider as pascal case in path.
 
-Eg: In this case, you need to replace `Microsoft.computer` with `Microsoft.Computer` to follw pascal case.
+Eg: In this case, you need to replace `Microsoft.computer` with `Microsoft.Computer` to follow pascal case.
 
 
 Invalid: 
@@ -2004,7 +2004,7 @@ For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/v
 
 Rename resource type or other identifiers as camel case in path.
 
-Eg: In this case, you need to replace `ResourceGroups` with `resourceGroups` to follw camel case.
+Eg: In this case, you need to replace `ResourceGroups` with `resourceGroups` to follow camel case.
 
 
 Invalid: 
@@ -2044,9 +2044,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
-**Output Message** : Enum must not contain duplicated value (case insentive).
+**Output Message** : Enum must not contain duplicated value (case insensitive).
 
-**Description** : Enum must not contain duplicated value (case insentive).
+**Description** : Enum must not contain duplicated value (case insensitive).
 
 **CreatedAt**: February 18, 2020
 
@@ -2146,7 +2146,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Enum value must not contain empty value.
 
-**Description** : Emum must not be empty, or contain special character, like space, tab, etc. It will lead to code generation failure in downstream pipeline.
+**Description** : Enum must not be empty, or contain special character, like space, tab, etc. It will lead to code generation failure in downstream pipeline.
 
 **CreatedAt**: February 18, 2020
 
@@ -2344,7 +2344,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 The following would be invalid:
 
 ```json
- "responese":{
+ "response":{
    "default": {
      "schema":{
          "error":"error msg",
@@ -2359,7 +2359,7 @@ The following would be invalid:
 the correct schema:
 
 ```json
- "responese":{
+ "response":{
    "default": {
      "error":
      {
@@ -2382,7 +2382,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Response schema must not be empty.
 
-**Description** : Response schema must not be empty, or it will block code genaration.
+**Description** : Response schema must not be empty, or it will block code generation.
 
 **CreatedAt**: April 2, 2020
 
@@ -2394,7 +2394,7 @@ The following would be invalid:
 
 ```json
 ...
- "responese":{
+ "response":{
    "default": {
      "schema":{
      }
@@ -2418,7 +2418,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: May 21, 2020
 
-**How to fix the violation**: For each response in the GET/PUT/PATCH opearation add the systemData object:
+**How to fix the violation**: For each response in the GET/PUT/PATCH operation add the systemData object:
 ``` json
  "systemData": {
     "$ref": "#/definitions/SystemData"
@@ -2449,7 +2449,7 @@ The following would be valid:
  "responses":{
    "default": {
      "schema":{
-       "$ref":#/definiton/Error
+       "$ref":#/definition/Error
      }
   }
  }
@@ -2485,20 +2485,20 @@ The following would be valid:
      .....
      .....
    ]
-  "responese":{
+  "response":{
    "default": {
      "schema":{
-       "$ref":#/definiton/Error
+       "$ref":#/definition/Error
      }
    },
    "200": {
      "schema":{
-       "$ref":#/definiton/response
+       "$ref":#/definition/response
      }
    },
    "204": {
      "schema":{
-       "$ref":#/definiton/resonse
+       "$ref":#/definition/response
      }
    }
   }
@@ -2516,7 +2516,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The operation: '{operation name}' is defined with x-ms-pageable enabled,but can not find the corresponding nextLink property in the response, please add it.
 
-**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) ,when specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
+**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) ,when specifying a x-ms-pageable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
 
 **CreatedAt**: May 21, 2020
 
@@ -2534,7 +2534,7 @@ The following would be valid:
           "nextLinkName": "nextLink"
   },
   ....
-  "responese":{
+  "response":{
    "200": {
      "schema":{
        "description": "The list of metric items.",
@@ -2635,7 +2635,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: July 13, 2020
 
-**How to fix the violation**: For each nested resource, add the corrsponding list operation.
+**How to fix the violation**: For each nested resource, add the corresponding list operation.
 
 For example:
 
@@ -2674,7 +2674,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: July 13, 2020
 
-**How to fix the violation**: For each top-level resource, add the corrsponding list by resource group operation.
+**How to fix the violation**: For each top-level resource, add the corresponding list by resource group operation.
 
 For example:
 
@@ -2713,7 +2713,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: July 13, 2020
 
-**How to fix the violation**: For each top-level resource, add the corrsponding list operation.
+**How to fix the violation**: For each top-level resource, add the corresponding list operation.
 
 For example:
 
