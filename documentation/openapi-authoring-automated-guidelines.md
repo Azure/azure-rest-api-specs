@@ -58,8 +58,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs |
 | [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
 | [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs |
-| [R4016](#r4016) | [ToplevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
-| [R4017](#r4017) | [ToplevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
+| [R4016](#r4016) | [TopLevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
+| [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
 | [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
 | [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
 
@@ -1424,7 +1424,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemdata. Model definition '{0}' has extra properties ['{1}'].
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData. Model definition '{0}' has extra properties ['{1}'].
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
 
@@ -2660,7 +2660,7 @@ For example:
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4016" ></a>R4016 ToplevelResourcesListByResourceGroup
+### <a name="r4016" ></a>R4016 TopLevelResourcesListByResourceGroup
 
 **Category** : ARM Error
 
@@ -2699,7 +2699,7 @@ For example:
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4017" ></a>R4017 ToplevelResourcesListBySubscription
+### <a name="r4017" ></a>R4017 TopLevelResourcesListBySubscription
 
 **Category** : ARM Error
 
