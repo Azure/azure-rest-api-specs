@@ -245,7 +245,7 @@
             "name": "body",
             "description": "Request body for face to face comparison.",
             "in": "body",
-            "required": false,
+            "required": true,
             "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/CompareFaceToFaceRequest"
@@ -2620,14 +2620,14 @@
             "description": "Source image files for face to face comparison.",
             "in": "formData",
             "type": "file",
-            "required": false
+            "required": true
           },
           {
             "name": "target",
             "description": "Target image files for face to face comparison.",
             "in": "formData",
             "type": "file",
-            "required": false
+            "required": true
           }
         ],
         "consumes": [
