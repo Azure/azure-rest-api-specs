@@ -489,6 +489,27 @@
         "modelAsString": true
       }
     },
+    "SaaSOfferStatus": {
+      "enum": [
+        "Started",
+        "PendingFulfillmentStart",
+        "InProgress",
+        "Subscribed",
+        "Suspended",
+        "Reinstated",
+        "Succeeded",
+        "Failed",
+        "Unsubscribed",
+        "Updating"
+      ],
+      "type": "string",
+      "description": "SaaS Offer Status for confluent RP",
+      "title": "SaaSOfferStatus",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SaaSOfferStatus"
+      }
+    },
     "OfferDetail": {
       "description": "Confluent Offer detail",
       "type": "object",
@@ -517,6 +538,10 @@
           "description": "Offer Plan Term unit",
           "maxLength": 25,
           "type": "string"
+        },
+        "status": {
+          "description": "SaaS Offer Status",
+          "$ref": "#/definitions/SaaSOfferStatus"
         }
       }
     },
