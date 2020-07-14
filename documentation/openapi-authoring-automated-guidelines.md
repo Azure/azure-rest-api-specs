@@ -56,6 +56,12 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs |
 | [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs |
 | [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs |
+| [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
+| [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs |
+| [R4016](#r4016) | [ToplevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
+| [R4017](#r4017) | [ToplevelResourceListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
+| [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
+| [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -2579,6 +2585,309 @@ The following would be valid:
           "format": "int64",
       ....
   }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4014" ></a>R4014 AllResourcesMustHaveGetOperation
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The resource does not have get operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) ,all the resources include top-level and nested resources must have a get operation. 
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each resource which doesn't have a get operation,add the corresponding operation.
+
+For example:
+
+```json
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyResourceType/{Name}/SubResource/{subName}": {
+      "get": {
+         ...
+        "operationId": "SubResource_Get",
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SubResource"
+            }
+          },
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4015" ></a>R4015 NestedResourcesMustHaveListOperation
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The nested resource does not have list operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the nested must have a list operation which returns the collection of the resource.
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each nested resource, add the corrsponding list operation.
+
+For example:
+
+```json
+...
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyTopLevelResourceType/{name}/MySubResource": {
+      "get": {
+        ...
+        ...
+        "description": "Handles requests to list all resources in a service.",
+        "operationId": "MySubResource_List",
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the service.",
+            "schema": {
+              "$ref": "#/definitions/MySubResourceList"
+            }
+          }
+        },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4016" ></a>R4016 ToplevelResourcesListByResourceGroup
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The top-level resource "{0}" does not have list by resource group operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the top-level resources must have a list by resource group operation which returns the collection of the resource. 
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each top-level resource, add the corrsponding list by resource group operation.
+
+For example:
+
+```json
+...
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyTopLevelResourceType": {
+      "get": {
+        ...
+        ...
+        "description": "Handles requests to list all resources in a resource group.",
+        "operationId": "Services_ListByRG",
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/MyTopLevelResourceList"
+            }
+          }
+        },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4017" ></a>R4017 ToplevelResourceListBySubscription
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The top-level resource "{0}" does not have list by subscription operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the top-level resources must have a list by subscription operation which returns the collection of the resource. 
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each top-level resource, add the corrsponding list operation.
+
+For example:
+
+```json
+...
+  "/subscriptions/{subscriptionId}/providers/Microsoft.MyNameSpace/MyTopLevelResourceType": {
+      "get": {
+        ...
+        ...
+        "description": "Handles requests to list all resources in a subscription.",
+        "operationId": "Services_ListBySubscription",
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/MyTopLevelResourceList"
+            }
+          }
+        },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4018" ></a>R4018 OperationsApiResponseSchema
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
+
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`, or `display.description`, `display.resource`, `display.operation`,`display.provider` must be included.
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**:  For each operations API ,provide a schema which consistent with the above contract.
+
+The following response is a good example::
+
+```json
+...
+ "AvailableOperations": {
+    "description": "Available operations of the service",
+    "type": "object",
+    "properties": {
+      "value": {
+        "description": "Collection of available operation details",
+        "uniqueItems": false,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/OperationDetail"
+        }
+      },
+      "nextLink": {
+        "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+        "type": "string"
+      }
+    }
+  },
+  "OperationDetail": {
+    "description": "Operation detail payload",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Name of the operation",
+        "type": "string"
+      },
+      "isDataAction": {
+        "description": "Indicates whether the operation is a data action",
+        "type": "boolean"
+      },
+      "display": {
+        "$ref": "#/definitions/OperationDisplay",
+        "description": "Display of the operation"
+      },
+      "origin": {
+        "description": "Origin of the operation",
+        "type": "string"
+      },
+      "properties": {
+        "$ref": "#/definitions/OperationProperties",
+        "description": "Properties of the operation"
+      }
+    }
+  },
+  "OperationDisplay": {
+    "description": "Operation display payload",
+    "type": "object",
+    "properties": {
+      "provider": {
+        "description": "Resource provider of the operation",
+        "type": "string"
+      },
+      "resource": {
+        "description": "Resource of the operation",
+        "type": "string"
+      },
+      "operation": {
+        "description": "Localized friendly name for the operation",
+        "type": "string"
+      },
+      "description": {
+        "description": "Localized friendly description for the operation",
+        "type": "string"
+      }
+    }
+  }
+....
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4019" ></a>R4019 GetCollectionResponseSchema
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response in the GET collection operation "{0}" is different than the response definition in the individual GET operation "{1}".
+
+**Description** : For all resources (top-level and nested), collection GETs should have a response definition with a single property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: Make sure the collection GETs return an array and its items schema the same as the response schema in corresponding individual GET. 
+
+The following response is a good example:
+
+```json
+...
+
+ "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyResourceType/{Name}": {
+      "get": {
+        ...
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Service.",
+            "schema": {
+              "$ref": "#/definitions/MyResourceSchema"
+            }
+          }
+
+...
+...
+
+ "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyResourceType": {
+      "get": {
+        .....
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/MyResourceList"
+            }
+          },
+...
+...
+"MyResourceList":{
+   "type": "object", 
+     "properties": { 
+       "value": { 
+           "type": "array", 
+           "items": { 
+               "$ref": "#/definitions/MyResourceSchema" 
+           } 
+       },
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
