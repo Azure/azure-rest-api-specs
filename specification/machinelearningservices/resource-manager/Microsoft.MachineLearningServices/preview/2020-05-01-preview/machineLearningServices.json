@@ -1733,7 +1733,6 @@
           },
           {
             "$ref": "#/parameters/InferenceEndpointNameParameter"
-<<<<<<< HEAD
           }
         ],
         "responses": {
@@ -1939,8 +1938,6 @@
           "Get Services": {
             // TODO: update
             "$ref": "./examples/getServices.json"
-=======
->>>>>>> changed url for endpoints instead of services and gave endpointName its own object
           }
         },
         "parameters": [
@@ -5631,6 +5628,55 @@
               "description": "Inference Deployment properties",
               "$ref": "#/definitions/InferenceEndpointResponse"
             }
+          },
+          "identity": {
+            "$ref": "#/definitions/Identity",
+            "description": "The identity of the resource."
+          },
+          "state": {
+            // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "Creating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled" // TODO: needed? 
+            ],
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            },
+            "readOnly": true,
+            "description": "The current provisioning state of the Inference Deployment resource."
+          },
+          "error": {
+            "description": "The error details.",
+            "allOf": [
+              {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            ],
+            "readOnly": true
+          },
+          "authEnabled": {
+            "description": "Whether or not authentication is enabled.",
+            "type": "boolean"
+          },
+          "authSettings": {
+            "$ref": "#/definitions/InferenceEndpointAuthSettings",
+            "description": "Authentication settings for the Inference Endpoint."
+          },
+          "uri": {
+            "description": "The URI for sending inference requests.",
+            "type": "string",
+            "readOnly": true
+          },
+          "swaggerUri": {
+            "description": "The Uri for sending swagger requests.",
+            "type": "string",
+            "readOnly": true
           }
         }
       ]
