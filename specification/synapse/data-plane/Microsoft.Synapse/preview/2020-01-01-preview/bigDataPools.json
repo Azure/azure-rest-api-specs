@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-01-01-preview",
+    "title": "SynapseClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "parameters": [
+      {
+        "name": "workspaceName",
+        "description": "The name of the workspace to execute operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/bigDataPools": {          
+      "get": {
+        "tags": [
+          "BigDataPools"
+        ],
+        "operationId": "BigDataPools_List",
+        "description": "List Big Data Pools",
+        "x-ms-examples": {
+          "List Big Data Pools": {
+            "$ref": "./examples/BigDataPools_List.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [              
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/BigDataPoolListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/bigDataPools/{bigDataPoolName}": {          
+      "get": {
+        "tags": [
+          "BigDataPools"
+        ],
+        "operationId": "BigDataPools_Get",
+        "description": "Get Big Data Pool",
+        "x-ms-examples": {
+          "Get Bit Data Pool": {
+            "$ref": "./examples/BigDataPools_Get.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [              
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BigDataPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/BigDataPoolResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BigDataPoolListResponse" : {
+      "description": "A list of BigDataPools in this workspace",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Big Data Pools",
+          "items": {
+            "$ref": "#/definitions/BigDataPoolResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "BigDataPoolResponse" : {
+      "description": "BigDataPool information",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM Resource ID of the BigDataPool"
+        },
+        "location": {
+          "type": "string",
+          "description": "Big Data Pool Location"
+        },
+        "name": {
+          "type": "string",
+          "description": "Big Data Pool Name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceProperties",
+          "description": "Big Data pool properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "BigDataPoolNameParameter": {
+      "name": "bigDataPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Big Data Pool name"
+    },
+    "SynapseDnsSuffixInPath": {
+      "name": "SynapseDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuresynapse.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-01-01-preview",
+    "title": "SynapseClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "parameters": [
+      {
+        "name": "workspaceName",
+        "description": "The name of the workspace to execute operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/sqlPools": {          
+      "get": {
+        "tags": [
+          "SqlPools"
+        ],
+        "operationId": "SqlPools_List",
+        "description": "List Sql Pools",
+        "x-ms-examples": {
+          "List Sql Pools": {
+            "$ref": "./examples/SqlPools_List.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [              
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/sqlPools/{sqlPoolName}": {          
+      "get": {
+        "tags": [
+          "SqlPools"
+        ],
+        "operationId": "SqlPools_Get",
+        "description": "Get Sql Pool",
+        "x-ms-examples": {
+          "List Sql Pools": {
+            "$ref": "./examples/SqlPools_Get.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [              
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SqlPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SqlPoolListResponse" : {
+      "description": "A list of SqlPools in this workspace",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sql Pools",
+          "items": {
+            "$ref": "#/definitions/SqlPoolResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlPoolResponse" : {
+      "description": "SqlPool information",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM Resource ID of the SqlPool"
+        },
+        "location": {
+          "type": "string",
+          "description": "Sql Pool Location"
+        },
+        "name": {
+          "type": "string",
+          "description": "Sql Pool Name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "sku": {
+          "$ref": "../../../resource-manager/sqlPool.json#/definitions/Sku",
+          "description": "SQL pool SKU"
+        },
+        "properties": {
+          "$ref": "../../../resource-manager/sqlPool.json#/definitions/SqlPoolResourceProperties",
+          "description": "SQL pool properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Sql Pool name"
+    },
+    "SynapseDnsSuffixInPath": {
+      "name": "SynapseDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuresynapse.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
