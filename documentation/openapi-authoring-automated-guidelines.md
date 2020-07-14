@@ -2595,15 +2595,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The resource does not have get operation, please add it.
+**Output Message** : The resource "{0}" does not have get operation, please add it.
 
-**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) ,all the resources include top-level and nested resources must have a get operation. 
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) ,all the resources ,including top-level and nested resources, must have a get operation. 
 
 **CreatedAt**: July 13, 2020
 
 **LastModifiedAt**: July 13, 2020
 
-**How to fix the violation**: For each resource which doesn't have a get operation,add the corresponding operation.
+**How to fix the violation**: For each resource which doesn't have a get operation,add the corresponding get operation.
 
 For example:
 
@@ -2630,7 +2630,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The nested resource does not have list operation, please add it.
+**Output Message** : The nested resource "{0}" does not have list operation, please add it.
 
 **Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the nested must have a list operation which returns the collection of the resource.
 
@@ -2749,7 +2749,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
 
-**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`, or `display.description`, `display.resource`, `display.operation`,`display.provider` must be included.
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` or `display.resource`,must be included.
 
 **CreatedAt**: July 13, 2020
 
