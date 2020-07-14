@@ -1690,7 +1690,7 @@ But it's allowed when all required properties are marked as discriminator, becau
 
 **Why the rule is important**: A PATCH operation is used to update properties of a resource. So, If the resource has 'X' number of properties and if you wish to change one of them, then a PATCH request could be sent with a value for that specified property. In other words, all the properties in the PATCH request are updated. Now, if any of the values are marked as required/default, it would force the system to update it always which is not the intention of the PATCH operation.
 
-**How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
+**How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.A recommended way is to define a new model that only contains the patchable properties to replace the original parameter in request body. 
 
 **Good Examples**: The following is a good example:
 ```json
@@ -1722,10 +1722,7 @@ But it's allowed when all required properties are marked as discriminator, becau
           "type": "string"
         }
       },
-      "discriminator": "prop0",
-      "required": [
-        "prop0"
-      ]
+      "required": []
     }
   }
 ......
