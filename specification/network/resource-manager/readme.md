@@ -46,6 +46,7 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2020-06-01/bastionHost.json
   - Microsoft.Network/stable/2020-06-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2020-06-01/customIpPrefix.json
   - Microsoft.Network/stable/2020-06-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2020-06-01/ddosProtectionPlan.json
   - Microsoft.Network/stable/2020-06-01/dscpConfiguration.json
@@ -57,6 +58,7 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/ipAllocation.json
   - Microsoft.Network/stable/2020-06-01/ipGroups.json
   - Microsoft.Network/stable/2020-06-01/loadBalancer.json
+  - Microsoft.Network/stable/2020-06-01/masterCustomIpPrefix.json
   - Microsoft.Network/stable/2020-06-01/natGateway.json
   - Microsoft.Network/stable/2020-06-01/network.json
   - Microsoft.Network/stable/2020-06-01/networkInterface.json
@@ -1423,6 +1425,9 @@ directive:
     from: checkDnsAvailability.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: customIpPrefix.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: ddosCustomPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -1454,6 +1459,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: masterCustomIpPrefix.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: natGateway.json

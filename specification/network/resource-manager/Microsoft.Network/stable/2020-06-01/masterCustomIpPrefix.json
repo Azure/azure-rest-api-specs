@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIpPrefixName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/masterCustomIpPrefixes/{masterCustomIpPrefixName}": {
       "delete": {
         "tags": [
-          "PublicIPPrefixes"
+          "MasterCustomIpPrefixes"
         ],
-        "operationId": "PublicIPPrefixes_Delete",
-        "description": "Deletes the specified public IP prefix.",
+        "operationId": "MasterCustomIPPrefixes_Delete",
+        "description": "Deletes the specified master custom IP Prefix.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -50,11 +50,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PublicIpPrefix."
+            "description": "The name of the MasterCustomIPPrefix."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -81,8 +81,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete public IP prefix": {
-            "$ref": "./examples/PublicIpPrefixDelete.json"
+          "Delete master custom IP prefix": {
+            "$ref": "./examples/MasterCustomIpPrefixDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -92,10 +92,10 @@
       },
       "get": {
         "tags": [
-          "PublicIPPrefixes"
+          "MasterCustomIpPrefixes"
         ],
-        "operationId": "PublicIPPrefixes_Get",
-        "description": "Gets the specified public IP prefix in a specified resource group.",
+        "operationId": "MasterCustomIPPrefixes_Get",
+        "description": "Gets the specified master custom IP prefix in a specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -105,11 +105,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the public IP prefix."
+            "description": "The name of the master custom IP prefix."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -127,9 +127,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting PublicIPPrefix resource.",
+            "description": "Request successful. The operation returns the resulting MasterCustomIPPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "default": {
@@ -140,17 +140,17 @@
           }
         },
         "x-ms-examples": {
-          "Get public IP prefix": {
-            "$ref": "./examples/PublicIpPrefixGet.json"
+          "Get master custom IP prefix": {
+            "$ref": "./examples/MasterCustomIpPrefixGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "PublicIPPrefixes"
+          "MasterCustomIpPrefixes"
         ],
-        "operationId": "PublicIPPrefixes_CreateOrUpdate",
-        "description": "Creates or updates a static or dynamic public IP prefix.",
+        "operationId": "MasterCustomIPPrefixes_CreateOrUpdate",
+        "description": "Creates or updates a master custom IP prefix.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -160,20 +160,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the public IP prefix."
+            "description": "The name of the master custom IP prefix."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             },
-            "description": "Parameters supplied to the create or update public IP prefix operation."
+            "description": "Parameters supplied to the create or update master custom IP prefix operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -184,15 +184,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Create successful. The operation returns the resulting PublicIPPrefix resource.",
+            "description": "Create successful. The operation returns the resulting MasterCustomIpPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "200": {
-            "description": "Update successful. The operation returns the resulting PublicIPPrefix resource.",
+            "description": "Update successful. The operation returns the resulting MasterCustomIpPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "default": {
@@ -203,11 +203,8 @@
           }
         },
         "x-ms-examples": {
-          "Create public IP prefix defaults": {
-            "$ref": "./examples/PublicIpPrefixCreateDefaults.json"
-          },
-          "Create public IP prefix allocation method": {
-            "$ref": "./examples/PublicIpPrefixCreateCustomizedValues.json"
+          "Create master custom IP prefix allocation method": {
+            "$ref": "./examples/MasterCustomIpPrefixCreateCustomizedValues.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -217,10 +214,10 @@
       },
       "patch": {
         "tags": [
-          "PublicIPPrefixes"
+          "MasterCustomIpPrefixes"
         ],
-        "operationId": "PublicIPPrefixes_UpdateTags",
-        "description": "Updates public IP prefix tags.",
+        "operationId": "MasterCustomIPPrefixes_UpdateTags",
+        "description": "Updates master custom IP prefix tags.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -230,11 +227,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "publicIpPrefixName",
+            "name": "masterCustomIpPrefixName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the public IP prefix."
+            "description": "The name of the master custom IP prefix."
           },
           {
             "name": "parameters",
@@ -243,7 +240,7 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update public IP prefix tags."
+            "description": "Parameters supplied to update master custom IP prefix tags."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -254,9 +251,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting PublicIPPrefix resource.",
+            "description": "Update successful. The operation returns the resulting masterCustomIpPrefix resource.",
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefix"
+              "$ref": "#/definitions/MasterCustomIpPrefix"
             }
           },
           "default": {
@@ -267,19 +264,19 @@
           }
         },
         "x-ms-examples": {
-          "Update public IP prefix tags": {
-            "$ref": "./examples/PublicIpPrefixUpdateTags.json"
+          "Update public IP address tags": {
+            "$ref": "./examples/MasterCustomIpPrefixUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPPrefixes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/masterCustomIpPrefixes": {
       "get": {
         "tags": [
-          "PublicIPPrefixes"
+          "MasterCustomIpPrefixes"
         ],
-        "operationId": "PublicIPPrefixes_ListAll",
-        "description": "Gets all the public IP prefixes in a subscription.",
+        "operationId": "MasterCustomIPPrefixes_ListAll",
+        "description": "Gets all master custom IP prefixes in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -290,9 +287,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of PublicIPPrefix resources.",
+            "description": "Request successful. The operation returns a list of MasterCustomIPPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefixListResult"
+              "$ref": "#/definitions/MasterCustomIpPrefixListResult"
             }
           },
           "default": {
@@ -303,8 +300,8 @@
           }
         },
         "x-ms-examples": {
-          "List all public IP prefixes": {
-            "$ref": "./examples/PublicIpPrefixListAll.json"
+          "List all master custom IP prefixes": {
+            "$ref": "./examples/MasterCustomIpPrefixListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -312,13 +309,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/masterCustomIpPrefixes": {
       "get": {
         "tags": [
-          "PublicIPPrefixes"
+          "MasterCustomIpPrefixes"
         ],
-        "operationId": "PublicIPPrefixes_List",
-        "description": "Gets all public IP prefixes in a resource group.",
+        "operationId": "MasterCustomIPPrefixes_List",
+        "description": "Gets all master custom IP prefixes in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -336,9 +333,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of PublicIPPrefix resources.",
+            "description": "Request successful. The operation returns a list of MasterCustomIPPrefix resources.",
             "schema": {
-              "$ref": "#/definitions/PublicIPPrefixListResult"
+              "$ref": "#/definitions/MasterCustomIpPrefixListResult"
             }
           },
           "default": {
@@ -349,8 +346,8 @@
           }
         },
         "x-ms-examples": {
-          "List resource group public IP prefixes": {
-            "$ref": "./examples/PublicIpPrefixList.json"
+          "List resource group master custom IP prefixes": {
+            "$ref": "./examples/MasterCustomIpPrefixList.json"
           }
         },
         "x-ms-pageable": {
@@ -360,97 +357,66 @@
     }
   },
   "definitions": {
-    "PublicIPPrefixSku": {
+    "MasterCustomIpPrefixPropertiesFormat": {
       "properties": {
-        "name": {
+        "cidr": {
           "type": "string",
-          "description": "Name of a public IP prefix SKU.",
+          "description": "The prefix range in CIDR notation. Should include the start address and the prefix length."
+        },
+        "originalValidationMessage": {
+          "type": "string",
+          "description": "Original message used to request creation of master custom IP Prefix."
+        },
+        "signedValidationMessage": {
+          "type": "string",
+          "description": "Signed message used to request creation of master custom IP Prefix."
+        },
+        "customIpPrefixes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "The list of corresponding Custom IP Prefixes."
+        },
+        "validationState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The validation state of the ROA for the corresponding RIR (ARIN/RIPE/APNIC/LACNIC/AFRINIC).",
           "enum": [
-            "Standard"
+            "Validating",
+            "Valid",
+            "Invalid"
           ],
           "x-ms-enum": {
-            "name": "PublicIPPrefixSkuName",
+            "name": "ValidationStatus",
             "modelAsString": true
           }
-        }
-      },
-      "description": "SKU of a public IP prefix."
-    },
-    "PublicIPPrefixPropertiesFormat": {
-      "properties": {
-        "publicIPAddressVersion": {
-          "$ref": "./network.json#/definitions/IPVersion",
-          "description": "The public IP address version."
-        },
-        "ipTags": {
-          "type": "array",
-          "items": {
-            "$ref": "./publicIpAddress.json#/definitions/IpTag"
-          },
-          "description": "The list of tags associated with the public IP prefix."
-        },
-        "prefixLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Length of the Public IP Prefix."
-        },
-        "ipPrefix": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The allocated Prefix."
-        },
-        "publicIPAddresses": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReferencedPublicIpAddress"
-          },
-          "description": "The list of all referenced PublicIPAddresses."
-        },
-        "loadBalancerFrontendIpConfiguration": {
-          "readOnly": true,
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "The reference to load balancer frontend IP configuration associated with the public IP prefix."
-        },
-        "customIPPrefix": {
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "The customIpPrefix that this prefix is associated with."
         },
         "resourceGuid": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource GUID property of the public IP prefix resource."
+          "description": "The resource GUID property of the master custom IP prefix resource."
         },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the public IP prefix resource."
+          "description": "The provisioning state of the master custom IP prefix resource."
         }
       },
-      "description": "Public IP prefix properties."
+      "description": "Master custom IP prefix properties."
     },
-    "PublicIPPrefix": {
+    "MasterCustomIpPrefix": {
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/PublicIPPrefixSku",
-          "description": "The public IP prefix SKU."
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PublicIPPrefixPropertiesFormat",
-          "description": "Public IP prefix properties."
+          "$ref": "#/definitions/MasterCustomIpPrefixPropertiesFormat",
+          "description": "Master Custom IP prefix properties."
         },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of availability zones denoting the IP allocated for the resource needs to come from."
         }
       },
       "allOf": [
@@ -458,32 +424,23 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "Public IP prefix resource."
+      "description": "Master Custom IP prefix resource."
     },
-    "PublicIPPrefixListResult": {
+    "MasterCustomIpPrefixListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PublicIPPrefix"
+            "$ref": "#/definitions/MasterCustomIpPrefix"
           },
-          "description": "A list of public IP prefixes that exists in a resource group."
+          "description": "A list of master custom IP prefixes that exists in a resource group."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for ListPublicIpPrefixes API service call."
-    },
-    "ReferencedPublicIpAddress": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The PublicIPAddress Reference."
-        }
-      },
-      "description": "Reference to a public IP address."
+      "description": "Response for ListMasterCustomIpPrefixes API service call."
     }
   }
 }
