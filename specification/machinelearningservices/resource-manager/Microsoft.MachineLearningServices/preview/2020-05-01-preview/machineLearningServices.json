@@ -1647,7 +1647,7 @@
     //////////////////////////////////////////////////
     // Inference Deployment List
     ////////////////////////////////////////////////////
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/deployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
       "get": {
         "tags": [
           "MachineLearningInferenceDeployments"
@@ -1680,7 +1680,7 @@
             "$ref": "#/parameters/PaginationParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
           }
         ],
         "responses": {
@@ -1702,7 +1702,7 @@
     //////////////////////////////////////////////////
     // Inference Deployment Item
     ////////////////////////////////////////////////////
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{serviceName}/deployments/{deploymentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}": {
       "get": {
         "tags": [
           "MachineLearningInferenceDeployments"
@@ -1729,7 +1729,7 @@
             "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
             "$ref": "#/parameters/InferenceDeploymentNameParameter"
@@ -1783,7 +1783,7 @@
             "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
             "$ref": "#/parameters/InferenceDeploymentNameParameter"
@@ -1831,7 +1831,7 @@
             "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
             "$ref": "#/parameters/InferenceDeploymentNameParameter"
@@ -1871,7 +1871,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services/{serviceName}/deployments/{deploymentName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}/skus": {
       "get": {
         "tags": [
           "MachineLearningDeployments"
@@ -1893,7 +1893,7 @@
             "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/WebServiceNameParameter"
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
             "$ref": "#/parameters/InferenceDeploymentNameParameter"
@@ -2045,6 +2045,14 @@
     "WebServiceNameParameter": {
       "name": "serviceName",
       "description": "Name of the Azure Machine Learning service.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "InferenceEndpointNameParameter": {
+      "name": "endpointName",
+      "description": "Name of the Azure Machine Learning endpoint.",
       "in": "path",
       "type": "string",
       "required": true,
