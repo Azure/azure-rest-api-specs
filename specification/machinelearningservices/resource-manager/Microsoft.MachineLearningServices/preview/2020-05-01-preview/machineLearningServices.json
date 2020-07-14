@@ -5310,70 +5310,86 @@
     //   "type": "SystemAssigned, UserAssigned"
     // }
 
-    "InferenceEndpointServiceResponse": {
-      "description": "The response for an Inference Endpoint service.",
+    "InferenceEndpointResponse": {
+      "description": "The response for an Inference Endpoint.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResponseBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            // TODO: name currently included in base!
-            // "name": {
-            //   "description": "The name of the Inference Endpoint.",
-            //   "type": "string"
-            // },
-
-            // TODO: not required since ServiceResponseBase is wrapped in ServiceResource that in turn
-            // already has an identity field?? Will that "just work"???
-            // "identity": {
-            //   "$ref": "#/definitions/Identity",
-            //   "description": "The identity of the resource."
-            // },
-
-            // TODO: base already has state!? do we need this also?
-            "provisioningState": {
-              // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
-              "type": "string",
-              "enum": [
-                "Unknown",
-                "Creating",
-                "Deleting",
-                "Succeeded",
-                "Failed",
-                "Canceled" // TODO: needed?
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": true
-              },
-              "readOnly": true,
-              "description": "The current provisioning state of the Inference Deployment resource."
-            },
-
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled.",
-              "type": "boolean"
-            },
-            "authSettings": {
-              "$ref": "#/definitions/InferenceEndpointAuthSettings",
-              "description": "Authentication settings for the Inference Endpoint."
-            },
-            "uri": {
-              "description": "The URI for sending inference requests.",
-              "type": "string",
-              "readOnly": true
-            },
-            "swaggerUri": {
-              "description": "The Uri for sending swagger requests.",
-              "type": "string",
-              "readOnly": true
+      "properties":
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the Inference Endpoint.",
+            "type": "string"
+          },
+          "description": {
+            "description": "The service description.",
+            "type": "string"
+          },
+          "kvTags": {
+            "description": "The service tag dictionary. Tags are mutable.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
+          },
+          "properties": {
+            "description": "The service property dictionary. Properties are immutable.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "identity": {
+            "$ref": "#/definitions/Identity",
+            "description": "The identity of the resource."
+          },
+          "state": {
+            // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "Creating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled" // TODO: needed? 
+            ],
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            },
+            "readOnly": true,
+            "description": "The current provisioning state of the Inference Deployment resource."
+          },
+          "error": {
+            "description": "The error details.",
+            "allOf": [
+              {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            ],
+            "readOnly": true
+          },
+          "authEnabled": {
+            "description": "Whether or not authentication is enabled.",
+            "type": "boolean"
+          },
+          "authSettings": {
+            "$ref": "#/definitions/InferenceEndpointAuthSettings",
+            "description": "Authentication settings for the Inference Endpoint."
+          },
+          "uri": {
+            "description": "The URI for sending inference requests.",
+            "type": "string",
+            "readOnly": true
+          },
+          "swaggerUri": {
+            "description": "The Uri for sending swagger requests.",
+            "type": "string",
+            "readOnly": true
           }
         }
-      ],
+      },
       "x-ms-discriminator-value": "InferenceEndpoint"
     },
     "InferenceEndpointAuthSettings": {
