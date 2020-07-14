@@ -20349,15 +20349,15 @@
         },
         "identityType": {
           "enum": [
+            "None",
             "SystemAssigned",
             "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
+            "SystemAssigned, UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedServiceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "details": {
@@ -20943,6 +20943,47 @@
         }
       }
     },
+    "BlobStorageTokenStore": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "BlobStorageTokenStore resource specific properties",
+          "properties": {
+            "sasUrlSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClientRegistration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ClientRegistration resource specific properties",
+          "properties": {
+            "clientId": {
+              "type": "string"
+            },
+            "clientSecretSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ConnStringValueTypePair": {
       "description": "Database connection string value to type pair.",
       "required": [
@@ -21239,6 +21280,36 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "CookieExpiration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CookieExpiration resource specific properties",
+          "properties": {
+            "convention": {
+              "enum": [
+                "FixedTime",
+                "IdentityProviderDerived"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CookieExpirationConvention",
+                "modelAsString": false
+              }
+            },
+            "timeToExpiration": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -21671,6 +21742,59 @@
         }
       }
     },
+    "FileSystemTokenStore": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "FileSystemTokenStore resource specific properties",
+          "properties": {
+            "directory": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ForwardProxy": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ForwardProxy resource specific properties",
+          "properties": {
+            "convention": {
+              "enum": [
+                "NoProxy",
+                "Standard",
+                "Custom"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ForwardProxyConvention",
+                "modelAsString": false
+              }
+            },
+            "customHostHeaderName": {
+              "type": "string"
+            },
+            "customProtoHeaderName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "FunctionEnvelope": {
       "description": "Function information.",
       "type": "object",
@@ -21767,6 +21891,19 @@
     "FunctionSecrets": {
       "description": "Function secrets.",
       "type": "object",
+      "properties": {
+        "key": {
+          "description": "Secret key.",
+          "type": "string"
+        },
+        "trigger_url": {
+          "description": "Trigger URL.",
+          "type": "string"
+        }
+      }
+    },
+    "GitHub": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
@@ -21774,15 +21911,85 @@
       ],
       "properties": {
         "properties": {
-          "description": "FunctionSecrets resource specific properties",
+          "description": "GitHub resource specific properties",
           "properties": {
-            "key": {
-              "description": "Secret key.",
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/ClientRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/LoginScopes"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GlobalValidation": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "GlobalValidation resource specific properties",
+          "properties": {
+            "requireAuthentication": {
+              "type": "boolean"
+            },
+            "unauthenticatedClientAction": {
+              "enum": [
+                "RedirectToLoginPage",
+                "AllowAnonymous",
+                "Return401",
+                "Return403"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "UnauthenticatedClientActionV2",
+                "modelAsString": false
+              }
+            },
+            "redirectToProvider": {
               "type": "string"
             },
-            "trigger_url": {
-              "description": "Trigger URL.",
+            "excludedPaths": {
+              "type": "array",
+              "items": {
               "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Google": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Google resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/ClientRegistration"
+            },
+            "login": {
+              "$ref": "#/definitions/LoginScopes"
+            },
+            "validation": {
+              "$ref": "#/definitions/AllowedAudiencesValidation"
             }
           },
           "x-ms-client-flatten": true
@@ -21967,6 +22174,115 @@
         }
       }
     },
+    "HttpSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HttpSettings resource specific properties",
+          "properties": {
+            "requireHttps": {
+              "type": "boolean"
+            },
+            "routes": {
+              "$ref": "#/definitions/HttpSettingsRoutes"
+            },
+            "forwardProxy": {
+              "$ref": "#/definitions/ForwardProxy"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HttpSettingsRoutes": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HttpSettingsRoutes resource specific properties",
+          "properties": {
+            "apiPrefix": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentityProviders": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "IdentityProviders resource specific properties",
+          "properties": {
+            "azureActiveDirectory": {
+              "$ref": "#/definitions/AzureActiveDirectory"
+            },
+            "facebook": {
+              "$ref": "#/definitions/Facebook"
+            },
+            "gitHub": {
+              "$ref": "#/definitions/GitHub"
+            },
+            "google": {
+              "$ref": "#/definitions/Google"
+            },
+            "twitter": {
+              "$ref": "#/definitions/Twitter"
+            },
+            "customOpenIdConnectProviders": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/CustomOpenIdConnectProvider"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JwtClaimChecks": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "JwtClaimChecks resource specific properties",
+          "properties": {
+            "allowedGroups": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "allowedClientApplications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "KeyInfo": {
       "description": "Function key info.",
       "type": "object",
@@ -22049,15 +22365,15 @@
             },
             "identityType": {
               "enum": [
+                "None",
                 "SystemAssigned",
                 "UserAssigned",
-                "SystemAssigned, UserAssigned",
-                "None"
+                "SystemAssigned, UserAssigned"
               ],
               "type": "string",
               "x-ms-enum": {
                 "name": "ManagedServiceIdentityType",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "details": {
@@ -24072,28 +24388,6 @@
         }
       }
     },
-    "SiteInstance": {
-      "description": "Instance of an app.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "SiteInstance resource specific properties",
-          "properties": {
-            "siteInstanceName": {
-              "description": "Name of instance.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "SiteLogsConfig": {
       "description": "Configuration of App Service site logs.",
       "type": "object",
@@ -24464,6 +24758,14 @@
                 "read"
               ]
             },
+            "isGitHubAction": {
+              "description": "<code>true</code> if this is deployed via GitHub action.",
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
             "deploymentRollbackEnabled": {
               "description": "<code>true</code> to enable deployment rollback; otherwise, <code>false</code>.",
               "type": "boolean",
@@ -24778,6 +25080,35 @@
         }
       }
     },
+    "TokenStore": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "TokenStore resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "tokenRefreshExtensionHours": {
+              "format": "double",
+              "type": "number"
+            },
+            "fileSystem": {
+              "$ref": "#/definitions/FileSystemTokenStore"
+            },
+            "azureBlobStorage": {
+              "$ref": "#/definitions/BlobStorageTokenStore"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "TriggeredJobHistory": {
       "description": "Triggered Web Job History. List of Triggered Web Job Run Information elements.",
       "type": "object",
@@ -24981,6 +25312,50 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "Twitter": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Twitter resource specific properties",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "registration": {
+              "$ref": "#/definitions/TwitterRegistration"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TwitterRegistration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "TwitterRegistration resource specific properties",
+          "properties": {
+            "consumerKey": {
+              "type": "string"
+            },
+            "consumerSecretSettingName": {
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
