@@ -2697,7 +2697,9 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
-          "$ref": "#/definitions/UrlSigningKey"
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -3868,6 +3870,12 @@
         "keyId"
       ],
       "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
+          ]
+        },
         "keyId": {
           "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
           "type": "string"
@@ -3877,7 +3885,11 @@
           "type": "string",
           "enum": [
             "SHA256"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
         },
         "parameterNameOverride": {
           "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
@@ -3909,7 +3921,11 @@
             "expires",
             "keyId",
             "signature"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "paramIndicator",
+            "modelAsString": true
+          }
         },
         "paramName": {
           "description": "Parameter name",
@@ -4227,6 +4243,22 @@
         "enabled": {
           "description": "Origin is enabled for load balancing or not. By default, origin is always enabled.",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
