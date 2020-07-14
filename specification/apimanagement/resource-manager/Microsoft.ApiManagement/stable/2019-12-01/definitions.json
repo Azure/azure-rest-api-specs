@@ -4590,6 +4590,28 @@
         "allowTracing": {
           "type": "boolean",
           "description": "Determines whether tracing can be enabled"
+        },
+        "appType": {
+          "type": "string",
+          "description": "Determines the type of application which send the create subscription request. Default is legacy portal.",
+          "enum": [
+            "portal",
+            "developerPortal"
+          ],
+          "x-ms-enum": {
+            "name": "AppType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "portal",
+                "description": "User create request was sent by legacy developer portal."
+              },
+              {
+                "value": "developerPortal",
+                "description": "User create request was sent by new developer portal."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -4690,6 +4712,28 @@
         "allowTracing": {
           "type": "boolean",
           "description": "Determines whether tracing can be enabled"
+        },
+        "appType": {
+          "type": "string",
+          "description": "Determines the type of application which send the update subscription request. Default is legacy portal.",
+          "enum": [
+            "portal",
+            "developerPortal"
+          ],
+          "x-ms-enum": {
+            "name": "AppType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "portal",
+                "description": "User create request was sent by legacy developer portal."
+              },
+              {
+                "value": "developerPortal",
+                "description": "User create request was sent by new developer portal."
+              }
+            ]
+          }
         }
       },
       "description": "Parameters supplied to the Update subscription operation."
@@ -5051,23 +5095,6 @@
         "password": {
           "type": "string",
           "description": "User Password. If no value is provided, a default password is generated."
-        },
-        "appType": {
-          "type": "string",
-          "description": "Determines the type of application which send the create user request. Default is old publisher portal.",
-          "enum": [
-            "developerPortal"
-          ],
-          "x-ms-enum": {
-            "name": "AppType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "developerPortal",
-                "description": "User create request was sent by new developer portal."
-              }
-            ]
-          }
         },
         "confirmation": {
           "type": "string",
