@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,7 +39,9 @@
   "paths": {
     "/providers/Microsoft.AzureStackHCI/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "description": "List all available Microsoft.AzureStackHCI provider operations",
         "parameters": [
@@ -57,10 +67,14 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/clusters": {
       "get": {
-        "tags": ["Clusters"],
+        "tags": [
+          "Clusters"
+        ],
         "operationId": "Clusters_List",
         "x-ms-examples": {
-          "ListClusters": { "$ref": "./examples/ListClusters.json" }
+          "ListClusters": {
+            "$ref": "./examples/ListClusters.json"
+          }
         },
         "description": "List all HCI clusters in a subscription.",
         "parameters": [
@@ -92,10 +106,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters": {
       "get": {
-        "tags": ["Clusters"],
+        "tags": [
+          "Clusters"
+        ],
         "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
-          "ListClusters": { "$ref": "./examples/ListClustersByResourceGroup.json" }
+          "ListClusters": {
+            "$ref": "./examples/ListClustersByResourceGroup.json"
+          }
         },
         "description": "List all HCI clusters in a resource group.",
         "parameters": [
@@ -130,10 +148,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}": {
       "get": {
-        "tags": ["Clusters"],
+        "tags": [
+          "Clusters"
+        ],
         "operationId": "Clusters_Get",
         "x-ms-examples": {
-          "GetClusters": { "$ref": "./examples/GetCluster.json" }
+          "GetClusters": {
+            "$ref": "./examples/GetCluster.json"
+          }
         },
         "description": "Get HCI cluster.",
         "parameters": [
@@ -166,10 +188,14 @@
         }
       },
       "put": {
-        "tags": ["Clusters"],
+        "tags": [
+          "Clusters"
+        ],
         "operationId": "Clusters_Create",
         "x-ms-examples": {
-          "GetClusters": { "$ref": "./examples/CreateCluster.json" }
+          "GetClusters": {
+            "$ref": "./examples/CreateCluster.json"
+          }
         },
         "description": "Create an HCI cluster.",
         "parameters": [
@@ -211,10 +237,14 @@
         }
       },
       "patch": {
-        "tags": ["Clusters"],
+        "tags": [
+          "Clusters"
+        ],
         "operationId": "Clusters_Update",
         "x-ms-examples": {
-          "GetClusters": { "$ref": "./examples/UpdateCluster.json" }
+          "GetClusters": {
+            "$ref": "./examples/UpdateCluster.json"
+          }
         },
         "description": "Update an HCI cluster.",
         "parameters": [
@@ -256,10 +286,14 @@
         }
       },
       "delete": {
-        "tags": ["Clusters"],
+        "tags": [
+          "Clusters"
+        ],
         "operationId": "Clusters_Delete",
         "x-ms-examples": {
-          "GetClusters": { "$ref": "./examples/DeleteCluster.json" }
+          "GetClusters": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
         },
         "description": "Delete an HCI cluster.",
         "parameters": [
