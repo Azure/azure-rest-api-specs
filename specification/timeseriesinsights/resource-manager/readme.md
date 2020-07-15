@@ -25,7 +25,16 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2020-05-15
+```
+
+### Tag: package-2020-05-15
+
+These settings apply only when `--tag=package-2020-05-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-15'
+input-file:
+- Microsoft.TimeSeriesInsights/stable/2020-05-15/timeseriesinsights.json
 ```
 
 ### Tag: package-2018-08-preview
@@ -65,6 +74,8 @@ directive:
       - $.definitions.LongTermEnvironmentResource
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.Gen1EnvironmentResource
+      - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource. Similarly, the Environments_Get operation returns an EnvironmentResource, from which both StandardEnvironmentResource and LongTermEnvironmentResource inherit.
 
@@ -74,6 +85,8 @@ directive:
       - $.definitions.LongTermEnvironmentResource 
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.Gen1EnvironmentResource
+      - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
 ```
@@ -124,6 +137,7 @@ batch:
   - tag: package-2017-11-15
   - tag: package-2017-02-preview
   - tag: package-2018-08-preview
+  - tag: package-2020-05-15
 ```
 
 ### Tag: package-2017-11-15 and java
@@ -165,6 +179,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-05-15 and java
+
+These settings apply only when `--tag=package-2020-05-15 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05-15' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.timeseriesinsights.v2020_05_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2020_05_15
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -177,6 +204,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2020-05-15/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
