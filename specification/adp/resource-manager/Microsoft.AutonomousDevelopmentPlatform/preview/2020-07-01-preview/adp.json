@@ -541,7 +541,14 @@
       ]
     },
     "AccountProperties": {
-      "description": "ADP account properties"
+      "description": "ADP account properties",
+      "properties": {
+        "accountId": {
+          "description": "The account's data-plane ID",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "DataPool": {
       "description": "An ADP Data Pool.",
@@ -583,6 +590,11 @@
     "DataPoolProperties": {
       "description": "Data Pool properties",
       "properties": {
+        "dataPoolId": {
+          "description": "The Data Pool's data-plane ID",
+          "type": "string",
+          "readOnly": true
+        },
         "locations": {
           "type": "array",
           "items": {
