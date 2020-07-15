@@ -354,6 +354,78 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_UpdateAutoScaleConfiguration",
+        "description": "Updates the Autoscale Configuration for HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable or Update Autoscale with the load based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithLoadBasedConfiguration.json"
+          },
+          "Enable or Update Autoscale with the schedule based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithScheduleBasedConfiguration.json"
+          },
+          "Disable Autoscale for the HDInsight cluster": {
+            "$ref": "./examples/DisableClusterAutoScale.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the roleName",
+            "enum": [
+              "workernode"
+            ],
+            "x-ms-enum": {
+              "name": "RoleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleConfigurationUpdateParameter"
+            },
+            "description": "The parameters for the update autoscale configuration operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
       "get": {
         "tags": [
@@ -733,6 +805,15 @@
         }
       },
       "description": "The autoscale request parameters"
+    },
+    "AutoscaleConfigurationUpdateParameter": {
+      "properties": {
+        "autoscale": {
+          "$ref": "#/definitions/Autoscale",
+          "description": "The autoscale configuration."
+        }
+      },
+      "description": "The autoscale configuration update parameter."
     },
     "HardwareProfile": {
       "properties": {
