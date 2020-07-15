@@ -1229,7 +1229,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
       "get": {
         "tags": [
           "LinkedWorkspaces"
@@ -4383,12 +4383,12 @@
     },
     "PaginatedInferenceEndpointsList": {
       "type": "object",
-      "description": "Paginated list of Machine Learning Inference Deployment objects wrapped in ARM resource envelope.",
+      "description": "Paginated list of Machine Learning Inference Endpoint objects wrapped in ARM resource envelope.",
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
-          "description": "An array of Machine Learning Inference Deployment  objects wrapped in ARM resource envelope.",
+          "description": "An array of Machine Learning Inference Endpoint objects wrapped in ARM resource envelope.",
           "items": {
             "$ref": "#/definitions/InferenceEndpointResource"
           }
@@ -5478,6 +5478,11 @@
           },
           "uri": {
             "description": "The URI for sending inference requests.",
+            "type": "string",
+            "readOnly": true
+          },
+          "swaggerUri": {
+            "description": "The Uri for sending swagger requests.",
             "type": "string",
             "readOnly": true
           },
