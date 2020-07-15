@@ -5,18 +5,11 @@
     "title": "SynapseClient"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "workspaceName",
-        "description": "The name of the workspace to execute operations on.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
-      },
-      {
-        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -24,7 +17,7 @@
     "https"
   ],
   "paths": {
-    "/integrationRuntimes": {          
+    "/integrationRuntimes": {
       "get": {
         "tags": [
           "IntegrationRuntimes"
@@ -41,7 +34,7 @@
           "application/json",
           "text/json"
         ],
-        "parameters": [              
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -50,7 +43,7 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": " ../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeListResponse"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeListResponse"
             }
           },
           "default": {
@@ -62,7 +55,7 @@
         }
       }
     },
-    "/integrationRuntimes/{integrationRuntimeName}": {          
+    "/integrationRuntimes/{integrationRuntimeName}": {
       "get": {
         "tags": [
           "IntegrationRuntimes"
@@ -79,7 +72,7 @@
           "application/json",
           "text/json"
         ],
-        "parameters": [              
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -91,7 +84,7 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": " ../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeResource"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeResource"
             }
           },
           "default": {
@@ -114,22 +107,21 @@
       "type": "string",
       "description": "The Synapse client API Version."
     },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "IntegrationRuntimeNameParameter": {
       "name": "integrationRuntimeName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The Integration Runtime name"
-    },
-    "SynapseDnsSuffixInPath": {
-      "name": "SynapseDnsSuffix",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "azuresynapse.net",
-      "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
-      "x-ms-parameter-location": "client"
     }
   }
 }

@@ -5,18 +5,11 @@
     "title": "SynapseClient"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "workspaceName",
-        "description": "The name of the workspace to execute operations on.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
-      },
-      {
-        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -24,7 +17,7 @@
     "https"
   ],
   "paths": {
-    "/sqlPools": {          
+    "/sqlPools": {
       "get": {
         "tags": [
           "SqlPools"
@@ -41,7 +34,7 @@
           "application/json",
           "text/json"
         ],
-        "parameters": [              
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -62,7 +55,7 @@
         }
       }
     },
-    "/sqlPools/{sqlPoolName}": {          
+    "/sqlPools/{sqlPoolName}": {
       "get": {
         "tags": [
           "SqlPools"
@@ -79,7 +72,7 @@
           "application/json",
           "text/json"
         ],
-        "parameters": [              
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -153,18 +146,19 @@
           "description": "Resource tags."
         },
         "sku": {
-          "$ref": " ../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/Sku",
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/Sku",
           "description": "SQL pool SKU"
         },
         "properties": {
-          "$ref": " ../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolResourceProperties",
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolResourceProperties",
           "description": "SQL pool properties",
           "x-ms-client-flatten": true
         }
       }
     }
   },
-  "parameters": {
+  "parameters":
+    {
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -172,22 +166,21 @@
       "type": "string",
       "description": "The Synapse client API Version."
     },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "SqlPoolNameParameter": {
       "name": "sqlPoolName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The Sql Pool name"
-    },
-    "SynapseDnsSuffixInPath": {
-      "name": "SynapseDnsSuffix",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "azuresynapse.net",
-      "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
-      "x-ms-parameter-location": "client"
     }
   }
 }
