@@ -1684,7 +1684,7 @@
           "200": {
             "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
             "schema": {
-              "$ref": "#/definitions/PaginatedInferenceDeploymentList"
+              "$ref": "#/definitions/PaginatedInferenceEndpointsList"
             }
           },
           "default": {
@@ -3965,6 +3965,15 @@
       }
     },
     "Sku": {
+      // CORRECTION???: Docs show sku def as 
+    // "sku": {
+    //     "name": "<sku-name>",
+    //     "tier": "<sku-tier>",
+    //     "size": "<sku-size>",
+    //     "family": "<sku-family>",
+    //     "capacity": <sku-capacity>
+    // },
+    // https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-syntax 
       "description": "Sku of the resource",
       "type": "object",
       "properties": {
@@ -4381,7 +4390,7 @@
           "type": "array",
           "description": "An array of Machine Learning Inference Deployment  objects wrapped in ARM resource envelope.",
           "items": {
-            "$ref": "#/definitions/InferenceDeploymentResource"
+            "$ref": "#/definitions/InferenceEndpointResource"
           }
         },
         "nextLink": {
@@ -5380,6 +5389,24 @@
     // "identityManagement": {
     //   "type": "SystemAssigned, UserAssigned"
     // }
+    "InferenceEndpointResource": {
+      "type": "object",
+      "description": "Machine Learning Inference Endpoint object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Inference Deployment properties",
+              "$ref": "#/definitions/InferenceEndpointResponse"
+            }
+          }
+        }
+      ]
+    },
     "InferenceEndpointResponse": {
       "description": "The response for an Inference Endpoint.",
       "type": "object",
@@ -5413,6 +5440,7 @@
             "$ref": "#/definitions/Identity",
             "description": "The identity of the resource."
           },
+          // TODO: DOES ENDPOINT NEED STATUS AND IS THIS BASED ON DEPLOYMENTS?
           "state": {
             // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
             "type": "string",
@@ -5453,10 +5481,12 @@
             "type": "string",
             "readOnly": true
           },
-          "swaggerUri": {
-            "description": "The Uri for sending swagger requests.",
-            "type": "string",
-            "readOnly": true
+          "deployments": {
+            "description": "The list of deployments.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/InferenceDeploymentResponse"
+            }
           }
         }
       },
@@ -5757,47 +5787,47 @@
     "SkuDescription": {
       "description": "Description of a SKU for a scalable resource.",
       "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the resource SKU.",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Sku"
         },
-        "tier": {
-          "description": "Service tier of the resource SKU.",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size specifier of the resource SKU.",
-          "type": "string"
-        },
-        "family": {
-          "description": "Family code of the resource SKU.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Current number of instances assigned to the resource.",
-          "type": "integer"
-        },
-        "skuCapacity": {
-          "$ref": "#/definitions/SkuCapacity",
-          "description": "Min, max, and default scale values of the SKU."
+        {
+          "type": "object",
+          "properties": {
+            "size": {
+              "description": "Size specifier of the resource SKU.",
+              "type": "string"
+            },
+            "family": {
+              "description": "Family code of the resource SKU.",
+              "type": "string"
+            },
+            "capacity": {
+              "format": "int32",
+              "description": "Current number of instances assigned to the resource.",
+              "type": "integer"
+            },
+            "skuCapacity": {
+              "$ref": "#/definitions/SkuCapacity",
+              "description": "Min, max, and default scale values of the SKU."
+            }
+            // "locations": {
+            //   "description": "Locations of the SKU.",
+            //   "type": "array",
+            //   "items": {
+            //     "type": "string"
+            //   }
+            // },
+            // "capabilities": {
+            //   "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
+            //   "type": "array",
+            //   "items": {
+            //     "$ref": "#/definitions/Capability"
+            //   }
+            // }
+          }
         }
-        // "locations": {
-        //   "description": "Locations of the SKU.",
-        //   "type": "array",
-        //   "items": {
-        //     "type": "string"
-        //   }
-        // },
-        // "capabilities": {
-        //   "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
-        //   "type": "array",
-        //   "items": {
-        //     "$ref": "#/definitions/Capability"
-        //   }
-        // }
-      }
+      ]
     },
     "AKSServiceResponse": {
       "description": "The response for an AKS service.",
