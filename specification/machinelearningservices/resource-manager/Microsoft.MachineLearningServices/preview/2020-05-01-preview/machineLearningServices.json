@@ -1682,7 +1682,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "description": "The response includes a paginated array of Machine Learning Inference Endpoints and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
             "schema": {
               "$ref": "#/definitions/PaginatedInferenceEndpointsList"
             }
@@ -1696,9 +1696,10 @@
         }
       }
     },
-        //////////////////////////////////////////////////
-    // Inference Deployment List
+    //////////////////////////////////////////////////
+    // Inference Endpoints Item
     ////////////////////////////////////////////////////
+
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
       "get": {
         "tags": [
@@ -1739,7 +1740,232 @@
           "200": {
             "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
             "schema": {
-              "$ref": "#/definitions/PaginatedInferenceDeploymentList"
+              "$ref": "#/definitions/InferenceEndpointResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "operationId": "MachineLearningInferenceEndpoint_Delete",
+        "description": "Delete a specific Inference Endpoint.",
+        "x-ms-examples": {
+          "Delete Endpoint": {
+            // TODO update
+            "$ref": "./examples/deleteService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource exists and was deleted successfully."
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "description": "Creates an Inference Endpoint. This call will create an Inference Endpoint if it does not exist. This is a nonrecoverable operation.",
+        "operationId": "MachineLearningInferenceEndpoint_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Or Update service": {
+            // TODO: udpate
+            "$ref": "./examples/createOrUpdateService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create the Inference Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Endpoint creation initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Inference Endpoint creation initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "description": "Creates or updates an Inference Endpoint. This call will update an Inference Endpoint if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Endpoint, do a GET first to verify that it does not exist yet.",
+        "operationId": "MachineLearningInferenceEndpoint_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Or Update service": {
+            // TODO: udpate
+            "$ref": "./examples/createOrUpdateService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Inference Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Endpoint creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Inference Endpoint creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+        //////////////////////////////////////////////////
+    // Inference Deployment List
+    ////////////////////////////////////////////////////
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments": {
+      "get": {
+        "tags": [
+          "MachineLearningInferenceDeployments"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningInferenceDeployments_ListInferenceDeployments",
+        "description": "Gets Inference Deployments.",
+        "x-ms-examples": {
+          "Get Services": {
+            // TODO: update
+            "$ref": "./examples/getServices.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInferenceDeploymentsList"
             }
           },
           "default": {
@@ -6270,7 +6496,7 @@
         "authSettings": {
           "$ref": "#/definitions/InferenceEndpointAuthSettings",
           "description": "Authentication settings for the Inference Endpoint."
-        }
+        },
         "location": {
           "description": "The name of the Azure location/region.",
           "type": "string"
