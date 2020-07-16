@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-01-01-preview",
-    "title": "SynapseClient"
+    "title": "BigDataPoolClient"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
@@ -17,16 +17,16 @@
     "https"
   ],
   "paths": {
-    "/sqlPools": {
+    "/bigDataPools": {
       "get": {
         "tags": [
-          "SqlPools"
+          "BigDataPools"
         ],
-        "operationId": "SqlPools_List",
-        "description": "List Sql Pools",
+        "operationId": "BigDataPools_List",
+        "description": "List Big Data Pools",
         "x-ms-examples": {
-          "List Sql Pools": {
-            "$ref": "./examples/SqlPools_List.json"
+          "List Big Data Pools": {
+            "$ref": "./examples/BigDataPools_List.json"
           }
         },
         "consumes": [],
@@ -43,7 +43,7 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/SqlPoolListResponse"
+              "$ref": "#/definitions/BigDataPoolListResponse"
             }
           },
           "default": {
@@ -55,16 +55,16 @@
         }
       }
     },
-    "/sqlPools/{sqlPoolName}": {
+    "/bigDataPools/{bigDataPoolName}": {
       "get": {
         "tags": [
-          "SqlPools"
+          "BigDataPools"
         ],
-        "operationId": "SqlPools_Get",
-        "description": "Get Sql Pool",
+        "operationId": "BigDataPools_Get",
+        "description": "Get Big Data Pool",
         "x-ms-examples": {
-          "List Sql Pools": {
-            "$ref": "./examples/SqlPools_Get.json"
+          "Get Bit Data Pool": {
+            "$ref": "./examples/BigDataPools_Get.json"
           }
         },
         "consumes": [],
@@ -77,14 +77,14 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SqlPoolNameParameter"
+            "$ref": "#/parameters/BigDataPoolNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/SqlPoolResponse"
+              "$ref": "#/definitions/BigDataPoolResponse"
             }
           },
           "default": {
@@ -98,8 +98,8 @@
     }
   },
   "definitions": {
-    "SqlPoolListResponse" : {
-      "description": "A list of SqlPools in this workspace",
+    "BigDataPoolListResponse" : {
+      "description": "A list of BigDataPools in this workspace",
       "type": "object",
       "required": [
         "value"
@@ -107,9 +107,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Sql Pools",
+          "description": "List of Big Data Pools",
           "items": {
-            "$ref": "#/definitions/SqlPoolResponse"
+            "$ref": "#/definitions/BigDataPoolResponse"
           }
         },
         "nextLink": {
@@ -118,21 +118,21 @@
         }
       }
     },
-    "SqlPoolResponse" : {
-      "description": "SqlPool information",
+    "BigDataPoolResponse" : {
+      "description": "BigDataPool information",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "ARM Resource ID of the SqlPool"
+          "description": "ARM Resource ID of the BigDataPool"
         },
         "location": {
           "type": "string",
-          "description": "Sql Pool Location"
+          "description": "Big Data Pool Location"
         },
         "name": {
           "type": "string",
-          "description": "Sql Pool Name"
+          "description": "Big Data Pool Name"
         },
         "type": {
           "type": "string",
@@ -145,20 +145,15 @@
           },
           "description": "Resource tags."
         },
-        "sku": {
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/Sku",
-          "description": "SQL pool SKU"
-        },
         "properties": {
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolResourceProperties",
-          "description": "SQL pool properties",
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceProperties",
+          "description": "Big Data pool properties",
           "x-ms-client-flatten": true
         }
       }
     }
   },
-  "parameters":
-    {
+  "parameters": {
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -175,12 +170,12 @@
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     },
-    "SqlPoolNameParameter": {
-      "name": "sqlPoolName",
+    "BigDataPoolNameParameter": {
+      "name": "bigDataPoolName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Sql Pool name"
+      "description": "The Big Data Pool name"
     }
   }
 }
