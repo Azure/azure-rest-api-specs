@@ -222,8 +222,7 @@
           "Analyze form with custom model": {
             "$ref": "./examples/AnalyzeBatch.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/custom/models/{modelId}/analyzeResults/{resultId}": {
@@ -325,8 +324,7 @@
           "Copy custom model": {
             "$ref": "./examples/CopyModel.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/custom/models/{modelId}/copyResults/{resultId}": {
@@ -723,8 +721,7 @@
           "Analyze receipt": {
             "$ref": "./examples/ReceiptsBatch.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/prebuilt/receipt/analyzeResults/{resultId}": {
@@ -808,8 +805,7 @@
           "Analyze layout": {
             "$ref": "./examples/LayoutBatch.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/layout/analyzeResults/{resultId}": {
@@ -1096,8 +1092,7 @@
       }
     },
     "ModelName": {
-      "description": "Optional user defined model name.",
-      "maxLength": 256,
+      "description": "Optional user defined model name (max length: 1024).",
       "type": "string",
       "x-nullable": false
     },
@@ -1193,6 +1188,18 @@
         }
       }
     },
+    "Attributes": {
+      "description": "Optional model attributes.",
+      "type": "object",
+      "properties": {
+        "isComposed": {
+          "description": "Is this model composed? (default: false).",
+          "type": "boolean",
+          "default": false,
+          "x-nullable": false
+        }
+      }
+    },
     "ModelInfo": {
       "description": "Basic custom model information.",
       "type": "object",
@@ -1238,18 +1245,8 @@
         "modelName": {
           "$ref": "#/definitions/ModelName"
         },
-        "modelType": {
-          "description": "Optional custom model type.",
-          "enum": [
-            "Custom",
-            "CustomComposed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ModelType",
-            "modelAsString": true
-          },
-          "x-nullable": true
+        "attributes": {
+          "$ref": "#/definitions/Attributes"
         }
       }
     },
