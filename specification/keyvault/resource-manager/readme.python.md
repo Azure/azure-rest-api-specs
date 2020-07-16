@@ -56,7 +56,7 @@ perform-load: false
 
 These settings apply only when `--tag=package-2020-04 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-2020-04'
 namespace: azure.mgmt.keyvault.v2020_04_01
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01
 python:
