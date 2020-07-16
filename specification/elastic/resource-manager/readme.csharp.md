@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Elastic
-  output-folder: $(csharp-sdks-folder)/elastic/management/Microsoft.Elastic/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/elastic/management/Microsoft.Elastic/src/Generated
 ```
