@@ -6,13 +6,21 @@
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/metricDefinitions": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Gets a list of managed instance metric definitions.",
         "operationId": "ManagedInstances_ListMetricDefinitions",
         "parameters": [
@@ -52,7 +60,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/metrics": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Gets a list of managed instance metrics.",
         "operationId": "ManagedInstances_ListMetrics",
         "parameters": [
@@ -120,7 +130,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/export": {
       "post": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Exports a managed instance.",
         "operationId": "ManagedInstances_Export",
         "parameters": [
@@ -162,7 +174,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Gets a list of managed instances in a resource group.",
         "operationId": "ManagedInstances_ListByResourceGroup",
         "parameters": [
@@ -199,7 +213,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Gets a managed instance.",
         "operationId": "ManagedInstances_Get",
         "parameters": [
@@ -234,7 +250,9 @@
         }
       },
       "put": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Creates or updates a managed instance.",
         "operationId": "ManagedInstances_CreateOrUpdate",
         "parameters": [
@@ -291,7 +309,9 @@
         }
       },
       "delete": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Deletes a managed instance.",
         "operationId": "ManagedInstances_Delete",
         "parameters": [
@@ -330,7 +350,9 @@
         }
       },
       "patch": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Updates a managed instance.",
         "operationId": "ManagedInstances_Update",
         "parameters": [
@@ -383,7 +405,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Get top resource consuming queries of a managed instance.",
         "operationId": "ManagedInstances_ListByManagedInstance",
         "parameters": [
@@ -428,7 +452,10 @@
             "description": "The time step to be used to summarize the metric values. Default value is PT1H",
             "required": false,
             "type": "string",
-            "enum": [ "PT1H", "P1D" ],
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
             "x-ms-enum": {
               "name": "QueryTimeGrainType",
               "modelAsString": true
@@ -440,7 +467,13 @@
             "description": "Aggregation function to be used, default value is 'sum'",
             "required": false,
             "type": "string",
-            "enum": [ "avg", "min", "max", "stdev", "sum" ],
+            "enum": [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "sum"
+            ],
             "x-ms-enum": {
               "name": "AggregationFunctionType",
               "modelAsString": true
@@ -452,7 +485,13 @@
             "description": "Metric to be used for ranking top queries. Default is 'cpu'",
             "required": false,
             "type": "string",
-            "enum": [ "cpu", "io", "logIo", "duration", "dtu" ],
+            "enum": [
+              "cpu",
+              "io",
+              "logIo",
+              "duration",
+              "dtu"
+            ],
             "x-ms-enum": {
               "name": "MetricType",
               "modelAsString": true
@@ -494,7 +533,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/failover": {
       "post": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Failovers a managed instance.",
         "operationId": "ManagedInstances_Failover",
         "parameters": [
@@ -514,7 +555,10 @@
             "description": "The type of replica to be failed over.",
             "required": false,
             "type": "string",
-            "enum": [ "Primary", "ReadableSecondary" ],
+            "enum": [
+              "Primary",
+              "ReadableSecondary"
+            ],
             "x-ms-enum": {
               "name": "ReplicaType",
               "modelAsString": true
@@ -548,7 +592,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/managedInstances": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Gets a list of all managed instances in an instance pool.",
         "operationId": "ManagedInstances_ListByInstancePool",
         "parameters": [
@@ -592,7 +638,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/managedInstances": {
       "get": {
-        "tags": [ "ManagedInstances" ],
+        "tags": [
+          "ManagedInstances"
+        ],
         "description": "Gets a list of all managed instances in the subscription.",
         "operationId": "ManagedInstances_List",
         "parameters": [
@@ -678,7 +726,14 @@
         },
         "primaryAggregationType": {
           "description": "The primary aggregation type defining how metric values are displayed.",
-          "enum": [ "None", "Average", "Count", "Minimum", "Maximum", "Total" ],
+          "enum": [
+            "None",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -726,7 +781,11 @@
       "properties": {
         "timeGrain": {
           "description": "The granularity of the database metric.",
-          "enum": [ "PT5M", "PT1H", "P1D" ],
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -736,7 +795,9 @@
         },
         "retention": {
           "description": "The length of retention for the database metric.",
-          "enum": [ "P14D" ],
+          "enum": [
+            "P14D"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -793,7 +854,11 @@
         },
         "timeGrain": {
           "description": "The time step to be used to summarize the metric values.",
-          "enum": [ "PT5M", "PT1H", "P1D" ],
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -878,33 +943,48 @@
       }
     },
     "ExportManagedInstanceDefinition": {
-      "required": [ "storageContainerSasToken", "storageContainerUri" ],
+      "required": [
+        "storageContainerSasToken",
+        "storageContainerUri"
+      ],
       "type": "object",
       "properties": {
         "exportUserDatabases": {
           "description": "The flag which value is used to either export user databases or not.",
           "type": "boolean",
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "storageContainerSasToken": {
           "description": "Tha storage container SAS token.",
           "type": "string",
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "storageContainerUri": {
           "description": "The URL of storage container.",
           "type": "string",
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "readOnlyMode": {
           "description": "The export read only mode to use.",
-          "enum": [ "None", "ReadOnly", "DenyAllConnections" ],
+          "enum": [
+            "None",
+            "ReadOnly",
+            "DenyAllConnections"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ReadOnlyMode",
             "modelAsString": true
           },
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       }
     },
@@ -939,7 +1019,10 @@
         },
         "type": {
           "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
-          "enum": [ "None", "SystemAssigned" ],
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IdentityTypeWithNone",
@@ -956,7 +1039,9 @@
     },
     "Sku": {
       "description": "An ARM Resource SKU.",
-      "required": [ "name" ],
+      "required": [
+        "name"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -1000,13 +1085,18 @@
         },
         "managedInstanceCreateMode": {
           "description": "Specifies the mode of database creation.\r\n\r\nDefault: Regular instance creation.\r\n\r\nRestore: Creates an instance by restoring a set of backups to specific point in time. RestorePointInTime and SourceManagedInstanceId must be specified.",
-          "enum": [ "Default", "PointInTimeRestore" ],
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedServerCreateMode",
             "modelAsString": true
           },
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "fullyQualifiedDomainName": {
           "description": "The fully qualified domain name of the managed instance.",
@@ -1016,12 +1106,18 @@
         "administratorLogin": {
           "description": "Administrator username for the managed instance. Can only be specified when the managed instance is being created (and is required for creation).",
           "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "administratorLoginPassword": {
           "description": "The administrator login password (required for managed instance creation).",
           "type": "string",
-          "x-ms-mutability": [ "create", "update" ]
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "subnetId": {
           "description": "Subnet resource ID for the managed instance.",
@@ -1034,7 +1130,10 @@
         },
         "licenseType": {
           "description": "The license type. Possible values are 'LicenseIncluded' (regular price inclusive of a new SQL license) and 'BasePrice' (discounted AHB price for bringing your own SQL licenses).",
-          "enum": [ "LicenseIncluded", "BasePrice" ],
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedInstanceLicenseType",
@@ -1054,7 +1153,10 @@
         "collation": {
           "description": "Collation of the managed instance.",
           "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dnsZone": {
           "description": "The Dns Zone that the managed instance is in.",
@@ -1064,7 +1166,9 @@
         "dnsZonePartner": {
           "description": "The resource id of another managed instance whose DNS zone this managed instance will share after creation.",
           "type": "string",
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "publicDataEndpointEnabled": {
           "description": "Whether or not the public data endpoint is enabled.",
@@ -1073,17 +1177,25 @@
         "sourceManagedInstanceId": {
           "description": "The resource identifier of the source managed instance associated with create operation of this instance.",
           "type": "string",
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "restorePointInTime": {
           "format": "date-time",
           "description": "Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
           "type": "string",
-          "x-ms-mutability": [ "create" ]
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "proxyOverride": {
           "description": "Connection type used for connecting to the instance.",
-          "enum": [ "Proxy", "Redirect", "Default" ],
+          "enum": [
+            "Proxy",
+            "Redirect",
+            "Default"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedInstanceProxyOverride",
@@ -1093,7 +1205,10 @@
         "timezoneId": {
           "description": "Id of the timezone. Allowed values are timezones supported by Windows.\r\nWindows keeps details on supported timezones, including the id, in registry under\r\nKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones.\r\nYou can get those registry values via SQL Server by querying SELECT name AS timezone_id FROM sys.time_zone_info.\r\nList of Ids can also be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.\r\nAn example of valid timezone id is \"Pacific Standard Time\" or \"W. Europe Standard Time\".",
           "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "instancePoolId": {
           "description": "The Id of the instance pool this managed server belongs to.",
@@ -1117,13 +1232,20 @@
         },
         "storageAccountType": {
           "description": "The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
-          "enum": [ "GRS", "LRS", "ZRS" ],
+          "enum": [
+            "GRS",
+            "LRS",
+            "ZRS"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "StorageAccountType",
             "modelAsString": true
           },
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -1194,7 +1316,10 @@
       }
     },
     "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
-      "required": [ "status", "description" ],
+      "required": [
+        "status",
+        "description"
+      ],
       "type": "object",
       "properties": {
         "status": {
@@ -1214,7 +1339,9 @@
     },
     "TrackedResource": {
       "description": "ARM tracked top level resource.",
-      "required": [ "location" ],
+      "required": [
+        "location"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1225,7 +1352,10 @@
         "location": {
           "description": "Resource location.",
           "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "description": "Resource tags.",
@@ -1238,7 +1368,9 @@
     },
     "ManagedInstance": {
       "description": "An Azure SQL managed instance.",
-      "required": [ "location" ],
+      "required": [
+        "location"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1249,7 +1381,10 @@
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
           "description": "The Azure Active Directory identity of the managed instance.",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1324,7 +1459,10 @@
         },
         "intervalType": {
           "description": "Interval type (length).",
-          "enum": [ "PT1H", "P1D" ],
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1395,7 +1533,10 @@
         },
         "intervalType": {
           "description": "Interval type (length).",
-          "enum": [ "PT1H", "P1D" ],
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1434,7 +1575,12 @@
         },
         "unit": {
           "description": "The unit of the metric.",
-          "enum": [ "percentage", "KB", "microseconds", "count" ],
+          "enum": [
+            "percentage",
+            "KB",
+            "microseconds",
+            "count"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1536,7 +1682,9 @@
       "description": "The name of the blob auditing policy.",
       "required": true,
       "type": "string",
-      "enum": [ "default" ],
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     },
     "SqlVirtualMachineInstanceNameParameter": {
