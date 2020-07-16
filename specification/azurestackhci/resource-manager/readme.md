@@ -25,6 +25,8 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the azurestackhci.
 
 ```yaml
+title: AzureStackHCIClient
+description: Azure Stack HCI management service
 openapi-type: arm
 tag: package-2020-03-01-preview
 ```
