@@ -34,7 +34,7 @@ tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package2020-04'
+```yaml $(tag) == 'package-2020-04'
 input-file:
   - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
