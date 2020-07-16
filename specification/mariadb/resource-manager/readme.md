@@ -89,6 +89,14 @@ input-file:
 - Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
+    reason: The name of the provider is Microsoft.DBforMariaDB
+```
+
 ---
 # Code Generation
 
