@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2020-03-01-preview
 ```
 
+## Suppression
+
+```yaml
+directive:
+  - suppress: R3020
+    from: azurestackhci.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP.
+```
+
 ### Tag: package-2020-03-01-preview
 
 These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
