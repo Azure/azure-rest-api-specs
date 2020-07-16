@@ -1,0 +1,138 @@
+{
+    "parameters": {
+        "api-version": "1.0",
+        "format": "json",
+        "query": "38.90731,47.03788",
+        "pollutants":  true
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "results": [
+            {
+              "dateTime": "2020-07-16T20:00:00+00:00",
+              "index": 0.0,
+              "globalIndex": 23.3,
+              "dominantPollutant": "Particulate Matter 2.5",
+              "category": "Fair",
+              "categoryColor": "#FFC300",
+              "description": "The air quality is generally acceptable for most individuals. However, sensitive groups may experience minor to moderate symptoms from long-term exposure.",
+              "pollutants": [
+                {
+                  "type": "NO2",
+                  "name": "Nitrogen Dioxide",
+                  "index": 0.0,
+                  "plumeLabsIndex": 5.8,
+                  "concentration": {
+                    "value": 11.7,
+                    "unit": "µg/m³",
+                    "unitType": 31
+                  }
+                },
+                {
+                  "type": "O3",
+                  "name": "Ozone",
+                  "index": 0.0,
+                  "plumeLabsIndex": 21.1,
+                  "concentration": {
+                    "value": 51.8,
+                    "unit": "µg/m³",
+                    "unitType": 31
+                  }
+                },
+                {
+                  "type": "PM10",
+                  "name": "Particulate Matter 10",
+                  "index": 0.0,
+                  "plumeLabsIndex": 22.0,
+                  "concentration": {
+                    "value": 22.0,
+                    "unit": "µg/m³",
+                    "unitType": 31
+                  }
+                },
+                {
+                  "type": "PM2_5",
+                  "name": "Particulate Matter 2.5",
+                  "index": 0.0,
+                  "plumeLabsIndex": 23.3,
+                  "concentration": {
+                    "value": 11.6,
+                    "unit": "µg/m³",
+                    "unitType": 31
+                  }
+                },
+                {
+                  "type": "CO",
+                  "name": "Carbon Monoxide",
+                  "index": 0.0,
+                  "plumeLabsIndex": 0.8,
+                  "concentration": {
+                    "value": 164.9,
+                    "unit": "µg/m³",
+                    "unitType": 31
+                  }
+                },
+                {
+                  "type": "SO2",
+                  "name": "Sulfure Dioxide",
+                  "index": 0.0,
+                  "plumeLabsIndex": 2.2,
+                  "concentration": {
+                    "value": 2.2,
+                    "unit": "µg/m³",
+                    "unitType": 31
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+        "400": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "400 BadRequest",
+                    "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+                }
+            }
+        },
+        "401": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "401 Unauthorized",
+                    "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+                }
+            }
+        },
+        "403": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "403 Forbidden",
+                    "message": "Permission, capacity, or authentication issues."
+                }
+            }
+        },
+        "404": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "404 NotFound",
+                    "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+                }
+            }
+        },
+        "500": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "500 InternalServerError",
+                    "message": "An error occurred while processing the request. Please try again later."
+                }
+            }
+        }
+    }
+}
