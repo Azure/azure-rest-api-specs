@@ -85,6 +85,10 @@ directive:
     where: $.definitions.Workbook
     from: workbooks_API.json
     reason: Already used in API
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.Workbook
+    from: workbooks_API.json
+    reason: Already used in API
 ```
 
 ### Tag: package-preview-2020-06-only
