@@ -30,6 +30,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
 batch:
+  - tag: package-2020-04
   - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
@@ -38,6 +39,7 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2020-04
   - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
@@ -48,6 +50,18 @@ batch:
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2020-04 and python
+
+These settings apply only when `--tag=package-2020-04 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+namespace: azure.mgmt.keyvault.v2020_04_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01
+python:
+  namespace: azure.mgmt.keyvault.v2020_04_01
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01
 ```
 
 ### Tag: package-2019-09 and python
