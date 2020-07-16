@@ -67,7 +67,6 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/stable/2020-07-01/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -106,7 +105,6 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/stable/2020-07-01/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -164,7 +162,6 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/stable/2020-07-01/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
@@ -350,19 +347,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2020-07-only
-
-These settings apply only when `--tag=package-2020-07-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-07-only'
-input-file:
-- Microsoft.Security/stable/2020-07-01/subAssessments.json
 
 # Needed when there is more than one input file
 override-info:
