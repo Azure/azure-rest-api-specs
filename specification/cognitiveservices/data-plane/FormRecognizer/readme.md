@@ -1,5 +1,4 @@
 # Cognitive Services Form Recognizer SDK
-
 > see https://aka.ms/autorest
 
 Configuration for generating Form Recognizer SDK.
