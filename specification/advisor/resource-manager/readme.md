@@ -153,6 +153,7 @@ input-file:
   - $(this-folder)/Microsoft.Advisor/stable/2017-04-19/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-03-31/advisor.json
   - $(this-folder)/Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
+  - $(this-folder)/Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
 
 ```
 
