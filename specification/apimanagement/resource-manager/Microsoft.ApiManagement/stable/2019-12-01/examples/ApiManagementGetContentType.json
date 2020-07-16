@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-12-01",
+    "subscriptionId": "subid",
+    "contentTypeId": "page"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/contentTypes/page",
+        "type": "Microsoft.ApiManagement/service/contentTypes",
+        "name": "page",
+        "properties": {
+          "name": "Page",
+          "description": "A regular page",
+          "schema": {
+            "properties": {
+              "en_us": {
+                "$ref": "#/definitions/metadata"
+              }
+            },
+            "additionalProperties": false,
+            "definitions": {
+              "metadata": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "title": "Title",
+                    "description": "Page title. This property gets included in SEO attributes.",
+                    "type": "string",
+                    "indexed": true
+                  },
+                  "description": {
+                    "title": "Description",
+                    "description": "Page description. This property gets included in SEO attributes.",
+                    "type": "string",
+                    "indexed": true
+                  },
+                  "keywords": {
+                    "title": "Keywords",
+                    "description": "Page keywords. This property gets included in SEO attributes.",
+                    "type": "string",
+                    "indexed": true
+                  },
+                  "permalink": {
+                    "title": "Permalink",
+                    "description": "Page permalink, e.g. '/about'.",
+                    "type": "string",
+                    "indexed": true
+                  },
+                  "documentId": {
+                    "title": "Document ID",
+                    "description": "Reference to page content document.",
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "title",
+                  "permalink",
+                  "documentId"
+                ]
+              }
+            }
+          },
+          "version": "1.0.0"
+        }
+      }
+    }
+  }
+}
