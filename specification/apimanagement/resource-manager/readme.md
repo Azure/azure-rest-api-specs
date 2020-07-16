@@ -417,6 +417,7 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtags.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtenant.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimusers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/definitions.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
