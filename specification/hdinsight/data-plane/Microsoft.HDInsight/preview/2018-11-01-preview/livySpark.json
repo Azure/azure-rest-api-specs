@@ -705,17 +705,17 @@
       "type": "object",
       "properties": {
         "from": {
-          "description": "The start index to fetch sessions.",
+          "description": "The start index to fetch Spark Batch jobs.",
           "format": "int32",
           "type": "integer"
         },
         "total": {
-          "description": "Number of sessions to fetch.",
+          "description": "Number of Spark Batch jobs to fetch.",
           "format": "int32",
           "type": "integer"
         },
         "sessions": {
-          "description": "Batch list.",
+          "description": "The Spark Batch job list.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -728,12 +728,12 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The session id.",
+          "description": "The spark batch job's id.",
           "format": "int32",
           "type": "integer"
         },
         "appId": {
-          "description": "The application id of this session.",
+          "description": "The application id of this job.",
           "type": "string"
         },
         "appInfo": {
@@ -744,8 +744,8 @@
           }
         },
         "state": {
-          "description": "The batch state.",
-          "$ref": "#/definitions/SessionState"
+          "description": "The current state of the spark batch job",
+          "$ref": "#/definitions/SubmittedJobState"
         },
         "log": {
           "description": "The log lines.",
@@ -783,7 +783,7 @@
           }
         },
         "jars": {
-          "description": "Jars to be used in this session.",
+          "description": "Jars to be used in this batch job.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -791,7 +791,7 @@
           }
         },
         "pyFiles": {
-          "description": "Python files to be used in this session.",
+          "description": "Python files to be used in this batch job.",
           "x-ms-client-name": "pythonFiles",
           "uniqueItems": false,
           "type": "array",
@@ -800,7 +800,7 @@
           }
         },
         "files": {
-          "description": "Files to be used in this session.",
+          "description": "Files to be used in this batch job.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -826,13 +826,13 @@
           "type": "integer"
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this session.",
+          "description": "Number of executors to launch for this batch job.",
           "x-ms-client-name": "executorCount",
           "format": "int32",
           "type": "integer"
         },
         "archives": {
-          "description": "Archives to be used in this session.",
+          "description": "Archives to be used in this batch job.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -844,7 +844,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name of this session.",
+          "description": "The name of this batch job.",
           "type": "string"
         },
         "conf": {
@@ -861,17 +861,17 @@
       "type": "object",
       "properties": {
         "from": {
-          "description": "The start index to fetch sessions.",
+          "description": "The start index to fetch spark sessions.",
           "format": "int32",
           "type": "integer"
         },
         "total": {
-          "description": "Number of sessions to fetch.",
+          "description": "Number of spark sessions to fetch.",
           "format": "int32",
           "type": "integer"
         },
         "sessions": {
-          "description": "Session list.",
+          "description": "The spark session list.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -884,16 +884,16 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The session id.",
+          "description": "The spark session's id.",
           "format": "int32",
           "type": "integer"
         },
         "appId": {
-          "description": "The application id of this session.",
+          "description": "The application id of this job.",
           "type": "string"
         },
         "owner": {
-          "description": "Remote user who submitted this session.",
+          "description": "Remote user who submitted this job.",
           "type": "string"
         },
         "proxyUser": {
@@ -901,7 +901,7 @@
           "type": "string"
         },
         "kind": {
-          "description": "Session kind.",
+          "description": "Spark session job kind.",
           "$ref": "#/definitions/SessionJobKind"
         },
         "log": {
@@ -914,8 +914,8 @@
           }
         },
         "state": {
-          "description": "The session state.",
-          "$ref": "#/definitions/SessionState"
+          "description": "The current state of the spark session job",
+          "$ref": "#/definitions/SubmittedJobState"
         },
         "appInfo": {
           "description": "The detailed application info.",
@@ -930,7 +930,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "Session kind.",
+          "description": "Spark session job kind.",
           "$ref": "#/definitions/SessionJobKind"
         },
         "proxyUser": {
@@ -938,7 +938,7 @@
           "type": "string"
         },
         "jars": {
-          "description": "jars to be used in this session.",
+          "description": "Jars to be used in this session.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -955,7 +955,7 @@
           }
         },
         "files": {
-          "description": "files to be used in this session.",
+          "description": "Files to be used in this session.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1054,13 +1054,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Session id.",
+          "description": "The spark job's livy id.",
           "format": "int32",
           "type": "integer"
         },
         "state": {
-          "description": "The current state of session.",
-          "$ref": "#/definitions/SessionState"
+          "description": "The current state of the spark job",
+          "$ref": "#/definitions/SubmittedJobState"
         }
       }
     },
@@ -1068,7 +1068,7 @@
       "type": "object",
       "properties": {
         "statements": {
-          "description": "statement list.",
+          "description": "The spark statement list.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1081,7 +1081,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The statement id.",
+          "description": "The spark statement id.",
           "format": "int32",
           "type": "integer"
         },
@@ -1090,7 +1090,7 @@
           "type": "string"
         },
         "state": {
-          "description": "The execution state.",
+          "description": "The current state of the spark statement.",
           "$ref": "#/definitions/StatementState"
         },
         "output": {
@@ -1112,7 +1112,7 @@
           "$ref": "#/definitions/StatementExecutionStatus"
         },
         "execution_count": {
-          "description": "Execution status.",
+          "description": "A monotonically increasing number.",
           "format": "int32",
           "type": "integer"
         },
@@ -1150,10 +1150,10 @@
         "cancelled"
       ]
     },
-    "SessionState": {
+    "SubmittedJobState": {
       "type": "string",
       "x-ms-enum": {
-        "name": "SessionState",
+        "name": "SubmittedJobState",
         "modelAsString": true
       },
       "enum": [
@@ -1166,7 +1166,8 @@
         "error",
         "dead",
         "killed",
-        "success"
+        "success",
+        "recovering"
       ]
     },
     "StatementExecutionStatus": {
