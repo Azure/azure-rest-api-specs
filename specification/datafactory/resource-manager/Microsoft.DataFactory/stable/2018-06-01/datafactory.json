@@ -3810,6 +3810,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6168,10 +6171,23 @@
       ]
     },
     "managedPrivateEndpointListResponse": {
-      "description": "A list of managed private endpoints resources.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ManagedPrivateEndpointResource"
+      "description": "A list of managed private endpoint resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed private endpoints.",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpointResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
       }
     },
     "ManagedPrivateEndpointResource": {
