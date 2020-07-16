@@ -5570,6 +5570,100 @@
         }
       ],
       "description": "Association entity details."
+    },
+    "ContentTypeCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentTypeContract"
+          },
+          "description": "Collection of content types.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content types."
+    },
+    "ContentTypeContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentTypeContractProperties",
+          "description": "Properties of the content type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentTypeContractProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Content type identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Content type name. Must be 1 to 250 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Content type description."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Content type schema."
+        },
+        "version": {
+          "type": "string",
+          "description": "Content type version."
+        }
+      }
+    },
+    "ContentItemCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItemContract"
+          },
+          "description": "Collection of content items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content items."
+    },
+    "ContentItemContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentItemContractProperties",
+          "description": "Properties of the content item."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentItemContractProperties": {
+      "properties": {},
+      "additionalProperties": true
     }
   },
   "parameters": {}
