@@ -2564,12 +2564,12 @@
           "type": "string",
           "description": "Default Action for Network Rule Set",
           "enum": [
-            "Allow",
-            "Deny"
+            "Deny",
+            "Allow"
           ],
           "x-ms-enum": {
             "name": "DefaultAction",
-            "modelAsString": false
+            "modelAsString": true
           },
           "default": "Deny"
         },
@@ -2593,7 +2593,6 @@
     "NetworkRuleSetIpRule": {
       "description": "IP Rule to be applied as part of Network Rule Set",
       "type": "object",
-      "x-ms-client-flatten": true,
       "properties": {
         "filterName": {
           "type": "string",
@@ -2611,7 +2610,7 @@
           ],
           "x-ms-enum": {
             "name": "NetworkRuleIPAction",
-            "modelAsString": false
+            "modelAsString": true
           },
           "default": "Allow"
         }
