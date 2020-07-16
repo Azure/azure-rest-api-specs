@@ -52,7 +52,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "../2020-02-02/bms.json#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -236,45 +236,6 @@
     }
   },
   "definitions": {
-    "ClientScriptForConnect": {
-      "description": "Client script details for file / folder restore.",
-      "type": "object",
-      "properties": {
-        "scriptContent": {
-          "description": "File content of the client script for file / folder restore.",
-          "type": "string"
-        },
-        "scriptExtension": {
-          "description": "File extension of the client script for file / folder restore - .ps1 , .sh , etc.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "OS type - Windows, Linux etc. for which this file / folder restore client script works.",
-          "type": "string"
-        },
-        "url": {
-          "description": "URL of Executable from where to source the content. If this is not null then ScriptContent should not be used",
-          "type": "string"
-        },
-        "scriptNameSuffix": {
-          "description": "Mandatory suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
-          "type": "string"
-        }
-      }
-    },
-    "InstantItemRecoveryTarget": {
-      "description": "Target details for file / folder restore.",
-      "type": "object",
-      "properties": {
-        "clientScripts": {
-          "description": "List of client scripts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClientScriptForConnect"
-          }
-        }
-      }
-    },
     "NewErrorResponse": {
       "properties": {
         "error": {
@@ -308,7 +269,7 @@
               "readOnly": true,
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ErrorAdditionalInfo"
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
               },
               "description": "The error additional info."
             }
@@ -316,170 +277,6 @@
         }
       },
       "description": "The resource management error response."
-    },
-    "ErrorAdditionalInfo": {
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
-    },
-    "OperationStatus": {
-      "description": "Operation status.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ID of the operation.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the operation.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Operation status.",
-          "enum": [
-            "Invalid",
-            "InProgress",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OperationStatusValues",
-            "modelAsString": true
-          }
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Operation start time. Format: ISO-8601.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Operation end time. Format: ISO-8601.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/OperationStatusError",
-          "description": "Error information related to this operation."
-        }
-      }
-    },
-    "OperationStatusError": {
-      "description": "Error information associated with operation status call.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code of the operation failure.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message displayed if the operation failure.",
-          "type": "string"
-        }
-      }
-    },
-    "OperationStatusExtendedInfo": {
-      "description": "Base class for additional information of operation status.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
-          "type": "string"
-        }
-      },
-      "discriminator": "objectType"
-    },
-    "OperationStatusJobExtendedInfo": {
-      "description": "Operation status job extended info.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "jobId": {
-          "description": "ID of the job created for this protected item.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
-    },
-    "OperationStatusJobsExtendedInfo": {
-      "description": "Operation status extended info for list of jobs.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "jobIds": {
-          "description": "IDs of the jobs created for the protected item.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "failedJobsError": {
-          "description": "Stores all the failed jobs along with the corresponding error codes.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
-    },
-    "OperationStatusProvisionILRExtendedInfo": {
-      "description": "Operation status extended info for ILR provision action.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "recoveryTarget": {
-          "$ref": "#/definitions/InstantItemRecoveryTarget",
-          "description": "Target details for file / folder restore."
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusProvisionILRExtendedInfo"
-    },
-    "OperationStatusRecoveryPointExtendedInfo": {
-      "description": "Operation status extended info for Updated Recovery Point.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "updatedRecoveryPoint": {
-          "$ref": "#/definitions/RecoveryPoint",
-          "description": "Recovery Point info with updated source snapshot URI"
-        },
-        "deletedBackupItemVersion": {
-          "description": "In case the share is in soft-deleted state, populate this field with deleted backup item",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusRecoveryPointExtendedInfo"
     },
     "PrepareDataMoveRequest": {
       "description": "Prepare DataMove Request",
@@ -527,7 +324,7 @@
       "description": "Prepare DataMove Request",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../2019-06-15/bms.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -558,7 +355,7 @@
       "description": "Prepare DataMove Response",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../2019-06-15/bms.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -567,47 +364,6 @@
           "description": "PrepareDataMoveResponseResource properties"
         }
       }
-    },
-    "RecoveryPoint": {
-      "description": "Base class for backup copies. Workload-specific backup copies are derived from this class.",
-      "type": "object"
-    },
-    "Resource": {
-      "description": "ARM Resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource Id represents the complete path to the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name associated with the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "eTag": {
-          "description": "Optional ETag.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "TriggerDataMoveRequest": {
       "description": "Trigger DataMove Request",
@@ -659,7 +415,7 @@
       "description": "Trigger DataMove Request",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../2019-06-15/bms.json#/definitions/Resource"
         }
       ],
       "properties": {
