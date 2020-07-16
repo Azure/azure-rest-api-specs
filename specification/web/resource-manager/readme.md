@@ -77,6 +77,12 @@ input-file:
 - Microsoft.Web/stable/2020-06-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-06-01/AppServicePlans.json
 - Microsoft.Web/stable/2020-06-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+  approved-by: "@weidongxu-microsoft"
 ```
 
 ### Tag: package-2019-08
