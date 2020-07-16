@@ -81,18 +81,6 @@ directive:
     where: $.definitions.Workbook
     from: workbooks_API.json
     reason: 'This property is already a part of our API, so we cannot remove it'
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Workbook
-    from: workbooks_API.json
-    reason: Already used in API
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Workbook
-    from: workbooks_API.json
-    reason: Already used in API
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Workbook
-    from: workbooks_API.json
-    reason: Cannot remove this for now as it is a breaking change
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
     where: $.definitions.Resource.properties.name
     from: types.json
