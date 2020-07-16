@@ -79,7 +79,7 @@ input-file:
 - Microsoft.Web/stable/2020-06-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3016 error
-- where: $.definitions.FunctionSecrets.trigger_url
+- where: $.definitions.FunctionSecrets.properties.trigger_url
   suppress: R3016
   reason: This requires a breaking change in functions runtime API.
   approved-by: "@weidongxu-microsoft"
