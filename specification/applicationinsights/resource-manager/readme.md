@@ -93,6 +93,10 @@ directive:
     where: $.definitions.Workbook
     from: workbooks_API.json
     reason: Cannot remove this for now as it is a breaking change
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: $.definitions.Resource.properties.name
+    from: types.json
+    reason: 'This property is already a part of our API, cannot remove it'
 ```
 
 ### Tag: package-preview-2020-06-only
