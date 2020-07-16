@@ -395,18 +395,18 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default": {
       "put": {
-        "description": "Change target directory.",
-        "operationId": "Subscription_ChangeTargetDirectory",
+        "description": "Change tenant request.",
+        "operationId": "Subscription_ChangeTenantRequest",
         "x-ms-examples": {
           "ChangeTargetDirectory": {
-            "$ref": "./examples/ChangeTargetDirectory.json"
+            "$ref": "./examples/ChangeTenantRequest.json"
           }
         },
         "responses": {
           "200": {
             "description": "Normal response for a successful query.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryBody"
+              "$ref": "#/definitions/ChangeTenantBody"
             }
           },
           "default": {
@@ -425,7 +425,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryBody"
+              "$ref": "#/definitions/ChangeTenantBody"
             }
           },
           {
@@ -434,18 +434,18 @@
         ]
       },
       "get": {
-        "description": "Get change target directory status.",
-        "operationId": "Subscription_GetChangeTargetDirectory",
+        "description": "Get change tenant status.",
+        "operationId": "Subscription_GetChangeTenantRequest",
         "x-ms-examples": {
           "GetChangeTargetDirectory": {
-            "$ref": "./examples/GetChangeTargetDirectory.json"
+            "$ref": "./examples/GetChangeTenantRequest.json"
           }
         },
         "responses": {
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryBody"
+              "$ref": "#/definitions/ChangeTenantBody"
             }
           },
           "default": {
@@ -465,18 +465,18 @@
         ]
       },
       "delete": {
-        "description": "Cancel change target directory.",
-        "operationId": "Subscription_CancelChangeTargetDirectory",
+        "description": "Delete change tenant request.",
+        "operationId": "Subscription_DeleteChangeTenantRequest",
         "x-ms-examples": {
           "CancelChangeDirectory": {
-            "$ref": "./examples/CancelChangeTargetDirectory.json"
+            "$ref": "./examples/DeleteChangeTenantRequest.json"
           }
         },
         "responses": {
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryBody"
+              "$ref": "#/definitions/ChangeTenantBody"
             }
           },
           "default": {
@@ -498,19 +498,16 @@
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptChangeTenant": {
       "post": {
-        "description": "Accept change target directory.",
-        "operationId": "Subscription_AcceptChangeTargetDirectory",
+        "description": "Accept change tenant request.",
+        "operationId": "Subscription_AcceptChangeTenantRequest",
         "x-ms-examples": {
           "AcceptChangeDirectory": {
-            "$ref": "./examples/AcceptChangeDirectory.json"
+            "$ref": "./examples/AcceptChangeTenantRequest.json"
           }
         },
         "responses": {
-          "200": {
-            "description": "Normal response for a successful query.",
-            "schema": {
-              "$ref": "#/definitions/ChangeDirectoryBody"
-            }
+          "204": {
+            "description": "Normal response for a successful query."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -531,18 +528,18 @@
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/changeTenantStatus": {
       "get": {
-        "description": "Get accept change directory transfer status.",
-        "operationId": "Subscription_GetAcceptChangeDirectoryStatus",
+        "description": "Get accept change tenant status.",
+        "operationId": "Subscription_GetAcceptChangeTenantStatus",
         "x-ms-examples": {
           "GetAcceptChangeDirectory": {
-            "$ref": "./examples/GetAcceptChangeDirectory.json"
+            "$ref": "./examples/GetAcceptChangeTenant.json"
           }
         },
         "responses": {
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/ChangeDirectoryBody"
+              "$ref": "#/definitions/ChangeTenantStatusBody"
             }
           },
           "default": {
@@ -778,10 +775,10 @@
         }
       }
     },
-    "ChangeDirectoryProperties": {
-      "description": "The response body for change directory operation",
+    "ChangeTenantProperties": {
+      "description": "The response body for change tenant operation",
       "properties": {
-        "destinationEmailId": {
+        "destinationEmail": {
           "description": "Email Id of the destination user",
           "type": "string"
         },
@@ -807,8 +804,8 @@
         }
       }
     },
-    "ChangeDirectoryBody": {
-      "description": "The parameters required to perform change directory operation.",
+    "ChangeTenantBody": {
+      "description": "The parameters required to perform change tenant operation.",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -828,7 +825,17 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ChangeDirectoryProperties"
+          "$ref": "#/definitions/ChangeTenantProperties"
+        }
+      }
+    },
+    "ChangeTenantStatusBody": {
+      "description": "The response body for get change tenant status.",
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "description": "Change tenant status",
+          "type": "string"
         }
       }
     }
