@@ -3885,7 +3885,11 @@
           "type": "string",
           "enum": [
             "SHA256"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
         },
         "parameterNameOverride": {
           "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
@@ -3914,10 +3918,14 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
-            "expires",
-            "keyId",
-            "signature"
-          ]
+            "Expires",
+            "KeyId",
+            "Signature"
+          ],
+          "x-ms-enum": {
+            "name": "paramIndicator",
+            "modelAsString": true
+          }
         },
         "paramName": {
           "description": "Parameter name",
