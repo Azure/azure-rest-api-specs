@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-06-16-alpha",
+    "version": "2020-07-10-alpha",
     "title": "CodespacesClient",
-    "description": "Microsoft Codespaces REST API version 2020-06-16-alpha.",
+    "description": "Microsoft Codespaces REST API version 2020-07-10-alpha",
     "x-ms-code-generation-settings": {
       "name": "CodespacesClient"
     }
@@ -438,7 +438,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Codespaces/plans/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Codespaces/plans": {
       "get": {
         "tags": [
           "CodespacesPlan"
@@ -480,7 +480,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Codespaces/plans/": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Codespaces/plans": {
       "get": {
         "tags": [
           "CodespacesPlan"
@@ -636,17 +636,77 @@
     },
     "Identity": {
       "type": "object",
-      "description": "Model representing Identity for Codespaces Plan.",
+      "description": "Model representing a managed identity for a Codespaces Plan.",
       "required": [
         "type"
       ],
       "properties": {
         "type": {
-          "description": "The type of identity",
-          "type": "string"
+          "description": "The type of managed identity used. The type 'None' will remove any identities.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "description": "The principal ID of resource identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
+    "Encryption": {
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.Codespaces",
+          "enum": [
+            "Microsoft.Codespaces",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "keySource"
+      ],      
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
+    },    
     "VnetProperties": {
       "type": "object",
       "description": "Model representing Vnet Injection properties for Codespaces Plan.",
@@ -722,6 +782,10 @@
           "$ref": "#/definitions/Sku",
           "description": "SKU of the service."
         },
+        "identity":{
+          "$ref": "#/definitions/Identity",
+          "description": "The managed identity associated with the resource."
+        },
         "properties": {
           "type": "object",
           "description": "Additional Codespaces Plan properties.",
@@ -738,6 +802,10 @@
             "vnetProperties":{
               "$ref": "#/definitions/VnetProperties",
               "description": "Specifies the vnet injection properties for this plan."
+            },
+            "encryption": {
+              "$ref": "#/definitions/Encryption",
+              "description": "Specifies the encryption properties for this resource."
             }
           }
         }
@@ -761,7 +829,7 @@
         },
         "identity":{
           "$ref": "#/definitions/Identity",
-          "description": "The type of identity used for the resource. "
+          "description": "The managed identity associated with the resource."
         },
         "properties":{
           "type": "object",
@@ -780,6 +848,10 @@
             "vnetProperties":{
               "$ref": "#/definitions/VnetProperties",
               "description": "Specifies the vnet injection properties for this plan."
+            },
+            "encryption": {
+              "$ref": "#/definitions/Encryption",
+              "description": "Specifies the encryption properties for this resource."
             }
           }
         }

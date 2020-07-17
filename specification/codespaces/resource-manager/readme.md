@@ -24,11 +24,52 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the codespaces.
 
+---
 ```yaml
 openapi-type: arm
-tag: package-2020-06-16
+tag: package-2020-06-16-alpha
 ```
 
+### Tag: package-2020-07-10-alpha
+
+These settings apply only when `--tag=package-2020-07-10-alpha` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-10-alpha'
+input-file:
+  - Microsoft.Codespaces/preview/2020-07-10-alpha/codespaces.json
+```
+
+---
+```yaml
+openapi-type: arm
+tag: package-2020-07-10-beta
+```
+
+### Tag: package-2020-07-10-beta
+
+These settings apply only when `--tag=package-2020-07-10-beta` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-10-beta'
+input-file:
+  - Microsoft.Codespaces/preview/2020-07-10-beta/codespaces.json
+```
+
+
+---
+```yaml
+openapi-type: arm
+tag: package-2020-07-10-privatepreview
+```
+
+### Tag: package-2020-07-10-privatepreview
+
+These settings apply only when `--tag=package-2020-07-10-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-10-privatepreview'
+input-file:
+  - Microsoft.Codespaces/preview/2020-07-10-privatepreview/codespaces.json
+```
+---
 ### Tag: package-2020-06-16
 
 These settings apply only when `--tag=package-2020-06-16` is specified on the command line.
