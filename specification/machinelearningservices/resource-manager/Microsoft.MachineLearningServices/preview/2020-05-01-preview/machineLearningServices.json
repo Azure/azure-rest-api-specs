@@ -5673,100 +5673,6 @@
             "description": "The URI for sending inference requests.",
             "type": "string",
             "readOnly": true
-          },
-          "swaggerUri": {
-            "description": "The Uri for sending swagger requests.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      ]
-    },
-    "InferenceEndpointResponse": {
-      "description": "The response for an Inference Endpoint.",
-      "type": "object",
-      "properties":
-      {
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the Inference Endpoint.",
-            "type": "string"
-          },
-          "description": {
-            "description": "The service description.",
-            "type": "string"
-          },
-          "kvTags": {
-            "description": "The service tag dictionary. Tags are mutable.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "properties": {
-            "description": "The service property dictionary. Properties are immutable.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "identity": {
-            "$ref": "#/definitions/Identity",
-            "description": "The identity of the resource."
-          },
-          // TODO: DOES ENDPOINT NEED STATUS AND IS THIS BASED ON DEPLOYMENTS?
-          "provisioningState": {
-            // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "Creating",
-              "Deleting",
-              "Succeeded",
-              "Failed",
-              "Canceled" // TODO: needed? 
-            ],
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": true
-            },
-            "readOnly": true,
-            "description": "The current provisioning state of the Inference Deployment resource."
-          },
-          "error": {
-            "description": "The error details.",
-            "allOf": [
-              {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            ],
-            "readOnly": true
-          },
-          "authEnabled": {
-            "description": "Whether or not authentication is enabled.",
-            "type": "boolean"
-          },
-          "authSettings": {
-            "$ref": "#/definitions/InferenceEndpointAuthSettings",
-            "description": "Authentication settings for the Inference Endpoint."
-          },
-          "uri": {
-            "description": "The URI for sending inference requests.",
-            "type": "string",
-            "readOnly": true
-          },
-          "swaggerUri": {
-            "description": "The Uri for sending swagger requests.",
-            "type": "string",
-            "readOnly": true
-          },
-          "deployments": {
-            "description": "The list of deployments.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/InferenceDeploymentResponse"
-            }
           }
         }
       },
@@ -5881,6 +5787,14 @@
       "description": "The response for an Inference Deployment.",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of the deployment.",
+          "type": "string"
+        },
+        "endpointName": {
+          "description": "Name of the endpoint the deployment is using.",
+          "type": "string"
+        },
         "models": {
           "description": "The list of models.",
           "type": "array",
@@ -5952,6 +5866,14 @@
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of the deployment.",
+          "type": "string"
+        },
+        "endpointName": {
+          "description": "Name of the endpoint the deployment is using.",
+          "type": "string"
+        },
         "models": {
           "description": "The list of models.",
           "type": "array",
