@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "transformName": "exampleTransform",
+    "$filter": "properties/state ne Microsoft.Media.JobState'processing'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "job1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job1",
+            "type": "Microsoft.Media/mediaservices/transforms/jobs",
+            "properties": {
+              "created": "0001-01-01T00:00:00Z",
+              "state": "Queued",
+              "input": {
+                "@odata.type": "#Microsoft.Media.JobInputs",
+                "inputs": [
+                  {
+                    "@odata.type": "#Microsoft.Media.JobInputAsset",
+                    "files": [],
+                    "assetName": "job1 input"
+                  }
+                ]
+              },
+              "lastModified": "0001-01-01T00:00:00Z",
+              "outputs": [
+                {
+                  "@odata.type": "#Microsoft.Media.JobOutputAsset",
+                  "state": "Queued",
+                  "progress": 0,
+                  "label": "example-custom-label",
+                  "assetName": "job1 output"
+                }
+              ],
+              "priority": "Low",
+              "correlationData": {}
+            }
+          },
+          {
+            "name": "job4",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job4",
+            "type": "Microsoft.Media/mediaservices/transforms/jobs",
+            "properties": {
+              "created": "0001-01-01T00:00:00Z",
+              "state": "Finished",
+              "input": {
+                "@odata.type": "#Microsoft.Media.JobInputs",
+                "inputs": [
+                  {
+                    "@odata.type": "#Microsoft.Media.JobInputAsset",
+                    "files": [],
+                    "assetName": "job4 input"
+                  }
+                ]
+              },
+              "lastModified": "0001-01-01T00:00:00Z",
+              "outputs": [
+                {
+                  "@odata.type": "#Microsoft.Media.JobOutputAsset",
+                  "state": "Finished",
+                  "progress": 100,
+                  "label": "example-custom-label",
+                  "startTime": "2019-10-10T22:28:02.9885137Z",
+                  "endTime": "2019-10-10T22:38:02.9885137Z",
+                  "assetName": "job4 output"
+                }
+              ],
+              "priority": "Low",
+              "correlationData": {},
+              "startTime": "2019-10-10T22:28:02.9885137Z",
+              "endTime": "2019-10-10T22:38:02.9885137Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -271,6 +271,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -314,6 +318,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -349,6 +357,14 @@
           "type": "object",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
+        "listAfter": {
+          "type": "object",
+          "description": "Lists files after the value (exclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
+        },
+        "listBefore": {
+          "type": "object",
+          "description": "Lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -356,6 +372,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -404,6 +424,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -446,6 +470,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -497,6 +525,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -564,6 +596,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -602,6 +638,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "fileListPath": {
           "type": "object",
@@ -645,6 +685,10 @@
         "fileListPath": {
           "type": "object",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -900,6 +944,29 @@
         }
       }
     },
+    "XmlReadSettings": {
+      "description": "Xml read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        },
+        "validationMode": {
+          "type": "object",
+          "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
+        },
+        "namespacePrefixes": {
+          "type": "object",
+          "description": "Namespace uri to prefix mappings to override the prefixes in column names when namespace is enabled, if no prefix is defined for a namespace uri, the prefix of xml element/attribute name in the xml data file will be used. Example: \"{\"http://www.example.com/xml\":\"prefix\"}\" Type: object (or Expression with resultType object)."
+        }
+      }
+    },
     "BinaryReadSettings": {
       "description": "Binary read settings.",
       "type": "object",
@@ -1018,6 +1085,28 @@
         }
       }
     },
+    "ExcelSource": {
+      "description": "A copy activity excel source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Excel store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
     "ParquetSource": {
       "description": "A copy activity Parquet source.",
       "type": "object",
@@ -1082,6 +1171,32 @@
         "formatSettings": {
           "$ref": "#/definitions/JsonReadSettings",
           "description": "Json format settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "XmlSource": {
+      "description": "A copy activity Xml source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Xml store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/XmlReadSettings",
+          "description": "Xml format settings."
         },
         "additionalColumns": {
           "type": "array",
@@ -2162,11 +2277,11 @@
         },
         "partitionUpperBound": {
           "type": "object",
-          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+          "description": "The maximum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
-          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+          "description": "The minimum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -4388,6 +4503,44 @@
         "mappings": {
           "type": "object",
           "description": "Column mappings with logical types. Tabular->tabular example: [{\"source\":{\"name\":\"CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"name\":\"CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}].  Hierarchical->tabular example: [{\"source\":{\"path\":\"$.CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"path\":\"$.CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}]. Type: object (or Expression with resultType object)."
+        },
+        "typeConversion": {
+          "type": "object",
+          "description": "Whether to enable the advanced type conversion feature in the Copy activity. Type: boolean (or Expression with resultType boolean)."
+        },
+        "typeConversionSettings": {
+          "description": "Type conversion settings",
+          "$ref": "#/definitions/TypeConversionSettings"
+        }
+      }
+    },
+    "TypeConversionSettings": {
+      "description": "Type conversion settings",
+      "type": "object",
+      "properties": {
+        "allowDataTruncation": {
+          "type": "object",
+          "description": "Whether to allow data truncation when converting the data. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatBooleanAsNumber": {
+          "type": "object",
+          "description": "Whether to treat boolean values as numbers. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dateTimeFormat": {
+          "type": "object",
+          "description": "The format for DateTime values. Type: string (or Expression with resultType string)."
+        },
+        "dateTimeOffsetFormat": {
+          "type": "object",
+          "description": "The format for DateTimeOffset values. Type: string (or Expression with resultType string)."
+        },
+        "timeSpanFormat": {
+          "type": "object",
+          "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "culture": {
+          "type": "object",
+          "description": "The culture used to convert data from/to string. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5919,7 +6072,7 @@
       "properties": {
         "waitTimeInSeconds": {
           "description": "Duration in seconds.",
-          "type": "integer"
+          "type": "object"
         }
       },
       "required": [
