@@ -281,6 +281,9 @@
           },
           {
             "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExecuteRunnerActionParameter"
           }
         ],
         "responses": {
@@ -502,6 +505,16 @@
           "type": "string"
         }
       }
+    },
+    "ExecuteRunnerActionParameters": {
+      "description": "Parameters for execute runner action",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "Execute Runner parameters, value in JToken",
+          "type": "object"
+        }
+      }
     }
   },
   "parameters": {
@@ -530,6 +543,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/DeployActionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ExecuteRunnerActionParameter": {
+      "description": "Represents excute runner action parameter",
+      "name": "executeRunnerActionParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ExecuteRunnerActionParameters"
       },
       "x-ms-parameter-location": "method"
     }
