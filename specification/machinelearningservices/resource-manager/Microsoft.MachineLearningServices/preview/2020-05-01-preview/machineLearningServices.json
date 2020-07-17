@@ -5629,11 +5629,44 @@
               "description": "Inference Deployment properties",
               "$ref": "#/definitions/InferenceEndpointResponse"
             }
+          }
+        }
+      ]
+    },
+    "InferenceEndpointResponse": {
+      "description": "The response for an Inference Endpoint.",
+      "type": "object",
+      "properties":
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the Inference Endpoint.",
+            "type": "string"
+          },
+          "description": {
+            "description": "The service description.",
+            "type": "string"
+          },
+          "kvTags": {
+            "description": "The service tag dictionary. Tags are mutable.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "description": "The service property dictionary. Properties are immutable.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           },
           "identity": {
             "$ref": "#/definitions/Identity",
             "description": "The identity of the resource."
           },
+          // TODO: DOES ENDPOINT NEED STATUS AND IS THIS BASED ON DEPLOYMENTS?
           "state": {
             // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
             "type": "string",
