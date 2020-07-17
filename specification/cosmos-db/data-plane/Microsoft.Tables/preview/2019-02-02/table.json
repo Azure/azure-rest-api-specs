@@ -1309,24 +1309,27 @@
       "description": "Table Service error.",
       "type": "object",
       "properties": {
-        "Code": {
-          "description": "The service error code.",
-          "type": "string",
-          "xml": {
-            "name": "Code"
-          }
-        },
-        "Message": {
-          "description": "The error message.",
+        "odata.error": {
+          "description": "The odata error.",
           "type": "object",
           "properties": {
-            "lang": {
-              "description": "Language code of the error message.",
+            "code": {
+              "description": "The service error code. The error codes possible are listed in: https://docs.microsoft.com/rest/api/storageservices/table-service-error-codes",
               "type": "string"
             },
-            "value": {
-              "description": "The error message.",
-              "type": "string"
+            "message": {
+              "description": "The service error message.",
+              "type": "object",
+              "properties": {
+                "lang": {
+                  "description": "Language code of the error message.",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "The error message.",
+                  "type": "string"
+                }
+              }
             }
           }
         }
