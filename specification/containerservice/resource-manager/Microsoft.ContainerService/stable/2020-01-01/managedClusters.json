@@ -304,6 +304,39 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "azure",
+              "exec"
+            ],
+            "x-ms-enum": {
+              "name": "Format",
+              "modelAsString": true
+            },
+            "default": "azure",
+            "description": "Credential Format. Possible values: azure, exec"
+          },
+          {
+            "name": "login",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "devicecode",
+              "spn",
+              "msi"
+            ],
+            "x-ms-enum": {
+              "name": "login",
+              "modelAsString": true
+            },
+            "default": "devicecode",
+            "description": "Credential Format. Possible values: devicecode, spn, msi"
           }
         ],
         "responses": {
