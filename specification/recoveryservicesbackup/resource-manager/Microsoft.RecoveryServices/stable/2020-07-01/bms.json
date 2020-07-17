@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/backupDataMove/operationStatus/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/operationStatus/{operationId}": {
       "get": {
         "tags": [
           "DataMove"
@@ -69,7 +69,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/prepareDataMove/action": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/prepareDataMove": {
       "post": {
         "tags": [
           "DataMove"
@@ -124,7 +124,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/prepareDataMove/operationResult/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/operationResults/{operationId}": {
       "get": {
         "tags": [
           "BMSPrepareDataMoveOperationResult"
@@ -158,7 +158,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrepareDataMoveResponse"
+              "$ref": "#/definitions/VaultStorageConfigOperationResultResponse"
             }
           },
           "202": {
@@ -179,7 +179,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/triggerDataMove/action": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/triggerDataMove": {
       "post": {
         "tags": [
           "DataMove"
@@ -277,6 +277,15 @@
         }
       },
       "description": "The resource management error response."
+    },
+    "VaultStorageConfigOperationResultResponse": {
+      "description": "Operation result response for VaultStorageConfig",
+      "type": "object",
+      "properties": {
+        "objectType": { "type": "string" }
+      },
+      "required" :  ["objectType"],
+      "x-ms-discriminator-value" : "objectType"
     },
     "PrepareDataMoveRequest": {
       "description": "Prepare DataMove Request",
