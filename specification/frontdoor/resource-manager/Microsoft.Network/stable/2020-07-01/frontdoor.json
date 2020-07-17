@@ -1438,12 +1438,12 @@
           "description": "Location of the backend (IP address or FQDN)",
           "type": "string"
         },
-        "privateLinkAlias": {
-          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
-          "type": "string"
-        },
         "privateLinkResourceId": {
           "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkGroupId": {
+          "description": "The Group Id of the Private Link resource that describes the target subresource. This field is required if the resource type for the Private Link is anything other than Microsoft.Network/privateLinkServices, such as private links created for Storage, Keyvault or Webapp resources",
           "type": "string"
         },
         "privateLinkLocation": {
