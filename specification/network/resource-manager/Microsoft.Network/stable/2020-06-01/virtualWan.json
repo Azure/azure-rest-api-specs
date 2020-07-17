@@ -5024,6 +5024,11 @@
           "items": {
             "$ref": "#/definitions/VpnSiteLink"
           }
+        },
+        "o365Policy": {
+          "readOnly": false,
+          "description": "Office365 Policy.",
+          "$ref": "#/definitions/O365PolicyProperties"
         }
       },
       "description": "Parameters for VpnSite."
@@ -7075,6 +7080,36 @@
           "description": "The type of the specified resource like RouteTable, ExpressRouteConnection, HubVirtualNetworkConnection, VpnConnection and P2SConnection."
         }
       }
+    },
+    "O365PolicyProperties": {
+      "properties": {
+        "breakOutCategories": {
+          "readOnly": false,
+          "description": "Office365 breakout categories.",
+          "$ref": "#/definitions/O365BreakOutCategoryPolicies"
+        }
+      },
+      "description": "The Office365 breakout policy."
+    },
+    "O365BreakOutCategoryPolicies": {
+      "properties": {
+        "allow": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Flag to control allow category."
+        },
+        "optimize": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Flag to control optimize category."
+        },
+        "default": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Flag to control default category."
+        }
+      },
+      "description": "Office365 breakout categories."
     }
   }
 }
