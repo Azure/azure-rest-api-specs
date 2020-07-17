@@ -109,6 +109,18 @@
             "schema": {
               "$ref": "#/definitions/TableQueryResponse"
             }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TableServiceError"
+            }
           }
         }
       },
@@ -1296,7 +1308,6 @@
     "TableServiceError": {
       "description": "Table Service error.",
       "type": "object",
-      "xml": {},
       "properties": {
         "Code": {
           "description": "The service error code.",
@@ -1307,9 +1318,16 @@
         },
         "Message": {
           "description": "The error message.",
-          "type": "string",
-          "xml": {
-            "name": "Message"
+          "type": "object",
+          "properties": {
+            "lang": {
+              "description": "Language code of the error message.",
+              "type": "string"
+            },
+            "value": {
+              "description": "The error message.",
+              "type": "string"
+            }
           }
         }
       }
