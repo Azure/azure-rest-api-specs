@@ -5706,18 +5706,6 @@
             "description": "The URI for sending inference requests.",
             "type": "string",
             "readOnly": true
-          },
-          "swaggerUri": {
-            "description": "The Uri for sending swagger requests.",
-            "type": "string",
-            "readOnly": true
-          },
-          "deployments": {
-            "description": "The list of deployments.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/InferenceDeploymentResponse"
-            }
           }
         }
       },
@@ -5832,6 +5820,14 @@
       "description": "The response for an Inference Deployment.",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of the deployment.",
+          "type": "string"
+        },
+        "endpointName": {
+          "description": "Name of the endpoint the deployment is using.",
+          "type": "string"
+        },
         "models": {
           "description": "The list of models.",
           "type": "array",
@@ -5903,6 +5899,14 @@
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of the deployment.",
+          "type": "string"
+        },
+        "endpointName": {
+          "description": "Name of the endpoint the deployment is using.",
+          "type": "string"
+        },
         "models": {
           "description": "The list of models.",
           "type": "array",
@@ -6501,11 +6505,11 @@
           "description": "The name of the Azure location/region.",
           "type": "string"
         },
-        // TODO: will this do the trick? It is not included in CreateServiceRequest
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
-        }
+        // // TODO: will this do the trick? It is not included in CreateServiceRequest
+        // "identity": {
+        //   "$ref": "#/definitions/Identity",
+        //   "description": "The identity of the resource."
+        // }
         // TODO: does not make sense on endpoint
             // "appInsightsEnabled": {
             //   "description": "Whether or not Application Insights is enabled.",
