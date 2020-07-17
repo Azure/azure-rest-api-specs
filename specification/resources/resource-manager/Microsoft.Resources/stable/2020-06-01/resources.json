@@ -5959,7 +5959,25 @@
             "Replace",
             "Merge",
             "Delete"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "operation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Replace",
+                "description": "The 'replace' option replaces the entire set of existing tags with a new set."
+              },
+              {
+                "value": "Merge",
+                "description": "The 'merge' option allows adding tags with new names and updating the values of tags with existing names."
+              },
+              {
+                "value": "Delete",
+                "description": "The 'delete' option allows selectively deleting tags based on given names or name/value pairs."
+              }
+            ]
+          }
         },
         "properties": {
           "$ref": "#/definitions/Tags",
