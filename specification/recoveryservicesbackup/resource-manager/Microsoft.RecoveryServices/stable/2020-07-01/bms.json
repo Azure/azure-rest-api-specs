@@ -18,12 +18,12 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/operationStatus/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/backupDataMove/operationStatus/{operationId}": {
       "get": {
         "tags": [
           "DataMove"
         ],
-        "description": "Common Controller for getting data move operation status",
+        "description": "Fetches operation status for data move operation on vault",
         "operationId": "GetOperationStatus",
         "produces": [
           "application/json"
@@ -69,12 +69,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/prepareDataMove/action": {
       "post": {
         "tags": [
           "DataMove"
         ],
-        "description": "Prepare Data Move controller",
+        "description": "Prepares source vault for Data Move operation",
         "operationId": "BMSPrepareDataMove",
         "produces": [
           "application/json"
@@ -98,7 +98,7 @@
             "description": "Prepare data move request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrepareDataMoveRequestResource"
+              "$ref": "#/definitions/PrepareDataMoveRequest"
             }
           }
         ],
@@ -124,12 +124,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/prepare/operationResult/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/prepareDataMove/operationResult/{operationId}": {
       "get": {
         "tags": [
           "BMSPrepareDataMoveOperationResult"
         ],
-        "description": "Prepare Data Move Operation Result",
+        "description": "Fetches Operation Result for Prepare Data Move",
         "operationId": "BMSPrepareDataMoveOperationResult_Get",
         "produces": [
           "application/json"
@@ -158,7 +158,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrepareDataMoveResponseResource"
+              "$ref": "#/definitions/PrepareDataMoveResponse"
             }
           },
           "202": {
@@ -179,12 +179,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDataMove/trigger": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/triggerDataMove/action": {
       "post": {
         "tags": [
           "DataMove"
         ],
-        "description": "Trigger Data Move controller",
+        "description": "Triggers Data Move Operation on target vault",
         "operationId": "BMSTriggerDataMove",
         "produces": [
           "application/json"
@@ -208,7 +208,7 @@
             "description": "Trigger data move request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TriggerDataMoveRequestResource"
+              "$ref": "#/definitions/TriggerDataMoveRequest"
             }
           }
         ],
@@ -280,6 +280,11 @@
     },
     "PrepareDataMoveRequest": {
       "description": "Prepare DataMove Request",
+      "required": [
+        "targetResourceId",
+        "targetRegion",
+        "dataMoveLevel"
+      ],
       "type": "object",
       "properties": {
         "targetResourceId": {
@@ -288,10 +293,6 @@
         },
         "targetRegion": {
           "description": "Target Region",
-          "type": "string"
-        },
-        "targetCloud": {
-          "description": "Target Cloud",
           "type": "string"
         },
         "dataMoveLevel": {
@@ -308,7 +309,7 @@
           }
         },
         "sourceContainerArmIds": {
-          "description": "Source Container ArmIds",
+          "description": "Source Container ArmIds\r\nThis needs to be populated only if DataMoveLevel is set to container",
           "type": "array",
           "items": {
             "type": "string"
@@ -317,20 +318,6 @@
         "ignoreMoved": {
           "description": "Ignore the artifacts which are already moved.",
           "type": "boolean"
-        }
-      }
-    },
-    "PrepareDataMoveRequestResource": {
-      "description": "Prepare DataMove Request",
-      "allOf": [
-        {
-          "$ref": "../2019-06-15/bms.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrepareDataMoveRequest",
-          "description": "PrepareDataMoveRequestResource properties"
         }
       }
     },
@@ -351,22 +338,14 @@
         }
       }
     },
-    "PrepareDataMoveResponseResource": {
-      "description": "Prepare DataMove Response",
-      "allOf": [
-        {
-          "$ref": "../2019-06-15/bms.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrepareDataMoveResponse",
-          "description": "PrepareDataMoveResponseResource properties"
-        }
-      }
-    },
     "TriggerDataMoveRequest": {
       "description": "Trigger DataMove Request",
+      "required": [
+        "sourceResourceId",
+        "sourceRegion",
+        "dataMoveLevel",
+        "correlationId"
+      ],
       "type": "object",
       "properties": {
         "sourceResourceId": {
@@ -375,10 +354,6 @@
         },
         "sourceRegion": {
           "description": "Source Region",
-          "type": "string"
-        },
-        "sourceCloud": {
-          "description": "Source Cloud",
           "type": "string"
         },
         "dataMoveLevel": {
@@ -408,20 +383,6 @@
         "pauseGC": {
           "description": "Pause GC",
           "type": "boolean"
-        }
-      }
-    },
-    "TriggerDataMoveRequestResource": {
-      "description": "Trigger DataMove Request",
-      "allOf": [
-        {
-          "$ref": "../2019-06-15/bms.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TriggerDataMoveRequest",
-          "description": "TriggerDataMoveRequestResource properties"
         }
       }
     }
