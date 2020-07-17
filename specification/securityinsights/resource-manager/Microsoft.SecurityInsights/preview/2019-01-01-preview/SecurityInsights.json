@@ -4061,6 +4061,11 @@
           "description": "The azure resource id of the resource",
           "readOnly": true,
           "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription id of the resource",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -7824,6 +7829,14 @@
           "description": "The uri link of the alert.",
           "readOnly": true,
           "type": "string"
+        },
+        "resourceIdentifiers": {
+          "description": "The list of resource identifiers of the alert.",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
