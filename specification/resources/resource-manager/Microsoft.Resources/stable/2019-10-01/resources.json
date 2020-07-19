@@ -4573,14 +4573,38 @@
           "type": "string",
           "description": "The namespace of the resource provider."
         },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderAuthorization"
+          },
+          "description": "The authorizations fields of the resource provider."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata."
+        },
         "registrationState": {
           "readOnly": true,
           "type": "string",
+          "enum": [
+            "NotRegistered",
+            "Registering",
+            "Registered",
+            "Unregistering",
+            "Unregistered",
+            "Deleted"
+          ],
           "description": "The registration state of the resource provider."
         },
         "registrationPolicy": {
           "readOnly": true,
           "type": "string",
+          "enum": [
+            "NotSpecified",
+            "RegistrationRequired",
+            "RegistrationFree"
+          ],
           "description": "The registration policy of the resource provider."
         },
         "resourceTypes": {
@@ -4593,6 +4617,56 @@
         }
       },
       "description": "Resource provider information."
+    },
+    "ResourceProviderAuthorization": {
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The application id of resource provider."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition id."
+        },
+        "managedByRoleDefinitionId": {
+          "type": "string",
+          "description": "The managed by role definition id."
+        },
+        "managedByAuthorization": {
+          "$ref": "#/definitions/ResourceProviderManagedByAuthorization"
+        },
+        "allowedThirdPartyExtensions": {
+          "$ref": "#/definitions/ThirdPartyExtension"
+        },
+        "groupingTag": {
+          "type": "string",
+          "description": "The grouping tag"
+        }
+      },
+      "type": "object",
+      "description": "The resource provider authorization information."
+    },
+    "ResourceProviderManagedByAuthorization": {
+      "properties": {
+        "managedByResourceRoleDefinitionId": {
+          "type": "string",
+          "description": "The role definition id that the resource provider gets on the managed by resource."
+        },
+        "allowManagedByInheritance": {
+          "type": "boolean",
+          "description": "the value indicating whether the resource provider opted into allowing other providers to inherit permissions if the managed by resource is part of another managed by resource group."
+        }
+      },
+      "description": "The resource provider managed by authorization information."
+    },
+    "ThirdPartyExtension": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the third party extension."
+        }
+      },
+      "description": "The identifier for third party extensions."
     },
     "BasicDependency": {
       "properties": {
