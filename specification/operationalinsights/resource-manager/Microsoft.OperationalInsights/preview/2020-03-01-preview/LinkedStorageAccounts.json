@@ -6,20 +6,12 @@
     "version": "2020-03-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}": {
       "put": {
-        "tags": [
-          "LinkedStorageAccounts"
-        ],
+        "tags": ["LinkedStorageAccounts"],
         "x-ms-examples": {
           "LinkedStorageAccountsCreate": {
             "$ref": "./examples/LinkedStorageAccountsCreate.json"
@@ -82,9 +72,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "LinkedStorageAccounts"
-        ],
+        "tags": ["LinkedStorageAccounts"],
         "x-ms-examples": {
           "LinkedStorageAccountsDelete": {
             "$ref": "./examples/LinkedStorageAccountsDelete.json"
@@ -116,9 +104,7 @@
         }
       },
       "get": {
-        "tags": [
-          "LinkedStorageAccounts"
-        ],
+        "tags": ["LinkedStorageAccounts"],
         "x-ms-examples": {
           "LinkedStorageAccountsGet": {
             "$ref": "./examples/LinkedStorageAccountsGet.json"
@@ -155,9 +141,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts": {
       "get": {
-        "tags": [
-          "LinkedStorageAccounts"
-        ],
+        "tags": ["LinkedStorageAccounts"],
         "description": "Gets all linked storage accounts associated with the specified workspace, storage accounts will be sorted by their data source type.",
         "operationId": "LinkedStorageAccounts_ListByWorkspace",
         "parameters": [
@@ -202,13 +186,7 @@
           "description": "Linked storage accounts type.",
           "type": "string",
           "readOnly": true,
-          "enum": [
-            "CustomLogs",
-            "AzureWatson",
-            "Query",
-            "Ingestion",
-            "Alerts"
-          ],
+          "enum": ["CustomLogs", "AzureWatson", "Query", "Ingestion", "Alerts"],
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": false
@@ -231,9 +209,7 @@
           "description": "Linked storage accounts properties."
         }
       },
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
@@ -260,13 +236,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": [
-        "CustomLogs",
-        "AzureWatson",
-        "Query",
-        "Ingestion",
-        "Alerts"
-      ],
+      "enum": ["CustomLogs", "AzureWatson", "Query", "Ingestion", "Alerts"],
       "x-ms-enum": {
         "name": "DataSourceType",
         "modelAsString": false
