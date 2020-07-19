@@ -1703,7 +1703,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
       "get": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpoints"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1906,6 +1906,69 @@
           },
           "201": {
             "description": "Inference Endpoint creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "description": "Updates mutable objects of an Inference Endpoint. This call will update an Inference Endpoint if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Endpoint, use PUT or POST for creation.",
+        "operationId": "MachineLearningInferenceEndpoint_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Or Update service": {
+            // TODO: udpate
+            "$ref": "./examples/createOrUpdateService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Inference Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Endpoint update initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Inference Endpoint update initiated.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation status.",
@@ -2133,6 +2196,72 @@
           },
           "201": {
             "description": "Inference Deployment creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningInferenceDeployments"
+        ],
+        "description": "Updates mutable obects of an Inference Deployment. This call will update an Inference Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Deployment, call PUT or POST for creation.",
+        "operationId": "MachineLearningInferenceDeployment_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Or Update service": {
+            // TODO: udpate
+            "$ref": "./examples/createOrUpdateService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceDeploymentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Inference Deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceDeploymentUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Deployment update initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Inference Deployment update initiated.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation status.",
@@ -3099,6 +3228,7 @@
             "type": "string"
           }
         },
+        // RANDOM QUESTION: WHY IS THIS HERE???
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
@@ -5638,78 +5768,83 @@
       "type": "object",
       "properties":
       {
-        "type": "object",
+        "name": {
+          "description": "The name of the Inference Endpoint.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The service description.",
+          "type": "string"
+        },
         "properties": {
-          "name": {
-            "description": "The name of the Inference Endpoint.",
+          "description": "The service property dictionary. Properties are immutable.",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
+          }
+        },
+        // Still Determining How this will be handled
+        // "identity": {
+        //   "$ref": "#/definitions/Identity",
+        //   "description": "The identity of the resource."
+        // },
+        // TODO: DOES ENDPOINT NEED STATUS AND IS THIS BASED ON DEPLOYMENTS?
+        "provisioningState": {
+          // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled" // TODO: needed? 
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
           },
-          "description": {
-            "description": "The service description.",
-            "type": "string"
-          },
-          "kvTags": {
-            "description": "The service tag dictionary. Tags are mutable.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
+          "readOnly": true,
+          "description": "The current provisioning state of the Inference Deployment resource."
+        },
+        "error": {
+          "description": "The error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "properties": {
-            "description": "The service property dictionary. Properties are immutable.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "identity": {
-            "$ref": "#/definitions/Identity",
-            "description": "The identity of the resource."
-          },
-          // TODO: DOES ENDPOINT NEED STATUS AND IS THIS BASED ON DEPLOYMENTS?
-          "provisioningState": {
-            // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "Creating",
-              "Deleting",
-              "Succeeded",
-              "Failed",
-              "Canceled" // TODO: needed? 
-            ],
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": true
-            },
-            "readOnly": true,
-            "description": "The current provisioning state of the Inference Deployment resource."
-          },
-          "error": {
-            "description": "The error details.",
-            "allOf": [
-              {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            ],
-            "readOnly": true
-          },
-          "authEnabled": {
-            "description": "Whether or not authentication is enabled.",
-            "type": "boolean"
-          },
-          "authSettings": {
-            "$ref": "#/definitions/InferenceEndpointAuthSettings",
-            "description": "Authentication settings for the Inference Endpoint."
-          },
-          "uri": {
-            "description": "The URI for sending inference requests.",
-            "type": "string",
-            "readOnly": true
+          ],
+          "readOnly": true
+        },
+        "authEnabled": {
+          "description": "Whether or not authentication is enabled.",
+          "type": "boolean"
+        },
+        "authSettings": {
+          "$ref": "#/definitions/InferenceEndpointAuthSettings",
+          "description": "Authentication settings for the Inference Endpoint."
+        },
+        "uri": {
+          "description": "The URI for sending inference requests.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentWeights": {
+          "description": "Weight distribution for deployments in the endpoint",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InferenceEndpointDeploymentWeight"
           }
         }
       },
       "x-ms-discriminator-value": "InferenceEndpoint"
+    },
+    "InferenceEndpointDeploymentWeight": {
+      "description": "Weight of a deployment in an endpoint.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      }
     },
     "InferenceEndpointAuthSettings": {
       "description": "Authentication settings for an Inference Endpoint.",
@@ -5718,6 +5853,18 @@
         "workspaceTokenAuthEnabled": {
           "description": "Whether or not workspace token authentication is enabled.",
           "type": "boolean"
+        }
+      }
+    },
+    "InferenceEndpointUpdateParameter": {
+      "description": "The parameters for updating an inference endpoint.",
+      "properties": {
+        "deploymentWeights": {
+          "description": "Weight distribution for deployments in the endpoint",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InferenceEndpointDeploymentWeight"
+          }
         }
       }
     },
@@ -6059,6 +6206,16 @@
           }
         }
       ]
+    },
+    "InferenceDeploymentUpdateParameter": {
+      "description": "The parameters for updating an inference deployment.",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "description": "Current number of instances assigned to the resource.",
+          "type": "integer"
+        },
+      }
     },
     "AKSServiceResponse": {
       "description": "The response for an AKS service.",
@@ -6474,13 +6631,6 @@
         "description": {
           "description": "The description of the endpoint.",
           "type": "string"
-        },
-        "kvTags": {
-          "description": "The endpoint tag dictionary. Tags are mutable.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "properties": {
           "description": "The endpoint properties dictionary. Properties are immutable.",
