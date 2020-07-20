@@ -1,5 +1,5 @@
 # Readme Configuration Guide for Python SDK
-This file describe how to configure readme files to make it avaiable for Python SDK code generation.
+This file describe how to configure readme files to make it available for Python SDK code generation.
 
 ## Common Configuration
 Configure basic package information.
@@ -10,14 +10,15 @@ Configure package title/description/tag.
 // file: readme.md
 
 ``` yaml
-title: xxxxConfigurationClient
-description: xxxx Configuration Client
+title: AppconfigurationConfigurationClient
+description: Appconfiguration Configuration Client
 openapi-type: arm
-tag: package-xxxx-xx-xx
+tag: package-2019-10-01             // refer to below tag description
 ```
 ~~~~
 
 ### tag
+Tags are used to define what swagger files are used in specific client SDK. In Single-API client, only one tag can be used to generate SDK client.
 A tag can contains a bunch of swagger files which are used to generate the SDK. 
 
 The name of a tag should be in form of package-yyyy-mm-dd[-xxx], for example below tag names are available:
@@ -34,15 +35,14 @@ A tag can be configured like below:
 // file: readme.md
 
 
-### Tag: package-2020-05-01
+### Tag: package-2019-10-01
 
 These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-01'
+``` yaml $(tag) == 'package-2019-10-01'
 input-file:
-- Microsoft.Compute/stable/2019-12-01/compute.json
-- Microsoft.Compute/stable/2019-12-01/runCommands.json
-- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.AppConfiguration/stable/2019-10-01/appconfiguration.json
+- Microsoft.AppConfiguration/stable/2019-10-01/xxxx.json
 ```
 ~~~~
 
@@ -66,9 +66,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - Microsoft.Compute/stable/2019-12-01/compute.json
-  - Microsoft.Compute/stable/2019-12-01/runCommands.json
-  - Microsoft.Compute/stable/2019-12-01/gallery.json
+  - Microsoft.AppConfiguration/stable/2019-10-01/appconfiguration.json
+  - Microsoft.AppConfiguration/stable/2019-10-01/xxxx.json
+  - Microsoft.AppConfiguration/stable/2018-10-01/appconfiguration.json
   - ...
 ~~~~
 
@@ -150,8 +150,11 @@ output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguratio
 ```
 ~~~
 
-## Multi-api
+## Multi-API
+Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is choosed as the latest stable api-version.
+
 If a multi-api package is need to be released, 'batch' should be used in the readme.python.md.
+Typical multi-api RPs are azure-mgmt-compute, azure-mgmt-network, azure-mgmt-storage, you cam find their readme files to have a reference for multi-api.
 
 ### batch
 The batch is a tag list which are used in the multi-api package. For example:
@@ -218,12 +221,17 @@ swagger-to-sdk:
 
 ## Run codegen
 After configure all the readme files, autorest can be used to generate SDK.
-### Track1
+
+### Track1 (for Autorest V2)
+Track1 SDK is based on AutoRest version V2 that's going to be replaced by version V3.
+
 ~~~
 autorest --keep-version-file --multiapi --no-async --python --python-mode=update --python-sdks-folder=C:\ZZ\projects\codegen\azure-sdk-for-python\sdk --use=@microsoft.azure/autorest.python@~4.0.71 --version=V2 ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
 ~~~
 
-### Track2
+### Track2 (for latest Autorest)
+Track 2 is based on the latest AutoRest code generator
+
 ~~~
 autorest --python --track2 --use=@autorest/python@5.1.0-preview.4 --python-sdks-folder=..\azure-sdk-for-python\sdk --multiapi --python-mode=update  ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
 ~~~
