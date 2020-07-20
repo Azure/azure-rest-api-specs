@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2020-07-15-privatepreview` is spec
 
 ```yaml $(tag) == 'package-2020-07-15-privatepreview'
 input-file:
-  - Microsoft.IntelligentITDigitalTwin/preview/2020-7-15-privatepreview/azureiidt.json
+  - Microsoft.IntelligentITDigitalTwin/preview/2020-07-15-privatepreview/azureiidt.json
 ```
 
 ---
