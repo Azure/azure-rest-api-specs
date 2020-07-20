@@ -1167,6 +1167,12 @@
           "type": "number",
           "x-nullable": false
         },
+        "modelId": {
+          "description": "Model identifier.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": false
+        },
         "errors": {
           "description": "Errors returned during the training operation.",
           "type": "array",
@@ -1312,11 +1318,9 @@
           "$ref": "#/definitions/TrainResult"
         },
         "composedTrainResults": {
-          "type": "object",
+          "type": "array",
           "description": "Training result for composed model.",
-          "additionalProperties": {
-            "$ref": "#/definitions/TrainResult"
-          }
+          "$ref": "#/definitions/TrainResult"
         }
       }
     },
