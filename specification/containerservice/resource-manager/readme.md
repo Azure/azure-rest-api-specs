@@ -44,6 +44,9 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-07'
 input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
 ```
 ### Tag: package-2020-06
@@ -265,6 +268,19 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+```
+
+### Tag: package-2020-07-01-only
+
+These settings apply only when `--tag=package-2020-07-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-06-01-only
@@ -569,6 +585,7 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2020-06-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2020-04-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2020-03-01/managedClusters.json
