@@ -45,6 +45,20 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
+### Tag: package-2020-07
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07'
+input-file:
+- Microsoft.RecoveryServices/stable/2020-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2020-02-02/bms.json
+- Microsoft.RecoveryServices/stable/2019-06-15/bms.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-08-10/operations.json
+```
+
 ### Tag: package-2020-02
 
 These settings apply only when `--tag=package-2020-02` is specified on the command line.
@@ -190,6 +204,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.RecoveryServices/stable/2020-07-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2020-02-02/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2019-06-15/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2017-07-01/bms.json
