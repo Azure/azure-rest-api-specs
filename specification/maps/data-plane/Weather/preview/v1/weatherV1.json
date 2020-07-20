@@ -714,7 +714,7 @@
     "/weather/airQuality/current/{format}": {
       "get": {
         "x-publish": false,
-        "description": "**Get Current Air Quality Preview**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Current Air Quality API returns details about current air quality conditions for a given coordinate location. The service returns an overview of pollution levels, including air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2). In addition, the service provides data about each pollutant in micrograms per cubic meter of air or parts per million, index values for each pollutant, and a breakdown of:\n  * Fine particles, such as those found in smoke and haze, are 2.5 micrometers in diameter and smaller. These particles can be directly emitted from sources such as forest fires, or they can form when gases emitted from power plants or automobiles react in the air.\n  * Inhalable course particles, such as those found near roadways, are larger than 2.5 micrometers and smaller than 10 micrometers in diameter.",
+        "description": "**Get Current Air Quality Preview**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Current Air Quality API returns details about current air quality conditions for a given coordinate location. The service returns an overview of pollution levels, including details such as air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2). In addition, the service provides data about each pollutant in micrograms per cubic meter of air or parts per million, index values for each pollutant, and a breakdown of:\n  * Fine particles, such as those found in smoke and haze, are 2.5 micrometers in diameter and smaller. These particles can be directly emitted from sources such as forest fires, or they can form when gases emitted from power plants or automobiles react in the air.\n  * Inhalable course particles, such as those found near roadways, are larger than 2.5 micrometers and smaller than 10 micrometers in diameter.",
         "operationId": "Weather_GetCurrentAirQualityPreview",
         "x-ms-examples": {
           "DailyIndices": {
@@ -746,8 +746,8 @@
           },
           {
             "name": "pollutants",
-            "description": "When this value is set to true, the API response will include detailed information about each pollutant. This value is set to false by default.",
-            "default": false,
+            "description": "When this value is set to true, the API response will include detailed information about each pollutant. This value is set to true by default.",
+            "default": true,
             "in": "query",
             "type": "boolean"
           }
@@ -819,8 +819,8 @@
           },
           {
             "name": "pollutants",
-            "description": "When this value is set to true, the API response will include detailed information about each pollutant. This value is set to false by default.",
-            "default": false,
+            "description": "When this value is set to true, the API response will include detailed information about each pollutant. This value is set to true by default.",
+            "default": true,
             "in": "query",
             "type": "boolean"
           }
