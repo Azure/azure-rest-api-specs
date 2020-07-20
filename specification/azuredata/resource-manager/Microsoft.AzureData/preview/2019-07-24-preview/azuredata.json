@@ -2750,6 +2750,10 @@
         "location": {
           "type": "string"
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
+        },
         "name": {
           "type": "string"
         },
@@ -2765,6 +2769,44 @@
         "type": {
           "type": "string"
         }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
       }
     },
     "ResourceSku": {
@@ -2791,8 +2833,8 @@
     "DataControllerProperties": {
       "type": "object",
       "properties": {
-        "dataController": {
-          "$ref": "#/definitions/DataController"
+        "onPremiseProperty": {
+          "$ref": "#/definitions/OnPremiseProperty"
         },
         "requestType": {
           "$ref": "#/definitions/RequestType"
@@ -2811,27 +2853,17 @@
         }
       }
     },
-    "DataController": {
+    "OnPremiseProperty": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid"
         },
-        "name": {
+        "publicSigningKey": {
           "type": "string"
         },
-        "azureResourceType": {
-          "type": "string"
-        },
-        "subscription": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "resourceGroup": {
-          "type": "string"
-        },
-        "location": {
+        "signingCertificateThumbprint": {
           "type": "string"
         }
       }
