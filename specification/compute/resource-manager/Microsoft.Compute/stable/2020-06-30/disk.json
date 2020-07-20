@@ -3,7 +3,7 @@
   "info": {
     "title": "DiskResourceProviderClient",
     "description": "The Disk Resource Provider Client.",
-    "version": "2020-05-01"
+    "version": "2020-06-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1634,6 +1634,10 @@
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Customer visible tier on the disk which indicates the tier to be set on the blob."
         }
       },
       "required": [
@@ -1735,7 +1739,7 @@
     "EncryptionSetProperties": {
       "properties": {
         "encryptionType": {
-          "$ref": "#/definitions/EncryptionType"
+          "$ref": "#/definitions/DiskEncryptionSetType"
         },
         "activeKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference",
@@ -1862,6 +1866,28 @@
         ]
       }
     },
+    "DiskEncryptionSetType": {
+      "type": "string",
+      "description": "The type of key used to encrypt the data of the disk.",
+      "enum": [
+        "EncryptionAtRestWithCustomerKey",
+        "EncryptionAtRestWithPlatformAndCustomerKeys"
+      ],
+      "x-ms-enum": {
+        "name": "DiskEncryptionSetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EncryptionAtRestWithCustomerKey",
+            "description": "Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+          },
+          {
+            "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+            "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          }
+        ]
+      }
+    },
     "Encryption": {
       "properties": {
         "diskEncryptionSetId": {
@@ -1959,6 +1985,10 @@
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Customer visible tier on the disk which indicates the tier to be set on the blob."
         }
       },
       "description": "Disk resource update properties."
@@ -2003,7 +2033,7 @@
     "DiskEncryptionSetUpdateProperties": {
       "properties": {
         "encryptionType": {
-          "$ref": "#/definitions/EncryptionType"
+          "$ref": "#/definitions/DiskEncryptionSetType"
         },
         "activeKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference"
@@ -2089,6 +2119,11 @@
           "type": "integer",
           "format": "int64",
           "description": "If createOption is Upload, this is the size of the contents of the upload including the VHD footer. This value should be between 20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32 TiB + 512 bytes for the VHD footer)."
+        },
+        "logicalSectorSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Support customers creating ultra disks with logicalSectorSize 512E. Support values are 512 and 4096 (default value)."
         }
       },
       "required": [
