@@ -2223,31 +2223,39 @@
       }
     },
     "SystemData": {
+      "description": "Read only system data",
       "type": "object",
       "properties": {
         "createdBy": {
-          "type": "string"
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
         },
         "createdByType": {
-          "$ref": "#/definitions/IdentityType"
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
         },
         "lastModifiedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType"
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     },
     "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
       "type": "string",
       "enum": [
         "User",
@@ -2282,6 +2290,7 @@
       }
     },
     "DataControllerProperties": {
+      "description": "The data controller properties.",
       "type": "object",
       "properties": {
         "onPremiseProperty": {
@@ -2305,17 +2314,21 @@
       }
     },
     "OnPremiseProperty": {
+      "description": "Properties from the on premise data controller",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "description": "A globally unique ID identifying the associated on premise cluster"
         },
         "publicSigningKey": {
-          "type": "string"
+          "type": "string",
+          "description": "Certificate that contains the on premise cluster public key used to verify signing"
         },
         "signingCertificateThumbprint": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique thumbprint returned to customer to verify the certificate being uploaded"
         }
       }
     },
