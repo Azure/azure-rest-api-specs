@@ -3,7 +3,7 @@
   "info": {
     "title": "IIDTManagementClient",
     "description": "Intelligent IT Digital Twin (IIDT) uses our proprietary discovery tool for corporate on-prem infrastructure and provisions its light-weight twin in Azure.",
-    "version": "2020-06-10-privatepreview"
+    "version": "2020-07-15-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -79,12 +79,6 @@
               "$ref": "#/definitions/ITDigitalTwin"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ITDigitalTwin"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -92,7 +86,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create an IT Digital Twin.": {
             "$ref": "./examples/CreateAITDigitalTwin.json"
@@ -143,12 +136,6 @@
               "$ref": "#/definitions/ITDigitalTwin"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ITDigitalTwin"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -156,7 +143,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update an IT Digital Twin": {
             "$ref": "./examples/UpdateAITDigitalTwin.json"
@@ -195,9 +181,6 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted"
-          },
           "204": {
             "description": "No Content"
           },
@@ -212,8 +195,7 @@
           "Delete an IT Digital Twin.": {
             "$ref": "./examples/DeleteAITDigitalTwin.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
