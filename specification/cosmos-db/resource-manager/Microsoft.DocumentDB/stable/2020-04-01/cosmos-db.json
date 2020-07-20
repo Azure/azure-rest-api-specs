@@ -5074,6 +5074,38 @@
         "defaultConsistencyLevel"
       ]
     },
+    "CorsPolicy": {
+      "type": "object",
+      "description": "The CORS policy for the Cosmos DB database account.",
+      "properties": {
+        "allowedOrigins": {
+          "description": "The origin domains that are permitted to make a request against the service via CORS.",
+          "type": "string"
+        },
+        "allowedMethods": {
+          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request.",
+          "type": "string"
+        },
+        "allowedHeaders": {
+          "description": "The request headers that the origin domain may specify on the CORS request.",
+          "type": "string"
+        },
+        "exposedHeaders": {
+          "description": "The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.",
+          "type": "string"
+        },
+        "maxAgeInSeconds": {
+          "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647,
+          "format": "int64"
+        }
+      },
+      "required": [
+        "allowedOrigins"
+      ]
+    },
     "DatabaseAccountGetProperties": {
       "description": "Properties for the database account.",
       "type": "object",
@@ -5197,6 +5229,10 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "cors": {
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "$ref": "#/definitions/CorsPolicy"
         }
       }
     },
@@ -5281,6 +5317,10 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "cors": {
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "$ref": "#/definitions/CorsPolicy"
         }
       },
       "required": [
@@ -5397,6 +5437,10 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "cors": {
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "$ref": "#/definitions/CorsPolicy"
         }
       }
     },
