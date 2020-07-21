@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-azurestackhci"
-  output-folder: "$(typescript-sdks-folder)/sdk/azurestackhci/azurestackhci"
+  output-folder: "$(typescript-sdks-folder)/sdk/azurestackhci/arm-azurestackhci"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
