@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myTokens-rg",
+    "tokenServiceName": "myTokens",
+    "groupName": "myGroup",
+    "accountName": "myAccount",
+    "api-version": "2019-07-01-preview",
+    "AccountResourceParameter": {
+      "location": "West US",
+      "properties":
+      {
+        "description": "My account",
+        "blockchainNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokens/tokenServices/myTokens/blockchainNetworks/myBlockchainNetwork"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Update the account successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokens/tokenServices/myTokens/groups/myGroup/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.Blockchains/tokenServices/groups/accounts",
+        "location": "West US",
+        "properties": {
+          "description": "My account",
+          "blockchainNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokens/tokenServices/myTokens/blockchainNetworks/myBlockchainNetwork",
+          "publicAddress": "",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "description": "Create the account successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokens/tokenServices/myTokens/groups/myGroup/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.Blockchains/tokenServices/groups/accounts",
+        "location": "West US",
+        "properties": {
+          "description": "My account",
+          "blockchainNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokens/tokenServices/myTokens/blockchainNetworks/myBlockchainNetwork",
+          "publicAddress": "",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

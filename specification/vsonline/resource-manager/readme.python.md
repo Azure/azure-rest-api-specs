@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.VSOnline
   package-name: vsonline
-  package-version: 2019-07-01
+  package-version: 2020-05-26
   clear-output-folder: true
 ```
 

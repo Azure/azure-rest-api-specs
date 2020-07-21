@@ -145,8 +145,7 @@
           "VSOAccountDelete": {
             "$ref": "./examples/VSOAccountDelete_example.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "put": {
         "tags": [
@@ -415,8 +414,7 @@
           "VSOPlanDelete": {
             "$ref": "./examples/VSOPlanDelete_example.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "put": {
         "tags": [
@@ -1043,6 +1041,20 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU of the service."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional VS Online Plan properties.",
+          "properties": {
+            "defaultAutoSuspendDelayMinutes": {
+              "description": "Specifies auto suspend interval for environments in this plan.",
+              "type": "integer"
+            },
+            "defaultEnvironmentSku": {
+              "description": "Specifies the default environment sku name for this plan.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -1064,12 +1076,13 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/VSOnlinePlanInfo"
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the service."
+        },
         "properties":{
           "type": "object",
           "description": "Additional VS Online Plan properties.",
@@ -1083,17 +1096,16 @@
               "type": "string",
               "readOnly": true,
               "description": "Service endpoint."
+            },
+            "defaultAutoSuspendDelayMinutes": {
+              "description": "Specifies auto suspend interval for environments in this plan.",
+              "type": "integer"
+            },
+            "defaultEnvironmentSku": {
+              "description": "Specifies the default environment sku name for this plan.",
+              "type": "string"
             }
           }
-        }
-      }
-    },
-    "VSOnlinePlanInfo": {
-      "description": "VS Online Plan properties. Holds properties that describe the plan.",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the service."
         }
       }
     },
@@ -1139,7 +1151,7 @@
         },
         "expiration": {
           "type": "integer",
-          "description": "The requested expiration timestamp for the VS Online Plan access token."
+          "description": "The requested expiration UNIX timestamp (seconds since epoch) for the VS Online Plan access token."
         },
         "identity": {
           "$ref": "#/definitions/VSOnlineDelegateIdentity",
@@ -1160,7 +1172,8 @@
       "type": "object",
       "required": [
         "username",
-        "displayName"
+        "displayName",
+        "id"
       ],
       "properties": {
         "username": {
@@ -1170,6 +1183,10 @@
         "displayName": {
           "type": "string",
           "description": "The user's display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The user's unique identifier which should never change."
         }
       }
     }
@@ -1222,7 +1239,7 @@
       "in": "query",
       "required": false,
       "type": "integer",
-      "description": "The requested expiration of a VS Online Plan access token.",
+      "description": "The requested expiration UNIX timestamp (seconds since epoch) of a VS Online Plan access token.",
       "x-ms-parameter-location": "method"
     }
   }
