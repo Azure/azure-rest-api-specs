@@ -2,17 +2,21 @@
   "parameters": {
     "subscriptionId": "12345",
     "resourceGroupName": "MyResourceGroup",
-    "resourceName": "MySpoolResource",
+    "spoolName": "MySpoolResource",
     "api-version": "2019-10-10-preview",
     "parameters": {
       "keyType": "Primary"
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "primaryKey": "1234",
-        "secondaryKey": "ABCD"
+        "primaryConnectionString": "endpoint=http://example.com;accesskey=1234"
+      }
+    },
+    "201": {
+      "body": {
       }
     }
   }

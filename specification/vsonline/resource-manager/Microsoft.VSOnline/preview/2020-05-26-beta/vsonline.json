@@ -1,0 +1,935 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-05-26-beta",
+    "title": "VSOnlineClient",
+    "description": "Microsoft VS Online REST API version 2020-05-26-beta.",
+    "x-ms-code-generation-settings": {
+      "name": "VSOnlineClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.VSOnline/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "operationId": "Operations_List",
+        "description": "Retrieves a list of available API operations",
+        "summary": "Retrieves a list of available API operations under this Resource Provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of operations under Microsoft.VSOnline resource provider.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Account does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOAccountErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOAccountGet": {
+            "$ref": "./examples/OperationGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}": {
+      "get": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Retrieves information about a VS Online Plan resource.",
+        "description": "Retrieves the properties of a VS Online Plan.",
+        "operationId": "Plan_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the VS Online Plan",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanGet": {
+            "$ref": "./examples/VSOPlanGet_example.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Deletes a VS Online Plan resource.",
+        "description": "Deletes an existing VS Online Plan.",
+        "operationId": "Plan_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the VS Online Plan is deleted."
+          },
+          "204": {
+            "description": "The request was successful; VS Online Plan does not exist."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 409 - Conflict(VS Online Plan is in a non-terminal state due to an ongoing operation.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanDelete": {
+            "$ref": "./examples/VSOPlanDelete_example.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Creates a VS Online Plan.",
+        "description": "Creates a VS Online Plan with the specified create parameters.",
+        "operationId": "Plan_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "name": "vsonlinePlan",
+            "in": "body",
+            "description": "VS Online Plan create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the VS Online Plan",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlan",
+              "x-ms-azure-resource": true
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Services Plan could not be created/updated)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanCreate": {
+            "$ref": "./examples/VSOPlanCreate_example.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Updates a VS Online Plan.",
+        "description": "Updates the properties of an existing VS Online Plan with the specified update parameters.",
+        "operationId": "Plan_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "name": "vsonlinePlanUpdateParameters",
+            "in": "body",
+            "description": "Parameters for updating the VS Online Plan.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VSOPlanUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the updated VS Online Plan.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlan",
+              "x-ms-azure-resource": true
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanUpdate": {
+            "$ref": "./examples/VSOPlanUpdate_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/readAllEnvironments": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan read environments access token.",
+        "description": "Get VS Online Plan access token which allows listing all environments in the Plan.",
+        "operationId": "Plan_ReadAllEnvironmentsAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_ReadAllEnvironments": {
+            "$ref": "./examples/VSOPlanActions_AccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/writeEnvironments": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan write environments access token.",
+        "description": "Get VS Online Plan access token which allows creating, updating, deleting and connecting to environments owned by the user.",
+        "operationId": "Plan_WriteEnvironmentsAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_WriteEnvironments": {
+            "$ref": "./examples/VSOPlanActions_AccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/deleteAllEnvironments": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan read and delete environments access token.",
+        "description": "Get VS Online Plan access token which allows reading and deleting all environments in the Plan.",
+        "operationId": "Plan_DeleteAllEnvironmentsAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_DeleteAllEnvironments": {
+            "$ref": "./examples/VSOPlanActions_AccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/writeDelegates": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan delegated write environments access token.",
+        "description": "Get VS Online Plan delegated access token which allows creating, updating, deleting and connecting to environments owned by the user.",
+        "operationId": "Plan_WriteDelegatesAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "name": "delegateRequest",
+            "in": "body",
+            "description": "VS Online Plan delegate access token parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VSOnlineDelegateAccessTokenRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_WriteEnvironmentsDelegate": {
+            "$ref": "./examples/VSOPlanActions_DelegatedAccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/": {
+      "get": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Retrieves information about all VS Online Plan resources under the given subscription and resource group",
+        "description": "Retrieves the properties of all VS Online Plans.",
+        "operationId": "Plan_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the VS Online Plan",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VSOPlanGet": {
+            "$ref": "./examples/VSOPlanListGet_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VSOnline/plans/": {
+      "get": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Retrieves information about all VS Online Plan resources under the given subscription",
+        "description": "Retrieves the properties of all VS Online Plans.",
+        "operationId": "Plan_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of VS Online Plans",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VSOPlanGet": {
+            "$ref": "./examples/VSOPlanListBySub_example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VSOAccountUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating a VS Online Account.",
+      "properties": {
+        "tags": {
+          "description": "Tags for the VS Online Account.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the service."
+        }
+      }
+    },
+    "VSOAccountErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource Id for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags":{
+          "description": "Tags for the VS Online Account",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "location": {
+          "description": "Region where the Azure resource is located.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Model representing SKU for VS Online Account.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the SKU for VS Online Account.",
+          "enum": [
+            "Free"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "description": "The tier of the SKU for VS Online Account.",
+          "enum": [
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VnetProperties": {
+      "type": "object",
+      "description": "Model representing Vnet Injection properties for VS Online Account.",
+      "properties": {
+        "SubnetId": {
+          "type": "string",
+          "description": "The ARM resource identifier of the virtual network subnet which the codespaces of the VSO Plan will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.The virtual network must be in the same region and subscription as the VSO Plan."
+         }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "List containing this Resource Provider's available operations.",
+      "properties": {
+        "value": {
+          "description": "Resource provider operations list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperationDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next page for list of Azure operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "description": "Describes the Resource Provider Operation.",
+      "properties": {
+        "name": {
+          "description": "Resource provider operation name.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Resource provider display properties.",
+          "$ref": "#/definitions/ResourceProviderOperationDisplay"
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "description": "Describes the properties of the Operation.",
+      "properties": {
+        "provider": {
+          "description": "Name of the resource provider.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the resource provider operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the resource provider operation.",
+          "type": "string"
+        }
+      }
+    },
+    "VSOPlanUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating a VS Online Plan.",
+      "properties": {
+        "tags": {
+          "description": "Tags for the VS Online Plan.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the service."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional VS Online Plan properties.",
+          "properties": {
+            "defaultAutoSuspendDelayMinutes": {
+              "description": "Specifies auto suspend interval for environments in this plan.",
+              "type": "integer"
+            },
+            "defaultEnvironmentSku": {
+              "description": "Specifies the default environment sku name for this plan.",
+              "type": "string"
+            },
+            "vnetProperties":{
+              "$ref": "#/definitions/VnetProperties",
+              "description": "Specifies the vnet injection properties for this plan."
+            }
+          }
+        }
+      }
+    },
+    "VSOPlanErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "VSOnlinePlan": {
+      "type": "object",
+      "description": "VS Online Plan. Represents the high level Plan needed to provision VS Online resources.",
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/VSOnlinePlanInfo"
+        }
+      ],
+      "properties": {
+        "properties":{
+          "type": "object",
+          "description": "Additional VS Online Plan properties.",
+          "title": "VS Online Additional properties",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "description": "unique user assigned id."
+            },
+            "serviceUri": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Service endpoint."
+            },
+            "defaultAutoSuspendDelayMinutes": {
+              "description": "Specifies auto suspend interval for environments in this plan.",
+              "type": "integer"
+            },
+            "defaultEnvironmentSku": {
+              "description": "Specifies the default environment sku name for this plan.",
+              "type": "string"
+            },
+            "vnetProperties":{
+              "$ref": "#/definitions/VnetProperties",
+              "description": "Specifies the vnet injection properties for this plan."
+            }
+          }
+        }
+      }
+    },
+    "VSOnlinePlanInfo": {
+      "description": "VS Online Plan properties. Holds properties that describe the plan.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the service."
+        }
+      }
+    },
+    "VSOnlinePlanList": {
+      "description": "Object that includes an array of VS Online Plans and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of VS Online Plans",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VSOnlinePlan"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "VSOnlinePlanAccessToken": {
+      "description": "Object that includes a VS Online Plans access token.",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The VS Online Plan access token."
+        }
+      }
+    },
+    "VSOnlineDelegateAccessTokenRequestBody": {
+      "description": "Object that includes a VS Online Plans delegate access token request parameters.",
+      "type": "object",
+      "required": [
+        "scope",
+        "identity"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The requested scopes for the VS Online Plan access token."
+        },
+        "expiration": {
+          "type": "integer",
+          "description": "The requested expiration UNIX timestamp (seconds since epoch) for the VS Online Plan access token."
+        },
+        "identity": {
+          "$ref": "#/definitions/VSOnlineDelegateIdentity",
+          "description": "The identity of the user of the VS Online Plan access token."
+        },
+        "environmentIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "An environment Id."
+          },
+          "description": "A subset of environments within the VS Online Plan which the returned token will grant access to.  If not provided the token will be applicable for all environments."
+        }
+      }
+    },
+    "VSOnlineDelegateIdentity": {
+      "description": "Object that includes the identity of the user of a delegated access token.",
+      "type": "object",
+      "required": [
+        "username",
+        "displayName",
+        "id"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's user name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The user's unique identifier which should never change."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "maxLength": 90,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "PlanNameParameter": {
+      "name": "planName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the VS Online Plan",
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    },
+    "PlanAccessTokenExpirationParameter": {
+      "name": "expiration",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "The requested expiration UNIX timestamp (seconds since epoch) of a VS Online Plan access token.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

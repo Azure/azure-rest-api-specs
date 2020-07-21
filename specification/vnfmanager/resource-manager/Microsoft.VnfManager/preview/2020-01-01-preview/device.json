@@ -228,7 +228,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./vnfmanager.json#/definitions/TagsObject"
+              "$ref": "#/definitions/VnfManagerPatchDevice"
             },
             "description": "Parameters supplied to update Vnf Manager Device tags."
           },
@@ -451,39 +451,54 @@
         }
       }
     },
-    "DeviceRegistrationKey": {
-      "description": "Vnf Manager Device registration key",
+    "VnfManagerPatchDevice": {
       "properties": {
-        "mecRegistrationKey": {
-          "type": "string",
-          "description": "The registration key for Vnf Manager Device."
-        }
-      }
-    },
-    "VNFRef": {
-      "description": "VNF ref",
-      "properties": {
-        "vnfRef": {
-          "type": "string",
-          "description": "The reference to to VNF deployed on the Vnf Manager device."
-        }
-      }
-    },
-    "VnfManagerDeviceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VnfManagerDevice"
-          },
-          "description": "A list of VnfManagerDevices in a resource group."
+        "properties": {
+          "type": "object",
+          "description": "Vnf Manager device Properties."
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+      "DeviceRegistrationKey": {
+        "description": "Vnf Manager Device registration key",
+        "properties": {
+          "mecRegistrationKey": {
+            "type": "string",
+            "description": "The registration key for Vnf Manager Device."
+          }
         }
       },
-      "description": "Response for VnfManagerDevices API service call."
+      "VNFRef": {
+        "description": "VNF ref",
+        "properties": {
+          "vnfRef": {
+            "type": "string",
+            "description": "The reference to to VNF deployed on the Vnf Manager device."
+          }
+        }
+      },
+      "VnfManagerDeviceListResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VnfManagerDevice"
+            },
+            "description": "A list of VnfManagerDevices in a resource group."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The URL to get the next set of results."
+          }
+        },
+        "description": "Response for VnfManagerDevices API service call."
+      }
     }
-  }
 }

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "hostedResourceProvider": "Microsoft.Contoso",
+    "rolloutName": "brazilUsShoeBoxTesting",
+    "api-version": "2019-02-01-preview",
+    "customRolloutSpecification": {
+      "properties": {
+        "specification": {
+          "TestRegions": {
+            "regions": ["brazilus"]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Custom rollout completed successfully.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilUsShoeBoxTesting",
+        "name": "Microsoft.Contoso/brazilUsShoeBoxTesting",
+        "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "specification": {
+            "TestRegions": {
+              "regions": ["brazilus","eastus2euap","centraluseuap"]
+            }
+          },
+          "status": {
+            "completedRegions" : ["brazilus","eastus2euap","centraluseuap"]
+          }
+        }
+      }
+    }
+  }
+}
