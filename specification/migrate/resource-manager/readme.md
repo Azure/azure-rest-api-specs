@@ -59,7 +59,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+tag: package-2019-10
 ```
 
 
@@ -89,6 +89,21 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: migrate.json
+    where: $.definitions.AssessedMachineProperties.properties.monthlyStandardSSDStorageCost
+    reason: SSD is short form.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: migrate.json
+    where: $.definitions.AssessmentProperties.properties.monthlyStandardSSDStorageCost
+    reason: SSD is short form.
+```
+
 # Code Generation
 
 ## Swagger to SDK
