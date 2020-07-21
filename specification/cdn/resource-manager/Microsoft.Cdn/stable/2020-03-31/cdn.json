@@ -3914,9 +3914,9 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
-            "expires",
-            "keyId",
-            "signature"
+            "Expires",
+            "KeyId",
+            "Signature"
           ]
         },
         "paramName": {
@@ -4428,7 +4428,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4474,13 +4474,6 @@
       "type": "object",
       "description": "Origin properties needed for origin update.",
       "properties": {
-        "tags": {
-          "description": "Origin tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"
