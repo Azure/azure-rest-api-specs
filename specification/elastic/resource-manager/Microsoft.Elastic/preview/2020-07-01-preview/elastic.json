@@ -521,7 +521,8 @@
       "properties": {
         "provisioningState": {
           "description": "Provision states for elastic RP.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "elasticOrganizationProperties": {
           "description": "Elastic organization properties.",
@@ -529,14 +530,16 @@
         },
         "userInfo": {
           "description": "User information.",
-          "$ref": "#/definitions/UserInfo"
+          "$ref": "#/definitions/UserInfo",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       }
     },
     "ManagedIdentityTypes": {
       "enum": [
-        "SystemAssigned",
-        "UserAssigned"
+        "SystemAssigned"
       ],
       "type": "string",
       "description": "Managed Identity types.",
