@@ -70,6 +70,16 @@ input-file:
 - Microsoft.ServiceFabric/stable/2020-03-01/application.json
 ```
 
+### Tag: package-2020-01-preview
+
+These settings apply only when `--tag=package-2020-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
+```
+
 ### Tag: package-2019-11-preview
 
 These settings apply only when `--tag=package-2019-11-preview` is specified on the command line.
@@ -219,6 +229,8 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 
 ```
 
