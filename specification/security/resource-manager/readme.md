@@ -36,6 +36,10 @@ directive:
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: alertTypes.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
+    reason: The list returns limited number of items
 ```
 
 ### Basic Information
@@ -59,6 +63,8 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
@@ -82,6 +88,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 
 # Needed when there is more than one input file
 override-info:
@@ -94,6 +101,8 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
@@ -119,6 +128,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 
 # Needed when there is more than one input file
 override-info:
@@ -139,10 +149,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
+- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+- Microsoft.Security/stable/2019-08-01/iotAlerts.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -152,14 +160,24 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -168,7 +186,7 @@ override-info:
 
 ### Tag: package-2015-06-preview-only
 
-These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2015-06-preview-only'
 input-file:
@@ -191,7 +209,7 @@ override-info:
 
 ### Tag: package-2017-08-preview-only
 
-These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2017-08-preview-only'
 input-file:
@@ -214,12 +232,12 @@ override-info:
 
 ### Tag: package-2019-01-preview-only
 
-These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
@@ -228,9 +246,23 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2020-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ### Tag: package-2017-08-only
 
-These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
@@ -243,7 +275,7 @@ override-info:
 
 ### Tag: package-2018-06-only
 
-These settings apply only when `--tag=package-2018-06-only` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2018-06-only'
 input-file:
@@ -256,7 +288,7 @@ override-info:
 
 ### Tag: package-2019-01-only
 
-These settings apply only when `--tag=package-2019-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-01-only'
 input-file:
@@ -270,12 +302,51 @@ override-info:
 
 ### Tag: package-2019-08-only
 
-These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line. This tag is used for Ruby SDK.
 
 ``` yaml $(tag) == 'package-2019-08-only'
 input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+- Microsoft.Security/stable/2019-08-01/iotAlerts.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-package-2020-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-01-only
+
+These settings apply only when `--tag=package-2020-01-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-01-only'
+input-file:
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
+- Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
+- Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
+- Microsoft.Security/stable/2020-01-01/topologies.json
 
 # Needed when there is more than one input file
 override-info:
@@ -330,12 +401,15 @@ AutoRest V3 generators require the use of `--tag=all-api-versions` to select api
 
 This block is updated by an automatic script. Edits may be lost!
 
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+
+``` yaml $(tag) == 'all-api-versions' /*autogenerated*/
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
@@ -360,6 +434,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/topologies.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
   - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
@@ -370,12 +445,20 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
@@ -385,5 +468,6 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
