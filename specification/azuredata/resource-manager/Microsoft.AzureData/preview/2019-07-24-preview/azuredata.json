@@ -2290,11 +2290,10 @@
       }
     },
     "DataControllerProperties": {
-      "description": "The data controller properties.",
       "type": "object",
       "properties": {
-        "onPremiseProperty": {
-          "$ref": "#/definitions/OnPremiseProperty"
+        "dataController": {
+          "$ref": "#/definitions/DataController"
         },
         "requestType": {
           "$ref": "#/definitions/RequestType"
@@ -2313,22 +2312,28 @@
         }
       }
     },
-    "OnPremiseProperty": {
-      "description": "Properties from the on premise data controller",
+    "DataController": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid",
-          "description": "A globally unique ID identifying the associated on premise cluster"
+          "format": "uuid"
         },
-        "publicSigningKey": {
-          "type": "string",
-          "description": "Certificate that contains the on premise cluster public key used to verify signing"
+        "name": {
+          "type": "string"
         },
-        "signingCertificateThumbprint": {
+        "azureResourceType": {
+          "type": "string"
+        },
+        "subscription": {
           "type": "string",
-          "description": "Unique thumbprint returned to customer to verify the certificate being uploaded"
+          "format": "uuid"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
         }
       }
     },
