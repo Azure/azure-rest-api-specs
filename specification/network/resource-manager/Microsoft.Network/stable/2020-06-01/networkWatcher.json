@@ -4141,6 +4141,22 @@
           "type": "string",
           "description": "The name of the connection monitor endpoint."
         },
+        "type": {
+          "type": "string",
+          "enum": [
+            "AzureVM",
+            "AzureVNet",
+            "AzureSubnet",
+            "ExternalAddress",
+            "MMAWorkspaceMachine",
+            "MMAWorkspaceNetwork"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointType",
+            "modelAsString": true
+          },
+          "description": "The endpoint type."
+        },
         "resourceId": {
           "type": "string",
           "description": "Resource ID of the connection monitor endpoint."
@@ -4152,12 +4168,60 @@
         "filter": {
           "$ref": "#/definitions/ConnectionMonitorEndpointFilter",
           "description": "Filter for sub-items within the endpoint."
+        },
+        "scope": {
+          "$ref": "#/definitions/ConnectionMonitorEndpointScope",
+          "description": "Endpoint scope."
+        },
+        "coverageLevel": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Low",
+            "BelowAverage",
+            "Average",
+            "AboveAverage",
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "CoverageLevel",
+            "modelAsString": true
+          },
+          "description": "Test coverage for the endpoint."
         }
       },
       "required": [
         "name"
       ],
       "description": "Describes the connection monitor endpoint."
+    },
+    "ConnectionMonitorEndpointScope": {
+      "properties": {
+        "include": {
+          "type": "array",
+          "description": "List of items which needs to be included to the endpoint scope.",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "description": "List of items which needs to be excluded from the endpoint scope.",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
+          }
+        }
+      },
+      "description": "Describes the connection monitor endpoint scope."
+    },
+    "ConnectionMonitorEndpointScopeItem": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the endpoint item. Supported types are IPv4/IPv6 subnet mask or IPv4/IPv6 IP address."
+        }
+      },
+      "description": "Describes the connection monitor endpoint scope item."
     },
     "ConnectionMonitorEndpointFilter": {
       "properties": {
