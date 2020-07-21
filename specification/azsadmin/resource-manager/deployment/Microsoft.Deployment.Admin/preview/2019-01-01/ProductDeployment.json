@@ -105,7 +105,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_BootStrap",
+        "operationId": "BootstrapAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -148,7 +148,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_Deploy",
+        "operationId": "DeployAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -191,7 +191,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_Remove",
+        "operationId": "RemoveAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -231,7 +231,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_RotateSecrets",
+        "operationId": "RotateSecretsAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -271,7 +271,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_ExecuteRunner",
+        "operationId": "ExecuteRunnerAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -281,6 +281,9 @@
           },
           {
             "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExecuteRunnerActionParameter"
           }
         ],
         "responses": {
@@ -489,7 +492,7 @@
         },
         "parameters": {
           "description": "Deployment parameters, value in JToken",
-          "type": "string"
+          "type": "object"
         }
       }
     },
@@ -500,6 +503,16 @@
         "version": {
           "description": "Generic Version object",
           "type": "string"
+        }
+      }
+    },
+    "ExecuteRunnerActionParameters": {
+      "description": "Parameters for execute runner action",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "Execute Runner parameters, value in JToken",
+          "type": "object"
         }
       }
     }
@@ -530,6 +543,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/DeployActionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ExecuteRunnerActionParameter": {
+      "description": "Represents excute runner action parameter",
+      "name": "executeRunnerActionParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ExecuteRunnerActionParameters"
       },
       "x-ms-parameter-location": "method"
     }
