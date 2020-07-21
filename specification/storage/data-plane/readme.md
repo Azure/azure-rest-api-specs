@@ -31,6 +31,15 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+- Microsoft.BlobStorage/preview/2019-12-12/blob.json
+```
+
 ### Tag: package-2018-11
 
 These settings apply only when `--tag=package-2018-11` is specified on the command line.
