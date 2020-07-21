@@ -8884,6 +8884,10 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "description": "The resource status information."
+        },
+        "patchStatus": {
+          "$ref": "#/definitions/VirtualMachinePatchStatus",
+          "description": "Specifies the result of the virtual machine patch related operations."
         }
       },
       "description": "The instance view of a virtual machine."
@@ -11537,7 +11541,7 @@
       "properties": {
         "patchMode": {
           "type": "string",
-          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> ** AutomaticByPlatform** - the virtual machine will automatically updated by the OS. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
+          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
           "enum": [
             "Manual",
             "AutomaticByOS",
@@ -11549,22 +11553,223 @@
           }
         }
       }
+    },
+    "VirtualMachinePatchStatus": {
+      "properties": {
+        "availablePatchSummary": {
+          "$ref": "#/definitions/AvailablePatchSummary",
+          "description": "Describes the properties of an virtual machine instanceview for available patch summary."
+        },
+        "lastPatchInstallationSummary": {
+          "$ref": "#/definitions/LastPatchInstallationSummary",
+          "description": "Describes the properties of an virtual machine instanceview for last installed patch summary."
+        },
+        "configurationStatusSummary": {
+          "$ref": "#/definitions/ConfigurationStatusSummary",
+          "description": "Describes configuration settings and belonging provisioning state."
+        }
+      },
+      "description": "Specifies the result of the virtual machine patch related operations."
+    },
+    "AvailablePatchSummary": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+        },
+        "criticalAndSecurityPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of critical or security patches that have been detected as available and not yet installed."
+        },
+        "otherPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches excluding critical and security."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of an virtual machine instanceview for available patch summary."
+
+    },
+    "LastPatchInstallationSummary": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "maintenanceWindowExceeded": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The overall status of the machine to show whether the patch operation exceeded the given maintenance window."
+        },
+        "rebootStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "\"The reboot status of the machine after the patch operation. It will be in \"NotNeeded\" status if reboot is not needed after the patch operation. \"Required\" will be the status once the patch is applied and machine is required to reboot. \"Started\" will be the reboot status when the machine starts to reboot. \"Failed\" will be the status if the machine is failed to reboot. \"Completed\" will be the status once the machine is rebooted successfully",
+          "enum": [
+            "NotNeeded",
+            "Required",
+            "Started",
+            "Failed",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "RebootStatus",
+            "modelAsString": true
+          }
+        },
+        "notSelectedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches but but not selected by user setting.Hence, were not installed."
+        },
+        "excludedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches but user setting excluded them from being installed."
+        },
+        "pendingPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches that are pending to be installed."
+        },
+        "installedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all installed patches."
+        },
+        "failedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches failed to be installed."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "startedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The person or system account that started the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of an virtual machine instanceview for last installed patch summary."
+    },
+    "ConfigurationStatusSummary": {
+      "properties": {
+        "patchModeProvisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status that shows whether the current patch mode is applied in the machine or not. \"Unknown\" is the state when the status is unknown. \"Pending\" is the state when the setting is changed but hasn't applied to the machine yet. \"Ready\" state shows the current patch mode setting is applied to the machine. \"Failed\" is the state in which applying the patchMode setting is failed but retry will happen. during the failed state, there will be an error listed in the error object.",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Ready",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "patchModeProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the current status of the patch configuration change"
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      }
     }
   }
-}
