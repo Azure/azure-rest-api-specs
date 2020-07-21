@@ -54,9 +54,9 @@ These settings apply only when `--tag=package-sqlGen3-2020-04-01-preview` is spe
 
 ``` yaml $(tag) == 'package-sqlGen3-2020-04-01-preview'
 input-file:
+- Microsoft.Synapse/preview/2020-04-01-preview/operations.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
-
 ```
 
 ## Suppressions
@@ -73,14 +73,6 @@ directive:
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
-  - suppress: OperationsAPIImplementation
-    reason: We do have a operations api as "/providers/Microsoft.Synapse/operations"
-    from: sqlDatabase.json
-    where: $.paths
-  - suppress: OperationsAPIImplementation
-    reason: We do have a operations api as "/providers/Microsoft.Synapse/operations"
-    from: sqlPool.json
-    where: $.paths
 ```
 
 ---
