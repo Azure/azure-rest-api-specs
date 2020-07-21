@@ -1,4 +1,4 @@
-# footprintMonitoring
+# footprintmonitoring
 
 > see https://aka.ms/autorest
 > and https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/81/Management-Plane-SDK-generation
