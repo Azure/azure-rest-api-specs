@@ -105,6 +105,9 @@
           },
           "Create a managed disk and associate with disk encryption set.": {
             "$ref": "./examples/CreateAManagedDiskWithDiskEncryptionSet.json"
+          },
+          "Create an ultra managed disk with logicalSectorSize 512E": {
+            "$ref": "./examples/CreateAManagedDiskWithLogicalSectorSize.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1844,11 +1847,11 @@
         "values": [
           {
             "value": "EncryptionAtRestWithCustomerKey",
-            "description": "Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+            "description": "Resource using diskEncryptionSet would be encrypted at rest with Customer managed key that can be changed and revoked by a customer."
           },
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-            "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+            "description": "Resource using diskEncryptionSet would be encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
           }
         ]
       }
@@ -2131,7 +2134,7 @@
         "logicalSectorSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Support customers creating ultra disks with logicalSectorSize 512E. Support values are 512 and 4096 (default value)."
+          "description": "Support customers creating ultra disks with logicalSectorSize 512E. Supported values are 512 and 4096 (default value)."
         }
       },
       "required": [
