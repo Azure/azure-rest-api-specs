@@ -49,8 +49,8 @@
           "BatchAccountCreate_BYOS": {
             "$ref": "./examples/BatchAccountCreate_BYOS.json"
           },
-          "BatchAccountCreate_PrivateLink": {
-            "$ref": "./examples/BatchAccountCreate_Private.json"
+          "PrivateBatchAccountCreate": {
+            "$ref": "./examples/PrivateBatchAccountCreate.json"
           }
         },
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
@@ -226,6 +226,9 @@
         "x-ms-examples": {
           "BatchAccountGet": {
             "$ref": "./examples/BatchAccountGet.json"
+          },
+          "PrivateBatchAccountGet": {
+            "$ref": "./examples/PrivateBatchAccountGet.json"
           }
         },
         "description": "Gets information about the specified Batch account.",
@@ -2236,6 +2239,7 @@
         },
         "publicNetworkAccess": {
           "title": "The network access type for accessing Azure Batch account.",
+          "description": "If not specified, the default value is 'enabled'.",
           "$ref": "#/definitions/PublicNetworkAccessType"
         },
         "encryption": {
@@ -2390,6 +2394,15 @@
           "title": "The network interface type for accessing Azure Batch service and Batch account operations.",
           "description": "If not specified, the default value is 'enabled'.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connections associated with the Batch account"
         },
         "autoStorage": {
           "title": "The properties and status of any auto-storage account associated with the Batch account.",
@@ -3098,6 +3111,14 @@
           },
           "title": "The list of required members that are used to establish the private link connection.",
           "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The list of required zone names for the private DNS resource name",
+          "readOnly": true
         }
       },
       "description": "Private link resource properties."
@@ -3185,6 +3206,9 @@
           "readOnly": true
         }
       },
+      "required": [
+        "status"
+      ],
       "description": "The private link service connection state of the private endpoint connection"
     },
     "PrivateLinkServiceConnectionStatus": {
@@ -3512,13 +3536,13 @@
           "type": "integer",
           "format": "int32",
           "title": "The desired number of dedicated compute nodes in the pool.",
-          "description": "At least one of targetDedicatedNodes, targetLowPriority nodes must be set."
+          "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
           "title": "The desired number of low-priority compute nodes in the pool.",
-          "description": "At least one of targetDedicatedNodes, targetLowPriority nodes must be set."
+          "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
           "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",

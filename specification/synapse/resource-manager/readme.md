@@ -24,7 +24,6 @@ To see additional help and options, run:
 These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
-title: SynapseManagementClient
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
@@ -43,6 +42,21 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/operations.json
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+- Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
+```
+
+### Tag: package-sqlGen3-2020-04-01-preview
+
+These settings apply only when `--tag=package-sqlGen3-2020-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-sqlGen3-2020-04-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
+- Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
+
 ```
 
 ## Suppressions
@@ -59,6 +73,14 @@ directive:
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Synapse/operations"
+    from: sqlDatabase.json
+    where: $.paths
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Synapse/operations"
+    from: sqlPool.json
+    where: $.paths
 ```
 
 ---
@@ -98,6 +120,9 @@ csharp:
   namespace: Microsoft.Azure.Management.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
+batch:
+ - tag: package-2019-06-01-preview
+ - tag: package-sqlGen3-2020-04-01-preview
 ```
 
 ## Go
@@ -122,6 +147,13 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/operations.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/operations.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
 
 ```
 
