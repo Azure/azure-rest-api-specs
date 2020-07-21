@@ -73,6 +73,14 @@ directive:
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Synapse/operations"
+    from: sqlDatabase.json
+    where: $.paths
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/Microsoft.Synapse/operations"
+    from: sqlPool.json
+    where: $.paths
 ```
 
 ---
