@@ -26,25 +26,34 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-preview-2020-08
 azure-validator: false
 ```
 
 ---
 
 
+### Tag: package-preview-2020-08
+
+These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-08'
+input-file:
+  - Microsoft.CostManagement/preview/2020-08-01-preview/costmanagement.json
+```
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
 ```
 
 =======
 
->>>>>>> Stashed changes
+> > > > > > > Stashed changes
+
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
