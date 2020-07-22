@@ -5943,10 +5943,9 @@
     "InferenceDeploymentUpdateParameter": {
       "description": "The parameters for updating an inference deployment.",
       "properties": {
-        "capacity": {
-          "format": "int32",
-          "description": "Current number of instances assigned to the resource.",
-          "type": "integer"
+        "sku": {
+          "description": "Information to update the SKU of the deployment.",
+          "$ref": "#/definitions/SkuDescription"
         },
         "weight": {
           "description": "The weight of the deployment for load balancing.",
