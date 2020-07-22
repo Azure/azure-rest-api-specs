@@ -1118,11 +1118,10 @@
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
-            "name": "$filter",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1130,7 +1129,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted.",
+            "description": "Accepted. Request will be processed. Use the Operation-Location header to check the status.",
             "headers": {
               "Operation-Location": {
                 "description": "The URL to check the status of the asynchronous operation.",
@@ -1171,11 +1170,7 @@
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
-            "name": "statusId",
-            "description": "Status id for an operation requested.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/statusIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1183,7 +1178,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Ok.",
+            "description": "Request is still processing.",
             "headers": {
               "Operation-Location": {
                 "description": "The URL to check the status of the asynchronous operation.",
@@ -1199,7 +1194,349 @@
             }
           },
           "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusWithLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },    
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/getReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReport_ByBillingProfileId",
+        "description": "Lists the reservations details for provided date range asynchronously.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GetReservationDetailsReportByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Operation-Location header to check the status.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/getReservationDetailsReport/Status/{statusId}": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReportStatus_ByBillingProfileId",
+        "description": "Get the reservations details report availability status.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "getReservationDetailsReportStatus": {
+            "$ref": "./examples/GetReservationDetailsReportStatusByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/statusIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
             "description": "Ok.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Request is still processing.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusWithLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/getReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReport_ByReservationOrderId",
+        "description": "Lists the reservations details for provided date range asynchronously.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GetReservationDetailsReportByReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Operation-Location header to check the status.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/getReservationDetailsReport/Status/{statusId}": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReportStatus_ByReservationOrderId",
+        "description": "Get the reservations details report availability status.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "getReservationDetailsReportStatus": {
+            "$ref": "./examples/GetReservationDetailsReportStatusByReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/statusIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is still processing.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusWithLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },    
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/getReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReport_ByReservationId",
+        "description": "Lists the reservations details for provided date range asynchronously.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GetReservationDetailsReportByReservation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Operation-Location header to check the status.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/getReservationDetailsReport/Status/{statusId}": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReportStatus_ByReservationId",
+        "description": "Get the reservations details report availability status.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "getReservationDetailsReportStatus": {
+            "$ref": "./examples/GetReservationDetailsReportStatusByReservation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/statusIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is still processing.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "200": {
+            "description": "Request processing completed.",
             "schema": {
               "$ref": "#/definitions/StatusWithLocation"
             }
@@ -3223,10 +3560,58 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "statusIdParameter": {
+      "name": "statusId",
+      "description": "Status id for an operation requested.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
-      "description": "BillingAccount ID",
+      "description": "Enrollment ID (Legacy BillingAccount ID)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "BillingProfile ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationIdParameter": {
+      "name": "reservationId",
+      "in": "path",
+      "description": "Reservation ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "in": "path",
+      "description": "Reservation Order ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
