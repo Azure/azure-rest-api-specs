@@ -1738,9 +1738,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "description": "The response includes a Machine Learning Inference Endpoint based on EndpointName, if any.",
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointResponse"
+              "$ref": "#/definitions/InferenceEndpointResource"
             }
           },
           "default": {
@@ -1985,6 +1985,44 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/validate": {
+      "post": {
+        "summary": "Validate if a resource can be created.",
+        "description": "Description for Validate if a resource can be created.",
+        "operationId": "Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     //////////////////////////////////////////////////
     // Inference Deployment List
     ////////////////////////////////////////////////////
@@ -2022,7 +2060,7 @@
           },
           {
             "$ref": "#/parameters/InferenceEndpointNameParameter"
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -2075,13 +2113,6 @@
           {
             "$ref": "#/parameters/InferenceDeploymentNameParameter"
           }
-          // {
-          //   "in": "query",
-          //   "name": "expand",
-          //   "description": "Set to True to include Model details.",
-          //   "type": "boolean",
-          //   "default": false
-          // }
         ],
         "responses": {
           "200": {
@@ -4756,7 +4787,7 @@
         }
       }
     },
-    "PaginatedInferenceDeploymentList": {
+    "PaginatedInferenceDeploymentsList": {
       "type": "object",
       "description": "Paginated list of Machine Learning Inference Deployment objects wrapped in ARM resource envelope.",
       "properties": {
@@ -5738,13 +5769,6 @@
     //////////////////////////////////////////////////////
     // Inference Endpoint
     //////////////////////////////////////////////////////
-    
-    // TODO: add this to the MANIFEST to enable MSI creation 
-    // TODO: will need to work with workspaceRP to make sure deletion is reliable
-    // 
-    // "identityManagement": {
-    //   "type": "SystemAssigned, UserAssigned"
-    // }
     "InferenceEndpointResource": {
       "type": "object",
       "description": "Machine Learning Inference Endpoint object wrapped into ARM resource envelope.",
@@ -5756,191 +5780,74 @@
           "type": "object",
           "properties": {
             "properties": {
-              "description": "Inference Deployment properties",
-              "$ref": "#/definitions/InferenceEndpointResponse"
+              "description": "Inference Endpoint properties",
+              "properties": {
+                "description": {
+                  "description": "The Endpoint description.",
+                  "type": "string"
+                },
+                "properties": {
+                  "description": "The Endpoint property dictionary. Properties are immutable.",
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "inferenceEndpointProvisioningState": {
+                  "type": "string",
+                  "enum": [
+                    "Unknown",
+                    "Creating",
+                    "Deleting",
+                    "Succeeded",
+                    "Failed",
+                    "Canceled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "InferenceEndpointProvisioningState",
+                    "modelAsString": true
+                  },
+                  "readOnly": true,
+                  "description": "The current provisioning state of the Inference Deployment resource."
+                },
+                "error": {
+                  "description": "The error details.",
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/ErrorResponse"
+                    }
+                  ],
+                  "readOnly": true
+                },
+                "authMode":{
+                  "type": "string",
+                  "enum": [
+                    "RBAC",
+                    "AAD",
+                    "Key"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AuthMode",
+                    "modelAsString": true
+                  },
+                  "readOnly": true,
+                  "description": "Authentication used for calling endpoint. Immutable and exclusive."
+                },
+                "uri": {
+                  "description": "The URI for sending inference requests.",
+                  "type": "string",
+                  "readOnly": true
+                }
+              },
+              "x-ms-discriminator-value": "InferenceEndpoint"
             }
           }
         }
       ]
     },
-    "InferenceEndpointResponse": {
-      "description": "The response for an Inference Endpoint.",
-      "type": "object",
-      "properties":
-      {
-        "name": {
-          "description": "The name of the Inference Endpoint.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The service description.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "The service property dictionary. Properties are immutable.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        // Still Determining How this will be handled
-        // "identity": {
-        //   "$ref": "#/definitions/Identity",
-        //   "description": "The identity of the resource."
-        // },
-        // TODO: DOES ENDPOINT NEED STATUS AND IS THIS BASED ON DEPLOYMENTS?
-        "provisioningState": {
-          // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled" // TODO: needed? 
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current provisioning state of the Inference Deployment resource."
-        },
-        "error": {
-          "description": "The error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          ],
-          "readOnly": true
-        },
-        "authEnabled": {
-          "description": "Whether or not authentication is enabled.",
-          "type": "boolean"
-        },
-        "authSettings": {
-          "$ref": "#/definitions/InferenceEndpointAuthSettings",
-          "description": "Authentication settings for the Inference Endpoint."
-        },
-        "uri": {
-          "description": "The URI for sending inference requests.",
-          "type": "string",
-          "readOnly": true
-        },
-        "deploymentWeights": {
-          "description": "Weight distribution for deployments in the endpoint",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InferenceEndpointDeploymentWeight"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "InferenceEndpoint"
-    },
-    "InferenceEndpointDeploymentWeight": {
-      "description": "Weight of a deployment in an endpoint.",
-      "type": "object",
-      "additionalProperties": {
-        "type": "integer"
-      }
-    },
-    "InferenceEndpointAuthSettings": {
-      "description": "Authentication settings for an Inference Endpoint.",
-      "type": "object",
-      "properties": {
-        "workspaceTokenAuthEnabled": {
-          "description": "Whether or not workspace token authentication is enabled.",
-          "type": "boolean"
-        }
-      }
-    },
     "InferenceEndpointUpdateParameter": {
       "description": "The parameters for updating an inference endpoint.",
-      "properties": {
-        "deploymentWeights": {
-          "description": "Weight distribution for deployments in the endpoint",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InferenceEndpointDeploymentWeight"
-          }
-        }
-      }
-    },
-    //////////////////////////////////////////////////////
-    // Inference Deployment Specs
-    //////////////////////////////////////////////////////
-    "InferenceDeploymentSpecBase": {
-      "description": "Deployment specification base.",
-      "type": "object",
-      "required": [
-        "specType"
-      ],
-      "properties": {
-        "specType": {
-          "description": "The deployment specification type.",
-          "enum": [
-            "Custom"
-          ],
-          "type": "string",
-          "example": "Custom"
-        }
-      }
-    },
-    "InferenceDeploymentCustomSpec": {
-      "description": "The custom spec payload.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/InferenceDeploymentSpecBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "livenessProbeRequirements": {
-              "description": "The liveness probe requirements.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LivenessProbeRequirements"
-                }
-              ]
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Custom"
-    },
-    "InferenceDeploymentCustomEnvironmentSpec": {
-      "description": "The custom environment spec payload.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/InferenceDeploymentSpecBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "livenessProbeRequirements": {
-              "description": "The liveness probe requirements.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LivenessProbeRequirements"
-                }
-              ]
-            },
-            "environmentImageRequest": {
-              "description": "The Environment, models and assets used for inferencing.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EnvironmentImageResponse"
-                }
-              ]
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "CustomEnvironment"
+      "properties": { }
     },
     //////////////////////////////////////////////////////
     // Inference Deployment
@@ -5957,145 +5864,111 @@
           "properties": {
             "properties": {
               "description": "Inference Deployment properties",
-              "$ref": "#/definitions/InferenceDeploymentResponse"
+              "properties": {
+                "models": {
+                  "description": "The list of model URIs.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                // TODO: verify this is what autoscaler needs... also this seems to be in conflict
+                // with the sku in the base "Resource" class
+                "sku": {
+                  "$ref": "#/definitions/SkuDescription"
+                },
+                "weight": {
+                  "description": "weight of the deployment for load balancing.",
+                  "type": "integer"
+                },
+                "InferenceDeploymentProvisioningState": {
+                  // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
+                  "type": "string",
+                  "enum": [
+                    "Unknown",
+                    "Scaling",
+                    "Creating",
+                    "Deleting",
+                    "Succeeded",
+                    "Failed",
+                    "Canceled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "InferenceDeploymentProvisioningState",
+                    "modelAsString": true
+                  },
+                  "readOnly": true,
+                  "description": "The current provisioning state of the Inference Deployment resource."
+                },
+                "environmentConfigUri": {
+                  "type": "string",
+                  "description": "URI of the environment configuration Artifact."
+                },
+                "codeAssetUri": {
+                  "type": "string",
+                  "description": "URI of the Code Assets i.e. startup code."
+                },
+                "vnet": {
+                  "$ref": "./definitions/VirtualNetworkProfile",
+                  "description": "Info of the customer's custom Virtual Network"
+                }
+              }
             }
           }
         }
       ]
     },
-    "InferenceDeploymentResponse": {
-      "description": "The response for an Inference Deployment.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the deployment.",
-          "type": "string"
-        },
-        "endpointName": {
-          "description": "Name of the endpoint the deployment is using.",
-          "type": "string"
-        },
-        "models": {
-          "description": "The list of models.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Model"
-          }
-        },
-        // TODO: name comes magically from base class of the wrapper InferenceDeploymentResource?!
-        // "name": {
-        //   "description": "The name of the deployment.",
-        //   "type": "string"
-        // },
-        "spec": {
-          "$ref": "#/definitions/InferenceDeploymentSpecBase"
-        },
-        // TODO: verify this is what autoscaler needs... also this seems to be in conflict
-        // with the sku in the base "Resource" class
-        "sku": {
-          "$ref": "#/definitions/SkuDescription"
-        },
-        // "dataCollection": {
-        //   "description": "Details of the data collection options specified.",
-        //   "allOf": [
-        //     {
-        //       "$ref": "#/definitions/ModelDataCollection"
-        //     }
-        //   ]
-        // },
-        "appInsightsEnabled": {
-          "description": "Whether or not Application Insights is enabled.",
-          "type": "boolean"
-        },
-        "provisioningState": {
-          // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "Scaling", // can go into this state while scaling (similar to app plan)
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled" // TODO: needed?
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current provisioning state of the Inference Deployment resource."
-        }
-        // "scoringTimeoutMs": {
-        //   "format": "int32",
-        //   "description": "The scoring timeout in milliseconds.",
-        //   "type": "integer",
-        //   "example": 100
-        // },
-        // "modelConfigMap": {
-        //   "description": "Details on the models and configurations.",
-        //   "type": "object",
-        //   "additionalProperties": {
-        //     "type": "object"
-        //   },
-        //   "readOnly": true
-        // }
-      }
-    },
     "InferenceDeploymentCreateRequest": {
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "properties": {
-        "endpointName": {
-          "description": "Name of the endpoint the deployment is using.",
-          "type": "string"
-        },
         "models": {
-          "description": "The list of models.",
+          "description": "The list of model URIs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Model"
+            "type": "string"
           }
-        },
-        // TODO: name comes from path?
-        // "name": {
-        //   "description": "The name of the deployment.",
-        //   "type": "string"
-        // },
-        "spec": {
-          "$ref": "#/definitions/InferenceDeploymentSpecBase"
         },
         // TODO: verify this is what autoscaler needs... also this seems to be in conflict
         // with the sku in the base "Resource" class
         "sku": {
           "$ref": "#/definitions/SkuDescription"
         },
-        // "dataCollection": {
-        //   "description": "Details of the data collection options specified.",
-        //   "allOf": [
-        //     {
-        //       "$ref": "#/definitions/ModelDataCollection"
-        //     }
-        //   ]
-        // },
-        "appInsightsEnabled": {
-          "description": "Whether or not Application Insights is enabled.",
-          "type": "boolean"
+        "weight": {
+          "description": "weight of the deployment for load balancing.",
+          "type": "integer"
+        },
+        "InferenceDeploymentProvisioningState": {
+          // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Scaling",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "InferenceDeploymentProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current provisioning state of the Inference Deployment resource."
+        },
+        "environmentConfigUri": {
+          "type": "string",
+          "description": "URI of the environment configuration Artifact."
+        },
+        "codeAssetUri": {
+          "type": "string",
+          "description": "URI of the Code Assets i.e. startup code."
+        },
+        "vnet": {
+          "$ref": "./definitions/VirtualNetworkProfile",
+          "description": "Info of the customer's custom Virtual Network"
         }
-        // "scoringTimeoutMs": {
-        //   "format": "int32",
-        //   "description": "The scoring timeout in milliseconds.",
-        //   "type": "integer",
-        //   "example": 100
-        // },
-        // "modelConfigMap": {
-        //   "description": "Details on the models and configurations.",
-        //   "type": "object",
-        //   "additionalProperties": {
-        //     "type": "object"
-        //   },
-        //   "readOnly": true
-        // }
       }
     },
     "SkuInfo": {
@@ -6189,20 +6062,6 @@
               "$ref": "#/definitions/SkuCapacity",
               "description": "Min, max, and default scale values of the SKU."
             }
-            // "locations": {
-            //   "description": "Locations of the SKU.",
-            //   "type": "array",
-            //   "items": {
-            //     "type": "string"
-            //   }
-            // },
-            // "capabilities": {
-            //   "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
-            //   "type": "array",
-            //   "items": {
-            //     "$ref": "#/definitions/Capability"
-            //   }
-            // }
           }
         }
       ]
@@ -6215,6 +6074,10 @@
           "description": "Current number of instances assigned to the resource.",
           "type": "integer"
         },
+        "weight": {
+          "description": "The weight of the deployment for load balancing.",
+          "type": "integer"
+        }
       }
     },
     "AKSServiceResponse": {
@@ -6624,10 +6487,6 @@
       "description": "The request to create an Inference Endpoint.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The name of the endpoint.",
-          "type": "string"
-        },
         "description": {
           "description": "The description of the endpoint.",
           "type": "string"
@@ -6639,30 +6498,78 @@
             "type": "string"
           }
         },
-        "authEnabled": {
-          "description": "Whether or not authentication is enabled.",
-          "type": "boolean"
-        },
-        "authSettings": {
-          "$ref": "#/definitions/InferenceEndpointAuthSettings",
-          "description": "Authentication settings for the Inference Endpoint."
+        "authMode":{
+          "type": "string",
+          "enum": [
+            "RBAC",
+            "AAD",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "AuthMode",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "Authentication used for calling endpoint. Immutable and exclusive."
         },
         "location": {
           "description": "The name of the Azure location/region.",
           "type": "string"
         },
-        // // TODO: will this do the trick? It is not included in CreateServiceRequest
-        // "identity": {
-        //   "$ref": "#/definitions/Identity",
-        //   "description": "The identity of the resource."
-        // }
-        // TODO: does not make sense on endpoint
-            // "appInsightsEnabled": {
-            //   "description": "Whether or not Application Insights is enabled.",
-            //   "type": "boolean"
-            // },
-      },
-      "x-ms-discriminator-value": "InferenceEndpoint"
+        "x-ms-discriminator-value": "InferenceEndpoint"
+      }
+    },
+    "ValidateResponse": {
+      "description": "Describes the result of resource validation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Result of validation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ValidateResponseError",
+          "description": "Error details for the case when validation fails."
+        }
+      }
+    },
+    "ValidateResponseError": {
+      "description": "Error details for when validation fails.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Validation error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Validation error message.",
+          "type": "string"
+        }
+      }
+    },
+    "VirtualNetworkProfile": {
+      "description": "Specification for using a Virtual Network.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the Virtual Network.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnet": {
+          "description": "Subnet within the Virtual Network.",
+          "type": "string"
+        }
+      }
     }
   }
 }
