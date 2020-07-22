@@ -82,6 +82,7 @@ clear-output-folder: false
 perform-load: false
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-01-01-preview-only and python
 
 These settings apply only when `--tag=package-2020-01-01-preview-only --python` is specified on the command line.
@@ -95,6 +96,8 @@ python:
   output-folder: $(python-sdks-folder)/$(python-base-folder)/v2020_01_01_preview
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2019-10-17-preview-only and python
 
 These settings apply only when `--tag=package-2019-10-17-preview-only --python` is specified on the command line.

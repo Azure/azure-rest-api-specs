@@ -12,7 +12,10 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+<<<<<<< HEAD
   - tag: package-2020-06
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - tag: package-2020-04
   - tag: package-2020-03
   - tag: package-2020-02
@@ -40,6 +43,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag)=='package-2020-06' && $(go)
 namespace: containerservice
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-06-01/$(namespace)
+```
+
+### Tag: package-2020-04 and go
+
+These settings apply only when `--package-2020-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2020-04' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-04-01/$(namespace)
 ```
 
 ### Tag: package-2020-04 and go

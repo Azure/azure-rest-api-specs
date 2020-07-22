@@ -23,7 +23,11 @@ These settings apply only when `--tag=package-2020-05 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2020-05' && $(ruby)
+<<<<<<< HEAD
 namespace: "Azure::Billing::Mgmt::V2020_05_01"
+=======
+namespace: "Azure::Billing::Mgmt::V2020_05"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_billing/lib
 ```
 

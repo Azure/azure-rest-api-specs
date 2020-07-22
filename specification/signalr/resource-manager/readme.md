@@ -26,7 +26,11 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-2020-07-01-preview
+=======
+tag: package-2020-05-01
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Suppression
@@ -55,6 +59,7 @@ directive:
     reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-07-01-preview
 
 These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
@@ -64,6 +69,8 @@ input-file:
 - Microsoft.SignalRService/preview/2020-07-01-preview/signalr.json
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-05-01
 
 These settings apply only when `--tag=package-2020-05-01` is specified on the command line.

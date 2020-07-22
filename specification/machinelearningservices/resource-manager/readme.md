@@ -110,6 +110,7 @@ input-file:
 - Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-05-01-preview
 
 These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
@@ -119,6 +120,8 @@ input-file:
 - Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-04-01-preview
 
 These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
@@ -209,7 +212,10 @@ batch:
   - tag: package-2019-06-01
   - tag: package-2019-05-01
   - tag: package-2018-11-19
+<<<<<<< HEAD
   - tag: package-2020-05-01-preview
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - tag: package-2020-04-01-preview
   - tag: package-2020-02-18-preview
   - tag: package-2018-03-preview
@@ -318,6 +324,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-05-01-preview and java
 
 These settings apply only when `--tag=package-2020-05-01-preview --java` is specified on the command line.
@@ -331,6 +338,8 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-04-01-preview and java
 
 These settings apply only when `--tag=package-2020-04-01-preview --java` is specified on the command line.
@@ -377,7 +386,10 @@ input-file:
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-04-01-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-02-18-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2018-03-01-preview/machineLearningServices.json

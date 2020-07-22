@@ -24,6 +24,7 @@ batch:
   - tag: package-2020-02
   - tag: package-2020-03
   - tag: package-2020-04
+<<<<<<< HEAD
   - tag: package-2020-06
 ```
 
@@ -38,6 +39,8 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_06_01
 regenerate-manager: true
 generate-interface: true
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Tag: package-2020-04 and java

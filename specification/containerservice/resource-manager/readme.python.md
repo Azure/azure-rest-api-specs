@@ -18,7 +18,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+<<<<<<< HEAD
   - tag: package-2020-06-01-only
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - tag: package-2020-04-01-only
   - tag: package-2020-03-01-only
   - tag: package-2020-02-01-only
@@ -38,6 +41,7 @@ batch:
   - tag: package-2017-07-only-extended
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-06-01-only and python
 
 These settings apply only when `--tag=package-2020-06-01-only --python` is specified on the command line.
@@ -49,6 +53,8 @@ python:
   output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2020_06_01
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-04-01-only and python
 
 These settings apply only when `--tag=package-2020-04-01-only --python` is specified on the command line.

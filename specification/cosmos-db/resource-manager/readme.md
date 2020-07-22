@@ -27,6 +27,7 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-2020-06-preview
 ```
 
@@ -40,6 +41,9 @@ input-file:
 - Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+=======
+tag: package-2020-04
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Tag: package-2020-04
@@ -278,8 +282,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json

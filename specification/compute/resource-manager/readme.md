@@ -34,7 +34,11 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-2020-06-01
+=======
+tag: package-2020-05-01
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 directive:
   - where:
@@ -210,6 +214,7 @@ directive:
 
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-06-01
 
 These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
@@ -234,6 +239,8 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/runCommands.json
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-05-01
 
 These settings apply only when `--tag=package-2020-05-01` is specified on the command line.

@@ -18,7 +18,10 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kusto
 batch:
   - tag: package-2019-11-09
   - tag: package-2020-02-15
+<<<<<<< HEAD
   - tag: package-2020-06-14  
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Tag: package-2018-09-07-preview and java
@@ -97,6 +100,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2020_02_15
 regenerate-manager: true
 generate-interface: true
+<<<<<<< HEAD
 ```
 
 ### Tag: package-2020-06-14 and java
@@ -110,4 +114,6 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2020_06_14
 regenerate-manager: true
 generate-interface: true
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```

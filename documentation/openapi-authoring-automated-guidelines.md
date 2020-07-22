@@ -2410,6 +2410,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message** : The response of operation '{operation name }' is defined without 'systemData'. Consider adding the systemData to the response.
 
 **Description** : The responses of GET, PUT and PATCH in new API versions should contain the `systemData` object.The version after 2020-05-01 consider as a new API version.
+<<<<<<< HEAD
+=======
+For more information, see: [AzureRPCSystemData-RP_Copy.docx](https://microsoft.sharepoint.com/:w:/t/Operations_Management_Suite/EZP2GBYnvsRKnSmJ_FXV4jkBUz6xG_glzG3KVnmHN9Q0qA?e=99dfOo). 
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 **CreatedAt**: May 21, 2020
 

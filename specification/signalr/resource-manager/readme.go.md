@@ -16,7 +16,10 @@ batch:
   - tag: package-2018-03-01-preview
   - tag: package-2018-10-01
   - tag: package-2020-05-01
+<<<<<<< HEAD
   - tag: package-2020-07-01-preview
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Tag: package-2018-03-01-preview and go
@@ -45,6 +48,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2020-05-01' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-05-01/$(namespace)
 ```
+<<<<<<< HEAD
 
 ### Tag: package-2020-07-01-preview and go
 
@@ -54,3 +58,5 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2020-07-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-07-01-preview/$(namespace)
 ```
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6

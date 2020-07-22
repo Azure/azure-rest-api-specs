@@ -40,7 +40,11 @@ input-file:
 - Microsoft.Network/stable/2020-05-01/network.json
 - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 - Microsoft.Network/stable/2020-05-01/frontdoor.json
+<<<<<<< HEAD
 - Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+=======
+- Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 directive:
   - where:
       - $.paths
@@ -272,6 +276,10 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/frontdoor.json
+<<<<<<< HEAD
+=======
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json

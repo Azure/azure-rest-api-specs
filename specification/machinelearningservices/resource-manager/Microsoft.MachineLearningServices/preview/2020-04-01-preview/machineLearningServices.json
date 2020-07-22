@@ -176,7 +176,10 @@
             "$ref": "./examples/deleteWorkspace.json"
           }
         },
+<<<<<<< HEAD
         "x-ms-long-running-operation": true,
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -195,9 +198,12 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
+<<<<<<< HEAD
           "202": {
             "description": "The request was accepted; the request was well-formed and received properly."
           },
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
           },
@@ -3547,6 +3553,7 @@
     "LinkedWorkspace": {
       "description": "Linked workspace.",
       "type": "object",
+<<<<<<< HEAD
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -3563,6 +3570,20 @@
           "type": "string",
           "description": "Resource type of linked workspace.",
           "readOnly": true
+=======
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ResourceId of the link of the linked workspace."
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the linked workspace."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of linked workspace."
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         },
         "properties": {
           "$ref": "#/definitions/LinkedWorkspaceProps"

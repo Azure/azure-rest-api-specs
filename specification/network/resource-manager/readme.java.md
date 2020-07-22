@@ -26,7 +26,10 @@ directive:
 
 ``` yaml $(java) && $(multiapi)
 batch:
+<<<<<<< HEAD
   - tag: package-2020-05
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - tag: package-2020-04
   - tag: package-2020-03
   - tag: package-2019-09
@@ -37,6 +40,7 @@ batch:
   - tag: package-2019-02
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-05 and java
 
 These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
@@ -50,6 +54,8 @@ java:
   generate-interface: true
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-04 and java
 
 These settings apply only when `--tag=package-2020-04 --java` is specified on the command line.

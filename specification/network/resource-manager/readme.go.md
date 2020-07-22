@@ -47,6 +47,7 @@ batch:
   - tag: package-2015-05-preview
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-05 and go
 
 These settings apply only when `--tag=package-2020-05 --go` is specified on the command line.
@@ -56,6 +57,8 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-05-01/$(namespace)
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-04 and go
 
 These settings apply only when `--tag=package-2020-04 --go` is specified on the command line.

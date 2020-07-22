@@ -1073,7 +1073,11 @@
         }
       }
     },
+<<<<<<< HEAD
     "/{billingScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+=======
+    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -1087,9 +1091,12 @@
           "ReservationRecommendationsBySubscription-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsBySubscription.json"
           },
+<<<<<<< HEAD
           "ReservationRecommendationsByResourceGroup-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsByResourceGroup.json"
           },
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           "ReservationRecommendationsByBillingAccount-Legacy": {
             "$ref": "./examples/ReservationRecommendationDetailsByBillingAccount.json"
           },
@@ -1103,6 +1110,7 @@
           },
           {
             "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+<<<<<<< HEAD
           },
           {
             "$ref": "#/parameters/scopeParameter"
@@ -1118,6 +1126,8 @@
           },
           {
             "$ref": "#/parameters/productParameter"
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           }
         ],
         "responses": {
@@ -3871,13 +3881,21 @@
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
+<<<<<<< HEAD
             "$ref": "#/definitions/BudgetFilterProperties"
+=======
+            "$ref": "#/definitions/BudgetFilter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           "minItems": 2
         },
         "not": {
           "description": "The logical \"NOT\" expression.",
+<<<<<<< HEAD
           "$ref": "#/definitions/BudgetFilterProperties"
+=======
+          "$ref": "#/definitions/BudgetFilter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         },
         "dimensions": {
           "description": "Has comparison expression for a dimension",
@@ -3889,6 +3907,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "BudgetFilterProperties": {
       "description": "The Dimensions or Tags to filter a budget by.",
       "properties": {
@@ -3902,6 +3921,8 @@
         }
       }
     },
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
     "BudgetComparisonExpression": {
       "description": "The comparison expression to be used in the budgets.",
       "properties": {
@@ -4997,6 +5018,15 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with reservation transactions operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount/Enrollment scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationRecommendationDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}', /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

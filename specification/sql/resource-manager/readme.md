@@ -139,8 +139,11 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+<<<<<<< HEAD
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -241,8 +244,11 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+<<<<<<< HEAD
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -332,8 +338,11 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+<<<<<<< HEAD
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -523,7 +532,10 @@ input-file:
  - ./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+<<<<<<< HEAD
  - ./Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -897,7 +909,10 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json

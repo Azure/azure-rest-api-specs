@@ -21,6 +21,7 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-2020-03-20
 ```
 
@@ -38,6 +39,9 @@ directive:
   - suppress: R3010
     from: vmware.json
     reason: list by immediate parent operations are defined
+=======
+tag: package-2019-08-09-preview
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Tag: package-2019-08-09-preview
@@ -72,8 +76,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
+<<<<<<< HEAD
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ## TypeScript
@@ -88,6 +95,7 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+<<<<<<< HEAD
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -96,6 +104,8 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -108,7 +118,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.AVS/stable/2020-03-20/vmware.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.AVS/preview/2019-08-09-preview/vmware.json
 
 ```

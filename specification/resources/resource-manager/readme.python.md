@@ -102,8 +102,11 @@ batch:
   - multiapiscript-subscriptions: true
   - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
+<<<<<<< HEAD
   - tag: package-templatespecs-2019-06-preview 
   - multiapiscript-templatespecs: true
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ```yaml $(multiapiscript-features)
@@ -141,6 +144,7 @@ clear-output-folder: false
 perform-load: false
 ```
 
+<<<<<<< HEAD
 
 ```yaml $(multiapiscript-templatespecs)
 multiapiscript: true
@@ -150,6 +154,8 @@ perform-load: false
 ```
 
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```yaml $(multiapiscript-locks)
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks

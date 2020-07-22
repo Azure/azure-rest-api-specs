@@ -43,6 +43,7 @@
         "operationId": "Policies_List",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
           },
           {
@@ -50,6 +51,15 @@
           },
           {
             "$ref": "cdn.json#/parameters/apiVersionParameter"
+=======
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           }
         ],
         "responses": {
@@ -85,16 +95,27 @@
         "operationId": "Policies_Get",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
+=======
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "cdn.json#/parameters/apiVersionParameter"
+=======
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           }
         ],
         "responses": {
@@ -125,16 +146,27 @@
         "operationId": "Policies_CreateOrUpdate",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
+=======
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "cdn.json#/parameters/apiVersionParameter"
+=======
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           {
             "description": "Policy to be created.",
@@ -187,16 +219,27 @@
         "operationId": "Policies_Update",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
+=======
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "cdn.json#/parameters/apiVersionParameter"
+=======
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           {
             "description": "CdnWebApplicationFirewallPolicy parameters to be patched.",
@@ -243,16 +286,27 @@
         "operationId": "Policies_Delete",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/resourceGroupNameParameter"
+=======
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           },
           {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "cdn.json#/parameters/apiVersionParameter"
+=======
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           }
         ],
         "responses": {
@@ -280,10 +334,17 @@
         "operationId": "ManagedRuleSets_List",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "cdn.json#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "cdn.json#/parameters/apiVersionParameter"
+=======
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
           }
         ],
         "responses": {
@@ -888,6 +949,23 @@
     }
   },
   "parameters": {
+<<<<<<< HEAD
+=======
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2017-04-02."
+    },
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
     "PolicyNameParameter": {
       "name": "policyName",
       "in": "path",
@@ -896,6 +974,20 @@
       "maxLength": 128,
       "x-ms-parameter-location": "method",
       "description": "The name of the CdnWebApplicationFirewallPolicy."
+<<<<<<< HEAD
+=======
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
     }
   }
 }

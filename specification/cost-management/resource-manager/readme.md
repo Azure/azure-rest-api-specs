@@ -26,7 +26,11 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-2020-06
+=======
+tag: package-2019-11
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 azure-validator: false
 ```
 
@@ -220,6 +224,10 @@ csharp:
   clear-output-folder: true
 ```
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)

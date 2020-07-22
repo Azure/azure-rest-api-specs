@@ -2697,9 +2697,13 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
+<<<<<<< HEAD
           "items": {
             "$ref": "#/definitions/UrlSigningKey"
           }
+=======
+          "$ref": "#/definitions/UrlSigningKey"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -3870,12 +3874,15 @@
         "keyId"
       ],
       "properties": {
+<<<<<<< HEAD
         "@odata.type": {
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
           ]
         },
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         "keyId": {
           "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
           "type": "string"
@@ -3885,11 +3892,15 @@
           "type": "string",
           "enum": [
             "SHA256"
+<<<<<<< HEAD
           ],
           "x-ms-enum": {
             "name": "algorithm",
             "modelAsString": true
           }
+=======
+          ]
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         },
         "parameterNameOverride": {
           "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
@@ -3918,6 +3929,7 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
+<<<<<<< HEAD
             "Expires",
             "KeyId",
             "Signature"
@@ -3926,6 +3938,12 @@
             "name": "paramIndicator",
             "modelAsString": true
           }
+=======
+            "expires",
+            "keyId",
+            "signature"
+          ]
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         },
         "paramName": {
           "description": "Parameter name",
@@ -4243,6 +4261,7 @@
         "enabled": {
           "description": "Origin is enabled for load balancing or not. By default, origin is always enabled.",
           "type": "boolean"
+<<<<<<< HEAD
         },
         "privateLinkAlias": {
           "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
@@ -4259,6 +4278,8 @@
         "privateLinkApprovalMessage": {
           "description": "A custom message to be included in the approval request to connect to the Private Link.",
           "type": "string"
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         }
       },
       "x-ms-azure-resource": true
@@ -4452,7 +4473,11 @@
       "type": "object",
       "allOf": [
         {
+<<<<<<< HEAD
           "$ref": "#/definitions/ProxyResource"
+=======
+          "$ref": "#/definitions/TrackedResource"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         }
       ],
       "properties": {
@@ -4514,6 +4539,16 @@
       "type": "object",
       "description": "Origin properties needed for origin update.",
       "properties": {
+<<<<<<< HEAD
+=======
+        "tags": {
+          "description": "Origin tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"

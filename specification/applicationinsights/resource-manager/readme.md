@@ -28,7 +28,11 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-preview-2020-06
+=======
+tag: package-preview-2020-02
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ## Suppression
@@ -238,6 +242,7 @@ directive:
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
 ```
 
+<<<<<<< HEAD
 ### Tag: package-preview-2020-06-only
 
 These settings apply only when `--tag=package-preview-2020-06-only` is specified on the command line.
@@ -269,6 +274,8 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
 ```
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ### Tag: package-preview-2020-02
 

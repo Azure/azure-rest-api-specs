@@ -17,7 +17,11 @@ cli:
             prop: 'properties'
           flatten: true
 
+<<<<<<< HEAD
         - where:
             op: 'CreateOrUpdate#Create|Delete|CreateOrUpdate#Update'
           hidden: true
+=======
+
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```

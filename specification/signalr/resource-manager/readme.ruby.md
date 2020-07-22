@@ -15,6 +15,7 @@ batch:
   - tag: package-2018-03-01-preview
   - tag: package-2018-10-01
   - tag: package-2020-05-01
+<<<<<<< HEAD
   - tag: package-2020-07-01-preview
 ```
 
@@ -26,6 +27,8 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 ``` yaml $(tag) == 'package-2020-07-01-preview' && $(ruby)
 namespace: "Azure::Signalr::Mgmt::V2020_07_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_signalr/lib
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Tag: package-2020-05-01 and ruby

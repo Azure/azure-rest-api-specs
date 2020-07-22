@@ -20,15 +20,27 @@ batch:
 ``` yaml $(package-spark)
 no-namespace-folders: true
 namespace: azure.synapse.spark
+<<<<<<< HEAD
 output-folder: $(python-sdks-folder)/synapse/azure-synapse-spark/azure/synapse/spark
+=======
+output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/spark
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 ``` yaml $(package-artifacts)
 no-namespace-folders: true
 namespace: azure.synapse.artifacts
+<<<<<<< HEAD
 output-folder: $(python-sdks-folder)/synapse/azure-synapse-artifacts/azure/synapse/artifacts
+=======
+output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/artifacts
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 ``` yaml $(package-access-control)
 no-namespace-folders: true
 namespace: azure.synapse.accesscontrol
+<<<<<<< HEAD
 output-folder: $(python-sdks-folder)/synapse/azure-synapse-accesscontrol/azure/synapse/accesscontrol
+=======
+output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/accesscontrol
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```

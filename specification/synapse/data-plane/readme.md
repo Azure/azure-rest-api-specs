@@ -43,10 +43,13 @@ tag: package-access-control-2020-02-01-preview
 tag: package-vnet-2019-06-01-preview
 ```
 
+<<<<<<< HEAD
 ``` yaml $(package-monitoring)
 tag: package-monitoring-2019-11-01-preview
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-spark-2019-11-01-preview
 
 These settings apply only when `--tag=package-spark-2019-11-01-preview` is specified on the command line.
@@ -82,6 +85,7 @@ These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specif
 ``` yaml $(tag) == 'package-vnet-2019-06-01-preview'
 input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
+<<<<<<< HEAD
 ```
 
 ### Tag: package-monitoring-2019-11-01-preview
@@ -91,6 +95,8 @@ These settings apply only when `--tag=package-monitoring-2019-11-01-preview` is 
 ``` yaml $(tag) == 'package-monitoring-2019-11-01-preview'
 input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ## Suppression
@@ -162,7 +168,10 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roles.json

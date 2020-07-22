@@ -27,7 +27,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
 batch:
+<<<<<<< HEAD
   - tag: package-2020-05
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - tag: package-2020-04
   - tag: package-2020-03
   - tag: package-2019-12
@@ -61,7 +64,10 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+<<<<<<< HEAD
   - tag: package-2020-05
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - tag: package-2020-04
   - tag: package-2020-03
   - tag: package-2019-12
@@ -99,6 +105,7 @@ clear-output-folder: false
 perform-load: false
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2020-05 and python
 
 These settings apply only when `--tag=package-2020-05 --python` is specified on the command line.
@@ -112,6 +119,8 @@ python:
   output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_05_01
 ```
 
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ### Tag: package-2020-04 and python
 
 These settings apply only when `--tag=package-2020-04 --python` is specified on the command line.

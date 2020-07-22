@@ -36,10 +36,13 @@ directive:
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
     reason: The list returns limited number of items
+<<<<<<< HEAD
   - suppress: PageableOperation
     from: alertTypes.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
     reason: The list returns limited number of items
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ### Basic Information
@@ -64,7 +67,10 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+<<<<<<< HEAD
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
@@ -102,7 +108,10 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+<<<<<<< HEAD
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
@@ -149,8 +158,11 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+<<<<<<< HEAD
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -173,11 +185,16 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+<<<<<<< HEAD
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+=======
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -186,7 +203,11 @@ override-info:
 
 ### Tag: package-2015-06-preview-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2015-06-preview-only'
 input-file:
@@ -209,7 +230,11 @@ override-info:
 
 ### Tag: package-2017-08-preview-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2017-08-preview-only'
 input-file:
@@ -232,7 +257,11 @@ override-info:
 
 ### Tag: package-2019-01-preview-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
@@ -248,12 +277,19 @@ override-info:
 
 ### Tag: package-2020-01-preview-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+<<<<<<< HEAD
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -262,7 +298,11 @@ override-info:
 
 ### Tag: package-2017-08-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
@@ -275,7 +315,11 @@ override-info:
 
 ### Tag: package-2018-06-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2018-06-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2018-06-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2018-06-only'
 input-file:
@@ -288,7 +332,11 @@ override-info:
 
 ### Tag: package-2019-01-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2019-01-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2019-01-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2019-01-only'
 input-file:
@@ -302,12 +350,17 @@ override-info:
 
 ### Tag: package-2019-08-only
 
+<<<<<<< HEAD
 These settings apply only when `--tag=package-2019-08-only` is specified on the command line. This tag is used for Ruby SDK.
+=======
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ``` yaml $(tag) == 'package-2019-08-only'
 input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+<<<<<<< HEAD
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
 
@@ -347,6 +400,8 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 # Needed when there is more than one input file
 override-info:
@@ -401,15 +456,22 @@ AutoRest V3 generators require the use of `--tag=all-api-versions` to select api
 
 This block is updated by an automatic script. Edits may be lost!
 
+<<<<<<< HEAD
 
 ``` yaml $(tag) == 'all-api-versions' /*autogenerated*/
+=======
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
@@ -445,8 +507,11 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
@@ -456,8 +521,11 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
@@ -470,4 +538,8 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6

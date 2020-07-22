@@ -46,6 +46,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
 - Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
 - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
+<<<<<<< HEAD
 ```
 
 ### Tag: package-sqlGen3-2020-04-01-preview
@@ -57,6 +58,8 @@ input-file:
 - Microsoft.Synapse/preview/2020-04-01-preview/operations.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 ```
 
 ## Suppressions
@@ -143,9 +146,12 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
+<<<<<<< HEAD
   - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/operations.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
+=======
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
 
 ```
 

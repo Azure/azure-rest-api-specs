@@ -1302,6 +1302,35 @@
             "modelAsString": true
           }
         },
+<<<<<<< HEAD
+=======
+        "healthStatus": {
+          "description": "Health status of protected item.",
+          "enum": [
+            "Passed",
+            "ActionRequired",
+            "ActionSuggested",
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          }
+        },
+        "healthDetails": {
+          "description": "Health details on this backup item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthDetails"
+          }
+        },
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         "lastBackupStatus": {
           "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
           "type": "string"
@@ -1611,7 +1640,11 @@
         }
       }
     },
+<<<<<<< HEAD
     "ResourceHealthDetails": {
+=======
+    "HealthDetails": {
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
       "description": "Health Details for backup items.",
       "type": "object",
       "properties": {
@@ -1646,7 +1679,11 @@
       "type": "object",
       "allOf": [
         {
+<<<<<<< HEAD
           "$ref": "#/definitions/ResourceHealthDetails"
+=======
+          "$ref": "#/definitions/HealthDetails"
+>>>>>>> 4ea1e0abb0265a95f3f49494d2f0815b6be6d7d6
         }
       ]
     },
@@ -1823,6 +1860,11 @@
             "Passed",
             "ActionRequired",
             "ActionSuggested",
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
             "Invalid"
           ],
           "type": "string",
@@ -2189,6 +2231,32 @@
           "x-ms-enum": {
             "name": "ProtectedItemHealthStatus",
             "modelAsString": true
+          }
+        },
+        "healthStatus": {
+          "description": "Health status of protected item.",
+          "enum": [
+            "Passed",
+            "ActionRequired",
+            "ActionSuggested",
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          }
+        },
+        "healthDetails": {
+          "description": "Health details on this backup item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthDetails"
           }
         },
         "extendedInfo": {
