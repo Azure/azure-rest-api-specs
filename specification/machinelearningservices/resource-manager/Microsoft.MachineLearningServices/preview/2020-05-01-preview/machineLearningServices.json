@@ -1690,7 +1690,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1746,7 +1746,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1790,70 +1790,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "MachineLearningInferenceEndpoints"
-        ],
-        "description": "Creates an Inference Endpoint. This call will create an Inference Endpoint if it does not exist. This is a nonrecoverable operation.",
-        "operationId": "MachineLearningInferenceEndpoint_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create Or Update service": {
-            // TODO: udpate
-            "$ref": "./examples/createOrUpdateService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "properties",
-            "description": "The payload that is used to create the Inference Endpoint.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Inference Endpoint creation initiated.",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointResource"
-            }
-          },
-          "201": {
-            "description": "Inference Endpoint creation initiated.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1916,7 +1853,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1979,7 +1916,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2017,7 +1954,7 @@
           "default": {
             "description": "App Service error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2072,7 +2009,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2124,7 +2061,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2171,7 +2108,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2237,7 +2174,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2303,7 +2240,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -5909,7 +5846,7 @@
                   "description": "URI of the Code Assets i.e. startup code."
                 },
                 "vnet": {
-                  "$ref": "./definitions/VirtualNetworkProfile",
+                  "$ref": "#/definitions/VirtualNetworkProfile",
                   "description": "Info of the customer's custom Virtual Network"
                 }
               }
@@ -5966,7 +5903,7 @@
           "description": "URI of the Code Assets i.e. startup code."
         },
         "vnet": {
-          "$ref": "./definitions/VirtualNetworkProfile",
+          "$ref": "#/definitions/VirtualNetworkProfile",
           "description": "Info of the customer's custom Virtual Network"
         }
       }
