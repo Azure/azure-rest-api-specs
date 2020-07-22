@@ -186,7 +186,12 @@
           "description": "Recommendation properties",
           "$ref": "#/definitions/IotRecommendationProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "IotRecommendationProperties": {
       "type": "object",
@@ -214,12 +219,13 @@
           "type": "object",
           "description": "A bag of fields which extends the recommendation information",
           "example": {
-            "endpoints": [
-              "10.0.0.4:58578",
-              "10.0.0.4:48766",
-              "10.0.0.4:42260"
-            ]
-          }
+	        "SnapshotId": "48519d58-4e35-46cd-aed5-6251af95ed50",
+	        "TotalFailedRules": "7",
+	        "TotalRulesFailedDuoToError": "1",
+	        "TotalInformationalFailedRules": "2",
+	        "TotalCriticalFailedRules": "3",
+	        "TotalWarningFailedRules": "1"
+	      }
         }
       }
     }
