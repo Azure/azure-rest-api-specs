@@ -17,44 +17,44 @@
     "https"
   ],
   "paths": {
-      "/workspace": {
-        "get": {
-          "tags": [
-            "Workspace"
-          ],
-          "operationId": "Workspace_Get",
-          "description": "Get Workspace",
-          "x-ms-examples": {
-            "Get Workspace Information": {
-              "$ref": "./examples/Workspace_Get.json"
+    "/workspace": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspace_Get",
+        "description": "Get Workspace",
+        "x-ms-examples": {
+          "Get Workspace Information": {
+            "$ref": "./examples/Workspace_Get.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResponse"
             }
           },
-          "consumes": [],
-          "produces": [
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success response.",
-              "schema": {
-                "$ref": "#/definitions/WorkspaceResponse"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorContract"
-              }
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
             }
           }
         }
       }
+    }
   },
   "definitions": {
     "WorkspaceResponse": {
@@ -84,13 +84,13 @@
           },
           "description": "Resource tags."
         },
-        "identity":{
+        "identity": {
           "description": "Workspace MSI information",
-          "$ref" : "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ManagedIdentity"
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ManagedIdentity"
         },
-        "properties":{
+        "properties": {
           "description": "Workspace Properties",
-          "$ref" : "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/WorkspaceProperties",
+          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/WorkspaceProperties",
           "x-ms-client-flatten": true
         }
       }
