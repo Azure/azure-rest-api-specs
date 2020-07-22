@@ -1103,10 +1103,10 @@
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "GetReservationDetailsReport_ByBillingAccountId_Async",
+        "operationId": "GetReservationDetailsReport_ByBillingAccountId",
         "description": "Lists the reservations details for provided date range asynchronously.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
           "ReservationDetails": {
@@ -1133,12 +1133,12 @@
             "description": "Accepted.",
             "headers": {
               "Operation-Location": {
-                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "description": "The URL to check the status of the asynchronous operation.",
                 "type": "string"
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
+                "type": "integer"
               }
             }
           },
@@ -1156,10 +1156,10 @@
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "GetReservationDetailsReport_ByBillingAccountId_Status",
-        "description": "Lists the reservations details for provided date range asynchronously.",
+        "operationId": "GetReservationDetailsReportStatus_ByBillingAccountId",
+        "description": "Get the reservations details report availability status.",
         "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
           "getReservationDetailsReportStatus": {
@@ -1175,7 +1175,7 @@
           },
           {
             "name": "StatusId",
-            "description": "Status id for each the operation status needs to be retrieved.",
+            "description": "Status id for each of the operation requested.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1189,7 +1189,7 @@
             "description": "Ok.",
             "headers": {
               "Operation-Location": {
-                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "description": "The URL to check the status of the asynchronous operation.",
                 "type": "string"
               },
               "Retry-After": {
