@@ -57,7 +57,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationsListResult"
+              "$ref": "../2020-02-10-preview/WebTestResults_API.json#/definitions/OperationsListResult"
             }
           },
           "default": {
@@ -93,7 +93,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../2020-02-10-preview/WebTestResults_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -117,20 +117,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Describes the format of an error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
     "LiveTokenResponse": {
       "type": "object",
       "properties": {
@@ -141,68 +127,6 @@
         }
       },
       "description": "The response to a live token query."
-    },
-    "OperationsListResult": {
-      "description": "Result of the List Operations operation",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A collection of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "Represents an operation returned by the GetOperations request",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationInfo",
-          "description": "Display name of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Properties of the operation",
-          "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperationInfo": {
-      "description": "Information about an operation",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Name of the provider",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Name of the resource type",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the operation",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
