@@ -806,7 +806,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues/{keyValueName}": {
       "get": {
         "tags": [
           "KeyValues"
@@ -827,7 +827,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "keyValueName",
             "in": "path",
             "description": "Identifier of key and label combination. Key and label are joined by $ character. Label is optional.",
             "required": true,
@@ -843,7 +843,7 @@
           },
           "default": {
             "description": "Error response describing why the operation failed",
-            "schema": {
+            "error": {
               "$ref": "#/definitions/Error"
             }
           }
@@ -859,7 +859,7 @@
           "KeyValues"
         ],
         "description": "Creates a key-value.",
-        "operationId": "ConfigurationStores_SetKeyValue",
+        "operationId": "ConfigurationStores_CreateKeyValue",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -874,7 +874,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "keyValueName",
             "in": "path",
             "description": "Identifier of key and label combination. Key and label are joined by $ character. Label is optional.",
             "required": true,
@@ -899,14 +899,14 @@
           },
           "default": {
             "description": "Error response describing why the operation failed",
-            "schema": {
+            "error": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "ConfigurationStores_SetKeyValue": {
-            "$ref": "./examples/ConfigurationStoresSetKeyValue.json"
+          "ConfigurationStores_CreateKeyValue": {
+            "$ref": "./examples/ConfigurationStoresCreateKeyValue.json"
           }
         }
       }
@@ -1236,7 +1236,8 @@
           "description": "All key value properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "KeyValueProperties": {
       "description": "All key value properties.",
