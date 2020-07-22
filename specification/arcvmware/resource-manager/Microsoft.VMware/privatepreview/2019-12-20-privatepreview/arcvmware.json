@@ -2230,6 +2230,11 @@
       ],
       "type": "object",
       "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "vCenterId": {
           "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
           "type": "string"
@@ -2513,6 +2518,11 @@
       ],
       "type": "object",
       "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "fqdn": {
           "description": "Gets or sets the FQDN/IPAddress of the vCenter.",
           "type": "string"
@@ -2886,6 +2896,11 @@
       ],
       "type": "object",
       "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "resourcePoolId": {
           "description": "Gets or sets the ARM Id of the resourcePool resource on which this virtual machine will\r\ndeploy.",
           "type": "string"
@@ -2920,7 +2935,7 @@
             {
               "$ref": "#/definitions/StorageProfile"
             }
-          ]         
+          ]
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
@@ -3100,6 +3115,11 @@
       ],
       "type": "object",
       "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "vCenterId": {
           "description": "Gets or sets the ARM Id of the vCenter resource in which this template resides.",
           "type": "string"
@@ -3266,6 +3286,11 @@
       ],
       "type": "object",
       "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "vCenterId": {
           "description": "Gets or sets the ARM Id of the vCenter resource in which this template resides.",
           "type": "string"
@@ -3475,6 +3500,11 @@
         },
         "networkName": {
           "description": "Gets or sets the name of the virtual network in vCenter that the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkUuid": {
+          "description": "Gets or sets a unique identifier for the network.",
           "type": "string",
           "readOnly": true
         },
