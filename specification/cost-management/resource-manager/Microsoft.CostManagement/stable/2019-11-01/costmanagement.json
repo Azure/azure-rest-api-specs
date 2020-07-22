@@ -1098,6 +1098,124 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/getReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReport_ByBillingAccountId_Async",
+        "description": "Lists the reservations details for provided date range asynchronously.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/getReservationDetailsReport.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/getReservationDetailsReport/Status/{StatusId}": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GetReservationDetailsReport_ByBillingAccountId_Status",
+        "description": "Lists the reservations details for provided date range asynchronously.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "getReservationDetailsReportStatus": {
+            "$ref": "./examples/getReservationDetailsReportStatus.json"
+          },
+          "getReservationDetailsReport": {
+            "$ref": "./examples/getReservationDetailsReport.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "StatusId",
+            "description": "Status id for each the operation status needs to be retrieved.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Ok.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/StatusWithLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.CostManagement/exports": {
       "get": {
         "tags": [
@@ -2608,6 +2726,46 @@
           "type": "object",
           "description": "Has filter expression to use in the query.",
           "$ref": "#/definitions/QueryFilter"
+        }
+      }
+    },
+    "Status": {
+      "description": "The status of the long running operation.",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StatusWithLocation": {
+      "description": "The status of the long running operation.",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "resourceLocation": {
+          "description": "A location url of the resource generated",
+          "type": "string"
         }
       }
     },
