@@ -1644,9 +1644,6 @@
         }
       }
     },
-    //////////////////////////////////////////////////
-    // Inference Endpoints List
-    ////////////////////////////////////////////////////
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints": {
       "get": {
         "tags": [
@@ -1659,7 +1656,6 @@
         "description": "Gets Inference Endpoints.",
         "x-ms-examples": {
           "Get Services": {
-            // TODO: update
             "$ref": "./examples/getServices.json"
           }
         },
@@ -1696,10 +1692,6 @@
         }
       }
     },
-    //////////////////////////////////////////////////
-    // Inference Endpoints Item
-    ////////////////////////////////////////////////////
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
       "get": {
         "tags": [
@@ -1712,7 +1704,6 @@
         "description": "Gets Inference Deployments in specified Inference Endpoint.",
         "x-ms-examples": {
           "Get Services": {
-            // TODO: update
             "$ref": "./examples/getServices.json"
           }
         },
@@ -1759,7 +1750,6 @@
         "description": "Delete a specific Inference Endpoint.",
         "x-ms-examples": {
           "Delete Endpoint": {
-            // TODO update
             "$ref": "./examples/deleteService.json"
           }
         },
@@ -1804,7 +1794,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
-            // TODO: udpate
             "$ref": "./examples/createOrUpdateService.json"
           }
         },
@@ -1867,7 +1856,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
-            // TODO: udpate
             "$ref": "./examples/createOrUpdateService.json"
           }
         },
@@ -1960,9 +1948,6 @@
         }
       }
     },
-    //////////////////////////////////////////////////
-    // Inference Deployment List
-    ////////////////////////////////////////////////////
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments": {
       "get": {
         "tags": [
@@ -1975,7 +1960,6 @@
         "description": "Gets Inference Deployments.",
         "x-ms-examples": {
           "Get Services": {
-            // TODO: update
             "$ref": "./examples/getServices.json"
           }
         },
@@ -2015,9 +1999,6 @@
         }
       }
     },
-    //////////////////////////////////////////////////
-    // Inference Deployment Item
-    ////////////////////////////////////////////////////
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}": {
       "get": {
         "tags": [
@@ -2027,7 +2008,6 @@
         "description": "Get a Inference Deployment by name.",
         "x-ms-examples": {
           "Get Service": {
-            // TODO update
             "$ref": "./examples/getService.json"
           }
         },
@@ -2074,7 +2054,6 @@
         "description": "Delete a specific Inference Deployment.",
         "x-ms-examples": {
           "Delete Service": {
-            // TODO update
             "$ref": "./examples/deleteService.json"
           }
         },
@@ -2122,7 +2101,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
-            // TODO: udpate
             "$ref": "./examples/createOrUpdateService.json"
           }
         },
@@ -2188,7 +2166,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
-            // TODO: udpate
             "$ref": "./examples/createOrUpdateService.json"
           }
         },
@@ -3196,7 +3173,6 @@
             "type": "string"
           }
         },
-        // RANDOM QUESTION: WHY IS THIS HERE???
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
@@ -4289,15 +4265,6 @@
       }
     },
     "Sku": {
-      // CORRECTION???: Docs show sku def as 
-    // "sku": {
-    //     "name": "<sku-name>",
-    //     "tier": "<sku-tier>",
-    //     "size": "<sku-size>",
-    //     "family": "<sku-family>",
-    //     "capacity": <sku-capacity>
-    // },
-    // https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-syntax 
       "description": "Sku of the resource",
       "type": "object",
       "properties": {
@@ -5703,9 +5670,6 @@
         }
       }
     },
-    //////////////////////////////////////////////////////
-    // Inference Endpoint
-    //////////////////////////////////////////////////////
     "InferenceEndpointResource": {
       "type": "object",
       "description": "Machine Learning Inference Endpoint object wrapped into ARM resource envelope.",
@@ -5786,9 +5750,6 @@
       "description": "The parameters for updating an inference endpoint.",
       "properties": { }
     },
-    //////////////////////////////////////////////////////
-    // Inference Deployment
-    //////////////////////////////////////////////////////
     "InferenceDeploymentResource": {
       "type": "object",
       "description": "Machine Learning Inference Deployment object wrapped into ARM resource envelope.",
@@ -5809,8 +5770,6 @@
                     "type": "string"
                   }
                 },
-                // TODO: verify this is what autoscaler needs... also this seems to be in conflict
-                // with the sku in the base "Resource" class
                 "sku": {
                   "$ref": "#/definitions/SkuDescription"
                 },
@@ -5819,7 +5778,6 @@
                   "type": "integer"
                 },
                 "InferenceDeploymentProvisioningState": {
-                  // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
                   "type": "string",
                   "enum": [
                     "Unknown",
@@ -5866,33 +5824,12 @@
             "type": "string"
           }
         },
-        // TODO: verify this is what autoscaler needs... also this seems to be in conflict
-        // with the sku in the base "Resource" class
         "sku": {
           "$ref": "#/definitions/SkuDescription"
         },
         "weight": {
           "description": "weight of the deployment for load balancing.",
           "type": "integer"
-        },
-        "InferenceDeploymentProvisioningState": {
-          // https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "Scaling",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "InferenceDeploymentProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current provisioning state of the Inference Deployment resource."
         },
         "environmentConfigUri": {
           "type": "string",
@@ -6452,8 +6389,7 @@
         "location": {
           "description": "The name of the Azure location/region.",
           "type": "string"
-        },
-        "x-ms-discriminator-value": "InferenceEndpoint"
+        }
       }
     },
     "ValidateResponse": {
