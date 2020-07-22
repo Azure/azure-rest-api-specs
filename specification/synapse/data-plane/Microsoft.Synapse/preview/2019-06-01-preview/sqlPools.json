@@ -123,27 +123,37 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "ARM Resource ID of the SqlPool"
-        },
-        "location": {
-          "type": "string",
-          "description": "Sql Pool Location"
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "Sql Pool Name"
+          "description": "The name of the resource"
         },
         "type": {
+          "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read"
+          ],
           "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "sku": {
           "$ref": "#/definitions/Sku",

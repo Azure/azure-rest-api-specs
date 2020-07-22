@@ -123,27 +123,37 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "ARM Resource ID of the BigDataPool"
-        },
-        "location": {
-          "type": "string",
-          "description": "Big Data Pool Location"
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "Big Data Pool Name"
+          "description": "The name of the resource"
         },
         "type": {
+          "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read"
+          ],
           "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceProperties",
