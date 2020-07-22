@@ -1,0 +1,49 @@
+{
+    "parameters": {
+        "api-version": "2020-07-01-preview",
+        "subscriptionId": "00000000-0000-0000-0000-000000000000",
+        "resourceGroupName": "myResourceGroup",
+        "monitorName": "myMonitor",
+        "requestBody": {
+            "name": "myMonitor",
+            "sku":{
+                "name": "free_Monthly"            
+            },
+            "properties": {
+                "elasticOrganizationProperties": {
+                },
+                "userInfo": {
+                    "name": "Alice",
+                    "emailAddress": "alice@microsoft.com",
+                    "phoneNumber": "123-456-7890"
+                }
+            },
+            "tags": {
+                "Environment": "Dev"
+            },
+            "location": "West US"
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+                "name": "myMonitor",
+                "type": "Microsoft.Elastic/monitors",
+                "sku":{
+                    "name": "free_Monthly"
+                },
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "elasticOrganizationProperties": {
+                        "id": "myOrg123"
+                    }
+                },
+                "tags": {
+                    "Environment": "Dev"
+                },
+                "location": "West US"
+            }
+        }
+    }
+}
