@@ -4,7 +4,7 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `stable_release_2_0`.
+The current release is `release_2_0`.
 
 ``` yaml
 
@@ -21,26 +21,18 @@ openapi-type: data-plane
 ```
 # Releases
 
-### Stable Release 2.0
-These settings apply only when `--tag=stable_release_2_0` is specified on the command line.
+### Release 2.0
+These settings apply only when `--tag=release_2_0` is specified on the command line.
 
-``` yaml $(tag) == 'stable_release_2_0'
-input-file:
-  - stable/v2.0/FormRecognizer.json
-```
-
-### Preview Release 2.0
-These settings apply only when `--tag=preview_release_2_0` is specified on the command line.
-
-``` yaml $(tag) == 'preview_release_2_0'
+``` yaml $(tag) == 'release_2_0'
 input-file: 
   - preview/v2.0/FormRecognizer.json
 ```
 
-### Preview Release 1.0
-These settings apply only when `--tag=preview_release_1_0` is specified on the command line.
+### Release 1.0
+These settings apply only when `--tag=release_1_0` is specified on the command line.
 
-``` yaml $(tag) == 'preview_release_1_0'
+``` yaml $(tag) == 'release_1_0'
 input-file: 
   - preview/v1.0/FormRecognizer.json
   - preview/v1.0/FormRecognizerReceipt.json
