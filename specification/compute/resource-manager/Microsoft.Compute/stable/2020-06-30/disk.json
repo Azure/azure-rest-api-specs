@@ -981,6 +981,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources": {
+      "get": {
+        "tags": [
+          "DiskEncryptionSets"
+        ],
+        "operationId": "DiskEncryptionSets_ListAssociatedResources",
+        "description": "Lists all resources that are encrypted with this disk encryption set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskEncryptionSetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceUriList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all resources that are encrypted with this disk encryption set.": {
+            "$ref": "./examples/ListDiskEncryptionSetAssociatedResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}": {
       "put": {
         "tags": [
@@ -2332,6 +2371,25 @@
         "value"
       ],
       "description": "The List disk encryption set operation response."
+    },
+    "ResourceUriList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of IDs or Owner IDs of resources which are encrypted with the disk encryption set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of encrypted resources. Call ListNext() with this to fetch the next page of encrypted resources."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List resources which are encrypted with the disk encryption set."
     },
     "PrivateEndpoint": {
       "properties": {
