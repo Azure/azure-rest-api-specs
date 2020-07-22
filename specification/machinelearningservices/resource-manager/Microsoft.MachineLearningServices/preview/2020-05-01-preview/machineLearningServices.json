@@ -1852,7 +1852,7 @@
           "MachineLearningInferenceEndpoints"
         ],
         "description": "Updates mutable objects of an Inference Endpoint. This call will update an Inference Endpoint if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Endpoint, use PUT or POST for creation.",
-        "operationId": "MachineLearningInferenceEndpoint_CreateOrUpdate",
+        "operationId": "MachineLearningInferenceEndpointUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
@@ -2161,8 +2161,8 @@
         "tags": [
           "MachineLearningInferenceDeployments"
         ],
-        "description": "Updates mutable obects of an Inference Deployment. This call will update an Inference Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Deployment, call PUT or POST for creation.",
-        "operationId": "MachineLearningInferenceDeployment_CreateOrUpdate",
+        "description": "Updates mutable objects of an Inference Deployment. This call will update an Inference Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Deployment, call PUT or POST for creation.",
+        "operationId": "MachineLearningInferenceDeployment_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
@@ -5773,6 +5773,10 @@
                 "sku": {
                   "$ref": "#/definitions/SkuDescription"
                 },
+                "scaleSettings": {
+                  "$ref": "#/definitions/SkuScaleSettings",
+                  "description": "Min, max, and default scale values of the deployment."
+                },
                 "weight": {
                   "description": "weight of the deployment for load balancing.",
                   "type": "integer"
@@ -5824,8 +5828,13 @@
             "type": "string"
           }
         },
-        "sku": {
-          "$ref": "#/definitions/SkuDescription"
+        "skuSize": {
+          "description": "sku size for the deployment",
+          "type": "string"
+        },
+        "scaleSettings": {
+          "description": "Scale settings for this deployment",
+          "$ref": "#/definitions/SkuScaleSettings"
         },
         "weight": {
           "description": "weight of the deployment for load balancing.",
@@ -5858,7 +5867,7 @@
           "description": "Name and tier of the SKU."
         },
         "capacity": {
-          "$ref": "#/definitions/SkuCapacity",
+          "$ref": "#/definitions/SkuScaleSettings",
           "description": "Min, max, and default scale values of the SKU."
         }
       }
@@ -5884,7 +5893,7 @@
         }
       }
     },
-    "SkuCapacity": {
+    "SkuScaleSettings": {
       "description": "Description of the Deployment scale options.",
       "type": "object",
       "properties": {
@@ -5931,10 +5940,6 @@
               "format": "int32",
               "description": "Current number of instances assigned to the resource.",
               "type": "integer"
-            },
-            "skuCapacity": {
-              "$ref": "#/definitions/SkuCapacity",
-              "description": "Min, max, and default scale values of the SKU."
             }
           }
         }
@@ -5945,7 +5950,10 @@
       "properties": {
         "sku": {
           "description": "Information to update the SKU of the deployment.",
-          "$ref": "#/definitions/SkuDescription"
+          "type": "string"
+        },
+        "capacity": {
+          "type": "integer"
         },
         "weight": {
           "description": "The weight of the deployment for load balancing.",
