@@ -146,13 +146,78 @@
           "description": "Resource tags."
         },
         "sku": {
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "SQL pool SKU"
         },
         "properties": {
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolResourceProperties",
+          "$ref": "#/definitions/SqlPoolResourceProperties",
           "description": "SQL pool properties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlPoolResourceProperties": {
+      "type": "object",
+      "title": "SQL pool properties",
+      "description": "Properties of a SQL Analytics pool",
+      "properties": {
+        "maxSizeBytes": {
+          "type": "integer",
+          "description": "Maximum size in bytes",
+          "format": "int64"
+        },
+        "collation": {
+          "type": "string",
+          "description": "Collation mode"
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "Source database to create from"
+        },
+        "recoverableDatabaseId": {
+          "type": "string",
+          "description": "Backup database to restore from"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Resource state"
+        },
+        "status": {
+          "type": "string",
+          "description": "Resource status"
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "description": "Snapshot time to restore",
+          "format": "date-time"
+        },
+        "createMode": {
+          "type": "string",
+          "description": "What is this?"
+        },
+        "creationDate": {
+          "type": "string",
+          "description": "Date the SQL pool was created",
+          "format": "date-time"
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "title": "Sku",
+      "description": "SQL pool SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The SKU name"
+        },
+        "tier": {
+          "type": "string",
+          "description": "The SKU name"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The SKU capacity"
         }
       }
     }
