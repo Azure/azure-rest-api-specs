@@ -1,4 +1,4 @@
-# footprintMonitoring
+# footprintmonitoring
 
 > see https://aka.ms/autorest
 > and https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/81/Management-Plane-SDK-generation
@@ -56,7 +56,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_footprintMonitoring']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_footprintmonitoring']
+  - repo: azure-cli-extensions
 ```
 
 ## Python
