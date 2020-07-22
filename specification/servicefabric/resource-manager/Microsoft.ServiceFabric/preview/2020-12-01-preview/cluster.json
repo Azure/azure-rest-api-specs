@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2020-03-01"
+    "version": "2020-12-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -457,6 +457,188 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          }
+        }
+      }
+    },
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "UpgradableVersionMaximum_Get",
+        "summary": "Gets the highest upgrade within one step of the current cluster version.",
+        "description": "Gets the highest upgrade within one step of the current cluster version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get highest upgrade": {
+            "$ref": "./examples/UpgradableVersionMaximum_example.json"
+          }
+        },
+        "tags": [
+          "UpgradableClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionResult"
+            }
+          }
+        }
+      }
+    },
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/clusterCreationVersions": {
+      "get": {
+        "operationId": "UpgradableVersionMinimum_Get",
+        "summary": "Gets the lowest downgrade within one step of the current cluster version.",
+        "description": "Gets the lowest downgrade within one step of the current cluster version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get lowest downgrade": {
+            "$ref": "./examples/UpgradableVersionMinimum_example.json"
+          }
+        },
+        "tags": [
+          "UpgradableClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionResult"
+            }
+          }
+        }
+      }
+    },
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/clusterCreationVersions/{clusterCreationVersion}": {
+      "get": {
+        "operationId": "UpgradableVersionMinimumWithCreation_Get",
+        "summary": "Gets the lowest downgrade within one step of the current cluster version.",
+        "description": "Gets the lowest downgrade within one step of the current cluster version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          },
+          {
+            "$ref": "#/parameters/clusterCreationVersion"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get lowest downgrade": {
+            "$ref": "./examples/UpgradableVersionMinimumWithCreation_example.json"
+          }
+        },
+        "tags": [
+          "UpgradableClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionResult"
+            }
+          }
+        }
+      }
+    },
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/targetVersions/{targetVersion}/clusterCreationVersions": {
+      "get": {
+        "operationId": "UpgradableVersionPath_Get",
+        "summary": "Gets the path of intermediate versions to or upgrade downgrade from the current cluster version to the target cluster version.",
+        "description": "Gets the path of intermediate versions to or upgrade downgrade from the current cluster version to the target cluster version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          },
+          {
+            "$ref": "#/parameters/targetVersion"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get highest upgrade": {
+            "$ref": "./examples/UpgradableVersionPath_example.json"
+          }
+        },
+        "tags": [
+          "UpgradableClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionPathResult"
+            }
+          }
+        }
+      }
+    },
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/targetVersions/{targetVersion}/clusterCreationVersions/{clusterCreationVersion}": {
+      "get": {
+        "operationId": "UpgradableVersionPathWithCreation_Get",
+        "summary": "Gets the path of intermediate versions to or upgrade downgrade from the current cluster version to the target cluster version.",
+        "description": "Gets the path of intermediate versions to or upgrade downgrade from the current cluster version to the target cluster version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          },
+          {
+            "$ref": "#/parameters/targetVersion"
+          },
+          {
+            "$ref": "#/parameters/clusterCreationVersion"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get highest upgrade": {
+            "$ref": "./examples/UpgradableVersionPathWithCreation_example.json"
+          }
+        },
+        "tags": [
+          "UpgradableClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionPathResult"
             }
           }
         }
@@ -1438,6 +1620,27 @@
         "TrustedPublisher"
       ]
     },
+    "UpgradableVersionPathResult": {
+      "properties": {
+        "supportedPath": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The cluster code version."
+          }
+        }
+      },
+      "description": "The list results of intermediate cluster code versions for an upgrade or downgrade."
+    },
+    "UpgradableVersionResult": {
+      "properties": {
+        "upgradeVersion": {
+          "type": "string",
+          "description": "The cluster code version."
+        }
+      },
+      "description": "The result of a possible cluster code version upgrade or downgrade."
+    },
     "UpgradeMode": {
       "type": "string",
       "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n",
@@ -1493,19 +1696,27 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-03-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-12-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2020-03-01"
+        "2020-12-01-preview"
       ],
-      "default": "2020-03-01",
+      "default": "2020-12-01-preview",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
       "name": "clusterName",
       "in": "path",
       "description": "The name of the cluster resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterCreationVersion": {
+      "name": "clusterCreationVersion",
+      "in": "path",
+      "description": "The cluster code version upon creation.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1553,6 +1764,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "targetVersion": {
+      "name": "targetVersion",
+      "in": "path",
+      "description": "The target code version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
