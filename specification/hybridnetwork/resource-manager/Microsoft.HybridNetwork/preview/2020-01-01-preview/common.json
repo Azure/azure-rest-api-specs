@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The defintions in this swagger specification will be used to manage the hybrid network resources.",
+    "description": "The definitions in this swagger specification will be used to manage the hybrid network resources.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -36,21 +36,28 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
-      "description": "Error details.",
+      "description": "The error response that indicates why an operation has failed.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response details containing error code and error message",
       "type": "object",
       "additionalProperties": true,
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
         "code": {
-          "description": "Error code.",
-          "type": "string"
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
-          "description": "Error message.",
-          "type": "string"
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
