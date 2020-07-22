@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-04-01-preview",
-    "title": "SynapseSqlManagementClient",
+    "title": "SynapseSqlV3ManagementClient",
     "description": "The Azure Synapse SQL management API provides a RESTful set of web APIs that interact with Azure Synapse SQL services to manage your resources. The API enables users to create, retrieve, update, and delete SqlPools, SqlDatabases, and other entities."
   },
   "host": "management.azure.com",
@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}": {
       "get": {
         "tags": [
-          "SqlPools"
+          "SqlPoolsV3"
         ],
         "description": "Gets a SqlPool.",
-        "operationId": "SqlPools_Get",
+        "operationId": "SqlPoolsV3_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -44,7 +44,7 @@
           "200": {
             "description": "Successfully retrieved the specified SqlPool.",
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPoolV3"
             }
           },
           "default": {
@@ -62,10 +62,10 @@
       },
       "put": {
         "tags": [
-          "SqlPools"
+          "SqlPoolsV3"
         ],
         "description": "Creates a new SqlPool or updates an existing SqlPool.",
-        "operationId": "SqlPools_CreateOrUpdate",
+        "operationId": "SqlPoolsV3_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -82,7 +82,7 @@
             "description": "The requested SqlPool resource state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPoolV3"
             }
           },
           {
@@ -96,7 +96,7 @@
           "200": {
             "description": "Successfully updated the SqlPool.",
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPoolV3"
             }
           },
           "202": {
@@ -105,7 +105,7 @@
           "201": {
             "description": "Successfully created the SqlPool.",
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPoolV3"
             }
           },
           "default": {
@@ -124,10 +124,10 @@
       },
       "delete": {
         "tags": [
-          "SqlPools"
+          "SqlPoolsV3"
         ],
         "description": "Deletes the SqlPool.",
-        "operationId": "SqlPools_Delete",
+        "operationId": "SqlPoolsV3_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -171,10 +171,10 @@
       },
       "patch": {
         "tags": [
-          "SqlPools"
+          "SqlPoolsV3"
         ],
         "description": "Updates an existing sqlpool.",
-        "operationId": "SqlPools_Update",
+        "operationId": "SqlPoolsV3_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -205,7 +205,7 @@
           "200": {
             "description": "Successfully updated the SqlPool.",
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPoolV3"
             }
           },
           "202": {
@@ -229,10 +229,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools": {
       "get": {
         "tags": [
-          "SqlPools"
+          "SqlPoolsV3"
         ],
         "description": "Gets a list of sql pools.",
-        "operationId": "SqlPools_ListByWorkspace",
+        "operationId": "SqlPoolsV3_ListByWorkspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -318,7 +318,7 @@
         }
       }
     },
-    "SqlPool": {
+    "SqlPoolV3": {
       "description": "A sql pool resource.",
       "required": [
         "location"
@@ -381,7 +381,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlPool"
+            "$ref": "#/definitions/SqlPoolV3"
           },
           "readOnly": true
         },
