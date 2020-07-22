@@ -16,7 +16,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appconfiguration
 
 ``` yaml $(java) && $(multiapi)
 batch:
-    tag: package-2020-07-01-preview
+  - tag: package-2020-07-01-preview
   - tag: package-2020-06-01
   - tag: package-2019-10-01
   - tag: package-2019-02-01-preview
