@@ -129,12 +129,6 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "404": {
-            "description": "The requested operation was not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -144,8 +138,8 @@
         },
         "produces": [ "application/json" ],
         "x-ms-examples": {
-          "OperationStatus successful call": {
-            "$ref": "./examples/operationStatusFound.json"
+          "Get OperationStatus": {
+            "$ref": "./examples/getOperationStatus.json"
           }
         }
       }
