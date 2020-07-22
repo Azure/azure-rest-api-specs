@@ -1104,7 +1104,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReport_ByBillingAccountId",
-        "description": "Lists the reservations details for provided date range asynchronously.",
+        "description": "Lists the reservations details for provided date range asynchronously based on enrollment id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1115,7 +1115,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/enrollmentIdParameter"
           },
           {
             "$ref": "#/parameters/startDateParameter"
@@ -1156,7 +1156,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReportStatus_ByBillingAccountId",
-        "description": "Get the reservations details report availability status.",
+        "description": "Get the reservations details report availability status by enrollment id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1167,7 +1167,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/enrollmentIdParameter"
           },
           {
             "$ref": "#/parameters/statusIdParameter"
@@ -1214,7 +1214,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReport_ByBillingProfileId",
-        "description": "Lists the reservations details for provided date range asynchronously.",
+        "description": "Lists the reservations details for provided date range asynchronously by billing profile.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1269,7 +1269,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReportStatus_ByBillingProfileId",
-        "description": "Get the reservations details report availability status.",
+        "description": "Get the reservations details report availability status by billing profile.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1330,7 +1330,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReport_ByReservationOrderId",
-        "description": "Lists the reservations details for provided date range asynchronously.",
+        "description": "Lists the reservations details for provided date range asynchronously by reservation order.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1382,7 +1382,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReportStatus_ByReservationOrderId",
-        "description": "Get the reservations details report availability status.",
+        "description": "Get the reservations details report availability status by reservation order.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1440,7 +1440,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReport_ByReservationId",
-        "description": "Lists the reservations details for provided date range asynchronously.",
+        "description": "Lists the reservations details for provided date range asynchronously by reservation.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1495,7 +1495,7 @@
           "ReservedInstances"
         ],
         "operationId": "GetReservationDetailsReportStatus_ByReservationId",
-        "description": "Get the reservations details report availability status.",
+        "description": "Get the reservations details report availability status by reservation.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -3584,10 +3584,18 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "billingAccountIdParameter": {
+    "enrollmentIdParameter": {
       "name": "billingAccountId",
       "in": "path",
       "description": "Enrollment ID (Legacy BillingAccount ID)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
