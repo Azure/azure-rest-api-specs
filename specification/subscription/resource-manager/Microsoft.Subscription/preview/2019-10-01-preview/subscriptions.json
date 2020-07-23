@@ -486,12 +486,9 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Subscription details.",
-            "schema": {
-              "$ref": "#/definitions/PutAliasResponse"
-            }
-          },
+          "204": {
+            "description": "No Content"
+            },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -755,20 +752,8 @@
           "description": "Determines whether subscription is fieldLed, partnerLed or LegacyEA",
           "type": "string"
         },
-        "initialOwnerPrincipalId": {
-          "description": "Initial owner principal Id.",
-          "type": "string"
-        },
-        "initialOwnerTenantId": {
-          "description": "Initial owner tenant Id.",
-          "type": "string"
-        },
-        "managementGroupId": {
-          "description": "The identifier of the management group to which this subscription will be associated.",
-          "type": "string"
-        },
-        "resellerId": {
-          "description": "Reseller ID, basically MPN Id.",
+        "subscriptionId": {
+          "description": "This parameter can be used to create alias for existing subscription Id",
           "type": "string"
         }
       }
