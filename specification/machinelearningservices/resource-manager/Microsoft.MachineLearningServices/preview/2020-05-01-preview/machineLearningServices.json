@@ -5702,7 +5702,7 @@
                     "modelAsString": true
                   },
                   "readOnly": true,
-                  "description": "Authentication used for calling endpoint. Immutable and exclusive."
+                  "description": "Authentication mode configured on the Inference Endpoint for inference requests."
                 },
                 "uri": {
                   "description": "The URI for sending inference requests.",
@@ -5760,7 +5760,7 @@
             "properties": {
               "description": "Inference Deployment properties",
               "properties": {
-                "models": {
+                "modelUris": {
                   "description": "The list of model URIs.",
                   "type": "array",
                   "items": {
@@ -5775,10 +5775,11 @@
                   "description": "Min, max, and default scale values of the deployment."
                 },
                 "weight": {
-                  "description": "weight of the deployment for load balancing.",
+                  "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceDeployment:<deployment-name>.",
                   "type": "integer",
                   "minimum": 0,
                   "exclusiveMinimum": true
+                  
                 },
                 "provisioningState": {
                   "type": "string",
@@ -5806,7 +5807,7 @@
                 },
                 "vnet": {
                   "$ref": "#/definitions/VirtualNetworkProfile",
-                  "description": "Info of the customer's custom Virtual Network"
+                  "description": "Description of the Virtual Network and subnet for outbound calls from this deployment."
                 }
               }
             }
@@ -5818,7 +5819,7 @@
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "properties": {
-        "models": {
+        "modelUris": {
           "description": "The list of model URIs.",
           "type": "array",
           "items": {
@@ -5841,7 +5842,7 @@
         },
         "environmentConfigUri": {
           "type": "string",
-          "description": "URI of the environment configuration Artifact."
+          "description": "URI of the Environment Configuration artifact."
         },
         "codeAssetUri": {
           "type": "string",
