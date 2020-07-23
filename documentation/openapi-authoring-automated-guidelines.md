@@ -56,7 +56,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs |
 | [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs |
 | [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs |
-| [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
 | [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs |
 | [R4016](#r4016) | [TopLevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
 | [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
@@ -73,7 +72,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
 | [R4009](#r4009) | [RequiredSystemDataInNewApiVersions](#r4009) | ARM OpenAPI(swagger) specs |
-
+| [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
 ### SDK Violations
 
 #### SDK Errors
@@ -2588,7 +2587,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r4014" ></a>R4014 AllResourcesMustHaveGetOperation
 
-**Category** : ARM Error
+**Category** : ARM Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
