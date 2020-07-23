@@ -38,11 +38,20 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
 ```
 
+
+### Tag: package-preview-2020-05
+
+These settings apply only when `--tag=package-preview-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-05'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
+```
 ### Tag: package-2020-04-01
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-04-01'
+``` yaml $(tag) == 'package-2020-04-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
 ```
@@ -51,7 +60,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-03-01'
+``` yaml $(tag) == 'package-2020-03-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
 ```
@@ -60,7 +69,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-01-01'
+``` yaml $(tag) == 'package-2020-01-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
 ```
@@ -69,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11-01'
+``` yaml $(tag) == 'package-2019-11-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
 ```
