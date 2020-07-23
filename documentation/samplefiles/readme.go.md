@@ -26,7 +26,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 # NOTE: go namespace can only consist of lower case letters, numbers and underscores
 namespace: yourservicename
 # NOTE: for special cases, you can hard code the namespace in the output-folder
-# NOTE: a preview api-version must in a 
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-12-01/$(namespace)
 ```
 
