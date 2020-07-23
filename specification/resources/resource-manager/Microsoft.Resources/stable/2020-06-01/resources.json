@@ -4590,10 +4590,12 @@
       "properties": {
         "profileVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "The profile version."
         },
         "apiVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "The API version."
         }
       }
@@ -4602,6 +4604,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "readOnly": true,
           "enum": [
             "NotSpecified",
             "Any",
@@ -4614,7 +4617,7 @@
           ],
           "x-ms-enum": {
             "name": "AliasPathTokenType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "NotSpecified",
@@ -4654,13 +4657,14 @@
         },
         "attributes": {
           "type": "string",
+          "readOnly": true,
           "enum": [
             "None",
             "Modifiable"
           ],
           "x-ms-enum": {
             "name": "AliasPathAttributes",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "None",
@@ -4694,6 +4698,7 @@
           "description": "The pattern for an alias path."
         },
         "metadata": {
+          "readOnly": true,
           "$ref": "#/definitions/AliasPathMetadata",
           "description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias."
         }
@@ -4784,6 +4789,7 @@
           "description": "The default pattern for an alias."
         },
         "defaultMetadata": {
+          "readOnly": true,
           "$ref": "#/definitions/AliasPathMetadata",
           "description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata"
         }
@@ -4819,10 +4825,12 @@
         },
         "defaultApiVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "The default API version."
         },
         "apiProfiles": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ApiProfile"
           },
