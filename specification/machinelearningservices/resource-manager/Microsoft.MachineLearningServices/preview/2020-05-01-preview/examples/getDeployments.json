@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "endpointName": "testendpoint",
+    "api-version": "2020-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [{
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/endpoints/testendpoint/deployments/testdeployment",
+            "name": "testdeployment",
+            "identity": "",
+            "location": "westus2euap",
+            "type": "Microsoft.MachineLearningServices/workspaces/endpoints/deployments",
+            "sku": {
+              "name": "Standard_DS1_V2",
+              "tier": "Enterprise",
+              "capacity": 5
+            },
+            "properties": {
+              "modelUris": [
+                "modelURL?"
+              ],
+              "scaleSettings": {
+                "minimum": 1,
+                "maximum": 5
+              },
+              "weight": 100,
+              "provisioningState": "Succeeded",
+              "environmentConfigUri": "EnvConfigURL?",
+              "codeAssetUri": "CodeAssetURL?",
+              "vnet": {
+                "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/testvnet",
+                "name": "testvnet",
+                "type": "Microsoft.Network/virtualNetworks",
+                "subnet": "default"
+              }
+            }
+          },{
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/endpoints/testendpoint/deployments/testdeployment2",
+            "name": "testdeployment2",
+            "identity": "",
+            "location": "westus2euap",
+            "type": "Microsoft.MachineLearningServices/workspaces/endpoints/deployments",
+            "sku": {
+              "name": "Standard_DS2_V2",
+              "tier": "Enterprise",
+              "capacity": 2
+            },
+            "properties": {
+              "modelUris": [
+                "modelURL?"
+              ],
+              "scaleSettings": {
+                "minimum": 1,
+                "maximum": 2
+              },
+              "weight": 100,
+              "provisioningState": "Succeeded",
+              "environmentConfigUri": "EnvConfigURL?",
+              "codeAssetUri": "CodeAssetURL?",
+              "vnet": {
+                "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/testvnet",
+                "name": "testvnet",
+                "type": "Microsoft.Network/virtualNetworks",
+                "subnet": "default"
+              }
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

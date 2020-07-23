@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "endpointName": "testendpoint",
+    "deploymentName": "testdeployment",
+    "api-version": "2020-05-01-preview",
+    "parameters": {
+      "modelUris": [
+        "modelURL?"
+      ],
+      "skuSize": "Standard_DS2_V2",
+      "weight": 100,
+      "scaleSettings": {
+        "minimum": 1,
+        "maximum": 5
+      },
+      "environmentConfigUri": "EnvConfigURL?",
+      "codeAssetUri": "CodeAssetURL?",
+      "vnet": {
+        "name": "testvnet",
+        "subnetName": "default"
+      }
+    }  
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/endpoints/testendpoint/deployments/testdeployment",
+        "name": "testdeployment",
+        "identity": "",
+        "location": "westus2euap",
+        "type": "Microsoft.MachineLearningServices/workspaces/endpoints/deployments",
+        "sku": {
+          "name": "Basic_A0",
+          "tier": "Basic",
+          "capacity": 5
+        },
+        "properties": {
+          "modelUris": [
+            "modelURL?"
+          ],
+          "scaleSettings": {
+            "minimum": 1,
+            "maximum": 5
+          },
+          "weight": 100,
+          "provisioningState": "Succeeded",
+          "environmentConfigUri": "EnvConfigURL?",
+          "codeAssetUri": "CodeAssetURL?",
+          "vnet": {
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/testvnet",
+            "name": "testvnet",
+            "type": "Microsoft.Network/virtualNetworks",
+            "subnet": "default"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        
+      }
+    }
+  }
+}

@@ -1655,7 +1655,7 @@
         "operationId": "MachineLearningInferenceEndpoints_ListInferenceEndpoints",
         "description": "Gets Inference Endpoints.",
         "x-ms-examples": {
-          "Get Services": {
+          "Get Endpoints": {
             "$ref": "./examples/getEndpoints.json"
           }
         },
@@ -1703,7 +1703,7 @@
         "operationId": "MachineLearningInferenceEndpoint_Get",
         "description": "Gets Details in specified Inference Endpoint.",
         "x-ms-examples": {
-          "Get Services": {
+          "Get Endpoint": {
             "$ref": "./examples/getEndpoint.json"
           }
         },
@@ -1793,7 +1793,7 @@
         "operationId": "MachineLearningInferenceEndpoint_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Or Update service": {
+          "Create Or Update Endpoint": {
             "$ref": "./examples/createOrUpdateEndpoint.json"
           }
         },
@@ -1850,9 +1850,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/validate": {
       "post": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
         "summary": "Validate if a resource can be created.",
         "description": "Description for Validate if a resource can be created.",
-        "operationId": "Validate",
+        "operationId": "MachineLearningInferenceEndpoint_Validate",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1897,8 +1900,8 @@
         "operationId": "MachineLearningInferenceDeployments_ListByInferenceEndpoint",
         "description": "Gets Inference Deployments.",
         "x-ms-examples": {
-          "Get Services": {
-            "$ref": "./examples/getServices.json"
+          "Get Deployments": {
+            "$ref": "./examples/getDeployments.json"
           }
         },
         "parameters": [
@@ -1945,8 +1948,8 @@
         "operationId": "MachineLearningInferenceDeployment_Get",
         "description": "Get a Inference Deployment by name.",
         "x-ms-examples": {
-          "Get Service": {
-            "$ref": "./examples/getService.json"
+          "Get Deployment": {
+            "$ref": "./examples/getDeployment.json"
           }
         },
         "parameters": [
@@ -1991,8 +1994,8 @@
         "operationId": "MachineLearningInferenceDeployment_Delete",
         "description": "Delete a specific Inference Deployment.",
         "x-ms-examples": {
-          "Delete Service": {
-            "$ref": "./examples/deleteService.json"
+          "Delete Deployment": {
+            "$ref": "./examples/deleteDeployment.json"
           }
         },
         "parameters": [
@@ -2038,8 +2041,8 @@
         "operationId": "MachineLearningInferenceDeployment_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Or Update service": {
-            "$ref": "./examples/createOrUpdateService.json"
+          "Create Or Update Deployment": {
+            "$ref": "./examples/createOrUpdateDeployment.json"
           }
         },
         "parameters": [
@@ -2103,8 +2106,8 @@
         "operationId": "MachineLearningInferenceDeployment_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create Or Update service": {
-            "$ref": "./examples/createOrUpdateService.json"
+          "Update Deployment": {
+            "$ref": "./examples/updateDeployment.json"
           }
         },
         "parameters": [
@@ -2164,10 +2167,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}/skus": {
       "get": {
         "tags": [
-          "MachineLearningDeployments"
+          "MachineLearningInferenceDeployments"
         ],
-        "summary": "Get available SKUs for scaling an Inference Deployment.",
-        "description": "Get available SKUs for scaling an Inference Deployment.",
+        "summary": "This is an ARM Contract for Azure Monitor to scale the number of instances of the Inference Deployment.",
+        "description": "Get SKU information for scaling an Inference Deployment.",
         "operationId": "MachineLearningService_ListDeploymentSkus",
         "parameters": [
           {
@@ -2196,9 +2199,6 @@
               "$ref": "#/definitions/SkuInfoCollection"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -5654,62 +5654,59 @@
         {
           "type": "object",
           "properties": {
+            "description": {
+              "description": "The Endpoint description.",
+              "type": "string",
+              "readOnly": true
+            },
             "properties": {
-              "description": "Inference Endpoint properties",
-              "properties": {
-                "description": {
-                  "description": "The Endpoint description.",
-                  "type": "string"
-                },
-                "properties": {
-                  "description": "The Endpoint property dictionary. Properties are immutable.",
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                "provisioningState": {
-                  "type": "string",
-                  "enum": [
-                    "Creating",
-                    "Deleting",
-                    "Succeeded",
-                    "Failed"
-                  ],
-                  "x-ms-enum": {
-                    "name": "InferenceEndpointProvisioningState",
-                    "modelAsString": true
-                  },
-                  "readOnly": true,
-                  "description": "The current provisioning state of the Inference Deployment resource."
-                },
-                "error": {
-                  "description": "The error details.",
-                  "allOf": [
-                    {
-                      "$ref": "#/definitions/MachineLearningServiceError"
-                    }
-                  ],
-                  "readOnly": true
-                },
-                "authMode":{
-                  "type": "string",
-                  "enum": [
-                    "None"
-                  ],
-                  "x-ms-enum": {
-                    "name": "AuthMode",
-                    "modelAsString": true
-                  },
-                  "readOnly": true,
-                  "description": "Authentication mode configured on the Inference Endpoint for inference requests."
-                },
-                "uri": {
-                  "description": "The URI for sending inference requests.",
-                  "type": "string",
-                  "readOnly": true
+              "description": "The Endpoint property dictionary. Properties are immutable.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "enum": [
+                "Creating",
+                "Deleting",
+                "Succeeded",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "InferenceEndpointProvisioningState",
+                "modelAsString": true
+              },
+              "readOnly": true,
+              "description": "The current provisioning state of the Inference Deployment resource."
+            },
+            "error": {
+              "description": "The error details.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/MachineLearningServiceError"
                 }
-              }
+              ],
+              "readOnly": true
+            },
+            "authMode":{
+              "type": "string",
+              "enum": [
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "AuthMode",
+                "modelAsString": true
+              },
+              "readOnly": true,
+              "description": "Authentication mode configured on the Inference Endpoint for inference requests."
+            },
+            "uri": {
+              "description": "The URI for sending inference requests.",
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -5740,10 +5737,6 @@
             "modelAsString": true
           },
           "description": "Authentication used for calling endpoint. Immutable and exclusive."
-        },
-        "location": {
-          "description": "The name of the Azure location/region.",
-          "type": "string"
         }
       }
     },
@@ -5757,29 +5750,30 @@
         {
           "type": "object",
           "properties": {
+            "sku": {
+              "$ref": "#/definitions/InferenceSku"
+            },
             "properties": {
-              "description": "Inference Deployment properties",
+              "type": "object",
               "properties": {
                 "modelUris": {
                   "description": "The list of model URIs.",
                   "type": "array",
                   "items": {
                     "type": "string"
-                  }
-                },
-                "sku": {
-                  "$ref": "#/definitions/InferenceSku"
+                  },
+                  "readOnly": true
                 },
                 "scaleSettings": {
                   "$ref": "#/definitions/SkuScaleSettings",
-                  "description": "Min, max, and default scale values of the deployment."
+                  "description": "Min, max, and default scale values of the deployment.",
+                  "readOnly": true
                 },
                 "weight": {
                   "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceDeployment:<deployment-name>.",
                   "type": "integer",
                   "minimum": 0,
                   "exclusiveMinimum": true
-                  
                 },
                 "provisioningState": {
                   "type": "string",
@@ -5799,15 +5793,18 @@
                 },
                 "environmentConfigUri": {
                   "type": "string",
-                  "description": "URI of the environment configuration Artifact."
+                  "description": "URI of the environment configuration Artifact.",
+                  "readOnly": true
                 },
                 "codeAssetUri": {
                   "type": "string",
-                  "description": "URI of the Code Assets i.e. startup code."
+                  "description": "URI of the Code Assets i.e. startup code.",
+                  "readOnly": true
                 },
                 "vnet": {
                   "$ref": "#/definitions/VirtualNetworkProfile",
-                  "description": "Description of the Virtual Network and subnet for outbound calls from this deployment."
+                  "description": "Description of the Virtual Network and subnet for outbound calls from this deployment.",
+                  "readOnly": true
                 }
               }
             }
@@ -5818,6 +5815,11 @@
     "InferenceDeploymentCreateRequest": {
       "description": "The request to create an Inference Deployment.",
       "type": "object",
+      "required": [
+        "modelUris",
+        "skuSize",
+        "weight"
+      ],
       "properties": {
         "modelUris": {
           "description": "The list of model URIs.",
@@ -5830,15 +5832,15 @@
           "description": "sku size for the deployment",
           "type": "string"
         },
-        "scaleSettings": {
-          "description": "Scale settings for this deployment",
-          "$ref": "#/definitions/SkuScaleSettings"
-        },
         "weight": {
           "description": "weight of the deployment for load balancing.",
           "type": "integer",
           "minimum": 0,
           "exclusiveMinimum": true
+        },
+        "scaleSettings": {
+          "description": "Scale settings for this deployment",
+          "$ref": "#/definitions/SkuScaleSettings"
         },
         "environmentConfigUri": {
           "type": "string",
@@ -5849,14 +5851,27 @@
           "description": "URI of the Code Assets i.e. startup code."
         },
         "vnet": {
-          "$ref": "#/definitions/VirtualNetworkProfile",
-          "description": "Info of the customer's custom Virtual Network"
+          "description": "Info of the customer's custom Virtual Network",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the Virtual Network."
+            },
+            "subnetName": {
+              "type": "string",
+              "description": "Name of the Subnet in the Virtual Network."
+            }
+          }
         }
       }
     },
     "SkuScaleSettings": {
       "description": "Description of the Deployment scale options.",
       "type": "object",
+      "required": [
+        "minimum",
+        "maximum"
+      ],
       "properties": {
         "minimum": {
           "format": "int32",
@@ -5876,6 +5891,40 @@
         "scaleType": {
           "description": "Available scale configurations for this Deployment.",
           "type": "string"
+        }
+      }
+    },
+    "SkuInfo": {
+      "description": "SKU discovery information.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource type that this SKU applies to.",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Name and tier of the SKU."
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuScaleSettings",
+          "description": "Min, max, and default scale values of the SKU."
+        }
+      }
+    },
+    "SkuInfoCollection": {
+      "description": "Collection of SKU information.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuInfo"
+          }
         }
       }
     },
@@ -5903,7 +5952,7 @@
       "properties": {
         "sku": {
           "description": "Information to update the SKU of the deployment.",
-          "type": "string"
+          "$ref": "#/definitions/InferenceSku"
         },
         "weight": {
           "description": "The weight of the deployment for load balancing.",
