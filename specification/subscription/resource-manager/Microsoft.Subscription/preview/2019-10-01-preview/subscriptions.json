@@ -505,6 +505,36 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Subscription/aliases": {
+      "get": {
+        "description": "Get Alias Subscription.",
+        "operationId": "Subscription_ListAlias",
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/ListAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -763,21 +793,25 @@
       "properties": {
         "id": {
           "description": "Fully qualified ID for the subscription resource.",
+          "readOnly": true,
           "type": "string"
         },
         "name": {
           "description": "Subscription ID.",
+          "readOnly": true,
           "type": "string"
         },
         "type": {
           "description": "Resource type, Microsoft.Subscriptions.",
+          "readOnly": true,
           "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/PutAliasResponseProperties",
           "description": "Put subscription response properties."
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "PutAliasResponseProperties": {
       "description": "Put subscription creation result properties.",
@@ -785,6 +819,24 @@
         "subscriptionId": {
           "description": "Newly created subscription Id.",
           "type": "string"
+        }
+      }
+    },
+    "PutAliasListResult": {
+      "description": "The list of aliases.",
+      "properties": {
+        "value": {
+          "description": "The list of alias.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PutAliasResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
