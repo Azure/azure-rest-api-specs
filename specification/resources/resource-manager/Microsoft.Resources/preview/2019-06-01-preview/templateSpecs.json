@@ -64,7 +64,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TemplateSpecModel"
+              "$ref": "#/definitions/TemplateSpec"
             },
             "description": "Template Spec supplied to the operation."
           }
@@ -73,13 +73,13 @@
           "200": {
             "description": "OK - The Template Spec update request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecModel"
+              "$ref": "#/definitions/TemplateSpec"
             }
           },
           "201": {
             "description": "Template Spec created.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecModel"
+              "$ref": "#/definitions/TemplateSpec"
             }
           },
           "default": {
@@ -127,7 +127,7 @@
           "200": {
             "description": "OK -- Template Spec tags are updated.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecModel"
+              "$ref": "#/definitions/TemplateSpec"
             }
           },
           "default": {
@@ -167,7 +167,7 @@
           "200": {
             "description": "OK - Returns information about the Template Spec.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecModel"
+              "$ref": "#/definitions/TemplateSpec"
             }
           },
           "default": {
@@ -333,7 +333,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TemplateSpecVersionModel"
+              "$ref": "#/definitions/TemplateSpecVersion"
             },
             "description": "Template Spec Version supplied to the operation."
           }
@@ -342,13 +342,13 @@
           "200": {
             "description": "OK - The Template Spec Version has been successfully updated.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecVersionModel"
+              "$ref": "#/definitions/TemplateSpecVersion"
             }
           },
           "201": {
             "description": "Template Spec Version created.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecVersionModel"
+              "$ref": "#/definitions/TemplateSpecVersion"
             }
           },
           "default": {
@@ -399,7 +399,7 @@
           "200": {
             "description": "OK -- Template Spec Version tags are updated.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecVersionModel"
+              "$ref": "#/definitions/TemplateSpecVersion"
             }
           },
           "default": {
@@ -442,7 +442,7 @@
           "200": {
             "description": "OK - Returns information about the Template Spec version.",
             "schema": {
-              "$ref": "#/definitions/TemplateSpecVersionModel"
+              "$ref": "#/definitions/TemplateSpecVersion"
             }
           },
           "default": {
@@ -544,7 +544,7 @@
     }
   },
   "definitions": {
-    "TemplateSpecModel": {
+    "TemplateSpec": {
       "required": [
         "location"
       ],
@@ -600,7 +600,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TemplateSpecModel"
+            "$ref": "#/definitions/TemplateSpec"
           },
           "description": "An array of Template Specs."
         },
@@ -675,7 +675,7 @@
         }
       }
     },
-    "TemplateSpecVersionModel": {
+    "TemplateSpecVersion": {
       "required": [
         "properties",
         "location"
@@ -738,7 +738,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TemplateSpecVersionModel"
+            "$ref": "#/definitions/TemplateSpecVersion"
           },
           "description": "An array of Template Spec versions."
         },
