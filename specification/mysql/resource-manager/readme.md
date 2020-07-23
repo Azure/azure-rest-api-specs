@@ -102,6 +102,7 @@ input-file:
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
 - Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 ```
 
 ## Suppression
@@ -109,6 +110,9 @@ input-file:
 directive:
   - suppress: PathResourceProviderNamePascalCase
     from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
     reason: The name of the provider is Microsoft.DBforMySQL
 ```
 
@@ -207,6 +211,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 
 ```
 
