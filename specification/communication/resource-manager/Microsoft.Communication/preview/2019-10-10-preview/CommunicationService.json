@@ -104,7 +104,47 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Communication/CommunicationServices": {
+    "/providers/Microsoft.Communication/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "description": "Gets the current status of an async operation.",
+        "operationId": "OperationStatuses_Get",
+        "summary": "Get Operation Status",
+        "tags": [ "OperationStatus" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "The requested operation status",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/getOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Communication/communicationServices": {
       "get": {
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "CommunicationService_ListBySubscription",
@@ -143,7 +183,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices": {
       "get": {
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "CommunicationService_ListByResourceGroup",
@@ -185,7 +225,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}": {
       "patch": {
         "description": "Operation to update an existing CommunicationService.",
         "operationId": "CommunicationService_Update",
@@ -198,7 +238,7 @@
             "description": "Parameters for the update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceResource"
+              "$ref": "#/definitions/TaggedResource"
             }
           },
           {
@@ -216,7 +256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes a CommunicationService which is not up-to-date.",
+            "description": "The update request was successful",
             "schema": {
               "$ref": "#/definitions/CommunicationServiceResource"
             }
@@ -306,7 +346,19 @@
         "consumes": [ "application/json" ],
         "responses": {
           "200": {
-            "description": "An existing resource was updated. The response describes the existing service and contains an Azure-AsyncOperation header to query the operation result.",
+            "description": "The create or update request was completed successfully",
+            "schema": {
+              "$ref": "#/definitions/CommunicationServiceResource"
+            }
+          },
+          "201": {
+            "description": "The create or update request was accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/CommunicationServiceResource"
             }
@@ -350,10 +402,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource has been deleted successfully."
+            "description": "The delete operation was successful."
           },
           "202": {
-            "description": "The delete operation is being performed in the background."
+            "description": "The delete operation is being performed in the background.",
+            "headers": {
+              "location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The resource did not exist."
@@ -373,7 +431,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/listKeys": {
       "post": {
         "description": "Get the access keys of the CommunicationService resource.",
         "operationId": "CommunicationService_ListKeys",
@@ -415,7 +473,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/regenerateKey": {
       "post": {
         "description": "Regenerate CommunicationService access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "CommunicationService_RegenerateKey",
@@ -479,13 +537,18 @@
       "description": "Error response indicating why the requested operation could not be performed.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "description": "The error",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -681,6 +744,58 @@
         "message": {
           "description": "The message of the operation.",
           "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The current status of an async operation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the operationstatus.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The start time of the operation",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete",
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "error": {
+          "description": "Operation Error message",
+          "$ref": "#/definitions/ErrorResponse",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -963,6 +1078,14 @@
       "name": "location",
       "in": "path",
       "description": "The Azure region",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The ID of an ongoing async operation",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
