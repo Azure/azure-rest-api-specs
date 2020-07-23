@@ -1656,7 +1656,7 @@
         "description": "Gets Inference Endpoints.",
         "x-ms-examples": {
           "Get Services": {
-            "$ref": "./examples/getServices.json"
+            "$ref": "./examples/getEndpoints.json"
           }
         },
         "parameters": [
@@ -1678,7 +1678,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response includes a paginated array of Machine Learning Inference Endpoints and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "description": "The response includes a paginated array of Machine Learning Inference Endpoints.",
             "schema": {
               "$ref": "#/definitions/PaginatedInferenceEndpointsList"
             }
@@ -1686,7 +1686,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1700,11 +1700,11 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "operationId": "MachineLearningInferenceDeployments_ListByInferenceEndpoint",
-        "description": "Gets Inference Deployments in specified Inference Endpoint.",
+        "operationId": "MachineLearningInferenceEndpoint_Get",
+        "description": "Gets Details in specified Inference Endpoint.",
         "x-ms-examples": {
           "Get Services": {
-            "$ref": "./examples/getServices.json"
+            "$ref": "./examples/getEndpoint.json"
           }
         },
         "parameters": [
@@ -1737,7 +1737,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1750,7 +1750,7 @@
         "description": "Delete a specific Inference Endpoint.",
         "x-ms-examples": {
           "Delete Endpoint": {
-            "$ref": "./examples/deleteService.json"
+            "$ref": "./examples/deleteEndpoint.json"
           }
         },
         "parameters": [
@@ -1780,7 +1780,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1794,7 +1794,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update service": {
-            "$ref": "./examples/createOrUpdateService.json"
+            "$ref": "./examples/createOrUpdateEndpoint.json"
           }
         },
         "parameters": [
@@ -1842,69 +1842,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "MachineLearningInferenceEndpoints"
-        ],
-        "description": "Updates mutable objects of an Inference Endpoint. This call will update an Inference Endpoint if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Endpoint, use PUT or POST for creation.",
-        "operationId": "MachineLearningInferenceEndpointUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create Or Update service": {
-            "$ref": "./examples/createOrUpdateService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "properties",
-            "description": "The payload that is used to update the Inference Endpoint.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointUpdateParameter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Inference Endpoint update initiated.",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointResource"
-            }
-          },
-          "201": {
-            "description": "Inference Endpoint update initiated.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1942,7 +1880,7 @@
           "default": {
             "description": "App Service error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1956,7 +1894,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "operationId": "MachineLearningInferenceDeployments_ListInferenceDeployments",
+        "operationId": "MachineLearningInferenceDeployments_ListByInferenceEndpoint",
         "description": "Gets Inference Deployments.",
         "x-ms-examples": {
           "Get Services": {
@@ -1985,7 +1923,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response includes a paginated array of Machine Learning Inference Deployments and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "description": "The response includes a paginated array of Machine Learning Inference Deployments.",
             "schema": {
               "$ref": "#/definitions/PaginatedInferenceDeploymentsList"
             }
@@ -1993,7 +1931,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2041,7 +1979,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2087,7 +2025,7 @@
           "default": {
             "description": "Error response describing why the request failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2152,7 +2090,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2194,7 +2132,7 @@
             "description": "The payload that is used to update the Inference Deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceDeploymentUpdateParameter"
+              "$ref": "#/definitions/InferenceDeploymentUpdateParameters"
             }
           }
         ],
@@ -2217,7 +2155,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -5670,12 +5608,48 @@
         }
       }
     },
+    "InferenceResourceBase": {
+      "description": "Azure Resource Manager resource envelope for Inference objects.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Specifies the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "InferenceEndpointResource": {
       "type": "object",
       "description": "Machine Learning Inference Endpoint object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/InferenceResourceBase"
         },
         {
           "type": "object",
@@ -5694,15 +5668,13 @@
                     "type": "string"
                   }
                 },
-                "inferenceEndpointProvisioningState": {
+                "provisioningState": {
                   "type": "string",
                   "enum": [
-                    "Unknown",
                     "Creating",
                     "Deleting",
                     "Succeeded",
-                    "Failed",
-                    "Canceled"
+                    "Failed"
                   ],
                   "x-ms-enum": {
                     "name": "InferenceEndpointProvisioningState",
@@ -5715,7 +5687,7 @@
                   "description": "The error details.",
                   "allOf": [
                     {
-                      "$ref": "#/definitions/ErrorResponse"
+                      "$ref": "#/definitions/MachineLearningServiceError"
                     }
                   ],
                   "readOnly": true
@@ -5723,9 +5695,7 @@
                 "authMode":{
                   "type": "string",
                   "enum": [
-                    "RBAC",
-                    "AAD",
-                    "Key"
+                    "None"
                   ],
                   "x-ms-enum": {
                     "name": "AuthMode",
@@ -5739,23 +5709,50 @@
                   "type": "string",
                   "readOnly": true
                 }
-              },
-              "x-ms-discriminator-value": "InferenceEndpoint"
+              }
             }
           }
         }
       ]
     },
-    "InferenceEndpointUpdateParameter": {
-      "description": "The parameters for updating an inference endpoint.",
-      "properties": { }
+    "InferenceEndpointCreateRequest": {
+      "description": "The request to create an Inference Endpoint.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The endpoint properties dictionary. Properties are immutable.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "authMode":{
+          "type": "string",
+          "enum": [
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AuthMode",
+            "modelAsString": true
+          },
+          "description": "Authentication used for calling endpoint. Immutable and exclusive."
+        },
+        "location": {
+          "description": "The name of the Azure location/region.",
+          "type": "string"
+        }
+      }
     },
     "InferenceDeploymentResource": {
       "type": "object",
       "description": "Machine Learning Inference Deployment object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/InferenceResourceBase"
         },
         {
           "type": "object",
@@ -5771,7 +5768,7 @@
                   }
                 },
                 "sku": {
-                  "$ref": "#/definitions/SkuDescription"
+                  "$ref": "#/definitions/InferenceSku"
                 },
                 "scaleSettings": {
                   "$ref": "#/definitions/SkuScaleSettings",
@@ -5779,18 +5776,18 @@
                 },
                 "weight": {
                   "description": "weight of the deployment for load balancing.",
-                  "type": "integer"
+                  "type": "integer",
+                  "minimum": 0,
+                  "exclusiveMinimum": true
                 },
-                "InferenceDeploymentProvisioningState": {
+                "provisioningState": {
                   "type": "string",
                   "enum": [
-                    "Unknown",
                     "Scaling",
                     "Creating",
                     "Deleting",
                     "Succeeded",
-                    "Failed",
-                    "Canceled"
+                    "Failed"
                   ],
                   "x-ms-enum": {
                     "name": "InferenceDeploymentProvisioningState",
@@ -5838,7 +5835,9 @@
         },
         "weight": {
           "description": "weight of the deployment for load balancing.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0,
+          "exclusiveMinimum": true
         },
         "environmentConfigUri": {
           "type": "string",
@@ -5851,45 +5850,6 @@
         "vnet": {
           "$ref": "#/definitions/VirtualNetworkProfile",
           "description": "Info of the customer's custom Virtual Network"
-        }
-      }
-    },
-    "SkuInfo": {
-      "description": "SKU discovery information.",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "description": "Resource type that this SKU applies to.",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/SkuDescription",
-          "description": "Name and tier of the SKU."
-        },
-        "capacity": {
-          "$ref": "#/definitions/SkuScaleSettings",
-          "description": "Min, max, and default scale values of the SKU."
-        }
-      }
-    },
-    "SkuInfoCollection": {
-      "description": "Collection of SKU information.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuInfo"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -5918,42 +5878,31 @@
         }
       }
     },
-    "SkuDescription": {
+    "InferenceSku": {
       "description": "Description of a SKU for a scalable resource.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Sku"
+      "properties": {
+        "name": {
+          "description": "Name of the sku",
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "size": {
-              "description": "Size specifier of the resource SKU.",
-              "type": "string"
-            },
-            "family": {
-              "description": "Family code of the resource SKU.",
-              "type": "string"
-            },
-            "capacity": {
-              "format": "int32",
-              "description": "Current number of instances assigned to the resource.",
-              "type": "integer"
-            }
-          }
+        "tier": {
+          "description": "Tier of the sku like Basic or Enterprise",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Current number of instances assigned to the resource.",
+          "type": "integer"
         }
-      ]
+      }
     },
-    "InferenceDeploymentUpdateParameter": {
+    "InferenceDeploymentUpdateParameters": {
       "description": "The parameters for updating an inference deployment.",
       "properties": {
         "sku": {
           "description": "Information to update the SKU of the deployment.",
           "type": "string"
-        },
-        "capacity": {
-          "type": "integer"
         },
         "weight": {
           "description": "The weight of the deployment for load balancing.",
@@ -6363,41 +6312,6 @@
         }
       ],
       "x-ms-discriminator-value": "Custom"
-    },
-    "InferenceEndpointCreateRequest": {
-      "description": "The request to create an Inference Endpoint.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the endpoint.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "The endpoint properties dictionary. Properties are immutable.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "authMode":{
-          "type": "string",
-          "enum": [
-            "RBAC",
-            "AAD",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "AuthMode",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "Authentication used for calling endpoint. Immutable and exclusive."
-        },
-        "location": {
-          "description": "The name of the Azure location/region.",
-          "type": "string"
-        }
-      }
     },
     "ValidateResponse": {
       "description": "Describes the result of resource validation.",
