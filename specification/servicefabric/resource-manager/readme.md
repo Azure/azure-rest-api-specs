@@ -28,7 +28,7 @@ These are the global settings for the ServiceFabricManagementClient API.
 title: ServiceFabricManagementClient
 description: Service Fabric Management Client
 openapi-type: arm
-tag: package-2020-03
+tag: package-2020-01-preview
 
 directive:
   - suppress: ListInOperationName
