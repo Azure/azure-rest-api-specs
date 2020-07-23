@@ -75,6 +75,9 @@
             "required": false,
             "type": "string",
             "description": "A table query continuation token from a previous call."
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -141,6 +144,9 @@
           },
           {
             "$ref": "#/parameters/PreferParameter"
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -247,6 +253,9 @@
           },
           {
             "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -343,6 +352,9 @@
             "required": false,
             "type": "string",
             "description": "An entity query continuation token from a previous call."
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -439,6 +451,9 @@
           },
           {
             "$ref": "#/parameters/rowKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -548,6 +563,9 @@
             "type": "string",
             "description": "Match condition for an entity to be updated. If specified and a matching entity is not found, an error will be raised. To force an unconditional update, set to the wildcard character (*). If not specified, an insert will be performed when no existing entity is found to update and a replace will be performed if an existing entity is found.",
             "x-ms-client-name": "IfMatch"
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -814,6 +832,9 @@
           },
           {
             "$ref": "#/parameters/PreferParameter"
+          },
+          {
+            "$ref": "#/parameters/acceptJsonParameter"
           }
         ],
         "responses": {
@@ -1010,6 +1031,9 @@
           },
           {
             "$ref": "#/parameters/compAclParameter"
+          },
+          {
+            "$ref": "#/parameters/acceptXmlParameter"
           }
         ],
         "responses": {
@@ -1908,6 +1932,28 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The row key of the entity."
+    },
+    "acceptJsonParameter": {
+      "description": "",
+      "name": "Accept",
+      "in": "header",
+      "type": "string",
+      "enum": [
+        "application/json"
+      ],
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "acceptXmlParameter": {
+      "description": "",
+      "name": "Accept",
+      "in": "header",
+      "type": "string",
+      "enum": [
+        "application/xml"
+      ],
+      "required": true,
+      "x-ms-parameter-location": "method"
     }
   }
 }
