@@ -2531,7 +2531,8 @@
             "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
-      }
+      },
+      "x-ms-parameter-location": "client"
     },
     "JobId": {
       "description": "Job ID",
@@ -2539,21 +2540,24 @@
       "in": "path",
       "name": "jobId",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ShowStats": {
       "name": "showStats",
       "in": "query",
       "description": "(Optional) if set to true, response will contain request and document level statistics.",
       "type": "boolean",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "ModelVersion": {
       "name": "model-version",
       "in": "query",
       "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
       "type": "string",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "MultiLanguageInput": {
       "in": "body",
@@ -2562,7 +2566,8 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/MultiLanguageBatchInput"
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
