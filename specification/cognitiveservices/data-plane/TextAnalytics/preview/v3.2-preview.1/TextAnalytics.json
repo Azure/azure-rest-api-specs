@@ -1780,6 +1780,38 @@
         }
       }
     },
+    "DocumentPiiEntities": {
+      "type": "object",
+      "required": [
+        "id",
+        "entities",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/PiiEntity"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
+          }
+        },
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
+        }
+      }
+    },
     "Entity": {
       "type": "object",
       "required": [
@@ -1818,6 +1850,24 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         }
       }
+    },
+    "PiiEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "redactedText"
+          ],
+          "properties": {
+            "redactedText": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "EntityLinkingResult": {
       "type": "object",
@@ -2309,22 +2359,35 @@
       "type": "object"
     },
     "PiiResult": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntitiesResult"
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentPiiEntities"
+          }
         },
-        {
-          "properties": {
-            "redactedText": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "redactedText"
-          ],
-          "type": "object"
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
-      ]
+      }
     },
     "LanguageResult": {
       "type": "object",
