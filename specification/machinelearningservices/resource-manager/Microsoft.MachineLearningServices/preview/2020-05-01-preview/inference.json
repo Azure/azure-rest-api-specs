@@ -277,7 +277,7 @@
           "200": {
             "description": "The response includes a paginated array of Machine Learning Inference Deployments.",
             "schema": {
-              "$ref": "#/definitions/PaginatedInferenceDeploymentsList"
+              "$ref": "#/definitions/PaginatedInferenceEndpointDeploymentsList"
             }
           },
           "default": {
@@ -419,7 +419,7 @@
             "description": "The payload that is used to create or update the Inference Deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceDeploymentCreateRequest"
+              "$ref": "#/definitions/InferenceEndpointDeploymentCreateRequest"
             }
           }
         ],
@@ -484,7 +484,7 @@
             "description": "The payload that is used to update the Inference Deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceDeploymentUpdateParameters"
+              "$ref": "#/definitions/InferenceEndpointDeploymentUpdateParameters"
             }
           }
         ],
@@ -755,7 +755,7 @@
         }
       }
     },
-    "PaginatedInferenceDeploymentsList": {
+    "PaginatedInferenceEndpointDeploymentsList": {
       "type": "object",
       "description": "Paginated list of Machine Learning Inference Deployment objects wrapped in ARM resource envelope.",
       "properties": {
@@ -941,7 +941,7 @@
                   "readOnly": true
                 },
                 "weight": {
-                  "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceDeployment:<deployment-name>.",
+                  "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceEndpointDeployment:<deployment-name>.",
                   "type": "integer",
                   "minimum": 0
                 },
@@ -955,7 +955,7 @@
                     "Failed"
                   ],
                   "x-ms-enum": {
-                    "name": "InferenceDeploymentProvisioningState",
+                    "name": "InferenceEndpointDeploymentProvisioningState",
                     "modelAsString": true
                   },
                   "readOnly": true,
@@ -982,7 +982,7 @@
         }
       ]
     },
-    "InferenceDeploymentCreateRequest": {
+    "InferenceEndpointDeploymentCreateRequest": {
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "required": [
@@ -1141,7 +1141,7 @@
         }
       }
     },
-    "InferenceDeploymentUpdateParameters": {
+    "InferenceEndpointDeploymentUpdateParameters": {
       "description": "The parameters for updating an inference deployment.",
       "properties": {
         "sku": {
