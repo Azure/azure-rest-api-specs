@@ -76,6 +76,9 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Trenton
+
+See configuration in [readme.trenton.md](./readme.trenton.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
