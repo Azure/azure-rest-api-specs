@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-01-01",
+    "version": "2018-07-01",
     "title": "DeploymentAdminClient",
     "description": "Deployment Admin Client."
   },
@@ -16,6 +16,36 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.Deployment.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of supported REST operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Returns the list of supported REST operations.",
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/OperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages": {
       "get": {
         "x-ms-examples": {
