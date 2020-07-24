@@ -14,26 +14,32 @@
         }
     },
     "responses": {
-        "202": {
+        "204": {
             "headers": {
                 "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1/entities/healthcare/jobs/{jobId}"
             }
         },
         "400": {
-          "error": {
-            "code": "InvalidRequest",
-            "message": "Invalid Request.",
-            "innererror": {
-              "code": "MissingInputRecords",
-              "message": "Missing input records."
+            "headers": {},
+            "body": {
+              "error": {
+                "code": "InvalidRequest",
+                "message": "Invalid Request.",
+                "innererror": {
+                  "code": "MissingInputRecords",
+                  "message": "Missing input records."
+                }
+              }
+            }
+          },
+          "500": {
+            "headers": {},
+            "body": {
+              "error": {
+                "code": "InternalServerError",
+                "message": "Internal Server Error"
+              }
             }
           }
-        },
-        "500": {
-          "error": {
-            "code": "InternalServerError",
-            "message": "Internal Server Error"
-          }
-        }
     }
 }

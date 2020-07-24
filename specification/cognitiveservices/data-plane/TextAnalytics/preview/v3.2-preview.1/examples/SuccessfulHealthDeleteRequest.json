@@ -5,26 +5,32 @@
         "jobId": "{Job ID}"
     },
     "responses": {
-        "202": {
+        "204": {
             "headers": {
                 "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1/entities/healthcare/jobs/{jobId}"
             }
         },
-        "400": {
-          "error": {
-            "code": "InvalidRequest",
-            "message": "Invalid Request.",
-            "innererror": {
-              "code": "MissingInputRecords",
-              "message": "Missing input records."
+        "404": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "NotFound",
+                    "message": "Not Found",
+                    "innererror": {
+                        "code": "JobIdNotFound",
+                        "message": "Job ID not found."
+                    }
+                }
             }
-          }
         },
         "500": {
-          "error": {
-            "code": "InternalServerError",
-            "message": "Internal Server Error"
-          }
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "InternalServerError",
+                    "message": "Internal Server Error"
+                }
+            }
         }
     }
 }

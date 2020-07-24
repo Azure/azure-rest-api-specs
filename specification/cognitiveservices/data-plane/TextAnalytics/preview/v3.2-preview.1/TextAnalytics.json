@@ -56,8 +56,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "A successful call results with an operation-location header used to check the status of the analysis job.",
+          "204": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -158,6 +158,8 @@
     "/entities/healthcare/jobs/{jobId}": {
       "delete": {
         "description": "Cancel healthcare prediction job.",
+        "operationId": "CancelHealthJob",
+        "summary": "Cancel healthcare prediction job",
         "parameters": [
           {
             "description": "Job ID",
@@ -169,8 +171,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted - Cancel Job request has been received.",
+          "204": {
+            "description": "Cancel Job request has been received.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -200,6 +202,8 @@
       },
       "get": {
         "description": "Get details of the healthcare prediction job specified by the jobId.",
+        "operationId": "HealthStatus",
+        "summary": "Get healthcare analysis job status and results",
         "parameters": [
           {
             "description": "Job ID",
@@ -261,7 +265,7 @@
     },
     "/entities/healthcare/jobs": {
       "post": {
-        "summary": "Health",
+        "summary": "Submit healthcare analysis job",
         "description": "The API returns a list of recognized healthcare entities and relations for each valid document.",
         "operationId": "Health",
         "consumes": [
@@ -307,7 +311,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "204": {
             "description": "Accepted - call results in a link where the status of the submitted job can be checked via the GET operation.",
             "headers": {
               "Operation-Location": {
@@ -1672,7 +1676,7 @@
             "negative"
           ],
           "x-ms-enum": {
-            "name": "AspectSentimentValue",
+            "name": "TokenSentimentValue",
             "modelAsString": false
           },
           "description": "Aspect level sentiment for the aspect in the sentence."
@@ -1722,6 +1726,10 @@
             "mixed",
             "negative"
           ],
+          "x-ms-enum": {
+            "name": "TokenSentimentValue",
+            "modelAsString": false
+          },
           "description": "Opinion level sentiment for the aspect in the sentence."
         },
         "confidenceScores": {
