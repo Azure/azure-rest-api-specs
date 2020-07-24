@@ -386,7 +386,7 @@
         "Locations",
         "SyntheticMonitorId"
       ],
-        "properties": {
+      "properties": {
         "SyntheticMonitorId": {
           "type": "string",
           "description": "Unique ID of this WebTest. This is typically the same value as the Name field."
@@ -438,8 +438,7 @@
         },
         "Locations": {
           "type": "array",
-          "description":
-            "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
+          "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
           "items": {
             "$ref": "#/definitions/WebTestGeolocation"
           }
@@ -456,14 +455,13 @@
         },
         "provisioningState": {
           "type": "string",
-          "description":
-            "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
+          "description": "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
           "readOnly": true
         },
         "Request": {
           "type": "object",
           "description": "the collection of request properties",
-          "requestProperties": {
+          "properties": {
             "RequestUrl": {
               "type": "string",
               "description": "Url location to test."
@@ -490,10 +488,28 @@
             }
           }
         },
+        "SSLCheck": {
+          "type": "boolean",
+          "description": "Checks to see if the SSL cert is still valid."
+        },
+        "SSLCertRemainingLifetimeCheck ": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A number of days to check still remain before the the existing SSL cert expires."
+        },
+        "ExpectedHttpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validate that the webtest returns the http status code provided."
+        },
+        "IgnoreHttpsStatusCode": {
+          "type": "boolean",
+          "description": "When set, validation will ignore the status code."
+        },
         "ContentValidation": {
           "type": "object",
           "description": "the collection of content validation properties",
-          "contentValidationProperties": {
+          "properties": {
             "ContentMatch": {
               "type": "string",
               "description": "content to look for in the return of the webtest."
@@ -504,27 +520,8 @@
             },
             "PassIfTextFound": {
               "type": "boolean",
-              "description":
-                "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
+              "description": "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
             }
-          },
-          "SSLCheck": {
-            "type": "boolean",
-            "description": "Checks to see if the SSL cert is still valid."
-          },
-          " SSLCertRemainingLifetimeCheck ": {
-            "type": "integer",
-            "format": "int32",
-            "description": "A number of days to check still remain before the the existing SSL cert expires."
-          },
-          "ExpectedHttpStatusCode": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Validate that the webtest returns the http status code provided."
-          },
-          "IgnoreHttpsStatusCode": {
-            "type": "boolean",
-            "description": "When set, validation will ignore the status code."
           }
         }
       }
