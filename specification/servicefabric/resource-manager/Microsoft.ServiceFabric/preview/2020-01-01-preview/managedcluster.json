@@ -657,16 +657,19 @@
         },
         "loadBalancingRules": {
           "type": "array",
-          "$ref": "#/definitions/LoadBalancingRule",
-          "description": "Describes a load balancing rule."
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Describes load balancing rules."
         },
         "clients": {
           "type": "array",
-          "$ref": "#/definitions/ClientCertificate",
+          "items": {
+            "$ref": "#/definitions/ClientCertificate"
+          },
           "description": "client certificates for the cluster."
         },
         "azureActiveDirectory": {
-          "type": "array",
           "$ref": "#/definitions/AzureActiveDirectory",
           "description": "Azure active directory."
         },
