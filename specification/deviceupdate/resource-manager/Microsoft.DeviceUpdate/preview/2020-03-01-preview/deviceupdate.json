@@ -646,10 +646,12 @@
         },
         "ioTHubConnectionString": {
           "description": "IoTHub connection string.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "eventHubConnectionString": {
           "description": "EventHub connection string.",
+          "x-ms-secret": true,
           "type": "string"
         }
       },
@@ -786,7 +788,10 @@
       "required": true,
       "type": "string",
       "description": "Account name.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "[a-z][a-z0-9]+",
+      "minLength": 3,
+      "maxLength": 24
     },
     "InstanceNameParameter": {
       "name": "instanceName",
@@ -794,7 +799,10 @@
       "required": true,
       "type": "string",
       "description": "Instance name.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "[a-z][a-z0-9-_]+",
+      "minLength": 3,
+      "maxLength": 36
     }
   }
 }
