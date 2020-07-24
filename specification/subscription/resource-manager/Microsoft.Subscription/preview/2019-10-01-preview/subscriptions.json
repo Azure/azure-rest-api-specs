@@ -402,6 +402,7 @@
             "$ref": "./examples/CreateAlias.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "responses": {
           "200": {
             "description": "Normal response for a successful query.",
@@ -409,7 +410,7 @@
               "$ref": "#/definitions/PutAliasResponse"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted. Subscription creation is in progress.",
             "headers": {
               "Location": {
@@ -420,6 +421,9 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
             }
           },
           "default": {
@@ -486,9 +490,9 @@
           }
         },
         "responses": {
-          "204": {
-            "description": "No Content"
-            },
+          "200": {
+            "description": "Deleted the alias"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -776,7 +780,15 @@
         },
         "workloadType": {
           "description": "The workload type of the subscription. It can be either Production or DevTest.",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "workloadType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Production",
+            "DevTest"
+          ]
         },
         "billingScope": {
           "description": "Determines whether subscription is fieldLed, partnerLed or LegacyEA",
@@ -789,26 +801,26 @@
       }
     },
     "PutAliasResponse": {
-      "description": "Subscription information (same as Microsoft.Resources/subscription).",
+      "description": "Subscription Information with the alias.",
       "properties": {
         "id": {
-          "description": "Fully qualified ID for the subscription resource.",
+          "description": "Fully qualified ID for the alias resource.",
           "readOnly": true,
           "type": "string"
         },
         "name": {
-          "description": "Subscription ID.",
+          "description": "Alias ID.",
           "readOnly": true,
           "type": "string"
         },
         "type": {
-          "description": "Resource type, Microsoft.Subscriptions.",
+          "description": "Resource type, Microsoft.Subscription.",
           "readOnly": true,
           "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/PutAliasResponseProperties",
-          "description": "Put subscription response properties."
+          "description": "Put Alias response properties."
         }
       },
       "x-ms-azure-resource": true
@@ -818,7 +830,20 @@
       "properties": {
         "subscriptionId": {
           "description": "Newly created subscription Id.",
+          "readOnly": true,
           "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Accepted",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
