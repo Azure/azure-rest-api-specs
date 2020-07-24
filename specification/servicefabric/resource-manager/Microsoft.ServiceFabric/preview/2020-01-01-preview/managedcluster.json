@@ -405,7 +405,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ClusterVersionDetails"
+                "$ref": "#/definitions/ManagedClusterVersionDetails"
               },
               "description": "The list of available Service Fabric runtime versions."
             }
@@ -416,26 +416,21 @@
   },
   "definitions": {
     "AzureActiveDirectory": {
-      "required": [
-        "tenantId",
-        "clusterApplication",
-        "clientApplication"
-      ],
       "properties": {
         "tenantId": {
-          "type": "boolean",
+          "type": "string",
           "description": "Azure active directory tenant id."
         },
         "clusterApplication": {
           "type": "string",
-          "description": "Azure active directory cluster application."
+          "description": "Azure active directory cluster application id."
         },
         "clientApplication": {
           "type": "string",
-          "description": "Azure active directory client application."
+          "description": "Azure active directory client application id."
         }
       },
-      "description": "Azure active directory."
+      "description": "The settings to enable AAD authentication on the cluster."
     },
     "ClientCertificate": {
       "required": [
@@ -487,7 +482,7 @@
         "Ready"
       ]
     },
-    "ClusterVersionDetails": {
+    "ManagedClusterVersionDetails": {
       "properties": {
         "msiVersion": {
           "type": "string",
