@@ -238,56 +238,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/validate": {
-      "post": {
-        "tags": [
-          "MachineLearningInferenceEndpoints"
-        ],
-        "summary": "Validate if a resource can be created.",
-        "description": "Description for Validate if a resource can be created.",
-        "operationId": "MachineLearningInferenceEndpoint_Validate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ValidateResponse"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments": {
       "get": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpointDeployments"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "operationId": "MachineLearningInferenceDeployments_ListByInferenceEndpoint",
+        "operationId": "MachineLearningInferenceEndpointDeployments_ListByInferenceEndpoint",
         "description": "Gets Inference Deployments.",
         "x-ms-examples": {
           "Get Deployments": {
@@ -333,9 +292,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments/{deploymentName}": {
       "get": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpointDeployments"
         ],
-        "operationId": "MachineLearningInferenceDeployment_Get",
+        "operationId": "MachineLearningInferenceEndpointDeployment_Get",
         "description": "Get a Inference Deployment by name.",
         "x-ms-examples": {
           "Get Deployment": {
@@ -359,14 +318,14 @@
             "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/InferenceDeploymentNameParameter"
+            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceDeploymentResource"
+              "$ref": "#/definitions/InferenceEndpointDeploymentResource"
             }
           },
           "default": {
@@ -379,9 +338,9 @@
       },
       "delete": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpointDeployments"
         ],
-        "operationId": "MachineLearningInferenceDeployment_Delete",
+        "operationId": "MachineLearningInferenceEndpointDeployment_Delete",
         "description": "Delete a specific Inference Deployment.",
         "x-ms-examples": {
           "Delete Deployment": {
@@ -405,7 +364,7 @@
             "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/InferenceDeploymentNameParameter"
+            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
           }
         ],
         "responses": {
@@ -425,10 +384,10 @@
       },
       "put": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpointDeployments"
         ],
         "description": "Creates or updates an Inference Deployment. This call will update an Inference Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Deployment, do a GET first to verify that it does not exist yet.",
-        "operationId": "MachineLearningInferenceDeployment_CreateOrUpdate",
+        "operationId": "MachineLearningInferenceEndpointDeployment_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Or Update Deployment": {
@@ -452,7 +411,7 @@
             "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/InferenceDeploymentNameParameter"
+            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
           },
           {
             "in": "body",
@@ -468,7 +427,7 @@
           "200": {
             "description": "Inference Deployment creation or update initiated.",
             "schema": {
-              "$ref": "#/definitions/InferenceDeploymentResource"
+              "$ref": "#/definitions/InferenceEndpointDeploymentResource"
             }
           },
           "201": {
@@ -490,10 +449,10 @@
       },
       "patch": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpointDeployments"
         ],
         "description": "Updates mutable objects of an Inference Deployment. This call will update an Inference Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Deployment, call PUT or POST for creation.",
-        "operationId": "MachineLearningInferenceDeployment_Update",
+        "operationId": "MachineLearningInferenceEndpointDeployment_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update Deployment": {
@@ -517,7 +476,7 @@
             "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/InferenceDeploymentNameParameter"
+            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
           },
           {
             "in": "body",
@@ -533,7 +492,7 @@
           "200": {
             "description": "Inference Deployment update initiated.",
             "schema": {
-              "$ref": "#/definitions/InferenceDeploymentResource"
+              "$ref": "#/definitions/InferenceEndpointDeploymentResource"
             }
           },
           "201": {
@@ -557,7 +516,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments/{deploymentName}/skus": {
       "get": {
         "tags": [
-          "MachineLearningInferenceDeployments"
+          "MachineLearningInferenceEndpointDeployments"
         ],
         "summary": "This is an ARM Contract for Azure Monitor to scale the number of instances of the Inference Deployment.",
         "description": "Get SKU information for scaling an Inference Deployment.",
@@ -579,7 +538,7 @@
             "$ref": "#/parameters/InferenceEndpointNameParameter"
           },
           {
-            "$ref": "#/parameters/InferenceDeploymentNameParameter"
+            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
           }
         ],
         "responses": {
@@ -640,7 +599,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "InferenceDeploymentNameParameter": {
+    "InferenceEndpointDeploymentNameParameter": {
       "name": "deploymentName",
       "description": "Name of the Azure Machine Learning Inference Deployment.",
       "in": "path",
@@ -805,7 +764,7 @@
           "type": "array",
           "description": "An array of Machine Learning Inference Deployment  objects wrapped in ARM resource envelope.",
           "items": {
-            "$ref": "#/definitions/InferenceDeploymentResource"
+            "$ref": "#/definitions/InferenceEndpointDeploymentResource"
           }
         },
         "nextLink": {
@@ -952,7 +911,7 @@
         }
       }
     },
-    "InferenceDeploymentResource": {
+    "InferenceEndpointDeploymentResource": {
       "type": "object",
       "description": "Machine Learning Inference Deployment object wrapped into ARM resource envelope.",
       "allOf": [
@@ -984,8 +943,7 @@
                 "weight": {
                   "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceDeployment:<deployment-name>.",
                   "type": "integer",
-                  "minimum": 0,
-                  "exclusiveMinimum": true
+                  "minimum": 0
                 },
                 "provisioningState": {
                   "type": "string",
@@ -1054,8 +1012,7 @@
         "weight": {
           "description": "weight of the deployment for load balancing.",
           "type": "integer",
-          "minimum": 0,
-          "exclusiveMinimum": true
+          "minimum": 0
         },
         "scaleSettings": {
           "description": "Scale settings for this deployment",
@@ -1096,22 +1053,26 @@
           "format": "int32",
           "description": "Minimum number of instances for this SKU.",
           "type": "integer",
-          "minimum": 1,
-          "exclusiveMinimum": true
+          "minimum": 1
         },
         "maximum": {
           "format": "int32",
           "description": "Maximum number of workers for this SKU.",
           "type": "integer"
         },
-        "default": {
-          "format": "int32",
-          "description": "Default number of workers for this SKU.",
-          "type": "integer"
-        },
         "scaleType": {
           "description": "Available scale configurations for this Deployment.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "skuTiers",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
@@ -1193,34 +1154,6 @@
         }
       }
     },
-    "ValidateResponse": {
-      "description": "Describes the result of resource validation.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Result of validation.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/ValidateResponseError",
-          "description": "Error details for the case when validation fails."
-        }
-      }
-    },
-    "ValidateResponseError": {
-      "description": "Error details for when validation fails.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Validation error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Validation error message.",
-          "type": "string"
-        }
-      }
-    },
     "VirtualNetworkProfile": {
       "description": "Specification for using a Virtual Network.",
       "type": "object",
@@ -1239,7 +1172,7 @@
           "type": "string",
           "readOnly": true
         },
-        "subnet": {
+        "subnetName": {
           "description": "Subnet within the Virtual Network.",
           "type": "string"
         }
