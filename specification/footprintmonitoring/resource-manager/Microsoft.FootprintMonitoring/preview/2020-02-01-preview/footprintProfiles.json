@@ -512,48 +512,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [ "Footprint Measurement Endpoints" ],
-        "summary": "Updates a measurement endpoint under a Footprint profile resource.",
-        "description": "Updates an existing measurement endpoint under a Footprint profile resource.",
-        "operationId": "measurementEndpoints_Update",
-        "x-ms-examples": {
-          "measurementEndpointsUpdate": {
-            "$ref": "./examples/measurementEndpointsUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MeasurementEndpointNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful. The resource was updated.",
-            "schema": {
-              "$ref": "#/definitions/MeasurementEndpoint"
-            }
-          },
-          "default": {
-            "description": "A response with a status and optional error describing the reason for the operation result.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}/conditions": {
@@ -753,51 +711,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [ "Footprint Measurement Endpoint Conditions" ],
-        "summary": "Updates a measurement endpoint condition under a Footprint measurement resource.",
-        "description": "Updates an existing measurement endpoint condition under a Footprint measurement resource.",
-        "operationId": "measurementEndpointConditions_Update",
-        "x-ms-examples": {
-          "measurementEndpointConditionUpdate": {
-            "$ref": "./examples/measurementEndpointConditionUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MeasurementEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MeasurementEndpointConditionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful. The resource was updated.",
-            "schema": {
-              "$ref": "#/definitions/MeasurementEndpointCondition"
-            }
-          },
-          "default": {
-            "description": "A response with a status and optional error describing the reason for the operation result.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/experiments": {
@@ -977,48 +890,6 @@
           },
           "204": {
             "description": "The request was successful, but the resource didn't exist anymore."
-          },
-          "default": {
-            "description": "A response with a status and optional error describing the reason for the operation result.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [ "Footprint Experiments" ],
-        "summary": "Updates a Footprint experiment resource.",
-        "description": "Updates an existing Footprint experiment resource.",
-        "operationId": "experiments_Update",
-        "x-ms-examples": {
-          "experimentsUpdate": {
-            "$ref": "./examples/experimentsUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ExperimentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful. The resource was updated.",
-            "schema": {
-              "$ref": "#/definitions/Experiment"
-            }
           },
           "default": {
             "description": "A response with a status and optional error describing the reason for the operation result.",
