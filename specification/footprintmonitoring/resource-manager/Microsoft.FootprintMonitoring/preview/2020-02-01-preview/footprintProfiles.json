@@ -538,15 +538,6 @@
           },
           {
             "$ref": "#/parameters/MeasurementEndpointNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Footprint measurement endpoint update parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MeasurementEndpointPatch"
-            }
           }
         ],
         "responses": {
@@ -791,15 +782,6 @@
           },
           {
             "$ref": "#/parameters/MeasurementEndpointConditionNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Footprint measurement condition update parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MeasurementEndpointConditionPatch"
-            }
           }
         ],
         "responses": {
@@ -1029,15 +1011,6 @@
           },
           {
             "$ref": "#/parameters/ExperimentNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Footprint experiment update parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExperimentPatch"
-            }
           }
         ],
         "responses": {
@@ -1348,7 +1321,7 @@
       "description": "A model representing a Footprint measurement endpoint.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "required": [
@@ -1360,6 +1333,16 @@
           "description": "Additional Footprint measurement endpoint properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MeasurementEndpointProperties"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1500,7 +1483,7 @@
       "description": "A model representing the Footprint experiment.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "required": [
@@ -1512,6 +1495,16 @@
           "description": "Additional Footprint experiment properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExperimentProperties"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1565,7 +1558,7 @@
       "description": "A model representing the Footprint measurement endpoint condition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "required": [
@@ -1577,6 +1570,16 @@
           "description": "Additional Footprint measurement endpoint condition properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MeasurementEndpointConditionProperties"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1645,48 +1648,6 @@
       "type": "object",
       "title": "Footprint Profile Update Model",
       "description": "The model for patches on Footprint profile resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "The tags for this resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ExperimentPatch": {
-      "type": "object",
-      "title": "Footprint Experiment Update Model",
-      "description": "The model for patches on Footprint experiment resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "The tags for this resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MeasurementEndpointPatch": {
-      "type": "object",
-      "title": "Footprint Measurement Endpoint Update Model",
-      "description": "The model for patches on Footprint measurement endpoint resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "The tags for this resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MeasurementEndpointConditionPatch": {
-      "type": "object",
-      "title": "Footprint Measurement Endpoint Condition Update Model",
-      "description": "The model for patches on Footprint measurement endpoint condition resources.",
       "properties": {
         "tags": {
           "type": "object",
