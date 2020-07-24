@@ -932,8 +932,8 @@
           "description": "The description of the endpoint.",
           "type": "string"
         },
-        "properties": {
-          "description": "The endpoint properties dictionary. Properties are immutable.",
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1033,6 +1033,13 @@
         "weight"
       ],
       "properties": {
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "modelUris": {
           "description": "The list of model URIs.",
           "type": "array",
@@ -1088,7 +1095,9 @@
         "minimum": {
           "format": "int32",
           "description": "Minimum number of instances for this SKU.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "exclusiveMinimum": true
         },
         "maximum": {
           "format": "int32",
@@ -1149,8 +1158,20 @@
           "type": "string"
         },
         "tier": {
-          "description": "Tier of the sku like Basic or Enterprise",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Free",
+            "Shared",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "skuTiers",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The tier of the sku."
         },
         "capacity": {
           "format": "int32",
