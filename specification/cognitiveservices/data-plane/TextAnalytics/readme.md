@@ -24,8 +24,8 @@ See Text Analytics [Quickstart guide](https://docs.microsoft.com/en-us/azure/cog
 
 > see https://aka.ms/autorest
 
-The current release is `release_3_0`.
-A preview release `release_3_2_preview.1` is also available.
+The current release is `release_2_1`.
+A preview release `release_2_1_preview` is also available.
 
 ``` yaml
 tag: release_2_1
@@ -186,6 +186,7 @@ input-file:
   - $(this-folder)/preview/v3.0-preview.1/TextAnalytics.json
   - $(this-folder)/stable/v3.0/TextAnalytics.json
   - $(this-folder)/preview/v3.1-preview.1/TextAnalytics.json
+  - $(this-folder)/preview/v3.2-preview.1/TextAnalytics.json
 
 ```
 
@@ -196,13 +197,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
-### Tag: package-preview-2018-05
-
-These settings apply only when `--tag=package-preview-2018-05` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2018-05'
-input-file:
-  - preview/2018-05-01-privatepreview/TextAnalytics.json
-```
-
