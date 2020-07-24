@@ -5,67 +5,86 @@
     "input": {
       "documents": [
         {
-          "id": "1",
           "language": "en",
-          "text": "Microsoft was founded by Bill Gates and Paul Allen."
+          "id": "1",
+          "text": "I had a wonderful trip to Seattle last week."
         },
         {
-          "id": "2",
           "language": "en",
-          "text": "Pike place market is my favorite Seattle attraction."
+          "id": "2",
+          "text": "I work at Microsoft."
+        },
+        {
+          "language": "en",
+          "id": "3",
+          "text": "I visited Space Needle 2 times."
         }
       ]
     }
   },
   "responses": {
     "200": {
-      "headers" : {},
+      "headers": {},
       "body": {
         "documents": [
           {
+            "id": "1",
             "entities": [
               {
-                "category": "Organization",
-                "confidenceScore": 0.84,
+                "text": "Seattle",
+                "category": "Location",
+                "offset": 26,
+                "length": 7,
+                "confidenceScore": 0.80
+              },
+              {
+                "text": "last week",
+                "category": "DateTime",
+                "subcategory": "DateRange",
+                "offset": 34,
                 "length": 9,
-                "offset": 0,
-                "text": "Microsoft"
-              },
-              {
-                "category": "Person",
-                "confidenceScore": 0.85,
-                "length": 10,
-                "offset": 25,
-                "text": "Bill Gates"
-              },
-              {
-                "category": "Person",
-                "confidenceScore": 0.9,
-                "length": 10,
-                "offset": 40,
-                "text": "Paul Allen"
+                "confidenceScore": 0.8
               }
             ],
-            "id": "1",
             "warnings": []
           },
           {
+            "id": "2",
             "entities": [
               {
-                "category": "Location",
-                "confidenceScore": 0.55,
-                "length": 7,
-                "offset": 33,
-                "subcategory": "GPE",
-                "text": "Seattle"
+                "text": "Microsoft",
+                "category": "Organization",
+                "offset": 10,
+                "length": 9,
+                "confidenceScore": 0.99
               }
             ],
-            "id": "2",
+            "warnings": []
+          },
+          {
+            "id": "3",
+            "entities": [
+              {
+                "text": "Space Needle",
+                "category": "Organization",
+                "offset": 10,
+                "length": 12,
+                "confidenceScore": 0.75
+              },
+              {
+                "text": "2",
+                "category": "Quantity",
+                "subcategory": "Number",
+                "offset": 23,
+                "length": 1,
+                "confidenceScore": 0.8
+              }
+            ],
             "warnings": []
           }
         ],
         "errors": [],
-        "modelVersion": "2020-04-01"
+        "modelVersion": "2019-10-01"
       }
     }
   }
