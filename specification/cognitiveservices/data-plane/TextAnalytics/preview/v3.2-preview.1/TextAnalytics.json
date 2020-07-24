@@ -157,6 +157,10 @@
     },
     "/entities/healthcare/jobs/{jobId}": {
       "delete": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "description": "Cancel healthcare prediction job.",
         "operationId": "CancelHealthJob",
         "summary": "Cancel healthcare prediction job",
@@ -201,6 +205,10 @@
         "x-ms-long-running-operation": true
       },
       "get": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "description": "Get details of the healthcare prediction job specified by the jobId.",
         "operationId": "HealthStatus",
         "summary": "Get healthcare analysis job status and results",
@@ -289,11 +297,11 @@
             "in": "query",
             "type": "string",
             "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
-            "default": "textelements_v8",
+            "default": "TextElements_v8",
             "enum": [
-              "textelements_v8",
-              "unicodecodepoint",
-              "utf16codeunit"
+              "TextElements_v8",
+              "UnicodeCodePoint",
+              "Utf16CodeUnit"
             ],
             "x-ms-enum": {
               "name": "StringIndexType",
@@ -372,11 +380,11 @@
             "in": "query",
             "type": "string",
             "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
-            "default": "textelements_v8",
+            "default": "TextElements_v8",
             "enum": [
-              "textelements_v8",
-              "unicodecodepoint",
-              "utf16codeunit"
+              "TextElements_v8",
+              "UnicodeCodePoint",
+              "Utf16CodeUnit"
             ],
             "x-ms-enum": {
               "name": "StringIndexType",
@@ -458,11 +466,11 @@
             "in": "query",
             "type": "string",
             "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
-            "default": "textelements_v8",
+            "default": "TextElements_v8",
             "enum": [
-              "textelements_v8",
-              "unicodecodepoint",
-              "utf16codeunit"
+              "TextElements_v8",
+              "UnicodeCodePoint",
+              "Utf16CodeUnit"
             ],
             "x-ms-enum": {
               "name": "StringIndexType",
@@ -538,11 +546,11 @@
             "in": "query",
             "type": "string",
             "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
-            "default": "textelements_v8",
+            "default": "TextElements_v8",
             "enum": [
-              "textelements_v8",
-              "unicodecodepoint",
-              "utf16codeunit"
+              "TextElements_v8",
+              "UnicodeCodePoint",
+              "Utf16CodeUnit"
             ],
             "x-ms-enum": {
               "name": "StringIndexType",
@@ -752,11 +760,11 @@
             "in": "query",
             "type": "string",
             "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
-            "default": "textelements_v8",
+            "default": "TextElements_v8",
             "enum": [
-              "textelements_v8",
-              "unicodecodepoint",
-              "utf16codeunit"
+              "TextElements_v8",
+              "UnicodeCodePoint",
+              "Utf16CodeUnit"
             ],
             "x-ms-enum": {
               "name": "StringIndexType",
@@ -1004,11 +1012,11 @@
                   "type": "string"
                 },
                 "stringIndexType": {
-                  "default": "textelements_v8",
+                  "default": "TextElements_v8",
                   "enum": [
-                    "textelements_v8",
-                    "unicodecodepoint",
-                    "utf16codeunit"
+                    "TextElements_v8",
+                    "UnicodeCodePoint",
+                    "Utf16CodeUnit"
                   ],
                   "type": "string"
                 }
@@ -1034,11 +1042,11 @@
                   "type": "string"
                 },
                 "stringIndexType": {
-                  "default": "textelements_v8",
+                  "default": "TextElements_v8",
                   "enum": [
-                    "textelements_v8",
-                    "unicodecodepoint",
-                    "utf16codeunit"
+                    "TextElements_v8",
+                    "UnicodeCodePoint",
+                    "Utf16CodeUnit"
                   ],
                   "type": "string"
                 }
@@ -1265,11 +1273,11 @@
                   "type": "string"
                 },
                 "stringIndexType": {
-                  "default": "textelements_v8",
+                  "default": "TextElements_v8",
                   "enum": [
-                    "textelements_v8",
-                    "unicodecodepoint",
-                    "utf16codeunit"
+                    "TextElements_v8",
+                    "UnicodeCodePoint",
+                    "Utf16CodeUnit"
                   ],
                   "type": "string"
                 }
@@ -1378,11 +1386,11 @@
                   "type": "boolean"
                 },
                 "stringIndexType": {
-                  "default": "textelements_v8",
+                  "default": "TextElements_v8",
                   "enum": [
-                    "textelements_v8",
-                    "unicodecodepoint",
-                    "utf16codeunit"
+                    "TextElements_v8",
+                    "UnicodeCodePoint",
+                    "Utf16CodeUnit"
                   ],
                   "type": "string",
                   "x-ms-enum": {
@@ -2041,11 +2049,11 @@
                   "type": "string"
                 },
                 "stringIndexType": {
-                  "default": "textelements_v8",
+                  "default": "TextElements_v8",
                   "enum": [
-                    "textelements_v8",
-                    "unicodecodepoint",
-                    "utf16codeunit"
+                    "TextElements_v8",
+                    "UnicodeCodePoint",
+                    "Utf16CodeUnit"
                   ],
                   "type": "string"
                 }
