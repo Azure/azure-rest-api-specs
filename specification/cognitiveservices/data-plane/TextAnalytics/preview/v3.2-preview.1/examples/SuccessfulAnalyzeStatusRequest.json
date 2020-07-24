@@ -33,7 +33,7 @@
     },
     "responses": {
         "200": {
-            "headers" : {},
+            "headers": {},
             "body": {
                 "createdUpdateDateTime": "2020-10-01T15-01-03.45Z",
                 "displayName": "Extracting Location & US Region",
@@ -120,6 +120,22 @@
                     "inProgress": 0,
                     "total": 2
                 }
+            }
+        },
+        "404": {
+            "error": {
+                "code": "NotFound",
+                "message": "Not Found",
+                "innererror": {
+                    "code": "JobIdNotFound",
+                    "message": "Job ID not found."
+                }
+            }
+        },
+        "500": {
+            "error": {
+                "code": "InternalServerError",
+                "message": "Internal Server Error"
             }
         }
     }

@@ -36,6 +36,22 @@
             "headers": {
                 "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1//analyze/jobs/{jobId}"
             }
+        },
+        "400": {
+          "error": {
+            "code": "InvalidRequest",
+            "message": "Invalid Request.",
+            "innererror": {
+              "code": "MissingInputRecords",
+              "message": "Missing input records."
+            }
+          }
+        },
+        "500": {
+          "error": {
+            "code": "InternalServerError",
+            "message": "Internal Server Error"
+          }
         }
     }
 }
