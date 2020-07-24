@@ -1,0 +1,243 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/iotRecommendations": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Recommendations": {
+            "$ref": "./examples/IotRecommendations/GetIoTRecommendationList.json"
+          }
+        },
+        "tags": [
+          "IoT Security Recommendations"
+        ],
+        "description": "List IoT recommendations",
+        "operationId": "IotRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "in": "query",
+            "name": "recommendationType",
+            "required": false,
+            "type": "string",
+            "description": "Filter by recommendation type"
+          },
+          {
+            "in": "query",
+            "name": "$limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Limit the number of items returned in a single page"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotRecommendationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/iotRecommendations/{iotRecommendationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Recommendation": {
+            "$ref": "./examples/IotRecommendations/GetIoTRecommendation.json"
+          }
+        },
+        "tags": [
+          "IoT Security Recommendations"
+        ],
+        "operationId": "IotRecommendations_Get",
+        "description": "Get IoT recommendation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "in": "path",
+            "name": "iotRecommendationId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the recommendation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT recommendation",
+            "schema": {
+              "$ref": "#/definitions/IotRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IotRecommendationList": {
+      "description": "List of IoT recommendations",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotRecommendation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When available, follow the URI to get the next page of data"
+        },
+        "totalCount": {
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer",
+          "description": "Total count of recommendations that conforms with the given filter options (not affected by page size)"
+        }
+      }
+    },
+    "IotRecommendation": {
+      "type": "object",
+      "description": "IoT recommendation",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Recommendation properties",
+          "$ref": "#/definitions/IotRecommendationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IotRecommendationProperties": {
+      "type": "object",
+      "description": "IoT recommendation properties",
+      "properties": {
+        "deviceId": {
+          "description": "Identifier of the device being reported on",
+          "readOnly": true,
+          "type": "string",
+          "example": "device-1"
+        },
+        "recommendationType": {
+          "description": "The type name of the recommendation",
+          "readOnly": true,
+          "type": "string",
+          "example": "IoT_PrivilegedContainer"
+        },
+        "discoveredTimeUtc": {
+          "description": "The discovery time of the recommendation",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020-05-13T06:32:25Z"
+        },
+        "recommendationAdditionalData": {
+          "type": "object",
+          "description": "A bag of fields which extends the recommendation information",
+          "example": {
+            "SnapshotId": "48519d58-4e35-46cd-aed5-6251af95ed50",
+            "TotalFailedRules": "7",
+            "TotalRulesFailedDuoToError": "1",
+            "TotalInformationalFailedRules": "2",
+            "TotalCriticalFailedRules": "3",
+            "TotalWarningFailedRules": "1"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SolutionName": {
+      "name": "solutionName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the IoT Security solution.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
