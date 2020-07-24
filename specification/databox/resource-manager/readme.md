@@ -26,7 +26,16 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2019-09
+```
+
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.DataBox/stable/2019-09-01/databox.json
 ```
 
 ### Tag: package-2018-01
@@ -58,6 +67,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
+  - repo: azure-cli-extensions
 ```
 
 ## C#
@@ -77,32 +87,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.databox
-  package-name: azure-mgmt-databox
-  title: DataBoxManagementClient
-  description: The DataBox Client.
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databox/azure/mgmt/databox
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databox
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Ruby
 
@@ -132,6 +117,7 @@ java:
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-01
+  - tag: package-2019-09
 ```
 
 ### Tag: package-2018-01 and java
@@ -142,7 +128,20 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databox.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2018_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-09 and java
+
+These settings apply only when `--tag=package-2019-09-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2019_09-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2019_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -159,6 +158,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DataBox/stable/2019-09-01/databox.json
   - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
 
 ```

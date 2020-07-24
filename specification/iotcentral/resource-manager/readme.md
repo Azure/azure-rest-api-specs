@@ -113,7 +113,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-09-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotcentral.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/iotcentral/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -126,38 +126,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2017-07-01-privatepreview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotcentral.v2017_07_01_privatepreview
-  output-folder: $(azure-libraries-for-java-folder)/iotcentral/resource-manager/v2017_07_01_privatepreview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2017_07_01_privatepreview
 regenerate-manager: true
 generate-interface: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.iotcentral
-  package-name: azure-mgmt-iotcentral
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/iotcentral/azure-mgmt-iotcentral/azure/mgmt/iotcentral
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/iotcentral/azure-mgmt-iotcentral
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 

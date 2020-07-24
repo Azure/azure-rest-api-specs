@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-devtestlabs"
   output-folder: "$(typescript-sdks-folder)/sdk/devtestlabs/arm-devtestlabs"
+  clear-output-folder: true
   generate-metadata: true
 ```

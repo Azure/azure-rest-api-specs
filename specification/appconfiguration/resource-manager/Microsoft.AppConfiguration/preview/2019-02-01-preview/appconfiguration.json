@@ -497,6 +497,57 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/listKeyValue": {
+      "post": {
+        "tags": [
+          "ConfigurationStores"
+        ],
+        "description": "Lists a configuration store key-value.",
+        "operationId": "ConfigurationStores_ListKeyValue",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "listKeyValueParameters",
+            "in": "body",
+            "description": "The parameters for retrieving a key-value.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListKeyValueParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/KeyValue"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationStores_ListKeyValue": {
+            "$ref": "./examples/ConfigurationStoresListKeyValue.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -700,6 +751,73 @@
         "id": {
           "description": "The id of the key to regenerate.",
           "type": "string"
+        }
+      }
+    },
+    "ListKeyValueParameters": {
+      "description": "The parameters used to list a configuration store key-value",
+      "required": [
+        "key"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The key to retrieve.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of the key.",
+          "type": "string"
+        }
+      }
+    },
+    "KeyValue": {
+      "description": "The result of a request to retrieve a key-value from the specified configuration store.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The primary identifier of a key-value.\r\nThe key is used in unison with the label to uniquely identify a key-value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "label": {
+          "description": "A value used to group key-values.\r\nThe label is used in unison with the key to uniquely identify a key-value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The value of the key-value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "contentType": {
+          "description": "The content type of the key-value's value.\r\nProviding a proper content-type can enable transformations of values when they are retrieved by applications.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "An ETag indicating the state of a key-value within a configuration store.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "The last time a modifying operation was performed on the given key-value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locked": {
+          "description": "A value indicating whether the key-value is locked.\r\nA locked key-value may not be modified until it is unlocked.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "A dictionary of tags that can help identify what a key-value may be applicable for.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },

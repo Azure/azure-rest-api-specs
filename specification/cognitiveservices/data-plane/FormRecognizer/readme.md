@@ -4,7 +4,14 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `release_1_0`.
+The current release is `release_2_0`.
+
+``` yaml
+
+tag: release_2_0
+add-credentials: true
+openapi-type: data-plane
+```
 
 ``` yaml
 
@@ -13,6 +20,14 @@ add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
+
+### Release 2.0
+These settings apply only when `--tag=release_2_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_0'
+input-file: 
+  - preview/v2.0/FormRecognizer.json
+```
 
 ### Release 1.0
 These settings apply only when `--tag=release_1_0` is specified on the command line.
@@ -49,7 +64,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.FormRecognizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.FormRecognizer/src/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/FormRecognizer/src/Generated
   title: "FormRecognizerClient"
   clear-output-folder: true
 ```
@@ -86,6 +101,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/v2.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizerReceipt.json
   - $(this-folder)/preview/v1.0/FormRecognizerReceiptOcr.json

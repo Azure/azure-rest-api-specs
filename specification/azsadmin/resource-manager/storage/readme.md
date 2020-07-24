@@ -24,25 +24,20 @@ These are the global settings for the Storage API.
 title: StorageAdminClient
 description: Storage Admin Client
 openapi-type: arm
-tag: package-2015-12-01
+tag: package-2019-08-08
 ```
 
-### Tag: package-2015-12-01
+### Tag: package-2019-08-08
 
-These settings apply only when `--tag=package-2015-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-12-01'
+``` yaml $(tag) == 'package-2019-08-08'
 input-file:
-    - "Microsoft.Storage.Admin/preview/2015-12-01/storage.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/blobServices.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/containers.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/farms.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/queueServices.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/quotas.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/shares.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json"
+    - "Microsoft.Storage.Admin/preview/2019-08-08/storageaccounts.json"
+    - "Microsoft.Storage.Admin/preview/2019-08-08/quotas.json"
+    - "Microsoft.Storage.Admin/preview/2019-08-08/settings.json"
+    - "Microsoft.Storage.Admin/preview/2019-08-08/storage.json"
+    - "Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json"
 ```
 
 ---
@@ -75,16 +70,11 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/storage.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/blobServices.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/containers.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/farms.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/queueServices.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/quotas.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/shares.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json
-  - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json
+  - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/storageaccounts.json
+  - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/quotas.json
+  - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/settings.json
+  - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/storage.json
+  - $(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json
 
 ```
 

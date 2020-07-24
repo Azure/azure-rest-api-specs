@@ -50,6 +50,19 @@ input-file:
 ```
 
 
+### Tag: package-2018-01-preview
+
+These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-preview'
+input-file:
+- Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
+- Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
+- Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+- Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
+```
+
+
 ---
 # Code Generation
 
@@ -121,7 +134,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.relay.v2016_07_01
-  output-folder: $(azure-libraries-for-java-folder)/relay/resource-manager/v2016_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/relay/mgmt-v2016_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -134,7 +147,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.relay.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/relay/resource-manager/v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/relay/mgmt-v2017_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -155,6 +168,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Relay/stable/2017-04-01/relay.json
   - $(this-folder)/Microsoft.Relay/stable/2016-07-01/relay.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
 
 ```
 
