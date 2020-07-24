@@ -5861,6 +5861,10 @@
               "required": false,
               "$ref": "#/definitions/PdfTextRotationAlgorithm"
             },
+            "executionEnvironment": {
+              "required": false,
+              "$ref": "#/definitions/ExecutionEnvironment"
+            },
             "queryTimeout": {
               "type": "string",
               "required": false,
@@ -6017,6 +6021,32 @@
       "x-nullable": true,
       "default": "none",
       "description": "Determines algorithm for text extraction from PDF files in Azure blob storage."
+    },
+    "ExecutionEnvironment": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "standard",
+            "name": "standard",
+            "description": "Indicates that Azure Cognitive Search can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
+          },
+          {
+            "value": "private",
+            "name": "private",
+            "description": "Indicates that the indexer should run with the environment provisioned specifically for the search service. This should only be specified as the execution environment if the indexer needs to access resources securely over shared private link resources."
+          }
+        ]
+      },
+      "x-nullable": true,
+      "default": "standard",
+      "description": "Specifies the environment in which the indexer should execute."
     },
     "FieldMappingFunction": {
       "properties": {
