@@ -449,7 +449,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchService"
+              "$ref": "#/definitions/SearchService_Update"
             },
             "description": "The definition of the Search service to update."
           },
@@ -1643,6 +1643,50 @@
         }
       ],
       "description": "Describes an Azure Cognitive Search service and its current state."
+    },
+    "SearchService_Update": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SearchServiceProperties",
+          "description": "Properties of the Search service."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits. This property is required when creating a new Search Service.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-rp-info"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to help categorize the resource in the Azure portal."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The parameters used to update an Azure Cognitive Search service."
     },
     "SearchServiceProperties": {
       "properties": {
