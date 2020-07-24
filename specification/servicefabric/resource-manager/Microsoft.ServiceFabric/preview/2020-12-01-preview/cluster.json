@@ -462,7 +462,7 @@
         }
       }
     },
-    "/versions/environments/{environment}/clusterVersions/{clusterVersion}": {
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/maximumUpgradeVersion": {
       "get": {
         "operationId": "UpgradableVersionMaximum_Get",
         "summary": "Gets the highest upgrade within one step of the current cluster version.",
@@ -492,11 +492,17 @@
             "schema": {
               "$ref": "#/definitions/UpgradableVersionResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
     },
-    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/clusterCreationVersions": {
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/minimumUpgradeVersion": {
       "get": {
         "operationId": "UpgradableVersionMinimum_Get",
         "summary": "Gets the lowest downgrade within one step of the current cluster version.",
@@ -526,11 +532,17 @@
             "schema": {
               "$ref": "#/definitions/UpgradableVersionResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
     },
-    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/clusterCreationVersions/{clusterCreationVersion}": {
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/clusterCreationVersions/{clusterCreationVersion}/minimumUpgradeVersion": {
       "get": {
         "operationId": "UpgradableVersionMinimumWithCreation_Get",
         "summary": "Gets the lowest downgrade within one step of the current cluster version.",
@@ -563,11 +575,17 @@
             "schema": {
               "$ref": "#/definitions/UpgradableVersionResult"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       }
     },
-    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/targetVersions/{targetVersion}/clusterCreationVersions": {
+    "/versions/environments/{environment}/clusterVersions/{clusterVersion}/targetVersions/{targetVersion}": {
       "get": {
         "operationId": "UpgradableVersionPath_Get",
         "summary": "Gets the path of intermediate versions to or upgrade downgrade from the current cluster version to the target cluster version.",
@@ -599,6 +617,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpgradableVersionPathResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
@@ -639,6 +663,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UpgradableVersionPathResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
