@@ -5697,10 +5697,12 @@
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
+          "x-nullable": true,
           "description": "The data change detection policy for the datasource."
         },
         "dataDeletionDetectionPolicy": {
           "$ref": "#/definitions/DataDeletionDetectionPolicy",
+          "x-nullable": true,
           "description": "The data deletion detection policy for the datasource."
         },
         "@odata.etag": {
@@ -5757,18 +5759,21 @@
         "batchSize": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": true,
           "description": "The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type."
         },
         "maxFailedItems": {
           "type": "integer",
           "format": "int32",
           "default": 0,
+          "x-nullable": true,
           "description": "The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0."
         },
         "maxFailedItemsPerBatch": {
           "type": "integer",
           "format": "int32",
           "default": 0,
+          "x-nullable": true,
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
         },
         "configuration": {
@@ -5815,6 +5820,7 @@
         },
         "mappingFunction": {
           "$ref": "#/definitions/FieldMappingFunction",
+          "x-nullable": true,
           "description": "A function to apply to each source field value before indexing."
         }
       },
@@ -5853,10 +5859,12 @@
         },
         "schedule": {
           "$ref": "#/definitions/IndexingSchedule",
+          "x-nullable": true,
           "description": "The schedule for this indexer."
         },
         "parameters": {
           "$ref": "#/definitions/IndexingParameters",
+          "x-nullable": true,
           "description": "Parameters for indexer execution."
         },
         "fieldMappings": {
@@ -5883,6 +5891,7 @@
           "x-ms-client-name": "IsDisabled",
           "type": "boolean",
           "default": false,
+          "x-nullable": true,
           "description": "A value indicating whether the indexer is disabled. Default is false."
         },
         "@odata.etag": {
@@ -6014,6 +6023,7 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
+          "x-nullable": true,
           "description": "The end time of this indexer execution, if the execution has already completed."
         },
         "errors": {
@@ -7215,6 +7225,7 @@
         },
         "suggestedFrom": {
           "$ref": "#/definitions/TextTranslationSkillLanguage",
+          "x-nullable": true,
           "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en."
         }
       },
