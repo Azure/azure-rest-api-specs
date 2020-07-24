@@ -523,6 +523,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -584,6 +587,7 @@
         },
         "vmInstanceCount": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
           "minimum": 1,
           "maximum": 2147483647
