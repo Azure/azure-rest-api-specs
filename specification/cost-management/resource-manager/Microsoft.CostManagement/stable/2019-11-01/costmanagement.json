@@ -1145,7 +1145,7 @@
           "200": {
             "description": "Request processing completed.",
             "schema": {
-              "$ref": "#/definitions/StatusWithLocation"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -1207,7 +1207,7 @@
           "200": {
             "description": "Request processing completed.",
             "schema": {
-              "$ref": "#/definitions/StatusWithLocation"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -2750,24 +2750,24 @@
         }
       }
     },
-    "StatusWithLocation": {
+    "OperationStatus": {
       "description": "The status of the long running operation.",
       "properties": {
         "status": {
           "description": "The status of the long running operation.",
-          "type": "string",
-          "enum": [
-            "running",
-            "succeeded",
-            "failed"
-          ],
-          "x-ms-enum": {
-            "name": "StatusType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/Status"
         },
-        "resourceLocation": {
-          "description": "A location url of the resource generated.",
+        "properties": {
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/ReportURL"
+        }
+      }
+    },
+    "ReportURL": {
+      "description": "The URL to download the generated report.",
+      "properties": {
+        "reportURL": {
+          "description": "The URL to download the generated report.",
           "type": "string"
         }
       }
