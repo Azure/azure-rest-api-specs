@@ -1028,7 +1028,7 @@
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "required": [
-        "modelUris",
+        "modelIds",
         "skuSize",
         "weight"
       ],
@@ -1040,8 +1040,8 @@
             "type": "string"
           }
         },
-        "modelUris": {
-          "description": "The list of model URIs.",
+        "modelIds": {
+          "description": "The list of model resource Ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1061,13 +1061,13 @@
           "description": "Scale settings for this deployment",
           "$ref": "#/definitions/SkuScaleSettings"
         },
-        "environmentConfigUri": {
+        "environmentConfigId": {
           "type": "string",
-          "description": "URI of the Environment Configuration artifact."
+          "description": "Resource Id of the Environment Configuration artifact."
         },
-        "codeAssetUri": {
+        "codeAssetId": {
           "type": "string",
-          "description": "URI of the Code Assets i.e. startup code."
+          "description": "Resource Id of the Code Assets i.e. startup code."
         },
         "vnet": {
           "description": "Info of the customer's custom Virtual Network",
