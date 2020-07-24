@@ -5,19 +5,14 @@
     "input": {
       "documents": [
         {
-          "language": "en",
           "id": "1",
-          "text": "I had a wonderful trip to Seattle last week."
+          "language": "en",
+          "text": "Microsoft was founded by Bill Gates and Paul Allen."
         },
         {
-          "language": "en",
           "id": "2",
-          "text": "I work at Microsoft."
-        },
-        {
           "language": "en",
-          "id": "3",
-          "text": "I visited Space Needle 2 times."
+          "text": "Pike place market is my favorite Seattle attraction."
         }
       ]
     }
@@ -28,71 +23,93 @@
       "body": {
         "documents": [
           {
-            "id": "1",
             "entities": [
               {
-                "name": "Seattle",
+                "dataSource": "Wikipedia",
+                "id": "Bill Gates",
+                "language": "en",
                 "matches": [
                   {
-                    "text": "Seattle",
-                    "offset": 26,
-                    "length": 7,
-                    "confidenceScore": 0.15
+                    "confidenceScore": 0.52,
+                    "length": 10,
+                    "offset": 25,
+                    "text": "Bill Gates"
                   }
                 ],
-                "language": "en",
-                "id": "Seattle",
-                "url": "https://en.wikipedia.org/wiki/Seattle",
-                "dataSource": "Wikipedia"
-              }
-            ],
-            "warnings": []
-          },
-          {
-            "id": "2",
-            "entities": [
+                "name": "Bill Gates",
+                "url": "https://en.wikipedia.org/wiki/Bill_Gates"
+              },
               {
-                "name": "Microsoft",
+                "dataSource": "Wikipedia",
+                "id": "Paul Allen",
+                "language": "en",
                 "matches": [
                   {
-                    "text": "Microsoft",
-                    "offset": 10,
-                    "length": 9,
-                    "confidenceScore": 0.18
+                    "confidenceScore": 0.54,
+                    "length": 10,
+                    "offset": 40,
+                    "text": "Paul Allen"
                   }
                 ],
-                "language": "en",
+                "name": "Paul Allen",
+                "url": "https://en.wikipedia.org/wiki/Paul_Allen"
+              },
+              {
+                "dataSource": "Wikipedia",
                 "id": "Microsoft",
-                "url": "https://en.wikipedia.org/wiki/Microsoft",
-                "dataSource": "Wikipedia"
+                "language": "en",
+                "matches": [
+                  {
+                    "confidenceScore": 0.49,
+                    "length": 9,
+                    "offset": 0,
+                    "text": "Microsoft"
+                  }
+                ],
+                "name": "Microsoft",
+                "url": "https://en.wikipedia.org/wiki/Microsoft"
               }
             ],
+            "id": "1",
             "warnings": []
           },
           {
-            "id": "3",
             "entities": [
               {
-                "name": "Space Needle",
+                "dataSource": "Wikipedia",
+                "id": "Pike Place Market",
+                "language": "en",
                 "matches": [
                   {
-                    "text": "Space Needle",
-                    "offset": 10,
-                    "length": 12,
-                    "confidenceScore": 0.15
+                    "confidenceScore": 0.86,
+                    "length": 17,
+                    "offset": 0,
+                    "text": "Pike place market"
                   }
                 ],
+                "name": "Pike Place Market",
+                "url": "https://en.wikipedia.org/wiki/Pike_Place_Market"
+              },
+              {
+                "dataSource": "Wikipedia",
+                "id": "Seattle",
                 "language": "en",
-                "id": "Space Needle",
-                "url": "https://en.wikipedia.org/wiki/Space_Needle",
-                "dataSource": "Wikipedia"
+                "matches": [
+                  {
+                    "confidenceScore": 0.27,
+                    "length": 7,
+                    "offset": 33,
+                    "text": "Seattle"
+                  }
+                ],
+                "name": "Seattle",
+                "url": "https://en.wikipedia.org/wiki/Seattle"
               }
             ],
+            "id": "2",
             "warnings": []
           }
-        ],
-        "errors": [],
-        "modelVersion": "2019-10-01"
+        ]
       }
     }
   }

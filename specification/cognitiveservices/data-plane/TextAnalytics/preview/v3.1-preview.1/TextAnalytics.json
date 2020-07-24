@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v3.1-preview.1",
+    "version": "v3.2-preview.1",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
       "email": "mlapi@microsoft.com"
     },
     "title": "Text Analytics Client",
-    "description": "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. No training data is needed to use this API; just bring your text data. This API uses advanced natural language processing techniques to deliver best in class predictions. Further documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview"
+    "description": "The Text Analytics API is a suite of natural language processing (NLP)  services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis,  key phrase extraction and language detection. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -23,7 +23,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.1-preview.1",
+    "hostTemplate": "{Endpoint}/text/analytics/v3.2-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -32,6 +32,129 @@
     ]
   },
   "paths": {
+    "/analyze": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
+        "operationId": "Analyze",
+        "summary": "Submit analysis job",
+        "parameters": [
+          {
+            "description": "Collection of documents to analyze and tasks to execute.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeBatchInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an operation-location header used to check the status of the analysis job.",
+            "headers": {
+              "Operation-Location": {
+                "format": "uri",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalyticsError"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/TextAnalyticsError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Submit analysis job request": {
+            "$ref": ".//examples//SuccessfulAnalyzeRequest.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/analyze/jobs/{jobid}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
+        "operationId": "AnalyzeStatus",
+        "summary": "Get analysis status and results",
+        "parameters": [
+          {
+            "description": "Job ID",
+            "format": "uuid",
+            "in": "path",
+            "name": "jobid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "in": "query",
+            "name": "showStats",
+            "type": "boolean"
+          },
+          {
+            "default": 20,
+            "description": "(Optional) Set the maximum number of results per task.",
+            "in": "query",
+            "maximum": 50,
+            "minimum": 1,
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "description": "(Optional) Set the number of elements to offset in the response.",
+            "in": "query",
+            "minimum": 0,
+            "name": "$skip",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis job status and metadata.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeJobState"
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalyticsError"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/TextAnalyticsError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Analysis job status request": {
+            "$ref": ".//examples//SuccessfulAnalyzeStatusRequest.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/entities/recognition/general": {
       "post": {
         "summary": "Named Entity Recognition",
@@ -50,15 +173,29 @@
             "name": "model-version",
             "in": "query",
             "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "required": false,
             "type": "string"
           },
           {
             "name": "showStats",
             "in": "query",
             "description": "(Optional) if set to true, response will contain input and document level statistics.",
-            "type": "boolean",
-            "required": false
+            "type": "boolean"
+          },
+          {
+            "name": "stringIndexType",
+            "in": "query",
+            "type": "string",
+            "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
+            "default": "textelements_v8",
+            "enum": [
+              "textelements_v8",
+              "unicodecodepoint",
+              "utf16codeunit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true
+            }
           },
           {
             "in": "body",
@@ -125,6 +262,22 @@
             "type": "string"
           },
           {
+            "name": "stringIndexType",
+            "in": "query",
+            "type": "string",
+            "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
+            "default": "textelements_v8",
+            "enum": [
+              "textelements_v8",
+              "unicodecodepoint",
+              "utf16codeunit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true
+            }
+          },
+          {
             "in": "body",
             "name": "input",
             "description": "Collection of documents to analyze.",
@@ -181,6 +334,22 @@
             "in": "query",
             "description": "(Optional) if set to true, response will contain input and document level statistics.",
             "type": "boolean"
+          },
+          {
+            "name": "stringIndexType",
+            "in": "query",
+            "type": "string",
+            "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
+            "default": "textelements_v8",
+            "enum": [
+              "textelements_v8",
+              "unicodecodepoint",
+              "utf16codeunit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true
+            }
           },
           {
             "in": "body",
@@ -361,6 +530,22 @@
             "in": "query",
             "description": "(Optional) if set to true, response will contain input and document level statistics including aspect-based sentiment analysis results.",
             "type": "boolean"
+          },
+          {
+            "name": "stringIndexType",
+            "in": "query",
+            "type": "string",
+            "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
+            "default": "textelements_v8",
+            "enum": [
+              "textelements_v8",
+              "unicodecodepoint",
+              "utf16codeunit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true
+            }
           },
           {
             "in": "body",
@@ -569,6 +754,238 @@
           "description": "Inner error contains more specific information."
         }
       }
+    },
+    "AnalyzeBatchInput": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDescriptor"
+        },
+        {
+          "$ref": "#/definitions/MultiLanguageBatchInput"
+        },
+        {
+          "$ref": "#/definitions/AnalysisTasks"
+        }
+      ]
+    },
+    "AnalyzeJobState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMetadata"
+        },
+        {
+          "$ref": "#/definitions/TasksState"
+        },
+        {
+          "properties": {
+            "errors": {
+              "items": {
+                "$ref": "#/definitions/TextAnalyticsError"
+              },
+              "type": "array"
+            },
+            "statistics": {
+              "$ref": "#/definitions/RequestStatistics"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "$ref": "#/definitions/Pagination"
+        }
+      ]
+    },
+    "CustomClassification": {
+      "properties": {
+        "confidenceScore": {
+          "example": 0.87,
+          "format": "double",
+          "type": "number"
+        },
+        "name": {
+          "example": "hotel booking",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "confidenceScore"
+      ],
+      "type": "object"
+    },
+    "CustomClassificationResult": {
+      "properties": {
+        "documents": {
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/CustomClassifications"
+          },
+          "type": "array"
+        },
+        "errors": {
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          },
+          "type": "array"
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        }
+      },
+      "required": [
+        "documents",
+        "errors"
+      ],
+      "type": "object"
+    },
+    "CustomClassificationTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "appId": {
+                  "type": "string"
+                },
+                "slotName": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "appId",
+                "slotName"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "parameters"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "CustomClassifications": {
+      "items": {
+        "$ref": "#/definitions/CustomClassification"
+      },
+      "type": "array"
+    },
+    "CustomEntities": {
+      "items": {
+        "$ref": "#/definitions/CustomEntity"
+      },
+      "type": "array"
+    },
+    "CustomEntitiesResult": {
+      "properties": {
+        "documents": {
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/CustomEntities"
+          },
+          "type": "array"
+        },
+        "errors": {
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          },
+          "type": "array"
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        }
+      },
+      "required": [
+        "documents",
+        "errors"
+      ],
+      "type": "object"
+    },
+    "CustomEntitiesTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "appId": {
+                  "type": "string"
+                },
+                "slotName": {
+                  "type": "string"
+                },
+                "stringIndexType": {
+                  "default": "textelements_v8",
+                  "enum": [
+                    "textelements_v8",
+                    "unicodecodepoint",
+                    "utf16codeunit"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "appId",
+                "slotName"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "parameters"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "CustomEntity": {
+      "properties": {
+        "category": {
+          "example": "address",
+          "type": "string"
+        },
+        "children": {
+          "example": [
+            {
+              "category": "city",
+              "confidenceScore": 0.78,
+              "length": 3,
+              "offset": 5
+            }
+          ],
+          "items": {
+            "$ref": "#/definitions/CustomEntity"
+          },
+          "type": "array"
+        },
+        "confidenceScore": {
+          "example": 0.96,
+          "type": "number"
+        },
+        "length": {
+          "example": 7,
+          "type": "number"
+        },
+        "offset": {
+          "example": 3,
+          "type": "number"
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ],
+      "type": "object"
     },
     "SentimentResponse": {
       "type": "object",
@@ -1243,6 +1660,33 @@
           "type": "string"
         }
       }
+    },
+    "Pagination": {
+      "properties": {
+        "@nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PiiResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitiesResult"
+        },
+        {
+          "properties": {
+            "redactedText": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "redactedText"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "LanguageResult": {
       "type": "object",
