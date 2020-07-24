@@ -1098,13 +1098,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/getReservationDetailsReport": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
       "post": {
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "GetReservationDetailsReport_ByBillingAccountId",
-        "description": "Lists the reservations details for provided date range asynchronously based on enrollment id.",
+        "operationId": "GenerateReservationDetailsReport_ByBillingAccountId",
+        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1142,58 +1142,6 @@
               }
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/getReservationDetailsReport/status/{statusId}": {
-      "get": {
-        "tags": [
-          "ReservedInstances"
-        ],
-        "operationId": "GetReservationDetailsReportStatus_ByBillingAccountId",
-        "description": "Get the reservations details report availability status by enrollment id.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "getReservationDetailsReportStatus": {
-            "$ref": "./examples/GetReservationDetailsReportStatusByBillingAccount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/enrollmentIdParameter"
-          },
-          {
-            "$ref": "#/parameters/statusIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Request is still processing.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Status"
-            }
-          },
           "200": {
             "description": "Request processing completed.",
             "schema": {
@@ -1209,13 +1157,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/getReservationDetailsReport": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
       "post": {
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "GetReservationDetailsReport_ByBillingProfileId",
-        "description": "Lists the reservations details for provided date range asynchronously by billing profile.",
+        "operationId": "GenerateReservationDetailsReport_ByBillingProfileId",
+        "description": "Generates the reservations details report for provided date range asynchronously by billing profile.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1254,61 +1202,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "integer"
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/getReservationDetailsReport/status/{statusId}": {
-      "get": {
-        "tags": [
-          "ReservedInstances"
-        ],
-        "operationId": "GetReservationDetailsReportStatus_ByBillingProfileId",
-        "description": "Get the reservations details report availability status by billing profile.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "getReservationDetailsReportStatus": {
-            "$ref": "./examples/GetReservationDetailsReportStatusByBillingProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileIdParameter"
-          },
-          {
-            "$ref": "#/parameters/statusIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Ok.",
-            "headers": {
-              "Location": {
-                "description": "Request is still processing.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Status"
             }
           },
           "200": {
@@ -3352,14 +3245,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "statusIdParameter": {
-      "name": "statusId",
-      "description": "Status id for an operation requested.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "enrollmentIdParameter": {
       "name": "billingAccountId",
       "in": "path",
@@ -3380,22 +3265,6 @@
       "name": "billingProfileId",
       "in": "path",
       "description": "BillingProfile ID",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "reservationIdParameter": {
-      "name": "reservationId",
-      "in": "path",
-      "description": "Reservation ID",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "reservationOrderIdParameter": {
-      "name": "reservationOrderId",
-      "in": "path",
-      "description": "Reservation Order ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
