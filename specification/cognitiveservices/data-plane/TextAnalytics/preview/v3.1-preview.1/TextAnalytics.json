@@ -80,13 +80,13 @@
           "400": {
             "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "500": {
             "description": "Internal error response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -150,13 +150,13 @@
           "400": {
             "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "500": {
             "description": "Internal error response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -214,13 +214,13 @@
           "400": {
             "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "500": {
             "description": "Internal error response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -278,13 +278,13 @@
           "400": {
             "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "500": {
             "description": "Internal error response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -342,13 +342,13 @@
           "400": {
             "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "500": {
             "description": "Internal error response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -412,13 +412,13 @@
           "400": {
             "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "500": {
             "description": "Internal error response",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -481,6 +481,19 @@
           "type": "string",
           "description": "Document Id."
         },
+        "error": {
+          "type": "object",
+          "description": "Document Error.",
+          "$ref": "#/definitions/TextAnalyticsError"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
         "error": {
           "type": "object",
           "description": "Document Error.",
