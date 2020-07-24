@@ -1113,6 +1113,7 @@
             "$ref": "./examples/GetReservationDetailsReportByBillingAccount.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/enrollmentIdParameter"
@@ -1129,9 +1130,9 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Request will be processed. Use the Operation-Location header to check the status.",
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
             "headers": {
-              "Operation-Location": {
+              "Location": {
                 "description": "The URL to check the status of the asynchronous operation.",
                 "type": "string"
               },
@@ -1180,7 +1181,7 @@
           "202": {
             "description": "Request is still processing.",
             "headers": {
-              "Operation-Location": {
+              "Location": {
                 "description": "The URL to check the status of the asynchronous operation.",
                 "type": "string"
               },
@@ -1223,6 +1224,7 @@
             "$ref": "./examples/GetReservationDetailsReportByBillingProfile.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -1242,9 +1244,9 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Request will be processed. Use the Operation-Location header to check the status.",
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
             "headers": {
-              "Operation-Location": {
+              "Location": {
                 "description": "The URL to check the status of the asynchronous operation.",
                 "type": "string"
               },
@@ -1296,7 +1298,7 @@
           "202": {
             "description": "Ok.",
             "headers": {
-              "Operation-Location": {
+              "Location": {
                 "description": "Request is still processing.",
                 "type": "string"
               },
