@@ -1331,32 +1331,16 @@
     "PrivateEndpointConnection": {
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-linked-resources"
-          }
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the private endpoint connection.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
     },
     "NetworkRuleSet": {
@@ -1445,29 +1429,16 @@
     "SharedPrivateLinkResource": {
       "x-ms-azure-resource": true,
       "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the shared private link resource.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the shared private link resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service."
     },
     "SharedPrivateLinkResourceProperties": {
