@@ -722,20 +722,6 @@
         }
       }
     },
-    "Sku": {
-      "description": "Sku of the resource",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the sku",
-          "type": "string"
-        },
-        "tier": {
-          "description": "Tier of the sku like Basic or Enterprise",
-          "type": "string"
-        }
-      }
-    },
     "PaginatedInferenceEndpointsList": {
       "type": "object",
       "description": "Paginated list of Machine Learning Inference Endpoint objects wrapped in ARM resource envelope.",
@@ -922,7 +908,7 @@
           "type": "object",
           "properties": {
             "sku": {
-              "$ref": "#/definitions/InferenceSku"
+              "$ref": "#/definitions/InferenceEndpointDeploymentSku"
             },
             "properties": {
               "type": "object",
@@ -1076,6 +1062,32 @@
         }
       }
     },
+    "Sku": {
+      "description": "Sku of the resource",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the sku",
+          "type": "string"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Free",
+            "Shared",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "skuTiers",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The tier of the sku."
+        }
+      }
+    },
     "SkuInfo": {
       "description": "SKU discovery information.",
       "type": "object",
@@ -1110,43 +1122,30 @@
         }
       }
     },
-    "InferenceSku": {
+    "InferenceEndpointDeploymentSku": {
       "description": "Description of a SKU for a scalable resource.",
       "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the sku",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Sku"
         },
-        "tier": {
-          "type": "string",
-          "enum": [
-            "Free",
-            "Shared",
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "skuTiers",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The tier of the sku."
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Current number of instances assigned to the resource.",
-          "type": "integer"
+        {
+          "type": "object",
+          "properties": {
+            "capacity": {
+              "description": "Current number of instances assigned to the resource.",
+              "type": "integer"
+            }
+          }
         }
-      }
+      ]
     },
     "InferenceEndpointDeploymentUpdateParameters": {
       "description": "The parameters for updating an inference deployment.",
       "properties": {
         "sku": {
           "description": "Information to update the SKU of the deployment.",
-          "$ref": "#/definitions/InferenceSku"
+          "$ref": "#/definitions/InferenceEndpointDeploymentSku"
         },
         "weight": {
           "description": "The weight of the deployment for load balancing.",
