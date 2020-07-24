@@ -35,17 +35,17 @@
         "200": {
             "headers": {},
             "body": {
-                "createdUpdateDateTime": "2020-10-01T15-01-03.45Z",
+                "createdDateTime": "2020-10-01T15:01:03Z",
                 "displayName": "Extracting Location & US Region",
-                "expirationDateTime": "2020-10-03T15-01-03.55Z",
+                "expirationDateTime": "2020-10-03T15:01:03Z",
                 "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18",
-                "lastUpdateDateTime": "2020-10-01T15-01-03.55Z",
+                "lastUpdateDateTime": "2020-10-01T15:01:03Z",
                 "status": "succeeded",
                 "tasks": {
                     "completed": 2,
                     "details": [
                         {
-                            "lastUpdateDateTime": "2020-10-01T15-01-03.53Z",
+                            "lastUpdateDateTime": "2020-10-01T15:01:03Z",
                             "name": "Recognize Entities",
                             "results": {
                                 "documents": [
@@ -109,12 +109,28 @@
                             "type": "Recognize Entities"
                         },
                         {
-                            "lastUpdateDateTime": "2020-10-01T15-01-03.55Z",
+                            "lastUpdateDateTime": "2020-10-01T15:01:03Z",
                             "name": "Custom Classification 71baed8c-a832-489d-8f38-e3b44685785f/USRegionClassifier",
-                            "results": null,
+                            "results": {
+                                "documents": [{
+                                    "id": "1",
+                                    "classifications": [{
+                                        "name": "NorthWest",
+                                        "confidenceScore": 0.88
+                                    }]
+                                },
+                                {
+                                    "id": "2",
+                                    "classifications": [{
+                                        "name": "NorthEast",
+                                        "confidenceScore": 0.94
+                                    }]
+                                }],
+                                "errors": [],
+                                "resultType": "CustomClassification"
+                            },
                             "status": "succeeded",
-                            "type": "Custom Classification",
-                            "resultType": "CustomClassification"
+                            "type": "Custom Classification"
                         }
                     ],
                     "failed": 0,

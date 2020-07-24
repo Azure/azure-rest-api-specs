@@ -739,7 +739,8 @@
             "InvalidRequest",
             "InvalidArgument",
             "InternalServerError",
-            "ServiceUnavailable"
+            "ServiceUnavailable",
+            "NotFound"
           ],
           "x-ms-enum": {
             "name": "ErrorCodeValue",
@@ -987,7 +988,7 @@
         "documents": {
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/CustomClassifications"
+            "$ref": "#/definitions/CustomClassificationDocument"
           },
           "type": "array"
         },
@@ -1038,11 +1039,23 @@
         }
       ]
     },
-    "CustomClassifications": {
-      "items": {
-        "$ref": "#/definitions/CustomClassification"
-      },
-      "type": "array"
+    "CustomClassificationDocument": {
+      "type": "object",
+      "required": [
+        "id",
+        "classifications"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "classifications": {
+          "items": {
+            "$ref": "#/definitions/CustomClassification"
+          },
+          "type": "array"
+        }
+      }
     },
     "CustomEntities": {
       "items": {
@@ -1956,7 +1969,13 @@
           "$ref": "#/definitions/Entity"
         },
         {
+          "required": [
+            "isNegated"
+          ],
           "properties": {
+            "isNegated": {
+              "type": "boolean"
+            },
             "links": {
               "description": "Entity references in known data sources.",
               "type": "array",
