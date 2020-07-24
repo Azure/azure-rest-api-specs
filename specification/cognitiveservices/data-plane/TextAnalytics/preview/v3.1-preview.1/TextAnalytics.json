@@ -291,7 +291,7 @@
           "200": {
             "description": "A successful call results in a list of entities containing personal information returned for each valid document",
             "schema": {
-              "$ref": "#/definitions/EntitiesResult"
+              "$ref": "#/definitions/PiiResult"
             }
           },
           "default": {
@@ -581,6 +581,21 @@
     }
   },
   "definitions": {
+    "AnalysisTasks": {
+      "properties": {
+        "tasks": {
+          "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsTask"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "tasks"
+      ],
+      "type": "object"
+    },
     "MultiLanguageBatchInput": {
       "type": "object",
       "required": [
@@ -679,6 +694,30 @@
         }
       }
     },
+    "TextAnalyticsResult": {
+      "discriminator": "resultType",
+      "properties": {
+        "resultType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "type": "object"
+    },
+    "TextAnalyticsTask": {
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
     "TextAnalyticsWarning": {
       "type": "object",
       "required": [
@@ -707,6 +746,74 @@
           "description": "A JSON pointer reference indicating the target object."
         }
       }
+    },
+    "PiiTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "domain": {
+                  "default": "none",
+                  "enum": [
+                    "phi",
+                    "none"
+                  ],
+                  "type": "string"
+                },
+                "model-version": {
+                  "default": "latest",
+                  "type": "string"
+                },
+                "stringIndexType": {
+                  "default": "textelements_v8",
+                  "enum": [
+                    "textelements_v8",
+                    "unicodecodepoint",
+                    "utf16codeunit"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "EntitiesTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "model-version": {
+                  "default": "latest",
+                  "type": "string"
+                },
+                "stringIndexType": {
+                  "default": "textelements_v8",
+                  "enum": [
+                    "textelements_v8",
+                    "unicodecodepoint",
+                    "utf16codeunit"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
     },
     "InnerError": {
       "type": "object",
@@ -1017,6 +1124,131 @@
           "description": "This field indicates which model is used for scoring."
         }
       }
+    },
+    "SentimentTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "model-version": {
+                  "default": "latest",
+                  "type": "string"
+                },
+                "opinionMining": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "stringIndexType": {
+                  "default": "textelements_v8",
+                  "enum": [
+                    "textelements_v8",
+                    "unicodecodepoint",
+                    "utf16codeunit"
+                  ],
+                  "type": "string",
+                  "x-ms-enum": {
+                    "modelAsString": false,
+                    "name": "State"
+                  }
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "results": {},
+        "status": {
+          "enum": [
+            "notstarted",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        },
+        "type": {
+          "enum": [
+            "Detect Language",
+            "Extract Key Phrases",
+            "Analyze Sentiment",
+            "Recognize Linked Entities",
+            "Recognize Entities",
+            "Recognize PII Entities",
+            "Custom Classification",
+            "Custom Entities"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
+    "TasksState": {
+      "properties": {
+        "tasks": {
+          "properties": {
+            "completed": {
+              "type": "integer"
+            },
+            "details": {
+              "items": {
+                "$ref": "#/definitions/TaskState"
+              },
+              "type": "array"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "inProgress": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "total",
+            "completed",
+            "failed",
+            "inProgress",
+            "details"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "tasks"
+      ],
+      "type": "object"
     },
     "DocumentSentiment": {
       "type": "object",
@@ -1496,6 +1728,36 @@
         }
       }
     },
+    "EntityLinkingTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "model-version": {
+                  "default": "latest",
+                  "type": "string"
+                },
+                "stringIndexType": {
+                  "default": "textelements_v8",
+                  "enum": [
+                    "textelements_v8",
+                    "unicodecodepoint",
+                    "utf16codeunit"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "LinkedEntity": {
       "type": "object",
       "required": [
@@ -1565,6 +1827,58 @@
         }
       }
     },
+    "JobDescriptor": {
+      "properties": {
+        "displayName": {
+          "description": "Optional display name for the analysis job.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "JobMetadata": {
+      "properties": {
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notstarted",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "jobId",
+        "lastUpdateDateTime",
+        "createdDateTime",
+        "status"
+      ],
+      "type": "object"
+    },
     "KeyPhraseResult": {
       "type": "object",
       "required": [
@@ -1627,6 +1941,27 @@
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
+    },
+    "KeyPhrasesTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsTask"
+        },
+        {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "model-version": {
+                  "default": "latest",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
     },
     "LanguageBatchInput": {
       "type": "object",
@@ -1773,6 +2108,76 @@
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         }
       }
+    },
+    "TypedCustomClassificationResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/CustomClassificationResult"
+        }
+      ]
+    },
+    "TypedCustomEntitiesResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/CustomEntitiesResult"
+        }
+      ]
+    },
+    "TypedEntitiesResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/EntitiesResult"
+        }
+      ]
+    },
+    "TypedEntityLinkingResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/EntityLinkingResult"
+        }
+      ]
+    },
+    "TypedKeyPhraseResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/KeyPhraseResult"
+        }
+      ]
+    },
+    "TypedPiiResult": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/PiiResult"
+        }
+      ]
+    },
+    "TypedSentimentResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalyticsResult"
+        },
+        {
+          "$ref": "#/definitions/SentimentResponse"
+        }
+      ]
     }
   },
   "parameters": {
