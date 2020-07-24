@@ -1,63 +1,107 @@
 {
   "parameters": {
-    "subscriptionId": "subscription-id",
-    "resourceGroupName": "resource-group-name",
-    "accountName": "account-name",
+    "subscriptionId": "sample-subscription-id",
+    "resourceGroupName": "sample-resource-group-name",
+    "accountName": "sample-account-name",
     "api-version": "2020-12-01-preview",
     "parameters": {
-      "properties": {
-        "cosmosDb": {
-          "id": "cosmos-db-id"
-        },
-        "extensions": {
-          "id": "extensions-id"
-        },
-        "networking": {
-          "endpoints": {
-            "mqtt": {
-              "enabled": true
-            },
-            "iotHub": {
-              "enabled": true
-            }
-          }
-        }
+      "sku": {
+        "name": "S0",
+        "capacity": 1
+      },
+      "tags": {
+        "sample-key1": "sample-value1",
+        "sample-key2": "sample-value2"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subscription-id/resourceGroups/resource-group-name/providers/Microsoft.Mobility/mcvpAccounts/account-name",
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.Mobility/mcvpAccounts/sample-account-name",
         "location": "eastus2",
-        "name": "account-name",
+        "name": "sample-account-name",
         "properties": {
+          "analytics": {
+            "enabled": true
+          },
           "cosmosDb": {
-            "id": "cosmos-db-id"
+            "id": "sample-cosmos-db-id"
           },
           "extensions": {
-            "id": "extensions-id"
+            "id": "sample-extensions-id"
           },
           "networking": {
+            "domainName": "sample-domain",
             "endpoints": {
               "mqtt": {
                 "enabled": true
               },
               "iotHub": {
-                "enabled": true
+                "enabled": true,
+                "rootCertificates": [ "sample-certificate" ]
               }
+            },
+            "sslCertificates": {
+              "primary": "sample-primary-certificate",
+              "secondary": "sample-secondary-certificate"
             }
           },
-          "provisioningState": "Accepted"
+          "provisioningState": "Succeeded"
         },
         "sku": {
-          "name": "Standard_A",
+          "name": "S0",
           "tier": "Standard",
           "capacity": 1
         },
         "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "sample-key1": "sample-value1",
+          "sample-key2": "sample-value2"
+        },
+        "type": "Microsoft.Mobility/mcvpAccounts"
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.Mobility/mcvpAccounts/sample-account-name",
+        "location": "eastus2",
+        "name": "sample-account-name",
+        "properties": {
+          "analytics": {
+            "enabled": true
+          },
+          "cosmosDb": {
+            "id": "sample-cosmos-db-id"
+          },
+          "extensions": {
+            "id": "sample-extensions-id"
+          },
+          "networking": {
+            "domainName": "sample-domain",
+            "endpoints": {
+              "mqtt": {
+                "enabled": true
+              },
+              "iotHub": {
+                "enabled": true,
+                "rootCertificates": [ "sample-certificate" ]
+              }
+            },
+            "sslCertificates": {
+              "primary": "sample-primary-certificate",
+              "secondary": "sample-secondary-certificate"
+            }
+          },
+          "provisioningState": "Patching"
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "tags": {
+          "sample-key1": "sample-value1",
+          "sample-key2": "sample-value2"
         },
         "type": "Microsoft.Mobility/mcvpAccounts"
       }
