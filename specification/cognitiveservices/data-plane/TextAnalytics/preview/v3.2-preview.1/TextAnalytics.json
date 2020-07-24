@@ -60,7 +60,6 @@
             "description": "A successful call results with an operation-location header used to check the status of the analysis job.",
             "headers": {
               "Operation-Location": {
-                "format": "uri",
                 "type": "string"
               }
             }
@@ -83,7 +82,8 @@
             "$ref": ".//examples//SuccessfulAnalyzeRequest.json"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/analyze/jobs/{jobId}": {
@@ -173,7 +173,6 @@
             "description": "Accepted - Cancel Job request has been received.",
             "headers": {
               "Operation-Location": {
-                "format": "uri",
                 "type": "string"
               }
             }
@@ -184,7 +183,8 @@
             "$ref": ".//examples//SuccessfulHealthDeleteRequest.json"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       },
       "get": {
         "description": "Get details of the healthcare prediction job specified by the jobId.",
@@ -287,7 +287,6 @@
             "description": "Accepted - call results in a link where the status of the submitted job can be checked via the GET operation.",
             "headers": {
               "Operation-Location": {
-                "format": "uri",
                 "type": "string"
               }
             }
@@ -304,7 +303,8 @@
             "$ref": ".//examples//SuccessfulHealthRequest.json"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/entities/recognition/general": {
@@ -1605,6 +1605,10 @@
             "mixed",
             "negative"
           ],
+          "x-ms-enum": {
+            "name": "AspectSentimentValue",
+            "modelAsString": false
+          },
           "description": "Aspect level sentiment for the aspect in the sentence."
         },
         "confidenceScores": {
@@ -1691,6 +1695,10 @@
             "opinion",
             "aspect"
           ],
+          "x-ms-enum": {
+            "name": "AspectRelationType",
+            "modelAsString": false
+          },
           "description": "The type related to the aspect."
         },
         "ref": {
@@ -2085,11 +2093,9 @@
           "type": "boolean"
         },
         "source": {
-          "format": "uri",
           "type": "string"
         },
         "target": {
-          "format": "uri",
           "type": "string"
         }
       }
@@ -2352,7 +2358,6 @@
     "Pagination": {
       "properties": {
         "@nextLink": {
-          "format": "uri",
           "type": "string"
         }
       },
