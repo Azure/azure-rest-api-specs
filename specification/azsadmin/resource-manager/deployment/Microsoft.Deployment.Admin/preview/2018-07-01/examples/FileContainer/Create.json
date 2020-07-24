@@ -2,8 +2,14 @@
   "parameters": {
     "subscriptionId": "be8b2e19-7f92-4644-b808-a18283aebb01",
     "location": "global",
-    "api-version": "2019-01-01",
-    "fileContainerId": "Microsoft.NullProvider.1.1"
+    "api-version": "2018-07-01",
+    "fileContainerId": "Microsoft.NullProvider.1.1",
+    "fileContainerParameters": {
+      "properties": {
+        "sourceUri": "https://deploymentproviderbvts.blob.redmond.ext-n22r1708.masd.stbtest.microsoft.com/temp/Microsoft.NullProvider.1.1.zip",
+        "postCopyAction": "Unzip"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -14,10 +20,10 @@
         "location": "global",
         "properties": {
           "postCopyAction": "Unzip",
-          "uri": "https://deploymentrp.blob.redmond.ext-n22r1708.masd.stbtest.microsoft.com/msdpfilecontainer-cb72641657134ed79ffeb632a58a671e/",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Creating"
         }
       }
-    }
+    },
+    "202": {}
   }
 }
