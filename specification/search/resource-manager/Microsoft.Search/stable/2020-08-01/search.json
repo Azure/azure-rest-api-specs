@@ -897,6 +897,9 @@
             }
           },
           "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+          },
           "description": "Initiates the creation or update of a shared private link resource managed by the Search service in the given resource group.",
           "externalDocs": {
             "url": "https://aka.ms/search-manage"
@@ -931,11 +934,14 @@
             }
           ],
           "responses": {
-            "202": {
-              "description": "The shared private link resource create or update operation has been accepted and will complete asynchronously.",
+            "200": {
+              "description": "The details of the shared private link resource that was created.",
               "schema": {
                 "$ref": "#/definitions/SharedPrivateLinkResource"
               }
+            },
+            "202": {
+              "description": "The shared private link resource create or update operation has been accepted and will complete asynchronously."
             },
             "default": {
               "description": "HTTP 400 (Bad Request): The given shared private link resource name or the shared private link resource definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or shared private link resource could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
@@ -1005,6 +1011,9 @@
             }
           },
           "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+          },
           "description": "Initiates the deletion of the shared private link resource from the Search service.",
           "externalDocs": {
             "url": "https://aka.ms/search-manage"
@@ -1092,60 +1101,6 @@
             },
             "default": {
               "description": "An unexpected error occurred during the operation.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}/operationStatuses/{operationName}": {
-        "get": {
-            "tags": [
-            "SharedPrivateLinkResources"
-          ],
-          "operationId": "SharedPrivateLinkResources_GetOperationStatus",
-          "x-ms-examples": {
-            "SharedPrivateLinkResourceGet": {
-              "$ref": "./examples/GetSharedPrivateLinkResourceOperationResult.json"
-            }
-          },
-          "description": "Gets the details of an asynchronous long running shared private link resource operation.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-manage"
-          },
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/SearchServiceNameParameter"
-            },
-            {
-              "$ref": "#/parameters/SharedPrivateLinkResourceNameParameter"
-            },
-            {
-              "$ref": "#/parameters/ClientRequestIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-                "$ref": "#/parameters/OperationNameParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The current status of the asynchronous shared private link resource operation.",
-              "schema": {
-                "$ref": "#/definitions/AsyncOperationResult"
-              }
-            },
-            "default": {
-              "description": "Any errors in fetching the operation status which will be deserialized per the error definition.",
               "schema": {
                 "$ref": "#/definitions/CloudError"
               }
@@ -1899,20 +1854,21 @@
       "AsyncOperationResult": {
           "type": "object",
           "properties": {
-              "status": {
-                "type": "string",
-                "description": "The current status of the long running asynchronous shared private link resource operation.",
-                "enum": [
-                  "Running",
-                  "Succeeded",
-                  "Failed"
-                ],
-                "x-ms-enum": {
-                  "name": "SharedPrivateLinkResourceAsyncOperationResult",
-                  "modelAsString": true
-                }
+            "status": {
+              "type": "string",
+              "description": "The current status of the long running asynchronous shared private link resource operation.",
+              "enum": [
+                "Running",
+                "Succeeded",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "SharedPrivateLinkResourceAsyncOperationResult",
+                "modelAsString": true
               }
-          }
+            }
+          },
+          "description": "The details of a long running asynchronous shared private link resource operation"
       },
       "CloudError": {
         "type": "object",
