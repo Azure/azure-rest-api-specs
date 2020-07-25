@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01-preview",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/insights/swaggerExample",
+            "name": "swaggerExample",
+            "type": "Microsoft.CostManagement/insights",
+            "kind": "anomaly",            
+            "properties": {
+              "scope": "/subscritptions/00000000-0000-0000-0000-000000000000",
+              "eventDate": "2020-06-30",              
+              "impactTerm": "ongoing",
+              "impactResolution": "2020-07-24 20:01:57",
+              "timeDetected": "2020-07-24 20:01:57",
+              "severity": "Low",
+              "justification": {
+                "Forecast": [
+                  {
+                    "isAnomaly": true,
+                    "expected": 33503.99,
+                    "actual": 37503.99,
+                    "delta": 0.0
+                  }
+                ],
+                "boundry": [
+                  {
+                    "threshold": "upper",
+                    "value": 99.5,
+                    "type": "quantile"
+                  },
+                  {
+                    "threshold": "lower",
+                    "value": 0.5,
+                    "type": "quantile"
+                  },
+                  {
+                    "threshold": "lower",
+                    "value": 27503.99,
+                    "type": "value"
+                  },
+                  {
+                    "threshold": "upper",
+                    "value": 47503.99,
+                    "type": "value"
+                  }
+                ]
+              },
+              "details": {
+                "contributors": [
+                  {
+                    "reason": "resourceGroupsCount",
+                    "currentCount": 33,
+                    "changePercentage": 0.18,
+                    "totalCostInUSD": 74.77,
+                    "comparisonType": "Average",
+                    "comparisonPeriod": "P2M"
+                  },
+                  {
+                    "reason": "ExistingResourceGoupCost",
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/kmd-elements-test",
+                    "change": "0.02 percent",
+                    "comparisonType": "Average",
+                    "comparisonPeriod": "P2M"
+                  },
+                  {
+                    "reason": "DeletedResourceGroupCost",
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/kmd-elements-par1",
+                    "change": "-5.37 USD",
+                    "comparisonType": "Absolute",
+                    "comparisonPeriod": "P2M"
+                  },
+                  {
+                    "reason": "AddedResourceGroupCost",
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/kmd-elements-41034",
+                    "change": "1.84 USD",
+                    "comparisonType": "Absolute",
+                    "comparisonPeriod": "P2M"
+                  }
+                ]
+              },
+              "status": "New"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

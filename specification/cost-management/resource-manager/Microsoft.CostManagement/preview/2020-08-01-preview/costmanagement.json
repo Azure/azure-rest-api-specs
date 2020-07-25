@@ -1456,6 +1456,90 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.CostManagement/insights": {
+      "get": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_ListByScope",
+        "description": "Lists all insights at the given scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "InsightsListBySubscription": {
+            "$ref": "./examples/InsightsListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeInsightsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InsightsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/insights/{insightName}": {
+      "get": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_GetByScope",
+        "description": "Gets the insight for the defined scope by insight name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "InsightsBySubscription": {
+            "$ref": "./examples/InsightsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeInsightsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/insightsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Insights"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -2082,6 +2166,267 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "InsightsListResult": {
+      "description": "Result of listing insights. It contains a list of available cost insights.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of cost insights.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Insights"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Insights": {
+      "description": "Cost insights.",
+      "type": "object",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of insights.",
+          "enum": [
+            "anomaly"
+          ],
+          "x-ms-enum": {
+            "name": "InsightsKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AnomalyInsights": {
+      "description": "Anomaly Insights.",
+      "type": "object",
+      "x-ms-discriminator-value": "anomaly",
+      "properties": {
+        "properties": {
+          "description": "Properties for anomaly insights",
+          "$ref": "#/definitions/AnamolyInsightsProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Insights"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "AnamolyInsightsProperties": {
+      "type": "object",
+      "description": "The properties of the view.",
+      "properties": {
+        "status": {
+          "description": "Status of the insight.",
+          "type": "string",
+          "enum":[
+            "New",            
+            "Dismissed",
+            "Acknowledged",
+            "Resolved"            
+          ],
+          "x-ms-enum":{
+            "name": "InsightsStatus",
+            "modelAsString": true
+          }
+        },
+        "eventDate": {
+          "description": "The date of event resulting in this anamoly",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "The scope at which the anamoly was detected.",
+          "type": "string",         
+          "readOnly": true
+        },
+        "impactTerm": {
+          "description": "The period where the impact was observed",
+          "type": "string",          
+          "readOnly": true
+        },
+        "impactResolution": {
+          "description": "The datetime when this impact was resolved.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },        
+        "timeDetected": {
+          "description": "The datetime when this anamoly was detected.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "severity": {
+          "description": "Severity of anamoly.",
+          "type": "string",
+          "readOnly": true
+        },       
+        "details": {
+          "description": "Details of anamoly.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AnalomyDetails"
+          }
+        },
+        "justification": {
+          "description": "Justification as why the impact qualifies as anamoly.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/InsightsAnamolyJustification"
+          }
+        }
+      }
+    },
+    "AnalomyDetails": {
+      "description": "Details of cost insights anamoly.",
+      "type": "object",
+      "properties": {
+        "contributors": {
+          "description": "The list of cost insights anamoly contributors.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InsightsAnamolyContributors"
+          }       
+        }
+      }
+    },
+    "InsightsAnamolyJustification": {
+      "description": "Justification as why the impact qualifies as anamoly.",
+      "type": "object",
+      "properties": {
+        "forecast": {
+          "description": "The list of expected forecasts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InsightsAnamolyForecast"
+          }       
+        },
+        "boundry": {
+          "description": "The list of boundaries.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InsightsAnamolyBoundary"
+          }       
+        }
+      }
+    },
+    "InsightsAnamolyForecast": {
+      "description": "The list of expected forecasts.",
+      "type": "object",
+      "properties": {
+        "isAnomaly": {
+          "description": "Flag indicating if this anamoly or not.",
+          "type": "boolean",
+          "readOnly": true          
+        },
+        "expected": {
+          "description": "Expected value",
+          "type": "number",
+          "readOnly": true         
+        },
+        "actual": {
+          "description": "Actual value",
+          "type": "number",
+          "readOnly": true         
+        },
+        "delta": {
+          "description": "Delta value",
+          "type": "number",
+          "readOnly": true         
+        }
+      }
+    },    
+    "InsightsAnamolyBoundary": {
+      "description": "The list of boundaries.",
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "description": "Description og threshold",
+          "type": "string",
+          "readOnly": true          
+        },
+        "value": {
+          "description": "Threshold value",
+          "type": "number",
+          "readOnly": true         
+        },
+        "type": {
+          "description": "Type of threshold",
+          "type": "string",
+          "readOnly": true         
+        }
+      }
+    },
+    "InsightsAnamolyContributors": {
+      "description": "Cost insights anamoly contributors.",
+      "type": "object",
+      "properties": {
+        "reason": {
+          "description": "Contribution Reason.",
+          "type": "string",
+          "readOnly": true          
+        },
+        "currentCount": {
+          "description": "Current count.",
+          "type": "number",
+          "readOnly": true         
+        },
+        "id": {
+          "description": "Id of resource triggering the change",
+          "type": "number",
+          "readOnly": true         
+        },
+        "change": {
+          "description": "Value of change",
+          "type": "number",
+          "readOnly": true         
+        },
+        "changePercentage": {
+          "description": "Percentage of change",
+          "type": "number",
+          "readOnly": true         
+        },
+        "totalCostInUSD": {
+          "description": "Cost in USD",
+          "type": "number",
+          "readOnly": true         
+        },
+        "comparisonPeriod": {
+          "description": "Time period used for comparison",
+          "type": "string",
+          "readOnly": true         
+        },
+        "comparisonType": {
+          "description": "Method used for comparison.",
+          "type": "string",
+          "readOnly": true         
         }
       }
     },
@@ -3140,6 +3485,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "insightsNameParameter": {
+      "name": "insightName",
+      "in": "path",
+      "description": "Insights name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "scopeViewParameter": {
       "name": "scope",
       "in": "path",
@@ -3181,6 +3534,15 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeInsightsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with insights operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope. At present, only subscription scope is supported.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
