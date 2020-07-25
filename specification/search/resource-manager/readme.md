@@ -68,7 +68,7 @@ input-file:
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
 ``` yaml $(tag) == 'package-2020-08-preview'
 input-file:
-- Microsoft.Search/stable/2020-08-01-preview/search.json
+- Microsoft.Search/preview/2020-08-01-preview/search.json
 ```
 
 ### Tag: package-2019-10-preview
