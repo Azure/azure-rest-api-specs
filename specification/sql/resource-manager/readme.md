@@ -135,12 +135,13 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
-- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -243,6 +244,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -334,6 +336,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -495,6 +498,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/operations.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -898,6 +902,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
   - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json

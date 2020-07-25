@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-06-01-preview",
+    "version": "2020-02-02-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -16,13 +16,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications/{authenticationName}": {
       "get": {
         "tags": [
-          "ServerAzureADAdministrators"
+          "ServerAzureADOnlyAuthentications"
         ],
-        "description": "Gets a Azure Active Directory administrator.",
-        "operationId": "ServerAzureADAdministrators_Get",
+        "description": "Gets a specific Azure Active Directory only authentication property.",
+        "operationId": "ServerAzureADOnlyAuthentications_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
@@ -37,25 +37,25 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "administratorName",
+            "name": "authenticationName",
             "in": "path",
-            "description": "The name of server active directory administrator.",
+            "description": "The name of server azure active directory only authentication.",
             "required": true,
             "type": "string",
             "enum": [
-              "ActiveDirectory"
+              "Default"
             ],
             "x-ms-enum": {
-              "name": "AdministratorName",
+              "name": "AuthenticationName",
               "modelAsString": true
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved a specified Azure Active Directory administrator.",
+            "description": "Successfully retrieved a specified Azure Active Directory only authentication properties.",
             "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
             }
           },
           "default": {
@@ -63,17 +63,17 @@
           }
         },
         "x-ms-examples": {
-          "Gets a Azure Active Directory administrator.": {
-            "$ref": "./examples/AdministratorGet.json"
+          "Gets a Azure Active Directory only authentication property.": {
+            "$ref": "./examples/AzureADOnlyAuthGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ServerAzureADAdministrators"
+          "ServerAzureADOnlyAuthentications"
         ],
-        "description": "Creates or updates an existing Azure Active Directory administrator.",
-        "operationId": "ServerAzureADAdministrators_CreateOrUpdate",
+        "description": "Sets Server Active Directory only authentication property or updates an existing server Active Directory only authentication property.",
+        "operationId": "ServerAzureADOnlyAuthentications_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
@@ -88,62 +88,62 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "administratorName",
+            "name": "authenticationName",
             "in": "path",
-            "description": "The name of server active directory administrator.",
+            "description": "The name of server azure active directory only authentication.",
             "required": true,
             "type": "string",
             "enum": [
-              "ActiveDirectory"
+              "Default"
             ],
             "x-ms-enum": {
-              "name": "AdministratorName",
+              "name": "AuthenticationName",
               "modelAsString": true
             }
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "The requested Azure Active Directory administrator Resource state.",
+            "description": "The required parameters for creating or updating an Active Directory only authentication property.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated a Azure Active Directory administrator.",
+            "description": "Successfully updated a Azure Active Directory only authentication property.",
             "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           },
           "202": {
             "description": "Accepted"
           },
           "201": {
-            "description": "Successfully created a Azure Active Directory administrator.",
+            "description": "Successfully updated Azure Active Directory only authentication property.",
             "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Creates or updates an existing Azure Active Directory administrator.": {
-            "$ref": "./examples/AdministratorCreateOrUpdate.json"
+          "Creates or updates Azure Active Directory only authentication object.": {
+            "$ref": "./examples/AzureADOnlyAuthCreateOrUpdate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "ServerAzureADAdministrators"
+          "ServerAzureADOnlyAuthentications"
         ],
-        "description": "Deletes the Azure Active Directory administrator with the given name.",
-        "operationId": "ServerAzureADAdministrators_Delete",
+        "description": "Deletes an existing server Active Directory only authentication property.",
+        "operationId": "ServerAzureADOnlyAuthentications_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
@@ -158,49 +158,49 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "administratorName",
+            "name": "authenticationName",
             "in": "path",
-            "description": "The name of server active directory administrator.",
+            "description": "The name of server azure active directory only authentication.",
             "required": true,
             "type": "string",
             "enum": [
-              "ActiveDirectory"
+              "Default"
             ],
             "x-ms-enum": {
-              "name": "AdministratorName",
+              "name": "AuthenticationName",
               "modelAsString": true
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the Azure Active Directory administrator."
+            "description": "Successfully deleted the Azure Active Directory only property."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           },
           "202": {
             "description": "Accepted"
           },
           "204": {
-            "description": "The specified Azure Active Directory administrator does not exist."
+            "description": "The specified Azure Active Directory only property does not exist."
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete Azure Active Directory administrator.": {
-            "$ref": "./examples/AdministratorDelete.json"
+          "Deletes Azure Active Directory only authentication object.": {
+            "$ref": "./examples/AzureADOnlyAuthDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications": {
       "get": {
         "tags": [
-          "ServerAzureADAdministrators"
+          "ServerAzureADOnlyAuthentications"
         ],
-        "description": "Gets a list of Azure Active Directory administrators in a server.",
-        "operationId": "ServerAzureADAdministrators_ListByServer",
+        "description": "Gets a list of server Azure Active Directory only authentications.",
+        "operationId": "ServerAzureADOnlyAuthentications_ListByServer",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
@@ -217,9 +217,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of Azure Active Directory administrators.",
+            "description": "Successfully retrieved the list of Azure Active Directory only authentication objects.",
             "schema": {
-              "$ref": "#/definitions/AdministratorListResult"
+              "$ref": "#/definitions/AzureADOnlyAuthListResult"
             }
           },
           "default": {
@@ -230,52 +230,24 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets a list of Azure Active Directory administrator.": {
-            "$ref": "./examples/AdministratorList.json"
+          "Gets a list of Azure Active Directory only authentication object.": {
+            "$ref": "./examples/AzureADOnlyAuthList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AdministratorProperties": {
-      "description": "Properties of a active directory administrator.",
+    "AzureADOnlyAuthProperties": {
+      "description": "Properties of a active directory only authentication.",
       "required": [
-        "administratorType",
-        "login",
-        "sid"
+        "azureADOnlyAuthentication"
       ],
       "type": "object",
       "properties": {
-        "administratorType": {
-          "description": "Type of the sever administrator.",
-          "enum": [
-            "ActiveDirectory"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AdministratorType",
-            "modelAsString": true
-          }
-        },
-        "login": {
-          "description": "Login name of the server administrator.",
-          "type": "string"
-        },
-        "sid": {
-          "format": "uuid",
-          "description": "SID (object ID) of the server administrator.",
-          "type": "string"
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "Tenant ID of the administrator.",
-          "type": "string"
-        },
         "azureADOnlyAuthentication": {
           "description": "Azure Active Directory only Authentication enabled.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         }
       }
     },
@@ -311,8 +283,8 @@
       ],
       "properties": {}
     },
-    "ServerAzureADAdministrator": {
-      "description": "Azure Active Directory administrator.",
+    "ServerAzureADOnlyAuthentication": {
+      "description": "Azure Active Directory only authentication.",
       "type": "object",
       "allOf": [
         {
@@ -321,21 +293,21 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AdministratorProperties",
+          "$ref": "#/definitions/AzureADOnlyAuthProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "AdministratorListResult": {
-      "description": "A list of active directory administrators.",
+    "AzureADOnlyAuthListResult": {
+      "description": "A list of active directory only authentications.",
       "type": "object",
       "properties": {
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerAzureADAdministrator"
+            "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
           },
           "readOnly": true
         },
