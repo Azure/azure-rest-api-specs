@@ -1057,18 +1057,30 @@
         }
       }
     },
-    "CustomEntities": {
-      "items": {
-        "$ref": "#/definitions/CustomEntity"
-      },
-      "type": "array"
+    "CustomEntitiesDocument": {
+      "type": "object",
+      "required": [
+        "id",
+        "entities"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/definitions/CustomEntity"
+          },
+          "type": "array"
+        }
+      }
     },
     "CustomEntitiesResult": {
       "properties": {
         "documents": {
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/CustomEntities"
+            "$ref": "#/definitions/CustomEntitiesDocument"
           },
           "type": "array"
         },
@@ -1123,45 +1135,30 @@
       ]
     },
     "CustomEntity": {
-      "properties": {
-        "category": {
-          "example": "address",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
         },
-        "children": {
-          "example": [
-            {
-              "category": "city",
-              "confidenceScore": 0.78,
-              "length": 3,
-              "offset": 5
+        {
+          "type": "object",
+          "properties": {
+            "children": {
+              "example": [
+                {
+                  "category": "city",
+                  "confidenceScore": 0.78,
+                  "length": 3,
+                  "offset": 5
+                }
+              ],
+              "items": {
+                "$ref": "#/definitions/CustomEntity"
+              },
+              "type": "array"
             }
-          ],
-          "items": {
-            "$ref": "#/definitions/CustomEntity"
-          },
-          "type": "array"
-        },
-        "confidenceScore": {
-          "example": 0.96,
-          "type": "number"
-        },
-        "length": {
-          "example": 7,
-          "type": "number"
-        },
-        "offset": {
-          "example": 3,
-          "type": "number"
+          }
         }
-      },
-      "required": [
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ],
-      "type": "object"
+      ]
     },
     "SentimentResponse": {
       "type": "object",
