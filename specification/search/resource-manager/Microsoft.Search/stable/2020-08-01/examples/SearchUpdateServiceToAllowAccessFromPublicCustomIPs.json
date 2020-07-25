@@ -8,11 +8,14 @@
       "properties": {
         "replicaCount": 3,
         "partitionCount": 1,
+        "publicNetworkAccess": "enabled",
         "networkRuleSet": {
-          "endpointAccess": "Public",
           "ipRules": [
             {
-              "value": "10.2.3.4"
+              "value": "123.4.5.6"
+            },
+            {
+              "value": "123.4.6.0/18"
             }
           ]
         }
@@ -40,8 +43,8 @@
           "statusDetails": "",
           "hostingMode": "default",
           "provisioningState": "succeeded",
+          "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "endpointAccess": "Public",
             "ipRules": [
               {
                 "value": "10.2.3.4"

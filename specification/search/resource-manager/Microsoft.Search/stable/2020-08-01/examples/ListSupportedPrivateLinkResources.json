@@ -61,6 +61,22 @@
                     "groupId": "vault",
                     "description": "Azure Cognitive Search can access keys in Azure Key Vault to encrypt search index and synonym map data"
                   }
+                },
+                {
+                  "name": "plr",
+                  "properties": {
+                    "type": "Microsoft.DBforMySQL/servers",
+                    "groupId": "mysqlServer",
+                    "description": "Azure Cognitive Search indexers can connect to MySQL databases for reading data (data source, preview)."
+                  }
+                },
+                {
+                  "name": "site",
+                  "properties": {
+                    "type": "Microsoft.Web/sites",
+                    "groupId": "sites",
+                    "description": "Azure Cognitive Search indexers can connect to App Services when executing custom web api skills that can be present in a skillset (optional) attached to the indexer."
+                  }
                 }
               ]
             }
