@@ -180,9 +180,9 @@
           }
         ],
         "responses": {
-		  "202": {
-		    "description": "Request is queued successfully."
-		  },
+          "202": {
+            "description": "Request is queued successfully."
+          },
           "204": {
             "description": "No Content."
           },
@@ -4130,6 +4130,78 @@
           "readOnly": true
         }
       }
+    },
+    "SynapseNotebookReference": {
+      "description": "Synapse notebook reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse notebook reference type.",
+          "enum": [
+            "NotebookReference"
+          ],
+          "x-ms-enum": {
+            "name": "NotebookReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference notebook name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SynapseSparkJobReference": {
+      "description": "Synapse spark job reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse spark job reference type.",
+          "enum": [
+            "SparkJobDefinitionReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkJobReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference spark job name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SqlPoolReference": {
+      "description": "SQL pool reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "SQL pool reference type.",
+          "enum": [
+            "SqlPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "SqlPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference SQL pool name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   },
   "parameters": {
