@@ -715,7 +715,7 @@
           "type": "integer"
         },
         "sessions": {
-          "description": "The Spark Batch job list.",
+          "description": "List of spark batch jobs.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -728,7 +728,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The spark batch job's id.",
+          "description": "The livy id of the spark batch job.",
           "format": "int32",
           "type": "integer"
         },
@@ -745,7 +745,7 @@
         },
         "state": {
           "description": "The current state of the spark batch job",
-          "$ref": "#/definitions/SubmittedJobState"
+          "$ref": "#/definitions/JobState"
         },
         "log": {
           "description": "The log lines.",
@@ -871,7 +871,7 @@
           "type": "integer"
         },
         "sessions": {
-          "description": "The spark session list.",
+          "description": "List of spark sessions.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -884,7 +884,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The spark session's id.",
+          "description": "The livy id of the spark session job.",
           "format": "int32",
           "type": "integer"
         },
@@ -915,7 +915,7 @@
         },
         "state": {
           "description": "The current state of the spark session job",
-          "$ref": "#/definitions/SubmittedJobState"
+          "$ref": "#/definitions/JobState"
         },
         "appInfo": {
           "description": "The detailed application info.",
@@ -1021,6 +1021,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "description":"The livy id of the spark job.",
           "format": "int32",
           "type": "integer"
         },
@@ -1054,13 +1055,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The spark job's livy id.",
+          "description": "The livy id of the spark job.",
           "format": "int32",
           "type": "integer"
         },
         "state": {
           "description": "The current state of the spark job",
-          "$ref": "#/definitions/SubmittedJobState"
+          "$ref": "#/definitions/JobState"
         }
       }
     },
@@ -1068,7 +1069,7 @@
       "type": "object",
       "properties": {
         "statements": {
-          "description": "The spark statement list.",
+          "description": "List of spark statements.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1081,7 +1082,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The spark statement id.",
+          "description": "The livy id of the spark statement job.",
           "format": "int32",
           "type": "integer"
         },
@@ -1150,10 +1151,10 @@
         "cancelled"
       ]
     },
-    "SubmittedJobState": {
+    "JobState": {
       "type": "string",
       "x-ms-enum": {
-        "name": "SubmittedJobState",
+        "name": "JobState",
         "modelAsString": true
       },
       "enum": [
