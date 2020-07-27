@@ -31,6 +31,15 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
+### Tag: package-2020-05-preview
+
+These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05-preview'
+input-file:
+- Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
+```
+
 ### Tag: package-2020-01-01-preview-only
 
 These settings apply only when `--tag=package-2020-01-01-preview-only` is specified on the command line.
