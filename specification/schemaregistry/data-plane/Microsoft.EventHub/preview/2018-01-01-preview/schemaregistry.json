@@ -45,16 +45,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SchemaBytePayload"
+            }
           },
           "404": {
             "description": "Schema with matching GUID not found"
           }
-        },
-        "tags": [
-          "schemas",
-          "client-runtime"
-        ]
+        }
       }
     },
     "/$schemagroups/{group-name}/schemas": {
@@ -122,6 +121,7 @@
       "post": {
         "summary": "Get schema GUID by schema content",
         "description": "Get GUID for schema with matching byte content and serialization format.",
+        "operationId": "getIdBySchemaContent",
         "produces": [
           "application/json"
         ],
@@ -166,27 +166,18 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "schema GUID"
-                }
-              }
+              "$ref": "#/definitions/SchemaId"
             }
           },
           "404": {
             "description": "Matching schema not found"
           }
-        },
-        "tags": [
-          "schemas",
-          "client-runtime"
-        ]
+        }
       },
       "put": {
         "summary": "Create new schema",
         "description": "Create new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n",
+        "operationId": "createSchema",
         "produces": [
           "application/json"
         ],
@@ -231,27 +222,18 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "schema GUID"
-                }
-              }
+              "$ref": "#/definitions/SchemaId"
             }
           },
           "400": {
             "description": "Invalid request"
           }
-        },
-        "tags": [
-          "schemas",
-          "client-runtime"
-        ]
+        }
       },
       "get": {
         "summary": "Get latest version of schema",
         "description": "Get latest version of schema.",
+        "operationId": "getLatestSchema",
         "produces": [
           "application/json"
         ],
@@ -296,22 +278,14 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "schema GUID"
-                }
-              }
+              "$ref": "#/definitions/SchemaBytePayload"
             }
           }
-        },
-        "tags": [
-          "schemas"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete schema",
+        "operationId": "deleteSchema",
         "parameters": [
           {
             "name": "group-name",
@@ -335,16 +309,13 @@
           "404": {
             "description": "Matching schema not found"
           }
-        },
-        "tags": [
-          "schemas"
-        ]
+        }
       }
     },
     "/$schemagroups/{group-name}/schemas/{schema-name}/versions": {
       "get": {
         "summary": "Get list of versions",
-        "description": "Get list of versions for specified schema",
+        "operationId": "getSchemaVersions",
         "produces": [
           "application/json"
         ],
@@ -380,15 +351,13 @@
               }
             }
           }
-        },
-        "tags": [
-          "schemas"
-        ]
+        }
       }
     },
     "/$schemagroups/{group-name}/schemas/{schema-name}/versions/{version-number}": {
       "get": {
         "summary": "Get specified version of schema",
+        "operationId": "getSchemaVersion",
         "parameters": [
           {
             "name": "group-name",
@@ -437,16 +406,14 @@
               }
             },
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SchemaBytePayload"
             }
           }
-        },
-        "tags": [
-          "schemas"
-        ]
+        }
       },
       "delete": {
         "summary": "Delete specified version of schema",
+        "operationId": "deleteSchemaVersion",
         "parameters": [
           {
             "name": "group-name",
@@ -474,10 +441,7 @@
           "200": {
             "description": "OK"
           }
-        },
-        "tags": [
-          "schemas"
-        ]
+        }
       }
     }
   },
@@ -492,62 +456,6 @@
     },
     "SchemaBytePayload": {
       "type": "string"
-    }
-  },
-  "responses": {
-    "SchemaIdResponse": {
-      "description": "OK",
-      "headers": {
-        "Location": {
-          "type": "string"
-        },
-        "X-Serialization": {
-          "type": "string",
-          "description": "schema type"
-        },
-        "X-Schema-Id": {
-          "type": "string",
-          "description": "unique schema identifier"
-        },
-        "X-Schema-Id-Location": {
-          "type": "string",
-          "description": "location of schema resource"
-        },
-        "X-Schema-Version": {
-          "type": "integer",
-          "description": "version of returned schema"
-        }
-      },
-      "schema": {
-        "$ref": "#/definitions/SchemaId"
-      }
-    },
-    "SchemaBytePayloadResponse": {
-      "description": "OK",
-      "headers": {
-        "Location": {
-          "type": "string"
-        },
-        "X-Serialization": {
-          "type": "string",
-          "description": "schema type"
-        },
-        "X-Schema-Id": {
-          "type": "string",
-          "description": "unique schema identifier"
-        },
-        "X-Schema-Id-Location": {
-          "type": "string",
-          "description": "location of schema resource"
-        },
-        "X-Schema-Version": {
-          "type": "integer",
-          "description": "version of returned schema"
-        }
-      },
-      "schema": {
-        "$ref": "#/definitions/SchemaBytePayload"
-      }
     }
   }
 }
