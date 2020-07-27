@@ -1,588 +1,553 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Azure Schema Registry Rest Service",
-      "version": "1.0.0-beta"
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Schema Registry",
+    "version": "0.1.9"
+  },
+  "paths": {
+    "/$schemagroups/getSchemaById": {
+      "get": {
+        "summary": "Get schema by GUID",
+        "description": "Get schema by GUID.  Azure Schema Registry guarantees that GUID within a namespace.",
+        "operationId": "getSchemaById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "X-Serialization",
+            "description": "schema type",
+            "required": true
+          },
+          {
+            "in": "header",
+            "type": "string",
+            "name": "X-Schema-Id",
+            "description": "unique schema identifier",
+            "required": true
+          },
+          {
+            "in": "header",
+            "type": "string",
+            "name": "X-Schema-Id-Location",
+            "description": "location of schema resource",
+            "required": true
+          },
+          {
+            "in": "header",
+            "type": "string",
+            "name": "X-Schema-Version",
+            "description": "version of returned schema",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Schema with matching GUID not found"
+          }
+        },
+        "tags": [
+          "schemas",
+          "client-runtime"
+        ]
+      }
     },
-    "paths": {
-      "/$schemagroups": {
-        "get": {
-          "summary": "Get list of schema groups",
-          "description": "Get all schema groups in namespace.",
-          "operationId": "getGroups",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "tags": [
-            "groups"
-          ]
-        }
-      },
-      "/$schemagroups/getSchemaById/{schema-id}": {
-        "get": {
-          "summary": "Get schema by schema ID",
-          "description": "Get schema by schema ID.",
-          "operationId": "getSchemaById",
-          "parameters": [
-            {
-              "name": "schema-id",
-              "in": "path",
-              "description": "schema ID referencing specific schema in registry namespace",
-              "required": true,
-              "schema": {
+    "/$schemagroups/{group-name}/schemas": {
+      "get": {
+        "summary": "Get schemas for group name",
+        "description": "Returns schema by group name.",
+        "operationId": "getSchemasByGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "group-name",
+            "description": "schema group",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "string"
               }
             }
-          ],
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/SchemaBytePayloadResponse"
-            },
-            "404": {
-              "description": "Schema with matching ID not found"
-            }
           },
-          "tags": [
-            "runtime"
-          ]
+          "404": {
+            "description": "Group not found"
+          }
         }
       },
-      "/$schemagroups/{group-name}": {
+      "delete": {
+        "summary": "Deletes all schemas in group",
+        "description": "Deletes all schemas under specified group name.",
+        "operationId": "deleteSchemasByGroup",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "group-name",
             "in": "path",
+            "type": "string",
+            "name": "group-name",
             "description": "schema group",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
-        "get": {
-          "summary": "Get schema group",
-          "description": "Get schema group description in registry namespace.",
-          "operationId": "getGroup",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/SchemaGroup"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Specified group not found"
-            }
+        "responses": {
+          "204": {
+            "description": "OK no content"
           },
-          "tags": [
-            "groups"
-          ]
-        },
-        "put": {
-          "summary": "Create or update a schema group",
-          "description": "Create or update schema group with specified schema type in registry namespace.",
-          "operationId": "createOrUpdateGroup",
-          "parameters": [
-            {
-              "name": "If-Match",
-              "description": "Specify an ETag value to perform update operation only on schema group with a matching Guid value. If a '*' is supplied then update is performed without ETag check. Supplying empty value will enforce the create-only behavior",
-              "in": "header",
-              "required": false,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "description": "schema group description",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaGroup"
-                }
-              }
-            }
+          "400": {
+            "description": "Invalid group supplied"
           },
-          "responses": {
-            "201": {
-              "description": "Created",
-              "headers": {
-                "Location": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "409": {
-              "description": "Schema group already exists"
-            }
-          },
-          "tags": [
-            "groups"
-          ]
-        },
-        "delete": {
-          "summary": "Delete schema group",
-          "description": "Delete schema group in schema registry namespace.",
-          "operationId": "deleteGroup",
-          "responses": {
-            "204": {
-              "description": "OK no content"
-            },
-            "404": {
-              "description": "Specified group not found"
-            }
-          },
-          "tags": [
-            "groups"
-          ]
-        }
-      },
-      "/$schemagroups/{group-name}/schemas": {
-        "parameters": [
-          {
-            "name": "group-name",
-            "in": "path",
-            "description": "schema group",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+          "404": {
+            "description": "Group not found"
           }
+        }
+      }
+    },
+    "/$schemagroups/{group-name}/schemas/{schema-name}": {
+      "post": {
+        "summary": "Get schema GUID by schema content",
+        "description": "Get GUID for schema with matching byte content and serialization format.",
+        "produces": [
+          "application/json"
         ],
-        "get": {
-          "tags": [
-            "groups"
-          ],
-          "summary": "Get schemas for group name",
-          "description": "Returns schema by group name.",
-          "operationId": "getSchemasByGroup",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "headers": {
-                "X-Schema-Type": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Group not found"
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "groups"
-          ],
-          "summary": "Deletes all schemas in group",
-          "description": "Deletes all schemas under specified group name.",
-          "operationId": "deleteSchemasByGroup",
-          "responses": {
-            "204": {
-              "description": "OK no content"
-            },
-            "404": {
-              "description": "Group not found"
-            }
-          }
-        }
-      },
-      "/$schemagroups/{group-name}/schemas/{schema-name}": {
         "parameters": [
           {
             "name": "group-name",
             "in": "path",
             "description": "schema group",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "schema-name",
             "in": "path",
             "description": "schema name",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
-        "post": {
-          "summary": "Get schema ID by schema content",
-          "description": "Get ID for schema with matching byte content and schema type.",
-          "operationId": "getIdBySchemaContent",
-          "parameters": [
-            {
-              "in": "header",
-              "name": "X-Schema-Type",
-              "schema": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Location": {
                 "type": "string"
               },
-              "required": true
-            }
-          ],
-          "requestBody": {
-            "description": "schema content",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaBytePayload"
+              "X-Serialization": {
+                "type": "string",
+                "description": "schema type"
+              },
+              "X-Schema-Id": {
+                "type": "string",
+                "description": "unique schema identifier"
+              },
+              "X-Schema-Id-Location": {
+                "type": "string",
+                "description": "location of schema resource"
+              },
+              "X-Schema-Version": {
+                "type": "integer",
+                "description": "version of returned schema"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "schema GUID"
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/SchemaIdResponse"
-            },
-            "404": {
-              "description": "Matching schema not found"
-            }
-          },
-          "tags": [
-            "runtime"
-          ]
+          "404": {
+            "description": "Matching schema not found"
+          }
         },
-        "put": {
-          "summary": "Register schema",
-          "description": "Register schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1. If schema with identical content already exists, existing schema's ID is returned. \n",
-          "operationId": "createSchema",
-          "parameters": [
-            {
-              "in": "header",
-              "name": "X-Schema-Type",
-              "schema": {
-                "type": "string"
-              },
-              "required": true
-            }
-          ],
-          "requestBody": {
-            "description": "schema content",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaBytePayload"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/SchemaIdResponse"
-            },
-            "400": {
-              "description": "Invalid request"
-            }
-          },
-          "tags": [
-            "runtime"
-          ]
-        },
-        "get": {
-          "summary": "Get latest version of schema",
-          "description": "Get latest version of schema.",
-          "operationId": "getLatestSchema",
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/SchemaBytePayloadResponse"
-            }
-          },
-          "tags": [
-            "schemas"
-          ]
-        },
-        "delete": {
-          "summary": "Delete schema",
-          "operationId": "deleteSchema",
-          "responses": {
-            "204": {
-              "description": "OK no content"
-            },
-            "404": {
-              "description": "Matching schema not found"
-            }
-          },
-          "tags": [
-            "schemas"
-          ]
-        }
+        "tags": [
+          "schemas",
+          "client-runtime"
+        ]
       },
-      "/$schemagroups/{group-name}/schemas/{schema-name}/versions": {
+      "put": {
+        "summary": "Create new schema",
+        "description": "Create new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "group-name",
             "in": "path",
             "description": "schema group",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "schema-name",
             "in": "path",
             "description": "schema name",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
-        "get": {
-          "summary": "Get list of versions",
-          "description": "Get list of versions for specified schema",
-          "operationId": "getSchemaVersions",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "headers": {
-                "X-Schema-Type": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
               },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    }
-                  }
+              "X-Serialization": {
+                "type": "string",
+                "description": "schema type"
+              },
+              "X-Schema-Id": {
+                "type": "string",
+                "description": "unique schema identifier"
+              },
+              "X-Schema-Id-Location": {
+                "type": "string",
+                "description": "location of schema resource"
+              },
+              "X-Schema-Version": {
+                "type": "integer",
+                "description": "version of returned schema"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "schema GUID"
                 }
               }
             }
           },
-          "tags": [
-            "schemas"
-          ]
-        }
+          "400": {
+            "description": "Invalid request"
+          }
+        },
+        "tags": [
+          "schemas",
+          "client-runtime"
+        ]
       },
-      "/$schemagroups/{group-name}/schemas/{schema-name}/versions/{version-number}": {
+      "get": {
+        "summary": "Get latest version of schema",
+        "description": "Get latest version of schema.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "group-name",
             "in": "path",
             "description": "schema group",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "schema-name",
             "in": "path",
             "description": "schema name",
             "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "X-Serialization": {
+                "type": "string",
+                "description": "schema type"
+              },
+              "X-Schema-Id": {
+                "type": "string",
+                "description": "unique schema identifier"
+              },
+              "X-Schema-Id-Location": {
+                "type": "string",
+                "description": "location of schema resource"
+              },
+              "X-Schema-Version": {
+                "type": "integer",
+                "description": "version of returned schema"
+              }
+            },
             "schema": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "schema GUID"
+                }
+              }
             }
+          }
+        },
+        "tags": [
+          "schemas"
+        ]
+      },
+      "delete": {
+        "summary": "Delete schema",
+        "parameters": [
+          {
+            "name": "group-name",
+            "in": "path",
+            "description": "schema group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schema-name",
+            "in": "path",
+            "description": "schema name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK no content"
+          },
+          "404": {
+            "description": "Matching schema not found"
+          }
+        },
+        "tags": [
+          "schemas"
+        ]
+      }
+    },
+    "/$schemagroups/{group-name}/schemas/{schema-name}/versions": {
+      "get": {
+        "summary": "Get list of versions",
+        "description": "Get list of versions for specified schema",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group-name",
+            "in": "path",
+            "description": "schema group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schema-name",
+            "in": "path",
+            "description": "schema name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Serialization": {
+                "type": "string",
+                "description": "schema type"
+              }
+            },
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "tags": [
+          "schemas"
+        ]
+      }
+    },
+    "/$schemagroups/{group-name}/schemas/{schema-name}/versions/{version-number}": {
+      "get": {
+        "summary": "Get specified version of schema",
+        "parameters": [
+          {
+            "name": "group-name",
+            "in": "path",
+            "description": "schema group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schema-name",
+            "in": "path",
+            "description": "schema name",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "version-number",
             "in": "path",
             "description": "version number",
             "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "type": "integer"
           }
         ],
-        "get": {
-          "summary": "Get specified version of schema",
-          "operationId": "getSchemaVersion",
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/SchemaBytePayloadResponse"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "X-Serialization": {
+                "type": "string",
+                "description": "schema type"
+              },
+              "X-Schema-Id": {
+                "type": "string",
+                "description": "unique schema identifier"
+              },
+              "X-Schema-Id-Location": {
+                "type": "string",
+                "description": "location of schema resource"
+              },
+              "X-Schema-Version": {
+                "type": "integer",
+                "description": "version of returned schema"
+              }
             },
-            "404": {
-              "description": "Specified schema not found"
+            "schema": {
+              "type": "object"
             }
-          },
-          "tags": [
-            "schemas"
-          ]
+          }
         },
-        "delete": {
-          "summary": "Delete specified version of schema",
-          "operationId": "deleteSchemaVersion",
-          "responses": {
-            "204": {
-              "description": "OK no content"
-            }
+        "tags": [
+          "schemas"
+        ]
+      },
+      "delete": {
+        "summary": "Delete specified version of schema",
+        "parameters": [
+          {
+            "name": "group-name",
+            "in": "path",
+            "description": "schema group",
+            "required": true,
+            "type": "string"
           },
-          "tags": [
-            "schemas"
-          ]
+          {
+            "name": "schema-name",
+            "in": "path",
+            "description": "schema name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version-number",
+            "in": "path",
+            "description": "version number",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "schemas"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SchemaId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         }
       }
     },
-    "components": {
-      "schemas": {
-        "SchemaId": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            }
-          }
-        },
-        "SchemaBytePayload": {
+    "SchemaBytePayload": {
+      "type": "string"
+    }
+  },
+  "responses": {
+    "SchemaIdResponse": {
+      "description": "OK",
+      "headers": {
+        "Location": {
           "type": "string"
         },
-        "SchemaGroup": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "createdTimeUtc": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "updatedTimeUtc": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "schemaType": {
-              "type": "string"
-            },
-            "etag": {
-              "type": "string",
-              "description": "Define an read-only identifier that uniquely describe an instance of the group. This is returned from get call for update purposes. Setting this on create or update has no effect."
-            },
-            "schemaCompatibility": {
-              "type": "integer",
-              "description": "schema compatibility mode enum, defined by supported schema type"
-            },
-            "groupProperties": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          }
+        "X-Serialization": {
+          "type": "string",
+          "description": "schema type"
+        },
+        "X-Schema-Id": {
+          "type": "string",
+          "description": "unique schema identifier"
+        },
+        "X-Schema-Id-Location": {
+          "type": "string",
+          "description": "location of schema resource"
+        },
+        "X-Schema-Version": {
+          "type": "integer",
+          "description": "version of returned schema"
         }
       },
-      "responses": {
-        "SchemaIdResponse": {
-          "description": "OK",
-          "headers": {
-            "Location": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "X-Schema-Type": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "X-Schema-Id": {
-              "schema": {
-                "type": "string"
-              },
-              "description": "unique schema identifier"
-            },
-            "X-Schema-Id-Location": {
-              "schema": {
-                "type": "string",
-                "format": "url"
-              },
-              "description": "location of schema resource"
-            },
-            "X-Schema-Version": {
-              "schema": {
-                "type": "integer"
-              },
-              "description": "version of returned schema"
-            }
-          },
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SchemaId"
-              }
-            }
-          }
+      "schema": {
+        "$ref": "#/definitions/SchemaId"
+      }
+    },
+    "SchemaBytePayloadResponse": {
+      "description": "OK",
+      "headers": {
+        "Location": {
+          "type": "string"
         },
-        "SchemaBytePayloadResponse": {
-          "description": "OK",
-          "headers": {
-            "Location": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "X-Schema-Type": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "X-Schema-Id": {
-              "schema": {
-                "type": "string"
-              },
-              "description": "unique schema identifier"
-            },
-            "X-Schema-Id-Location": {
-              "schema": {
-                "type": "string",
-                "format": "url"
-              },
-              "description": "location of schema resource"
-            },
-            "X-Schema-Version": {
-              "schema": {
-                "type": "integer"
-              },
-              "description": "version of returned schema"
-            }
-          },
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SchemaBytePayload"
-              }
-            }
-          }
+        "X-Serialization": {
+          "type": "string",
+          "description": "schema type"
+        },
+        "X-Schema-Id": {
+          "type": "string",
+          "description": "unique schema identifier"
+        },
+        "X-Schema-Id-Location": {
+          "type": "string",
+          "description": "location of schema resource"
+        },
+        "X-Schema-Version": {
+          "type": "integer",
+          "description": "version of returned schema"
         }
+      },
+      "schema": {
+        "$ref": "#/definitions/SchemaBytePayload"
       }
     }
   }
+}
