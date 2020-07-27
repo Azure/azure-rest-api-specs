@@ -89,6 +89,10 @@ directive:
     where: $.definitions.Resource.properties.id
     from: types.json
     reason: 'This property is already a part of our API, cannot remove it'
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: $.definitions.WorkbookResource.properties.id
+    from: workbooks_API.json
+    reason: 'This property is already a part of our API, cannot remove it'
 ```
 
 ### Tag: package-preview-2020-06-only
