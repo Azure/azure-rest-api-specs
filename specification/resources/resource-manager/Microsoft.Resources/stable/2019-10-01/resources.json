@@ -4533,6 +4533,13 @@
           },
           "description": "The collection of locations where this resource type can be created."
         },
+        "aliases": {	
+          "type": "array",	
+          "items": {	
+            "$ref": "#/definitions/Alias"	
+          },	
+          "description": "The aliases that are supported by this resource type."	
+        },
         "apiVersions": {
           "type": "array",
           "items": {
@@ -4546,11 +4553,6 @@
           "items": {
             "$ref": "#/definitions/ApiProfiles"
           }
-        },
-        "aliases": {
-          "type": "array",
-          "description": "Aliases for the property names.",
-          "$ref": "#/definitions/Alias"
         },
         "capabilities": {
           "type": "string",
