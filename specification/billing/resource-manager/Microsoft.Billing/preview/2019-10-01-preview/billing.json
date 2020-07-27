@@ -6542,6 +6542,21 @@
           "description": "Billing address.",
           "$ref": "#/definitions/AddressDetails"
         },
+        "billingRelationshipType": {
+          "description": "Identifies which services and purchases are paid by a billing profile.",
+          "type": "string",
+          "enum": [
+            "Direct",
+            "IndirectCustomer",
+            "IndirectPartner",
+            "CSPPartner"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingRelationshipType",
+            "modelAsString": true
+          }
+        },
         "invoiceEmailOptIn": {
           "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
           "type": "boolean"
@@ -6562,6 +6577,11 @@
           "items": {
             "$ref": "#/definitions/AzurePlan"
           }
+        },
+        "indirectRelationshipInfo": {
+          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "readOnly": true,
+          "$ref": "#/definitions/IndirectRelationshipInfo"
         },
         "invoiceSections": {
           "description": "The invoice sections associated to the billing profile.",
@@ -6609,6 +6629,14 @@
             "name": "SpendingLimit",
             "modelAsString": true
           }
+        },
+        "targetClouds": {
+          "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TargetCloud"
+          }
         }
       }
     },
@@ -6653,6 +6681,23 @@
         },
         "postalCode": {
           "description": "Postal code.",
+          "type": "string"
+        }
+      }
+    },
+    "IndirectRelationshipInfo": {
+      "description": "The billing profile details of the partner of the customer for an indirect motion.",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
           "type": "string"
         }
       }
@@ -6706,6 +6751,24 @@
         "displayName": {
           "description": "The name of the invoice section.",
           "type": "string"
+        },
+        "state": {
+          "description": "Identifies the state of an invoice section.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Restricted"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceSectionState",
+            "modelAsString": true
+          }
+        },
+        "targetCloud": {
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "$ref": "#/definitions/TargetCloud",
+          "readOnly": true
         }
       }
     },
@@ -7539,6 +7602,19 @@
           "description": "The ID of the enrollment account.",
           "type": "string"
         }
+      }
+    },
+    "TargetCloud": {
+      "type": "string",
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "x-ms-enum": {
+        "name": "targetCloud",
+        "modelAsString": true
       }
     },
     "TransactionListResult": {
