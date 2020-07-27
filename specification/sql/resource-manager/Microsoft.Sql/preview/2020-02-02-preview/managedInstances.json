@@ -561,50 +561,9 @@
           "description": "Specifies maintenance configuration id to apply to this managed instance.",
           "type": "string"
         },
-        "privateEndpointConnections": {
-          "description": "List of private endpoint connections on a managed instance.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedInstancePecProperty"
-          },
-          "readOnly": true
-        },
         "minimalTlsVersion": {
           "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
           "type": "string"
-        },
-        "storageAccountType": {
-          "description": "The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
-          "enum": [
-            "GRS",
-            "LRS",
-            "ZRS"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageAccountType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
-    "ManagedInstancePecProperty": {
-      "description": "A private endpoint connection under a managed instance",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
-          "description": "Private endpoint connection properties",
-          "readOnly": true
         }
       }
     },
@@ -629,34 +588,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ManagedInstancePrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/ManagedInstancePrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/ManagedInstancePrivateLinkServiceConnectionStateProperty",
-          "description": "Connection State of the Private Endpoint Connection."
-        },
-        "provisioningState": {
-          "description": "State of the Private Endpoint Connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedInstancePrivateEndpointProperty": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the private endpoint.",
-          "type": "string"
-        }
-      }
     },
     "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
       "required": [
