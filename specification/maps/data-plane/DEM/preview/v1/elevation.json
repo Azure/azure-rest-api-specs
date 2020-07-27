@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Elevation API",
+    "version": "1.0",
+    "description": "The Azure Maps elevation api provides HTTP interface to query elevation information on the earth. Customer can query elevation by given points localtion, a line defined by a start point and an  end point, or lattice defined by a bounding box and number of rows and columns."
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "paths": {
+    "/elevation/point": {
+      "get": {
+        "x-publish": true,
+        "description": "**Applies to**: S0 and S1 pricing tiers.\nA elevation point API provides elevation data for a point/points. Each point is identified by longitute/latitude  value in WGS84.",
+        "operationId": "Elevation_GetDataForPoints",
+        "x-ms-examples": {
+          "GetDataForPoints": {
+            "$ref": "./examples/GetDataForPoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "points",
+            "in": "query",
+            "description": "The string representation of a list of points. A point is defined in longitude, latitude format.  The value of longitude and latitude refers to WGS84 reference system. If multiple points is requested,  a list of points will be seperated by the pipe ('|') character. Customer can provide  up to 2000 point  locations in a single request. The accuracy of the elevation data will be highest for a single point but  less accuracy will be returned if multiple locations spread apart.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PointsResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/elevation/line": {
+      "get": {
+        "x-publish": true,
+        "description": "**Applies to**: S0 and S1 pricing tiers.\nA elevation line API provides elevation data along a line. A line is defined by a start/from point and a end/to point seperated by pipe ('|')  character. In addition to a requested line, customers also specify samples count of points along the line that will be calculated to return the  elevation data. A line between two positions is a straight Cartesian line, the shortest line between those two points in the coordinate reference  system. Note that the point is chosen based on Eudclidean distance and may markedly differ from the geodesic path along the curved surface of  the reference ellipsoid.",
+        "operationId": "Elevation_GetDataForLine",
+        "x-ms-examples": {
+          "GetDataForLine": {
+            "$ref": "./examples/GetDataForLine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "lines",
+            "in": "query",
+            "description": "The string representation of a line. A line is defined by a start/from point and a end/to point seperated by by pipe ('|')  character. The format of the line can be defined as longitude_startpoint, latitude_startpoint | longitude_endpoint, latitude_endpoint.  The value of the longitude and latitude refers to WGS84 reference system. Less accuracy result might be returned for big line, aka  provided start point and end point are far away from each other.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "samples",
+            "in": "query",
+            "description": "In addition to a requested line, customer also specifies samples count of points along the line that will be calculated to return the  elevation data. If not provided, 10 points will be calculated and returned along the requested line.",
+            "type": "number",
+            "minimum": 2,
+            "maximum": 2000,
+            "default": 10,
+            "required": false
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LineResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/elevation/lattice": {
+      "get": {
+        "x-publish": true,
+        "description": "**Applies to**: S0 and S1 pricing tiers.\nA elevation lattice API provides elevation data accross an grid area in a bounding box. A lattice is defined by a bounding box and numbers  of rows and columns. The point is chosen based on Eudclidean distance in straight Cartesian gird line and may markedly differ from the geodesic  path along the curved surface of the reference ellipsoid. Up to 2000 locations can be provided in a single request.",
+        "operationId": "Elevation_GetDataForLattice",
+        "x-ms-examples": {
+          "GetDataForLattice": {
+            "$ref": "./examples/GetDataForLattice.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "bounds",
+            "in": "query",
+            "description": "The string representation of a lattice. The value of the bbox member MUST be an array of length 4, with  2 axes of the most southwesterly point followed by 2 axes of the more northeasterly point. The format  can be illustrate as SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "The rows of the lattice. rows muliplies columns should be smaller than 2000.",
+            "type": "number",
+            "minimum": 2,
+            "maximum": 1000,
+            "required": true
+          },
+          {
+            "name": "columns",
+            "in": "query",
+            "description": "The columns of the lattice. rows muliplies columns should be smaller than 2000.",
+            "type": "number",
+            "minimum": 2,
+            "maximum": 1000,
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LatticeResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "longitude": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "ElevationPointResponse": {
+      "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PointElevationResult"
+      }
+    },
+    "PointElevationResult": {
+      "type": "object",
+      "description": "The elevation data.",
+      "properties": {
+        "coordinate": {
+          "$ref": "#/definitions/Coordinate"
+        },
+        "elevationInMeter": {
+          "description": "The elevation value in meters.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ElevationLineResponse": {
+      "description": "The response for line elevation API. The samples number of result will be listed from start point toward end point direction.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PointElevationResult"
+      }
+    },
+    "ElevationLatticeResponse": {
+      "description": "The response for line elevation API. The samples number of result will be listed from start point toward end point direction.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PointElevationResult"
+      }
+    },
+    "PointsResult": {
+      "type": "object",
+      "description": "The result of elecation point request.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ElevationPointResponse"
+        }
+      }
+    },
+    "LineResult": {
+      "type": "object",
+      "description": "The result of elecation line request.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ElevationLineResponse"
+        }
+      }
+    },
+    "LatticeResult": {
+      "type": "object",
+      "description": "The result of elecation lattice request.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ElevationLatticeResponse"
+        }
+      }
+    }
+  }
+}
