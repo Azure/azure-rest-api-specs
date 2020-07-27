@@ -18,17 +18,28 @@ tag: package-xxxx-xx-xx
 ~~~~
 
 ### tag
-A tag can contains a bunch of swagger files which are used to generate the SDK. For Example:
+Tags are used to define what swagger files are used in specific client SDK. In Single-API client, only one tag can be used to generate SDK client.
+A tag can contains a bunch of swagger files which are used to generate the SDK. 
 
+The name of a tag should be in form of package-yyyy-mm-dd[-xxx], for example below tag names are available:
+- package-2020-02-03
+- package-2020-03-22-preview
+- package-2020-05-03-only
+
+while the below tag names are invalid names:
+- 2020-03-04
+- package-preview-2020-03-04
+
+A tag can be configured like below:
 ~~~~
 // file: readme.md
 
 
-### Tag: package-2020-05-01
+### Tag: package-2019-12-01
 
-These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-01'
+``` yaml $(tag) == 'package-2019-12-01'
 input-file:
 - Microsoft.Compute/stable/2019-12-01/compute.json
 - Microsoft.Compute/stable/2019-12-01/runCommands.json
