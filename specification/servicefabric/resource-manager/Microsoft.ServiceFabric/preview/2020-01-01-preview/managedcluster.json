@@ -51,7 +51,7 @@
           }
         ],
         "tags": [
-          "Cluster"
+          "ManagedCluster"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -327,6 +327,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -405,9 +408,15 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ClusterVersionDetails"
+                "$ref": "#/definitions/ManagedClusterVersionDetails"
               },
               "description": "The list of available Service Fabric runtime versions."
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
@@ -416,26 +425,21 @@
   },
   "definitions": {
     "AzureActiveDirectory": {
-      "required": [
-        "tenantId",
-        "clusterApplication",
-        "clientApplication"
-      ],
       "properties": {
         "tenantId": {
-          "type": "boolean",
+          "type": "string",
           "description": "Azure active directory tenant id."
         },
         "clusterApplication": {
           "type": "string",
-          "description": "Azure active directory cluster application."
+          "description": "Azure active directory cluster application id."
         },
         "clientApplication": {
           "type": "string",
-          "description": "Azure active directory client application."
+          "description": "Azure active directory client application id."
         }
       },
-      "description": "Azure active directory."
+      "description": "The settings to enable AAD authentication on the cluster."
     },
     "ClientCertificate": {
       "required": [
@@ -487,7 +491,7 @@
         "Ready"
       ]
     },
-    "ClusterVersionDetails": {
+    "ManagedClusterVersionDetails": {
       "properties": {
         "msiVersion": {
           "type": "string",
@@ -514,12 +518,14 @@
       "properties": {
         "frontendPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 1 and 65534.",
           "minimum": 1,
           "maximum": 65534
         },
         "backendPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535.",
           "minimum": 1,
           "maximum": 65534
@@ -629,11 +635,13 @@
         },
         "clientConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for client connections to the cluster.",
           "default": 19000
         },
         "httpGatewayConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for http connections to the cluster.",
           "default": 19080
         },
@@ -649,16 +657,19 @@
         },
         "loadBalancingRules": {
           "type": "array",
-          "$ref": "#/definitions/LoadBalancingRule",
-          "description": "Describes a load balancing rule."
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Describes load balancing rules."
         },
         "clients": {
           "type": "array",
-          "$ref": "#/definitions/ClientCertificate",
+          "items": {
+            "$ref": "#/definitions/ClientCertificate"
+          },
           "description": "client certificates for the cluster."
         },
         "azureActiveDirectory": {
-          "type": "array",
           "$ref": "#/definitions/AzureActiveDirectory",
           "description": "Azure active directory."
         },
@@ -696,6 +707,7 @@
         },
         "reverseProxyEndpointPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The endpoint used by reverse proxy."
         }
       },
@@ -705,10 +717,12 @@
       "properties": {
         "clientConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for client connections to the cluster."
         },
         "httpGatewayConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for http connections to the cluster."
         },
         "loadBalancingRules": {
@@ -745,6 +759,7 @@
         },
         "reverseProxyEndpointPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The endpoint used by reverse proxy."
         }
       },

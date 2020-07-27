@@ -68,6 +68,8 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 input-file:
 - Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
 - Microsoft.ServiceFabric/stable/2020-03-01/application.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 ```
 
 ### Tag: package-2020-01-preview
