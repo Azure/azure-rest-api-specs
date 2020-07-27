@@ -4533,13 +4533,6 @@
           },
           "description": "The collection of locations where this resource type can be created."
         },
-        "aliases": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Alias"
-          },
-          "description": "The aliases that are supported by this resource type."
-        },
         "apiVersions": {
           "type": "array",
           "items": {
@@ -4547,65 +4540,60 @@
           },
           "description": "The API version."
         },
+        "apiProfiles": {
+          "type": "array",
+          "description": "API profiles of the resource type.",
+          "items": {
+            "$ref": "#/definitions/ApiProfiles"
+          }
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Aliases for the property names.",
+          "$ref": "#/definitions/Alias"
+        },
         "capabilities": {
           "type": "string",
-          "description": "The additional capabilities offered by this resource type."
+          "description": "The additional capabilities offered by this resource type.",
+          "enum": [
+            "None",
+            "CrossResourceGroupMove",
+            "CrossSubscriptipnResourceMove",
+            "SystemAssignedResourceIdentity",
+            "SupportTags",
+            "SupportsLocation",
+            "SupportsExtension"
+          ]
         },
-        "properties": {
+        "metadata": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "The additional properties. "
-          },
-          "description": "The properties."
+          "description": "Resource type metadata."
         }
       },
       "description": "Resource type managed by the resource provider."
     },
+    "ApiProfiles": {
+      "properties": {
+        "profileVersion": {
+          "type": "string",
+          "description": "The profile version."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version."
+        }
+      },
+      "description": "The API profile."
+    },
     "Provider": {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provider ID."
-        },
         "namespace": {
           "type": "string",
           "description": "The namespace of the resource provider."
         },
-        "authorizations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderAuthorization"
-          },
-          "description": "The authorizations fields of the resource provider."
-        },
         "metadata": {
           "type": "object",
           "description": "The metadata."
-        },
-        "registrationState": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "NotRegistered",
-            "Registering",
-            "Registered",
-            "Unregistering",
-            "Unregistered",
-            "Deleted"
-          ],
-          "description": "The registration state of the resource provider."
-        },
-        "registrationPolicy": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "RegistrationRequired",
-            "RegistrationFree"
-          ],
-          "description": "The registration policy of the resource provider."
         },
         "resourceTypes": {
           "readOnly": true,
@@ -4617,56 +4605,6 @@
         }
       },
       "description": "Resource provider information."
-    },
-    "ResourceProviderAuthorization": {
-      "properties": {
-        "applicationId": {
-          "type": "string",
-          "description": "The application id of resource provider."
-        },
-        "roleDefinitionId": {
-          "type": "string",
-          "description": "The role definition id."
-        },
-        "managedByRoleDefinitionId": {
-          "type": "string",
-          "description": "The managed by role definition id."
-        },
-        "managedByAuthorization": {
-          "$ref": "#/definitions/ResourceProviderManagedByAuthorization"
-        },
-        "allowedThirdPartyExtensions": {
-          "$ref": "#/definitions/ThirdPartyExtension"
-        },
-        "groupingTag": {
-          "type": "string",
-          "description": "The grouping tag"
-        }
-      },
-      "type": "object",
-      "description": "The resource provider authorization information."
-    },
-    "ResourceProviderManagedByAuthorization": {
-      "properties": {
-        "managedByResourceRoleDefinitionId": {
-          "type": "string",
-          "description": "The role definition id that the resource provider gets on the managed by resource."
-        },
-        "allowManagedByInheritance": {
-          "type": "boolean",
-          "description": "the value indicating whether the resource provider opted into allowing other providers to inherit permissions if the managed by resource is part of another managed by resource group."
-        }
-      },
-      "description": "The resource provider managed by authorization information."
-    },
-    "ThirdPartyExtension": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the third party extension."
-        }
-      },
-      "description": "The identifier for third party extensions."
     },
     "BasicDependency": {
       "properties": {
