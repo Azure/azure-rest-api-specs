@@ -2221,7 +2221,7 @@
       "properties": {
         "properties": {
           "description": "Properties for anomaly insights",
-          "$ref": "#/definitions/AnamolyInsightsProperties",
+          "$ref": "#/definitions/AnomalyInsightsProperties",
           "x-ms-client-flatten": true
         }
       },
@@ -2234,7 +2234,7 @@
         "properties"
       ]
     },
-    "AnamolyInsightsProperties": {
+    "AnomalyInsightsProperties": {
       "type": "object",
       "description": "The properties of the view.",
       "properties": {
@@ -2253,13 +2253,13 @@
           }
         },
         "eventDate": {
-          "description": "The date of event resulting in this anamoly",
+          "description": "The date of event resulting in this Anomaly",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "scope": {
-          "description": "The scope at which the anamoly was detected.",
+          "description": "The scope at which the Anomaly was detected.",
           "type": "string",         
           "readOnly": true
         },
@@ -2275,48 +2275,48 @@
           "readOnly": true
         },        
         "timeDetected": {
-          "description": "The datetime when this anamoly was detected.",
+          "description": "The datetime when this Anomaly was detected.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "severity": {
-          "description": "Severity of anamoly.",
+          "description": "Severity of Anomaly.",
           "type": "string",
           "readOnly": true
         },       
         "details": {
-          "description": "Details of anamoly.",
+          "description": "Details of Anomaly.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/AnalomyDetails"
           }
         },
         "justification": {
-          "description": "Justification as why the impact qualifies as anamoly.",
+          "description": "Justification as why the impact qualifies as Anomaly.",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/InsightsAnamolyJustification"
+            "$ref": "#/definitions/InsightsAnomalyJustification"
           }
         }
       }
     },
     "AnalomyDetails": {
-      "description": "Details of cost insights anamoly.",
+      "description": "Details of cost insights Anomaly.",
       "type": "object",
       "properties": {
         "contributors": {
-          "description": "The list of cost insights anamoly contributors.",
+          "description": "The list of cost insights Anomaly contributors.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/InsightsAnamolyContributors"
+            "$ref": "#/definitions/InsightsAnomalyContributors"
           }       
         }
       }
     },
-    "InsightsAnamolyJustification": {
-      "description": "Justification as why the impact qualifies as anamoly.",
+    "InsightsAnomalyJustification": {
+      "description": "Justification as why the impact qualifies as Anomaly.",
       "type": "object",
       "properties": {
         "forecast": {
@@ -2324,7 +2324,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/InsightsAnamolyForecast"
+            "$ref": "#/definitions/InsightsAnomalyForecast"
           }       
         },
         "boundry": {
@@ -2332,17 +2332,17 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/InsightsAnamolyBoundary"
+            "$ref": "#/definitions/InsightsAnomalyBoundary"
           }       
         }
       }
     },
-    "InsightsAnamolyForecast": {
+    "InsightsAnomalyForecast": {
       "description": "The list of expected forecasts.",
       "type": "object",
       "properties": {
         "isAnomaly": {
-          "description": "Flag indicating if this anamoly or not.",
+          "description": "Flag indicating if this Anomaly or not.",
           "type": "boolean",
           "readOnly": true          
         },
@@ -2363,7 +2363,7 @@
         }
       }
     },    
-    "InsightsAnamolyBoundary": {
+    "InsightsAnomalyBoundary": {
       "description": "The list of boundaries.",
       "type": "object",
       "properties": {
@@ -2384,8 +2384,8 @@
         }
       }
     },
-    "InsightsAnamolyContributors": {
-      "description": "Cost insights anamoly contributors.",
+    "InsightsAnomalyContributors": {
+      "description": "Cost insights Anomaly contributors.",
       "type": "object",
       "properties": {
         "reason": {
