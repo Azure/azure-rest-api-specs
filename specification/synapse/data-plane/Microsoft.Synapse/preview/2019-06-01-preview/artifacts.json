@@ -1157,6 +1157,42 @@
         }
       }
     },
+    "/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_CancelTriggerInstance",
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Cancel.json"
+          }
+        },
+        "description": "Cancel single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TriggerRun has been cancelled."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/queryTriggerRuns": {
       "post": {
         "tags": [
