@@ -5924,22 +5924,22 @@
     },
     "SqlPoolStoredProcedureActivityTypeProperties": {
       "description": "SQL stored procedure activity properties.",
-        "properties": {
-          "storedProcedureName": {
-            "type": "object",
-            "description": "Stored procedure name. Type: string (or Expression with resultType string)."
-          },
-          "storedProcedureParameters": {
-            "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/StoredProcedureParameter"
-            }
-          }
+      "properties": {
+        "storedProcedureName": {
+          "type": "object",
+          "description": "Stored procedure name. Type: string (or Expression with resultType string)."
         },
-        "required": [
-          "storedProcedureName"
-        ]
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        }
+      },
+      "required": [
+        "storedProcedureName"
+      ]
     }
   }
 }
