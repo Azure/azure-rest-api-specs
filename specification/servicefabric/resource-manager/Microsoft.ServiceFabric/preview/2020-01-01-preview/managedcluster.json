@@ -685,19 +685,9 @@
           "description": "Use service fabric test vm extension, by default it's false."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ManagedResourseProvisioningState",
           "description": "The provisioning state of the managed cluster resource.",
-          "readOnly": true,
-          "enum": [
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -1003,6 +993,22 @@
         }
       },
       "description": "The error details."
+    },
+    "ManagedResourseProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
     },
     "OperationListResult": {
       "properties": {

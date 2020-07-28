@@ -658,25 +658,9 @@
           }
         },
         "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the node type, which only appears in the response.",
-          "readOnly": true,
-          "enum": [
-            "None",
-            "Creating",
-            "Created",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Deleting",
-            "Deleted",
-            "Other"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ManagedResourseProvisioningState",
+          "description": "The provisioning state of the managed cluster resource.",
+          "readOnly": true
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -798,6 +782,22 @@
       },
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
+    },
+    "ManagedResourseProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
     },
     "SubResource": {
       "properties": {
