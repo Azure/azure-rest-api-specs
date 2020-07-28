@@ -2241,13 +2241,13 @@
         "status": {
           "description": "Status of the insight.",
           "type": "string",
-          "enum":[
-            "New",            
+          "enum": [
+            "New",
             "Dismissed",
             "Acknowledged",
-            "Resolved"            
+            "Resolved"
           ],
-          "x-ms-enum":{
+          "x-ms-enum": {
             "name": "InsightsStatus",
             "modelAsString": true
           }
@@ -2260,12 +2260,12 @@
         },
         "scope": {
           "description": "The scope at which the Anomaly was detected.",
-          "type": "string",         
+          "type": "string",
           "readOnly": true
         },
         "impactTerm": {
           "description": "The period where the impact was observed",
-          "type": "string",          
+          "type": "string",
           "readOnly": true
         },
         "impactResolution": {
@@ -2273,7 +2273,7 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
-        },        
+        },
         "timeDetected": {
           "description": "The datetime when this Anomaly was detected.",
           "type": "string",
@@ -2284,7 +2284,7 @@
           "description": "Severity of Anomaly.",
           "type": "string",
           "readOnly": true
-        },       
+        },
         "details": {
           "description": "Details of Anomaly.",
           "type": "object",
@@ -2311,7 +2311,7 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/InsightsAnomalyContributors"
-          }       
+          }
         }
       }
     },
@@ -2325,7 +2325,7 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/InsightsAnomalyForecast"
-          }       
+          }
         },
         "boundary": {
           "description": "The list of boundaries.",
@@ -2333,7 +2333,7 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/InsightsAnomalyBoundary"
-          }       
+          }
         }
       }
     },
@@ -2344,25 +2344,25 @@
         "isAnomaly": {
           "description": "Flag indicating if this Anomaly or not.",
           "type": "boolean",
-          "readOnly": true          
+          "readOnly": true
         },
         "expected": {
           "description": "Expected value",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "actual": {
           "description": "Actual value",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "delta": {
           "description": "Delta value",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         }
       }
-    },    
+    },
     "InsightsAnomalyBoundary": {
       "description": "The list of boundaries.",
       "type": "object",
@@ -2370,17 +2370,17 @@
         "threshold": {
           "description": "Description og threshold",
           "type": "string",
-          "readOnly": true          
+          "readOnly": true
         },
         "value": {
           "description": "Threshold value",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "type": {
           "description": "Type of threshold",
           "type": "string",
-          "readOnly": true         
+          "readOnly": true
         }
       }
     },
@@ -2391,42 +2391,42 @@
         "reason": {
           "description": "Contribution Reason.",
           "type": "string",
-          "readOnly": true          
+          "readOnly": true
         },
         "currentCount": {
           "description": "Current count.",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "id": {
           "description": "Id of resource triggering the change",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "change": {
           "description": "Value of change",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "changePercentage": {
           "description": "Percentage of change",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "totalCostInUSD": {
           "description": "Cost in USD",
           "type": "number",
-          "readOnly": true         
+          "readOnly": true
         },
         "comparisonPeriod": {
           "description": "Time period used for comparison",
           "type": "string",
-          "readOnly": true         
+          "readOnly": true
         },
         "comparisonType": {
           "description": "Method used for comparison.",
           "type": "string",
-          "readOnly": true         
+          "readOnly": true
         }
       }
     },
