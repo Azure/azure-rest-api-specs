@@ -44,7 +44,7 @@
             "$ref": "#/parameters/ImageUrl"
           },
           {
-            "$ref": "#/parameters/CustomPage"
+            "$ref": "#/parameters/Pages"
           }
         ],
         "consumes": [
@@ -129,7 +129,7 @@
             "$ref": "#/parameters/ImageStream"
           },
           {
-            "$ref": "#/parameters/CustomPage"
+            "$ref": "#/parameters/Pages"
           }
         ],
         "consumes": [
@@ -486,8 +486,8 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
-    "CustomPage": {
-      "name": "CustomPage",
+    "Pages": {
+      "name": "Pages",
       "in": "query",
       "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma or space.",
       "required": false,
@@ -495,7 +495,7 @@
       "x-ms-parameter-location": "method",
       "type": "string",
       "x-ms-enum": {
-        "name": "CustomPage",
+        "name": "Pages",
         "modelAsString": true
       }
     }
