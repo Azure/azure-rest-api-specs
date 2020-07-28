@@ -675,23 +675,19 @@
         },
         "fabricSettings": {
           "type": "array",
-          "$ref": "#/definitions/SettingsSectionDescription",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          },
           "description": "The list of custom fabric settings to configure the cluster."
         },
+        "useTestExtension": {
+          "type": "boolean",
+          "description": "Use service fabric test vm extension, by default it's false."
+        },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
           "description": "The provisioning state of the managed cluster resource.",
-          "readOnly": true,
-          "enum": [
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -727,22 +723,27 @@
         },
         "loadBalancingRules": {
           "type": "array",
-          "$ref": "#/definitions/LoadBalancingRule",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
           "description": "Describes a load balancing rule."
         },
         "clients": {
           "type": "array",
-          "$ref": "#/definitions/ClientCertificate",
+          "items": {
+            "$ref": "#/definitions/ClientCertificate"
+          },
           "description": "client certificates for the cluster."
         },
         "azureActiveDirectory": {
-          "type": "array",
           "$ref": "#/definitions/AzureActiveDirectory",
           "description": "Azure active directory."
         },
         "fabricSettings": {
           "type": "array",
-          "$ref": "#/definitions/SettingsSectionDescription",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          },
           "description": "The list of custom fabric settings to configure the cluster."
         },
         "clusterCodeVersion": {
@@ -992,6 +993,22 @@
         }
       },
       "description": "The error details."
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
     },
     "OperationListResult": {
       "properties": {
