@@ -128,12 +128,7 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/SchemaId"
             }
           }
         }
@@ -207,16 +202,21 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/SchemaId"
             }
           }
         }
       }
+    }
+  },
+  "definitions": {	
+    "SchemaId": {	
+      "type": "object",	
+      "properties": {	
+        "id": {	
+          "type": "string"	
+        }	
+      }	
     }
   }
 }
