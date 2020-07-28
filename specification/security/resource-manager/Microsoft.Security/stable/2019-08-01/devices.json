@@ -177,7 +177,6 @@
       ],
       "properties": {
         "totalCount": {
-          "readOnly": true,
           "type": "integer",
           "description": "Total count of devices in all the pages."
         },
@@ -322,7 +321,7 @@
             "Supervisory",
             "Enterprise"
           ],
-          "default": "Automatic",
+          "default": "ProcessControl",
           "x-ms-enum": {
             "name": "PurdueLevel",
             "modelAsString": true
@@ -430,10 +429,10 @@
           "format": "date-time",
           "description": "Detection time of the ip address."
         },
-        "subnetCIDR": {
+        "subnetCidr": {
           "readOnly": true,
           "type": "string",
-          "description": "Subnet CIDR"
+          "description": "Subnet Classless Inter-Domain Routing"
         },
         "fqdn": {
           "readOnly": true,
@@ -497,7 +496,7 @@
         "serial": {
           "readOnly": true,
           "type": "string",
-          "description": "Serial"
+          "description": "Serial of the firmware"
         },
         "model": {
           "readOnly": true,
