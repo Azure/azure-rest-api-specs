@@ -1646,7 +1646,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "Customer visible tier on the disk which indicates the tier to be set on the blob."
+          "description": "Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks."
         }
       },
       "required": [
@@ -1896,7 +1896,7 @@
           },
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-            "description": "Resource using diskEncryptionSet would be encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+            "description": "Resource using diskEncryptionSet would be encrypted at rest with two layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
           }
         ]
       }
@@ -2001,7 +2001,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "Customer visible tier on the disk which indicates the tier to be set on the blob."
+          "description": "Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks."
         }
       },
       "description": "Disk resource update properties."
@@ -2179,7 +2179,7 @@
         "logicalSectorSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Support customers creating ultra disks with logicalSectorSize 512E. Supported values are 512 and 4096 (default value)."
+          "description": "Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default."
         }
       },
       "required": [
