@@ -1,5 +1,5 @@
-# Readme Configuration Guide for Typescript SDK
-This file describe how to configure readme files to make it available for Typescript SDK code generation.
+# Readme Configuration Guide for Azure SDK for Javascript (Typescript)
+This file describe how to configure readme files to make it available for Azure SDK for Javascript (Typescript) code generation.
 
 ## Common Configuration
 Configure basic package information.
@@ -49,7 +49,7 @@ input-file:
 
 
 ## Swagger to SDK
-To make Typescript SDK can be generated from the tag, swagger-to-sdk need to be configured:
+To make Azure SDK for Javascript (Typescript) can be generated from the tag, swagger-to-sdk need to be configured:
 
 ~~~
 // file: readme.md
@@ -95,7 +95,7 @@ typescript:
 ~~~
 
 ## Multi-api
-Currently the Typescript SDK doesn't support multi-api which means each operation contained in one package should only contains one api-version's. and Typescript SDK only supports single api package.
+Currently the Azure SDK for Javascript (Typescript) doesn't support multi-api which means each operation contained in one package should only contains one api-version's. and Azure SDK for Javascript (Typescript) only supports single api package.
 
 ## Multi-packages 
 The batch is a tag list which are used in the one RP has multi-package scenarios. For example, 
@@ -176,7 +176,7 @@ input-file:
 ```
 ~~~
 
-Finally, in your readme.typescript.md you should include what packages you want to include in the Typescript SDK.
+Finally, in your readme.typescript.md you should include what packages you want to include in the Azure SDK for Javascript (Typescript).
 And in each package's section define the default package name output folder in azure-sdk-for-js repo etc.
 
 ~~~
