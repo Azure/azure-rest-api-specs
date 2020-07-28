@@ -43,23 +43,12 @@
                 "description": "Create a GuestUser sending an invit",
                 "parameters": [
                     {
-                        "name": "invitedUserEmailAddress",
+                        "name": "invitationcontent",
                         "in": "body",
                         "required": true,
-                        "type": "string",
                         "description": "The email address of the GuestUser you want to invite, the domain of the mail addres must exist on existin Azure AD",
 			"schema" : {
-			    "$ref" : "#/definitions/invitation"
-			}
-                    },
-                    {
-                        "name": "inviteRedirectUrl",
-                        "in": "body",
-                        "required": false,
-                        "type": "string",
-                        "description": "The URL that will be redirected to after redemption.",
-			"schema" : {
-			    "$ref" : "#/definitions/invitation"
+			    "$ref" : "#/definitions/invitationSended"
 			}
                     }
                 ],
@@ -85,7 +74,10 @@
             "allOf": [
                 {
                     "$ref": "./graph.json#/definitions/globalgraphresources"
-                }
+                },
+		{
+		    "$ref" : "#/definitions/invitationSended"	
+		}
             ],
             "properties": {
                 "inviteRedeemUrl": {
@@ -96,20 +88,14 @@
                     "type": "string",
                     "description": "The name of the GestUser invited"
                 },
-                "invitedUserEmailAddress": {
-                    "type": "string",
-                    "description": "The email of the GuestUser invited"
-                },
                 "sendInvitationMessage": {
                     "type": "boolean",
                     "description": "Set to true if there is a custom message in the invitation of the GuestUser"
                 },
                 "invitedUserMessageInfo": {
+		    "x-ms-client-flatten": true,
+		    "$ref" : "#/definitions/customMessagePropertieFormat",
                     "description": "The custom message information for the GuestUser invited"
-                },
-                "inviteRedirectUrl": {
-                    "type": "string",
-                    "description": "The redirect url for this GuestUser invitation"
                 },
                 "statuts": {
                     "type": "string",
@@ -120,6 +106,18 @@
                 }
             }
         },
+	"invitationSended" : {
+	   "properties": {
+                "invitedUserEmailAddress": {
+                    "type": "string",
+                    "description": "The email of the GuestUser invited"
+                },
+                "inviteRedirectUrl": {
+                    "type": "string",
+                    "description": "The redirect url for this GuestUser invitation"
+                }
+	   }
+	},
         "customMessagePropertieFormat": {
             "properties": {
                 "messageLanguage": {
