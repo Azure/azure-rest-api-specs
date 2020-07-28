@@ -148,49 +148,6 @@
       }
     },
     "/entities/healthcare/jobs/{jobId}": {
-      "delete": {
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "description": "Cancel healthcare prediction job.",
-        "operationId": "CancelHealthJob",
-        "summary": "Cancel healthcare prediction job",
-        "parameters": [
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Cancel Job request has been received.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Job ID not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Health request": {
-            "$ref": ".//examples//SuccessfulHealthDeleteRequest.json"
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      },
       "get": {
         "produces": [
           "application/json",
@@ -247,6 +204,49 @@
           }
         },
         "deprecated": false
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Cancel healthcare prediction job.",
+        "operationId": "CancelHealthJob",
+        "summary": "Cancel healthcare prediction job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Health request": {
+            "$ref": ".//examples//SuccessfulHealthDeleteRequest.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/entities/healthcare/jobs": {
