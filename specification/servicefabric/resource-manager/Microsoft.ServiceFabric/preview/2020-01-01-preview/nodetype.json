@@ -656,6 +656,11 @@
           "items": {
             "$ref": "#/definitions/VMSSExtension"
           }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
+          "description": "The provisioning state of the managed cluster resource.",
+          "readOnly": true
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -778,6 +783,22 @@
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
     },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
+    },
     "SubResource": {
       "properties": {
         "id": {
@@ -850,6 +871,10 @@
         "typeHandlerVersion"
       ],
       "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
         "publisher": {
           "type": "string",
           "description": "The name of the extension handler publisher."
@@ -866,10 +891,6 @@
           "type": "boolean",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
         },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates if the extension will upgrade automatically."
-        },
         "settings": {
           "type": "object",
           "description": "Json formatted public settings for the extension."
@@ -882,6 +903,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state, which only appears in the response."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
