@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-preview-2020-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-02'
 input-file:
-  - Microsoft.Sql/preview/2020-02-02-preview/ManagedBackupShortTermRetention.json
   - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2020-02-02-preview/operations.json
 ```

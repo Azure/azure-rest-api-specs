@@ -16,19 +16,19 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}": {
       "get": {
         "tags": [
-          "ManagedBackupShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
-        "description": "Gets a managed database's short term retention policy.",
-        "operationId": "ManagedBackupShortTermRetentionPolicies_Get",
+        "description": "Gets a database's short term retention policy.",
+        "operationId": "BackupShortTermRetentionPolicies_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -36,14 +36,14 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "The policy name.",
+            "description": "The policy name. Should always be \"default\".",
             "required": true,
             "type": "string",
             "enum": [
               "default"
             ],
             "x-ms-enum": {
-              "name": "ManagedShortTermRetentionPolicyName",
+              "name": "ShortTermRetentionPolicyName",
               "modelAsString": true
             }
           },
@@ -58,7 +58,7 @@
           "200": {
             "description": "Successfully retrieved the policy.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
@@ -67,22 +67,22 @@
         },
         "x-ms-examples": {
           "Get the short term retention policy for the database.": {
-            "$ref": "./examples/GetManagedShortTermRetentionPolicy.json"
+            "$ref": "./examples/GetShortTermRetentionPolicy.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ManagedBackupShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
-        "description": "Updates a managed database's short term retention policy.",
-        "operationId": "ManagedBackupShortTermRetentionPolicies_CreateOrUpdate",
+        "description": "Updates a database's short term retention policy.",
+        "operationId": "BackupShortTermRetentionPolicies_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -97,7 +97,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "ManagedShortTermRetentionPolicyName",
+              "name": "ShortTermRetentionPolicyName",
               "modelAsString": true
             }
           },
@@ -107,7 +107,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           {
@@ -121,11 +121,11 @@
           "200": {
             "description": "Successfully updated the policy.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -134,22 +134,22 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update the short term retention policy for the database.": {
-            "$ref": "./examples/UpdateManagedShortTermRetentionPolicy.json"
+            "$ref": "./examples/UpdateShortTermRetentionPolicy.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "ManagedBackupShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
-        "description": "Updates a managed database's short term retention policy.",
-        "operationId": "ManagedBackupShortTermRetentionPolicies_Update",
+        "description": "Updates a database's short term retention policy.",
+        "operationId": "BackupShortTermRetentionPolicies_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -164,7 +164,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "ManagedShortTermRetentionPolicyName",
+              "name": "ShortTermRetentionPolicyName",
               "modelAsString": true
             }
           },
@@ -174,7 +174,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           {
@@ -188,11 +188,11 @@
           "200": {
             "description": "Successfully updated the policy.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -201,24 +201,24 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update the short term retention policy for the database.": {
-            "$ref": "./examples/UpdateManagedShortTermRetentionPolicy.json"
+            "$ref": "./examples/UpdateShortTermRetentionPolicy.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies": {
       "get": {
         "tags": [
-          "ManagedBackupShortTermRetentionPolicies"
+          "BackupShortTermRetentionPolicies"
         ],
-        "description": "Gets a managed database's short term retention policy list.",
-        "operationId": "ManagedBackupShortTermRetentionPolicies_ListByDatabase",
+        "description": "Gets a database's short term retention policy.",
+        "operationId": "BackupShortTermRetentionPolicies_ListByDatabase",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -234,7 +234,7 @@
           "200": {
             "description": "Successfully retrieved the policy.",
             "schema": {
-              "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicyListResult"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicyListResult"
             }
           },
           "default": {
@@ -245,15 +245,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get the short term retention policy list for the database.": {
-            "$ref": "./examples/GetListManagedShortTermRetentionPolicy.json"
+          "Get the short term retention policy for the database.": {
+            "$ref": "./examples/ListShortTermRetentionPoliciesByDatabase.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ManagedBackupShortTermRetentionPolicyProperties": {
+    "BackupShortTermRetentionPolicyProperties": {
       "description": "Properties of a short term retention policy",
       "type": "object",
       "properties": {
@@ -309,7 +309,7 @@
       ],
       "properties": {}
     },
-    "ManagedBackupShortTermRetentionPolicy": {
+    "BackupShortTermRetentionPolicy": {
       "description": "A short term retention policy.",
       "type": "object",
       "allOf": [
@@ -319,13 +319,13 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicyProperties",
+          "$ref": "#/definitions/BackupShortTermRetentionPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ManagedBackupShortTermRetentionPolicyListResult": {
+    "BackupShortTermRetentionPolicyListResult": {
       "description": "A list of short term retention policies.",
       "type": "object",
       "properties": {
@@ -333,7 +333,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedBackupShortTermRetentionPolicy"
+            "$ref": "#/definitions/BackupShortTermRetentionPolicy"
           },
           "readOnly": true
         },
