@@ -104,7 +104,7 @@
           },
           {
             "default": 20,
-            "description": "(Optional) Set the maximum number of results per task.",
+            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "maximum": 50,
             "minimum": 1,
@@ -112,7 +112,8 @@
             "type": "integer"
           },
           {
-            "description": "(Optional) Set the number of elements to offset in the response.",
+            "default": 0,
+            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "minimum": 0,
             "name": "$skip",
@@ -161,18 +162,21 @@
             "$ref": "#/parameters/JobId"
           },
           {
+            "default": 20,
+            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
-            "name": "$skip",
-            "type": "number",
-            "description": "Skip the $skip entries in the collection. When both $top and $skip are supplied, $skip is applied first.",
-            "required": false
+            "maximum": 50,
+            "minimum": 1,
+            "name": "$top",
+            "type": "integer"
           },
           {
+            "default": 0,
+            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
-            "name": "$top",
-            "type": "number",
-            "description": "Take the $top entries in the collection. When both $top and $skip are supplied, $skip is applied first.",
-            "required": false
+            "minimum": 0,
+            "name": "$skip",
+            "type": "integer"
           },
           {
             "$ref": "#/parameters/ShowStats"
@@ -252,7 +256,7 @@
     "/entities/healthcare/jobs": {
       "post": {
         "summary": "Submit healthcare analysis job",
-        "description": "The API returns a list of recognized healthcare entities and relations for each valid document.",
+        "description": "Start a healthcare analysis job to recognize healthcare related entities (drugs, conditions, symptoms, etc) and their relations.",
         "operationId": "Health",
         "consumes": [
           "application/json",
@@ -1236,7 +1240,9 @@
             "notstarted",
             "running",
             "succeeded",
-            "failed"
+            "failed",
+            "cancelled",
+            "cancelling"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1274,14 +1280,14 @@
       "properties": {
         "tasks": {
           "properties": {
-            "completed": {
-              "type": "integer"
-            },
             "details": {
               "items": {
                 "$ref": "#/definitions/TaskState"
               },
               "type": "array"
+            },
+            "completed": {
+              "type": "integer"
             },
             "failed": {
               "type": "integer"
@@ -1935,7 +1941,7 @@
           "description": "Unique, non-empty document identifier."
         },
         "entities": {
-          "description": "Gets or sets the list of recognized health entities in document.",
+          "description": "Healthcare entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthcareEntity"
@@ -1943,6 +1949,7 @@
         },
         "relations": {
           "type": "array",
+          "description": "Healthcare entity relations.",
           "items": {
             "$ref": "#/definitions/HealthcareRelation"
           }
@@ -1994,6 +2001,7 @@
       ],
       "properties": {
         "relationType": {
+          "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
           "type": "string"
         },
         "bidirectional": {
@@ -2001,9 +2009,11 @@
           "type": "boolean"
         },
         "source": {
+          "description": "Reference link to the source entity.",
           "type": "string"
         },
         "target": {
+          "description": "Reference link to the target entity.",
           "type": "string"
         }
       }
@@ -2020,7 +2030,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Entity id in the given source catalog. Example: blood pressure - source: umls, concept_id: C1272641.",
+          "description": "Entity id in the given source catalog.",
           "type": "string"
         }
       }
