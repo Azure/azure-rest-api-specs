@@ -40,6 +40,10 @@ directive:
     from: alertTypes.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: recommendationTypes.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/recommendationTypes"].get'
+    reason: The list returns limited number of items
 ```
 
 ### Basic Information
@@ -151,6 +155,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -173,8 +179,10 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 
 # Needed when there is more than one input file
@@ -308,6 +316,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -339,6 +349,8 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
@@ -411,6 +423,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -442,6 +455,8 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendations.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
@@ -451,6 +466,8 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
