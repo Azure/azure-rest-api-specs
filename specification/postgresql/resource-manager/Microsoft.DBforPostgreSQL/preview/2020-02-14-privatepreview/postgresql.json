@@ -1056,6 +1056,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -1398,10 +1404,6 @@
           "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
-      "required": [
-        "properties",
-        "location"
-      ],
       "description": "Represents a server to be updated."
     },
     "ServerListResult": {
