@@ -9,6 +9,9 @@
       "get": {
         "summary": "Get schema by ID",
         "description": "Get schema by ID.  Azure Schema Registry guarantees that ID is unique within a namespace.",
+        "x-ms-examples": {
+          "Get schema by ID": { "$ref": "./examples/getSchemaById.json" }
+        },
         "operationId": "getSchemaById",
         "produces": [
           "application/json"
@@ -57,6 +60,9 @@
       "post": {
         "summary": "Get schema ID by schema content",
         "description": "Get ID for schema with matching byte content and serialization format.",
+        "x-ms-examples": {
+          "Get schema ID": { "$ref": "./examples/getSchemaId.json" }
+        },
         "operationId": "getIdBySchemaContent",
         "produces": [
           "application/json"
@@ -124,9 +130,12 @@
         }
       },
       "put": {
-        "summary": "Create new schema",
-        "description": "Create new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n",
-        "operationId": "createSchema",
+        "summary": "Register new schema",
+        "description": "Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n",
+        "x-ms-examples": {
+          "Get schema ID": { "$ref": "./examples/registerSchema.json" }
+        },
+        "operationId": "registerSchema",
         "produces": [
           "application/json"
         ],
