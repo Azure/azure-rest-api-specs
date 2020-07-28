@@ -150,6 +150,7 @@ input-file:
 - Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+- Microsoft.Security/stable/2019-08-01/devices.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
@@ -312,6 +313,7 @@ These settings apply only when `--tag=package-2019-08-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2019-08-only'
 input-file:
+- Microsoft.Security/stable/2019-08-01/devices.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
@@ -450,6 +452,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/devices.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json

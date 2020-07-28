@@ -277,12 +277,12 @@
 					"description": "last time the device was updated"
 				},
 				"managementState": {
+					"readOnly": true,
 					"type": "string",
 					"enum": [
 						"Managed",
 						"Unmanaged"
 					],
-					"default": "Unmanaged",
 					"description": "Managed state of the device.",
 					"x-ms-enum": {
 						"name": "ManagementState",
@@ -349,7 +349,7 @@
 						"type": "string"
 					}
 				},
-				"discovereyTime": {
+				"discoveryTime": {
 					"readOnly": true,
 					"type": "string",
 					"format": "date-time",
@@ -362,7 +362,6 @@
 						"ProgrammingDevice",
 						"NotProgrammingDevice"
 					],
-					"default": "NotProgrammingDevice",
 					"x-ms-enum": {
 						"name": "ProgrammingState",
 						"modelAsString": true
@@ -382,7 +381,6 @@
 						"ScannerDevice",
 						"NotScannerDevice"
 					],
-					"default": "NotScannerDevice",
 					"x-ms-enum": {
 						"name": "ScanningFunctionality",
 						"modelAsString": true
