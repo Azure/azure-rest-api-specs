@@ -1138,9 +1138,17 @@
           "format": "int32",
           "description": "Max compute of a server is 64vCores."
         },
-        "publicIpAddressRequested": {
-          "description": "public IP requested as true",
-          "type": "boolean"
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "public network access is enabled or not",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPublicNetworkAccessState",
+            "modelAsString": true
+          }
         },
         "standbyCount": {
           "type": "integer",
@@ -1234,9 +1242,17 @@
           "type": "string",
           "description": "server edition default to general purpose"
         },
-        "publicIpAddressRequested": {
-          "description": "public IP requested as true",
-          "type": "boolean"
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "public network access is enabled or not",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPublicNetworkAccessState",
+            "modelAsString": true
+          }
         },
         "vnetInjArgs": {
           "properties": {
