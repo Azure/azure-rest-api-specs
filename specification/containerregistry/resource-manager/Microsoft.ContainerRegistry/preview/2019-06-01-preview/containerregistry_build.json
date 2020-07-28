@@ -721,11 +721,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The run request name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           }
         ],
         "responses": {
@@ -768,11 +764,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The name of task run.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           },
           {
             "name": "taskRun",
@@ -831,11 +823,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The task run name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           }
         ],
         "responses": {
@@ -882,11 +870,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The task run name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           },
           {
             "name": "updateParameters",
@@ -947,11 +931,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The run request name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           }
         ],
         "responses": {
@@ -1916,7 +1896,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1928,6 +1908,10 @@
           "$ref": "#/definitions/TaskRunProperties",
           "description": "The properties associated with the task run, i.e., request and result of the run",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The location of the resource",
+          "type": "string"
         }
       }
     },
@@ -2027,6 +2011,10 @@
           "$ref": "#/definitions/TaskRunPropertiesUpdateParameters",
           "description": "The properties for updating a task run.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The location of the resource",
+          "type": "string"
         },
         "tags": {
           "description": "The ARM resource tags.",
@@ -3600,6 +3588,17 @@
       "type": "string",
       "maxLength": 20,
       "minLength": 3,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "TaskRunNameParameter": {
+      "name": "taskRunName",
+      "in": "path",
+      "description": "The name of the task run.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
       "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     }
