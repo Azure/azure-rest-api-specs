@@ -45,6 +45,19 @@ input-file:
 - Microsoft.KeyVault/preview/7.2-preview/securitydomain.json
 ```
 
+### Tag: package-7.1
+
+These settings apply only when `--tag=package-7.1` is specified on the command line.
+
+```yaml $(tag) == 'package-7.1'
+input-file:
+- Microsoft.KeyVault/stable/7.1/certificates.json
+- Microsoft.KeyVault/stable/7.1/common.json
+- Microsoft.KeyVault/stable/7.1/keys.json
+- Microsoft.KeyVault/stable/7.1/secrets.json
+- Microsoft.KeyVault/stable/7.1/storage.json
+```
+
 ### Tag: package-7.1-preview
 
 These settings apply only when `--tag=package-7.1-preview` is specified on the command line.
