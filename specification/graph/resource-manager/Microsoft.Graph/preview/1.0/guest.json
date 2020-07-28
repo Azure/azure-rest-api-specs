@@ -35,7 +35,7 @@
     },
     "paths": {
         "/invitations": {
-            "create": {
+            "post": {
                 "tags": [
                     "GuestUser"
                 ],
@@ -47,14 +47,20 @@
                         "in": "body",
                         "required": true,
                         "type": "string",
-                        "description": "The email address of the GuestUser you want to invite, the domain of the mail addres must exist on existin Azure AD"
+                        "description": "The email address of the GuestUser you want to invite, the domain of the mail addres must exist on existin Azure AD",
+			"schema" : {
+			    "$ref" : "#/definitions/invitation"
+			}
                     },
                     {
                         "name": "inviteRedirectUrl",
                         "in": "body",
                         "required": false,
                         "type": "string",
-                        "description": "The URL that will be redirected to after redemption."
+                        "description": "The URL that will be redirected to after redemption.",
+			"schema" : {
+			    "$ref" : "#/definitions/invitation"
+			}
                     }
                 ],
                 "responses": {
@@ -70,81 +76,79 @@
                             "$ref": "./graph.json#/definitions/CloudError"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "invitation": {
+            "allOf": [
+                {
+                    "$ref": "./graph.json#/definitions/globalgraphresources"
+                }
+            ],
+            "properties": {
+                "inviteRedeemUrl": {
+                    "type": "string",
+                    "description": "The invitation url for this GuestUser invitation"
                 },
-                "definitions": {
-                    "invitation": {
-                        "allOf": [
-                            {
-                                "$ref": "./graph.json#/definitions/globalgraphresources"
-                            }
-                        ],
+                "invitedUserDisplayName": {
+                    "type": "string",
+                    "description": "The name of the GestUser invited"
+                },
+                "invitedUserEmailAddress": {
+                    "type": "string",
+                    "description": "The email of the GuestUser invited"
+                },
+                "sendInvitationMessage": {
+                    "type": "boolean",
+                    "description": "Set to true if there is a custom message in the invitation of the GuestUser"
+                },
+                "invitedUserMessageInfo": {
+                    "description": "The custom message information for the GuestUser invited"
+                },
+                "inviteRedirectUrl": {
+                    "type": "string",
+                    "description": "The redirect url for this GuestUser invitation"
+                },
+                "statuts": {
+                    "type": "string",
+                    "description": "The status of this GuestUser invitation"
+                },
+                "invitedUser": {
+                    "$ref": "./graph.json#/definitions/globalgraphresources"
+                }
+            }
+        },
+        "customMessagePropertieFormat": {
+            "properties": {
+                "messageLanguage": {
+                    "type": "string",
+                    "description": "The language message of the message"
+                },
+                "ccRecipients": {
+                    "type": "array",
+                    "description": "All Cc emails addresses",
+                    "items": {
                         "properties": {
-                            "inviteRedeemUrl": {
-                                "type": "string",
-                                "description": "The invitation url for this GuestUser invitation"
-                            },
-                            "invitedUserDisplayName": {
-                                "type": "string",
-                                "description": "The name of the GestUser invited"
-                            },
-                            "invitedUserEmailAddress": {
-                                "type": "string",
-                                "description": "The email of the GuestUser invited"
-                            },
-                            "sendInvitationMessage": {
-                                "type": "boolean",
-                                "description": "Set to true if there is a custom message in the invitation of the GuestUser"
-                            },
-                            "invitedUserMessageInfo": {
-                                "description": "The custom message information for the GuestUser invited"
-                            },
-                            "inviteRedirectUrl": {
-                                "type": "string",
-                                "description": "The redirect url for this GuestUser invitation"
-                            },
-                            "statuts": {
-                                "type": "string",
-                                "description": "The status of this GuestUser invitation"
-                            },
-                            "invitedUser": {
+                            "emailAddress": {
                                 "properties": {
-                                    "$ref": "./graph.json#/definitions/globalgraphresources"
-                                }
-                            }
-                        }
-                    },
-                    "customMessagePropertieFormat": {
-                        "properties": {
-                            "messageLanguage": {
-                                "type": "string",
-                                "description": "The language message of the message"
-                            },
-                            "ccRecipients": {
-                                "type": "array",
-                                "description": "All Cc emails addresses",
-                                "items": {
-                                    "properties": {
-                                        "emailAddress": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string",
-                                                    "description": "The name of the recipient"
-                                                },
-                                                "address": {
-                                                    "description": "The email address of the recipient",
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the recipient"
+                                    },
+                                    "address": {
+                                        "description": "The email address of the recipient",
+                                        "type": "string"
                                     }
                                 }
-                            },
-                            "customizedMessageBody": {
-                                "type": "string",
-                                "description": "The content of the message"
                             }
                         }
                     }
+                },
+                "customizedMessageBody": {
+                    "type": "string",
+                    "description": "The content of the message"
                 }
             }
         }
