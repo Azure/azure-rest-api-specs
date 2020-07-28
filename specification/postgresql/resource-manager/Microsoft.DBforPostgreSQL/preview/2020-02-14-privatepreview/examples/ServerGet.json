@@ -8,6 +8,11 @@
   "responses": {
     "200": {
       "body": {
+        "sku": {
+          "tier": "GeneralPurpose",
+          "capacity": 4,
+          "name": "Standard_D4s_v3"
+        },
         "properties": {
           "administratorLogin": "cloudsa",
           "version": "12",
@@ -16,9 +21,10 @@
           "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
           "displayName": "demosingleserver",
           "publicNetworkAccess": "Enabled",
-          "serverEdition": "GeneralPurpose",
-          "vCores": 4,
-          "storageQuotaInMb": 524288
+          "storageProfile": {
+            "storageMB": 524288,
+            "backupRetentionDays": 7
+          }
         },
         "location": "westus",
         "tags": {

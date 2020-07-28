@@ -1128,10 +1128,9 @@
           "type": "string",
           "description": "The display name of a server."
         },
-        "storageQuotaInMb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max Storage in MB of a server is 2097152MB(2TiB)."
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
         },
         "vCores": {
           "type": "integer",
@@ -1154,11 +1153,6 @@
           "type": "integer",
           "format": "int32",
           "description": "stand by count value can be either 0 or 1"
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "backup retention days range from min 1 to max 35"
         },
         "vnetInjArgs": {
           "properties": {
@@ -1184,6 +1178,10 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
           "description": "The Azure Active Directory identity of the server."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
@@ -1218,29 +1216,14 @@
           "$ref": "#/definitions/ServerVersion",
           "description": "PostgreSQL Server version."
         },
-        "vCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max compute of a server is 64vCores."
-        },
-        "storageQuotaInMb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max Storage in MB of a server is 2097152MB(2TiB)."
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
         },
         "standbyCount": {
           "type": "integer",
           "format": "int32",
           "description": "stand by count value can be either 0 or 1"
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "backup retention days range from min 1 to max 35"
-        },
-        "serverEdition": {
-          "type": "string",
-          "description": "server edition default to general purpose"
         },
         "publicNetworkAccess": {
           "type": "string",
@@ -1348,20 +1331,14 @@
           "format": "int32",
           "description": "Max compute of a server is 64vCores."
         },
-        "storageQuotaInMb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max Storage in MB of a server is 2097152MB(2TiB)."
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
         },
         "standbyCount": {
           "type": "integer",
           "format": "int32",
           "description": "stand by count value can be either 0 or 1"
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "backup retention days range from min 1 to max 35"
         },
         "serverEdition": {
           "type": "string",
@@ -1374,6 +1351,10 @@
         "location": {
           "type": "string",
           "description": "The location the resource resides in."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
           "$ref": "#/definitions/ServerPropertiesForCreate",
@@ -1399,6 +1380,10 @@
         "location": {
           "type": "string",
           "description": "The location the resource resides in."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
           "$ref": "#/definitions/ServerPropertiesForUpdate",
@@ -1435,6 +1420,49 @@
         }
       },
       "description": "A list of servers."
+    },
+    "StorageProfile": {
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server."
+        },
+        "storageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        }
+      },
+      "description": "Storage Profile properties of a server"
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the particular SKU, e.g. Burstable.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The scale up/out capacity, representing server's compute units."
+        }
+      },
+      "description": "Sku information related properties of a server."
     },
     "FirewallRuleProperties": {
       "properties": {

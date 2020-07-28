@@ -6,18 +6,28 @@
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "location": "westus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "capacity": 4,
+        "name": "Standard_D4s_v3"
+      },
       "properties": {
-        "vCores": 4,
         "administratorLoginPassword": "newpassword",
-        "backupRetentionDays": 20,
-        "storageQuotaInMb": 524288,
-        "serverEdition": "GeneralPurpose"
+        "storageProfile": {
+          "storageMB": 524288,
+          "backupRetentionDays": 20
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "sku": {
+          "tier": "GeneralPurpose",
+          "capacity": 4,
+          "name": "Standard_D4s_v3"
+        },
         "properties": {
           "administratorLogin": "cloudsa",
           "version": "12",
@@ -26,10 +36,10 @@
           "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
           "displayName": "demosingleserver",
           "publicNetworkAccess": "Enabled",
-          "serverEdition": "GeneralPurpose",
-          "vCores": 4,
-          "storageQuotaInMb": 524288,
-          "backupRetentionDays": 20,
+          "storageProfile": {
+            "storageMB": 524288,
+            "backupRetentionDays": 20
+          },
           "vnetInjArgs": {}
         },
         "location": "westus",
