@@ -2833,9 +2833,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The response in the GET collection operation "{0}" is different than the response definition in the individual GET operation "{1}".
+**Output Message** : The response model in the GET collection operation "{0}" does not match with the response model in the individual GET operation "{1}".
 
-**Description** : For all resources (top-level and nested), collection GETs should have a response definition with a property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md#get-resource), for all resources (top-level and nested), collection GETs should have a response definition with a property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
 
 **CreatedAt**: July 13, 2020
 
