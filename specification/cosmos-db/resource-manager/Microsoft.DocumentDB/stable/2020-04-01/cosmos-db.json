@@ -5208,72 +5208,18 @@
       },
       "description": "The List operation response, that contains the graphs and their properties."
     },
-    "ApiErrorBase": {
+    "ErrorResponse": {
       "properties": {
         "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
+          "description": "Error code.",
+          "type": "string"
         },
         "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "ErrorResponse": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ApiError"
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       },
       "description": "Error Response."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
     },
     "FailoverPolicies": {
       "properties": {
