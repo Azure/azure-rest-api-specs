@@ -128,8 +128,14 @@
           "Assignment_Delete at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Delete.json"
           },
+          "Assignment_Delete at subscription scope, and delete the resources created by the assignment": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Delete_AndDeleteChildren.json"
+          },
           "Assignment_Delete at management group scope": {
             "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Delete.json"
+          },
+          "Assignment_Delete at management group scope, and delete the resources created by the assignment": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Delete_AndDeleteChildren.json"
           }
         },
         "parameters": [
@@ -141,6 +147,21 @@
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
+          },
+          {
+            "name": "deleteBehavior",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "AssignmentDeleteBehavior",
+              "modelAsString": true
+            },
+            "description": "When deleteBehavior=all, the resources that were created by the blueprint assignment will be deleted."
           }
         ],
         "responses": {
