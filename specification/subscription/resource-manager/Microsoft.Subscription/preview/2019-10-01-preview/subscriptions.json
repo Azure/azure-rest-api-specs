@@ -483,6 +483,9 @@
           "200": {
             "description": "Deleted the alias"
           },
+          "204": {
+            "description": "Alias does not exist"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -828,7 +831,8 @@
           "description": "The provisioning state of the resource.",
           "enum": [
             "Accepted",
-            "Succeeded"
+            "Succeeded",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
