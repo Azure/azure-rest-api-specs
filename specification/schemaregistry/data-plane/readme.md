@@ -51,16 +51,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_schemaregistry']
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
