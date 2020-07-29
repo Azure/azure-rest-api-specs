@@ -1685,7 +1685,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "SqlResources_MigrateToAutoscaleSqlDatabase",
+        "operationId": "SqlResources_MigrateSqlDatabaseToAutoscale",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBSqlDatabaseMigrateToAutoscale.json"
@@ -1719,19 +1719,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "SqlResources_MigrateToManualThroughputSqlDatabase",
+        "operationId": "SqlResources_MigrateSqlDatabaseToManualThroughput",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBSqlDatabaseMigrateToManualThroughput.json"
@@ -1764,12 +1758,6 @@
             "description": "The SQL database migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2032,7 +2020,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "SqlResources_MigrateToAutoscaleSqlContainer",
+        "operationId": "SqlResources_MigrateSqlContainerToAutoscale",
         "x-ms-examples": {
           "CosmosDBSqlContainerMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBSqlContainerMigrateToAutoscale.json"
@@ -2069,19 +2057,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "SqlResources_MigrateToManualThroughputSqlContainer",
+        "operationId": "SqlResources_MigrateSqlContainerToManualThroughput",
         "x-ms-examples": {
           "CosmosDBSqlContainerMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBSqlContainerMigrateToManualThroughput.json"
@@ -2117,12 +2099,6 @@
             "description": "The SQL container migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2901,7 +2877,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "MongoDBResources_MigrateToAutoscaleMongoDBDatabase",
+        "operationId": "MongoDBResources_MigrateMongoDBDatabaseToAutoscale",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseMigrateToAutoscale.json"
@@ -2935,19 +2911,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "MongoDBResources_MigrateToManualThroughputMongoDBDatabase",
+        "operationId": "MongoDBResources_MigrateMongoDBDatabaseToManualThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseMigrateToManualThroughput.json"
@@ -2980,12 +2950,6 @@
             "description": "The MongoDB database migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -3248,7 +3212,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "MongoDBResources_MigrateToAutoscaleMongoDBCollection",
+        "operationId": "MongoDBResources_MigrateMongoDBCollectionToAutoscale",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBMongoDBCollectionMigrateToAutoscale.json"
@@ -3285,19 +3249,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "MongoDBResources_MigrateToManualThroughputMongoDBCollection",
+        "operationId": "MongoDBResources_MigrateMongoDBCollectionToManualThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBMongoDBCollectionMigrateToManualThroughput.json"
@@ -3333,12 +3291,6 @@
             "description": "The MongoDB collection migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -3583,7 +3535,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "TableResources_MigrateToAutoscaleTable",
+        "operationId": "TableResources_MigrateTableToAutoscale",
         "x-ms-examples": {
           "CosmosDBTableMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBTableMigrateToAutoscale.json"
@@ -3617,19 +3569,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "TableResources_MigrateToManualThroughputTable",
+        "operationId": "TableResources_MigrateTableToManualThroughput",
         "x-ms-examples": {
           "CosmosDBTableMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBTableMigrateToManualThroughput.json"
@@ -3662,12 +3608,6 @@
             "description": "The Table migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -3912,7 +3852,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "CassandraResources_MigrateToAutoscaleCassandraKeyspace",
+        "operationId": "CassandraResources_MigrateCassandraKeyspaceToAutoscale",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceMigrateToAutoscale.json"
@@ -3946,19 +3886,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "CassandraResources_MigrateToManualThroughputCassandraKeyspace",
+        "operationId": "CassandraResources_MigrateCassandraKeyspaceToManualThroughput",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceMigrateToManualThroughput.json"
@@ -3991,12 +3925,6 @@
             "description": "The Cassandra Keyspace migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4259,7 +4187,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "CassandraResources_MigrateToAutoscaleCassandraTable",
+        "operationId": "CassandraResources_MigrateCassandraTableToAutoscale",
         "x-ms-examples": {
           "CosmosDBCassandraTableMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBCassandraTableMigrateToAutoscale.json"
@@ -4296,19 +4224,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "CassandraResources_MigrateToManualThroughputCassandraTable",
+        "operationId": "CassandraResources_MigrateCassandraTableToManualThroughput",
         "x-ms-examples": {
           "CosmosDBCassandraTableMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBCassandraTableMigrateToManualThroughput.json"
@@ -4344,12 +4266,6 @@
             "description": "The Cassandra table migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4594,7 +4510,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "GremlinResources_MigrateToAutoscaleGremlinDatabase",
+        "operationId": "GremlinResources_MigrateGremlinDatabaseToAutoscale",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBGremlinDatabaseMigrateToAutoscale.json"
@@ -4628,19 +4544,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "GremlinResources_MigrateToManualThroughputGremlinDatabase",
+        "operationId": "GremlinResources_MigrateGremlinDatabaseToManualThroughput",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBGremlinDatabaseMigrateToManualThroughput.json"
@@ -4673,12 +4583,6 @@
             "description": "The Gremlin database migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4941,7 +4845,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
-        "operationId": "GremlinResources_MigrateToAutoscaleGremlinGraph",
+        "operationId": "GremlinResources_MigrateGremlinGraphToAutoscale",
         "x-ms-examples": {
           "CosmosDBGremlinGraphMigrateToAutoscale": {
             "$ref": "./examples/CosmosDBGremlinGraphMigrateToAutoscale.json"
@@ -4978,19 +4882,13 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
-        "operationId": "GremlinResources_MigrateToManualThroughputGremlinGraph",
+        "operationId": "GremlinResources_MigrateGremlinGraphToManualThroughput",
         "x-ms-examples": {
           "CosmosDBGremlinGraphMigrateToManualThroughput": {
             "$ref": "./examples/CosmosDBGremlinGraphMigrateToManualThroughput.json"
@@ -5026,12 +4924,6 @@
             "description": "The Gremlin graph migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
