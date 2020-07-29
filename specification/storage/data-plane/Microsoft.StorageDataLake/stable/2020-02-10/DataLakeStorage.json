@@ -1955,6 +1955,9 @@
             "$ref": "#/parameters/TransactionalContentMD5"
           },
           {
+            "$ref": "#/parameters/ContentCrc64"
+          },
+          {
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
@@ -1995,6 +1998,21 @@
                 "description": "An HTTP entity tag associated with the file or directory.",
                 "format": "etag",
                 "type": "string"
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "x-ms-content-crc64": {
+                "type": "string",
+                "format": "byte",
+                "description": "This header is returned so that the client can check for message content integrity. The value of this header is computed by the Blob service; it is not necessarily the same value specified in the request headers."
+              },
+              "x-ms-request-server-encrypted": {
+                "x-ms-client-name": "IsServerEncrypted",
+                "type": "boolean",
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
               }
             }
           },
@@ -2146,6 +2164,9 @@
           },
           {
             "$ref": "#/parameters/ContentLength"
+          },
+          {
+            "$ref": "#/parameters/TransactionalContentMD5"
           },
         ],
         "responses": {
@@ -2607,6 +2628,16 @@
         "name": "path-HTTP-headers"
       },
       "description": "Specify the transactional md5 for the body, to be validated by the service."
+    },
+    "ContentCrc64": {
+      "name": "x-ms-content-crc64",
+      "x-ms-client-name": "transactionalContentCrc64",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method",
+      "description": "Specify the transactional crc64 for the body, to be validated by the service."
     },
     "Umask": {
       "name": "x-ms-umask",
