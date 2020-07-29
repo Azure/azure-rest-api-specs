@@ -1226,6 +1226,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/upgradeNodeImageVersion": {
+      "post": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "ManagedClusters_UpgradeNodeImageVersion",
+        "summary": "Upgrade node image version of an agent pool to the latest.",
+        "description": "Upgrade node image version of an agent pool to the latest.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent pool."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reset Service Principal Profile": {
+            "$ref": "./examples/AgentPoolsUpgradeNodeImageVersion.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1691,6 +1739,7 @@
           "description": "Version of orchestrator specified when creating the managed cluster."
         },
         "nodeImageVersion": {
+          "readOnly": true,
           "type": "string",
           "description": "Version of node image"
         },
