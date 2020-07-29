@@ -73,6 +73,9 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
+        },
+		"x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -178,6 +181,7 @@
       "properties": {
         "totalCount": {
           "type": "integer",
+		  "format": "int64",
           "description": "Total count of devices in all the pages."
         },
         "value": {
@@ -462,15 +466,31 @@
           "format": "date-time",
           "description": "Detection time of the mac address."
         },
-        "isPrimary": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether this is the primary MAC address of the device"
+        "significance": {
+		  "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "MacSignificance",
+            "modelAsString": true
+          },
+          "description": "Indicates whether this is the primary secondary MAC address of the device
         },
-        "isGuessed": {
+        "relationToIpStatus": {
           "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether this mac was guessed to be related to the ip address"
+          "type": "string",
+          "enum": [
+            "Guess",
+            "certain"
+          ],
+          "x-ms-enum": {
+            "name": "RelationToIpStatus",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the relation of the mac to the ip address is certain or a guess"
         }
       }
     },
