@@ -1,0 +1,4330 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/linkedservices": {
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_GetLinkedServicesByWorkspace",
+        "x-ms-examples": {
+          "LinkedServices_ListByWorkspace": {
+            "$ref": "./examples/LinkedServices_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists linked services.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/linkedservices/{linkedServiceName}": {
+      "put": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_CreateOrUpdateLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Create": {
+            "$ref": "./examples/LinkedServices_Create.json"
+          },
+          "LinkedServices_Update": {
+            "$ref": "./examples/LinkedServices_Update.json"
+          }
+        },
+        "description": "Creates or updates a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linkedService entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "linkedService",
+            "description": "Linked service resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_GetLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Get": {
+            "$ref": "./examples/LinkedServices_Get.json"
+          }
+        },
+        "description": "Gets a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linked service entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_DeleteLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Delete": {
+            "$ref": "./examples/LinkedServices_Delete.json"
+          }
+        },
+        "description": "Deletes a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/datasets": {
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Dataset_GetDatasetsByWorkspace",
+        "x-ms-examples": {
+          "Datasets_ListByWorkspace": {
+            "$ref": "./examples/Datasets_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists datasets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatasetListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/datasets/{datasetName}": {
+      "put": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Dataset_CreateOrUpdateDataset",
+        "x-ms-examples": {
+          "Datasets_Create": {
+            "$ref": "./examples/Datasets_Create.json"
+          },
+          "Datasets_Update": {
+            "$ref": "./examples/Datasets_Update.json"
+          }
+        },
+        "description": "Creates or updates a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the dataset entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "dataset",
+            "description": "Dataset resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Dataset_GetDataset",
+        "x-ms-examples": {
+          "Datasets_Get": {
+            "$ref": "./examples/Datasets_Get.json"
+          }
+        },
+        "description": "Gets a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the dataset entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Dataset_DeleteDataset",
+        "x-ms-examples": {
+          "Datasets_Delete": {
+            "$ref": "./examples/Datasets_Delete.json"
+          }
+        },
+        "description": "Deletes a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines": {
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_GetPipelinesByWorkspace",
+        "x-ms-examples": {
+          "Pipelines_ListByWorkspace": {
+            "$ref": "./examples/Pipelines_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists pipelines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/pipelines/{pipelineName}": {
+      "put": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_CreateOrUpdatePipeline",
+        "x-ms-examples": {
+          "Pipelines_Create": {
+            "$ref": "./examples/Pipelines_Create.json"
+          },
+          "Pipelines_Update": {
+            "$ref": "./examples/Pipelines_Update.json"
+          }
+        },
+        "description": "Creates or updates a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the pipeline entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "pipeline",
+            "description": "Pipeline resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_GetPipeline",
+        "x-ms-examples": {
+          "Pipelines_Get": {
+            "$ref": "./examples/Pipelines_Get.json"
+          }
+        },
+        "description": "Gets a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the pipeline entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_DeletePipeline",
+        "x-ms-examples": {
+          "Pipelines_Delete": {
+            "$ref": "./examples/Pipelines_Delete.json"
+          }
+        },
+        "description": "Deletes a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines/{pipelineName}/createRun": {
+      "post": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_CreatePipelineRun",
+        "x-ms-examples": {
+          "Pipelines_CreateRun": {
+            "$ref": "./examples/Pipelines_CreateRun.json"
+          }
+        },
+        "description": "Creates a run of a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "referencePipelineRunId",
+            "description": "The pipeline run identifier. If run ID is specified the parameters of the specified run will be used to create a new run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "isRecovery",
+            "description": "Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "startActivityName",
+            "description": "In recovery mode, the rerun will start from this activity. If not specified, all activities will run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ParameterValueSpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CreateRunResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/queryPipelineRuns": {
+      "post": {
+        "operationId": "PipelineRun_QueryPipelineRunsByWorkspace",
+        "x-ms-examples": {
+          "PipelineRuns_QueryByWorkspace": {
+            "$ref": "./examples/PipelineRuns_QueryByWorkspace.json"
+          }
+        },
+        "description": "Query pipeline runs in the workspace based on input filter conditions.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the pipeline run.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelineruns/{runId}": {
+      "get": {
+        "operationId": "PipelineRun_GetPipelineRun",
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "./examples/PipelineRuns_Get.json"
+          }
+        },
+        "description": "Get a pipeline run by its run ID.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines/{pipelineName}/pipelineruns/{runId}/queryActivityruns": {
+      "post": {
+        "operationId": "PipelineRun_QueryActivityRuns",
+        "x-ms-examples": {
+          "ActivityRuns_QueryByPipelineRun": {
+            "$ref": "./examples/ActivityRuns_QueryByPipelineRun.json"
+          }
+        },
+        "description": "Query activity runs based on input filter conditions.",
+        "tags": [
+          "activityruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the activity runs.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ActivityRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelineruns/{runId}/cancel": {
+      "post": {
+        "operationId": "PipelineRun_CancelPipelineRun",
+        "x-ms-examples": {
+          "PipelineRuns_Cancel": {
+            "$ref": "./examples/PipelineRuns_Cancel.json"
+          }
+        },
+        "description": "Cancel a pipeline run by its run ID.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "name": "isRecursive",
+            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pipeline run has been canceled successfully. "
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers": {
+      "get": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_GetTriggersByWorkspace",
+        "x-ms-examples": {
+          "Triggers_ListByWorkspace": {
+            "$ref": "./examples/Triggers_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists triggers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/triggers/{triggerName}": {
+      "put": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_CreateOrUpdateTrigger",
+        "x-ms-examples": {
+          "Triggers_Create": {
+            "$ref": "./examples/Triggers_Create.json"
+          },
+          "Triggers_Update": {
+            "$ref": "./examples/Triggers_Update.json"
+          }
+        },
+        "description": "Creates or updates a trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the trigger entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "trigger",
+            "description": "Trigger resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "trigger"
+        ],
+        "operationId": "Trigger_GetTrigger",
+        "x-ms-examples": {
+          "Triggers_Get": {
+            "$ref": "./examples/Triggers_Get.json"
+          }
+        },
+        "description": "Gets a trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the trigger entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_DeleteTrigger",
+        "x-ms-examples": {
+          "Triggers_Delete": {
+            "$ref": "./examples/Triggers_Delete.json"
+          }
+        },
+        "description": "Deletes a trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/subscribeToEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_SubscribeTriggerToEvents",
+        "x-ms-examples": {
+          "Triggers_SubscribeToEvents": {
+            "$ref": "./examples/Triggers_SubscribeToEvents.json"
+          }
+        },
+        "description": "Subscribe event trigger to events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is subscribed to events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/getEventSubscriptionStatus": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_GetEventSubscriptionStatus",
+        "x-ms-examples": {
+          "Triggers_GetEventSubscriptionStatus": {
+            "$ref": "./examples/Triggers_GetEventSubscriptionStatus.json"
+          }
+        },
+        "description": "Get a trigger's event subscription status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger event subscription state.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/unsubscribeFromEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_UnsubscribeTriggerFromEvents",
+        "x-ms-examples": {
+          "Triggers_UnsubscribeFromEvents": {
+            "$ref": "./examples/Triggers_UnsubscribeFromEvents.json"
+          }
+        },
+        "description": "Unsubscribe event trigger from events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is unsubscribed from events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/start": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_StartTrigger",
+        "x-ms-examples": {
+          "Triggers_Start": {
+            "$ref": "./examples/Triggers_Start.json"
+          }
+        },
+        "description": "Starts a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been started successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/stop": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Trigger_StopTrigger",
+        "x-ms-examples": {
+          "Triggers_Stop": {
+            "$ref": "./examples/Triggers_Stop.json"
+          }
+        },
+        "description": "Stops a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been stopped successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/triggerRuns/{runId}/rerun": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_RerunTriggerInstance",
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Rerun.json"
+          }
+        },
+        "description": "Rerun single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TriggerRun has been restarted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_CancelTriggerInstance",
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Cancel.json"
+          }
+        },
+        "description": "Cancel single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TriggerRun has been cancelled."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/queryTriggerRuns": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRun_QueryTriggerRunsByWorkspace",
+        "x-ms-examples": {
+          "TriggerRuns_QueryByWorkspace": {
+            "$ref": "./examples/TriggerRuns_QueryByWorkspace.json"
+          }
+        },
+        "description": "Query trigger runs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the pipeline run.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/dataflows/{dataFlowName}": {
+      "put": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_CreateOrUpdateDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Create": {
+            "$ref": "./examples/DataFlows_Create.json"
+          },
+          "DataFlows_Update": {
+            "$ref": "./examples/DataFlows_Update.json"
+          }
+        },
+        "description": "Creates or updates a data flow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the data flow entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "dataFlow",
+            "description": "Data flow resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFlowResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_GetDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Get": {
+            "$ref": "./examples/DataFlows_Get.json"
+          }
+        },
+        "description": "Gets a data flow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the data flow entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_DeleteDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Delete": {
+            "$ref": "./examples/DataFlows_Delete.json"
+          }
+        },
+        "description": "Deletes a data flow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/dataflows": {
+      "get": {
+        "tags": [
+          "dataFlows"
+        ],
+        "operationId": "DataFlow_GetDataFlowsByWorkspace",
+        "x-ms-examples": {
+          "DataFlows_ListByWorkspace": {
+            "$ref": "./examples/DataFlows_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists data flows.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/createDataFlowDebugSession": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_CreateDataFlowDebugSession",
+        "x-ms-examples": {
+          "DataFlowDebugSession_Create": {
+            "$ref": "./examples/DataFlowDebugSession_Create.json"
+          }
+        },
+        "description": "Creates a data flow debug session.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug session definition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDataFlowDebugSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CreateDataFlowDebugSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/queryDataFlowDebugSessions": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_QueryDataFlowDebugSessionsByWorkspace",
+        "x-ms-examples": {
+          "DataFlowDebugSession_QueryByWorkspace": {
+            "$ref": "./examples/DataFlowDebugSession_QueryByWorkspace.json"
+          }
+        },
+        "description": "Query all active data flow debug sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/QueryDataFlowDebugSessionsResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/addDataFlowToDebugSession": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_AddDataFlow",
+        "x-ms-examples": {
+          "DataFlowDebugSession_AddDataFlow": {
+            "$ref": "./examples/DataFlowDebugSession_AddDataFlow.json"
+          }
+        },
+        "description": "Add a data flow into debug session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug session definition with debug content.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AddDataFlowToDebugSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/deleteDataFlowDebugSession": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_DeleteDataFlowDebugSession",
+        "x-ms-examples": {
+          "DataFlowDebugSession_Delete": {
+            "$ref": "./examples/DataFlowDebugSession_Delete.json"
+          }
+        },
+        "description": "Deletes a data flow debug session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug session definition for deletion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteDataFlowDebugSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/executeDataFlowDebugCommand": {
+      "post": {
+        "tags": [
+          "dataFlowDebugSession"
+        ],
+        "operationId": "DataFlowDebugSession_ExecuteCommand",
+        "x-ms-examples": {
+          "DataFlowDebugSession_ExecuteCommand": {
+            "$ref": "./examples/DataFlowDebugSession_ExecuteCommand.json"
+          }
+        },
+        "description": "Execute a data flow debug command.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "Data flow debug command definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataFlowDebugCommandResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sqlScripts": {
+      "get": {
+        "tags": [
+          "sqlScripts"
+        ],
+        "operationId": "SqlScript_GetSqlScriptsByWorkspace",
+        "x-ms-examples": {
+          "SqlScripts_ListByWorkspace": {
+            "$ref": "./examples/SqlScripts_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists sql scripts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SqlScriptsListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sqlScripts/{sqlScriptName}": {
+      "put": {
+        "tags": [
+          "sqlScripts"
+        ],
+        "operationId": "SqlScript_CreateOrUpdateSqlScript",
+        "x-ms-examples": {
+          "SqlScripts_Create": {
+            "$ref": "./examples/SqlScripts_Create.json"
+          },
+          "SqlScripts_Update": {
+            "$ref": "./examples/SqlScripts_Update.json"
+          }
+        },
+        "description": "Creates or updates a Sql Script.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sqlScriptName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the SQL script entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "sqlScript",
+            "description": "Sql Script resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlScriptResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SqlScriptResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "sqlScripts"
+        ],
+        "operationId": "SqlScript_GetSqlScript",
+        "x-ms-examples": {
+          "SqlScripts_Get": {
+            "$ref": "./examples/SqlScripts_Get.json"
+          }
+        },
+        "description": "Gets a sql script.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sqlScriptName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the sql compute entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SqlScriptResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "sqlScripts"
+        ],
+        "operationId": "SqlScript_DeleteSqlScript",
+        "x-ms-examples": {
+          "SqlScripts_Delete": {
+            "$ref": "./examples/SqlScripts_Delete.json"
+          }
+        },
+        "description": "Deletes a Sql Script.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sqlScriptName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sparkJobDefinitions": {
+      "get": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_GetSparkJobDefinitionsByWorkspace",
+        "x-ms-examples": {
+          "SparkJobDefinitions_ListByWorkspace": {
+            "$ref": "./examples/SparkJobDefinitions_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists spark job definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionsListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/sparkJobDefinitions/{sparkJobDefinitionName}": {
+      "put": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_CreateOrUpdateSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Create": {
+            "$ref": "./examples/SparkJobDefinitions_Create.json"
+          },
+          "SparkJobDefinitions_Update": {
+            "$ref": "./examples/SparkJobDefinitions_Update.json"
+          }
+        },
+        "description": "Creates or updates a Spark Job Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Spark Job Definition entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "sparkJobDefinition",
+            "description": "Spark Job Definition resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_GetSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Get": {
+            "$ref": "./examples/SparkJobDefinitions_Get.json"
+          }
+        },
+        "description": "Gets a Spark Job Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Spark Job Definition entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_DeleteSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Delete": {
+            "$ref": "./examples/SparkJobDefinitions_Delete.json"
+          }
+        },
+        "description": "Deletes a Spark Job Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sparkJobDefinitions/{sparkJobDefinitionName}/execute": {
+      "post": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_ExecuteSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Execute": {
+            "$ref": "./examples/SparkJobDefinitions_Execute.json"
+          }
+        },
+        "description": "Executes the spark job definition.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/debugSparkJobDefinition": {
+      "post": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_DebugSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Debug": {
+            "$ref": "./examples/SparkJobDefinitions_Debug.json"
+          }
+        },
+        "description": "Debug the spark job definition.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sparkJobDefinitionAzureResource",
+            "description": "Spark Job Definition resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SparkJobDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/notebooks": {
+      "get": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_GetNotebooksByWorkspace",
+        "x-ms-examples": {
+          "Notebooks_ListByWorkspace": {
+            "$ref": "./examples/Notebooks_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists Notebooks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NotebookListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/notebooks/summary": {
+      "get": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_GetNotebookSummaryByWorkSpace",
+        "x-ms-examples": {
+          "Notebooks_ListSummaryByWorkSpace": {
+            "$ref": "./examples/Notebooks_ListSummaryByWorkSpace.json"
+          }
+        },
+        "description": "Lists a summary of Notebooks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NotebookListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/notebooks/{notebookName}": {
+      "put": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_CreateOrUpdateNotebook",
+        "x-ms-examples": {
+          "Notebooks_Create": {
+            "$ref": "./examples/Notebooks_Create.json"
+          },
+          "Notebooks_Update": {
+            "$ref": "./examples/Notebooks_Update.json"
+          }
+        },
+        "description": "Creates or updates a Note Book.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/NotebookName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Note book entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "Notebook",
+            "description": "Note book resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotebookResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NotebookResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_GetNotebook",
+        "x-ms-examples": {
+          "Notebooks_Get": {
+            "$ref": "./examples/Notebooks_Get.json"
+          }
+        },
+        "description": "Gets a Note Book.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/NotebookName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Notebook entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NotebookResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_DeleteNotebook",
+        "x-ms-examples": {
+          "Notebooks_Delete": {
+            "$ref": "./examples/Notebooks_Delete.json"
+          }
+        },
+        "description": "Deletes a Note book.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/NotebookName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Azure Synapse top-level resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Etag identifies change in the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubResource": {
+      "description": "Azure Synapse nested resource, which belongs to a workspace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag identifies change in the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubResourceDebugResource": {
+      "description": "Azure Synapse nested debug resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        }
+      }
+    },
+    "Expression": {
+      "description": "Azure Synapse expression definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Expression type.",
+          "enum": [
+            "Expression"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressionType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Expression value."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "SecureString": {
+      "x-ms-discriminator-value": "SecureString",
+      "description": "Azure Synapse secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of secure string."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureKeyVaultSecretReference": {
+      "x-ms-discriminator-value": "AzureKeyVaultSecret",
+      "description": "Azure Key Vault secret reference.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "store": {
+          "description": "The Azure Key Vault linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "secretName": {
+          "type": "object",
+          "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
+        },
+        "secretVersion": {
+          "type": "object",
+          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "store",
+        "secretName"
+      ]
+    },
+    "SecretBase": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "IntegrationRuntimeReference": {
+      "description": "Integration runtime reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of integration runtime.",
+          "enum": [
+            "IntegrationRuntimeReference"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference integration runtime name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for integration runtime."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "LinkedServiceListResponse": {
+      "description": "A list of linked service resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetListResponse": {
+      "description": "A list of dataset resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of datasets.",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineListResponse": {
+      "description": "A list of pipeline resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipelines.",
+          "items": {
+            "$ref": "#/definitions/PipelineResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerListResponse": {
+      "description": "A list of trigger resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of triggers.",
+          "items": {
+            "$ref": "#/definitions/TriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowListResponse": {
+      "description": "A list of data flow resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of data flows.",
+          "items": {
+            "$ref": "#/definitions/DataFlowResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateDataFlowDebugSessionRequest": {
+      "description": "Request body structure for creating data flow debug session.",
+      "type": "object",
+      "properties": {
+        "dataFlowName": {
+          "description": "The name of the data flow.",
+          "type": "string"
+        },
+        "existingClusterId": {
+          "description": "The ID of existing Databricks cluster.",
+          "type": "string"
+        },
+        "clusterTimeout": {
+          "description": "Timeout setting for Databricks cluster.",
+          "type": "integer"
+        },
+        "newClusterName": {
+          "description": "The name of new Databricks cluster.",
+          "type": "string"
+        },
+        "newClusterNodeType": {
+          "description": "The type of new Databricks cluster.",
+          "type": "string"
+        },
+        "dataBricksLinkedService": {
+          "description": "Data bricks linked service.",
+          "$ref": "#/definitions/LinkedServiceResource"
+        }
+      }
+    },
+    "CreateDataFlowDebugSessionResponse": {
+      "description": "Response body structure for creating data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        }
+      }
+    },
+    "StartDataFlowDebugSessionRequest": {
+      "description": "Request body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlow": {
+          "description": "Data flow instance.",
+          "$ref": "#/definitions/DataFlowResource"
+        },
+        "datasets": {
+          "type": "array",
+          "description": "List of datasets.",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "linkedServices": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "staging": {
+          "description": "Staging info for debug session.",
+          "type": "object"
+        },
+        "debugSettings": {
+          "description": "Data flow debug settings.",
+          "type": "object"
+        },
+        "incrementalDebug": {
+          "description": "The type of new Databricks cluster.",
+          "type": "boolean"
+        }
+      }
+    },
+    "StartDataFlowDebugSessionResponse": {
+      "description": "Response body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "jobVersion": {
+          "description": "The ID of data flow debug job version.",
+          "type": "string"
+        }
+      }
+    },
+    "DeleteDataFlowDebugSessionRequest": {
+      "description": "Request body structure for deleting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugPreviewDataRequest": {
+      "description": "Request body structure for data flow preview data.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The output stream name.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "The row limit for preview request.",
+          "type": "integer"
+        }
+      }
+    },
+    "DataFlowDebugStatisticsRequest": {
+      "description": "Request body structure for data flow statistics.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The output stream name.",
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "description": "List of column names.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EvaluateDataFlowExpressionRequest": {
+      "description": "Request body structure for data flow expression preview.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The output stream name.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "The row limit for preview request.",
+          "type": "integer"
+        },
+        "expression": {
+          "description": "The expression for preview.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugCommandRequest": {
+      "description": "Request body structure for data flow expression preview.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlowName": {
+          "description": "The data flow which contains the debug session.",
+          "type": "string"
+        },
+        "commandName": {
+          "description": "The command name.",
+          "type": "string"
+        },
+        "commandPayload": {
+          "description": "The command payload object.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "sessionId",
+        "commandPayload"
+      ]
+    },
+    "DataFlowDebugQueryResponse": {
+      "description": "Response body structure of data flow query for data preview, statistics or expression preview.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "The run ID of data flow debug session.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugResultResponse": {
+      "description": "Response body structure of data flow result for data preview, statistics or expression preview.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The run status of data preview, statistics or expression preview.",
+          "type": "string"
+        },
+        "data": {
+          "description": "The result data of data preview, statistics or expression preview.",
+          "type": "string"
+        }
+      }
+    },
+    "QueryDataFlowDebugSessionsResponse": {
+      "description": "A list of active debug sessions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array with all active debug sessions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFlowDebugSessionInfo"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugSessionInfo": {
+      "description": "Data flow debug session info.",
+      "type": "object",
+      "properties": {
+        "dataFlowName": {
+          "description": "The name of the data flow.",
+          "type": "string"
+        },
+        "computeType": {
+          "description": "Compute type of the cluster.",
+          "type": "string"
+        },
+        "coreCount": {
+          "description": "Core count of the cluster.",
+          "type": "integer"
+        },
+        "nodeCount": {
+          "description": "Node count of the cluster. (deprecated property)",
+          "type": "integer"
+        },
+        "integrationRuntimeName": {
+          "description": "Attached integration runtime name of data flow debug session.",
+          "type": "string"
+        },
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time of data flow debug session.",
+          "type": "string"
+        },
+        "timeToLiveInMinutes": {
+          "description": "Compute type of the cluster.",
+          "type": "integer"
+        },
+        "lastActivityTime": {
+          "description": "Last activity time of data flow debug session.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "CreateRunResponse": {
+      "description": "Response body with a run identifier.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "TriggerDependencyProvisioningStatus": {
+      "description": "Defines the response of a provision trigger dependency operation.",
+      "type": "object",
+      "properties": {
+        "triggerName": {
+          "description": "Trigger name.",
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "description": "Provisioning status.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "triggerName",
+        "provisioningStatus"
+      ]
+    },
+    "VariableDefinitionSpecification": {
+      "description": "Definition of variable for a Pipeline.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VariableSpecification"
+      }
+    },
+    "VariableSpecification": {
+      "description": "Definition of a single variable for a Pipeline.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Variable type.",
+          "enum": [
+            "String",
+            "Bool",
+            "Boolean",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "VariableType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of variable."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ParameterDefinitionSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterSpecification"
+      }
+    },
+    "ParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Parameter type.",
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array",
+            "SecureString"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of parameter."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ParameterValueSpecification": {
+      "description": "An object mapping parameter names to argument values.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineResource": {
+      "description": "Pipeline resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./entityTypes/Pipeline.json#/definitions/Pipeline",
+          "description": "Properties of the pipeline."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PipelineReference": {
+      "description": "Pipeline reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Pipeline reference type.",
+          "enum": [
+            "PipelineReference"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference pipeline name."
+        },
+        "name": {
+          "type": "string",
+          "description": "Reference name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "TriggerPipelineReference": {
+      "description": "Pipeline that needs to be triggered with the given parameters.",
+      "properties": {
+        "pipelineReference": {
+          "description": "Pipeline reference.",
+          "$ref": "#/definitions/PipelineReference"
+        },
+        "parameters": {
+          "description": "Pipeline parameters.",
+          "$ref": "#/definitions/ParameterValueSpecification"
+        }
+      }
+    },
+    "TriggerResource": {
+      "description": "Trigger resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/Trigger",
+          "description": "Properties of the trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "TriggerSubscriptionOperationStatus": {
+      "description": "Defines the response of a trigger subscription operation.",
+      "type": "object",
+      "properties": {
+        "triggerName": {
+          "description": "Trigger name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Provisioning",
+            "Deprovisioning",
+            "Disabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EventSubscriptionStatus",
+            "modelAsString": true
+          },
+          "description": "Event Subscription Status.",
+          "readOnly": true
+        }
+      }
+    },
+    "Workspace": {
+      "description": "Workspace resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/WorkspaceIdentity",
+          "description": "Managed service identity of the workspace."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "Properties of the workspace."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "WorkspaceUpdateParameters": {
+      "description": "Parameters for updating a workspace resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "identity": {
+          "$ref": "#/definitions/WorkspaceIdentity",
+          "description": "Managed service identity of the workspace."
+        }
+      }
+    },
+    "WorkspaceIdentity": {
+      "description": "Identity properties of the workspace resource.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal id of the identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The client tenant id of the identity."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "WorkspaceProperties": {
+      "description": "Workspace resource properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "Workspace provisioning state, example Succeeded.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "Time the workspace was created in ISO8601 format.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "version": {
+          "description": "Version of the workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "defaultStorage": {
+          "description": "Linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "defaultSqlServer": {
+          "description": "Linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        }
+      }
+    },
+    "DatasetReference": {
+      "description": "Dataset reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Dataset reference type.",
+          "enum": [
+            "DatasetReference"
+          ],
+          "x-ms-enum": {
+            "name": "DatasetReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference dataset name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for dataset."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "DatasetResource": {
+      "description": "Dataset resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset",
+          "description": "Dataset properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DatasetDebugResource": {
+      "description": "Dataset debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset",
+          "description": "Dataset properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkedServiceReference": {
+      "description": "Linked service reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Linked service reference type.",
+          "enum": [
+            "LinkedServiceReference"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference LinkedService name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for LinkedService."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "LinkedServiceResource": {
+      "description": "Linked service resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
+          "description": "Properties of linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkedServiceDebugResource": {
+      "description": "Linked service debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
+          "description": "Properties of linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlScriptsListResponse": {
+      "description": "A list of sql scripts resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of sql scripts.",
+          "items": {
+            "$ref": "#/definitions/SqlScriptResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlScriptResource": {
+      "description": "Sql Script resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/SqlScript.json#/definitions/SqlScript",
+          "description": "Properties of sql script."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SparkJobDefinitionsListResponse": {
+      "description": "A list of spark job definitions resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of spark job definitions.",
+          "items": {
+            "$ref": "#/definitions/SparkJobDefinitionResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "SparkJobDefinitionResource": {
+      "description": "Spark job definition resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/SparkJobDefinition.json#/definitions/SparkJobDefinition",
+          "description": "Properties of spark job definition."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "NotebookListResponse": {
+      "description": "A list of Notebook resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Notebooks.",
+          "items": {
+            "$ref": "#/definitions/NotebookResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "NotebookResource": {
+      "description": "Notebook resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Notebook.json#/definitions/Notebook",
+          "description": "Properties of Notebook."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DataFlowResource": {
+      "description": "Data flow resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/DataFlow.json#/definitions/DataFlow",
+          "description": "Data flow properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DataFlowReference": {
+      "description": "Data flow reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Data flow reference type.",
+          "enum": [
+            "DataFlowReference"
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference data flow name."
+        },
+        "datasetParameters": {
+          "type": "object",
+          "description": "Reference data flow parameters from dataset."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "DataFlowStagingInfo": {
+      "description": "Staging info for execute data flow activity.",
+      "properties": {
+        "linkedService": {
+          "description": "Staging linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "folderPath": {
+          "description": "Folder path for staging blob.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugPackage": {
+      "description": "Request body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "description": "The ID of data flow debug session.",
+          "type": "string"
+        },
+        "dataFlow": {
+          "description": "Data flow instance.",
+          "$ref": "#/definitions/DataFlowDebugResource"
+        },
+        "datasets": {
+          "type": "array",
+          "description": "List of datasets.",
+          "items": {
+            "$ref": "#/definitions/DatasetDebugResource"
+          }
+        },
+        "linkedServices": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceDebugResource"
+          }
+        },
+        "staging": {
+          "description": "Staging info for debug session.",
+          "$ref": "#/definitions/DataFlowStagingInfo"
+        },
+        "debugSettings": {
+          "description": "Data flow debug settings.",
+          "type": "object",
+          "properties": {
+            "sourceSettings": {
+              "type": "array",
+              "description": "Source setting for data flow debug.",
+              "items": {
+                "$ref": "#/definitions/DataFlowSourceSetting"
+              }
+            },
+            "parameters": {
+              "description": "Data flow parameters.",
+              "$ref": "#/definitions/ParameterValueSpecification"
+            },
+            "datasetParameters": {
+              "description": "Parameters for dataset.",
+              "type": "object"
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DataFlowSourceSetting": {
+      "description": "Definition of data flow source setting for debug.",
+      "type": "object",
+      "properties": {
+        "sourceName": {
+          "description": "The data flow source name.",
+          "type": "string"
+        },
+        "rowLimit": {
+          "description": "Defines the row limit of data flow source in debug.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DataFlowDebugResource": {
+      "description": "Data flow debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/DataFlow.json#/definitions/DataFlow",
+          "description": "Data flow properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "AddDataFlowToDebugSessionResponse": {
+      "description": "Response body structure for starting data flow debug session.",
+      "type": "object",
+      "properties": {
+        "jobVersion": {
+          "description": "The ID of data flow debug job version.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugCommandResponse": {
+      "description": "Response body structure of data flow result for data preview, statistics or expression preview.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The run status of data preview, statistics or expression preview.",
+          "type": "string"
+        },
+        "data": {
+          "description": "The result data of data preview, statistics or expression preview.",
+          "type": "string"
+        }
+      }
+    },
+    "RunFilterParameters": {
+      "description": "Query parameters for listing runs.",
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results. Null for first page.",
+          "type": "string"
+        },
+        "lastUpdatedAfter": {
+          "description": "The time at or after which the run event was updated in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedBefore": {
+          "description": "The time at or before which the run event was updated in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters.",
+          "items": {
+            "$ref": "#/definitions/RunQueryFilter"
+          }
+        },
+        "orderBy": {
+          "type": "array",
+          "description": "List of OrderBy option.",
+          "items": {
+            "$ref": "#/definitions/RunQueryOrderBy"
+          }
+        }
+      },
+      "required": [
+        "lastUpdatedAfter",
+        "lastUpdatedBefore"
+      ]
+    },
+    "RunQueryFilter": {
+      "description": "Query filter option for listing runs.",
+      "type": "object",
+      "properties": {
+        "operand": {
+          "description": "Parameter name to be used for filter. The allowed operands to query pipeline runs are PipelineName, RunStart, RunEnd and Status; to query activity runs are ActivityName, ActivityRunStart, ActivityRunEnd, ActivityType and Status, and to query trigger runs are TriggerName, TriggerRunTimestamp and Status.",
+          "type": "string",
+          "enum": [
+            "PipelineName",
+            "Status",
+            "RunStart",
+            "RunEnd",
+            "ActivityName",
+            "ActivityRunStart",
+            "ActivityRunEnd",
+            "ActivityType",
+            "TriggerName",
+            "TriggerRunTimestamp",
+            "RunGroupId",
+            "LatestOnly"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryFilterOperand",
+            "modelAsString": true
+          }
+        },
+        "operator": {
+          "description": "Operator to be used for filter.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "In",
+            "NotIn"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryFilterOperator",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "List of filter values.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "operand",
+        "operator",
+        "values"
+      ]
+    },
+    "RunQueryOrderBy": {
+      "description": "An object to provide order by options for listing runs.",
+      "type": "object",
+      "properties": {
+        "orderBy": {
+          "description": "Parameter name to be used for order by. The allowed parameters to order by for pipeline runs are PipelineName, RunStart, RunEnd and Status; for activity runs are ActivityName, ActivityRunStart, ActivityRunEnd and Status; for trigger runs are TriggerName, TriggerRunTimestamp and Status.",
+          "type": "string",
+          "enum": [
+            "RunStart",
+            "RunEnd",
+            "PipelineName",
+            "Status",
+            "ActivityName",
+            "ActivityRunStart",
+            "ActivityRunEnd",
+            "TriggerName",
+            "TriggerRunTimestamp"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryOrderByField",
+            "modelAsString": true
+          }
+        },
+        "order": {
+          "description": "Sorting order of the parameter.",
+          "type": "string",
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryOrder",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "orderBy",
+        "order"
+      ]
+    },
+    "PipelineRunsQueryResponse": {
+      "description": "A list pipeline runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipeline runs.",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "Information about a pipeline run.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "runGroupId": {
+          "description": "Identifier that correlates all the recovery runs of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isLatest": {
+          "description": "Indicates if the recovered pipeline run is the latest in its group.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "pipelineName": {
+          "description": "The pipeline name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "The full or partial list of parameter name, value pair used in the pipeline run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "invokedBy": {
+          "description": "Entity that started the pipeline run.",
+          "$ref": "#/definitions/PipelineRunInvokedBy",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "description": "The last updated timestamp for the pipeline run event in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runStart": {
+          "description": "The start time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runEnd": {
+          "description": "The end time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "description": "The duration of a pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The message from a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineRunInvokedBy": {
+      "description": "Provides entity name and id that started the pipeline run.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the entity that started the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The ID of the entity that started the run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invokedByType": {
+          "description": "The type of the entity that started the run.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ActivityRunsQueryResponse": {
+      "description": "A list activity runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of activity runs.",
+          "items": {
+            "$ref": "#/definitions/ActivityRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "ActivityRun": {
+      "description": "Information about an activity run in a pipeline.",
+      "type": "object",
+      "properties": {
+        "pipelineName": {
+          "description": "The name of the pipeline.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunId": {
+          "description": "The id of the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityName": {
+          "description": "The name of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityType": {
+          "description": "The type of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityRunId": {
+          "description": "The id of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkedServiceName": {
+          "description": "The name of the compute linked service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityRunStart": {
+          "description": "The start time of the activity run in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "activityRunEnd": {
+          "description": "The end time of the activity run in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "description": "The duration of the activity run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "input": {
+          "description": "The input for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "output": {
+          "description": "The output for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The error if any from the activity run.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "TriggerRunsQueryResponse": {
+      "description": "A list of trigger runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of trigger runs.",
+          "items": {
+            "$ref": "#/definitions/TriggerRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerRun": {
+      "description": "Trigger runs.",
+      "type": "object",
+      "properties": {
+        "triggerRunId": {
+          "type": "string",
+          "description": "Trigger run id.",
+          "readOnly": true
+        },
+        "triggerName": {
+          "type": "string",
+          "description": "Trigger name.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "type": "string",
+          "description": "Trigger type.",
+          "readOnly": true
+        },
+        "triggerRunTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Trigger run start time.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Inprogress"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerRunStatus",
+            "modelAsString": true
+          },
+          "description": "Trigger run status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Trigger error message.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "List of property name and value related to trigger run. Name, value pair depends on type of trigger.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "triggeredPipelines": {
+          "description": "List of pipeline name and run Id triggered by the trigger run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "RerunTumblingWindowTriggerActionParameters": {
+      "description": "Rerun tumbling window trigger Parameters.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxConcurrency": {
+          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "maxConcurrency"
+      ]
+    },
+    "RerunTriggerListResponse": {
+      "description": "A list of rerun triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of rerun triggers.",
+          "items": {
+            "$ref": "#/definitions/RerunTriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RerunTriggerResource": {
+      "description": "RerunTrigger resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
+          "description": "Properties of the rerun trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GetSsisObjectMetadataRequest": {
+      "type": "object",
+      "description": "The request payload of get SSIS object metadata.",
+      "properties": {
+        "metadataPath": {
+          "type": "string",
+          "description": "Metadata path."
+        }
+      }
+    },
+    "SsisObjectMetadataStatusResponse": {
+      "type": "object",
+      "description": "The status of the operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "string",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
+        }
+      }
+    },
+    "ExposureControlRequest": {
+      "type": "object",
+      "description": "The exposure control request.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlResponse": {
+      "type": "object",
+      "description": "The exposure control response.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The feature value.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlScriptName": {
+      "name": "sqlScriptName",
+      "description": "The sql script name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sparkJobDefinitionName": {
+      "name": "sparkJobDefinitionName",
+      "description": "The spark job definition name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NotebookName": {
+      "name": "notebookName",
+      "description": "The notebook name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "locationId": {
+      "name": "locationId",
+      "description": "The location identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "linkedServiceName": {
+      "name": "linkedServiceName",
+      "description": "The linked service name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "datasetName": {
+      "name": "datasetName",
+      "description": "The dataset name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "pipelineName": {
+      "name": "pipelineName",
+      "description": "The pipeline name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "dataFlowName": {
+      "name": "dataFlowName",
+      "description": "The data flow name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "triggerName": {
+      "name": "triggerName",
+      "description": "The trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "rerunTriggerName": {
+      "name": "rerunTriggerName",
+      "description": "The rerun trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "runId": {
+      "name": "runId",
+      "description": "The pipeline run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sessionId": {
+      "name": "sessionId",
+      "description": "The data flow session identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "jobVersion": {
+      "name": "jobVersion",
+      "description": "The data flow job version identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "nodeName": {
+      "name": "nodeName",
+      "description": "The integration runtime node name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$",
+      "minLength": 1,
+      "maxLength": 150,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
