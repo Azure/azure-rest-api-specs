@@ -11,10 +11,10 @@
         "description": "Get schema by ID.  Azure Schema Registry guarantees that ID is unique within a namespace.",
         "x-ms-examples": {
           "Get schema by ID": {
-            "$ref": "./examples/getSchemaById.json"
+            "$ref": "./examples/OperationSchema_GetById.json"
           }
         },
-        "operationId": "getSchemaById",
+        "operationId": "Schema_GetById",
         "produces": [
           "application/json"
         ],
@@ -22,7 +22,7 @@
           {
             "name": "schema-id",
             "in": "path",
-            "description": "schema ID referencing specific schema in registry namespace",
+            "description": "References specific schema in registry namespace.",
             "required": true,
             "type": "string"
           }
@@ -53,6 +53,12 @@
             },
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/ServiceErrorResponse"
             }
           }
         }
@@ -64,10 +70,10 @@
         "description": "Get ID for schema with matching byte content and serialization format.",
         "x-ms-examples": {
           "Get schema ID": {
-            "$ref": "./examples/getSchemaId.json"
+            "$ref": "./examples/OperationSchema_GetIdByContent.json"
           }
         },
-        "operationId": "getIdBySchemaContent",
+        "operationId": "Schema_GetIdByContent",
         "produces": [
           "application/json"
         ],
@@ -129,6 +135,12 @@
             },
             "schema": {
               "$ref": "#/definitions/SchemaId"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/ServiceErrorResponse"
             }
           }
         }
@@ -138,10 +150,10 @@
         "description": "Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n",
         "x-ms-examples": {
           "Register schema": {
-            "$ref": "./examples/registerSchema.json"
+            "$ref": "./examples/OperationSchema_Register.json"
           }
         },
-        "operationId": "registerSchema",
+        "operationId": "Schema_Register",
         "produces": [
           "application/json"
         ],
@@ -203,6 +215,12 @@
             },
             "schema": {
               "$ref": "#/definitions/SchemaId"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/ServiceErrorResponse"
             }
           }
         }
@@ -215,10 +233,19 @@
         "id": {
           "type": "string"
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
+    },
+    "ServiceErrorResponse": {
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
     }
   }
 }
