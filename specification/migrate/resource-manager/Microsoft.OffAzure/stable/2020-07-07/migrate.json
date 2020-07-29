@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-07-07",
+    "version": "2020-01-01",
     "title": "Azure Migrate V2",
     "description": "Discover your workloads for Azure.",
     "contact": {
@@ -2590,6 +2590,262 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}": {
+      "get": {
+        "tags": [
+          "MasterSites"
+        ],
+        "summary": "Method to get a site.",
+        "operationId": "MasterSites_GetSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Master site": {
+            "$ref": "./examples/MasterSite_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "MasterSites"
+        ],
+        "summary": "Method to create or update a site.",
+        "operationId": "MasterSites_PutSite",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Master site": {
+            "$ref": "./examples/MasterSite_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "MasterSites"
+        ],
+        "summary": "Method to delete a site.",
+        "operationId": "MasterSites_DeleteSite",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Master site": {
+            "$ref": "./examples/MasterSite_Delete.json"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "MasterSites"
+        ],
+        "summary": "Method to patch an existing site.",
+        "operationId": "MasterSites_PatchSite",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MasterSite"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Master site": {
+            "$ref": "./examples/MasterSite_Patch.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/providers/Microsoft.OffAzure/operations": {
       "get": {
         "summary": "Get list of operations supported in the API.",
@@ -4574,6 +4830,59 @@
           "format": "int32",
           "description": "Number of vCenters part of the site.",
           "type": "integer"
+        }
+      }
+    },
+    "MasterSite": {
+      "description": "Site REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the Master site.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource. Type = Microsoft.OffAzure/MasterSites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "eTag for concurrency control.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure location in which Sites is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/MasterSiteProperties",
+          "description": "Nested properties of Master site."
+        }
+      }
+    },
+    "MasterSiteProperties": {
+      "description": "Class for site properties.",
+      "type": "object",
+      "properties": {
+          "publicNetworkAccess": {
+          "description": "State of public network access.",
+          "type": "string"
+        },
+        "allowMultipleSites": {
+          "description": "Value indicating whether multiple sites per site type are allowed.",
+          "type": "boolean"
+        },
+        "sites": {
+          "description": "List of sites that are a part of Master Site.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
