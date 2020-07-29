@@ -947,12 +947,9 @@
             "properties": {
               "type": "object",
               "properties": {
-                "modelIds": {
-                  "description": "The list of model ResourceIds.",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
+                "modelId": {
+                  "description": "The model Resource Id.",
+                  "type": "string",
                   "readOnly": true
                 },
                 "scaleSettings": {
@@ -1024,7 +1021,7 @@
       "description": "The request to create an Inference Deployment.",
       "type": "object",
       "required": [
-        "modelIds",
+        "modelId",
         "sku",
         "weight"
       ],
@@ -1036,12 +1033,9 @@
             "type": "string"
           }
         },
-        "modelIds": {
-          "description": "The list of model resource Ids.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "modelId": {
+          "description": "The model resource Id.",
+          "type": "string"
         },
         "sku": {
           "description": "Sku for the deployment. Give the name of the sku such as Standard_DS2 or Basic_A0.",
