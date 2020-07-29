@@ -1,154 +1,154 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "GraphManagementClient",
-        "description": "The Microsoft Graph API provides a RESTful set of web services that interact with Microsoft Graph service to manage your entities and relationships accross diferent services exposed with rich scenarios around users and groups (Azure Active Directory).",
-        "version": "1.0"
-    },
-    "host": "graph.microsoft.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/invitations": {
-            "post": {
-                "tags": [
-                    "GuestUser"
-                ],
-                "operationId": "GuestUser_Create",
-                "description": "Create a GuestUser sending an invit",
-                "parameters": [
-                    {
-                        "name": "invitationcontent",
-                        "in": "body",
-                        "required": true,
-                        "description": "The email address of the GuestUser you want to invite, the domain of the mail addres must exist on existin Azure AD",
-			"schema" : {
-			    "$ref" : "#/definitions/invitationSended"
-			}
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Create successful. The operation returns the resulting GuestUser resource.",
-                        "schema": {
-                            "$ref": "#/definitions/invitation"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./graph.json#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "invitation": {
-            "allOf": [
-                {
-                    "$ref": "./graph.json#/definitions/globalgraphresources"
-                },
-		{
-		    "$ref" : "#/definitions/invitationSended"	
-		}
-            ],
-            "properties": {
-                "inviteRedeemUrl": {
-                    "type": "string",
-                    "description": "The invitation url for this GuestUser invitation"
-                },
-                "invitedUserDisplayName": {
-                    "type": "string",
-                    "description": "The name of the GestUser invited"
-                },
-                "sendInvitationMessage": {
-                    "type": "boolean",
-                    "description": "Set to true if there is a custom message in the invitation of the GuestUser"
-                },
-                "invitedUserMessageInfo": {
-		    "x-ms-client-flatten": true,
-		    "$ref" : "#/definitions/customMessagePropertieFormat",
-                    "description": "The custom message information for the GuestUser invited"
-                },
-                "statuts": {
-                    "type": "string",
-                    "description": "The status of this GuestUser invitation"
-                },
-                "invitedUser": {
-                    "$ref": "./graph.json#/definitions/globalgraphresources"
-                }
-            }
-        },
-	"invitationSended" : {
-	   "properties": {
-                "invitedUserEmailAddress": {
-                    "type": "string",
-                    "description": "The email of the GuestUser invited"
-                },
-                "inviteRedirectUrl": {
-                    "type": "string",
-                    "description": "The redirect url for this GuestUser invitation"
-                }
-	   }
-	},
-        "customMessagePropertieFormat": {
-            "properties": {
-                "messageLanguage": {
-                    "type": "string",
-                    "description": "The language message of the message"
-                },
-                "ccRecipients": {
-                    "type": "array",
-                    "description": "All Cc emails addresses",
-                    "items": {
-                        "properties": {
-                            "emailAddress": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "description": "The name of the recipient"
-                                    },
-                                    "address": {
-                                        "description": "The email address of the recipient",
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "customizedMessageBody": {
-                    "type": "string",
-                    "description": "The content of the message"
-                }
-            }
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "GraphManagementClient",
+    "description": "The Microsoft Graph API provides a RESTful set of web services that interact with Microsoft Graph service to manage your entities and relationships across different services exposed with rich scenarios around users and groups (Azure Active Directory).",
+    "version": "1.0"
+  },
+  "host": "graph.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/invitations": {
+      "post": {
+        "tags": [
+          "GuestUser"
+        ],
+        "operationId": "GuestUser_Create",
+        "description": "Create a GuestUser sending an invitation",
+        "parameters": [
+          {
+            "name": "invitationContent",
+            "in": "body",
+            "required": true,
+            "description": "The email address of the GuestUser you want to invite, the domain of the mail address must exist on existing Azure AD",
+            "schema": {
+              "$ref": "#/definitions/invitationSended"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting GuestUser resource.",
+            "schema": {
+              "$ref": "#/definitions/invitation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./graph.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "invitation": {
+      "allOf": [
+        {
+          "$ref": "./graph.json#/definitions/globalGraphResource"
+        },
+        {
+          "$ref": "#/definitions/invitationSended"
+        }
+      ],
+      "properties": {
+        "inviteRedeemUrl": {
+          "type": "string",
+          "description": "The invitation url for this GuestUser invitation"
+        },
+        "invitedUserDisplayName": {
+          "type": "string",
+          "description": "The name of the GestUser invited"
+        },
+        "sendInvitationMessage": {
+          "type": "boolean",
+          "description": "Set to true if there is a custom message in the invitation of the GuestUser"
+        },
+        "invitedUserMessageInfo": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/customMessagePropertiesFormat",
+          "description": "The custom message information for the GuestUser invited"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this GuestUser invitation"
+        },
+        "invitedUser": {
+          "$ref": "./graph.json#/definitions/globalGraphResource"
+        }
+      }
+    },
+    "invitationSended": {
+      "properties": {
+        "invitedUserEmailAddress": {
+          "type": "string",
+          "description": "The email of the GuestUser invited"
+        },
+        "inviteRedirectUrl": {
+          "type": "string",
+          "description": "The redirect url for this GuestUser invitation"
+        }
+      }
+    },
+    "customMessagePropertiesFormat": {
+      "properties": {
+        "messageLanguage": {
+          "type": "string",
+          "description": "The language message of the message"
+        },
+        "ccRecipients": {
+          "type": "array",
+          "description": "All Cc emails addresses",
+          "items": {
+            "properties": {
+              "emailAddress": {
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the recipient"
+                  },
+                  "address": {
+                    "description": "The email address of the recipient",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "customizedMessageBody": {
+          "type": "string",
+          "description": "The content of the message"
+        }
+      }
+    }
+  }
 }
