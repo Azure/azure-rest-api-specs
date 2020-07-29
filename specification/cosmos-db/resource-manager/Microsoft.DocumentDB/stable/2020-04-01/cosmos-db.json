@@ -1680,6 +1680,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "SqlResources_MigrateToAutoscaleSqlDatabase",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBSqlDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "SqlResources_MigrateToManualThroughputSqlDatabase",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBSqlDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
         "operationId": "SqlResources_ListSqlContainers",
