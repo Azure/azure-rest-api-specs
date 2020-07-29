@@ -2599,7 +2599,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: July 13, 2020
 
-**How to fix the violation**: For each resource which doesn't have a get operation,add the corresponding get operation.
+**How to fix the violation**: 
+Since all the models that having 'x-ms-azure-resource' enabled are considered as ARM resource,
+If the output resource is not exactly a ARM resource,you should remove the extension from the model. 
+Otherwise,for each resource which doesn't have a get operation,add the corresponding get operation. 
 
 For example:
 
