@@ -46,6 +46,7 @@ input-file:
   - Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
@@ -392,6 +393,7 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
@@ -417,7 +419,6 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtags.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtenant.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimusers.json
-  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/definitions.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json

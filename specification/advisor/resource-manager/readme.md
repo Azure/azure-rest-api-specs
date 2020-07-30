@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-2020-01
 ```
 
+### Tag: package-2020-07-preview
+
+These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-preview'
+input-file:
+  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+```
 
 ### Tag: package-2020-01
 
@@ -149,11 +157,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2020-01-01/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-04-19/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-03-31/advisor.json
   - $(this-folder)/Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
-  - $(this-folder)/Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
 
 ```
 

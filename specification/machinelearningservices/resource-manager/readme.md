@@ -370,6 +370,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
