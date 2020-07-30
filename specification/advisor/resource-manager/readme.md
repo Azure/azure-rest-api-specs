@@ -157,6 +157,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2020-01-01/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-04-19/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-03-31/advisor.json
