@@ -12,6 +12,7 @@ This is the AutoRest configuration file for Azure Migrate.
 batch:
   - tag: package-2018-02
   - tag: package-2020-01
+  - tag: package-2020-07
 ```
 
 
@@ -66,11 +67,6 @@ To see additional help and options, run:
 ### Basic Information
 
 These are the global settings for the API.
-
-``` yaml
-openapi-type: arm
-tag: package-2020-07
-```
 
 ### Tag: package-2018-02
 
@@ -146,6 +142,7 @@ input-file:
   - $(this-folder)/Microsoft.Migrate/stable/2018-02-02/migrate.json
   - $(this-folder)/Microsoft.Migrate/stable/2019-10-01/migrate.json
   - $(this-folder)/Microsoft.OffAzure/stable/2020-01-01/migrate.json
+  - $(this-folder)/Microsoft.OffAzure/stable/2020-07-07/migrate.json
 
 ```
 
