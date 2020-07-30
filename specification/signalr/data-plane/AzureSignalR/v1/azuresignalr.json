@@ -565,55 +565,6 @@
           }
         }
       },
-      "head": {
-        "tags": [
-          "signalr.v1"
-        ],
-        "summary": "Check whether a user exists in the target group.",
-        "operationId": "ServiceApi_CheckUserExistenceInGroup",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "user",
-            "description": "Target user Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      },
       "put": {
         "tags": [
           "signalr.v1"
