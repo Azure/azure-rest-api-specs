@@ -1847,7 +1847,7 @@
           "CreatePool - Minimal VirtualMachineConfiguration": {
             "$ref": "./examples/PoolCreate_MinimalVirtualMachineConfiguration.json"
           },
-          "CreatePool - Full Example": {
+          "CreatePool - Full CloudServiceConfiguration": {
             "$ref": "./examples/PoolCreate_CloudServiceConfiguration.json"
           },
           "CreatePool - Custom Image": {
@@ -2232,7 +2232,6 @@
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
-          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "$ref": "#/definitions/EncryptionProperties"
         }
       },
@@ -2260,7 +2259,6 @@
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
-          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "$ref": "#/definitions/EncryptionProperties"
         }
       },
@@ -2285,8 +2283,7 @@
           "description": "The properties of the Batch account."
         },
         "identity": {
-          "$ref": "#/definitions/BatchAccountIdentity",
-          "description": "The identity of the Batch account."
+          "$ref": "#/definitions/BatchAccountIdentity"
         }
       },
       "required": [
@@ -2369,7 +2366,7 @@
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false,
-            "values": [
+            "values" : [
               {
                 "value": "SystemAssigned",
                 "description": "Batch account has a system assigned identity with it."
@@ -2472,7 +2469,6 @@
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
-          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "readOnly": true,
           "$ref": "#/definitions/EncryptionProperties"
         },
@@ -2484,12 +2480,12 @@
           "title": "The dedicated core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
-        "lowPriorityCoreQuota": {
+        "spotCoreQuota": {
           "readOnly": true,
           "x-nullable": true,
           "type": "integer",
           "format": "int32",
-          "title": "The low-priority core quota for the Batch account.",
+          "title": "The spot core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamily": {
@@ -2533,8 +2529,7 @@
           "description": "The properties associated with the account."
         },
         "identity": {
-          "$ref": "#/definitions/BatchAccountIdentity",
-          "description": "The identity of the Batch account."
+          "$ref": "#/definitions/BatchAccountIdentity"
         }
       },
       "allOf": [
@@ -2559,8 +2554,7 @@
           "description": "The properties of the account."
         },
         "identity": {
-          "$ref": "#/definitions/BatchAccountIdentity",
-          "description": "The identity of the Batch account."
+          "$ref": "#/definitions/BatchAccountIdentity"
         }
       },
       "description": "Parameters for updating an Azure Batch account."
@@ -2600,7 +2594,7 @@
               },
               {
                 "value": "Microsoft.KeyVault",
-                "description": "The encryption keys used to protect the account data are stored in an external key vault. If this is set then the Batch Account identity must be set to `SystemAssigned` and a valid Key Identifier must also be supplied under the keyVaultProperties."
+                "description": "The encryption keys used to protect the account data are stored in an external key vault."
               }
             ]
           }
@@ -2609,17 +2603,15 @@
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Additional details when using Microsoft.KeyVault"
         }
-      },
-      "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead."
+      }
     },
     "KeyVaultProperties": {
       "properties": {
         "keyIdentifier": {
           "type": "string",
-          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. To be usable the following prerequisites must be met:\n\n The Batch Account has a System Assigned identity\n The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\n The KeyVault has soft-delete and purge protection enabled"
+          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053"
         }
-      },
-      "description": "KeyVault configuration when using an encryption KeySource of Microsoft.KeyVault."
+      }
     },
     "BatchAccountRegenerateKeyParameters": {
       "properties": {
@@ -3429,10 +3421,10 @@
           "title": "The number of compute nodes currently in the pool.",
           "readOnly": true
         },
-        "currentLowPriorityNodes": {
+        "currentSpotNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low priority compute nodes currently in the pool.",
+          "title": "The number of spot compute nodes currently in the pool.",
           "readOnly": true
         },
         "scaleSettings": {
@@ -3472,10 +3464,10 @@
           "$ref": "#/definitions/NetworkConfiguration",
           "title": "The network configuration for the pool."
         },
-        "maxTasksPerNode": {
+        "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
           "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
@@ -3539,6 +3531,12 @@
           },
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
+        },
+        "maxSpotPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "The maximum price you are willing to pay per hour for a Spot VM, expressed in US dollars",
+          "description": "This price gets compared against the current Azure Spot price for the Pool's VM size. If the Azure Spot price is higher than the maxSpotPrice, then existing Spot VMs in the Pool will be evicted and new Spot VMs will fail to allocate. There is a special value of -1 which ensures that Spot VMs will never be preempted for price reasons and that Spot VMs will always be billed at the current on-demand price. Applicable only for VirtualMachineConfiguration pools. Default value is -1 if not provided."
         }
       },
       "description": "Pool properties."
@@ -3608,13 +3606,13 @@
           "type": "integer",
           "format": "int32",
           "title": "The desired number of dedicated compute nodes in the pool.",
-          "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
+          "description": "At least one of targetDedicatedNodes, targetSpotNodes must be set."
         },
-        "targetLowPriorityNodes": {
+        "targetSpotNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool.",
-          "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
+          "title": "The desired number of spot compute nodes in the pool.",
+          "description": "At least one of targetDedicatedNodes, targetSpotNodes must be set."
         },
         "nodeDeallocationOption": {
           "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
@@ -3891,7 +3889,7 @@
             "type": "string",
             "x-nullable": false,
             "title": "The disks to encrypt on each compute node.",
-            "description": "If omitted, no disks on the compute nodes in the pool will be encrypted.",
+            "description": "If omitted, only OsDisk is encrypted using platform managed key by default.",
             "enum": [
               "OsDisk",
               "TemporaryDisk"
@@ -3907,14 +3905,14 @@
                 },
                 {
                   "value": "TemporaryDisk",
-                  "description": "The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time.",
+                  "description": "The temporary disk on the compute node is encrypted.",
                   "name": "TemporaryDisk"
                 }
               ]
             }
           },
           "title": "The list of disk targets Batch Service will encrypt on the compute node",
-          "description": "On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified."
+          "description": "The target disks specified will be encrypted using a platform managed key."
         }
       },
       "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Virtual Machine Image or Shared Image Gallery Image."
@@ -4006,7 +4004,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The logical unit number.",
-          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive."
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
@@ -4049,7 +4047,7 @@
               },
               {
                 "value": "Pack",
-                "description": "As many tasks as possible (maxTasksPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool."
+                "description": "As many tasks as possible (taskSlotsPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool."
               }
             ]
           }
@@ -4444,7 +4442,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -4516,10 +4514,10 @@
           "format": "int32",
           "title": "The desired number of dedicated compute nodes in the pool."
         },
-        "targetLowPriorityNodes": {
+        "targetSpotNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool."
+          "title": "The desired number of spot compute nodes in the pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -4557,7 +4555,7 @@
             "$ref": "#/definitions/InboundNatPool"
           },
           "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
-          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400."
+          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
       },
       "required": [
