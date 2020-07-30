@@ -668,7 +668,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many days the daily indices are returned. By default, the indices data for the current day will be returned. When requesting future indices data, the current day is included in the response as day 1. Available values are\\n  * `1` - Return daily index data for the current day. Default value.\\n  * `5` - Return 5 days of daily index data starting from the current day.\\n  * `10` - Return 10 days of daily index data starting from the current day.\\n  * `15` - Return 15 days of daily index data starting from the current day.",
+            "description": "Specifies for how many days the daily indices are returned. By default, the indices data for the current day will be returned. When requesting future indices data, the current day is included in the response as day 1. Available values are\n  * `1` - Return daily index data for the current day. Default value.\n  * `5` - Return 5 days of daily index data starting from the current day.\n  * `10` - Return 10 days of daily index data starting from the current day.\n  * `15` - Return 15 days of daily index data starting from the current day.",
             "default": 1,
             "in": "query",
             "type": "integer"
@@ -714,7 +714,7 @@
     "/weather/airQuality/current/{format}": {
       "get": {
         "x-publish": false,
-        "description": "**Get Current Air Quality Preview**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet Current Air Quality API returns details about current air quality conditions for a given coordinate location. The service returns an overview of pollution levels, including details such as air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2). In addition, the service provides data about each pollutant in micrograms per cubic meter of air or parts per million, index values for each pollutant, and a breakdown of:\\n * Fine particles, such as those found in smoke and haze, are 2.5 micrometers in diameter and smaller. These particles can be directly emitted from sources such as forest fires, or they can form when gases emitted from power plants or automobiles react in the air.\\n  * Inhalable course particles, such as those found near roadways, are larger than 2.5 micrometers and smaller than 10 micrometers in diameter.",
+        "description": "**Get Current Air Quality Preview**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet Current Air Quality API returns details about current air quality conditions for a given coordinate location. The service returns an overview of pollution levels, including details such as air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2). In addition, the service provides data about each pollutant in micrograms per cubic meter of air or parts per million, index values for each pollutant, and a breakdown of:\n  * Fine particles, such as those found in smoke and haze, are 2.5 micrometers in diameter and smaller. These particles can be directly emitted from sources such as forest fires, or they can form when gases emitted from power plants or automobiles react in the air.\n  * Inhalable course particles, such as those found near roadways, are larger than 2.5 micrometers and smaller than 10 micrometers in diameter.",
         "operationId": "Weather_GetCurrentAirQualityPreview",
         "x-ms-examples": {
           "Request Current Air Quality": {
@@ -780,7 +780,7 @@
     "/weather/airQuality/forecast/hourly/{format}": {
       "get": {
         "x-publish": false,
-        "description": "**Get Hourly Air Quality Forecast Preview**\n\n**Applies to**: S1 pricing tier.\n\nThis service allows users to request detailed air quality forecast by the hour for the next 1, 12, 24, 48, 72, and 96 hours for the given coordinate location. The service returns an overview of pollution levels, including details such as air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2). In addition, the service provides data about each pollutant in micrograms per cubic meter of air or parts per million, index values for each pollutant, and a breakdown of:\\n * Fine particles, such as those found in smoke and haze, are 2.5 micrometers in diameter and smaller. These particles can be directly emitted from sources such as forest fires, or they can form when gases emitted from power plants or automobiles react in the air.\\n  * Inhalable course particles, such as those found near roadways, are larger than 2.5 micrometers and smaller than 10 micrometers in diameter.",
+        "description": "**Get Hourly Air Quality Forecast Preview**\n\n**Applies to**: S1 pricing tier.\n\nThis service allows users to request detailed air quality forecast by the hour for the next 1, 12, 24, 48, 72, and 96 hours for the given coordinate location. The service returns an overview of pollution levels, including details such as air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2). In addition, the service provides data about each pollutant in micrograms per cubic meter of air or parts per million, index values for each pollutant, and a breakdown of:\n  * Fine particles, such as those found in smoke and haze, are 2.5 micrometers in diameter and smaller. These particles can be directly emitted from sources such as forest fires, or they can form when gases emitted from power plants or automobiles react in the air.\n  * Inhalable course particles, such as those found near roadways, are larger than 2.5 micrometers and smaller than 10 micrometers in diameter.",
         "operationId": "Weather_GetHourlyAirQualityForecastPreview",
         "x-ms-examples": {
           "Request Hourly Air Quality data for next 12 hours": {
@@ -812,7 +812,7 @@
           },
           {
             "name": "duration",
-            "description": "Time of forecast measured in hours from the current time. By default, the forecast data for the next hour will be returned. Available values are\\n  * `1` - Return hourly forecast of air quality for the next 1 hour. Default value.\\n  * `12` - Return hourly forecast of air quality for the next 12 hours.\\n  * `24` - Return hourly forecast of air quality for the next 24 hours.\\n  * `48` - Return hourly forecast of air quality for the next 48 hours (2 days).\\n  * `72` - Return hourly forecast of air quality for the next 72 hours (3 days).\\n  * `96` - Return hourly forecast of air quality for the next 96 hours (4 days).",
+            "description": "Time of forecast measured in hours from the current time. By default, the forecast data for the next hour will be returned. Available values are\n  * `1` - Return hourly forecast of air quality for the next 1 hour. Default value.\n  * `12` - Return hourly forecast of air quality for the next 12 hours.\n  * `24` - Return hourly forecast of air quality for the next 24 hours.\n  * `48` - Return hourly forecast of air quality for the next 48 hours (2 days).\n  * `72` - Return hourly forecast of air quality for the next 72 hours (3 days).\n  * `96` - Return hourly forecast of air quality for the next 96 hours (4 days).",
             "default": 1,
             "in": "query",
             "type": "integer"
@@ -853,7 +853,7 @@
     "/weather/airQuality/forecast/daily/{format}": {
       "get": {
         "x-publish": false,
-        "description": "**Get Hourly Air Quality Forecast Preview**\n\n**Applies to**: S1 pricing tier.\n\nThe service returns air quality forecast for the next 1,2,3 and 4 days for the given coordinate location. The service returns an overview of pollution levels, including air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2).",
+        "description": "**Get Hourly Air Quality Forecast Preview**\n\n**Applies to**: S1 pricing tier.\n\nThe service returns air quality forecast for the next 1, 2, 3 and 4 days for the given coordinate location. The service returns an overview of pollution levels, including air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions. Response data covers various pollutants such as particulate matter 2.5 (PM2.5), particulate matter 10 (PM10), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO), and sulfur dioxide (SO2).",
         "operationId": "Weather_GetDailyAirQualityForecastPreview",
         "x-ms-examples": {
           "Request Daily Air Quality data for next 2 days": {
@@ -885,7 +885,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many days the daily air quality forecast responses are returned measured in days from the current time. By default, the forecast data for the next day will be returned. Available values are\\n  * `1` - Return daily forecast of air quality for the next day. Default value.\\n  * `2` - Return daily forecast of air quality for the next 2 days.\\n  * `3` - Return daily forecast of air quality for the next 3 days.\\n  * `4` - Return daily forecast of air quality for the next 4 days.",
+            "description": "Specifies for how many days the daily air quality forecast responses are returned measured in days from the current time. By default, the forecast data for the next day will be returned. Available values are\n  * `1` - Return daily forecast of air quality for the next day. Default value.\n  * `2` - Return daily forecast of air quality for the next 2 days.\n  * `3` - Return daily forecast of air quality for the next 3 days.\n  * `4` - Return daily forecast of air quality for the next 4 days.",
             "default": 1,
             "in": "query",
             "type": "integer"
@@ -2450,7 +2450,7 @@
           "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
         },
         "dominantPollutant": {
-          "type": "string",
+          "$ref": "#/definitions/DominantPollutant",
           "description": "The pollutant with the highest concentration."
         },
         "category": {
@@ -2554,6 +2554,48 @@
           "type": "integer",
           "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
         }
+      }
+    },
+    "DominantPollutant": {
+      "type": "string",
+      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "enum": [
+        "Carbon Monoxide",
+        "Nitrogen Dioxide",
+        "Ozone",
+        "Particulate Matter 2.5",
+        "Particulate Matter 10",
+        "Sulfur Dioxide"
+      ],
+      "x-ms-enum": {
+        "name": "DominantPollutant",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Carbon Monoxide",
+            "description": "Carbon monoxide (\"CO\")"
+          },
+          {
+            "value": "Nitrogen Dioxide",
+            "description": "Nitrogen dioxide (\"NO2\")"
+          },
+          {
+            "value": "Ozone",
+            "description": "Ozone (\"O3\")"
+          },
+          {
+            "value": "Particulate Matter 2.5",
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
+          },
+          {
+            "value": "Particulate Matter 10",
+            "description": "Particulate matter 10 (\"PM10\")"
+          },
+          {
+            "value": "Sulfur Dioxide",
+            "description": "Sulfur dioxide (\"SO2\")"
+          }
+        ]
       }
     }
   }
