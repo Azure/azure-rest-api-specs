@@ -3,10 +3,13 @@
   "info": {
     "title": "GraphManagementClient",
     "description": "The Microsoft Graph API provides a RESTful set of web services that interact with Microsoft Graph service to manage your entities and relationships across different services exposed with rich scenarios around users and groups (Azure Active Directory).",
-    "version": "1.0"
+    "version": "1.0",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "host": "graph.microsoft.com",
-  "basePath" : "/v1.0",
+  "basePath": "/v1.0",
   "schemes": [
     "https"
   ],
@@ -68,6 +71,107 @@
           }
         }
       }
+    },
+    "/users/{guestUserId}": {
+      "get": {
+        "tags": [
+          "GuestUser"
+        ],
+        "operationId": "GuestUser_Get",
+        "description": "Get a GuestUser",
+        "parameters": [
+          {
+            "name": "guestUserId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique ID of the Guest User"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns the resulting GuestUser resource.",
+            "schema": {
+              "$ref": "#/definitions/guestUser"
+            }
+          },
+          "202": {
+            "description": "Get successful, with still operations on server side. The operation returns the resulting GuestUser resource.",
+            "schema": {
+              "$ref": "#/definitions/guestUser"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./graph.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GuestUser"
+        ],
+        "operationId": "GuestUser_Update",
+        "description": "Update a GuestUser",
+        "parameters": [
+          {
+            "name": "guestUserProperties",
+            "in": "body",
+            "required": true,
+            "description": "The GuestUser you want",
+            "schema": {
+              "$ref": "#/definitions/invitationSended"
+            }
+          },
+          {
+            "name": "guestUserId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique ID of the Guest User"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Update successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./graph.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GuestUser"
+        ],
+        "operationId": "GuestUser_Delete",
+        "description": "Delete a GuestUser",
+        "parameters": [
+          {
+            "name": "guestUserId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique ID of the Guest User"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./graph.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -95,7 +199,10 @@
       }
     },
     "invitationSended": {
-      "required" : ["invitedUserEmailAddress","inviteRedirectUrl"],
+      "required": [
+        "invitedUserEmailAddress",
+        "inviteRedirectUrl"
+      ],
       "properties": {
         "invitedUserEmailAddress": {
           "type": "string",
@@ -149,6 +256,288 @@
         "customizedMessageBody": {
           "type": "string",
           "description": "The content of the message"
+        }
+      }
+    },
+    "guestUser": {
+      "allOf": [
+        {
+          "$ref": "./graph.json#/definitions/globalGraphResource"
+        }
+      ],
+      "properties": {
+        "aboutMe": {
+          "type": "string",
+          "description": "A freeform text entry field for the user to describe themselves."
+        },
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "true if the account is enabled; otherwise, false. This property is required when a user is created. Supports $filter."
+        },
+        "ageGroup": {
+          "type": "string",
+          "description": "Sets the age group of the user. Allowed values: null, minor, notAdult and adult. Refer to the legal age group property definitions for further information."
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The birthday of the user. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'"
+        },
+        "businessPhones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The telephone numbers for the user. NOTE: Although this is a string collection, only one number can be set for this property."
+        },
+        "city": {
+          "type": "string",
+          "description": "The city in which the user is located. Supports $filter."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The company name which the user is associated. This property can be useful for describing the company that an external user comes from."
+        },
+        "consentProvidedForMinor": {
+          "type": "string",
+          "description": "Sets whether consent has been obtained for minors. Allowed values: null, granted, denied and notRequired. Refer to the legal age group property definitions for further information."
+        },
+        "country": {
+          "type": "string",
+          "description": "The country/region in which the user is located; for example, ?US? or ?UK?. Supports $filter."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created date of the user object."
+        },
+        "creationType": {
+          "type": "string",
+          "description": "Indicates whether the user account was created as a regular school or work account (null), an external account (Invitation), a local account for an Azure Active Directory B2C tenant (LocalAccount) or self-service sign-up using email verification (EmailVerified). Read-only."
+        },
+        "deletedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the user was deleted."
+        },
+        "department": {
+          "type": "string",
+          "description": "The name for the department in which the user works. Supports $filter."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name displayed in the address book for the user. This is usually the combination of the user's first name, middle initial and last name. This property is required when a user is created and it cannot be cleared during updates. Supports $filter and $orderby."
+        },
+        "employeeId": {
+          "type": "string",
+          "description": "The employee identifier assigned to the user by the organization. Supports $filter."
+        },
+        "externalUserState": {
+          "type": "string",
+          "description": "For an external user invited to the tenant using the invitation API, this property represents the invited user's invitation status. For invited users, the state can be PendingAcceptance or Accepted, or null for all other users."
+        },
+        "externalUserStateChangeDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Shows the timestamp for the latest change to the externalUserState property."
+        },
+        "faxNumber": {
+          "type": "string",
+          "description": "The fax number of the user."
+        },
+        "givenName": {
+          "type": "string",
+          "description": "The given name (first name) of the user. Supports $filter."
+        },
+        "hireDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The hire date of the user. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'"
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the user. Inherited from directoryObject. Key. Not nullable. Read-only."
+        },
+        "imAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The instant message voice over IP (VOIP) session initiation protocol (SIP) addresses for the user. Read-only."
+        },
+        "interests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list for the user to describe their interests."
+        },
+        "isResourceAccount": {
+          "type": "boolean",
+          "description": "Do not use ? reserved for future use."
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "The user?s job title. Supports $filter."
+        },
+        "lastPasswordChangeDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when this Azure AD user last changed their password. The date and time information uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'"
+        },
+        "legalAgeGroupClassification": {
+          "type": "string",
+          "description": "Used by enterprise applications to determine the legal age group of the user. This property is read-only and calculated based on ageGroup and consentProvidedForMinor properties. Allowed values: null, minorWithOutParentalConsent, minorWithParentalConsent, minorNoParentalConsentRequired, notAdult and adult. Refer to the legal age group property definitions for further information.)"
+        },
+        "mail": {
+          "type": "string",
+          "description": "The SMTP address for the user, for example, \"jeff@contoso.onmicrosoft.com\". Read-Only. Supports $filter."
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user. This property must be specified when a user is created. Supports $filter."
+        },
+        "mobilePhone": {
+          "type": "string",
+          "description": "The primary cellular telephone number for the user."
+        },
+        "mySite": {
+          "type": "string",
+          "description": "The URL for the user's personal site."
+        },
+        "officeLocation": {
+          "type": "string",
+          "description": "The office location in the user's place of business."
+        },
+        "onPremisesDistinguishedName": {
+          "type": "string",
+          "description": "Contains the on-premises Active Directory distinguished name or DN. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
+        },
+        "onPremisesDomainName": {
+          "type": "string",
+          "description": "Contains the on-premises domainFQDN, also called dnsDomainName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
+        },
+        "onPremisesImmutableId": {
+          "type": "string",
+          "description": "This property is used to associate an on-premises Active Directory user account to their Azure AD user object. This property must be specified when creating a new user account in the Graph if you are using a federated domain for the user?s userPrincipalName (UPN) property. Important: The $ and _ characters cannot be used when specifying this property. Supports $filter."
+        },
+        "onPremisesLastSyncDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the last time at which the object was synced with the on-premises directory; for example: \"2013-02-16T03:04:54Z\". The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'. Read-only."
+        },
+        "onPremisesSamAccountName": {
+          "type": "string",
+          "description": "Contains the on-premises samAccountName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
+        },
+        "onPremisesSecurityIdentifier": {
+          "type": "string",
+          "description": "Contains the on-premises security identifier (SID) for the user that was synchronized from on-premises to the cloud. Read-only."
+        },
+        "onPremisesSyncEnabled": {
+          "type": "boolean",
+          "description": "true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only"
+        },
+        "onPremisesUserPrincipalName": {
+          "type": "string",
+          "description": "Contains the on-premises userPrincipalName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
+        },
+        "otherMails": {
+          "type": "string",
+          "description": "A list of additional email addresses for the user; for example: [\"bob@contoso.com\", \"Robert@fabrikam.com\"]. Supports $filter."
+        },
+        "passwordPolicies": {
+          "type": "string",
+          "description": "Specifies password policies for the user. This value is an enumeration with one possible value being ?DisableStrongPassword?, which allows weaker passwords than the default policy to be specified. ?DisablePasswordExpiration? can also be specified. The two may be specified together; for example: \"DisablePasswordExpiration, DisableStrongPassword\"."
+        },
+        "pastProjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list for the user to enumerate their past projects."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal code for the user's postal address. The postal code is specific to the user's country/region. In the United States of America, this attribute contains the ZIP code."
+        },
+        "preferredDataLocation": {
+          "type": "string",
+          "description": "The preferred data location for the user. For more information, see OneDrive Online Multi-Geo."
+        },
+        "preferredLanguage": {
+          "type": "string",
+          "description": "The preferred language for the user. Should follow ISO 639-1 Code; for example \"en-US\"."
+        },
+        "preferredName": {
+          "type": "string",
+          "description": "The preferred name for the user."
+        },
+        "proxyAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "For example: [\"SMTP: bob@contoso.com\", \"smtp: bob@sales.contoso.com\"] The any operator is required for filter expressions on multi-valued properties. Read-only, Not nullable. Supports $filter."
+        },
+        "refreshTokensValidFromDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Any refresh tokens or sessions tokens (session cookies) issued before this time are invalid, and applications will get an error when using an invalid refresh or sessions token to acquire a delegated access token (to access APIs such as Microsoft Graph). If this happens, the application will need to acquire a new refresh token by making a request to the authorize endpoint."
+        },
+        "responsibilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list for the user to enumerate their responsibilities."
+        },
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list for the user to enumerate the schools they have attended."
+        },
+        "showInAddressList": {
+          "type": "boolean",
+          "description": "true if the Outlook global address list should contain this user, otherwise false. If not set, this will be treated as true. For users invited through the invitation manager, this property will be set to false."
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list for the user to enumerate their skills."
+        },
+        "signInSessionsValidFromDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Any refresh tokens or sessions tokens (session cookies) issued before this time are invalid, and applications will get an error when using an invalid refresh or sessions token to acquire a delegated access token (to access APIs such as Microsoft Graph). If this happens, the application will need to acquire a new refresh token by making a request to the authorize endpoint. Read-only. Use revokeSignInSessions to reset."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state or province in the user's address. Supports $filter."
+        },
+        "streetAddress": {
+          "type": "string",
+          "description": "The street address of the user's place of business."
+        },
+        "surname": {
+          "type": "string",
+          "description": "The user's surname (family name or last name). Supports $filter."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\". Not nullable. Supports $filter."
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The user principal name (UPN) of the user. The UPN is an Internet-style login name for the user based on the Internet standard RFC 822. By convention, this should map to the user's email name. The general format is alias@domain, where domain must be present in the tenant?s collection of verified domains. This property is required when a user is created. The verified domains for the tenant can be accessed from the verifiedDomains property of organization. Supports $filter and $orderby."
+        },
+        "userType": {
+          "type": "string",
+          "description": "A string value that can be used to classify user types in your directory, such as ?Member? and ?Guest?. Supports $filter."
         }
       }
     }
