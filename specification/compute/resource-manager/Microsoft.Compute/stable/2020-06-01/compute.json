@@ -8887,7 +8887,7 @@
         },
         "patchStatus": {
           "$ref": "#/definitions/VirtualMachinePatchStatus",
-          "description": "Specifies the result of the virtual machine patch related operations."
+          "description": "The status of virtual machine patch operations."
         }
       },
       "description": "The instance view of a virtual machine."
@@ -11558,18 +11558,18 @@
       "properties": {
         "availablePatchSummary": {
           "$ref": "#/definitions/AvailablePatchSummary",
-          "description": "Describes the properties of a virtual machine instance view for available patch summary."
+          "description": "The available patch summary of the latest assessment operation for the virtual machine."
         },
         "lastPatchInstallationSummary": {
           "$ref": "#/definitions/LastPatchInstallationSummary",
-          "description": "Describes the properties of a virtual machine instance view for last installed patch summary."
+          "description": "The installation summary of the latest installation operation for the virtual machine."
         },
         "configurationStatusSummary": {
           "$ref": "#/definitions/ConfigurationStatusSummary",
-          "description": "Describes configuration settings and belonging provisioning state."
+          "description": "The configuration status summary for the virtual machine."
         }
       },
-      "description": "Specifies the result of the virtual machine patch related operations."
+      "description": "The status of virtual machine patch operations."
     },
     "AvailablePatchSummary": {
       "properties": {
@@ -11660,7 +11660,7 @@
         "rebootStatus": {
           "type": "string",
           "readOnly": true,
-          "description": "\"The reboot status of the machine after the patch operation. It will be in \"NotNeeded\" status if reboot is not needed after the patch operation. \"Required\" will be the status once the patch is applied and machine is required to reboot. \"Started\" will be the reboot status when the machine has started to reboot. \"Failed\" will be the status if the machine is failed to reboot. \"Completed\" will be the status once the machine is rebooted successfully",
+          "description": "The reboot status of the machine after the patch operation. It will be in \"NotNeeded\" status if reboot is not needed after the patch operation. \"Required\" will be the status once the patch is applied and machine is required to reboot. \"Started\" will be the reboot status when the machine has started to reboot. \"Failed\" will be the status if the machine is failed to reboot. \"Completed\" will be the status once the machine is rebooted successfully",
           "enum": [
             "NotNeeded",
             "Required",
@@ -11695,13 +11695,13 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "The number of all successfully installed patches."
+          "description": "The count of patches that successfully installed."
         },
         "failedPatchCount": {
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "The number of patches failed to installed."
+          "description": "The count of patches that failed installation."
         },
         "startTime": {
           "type": "string",
@@ -11726,14 +11726,14 @@
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
       },
-      "description": "Describes the properties of an virtual machine instance view for last installed patch summary."
+      "description": "Describes the properties of the last installed patch summary."
     },
     "ConfigurationStatusSummary": {
       "properties": {
         "patchModeProvisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Describes the enablement status of the specified patchMode <see cref=\"InGuestPatchMode\"/> on a VM.. \"Unknown\" is the state when the status is unknown. \"Pending\" is the state that tells Changes made to the patch configuration in the VM model have not yet been completed on the VM. \"Ready\" state shows that the VM is in the patch configuration state specified by its VM model.",
+          "description": "Describes the enablement status of the specified patchMode of a VM.. \"Unknown\" is the state when the status is unknown. \"Pending\" indicates that required configuration of the VM has not yet completed. \"Ready\" indicates that the VM is configured as specified by its patchMode.",
           "enum": [
             "Unknown",
             "Pending",
@@ -11756,7 +11756,7 @@
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
       },
-      "description": "Describes the current status of the patch configuration change"
+      "description": "Describes the properties of the last detected patch configuration status."
     }
   },
   "parameters": {
