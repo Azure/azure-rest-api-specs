@@ -195,6 +195,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Devices/stable/2020-04-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2020-03-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2019-11-04/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2019-07-01-preview/iothub.json

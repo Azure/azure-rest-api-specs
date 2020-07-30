@@ -138,6 +138,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Maintenance/preview/2020-07-01-preview/Maintenance.json
   - $(this-folder)/Microsoft.Maintenance/stable/2020-04-01/Maintenance.json
   - $(this-folder)/Microsoft.Maintenance/preview/2018-06-01-preview/Maintenance.json
 

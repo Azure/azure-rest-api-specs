@@ -180,8 +180,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/stable/v3.0/TranslatorText.json
   - $(this-folder)/preview/v1.0-preview.1/TranslatorBatch.json
+  - $(this-folder)/stable/v3.0/TranslatorText.json
 
 ```
 
