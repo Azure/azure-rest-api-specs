@@ -6,7 +6,7 @@
     "version": "1.0"
   },
   "host": "graph.microsoft.com",
-  "basePath" : "/1.0",
+  "basePath" : "/v1.0",
   "schemes": [
     "https"
   ],
@@ -85,6 +85,22 @@
           "type": "string",
           "description": "The invitation url for this GuestUser invitation"
         },
+        "status": {
+          "type": "string",
+          "description": "The status of this GuestUser invitation"
+        },
+        "invitedUser": {
+          "$ref": "./graph.json#/definitions/globalGraphResource"
+        }
+      }
+    },
+    "invitationSended": {
+      "required" : ["invitedUserEmailAddress","inviteRedirectUrl"],
+      "properties": {
+        "invitedUserEmailAddress": {
+          "type": "string",
+          "description": "The email of the GuestUser invited"
+        },
         "invitedUserDisplayName": {
           "type": "string",
           "description": "The name of the GestUser invited"
@@ -97,21 +113,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/customMessagePropertiesFormat",
           "description": "The custom message information for the GuestUser invited"
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of this GuestUser invitation"
-        },
-        "invitedUser": {
-          "$ref": "./graph.json#/definitions/globalGraphResource"
-        }
-      }
-    },
-    "invitationSended": {
-      "properties": {
-        "invitedUserEmailAddress": {
-          "type": "string",
-          "description": "The email of the GuestUser invited"
         },
         "inviteRedirectUrl": {
           "type": "string",
