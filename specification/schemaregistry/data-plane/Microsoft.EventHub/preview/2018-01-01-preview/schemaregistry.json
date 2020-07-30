@@ -7,8 +7,8 @@
   "paths": {
     "/$schemagroups/getSchemaById/{schema-id}": {
       "get": {
-        "summary": "Get schema by ID",
-        "description": "Get schema by ID.  Azure Schema Registry guarantees that ID is unique within a namespace.",
+        "summary": "Get a registered schema by its unique ID reference.",
+        "description": "Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace.",
         "x-ms-examples": {
           "Get schema by ID": {
             "$ref": "./examples/OperationSchema_GetById.json"
@@ -32,23 +32,24 @@
             "description": "OK",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
               },
               "X-Serialization": {
                 "type": "string",
-                "description": "schema type"
+                "description": "Serialization type for the schema being stored."
               },
               "X-Schema-Id": {
                 "type": "string",
-                "description": "unique schema identifier"
+                "description": "References specific schema in registry namespace."
               },
               "X-Schema-Id-Location": {
                 "type": "string",
-                "description": "location of schema resource"
+                "description": "URL location of schema, idenfitied by schema ID."
               },
               "X-Schema-Version": {
                 "type": "integer",
-                "description": "version of returned schema"
+                "description": "Version of the returned schema."
               }
             },
             "schema": {
@@ -56,7 +57,7 @@
             }
           },
           "default": {
-            "description": "An error response received from the Azure Synapse service.",
+            "description": "An error response received from the Azure Schema Registry service.",
             "schema": {
               "$ref": "#/definitions/ServiceErrorResponse"
             }
@@ -66,8 +67,8 @@
     },
     "/$schemagroups/{group-name}/schemas/{schema-name}": {
       "post": {
-        "summary": "Get schema ID by schema content",
-        "description": "Get ID for schema with matching byte content and serialization format.",
+        "summary": "Get ID for existing schema.",
+        "description": "Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.",
         "x-ms-examples": {
           "Get schema ID": {
             "$ref": "./examples/OperationSchema_GetIdByContent.json"
@@ -81,21 +82,21 @@
           {
             "name": "group-name",
             "in": "path",
-            "description": "schema group",
+            "description": "Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "schema-name",
             "in": "path",
-            "description": "schema name",
+            "description": "Name of the registered schema.",
             "required": true,
             "type": "string"
           },
           {
             "name": "schema-content",
             "in": "body",
-            "description": "schema content",
+            "description": "String representation of the registered schema.",
             "required": true,
             "schema": {
               "type": "string"
@@ -104,7 +105,7 @@
           {
             "name": "serialization-type",
             "in": "header",
-            "description": "serialization type for schema being registered",
+            "description": "Serialization type of the registered schema.  Must match serialization type of the specified schema group.",
             "required": true,
             "type": "string"
           }
@@ -114,23 +115,24 @@
             "description": "OK",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
               },
               "X-Serialization": {
                 "type": "string",
-                "description": "schema type"
+                "description": "Serialization type for the schema being stored."
               },
               "X-Schema-Id": {
                 "type": "string",
-                "description": "unique schema identifier"
+                "description": "References specific schema in registry namespace."
               },
               "X-Schema-Id-Location": {
                 "type": "string",
-                "description": "location of schema resource"
+                "description": "URL location of schema, idenfitied by schema ID."
               },
               "X-Schema-Version": {
                 "type": "integer",
-                "description": "version of returned schema"
+                "description": "Version of the returned schema."
               }
             },
             "schema": {
@@ -138,7 +140,7 @@
             }
           },
           "default": {
-            "description": "An error response received from the Azure Synapse service.",
+            "description": "An error response received from the Azure Schema Registry service.",
             "schema": {
               "$ref": "#/definitions/ServiceErrorResponse"
             }
@@ -161,21 +163,21 @@
           {
             "name": "group-name",
             "in": "path",
-            "description": "schema group",
+            "description": "Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "schema-name",
             "in": "path",
-            "description": "schema name",
+            "description": "Name of schema being registered.",
             "required": true,
             "type": "string"
           },
           {
             "name": "schema-content",
             "in": "body",
-            "description": "schema content",
+            "description": "String representation of the schema being registered.",
             "required": true,
             "schema": {
               "type": "string"
@@ -184,7 +186,7 @@
           {
             "name": "serialization-type",
             "in": "header",
-            "description": "serialization type for schema being registered",
+            "description": "Serialization type for the schema being registered.  Must match serialization type of the specified schema group.",
             "required": true,
             "type": "string"
           }
@@ -194,23 +196,24 @@
             "description": "OK",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
               },
               "X-Serialization": {
                 "type": "string",
-                "description": "schema type"
+                "description": "Serialization type for the schema being registered."
               },
               "X-Schema-Id": {
                 "type": "string",
-                "description": "unique schema identifier"
+                "description": "References specific schema in registry namespace."
               },
               "X-Schema-Id-Location": {
                 "type": "string",
-                "description": "location of schema resource"
+                "description": "URL location of schema, idenfitied by schema ID."
               },
               "X-Schema-Version": {
                 "type": "integer",
-                "description": "version of returned schema"
+                "description": "Version of the returned schema."
               }
             },
             "schema": {
@@ -218,7 +221,7 @@
             }
           },
           "default": {
-            "description": "An error response received from the Azure Synapse service.",
+            "description": "An error response received from the Azure Schema Registry service.",
             "schema": {
               "$ref": "#/definitions/ServiceErrorResponse"
             }
@@ -245,7 +248,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Schema Registry service endpoint API version that should be used."
+      "description": "Schema Registry service API version that should be used."
     }
   }
 }
