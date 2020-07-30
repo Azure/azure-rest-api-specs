@@ -67,7 +67,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerForCreate"
+              "$ref": "#/definitions/Server"
             },
             "description": "The required parameters for creating or updating a server."
           }
@@ -1083,7 +1083,21 @@
       "properties": {
         "administratorLogin": {
           "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
+          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "description": "The administrator login password (required for server creation).",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
@@ -1092,6 +1106,7 @@
         "state": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
+          "readOnly": true,
           "enum": [
             "Ready",
             "Dropping",
@@ -1117,6 +1132,7 @@
             "Healthy",
             "RemovingStandby"
           ],
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ServerHAState",
             "modelAsString": true
@@ -1124,7 +1140,8 @@
         },
         "fullyQualifiedDomainName": {
           "type": "string",
-          "description": "The fully qualified domain name of a server."
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -1151,88 +1168,14 @@
           "format": "int32",
           "description": "stand by count value can be either 0 or 1"
         },
-        "vnetInjArgs": {
-          "properties": {
-            "delegatedVnetID": {
-              "type": "string",
-              "description": "delegated vNet ID"
-            },
-            "delegatedSubnetName": {
-              "type": "string",
-              "description": "delegated subnet name"
-            },
-            "delegatedVnetName": {
-              "type": "string",
-              "description": "delegated vNet name"
-            }
-          }
-        }
-      },
-      "description": "The properties of a server."
-    },
-    "Server": {
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
-          "description": "The Azure Active Directory identity of the server."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU (pricing tier) of the server."
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the server."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Represents a server."
-    },
-    "ServerPropertiesForCreate": {
-      "discriminator": "createMode",
-      "required": [
-        "createMode"
-      ],
-      "properties": {
-        "administratorLogin": {
+        "sourceServerName": {
           "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
+          "description": "The source PostgreSQL server name to restore from."
         },
-        "administratorLoginPassword": {
+        "pointInTimeUTC": {
           "type": "string",
-          "x-ms-secret": true,
-          "format": "password",
-          "description": "The password of the administrator login."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Storage profile of a server."
-        },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "public network access is enabled or not",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ServerPublicNetworkAccessState",
-            "modelAsString": true
-          }
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
         },
         "vnetInjArgs": {
           "properties": {
@@ -1262,55 +1205,31 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "description": "The properties of a server."
     },
-    "ServerPropertiesForDefaultCreate": {
-      "x-ms-discriminator-value": "Default",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerPropertiesForCreate"
-        }
-      ],
+    "Server": {
       "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
+          "description": "The Azure Active Directory identity of the server."
         },
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the administrator login."
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server."
         }
       },
-      "required": [
-        "administratorLogin",
-        "administratorLoginPassword"
-      ],
-      "description": "The properties used to create a new server."
-    },
-    "ServerPropertiesForRestore": {
-      "x-ms-discriminator-value": "PointInTimeRestore",
       "allOf": [
         {
-          "$ref": "#/definitions/ServerPropertiesForCreate"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
-      "properties": {
-        "sourceServerName": {
-          "type": "string",
-          "description": "The source PostgreSQL server name to restore from."
-        },
-        "pointInTimeUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
-        }
-      },
-      "required": [
-        "sourceServerName",
-        "pointInTimeUTC"
-      ],
-      "description": "The properties used to create a new server by restoring from a backup."
+      "description": "Represents a server."
     },
     "ServerPropertiesForUpdate": {
       "properties": {
@@ -1342,35 +1261,6 @@
           "description": "server edition default to general purpose"
         }
       }
-    },
-    "ServerForCreate": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location the resource resides in."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU (pricing tier) of the server."
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerPropertiesForCreate",
-          "x-ms-client-flatten": false,
-          "description": "Properties of the server."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      },
-      "required": [
-        "properties",
-        "location"
-      ],
-      "description": "Represents a server to be created."
     },
     "ServerForUpdate": {
       "properties": {
