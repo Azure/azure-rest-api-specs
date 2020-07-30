@@ -36,7 +36,10 @@ input-file:
     - Microsoft.Deployment.Admin/preview/2019-01-01/Deployment.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlan.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperation.json
+    - Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperationAttempt.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/FileContainer.json
+    - Microsoft.Deployment.Admin/preview/2019-01-01/Locations.json
+    - Microsoft.Deployment.Admin/preview/2019-01-01/OperationResults.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/ProductDeployment.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
