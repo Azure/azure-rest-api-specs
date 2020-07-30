@@ -620,10 +620,12 @@
           },
           {
             "name": "name",
-            "in": "path",
+            "in": "body",
             "description": "The name of the consumer group to add.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/EventHubConsumerGroupBodyDescription"
+            }
           }
         ],
         "responses": {
@@ -3514,6 +3516,25 @@
           "description": "The next link.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "EventHubConsumerGroupBodyDescription": {
+      "description": "The EventHub consumer group.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventHubConsumerGroupName"
+        }
+      }
+    },
+    "EventHubConsumerGroupName": {
+      "description": "The EventHub consumer group name.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "EventHub consumer group name",
+          "type": "string"
         }
       }
     },
