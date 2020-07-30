@@ -219,6 +219,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/application.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/cluster.json
@@ -231,8 +233,6 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
-  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 
 ```
 

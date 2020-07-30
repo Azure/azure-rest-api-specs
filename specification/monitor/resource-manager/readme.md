@@ -620,6 +620,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/operations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
@@ -643,7 +645,6 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2019-03-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-03-01/actionGroups_API.json
