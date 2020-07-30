@@ -242,11 +242,88 @@
     },
     "SecurityDomainObject": {
       "properties": {
-        "value": {
-          "type": "string",
-          "description": "Security domain"
+        "EncData": {
+          "$ref": "#/definitions/EncDataSet",
+          "description": "Array of encrypted data set"
+        },
+        "SharedKeys": {
+          "properties": {
+            "key_algorithm": {
+              "type": "string",
+              "description": "The Algorithm used for shared keys"
+            },
+            "required": {
+              "type": "integer",
+              "description": "Number of keys required for security domain"
+            },
+            "enc_shares": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EncSharesSetItem"
+              },
+              "uniqueItems": true,
+              "description": "Compact JWE wrapped shares array"
+            }
+          },
+          "description": "Array of shared keys"
         }
-      }
+      },
+      "description": "Security domain",
+      "required": [
+        "EncData",
+        "SharedKeys"
+      ]
+    },
+    "EncDataSet": {
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncDataSetItem"
+          },
+          "description": "Array of encrypted security domain",
+          "uniqueItems": true
+        },
+        "kdf": {
+          "type": "string",
+          "description": "The key derivation function used"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "EncDataSetItem": {
+      "properties": {
+        "compact_jwe": {
+          "type": "string",
+          "description": "Encrypted data"
+        },
+        "tag": {
+          "type": "string",
+          "description": "hsm backup tag"
+        }
+      },
+      "required": [
+        "compact_jwe",
+        "tag"
+      ]
+    },
+    "EncSharesSetItem": {
+      "properties": {
+        "enc_key": {
+          "type": "string",
+          "description": "Compact JWE wrapped share"
+        },
+        "x5t_256": {
+          "type": "string",
+          "description": "SHA 256 hash of certificate"
+        }
+      },
+      "required": [
+        "enc_key",
+        "x5t_256"
+      ]
     },
     "SecurityDomainOperationStatus": {
       "properties": {
