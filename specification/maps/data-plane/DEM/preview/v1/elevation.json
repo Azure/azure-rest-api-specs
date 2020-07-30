@@ -108,11 +108,11 @@
     "/elevation/point": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S0 and S1 pricing tiers.\nA elevation point API provides elevation data for a point/points. Each point is identified by longitute/latitude  value in WGS84.",
-        "operationId": "Elevation_GetDataForPoints",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Lat/Lon Coordinates API provides elevation data for one or more points.  Each point is defined in lat/lon WGS84 coordinate reference system format.  ",
+        "operationId": "Elevation_GetDataForLatLongCoordinates",
         "x-ms-examples": {
-          "GetDataForPoints": {
-            "$ref": "./examples/GetDataForPoints.json"
+          "GetDataForLatLongCoordinates": {
+            "$ref": "./examples/GetDataForLatLongCoordinates.json"
           }
         },
         "parameters": [
@@ -128,7 +128,7 @@
           {
             "name": "points",
             "in": "query",
-            "description": "The string representation of a list of points. A point is defined in longitude, latitude format.  The value of longitude and latitude refers to WGS84 reference system. If multiple points is requested,  a list of points will be seperated by the pipe ('|') character. Customer can provide  up to 2000 point  locations in a single request. The accuracy of the elevation data will be highest for a single point but  less accuracy will be returned if multiple locations spread apart.",
+            "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list will be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
             "required": true,
             "type": "string"
           }
@@ -164,11 +164,11 @@
     "/elevation/line": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S0 and S1 pricing tiers.\nA elevation line API provides elevation data along a line. A line is defined by a start/from point and a end/to point seperated by pipe ('|')  character. In addition to a requested line, customers also specify samples count of points along the line that will be calculated to return the  elevation data. A line between two positions is a straight Cartesian line, the shortest line between those two points in the coordinate reference  system. Note that the point is chosen based on Eudclidean distance and may markedly differ from the geodesic path along the curved surface of  the reference ellipsoid.",
-        "operationId": "Elevation_GetDataForLine",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both endpoints and equally spaced points  along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Eudclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "operationId": "Elevation_GetDataForPolyLine",
         "x-ms-examples": {
-          "GetDataForLine": {
-            "$ref": "./examples/GetDataForLine.json"
+          "GetDataForPolyLine": {
+            "$ref": "./examples/GetDataForPolyLine.json"
           }
         },
         "parameters": [
@@ -184,16 +184,16 @@
           {
             "name": "lines",
             "in": "query",
-            "description": "The string representation of a line. A line is defined by a start/from point and a end/to point seperated by by pipe ('|')  character. The format of the line can be defined as longitude_startpoint, latitude_startpoint | longitude_endpoint, latitude_endpoint.  The value of the longitude and latitude refers to WGS84 reference system. Less accuracy result might be returned for big line, aka  provided start point and end point are far away from each other.",
+            "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates with  each endpoint separated by a pipe ('|') character. The format of the polyline can be defined as  longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ..., longitude_pointN,  latitude_pointN. The values of longitude and latitude refers to World Geodetic System (WGS84)  coordinate reference system. The resolution of the data used to compute the elevation will depend  on the distance between the endpoints.",
             "required": true,
             "type": "string"
           },
           {
             "name": "samples",
             "in": "query",
-            "description": "In addition to a requested line, customer also specifies samples count of points along the line that will be calculated to return the  elevation data. If not provided, 10 points will be calculated and returned along the requested line.",
+            "description": "The samples parameter can specify the number of equally spaced points at which elevation values  should be provided along a polyline path. The combined number of samples and endpoints should not  exceed 2,000.",
             "type": "number",
-            "minimum": 2,
+            "minimum": 0,
             "maximum": 2000,
             "default": 10,
             "required": false
@@ -206,7 +206,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LineResult"
+              "$ref": "#/definitions/LinesResult"
             }
           },
           "400": {
@@ -230,11 +230,11 @@
     "/elevation/lattice": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S0 and S1 pricing tiers.\nA elevation lattice API provides elevation data accross an grid area in a bounding box. A lattice is defined by a bounding box and numbers  of rows and columns. The point is chosen based on Eudclidean distance in straight Cartesian gird line and may markedly differ from the geodesic  path along the curved surface of the reference ellipsoid. Up to 2000 locations can be provided in a single request.",
-        "operationId": "Elevation_GetDataForLattice",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally-spaced locations within a bounding box.  A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns. Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2000 elevations can be returned in a single request.",
+        "operationId": "Elevation_GetDataForBoundingBox",
         "x-ms-examples": {
-          "GetDataForLattice": {
-            "$ref": "./examples/GetDataForLattice.json"
+          "GetDataForBoundingBox": {
+            "$ref": "./examples/GetDataForBoundingBox.json"
           }
         },
         "parameters": [
@@ -250,14 +250,14 @@
           {
             "name": "bounds",
             "in": "query",
-            "description": "The string representation of a lattice. The value of the bbox member MUST be an array of length 4, with  2 axes of the most southwesterly point followed by 2 axes of the more northeasterly point. The format  can be illustrate as SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude.",
+            "description": "The string that represents the rectangular area of a bounding box. The value of the bounds parameter  must be an array of length 4, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: [SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude].",
             "required": true,
             "type": "string"
           },
           {
             "name": "rows",
             "in": "query",
-            "description": "The rows of the lattice. rows muliplies columns should be smaller than 2000.",
+            "description": "Specifies the number of rows to use to divide the bounding box area into a grid. The number of vertices  in the grid should be less than 2000. ",
             "type": "number",
             "minimum": 2,
             "maximum": 1000,
@@ -266,7 +266,7 @@
           {
             "name": "columns",
             "in": "query",
-            "description": "The columns of the lattice. rows muliplies columns should be smaller than 2000.",
+            "description": "Specifies the number of columns to use to divide the bounding box area into a grid. The number of vertices  in the grid should be less than 2000. ",
             "type": "number",
             "minimum": 2,
             "maximum": 1000,
@@ -280,7 +280,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LatticeResult"
+              "$ref": "#/definitions/BoundingBoxResult"
             }
           },
           "400": {
@@ -404,7 +404,7 @@
         }
       }
     },
-    "LineResult": {
+    "LinesResult": {
       "type": "object",
       "description": "The result of elecation line request.",
       "properties": {
@@ -413,7 +413,7 @@
         }
       }
     },
-    "LatticeResult": {
+    "BoundingBoxResult": {
       "type": "object",
       "description": "The result of elecation lattice request.",
       "properties": {
