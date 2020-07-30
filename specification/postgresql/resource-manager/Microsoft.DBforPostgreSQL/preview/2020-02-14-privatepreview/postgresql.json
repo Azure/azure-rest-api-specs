@@ -453,7 +453,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FlexibleServers_FirewallRules_CreateOrUpdate",
+        "operationId": "FlexibleServersFirewallRules_CreateOrUpdate",
         "x-ms-examples": {
           "FirewallRuleCreate": {
             "$ref": "./examples/FirewallRuleCreate.json"
@@ -562,7 +562,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FlexibleServers_FirewallRules_Get",
+        "operationId": "FlexibleServersFirewallRules_Get",
         "x-ms-examples": {
           "FirewallRuleList": {
             "$ref": "./examples/FirewallRuleGet.json"
@@ -607,7 +607,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FlexibleServers_FirewallRules_ListByServer",
+        "operationId": "FlexibleServersFirewallRules_ListByServer",
         "x-ms-examples": {
           "FirewallRuleList": {
             "$ref": "./examples/FirewallRuleListByServer.json"
@@ -652,7 +652,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "FlexibleServers_Configurations_ListByServer",
+        "operationId": "FlexibleServersConfigurations_ListByServer",
         "x-ms-examples": {
           "ConfigurationList": {
             "$ref": "./examples/ConfigurationListByServer.json"
@@ -697,7 +697,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "FlexibleServers_Configurations_Get",
+        "operationId": "FlexibleServersConfigurations_Get",
         "x-ms-examples": {
           "ConfigurationGet": {
             "$ref": "./examples/ConfigurationGet.json"
@@ -742,7 +742,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "FlexibleServers_Configurations_Update",
+        "operationId": "FlexibleServersConfigurations_Update",
         "x-ms-examples": {
           "ConfigurationUpdate": {
             "$ref": "./examples/ConfigurationUpdate.json"
@@ -797,7 +797,7 @@
         "tags": [
           "CustomerMaintenanceWindow"
         ],
-        "operationId": "FlexibleServers_CustomerMaintenanceWindow_CreateOrUpdate",
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_CreateOrUpdate",
         "x-ms-examples": {
           "CustomerMaintenanceWindowCreate": {
             "$ref": "./examples/CustomerMaintenanceWindowCreate.json"
@@ -859,7 +859,7 @@
         "tags": [
           "CustomerMaintenanceWindow"
         ],
-        "operationId": "FlexibleServers_CustomerMaintenanceWindow_Delete",
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_Delete",
         "x-ms-examples": {
           "CustomerMaintenanceWindowDelete": {
             "$ref": "./examples/CustomerMaintenanceWindowDelete.json"
@@ -906,7 +906,7 @@
         "tags": [
           "CustomerMaintenanceWindow"
         ],
-        "operationId": "FlexibleServers_CustomerMaintenanceWindow_Get",
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_Get",
         "x-ms-examples": {
           "CustomerMaintenanceWindowGet": {
             "$ref": "./examples/CustomerMaintenanceWindowGet.json"
@@ -951,7 +951,7 @@
         "tags": [
           "CustomerMaintenanceWindow"
         ],
-        "operationId": "FlexibleServers_CustomerMaintenanceWindow_ListByServer",
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_ListByServer",
         "x-ms-examples": {
           "CustomerMaintenanceWindowList": {
             "$ref": "./examples/CustomerMaintenanceWindowListByServer.json"
@@ -993,7 +993,7 @@
         "tags": [
           "CheckNameAvailability"
         ],
-        "operationId": "FlexibleServers_CheckNameAvailability_Execute",
+        "operationId": "FlexibleServersCheckNameAvailability_Execute",
         "x-ms-examples": {
           "NameAvailability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -1104,7 +1104,8 @@
           "x-ms-enum": {
             "name": "ServerState",
             "modelAsString": true
-          }
+          },
+          "readonly": "true"
         },
         "haState": {
           "type": "string",
@@ -1120,28 +1121,22 @@
           "x-ms-enum": {
             "name": "ServerHAState",
             "modelAsString": true
-          }
+          },
+          "readonly": "true"
         },
         "fullyQualifiedDomainName": {
           "type": "string",
-          "description": "The fully qualified domain name of a server."
-        },
-        "serverEdition": {
-          "type": "string",
-          "description": "server edition default to general purpose"
+          "description": "The fully qualified domain name of a server.",
+          "readonly": "true"
         },
         "displayName": {
           "type": "string",
-          "description": "The display name of a server."
+          "description": "The display name of a server.",
+          "readonly": "true"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
-        },
-        "vCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max compute of a server is 64vCores."
         },
         "publicNetworkAccess": {
           "type": "string",
