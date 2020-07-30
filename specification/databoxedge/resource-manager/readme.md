@@ -208,6 +208,7 @@ input-file:
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
