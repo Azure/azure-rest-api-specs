@@ -46,6 +46,7 @@ input-file:
   - Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
