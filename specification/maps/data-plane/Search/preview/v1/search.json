@@ -168,7 +168,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Limit": {
+    "LimitSearch": {
       "name": "limit",
       "in": "query",
       "description": "Maximum number of responses that will be returned. Default: 10, minimum: 1 and maximum: 100",
@@ -592,7 +592,7 @@
             "$ref": "#/parameters/Typeahead"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Offset"
@@ -627,7 +627,7 @@
           {
             "name": "minFuzzyLevel",
             "in": "query",
-            "description": "Minimum fuzzyness level to be used. Default: 1, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
+            "description": "Minimum fuzziness level to be used. Default: 1, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
             "required": false,
             "type": "integer",
             "default": 1,
@@ -637,7 +637,7 @@
           {
             "name": "maxFuzzyLevel",
             "in": "query",
-            "description": "Maximum fuzzyness level to be used. Default: 2, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
+            "description": "Maximum fuzziness level to be used. Default: 2, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
             "required": false,
             "type": "integer",
             "default": 2,
@@ -720,7 +720,7 @@
             "$ref": "#/parameters/Typeahead"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Offset"
@@ -820,7 +820,7 @@
             "$ref": "#/parameters/RequiredBiasLon"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Offset"
@@ -914,7 +914,7 @@
             "$ref": "#/parameters/Typeahead"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Offset"
@@ -1076,7 +1076,7 @@
             "$ref": "#/parameters/Typeahead"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Offset"
@@ -1166,7 +1166,7 @@
           {
             "name": "returnSpeedLimit",
             "in": "query",
-            "description": "Boolean. To enable return of the posted speedlimit",
+            "description": "Boolean. To enable return of the posted speed limit",
             "required": false,
             "type": "boolean",
             "default": false
@@ -1193,7 +1193,7 @@
           {
             "name": "returnRoadUse",
             "in": "query",
-            "description": "Boolean. To enable return of the road use array for reversegeocodes at street level",
+            "description": "Boolean. To enable return of the road use array for reverse geocodes at street level",
             "required": false,
             "type": "boolean",
             "default": false
@@ -1201,7 +1201,7 @@
           {
             "name": "roadUse",
             "in": "query",
-            "description": "To restrict reversegeocodes to a certain type of roaduse. The road use array for reversegeocodes can be one or more of LimitedAccess, Arterial, Terminal, Ramp, Rotary, LocalStreet",
+            "description": "To restrict reverse geocodes to a certain type of road use. The road use array for reverse geocodes can be one or more of LimitedAccess, Arterial, Terminal, Ramp, Rotary, LocalStreet",
             "required": false,
             "type": "string"
           },
@@ -1222,7 +1222,7 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API.",
+            "description": "Specifies the level of filtering performed on geographies. Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API. The following parameters are ignored when entityType is set:\n\n* heading\n* number\n* returnRoadUse\n* returnSpeedLimit\n* roadUse\n* returnMatchType",
             "required": false,
             "type": "string",
             "enum": [
@@ -1331,7 +1331,7 @@
             "$ref": "#/parameters/Position"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "name": "heading",
@@ -1412,7 +1412,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Offset"
@@ -1469,7 +1469,7 @@
           {
             "name": "countrySubdivision",
             "in": "query",
-            "description": "The country subdividion portion of an address",
+            "description": "The country subdivision portion of an address",
             "required": false,
             "type": "string"
           },
@@ -1545,7 +1545,7 @@
             "$ref": "#/parameters/TextFormat"
           },
           {
-            "$ref": "#/parameters/Limit"
+            "$ref": "#/parameters/LimitSearch"
           },
           {
             "$ref": "#/parameters/Language"
@@ -3418,7 +3418,7 @@
           "readOnly": true
         },
         "countrySubdivisionName": {
-          "description": "Country Subdividion Name property",
+          "description": "Country Subdivision Name property",
           "type": "string",
           "readOnly": true
         },
@@ -3525,7 +3525,7 @@
       }
     },
     "EntityType": {
-      "description": "Defines geography entity types.",
+      "description": "Geography entity type. Present only when entityType was requested and is available.",
       "type": "string",
       "enum": [
         "Country",
