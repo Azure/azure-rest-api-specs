@@ -260,27 +260,30 @@
                     "maxItems": 10
                   },
                   "uniqueItems": true,
-                  "description": "Compact JWE wrapped shares array",
-                  "required": [
-                    "key_algorithm",
-                    "required",
-                    "enc_shares"
-                  ]
+                  "description": "Compact JWE wrapped shares array"
                 }
               },
+              "required": [
+                "key_algorithm",
+                "required",
+                "enc_shares"
+              ],
               "description": "Array of shared keys"
             },
             "version": {
               "type": "integer"
             }
-          }
+          },
+          "required": [
+            "EncData",
+            "SharedKeys",
+            "version"
+          ]
         }
       },
       "description": "Security domain",
       "required": [
-        "version",
-        "EncData",
-        "SharedKeys"
+        "data"
       ]
     },
     "EncDataSet": {
