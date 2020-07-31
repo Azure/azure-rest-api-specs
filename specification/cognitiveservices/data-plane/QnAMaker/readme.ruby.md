@@ -21,6 +21,6 @@ These settings apply only when `--tag=release_4_0 --ruby` is specified on the co
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'release_4_0' && $(ruby)
-namespace: "Azure::CognitiveServices::QnAMaker::V4"
+namespace: "Azure::CognitiveServices::Qnamaker::V4_0"
 output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/lib
 ```

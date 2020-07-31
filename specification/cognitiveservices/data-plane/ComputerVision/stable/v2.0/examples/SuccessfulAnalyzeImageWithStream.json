@@ -2,8 +2,21 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "visualFeatures": ["Categories", "Adult", "Tags", "Description", "Faces", "Color", "ImageType", "Objects"],
-    "details": ["Celebrities", "Landmarks"],
+    "visualFeatures": [
+      "Categories",
+      "Adult",
+      "Tags",
+      "Description",
+      "Faces",
+      "Color",
+      "ImageType",
+      "Objects",
+      "Brands"
+    ],
+    "details": [
+      "Celebrities",
+      "Landmarks"
+    ],
     "language": "en",
     "Image": "{binary}"
   },
@@ -130,6 +143,28 @@
             "parent": {
               "object": "plant",
               "confidence": 0.95
+            }
+          }
+        ],
+        "brands": [
+          {
+            "name": "Pepsi",
+            "confidence": 0.857,
+            "rectangle": {
+              "x": 489,
+              "y": 79,
+              "w": 161,
+              "h": 177
+            }
+          },
+          {
+            "name": "Coca-Cola",
+            "confidence": 0.893,
+            "rectangle": {
+              "x": 216,
+              "y": 55,
+              "w": 171,
+              "h": 372
             }
           }
         ]

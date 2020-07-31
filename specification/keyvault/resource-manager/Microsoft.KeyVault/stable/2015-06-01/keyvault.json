@@ -101,6 +101,9 @@
         "responses": {
           "200": {
             "description": "OK Response."
+          },
+          "204": {
+            "description": "No Content."
           }
         }
       },
@@ -197,7 +200,9 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": [ "resourceType eq 'Microsoft.KeyVault/vaults'" ],
+            "enum": [
+              "resourceType eq 'Microsoft.KeyVault/vaults'"
+            ],
             "description": "The filter to apply on the operation."
           },
           {
@@ -211,8 +216,11 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "x-ms-api-version": false,
             "type": "string",
-            "enum": [ "2015-11-01" ],
+            "enum": [
+              "2015-11-01"
+            ],
             "description": "Azure Resource Manager Api Version."
           },
           {
@@ -239,7 +247,9 @@
         "family": {
           "type": "string",
           "description": "SKU family name",
-          "enum": [ "A" ],
+          "enum": [
+            "A"
+          ],
           "x-ms-enum": {
             "name": "SkuFamily",
             "modelAsString": true
@@ -248,7 +258,10 @@
         "name": {
           "type": "string",
           "description": "SKU name to specify whether the key vault is a standard vault or a premium vault.",
-          "enum": [ "standard", "premium" ],
+          "enum": [
+            "standard",
+            "premium"
+          ],
           "x-ms-enum": {
             "name": "SkuName",
             "modelAsString": false
@@ -295,7 +308,25 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore", "recover", "purge" ],
+            "enum": [
+              "all",
+              "encrypt",
+              "decrypt",
+              "wrapKey",
+              "unwrapKey",
+              "sign",
+              "verify",
+              "get",
+              "list",
+              "create",
+              "update",
+              "import",
+              "delete",
+              "backup",
+              "restore",
+              "recover",
+              "purge"
+            ],
             "x-ms-enum": {
               "name": "KeyPermissions",
               "modelAsString": true
@@ -307,7 +338,17 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "get", "list", "set", "delete", "backup", "restore", "recover", "purge" ],
+            "enum": [
+              "all",
+              "get",
+              "list",
+              "set",
+              "delete",
+              "backup",
+              "restore",
+              "recover",
+              "purge"
+            ],
             "x-ms-enum": {
               "name": "SecretPermissions",
               "modelAsString": true
@@ -319,7 +360,23 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "get", "list", "delete", "create", "import", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers", "manageissuers", "recover", "purge" ],
+            "enum": [
+              "all",
+              "get",
+              "list",
+              "delete",
+              "create",
+              "import",
+              "update",
+              "managecontacts",
+              "getissuers",
+              "listissuers",
+              "setissuers",
+              "deleteissuers",
+              "manageissuers",
+              "recover",
+              "purge"
+            ],
             "x-ms-enum": {
               "name": "CertificatePermissions",
               "modelAsString": true

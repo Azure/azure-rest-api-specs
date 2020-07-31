@@ -494,6 +494,14 @@
           },
           "x-nullable": true
         },
+        "brands": {
+          "description": "Array of brands detected in the image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedBrand"
+          },
+          "x-nullable": true
+        },
         "requestId": {
           "description": "Id of the REST API request.",
           "type": "string",
@@ -711,6 +719,31 @@
         "parent": {
           "$ref": "#/definitions/ObjectHierarchy",
           "description": "The parent object, from a taxonomy perspective.\r\nThe parent object is a more generic form of this object.  For example, a 'bulldog' would have a parent of 'dog'."
+        }
+      },
+      "x-nullable": true
+    },
+    "DetectedBrand": {
+      "description": "A brand detected in an image.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Label for the brand.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "confidence": {
+          "format": "double",
+          "description": "Confidence score of having observed the brand in the image, as a value ranging from 0 to 1.",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "rectangle": {
+          "$ref": "#/definitions/BoundingRect",
+          "description": "Approximate location of the detected brand.",
+          "readOnly": true
         }
       },
       "x-nullable": true
@@ -1335,7 +1368,7 @@
     "VisualFeatures": {
       "name": "visualFeatures",
       "in": "query",
-      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white. Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected. Objects - detects various objects within an image, including the approximate location. The Objects argument is only available in English.",
+      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white. Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected. Objects - detects various objects within an image, including the approximate location. The Objects argument is only available in English. Brands - detects various brands within an image, including the approximate location. The Brands argument is only available in English.",
       "required": false,
       "type": "array",
       "items": {
@@ -1348,7 +1381,8 @@
           "Color",
           "Tags",
           "Description",
-          "Objects"
+          "Objects",
+          "Brands"
         ],
         "x-nullable": false,
         "x-ms-enum": {

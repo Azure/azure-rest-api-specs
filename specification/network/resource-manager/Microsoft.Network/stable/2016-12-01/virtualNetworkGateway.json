@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
       "put": {
         "tags": [
           "VirtualNetworkGateways"
@@ -166,7 +166,10 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways": {
@@ -226,8 +229,8 @@
             "type": "string",
             "description": "The name of the virtual network gateway."
           },
-          { 
-            "name": "gatewayVip",		
+          {
+            "name": "gatewayVip",
             "in": "query",
             "required": false,
             "type": "string",
@@ -251,7 +254,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
@@ -299,6 +305,10 @@
               "type": "string"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -349,7 +359,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
@@ -392,7 +405,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes": {
@@ -442,7 +458,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
@@ -575,9 +594,12 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
       "put": {
         "tags": [
@@ -668,9 +690,9 @@
             }
           }
         }
-      }	  
+      }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
       "get": {
         "tags": [
           "VirtualNetworkGatewayConnections"
@@ -754,10 +776,13 @@
             "description": ""
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
       "put": {
         "tags": [
           "LocalNetworkGateways"
@@ -887,7 +912,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways": {
@@ -927,7 +955,7 @@
     }
   },
   "definitions": {
-	"VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAllocationMethod": {
           "type": "string",
@@ -1016,7 +1044,7 @@
           "type": "boolean",
           "description": "Whether BGP is enabled for this virtual network gateway or not."
         },
-	    "activeActive": {
+        "activeActive": {
           "type": "boolean",
           "description": "ActiveActive flag"
         },
@@ -1048,7 +1076,7 @@
       },
       "description": "VirtualNetworkGateway properties"
     },
-	"VpnClientRootCertificatePropertiesFormat": {
+    "VpnClientRootCertificatePropertiesFormat": {
       "properties": {
         "publicCertData": {
           "type": "string",
@@ -1090,7 +1118,7 @@
       ],
       "description": "VPN client root certificate of virtual network gateway"
     },
-	"VpnClientRevokedCertificatePropertiesFormat": {
+    "VpnClientRevokedCertificatePropertiesFormat": {
       "properties": {
         "thumbprint": {
           "type": "string",
@@ -1126,7 +1154,7 @@
       ],
       "description": "VPN client revoked certificate of virtual network gateway."
     },
-	"VpnClientConfiguration": {
+    "VpnClientConfiguration": {
       "properties": {
         "vpnClientAddressPool": {
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
@@ -1187,7 +1215,7 @@
       },
       "description": "VirtualNetworkGatewaySku details"
     },
-	"BgpSettings": {
+    "BgpSettings": {
       "properties": {
         "asn": {
           "type": "integer",
@@ -1258,7 +1286,7 @@
         },
         "messagesReceived": {
           "type": "integer",
-          "format": "in64",
+          "format": "int64",
           "readOnly": true,
           "description": "The number of BGP messages received"
         }
@@ -1325,7 +1353,7 @@
       ],
       "description": "A common class for general resource information"
     },
-	"VpnClientParameters": {
+    "VpnClientParameters": {
       "properties": {
         "ProcessorArchitecture": {
           "type": "string",
@@ -1345,7 +1373,7 @@
       ],
       "description": "VpnClientParameters"
     },
-	"VirtualNetworkGatewayListResult": {
+    "VirtualNetworkGatewayListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -1408,19 +1436,19 @@
           }
         },
         "ingressBytesTransferred": {
-          "readOnly": true,		
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Ingress Bytes Transferred in this connection"
         },
         "egressBytesTransferred": {
-          "readOnly": true,		
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Egress Bytes Transferred in this connection"
-        },		
+        },
         "lastConnectionEstablishedUtcTime": {
-          "readOnly": true,		
+          "readOnly": true,
           "type": "string",
           "description": "The time at which connection was established in Utc format."
         }
@@ -1444,7 +1472,7 @@
         },
         "connectionType": {
           "type": "string",
-          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
+          "description": "Gateway connection type. Possible values are: 'IPsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
           "enum": [
             "IPsec",
             "Vnet2Vnet",
@@ -1584,10 +1612,10 @@
       },
       "required": [
         "value"
-      ],	  
+      ],
       "description": "Response for GetConnectionSharedKey API service call"
     },
-	"LocalNetworkGatewayPropertiesFormat": {
+    "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",

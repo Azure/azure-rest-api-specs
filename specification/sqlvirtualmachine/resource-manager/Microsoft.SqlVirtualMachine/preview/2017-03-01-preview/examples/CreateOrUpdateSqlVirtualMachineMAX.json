@@ -2,54 +2,56 @@
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testrg",
-    "sqlVirtualMachineName":"testvm",
+    "sqlVirtualMachineName": "testvm",
     "api-version": "2017-03-01-preview",
     "parameters": {
       "location": "northeurope",
       "properties": {
         "sqlServerLicenseType": "PAYG",
+        "sqlImageSku": "Enterprise",
+        "sqlManagement": "Full",
         "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
-        "ServerConfigurationsManagementSettings": {
-          "SQLConnectivityUpdateSettings": {
-            "ConnectivityType": "Private",
-            "Port": 1433,
-            "SQLAuthUpdateUserName": "sqllogin",
-            "SQLAuthUpdatePassword": "<password>"
+        "serverConfigurationsManagementSettings": {
+          "sqlConnectivityUpdateSettings": {
+            "connectivityType": "PRIVATE",
+            "port": 1433,
+            "sqlAuthUpdateUserName": "sqllogin",
+            "sqlAuthUpdatePassword": "<password>"
           },
-          "SQLStorageUpdateSettings": {
-            "DiskCount": 1,
-            "StartingDeviceId": 2,
-            "DiskConfigurationType": "NEW"
+          "sqlStorageUpdateSettings": {
+            "diskCount": 1,
+            "startingDeviceId": 2,
+            "diskConfigurationType": "NEW"
           },
-          "SQLWorkloadTypeUpdateSettings": {
-            "SQLWorkloadType": "OLTP"
+          "sqlWorkloadTypeUpdateSettings": {
+            "sqlWorkloadType": "OLTP"
           },
-          "AdditionalFeaturesServerConfigurations": {
-            "IsRServicesEnabled": false
+          "additionalFeaturesServerConfigurations": {
+            "isRServicesEnabled": false
           }
         },
-        "KeyVaultCredentialSettings": {
-          "Enable": false
+        "keyVaultCredentialSettings": {
+          "enable": false
         },
-        "AutoPatchingSettings": {
-          "Enable": true,
-          "DayOfWeek": "Sunday",
-          "MaintenanceWindowStartingHour": 2,
-          "MaintenanceWindowDuration": 60
+        "autoPatchingSettings": {
+          "enable": true,
+          "dayOfWeek": "Sunday",
+          "maintenanceWindowStartingHour": 2,
+          "maintenanceWindowDuration": 60
         },
-        "AutoBackupSettings": {
-          "Enable": true,
-          "RetentionPeriod": 17,
-          "EnableEncryption": true,
-          "Password": "<Password>",
-          "BackupScheduleType": "Manual",
-          "BackupSystemDbs": true,
-          "StorageAccountUrl": "https://teststorage.blob.core.windows.net/",
-          "StorageAccessKey": "<primary storage access key>",
-          "FullBackupFrequency": "Daily",
-          "FullBackupStartTime": 6,
-          "FullBackupWindowHours": 11,
-          "LogBackupFrequency": 10
+        "autoBackupSettings": {
+          "enable": true,
+          "retentionPeriod": 17,
+          "enableEncryption": true,
+          "password": "<Password>",
+          "backupScheduleType": "Manual",
+          "backupSystemDbs": true,
+          "storageAccountUrl": "https://teststorage.blob.core.windows.net/",
+          "storageAccessKey": "<primary storage access key>",
+          "fullBackupFrequency": "Daily",
+          "fullBackupStartTime": 6,
+          "fullBackupWindowHours": 11,
+          "logBackupFrequency": 10
         }
       }
     }
@@ -61,7 +63,8 @@
           "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
           "provisioningState": "Updating",
           "sqlServerLicenseType": "PAYG",
-          "sqlImageSku": "Enterprise"
+          "sqlImageSku": "Enterprise",
+          "sqlManagement": "Full"
         },
         "location": "northeurope",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
@@ -75,7 +78,8 @@
           "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm",
           "provisioningState": "Provisioning",
           "sqlServerLicenseType": "PAYG",
-          "sqlImageSku": "Unknown"
+          "sqlImageSku": "Unknown",
+          "sqlManagement": "Full"
         },
         "location": "northeurope",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",

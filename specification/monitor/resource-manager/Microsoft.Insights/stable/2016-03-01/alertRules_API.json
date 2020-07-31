@@ -38,7 +38,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
       "put": {
-        "description": "Creates or updates an alert rule.",
+        "description": "Creates or updates a classic metric alert rule.",
         "tags": [
           "AlertRules"
         ],
@@ -87,11 +87,13 @@
           }
         },
         "x-ms-examples": {
-            "Create or update an alert rule": { "$ref": "./examples/createOrUpdateAlertRule.json" }
+          "Create or update an alert rule": {
+            "$ref": "./examples/createOrUpdateAlertRule.json"
+          }
         }
       },
       "delete": {
-        "description": "Deletes an alert rule",
+        "description": "Deletes a classic metric alert rule",
         "tags": [
           "AlertRules"
         ],
@@ -119,11 +121,13 @@
           }
         },
         "x-ms-examples": {
-            "Delete an alert rule": { "$ref": "./examples/deleteAlertRule.json" }
+          "Delete an alert rule": {
+            "$ref": "./examples/deleteAlertRule.json"
+          }
         }
       },
       "get": {
-        "description": "Gets an alert rule",
+        "description": "Gets a classic metric alert rule",
         "tags": [
           "AlertRules"
         ],
@@ -151,58 +155,62 @@
           }
         },
         "x-ms-examples": {
-            "Get an alert rule": { "$ref": "./examples/getAlertRule.json" }
+          "Get an alert rule": {
+            "$ref": "./examples/getAlertRule.json"
+          }
         }
       },
       "patch": {
-          "description": "Updates an existing AlertRuleResource. To update other fields use the CreateOrUpdate method.",
-          "operationId": "AlertRules_Update",
-          "parameters": [
-              {
-                  "$ref": "#/parameters/SubscriptionIdParameter"
-              },
-              {
-                  "$ref": "#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                  "$ref": "#/parameters/RuleNameParameter"
-              },
-              {
-                  "$ref": "#/parameters/ApiVersionParameter"
-              },
-              {
-                  "name": "alertRulesResource",
-                  "in": "body",
-                  "required": true,
-                  "schema": {
-                      "$ref": "#/definitions/AlertRuleResourcePatch"
-                  },
-                  "description": "Parameters supplied to the operation."
-              }
-          ],
-          "responses": {
-              "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                      "$ref": "#/definitions/ErrorResponse"
-                  }
-              },
-              "200": {
-                  "description": "Successful request to update an alert rule",
-                  "schema": {
-                      "$ref": "#/definitions/AlertRuleResource"
-                  }
-              },
-              "201": {
-                  "description": "Successful request to update an alert rule that resulted in a creation of the alert rule",
-                  "schema": {
-                      "$ref": "#/definitions/AlertRuleResource"
-                  }
-              }
+        "description": "Updates an existing classic metric AlertRuleResource. To update other fields use the CreateOrUpdate method.",
+        "operationId": "AlertRules_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-examples": {
-              "Patch an alert rule": { "$ref": "./examples/patchAlertRule.json" }
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "alertRulesResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResourcePatch"
+            },
+            "description": "Parameters supplied to the operation."
           }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to update an alert rule",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResource"
+            }
+          },
+          "201": {
+            "description": "Successful request to update an alert rule that resulted in a creation of the alert rule",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an alert rule": {
+            "$ref": "./examples/patchAlertRule.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules": {
@@ -211,7 +219,7 @@
           "AlertRules"
         ],
         "operationId": "AlertRules_ListByResourceGroup",
-        "description": "List the alert rules within a resource group.",
+        "description": "List the classic metric alert rules within a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -235,7 +243,9 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-            "List alert rules": { "$ref": "./examples/listAlertRule.json" }
+          "List alert rules": {
+            "$ref": "./examples/listAlertRule.json"
+          }
         }
       }
     },
@@ -245,7 +255,7 @@
           "AlertRules"
         ],
         "operationId": "AlertRules_ListBySubscription",
-        "description": "List the alert rules within a subscription.",
+        "description": "List the classic metric alert rules within a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -266,7 +276,9 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-            "List alert rules": { "$ref": "./examples/listAlertRuleBySubscription.json" }
+          "List alert rules": {
+            "$ref": "./examples/listAlertRuleBySubscription.json"
+          }
         }
       }
     }
@@ -285,7 +297,9 @@
           "description": "the resource from which the rule collects its data. For this type dataSource will always be of type RuleMetricDataSource."
         }
       },
-      "required": [ "odata.type" ],
+      "required": [
+        "odata.type"
+      ],
       "description": "The condition that results in the alert rule being activated."
     },
     "RuleDataSource": {
@@ -301,7 +315,9 @@
           "description": "the resource identifier of the resource the rule monitors. **NOTE**: this property cannot be updated for an existing rule."
         }
       },
-      "required": [ "odata.type" ],
+      "required": [
+        "odata.type"
+      ],
       "description": "The resource from which the rule collects its data."
     },
     "RuleMetricDataSource": {
@@ -334,7 +350,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref" : "#/definitions/RuleDataSource"
+          "$ref": "#/definitions/RuleDataSource"
         }
       ],
       "properties": {
@@ -392,14 +408,14 @@
       "description": "Operators allowed in the rule condition."
     },
     "TimeAggregationOperator": {
-       "type": "string",
-       "enum": [
-         "Average",
-         "Minimum",
-         "Maximum",
-         "Total",
-         "Last"
-       ],
+      "type": "string",
+      "enum": [
+        "Average",
+        "Minimum",
+        "Maximum",
+        "Total",
+        "Last"
+      ],
       "x-ms-enum": {
         "name": "TimeAggregationOperator",
         "modelAsString": false
@@ -411,10 +427,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref" : "#/definitions/RuleCondition"
+          "$ref": "#/definitions/RuleCondition"
         }
       ],
-      "required": [ "threshold", "operator" ],
+      "required": [
+        "threshold",
+        "operator"
+      ],
       "properties": {
         "operator": {
           "$ref": "#/definitions/ConditionOperator",
@@ -443,7 +462,7 @@
       "type": "object",
       "allOf": [
         {
-           "$ref" : "#/definitions/RuleCondition"
+          "$ref": "#/definitions/RuleCondition"
         }
       ],
       "properties": {
@@ -459,20 +478,22 @@
           "description": "the number of locations that must fail to activate the alert."
         }
       },
-      "required": [ "failedLocationCount" ],
+      "required": [
+        "failedLocationCount"
+      ],
       "description": "A rule condition based on a certain number of locations failing.",
       "example": "{\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition\",\r\n\t\"dataSource\": {\r\n\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource\",\r\n\t\t\"resourceUri\": \"/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourcegroups/Default-Web-CentralUS/providers/microsoft.insights/webtests/homepagetest-newrelapp2\",r\n\t\t\"metricName\": \"GSMT_AvRaW\"\r\n\t},\r\n\t\"windowSize\": \"PT5M\",\r\n\t\"failedLocationCount\": 1\r\n}"
     },
     "ManagementEventAggregationCondition": {
       "properties": {
         "operator": {
-           "$ref": "#/definitions/ConditionOperator",
-           "description": "the condition operator."
+          "$ref": "#/definitions/ConditionOperator",
+          "description": "the condition operator."
         },
         "threshold": {
-           "type": "number",
-           "format": "double",
-           "description": "The threshold value that activates the alert."
+          "type": "number",
+          "format": "double",
+          "description": "The threshold value that activates the alert."
         },
         "windowSize": {
           "type": "string",
@@ -487,7 +508,7 @@
       "type": "object",
       "allOf": [
         {
-           "$ref" : "#/definitions/RuleCondition"
+          "$ref": "#/definitions/RuleCondition"
         }
       ],
       "properties": {
@@ -508,7 +529,9 @@
           "description": "specifies the type of the action. There are two types of actions: RuleEmailAction and RuleWebhookAction."
         }
       },
-      "required": [ "odata.type" ],
+      "required": [
+        "odata.type"
+      ],
       "description": "The action that is performed when the alert rule becomes active, and when an alert condition is resolved."
     },
     "RuleEmailAction": {
@@ -521,15 +544,15 @@
       ],
       "properties": {
         "sendToServiceOwners": {
-            "type": "boolean",
-            "description": "Whether the administrators (service and co-administrators) of the service should be notified when the alert is activated."
+          "type": "boolean",
+          "description": "Whether the administrators (service and co-administrators) of the service should be notified when the alert is activated."
         },
         "customEmails": {
-            "type": "array",
-            "items": {
-              "type" : "string"
-            },
-            "description": "the list of administrator's custom email addresses to notify of the activation of the alert."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of administrator's custom email addresses to notify of the activation of the alert."
         }
       },
       "description": "Specifies the action to send email when the rule condition is evaluated. The discriminator is always RuleEmailAction in this case.",
@@ -544,17 +567,17 @@
         }
       ],
       "properties": {
-         "serviceUri": {
-           "type": "string",
-           "description": "the service uri to Post the notification when the alert activates or resolves."
-         },
-         "properties": {
-           "type": "object",
-           "additionalProperties": {
-              "type": "string"
-           },
-           "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
-         }
+        "serviceUri": {
+          "type": "string",
+          "description": "the service uri to Post the notification when the alert activates or resolves."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
+        }
       },
       "description": "Specifies the action to post to service when the rule condition is evaluated. The discriminator is always RuleWebhookAction in this case.",
       "example": "{\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleWebhookAction\",\r\n\t\"serviceUri\": \"http://contoso.com/\",\r\n\t\"properties\": { }\r\n}"
@@ -619,8 +642,8 @@
           "type": "string",
           "description": "Resource location",
           "x-ms-mutability": [
-              "create",
-              "read"
+            "create",
+            "read"
           ]
         },
         "tags": {
@@ -639,9 +662,9 @@
     "AlertRuleResource": {
       "type": "object",
       "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
+        {
+          "$ref": "#/definitions/Resource"
+        }
       ],
       "required": [
         "properties"
@@ -659,10 +682,10 @@
       "description": "The alert rule object for patch operations.",
       "properties": {
         "tags": {
-            "additionalProperties": {
-                "type": "string"
-            },
-            "description": "Resource tags"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         },
         "properties": {
           "x-ms-client-flatten": true,

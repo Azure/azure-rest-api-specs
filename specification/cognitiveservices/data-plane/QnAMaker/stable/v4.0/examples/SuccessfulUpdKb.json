@@ -15,20 +15,6 @@
               "How can I change the default message from QnA Maker?"
             ],
             "metadata": []
-          },
-          {
-            "id": 0,
-            "answer": "You can use our REST apis to manage your KB. See here for details: https://westus.dev.cognitive.microsoft.com/docs/services/58994a073d9e04097c7ba6fe/operations/58994a073d9e041ad42d9baa",
-            "source": "Custom Editorial",
-            "questions": [
-              "How do I programmatically update my KB?"
-            ],
-            "metadata": [
-              {
-                "name": "category",
-                "value": "api"
-              }
-            ]
           }
         ],
         "urls": [
@@ -43,28 +29,88 @@
       },
       "delete": {
         "ids": [
-          4,
           13,
           35
-        ],
-        "sources": [
-          "Custom Editorial"
         ]
       },
       "update": {
-        "name": "QnA Maker + Emotion API FAQ Bot",
+        "name": "QnA Maker FAQ Prompts Bot",
         "qnaList": [
           {
-            "id": 30,
-            "answer": "Yes, you can use our REST APIs to manage a KB. Please check our documentation for details.",
-            "source": "Custom Q&A",
+            "id": 2,
+            "answer": "You can use our REST apis to create a KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/create",
+            "source": "Custom Editorial",
             "questions": {
-              "add": [
-                "can I programmatically manage a KB?"
+              "add": [],
+              "delete": []
+            },
+            "metadata": {
+              "add": [],
+              "delete": []
+            },
+            "alternateQuestionClusters": {
+              "delete": []
+            },
+            "context": {
+              "isContextOnly": false,
+              "promptsToAdd": [
+                {
+                  "displayText": "Add Prompts",
+                  "displayOrder": 0,
+                  "qna": {
+                    "id": 0,
+                    "answer": "Click here to know more https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/multiturn-conversation",
+                    "source": "Editorial",
+                    "questions": [
+                      "How can I add prompts?"
+                    ],
+                    "metadata": [],
+                    "alternateQuestionClusters": [],
+                    "context": {
+                      "isContextOnly": false,
+                      "prompts": []
+                    }
+                  },
+                  "qnaId": 0
+                },
+                {
+                  "displayText": "Delete Prompts",
+                  "displayOrder": 0,
+                  "qna": {
+                    "id": 0,
+                    "answer": "Click here to know more https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/multiturn-conversation",
+                    "source": "Editorial",
+                    "questions": [
+                      "How can I delete delete prompts?"
+                    ],
+                    "metadata": [],
+                    "alternateQuestionClusters": [],
+                    "context": {
+                      "isContextOnly": false,
+                      "prompts": []
+                    }
+                  },
+                  "qnaId": 0
+                },
+                {
+                  "displayText": "Update Knowledgebase",
+                  "displayOrder": 0,
+                  "qna": null,
+                  "qnaId": 3
+                }
               ],
-              "delete": [
-                "How do I programmatically update my KB?"
+              "promptsToDelete": [
+                3
               ]
+            }
+          },
+          {
+            "id": 3,
+            "answer": "You can use our REST apis to update your KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/update",
+            "source": "Custom Editorial",
+            "questions": {
+              "add": [],
+              "delete": []
             },
             "metadata": {
               "delete": [
@@ -79,11 +125,25 @@
                   "value": "programmatic"
                 }
               ]
+            },
+            "alternateQuestionClusters": {
+              "delete": []
+            },
+            "context": {
+              "isContextOnly": false,
+              "promptsToAdd": [
+                {
+                  "displayText": "Regenerate Endpoint keys",
+                  "displayOrder": 1,
+                  "qna": null,
+                  "qnaId": 4
+                }
+              ],
+              "promptsToDelete": [
+                4
+              ]
             }
           }
-        ],
-        "urls": [
-          "https://docs.microsoft.com/en-us/bot-framework/resources-bot-framework-faq"
         ]
       }
     }

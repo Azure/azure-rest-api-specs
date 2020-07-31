@@ -1,0 +1,987 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-05-01-preview",
+    "title": "ContainerRegistryManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps/{scopeMapName}": {
+      "get": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Gets the properties of the specified scope map.",
+        "operationId": "ScopeMaps_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapGet": {
+            "$ref": "./examples/ScopeMapGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Creates a scope map for a container registry with the specified parameters.",
+        "operationId": "ScopeMaps_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          },
+          {
+            "name": "scopeMapCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a scope map.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapCreate": {
+            "$ref": "./examples/ScopeMapCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Deletes a scope map from a container registry.",
+        "operationId": "ScopeMaps_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The scopemap does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapDelete": {
+            "$ref": "./examples/ScopeMapDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Updates a scope map with the specified parameters.",
+        "operationId": "ScopeMaps_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          },
+          {
+            "name": "scopeMapUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a scope map.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeMapUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapUpdate": {
+            "$ref": "./examples/ScopeMapUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps": {
+      "get": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Lists all the scope maps for the specified container registry.",
+        "operationId": "ScopeMaps_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMapListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapList": {
+            "$ref": "./examples/ScopeMapList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens/{tokenName}": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Gets the properties of the specified token.",
+        "operationId": "Tokens_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenGet": {
+            "$ref": "./examples/TokenGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Creates a token for a container registry with the specified parameters.",
+        "operationId": "Tokens_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          },
+          {
+            "name": "tokenCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenCreate": {
+            "$ref": "./examples/TokenCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Deletes a token from a container registry.",
+        "operationId": "Tokens_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The token does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "TokenDelete": {
+            "$ref": "./examples/TokenDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Updates a token with the specified parameters.",
+        "operationId": "Tokens_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          },
+          {
+            "name": "tokenUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenUpdate": {
+            "$ref": "./examples/TokenUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Lists all the tokens for the specified container registry.",
+        "operationId": "Tokens_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TokenListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenList": {
+            "$ref": "./examples/TokenList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/generateCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Generate keys for a token of a specified container registry.",
+        "operationId": "Registries_GenerateCredentials",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "generateCredentialsParameters",
+            "in": "body",
+            "description": "The parameters for generating credentials.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateCredentialsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/GenerateCredentialsResult"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "RegistryGenerateCredentials": {
+            "$ref": "./examples/RegistryGenerateCredentials.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ScopeMap": {
+      "description": "An object that represents a scope map for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopeMapProperties",
+          "description": "The properties of the scope map.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopeMapProperties": {
+      "description": "The properties of a scope map.",
+      "required": [
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The user friendly description of the scope map.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the scope map. E.g. BuildIn scope map.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of scope map.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "actions": {
+          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ScopeMapUpdateParameters": {
+      "description": "The properties for updating the scope map.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopeMapPropertiesUpdateParameters",
+          "description": "The update parameters for scope map properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopeMapPropertiesUpdateParameters": {
+      "description": "The update parameters for scope map properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The user friendly description of the scope map.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of scope permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ScopeMapListResult": {
+      "description": "The result of a request to list scope maps for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of scope maps. Since this list may be incomplete, the nextLink field should be used to request the next list of scope maps.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeMap"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of scope maps.",
+          "type": "string"
+        }
+      }
+    },
+    "Token": {
+      "description": "An object that represents a token for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TokenProperties",
+          "description": "The properties of the token.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TokenProperties": {
+      "description": "The properties of a token.",
+      "type": "object",
+      "properties": {
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of scope map.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "scopeMapId": {
+          "description": "The resource ID of the scope map to which the token will be associated with.",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/TokenCredentialsProperties",
+          "description": "The credentials that can be used for authenticating the token."
+        },
+        "status": {
+          "description": "The status of the token example enabled or disabled.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TokenCredentialsProperties": {
+      "description": "The properties of the credentials that can be used for authenticating the token.",
+      "type": "object",
+      "properties": {
+        "activeDirectoryObject": {
+          "$ref": "#/definitions/ActiveDirectoryObject"
+        },
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenCertificate"
+          }
+        },
+        "passwords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenPassword"
+          }
+        }
+      }
+    },
+    "ActiveDirectoryObject": {
+      "description": "The Active Directory Object that will be used for authenticating the token of a container registry.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "The user/group/application object ID for Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of user/group/application object Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
+        }
+      }
+    },
+    "TokenCertificate": {
+      "description": "The properties of a certificate used for authenticating a token.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "certificate1",
+            "certificate2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenCertificateName",
+            "modelAsString": true
+          }
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry datetime of the certificate.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "The thumbprint of the certificate.",
+          "type": "string"
+        },
+        "encodedPemCertificate": {
+          "description": "Base 64 encoded string of the public certificate1 in PEM format that will be used for authenticating the token.",
+          "type": "string"
+        }
+      }
+    },
+    "TokenPassword": {
+      "description": "The password that will be used for authenticating the token of a container registry.",
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation datetime of the password.",
+          "type": "string"
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry datetime of the password.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The password name \"password1\" or \"password2\"",
+          "enum": [
+            "password1",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenPasswordName",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The password value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TokenUpdateParameters": {
+      "description": "The parameters for updating a token.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TokenUpdateProperties",
+          "description": "The properties of the token update parameters.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TokenUpdateProperties": {
+      "description": "The parameters for updating token properties.",
+      "type": "object",
+      "properties": {
+        "scopeMapId": {
+          "description": "The resource ID of the scope map to which the token will be associated with.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the token example enabled or disabled.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenStatus",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "$ref": "#/definitions/TokenCredentialsProperties",
+          "description": "The credentials that can be used for authenticating the token."
+        }
+      }
+    },
+    "TokenListResult": {
+      "description": "The result of a request to list tokens for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of tokens. Since this list may be incomplete, the nextLink field should be used to request the next list of tokens.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Token"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of tokens.",
+          "type": "string"
+        }
+      }
+    },
+    "GenerateCredentialsParameters": {
+      "description": "The parameters used to generate credentials for a specified token or user of a container registry.",
+      "type": "object",
+      "properties": {
+        "tokenId": {
+          "description": "The resource ID of the token for which credentials have to be generated.",
+          "type": "string"
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry date of the generated credentials after which the credentials become invalid.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Specifies name of the password which should be regenerated if any -- password1 or password2.",
+          "enum": [
+            "password1",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenPasswordName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "GenerateCredentialsResult": {
+      "description": "The response from the GenerateCredentials operation.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username for a container registry.",
+          "type": "string"
+        },
+        "passwords": {
+          "description": "The list of passwords for a container registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenPassword"
+          }
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the container registry belongs.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "RegistryNameParameter": {
+      "name": "registryName",
+      "in": "path",
+      "description": "The name of the container registry.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ScopeMapNameParameter": {
+      "name": "scopeMapName",
+      "in": "path",
+      "description": "The name of the scope map.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-_]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "TokenNameParameter": {
+      "name": "tokenName",
+      "in": "path",
+      "description": "The name of the token.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

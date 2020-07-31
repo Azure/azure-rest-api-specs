@@ -1,0 +1,647 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BlueprintClient",
+    "description": "Azure Blueprints Client provides access to blueprint definitions, assignments, and artifacts, and related blueprint operations.",
+    "version": "2018-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}": {
+      "put": {
+        "tags": [
+          "Assignment"
+        ],
+        "operationId": "Assignments_CreateOrUpdate",
+        "description": "Create or update a blueprint assignment.",
+        "x-ms-examples": {
+          "Assignment with system-assigned managed identity at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Create_SystemAssignedMSI.json"
+          },
+          "Assignment with user-assigned managed identity at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Create_UserAssignedMSI.json"
+          },
+          "Assignment with system-assigned managed identity at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Create_SystemAssignedMSI.json"
+          },
+          "Assignment with user-assigned managed identity at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Create_UserAssignedMSI.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          },
+          {
+            "name": "assignment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Assignment"
+            },
+            "description": "Blueprint assignment object to save."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- blueprint assignment saved.",
+            "schema": {
+              "$ref": "#/definitions/Assignment"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Assignment"
+        ],
+        "operationId": "Assignments_Get",
+        "description": "Get a blueprint assignment.",
+        "x-ms-examples": {
+          "Assignment at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Get.json"
+          },
+          "Assignment at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- blueprint assignment retrieved.",
+            "schema": {
+              "$ref": "#/definitions/Assignment"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Assignment"
+        ],
+        "operationId": "Assignments_Delete",
+        "description": "Delete a blueprint assignment.",
+        "x-ms-examples": {
+          "Assignment_Delete at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Delete.json"
+          },
+          "Assignment_Delete at subscription scope, and delete the resources created by the assignment": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Delete_AndDeleteChildren.json"
+          },
+          "Assignment_Delete at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Delete.json"
+          },
+          "Assignment_Delete at management group scope, and delete the resources created by the assignment": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Delete_AndDeleteChildren.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          },
+          {
+            "name": "deleteBehavior",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "none",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "AssignmentDeleteBehavior",
+              "modelAsString": true
+            },
+            "description": "When deleteBehavior=all, the resources that were created by the blueprint assignment will be deleted."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK -- blueprint assignment deleted.",
+            "schema": {
+              "$ref": "#/definitions/Assignment"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
+      "post": {
+        "operationId": "Assignments_WhoIsBlueprint",
+        "description": "Get Blueprints service SPN objectId",
+        "x-ms-examples": {
+          "WhoIsBlueprint_Action at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/WhoIsBlueprint_Action.json"
+          },
+          "WhoIsBlueprint_Action at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/WhoIsBlueprint_Action.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blueprints service SPN objectId",
+            "schema": {
+              "$ref": "#/definitions/WhoIsBlueprintContract"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments": {
+      "get": {
+        "tags": [
+          "Assignment"
+        ],
+        "operationId": "Assignments_List",
+        "description": "List blueprint assignments within a subscription or a management group.",
+        "x-ms-examples": {
+          "Assignment at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_List.json"
+          },
+          "Assignment at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- all blueprint assignments retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AssignmentList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Assignment": {
+      "type": "object",
+      "description": "Represents a blueprint assignment.",
+      "properties": {
+        "identity": {
+          "description": "Managed identity for this blueprint assignment.",
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "Properties for blueprint assignment object.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssignmentProperties"
+        }
+      },
+      "required": [
+        "identity",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AssignmentList": {
+      "type": "object",
+      "description": "List of blueprint assignments",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of blueprint assignments.",
+          "items": {
+            "$ref": "#/definitions/Assignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User-assigned managed identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client App Id associated with this identity."
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Managed identity generic object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the managed identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "ID of the Azure Active Directory."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user-assigned managed identities associated with the resource. Key is the Azure resource Id of the managed identity.",
+          "additionalProperties": {
+            "description": "User-assigned managed identity.",
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AssignmentStatus": {
+      "description": "The status of a blueprint assignment. This field is readonly.",
+      "type": "object",
+      "properties": {
+        "managedResources": {
+          "type": "array",
+          "description": "List of resources that were created by the blueprint assignment.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
+      ]
+    },
+    "AssignmentLockSettings": {
+      "description": "Defines how resources deployed by a blueprint assignment are locked.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Lock mode.",
+          "enum": [
+            "None",
+            "AllResourcesReadOnly",
+            "AllResourcesDoNotDelete"
+          ],
+          "x-ms-enum": {
+            "name": "AssignmentLockMode",
+            "modelAsString": true
+          }
+        },
+        "excludedPrincipals": {
+          "type": "array",
+          "description": "List of AAD principals excluded from blueprint locks. Up to 5 principals are permitted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedActions": {
+          "type": "array",
+          "description": "List of management operations that are excluded from blueprint locks. Up to 200 actions are permitted. If the lock mode is set to 'AllResourcesReadOnly', then the following actions are automatically appended to 'excludedActions': '*/read', 'Microsoft.Network/virtualNetworks/subnets/join/action' and 'Microsoft.Authorization/locks/delete'. If the lock mode is set to 'AllResourcesDoNotDelete', then the following actions are automatically appended to 'excludedActions': 'Microsoft.Authorization/locks/delete'. Duplicate actions will get removed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AssignmentProperties": {
+      "type": "object",
+      "description": "Detailed properties for a blueprint assignment.",
+      "properties": {
+        "blueprintId": {
+          "type": "string",
+          "description": "ID of the published version of a blueprint definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The target subscription scope of the blueprint assignment (format: '/subscriptions/{subscriptionId}'). For management group level assignments, the property is required."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Blueprint assignment parameter values.",
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
+        },
+        "resourceGroups": {
+          "description": "Names and locations of resource group placeholders.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceGroupValue"
+          }
+        },
+        "status": {
+          "description": "Status of blueprint assignment. This field is readonly.",
+          "readOnly": true,
+          "$ref": "#/definitions/AssignmentStatus"
+        },
+        "locks": {
+          "description": "Defines how resources deployed by a blueprint assignment are locked.",
+          "$ref": "#/definitions/AssignmentLockSettings"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "State of the blueprint assignment.",
+          "enum": [
+            "creating",
+            "validating",
+            "waiting",
+            "deploying",
+            "cancelling",
+            "locking",
+            "succeeded",
+            "failed",
+            "canceled",
+            "deleting"
+          ],
+          "x-ms-enum": {
+            "name": "AssignmentProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlueprintResourcePropertiesBase"
+        }
+      ],
+      "required": [
+        "parameters",
+        "resourceGroups"
+      ]
+    },
+    "ParameterValue": {
+      "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Parameter value. Any valid JSON value is allowed including objects, arrays, strings, numbers and booleans."
+        },
+        "reference": {
+          "type": "object",
+          "description": "Parameter value as reference type.",
+          "$ref": "#/definitions/SecretValueReference"
+        }
+      }
+    },
+    "SecretValueReference": {
+      "description": "Reference to a Key Vault secret.",
+      "type": "object",
+      "properties": {
+        "keyVault": {
+          "description": "Specifies the reference to a given Azure Key Vault.",
+          "$ref": "#/definitions/keyVaultReference"
+        },
+        "secretName": {
+          "description": "Name of the secret.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version of the secret to use. If left blank, the latest version of the secret is used.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "keyVault",
+        "secretName"
+      ]
+    },
+    "keyVaultReference": {
+      "description": "Specifies the link to a Key Vault.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Azure resource ID of the Key Vault.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ResourceGroupValue": {
+      "description": "Represents an Azure resource group.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource group.",
+          "minLength": 1,
+          "maxLength": 90
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource group."
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "Common properties for all Azure tracked resources.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of this blueprint assignment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ]
+    },
+    "AzureResourceBase": {
+      "description": "Common properties for all Azure resources.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "String Id used to locate any resource on Azure."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of this resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of this resource."
+        }
+      }
+    },
+    "BlueprintResourcePropertiesBase": {
+      "description": "Shared properties between all blueprint resources.",
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "One-liner string explain this resource.",
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string",
+          "description": "Multi-line explain this resource.",
+          "maxLength": 500
+        }
+      }
+    },
+    "BlueprintResourceStatusBase": {
+      "description": "Shared status properties between all blueprint resources.",
+      "type": "object",
+      "properties": {
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Creation time of this blueprint definition."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last modified time of this blueprint definition."
+        }
+      }
+    },
+    "WhoIsBlueprintContract": {
+      "description": "Response schema for querying the Azure Blueprints service principal in the tenant.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "AAD object Id of the Azure Blueprints service principal in the tenant."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "resourceScope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "AssignmentNameParameter": {
+      "name": "assignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the blueprint assignment."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Client API Version."
+    }
+  }
+}

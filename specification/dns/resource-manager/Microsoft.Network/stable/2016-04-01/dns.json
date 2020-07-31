@@ -1160,18 +1160,30 @@
     },
     "CloudError": {
       "type": "object",
-      "properties": { "error": { "$ref": "#/definitions/CloudErrorBody" } },
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
       "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
       "properties": {
-        "code": { "type": "string" },
-        "message": { "type": "string" },
-        "target": { "type": "string" },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
         "details": {
           "type": "array",
-          "items": { "$ref": "#/definitions/CloudErrorBody" }
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
         }
       },
       "x-ms-external": true

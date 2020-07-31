@@ -96,7 +96,8 @@
                 "cost": 0,
                 "timespan": "2017-08-10T21:44:34Z/2017-08-10T22:44:34Z",
                 "interval": "PT1M",
-                "value": [{
+                "value": [
+                  {
                     "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/Microsoft.Insights/metrics/CpuTime",
                     "type": "Microsoft.Insights/metrics",
                     "name": {
@@ -104,27 +105,35 @@
                       "localizedValue": "CPU Time"
                     },
                     "unit": "Seconds",
-                    "timeseries": [{
+                    "timeseries": [
+                      {
                         "metadatavalues": [],
-                        "data": [{
+                        "data": [
+                          {
                             "timeStamp": "2017-08-10T21:44:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:45:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:46:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:47:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:48:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:49:00Z",
                             "total": 0.0
-                          }, {
+                          },
+                          {
                             "timeStamp": "2017-08-10T21:50:00Z",
                             "total": 0.0
                           }
@@ -139,15 +148,21 @@
         },
         "x-ms-odata": "#/definitions/MetadataValue",
         "x-ms-examples": {
-          "Get Metric for data": { "$ref": "./examples/GetMetric.json" },
-          "Get Metric for metadata": { "$ref": "./examples/GetMetricMetadata.json" }
+          "Get Metric for data": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric for metadata": {
+            "$ref": "./examples/GetMetricMetadata.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -180,7 +195,9 @@
       }
     },
     "MetricValue": {
-      "required": [ "timeStamp" ],
+      "required": [
+        "timeStamp"
+      ],
       "properties": {
         "timeStamp": {
           "type": "string",
@@ -268,7 +285,10 @@
           "description": "the value of the collection."
         }
       },
-      "required": [ "timespan", "value" ],
+      "required": [
+        "timespan",
+        "value"
+      ],
       "description": "The response to a metrics query."
     },
     "Metric": {
@@ -298,7 +318,13 @@
           "description": "the time series returned when a data query is performed."
         }
       },
-      "required": [ "id", "type", "name", "unit", "timeseries" ],
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ],
       "description": "The result data of a query."
     },
     "TimeSeriesElement": {

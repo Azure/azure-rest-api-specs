@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "request": {
+      "dataFlowName": "dataflow",
+      "existingClusterId": "1221221",
+      "clusterTimeout": 50,
+      "newClusterName": "newClusterName",
+      "newClusterNodeType": "newClusterNodeType",
+      "dataBricksLinkedService": {
+        "properties": {
+          "type": "AzureStorage",
+          "typeProperties": {
+            "connectionString": {
+              "type": "SecureString",
+              "value": "DefaultEndpointsProtocol=https;AccountName=examplestorageaccount;AccountKey=<storage key>"
+            }
+          },
+          "description": "Example description"
+        }
+      }
+    },
+    "api-version": "2019-06-01-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:01 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "14989",
+        "x-ms-request-id": "2f955e10-c6df-45a7-97d4-81acdb8540cd",
+        "x-ms-correlation-request-id": "2f955e10-c6df-45a7-97d4-81acdb8540cd",
+        "location": "https://exampleWorkspaceName.dev.azuresynapse.net/operationStatuses/dfCreateSession$$229c688c-944c-44ac-b31a-82d50f347154?api-version=2019-06-01-preview"
+      }
+    },
+    "200": {
+      "body": {
+        "sessionId": "229c688c-944c-44ac-b31a-82d50f347154"
+      }
+    }
+  }
+}

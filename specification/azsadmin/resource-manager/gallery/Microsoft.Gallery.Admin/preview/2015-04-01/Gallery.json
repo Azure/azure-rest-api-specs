@@ -1,182 +1,182 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-04-01",
-        "title": "GalleryManagementClient",
-        "description": "The Admin Gallery Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/providers/Microsoft.Gallery.Admin/operations": {
-            "get": {
-                "x-ms-examples": {
-                    "Gets the available gallery admin operations.": {
-                        "$ref": "./examples/Operations.json"
-                    }
-                },
-                "tags": [
-                    "Operations"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Gallery.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "summary": "Gets the available gallery admin operations.",
-                "operationId": "Operations_List",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OperationList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-04-01",
+    "title": "GalleryManagementClient",
+    "description": "The Admin Gallery Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.Gallery.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the available gallery admin operations.": {
+            "$ref": "./examples/Operations.json"
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "Gallery.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "summary": "Gets the available gallery admin operations.",
+        "operationId": "Operations_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
-    },
-    "definitions": {
-        "Resource": {
-            "description": "Base Resource Object.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "description": "URI of the resource.",
-                    "type": "string"
-                },
-                "name": {
-                    "readOnly": true,
-                    "description": "Name of the resource.",
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "description": "Type of the resource.",
-                    "type": "string"
-                },
-                "location": {
-                    "readOnly": true,
-                    "description": "Location of the resource.",
-                    "type": "string"
-                },
-                "tags": {
-                    "readOnly": true,
-                    "description": "List of key-value pairs.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "x-ms-azure-resource": true
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base Resource Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "URI of the resource.",
+          "type": "string"
         },
-        "Operation": {
-            "description": "Represents a REST operation.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "Name of the REST operation.",
-                    "type": "string"
-                },
-                "origin": {
-                    "description": "Origin of the REST operation.",
-                    "type": "string"
-                },
-                "display": {
-                    "description": "Information about the REST operation.",
-                    "$ref": "#/definitions/OperationDisplayDefinition"
-                }
-            }
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
         },
-        "OperationDisplayDefinition": {
-            "description": "Information about the REST operation.",
-            "type": "object",
-            "properties": {
-                "description": {
-                    "description": "Description of the REST operation.",
-                    "type": "string"
-                },
-                "operation": {
-                    "description": "Type of REST operation.",
-                    "type": "string"
-                },
-                "provider": {
-                    "description": "Provider of the REST operation.",
-                    "type": "string"
-                },
-                "resource": {
-                    "description": "Resource returned by the REST operation.",
-                    "type": "string"
-                }
-            }
+        "type": {
+          "readOnly": true,
+          "description": "Type of the resource.",
+          "type": "string"
         },
-        "OperationList": {
-            "description": "List of operations.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "List of operations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    }
-                }
-            }
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-            "required": true,
+        "location": {
+          "readOnly": true,
+          "description": "Location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "readOnly": true,
+          "description": "List of key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client API Version.",
-            "required": true,
-            "type": "string",
-            "default": "2016-05-01"
-        },
-        "FilterParameter": {
-            "description": "OData filter parameter.",
-            "name": "$filter",
-            "in": "query",
-            "type": "string",
-            "x-ms-parameter-location": "method"
+          }
         }
+      },
+      "x-ms-azure-resource": true
     },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
+    "Operation": {
+      "description": "Represents a REST operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the REST operation.",
+          "type": "string"
+        },
+        "origin": {
+          "description": "Origin of the REST operation.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Information about the REST operation.",
+          "$ref": "#/definitions/OperationDisplayDefinition"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "OperationDisplayDefinition": {
+      "description": "Information about the REST operation.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the REST operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Type of REST operation.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Provider of the REST operation.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource returned by the REST operation.",
+          "type": "string"
         }
-    ]
+      }
+    },
+    "OperationList": {
+      "description": "List of operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2016-05-01"
+    },
+    "FilterParameter": {
+      "description": "OData filter parameter.",
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

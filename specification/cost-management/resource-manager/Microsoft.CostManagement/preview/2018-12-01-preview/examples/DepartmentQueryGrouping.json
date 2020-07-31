@@ -3,29 +3,29 @@
     "api-version": "2018-12-01-preview",
     "billingAccountId": "70664866",
     "departmentId": "123",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "Custom",
-        "timePeriod": {
-          "from": "2018-08-01T00:00:00.000Z",
-          "to": "2018-10-31T00:00:00.000Z"
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-08-01T00:00:00.000Z",
+        "to": "2018-10-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "None",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
         },
-        "dataset": {
-          "granularity": "None",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "AccountName"
-            }
-          ]      
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "AccountName"
+          }
+        ]
       }
-    }       
+    }
   },
   "responses": {
     "200": {
@@ -45,7 +45,7 @@
                 {
                   "name": "AccountName",
                   "type": "String"
-                },             
+                },
                 {
                   "name": "Currency",
                   "type": "String"
@@ -54,19 +54,19 @@
               "rows": [
                 [
                   19.545363672276512,
-                  "Azure Dev Account",                           
+                  "Azure Dev Account",
                   "USD"
                 ],
                 [
                   173.41979241290323,
-                  "Azure PPE Account",                                 
+                  "Azure PPE Account",
                   "USD"
                 ],
                 [
                   20.359416562625452,
-                  "Azure Prod Account",                         
+                  "Azure Prod Account",
                   "USD"
-                ]                
+                ]
               ]
             }
           }

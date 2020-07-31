@@ -48,14 +48,14 @@
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "properties": {
         "databaseCount": {
-            "type": "integer",
-            "description": "Count of databases",
-            "readOnly": true
+          "type": "integer",
+          "description": "Count of databases",
+          "readOnly": true
         },
         "state": {
-            "$ref": "TasksCommon.json#/definitions/MigrationState",
-            "description": "Current state of migration",
-            "readOnly": true
+          "$ref": "TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
         },
         "startedOn": {
           "type": "string",
@@ -85,9 +85,9 @@
           "readOnly": true
         },
         "targetServerName": {
-            "type": "string",
-            "description": "Target server name",
-            "readOnly": true
+          "type": "string",
+          "description": "Target server name",
+          "readOnly": true
         },
         "targetServerVersion": {
           "type": "string",
@@ -100,9 +100,9 @@
           "readOnly": true
         },
         "databaseErrorCount": {
-            "type": "integer",
-            "description": "Number of database level errors",
-            "readOnly": true
+          "type": "integer",
+          "description": "Number of database level errors",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -121,9 +121,9 @@
           "readOnly": true
         },
         "migrationState": {
-            "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationState",
-            "description": "Current state of database",
-            "readOnly": true
+          "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationState",
+          "description": "Current state of database",
+          "readOnly": true
         },
         "startedOn": {
           "type": "string",
@@ -138,39 +138,39 @@
           "readOnly": true
         },
         "fullBackupSetInfo": {
-            "type": "object",
-            "description": "Details of full backup set",
-            "$ref": "Common.json#/definitions/BackupSetInfo",
-            "readOnly": true
+          "type": "object",
+          "description": "Details of full backup set",
+          "$ref": "Common.json#/definitions/BackupSetInfo",
+          "readOnly": true
         },
-        "lastRestoredBackupSetInfo":{
-            "type": "object",
-            "description": "Last applied backup set information",
-            "$ref": "Common.json#/definitions/BackupSetInfo",
-            "readOnly": true
+        "lastRestoredBackupSetInfo": {
+          "type": "object",
+          "description": "Last applied backup set information",
+          "$ref": "Common.json#/definitions/BackupSetInfo",
+          "readOnly": true
         },
-        "activeBackupSets":{
-            "description": "Backup sets that are currently active (Either being uploaded or getting restored)",
-            "type": "array",
-            "items": {
-                "$ref": "Common.json#/definitions/BackupSetInfo"
-            },
+        "activeBackupSets": {
+          "description": "Backup sets that are currently active (Either being uploaded or getting restored)",
+          "type": "array",
+          "items": {
+            "$ref": "Common.json#/definitions/BackupSetInfo"
+          },
           "readOnly": true
         },
         "containerName": {
-            "description": "Name of container created in the Azure Storage account where backups are copied to",
-            "type": "string",
-            "readOnly": true
+          "description": "Name of container created in the Azure Storage account where backups are copied to",
+          "type": "string",
+          "readOnly": true
         },
         "errorPrefix": {
-            "description": "prefix string to use for querying errors for this database",
-            "type": "string",
-            "readOnly": true
+          "description": "prefix string to use for querying errors for this database",
+          "type": "string",
+          "readOnly": true
         },
         "isFullBackupRestored": {
-            "description": "Whether full backup has been applied to the target database or not",
-            "type": "boolean",
-            "readOnly": true
+          "description": "Whether full backup has been applied to the target database or not",
+          "type": "boolean",
+          "readOnly": true
         },
         "exceptionsAndWarnings": {
           "description": "Migration exceptions and warnings",

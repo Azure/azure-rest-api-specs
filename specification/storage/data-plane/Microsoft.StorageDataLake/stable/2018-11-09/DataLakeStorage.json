@@ -21,7 +21,6 @@
     ]
   },
   "schemes": [
-    "http",
     "https"
   ],
   "produces": [
@@ -330,7 +329,7 @@
         "parameters": [
           {
             "name": "x-ms-properties",
-            "description": "User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+            "description": "User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -378,7 +377,7 @@
         "parameters": [
           {
             "name": "x-ms-properties",
-            "description": "Optional. User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.  If the filesystem exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.",
+            "description": "Optional. User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.  If the filesystem exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -482,7 +481,7 @@
           {
             "name": "upn",
             "in": "query",
-            "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false.",
+            "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the user identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.",
             "required": false,
             "type": "boolean"
           }
@@ -521,7 +520,7 @@
                 "type": "string"
               },
               "x-ms-properties": {
-                "description": "The user-defined properties associated with the filesystem.  A comma-separated list of name and value pairs in the format \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+                "description": "The user-defined properties associated with the filesystem.  A comma-separated list of name and value pairs in the format \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
                 "type": "string"
               },
               "x-ms-namespace-enabled": {
@@ -587,7 +586,7 @@
           "name": "filesystem",
           "in": "path",
           "description": "The filesystem identifier.  The value must start and end with a letter or number and must contain only letters, numbers, and the dash (-) character.  Consecutive dashes are not permitted.  All letters must be lowercase.  The value must have between 3 and 63 characters.",
-          "pattern": "^[a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$",
+          "pattern": "^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$",
           "minLength": 3,
           "maxLength": 63,
           "required": true,
@@ -792,7 +791,7 @@
           {
             "name": "x-ms-rename-source",
             "in": "header",
-            "description": "An optional file or directory to be renamed.  The value must have the following format: \"/{filesystem}/{path}\".  If \"x-ms-properties\" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved.",
+            "description": "An optional file or directory to be renamed.  The value must have the following format: \"/{filesystem}/{path}\".  If \"x-ms-properties\" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved. This value must be a URL percent-encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
             "required": false,
             "type": "string"
           },
@@ -814,7 +813,7 @@
           },
           {
             "name": "x-ms-properties",
-            "description": "Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+            "description": "Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -951,8 +950,12 @@
                 "description": "The content type specified for the resource. If no content type was specified, the default content type is application/octet-stream.",
                 "type": "string"
               },
+              "Content-MD5": {
+                "description": "An MD5 hash of the request content. This header is only returned for \"Flush\" operation. This header is returned so that the client can check for message content integrity. This header refers to the content of the request, not actual file content.",
+                "type": "string"
+              },
               "x-ms-properties": {
-                "description": "User-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+                "description": "User-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
                 "type": "string"
               },
               "x-ms-request-id": {
@@ -969,6 +972,10 @@
           "202": {
             "description": "The uploaded data was accepted.",
             "headers": {
+              "Content-MD5": {
+                "description": "An MD5 hash of the request content. This header is only returned for \"Append\" operation. This header is returned so that the client can check for message content integrity. The value of this header is computed by the service; it is not necessarily the same value specified in the request headers.",
+                "type": "string"
+              },
               "Date": {
                 "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated.",
                 "type": "string"
@@ -1022,6 +1029,13 @@
             "type": "boolean"
           },
           {
+            "name": "close",
+            "in": "query",
+            "description": "Azure Storage Events allow applications to receive notifications when files change. When Azure Storage Events are enabled, a file changed event is raised. This event has a property indicating whether this is the final change to distinguish the difference between an intermediate flush to a file stream and the final close of a file stream. The close query parameter is valid only when the action is \"flush\" and change notifications are enabled. If the value of close is \"true\" and the flush operation completes successfully, the service raises a file change notification with a property indicating that this is the final update (the file stream has been closed). If \"false\" a change notification is raised indicating the file has changed. The default is false. This query parameter is set to true by the Hadoop ABFS driver to indicate that the file stream has been closed.\"",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "Content-Length",
             "in": "header",
             "description": "Required for \"Append Data\" and \"Flush Data\".  Must be 0 for \"Flush Data\".  Must be the length of the request content in bytes for \"Append Data\".",
@@ -1029,6 +1043,12 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "Content-MD5",
+            "in": "header",
+            "description": "Optional. An MD5 hash of the request content. This header is valid on \"Append\" and \"Flush\" operations. This hash is used to verify the integrity of the request content during transport. When this header is specified, the storage service compares the hash of the content that has arrived with this header value. If the two hashes do not match, the operation will fail with error code 400 (Bad Request). Note that this MD5 hash is not stored with the file. This header is associated with the request content, and not with the stored content of the file itself.",
+            "type": "string"
           },
           {
             "name": "x-ms-lease-id",
@@ -1074,8 +1094,15 @@
             "type": "string"
           },
           {
+            "name": "x-ms-content-md5",
+            "in": "header",
+            "description": "Optional and only valid for \"Flush & Set Properties\" operations.  The service stores this value and includes it in the \"Content-Md5\" response header for \"Read & Get Properties\" operations. If this property is not specified on the request, then the property will be cleared for the file. Subsequent calls to \"Read & Get Properties\" will not return this property unless it is explicitly set on that file again.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "x-ms-properties",
-            "description": "Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.  Valid only for the setProperties operation.  If the file or directory exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.",
+            "description": "Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set. Valid only for the setProperties operation. If the file or directory exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.",
             "in": "header",
             "required": false,
             "type": "string"
@@ -1378,6 +1405,10 @@
                 "description": "The content type specified for the resource. If no content type was specified, the default content type is application/octet-stream.",
                 "type": "string"
               },
+              "Content-MD5": {
+                "description": "The MD5 hash of complete file. If the file has an MD5 hash and this read operation is to read the complete file, this response header is returned so that the client can check for message content integrity.",
+                "type": "string"
+              },
               "Date": {
                 "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated.",
                 "type": "string"
@@ -1404,7 +1435,7 @@
                 "type": "string"
               },
               "x-ms-properties": {
-                "description": "The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+                "description": "The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
                 "type": "string"
               },
               "x-ms-lease-duration": {
@@ -1460,6 +1491,14 @@
                 "description": "The content type specified for the resource. If no content type was specified, the default content type is application/octet-stream.",
                 "type": "string"
               },
+              "Content-MD5": {
+                "description": "The MD5 hash of read range. If the request is to read a specified range and the \"x-ms-range-get-content-md5\" is set to true, then the request returns an MD5 hash for the range, as long as the range size is less than or equal to 4 MB.",
+                "type": "string"
+              },
+              "x-ms-content-md5": {
+                "description": "The MD5 hash of complete file stored in storage. If the file has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the complete file's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range.",
+                "type": "string"
+              },
               "Date": {
                 "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated.",
                 "type": "string"
@@ -1486,7 +1525,7 @@
                 "type": "string"
               },
               "x-ms-properties": {
-                "description": "The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+                "description": "The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
                 "type": "string"
               },
               "x-ms-lease-duration": {
@@ -1525,6 +1564,13 @@
             "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "x-ms-range-get-content-md5",
+            "in": "header",
+            "description": "Optional. When this header is set to \"true\" and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4MB in size. If this header is specified without the Range header, the service returns status code 400 (Bad Request). If this header is set to true when the range exceeds 4 MB in size, the service returns status code 400 (Bad Request).",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "If-Match",
@@ -1600,6 +1646,10 @@
                 "description": "The content type specified for the resource. If no content type was specified, the default content type is application/octet-stream.",
                 "type": "string"
               },
+              "Content-MD5": {
+                "description": "The MD5 hash of complete file stored in storage. This header is returned only for \"GetProperties\" operation. If the Content-MD5 header has been set for the file, this response header is returned for GetProperties call so that the client can check for message content integrity.",
+                "type": "string"
+              },
               "Date": {
                 "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated.",
                 "type": "string"
@@ -1626,7 +1676,7 @@
                 "type": "string"
               },
               "x-ms-properties": {
-                "description": "The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is base64 encoded.",
+                "description": "The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
                 "type": "string"
               },
               "x-ms-owner": {
@@ -1682,7 +1732,7 @@
           {
             "name": "upn",
             "in": "query",
-            "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false.",
+            "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the user identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.",
             "required": false,
             "type": "boolean"
           },
@@ -1816,7 +1866,7 @@
           "name": "filesystem",
           "in": "path",
           "description": "The filesystem identifier.",
-          "pattern": "^[a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$",
+          "pattern": "^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$",
           "minLength": 3,
           "maxLength": 63,
           "required": true,

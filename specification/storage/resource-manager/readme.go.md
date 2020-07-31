@@ -13,6 +13,9 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2019-06
+  - tag: package-2019-04
+  - tag: package-2018-11
   - tag: package-2018-07
   - tag: package-2018-03
   - tag: package-2018-02
@@ -23,6 +26,33 @@ batch:
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2019-06 and go
+
+These settings apply only when `--tag=package-2019-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2019-06' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-06-01/$(namespace)
+```
+
+### Tag: package-2019-04 and go
+
+These settings apply only when `--tag=package-2019-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2019-04' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-04-01/$(namespace)
+```
+
+### Tag: package-2018-11 and go
+
+These settings apply only when `--tag=package-2018-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-11' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-11-01/$(namespace)
 ```
 
 ### Tag: package-2018-07 and go

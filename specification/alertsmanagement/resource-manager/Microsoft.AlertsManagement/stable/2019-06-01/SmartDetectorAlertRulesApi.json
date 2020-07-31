@@ -1,0 +1,653 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Alerts Management Service Resource Provider",
+    "description": "APIs for Azure Smart Detector Alert Rules CRUD operations.",
+    "version": "2019-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.alertsManagement/smartDetectorAlertRules": {
+      "get": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_List",
+        "description": "List all the existing Smart Detector alert rules within the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandDetectorParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to list Smart Detector alert rules.",
+            "schema": {
+              "$ref": "#/definitions/AlertRulesList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Smart Detector alert rules": {
+            "$ref": "./examples/SmartDetectorAlertRule_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.alertsManagement/smartDetectorAlertRules": {
+      "get": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_ListByResourceGroup",
+        "description": "List all the existing Smart Detector alert rules within the subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandDetectorParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to list Smart Detector alert rules.",
+            "schema": {
+              "$ref": "#/definitions/AlertRulesList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List alert rules": {
+            "$ref": "./examples/SmartDetectorAlertRule_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.alertsManagement/smartDetectorAlertRules/{alertRuleName}": {
+      "get": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_Get",
+        "description": "Get a specific Smart Detector alert rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandDetectorParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get Smart Detector alert rule.",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Smart Detector alert rule": {
+            "$ref": "./examples/SmartDetectorAlertRule_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_CreateOrUpdate",
+        "description": "Create or update a Smart Detector alert rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Parameters supplied to the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to update a Smart Detector alert rule.",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          },
+          "201": {
+            "description": "Successful request to create a Smart Detector alert rule.",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Smart Detector alert rule": {
+            "$ref": "./examples/SmartDetectorAlertRule_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_Patch",
+        "description": "Patch a specific Smart Detector alert rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Parameters supplied to the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRulePatchObject"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to patch Smart Detector alert rule.",
+            "schema": {
+              "$ref": "#/definitions/AlertRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch alert rules": {
+            "$ref": "./examples/SmartDetectorAlertRule_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SmartDetectorAlertRules"
+        ],
+        "operationId": "SmartDetectorAlertRules_Delete",
+        "description": "Delete an existing Smart Detector alert rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to delete a Smart Detector alert rule."
+          },
+          "204": {
+            "description": "The Smart Detector alert rule does not exist. It may have already been deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Smart Detector alert rule": {
+            "$ref": "./examples/SmartDetectorAlertRule_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SmartDetectorErrorResponse": {
+      "description": "Describe the format of an Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ActionGroupsInformation": {
+      "properties": {
+        "customEmailSubject": {
+          "description": "An optional custom email subject to use in email notifications.",
+          "type": "string"
+        },
+        "customWebhookPayload": {
+          "description": "An optional custom web-hook payload to use in web-hook notifications.",
+          "type": "string"
+        },
+        "groupIds": {
+          "description": "The Action Group resource IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "groupIds"
+      ],
+      "description": "The Action Groups information, used by the alert rule."
+    },
+    "ThrottlingInformation": {
+      "properties": {
+        "duration": {
+          "description": "The required duration (in ISO8601 format) to wait before notifying on the alert rule again. The time granularity must be in minutes and minimum value is 0 minutes",
+          "type": "string",
+          "format": "duration"
+        }
+      },
+      "description": "Optional throttling information for the alert rule."
+    },
+    "AzureResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "default": "global"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "An Azure resource object"
+    },
+    "AlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRuleProperties",
+          "description": "The properties of the alert rule."
+        }
+      },
+      "description": "The alert rule information"
+    },
+    "AlertRulesList": {
+      "description": "List of Smart Detector alert rules.",
+      "properties": {
+        "value": {
+          "description": "List of Smart Detector alert rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "AlertRulePatchObject": {
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource name."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRulePatchProperties",
+          "description": "The properties of the alert rule.",
+          "minProperties": 1
+        }
+      },
+      "description": "The alert rule patch information"
+    },
+    "Detector": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The detector id."
+        },
+        "parameters": {
+          "description": "The detector's parameters.'",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "name": {
+          "description": "The Smart Detector name. By default this is not populated, unless it's specified in expandDetector",
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "The Smart Detector description. By default this is not populated, unless it's specified in expandDetector"
+        },
+        "supportedResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Smart Detector supported resource types. By default this is not populated, unless it's specified in expandDetector"
+        },
+        "imagePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Smart Detector image path. By default this is not populated, unless it's specified in expandDetector"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The detector information. By default this is not populated, unless it's specified in expandDetector"
+    },
+    "AlertRuleProperties": {
+      "properties": {
+        "description": {
+          "description": "The alert rule description.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The alert rule state.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertRuleState",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "The alert rule severity.",
+          "type": "string",
+          "enum": [
+            "Sev0",
+            "Sev1",
+            "Sev2",
+            "Sev3",
+            "Sev4"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "frequency": {
+          "description": "The alert rule frequency in ISO8601 format. The time granularity must be in minutes and minimum value is 5 minutes.",
+          "type": "string",
+          "format": "duration"
+        },
+        "detector": {
+          "description": "The alert rule's detector.",
+          "$ref": "#/definitions/Detector"
+        },
+        "scope": {
+          "description": "The alert rule resources scope.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actionGroups": {
+          "description": "The alert rule actions.",
+          "$ref": "#/definitions/ActionGroupsInformation"
+        },
+        "throttling": {
+          "description": "The alert rule throttling information.",
+          "$ref": "#/definitions/ThrottlingInformation"
+        }
+      },
+      "required": [
+        "state",
+        "severity",
+        "frequency",
+        "detector",
+        "scope",
+        "actionGroups"
+      ],
+      "description": "The alert rule properties."
+    },
+    "AlertRulePatchProperties": {
+      "properties": {
+        "description": {
+          "description": "The alert rule description.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The alert rule state.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlertRuleState",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "The alert rule severity.",
+          "type": "string",
+          "enum": [
+            "Sev0",
+            "Sev1",
+            "Sev2",
+            "Sev3",
+            "Sev4"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "frequency": {
+          "description": "The alert rule frequency in ISO8601 format. The time granularity must be in minutes and minimum value is 5 minutes.",
+          "type": "string",
+          "format": "duration"
+        },
+        "actionGroups": {
+          "description": "The alert rule actions.",
+          "$ref": "#/definitions/ActionGroupsInformation"
+        },
+        "throttling": {
+          "description": "The alert rule throttling information.",
+          "$ref": "#/definitions/ThrottlingInformation"
+        }
+      },
+      "description": "The alert rule properties."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertRuleNameParameter": {
+      "name": "alertRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the alert rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ExpandDetectorParameter": {
+      "name": "expandDetector",
+      "in": "query",
+      "type": "boolean",
+      "description": "Indicates if Smart Detector should be expanded.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

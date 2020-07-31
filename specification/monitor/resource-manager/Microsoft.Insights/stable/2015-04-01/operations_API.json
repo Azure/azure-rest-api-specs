@@ -36,35 +36,37 @@
     }
   },
   "paths": {
-      "/providers/microsoft.insights/operations": {
-        "get": {
-          "tags": [
-            "Operations"
-          ],
-          "description": "Lists all of the available operations from Microsoft.Insights provider.",
-          "operationId": "Operations_List",
-          "x-ms-examples": {
-            "Get a list of operations for a resource provider": { 
-              "$ref": "./examples/OperationList.json" 
-            }
-          },
-          "parameters": [{
+    "/providers/microsoft.insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available operations from Microsoft.Insights provider.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get a list of operations for a resource provider": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "parameters": [
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/OperationListResult"
-              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         }
       }
+    }
   },
   "definitions": {
     "OperationListResult": {
-     "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",

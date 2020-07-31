@@ -5,9 +5,20 @@ package-name: azure_mgmt_managed_applications
 package-version: "0.16.0"
 azure-arm: true
 batch:
+  - tag: package-managedapplications-2019-07
   - tag: package-managedapplications-2018-06
   - tag: package-managedapplications-2017-09
   - tag: package-managedapplications-2016-09
+```
+
+### Tag: package-managedapplications-2019-07 and ruby
+
+These settings apply only when `--tag=package-managedapplications-2019-07 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07' && $(ruby)
+namespace: "Azure::ManagedApplications::Mgmt::V2019_07_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_managed_applications/lib
 ```
 
 ### Tag: package-managedapplications-2018-06 and ruby
@@ -47,8 +58,30 @@ package-name: azure_mgmt_subscriptions
 package-version: "0.16.0"
 azure-arm: true
 batch:
+  - tag: package-subscriptions-2019-06
+  - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - tag: package-subscriptions-2015-11
+```
+
+### Tag: package-subscriptions-2019-06 and ruby
+
+These settings apply only when `--tag=package-subscriptions-2019-06 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06' && $(ruby)
+namespace: "Azure::Subscriptions::Mgmt::V2019_06_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_subscriptions/lib
+```
+
+### Tag: package-subscriptions-2018-06 and ruby
+
+These settings apply only when `--tag=package-subscriptions-2018-06 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2018-06' && $(ruby)
+namespace: "Azure::Subscriptions::Mgmt::V2018_06_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_subscriptions/lib
 ```
 
 ### Tag: package-subscriptions-2016-06 and ruby
@@ -202,10 +235,21 @@ package-name: azure_mgmt_resources
 package-version: "0.16.0"
 azure-arm: true
 batch:
+  - tag: package-resources-2019-03
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-07
   - tag: package-resources-2016-02
+```
+
+### Tag: package-resources-2019-03 and ruby
+
+These settings apply only when `--tag=package-resources-2019-03 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-03' && $(ruby)
+namespace: "Azure::Resources::Mgmt::V2019_03_10"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_resources/lib
 ```
 
 ### Tag: package-resources-2017-05 and ruby

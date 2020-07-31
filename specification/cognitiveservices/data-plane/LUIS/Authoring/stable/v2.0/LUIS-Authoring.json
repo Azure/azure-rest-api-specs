@@ -28,7 +28,7 @@
   "paths": {
     "/apps/{appId}/versions/{versionId}/patterns": {
       "post": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Creates a new pattern feature.",
+        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Creates a new pattern feature in a version of the application.",
         "operationId": "Features_CreatePatternFeature",
         "deprecated": true,
         "parameters": [
@@ -76,7 +76,7 @@
       },
       "get": {
         "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets all the pattern features.",
-        "operationId": "Features_GetApplicationVersionPatternFeatures",
+        "operationId": "Features_ListApplicationVersionPatternFeatures",
         "deprecated": true,
         "parameters": [
           {
@@ -118,7 +118,7 @@
     },
     "/apps/{appId}/versions/{versionId}/phraselists": {
       "post": {
-        "description": "Creates a new phraselist feature.",
+        "description": "Creates a new phraselist feature in a version of the application.",
         "operationId": "Features_AddPhraseList",
         "parameters": [
           {
@@ -164,7 +164,7 @@
         }
       },
       "get": {
-        "description": "Gets all the phraselist features.",
+        "description": "Gets all the phraselist features in a version of the application.",
         "operationId": "Features_ListPhraseLists",
         "parameters": [
           {
@@ -206,7 +206,7 @@
     },
     "/apps/{appId}/versions/{versionId}/features": {
       "get": {
-        "description": "Gets all the extraction features for the specified application version.",
+        "description": "Gets all the extraction phraselist and pattern features in a version of the application.",
         "operationId": "Features_List",
         "parameters": [
           {
@@ -248,7 +248,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patterns/{patternId}": {
       "get": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets the specified pattern feature's info.",
+        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets the specified pattern feature's info in a version of the application.",
         "operationId": "Features_GetPatternFeatureInfo",
         "deprecated": true,
         "parameters": [
@@ -290,7 +290,7 @@
         }
       },
       "put": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Updates the pattern, the name and the state of the pattern feature.",
+        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Updates the pattern, the name and the state of the pattern feature in a version of the application.",
         "operationId": "Features_UpdatePatternFeature",
         "deprecated": true,
         "parameters": [
@@ -344,7 +344,7 @@
         }
       },
       "delete": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Deletes a pattern feature.",
+        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Deletes a pattern feature in a version of the application.",
         "operationId": "Features_DeletePatternFeature",
         "deprecated": true,
         "parameters": [
@@ -388,7 +388,7 @@
     },
     "/apps/{appId}/versions/{versionId}/phraselists/{phraselistId}": {
       "get": {
-        "description": "Gets phraselist feature info.",
+        "description": "Gets phraselist feature info in a version of the application.",
         "operationId": "Features_GetPhraseList",
         "parameters": [
           {
@@ -429,7 +429,7 @@
         }
       },
       "put": {
-        "description": "Updates the phrases, the state and the name of the phraselist feature.",
+        "description": "Updates the phrases, the state and the name of the phraselist feature in a version of the application.",
         "operationId": "Features_UpdatePhraseList",
         "parameters": [
           {
@@ -481,7 +481,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a phraselist feature.",
+        "description": "Deletes a phraselist feature from a version of the application.",
         "operationId": "Features_DeletePhraseList",
         "parameters": [
           {
@@ -524,7 +524,7 @@
     },
     "/apps/{appId}/versions/{versionId}/example": {
       "post": {
-        "description": "Adds a labeled example to the application.",
+        "description": "Adds a labeled example utterance in a version of the application.",
         "operationId": "Examples_Add",
         "parameters": [
           {
@@ -540,7 +540,7 @@
             "schema": {
               "$ref": "#/definitions/ExampleLabelObject"
             },
-            "description": "An example label with the expected intent and entities."
+            "description": "A labeled example utterance with the expected intent and entities."
           }
         ],
         "consumes": [
@@ -548,7 +548,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The ID of the created example.",
+            "description": "The ID of the created example utterance.",
             "schema": {
               "$ref": "#/definitions/LabelExampleResponse"
             }
@@ -572,7 +572,7 @@
     },
     "/apps/{appId}/versions/{versionId}/examples": {
       "post": {
-        "description": "Adds a batch of labeled examples to the application.",
+        "description": "Adds a batch of labeled example utterances to a version of the application.",
         "operationId": "Examples_Batch",
         "parameters": [
           {
@@ -588,7 +588,7 @@
             "schema": {
               "$ref": "#/definitions/ExampleLabelObjectArray"
             },
-            "description": "Array of examples."
+            "description": "Array of example utterances."
           }
         ],
         "consumes": [
@@ -596,13 +596,13 @@
         ],
         "responses": {
           "201": {
-            "description": "A string array determining which labels were added successfully.",
+            "description": "A string array determining which labeled example utterances were added successfully.",
             "schema": {
               "$ref": "#/definitions/BatchLabelExampleResponse"
             }
           },
           "207": {
-            "description": "Indicates that the request was partially successful. The response contains a string array indicating the status of each of the added labels.",
+            "description": "Indicates that the request was partially successful. The response contains a string array indicating the status of each of the added labeled example utterances.",
             "schema": {
               "$ref": "#/definitions/BatchLabelExampleResponse"
             }
@@ -624,7 +624,7 @@
         }
       },
       "get": {
-        "description": "Returns examples to be reviewed.",
+        "description": "Returns example utterances to be reviewed from a version of the application.",
         "operationId": "Examples_List",
         "parameters": [
           {
@@ -642,7 +642,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of predictions and label pairs for every example in the application.",
+            "description": "A list of predictions and label pairs for every example utterance in the application.",
             "schema": {
               "$ref": "#/definitions/LabeledUtterances"
             }
@@ -666,7 +666,7 @@
     },
     "/apps/{appId}/versions/{versionId}/examples/{exampleId}": {
       "delete": {
-        "description": "Deletes the labeled example with the specified ID.",
+        "description": "Deletes the labeled example utterances with the specified ID from a version of the application.",
         "operationId": "Examples_Delete",
         "parameters": [
           {
@@ -685,7 +685,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted example label.",
+            "description": "Successfully deleted example utterance.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -709,7 +709,7 @@
     },
     "/apps/{appId}/versions/{versionId}/intents": {
       "post": {
-        "description": "Adds an intent classifier to the application.",
+        "description": "Adds an intent to a version of the application.",
         "operationId": "Model_AddIntent",
         "parameters": [
           {
@@ -725,7 +725,7 @@
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
-            "description": "A model object containing the name of the new intent classifier."
+            "description": "A model object containing the name of the new intent."
           }
         ],
         "consumes": [
@@ -733,10 +733,16 @@
         ],
         "responses": {
           "201": {
-            "description": "The ID of the created model.",
+            "description": "The ID of the created intent model.",
             "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -750,7 +756,7 @@
         }
       },
       "get": {
-        "description": "Gets information about the intent models.",
+        "description": "Gets information about the intent models in a version of the application.",
         "operationId": "Model_ListIntents",
         "parameters": [
           {
@@ -792,7 +798,7 @@
     },
     "/apps/{appId}/versions/{versionId}/entities": {
       "post": {
-        "description": "Adds an entity extractor to the application.",
+        "description": "Adds a simple entity extractor to a version of the application.",
         "operationId": "Model_AddEntity",
         "parameters": [
           {
@@ -808,7 +814,7 @@
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
-            "description": "A model object containing the name for the new entity extractor."
+            "description": "A model object containing the name for the new simple entity extractor."
           }
         ],
         "consumes": [
@@ -839,7 +845,7 @@
         }
       },
       "get": {
-        "description": "Gets information about the entity models.",
+        "description": "Gets information about all the simple entity models in a version of the application.",
         "operationId": "Model_ListEntities",
         "parameters": [
           {
@@ -881,7 +887,7 @@
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities": {
       "post": {
-        "description": "Adds a hierarchical entity extractor to the application version.",
+        "description": "Adds a hierarchical entity extractor to a version of the application.",
         "operationId": "Model_AddHierarchicalEntity",
         "parameters": [
           {
@@ -928,7 +934,7 @@
         }
       },
       "get": {
-        "description": "Gets information about the hierarchical entity models.",
+        "description": "Gets information about all the hierarchical entity models in a version of the application.",
         "operationId": "Model_ListHierarchicalEntities",
         "parameters": [
           {
@@ -970,7 +976,7 @@
     },
     "/apps/{appId}/versions/{versionId}/compositeentities": {
       "post": {
-        "description": "Adds a composite entity extractor to the application.",
+        "description": "Adds a composite entity extractor to a version of the application.",
         "operationId": "Model_AddCompositeEntity",
         "parameters": [
           {
@@ -1017,7 +1023,7 @@
         }
       },
       "get": {
-        "description": "Gets information about the composite entity models.",
+        "description": "Gets information about all the composite entity models in a version of the application.",
         "operationId": "Model_ListCompositeEntities",
         "parameters": [
           {
@@ -1059,7 +1065,7 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists": {
       "get": {
-        "description": "Gets information about the closedlist models.",
+        "description": "Gets information about all the list entity models in a version of the application.",
         "operationId": "Model_ListClosedLists",
         "parameters": [
           {
@@ -1077,7 +1083,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of closedlist entity model infos.",
+            "description": "A list of list entity model infos.",
             "schema": {
               "$ref": "#/definitions/ClosedListEntityExtractorsList"
             }
@@ -1099,7 +1105,7 @@
         }
       },
       "post": {
-        "description": "Adds a closed list model to the application.",
+        "description": "Adds a list entity model to a version of the application.",
         "operationId": "Model_AddClosedList",
         "parameters": [
           {
@@ -1115,7 +1121,7 @@
             "schema": {
               "$ref": "#/definitions/ClosedListModelCreateObject"
             },
-            "description": "A model containing the name and words for the new closed list entity extractor."
+            "description": "A model containing the name and words for the new list entity extractor."
           }
         ],
         "consumes": [
@@ -1148,7 +1154,7 @@
     },
     "/apps/{appId}/versions/{versionId}/prebuilts": {
       "post": {
-        "description": "Adds a list of prebuilt entity extractors to the application.",
+        "description": "Adds a list of prebuilt entities to a version of the application.",
         "operationId": "Model_AddPrebuilt",
         "parameters": [
           {
@@ -1194,7 +1200,7 @@
         }
       },
       "get": {
-        "description": "Gets information about the prebuilt entity models.",
+        "description": "Gets information about all the prebuilt entities in a version of the application.",
         "operationId": "Model_ListPrebuilts",
         "parameters": [
           {
@@ -1236,7 +1242,7 @@
     },
     "/apps/{appId}/versions/{versionId}/listprebuilts": {
       "get": {
-        "description": "Gets all the available prebuilt entity extractors for the application.",
+        "description": "Gets all the available prebuilt entities in a version of the application.",
         "operationId": "Model_ListPrebuiltEntities",
         "parameters": [
           {
@@ -1272,7 +1278,7 @@
     },
     "/apps/{appId}/versions/{versionId}/models": {
       "get": {
-        "description": "Gets information about the application version models.",
+        "description": "Gets information about all the intent and entity models in a version of the application.",
         "operationId": "Model_ListModels",
         "parameters": [
           {
@@ -1313,58 +1319,58 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/models/{modelId}/examples": {
-     "get": {
-       "description": "Gets the utterances for the given model in the given app version.",
-       "operationId": "Model_Examples",
-       "parameters": [
-         {
-           "$ref": "#/parameters/AppIdInPath"
-         },
-         {
-           "$ref": "#/parameters/VersionIdInPath"
-         },
-         {
+      "get": {
+        "description": "Gets the example utterances for the given intent or entity model in a version of the application.",
+        "operationId": "Model_Examples",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The ID (GUID) of the model.",
             "x-ms-parameter-location": "method"
-           },
-         {
-           "$ref": "#/parameters/SkipInPath"
-         },
-         {
-           "$ref": "#/parameters/TakeInPath"
-         }
-       ],
-       "responses": {
-         "200": {
-           "description": "A list of examples for the model.",
-           "schema": {
-             "$ref": "#/definitions/ExamplesPerModelResponseObject"
-           }
-         },
-         "default": {
-           "description": "Error Response.",
-           "schema": {
-             "$ref": "#/definitions/ErrorResponse"
-           }
-         }
-       },
-       "produces": [
-         "application/json"
-       ],
-       "x-ms-examples": {
-         "Successful Get Examples Per Model Request": {
-           "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
-         }
-       }
-     }
-   },
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of example utterances for the model.",
+            "schema": {
+              "$ref": "#/definitions/ExamplesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Examples Per Model Request": {
+            "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
       "get": {
-        "description": "Gets information about the intent model.",
+        "description": "Gets information about the intent model in a version of the application.",
         "operationId": "Model_GetIntent",
         "parameters": [
           {
@@ -1401,7 +1407,7 @@
         }
       },
       "put": {
-        "description": "Updates the name of an intent classifier.",
+        "description": "Updates the name of an intent in a version of the application.",
         "operationId": "Model_UpdateIntent",
         "parameters": [
           {
@@ -1420,7 +1426,7 @@
             "schema": {
               "$ref": "#/definitions/ModelUpdateObject"
             },
-            "description": "A model object containing the new intent classifier name."
+            "description": "A model object containing the new intent name."
           }
         ],
         "consumes": [
@@ -1450,7 +1456,7 @@
         }
       },
       "delete": {
-        "description": "Deletes an intent classifier from the application.",
+        "description": "Deletes an intent from a version of the application.",
         "operationId": "Model_DeleteIntent",
         "parameters": [
           {
@@ -1466,7 +1472,7 @@
             "name": "deleteUtterances",
             "in": "query",
             "type": "boolean",
-            "description": "Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value).",
+            "description": "If true, deletes the intent's example utterances. If false, moves the example utterances to the None intent. The default value is false.",
             "default": false
           }
         ],
@@ -1496,7 +1502,7 @@
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}": {
       "get": {
-        "description": "Gets information about the entity model.",
+        "description": "Gets information about an entity model in a version of the application.",
         "operationId": "Model_GetEntity",
         "parameters": [
           {
@@ -1538,7 +1544,7 @@
         }
       },
       "put": {
-        "description": "Updates the name of an entity extractor.",
+        "description": "Updates the name of an entity in a version of the application.",
         "operationId": "Model_UpdateEntity",
         "parameters": [
           {
@@ -1592,7 +1598,7 @@
         }
       },
       "delete": {
-        "description": "Deletes an entity extractor from the application.",
+        "description": "Deletes an entity from a version of the application.",
         "operationId": "Model_DeleteEntity",
         "parameters": [
           {
@@ -1636,7 +1642,7 @@
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}": {
       "get": {
-        "description": "Gets information about the hierarchical entity model.",
+        "description": "Gets information about a hierarchical entity in a version of the application.",
         "operationId": "Model_GetHierarchicalEntity",
         "parameters": [
           {
@@ -1673,7 +1679,7 @@
         }
       },
       "put": {
-        "description": "Updates the name and children of a hierarchical entity model.",
+        "description": "Updates the name and children of a hierarchical entity model in a version of the application.",
         "operationId": "Model_UpdateHierarchicalEntity",
         "parameters": [
           {
@@ -1722,7 +1728,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a hierarchical entity extractor from the application version.",
+        "description": "Deletes a hierarchical entity from a version of the application.",
         "operationId": "Model_DeleteHierarchicalEntity",
         "parameters": [
           {
@@ -1761,7 +1767,7 @@
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}": {
       "get": {
-        "description": "Gets information about the composite entity model.",
+        "description": "Gets information about a composite entity in a version of the application.",
         "operationId": "Model_GetCompositeEntity",
         "parameters": [
           {
@@ -1798,7 +1804,7 @@
         }
       },
       "put": {
-        "description": "Updates the composite entity extractor.",
+        "description": "Updates a composite entity in a version of the application.",
         "operationId": "Model_UpdateCompositeEntity",
         "parameters": [
           {
@@ -1847,7 +1853,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a composite entity extractor from the application.",
+        "description": "Deletes a composite entity from a version of the application.",
         "operationId": "Model_DeleteCompositeEntity",
         "parameters": [
           {
@@ -1886,7 +1892,7 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}": {
       "get": {
-        "description": "Gets information of a closed list model.",
+        "description": "Gets information about a list entity in a version of the application.",
         "operationId": "Model_GetClosedList",
         "parameters": [
           {
@@ -1898,7 +1904,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list model ID.",
+            "description": "The list model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1906,7 +1912,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The closed list model info.",
+            "description": "The list model info.",
             "schema": {
               "$ref": "#/definitions/ClosedListEntityExtractor"
             }
@@ -1928,7 +1934,7 @@
         }
       },
       "put": {
-        "description": "Updates the closed list model.",
+        "description": "Updates the list entity in a version of the application.",
         "operationId": "Model_UpdateClosedList",
         "parameters": [
           {
@@ -1940,7 +1946,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list model ID.",
+            "description": "The list model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1952,7 +1958,7 @@
             "schema": {
               "$ref": "#/definitions/ClosedListModelUpdateObject"
             },
-            "description": "The new entity name and words list."
+            "description": "The new list entity name and words list."
           }
         ],
         "consumes": [
@@ -1960,7 +1966,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated Closed List name and words list.",
+            "description": "Successfully updated list entity name and words list.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -1982,7 +1988,7 @@
         }
       },
       "patch": {
-        "description": "Adds a batch of sublists to an existing closedlist.",
+        "description": "Adds a batch of sublists to an existing list entity in a version of the application.",
         "operationId": "Model_PatchClosedList",
         "parameters": [
           {
@@ -1994,7 +2000,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list model ID.",
+            "description": "The list entity model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2014,7 +2020,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully added sublists to Closed List.",
+            "description": "Successfully added sublists to the list entity.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -2036,7 +2042,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a closed list model from the application.",
+        "description": "Deletes a list entity model from a version of the application.",
         "operationId": "Model_DeleteClosedList",
         "parameters": [
           {
@@ -2048,7 +2054,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list model ID.",
+            "description": "The list entity model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2056,7 +2062,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully delete Closed List from application.",
+            "description": "Successfully delete list entity from a version of application.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -2080,7 +2086,7 @@
     },
     "/apps/{appId}/versions/{versionId}/prebuilts/{prebuiltId}": {
       "get": {
-        "description": "Gets information about the prebuilt entity model.",
+        "description": "Gets information about a prebuilt entity model in a version of the application.",
         "operationId": "Model_GetPrebuilt",
         "parameters": [
           {
@@ -2122,7 +2128,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a prebuilt entity extractor from the application.",
+        "description": "Deletes a prebuilt entity extractor from a version of the application.",
         "operationId": "Model_DeletePrebuilt",
         "parameters": [
           {
@@ -2166,7 +2172,7 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists/{subListId}": {
       "delete": {
-        "description": "Deletes a sublist of a specific closed list model.",
+        "description": "Deletes a sublist of a specific list entity model from a version of the application.",
         "operationId": "Model_DeleteSubList",
         "parameters": [
           {
@@ -2178,7 +2184,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list entity extractor ID.",
+            "description": "The list entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2188,7 +2194,8 @@
             "in": "path",
             "description": "The sublist ID.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -2215,7 +2222,7 @@
         }
       },
       "put": {
-        "description": "Updates one of the closed list's sublists.",
+        "description": "Updates one of the list entity's sublists in a version of the application.",
         "operationId": "Model_UpdateSubList",
         "parameters": [
           {
@@ -2227,7 +2234,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list entity extractor ID.",
+            "description": "The list entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2237,7 +2244,8 @@
             "in": "path",
             "description": "The sublist ID.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "name": "wordListBaseUpdateObject",
@@ -2278,8 +2286,8 @@
     },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}/suggest": {
       "get": {
-        "description": "Suggests examples that would improve the accuracy of the intent model.",
-        "operationId": "Model_GetIntentSuggestions",
+        "description": "Suggests example utterances that would improve the accuracy of the intent model in a version of the application.",
+        "operationId": "Model_ListIntentSuggestions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -2296,7 +2304,7 @@
         ],
         "responses": {
           "200": {
-            "description": "If there's no trained model, nothing is returned in the response. If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions. If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
+            "description": "If there's no trained intent model, nothing is returned in the response. If there's a trained model and active learning finds any relevant queries, they are returned with the intent model predictions. If there's a trained model but active learning didn't find any relevant queries, an empty list is returned in the response.",
             "schema": {
               "$ref": "#/definitions/IntentsSuggestionExamples"
             }
@@ -2320,8 +2328,8 @@
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest": {
       "get": {
-        "description": "Get suggestion examples that would improve the accuracy of the entity model.",
-        "operationId": "Model_GetEntitySuggestions",
+        "description": "Get suggested example utterances that would improve the accuracy of the entity model in a version of the application.",
+        "operationId": "Model_ListEntitySuggestions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -2343,7 +2351,7 @@
         ],
         "responses": {
           "200": {
-            "description": "If there's no trained model, nothing is returned in the response. If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions. If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
+            "description": "If there's no trained entity model, nothing is returned in the response. If there's a trained model and active learning finds any relevant queries, they are returned with the entity model predictions. If there's a trained model but active learning didn't find any relevant queries, an empty list is returned in the response.",
             "schema": {
               "$ref": "#/definitions/EntitiesSuggestionExamples"
             }
@@ -2377,7 +2385,7 @@
             "schema": {
               "$ref": "#/definitions/ApplicationCreateObject"
             },
-            "description": "A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is 0.1. Note: the culture cannot be changed after the app is created."
+            "description": "An application containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is \"0.1\". Note: the culture cannot be changed after the app is created."
           }
         ],
         "consumes": [
@@ -2408,7 +2416,7 @@
         }
       },
       "get": {
-        "description": "Lists all of the user applications.",
+        "description": "Lists all of the user's applications.",
         "operationId": "Apps_List",
         "parameters": [
           {
@@ -2444,13 +2452,13 @@
     },
     "/apps/import": {
       "post": {
-        "description": "Imports an application to LUIS, the application's structure should be included in the request body.",
+        "description": "Imports an application to LUIS, the application's structure is included in the request body.",
         "operationId": "Apps_Import",
         "parameters": [
           {
             "name": "appName",
             "in": "query",
-            "description": "The application name to create. If not specified, the application name will be read from the imported object.",
+            "description": "The application name to create. If not specified, the application name will be read from the imported object. If the application name already exists, an error is returned.",
             "type": "string"
           },
           {
@@ -2577,7 +2585,7 @@
     },
     "/apps/cultures": {
       "get": {
-        "description": "Gets the supported application cultures.",
+        "description": "Gets a list of supported cultures. Cultures are equivalent to the written language and locale. For example,\"en-us\" represents the U.S. variation of English.",
         "operationId": "Apps_ListSupportedCultures",
         "responses": {
           "200": {
@@ -2605,7 +2613,7 @@
     },
     "/apps/{appId}/querylogs": {
       "get": {
-        "description": "Gets the query logs of the past month for the application.",
+        "description": "Gets the logs of the past month's endpoint queries for the application.",
         "operationId": "Apps_DownloadQueryLogs",
         "parameters": [
           {
@@ -2750,7 +2758,7 @@
     },
     "/apps/{appId}/versions/{versionId}/clone": {
       "post": {
-        "description": "Creates a new version using the current snapshot of the selected application version.",
+        "description": "Creates a new version from the selected version.",
         "operationId": "Versions_Clone",
         "parameters": [
           {
@@ -2762,6 +2770,7 @@
           {
             "name": "versionCloneObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
@@ -2773,7 +2782,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The version ID of the created task.",
+            "description": "The new version ID.",
             "schema": {
               "type": "string"
             }
@@ -2848,7 +2857,7 @@
     },
     "/apps/{appId}/versions": {
       "get": {
-        "description": "Gets the application versions info.",
+        "description": "Gets a list of versions for this application ID.",
         "operationId": "Versions_List",
         "parameters": [
           {
@@ -2890,7 +2899,7 @@
     },
     "/apps/{appId}/versions/{versionId}/": {
       "get": {
-        "description": "Gets the version info.",
+        "description": "Gets the version information such as date created, last modified date, endpoint URL, count of intents and entities, training and publishing status.",
         "operationId": "Versions_Get",
         "parameters": [
           {
@@ -3088,7 +3097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The \"modelId\" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: \"statusId\": An integer from 0 to 3 that corresponds to the value of the status field. \"status\": A string with one of the following values: \"Success\", \"UpToDate\", \"InProgress\", \"Fail\". If the status is \"Fail\", the \"failureReason\" property provides the reason for failure. \"exampleCount\": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. \"failureReason\": A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled examples were provided for training. \"trainingDateTime\": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (\"Z\"), for example: \"2017-08-10T01:08:34Z\".",
+            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The \"modelId\" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: \"statusId\": An integer from 0 to 3 that corresponds to the value of the status field. \"status\": A string with one of the following values: \"Success\", \"UpToDate\", \"InProgress\", \"Fail\". If the status is \"Fail\", the \"failureReason\" property provides the reason for failure. \"exampleCount\": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. \"failureReason\": A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled example utterances were provided for training. \"trainingDateTime\": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (\"Z\"), for example: \"2017-08-10T01:08:34Z\".",
             "schema": {
               "$ref": "#/definitions/ModelTrainingInfoList"
             }
@@ -3164,7 +3173,7 @@
     },
     "/apps/{appId}/settings": {
       "get": {
-        "description": "Get the application settings.",
+        "description": "Get the application settings including 'UseAllTrainingData'.",
         "operationId": "Apps_GetSettings",
         "parameters": [
           {
@@ -3195,7 +3204,7 @@
         }
       },
       "put": {
-        "description": "Updates the application settings.",
+        "description": "Updates the application settings including 'UseAllTrainingData'.",
         "operationId": "Apps_UpdateSettings",
         "parameters": [
           {
@@ -3240,7 +3249,7 @@
     },
     "/apps/{appId}/publishsettings": {
       "get": {
-        "description": "Get the application publish settings.",
+        "description": "Get the application publish settings including 'UseAllTrainingData'.",
         "operationId": "Apps_GetPublishSettings",
         "parameters": [
           {
@@ -3271,7 +3280,7 @@
         }
       },
       "put": {
-        "description": "Updates the application publish settings.",
+        "description": "Updates the application publish settings including 'UseAllTrainingData'.",
         "operationId": "Apps_UpdatePublishSettings",
         "parameters": [
           {
@@ -3316,7 +3325,7 @@
     },
     "/apps/{appId}/versions/{versionId}/suggest": {
       "delete": {
-        "description": "Deleted an unlabelled utterance.",
+        "description": "Deleted an unlabelled utterance in a version of the application.",
         "operationId": "Versions_DeleteUnlabelledUtterance",
         "parameters": [
           {
@@ -3481,7 +3490,7 @@
         }
       },
       "put": {
-        "description": "Replaces the current users access list with the one sent in the body. If an empty list is sent, all access to other users will be removed.",
+        "description": "Replaces the current user access list with the new list sent in the body. If an empty list is sent, all access to other users will be removed.",
         "operationId": "Permissions_Update",
         "parameters": [
           {
@@ -3494,7 +3503,7 @@
             "schema": {
               "$ref": "#/definitions/CollaboratorsArray"
             },
-            "description": "A model containing a list of user's email addresses."
+            "description": "A model containing a list of user email addresses."
           }
         ],
         "consumes": [
@@ -3559,7 +3568,7 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists": {
       "post": {
-        "description": "Adds a list to an existing closed list.",
+        "description": "Adds a sublist to an existing list entity in a version of the application.",
         "operationId": "Model_AddSubList",
         "parameters": [
           {
@@ -3571,7 +3580,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "The closed list entity extractor ID.",
+            "description": "The list entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3591,9 +3600,10 @@
         ],
         "responses": {
           "201": {
-            "description": "The ID of the newly created list.",
+            "description": "The ID of the newly created sublist.",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64"
             }
           },
           "default": {
@@ -3615,7 +3625,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltdomains": {
       "post": {
-        "description": "Adds a customizable prebuilt domain along with all of its models to this application.",
+        "description": "Adds a customizable prebuilt domain along with all of its intent and entity models in a version of the application.",
         "operationId": "Model_AddCustomPrebuiltDomain",
         "parameters": [
           {
@@ -3639,7 +3649,7 @@
         ],
         "responses": {
           "201": {
-            "description": "An array of the created custom prebuilt domain model Ids.",
+            "description": "An array of the created customizable prebuilt domain intent and entity model Ids.",
             "schema": {
               "$ref": "#/definitions/GuidList"
             }
@@ -3663,7 +3673,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltintents": {
       "post": {
-        "description": "Adds a custom prebuilt intent model to the application.",
+        "description": "Adds a customizable prebuilt intent model to a version of the application.",
         "operationId": "Model_AddCustomPrebuiltIntent",
         "parameters": [
           {
@@ -3679,7 +3689,7 @@
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
-            "description": "A model object containing the name of the custom prebuilt intent and the name of the domain to which this model belongs."
+            "description": "A model object containing the name of the customizable prebuilt intent and the name of the domain to which this model belongs."
           }
         ],
         "consumes": [
@@ -3687,7 +3697,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The ID of the created model.",
+            "description": "The ID of the created intent model.",
             "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
@@ -3710,7 +3720,7 @@
         }
       },
       "get": {
-        "description": "Gets custom prebuilt intents information of this application.",
+        "description": "Gets information about customizable prebuilt intents added to a version of the application.",
         "operationId": "Model_ListCustomPrebuiltIntents",
         "parameters": [
           {
@@ -3722,7 +3732,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of all custom prebuilt intents and their representations.",
+            "description": "Returns a list of all customizable prebuilt intents and their representations in a version of the application.",
             "schema": {
               "$ref": "#/definitions/IntentClassifiersList"
             }
@@ -3746,7 +3756,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltentities": {
       "post": {
-        "description": "Adds a custom prebuilt entity model to the application.",
+        "description": "Adds a prebuilt entity model to a version of the application.",
         "operationId": "Model_AddCustomPrebuiltEntity",
         "parameters": [
           {
@@ -3762,7 +3772,7 @@
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
-            "description": "A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs."
+            "description": "A model object containing the name of the prebuilt entity and the name of the domain to which this model belongs."
           }
         ],
         "consumes": [
@@ -3770,7 +3780,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The ID of the created model.",
+            "description": "The ID of the created prebuilt model.",
             "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
@@ -3793,7 +3803,7 @@
         }
       },
       "get": {
-        "description": "Gets all custom prebuilt entities information of this application.",
+        "description": "Gets all prebuilt entities used in a version of the application.",
         "operationId": "Model_ListCustomPrebuiltEntities",
         "parameters": [
           {
@@ -3805,7 +3815,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of all custom prebuilt entities and their representations.",
+            "description": "Returns a list of all prebuilt entities and their representations.",
             "schema": {
               "$ref": "#/definitions/EntityExtractorsList"
             }
@@ -3829,7 +3839,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltmodels": {
       "get": {
-        "description": "Gets all custom prebuilt models information of this application.",
+        "description": "Gets all prebuilt intent and entity model information used in a version of this application.",
         "operationId": "Model_ListCustomPrebuiltModels",
         "parameters": [
           {
@@ -3841,7 +3851,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of all custom prebuilt models and their representations.",
+            "description": "Returns a list of all prebuilt models and their representations.",
             "schema": {
               "$ref": "#/definitions/CustomPrebuiltModelList"
             }
@@ -3865,7 +3875,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltdomains/{domainName}": {
       "delete": {
-        "description": "Deletes a prebuilt domain's models from the application.",
+        "description": "Deletes a prebuilt domain's models in a version of the application.",
         "operationId": "Model_DeleteCustomPrebuiltDomain",
         "parameters": [
           {
@@ -3934,7 +3944,7 @@
         }
       },
       "post": {
-        "description": "Adds a prebuilt domain along with its models as a new application.",
+        "description": "Adds a prebuilt domain along with its intent and entity models as a new application.",
         "operationId": "Apps_AddCustomPrebuiltDomain",
         "parameters": [
           {
@@ -3977,7 +3987,7 @@
     },
     "/apps/customprebuiltdomains/{culture}": {
       "get": {
-        "description": "Gets all the available custom prebuilt domains for a specific culture.",
+        "description": "Gets all the available prebuilt domains for a specific culture.",
         "operationId": "Apps_ListAvailableCustomPrebuiltDomainsForCulture",
         "parameters": [
           {
@@ -3990,7 +4000,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of all domains and their intents/entities representation for a specific culture.",
+            "description": "Returns a list of all domains and their intents and entities for a specific culture.",
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
@@ -4014,7 +4024,7 @@
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/children/{hChildId}": {
       "get": {
-        "description": "Gets information about the hierarchical entity child model.",
+        "description": "Gets information about the child's model contained in an hierarchical entity child model in a version of the application.",
         "operationId": "Model_GetHierarchicalEntityChild",
         "parameters": [
           {
@@ -4059,7 +4069,7 @@
         }
       },
       "put": {
-        "description": "Renames a single child in an existing hierarchical entity model.",
+        "description": "Renames a single child in an existing hierarchical entity model in a version of the application.",
         "operationId": "Model_UpdateHierarchicalEntityChild",
         "parameters": [
           {
@@ -4121,7 +4131,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a hierarchical entity extractor child from the application.",
+        "description": "Deletes a hierarchical entity extractor child in a version of the application.",
         "operationId": "Model_DeleteHierarchicalEntityChild",
         "parameters": [
           {
@@ -4168,7 +4178,7 @@
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/children": {
       "post": {
-        "description": "Creates a single child in an existing hierarchical entity model.",
+        "description": "Creates a single child in an existing hierarchical entity model in a version of the application.",
         "operationId": "Model_AddHierarchicalEntityChild",
         "parameters": [
           {
@@ -4225,7 +4235,7 @@
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children": {
       "post": {
-        "description": "Creates a single child in an existing composite entity model.",
+        "description": "Creates a single child in an existing composite entity model in a version of the application.",
         "operationId": "Model_AddCompositeEntityChild",
         "parameters": [
           {
@@ -4282,7 +4292,7 @@
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children/{cChildId}": {
       "delete": {
-        "description": "Deletes a composite entity extractor child from the application.",
+        "description": "Deletes a composite entity extractor child from a version of the application.",
         "operationId": "Model_DeleteCompositeEntityChild",
         "parameters": [
           {
@@ -4329,8 +4339,8 @@
     },
     "/apps/{appId}/versions/{versionId}/regexentities": {
       "get": {
-        "summary": "Gets information about the regex entity models.",
-        "operationId": "Model_GetRegexEntityInfos",
+        "summary": "Gets information about the regular expression entity models in a version of the application.",
+        "operationId": "Model_ListRegexEntityInfos",
         "produces": [
           "application/json"
         ],
@@ -4350,7 +4360,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of regex entity model infos.",
+            "description": "A list of regular expression entity model infos.",
             "schema": {
               "$ref": "#/definitions/RegexEntityExtractorList"
             }
@@ -4369,7 +4379,7 @@
         }
       },
       "post": {
-        "summary": "Adds a regex entity model to the application version.",
+        "summary": "Adds a regular expression entity model to a version of the application.",
         "operationId": "Model_CreateRegexEntityModel",
         "consumes": [
           "application/json"
@@ -4387,7 +4397,7 @@
           {
             "name": "regexEntityExtractorCreateObj",
             "in": "body",
-            "description": "A model object containing the name and regex pattern for the new regex entity extractor.",
+            "description": "A model object containing the name and regex pattern for the new regular expression entity extractor.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RegexModelCreateObject"
@@ -4418,8 +4428,8 @@
     },
     "/apps/{appId}/versions/{versionId}/patternanyentities": {
       "get": {
-        "summary": "Get information about the Pattern.Any entity models.",
-        "operationId": "Model_GetPatternAnyEntityInfos",
+        "summary": "Get information about the Pattern.Any entity models in a version of the application.",
+        "operationId": "Model_ListPatternAnyEntityInfos",
         "produces": [
           "application/json"
         ],
@@ -4458,7 +4468,7 @@
         }
       },
       "post": {
-        "summary": "Adds a pattern.any entity extractor to the application.",
+        "summary": "Adds a pattern.any entity extractor to a version of the application.",
         "operationId": "Model_CreatePatternAnyEntityModel",
         "consumes": [
           "application/json"
@@ -4507,8 +4517,8 @@
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetEntityRoles",
+        "summary": "Get all roles for an entity in a version of the application",
+        "operationId": "Model_ListEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4549,7 +4559,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create an entity role in a version of the application.",
         "operationId": "Model_CreateEntityRole",
         "consumes": [
           "application/json"
@@ -4606,8 +4616,8 @@
     },
     "/apps/{appId}/versions/{versionId}/prebuilts/{entityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetPrebuiltEntityRoles",
+        "summary": "Get a prebuilt entity's roles in a version of the application.",
+        "operationId": "Model_ListPrebuiltEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4648,7 +4658,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for a prebuilt entity in a version of the application.",
         "operationId": "Model_CreatePrebuiltEntityRole",
         "consumes": [
           "application/json"
@@ -4705,8 +4715,8 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{entityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetClosedListEntityRoles",
+        "summary": "Get all roles for a list entity in a version of the application.",
+        "operationId": "Model_ListClosedListEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4747,7 +4757,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for a list entity in a version of the application.",
         "operationId": "Model_CreateClosedListEntityRole",
         "consumes": [
           "application/json"
@@ -4804,8 +4814,8 @@
     },
     "/apps/{appId}/versions/{versionId}/regexentities/{entityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetRegexEntityRoles",
+        "summary": "Get all roles for a regular expression entity in a version of the application.",
+        "operationId": "Model_ListRegexEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4846,7 +4856,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for an regular expression entity in a version of the application.",
         "operationId": "Model_CreateRegexEntityRole",
         "consumes": [
           "application/json"
@@ -4903,8 +4913,8 @@
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetCompositeEntityRoles",
+        "summary": "Get all roles for a composite entity in a version of the application",
+        "operationId": "Model_ListCompositeEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4940,7 +4950,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for a composite entity in a version of the application.",
         "operationId": "Model_CreateCompositeEntityRole",
         "consumes": [
           "application/json"
@@ -4992,8 +5002,8 @@
     },
     "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetPatternAnyEntityRoles",
+        "summary": "Get all roles for a Pattern.any entity in a version of the application",
+        "operationId": "Model_ListPatternAnyEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -5034,7 +5044,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for an Pattern.any entity in a version of the application.",
         "operationId": "Model_CreatePatternAnyEntityRole",
         "consumes": [
           "application/json"
@@ -5091,8 +5101,8 @@
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetHierarchicalEntityRoles",
+        "summary": "Get all roles for a hierarchical entity in a version of the application",
+        "operationId": "Model_ListHierarchicalEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -5128,7 +5138,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for an hierarchical entity in a version of the application.",
         "operationId": "Model_CreateHierarchicalEntityRole",
         "consumes": [
           "application/json"
@@ -5180,8 +5190,8 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltentities/{entityId}/roles": {
       "get": {
-        "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetCustomPrebuiltEntityRoles",
+        "summary": "Get all roles for a prebuilt entity in a version of the application",
+        "operationId": "Model_ListCustomPrebuiltEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -5222,7 +5232,7 @@
         }
       },
       "post": {
-        "summary": "Create an entity role for an entity in the application.",
+        "summary": "Create a role for a prebuilt entity in a version of the application.",
         "operationId": "Model_CreateCustomPrebuiltEntityRole",
         "consumes": [
           "application/json"
@@ -5279,7 +5289,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/explicitlist": {
       "get": {
-        "summary": "Get the explicit list of the pattern.any entity.",
+        "summary": "Get the explicit (exception) list of the pattern.any entity in a version of the application.",
         "operationId": "Model_GetExplicitList",
         "produces": [
           "application/json"
@@ -5321,7 +5331,7 @@
         }
       },
       "post": {
-        "summary": "Add a new item to the explicit list for the Pattern.Any entity.",
+        "summary": "Add a new exception to the explicit list for the Pattern.Any entity in a version of the application.",
         "operationId": "Model_AddExplicitListItem",
         "consumes": [
           "application/json"
@@ -5377,7 +5387,7 @@
     },
     "/apps/{appId}/versions/{versionId}/regexentities/{regexEntityId}": {
       "get": {
-        "summary": "Gets information of a regex entity model.",
+        "summary": "Gets information about a regular expression entity in a version of the application.",
         "operationId": "Model_GetRegexEntityEntityInfo",
         "produces": [
           "application/json"
@@ -5392,7 +5402,7 @@
           {
             "name": "regexEntityId",
             "in": "path",
-            "description": "The regex entity model ID.",
+            "description": "The regular expression entity model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -5400,7 +5410,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A regex entity model info.",
+            "description": "A regular expression entity model info.",
             "schema": {
               "$ref": "#/definitions/RegexEntityExtractor"
             }
@@ -5419,7 +5429,7 @@
         }
       },
       "put": {
-        "summary": "Updates the regex entity model .",
+        "summary": "Updates the regular expression entity in a version of the application.",
         "operationId": "Model_UpdateRegexEntityModel",
         "consumes": [
           "application/json"
@@ -5437,7 +5447,7 @@
           {
             "name": "regexEntityId",
             "in": "path",
-            "description": "The regex entity extractor ID.",
+            "description": "The regular expression entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -5454,7 +5464,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the regex entity extractor.",
+            "description": "Successfully updated the regular expression entity extractor.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -5473,7 +5483,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes a regex entity model from the application.",
+        "summary": "Deletes a regular expression entity from a version of the application.",
         "operationId": "Model_DeleteRegexEntityModel",
         "produces": [
           "application/json"
@@ -5488,7 +5498,7 @@
           {
             "name": "regexEntityId",
             "in": "path",
-            "description": "The regex entity extractor ID.",
+            "description": "The regular expression entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -5517,7 +5527,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}": {
       "get": {
-        "summary": "Gets information about the application version's Pattern.Any model.",
+        "summary": "Gets information about the Pattern.Any model in a version of the application.",
         "operationId": "Model_GetPatternAnyEntityInfo",
         "produces": [
           "application/json"
@@ -5540,7 +5550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A regex entity model info.",
+            "description": "A regular expression entity model info.",
             "schema": {
               "$ref": "#/definitions/PatternAnyEntityExtractor"
             }
@@ -5559,7 +5569,7 @@
         }
       },
       "put": {
-        "summary": "Updates the name and explicit list of a Pattern.Any entity model.",
+        "summary": "Updates the name and explicit (exception) list of a Pattern.Any entity model in a version of the application.",
         "operationId": "Model_UpdatePatternAnyEntityModel",
         "consumes": [
           "application/json"
@@ -5613,7 +5623,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes a Pattern.Any entity extractor from the application.",
+        "summary": "Deletes a Pattern.Any entity extractor from a version of the application.",
         "operationId": "Model_DeletePatternAnyEntityModel",
         "produces": [
           "application/json"
@@ -5657,7 +5667,7 @@
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given entity in a version of the application",
         "operationId": "Model_GetEntityRole",
         "produces": [
           "application/json"
@@ -5707,7 +5717,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given entity in a version of the application.",
         "operationId": "Model_UpdateEntityRole",
         "consumes": [
           "application/json"
@@ -5769,7 +5779,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete an entity role in a version of the application.",
         "operationId": "Model_DeleteEntityRole",
         "produces": [
           "application/json"
@@ -5821,7 +5831,7 @@
     },
     "/apps/{appId}/versions/{versionId}/prebuilts/{entityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given prebuilt entity in a version of the application",
         "operationId": "Model_GetPrebuiltEntityRole",
         "produces": [
           "application/json"
@@ -5871,7 +5881,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given prebuilt entity in a version of the application",
         "operationId": "Model_UpdatePrebuiltEntityRole",
         "consumes": [
           "application/json"
@@ -5933,7 +5943,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role in a prebuilt entity in a version of the application.",
         "operationId": "Model_DeletePrebuiltEntityRole",
         "produces": [
           "application/json"
@@ -5985,7 +5995,7 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{entityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given list entity in a version of the application.",
         "operationId": "Model_GetClosedListEntityRole",
         "produces": [
           "application/json"
@@ -6035,7 +6045,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given list entity in a version of the application.",
         "operationId": "Model_UpdateClosedListEntityRole",
         "consumes": [
           "application/json"
@@ -6097,7 +6107,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role for a given list entity in a version of the application.",
         "operationId": "Model_DeleteClosedListEntityRole",
         "produces": [
           "application/json"
@@ -6149,7 +6159,7 @@
     },
     "/apps/{appId}/versions/{versionId}/regexentities/{entityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given regular expression entity in a version of the application.",
         "operationId": "Model_GetRegexEntityRole",
         "produces": [
           "application/json"
@@ -6199,7 +6209,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given regular expression entity in a version of the application",
         "operationId": "Model_UpdateRegexEntityRole",
         "consumes": [
           "application/json"
@@ -6261,7 +6271,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role for a given regular expression in a version of the application.",
         "operationId": "Model_DeleteRegexEntityRole",
         "produces": [
           "application/json"
@@ -6313,7 +6323,7 @@
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given composite entity in a version of the application",
         "operationId": "Model_GetCompositeEntityRole",
         "produces": [
           "application/json"
@@ -6358,7 +6368,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given composite entity in a version of the application",
         "operationId": "Model_UpdateCompositeEntityRole",
         "consumes": [
           "application/json"
@@ -6415,7 +6425,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role for a given composite entity in a version of the application.",
         "operationId": "Model_DeleteCompositeEntityRole",
         "produces": [
           "application/json"
@@ -6462,7 +6472,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given Pattern.any entity in a version of the application.",
         "operationId": "Model_GetPatternAnyEntityRole",
         "produces": [
           "application/json"
@@ -6512,7 +6522,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given Pattern.any entity in a version of the application.",
         "operationId": "Model_UpdatePatternAnyEntityRole",
         "consumes": [
           "application/json"
@@ -6574,7 +6584,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role for a given Pattern.any entity in a version of the application.",
         "operationId": "Model_DeletePatternAnyEntityRole",
         "produces": [
           "application/json"
@@ -6626,7 +6636,7 @@
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given hierarchical entity in a version of the application.",
         "operationId": "Model_GetHierarchicalEntityRole",
         "produces": [
           "application/json"
@@ -6671,7 +6681,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given hierarchical entity in a version of the application.",
         "operationId": "Model_UpdateHierarchicalEntityRole",
         "consumes": [
           "application/json"
@@ -6728,7 +6738,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role for a given hierarchical role in a version of the application.",
         "operationId": "Model_DeleteHierarchicalEntityRole",
         "produces": [
           "application/json"
@@ -6775,7 +6785,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltentities/{entityId}/roles/{roleId}": {
       "get": {
-        "summary": "Get one entity role for a given entity",
+        "summary": "Get one role for a given prebuilt entity in a version of the application.",
         "operationId": "Model_GetCustomEntityRole",
         "produces": [
           "application/json"
@@ -6825,7 +6835,7 @@
         }
       },
       "put": {
-        "summary": "Update an entity role for a given entity",
+        "summary": "Update a role for a given prebuilt entity in a version of the application.",
         "operationId": "Model_UpdateCustomPrebuiltEntityRole",
         "consumes": [
           "application/json"
@@ -6887,7 +6897,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an entity role.",
+        "summary": "Delete a role for a given prebuilt entity in a version of the application.",
         "operationId": "Model_DeleteCustomEntityRole",
         "produces": [
           "application/json"
@@ -6939,7 +6949,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/explicitlist/{itemId}": {
       "get": {
-        "summary": "Get the explicit list of the pattern.any entity.",
+        "summary": "Get the explicit (exception) list of the pattern.any entity in a version of the application.",
         "operationId": "Model_GetExplicitListItem",
         "produces": [
           "application/json"
@@ -6989,7 +6999,7 @@
         }
       },
       "put": {
-        "summary": "Updates an explicit list item for a Pattern.Any entity.",
+        "summary": "Updates an explicit (exception) list item for a Pattern.Any entity in a version of the application.",
         "operationId": "Model_UpdateExplicitListItem",
         "consumes": [
           "application/json"
@@ -7051,7 +7061,7 @@
         }
       },
       "delete": {
-        "summary": "Delete the explicit list item from the Pattern.any explicit list.",
+        "summary": "Delete an item from the explicit (exception) list for a Pattern.any entity in a version of the application.",
         "operationId": "Model_DeleteExplicitListItem",
         "produces": [
           "application/json"
@@ -7103,7 +7113,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patternrule": {
       "post": {
-        "summary": "Adds one pattern to the specified application.",
+        "summary": "Adds a pattern to a version of the application.",
         "operationId": "Pattern_AddPattern",
         "consumes": [
           "application/json"
@@ -7151,8 +7161,8 @@
     },
     "/apps/{appId}/versions/{versionId}/patternrules": {
       "get": {
-        "summary": "Returns an application version's patterns.",
-        "operationId": "Pattern_GetPatterns",
+        "summary": "Gets patterns in a version of the application.",
+        "operationId": "Pattern_ListPatterns",
         "produces": [
           "application/json"
         ],
@@ -7191,7 +7201,7 @@
         }
       },
       "put": {
-        "summary": "Updates patterns",
+        "summary": "Updates patterns in a version of the application.",
         "operationId": "Pattern_UpdatePatterns",
         "consumes": [
           "application/json"
@@ -7240,7 +7250,7 @@
         }
       },
       "post": {
-        "summary": "Adds a batch of patterns to the specified application.",
+        "summary": "Adds a batch of patterns in a version of the application.",
         "operationId": "Pattern_BatchAddPatterns",
         "consumes": [
           "application/json"
@@ -7289,7 +7299,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes the patterns with the specified IDs.",
+        "summary": "Deletes a list of patterns in a version of the application.",
         "operationId": "Pattern_DeletePatterns",
         "consumes": [
           "application/json"
@@ -7341,7 +7351,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patternrules/{patternId}": {
       "put": {
-        "summary": "Updates a pattern",
+        "summary": "Updates a pattern in a version of the application.",
         "operationId": "Pattern_UpdatePattern",
         "consumes": [
           "application/json"
@@ -7395,7 +7405,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes the pattern with the specified ID.",
+        "summary": "Deletes the pattern with the specified ID from a version of the application..",
         "operationId": "Pattern_DeletePattern",
         "produces": [
           "application/json"
@@ -7439,8 +7449,8 @@
     },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}/patternrules": {
       "get": {
-        "summary": "Returns patterns to be retrieved for the specific intent.",
-        "operationId": "Pattern_GetIntentPatterns",
+        "summary": "Returns patterns for the specific intent in a version of the application.",
+        "operationId": "Pattern_ListIntentPatterns",
         "produces": [
           "application/json"
         ],
@@ -7484,7 +7494,7 @@
     },
     "/apps/{appId}/versions/{versionId}/settings": {
       "get": {
-        "description": "Gets the application version settings.",
+        "description": "Gets the settings in a version of the application.",
         "operationId": "Settings_List",
         "parameters": [
           {
@@ -7521,7 +7531,7 @@
         }
       },
       "put": {
-        "description": "Updates the application version settings.",
+        "description": "Updates the settings in a version of the application.",
         "operationId": "Settings_Update",
         "parameters": [
           {
@@ -7535,7 +7545,10 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AppVersionSettingObject"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AppVersionSettingObject"
+              }
             },
             "description": "A list of the updated application version settings."
           }
@@ -7569,9 +7582,9 @@
     },
     "/apps/{appId}/azureaccounts": {
       "post": {
-        "description": "Assigns an azure account to the application.",
+        "description": "Assigns an Azure account to the application.",
         "operationId": "AzureAccounts_AssignToApp",
-        "summary": "apps - Assign a LUIS azure account to an application",
+        "summary": "apps - Assign a LUIS Azure account to an application",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -7585,7 +7598,7 @@
             "schema": {
               "$ref": "#/definitions/AzureAccountInfoObject"
             },
-            "description": "The azure account information object."
+            "description": "The Azure account information object."
           }
         ],
         "consumes": [
@@ -7615,9 +7628,9 @@
         }
       },
       "get": {
-        "description": "Gets the LUIS azure accounts assigned to the application for the user using his ARM token.",
+        "description": "Gets the LUIS Azure accounts assigned to the application for the user using his ARM token.",
         "operationId": "AzureAccounts_GetAssigned",
-        "summary": "apps - Get LUIS azure accounts assigned to the application",
+        "summary": "apps - Get LUIS Azure accounts assigned to the application",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -7650,9 +7663,9 @@
         }
       },
       "delete": {
-        "description": "Removes assigned azure account from the application.",
+        "description": "Removes assigned Azure account from the application.",
         "operationId": "AzureAccounts_RemoveFromApp",
-        "summary": "apps - Removes an assigned LUIS azure account from an application",
+        "summary": "apps - Removes an assigned LUIS Azure account from an application",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -7666,7 +7679,7 @@
             "schema": {
               "$ref": "#/definitions/AzureAccountInfoObject"
             },
-            "description": "The azure account information object."
+            "description": "The Azure account information object."
           }
         ],
         "consumes": [
@@ -7698,9 +7711,9 @@
     },
     "/azureaccounts": {
       "get": {
-        "description": "Gets the LUIS azure accounts for the user using his ARM token.",
-        "operationId": "AzureAccounts_GetUserLUISAccounts",
-        "summary": "user - Get LUIS azure accounts",
+        "description": "Gets the LUIS Azure accounts for the user using his ARM token.",
+        "operationId": "AzureAccounts_ListUserLUISAccounts",
+        "summary": "user - Get LUIS Azure accounts",
         "parameters": [
           {
             "$ref": "#/parameters/BearerAuthPath"
@@ -7708,7 +7721,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of azure account information objects.",
+            "description": "A list of Azure account information objects.",
             "schema": {
               "$ref": "#/definitions/AzureAccountInfoList"
             }
@@ -7732,7 +7745,7 @@
     },
     "/package/{appId}/slot/{slotName}/gzip": {
       "get": {
-        "description": "Packages published LUIS application as GZip.",
+        "description": "Packages a published LUIS application as a GZip file to be used in the LUIS container.",
         "operationId": "Apps_PackagePublishedApplicationAsGzip",
         "summary": "package - Gets published LUIS application package in binary stream GZip format",
         "parameters": [
@@ -7770,7 +7783,7 @@
     },
     "/package/{appId}/versions/{versionId}/gzip": {
       "get": {
-        "description": "Packages trained LUIS application as GZip.",
+        "description": "Packages trained LUIS application as GZip file to be used in the LUIS container.",
         "operationId": "Apps_PackageTrainedApplicationAsGzip",
         "summary": "package - Gets trained LUIS application package in binary stream GZip format",
         "parameters": [
@@ -7806,7 +7819,7 @@
         }
       }
     }
-  }, 
+  },
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
@@ -7828,6 +7841,10 @@
         "endCharIndex": {
           "description": "The index within the utterance where the extracted entity ends.",
           "type": "integer"
+        },
+        "role": {
+          "description": "The role of the entity within the utterance.",
+          "type": "string"
         }
       }
     },
@@ -7904,7 +7921,7 @@
       }
     },
     "HierarchicalEntityModel": {
-      "description": "A Hierarchical Entity Extractor.",
+      "description": "A hierarchical entity extractor.",
       "type": "object",
       "properties": {
         "children": {
@@ -7921,7 +7938,7 @@
       }
     },
     "CompositeEntityModel": {
-      "description": "A composite entity.",
+      "description": "A composite entity extractor.",
       "type": "object",
       "properties": {
         "children": {
@@ -7957,6 +7974,10 @@
         "entity": {
           "description": "The entity name.",
           "type": "string"
+        },
+        "role": {
+          "description": "The role of the entity within the utterance.",
+          "type": "string"
         }
       }
     },
@@ -7967,7 +7988,8 @@
         "public": {
           "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
           "type": "boolean",
-          "x-nullable": false
+          "x-nullable": false,
+          "x-ms-client-name": "isPublic"
         }
       }
     },
@@ -7993,15 +8015,15 @@
       }
     },
     "ExampleLabelObject": {
-      "description": "A labeled example.",
+      "description": "A labeled example utterance.",
       "type": "object",
       "properties": {
         "text": {
-          "description": "The sample's utterance.",
+          "description": "The example utterance.",
           "type": "string"
         },
         "entityLabels": {
-          "description": "The identified entities within the utterance.",
+          "description": "The identified entities within the example utterance.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/EntityLabelObject"
@@ -8009,7 +8031,7 @@
           "type": "array"
         },
         "intentName": {
-          "description": "The identified intent representing the utterance.",
+          "description": "The identified intent representing the example utterance.",
           "type": "string"
         }
       }
@@ -8027,14 +8049,14 @@
           "type": "string"
         },
         "isExchangeable": {
-          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
+          "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
           "default": true,
           "type": "boolean"
         }
       }
     },
     "SubClosedList": {
-      "description": "Sublist of items for a Closed list.",
+      "description": "Sublist of items for a list entity.",
       "type": "object",
       "properties": {
         "canonicalForm": {
@@ -8051,7 +8073,7 @@
       }
     },
     "SubClosedListResponse": {
-      "description": "Sublist of items for a Closed list.",
+      "description": "Sublist of items for a list entity.",
       "type": "object",
       "allOf": [
         {
@@ -8125,15 +8147,15 @@
       }
     },
     "ClosedList": {
-      "description": "Exported Model - A Closed List.",
+      "description": "Exported Model - A list entity.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the closed list feature.",
+          "description": "Name of the list entity.",
           "type": "string"
         },
         "subLists": {
-          "description": "Sublists for the feature.",
+          "description": "Sublists for the list entity.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/SubClosedList"
@@ -8149,7 +8171,7 @@
       }
     },
     "ClosedListModelPatchObject": {
-      "description": "Object model for adding a batch of sublists to an existing closedlist.",
+      "description": "Object model for adding a batch of sublists to an existing list entity.",
       "type": "object",
       "properties": {
         "subLists": {
@@ -8179,7 +8201,7 @@
           "type": "string"
         },
         "mode": {
-          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
+          "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
           "type": "boolean"
         }
       }
@@ -8209,7 +8231,7 @@
       }
     },
     "WordListObject": {
-      "description": "Sublist of items for a Closed list.",
+      "description": "Sublist of items for a list entity.",
       "type": "object",
       "properties": {
         "canonicalForm": {
@@ -8226,7 +8248,7 @@
       }
     },
     "WordListBaseUpdateObject": {
-      "description": "Object model for updating one of the closed list's sublists.",
+      "description": "Object model for updating one of the list entity's sublists.",
       "type": "object",
       "properties": {
         "canonicalForm": {
@@ -8275,7 +8297,7 @@
       }
     },
     "ClosedListModelUpdateObject": {
-      "description": "Object model for updating a closed list.",
+      "description": "Object model for updating a list entity.",
       "type": "object",
       "properties": {
         "subLists": {
@@ -8287,13 +8309,13 @@
           "type": "array"
         },
         "name": {
-          "description": "The new name of the closed list feature.",
+          "description": "The new name of the list entity.",
           "type": "string"
         }
       }
     },
     "ClosedListModelCreateObject": {
-      "description": "Object model for creating a closed list.",
+      "description": "Object model for creating a list entity.",
       "type": "object",
       "properties": {
         "subLists": {
@@ -8305,7 +8327,7 @@
           "type": "array"
         },
         "name": {
-          "description": "Name of the closed list feature.",
+          "description": "Name of the list entity.",
           "type": "string"
         }
       }
@@ -8513,7 +8535,7 @@
           "type": "array"
         },
         "closedLists": {
-          "description": "List of closed lists.",
+          "description": "List of list entities.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/ClosedList"
@@ -8577,7 +8599,7 @@
           "type": "array"
         },
         "utterances": {
-          "description": "List of sample utterances.",
+          "description": "List of example utterances.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/JSONUtterance"
@@ -8617,7 +8639,7 @@
         },
         "text": {
           "type": "string",
-          "description": "The utterance. E.g.: what's the weather like in seattle?"
+          "description": "The utterance. For example, \"What's the weather like in seattle?\""
         },
         "tokenizedText": {
           "type": "array",
@@ -8666,11 +8688,11 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The utterance. E.g.: what's the weather like in seattle?"
+          "description": "The utterance. For example, \"What's the weather like in seattle?\""
         },
         "tokenizedText": {
           "type": "array",
-          "description": "The utterance tokenized.",
+          "description": "The tokenized utterance.",
           "items": {
             "type": "string"
           }
@@ -8704,7 +8726,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The utterance. E.g.: what's the weather like in seattle?"
+          "description": "The utterance. For example, \"What's the weather like in seattle?\""
         },
         "tokenizedText": {
           "type": "array",
@@ -8744,6 +8766,14 @@
         "endTokenIndex": {
           "description": "The index within the utterance where the extracted entity ends.",
           "type": "integer"
+        },
+        "role": {
+          "description": "The role of the entity within the utterance.",
+          "type": "string"
+        },
+        "roleId": {
+          "description": "The role Id.",
+          "type": "string"
         }
       },
       "required": [
@@ -8925,10 +8955,11 @@
         "Hierarchical Entity Extractor",
         "Hierarchical Child Entity Extractor",
         "Composite Entity Extractor",
-        "Closed List Entity Extractor",
+        "List Entity Extractor",
         "Prebuilt Entity Extractor",
         "Intent Classifier",
         "Pattern.Any Entity Extractor",
+        "Closed List Entity Extractor",
         "Regex Entity Extractor"
       ]
     },
@@ -8991,9 +9022,9 @@
       }
     },
     "ClosedListEntityExtractor": {
-      "description": "Closed List Entity Extractor.",
+      "description": "List Entity Extractor.",
       "type": "object",
-      "x-ms-discriminator-value": "Closed List Entity Extractor",
+      "x-ms-discriminator-value": "List Entity Extractor",
       "allOf": [
         {
           "$ref": "#/definitions/ModelInfo"
@@ -9004,7 +9035,7 @@
       ],
       "properties": {
         "subLists": {
-          "description": "List of sub-lists.",
+          "description": "List of sublists.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubClosedListResponse"
@@ -9013,7 +9044,7 @@
       }
     },
     "ClosedListEntityExtractorsList": {
-      "description": "List of Closed List Entity Extractors.",
+      "description": "List of List Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ClosedListEntityExtractor"
@@ -9232,11 +9263,11 @@
       }
     },
     "LabelExampleResponse": {
-      "description": "Response when adding a labeled example.",
+      "description": "Response when adding a labeled example utterance.",
       "type": "object",
       "properties": {
         "UtteranceText": {
-          "description": "The sample's utterance.",
+          "description": "The example utterance.",
           "type": "string"
         },
         "ExampleId": {
@@ -9246,7 +9277,7 @@
       }
     },
     "BatchLabelExample": {
-      "description": "Response when adding a batch of labeled examples.",
+      "description": "Response when adding a batch of labeled example utterances.",
       "type": "object",
       "properties": {
         "value": {
@@ -9261,7 +9292,7 @@
       }
     },
     "BatchLabelExampleResponse": {
-      "description": "Response when adding a batch of labeled examples.",
+      "description": "Response when adding a batch of labeled example utterances.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/BatchLabelExample"
@@ -9285,15 +9316,15 @@
           "type": "string"
         },
         "culture": {
-          "description": "The culture of the application. E.g.: en-us.",
+          "description": "The culture of the application. For example, \"en-us\".",
           "type": "string"
         },
         "usageScenario": {
-          "description": "Defines the scenario for the new application. Optional. E.g.: IoT.",
+          "description": "Defines the scenario for the new application. Optional. For example, IoT.",
           "type": "string"
         },
         "domain": {
-          "description": "The domain for the new application. Optional. E.g.: Comics.",
+          "description": "The domain for the new application. Optional. For example, Comics.",
           "type": "string"
         },
         "versionsCount": {
@@ -9423,7 +9454,7 @@
           "format": "uuid"
         },
         "public": {
-          "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
+          "description": "Setting your application as public allows other people to use your application's endpoint using their own keys for billing purposes.",
           "type": "boolean",
           "x-nullable": false,
           "x-ms-client-name": "isPublic"
@@ -9444,19 +9475,19 @@
           "format": "uuid"
         },
         "sentimentAnalysis": {
-          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the response",
+          "description": "Setting sentiment analysis as true returns the sentiment of the input utterance along with the response",
           "type": "boolean",
           "x-nullable": false,
           "x-ms-client-name": "IsSentimentAnalysisEnabled"
         },
         "speech": {
-          "description": "Setting speech as public enables speech priming in your app",
+          "description": "Enables speech priming in your app",
           "type": "boolean",
           "x-nullable": false,
           "x-ms-client-name": "IsSpeechEnabled"
         },
         "spellChecker": {
-          "description": "Setting spell checker as public enables spell checking the input utterance.",
+          "description": "Enables spell checking of the utterance.",
           "type": "boolean",
           "x-nullable": false,
           "x-ms-client-name": "IsSpellCheckerEnabled"
@@ -9718,11 +9749,11 @@
       }
     },
     "RegexModelCreateObject": {
-      "description": "Model object for creating a regex entity model.",
+      "description": "Model object for creating a regular expression entity model.",
       "type": "object",
       "properties": {
         "regexPattern": {
-          "description": "The regex entity pattern.",
+          "description": "The regular expression entity pattern.",
           "type": "string"
         },
         "name": {
@@ -9749,7 +9780,7 @@
       }
     },
     "ExplicitListItemCreateObject": {
-      "description": "Object model for creating an explicit list item.",
+      "description": "Object model for creating an explicit (exception) list item.",
       "type": "object",
       "properties": {
         "explicitListItem": {
@@ -9759,11 +9790,11 @@
       }
     },
     "RegexModelUpdateObject": {
-      "description": "Model object for updating a regex entity model.",
+      "description": "Model object for updating a regular expression entity model.",
       "type": "object",
       "properties": {
         "regexPattern": {
-          "description": "The regex entity pattern.",
+          "description": "The regular expression entity pattern.",
           "type": "string"
         },
         "name": {
@@ -9800,7 +9831,7 @@
       }
     },
     "ExplicitListItemUpdateObject": {
-      "description": "Model object for updating an explicit list item.",
+      "description": "Model object for updating an explicit (exception) list item.",
       "type": "object",
       "properties": {
         "explicitListItem": {
@@ -9843,7 +9874,7 @@
       }
     },
     "RegexEntityExtractor": {
-      "description": "Regex Entity Extractor.",
+      "description": "Regular Expression Entity Extractor.",
       "type": "object",
       "x-ms-discriminator-value": "Regex Entity Extractor",
       "allOf": [
@@ -9856,13 +9887,13 @@
       ],
       "properties": {
         "regexPattern": {
-          "description": "The Regex entity pattern.",
+          "description": "The Regular Expression entity pattern.",
           "type": "string"
         }
       }
     },
     "RegexEntityExtractorList": {
-      "description": "List of Regex Entity Extractors.",
+      "description": "List of Regular Expression Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/RegexEntityExtractor"
@@ -9916,7 +9947,7 @@
       }
     },
     "ExplicitListItem": {
-      "description": "Explicit list item",
+      "description": "Explicit (exception) list item",
       "type": "object",
       "properties": {
         "id": {
@@ -9931,7 +9962,7 @@
       }
     },
     "ExplicitListItemList": {
-      "description": "List of explicit list items",
+      "description": "List of explicit (exception) list items",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ExplicitListItem"
@@ -9968,15 +9999,15 @@
         "$ref": "#/definitions/PatternRuleInfo"
       }
     },
-    "ExamplesPerModelResponseObject":{
-      "description": "A list of examples per model.",
+    "ExamplesPerModelResponseObject": {
+      "description": "A list of example utterances per model.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LabelTextObject"
       }
     },
-    "LabelTextObject":{
-      "description": "An object containing the example's text.",
+    "LabelTextObject": {
+      "description": "An object containing the example utterance's text.",
       "type": "object",
       "properties": {
         "id": {
@@ -10079,7 +10110,7 @@
       }
     },
     "AzureAccountInfoObject": {
-      "description": "Defines the azure account information object.",
+      "description": "Defines the Azure account information object.",
       "type": "object",
       "required": [
         "azureSubscriptionId",
@@ -10088,15 +10119,15 @@
       ],
       "properties": {
         "azureSubscriptionId": {
-          "description": "The id for the azure subscription.",
+          "description": "The id for the Azure subscription.",
           "type": "string"
         },
         "resourceGroup": {
-          "description": "The azure resource group name.",
+          "description": "The Azure resource group name.",
           "type": "string"
         },
         "accountName": {
-          "description": "The azure account name.",
+          "description": "The Azure account name.",
           "type": "string"
         }
       }
@@ -10153,7 +10184,6 @@
       "description": "The publishing slot name.",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "x-ms-parameter-location": "method"
     },
     "SkipInPath": {
@@ -10183,6 +10213,14 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
+    "BearerAuthPath": {
+      "name": "Authorization",
+      "in": "header",
+      "description": "The bearer authorization header to use; containing the user's ARM token used to validate Azure accounts information.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
@@ -10191,14 +10229,6 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
-    },
-    "BearerAuthPath": {
-      "name": "Authorization",
-      "in": "header",
-      "description": "The bearer authorization header to use; containing the user's ARM token used to validate azure accounts information.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   }
 }

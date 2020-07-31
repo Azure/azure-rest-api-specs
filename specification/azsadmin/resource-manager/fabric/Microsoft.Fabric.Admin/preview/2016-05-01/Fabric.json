@@ -1,214 +1,214 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2016-05-01",
-        "title": "FabricAdminClient",
-        "description": "The Admin Fabric Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/providers/Microsoft.Fabric.Admin/operations": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the list of support REST operations.": {
-                        "$ref": "./examples/Operations/List.json"
-                    }
-                },
-                "description": "Returns the list of support REST operations.",
-                "tags": [
-                    "Fabric"
-                ],
-                "operationId": "Fabric_ListOperations",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OperationList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-05-01",
+    "title": "FabricAdminClient",
+    "description": "The Admin Fabric Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Fabric.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of support REST operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Returns the list of support REST operations.",
+        "tags": [
+          "Fabric"
+        ],
+        "operationId": "Fabric_ListOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-    },
-    "definitions": {
-        "Resource": {
-            "description": "Base resource object.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "URI of the resource.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "name": {
-                    "description": "Name of the resource.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "type": {
-                    "description": "Type of resource.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "location": {
-                    "description": "The region where the resource is located.",
-                    "type": "string"
-                },
-                "tags": {
-                    "description": "List of key-value pairs.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "x-ms-azure-resource": true
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "URI of the resource.",
+          "type": "string",
+          "readOnly": true
         },
-        "Operation": {
-            "description": "Describes the supported REST operation.",
-            "properties": {
-                "name": {
-                    "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
-                    "type": "string"
-                },
-                "display": {
-                    "description": "Contains the localized display information for this particular operation or action.",
-                    "$ref": "#/definitions/Display"
-                }
-            }
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string",
+          "readOnly": true
         },
-        "Display": {
-            "description": "Contains the localized display information for this particular operation / action.",
-            "properties": {
-                "provider": {
-                    "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\".",
-                    "type": "string"
-                },
-                "resource": {
-                    "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
-                    "type": "string"
-                },
-                "operation": {
-                    "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
-                    "type": "string"
-                }
-            }
+        "type": {
+          "description": "Type of resource.",
+          "type": "string",
+          "readOnly": true
         },
-        "OperationList": {
-            "description": "A pageable list of supported operations objects.",
-            "properties": {
-                "value": {
-                    "description": "List of supported operations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to next page.",
-                    "type": "string"
-                }
-            }
+        "location": {
+          "description": "The region where the resource is located.",
+          "type": "string"
         },
-        "ProvisioningState": {
-            "description": "Provisioning status of the resource.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Provisioning status of the resource.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ProvisioningStateProperties"
-                }
-            }
-        },
-        "ProvisioningStateProperties": {
-            "description": "Provisioning status of the resource.",
-            "type": "object",
-            "properties": {
-                "provisioningState": {
-                    "description": "Provisioning status of the resource.",
-                    "type": "string"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-            "required": true,
+        "tags": {
+          "description": "List of key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client API Version.",
-            "required": true,
-            "type": "string",
-            "default": "2016-05-01"
-        },
-        "LocationParameter": {
-            "description": "Location of the resource.",
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "ResourceGroupParameter": {
-            "description": "Name of the resource group.",
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "FilterParameter": {
-            "description": "OData filter parameter.",
-            "name": "$filter",
-            "in": "query",
-            "type": "string",
-            "x-ms-parameter-location": "method"
+          }
         }
+      },
+      "x-ms-azure-resource": true
     },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation or action.",
+          "$ref": "#/definitions/Display"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\".",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will be displayed to the user.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string"
         }
-    ]
+      }
+    },
+    "OperationList": {
+      "description": "A pageable list of supported operations objects.",
+      "properties": {
+        "value": {
+          "description": "List of supported operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Provisioning status of the resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProvisioningStateProperties"
+        }
+      }
+    },
+    "ProvisioningStateProperties": {
+      "description": "Provisioning status of the resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning status of the resource.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2016-05-01"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupParameter": {
+      "description": "Name of the resource group.",
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "description": "OData filter parameter.",
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

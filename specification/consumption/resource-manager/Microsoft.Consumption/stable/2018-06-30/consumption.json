@@ -2328,7 +2328,7 @@
         }
       }
     },
-	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/usageDetails": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
           "UsageDetails"
@@ -2498,8 +2498,8 @@
           "nextLinkName": "nextLink"
         }
       }
-	},
-	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/aggregatedcost": {
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/aggregatedcost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -2536,9 +2536,9 @@
             }
           }
         }
-	 }
-   },
-   	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -2557,7 +2557,7 @@
           {
             "$ref": "#/parameters/managementGroupIdParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/billingPeriodNameParameter"
           },
           {
@@ -2578,8 +2578,8 @@
             }
           }
         }
-	 }
-   }
+      }
+    }
   },
   "definitions": {
     "MeterDetails": {
@@ -3789,8 +3789,8 @@
           "description": "Offer Id",
           "type": "string",
           "readOnly": true
-		    }
-	    }
+        }
+      }
     },
     "Forecast": {
       "description": "A forecast resource.",
@@ -3903,7 +3903,7 @@
         }
       }
     },
-	"ManagementGroupAggregatedCostResult": {
+    "ManagementGroupAggregatedCostResult": {
       "description": "A management group aggregated cost resource.",
       "type": "object",
       "allOf": [
@@ -3928,19 +3928,19 @@
           "type": "string",
           "readOnly": true
         },
-         "azureCharges": {
+        "azureCharges": {
           "description": "Azure Charges.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
-         "marketplaceCharges": {
+        "marketplaceCharges": {
           "description": "Marketplace Charges.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
-         "chargesBilledSeparately": {
+        "chargesBilledSeparately": {
           "description": "Charges Billed Separately.",
           "type": "number",
           "format": "decimal",
@@ -3951,16 +3951,16 @@
           "type": "string",
           "readOnly": true
         },
-		"children": {
+        "children": {
           "description": "Children of a management group",
-		  "type": "array",
+          "type": "array",
           "items": {
-             "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
-            }
-		}
+            "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
+          }
+        }
       }
     },
-	"ErrorDetails": {
+    "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -4211,13 +4211,13 @@
         ]
       }
     },
-	"managementGroupIdParameter": {
+    "managementGroupIdParameter": {
       "name": "managementGroupId",
       "in": "path",
       "description": "Azure Management Group ID.",
       "required": true,
       "type": "string",
-	  "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     }
   }
 }

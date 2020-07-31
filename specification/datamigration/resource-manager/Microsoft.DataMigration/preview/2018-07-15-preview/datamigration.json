@@ -48,7 +48,9 @@
         ],
         "operationId": "ResourceSkus_ListSkus",
         "x-ms-examples": {
-          "ListSkus": { "$ref": "./examples/ResourceSkus_ListSkus.json" }
+          "ListSkus": {
+            "$ref": "./examples/ResourceSkus_ListSkus.json"
+          }
         },
         "parameters": [
           {
@@ -102,7 +104,9 @@
         ],
         "operationId": "Services_CreateOrUpdate",
         "x-ms-examples": {
-          "Services_CreateOrUpdate": { "$ref": "./examples/Services_CreateOrUpdate.json" }
+          "Services_CreateOrUpdate": {
+            "$ref": "./examples/Services_CreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -144,7 +148,9 @@
         ],
         "operationId": "Services_Get",
         "x-ms-examples": {
-          "Services_CreateOrUpdate": { "$ref": "./examples/Services_Get.json" }
+          "Services_CreateOrUpdate": {
+            "$ref": "./examples/Services_Get.json"
+          }
         },
         "responses": {
           "200": {
@@ -176,7 +182,9 @@
         ],
         "operationId": "Services_Delete",
         "x-ms-examples": {
-          "Services_CreateOrUpdate": { "$ref": "./examples/Services_Delete.json" }
+          "Services_CreateOrUpdate": {
+            "$ref": "./examples/Services_Delete.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "responses": {
@@ -207,7 +215,9 @@
         ],
         "operationId": "Services_Update",
         "x-ms-examples": {
-          "Services_CreateOrUpdate": { "$ref": "./examples/Services_Update.json" }
+          "Services_CreateOrUpdate": {
+            "$ref": "./examples/Services_Update.json"
+          }
         },
         "parameters": [
           {
@@ -245,7 +255,9 @@
         ],
         "operationId": "Services_CheckStatus",
         "x-ms-examples": {
-          "Services_CheckStatus": { "$ref": "./examples/Services_CheckStatus.json" }
+          "Services_CheckStatus": {
+            "$ref": "./examples/Services_CheckStatus.json"
+          }
         },
         "parameters": [
           {
@@ -288,7 +300,9 @@
         ],
         "operationId": "Services_Start",
         "x-ms-examples": {
-          "Services_Start": { "$ref": "./examples/Services_Start.json" }
+          "Services_Start": {
+            "$ref": "./examples/Services_Start.json"
+          }
         },
         "parameters": [
           {
@@ -332,7 +346,9 @@
         ],
         "operationId": "Services_Stop",
         "x-ms-examples": {
-          "Services_Stop": { "$ref": "./examples/Services_Stop.json" }
+          "Services_Stop": {
+            "$ref": "./examples/Services_Stop.json"
+          }
         },
         "parameters": [
           {
@@ -376,7 +392,9 @@
         ],
         "operationId": "Services_ListSkus",
         "x-ms-examples": {
-          "Services_ListSkus": { "$ref": "./examples/Services_ListSkus.json" }
+          "Services_ListSkus": {
+            "$ref": "./examples/Services_ListSkus.json"
+          }
         },
         "parameters": [
           {
@@ -422,7 +440,9 @@
         ],
         "operationId": "Tasks_List",
         "x-ms-examples": {
-          "Tasks_List": { "$ref": "./examples/Tasks_List.json" }
+          "Tasks_List": {
+            "$ref": "./examples/Tasks_List.json"
+          }
         },
         "parameters": [
           {
@@ -463,6 +483,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks": {
+      "get": {
+        "summary": "Get service level tasks for a service",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service level tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
+        "tags": [
+          "Service resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "ServiceTasks_List",
+        "x-ms-examples": {
+          "ServiceTasks_List": {
+            "$ref": "./examples/ServiceTasks_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/taskType"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Got service tasks",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/TaskList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/checkNameAvailability": {
       "post": {
         "summary": "Check nested resource name validity and availability",
@@ -473,7 +544,9 @@
         ],
         "operationId": "Services_CheckChildrenNameAvailability",
         "x-ms-examples": {
-          "Services_CheckChildrenNameAvailability": { "$ref": "./examples/Services_CheckChildrenNameAvailability.json" }
+          "Services_CheckChildrenNameAvailability": {
+            "$ref": "./examples/Services_CheckChildrenNameAvailability.json"
+          }
         },
         "parameters": [
           {
@@ -519,7 +592,9 @@
         ],
         "operationId": "Services_ListByResourceGroup",
         "x-ms-examples": {
-          "Services_ListByResourceGroup": { "$ref": "./examples/Services_ListByResourceGroup.json" }
+          "Services_ListByResourceGroup": {
+            "$ref": "./examples/Services_ListByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -562,7 +637,9 @@
         ],
         "operationId": "Services_List",
         "x-ms-examples": {
-          "Services_List": { "$ref": "./examples/Services_List.json" }
+          "Services_List": {
+            "$ref": "./examples/Services_List.json"
+          }
         },
         "parameters": [
           {
@@ -622,7 +699,9 @@
         ],
         "operationId": "Tasks_CreateOrUpdate",
         "x-ms-examples": {
-          "Tasks_CreateOrUpdate": { "$ref": "./examples/Tasks_CreateOrUpdate.json" }
+          "Tasks_CreateOrUpdate": {
+            "$ref": "./examples/Tasks_CreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -660,7 +739,9 @@
         ],
         "operationId": "Tasks_Get",
         "x-ms-examples": {
-          "Tasks_Get": { "$ref": "./examples/Tasks_Get.json" }
+          "Tasks_Get": {
+            "$ref": "./examples/Tasks_Get.json"
+          }
         },
         "parameters": [
           {
@@ -701,7 +782,9 @@
         ],
         "operationId": "Tasks_Delete",
         "x-ms-examples": {
-          "Tasks_Delete": { "$ref": "./examples/Tasks_Delete.json" }
+          "Tasks_Delete": {
+            "$ref": "./examples/Tasks_Delete.json"
+          }
         },
         "responses": {
           "200": {
@@ -728,7 +811,9 @@
         ],
         "operationId": "Tasks_Update",
         "x-ms-examples": {
-          "Tasks_Update": { "$ref": "./examples/Tasks_Update.json" }
+          "Tasks_Update": {
+            "$ref": "./examples/Tasks_Update.json"
+          }
         },
         "parameters": [
           {
@@ -738,6 +823,171 @@
         "responses": {
           "200": {
             "description": "Task resource updated",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/groupName"
+        },
+        {
+          "$ref": "#/parameters/serviceName"
+        },
+        {
+          "$ref": "#/parameters/taskName"
+        },
+        {
+          "$ref": "#/parameters/apiVersion"
+        }
+      ],
+      "put": {
+        "summary": "Create or update service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PUT method creates a new service task or updates an existing one, although since service tasks have no mutable custom properties, there is little reason to update an existing one.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "PUT"
+        ],
+        "operationId": "ServiceTasks_CreateOrUpdate",
+        "x-ms-examples": {
+          "Tasks_CreateOrUpdate": {
+            "$ref": "./examples/ServiceTasks_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service task updated",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "201": {
+            "description": "Service task created",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get service task information",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The GET method retrieves information about a service task.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "ServiceTasks_Get",
+        "x-ms-examples": {
+          "Tasks_Get": {
+            "$ref": "./examples/ServiceTasks_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "description": "Expand the response",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A service task resource",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The DELETE method deletes a service task, canceling it first if it's running.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "DELETE"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deleteRunningTasks"
+          }
+        ],
+        "operationId": "ServiceTasks_Delete",
+        "x-ms-examples": {
+          "Tasks_Delete": {
+            "$ref": "./examples/ServiceTasks_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service Task resource deleted"
+          },
+          "204": {
+            "description": "Not found"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Create or update service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PATCH method updates an existing service task, but since service tasks have no mutable custom properties, there is little reason to do so.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "PATCH"
+        ],
+        "operationId": "ServiceTasks_Update",
+        "x-ms-examples": {
+          "Tasks_Update": {
+            "$ref": "./examples/ServiceTasks_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Task resource updated",
             "schema": {
               "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
             }
@@ -762,7 +1012,9 @@
         ],
         "operationId": "Tasks_Cancel",
         "x-ms-examples": {
-          "Tasks_Cancel": { "$ref": "./examples/Tasks_Cancel.json" }
+          "Tasks_Cancel": {
+            "$ref": "./examples/Tasks_Cancel.json"
+          }
         },
         "parameters": [
           {
@@ -800,6 +1052,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}/cancel": {
+      "post": {
+        "summary": "Cancel a service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method cancels a service task if it's currently queued or running.",
+        "tags": [
+          "Service Task resource",
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "ServiceTasks_Cancel",
+        "x-ms-examples": {
+          "Tasks_Cancel": {
+            "$ref": "./examples/ServiceTasks_Cancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/taskName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Task canceled",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/command": {
       "post": {
         "summary": "Execute a command on a task",
@@ -811,7 +1111,9 @@
         ],
         "operationId": "Tasks_Command",
         "x-ms-examples": {
-          "Tasks_Command": { "$ref": "./examples/Tasks_Command.json" }
+          "Tasks_Command": {
+            "$ref": "./examples/Tasks_Command.json"
+          }
         },
         "parameters": [
           {
@@ -863,7 +1165,9 @@
         ],
         "operationId": "Projects_List",
         "x-ms-examples": {
-          "Projects_List": { "$ref": "./examples/Projects_List.json" }
+          "Projects_List": {
+            "$ref": "./examples/Projects_List.json"
+          }
         },
         "parameters": [
           {
@@ -926,7 +1230,9 @@
         ],
         "operationId": "Projects_CreateOrUpdate",
         "x-ms-examples": {
-          "Projects_CreateOrUpdate": { "$ref": "./examples/Projects_CreateOrUpdate.json" }
+          "Projects_CreateOrUpdate": {
+            "$ref": "./examples/Projects_CreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -964,7 +1270,9 @@
         ],
         "operationId": "Projects_Get",
         "x-ms-examples": {
-          "Projects_Get": { "$ref": "./examples/Projects_Get.json" }
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
+          }
         },
         "responses": {
           "200": {
@@ -996,7 +1304,9 @@
         ],
         "operationId": "Projects_Delete",
         "x-ms-examples": {
-          "Projects_Delete": { "$ref": "./examples/Projects_Delete.json" }
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
+          }
         },
         "responses": {
           "200": {
@@ -1023,7 +1333,9 @@
         ],
         "operationId": "Projects_Update",
         "x-ms-examples": {
-          "Projects_Update": { "$ref": "./examples/Projects_Update.json" }
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Update.json"
+          }
         },
         "parameters": [
           {
@@ -1056,7 +1368,9 @@
         ],
         "operationId": "Services_CheckNameAvailability",
         "x-ms-examples": {
-          "Services_CheckNameAvailability": { "$ref": "./examples/Services_CheckNameAvailability.json" }
+          "Services_CheckNameAvailability": {
+            "$ref": "./examples/Services_CheckNameAvailability.json"
+          }
         },
         "parameters": [
           {
@@ -1098,7 +1412,9 @@
         ],
         "operationId": "Usages_List",
         "x-ms-examples": {
-          "Services_Usages": { "$ref": "./examples/Usages_List.json" }
+          "Services_Usages": {
+            "$ref": "./examples/Usages_List.json"
+          }
         },
         "parameters": [
           {
@@ -1140,7 +1456,9 @@
         ],
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "Operations_List": { "$ref": "./examples/Operations_List.json" }
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
         },
         "parameters": [
           {
@@ -1177,7 +1495,9 @@
         ],
         "operationId": "Files_List",
         "x-ms-examples": {
-          "Files_List": { "$ref": "./examples/Files_List.json" }
+          "Files_List": {
+            "$ref": "./examples/Files_List.json"
+          }
         },
         "parameters": [
           {
@@ -1246,7 +1566,9 @@
         ],
         "operationId": "Files_Get",
         "x-ms-examples": {
-          "Files_List": { "$ref": "./examples/Files_Get.json" }
+          "Files_List": {
+            "$ref": "./examples/Files_Get.json"
+          }
         },
         "responses": {
           "200": {
@@ -1273,7 +1595,9 @@
         ],
         "operationId": "Files_CreateOrUpdate",
         "x-ms-examples": {
-          "Files_CreateOrUpdate": { "$ref": "./examples/Files_CreateOrUpdate.json" }
+          "Files_CreateOrUpdate": {
+            "$ref": "./examples/Files_CreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -1311,7 +1635,9 @@
         ],
         "operationId": "Files_Delete",
         "x-ms-examples": {
-          "Files_Delete": { "$ref": "./examples/Files_Delete.json" }
+          "Files_Delete": {
+            "$ref": "./examples/Files_Delete.json"
+          }
         },
         "responses": {
           "200": {
@@ -1338,7 +1664,9 @@
         ],
         "operationId": "Files_Update",
         "x-ms-examples": {
-          "Files_Update": { "$ref": "./examples/Files_Update.json" }
+          "Files_Update": {
+            "$ref": "./examples/Files_Update.json"
+          }
         },
         "parameters": [
           {
@@ -1372,7 +1700,9 @@
         ],
         "operationId": "Files_Read",
         "x-ms-examples": {
-          "Files_List": { "$ref": "./examples/Files_Read.json" }
+          "Files_List": {
+            "$ref": "./examples/Files_Read.json"
+          }
         },
         "parameters": [
           {
@@ -1421,7 +1751,9 @@
         ],
         "operationId": "Files_ReadWrite",
         "x-ms-examples": {
-          "Files_List": { "$ref": "./examples/Files_ReadWrite.json" }
+          "Files_List": {
+            "$ref": "./examples/Files_ReadWrite.json"
+          }
         },
         "parameters": [
           {

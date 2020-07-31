@@ -72,7 +72,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-            "List autoscale settings": { "$ref": "./examples/listAutoscaleSetting.json" }
+          "List autoscale settings": {
+            "$ref": "./examples/listAutoscaleSetting.json"
+          }
         }
       }
     },
@@ -127,7 +129,9 @@
           }
         },
         "x-ms-examples": {
-            "Create or update an autoscale setting": { "$ref": "./examples/createOrUpdateAutoscaleSetting.json" }
+          "Create or update an autoscale setting": {
+            "$ref": "./examples/createOrUpdateAutoscaleSetting.json"
+          }
         }
       },
       "delete": {
@@ -165,7 +169,9 @@
           }
         },
         "x-ms-examples": {
-            "Delete an autoscale setting": { "$ref": "./examples/deleteAutoscaleSetting.json" }
+          "Delete an autoscale setting": {
+            "$ref": "./examples/deleteAutoscaleSetting.json"
+          }
         }
       },
       "get": {
@@ -203,52 +209,56 @@
           }
         },
         "x-ms-examples": {
-            "Get an autoscale setting": { "$ref": "./examples/getAutoscaleSetting.json" }
+          "Get an autoscale setting": {
+            "$ref": "./examples/getAutoscaleSetting.json"
+          }
         }
       },
       "patch": {
-          "description": "Updates an existing AutoscaleSettingsResource. To update other fields use the CreateOrUpdate method.",
-          "operationId": "AutoscaleSettings_Update",
-          "parameters": [
-              {
-                  "$ref": "#/parameters/SubscriptionIdParameter"
-              },
-              {
-                "$ref": "#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                "$ref": "#/parameters/AutoscaleSettingNameParameter"
-              },
-              {
-                  "$ref": "#/parameters/ApiVersionParameter"
-              },
-              {
-                  "name": "autoscaleSettingResource",
-                  "in": "body",
-                  "required": true,
-                  "schema": {
-                      "$ref": "#/definitions/AutoscaleSettingResourcePatch"
-                  },
-                  "description": "Parameters supplied to the operation."
-              }
-          ],
-          "responses": {
-              "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                      "$ref": "#/definitions/ErrorResponse"
-                  }
-              },
-              "200": {
-                  "description": "An existing autoscale setting resource was successfully updated.",
-                  "schema": {
-                      "$ref": "#/definitions/AutoscaleSettingResource"
-                  }
-              }
+        "description": "Updates an existing AutoscaleSettingsResource. To update other fields use the CreateOrUpdate method.",
+        "operationId": "AutoscaleSettings_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-examples": {
-              "Patch an autoscale setting": { "$ref": "./examples/patchAutoscaleSetting.json" }
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoscaleSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "autoscaleSettingResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResourcePatch"
+            },
+            "description": "Parameters supplied to the operation."
           }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An existing autoscale setting resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an autoscale setting": {
+            "$ref": "./examples/patchAutoscaleSetting.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/autoscalesettings": {
@@ -284,7 +294,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-            "List autoscale settings": { "$ref": "./examples/listAutoscaleSettingBySubscription.json" }
+          "List autoscale settings": {
+            "$ref": "./examples/listAutoscaleSettingBySubscription.json"
+          }
         }
       }
     }
@@ -311,8 +323,8 @@
           "type": "string",
           "description": "Resource location",
           "x-ms-mutability": [
-              "create",
-              "read"
+            "create",
+            "read"
           ]
         },
         "tags": {
@@ -351,11 +363,24 @@
       "description": "The number of instances that can be used during this profile."
     },
     "MetricTrigger": {
-      "required": ["metricName", "metricResourceUri", "timeGrain", "statistic", "timeWindow", "timeAggregation", "operator", "threshold"],
+      "required": [
+        "metricName",
+        "metricResourceUri",
+        "timeGrain",
+        "statistic",
+        "timeWindow",
+        "timeAggregation",
+        "operator",
+        "threshold"
+      ],
       "properties": {
         "metricName": {
           "type": "string",
           "description": "the name of the metric that defines what the rule monitors."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "the namespace of the metric that defines what the rule monitors."
         },
         "metricResourceUri": {
           "type": "string",
@@ -421,6 +446,13 @@
           "type": "number",
           "format": "double",
           "description": "the threshold of the metric that triggers the scale action."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleMetricDimension"
+          },
+          "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}]."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -473,7 +505,8 @@
     },
     "ScaleRule": {
       "required": [
-        "scaleAction", "metricTrigger"
+        "scaleAction",
+        "metricTrigger"
       ],
       "properties": {
         "metricTrigger": {
@@ -504,11 +537,19 @@
           "description": "the end time for the profile in ISO 8601 format."
         }
       },
-      "required": [ "start", "end" ],
+      "required": [
+        "start",
+        "end"
+      ],
       "description": "A specific date-time for the profile."
     },
     "RecurrentSchedule": {
-      "required": ["timeZone", "days", "hours", "minutes"],
+      "required": [
+        "timeZone",
+        "days",
+        "hours",
+        "minutes"
+      ],
       "properties": {
         "timeZone": {
           "type": "string",
@@ -541,7 +582,10 @@
       "description": "The scheduling constraints for when the profile begins."
     },
     "Recurrence": {
-      "required": ["frequency", "schedule"],
+      "required": [
+        "frequency",
+        "schedule"
+      ],
       "properties": {
         "frequency": {
           "type": "string",
@@ -569,7 +613,7 @@
       "description": "The repeating times at which this profile begins. This element is not used if the FixedDate element is used."
     },
     "AutoscaleProfile": {
-      "required":[
+      "required": [
         "rules",
         "name",
         "capacity"
@@ -645,7 +689,9 @@
         "operation": {
           "type": "string",
           "description": "the operation associated with the notification and its value must be \"scale\"",
-          "enum": ["Scale"],
+          "enum": [
+            "Scale"
+          ],
           "x-ms-enum": {
             "name": "OperationType",
             "modelAsString": false
@@ -666,7 +712,7 @@
       "description": "Autoscale notification."
     },
     "AutoscaleSetting": {
-      "required":[
+      "required": [
         "profiles"
       ],
       "properties": {
@@ -705,7 +751,7 @@
       "type": "object",
       "allOf": [
         {
-           "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "required": [
@@ -724,10 +770,10 @@
       "description": "The autoscale setting object for patch operations.",
       "properties": {
         "tags": {
-            "additionalProperties": {
-                "type": "string"
-            },
-            "description": "Resource tags"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -750,7 +796,9 @@
           "description": "URL to get the next set of results."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents a collection of autoscale setting resources."
     },
     "ErrorResponse": {
@@ -766,6 +814,39 @@
           "type": "string"
         }
       }
+    },
+    "ScaleRuleMetricDimension": {
+      "required": [
+        "DimensionName",
+        "Operator",
+        "Values"
+      ],
+      "properties": {
+        "DimensionName": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "Operator": {
+          "type": "string",
+          "description": "the dimension operator. Only 'Equals' and 'NotEquals' are supported. 'Equals' being equal to any of the values. 'NotEquals' being not equal to all of the values",
+          "enum": [
+            "Equals",
+            "NotEquals"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleRuleMetricDimensionOperationType",
+            "modelAsString": true
+          }
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "list of dimension values. For example: [\"App1\",\"App2\"]."
+        }
+      },
+      "description": "Specifies an auto scale rule metric dimension."
     }
   },
   "parameters": {
