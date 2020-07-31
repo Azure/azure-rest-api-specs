@@ -34,12 +34,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_Create",
+        "operationId": "FlexibleServers_Create",
         "x-ms-examples": {
           "Create a new server": {
             "$ref": "./examples/ServerCreate.json"
@@ -70,7 +70,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerForCreate"
+              "$ref": "#/definitions/Server"
             },
             "description": "The required parameters for creating or updating a server."
           }
@@ -104,7 +104,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_Update",
+        "operationId": "FlexibleServers_Update",
         "x-ms-examples": {
           "Update a server": {
             "$ref": "./examples/ServerUpdate.json"
@@ -157,7 +157,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_Delete",
+        "operationId": "FlexibleServers_Delete",
         "x-ms-examples": {
           "Delete a server": {
             "$ref": "./examples/ServerDelete.json"
@@ -201,7 +201,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_Get",
+        "operationId": "FlexibleServers_Get",
         "x-ms-examples": {
           "Get a server": {
             "$ref": "./examples/ServerGet.json"
@@ -241,12 +241,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers": {
       "get": {
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_ListByResourceGroup",
+        "operationId": "FlexibleServers_ListByResourceGroup",
         "x-ms-examples": {
           "List servers in a resource group": {
             "$ref": "./examples/ServersListByResourceGroup.json"
@@ -283,12 +283,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/flexibleServers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/flexibleServers": {
       "get": {
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_List",
+        "operationId": "FlexibleServers_List",
         "x-ms-examples": {
           "List servers in a subscription": {
             "$ref": "./examples/ServersList.json"
@@ -322,12 +322,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/restart": {
       "post": {
         "tags": [
           "ServerRestart"
         ],
-        "operationId": "Servers_Restart",
+        "operationId": "FlexibleServers_Restart",
         "x-ms-examples": {
           "Restart a server": {
             "$ref": "./examples/ServerRestart.json"
@@ -365,12 +365,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/start": {
       "post": {
         "tags": [
           "ServerStart"
         ],
-        "operationId": "Servers_Start",
+        "operationId": "FlexibleServers_Start",
         "x-ms-examples": {
           "Start a server": {
             "$ref": "./examples/ServerStart.json"
@@ -408,12 +408,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/stop": {
       "post": {
         "tags": [
           "ServerStop"
         ],
-        "operationId": "Servers_Stop",
+        "operationId": "FlexibleServers_Stop",
         "x-ms-examples": {
           "Stop a server": {
             "$ref": "./examples/ServerStop.json"
@@ -451,12 +451,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/Replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/replicas": {
       "get": {
         "tags": [
           "Servers"
         ],
-        "operationId": "Replicas_ListByServer",
+        "operationId": "FlexibleServersReplicas_ListByServer",
         "x-ms-examples": {
           "List replicas for a server": {
             "$ref": "./examples/ReplicasListByServer.json"
@@ -483,6 +483,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -490,12 +496,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FirewallRules_CreateOrUpdate",
+        "operationId": "FlexibleServersFirewallRules_CreateOrUpdate",
         "x-ms-examples": {
           "Create a firewall rule": {
             "$ref": "./examples/FirewallRuleCreate.json"
@@ -543,6 +549,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -551,7 +563,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FirewallRules_Delete",
+        "operationId": "FlexibleServersFirewallRules_Delete",
         "x-ms-examples": {
           "Delete a firewall rule": {
             "$ref": "./examples/FirewallRuleDelete.json"
@@ -584,6 +596,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -592,7 +610,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FirewallRules_Get",
+        "operationId": "FlexibleServersFirewallRules_Get",
         "x-ms-examples": {
           "Get a firewall rule": {
             "$ref": "./examples/FirewallRuleGet.json"
@@ -632,12 +650,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FirewallRules_ListByServer",
+        "operationId": "FlexibleServersFirewallRules_ListByServer",
         "x-ms-examples": {
           "List all firewall rules in a server": {
             "$ref": "./examples/FirewallRulesListByServer.json"
@@ -664,6 +682,12 @@
             "schema": {
               "$ref": "#/definitions/FirewallRuleListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -671,12 +695,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_CreateOrUpdate",
+        "operationId": "FlexibleServersDatabases_CreateOrUpdate",
         "x-ms-examples": {
           "Create a database": {
             "$ref": "./examples/DatabaseCreate.json"
@@ -724,6 +748,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -732,7 +762,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_Delete",
+        "operationId": "FlexibleServersDatabases_Delete",
         "x-ms-examples": {
           "Delete a database": {
             "$ref": "./examples/DatabaseDelete.json"
@@ -765,6 +795,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -773,7 +809,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_Get",
+        "operationId": "FlexibleServersDatabases_Get",
         "x-ms-examples": {
           "Get a database": {
             "$ref": "./examples/DatabaseGet.json"
@@ -803,16 +839,22 @@
             "schema": {
               "$ref": "#/definitions/Database"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_ListByServer",
+        "operationId": "FlexibleServersDatabases_ListByServer",
         "x-ms-examples": {
           "List databases in a server": {
             "$ref": "./examples/DatabasesListByServer.json"
@@ -839,6 +881,12 @@
             "schema": {
               "$ref": "#/definitions/DatabaseListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -846,12 +894,68 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/configurations/{configurationName}": {
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "FlexibleServersConfigurations_Update",
+        "x-ms-examples": {
+          "Update a user configration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "get": {
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_Get",
+        "operationId": "FlexibleServersConfigurations_Get",
         "x-ms-examples": {
           "Get a configuration": {
             "$ref": "./examples/ConfigurationGet.json"
@@ -891,12 +995,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_ListByServer",
+        "operationId": "FlexibleServersConfigurations_ListByServer",
         "x-ms-examples": {
           "List all configurations for a server": {
             "$ref": "./examples/ConfigurationsListByServer.json"
@@ -936,70 +1040,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/updateConfigurations": {
-      "post": {
-        "tags": [
-          "Configurations"
-        ],
-        "operationId": "Configurations_Update",
-        "x-ms-examples": {
-          "Update a set of configurations": {
-            "$ref": "./examples/ConfigurationsUpdate.json"
-          }
-        },
-        "description": "Updates a set configurations for a server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationUpdateList"
-            },
-            "description": "The required parameters for updating server configurations."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
       "put": {
         "tags": [
           "MaintenanceWindows"
         ],
-        "operationId": "MaintenanceWindows_CreateOrUpdate",
+        "operationId": "FlexibleServersMaintenanceWindows_CreateOrUpdate",
         "x-ms-examples": {
           "Create a maintenance window": {
             "$ref": "./examples/MaintenanceWindowCreate.json"
@@ -1047,6 +1093,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1055,7 +1107,7 @@
         "tags": [
           "MaintenanceWindows"
         ],
-        "operationId": "MaintenanceWindows_Delete",
+        "operationId": "FlexibleServersMaintenanceWindows_Delete",
         "x-ms-examples": {
           "Delete a maintenance window": {
             "$ref": "./examples/MaintenanceWindowDelete.json"
@@ -1088,6 +1140,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1096,7 +1154,7 @@
         "tags": [
           "MaintenanceWindows"
         ],
-        "operationId": "MaintenanceWindows_Get",
+        "operationId": "FlexibleServersMaintenanceWindows_Get",
         "x-ms-examples": {
           "Get a maintenance window": {
             "$ref": "./examples/MaintenanceWindowGet.json"
@@ -1136,12 +1194,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenanceWindows": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/flexibleServers/{serverName}/maintenanceWindows": {
       "get": {
         "tags": [
           "MaintenanceWindows"
         ],
-        "operationId": "MaintenanceWindows_ListByServer",
+        "operationId": "FlexibleServersMaintenanceWindows_ListByServer",
         "x-ms-examples": {
           "List maintenance windows for a server": {
             "$ref": "./examples/MaintenanceWindowsListByServer.json"
@@ -1168,16 +1226,25 @@
             "schema": {
               "$ref": "#/definitions/MaintenanceWindowListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
         ],
-        "operationId": "CheckNameAvailability_Execute",
+        "operationId": "FlexibleServersCheckNameAvailability_Execute",
         "x-ms-examples": {
           "Check name availability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -1217,7 +1284,7 @@
         }
       }
     },
-    "/providers/Microsoft.DBforMySQL/operations": {
+    "/providers/Microsoft.DBForMySQL/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1239,6 +1306,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1266,7 +1339,7 @@
       ],
       "x-ms-enum": {
         "name": "SslEnforcementEnum",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "InfrastructureEncryption": {
@@ -1277,18 +1350,8 @@
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "InfrastructureEncryption",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Enabled",
-            "description": "Default value for single layer of encryption for data at rest."
-          },
-          {
-            "value": "Disabled",
-            "description": "Additional (2nd) layer of encryption for data at rest"
-          }
-        ]
+        "name": "InfrastructureEncryptionEnum",
+        "modelAsString": true
       }
     },
     "PublicNetworkAccess": {
@@ -1324,6 +1387,7 @@
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Backup retention days for the server."
         },
         "storageMB": {
@@ -1351,213 +1415,6 @@
       },
       "description": "Storage Profile properties of a server"
     },
-    "ServerProperties": {
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "Server version."
-        },
-        "sslEnforcement": {
-          "$ref": "#/definitions/SslEnforcement",
-          "description": "Enable ssl enforcement or not when connect to server."
-        },
-        "infrastructureEncryption": {
-          "$ref": "#/definitions/InfrastructureEncryption",
-          "description": "Status showing whether the server enabled infrastructure encryption."
-        },
-        "state": {
-          "type": "string",
-          "description": "The state of a server.",
-          "enum": [
-            "Ready",
-            "Dropping",
-            "Disabled",
-            "Starting",
-            "Stopping",
-            "Stopped",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ServerState",
-            "modelAsString": true
-          }
-        },
-        "haState": {
-          "type": "string",
-          "description": "The state of a HA server.",
-          "enum": [
-            "NotEnabled",
-            "CreatingStandby",
-            "ReplicatingData",
-            "FailingOver",
-            "Healthy",
-            "RemovingStandby"
-          ],
-          "x-ms-enum": {
-            "name": "ServerHAState",
-            "modelAsString": true
-          }
-        },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
-        },
-        "fullyQualifiedDomainName": {
-          "type": "string",
-          "description": "The fully qualified domain name of a server."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Storage profile of a server."
-        },
-        "replicationRole": {
-          "type": "string",
-          "description": "The replication role."
-        },
-        "primaryServerId": {
-          "type": "string",
-          "description": "The primary server id of a replica server."
-        },
-        "replicaCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "The maximum number of replicas that a primary server can have."
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
-        },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "Vnet arguments."
-        }
-      },
-      "description": "The properties of a server."
-    },
-    "ServerPropertiesForCreate": {
-      "discriminator": "createMode",
-      "required": [
-        "createMode"
-      ],
-      "properties": {
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "Server version."
-        },
-        "sslEnforcement": {
-          "$ref": "#/definitions/SslEnforcement",
-          "description": "Enable ssl enforcement or not when connect to server."
-        },
-        "infrastructureEncryption": {
-          "$ref": "#/definitions/InfrastructureEncryption",
-          "description": "Status showing whether the server enabled infrastructure encryption."
-        },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "Vnet arguments."
-        },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1."
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Storage profile of a server."
-        },
-        "createMode": {
-          "type": "string",
-          "description": "The mode to create a new server.",
-          "enum": [
-            "Default",
-            "PointInTimeRestore",
-            "Replica"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The properties used to create a new server."
-    },
-    "ServerPropertiesForDefaultCreate": {
-      "x-ms-discriminator-value": "Default",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerPropertiesForCreate"
-        }
-      ],
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation)."
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "format": "password",
-          "description": "The password of the administrator login."
-        }
-      },
-      "required": [
-        "administratorLogin",
-        "administratorLoginPassword"
-      ],
-      "description": "The properties used to create a new server."
-    },
-    "ServerPropertiesForRestore": {
-      "x-ms-discriminator-value": "PointInTimeRestore",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerPropertiesForCreate"
-        }
-      ],
-      "properties": {
-        "sourceServerId": {
-          "type": "string",
-          "description": "The source server id to restore from."
-        },
-        "restorePointInTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
-        }
-      },
-      "required": [
-        "sourceServerId",
-        "restorePointInTime"
-      ],
-      "description": "The properties used to create a new server by restoring from a backup."
-    },
-    "ServerPropertiesForReplica": {
-      "x-ms-discriminator-value": "Replica",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerPropertiesForCreate"
-        }
-      ],
-      "properties": {
-        "sourceServerId": {
-          "type": "string",
-          "description": "The primary server id to create replica from."
-        }
-      },
-      "required": [
-        "sourceServerId"
-      ],
-      "description": "The properties to create a new replica."
-    },
     "Sku": {
       "properties": {
         "name": {
@@ -1579,6 +1436,154 @@
         }
       },
       "description": "Billing information related properties of a server."
+    },
+    "ServerProperties": {
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "description": "The password of the administrator login (required for server creation).",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "Server version."
+        },
+        "sslEnforcement": {
+          "$ref": "#/definitions/SslEnforcement",
+          "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "infrastructureEncryption": {
+          "$ref": "#/definitions/InfrastructureEncryption",
+          "description": "Status showing whether the server enabled infrastructure encryption.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of a server.",
+          "enum": [
+            "Ready",
+            "Dropping",
+            "Disabled",
+            "Starting",
+            "Stopping",
+            "Stopped",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ServerState",
+            "modelAsString": true
+          }
+        },
+        "haState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of a HA server.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
+          ],
+          "x-ms-enum": {
+            "name": "ServerHAState",
+            "modelAsString": true
+          }
+        },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "stand by count value can be either 0 or 1"
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role."
+        },
+        "primaryServerId": {
+          "type": "string",
+          "description": "The primary server id of a replica server.",
+          "readOnly": true
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The maximum number of replicas that a primary server can have."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "sourceServerId": {
+          "type": "string",
+          "description": "The source MySQL server name to restore from.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "vnetInjArgs": {
+          "$ref": "#/definitions/VnetInjArgs",
+          "description": "Vnet arguments."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a new MySQL server.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore",
+            "Replica"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The properties of a server."
     },
     "Server": {
       "properties": {
@@ -1603,34 +1608,41 @@
       ],
       "description": "Represents a server."
     },
-    "ServerForCreate": {
+    "ServerPropertiesForUpdate": {
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU (pricing tier) of the server."
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
         },
-        "properties": {
-          "$ref": "#/definitions/ServerPropertiesForCreate",
-          "x-ms-client-flatten": false,
-          "description": "Properties of the server."
-        },
-        "location": {
+        "administratorLoginPassword": {
           "type": "string",
-          "description": "The location the resource resides in."
+          "x-ms-secret": true,
+          "format": "password",
+          "description": "The password of the administrator login."
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
+        "sslEnforcement": {
+          "$ref": "#/definitions/SslEnforcement",
+          "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "vnetInjArgs": {
+          "$ref": "#/definitions/VnetInjArgs",
+          "description": "Vnet arguments."
+        },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "stand by count value can be either 0 or 1"
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role of the server."
         }
       },
-      "required": [
-        "properties",
-        "location"
-      ],
-      "description": "Represents a server to be created."
+      "description": "The properties that can be updated for a server."
     },
     "ServerForUpdate": {
       "properties": {
@@ -1639,39 +1651,7 @@
           "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
-          "properties": {
-            "storageProfile": {
-              "$ref": "#/definitions/StorageProfile",
-              "description": "Storage profile of a server."
-            },
-            "administratorLoginPassword": {
-              "type": "string",
-              "x-ms-secret": true,
-              "format": "password",
-              "description": "The password of the administrator login."
-            },
-            "sslEnforcement": {
-              "$ref": "#/definitions/SslEnforcement",
-              "description": "Enable ssl enforcement or not when connect to server."
-            },
-            "vnetInjArgs": {
-              "$ref": "#/definitions/VnetInjArgs",
-              "description": "Vnet arguments."
-            },
-            "standbyCount": {
-              "type": "integer",
-              "format": "int32",
-              "description": "stand by count value can be either 0 or 1"
-            },
-            "publicNetworkAccess": {
-              "$ref": "#/definitions/PublicNetworkAccess",
-              "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
-            },
-            "replicationRole": {
-              "type": "string",
-              "description": "The replication role of the server."
-            }
-          },
+          "$ref": "#/definitions/ServerPropertiesForUpdate",
           "x-ms-client-flatten": true,
           "description": "The properties that can be updated for a server."
         },
@@ -1831,8 +1811,22 @@
           "type": "string",
           "description": "Source of the configuration."
         },
+        "isReadOnly": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration read only.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsReadOnly",
+            "modelAsString": true
+          }
+        },
         "isConfigPendingRestart": {
           "type": "string",
+          "readOnly": true,
           "description": "If is the configuration pending restart or not.",
           "enum": [
             "True",
@@ -1845,6 +1839,7 @@
         },
         "isDynamicConfig": {
           "type": "string",
+          "readOnly": true,
           "description": "If is the configuration dynamic.",
           "enum": [
             "True",
@@ -1890,57 +1885,26 @@
       },
       "description": "A list of server configurations."
     },
-    "ConfigurationForUpdate": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the configuration."
-        },
-        "properties": {
-          "properties": {
-            "value": {
-              "type": "string",
-              "description": "Value of the configuration."
-            },
-            "source": {
-              "type": "string",
-              "description": "Source of the configuration."
-            }
-          },
-          "x-ms-client-flatten": true,
-          "description": "The properties can be updated for a configuration."
-        }
-      },
-      "description": "Represents a Configuration."
-    },
-    "ConfigurationUpdateList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationForUpdate"
-          },
-          "description": "The list of server configurations."
-        }
-      },
-      "description": "A list of server configurations to update."
-    },
     "MaintenanceWindowProperties": {
       "properties": {
         "dayOfWeek": {
           "type": "integer",
+          "format": "int32",
           "description": "The day of week of the maintenance window to start"
         },
         "durationInMinutes": {
           "type": "integer",
+          "format": "int32",
           "description": "The duration of the maintenance window to run."
         },
         "startHour": {
           "type": "integer",
+          "format": "int32",
           "description": "The starting hour of the maintenance window."
         },
         "startMinute": {
           "type": "integer",
+          "format": "int32",
           "description": "The starting minutes of the maintenance window."
         }
       },
@@ -1970,16 +1934,21 @@
       "description": "Represents a server maintenance window."
     },
     "MaintenanceWindowListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindow"
           },
-          "description": "The list of maintenance windows in a server."
+          "description": "The list of server maintenance window."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       },
-      "description": "A list of maintenance windows."
+      "description": "A list of maintenance windows for a MySQL server."
     },
     "OperationDisplay": {
       "properties": {

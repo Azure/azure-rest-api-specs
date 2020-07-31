@@ -1,10 +1,16 @@
 {
   "parameters": {
-    "configurationName": "event_scheduler",
     "serverName": "testserver",
-    "resourceGroupName": "TestGroup",
+    "configurationName": "event_scheduler",
+    "resourceGroupName": "testrg",
     "api-version": "2020-07-01-privatepreview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "value": "on",
+        "source": "user-override"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -17,13 +23,13 @@
           "allowedValues": "ON,OFF,DISABLED",
           "source": "user-override",
           "isConfigPendingRestart": "False",
-          "isDynamicConfig": "True",
-          "isReadOnly": "False"
+          "isDynamicConfig": "True"
         },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/configurations/event_scheduler",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/testserver/configurations/event_scheduler",
         "name": "event_scheduler",
         "type": "Microsoft.DBforMySQL/flexibleServers/configurations"
       }
-    }
+    },
+    "202": {}
   }
 }
