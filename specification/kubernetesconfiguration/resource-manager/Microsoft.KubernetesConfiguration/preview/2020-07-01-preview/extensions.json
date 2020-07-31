@@ -74,7 +74,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExtensionInstance"
+              "$ref": "#/definitions/ExtensionInstanceForCreate"
             },
             "description": "Properties necessary to Create an Extension Instance."
           }
@@ -598,39 +598,6 @@
               "description": "Configuration settings that are sensitive, as name-value pairs for configuring this instance of the extension.",
               "type": "object",
               "$ref": "#/definitions/ExtensionProtectedSettings"
-            },
-            "installState": {
-              "type": "string",
-              "description": "Status of installation of this instance of the extension.",
-              "$ref": "#/definitions/InstallState"
-            },
-            "statuses": {
-              "type": "array",
-              "description": "Status from this instance of the extension.",
-              "items": {
-                "$ref": "#/definitions/ExtensionStatus"
-              }
-            },
-            "creationTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
-              "readOnly": true
-            },
-            "lastModifiedTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
-              "readOnly": true
-            },
-            "lastStatusTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time of last status from the agent.",
-              "readOnly": true
-            },
-            "errorInfo": {
-              "type": "object",
-              "description": "Error information from the Agent - e.g. errors during installation.",
-              "readOnly": true,
-              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
