@@ -1,0 +1,1640 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2020-02-14-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}": {
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "FlexibleServers_Create",
+        "x-ms-examples": {
+          "Create a new server": {
+            "$ref": "./examples/ServerCreate.json"
+          },
+          "Create a database as a point in time restore": {
+            "$ref": "./examples/ServerCreatePointInTimeRestore.json"
+          }
+        },
+        "description": "Creates a new server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "FlexibleServers_Update",
+        "x-ms-examples": {
+          "ServerUpdate": {
+            "$ref": "./examples/ServerUpdate.json"
+          }
+        },
+        "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerForUpdate"
+            },
+            "description": "The required parameters for updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "FlexibleServers_Delete",
+        "x-ms-examples": {
+          "ServerDelete": {
+            "$ref": "./examples/ServerDelete.json"
+          }
+        },
+        "description": "Deletes a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "FlexibleServers_Get",
+        "x-ms-examples": {
+          "ServerGet": {
+            "$ref": "./examples/ServerGet.json"
+          },
+          "ServerGetWithVnet": {
+            "$ref": "./examples/ServerGetWithVnet.json"
+          }
+        },
+        "description": "Gets information about a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "FlexibleServers_ListByResourceGroup",
+        "x-ms-examples": {
+          "ServerListByResourceGroup": {
+            "$ref": "./examples/ServerListByResourceGroup.json"
+          }
+        },
+        "description": "List all the servers in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/flexibleServers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "FlexibleServers_List",
+        "x-ms-examples": {
+          "ServerList": {
+            "$ref": "./examples/ServerList.json"
+          }
+        },
+        "description": "List all the servers in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "ServerRestart"
+        ],
+        "operationId": "FlexibleServers_Restart",
+        "x-ms-examples": {
+          "ServerRestart": {
+            "$ref": "./examples/ServerRestart.json"
+          }
+        },
+        "description": "Restarts a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/start": {
+      "post": {
+        "tags": [
+          "ServerStart"
+        ],
+        "operationId": "FlexibleServers_Start",
+        "x-ms-examples": {
+          "ServerStart": {
+            "$ref": "./examples/ServerStart.json"
+          }
+        },
+        "description": "Starts a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/stop": {
+      "post": {
+        "tags": [
+          "ServerStop"
+        ],
+        "operationId": "FlexibleServers_Stop",
+        "x-ms-examples": {
+          "ServerStop": {
+            "$ref": "./examples/ServerStop.json"
+          }
+        },
+        "description": "Stops a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FlexibleServersFirewallRules_CreateOrUpdate",
+        "x-ms-examples": {
+          "FirewallRuleCreate": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          }
+        },
+        "description": "Creates a new firewall rule or updates an existing firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "The required parameters for creating or updating a firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "x-ms-examples": {
+          "FirewallRuleDelete": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
+        },
+        "description": "Deletes a PostgreSQL server firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FlexibleServersFirewallRules_Get",
+        "x-ms-examples": {
+          "FirewallRuleList": {
+            "$ref": "./examples/FirewallRuleGet.json"
+          }
+        },
+        "description": "List all the firewall rules in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/firewallRules": {
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FlexibleServersFirewallRules_ListByServer",
+        "x-ms-examples": {
+          "FirewallRuleList": {
+            "$ref": "./examples/FirewallRuleListByServer.json"
+          }
+        },
+        "description": "List all the firewall rules in a given PostgreSQL server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/configurations": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "FlexibleServersConfigurations_ListByServer",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationListByServer.json"
+          }
+        },
+        "description": "List all the configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/configurations/{configurationName}": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "FlexibleServersConfigurations_Get",
+        "x-ms-examples": {
+          "ConfigurationGet": {
+            "$ref": "./examples/ConfigurationGet.json"
+          }
+        },
+        "description": "Gets information about a configuration of server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
+      "put": {
+        "tags": [
+          "CustomerMaintenanceWindow"
+        ],
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_CreateOrUpdate",
+        "x-ms-examples": {
+          "CustomerMaintenanceWindowCreate": {
+            "$ref": "./examples/CustomerMaintenanceWindowCreate.json"
+          }
+        },
+        "description": "Creates a new customer maintenance window.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerMaintenanceWindow"
+            },
+            "description": "The required parameters for creating or updating a customer maintenance window."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerMaintenanceWindow"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CustomerMaintenanceWindow"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "CustomerMaintenanceWindow"
+        ],
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_Delete",
+        "x-ms-examples": {
+          "CustomerMaintenanceWindowDelete": {
+            "$ref": "./examples/CustomerMaintenanceWindowDelete.json"
+          }
+        },
+        "description": "Deletes a PostgreSQL server Customer maintenance window.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "CustomerMaintenanceWindow"
+        ],
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_Get",
+        "x-ms-examples": {
+          "CustomerMaintenanceWindowGet": {
+            "$ref": "./examples/CustomerMaintenanceWindowGet.json"
+          }
+        },
+        "description": "Get the Customer maintenance windows of a given PostgreSQL server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerMaintenanceWindow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows": {
+      "get": {
+        "tags": [
+          "CustomerMaintenanceWindow"
+        ],
+        "operationId": "FlexibleServersCustomerMaintenanceWindow_ListByServer",
+        "x-ms-examples": {
+          "CustomerMaintenanceWindowList": {
+            "$ref": "./examples/CustomerMaintenanceWindowListByServer.json"
+          }
+        },
+        "description": "List all the Customer Maintenance Windows in a given PostgreSQL server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerMaintenanceWindowListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "operationId": "FlexibleServersCheckNameAvailability_Execute",
+        "x-ms-examples": {
+          "NameAvailability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "description": "Check the availability of name for resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if resource name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBForPostgreSql/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "description": "Lists all of the available REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerVersion": {
+      "type": "string",
+      "description": "The version of a server.",
+      "enum": [
+        "12"
+      ],
+      "x-ms-enum": {
+        "name": "ServerVersion",
+        "modelAsString": true
+      }
+    },
+    "ServerProperties": {
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "description": "The administrator login password (required for server creation).",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "PostgreSQL Server version."
+        },
+        "state": {
+          "type": "string",
+          "description": "A state of a server that is visible to user.",
+          "readOnly": true,
+          "enum": [
+            "Ready",
+            "Dropping",
+            "Disabled",
+            "Starting",
+            "Stopping",
+            "Stopped",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ServerState",
+            "modelAsString": true
+          }
+        },
+        "haState": {
+          "type": "string",
+          "description": "A state of a HA server that is visible to user.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ServerHAState",
+            "modelAsString": true
+          }
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of a server."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "public network access is enabled or not",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPublicNetworkAccessState",
+            "modelAsString": true
+          }
+        },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "stand by count value can be either 0 or 1"
+        },
+        "sourceServerName": {
+          "type": "string",
+          "description": "The source PostgreSQL server name to restore from."
+        },
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+        },
+        "vnetInjArgs": {
+          "properties": {
+            "delegatedVnetID": {
+              "type": "string",
+              "description": "delegated vNet ID"
+            },
+            "delegatedSubnetName": {
+              "type": "string",
+              "description": "delegated subnet name"
+            },
+            "delegatedVnetName": {
+              "type": "string",
+              "description": "delegated vNet name"
+            }
+          }
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a new PostgreSQL server.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of a server."
+    },
+    "Server": {
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
+          "description": "The Azure Active Directory identity of the server."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Represents a server."
+    },
+    "ServerPropertiesForUpdate": {
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The password of the administrator login."
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "PostgreSQL Server version."
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max compute of a server is 64vCores."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Storage profile of a server."
+        },
+        "standbyCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "stand by count value can be either 0 or 1"
+        },
+        "serverEdition": {
+          "type": "string",
+          "description": "server edition default to general purpose"
+        }
+      }
+    },
+    "ServerForUpdate": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location the resource resides in."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU (pricing tier) of the server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerPropertiesForUpdate",
+          "x-ms-client-flatten": false,
+          "description": "Properties of the server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "Represents a server to be updated."
+    },
+    "ServerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          },
+          "description": "The list of servers"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of servers."
+    },
+    "StorageProfile": {
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server."
+        },
+        "storageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        }
+      },
+      "description": "Storage Profile properties of a server"
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the particular SKU, e.g. Burstable.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The scale up/out capacity, representing server's compute units."
+        }
+      },
+      "description": "Sku information related properties of a server."
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+          "description": "The start IP address of the server firewall rule. Must be IPv4 format."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+          "description": "The end IP address of the server firewall rule. Must be IPv4 format."
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
+      "description": "The properties of a server firewall rule."
+    },
+    "FirewallRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a firewall rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Represents a server firewall rule."
+    },
+    "FirewallRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of firewall rules in a server."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of firewall rules."
+    },
+    "CustomerMaintenanceWindowProperties": {
+      "properties": {
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The day of week of the customer maintenance window to start"
+        },
+        "durationInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the customer maintenance window to run."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The starting hour of the customer maintenance window."
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The starting minutes of the customer maintenance window."
+        }
+      },
+      "required": [
+        "dayOfWeek",
+        "startHour",
+        "startMinute"
+      ],
+      "description": "The properties of a server firewall rule."
+    },
+    "CustomerMaintenanceWindow": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomerMaintenanceWindowProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a customer maintenance window."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Represents a server firewall rule."
+    },
+    "CustomerMaintenanceWindowListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerMaintenanceWindow"
+          },
+          "description": "The list of CustomerMaintenanceWindows in a PostgreSQL server."
+        }
+      },
+      "description": "A list of firewall rules."
+    },
+    "ConfigurationProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Description of the configuration."
+        },
+        "defaultValue": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Default value of the configuration."
+        },
+        "dataType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Data type of the configuration.",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          }
+        },
+        "allowedValues": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Allowed values of the configuration."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration."
+        }
+      },
+      "description": "The properties of a configuration."
+    },
+    "Configuration": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Configuration."
+    },
+    "ConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "description": "The list of server configurations."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of server configurations."
+    },
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Operation resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Localized friendly name for the operation."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Operation description."
+        }
+      },
+      "description": "Display metadata associated with the operation."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "readOnly": true,
+          "description": "The localized display information for this particular operation or action."
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "NotSpecified",
+            "user",
+            "system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false,
+          "description": "Additional descriptions for the operation."
+        }
+      },
+      "description": "REST API operation definition."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "The list of resource provider operations."
+        }
+      },
+      "description": "A list of resource provider operations."
+    },
+    "NameAvailabilityRequest": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type used for verification."
+        }
+      },
+      "description": "Request from client to check resource name availability."
+    },
+    "NameAvailability": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error Message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the PostgreSQL server."
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the server"
+        }
+      },
+      "description": "Represents a resource name availability."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the Batch service."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server firewall rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "MaintenanceWindowNameParameter": {
+      "name": "maintenanceWindowName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the maintenance window.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
