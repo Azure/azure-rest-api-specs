@@ -2230,6 +2230,11 @@
         "tags": [
           "Providers"
         ],
+        "x-ms-examples": {
+          "Get a resource provider at tenant scope": {
+            "$ref": "./examples/GetNamedProviderAtTenant.json"
+          }
+        },
         "operationId": "Providers_GetAtTenantScope",
         "description": "Gets the specified resource provider at the tenant level.",
         "parameters": [
@@ -4581,6 +4586,100 @@
       },
       "description": "An error response for a resource management request."
     },
+    "ApiProfile": {
+      "properties": {
+        "profileVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The profile version."
+        },
+        "apiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The API version."
+        }
+      }
+    },
+    "AliasPathMetadata": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NotSpecified",
+            "Any",
+            "String",
+            "Object",
+            "Array",
+            "Integer",
+            "Number",
+            "Boolean"
+          ],
+          "x-ms-enum": {
+            "name": "AliasPathTokenType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "The token type is not specified."
+              },
+              {
+                "value": "Any",
+                "description": "The token type can be anything."
+              },
+              {
+                "value": "String",
+                "description": "The token type is string."
+              },
+              {
+                "value": "Object",
+                "description": "The token type is object."
+              },
+              {
+                "value": "Array",
+                "description": "The token type is array."
+              },
+              {
+                "value": "Integer",
+                "description": "The token type is integer."
+              },
+              {
+                "value": "Number",
+                "description": "The token type is number."
+              },
+              {
+                "value": "Boolean",
+                "description": "The token type is boolean."
+              }
+            ]
+          },
+          "description": "The type of the token that the alias path is referring to."
+        },
+        "attributes": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "None",
+            "Modifiable"
+          ],
+          "x-ms-enum": {
+            "name": "AliasPathAttributes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "The token that the alias path is referring to has no attributes."
+              },
+              {
+                "value": "Modifiable",
+                "description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect."
+              }
+            ]
+          },
+          "description": "The attributes of the token that the alias path is referring to."
+        }
+      }
+    },
     "AliasPath": {
       "properties": {
         "path": {
@@ -4597,6 +4696,11 @@
         "pattern": {
           "$ref": "#/definitions/AliasPattern",
           "description": "The pattern for an alias path."
+        },
+        "metadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/AliasPathMetadata",
+          "description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias."
         }
       },
       "description": "The type of the paths for alias."
@@ -4683,6 +4787,11 @@
         "defaultPattern": {
           "$ref": "#/definitions/AliasPattern",
           "description": "The default pattern for an alias."
+        },
+        "defaultMetadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/AliasPathMetadata",
+          "description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata"
         }
       },
       "description": "The alias type. "
@@ -4713,6 +4822,19 @@
             "type": "string"
           },
           "description": "The API version."
+        },
+        "defaultApiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The default API version."
+        },
+        "apiProfiles": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ApiProfile"
+          },
+          "description": "The API profiles for the resource provider."
         },
         "capabilities": {
           "type": "string",
