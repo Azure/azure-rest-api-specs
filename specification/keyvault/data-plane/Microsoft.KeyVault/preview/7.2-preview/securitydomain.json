@@ -37,10 +37,10 @@
         "parameters": [
           {
             "in": "body",
-            "name": "MofNCertificateInfo",
+            "name": "CertificateInfoObject",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MofNCertificateInfoObject"
+              "$ref": "#/definitions/CertificateInfoObject"
             },
             "description": "Security domain download operation requires customer to provide N certificates containing public key in JWK format."
           },
@@ -185,24 +185,7 @@
     }
   },
   "definitions": {
-    "MofNCertificateInfoObject": {
-      "properties": {
-        "Certificates": {
-          "$ref": "#/definitions/CertificateSet"
-        },
-        "quorum_threshold": {
-          "description": "Customer to specify the quorum number of certificates to restore security domain",
-          "type": "integer",
-          "default": 2,
-          "minimum": 2,
-          "maximum": 10
-        }
-      },
-      "required": [
-        "Certificates"
-      ]
-    },
-    "CertificateSet": {
+    "CertificateInfoObject": {
       "properties": {
         "certificates": {
           "type": "array",
@@ -213,6 +196,13 @@
           "maxItems": 10,
           "uniqueItems": true,
           "description": "Certificates needed from customer"
+        },
+        "quorum_threshold": {
+          "description": "Customer to specify the quorum number of certificates to restore security domain",
+          "type": "integer",
+          "default": 2,
+          "minimum": 2,
+          "maximum": 10
         }
       },
       "required": [
