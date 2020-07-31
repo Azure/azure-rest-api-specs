@@ -620,8 +620,15 @@
           },
           {
             "name": "name",
-            "in": "body",
+            "in": "path",
             "description": "The name of the consumer group to add.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "consumerGroupBody",
+            "in": "body",
+            "description": "The consumer group to add.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EventHubConsumerGroupBodyDescription"
