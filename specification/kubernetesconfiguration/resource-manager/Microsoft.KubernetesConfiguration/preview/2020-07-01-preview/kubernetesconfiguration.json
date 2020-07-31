@@ -424,6 +424,12 @@
         }
       }
     },
+    "ConfigurationProtectedSettings": {
+      "description": "Name-value pairs of protected configuration settings for the configuration",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "SourceControlConfiguration": {
       "description": "The SourceControl Configuration object.",
       "properties": {
@@ -459,6 +465,11 @@
             "operatorParams": {
               "description": "Any Parameters for the Operator instance in string format.",
               "type": "string"
+            },
+            "ConfigurationProtectedSettings": {
+              "description": "Name-value pairs of protected configuration settings for the configuration",
+              "type": "object",
+              "$ref": "#/definitions/ConfigurationProtectedSettings"
             },
             "operatorScope": {
               "description": "Scope at which the operator will be installed.",

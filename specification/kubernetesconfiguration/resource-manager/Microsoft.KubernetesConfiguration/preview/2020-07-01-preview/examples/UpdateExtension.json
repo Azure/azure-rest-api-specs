@@ -9,7 +9,7 @@
     "clusterName": "clusterName1",
     "extensionInstance": {
       "properties": {
-        "autoUpgrade": "true",
+        "autoUpgradeMinorVersion": "true",
         "releaseTrain": "Stable"
       }
     }
@@ -23,16 +23,17 @@
         "type": "Microsoft.KubernetesConfiguration/extensions",
         "name": "ClusterMonitor",
         "properties": {
-          "extensionType": "Microsoft.OperationInsights/containerMonitoring",
-          "autoUpgrade": "true",
+          "extensionType": "azuremonitor-containers",
+          "autoUpgradeMinorVersion": "true",
           "releaseTrain": "Stable",
           "version": "0.0.9",
           "scope": "namespace",
           "namespace": "insights",
           "configurationSettings": {
-            "LogAnalyticsWorkspaceId": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/65b8a862-ad7f-48b9-a9de-7478682b1fb4"
-          },
-          "installStatus": "InstallPending",
+            "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+            "omsagent.env.clusterName": "clusterName1"
+            },
+          "installState": "Pending",
           "statuses": [],
           "creationTime": "2020-06-08T05:10:57.027Z",
           "lastModifiedTime": "2020-06-10T07:32:31.249Z",

@@ -381,8 +381,8 @@
         "type": "string"
       }
     },
-    "AutoUpgrade": {
-      "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
+    "AutoUpgradeMinorVersion": {
+      "description": "Flag to note if this instance is enabled for Automatic upgrade of minor versions, or not.",
       "type": "string",
       "enum": [
         "true",
@@ -390,47 +390,62 @@
       ],
       "default": "true",
       "x-ms-enum": {
-        "name": "autoUpgradeType",
+        "name": "autoUpgradeMinorVersionType",
         "modelAsString": true
       }
     },
     "ReleaseTrain": {
-      "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+      "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
       "type": "string",
-      "enum": [
-        "Stable",
-        "Preview"
-      ],
-      "default": "Stable",
-      "x-ms-enum": {
-        "name": "releaseTrainType",
-        "modelAsString": true
+      "default": "Stable"
+    },
+    "ScopeCluster": {
+      "description": "Specifies that the scope of the extensionInstance is Cluster",
+      "type": "object",
+      "properties": {
+        "releaseNamespace": {
+          "description": "Namespace where the extension Release must be placed, for a Cluster scoped extensionInstance.  If this namespace does not exist, it will be created",
+          "type": "string"
+        }
+      }
+    },
+    "ScopeNamespace": {
+      "description": "Specifies that the scope of the extensionInstance is Namespace",
+      "type": "object",
+      "properties": {
+        "targetNamespace": {
+          "description": "Namespace where the extensionInstance will be created for an Namespace scoped extensionInstance.  If this namespace does not exist, it will be created",
+          "type": "string"
+        }
       }
     },
     "Scope": {
-      "description": "Scope at which the extension instance is installed.",
-      "type": "string",
-      "enum": [
-        "cluster",
-        "namespace"
-      ],
-      "default": "namespace",
-      "x-ms-enum": {
-        "name": "extensionScopeType",
-        "modelAsString": true
+      "description": "Scope of the extensionInstance. It can be either Cluster or Namespace; but not both.",
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "object",
+          "description": "Specifies that the scope of the extensionInstance is Cluster",
+          "$ref": "#/definitions/ScopeCluster"
+        },
+        "namespace": {
+          "type": "object",
+          "description": "Specifies that the scope of the extensionInstance is Namespace",
+          "$ref": "#/definitions/ScopeNamespace"
+        }
       }
     },
-    "InstallStatus": {
+    "InstallState": {
       "description": "Status of installation of this instance of the extension.",
       "type": "string",
       "readOnly": true,
       "enum": [
-        "InstallPending",
+        "Pending",
         "Installed",
-        "InstallFailed"
+        "Failed"
       ],
       "x-ms-enum": {
-        "name": "installStatusType",
+        "name": "installStateType",
         "modelAsString": true
       }
     },
@@ -483,16 +498,16 @@
               "type": "string",
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
             },
-            "autoUpgrade": {
-              "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
-              "$ref": "#/definitions/AutoUpgrade"
+            "autoUpgradeMinorVersion": {
+              "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
+              "$ref": "#/definitions/AutoUpgradeMinorVersion"
             },
             "releaseTrain": {
-              "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+              "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
               "$ref": "#/definitions/ReleaseTrain"
             },
             "version": {
-              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version.",
+              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
               "type": "string"
             },
             "scope": {
@@ -509,15 +524,10 @@
               "type": "object",
               "$ref": "#/definitions/ConfigurationSettings"
             },
-            "configurationProtectedSettings": {
-              "description": "Configuration settings that are sensitive, as name-value pairs for configuring this instance of the extension..",
-              "type": "object",
-              "$ref": "#/definitions/ConfigurationProtectedSettings"
-            },
-            "installStatus": {
+            "installState": {
               "type": "string",
               "description": "Status of installation of this instance of the extension.",
-              "$ref": "#/definitions/InstallStatus"
+              "$ref": "#/definitions/InstallState"
             },
             "statuses": {
               "type": "array",
@@ -541,11 +551,96 @@
               "description": "DateLiteral (per ISO8601) noting the time of last status from the agent.",
               "readOnly": true
             },
-            "error": {
+            "errorInfo": {
               "type": "object",
-              "description": "Error information from the Agent for errors during installation.",
+              "description": "Error information from the Agent - e.g. errors during installation.",
               "readOnly": true,
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionInstanceForCreate": {
+      "description": "Object to create a new Extension Instance.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties of an Extension Instance resource",
+          "properties": {
+            "extensionType": {
+              "type": "string",
+              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
+            },
+            "autoUpgradeMinorVersion": {
+              "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
+              "$ref": "#/definitions/AutoUpgradeMinorVersion"
+            },
+            "releaseTrain": {
+              "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+              "$ref": "#/definitions/ReleaseTrain"
+            },
+            "version": {
+              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
+              "type": "string"
+            },
+            "scope": {
+              "description": "Scope at which the extension instance is installed.",
+              "$ref": "#/definitions/Scope"
+            },
+            "namespace": {
+              "description": "The namespace to which this extension is installed.",
+              "type": "string",
+              "default": "default"
+            },
+            "configurationSettings": {
+              "description": "Configuration settings, as name-value pairs for configuring this instance of the extension..",
+              "type": "object",
+              "$ref": "#/definitions/ConfigurationSettings"
+            },
+            "configurationProtectedSettings": {
+              "description": "Configuration settings that are sensitive, as name-value pairs for configuring this instance of the extension..",
+              "type": "object",
+              "$ref": "#/definitions/ConfigurationProtectedSettings"
+            },
+            "installState": {
+              "type": "string",
+              "description": "Status of installation of this instance of the extension.",
+              "$ref": "#/definitions/InstallState"
+            },
+            "statuses": {
+              "type": "array",
+              "description": "Status from this instance of the extension.",
+              "items": {
+                "$ref": "#/definitions/ExtensionStatus"
+              }
+            },
+            "creationTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
+              "readOnly": true
+            },
+            "lastModifiedTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
+              "readOnly": true
+            },
+            "lastStatusTime": {
+              "type": "string",
+              "description": "DateLiteral (per ISO8601) noting the time of last status from the agent.",
+              "readOnly": true
+            },
+            "errorInfo": {
+              "type": "object",
+              "description": "Error information from the Agent - e.g. errors during installation.",
+              "readOnly": true,
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         }
@@ -569,12 +664,12 @@
               "type": "string",
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
             },
-            "autoUpgrade": {
-              "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
-              "$ref": "#/definitions/AutoUpgrade"
+            "autoUpgradeMinorVersion": {
+              "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
+              "$ref": "#/definitions/AutoUpgradeMinorVersion"
             },
             "releaseTrain": {
-              "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+              "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
               "$ref": "#/definitions/ReleaseTrain"
             },
             "version": {
@@ -590,10 +685,10 @@
               "type": "string",
               "default": "default"
             },
-            "installStatus": {
+            "installState": {
               "type": "string",
               "description": "Status of installation of this instance of the extension.",
-              "$ref": "#/definitions/InstallStatus"
+              "$ref": "#/definitions/InstallState"
             },
             "creationTime": {
               "type": "string",
@@ -651,16 +746,16 @@
           "x-ms-client-flatten": true,
           "description": "Properties to update an Extension Instance resource",
           "properties": {
-            "autoUpgrade": {
+            "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
-              "$ref": "#/definitions/AutoUpgrade"
+              "$ref": "#/definitions/AutoUpgradeMinorVersion"
             },
             "releaseTrain": {
-              "description": "Upgrade releaseTrain this extension instance participates in - only if autoUpgrade is 'true'.",
+              "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
               "$ref": "#/definitions/ReleaseTrain"
             },
             "version": {
-              "description": "Version number of extension, to 'pin' to a specific version.  autoUpgrade must be 'false'.",
+              "description": "Version number of extension, to 'pin' to a specific version.  autoUpgradeMinorVersion must be 'false'.",
               "type": "string"
             }
           }
