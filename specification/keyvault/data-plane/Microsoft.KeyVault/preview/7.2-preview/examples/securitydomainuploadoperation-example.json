@@ -2,32 +2,35 @@
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
     "security_domain": {
-      "EncData": {
-        "data": [
-          {
-            "compact_jwe": "<encrypted data>",
-            "tag": "pstore"
-          },
-          {
-            "compact_jwe": "<encrypted data>",
-            "tag": "pstore"
-          }
-        ],
-        "kdf": "sp108_kdf"
-      },
-      "SharedKeys": {
-        "key_algorithm": "shamir_share",
-        "required": 2,
-        "enc_shares": [
-          {
-            "enc_key": "compact JWE wrapped share",
-            "x5t_256": "bWFuZ2VkaHNtDQo"
-          },
-          {
-            "enc_key": "compact JWE wrapped share",
-            "x5t_256": "bWFuZ2VkaHNta2V5dmF1bHQNCg"
-          }
-        ]
+      "data": {
+        "EncData": {
+          "data": [
+            {
+              "compact_jwe": "<encrypted data>",
+              "tag": "pstore"
+            },
+            {
+              "compact_jwe": "<encrypted data>",
+              "tag": "pstore"
+            }
+          ],
+          "kdf": "sp108_kdf"
+        },
+        "SharedKeys": {
+          "key_algorithm": "shamir_share",
+          "required": 2,
+          "enc_shares": [
+            {
+              "enc_key": "compact JWE wrapped share",
+              "x5t_256": "bWFuZ2VkaHNtDQo"
+            },
+            {
+              "enc_key": "compact JWE wrapped share",
+              "x5t_256": "bWFuZ2VkaHNta2V5dmF1bHQNCg"
+            }
+          ]
+        },
+        "version": 2
       }
     },
     "api-version": "7.2-preview"

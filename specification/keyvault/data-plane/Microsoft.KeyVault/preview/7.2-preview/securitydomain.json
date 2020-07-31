@@ -50,7 +50,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Security domain download response",
+            "description": "This is the specification of the security domain as downloaded from the new pool",
             "schema": {
               "$ref": "#/definitions/SecurityDomainObject"
             }
@@ -242,34 +242,53 @@
     },
     "SecurityDomainObject": {
       "properties": {
-        "EncData": {
-          "$ref": "#/definitions/EncDataSet",
-          "description": "Array of encrypted data set"
-        },
-        "SharedKeys": {
+        "data": {
+          "type": "object",
           "properties": {
-            "key_algorithm": {
-              "type": "string",
-              "description": "The Algorithm used for shared keys"
+            "EncData": {
+              "$ref": "#/definitions/EncDataSet",
+              "description": "Array of encrypted data set"
             },
-            "required": {
-              "type": "integer",
-              "description": "Number of keys required for security domain"
-            },
-            "enc_shares": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/EncSharesSetItem"
+            "SharedKeys": {
+              "properties": {
+                "key_algorithm": {
+                  "type": "string",
+                  "default": "shamir_share",
+                  "description": "The Algorithm used for shared keys"
+                },
+                "required": {
+                  "type": "integer",
+                  "minimum": 2,
+                  "maximum": 10,
+                  "description": "Number of keys required for security domain"
+                },
+                "enc_shares": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Key",
+                    "minItems": 3,
+                    "maxItems": 10
+                  },
+                  "uniqueItems": true,
+                  "description": "Compact JWE wrapped shares array",
+                  "required": [
+                    "key_algorithm",
+                    "required",
+                    "enc_shares"
+                  ]
+                }
               },
-              "uniqueItems": true,
-              "description": "Compact JWE wrapped shares array"
+              "description": "Array of shared keys"
+            },
+            "version": {
+              "type": "integer"
             }
-          },
-          "description": "Array of shared keys"
+          }
         }
       },
       "description": "Security domain",
       "required": [
+        "version",
         "EncData",
         "SharedKeys"
       ]
@@ -279,18 +298,21 @@
         "data": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EncDataSetItem"
+            "$ref": "#/definitions/EncDataSetItem",
+            "minItems": 2
           },
           "description": "Array of encrypted security domain",
           "uniqueItems": true
         },
         "kdf": {
           "type": "string",
+          "default": "sp108_kdf",
           "description": "The key derivation function used"
         }
       },
       "required": [
-        "data"
+        "data",
+        "kdf"
       ]
     },
     "EncDataSetItem": {
@@ -309,7 +331,7 @@
         "tag"
       ]
     },
-    "EncSharesSetItem": {
+    "Key": {
       "properties": {
         "enc_key": {
           "type": "string",
