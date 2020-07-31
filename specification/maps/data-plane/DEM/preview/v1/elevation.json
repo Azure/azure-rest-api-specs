@@ -164,7 +164,7 @@
     "/elevation/line": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both endpoints and equally spaced points  along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Eudclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both endpoints and equally spaced points  along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "Elevation_GetDataForPolyLine",
         "x-ms-examples": {
           "GetDataForPolyLine": {
@@ -184,14 +184,14 @@
           {
             "name": "lines",
             "in": "query",
-            "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates with  each endpoint separated by a pipe ('|') character. The format of the polyline can be defined as  longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ..., longitude_pointN,  latitude_pointN. The values of longitude and latitude refers to World Geodetic System (WGS84)  coordinate reference system. The resolution of the data used to compute the elevation will depend  on the distance between the endpoints.",
+            "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates,  with each endpoint separated by a pipe ('|') character. The polyline should be defined in the  following format: [longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ...,  longitude_pointN, latitude_pointN]. The longitude and latitude values refer to the World Geodetic  System (WGS84) coordinate reference system. The resolution of the data used to compute the  elevation will depend on the distance between the endpoints.",
             "required": true,
             "type": "string"
           },
           {
             "name": "samples",
             "in": "query",
-            "description": "The samples parameter can specify the number of equally spaced points at which elevation values  should be provided along a polyline path. The combined number of samples and endpoints should not  exceed 2,000.",
+            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The combined number of samples and endpoints should not  exceed 2,000.",
             "type": "number",
             "minimum": 0,
             "maximum": 2000,
@@ -380,7 +380,7 @@
       }
     },
     "ElevationLineResponse": {
-      "description": "The response for line elevation API. The samples number of result will be listed from start point toward end point direction.",
+      "description": "The response from the Get Data for Polyline API. The results will be listed in the direction from the first endpoint towards the last endpoint.",
       "type": "array",
       "readOnly": true,
       "items": {
@@ -388,7 +388,7 @@
       }
     },
     "ElevationLatticeResponse": {
-      "description": "The response for line elevation API. The samples number of result will be listed from start point toward end point direction.",
+      "description": "The response from the Get Data for Bounding Box API. The results will be ordered starting with the southwest corner, and then proceed west to east and south to north.",
       "type": "array",
       "readOnly": true,
       "items": {
@@ -397,7 +397,7 @@
     },
     "PointsResult": {
       "type": "object",
-      "description": "The result of elecation point request.",
+      "description": "The response from a successful Get Data for Lat/Lon Coordinates request.",
       "properties": {
         "data": {
           "$ref": "#/definitions/ElevationPointResponse"
@@ -406,7 +406,7 @@
     },
     "LinesResult": {
       "type": "object",
-      "description": "The result of elecation line request.",
+      "description": "The response from a successful Get Data for Polyline request.",
       "properties": {
         "data": {
           "$ref": "#/definitions/ElevationLineResponse"
@@ -415,7 +415,7 @@
     },
     "BoundingBoxResult": {
       "type": "object",
-      "description": "The result of elecation lattice request.",
+      "description": "The response from a successful Get Data for Bounding Box API.",
       "properties": {
         "data": {
           "$ref": "#/definitions/ElevationLatticeResponse"
