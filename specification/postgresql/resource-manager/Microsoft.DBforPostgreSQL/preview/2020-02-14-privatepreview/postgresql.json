@@ -737,64 +737,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/updateConfigurations": {
-      "post": {
-        "tags": [
-          "Configurations"
-        ],
-        "operationId": "FlexibleServersConfigurations_Update",
-        "x-ms-examples": {
-          "ConfigurationUpdate": {
-            "$ref": "./examples/ConfigurationUpdate.json"
-          }
-        },
-        "description": "Updates a configuration of a server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationUpdateList"
-            },
-            "description": "The required parameters for updating a server configuration."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
       "put": {
         "tags": [
@@ -1522,28 +1464,6 @@
       ],
       "description": "Represents a Configuration."
     },
-    "ConfigurationUpdateProperties": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Value of the configuration."
-        }
-      }
-    },
-    "ConfigurationUpdate": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Value of the configuration."
-        },
-        "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a configuration."
-        }
-      },
-      "description": "Represents a Configuration."
-    },
     "ConfigurationListResult": {
       "type": "object",
       "properties": {
@@ -1560,18 +1480,6 @@
         }
       },
       "description": "A list of server configurations."
-    },
-    "ConfigurationUpdateList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationUpdate"
-          },
-          "description": "The list of server configurations."
-        }
-      },
-      "description": "A list of PostgreSQL server configurations to update."
     },
     "OperationDisplay": {
       "properties": {
