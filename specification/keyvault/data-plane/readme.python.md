@@ -22,7 +22,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(python) && $(multiapi)
 batch:
   - tag: package-7.2-preview
-  - tag: package-7.1-preview
+  - tag: package-7.1
   - tag: package-7.0
   - tag: package-2016-10
 ```
@@ -37,11 +37,11 @@ python:
   output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_2_preview
 ```
 
-### Tag: package-7.1-preview and python
+### Tag: package-7.1 and python
 
-These settings apply only when `--tag=package-7.1-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-7.1 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.1-preview' && $(python)
+``` yaml $(tag) == 'package-7.1' && $(python)
 python:
   namespace: azure.keyvault.v7_1
   output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_1_preview
