@@ -77,6 +77,7 @@
           }
         },
         "description": "Creates or updates a linked service.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/linkedServiceName"
@@ -102,11 +103,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request is queued successfully.",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/LinkedServiceResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -171,6 +175,7 @@
           }
         },
         "description": "Deletes a linked service.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/linkedServiceName"
@@ -180,8 +185,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK."
+          },
           "202": {
-            "description": "Request is queued successfully."
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -415,6 +423,7 @@
           }
         },
         "description": "Creates or updates a pipeline.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -440,11 +449,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request is queued successfully.",
+          "200": {
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/PipelineResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -509,6 +521,7 @@
           }
         },
         "description": "Deletes a pipeline.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -518,8 +531,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK."
+          },
           "202": {
-            "description": "Request is queued successfully."
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -545,6 +561,7 @@
           }
         },
         "description": "Creates a run of a pipeline.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -587,11 +604,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request is queued successfully.",
+          "200": {
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/CreateRunResponse"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -819,6 +839,7 @@
           }
         },
         "description": "Creates or updates a trigger.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/triggerName"
@@ -844,11 +865,14 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Request is queued successfully.",
             "schema": {
               "$ref": "#/definitions/TriggerResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -913,6 +937,7 @@
           }
         },
         "description": "Deletes a trigger.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/triggerName"
@@ -922,8 +947,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK."
+          },
           "202": {
-            "description": "Request is queued successfully."
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -2109,6 +2137,7 @@
           }
         },
         "description": "Creates or updates a Note Book.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/NotebookName"
@@ -2134,11 +2163,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request is queued successfully.",
+          "200": {
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/NotebookResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -2203,6 +2235,7 @@
           }
         },
         "description": "Deletes a Note book.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/NotebookName"
@@ -2212,8 +2245,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK."
+          },
           "202": {
-            "description": "Request is queued successfully."
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
