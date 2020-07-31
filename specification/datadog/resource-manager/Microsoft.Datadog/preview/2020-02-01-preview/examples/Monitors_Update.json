@@ -5,27 +5,12 @@
     "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
     "requestBody": {
-      "name": "myMonitor",
-      "sku": {
-        "name": "free_Monthly"
-      },
       "properties": {
-        "datadogOrganizationProperties": {
-          "name": "myOrg",
-          "subscription": "pro",
-          "idpMetadata": "<xml>some long string...</xml>",
-          "enterpriseAppId": "00000000-0000-0000-0000-000000000000"
-        },
-        "userInfo": {
-          "name": "Alice",
-          "emailAddress": "alice@microsoft.com",
-          "phoneNumber": "123-456-7890"
-        }
+        "monitoringStatus": "Enabled"
       },
       "tags": {
         "Environment": "Dev"
-      },
-      "location": "West US"
+      }
     }
   },
   "responses": {
@@ -39,6 +24,7 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
+          "monitoringStatus": "Enabled",
           "datadogOrganizationProperties": {
             "name": "myOrg",
             "id": "myOrg123",
