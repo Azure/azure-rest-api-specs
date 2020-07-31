@@ -350,36 +350,6 @@
         }
       }
     },
-    "ResourceIdentity": {
-      "description": "Azure Active Directory identity configuration for a resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "format": "uuid",
-          "description": "The Azure Active Directory principal id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
-          "enum": [
-            "None",
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityTypeWithNone",
-            "modelAsString": true
-          }
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "The Azure Active Directory tenant id.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Sku": {
       "description": "An ARM Resource SKU.",
       "required": [
