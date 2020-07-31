@@ -122,7 +122,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SourceControlConfiguration"
+              "$ref": "#/definitions/SourceControlConfigurationForCreate"
             },
             "description": "Properties necessary to Create KubernetesConfiguration."
           }
@@ -431,7 +431,109 @@
       }
     },
     "SourceControlConfiguration": {
-      "description": "The SourceControl Configuration object.",
+      "description": "The SourceControl Configuration object returned in Get & Put response.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Properties to create a Source Control Configuration resource",
+          "properties": {
+            "repositoryUrl": {
+              "type": "string",
+              "description": "Url of the SourceControl Repository."
+            },
+            "operatorNamespace": {
+              "description": "The namespace to which this operator is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.",
+              "type": "string",
+              "default": "default"
+            },
+            "operatorInstanceName": {
+              "description": "Instance name of the operator - identifying the specific configuration.",
+              "type": "string"
+            },
+            "operatorType": {
+              "description": "Type of the operator",
+              "type": "string",
+              "enum": [
+                "Flux"
+              ],
+              "x-ms-enum": {
+                "name": "operatorType",
+                "modelAsString": true
+              }
+            },
+            "operatorParams": {
+              "description": "Any Parameters for the Operator instance in string format.",
+              "type": "string"
+            },
+            "operatorScope": {
+              "description": "Scope at which the operator will be installed.",
+              "type": "string",
+              "enum": [
+                "cluster",
+                "namespace"
+              ],
+              "default": "cluster",
+              "x-ms-enum": {
+                "name": "operatorScope",
+                "modelAsString": true
+              }
+            },
+            "repositoryPublicKey": {
+              "description": "Public Key associated with this SourceControl configuration (either generated within the cluster or provided by the user).",
+              "type": "string",
+              "readOnly": true
+            },
+            "enableHelmOperator": {
+              "description": "Option to enable Helm Operator for this git configuration.",
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ],
+              "x-ms-enum": {
+                "name": "enableHelmOperator",
+                "modelAsString": true
+              }
+            },
+            "helmOperatorProperties": {
+              "description": "Properties for Helm operator.",
+              "type": "object",
+              "$ref": "#/definitions/HelmOperatorProperties"
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "The provisioning state of the resource provider.",
+              "readOnly": true,
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "ProvisioningState"
+              },
+              "enum": [
+                "Accepted",
+                "Deleting",
+                "Running",
+                "Succeeded",
+                "Failed"
+              ]
+            },
+            "complianceStatus": {
+              "type": "object",
+              "description": "Compliance Status of the Configuration",
+              "readOnly": true,
+              "$ref": "#/definitions/ComplianceStatus"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SourceControlConfigurationForCreate": {
+      "description": "The SourceControl Configuration object to create a new configuration.",
       "properties": {
         "properties": {
           "type": "object",
@@ -505,28 +607,6 @@
               "description": "Properties for Helm operator.",
               "type": "object",
               "$ref": "#/definitions/HelmOperatorProperties"
-            },
-            "provisioningState": {
-              "type": "string",
-              "description": "The provisioning state of the resource provider.",
-              "readOnly": true,
-              "x-ms-enum": {
-                "modelAsString": true,
-                "name": "ProvisioningState"
-              },
-              "enum": [
-                "Accepted",
-                "Deleting",
-                "Running",
-                "Succeeded",
-                "Failed"
-              ]
-            },
-            "complianceStatus": {
-              "type": "object",
-              "description": "Compliance Status of the Configuration",
-              "readOnly": true,
-              "$ref": "#/definitions/ComplianceStatus"
             }
           }
         }
