@@ -26,9 +26,18 @@ These are the global settings for the digitaltwins.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03-01-preview
+tag: package-2020-10
 ```
 
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10'
+input-file:
+  - Microsoft.DigitalTwins/stable/2020-10-31/digitaltwins.json
+```
 ### Tag: package-2020-03-01-preview
 
 These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
