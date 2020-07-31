@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc4",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2020-02-14-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "capacity": 4,
+        "name": "Standard_D4s_v3"
+      },
+      "properties": {
+        "administratorLoginPassword": "newpassword",
+        "storageProfile": {
+          "storageMB": 524288,
+          "backupRetentionDays": 20
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "GeneralPurpose",
+          "capacity": 4,
+          "name": "Standard_D4s_v3"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "version": "12",
+          "state": "Ready",
+          "haState": "NotEnabled",
+          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+          "displayName": "demosingleserver",
+          "publicNetworkAccess": "Enabled",
+          "storageProfile": {
+            "storageMB": 524288,
+            "backupRetentionDays": 20
+          },
+          "vnetInjArgs": {}
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+        "name": "pgtestsvc4",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}
