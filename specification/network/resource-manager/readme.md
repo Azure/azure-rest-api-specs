@@ -28,15 +28,66 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2020-04
+tag: package-2020-05
 ```
 
 
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Network/stable/2020-05-01/applicationGateway.json
+  - Microsoft.Network/stable/2020-05-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2020-05-01/availableDelegations.json
+  - Microsoft.Network/stable/2020-05-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2020-05-01/azureFirewall.json
+  - Microsoft.Network/stable/2020-05-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2020-05-01/bastionHost.json
+  - Microsoft.Network/stable/2020-05-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2020-05-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2020-05-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2020-05-01/endpointService.json
+  - Microsoft.Network/stable/2020-05-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2020-05-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2020-05-01/expressRoutePort.json
+  - Microsoft.Network/stable/2020-05-01/firewallPolicy.json
+  - Microsoft.Network/stable/2020-05-01/ipAllocation.json
+  - Microsoft.Network/stable/2020-05-01/ipGroups.json
+  - Microsoft.Network/stable/2020-05-01/loadBalancer.json
+  - Microsoft.Network/stable/2020-05-01/natGateway.json
+  - Microsoft.Network/stable/2020-05-01/network.json
+  - Microsoft.Network/stable/2020-05-01/networkInterface.json
+  - Microsoft.Network/stable/2020-05-01/networkProfile.json
+  - Microsoft.Network/stable/2020-05-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2020-05-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2020-05-01/networkWatcher.json
+  - Microsoft.Network/stable/2020-05-01/operation.json
+  - Microsoft.Network/stable/2020-05-01/privateEndpoint.json
+  - Microsoft.Network/stable/2020-05-01/privateLinkService.json
+  - Microsoft.Network/stable/2020-05-01/publicIpAddress.json
+  - Microsoft.Network/stable/2020-05-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2020-05-01/routeFilter.json
+  - Microsoft.Network/stable/2020-05-01/routeTable.json
+  - Microsoft.Network/stable/2020-05-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2020-05-01/serviceCommunity.json
+  - Microsoft.Network/stable/2020-05-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2020-05-01/serviceTags.json
+  - Microsoft.Network/stable/2020-05-01/usage.json
+  - Microsoft.Network/stable/2020-05-01/virtualNetwork.json
+  - Microsoft.Network/stable/2020-05-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2020-05-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2020-05-01/virtualRouter.json
+  - Microsoft.Network/stable/2020-05-01/virtualWan.json
+  - Microsoft.Network/stable/2020-05-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2020-05-01/vmssPublicIpAddress.json
+```
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-04'
+``` yaml $(tag) == 'package-2020-04'
 input-file:
   - Microsoft.Network/stable/2020-04-01/applicationGateway.json
   - Microsoft.Network/stable/2020-04-01/applicationSecurityGroup.json
@@ -84,6 +135,7 @@ input-file:
   - Microsoft.Network/stable/2020-04-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
@@ -270,7 +322,7 @@ input-file:
   - Microsoft.Network/stable/2019-09-01/networkProfile.json
   - Microsoft.Network/stable/2019-09-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-09-01/networkWatcher.json
-  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
+  - Microsoft.Network/stable/2019-09-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-09-01/operation.json
   - Microsoft.Network/stable/2019-09-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-09-01/privateLinkService.json
@@ -321,7 +373,7 @@ input-file:
   - Microsoft.Network/stable/2019-08-01/networkProfile.json
   - Microsoft.Network/stable/2019-08-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-08-01/networkWatcher.json
-  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
+  - Microsoft.Network/stable/2019-08-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-08-01/operation.json
   - Microsoft.Network/stable/2019-08-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-08-01/privateLinkService.json
@@ -371,7 +423,7 @@ input-file:
   - Microsoft.Network/stable/2019-07-01/networkProfile.json
   - Microsoft.Network/stable/2019-07-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-07-01/networkWatcher.json
-  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
+  - Microsoft.Network/stable/2019-07-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-07-01/operation.json
   - Microsoft.Network/stable/2019-07-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-07-01/privateLinkService.json
@@ -1515,6 +1567,7 @@ swagger-to-sdk:
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
       - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-network
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -1572,6 +1625,50 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/applicationGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/applicationSecurityGroup.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/availableDelegations.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/availableServiceAliases.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/azureFirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/azureFirewallFqdnTag.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/bastionHost.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/checkDnsAvailability.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/ddosCustomPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/ddosProtectionPlan.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/endpointService.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/expressRouteCircuit.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/expressRouteCrossConnection.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/expressRoutePort.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/firewallPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/ipAllocation.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/ipGroups.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/loadBalancer.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/natGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/networkInterface.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/networkProfile.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/networkSecurityGroup.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/networkVirtualAppliance.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/operation.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/privateEndpoint.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/privateLinkService.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/publicIpAddress.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/publicIpPrefix.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/routeFilter.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/routeTable.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/securityPartnerProvider.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/serviceCommunity.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/serviceEndpointPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/serviceTags.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/usage.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/virtualNetwork.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/virtualNetworkGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/virtualNetworkTap.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/virtualRouter.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/virtualWan.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/vmssNetworkInterface.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/vmssPublicIpAddress.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/applicationGateway.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/applicationSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/availableDelegations.json
@@ -1773,7 +1870,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkWatcher.json
-  - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
+  - $(this-folder)/Microsoft.Network/stable/2019-09-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-09-01/privateLinkService.json
@@ -1816,6 +1913,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-08-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/privateLinkService.json
@@ -1857,6 +1955,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-07-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-07-01/privateLinkService.json
@@ -1898,6 +1997,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkProfile.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/operation.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-06-01/privateLinkService.json
