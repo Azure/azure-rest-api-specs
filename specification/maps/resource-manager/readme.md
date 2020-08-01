@@ -213,6 +213,10 @@ directive:
     where: $.definitions.Creator
     from: maps-management.json
     reason: Don't need to list by resourceGroup because this is a nested resource.
+  - suppress: TrackedResourceListBySubscription
+    where: $.definitions.Creator
+    from: maps-management.json
+    reason: Doesn't apply because this is a nested resource.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
