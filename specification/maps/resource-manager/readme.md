@@ -209,6 +209,10 @@ directive:
     where: $.definitions.Creator.properties.properties
     from: maps-management.json
     reason: False positive.
+  - suppress: TrackedResourceListByResourceGroup
+    where: $.definitions.Creator
+    from: maps-management.json
+    reason: Don't need to list by resourceGroup because this is a nested resource.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
