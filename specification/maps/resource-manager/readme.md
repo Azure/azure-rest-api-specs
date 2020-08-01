@@ -217,6 +217,10 @@ directive:
     where: $.definitions.Creator
     from: maps-management.json
     reason: Doesn't apply because this is a nested resource.
+  - suppress: PutRequestResponseScheme
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].put'
+    from: maps-management.json
+    reason: False positive. Structure is the same with addition of provisioningStatus property.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
