@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SCVMM",
-    "description": "The Microsoft.SCVMM Rest API spec.",
+    "description": "The Microsoft.ScVmm Rest API spec.",
     "version": "2020-06-05-preview",
     "x-ms-code-generation-settings": {
       "name": "SCVMMClient"
@@ -37,12 +37,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VMMServers/{VMMServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VmmServers/{vmmServerName}": {
       "get": {
         "tags": [
-          "VMMServers"
+          "VmmServers"
         ],
-        "operationId": "VMMServers_Get",
+        "operationId": "VmmServers_Get",
         "summary": "Gets a VMMServer.",
         "description": "Implements VMMServer GET method.",
         "x-ms-examples": {
@@ -59,7 +59,7 @@
           },
           {
             "in": "path",
-            "name": "VMMServerName",
+            "name": "vmmServerName",
             "required": true,
             "type": "string",
             "description": "Name of the VMMServer."
@@ -70,7 +70,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the VMMServers resource.",
+            "description": "Retrieves the VmmServers resource.",
             "schema": {
               "$ref": "#/definitions/VMMServer"
             }
@@ -85,11 +85,11 @@
       },
       "put": {
         "tags": [
-          "VMMServers"
+          "VmmServers"
         ],
-        "operationId": "VMMServers_CreateOrUpdate",
-        "description": "Create Or Update VMMServers.",
-        "summary": "Implements VMMServers PUT method.",
+        "operationId": "VmmServers_CreateOrUpdate",
+        "description": "Create Or Update VmmServers.",
+        "summary": "Implements VmmServers PUT method.",
         "x-ms-examples": {
           "CreateVMMServer": {
             "$ref": "./examples/CreateVMMServer.json"
@@ -104,7 +104,7 @@
           },
           {
             "in": "path",
-            "name": "VMMServerName",
+            "name": "vmmServerName",
             "required": true,
             "type": "string",
             "description": "Name of the VMMServer."
@@ -113,7 +113,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "VMMServers",
+            "name": "VmmServers",
             "description": "Request payload.",
             "in": "body",
             "required": true,
@@ -124,13 +124,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the VMMServers resource.",
+            "description": "Updates the VmmServers resource.",
             "schema": {
               "$ref": "#/definitions/VMMServer"
             }
           },
           "201": {
-            "description": "Creates the VMMServers resource.",
+            "description": "Creates the VmmServers resource.",
             "schema": {
               "$ref": "#/definitions/VMMServer"
             },
@@ -152,9 +152,9 @@
       },
       "delete": {
         "tags": [
-          "VMMServers"
+          "VmmServers"
         ],
-        "operationId": "VMMServers_Delete",
+        "operationId": "VmmServers_Delete",
         "summary": "Deletes a VMMServer.",
         "description": "Implements VMMServer DELETE method.",
         "x-ms-examples": {
@@ -171,7 +171,7 @@
           },
           {
             "in": "path",
-            "name": "VMMServerName",
+            "name": "vmmServerName",
             "required": true,
             "type": "string",
             "description": "Name of the VMMServer."
@@ -182,7 +182,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Deletes the VMMServers resource."
+            "description": "Deletes the VmmServers resource."
           },
           "202": {
             "description": "Accepted",
@@ -207,9 +207,9 @@
       },
       "patch": {
         "tags": [
-          "VMMServers"
+          "VmmServers"
         ],
-        "operationId": "VMMServers_Update",
+        "operationId": "VmmServers_Update",
         "summary": "Updates the resource.",
         "description": "Implements PATCH method.",
         "x-ms-examples": {
@@ -229,14 +229,14 @@
           },
           {
             "in": "path",
-            "name": "VMMServerName",
+            "name": "vmmServerName",
             "required": true,
             "type": "string",
             "description": "Name of the VMMServer."
           },
           {
-            "name": "VMMServersPatchResource",
-            "description": "VMMServers patch details.",
+            "name": "VmmServersPatchResource",
+            "description": "VmmServers patch details.",
             "in": "body",
             "required": true,
             "schema": {
@@ -260,17 +260,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VMMServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VmmServers": {
       "get": {
         "tags": [
-          "VMMServers"
+          "VmmServers"
         ],
-        "operationId": "VMMServers_ListByResourceGroup",
-        "summary": "Implements GET VMMServers in a resource group.",
-        "description": "List of VMMServers in a resource group.",
+        "operationId": "VmmServers_ListByResourceGroup",
+        "summary": "Implements GET VmmServers in a resource group.",
+        "description": "List of VmmServers in a resource group.",
         "x-ms-examples": {
-          "ListVMMServersByResourceGroup": {
-            "$ref": "./examples/ListVMMServersByResourceGroup.json"
+          "ListVmmServersByResourceGroup": {
+            "$ref": "./examples/ListVmmServersByResourceGroup.json"
           }
         },
         "parameters": [
@@ -286,7 +286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VMMServers under the resouce group.",
+            "description": "Lists all VmmServers under the resouce group.",
             "schema": {
               "$ref": "#/definitions/VMMServerListResult"
             }
@@ -303,17 +303,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SCVMM/VMMServers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/VmmServers": {
       "get": {
         "tags": [
-          "VMMServers"
+          "VmmServers"
         ],
-        "operationId": "VMMServers_ListBySubscription",
-        "summary": "Implements GET VMMServers in a subscription.",
-        "description": "List of VMMServers in a subscription.",
+        "operationId": "VmmServers_ListBySubscription",
+        "summary": "Implements GET VmmServers in a subscription.",
+        "description": "List of VmmServers in a subscription.",
         "x-ms-examples": {
-          "ListVMMServersBySubscription": {
-            "$ref": "./examples/ListVMMServersBySubscription.json"
+          "ListVmmServersBySubscription": {
+            "$ref": "./examples/ListVmmServersBySubscription.json"
           }
         },
         "parameters": [
@@ -326,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VMMServers under the subscription.",
+            "description": "Lists all VmmServers under the subscription.",
             "schema": {
               "$ref": "#/definitions/VMMServerListResult"
             }
@@ -343,7 +343,7 @@
         }
       }
     },
-    "/providers/Microsoft.SCVMM/operations": {
+    "/providers/Microsoft.ScVmm/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -366,6 +366,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceProviderOperationList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -373,7 +379,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/Clouds/{CloudName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/Clouds/{cloudName}": {
       "get": {
         "tags": [
           "Clouds"
@@ -395,7 +401,7 @@
           },
           {
             "in": "path",
-            "name": "CloudName",
+            "name": "cloudName",
             "required": true,
             "type": "string",
             "description": "Name of the Cloud."
@@ -440,7 +446,7 @@
           },
           {
             "in": "path",
-            "name": "CloudName",
+            "name": "cloudName",
             "required": true,
             "type": "string",
             "description": "Name of the Cloud."
@@ -507,7 +513,7 @@
           },
           {
             "in": "path",
-            "name": "CloudName",
+            "name": "cloudName",
             "required": true,
             "type": "string",
             "description": "Name of the Cloud."
@@ -565,7 +571,7 @@
           },
           {
             "in": "path",
-            "name": "CloudName",
+            "name": "cloudName",
             "required": true,
             "type": "string",
             "description": "Name of the Cloud."
@@ -596,7 +602,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/Clouds": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/Clouds": {
       "get": {
         "tags": [
           "Clouds"
@@ -639,7 +645,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SCVMM/Clouds": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/Clouds": {
       "get": {
         "tags": [
           "Clouds"
@@ -679,7 +685,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VirtualNetworks/{VirtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VirtualNetworks/{virtualNetworkName}": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -701,7 +707,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualNetworkName",
+            "name": "virtualNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualNetwork."
@@ -746,7 +752,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualNetworkName",
+            "name": "virtualNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualNetwork."
@@ -813,7 +819,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualNetworkName",
+            "name": "virtualNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualNetwork."
@@ -871,7 +877,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualNetworkName",
+            "name": "virtualNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualNetwork."
@@ -902,7 +908,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VirtualNetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VirtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -945,7 +951,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SCVMM/VirtualNetworks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/VirtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -985,7 +991,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VirtualMachines/{VirtualMachineName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VirtualMachines/{virtualMachineName}": {
       "get": {
         "tags": [
           "VirtualMachines"
@@ -1007,7 +1013,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineName",
+            "name": "virtualMachineName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachine."
@@ -1052,7 +1058,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineName",
+            "name": "virtualMachineName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachine."
@@ -1119,7 +1125,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineName",
+            "name": "virtualMachineName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachine."
@@ -1177,7 +1183,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineName",
+            "name": "virtualMachineName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachine."
@@ -1208,7 +1214,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VirtualMachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VirtualMachines": {
       "get": {
         "tags": [
           "VirtualMachines"
@@ -1251,7 +1257,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SCVMM/VirtualMachines": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/VirtualMachines": {
       "get": {
         "tags": [
           "VirtualMachines"
@@ -1291,7 +1297,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VirtualMachineTemplates/{VirtualMachineTemplateName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VirtualMachineTemplates/{virtualMachineTemplateName}": {
       "get": {
         "tags": [
           "VirtualMachineTemplates"
@@ -1313,7 +1319,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineTemplateName",
+            "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachineTemplate."
@@ -1358,7 +1364,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineTemplateName",
+            "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachineTemplate."
@@ -1425,7 +1431,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineTemplateName",
+            "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachineTemplate."
@@ -1483,7 +1489,7 @@
           },
           {
             "in": "path",
-            "name": "VirtualMachineTemplateName",
+            "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
             "description": "Name of the VirtualMachineTemplate."
@@ -1514,7 +1520,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SCVMM/VirtualMachineTemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/VirtualMachineTemplates": {
       "get": {
         "tags": [
           "VirtualMachineTemplates"
@@ -1557,7 +1563,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SCVMM/VirtualMachineTemplates": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScVmm/VirtualMachineTemplates": {
       "get": {
         "tags": [
           "VirtualMachineTemplates"
@@ -1700,6 +1706,9 @@
           },
           "description": "Resource tags"
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
         "extendedLocation": {
           "type": "object",
           "description": "The extended location.",
@@ -1718,15 +1727,15 @@
       "required": [
         "location"
       ],
-      "description": "The VMMServers resource definition."
+      "description": "The VmmServers resource definition."
     },
     "VMMServerListResult": {
       "type": "object",
-      "description": "List of VMMServers.",
+      "description": "List of VmmServers.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of VMMServers.",
+          "description": "List of VmmServers.",
           "items": {
             "$ref": "#/definitions/VMMServer"
           }
@@ -1826,6 +1835,9 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         },
         "extendedLocation": {
           "type": "object",
@@ -1931,6 +1943,9 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         },
         "extendedLocation": {
           "type": "object",
@@ -2323,6 +2338,9 @@
           },
           "description": "Resource tags"
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
         "extendedLocation": {
           "type": "object",
           "description": "The extended location.",
@@ -2486,6 +2504,9 @@
           },
           "description": "Resource tags"
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
         "extendedLocation": {
           "type": "object",
           "description": "The extended location.",
@@ -2565,6 +2586,59 @@
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
           "description": "The error details."
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedByAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
         }
       }
     },
