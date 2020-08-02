@@ -99,6 +99,12 @@
               "$ref": "#/definitions/ServiceResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Service is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -113,6 +119,9 @@
         "x-ms-examples": {
           "Services_CreateOrUpdate": {
             "$ref": "./examples/Services_CreateOrUpdate.json"
+          },
+          "Services_CreateOrUpdate_VNetInjection": {
+            "$ref": "./examples/Services_CreateOrUpdate_VNetInjection.json"
           }
         }
       },
@@ -392,6 +401,326 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the config server and its properties.",
+        "operationId": "ConfigServers_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServers_Get": {
+            "$ref": "./examples/ConfigServers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Update the config server.",
+        "operationId": "ConfigServers_UpdatePut",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "configServerResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConfigServers_UpdatePut": {
+            "$ref": "./examples/ConfigServers_UpdatePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Update the config server.",
+        "operationId": "ConfigServers_UpdatePatch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "configServerResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConfigServers_UpdatePatch": {
+            "$ref": "./examples/ConfigServers_UpdatePatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Monitoring Setting and its properties.",
+        "operationId": "MonitoringSettings_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Monitoring Setting.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoringSettings_Get": {
+            "$ref": "./examples/MonitoringSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Update the Monitoring Setting.",
+        "operationId": "MonitoringSettings_UpdatePut",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "monitoringSettingResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Monitoring Setting.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Monitoring Setting is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "MonitoringSettings_UpdatePut": {
+            "$ref": "./examples/MonitoringSettings_UpdatePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Update the Monitoring Setting.",
+        "operationId": "MonitoringSettings_UpdatePatch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "monitoringSettingResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Monitoring Setting.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Monitoring Setting is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringSettingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "MonitoringSettings_UpdatePatch": {
+            "$ref": "./examples/MonitoringSettings_UpdatePatch.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}": {
       "get": {
         "tags": [
@@ -488,6 +817,12 @@
               "$ref": "#/definitions/AppResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting App is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -535,12 +870,19 @@
           "200": {
             "description": "Success. The response indicates the resource is deleted."
           },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Apps_Delete": {
@@ -790,12 +1132,28 @@
               "$ref": "#/definitions/BindingResource"
             }
           },
+          "201": {
+            "description": "Created. The response describes the new Binding and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Binding is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Bindings_CreateOrUpdate": {
@@ -833,6 +1191,9 @@
           "204": {
             "description": "Success. The response indicates the resource doesn't exist."
           },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
           "200": {
             "description": "Success. The response indicates the resource is deleted."
           },
@@ -842,6 +1203,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Bindings_Delete": {
@@ -891,12 +1256,22 @@
               "$ref": "#/definitions/BindingResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Binding is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Bindings_Update": {
@@ -1036,12 +1411,28 @@
               "$ref": "#/definitions/CertificateResource"
             }
           },
+          "201": {
+            "description": "Created. The response describes the new certificate and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting certificate is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Certificates_CreateOrUpdate": {
@@ -1076,6 +1467,9 @@
           "200": {
             "description": "Success. The response indicates the certificate deleted."
           },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
           "204": {
             "description": "No content. The response indicates the certificate doesn't exist."
           },
@@ -1085,6 +1479,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Certificates_Delete": {
@@ -1279,12 +1677,28 @@
               "$ref": "#/definitions/CustomDomainResource"
             }
           },
+          "201": {
+            "description": "Created. The response describes the new custom domain and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting custom domain is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "CustomDomains_CreateOrUpdate": {
@@ -1322,6 +1736,9 @@
           "200": {
             "description": "Success. The response indicates the custom domain deleted."
           },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
           "204": {
             "description": "No content. The response indicates the custom domain doesn't exist."
           },
@@ -1331,6 +1748,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "CustomDomains_Delete": {
@@ -1380,12 +1801,22 @@
               "$ref": "#/definitions/CustomDomainResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting custom domain is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "CustomDomains_Patch": {
@@ -1442,7 +1873,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/validateDomain": {
       "post": {
         "tags": [
           "AppPlatform"
@@ -1590,6 +2021,12 @@
               "$ref": "#/definitions/DeploymentResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1640,12 +2077,19 @@
           "204": {
             "description": "Success. The response indicates the resource doesn't exist."
           },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Deployments_Delete": {
@@ -2288,13 +2732,9 @@
             "modelAsString": true
           }
         },
-        "configServerProperties": {
-          "$ref": "#/definitions/ConfigServerProperties",
-          "description": "Config server git properties of the Service"
-        },
-        "trace": {
-          "$ref": "#/definitions/TraceProperties",
-          "description": "Trace properties of the Service"
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network profile of the Service"
         },
         "version": {
           "format": "int32",
@@ -2353,11 +2793,27 @@
         }
       }
     },
+    "ConfigServerResource": {
+      "description": "Config Server resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigServerProperties",
+          "description": "Properties of the Config Server resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
     "ConfigServerProperties": {
       "description": "Config server git properties payload",
       "type": "object",
       "properties": {
-        "state": {
+        "provisioningState": {
           "description": "State of the config server.",
           "enum": [
             "NotAvailable",
@@ -2383,12 +2839,28 @@
         }
       }
     },
-    "TraceProperties": {
-      "description": "Trace properties payload",
+    "MonitoringSettingResource": {
+      "description": "Monitoring Setting resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitoringSettingProperties",
+          "description": "Properties of the Monitoring Setting resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "MonitoringSettingProperties": {
+      "description": "Monitoring Setting properties payload",
       "type": "object",
       "properties": {
-        "state": {
-          "description": "State of the trace proxy.",
+        "provisioningState": {
+          "description": "State of the Monitoring Setting.",
           "enum": [
             "NotAvailable",
             "Failed",
@@ -2398,20 +2870,46 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "TraceProxyState",
+            "name": "MonitoringSettingState",
             "modelAsString": true
           }
         },
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "Error when apply trace proxy changes."
+          "description": "Error when apply Monitoring Setting changes."
         },
-        "enabled": {
-          "description": "Indicates whether enable the tracing functionality",
+        "traceEnabled": {
+          "description": "Indicates whether enable the trace functionality",
           "type": "boolean"
         },
-        "appInsightInstrumentationKey": {
+        "appInsightsInstrumentationKey": {
           "description": "Target application insight instrumentation key",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkProfile": {
+      "description": "Service network profile payload",
+      "type": "object",
+      "properties": {
+        "serviceRuntimeSubnetId": {
+          "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
+          "type": "string"
+        },
+        "appSubnetId": {
+          "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
+          "type": "string"
+        },
+        "serviceCidr": {
+          "description": "Azure Spring Cloud service reserved CIDR",
+          "type": "string"
+        },
+        "serviceRuntimeNetworkResourceGroup": {
+          "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
+          "type": "string"
+        },
+        "appNetworkResourceGroup": {
+          "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
           "type": "string"
         }
       }
@@ -3075,6 +3573,10 @@
           "$ref": "#/definitions/DeploymentResourceProperties",
           "description": "Properties of the Deployment resource",
           "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Deployment resource"
         }
       }
     },
@@ -3199,12 +3701,6 @@
         "jvmOptions": {
           "description": "JVM parameter",
           "type": "string"
-        },
-        "instanceCount": {
-          "format": "int32",
-          "description": "Instance count, basic tier should be in range (1, 25), standard tier should be in range (1, 500)",
-          "default": 1,
-          "type": "integer"
         },
         "environmentVariables": {
           "description": "Collection of environment variables",

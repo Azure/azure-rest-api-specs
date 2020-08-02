@@ -2,25 +2,10 @@
   "parameters": {
     "resource": {
       "properties": {
-        "configServerProperties": {
-          "configServer": {
-            "gitProperty": {
-              "uri": "https://github.com/fake-user/fake-repository.git",
-              "label": "master",
-              "searchPaths": [
-                "/"
-              ]
-            }
-          }
-        },
-        "trace": {
-          "enabled": true,
-          "appInsightInstrumentationKey": "00000000-0000-0000-0000-000000000000"
-        }
       },
       "sku": {
-        "name": "P0",
-        "tier": "Premium"
+        "name": "S0",
+        "tier": "Standard"
       },
       "location": "eastus",
       "tags": {
@@ -37,29 +22,12 @@
       "body": {
         "properties": {
           "provisioningState": "Creating",
-          "configServerProperties": {
-            "state": "Succeeded",
-            "configServer": {
-              "gitProperty": {
-                "uri": "https://github.com/fake-user/fake-repository.git",
-                "label": "master",
-                "searchPaths": [
-                  "/"
-                ]
-              }
-            }
-          },
-          "trace": {
-            "state": "Succeeded",
-            "enabled": true,
-            "appInsightInstrumentationKey": "00000000-0000-0000-0000-000000000000"
-          },
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
         "type": "Microsoft.AppPlatform/Spring",
         "sku": {
-          "name": "P0",
-          "tier": "Premium"
+          "name": "S0",
+          "tier": "Standard"
         },
         "location": "eastus",
         "tags": {
@@ -73,29 +41,31 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "configServerProperties": {
-            "state": "Succeeded",
-            "configServer": {
-              "gitProperty": {
-                "uri": "https://github.com/fake-user/fake-repository.git",
-                "label": "master",
-                "searchPaths": [
-                  "/"
-                ]
-              }
-            }
-          },
-          "trace": {
-            "state": "Succeeded",
-            "enabled": true,
-            "appInsightInstrumentationKey": "00000000-0000-0000-0000-000000000000"
-          },
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
         "type": "Microsoft.AppPlatform/Spring",
         "sku": {
-          "name": "P0",
-          "tier": "Premium"
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice",
+        "name": "myservice"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "provisioningState": "Updating",
+          "serviceId": "12345678abcd1234abcd12345678abcd"
+        },
+        "type": "Microsoft.AppPlatform/Spring",
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
         },
         "location": "eastus",
         "tags": {

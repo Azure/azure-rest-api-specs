@@ -41,6 +41,12 @@ directive:
     from: appplatform.json
     where: $.definitions.Dimension.properties.toBeExportedForShoebox
     reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+  - suppress: R3021
+    from: appplatform.json
+    reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
+    #where: 
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
 ```
 
 
