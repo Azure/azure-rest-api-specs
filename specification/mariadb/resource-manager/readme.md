@@ -86,6 +86,15 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
 - Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
+    reason: The name of the provider is Microsoft.DBforMariaDB
 ```
 
 ---
@@ -172,16 +181,17 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
-  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 
 ```
 

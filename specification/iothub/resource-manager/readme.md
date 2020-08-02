@@ -26,17 +26,17 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08
+tag: package-2020-06
 ```
 
 
-### Tag: package-2020-08
+### Tag: package-2020-06
 
-These settings apply only when `--tag=package-2020-08` is specified on the command line.
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-08'
+```yaml $(tag) == 'package-2020-06'
 input-file:
-  - Microsoft.Devices/stable/2020-08-31/iothub.json
+  - Microsoft.Devices/stable/2020-06-15/iothub.json
 ```
 ### Tag: package-2020-04
 
@@ -204,6 +204,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Devices/stable/2020-04-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2020-03-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2019-11-04/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2019-07-01-preview/iothub.json
