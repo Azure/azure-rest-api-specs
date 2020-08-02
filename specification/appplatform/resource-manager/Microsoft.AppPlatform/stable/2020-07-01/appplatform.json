@@ -327,6 +327,7 @@
         "tags": [
           "AppPlatform"
         ],
+        "description": "Disable test endpoint functionality for a Service.",
         "operationId": "Services_DisableTestEndpoint",
         "parameters": [
           {
@@ -365,6 +366,7 @@
         "tags": [
           "AppPlatform"
         ],
+        "description": "Enable test endpoint functionality for a Service.",
         "operationId": "Services_EnableTestEndpoint",
         "parameters": [
           {
@@ -1764,7 +1766,7 @@
           "AppPlatform"
         ],
         "description": "Update custom domain of one lifecycle application.",
-        "operationId": "CustomDomains_Patch",
+        "operationId": "CustomDomains_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1819,8 +1821,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "CustomDomains_Patch": {
-            "$ref": "./examples/CustomDomains_Patch.json"
+          "CustomDomains_Update": {
+            "$ref": "./examples/CustomDomains_Update.json"
           }
         }
       }
@@ -1879,7 +1881,7 @@
           "AppPlatform"
         ],
         "description": "Check the resource name is valid as well as not in use.",
-        "operationId": "CustomDomains_Validate",
+        "operationId": "Apps_ValidateDomain",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1899,6 +1901,7 @@
           {
             "name": "validatePayload",
             "in": "body",
+            "description": "Custom domain payload to be validated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CustomDomainValidatePayload"
@@ -1920,8 +1923,8 @@
           }
         },
         "x-ms-examples": {
-          "CustomDomains_Validate": {
-            "$ref": "./examples/CustomDomains_Validate.json"
+          "Apps_ValidateDomain": {
+            "$ref": "./examples/Apps_ValidateDomain.json"
           }
         }
       }
@@ -2229,7 +2232,7 @@
           "AppPlatform"
         ],
         "description": "List deployments for a certain service",
-        "operationId": "Deployments_ListClusterAllDeployments",
+        "operationId": "Deployments_ListForCluster",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2274,8 +2277,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Deployments_ListClusterAllDeployments": {
-            "$ref": "./examples/Deployments_ListClusterAllDeployments.json"
+          "Deployments_ListForCluster": {
+            "$ref": "./examples/Deployments_ListForCluster.json"
           }
         }
       }
@@ -2609,7 +2612,8 @@
         "tags": [
           "AppPlatform"
         ],
-        "operationId": "Sku_List",
+        "description": "Lists all of the available skus of the Microsoft.AppPlatform provider.",
+        "operationId": "Skus_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2636,8 +2640,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Sku_List": {
-            "$ref": "./examples/Sku_List.json"
+          "Skus_List": {
+            "$ref": "./examples/Skus_List.json"
           }
         }
       }
@@ -2754,6 +2758,7 @@
       "type": "object",
       "properties": {
         "type": {
+          "description": "Type of the managed identity",
           "enum": [
             "None",
             "SystemAssigned",
@@ -2767,9 +2772,11 @@
           }
         },
         "principalId": {
+          "description": "Principal Id",
           "type": "string"
         },
         "tenantId": {
+          "description": "Tenant Id",
           "type": "string"
         }
       }
@@ -3987,6 +3994,7 @@
       }
     },
     "ResourceSkuCollection": {
+      "description": "Object that includes an array of Azure Spring Cloud SKU and a possible link for next set",
       "type": "object",
       "properties": {
         "value": {
@@ -4087,6 +4095,7 @@
       }
     },
     "ResourceSkuLocationInfo": {
+      "description": "Locations and availability zones where the SKU is available",
       "type": "object",
       "properties": {
         "location": {
@@ -4112,6 +4121,7 @@
       }
     },
     "ResourceSkuRestrictions": {
+      "description": "Restrictions where the SKU cannot be used",
       "type": "object",
       "properties": {
         "type": {
@@ -4153,6 +4163,7 @@
       }
     },
     "ResourceSkuZoneDetails": {
+      "description": "Details of capabilities available to a SKU in specific zones",
       "type": "object",
       "properties": {
         "name": {
@@ -4174,6 +4185,7 @@
       }
     },
     "ResourceSkuRestrictionInfo": {
+      "description": "Information about the restriction where the SKU cannot be used",
       "type": "object",
       "properties": {
         "locations": {
@@ -4211,6 +4223,7 @@
       "description": "An error response from the service.",
       "properties": {
         "error": {
+          "description": "An error response from the service.",
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
