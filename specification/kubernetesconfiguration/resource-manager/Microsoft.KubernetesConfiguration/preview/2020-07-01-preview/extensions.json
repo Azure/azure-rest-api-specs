@@ -381,7 +381,7 @@
         "type": "string"
       }
     },
-    "AutoUpgradeMinorVersion": {
+    "AutoUpgradeMinorVersionDefinition": {
       "description": "Flag to note if this instance is enabled for Automatic upgrade of minor versions, or not.",
       "type": "string",
       "enum": [
@@ -390,7 +390,7 @@
       ],
       "default": "true",
       "x-ms-enum": {
-        "name": "autoUpgradeMinorVersionType",
+        "name": "AutoUpgradeMinorVersionType",
         "modelAsString": true
       }
     },
@@ -435,7 +435,7 @@
         }
       }
     },
-    "InstallState": {
+    "InstallStateDefinition": {
       "description": "Status of installation of this instance of the extension.",
       "type": "string",
       "readOnly": true,
@@ -445,7 +445,7 @@
         "Failed"
       ],
       "x-ms-enum": {
-        "name": "installStateType",
+        "name": "InstallStateType",
         "modelAsString": true
       }
     },
@@ -472,7 +472,7 @@
           ],
           "default": "Information",
           "x-ms-enum": {
-            "name": "levelType",
+            "name": "LevelType",
             "modelAsString": true
           }
         },
@@ -522,7 +522,7 @@
             "installState": {
               "type": "string",
               "description": "Status of installation of this instance of the extension.",
-              "$ref": "#/definitions/InstallState"
+              "$ref": "#/definitions/InstallStateDefinition"
             },
             "statuses": {
               "type": "array",
@@ -575,7 +575,7 @@
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersion"
+              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
@@ -623,7 +623,7 @@
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersion"
+              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
@@ -640,7 +640,7 @@
             "installState": {
               "type": "string",
               "description": "Status of installation of this instance of the extension.",
-              "$ref": "#/definitions/InstallState"
+              "$ref": "#/definitions/InstallStateDefinition"
             },
             "creationTime": {
               "type": "string",
@@ -700,7 +700,7 @@
           "properties": {
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersion"
+              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",

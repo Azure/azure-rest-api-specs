@@ -359,8 +359,18 @@
       "properties": {
         "complianceState": {
           "description": "The compliance state of the configuration.",
-          "$ref": "#/definitions/ComplianceState",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ComplianceStateType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Pending",
+            "Compliant",
+            "Noncompliant",
+            "Installed",
+            "Failed"
+          ]
         },
         "lastConfigApplied": {
           "description": "Datetime the configuration was last applied.",
@@ -380,27 +390,11 @@
             "Information"
           ],
           "x-ms-enum": {
-            "name": "messageLevelType",
+            "name": "MessageLevelType",
             "modelAsString": true
           }
         }
       }
-    },
-    "ComplianceState": {
-      "description": "The compliance state of the configuration.",
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "complianceStateType",
-        "modelAsString": true
-      },
-      "enum": [
-        "Pending",
-        "Compliant",
-        "Noncompliant",
-        "Installed",
-        "Failed"
-      ]
     },
     "ChartVersion": {
       "description": "Version of the operator Helm chart.",
@@ -458,7 +452,7 @@
                 "Flux"
               ],
               "x-ms-enum": {
-                "name": "operatorType",
+                "name": "OperatorType",
                 "modelAsString": true
               }
             },
@@ -475,7 +469,7 @@
               ],
               "default": "cluster",
               "x-ms-enum": {
-                "name": "operatorScopeType",
+                "name": "OperatorScopeType",
                 "modelAsString": true
               }
             },
