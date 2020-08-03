@@ -3,7 +3,7 @@
   "info": {
     "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "title": "Storage Cache Mgmt Client",
-    "version": "2020-07-23-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "basePath": "/",
@@ -1068,7 +1068,7 @@
         "operationId": "Caches_UpgradeFirmware"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/LFSCaches": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems": {
       "get": {
         "produces": [
           "application/json"
@@ -1090,9 +1090,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of LFSCache objects. Note that entity references might replace complete LFSCache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of amlFilesystem objects. Note that entity references might replace complete amlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
-              "$ref": "#/definitions/LFSCachesListResult"
+              "$ref": "#/definitions/amlFilesystemsListResult"
             }
           },
           "default": {
@@ -1103,21 +1103,21 @@
           }
         },
         "x-ms-examples": {
-          "LFSCaches_ListByResourceGroup": {
-            "$ref": "./examples/LFSCaches_ListByResourceGroup.json"
+          "amlFilesystems_ListByResourceGroup": {
+            "$ref": "./examples/amlFilesystems_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "tags": [
-          "LFSCaches"
+          "amlFilesystems"
         ],
-        "description": "Returns all LFSCaches the user has access to under a resource group.",
-        "operationId": "LFSCaches_ListByResourceGroup"
+        "description": "Returns all amlFilesystems the user has access to under a resource group.",
+        "operationId": "amlFilesystems_ListByResourceGroup"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/LFSCaches/{LFSCacheName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}": {
       "delete": {
         "produces": [
           "application/json"
@@ -1131,9 +1131,9 @@
             "type": "string"
           },
           {
-            "description": "Name of LFSCache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of amlFilesystem. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
-            "name": "LFSCacheName",
+            "name": "amlFilesystemName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
@@ -1147,15 +1147,15 @@
         ],
         "responses": {
           "200": {
-            "description": "LFSCache deleted.",
+            "description": "amlFilesystem deleted.",
             "schema": {}
           },
           "202": {
-            "description": "Started the LFSCache's transition to Deleted state. Poll the LFSCache to monitor.",
+            "description": "Started the amlFilesystem's transition to Deleted state. Poll the amlFilesystem to monitor.",
             "schema": {}
           },
           "204": {
-            "description": "LFSCache deleted.",
+            "description": "amlFilesystem deleted.",
             "schema": {}
           },
           "default": {
@@ -1166,16 +1166,16 @@
           }
         },
         "x-ms-examples": {
-          "LFSCaches_Delete": {
-            "$ref": "./examples/LFSCaches_Delete.json"
+          "amlFilesystems_Delete": {
+            "$ref": "./examples/amlFilesystems_Delete.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
-          "LFSCaches"
+          "amlFilesystems"
         ],
-        "description": "Schedules a LFSCache for deletion.",
-        "operationId": "LFSCaches_Delete"
+        "description": "Schedules a amlFilesystem for deletion.",
+        "operationId": "amlFilesystems_Delete"
       },
       "get": {
         "produces": [
@@ -1190,9 +1190,9 @@
             "type": "string"
           },
           {
-            "description": "Name of LFSCache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of amlFilesystem. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
-            "name": "LFSCacheName",
+            "name": "amlFilesystemName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
@@ -1206,9 +1206,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the LFSCache object corresponding to LFSCacheName.",
+            "description": "Returns the amlFilesystem object corresponding to amlFilesystemName.",
             "schema": {
-              "$ref": "#/definitions/LFSCache"
+              "$ref": "#/definitions/amlFilesystem"
             }
           },
           "default": {
@@ -1219,15 +1219,15 @@
           }
         },
         "x-ms-examples": {
-          "LFSCaches_Get": {
-            "$ref": "./examples/LFSCaches_Get.json"
+          "amlFilesystems_Get": {
+            "$ref": "./examples/amlFilesystems_Get.json"
           }
         },
         "tags": [
-          "LFSCaches"
+          "amlFilesystems"
         ],
-        "description": "Returns a LFSCache.",
-        "operationId": "LFSCaches_Get"
+        "description": "Returns a amlFilesystem.",
+        "operationId": "amlFilesystems_Get"
       },
       "put": {
         "consumes": [
@@ -1251,33 +1251,33 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of LFSCache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of amlFilesystem. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
-            "name": "LFSCacheName",
+            "name": "amlFilesystemName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Object containing the user-selectable properties of the new LFSCache. If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user-selectable properties of the new amlFilesystem. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
-            "name": "LFSCache",
+            "name": "amlFilesystem",
             "schema": {
-              "$ref": "#/definitions/LFSCache"
+              "$ref": "#/definitions/amlFilesystem"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "LFSCache created or updated.",
+            "description": "amlFilesystem created or updated.",
             "schema": {
-              "$ref": "#/definitions/LFSCache"
+              "$ref": "#/definitions/amlFilesystem"
             }
           },
           "201": {
-            "description": "LFSCache creation or update has been initiated. Poll the new LFSCache's provisioningState property to monitor creation progress.",
+            "description": "amlFilesystem creation or update has been initiated. Poll the new amlFilesystem's provisioningState property to monitor creation progress.",
             "schema": {
-              "$ref": "#/definitions/LFSCache"
+              "$ref": "#/definitions/amlFilesystem"
             }
           },
           "default": {
@@ -1288,16 +1288,16 @@
           }
         },
         "x-ms-examples": {
-          "LFSCaches_CreateOrUpdate": {
-            "$ref": "./examples/LFSCaches_CreateOrUpdate.json"
+          "amlFilesystems_CreateOrUpdate": {
+            "$ref": "./examples/amlFilesystems_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
-          "LFSCaches"
+          "amlFilesystems"
         ],
-        "description": "Create or update a LFSCache.",
-        "operationId": "LFSCaches_CreateOrUpdate"
+        "description": "Create or update a amlFilesystem.",
+        "operationId": "amlFilesystems_CreateOrUpdate"
       },
       "patch": {
         "consumes": [
@@ -1321,27 +1321,27 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of LFSCache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of amlFilesystem. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
-            "name": "LFSCacheName",
+            "name": "amlFilesystemName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Object containing the user-selectable properties of the LFSCache. If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user-selectable properties of the amlFilesystem. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
-            "name": "LFSCache",
+            "name": "amlFilesystem",
             "schema": {
-              "$ref": "#/definitions/LFSCache"
+              "$ref": "#/definitions/amlFilesystem"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated the LFSCache.",
+            "description": "Updated the amlFilesystem.",
             "schema": {
-              "$ref": "#/definitions/LFSCache"
+              "$ref": "#/definitions/amlFilesystem"
             }
           },
           "default": {
@@ -1352,18 +1352,18 @@
           }
         },
         "x-ms-examples": {
-          "LFSCaches_Update": {
-            "$ref": "./examples/LFSCaches_Update.json"
+          "amlFilesystems_Update": {
+            "$ref": "./examples/amlFilesystems_Update.json"
           }
         },
         "tags": [
-          "LFSCaches"
+          "amlFilesystems"
         ],
-        "description": "Update a LFSCache instance.",
-        "operationId": "LFSCaches_Update"
+        "description": "Update a amlFilesystem instance.",
+        "operationId": "amlFilesystems_Update"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/LFSCaches/{LFSCacheName}/upgrade": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/export": {
       "post": {
         "produces": [
           "application/json"
@@ -1383,25 +1383,33 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of LFSCache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of amlFilesystem. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
-            "name": "LFSCacheName",
+            "name": "amlFilesystemName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
+          },
+          {
+            "name" : "info",
+            "description" : "Inoformation about the export operation",
+            "in" : "body",
+            "schema" : {
+              "$ref" : "#/definitions/amlFilesystemExport"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "LFSCache firmware is up to date.",
+            "description": "amlFilesystem is exported?????.",
             "schema": {}
           },
           "202": {
-            "description": "LFSCache has started the upgrade. Poll the LFSCache's state field to monitor.",
+            "description": "amlFilesystem has started the export. Poll the amlFilesystem's export state field to monitor.",
             "schema": {}
           },
           "204": {
-            "description": "LFSCache firmware is up to date.",
+            "description": "amlFilesystem export is exported?????.",
             "schema": {}
           },
           "default": {
@@ -1412,8 +1420,8 @@
           }
         },
         "x-ms-examples": {
-          "LFSCaches_UpgradeFirmware": {
-            "$ref": "./examples/LFSCaches_UpgradeFirmware.json"
+          "amlFilesystems_UpgradeFirmware": {
+            "$ref": "./examples/amlFilesystems_Export.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1421,12 +1429,12 @@
           "final-state-via": "azure-async-operation"
         },
         "tags": [
-          "LFSCaches"
+          "amlFilesystems"
         ],
-        "description": "Upgrade a LFSCache's firmware if a new version is available. Otherwise, this operation has no effect.",
-        "operationId": "LFSCaches_UpgradeFirmware"
+        "description": "Export data from the amlFilesystem.",
+        "operationId": "amlFilesystems_Export"
       }
-    },
+    }
   },
   "definitions": {
     "ApiOperation": {
@@ -2214,15 +2222,15 @@
       },
       "type": "object"
     },
-    "LFSCache": {
-      "description": "An LFSCache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+    "amlFilesystem": {
+      "description": "An amlFilesystem instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "properties": {
         "tags": {
           "description": "ARM tags as name/value pairs.",
           "type": "object"
         },
         "id": {
-          "description": "Resource ID of the Cache.",
+          "description": "Resource ID of the amlFilesystem.",
           "readOnly": true,
           "$ref": "#/definitions/URLString"
         },
@@ -2231,39 +2239,39 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of Cache.",
+          "description": "Name of amlFilesystem.",
           "readOnly": true,
           "$ref": "#/definitions/ResourceName"
         },
         "type": {
-          "description": "Type of the Cache; Microsoft.StorageCache/Cache",
+          "description": "Type of the filesystem; Microsoft.StorageCache/amlFilesystem",
           "readOnly": true,
           "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/CacheIdentity",
-          "description": "The identity of the cache, if configured."
+          "$ref": "#/definitions/amlFilesystemIdentity",
+          "description": "The identity of the filesystem, if configured."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties of the Cache.",
+          "description": "Properties of the amlFilesystem.",
           "properties": {
-            "cacheSizeGB": {
-              "description": "The size of this Cache, in GB.",
-              "type": "integer"
+            "storageCapacityTiB": {
+              "description": "The size of this filesystem, in TiB.",
+              "type": "number",
+              "format": "float"
             },
             "health": {
-              "description": "Health of the Cache.",
+              "description": "Health of the amlFilesystem.",
               "readOnly": true,
-              "$ref": "#/definitions/CacheHealth"
+              "$ref": "#/definitions/amlFilesystemHealth"
             },
-            "mountAddresses": {
-              "description": "Array of IP addresses that can be used by clients mounting this Cache.",
-              "readOnly": true,
+            "availabilityZones": {
+              "type": "array",
               "items": {
                 "type": "string"
               },
-              "type": "array"
+              "description": "Availability zones for nodes."
             },
             "provisioningState": {
               "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
@@ -2282,24 +2290,29 @@
               "type": "string"
             },
             "subnet": {
-              "description": "Subnet used for the Cache.",
+              "description": "Subnet used for the amlFilesystem.",
               "$ref": "#/definitions/URLString"
             },
             "upgradeStatus": {
-              "description": "Upgrade status of the Cache.",
+              "description": "Upgrade status of the amlFilesystem.",
               "$ref": "#/definitions/CacheUpgradeStatus"
             },
-            "networkSettings": {
-              "$ref": "#/definitions/CacheNetworkSettings",
-              "description": "Specifies network settings of the cache."
-            },
             "encryptionSettings": {
-              "$ref": "#/definitions/CacheEncryptionSettings",
-              "description": "Specifies encryption settings of the cache."
+              "$ref": "#/definitions/amlFilesystemEncryptionSettings",
+              "description": "Specifies encryption settings of the amlFilesystem."
             },
-            "securitySettings": {
-              "$ref": "#/definitions/CacheSecuritySettings",
-              "description": "Specifies security settings of the cache."
+            "HSMSettings": {
+              "$ref": "#/definitions/amlFilesystemHSMSettings",
+              "description": "Specifies HSM settings of the amlFilesystem."
+            },
+            "maintenanceWindow": {
+              "description": "Start time of a 30 minute weekly maintenance window",
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "namespaceHydrationStatus": {
+              "description" : "Namespace Hydration Status during creation",
+              "$ref": "#/definitions/amlFilesystemHydrationStatus"
             }
           },
           "type": "object"
@@ -2318,7 +2331,7 @@
       "x-ms-azure-resource": true,
       "type": "object"
     },
-    "LFSCachesListResult": {
+    "amlFilesystemsListResult": {
       "description": "Result of the request to list Caches. It contains a list of Caches and a URL link to get the next set of results.",
       "properties": {
         "nextLink": {
@@ -2328,13 +2341,163 @@
         "value": {
           "description": "List of Caches.",
           "items": {
-            "$ref": "#/definitions/LFSCache"
+            "$ref": "#/definitions/amlFilesystem"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
+    "amlFilesystemIdentity": {
+      "description": "amlFilesystem identity properties.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the amlFilesystem."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the amlFilesystem."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the amlFilesystem",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "amlFilesystemIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "amlFilesystemHealth": {
+      "description": "An indication of amlFilesystem health. Gives more information about health than just that related to provisioning.",
+      "properties": {
+        "state": {
+          "description": "List of amlFilesystem health states.",
+          "enum": [
+            "Unknown",
+            "Healthy",
+            "Degraded",
+            "Down",
+            "Transitioning",
+            "Stopping",
+            "Stopped",
+            "Upgrading",
+            "Flushing"
+          ],
+          "x-ms-enum": {
+            "name": "amlFilesystemHealthStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "statusDescription": {
+          "description": "Describes explanation of state.",
+          "type": "string"
+        }
+      }
+    },
+    "amlFilesystemEncryptionSettings": {
+      "description": "amlFilesystem encryption settings.",
+      "properties": {
+        "keyEncryptionKey": {
+          "x-ms-secret": true,
+          "$ref": "#/definitions/KeyVaultKeyReference",
+          "description": "Specifies the location of the key encryption key in Key Vault."
+        }
+      }
+    },
+    "amlFilesystemHSMSettings": {
+      "description": "amlFilesystem HSM settings.",
+      "properties": {
+        "container": {
+          "description": "Container used for the amlFilesystem.",
+          "$ref": "#/definitions/URLString"
+        },
+        "containerSasToken": {
+          "description": "Specifies the storage container sas token.",
+          "type": "string"
+        },
+        "importPrefix" : {
+          "description": "Path/Prefix for blobs in above container.  Only blobs containing this prefix get pre-hydrated into the cluster namespace",
+          "type" : "string"
+        },
+        "exportPrefix" : {
+          "description": "Path/Prefix in above blob container where data gets exported when an export task runs",
+          "type" : "string"
+        }
+      }
+    },
+    "amlFilesystemHydrationStatus" : {
+      "description" : "Information about the amlFilesystem hydration status",
+      "type" : "object",
+      "readOnly" : true,
+      "properties": {
+        "state" : {
+          "description" : "The state of the namespace hydration",
+          "type" : "string",
+          "enum" : [
+            "InActive",
+            "InProgress",
+            "Failed",
+            "Complete/NotRunning????"
+          ],
+          "x-ms-enum": {
+            "name": "HydrationStatusType",
+            "modelAsString": true
+          }
+        },
+        "errorCode" : {
+          "type" : "integer"
+        },
+        "errorMessage" : {
+          "type" : "string"
+        }
+      }
+    },
+    "amlFilesystemExport" : {
+      "description" : "Information about the amlFilesystem export",
+      "type" : "object",
+      "properties": {
+        "filesystemPath" : {
+          "type" : "string",
+          "description" : "The path to the filesystem to export."
+        },
+        "status" : {
+          "type" : "object",
+          "readOnly" : true,
+          "properties": {
+            "state" : {
+              "readOnly": true,
+              "description" : "The state of the export operation",
+              "type" : "string",
+              "enum" : [
+                "InActive",
+                "InProgress",
+                "Failed",
+                "Complete/NotRunning????"
+              ],
+              "x-ms-enum": {
+                "name": "ExportStatusType",
+                "modelAsString": true
+              }
+            },
+            "errorCode" : {
+              "type" : "integer"
+            },
+            "errorMessage" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
