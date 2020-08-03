@@ -113,6 +113,9 @@
         "x-ms-examples": {
           "Services_CreateOrUpdate": {
             "$ref": "./examples/Services_CreateOrUpdate.json"
+          },
+          "Services_CreateOrUpdate_VNetInjection": {
+            "$ref": "./examples/Services_CreateOrUpdate_VNetInjection.json"
           }
         }
       },
@@ -2296,6 +2299,10 @@
           "$ref": "#/definitions/TraceProperties",
           "description": "Trace properties of the Service"
         },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network profile of the Service"
+        },
         "version": {
           "format": "int32",
           "description": "Version of the Service",
@@ -2412,6 +2419,32 @@
         },
         "appInsightInstrumentationKey": {
           "description": "Target application insight instrumentation key",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkProfile": {
+      "description": "Service network profile payload",
+      "type": "object",
+      "properties": {
+        "serviceRuntimeSubnetId": {
+          "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
+          "type": "string"
+        },
+        "appSubnetId": {
+          "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
+          "type": "string"
+        },
+        "serviceCidr": {
+          "description": "Azure Spring Cloud service reserved CIDR",
+          "type": "string"
+        },
+        "serviceRuntimeNetworkResourceGroup": {
+          "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
+          "type": "string"
+        },
+        "appNetworkResourceGroup": {
+          "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
           "type": "string"
         }
       }
