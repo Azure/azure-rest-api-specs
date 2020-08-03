@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of cost allocation rules for the billing account.",
+            "description": "List of cost allocation rules for the billing account or enterprise enrollment.",
             "schema": {
               "$ref": "#/definitions/CostAllocationRuleList"
             }
@@ -99,7 +99,7 @@
           },
           {
             "name": "costAllocationRuleCheckNameAvailabilityRequest",
-            "description": "Cost allocation rule to be created/updated",
+            "description": "Cost allocation rule to be created or updated",
             "in": "body",
             "required": true,
             "schema": {
@@ -187,7 +187,7 @@
           },
           {
             "name": "costAllocationRule",
-            "description": "Cost allocation rule to be created/updated",
+            "description": "Cost allocation rule to be created or updated",
             "in": "body",
             "required": true,
             "schema": {
@@ -270,7 +270,7 @@
     },
     "CostAllocationRuleList": {
       "type": "object",
-      "description": "Result of listing cost allocation rules. It contains a list of available rules in the billing account provided.",
+      "description": "Result of listing cost allocation rules. It contains a list of available rules in the billing account or enterprise enrollment provided.",
       "properties": {
         "value": {
           "description": "The list of cost allocation rules.",
