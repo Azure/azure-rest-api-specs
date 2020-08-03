@@ -392,6 +392,146 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Subscription/aliases/{aliasName}": {
+      "put": {
+        "description": "Create Alias Subscription.",
+        "operationId": "Subscription_CreateAlias",
+        "x-ms-examples": {
+          "CreateAlias": {
+            "$ref": "./examples/createAlias.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "201": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAliasRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get Alias Subscription.",
+        "operationId": "Subscription_GetAlias",
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/getAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete Alias.",
+        "operationId": "Subscription_DeleteAlias",
+        "x-ms-examples": {
+          "DeleteAlias": {
+            "$ref": "./examples/deleteAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted the alias"
+          },
+          "204": {
+            "description": "Alias does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/aliases": {
+      "get": {
+        "description": "Get Alias Subscription.",
+        "operationId": "Subscription_ListAlias",
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/listAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -406,6 +546,16 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
         }
       }
     },
@@ -608,6 +758,116 @@
           "type": "string"
         }
       }
+    },
+    "PutAliasRequest": {
+      "description": "The parameters required to create a new subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutAliasRequestProperties",
+          "description": "Put alias request properties."
+        }
+      }
+    },
+    "PutAliasRequestProperties": {
+      "description": "Put subscription properties.",
+      "required": [
+        "displayName",
+        "workloadType",
+        "billingScope"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "workloadType": {
+          "description": "The workload type of the subscription. It can be either Production or DevTest.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "workloadType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Production",
+            "DevTest"
+          ]
+        },
+        "billingScope": {
+          "description": "Determines whether subscription is fieldLed, partnerLed or LegacyEA",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "This parameter can be used to create alias for existing subscription Id",
+          "type": "string"
+        }
+      }
+    },
+    "PutAliasResponse": {
+      "description": "Subscription Information with the alias.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the alias resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Alias ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Subscription/aliases.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PutAliasResponseProperties",
+          "description": "Put Alias response properties."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PutAliasResponseProperties": {
+      "description": "Put subscription creation result properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "Newly created subscription Id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PutAliasListResult": {
+      "description": "The list of aliases.",
+      "properties": {
+        "value": {
+          "description": "The list of alias.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PutAliasResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -635,6 +895,14 @@
       "schema": {
         "$ref": "#/definitions/SubscriptionName"
       }
+    },
+    "aliasNameParameter": {
+      "name": "aliasName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Alias Name"
     }
   },
   "security": [
