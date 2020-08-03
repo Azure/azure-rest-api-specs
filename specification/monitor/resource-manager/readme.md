@@ -31,6 +31,24 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
+### Tag: package-2020-05-preview
+
+These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05-preview'
+input-file:
+- Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
+```
+
+### Tag: package-2020-01-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
+```
+
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
@@ -602,6 +620,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/operations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json

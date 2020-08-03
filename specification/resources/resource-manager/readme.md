@@ -580,8 +580,8 @@ directive:
   - suppress: R3006 #BodyTopLevelProperties
     from: templateSpecs.json
     where: 
-    - $.definitions.TemplateSpecModel.properties
-    - $.definitions.TemplateSpecVersionModel.properties
+    - $.definitions.TemplateSpec.properties
+    - $.definitions.TemplateSpecVersion.properties
     - $.definitions.TemplateSpecUpdateModel.properties
     - $.definitions.TemplateSpecVersionUpdateModel.properties
     reason: Currently systemData is not allowed
@@ -591,7 +591,7 @@ directive:
     reason: Tooling issue
   - suppress: TrackedResourceListByResourceGroup
     from: templateSpecs.json
-    where: $.definitions.TemplateSpecVersionModel
+    where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
 ```
 
@@ -615,6 +615,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#templatespecs
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
@@ -660,6 +661,9 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
 - Microsoft.Resources/stable/2016-06-01/subscriptions.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
+
+override-info:
+  title: PolicyClient
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
@@ -674,6 +678,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2020-06-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
@@ -697,6 +702,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json

@@ -136,6 +136,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.BotService/stable/2020-06-02/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2018-07-12/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2017-12-01/botservice.json
 
