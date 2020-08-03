@@ -34,6 +34,18 @@ openapi-type: arm
 tag: package-2019-10-preview
 ```
 
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
