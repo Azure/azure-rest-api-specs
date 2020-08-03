@@ -5831,6 +5831,115 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "SynapseNotebookActivity": {
+      "description": "Execute Synapse notebook activity.",
+      "x-ms-discriminator-value": "SynapseNotebook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute Synapse notebook activity properties.",
+          "$ref": "#/definitions/SynapseNotebookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SynapseNotebookActivityTypeProperties": {
+      "description": "Execute Synapse notebook activity properties.",
+      "properties": {
+        "notebook": {
+          "description": "Synapse notebook reference.",
+          "$ref": "../artifacts.json#/definitions/SynapseNotebookReference"
+        },
+        "parameters": {
+          "description": "Notebook parameters.",
+          "$ref": "../artifacts.json#/definitions/ParameterValueSpecification"
+        }
+      },
+      "required": [
+        "notebook"
+      ]
+    },
+    "SynapseSparkJobDefinitionActivity": {
+      "description": "Execute spark job activity.",
+      "x-ms-discriminator-value": "SparkJob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute spark job activity properties.",
+          "$ref": "#/definitions/SynapseSparkJobActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SynapseSparkJobActivityTypeProperties": {
+      "description": "Execute spark job activity properties.",
+      "properties": {
+        "sparkJob": {
+          "description": "Synapse spark job reference.",
+          "$ref": "../artifacts.json#/definitions/SynapseSparkJobReference"
+        }
+      },
+      "required": [
+        "sparkJob"
+      ]
+    },
+    "SqlPoolStoredProcedureActivity": {
+      "description": "Execute SQL pool stored procedure activity.",
+      "x-ms-discriminator-value": "SqlPoolStoredProcedure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "sqlPool": {
+          "description": "SQL pool stored procedure reference.",
+          "$ref": "../artifacts.json#/definitions/SqlPoolReference"
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute SQL pool stored procedure activity properties.",
+          "$ref": "#/definitions/SqlPoolStoredProcedureActivityTypeProperties"
+        }
+      },
+      "required": [
+        "sqlPool",
+        "typeProperties"
+      ]
+    },
+    "SqlPoolStoredProcedureActivityTypeProperties": {
+      "description": "SQL stored procedure activity properties.",
+      "properties": {
+        "storedProcedureName": {
+          "type": "object",
+          "description": "Stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        }
+      },
+      "required": [
+        "storedProcedureName"
+      ]
     }
   }
 }
