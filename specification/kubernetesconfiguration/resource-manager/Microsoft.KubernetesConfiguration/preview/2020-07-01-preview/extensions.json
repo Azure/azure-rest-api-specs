@@ -381,19 +381,6 @@
         "type": "string"
       }
     },
-    "AutoUpgradeMinorVersionDefinition": {
-      "description": "Flag to note if this instance is enabled for Automatic upgrade of minor versions, or not.",
-      "type": "string",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "default": "true",
-      "x-ms-enum": {
-        "name": "AutoUpgradeMinorVersionType",
-        "modelAsString": true
-      }
-    },
     "ReleaseTrain": {
       "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
       "type": "string",
@@ -500,7 +487,7 @@
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
+              "type": "boolean"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
@@ -575,7 +562,7 @@
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
+              "type": "boolean"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
@@ -623,7 +610,7 @@
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
+              "type": "boolean"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
@@ -700,7 +687,7 @@
           "properties": {
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this instance participates in Extension Lifecycle Management or not.",
-              "$ref": "#/definitions/AutoUpgradeMinorVersionDefinition"
+              "type": "boolean"
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
