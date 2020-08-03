@@ -120,8 +120,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Quota counter period was successfully updated."
+          "200": {
+            "description": "Updated Quota Counter Values.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/QuotaCounterCollection"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -224,8 +227,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The quota counter value was successfully updated."
+          "200": {
+            "description": "The response body contains the Quota counter details for the specified period.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/QuotaCounterContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

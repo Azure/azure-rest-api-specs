@@ -80,53 +80,12 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}": {
-      "head": {
-        "tags": [
-          "ContentType"
-        ],
-        "operationId": "ContentType_GetEntityTag",
-        "description": "Returns content type metadata",
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ContentTypeIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Specified content type entity exists and current entity state version is present in the ETag header.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "get": {
         "tags": [
           "ContentType"
         ],
-        "operationId": "ContentTypes_Get",
-        "description": "Gets API Management content type details",
+        "operationId": "ContentType_Get",
+        "description": "Gets API Management content type details.",
         "x-ms-examples": {
           "ApiManagementGetContentType": {
             "$ref": "./examples/ApiManagementGetContentType.json"
@@ -175,7 +134,7 @@
           "ContentType"
         ],
         "operationId": "ContentType_CreateOrUpdate",
-        "description": "Creates new content type",
+        "description": "Creates or updates an Content Type.",
         "x-ms-examples": {
           "ApiManagementCreateContentType": {
             "$ref": "./examples/ApiManagementCreateContentType.json"
@@ -190,6 +149,9 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ContentTypeIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -237,6 +199,11 @@
         ],
         "operationId": "ContentType_Delete",
         "description": "Removes specified content type.",
+        "x-ms-examples": {
+          "ApiManagementDeleteContentType": {
+            "$ref": "./examples/ApiManagementDeleteContentType.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -248,6 +215,9 @@
             "$ref": "./apimanagement.json#/parameters/ContentTypeIdParameter"
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -256,6 +226,9 @@
         ],
         "responses": {
           "200": {
+            "description": "The content type was successfully deleted."
+          },
+          "204": {
             "description": "The content type was successfully deleted."
           },
           "default": {
@@ -270,13 +243,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems": {
       "get": {
         "tags": [
-          "ContentItem"
+          "ContentTypeContentItem"
         ],
-        "operationId": "ContentItem_ListByService",
+        "operationId": "ContentTypeContentItem_ListByService",
         "description": "Returns list of content items",
         "x-ms-examples": {
-          "ApiManagementListContentItems": {
-            "$ref": "./examples/ApiManagementListContentItems.json"
+          "ApiManagementListContentTypeContentItems": {
+            "$ref": "./examples/ApiManagementListContentTypeContentItems.json"
           }
         },
         "parameters": [
@@ -318,10 +291,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}": {
       "head": {
         "tags": [
-          "ContentItem"
+          "ContentTypeContentItem"
         ],
-        "operationId": "ContentItem_GetEntityTag",
+        "operationId": "ContentTypeContentItem_GetEntityTag",
         "description": "Returns content item metadata",
+        "x-ms-examples": {
+          "ApiManagementHeadContentTypeContentItem": {
+            "$ref": "./examples/ApiManagementHeadContentTypeContentItem.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -362,13 +340,13 @@
       },
       "get": {
         "tags": [
-          "ContentItem"
+          "ContentTypeContentItem"
         ],
-        "operationId": "ContentItem_Get",
+        "operationId": "ContentTypeContentItem_Get",
         "description": "Returns content item details",
         "x-ms-examples": {
-          "ApiManagementGetContentItem": {
-            "$ref": "./examples/ApiManagementGetContentItem.json"
+          "ApiManagementGetContentTypeContentItem": {
+            "$ref": "./examples/ApiManagementGetContentTypeContentItem.json"
           }
         },
         "parameters": [
@@ -414,13 +392,13 @@
       },
       "put": {
         "tags": [
-          "ContentItem"
+          "ContentTypeContentItem"
         ],
-        "operationId": "ContentItem_CreateOrUpdate",
+        "operationId": "ContentTypeContentItem_CreateOrUpdate",
         "description": "Creates new content item",
         "x-ms-examples": {
-          "ApiManagementCreateContentItem": {
-            "$ref": "./examples/ApiManagementCreateContentItem.json"
+          "ApiManagementCreateContentTypeContentItem": {
+            "$ref": "./examples/ApiManagementCreateContentTypeContentItem.json"
           }
         },
         "parameters": [
@@ -435,6 +413,9 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ContentItemIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -478,10 +459,15 @@
       },
       "delete": {
         "tags": [
-          "ContentItem"
+          "ContentTypeContentItem"
         ],
-        "operationId": "ContentItem_Delete",
+        "operationId": "ContentTypeContentItem_Delete",
         "description": "Removes specified content item.",
+        "x-ms-examples": {
+          "ApiManagementDeleteContentTypeContentItem": {
+            "$ref": "./examples/ApiManagementDeleteContentTypeContentItem.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -494,6 +480,9 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ContentItemIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"

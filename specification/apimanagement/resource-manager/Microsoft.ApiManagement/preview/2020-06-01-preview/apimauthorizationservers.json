@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "|   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith | </br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith | </br>"
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -170,7 +170,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the details of the specified authorization server.",
+            "description": "Gets the details of the specified authorization server. No secrets included.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationServerContract"
             },
@@ -303,8 +303,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The authorization server settings were successfully updated."
+          "200": {
+            "description": "The authorization server settings were successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationServerContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -369,8 +378,8 @@
         "operationId": "AuthorizationServer_ListSecrets",
         "description": "Gets the client secret details of the authorization server.",
         "x-ms-examples": {
-          "ApiManagementListSecretsAuthorizationServer": {
-            "$ref": "./examples/ApiManagementListSecretsAuthorizationServer.json"
+          "ApiManagementAuthorizationServerListSecrets": {
+            "$ref": "./examples/ApiManagementAuthorizationServerListSecrets.json"
           }
         },
         "parameters": [
@@ -392,9 +401,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The response body contains the client secret.",
+            "description": "Gets the secrets of the specified authorization server.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ClientSecretContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {

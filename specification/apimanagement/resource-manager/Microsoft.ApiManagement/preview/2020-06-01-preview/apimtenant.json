@@ -171,8 +171,16 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Tenant's access information updated successfully."
+          "200": {
+            "headers": {
+              "ETag": {
+                "description": "tenant's access information updated successfully",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

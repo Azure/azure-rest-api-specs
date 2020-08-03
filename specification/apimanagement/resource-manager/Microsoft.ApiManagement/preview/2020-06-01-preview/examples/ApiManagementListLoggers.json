@@ -10,36 +10,41 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/buffered111",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/azuremonitor",
             "type": "Microsoft.ApiManagement/service/loggers",
-            "name": "buffered111",
+            "name": "azuremonitor",
             "properties": {
-              "loggerType": "azureEventHub",
-              "description": "Sample description",
-              "credentials": {
-                "connectionString": "Endpoint=sb://apimaccounts.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=*******************h=****"
-              },
-              "isBuffered": true,
-              "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/apimaccounts"
+              "loggerType": "azureMonitor",
+              "isBuffered": true
             }
           },
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/vvktest",
             "type": "Microsoft.ApiManagement/service/loggers",
-            "name": "loggerId",
+            "name": "vvktest",
             "properties": {
-              "loggerType": "azureEventHub",
-              "description": "adding a new logger",
+              "loggerType": "applicationInsights",
               "credentials": {
-                "name": "hydraeventhub",
-                "connectionString": "{{Logger-Credentials-59544ef2e4bbd50d9468c618}}"
+                "instrumentationKey": "{{Logger-Credentials-5b1a17ef2b3f91153004b10d}}"
               },
-              "isBuffered": true,
-              "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.EventHub/namespaces/hydraeventhub-ns"
+              "isBuffered": true
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/applicationinsights",
+            "type": "Microsoft.ApiManagement/service/loggers",
+            "name": "applicationinsights",
+            "properties": {
+              "loggerType": "applicationInsights",
+              "description": "miaoappinsight",
+              "credentials": {
+                "instrumentationKey": "{{Logger-Credentials-5b2056062b3f911ae84a3069}}"
+              },
+              "isBuffered": true
             }
           }
         ],
-        "nextLink": ""
+        "count": 3
       }
     }
   }
