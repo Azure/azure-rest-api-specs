@@ -882,7 +882,8 @@
           "EventChannels_Delete": {
             "$ref": "./examples/EventChannels_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/eventChannels": {
@@ -1618,6 +1619,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1637,7 +1644,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1987,6 +1994,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -2006,7 +2019,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3462,13 +3475,13 @@
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "x-ms-examples": {
-          "PartnerTopics_Get": {
+          "PartnerRegistrations_List": {
             "$ref": "./examples/PartnerRegistrations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3875,7 +3888,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -3919,7 +3936,9 @@
         "summary": "Update a specific private endpoint connection.",
         "description": "Update a specific private endpoint connection under a topic or domain.",
         "operationId": "PrivateEndpointConnections_Update",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -3939,7 +3958,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -3954,6 +3977,15 @@
             "description": "The name of the private endpoint connection connection.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection object to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3977,7 +4009,7 @@
           }
         },
         "x-ms-examples": {
-          "PartnerTopics_Delete": {
+          "PrivateEndpointConnections_Update": {
             "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
         },
@@ -4010,7 +4042,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4077,7 +4113,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -5354,7 +5394,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "the Sku name of the resource.\r\nthe possible values: Basic; Premium",
+          "description": "The Sku name of the resource. The possible values are: Basic or Premium.",
           "enum": [
             "Basic",
             "Premium"
@@ -5404,7 +5444,6 @@
     },
     "PrivateEndpointConnection": {
       "type": "object",
-      "description": "PrivateEndpointConnection resource information.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -5475,7 +5514,7 @@
       "x-ms-azure-resource": true
     },
     "PrivateEndpointConnectionProperties": {
-      "description": "Properties of the private endpoint connection resource",
+      "description": "Properties of the private endpoint connection resource.",
       "type": "object",
       "properties": {
         "privateEndpoint": {
@@ -5522,7 +5561,7 @@
       }
     },
     "ConnectionState": {
-      "description": "ConnectionState Information.",
+      "description": "ConnectionState information.",
       "type": "object",
       "properties": {
         "status": {
@@ -5721,8 +5760,8 @@
       }
     },
     "DomainUpdateParameterProperties": {
-      "type": "object",
       "description": "Information of domain update parameter properties.",
+      "type": "object",
       "properties": {
         "publicNetworkAccess": {
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
@@ -5872,6 +5911,34 @@
             "name": "EventChannelProvisioningState",
             "modelAsString": true
           }
+        },
+        "partnerTopicReadinessState": {
+          "description": "The readiness state of the corresponding partner topic.",
+          "enum": [
+            "NotActivatedByUserYet",
+            "ActivatedByUser",
+            "DeactivatedByUser",
+            "DeletedByUser"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PartnerTopicReadinessState",
+            "modelAsString": true
+          }
+        },
+        "expirationTimeIfNotActivatedUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the event channel. If this timer expires while the corresponding partner topic is never activated,\r\nthe event channel and corresponding partner topic are deleted.",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/EventChannelFilter",
+          "description": "Information about the filter for the event channel."
+        },
+        "partnerTopicFriendlyDescription": {
+          "description": "Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.\r\nThis will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer.",
+          "type": "string"
         }
       }
     },
@@ -5902,6 +5969,274 @@
           "type": "string"
         }
       }
+    },
+    "EventChannelFilter": {
+      "description": "Filter for the Event Channel.",
+      "type": "object",
+      "properties": {
+        "advancedFilters": {
+          "description": "An array of advanced filters that are used for filtering event channels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedFilter"
+          }
+        }
+      }
+    },
+    "NumberInAdvancedFilter": {
+      "description": "NumberIn Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "NumberIn"
+    },
+    "NumberNotInAdvancedFilter": {
+      "description": "NumberNotIn Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "NumberNotIn"
+    },
+    "NumberLessThanAdvancedFilter": {
+      "description": "NumberLessThan Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "The filter value.",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "NumberLessThan"
+    },
+    "NumberGreaterThanAdvancedFilter": {
+      "description": "NumberGreaterThan Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "The filter value.",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "NumberGreaterThan"
+    },
+    "NumberLessThanOrEqualsAdvancedFilter": {
+      "description": "NumberLessThanOrEquals Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "The filter value.",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "NumberLessThanOrEquals"
+    },
+    "NumberGreaterThanOrEqualsAdvancedFilter": {
+      "description": "NumberGreaterThanOrEquals Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "The filter value.",
+          "type": "number"
+        }
+      },
+      "x-ms-discriminator-value": "NumberGreaterThanOrEquals"
+    },
+    "BoolEqualsAdvancedFilter": {
+      "description": "BoolEquals Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "The boolean filter value.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "BoolEquals"
+    },
+    "StringInAdvancedFilter": {
+      "description": "StringIn Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringIn"
+    },
+    "StringNotInAdvancedFilter": {
+      "description": "StringNotIn Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotIn"
+    },
+    "StringBeginsWithAdvancedFilter": {
+      "description": "StringBeginsWith Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringBeginsWith"
+    },
+    "StringEndsWithAdvancedFilter": {
+      "description": "StringEndsWith Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringEndsWith"
+    },
+    "StringContainsAdvancedFilter": {
+      "description": "StringContains Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringContains"
+    },
+    "AdvancedFilter": {
+      "description": "This is the base type that represents an advanced filter. To configure an advanced filter, do not directly instantiate an object of this class. Instead, instantiate an object of a derived class such as BoolEqualsAdvancedFilter, NumberInAdvancedFilter, StringEqualsAdvancedFilter etc. depending on the type of the key based on which you want to filter.",
+      "required": [
+        "operatorType"
+      ],
+      "type": "object",
+      "properties": {
+        "operatorType": {
+          "description": "The operator type used for filtering, e.g., NumberIn, StringContains, BoolEquals and others.",
+          "enum": [
+            "NumberIn",
+            "NumberNotIn",
+            "NumberLessThan",
+            "NumberGreaterThan",
+            "NumberLessThanOrEquals",
+            "NumberGreaterThanOrEquals",
+            "BoolEquals",
+            "StringIn",
+            "StringNotIn",
+            "StringBeginsWith",
+            "StringEndsWith",
+            "StringContains"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdvancedFilterOperatorType",
+            "modelAsString": true
+          }
+        },
+        "key": {
+          "description": "The field/property in the event based on which you want to filter.",
+          "type": "string"
+        }
+      },
+      "discriminator": "operatorType"
     },
     "EventChannel": {
       "description": "Event Channel.",
@@ -6160,26 +6495,6 @@
         }
       }
     },
-    "NumberInAdvancedFilter": {
-      "description": "NumberIn Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "NumberIn"
-    },
     "StorageBlobDeadLetterDestination": {
       "description": "Information about the storage blob based dead letter destination.",
       "type": "object",
@@ -6196,241 +6511,6 @@
         }
       },
       "x-ms-discriminator-value": "StorageBlob"
-    },
-    "NumberNotInAdvancedFilter": {
-      "description": "NumberNotIn Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "NumberNotIn"
-    },
-    "NumberLessThanAdvancedFilter": {
-      "description": "NumberLessThan Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "value": {
-          "format": "double",
-          "description": "The filter value.",
-          "type": "number"
-        }
-      },
-      "x-ms-discriminator-value": "NumberLessThan"
-    },
-    "NumberGreaterThanAdvancedFilter": {
-      "description": "NumberGreaterThan Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "value": {
-          "format": "double",
-          "description": "The filter value.",
-          "type": "number"
-        }
-      },
-      "x-ms-discriminator-value": "NumberGreaterThan"
-    },
-    "NumberLessThanOrEqualsAdvancedFilter": {
-      "description": "NumberLessThanOrEquals Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "value": {
-          "format": "double",
-          "description": "The filter value.",
-          "type": "number"
-        }
-      },
-      "x-ms-discriminator-value": "NumberLessThanOrEquals"
-    },
-    "NumberGreaterThanOrEqualsAdvancedFilter": {
-      "description": "NumberGreaterThanOrEquals Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "value": {
-          "format": "double",
-          "description": "The filter value.",
-          "type": "number"
-        }
-      },
-      "x-ms-discriminator-value": "NumberGreaterThanOrEquals"
-    },
-    "BoolEqualsAdvancedFilter": {
-      "description": "BoolEquals Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "value": {
-          "description": "The boolean filter value.",
-          "type": "boolean"
-        }
-      },
-      "x-ms-discriminator-value": "BoolEquals"
-    },
-    "StringInAdvancedFilter": {
-      "description": "StringIn Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "StringIn"
-    },
-    "StringNotInAdvancedFilter": {
-      "description": "StringNotIn Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "StringNotIn"
-    },
-    "StringBeginsWithAdvancedFilter": {
-      "description": "StringBeginsWith Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "StringBeginsWith"
-    },
-    "StringEndsWithAdvancedFilter": {
-      "description": "StringEndsWith Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "StringEndsWith"
-    },
-    "StringContainsAdvancedFilter": {
-      "description": "StringContains Advanced Filter.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AdvancedFilter"
-        }
-      ],
-      "properties": {
-        "values": {
-          "description": "The set of filter values.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "StringContains"
-    },
-    "AdvancedFilter": {
-      "description": "This is the base type that represents an advanced filter. To configure an advanced filter, do not directly instantiate an object of this class. Instead, instantiate an object of a derived class such as BoolEqualsAdvancedFilter, NumberInAdvancedFilter, StringEqualsAdvancedFilter etc. depending on the type of the key based on which you want to filter.",
-      "required": [
-        "operatorType"
-      ],
-      "type": "object",
-      "properties": {
-        "operatorType": {
-          "description": "The operator type used for filtering, e.g., NumberIn, StringContains, BoolEquals and others.",
-          "enum": [
-            "NumberIn",
-            "NumberNotIn",
-            "NumberLessThan",
-            "NumberGreaterThan",
-            "NumberLessThanOrEquals",
-            "NumberGreaterThanOrEquals",
-            "BoolEquals",
-            "StringIn",
-            "StringNotIn",
-            "StringBeginsWith",
-            "StringEndsWith",
-            "StringContains"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AdvancedFilterOperatorType",
-            "modelAsString": true
-          }
-        },
-        "key": {
-          "description": "The field/property in the event based on which you want to filter.",
-          "type": "string"
-        }
-      },
-      "discriminator": "operatorType"
     },
     "WebHookEventSubscriptionDestination": {
       "description": "Information about the webhook destination for an event subscription.",
@@ -6968,7 +7048,23 @@
           "type": "string"
         },
         "partnerResourceTypeDescription": {
-          "description": "Description of the partner resource type.",
+          "description": "Short description of the partner resource type. The length of this description should not exceed 256 characters.",
+          "type": "string"
+        },
+        "longDescription": {
+          "description": "Long description for the custom scenarios and integration to be displayed in the portal if needed.\r\nLength of this description should not exceed 2048 characters.",
+          "type": "string"
+        },
+        "partnerCustomerServiceNumber": {
+          "description": "The customer service number of the publisher. The expected phone format should start with a '+' sign \r\nfollowed by the country code. The remaining digits are then followed. Only digits and spaces are allowed and its\r\nlength cannot exceed 16 digits including country code. Examples of valid phone numbers are: +1 515 123 4567 and\r\n+966 7 5115 2471. Examples of invalid phone numbers are: +1 (515) 123-4567, 1 515 123 4567 and +966 121 5115 24 7 551 1234 43",
+          "type": "string"
+        },
+        "partnerCustomerServiceExtension": {
+          "description": "The extension of the customer service number of the publisher. Only digits are allowed and number of digits should not exceed 10.",
+          "type": "string"
+        },
+        "customerServiceUri": {
+          "description": "The extension of the customer service URI of the publisher.",
           "type": "string"
         },
         "setupUri": {
@@ -7021,6 +7117,13 @@
       "description": "Properties of the Partner Registration update.",
       "type": "object",
       "properties": {
+        "tags": {
+          "description": "Tags of the partner registration resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "partnerTopicTypeName": {
           "description": "Name of the partner topic type.",
           "type": "string"
@@ -7122,12 +7225,30 @@
         }
       }
     },
+    "PartnerTopicUpdateParameters": {
+      "description": "Properties of the Partner Topic update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the partner topic.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PartnerTopicProperties": {
       "description": "Properties of the Partner Topic.",
       "type": "object",
       "properties": {
         "source": {
           "description": "Source associated with this partner topic. This represents a unique partner resource.",
+          "type": "string"
+        },
+        "expirationTimeIfNotActivatedUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the partner topic. If this timer expires while the partner topic is still never activated,\r\nthe partner topic and corresponding event channel are deleted.",
           "type": "string"
         },
         "provisioningState": {
@@ -7159,6 +7280,10 @@
             "name": "PartnerTopicActivationState",
             "modelAsString": true
           }
+        },
+        "partnerTopicFriendlyDescription": {
+          "description": "Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.\r\nThis will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer.",
+          "type": "string"
         }
       }
     },
@@ -7175,19 +7300,6 @@
           "$ref": "#/definitions/PartnerTopicProperties",
           "description": "Properties of the partner topic.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PartnerTopicUpdateParameters": {
-      "description": "Properties of the Partner Topic update.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Tags of the partner topic.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -7307,8 +7419,8 @@
       }
     },
     "PrivateLinkResource": {
-      "type": "object",
       "description": "Information of the private link resource.",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -7366,40 +7478,6 @@
         "nextLink": {
           "description": "A link for the next page of private link resources.",
           "type": "string"
-        }
-      }
-    },
-    "SkuDefinitionsForResourceTypeListResult": {
-      "description": "List collection of Sku Definitions for each Resource Type.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A collection of Sku Definitions for each Resource Type.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuDefinitionsForResourceType"
-          }
-        },
-        "nextLink": {
-          "description": "A link for the next page of Sku Definitions.",
-          "type": "string"
-        }
-      }
-    },
-    "SkuDefinitionsForResourceType": {
-      "description": "Describes an EventGrid Resource Sku Definition.",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "description": "The Resource Type applicable for the Sku.",
-          "type": "string"
-        },
-        "skus": {
-          "description": "The Sku pricing tiers for the resource type.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSku"
-          }
         }
       }
     },
@@ -7490,7 +7568,6 @@
       "type": "object",
       "properties": {
         "privateEndpointConnections": {
-          "description": "List of private endpoint connections.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -7598,8 +7675,8 @@
           }
         },
         "identity": {
-          "description": "Resource identity information.",
-          "$ref": "#/definitions/IdentityInfo"
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Resource identity information."
         },
         "properties": {
           "$ref": "#/definitions/TopicUpdateParameterProperties",
