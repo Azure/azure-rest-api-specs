@@ -490,13 +490,11 @@
       "in": "query",
       "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma or space.",
       "required": false,
-      "default": [
-        ""
-      ],
       "x-ms-parameter-location": "method",
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "integer",
+        "format": "int32"
       },
       "collectionFormat": "csv"
     }
