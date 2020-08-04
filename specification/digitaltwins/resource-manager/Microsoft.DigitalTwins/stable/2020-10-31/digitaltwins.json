@@ -609,7 +609,7 @@
           "format": "date-time"
         },
         "lastUpdatedTime": {
-          "description": "Time when DigitalTwinsInstance was created.",
+          "description": "Time when DigitalTwinsInstance was updated.",
           "readOnly": true,
           "type": "string",
           "format": "date-time"
@@ -633,29 +633,10 @@
         "hostName": {
           "description": "Api endpoint to work with DigitalTwinsInstance.",
           "type": "string",
+          "nullable": true,
           "readOnly": true
         }
       }
-    },
-    "DigitalTwinsSkuInfo": {
-      "description": "Information about the SKU of the DigitalTwinsInstance.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU.",
-          "enum": [
-            "F1"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DigitalTwinsSku",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "DigitalTwinsDescription": {
       "description": "The description of the DigitalTwins service.",
@@ -680,6 +661,7 @@
         "tags": {
           "description": "Instance tags",
           "type": "object",
+          "nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -698,7 +680,7 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
+          "pattern": "^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$"
         },
         "type": {
           "readOnly": true,
@@ -715,14 +697,11 @@
         },
         "tags": {
           "type": "object",
+          "nullable": true,
           "additionalProperties": {
             "type": "string"
           },
           "description": "The resource tags."
-        },
-        "sku": {
-          "description": "This property is reserved for future use, and will be ignored/omitted",
-          "$ref": "#/definitions/DigitalTwinsSkuInfo"
         }
       },
       "x-ms-azure-resource": true,
@@ -755,6 +734,7 @@
         "details": {
           "description": "Internal error details.",
           "type": "array",
+          "nullable": true,
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
@@ -768,7 +748,8 @@
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of DigitalTwins description objects.",
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "value": {
           "description": "A list of DigitalTwins description objects.",
@@ -785,7 +766,8 @@
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of DigitalTwins description objects.",
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "value": {
           "description": "A list of DigitalTwins operations supported by the Microsoft.DigitalTwins resource provider.",
@@ -809,6 +791,22 @@
         "display": {
           "description": "Operation properties display",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "nullable": true,
+          "description": "The intended executor of the operation."
+        },
+        "isDataAction": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "If the operation is a data action (for data plane rbac)."
+        },
+        "properties": {
+          "description": "Extra properties for the operation.",
+          "nullable": true,
+          "$ref": "#/definitions/OperationProperties"
         }
       }
     },
@@ -835,6 +833,185 @@
           "readOnly": true,
           "type": "string",
           "description": "Friendly description for the operation,"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "The object that represents the operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "description": "Service specification of the operation.",
+          "nullable": true,
+          "$ref": "#/definitions/OperationServiceSpecification"
+        }
+      }
+    },
+    "OperationServiceSpecification": {
+      "description": "The object that represents the service specification.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications for the operation.",
+          "readOnly": true,
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "description": "Log specifications for the operation.",
+          "readOnly": true,
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecification"
+          }
+        }
+      }
+    },
+    "OperationMetricSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "displayName": {
+          "type": "string",
+          "description": ""
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": ""
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": ""
+        },
+        "unit": {
+          "description": "",
+          "enum": [
+            "Bytes",
+            "BytesPerSecond",
+            "Count",
+            "CountPerSecond",
+            "Percent",
+            "Seconds",
+            "Milliseconds"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationMetricSpecificationUnit",
+            "modelAsString": true
+          }
+        },
+        "aggregationType": {
+          "description": "",
+          "$ref": "#definitions/OperationMetricAggregationType"
+        },
+        "supportedAggregationTypes": {
+          "nullable": true,
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/OperationMetricAggregationType"
+          }
+        },
+        "dimensions": {
+          "nullable": true,
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/OperationMetricDimension"
+          }
+        },
+        "availabilities": {
+          "nullable": true,
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/OperationMetricAvailability"
+          }
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "nullable": true,
+          "description": ""
+        }
+      }
+    },
+    "OperationMetricAggregationType": {
+      "enum": [
+        "Average",
+        "Last",
+        "Maximum",
+        "Minimum",
+        "None",
+        "Total"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "OperationMetricAggregationType",
+        "modelAsString": true
+      }
+    },
+    "OperationMetricDimension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": ""
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": ""
+        },
+        "internalName": {
+          "type": "string",
+          "nullable": true,
+          "readOnly": true,
+          "description": ""
+        }
+      }
+    },
+    "OperationMetricAvailability": {
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "readOnly": true,
+          "description": ""
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": ""
+        }
+      }
+    },
+    "OperationLogSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Display name for the log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Blob duration of the log specification."
         }
       }
     },
@@ -870,10 +1047,6 @@
           "type": "boolean",
           "description": "Specifies a Boolean value that indicates if the name is available."
         },
-        "name": {
-          "type": "string",
-          "description": "The name that was checked."
-        },
         "message": {
           "type": "string",
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
@@ -881,8 +1054,9 @@
         "reason": {
           "type": "string",
           "enum": [
-            "Invalid",
-            "AlreadyExists"
+            "NameIsAvailable",
+            "NameConflict",
+            "InvalidName"
           ],
           "x-ms-enum": {
             "name": "reason",
@@ -894,7 +1068,7 @@
       "description": "The result returned from a check name availability request."
     },
     "ExternalResource": {
-      "description": "Definition of a Resource.",
+      "description": "Definition of a resource.",
       "type": "object",
       "properties": {
         "id": {
@@ -960,6 +1134,7 @@
             "Canceled"
           ],
           "type": "string",
+          "nullable": true,
           "readOnly": true,
           "x-ms-enum": {
             "name": "EndpointProvisioningState",
@@ -969,11 +1144,19 @@
         "createdTime": {
           "description": "Time when the Endpoint was added to DigitalTwinsInstance.",
           "type": "string",
+          "nullable": true,
           "format": "date-time",
+          "readOnly": true
+        },
+        "deadLetterSecret": {
+          "description": "Dead letter storage secret. Will be obfuscated during read.",
+          "type": "string",
+          "nullable": true,
           "readOnly": true
         },
         "tags": {
           "type": "object",
+          "nullable": true,
           "additionalProperties": {
             "type": "string"
           },
@@ -982,10 +1165,9 @@
       }
     },
     "ServiceBus": {
-      "description": "properties related to servicebus.",
+      "description": "Properties related to ServiceBus.",
       "required": [
-        "primaryConnectionString",
-        "secondaryConnectionString"
+        "primaryConnectionString"
       ],
       "x-ms-discriminator-value": "ServiceBus",
       "allOf": [
@@ -996,48 +1178,49 @@
           "type": "object",
           "properties": {
             "primaryConnectionString": {
-              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read",
+              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string"
             },
             "secondaryConnectionString": {
-              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read",
-              "type": "string"
+              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
+              "type": "string",
+              "nullable": true
             }
           }
         }
       ]
     },
     "EventHub": {
-      "description": "properties related to eventhub.",
+      "description": "Properties related to EventHub.",
       "required": [
-        "connectionString-PrimaryKey",
-        "connectionString-SecondaryKey"
+        "connectionString-PrimaryKey"
       ],
       "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
+          "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
+        },
+        {
           "type": "object",
           "properties": {
             "connectionString-PrimaryKey": {
-              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read",
+              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string"
             },
             "connectionString-SecondaryKey": {
-              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read",
-              "type": "string"
+              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
+              "type": "string",
+              "nullable": true
             }
           }
-        },
-        {
-          "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
         }
       ]
     },
     "EventGrid": {
-      "description": "properties related to eventgrid.",
+      "description": "Properties related to EventGrid.",
       "required": [
-        "accessKey1",
-        "accessKey2"
+        "TopicEndpoint",
+        "accessKey1"
       ],
       "x-ms-discriminator-value": "EventGrid",
       "allOf": [
@@ -1052,12 +1235,13 @@
               "type": "string"
             },
             "accessKey1": {
-              "description": "EventGrid secondary accesskey. Will be obfuscated during read",
+              "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
               "type": "string"
             },
             "accessKey2": {
-              "description": "EventGrid secondary accesskey. Will be obfuscated during read",
-              "type": "string"
+              "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+              "type": "string",
+              "nullable": true
             }
           }
         }
@@ -1069,7 +1253,8 @@
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of DigitalTwinsInstance Endpoints.",
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "value": {
           "description": "A list of DigitalTwinsInstance Endpoints.",
@@ -1117,8 +1302,9 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "minLength": 1,
-      "maxLength": 64
+      "pattern": "^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "location": {
       "name": "location",
@@ -1136,9 +1322,9 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "pattern": "^[A-Za-z0-9-._]{1,64}$",
-      "minLength": 1,
-      "maxLength": 64
+      "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
+      "minLength": 2,
+      "maxLength": 49
     }
   }
 }
