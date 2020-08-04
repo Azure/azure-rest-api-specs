@@ -11563,10 +11563,6 @@
         "lastPatchInstallationSummary": {
           "$ref": "#/definitions/LastPatchInstallationSummary",
           "description": "The installation summary of the latest installation operation for the virtual machine."
-        },
-        "configurationStatusSummary": {
-          "$ref": "#/definitions/ConfigurationStatusSummary",
-          "description": "The configuration status summary for the virtual machine."
         }
       },
       "description": "The status of virtual machine patch operations."
@@ -11727,36 +11723,6 @@
         }
       },
       "description": "Describes the properties of the last installed patch summary."
-    },
-    "ConfigurationStatusSummary": {
-      "properties": {
-        "patchModeProvisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Describes the enablement status of the specified patchMode of a VM.. \"Unknown\" is the state when the status is unknown. \"Pending\" indicates that required configuration of the VM has not yet completed. \"Ready\" indicates that the VM is configured as specified by its patchMode.",
-          "enum": [
-            "Unknown",
-            "Pending",
-            "Ready"
-          ],
-          "x-ms-enum": {
-            "name": "patchModeProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The UTC timestamp when the operation began."
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "readOnly": true,
-          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
-        }
-      },
-      "description": "Describes the properties of the last detected patch configuration status."
     }
   },
   "parameters": {
