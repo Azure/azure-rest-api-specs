@@ -60,14 +60,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/FlexibleServer"
             },
             "description": "The required parameters for creating or updating a server."
           }
@@ -76,13 +76,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/FlexibleServer"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/FlexibleServer"
             }
           },
           "202": {
@@ -91,7 +91,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -119,14 +119,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerForUpdate"
+              "$ref": "#/definitions/FlexibleServerForUpdate"
             },
             "description": "The required parameters for updating a server."
           }
@@ -135,7 +135,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/FlexibleServer"
             }
           },
           "202": {
@@ -144,7 +144,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -172,7 +172,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
@@ -188,7 +188,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -219,20 +219,20 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/FlexibleServer"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -265,13 +265,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerListResult"
+              "$ref": "#/definitions/FlexibleServerListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -304,13 +304,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerListResult"
+              "$ref": "#/definitions/FlexibleServerListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -342,7 +342,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
@@ -355,7 +355,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -385,7 +385,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
@@ -398,7 +398,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -428,7 +428,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
@@ -441,7 +441,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -471,17 +471,17 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/FirewallRuleNameParameter"
+            "$ref": "#/parameters/FlexibleServerFirewallRuleNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/FlexibleServerFirewallRule"
             },
             "description": "The required parameters for creating or updating a firewall rule."
           }
@@ -490,13 +490,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/FlexibleServerFirewallRule"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/FlexibleServerFirewallRule"
             }
           },
           "202": {
@@ -505,7 +505,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -533,10 +533,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/FirewallRuleNameParameter"
+            "$ref": "#/parameters/FlexibleServerFirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -552,7 +552,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -580,23 +580,23 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/FirewallRuleNameParameter"
+            "$ref": "#/parameters/FlexibleServerFirewallRuleNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/FlexibleServerFirewallRule"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -625,20 +625,20 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FirewallRuleListResult"
+              "$ref": "#/definitions/FlexibleServerFirewallRuleListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -670,20 +670,20 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
+              "$ref": "#/definitions/FlexibleServerConfigurationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -715,23 +715,23 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationNameParameter"
+            "$ref": "#/parameters/FlexibleServerConfigurationNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Configuration"
+              "$ref": "#/definitions/FlexibleServerConfiguration"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -760,17 +760,17 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+            "$ref": "#/parameters/FlexibleServerMaintenanceWindowNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindow"
             },
             "description": "The required parameters for creating or updating a customer maintenance window."
           }
@@ -779,13 +779,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindow"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindow"
             }
           },
           "202": {
@@ -794,7 +794,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -822,10 +822,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+            "$ref": "#/parameters/FlexibleServerMaintenanceWindowNameParameter"
           }
         ],
         "responses": {
@@ -841,7 +841,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         },
@@ -869,23 +869,23 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+            "$ref": "#/parameters/FlexibleServerMaintenanceWindowNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindow"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -902,7 +902,7 @@
             "$ref": "./examples/CustomerMaintenanceWindowListByServer.json"
           }
         },
-        "description": "List all the Customer Maintenance Windows in a given PostgreSQL server.",
+        "description": "List all the Customer Maintenance Windows in a given PostgreSQL flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -914,20 +914,20 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "#/parameters/FlexibleServerNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindowListResult"
+              "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindowListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -957,7 +957,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NameAvailabilityRequest"
+              "$ref": "#/definitions/FlexibleServerNameAvailabilityRequest"
             },
             "description": "The required parameters for checking if resource name is available."
           }
@@ -966,13 +966,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/NameAvailability"
+              "$ref": "#/definitions/FlexibleServerNameAvailability"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -999,13 +999,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/FlexibleServerOperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/FlexibleServerCloudError"
             }
           }
         }
@@ -1013,7 +1013,7 @@
     }
   },
   "definitions": {
-    "ServerVersion": {
+    "FlexibleServerVersion": {
       "type": "string",
       "description": "The version of a server.",
       "enum": [
@@ -1024,7 +1024,7 @@
         "modelAsString": true
       }
     },
-    "ServerProperties": {
+    "FlexibleServerProperties": {
       "properties": {
         "administratorLogin": {
           "type": "string",
@@ -1045,7 +1045,7 @@
           ]
         },
         "version": {
-          "$ref": "#/definitions/ServerVersion",
+          "$ref": "#/definitions/FlexibleServerVersion",
           "description": "PostgreSQL Server version."
         },
         "state": {
@@ -1093,7 +1093,7 @@
           "description": "The display name of a server."
         },
         "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
+          "$ref": "#/definitions/FlexibleServerStorageProfile",
           "description": "Storage profile of a server."
         },
         "publicNetworkAccess": {
@@ -1148,23 +1148,33 @@
           "x-ms-enum": {
             "name": "CreateMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "description": "The properties of a server."
     },
-    "Server": {
+    "FlexibleServer": {
       "properties": {
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
           "description": "The Azure Active Directory identity of the server."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/FlexibleServerSku",
           "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
-          "$ref": "#/definitions/ServerProperties",
+          "$ref": "#/definitions/FlexibleServerProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the server."
         }
@@ -1176,16 +1186,12 @@
       ],
       "description": "Represents a server."
     },
-    "ServerPropertiesForUpdate": {
+    "FlexibleServerPropertiesForUpdate": {
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
           "description": "The password of the administrator login."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version."
         },
         "vCores": {
           "type": "integer",
@@ -1193,32 +1199,28 @@
           "description": "Max compute of a server is 64vCores."
         },
         "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
+          "$ref": "#/definitions/FlexibleServerStorageProfile",
           "description": "Storage profile of a server."
         },
         "standbyCount": {
           "type": "integer",
           "format": "int32",
           "description": "stand by count value can be either 0 or 1"
-        },
-        "serverEdition": {
-          "type": "string",
-          "description": "server edition default to general purpose"
         }
       }
     },
-    "ServerForUpdate": {
+    "FlexibleServerForUpdate": {
       "properties": {
         "location": {
           "type": "string",
           "description": "The location the resource resides in."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/FlexibleServerSku",
           "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
-          "$ref": "#/definitions/ServerPropertiesForUpdate",
+          "$ref": "#/definitions/FlexibleServerPropertiesForUpdate",
           "x-ms-client-flatten": false,
           "description": "Properties of the server."
         },
@@ -1232,15 +1234,15 @@
       },
       "description": "Represents a server to be updated."
     },
-    "ServerListResult": {
+    "FlexibleServerListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Server"
+            "$ref": "#/definitions/FlexibleServer"
           },
-          "description": "The list of servers"
+          "description": "The list of flexible servers"
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
@@ -1249,7 +1251,7 @@
       },
       "description": "A list of servers."
     },
-    "StorageProfile": {
+    "FlexibleServerStorageProfile": {
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
@@ -1264,7 +1266,7 @@
       },
       "description": "Storage Profile properties of a server"
     },
-    "Sku": {
+    "FlexibleServerSku": {
       "properties": {
         "name": {
           "type": "string",
@@ -1292,7 +1294,7 @@
       },
       "description": "Sku information related properties of a server."
     },
-    "FirewallRuleProperties": {
+    "FlexibleServerFirewallRuleProperties": {
       "properties": {
         "startIpAddress": {
           "type": "string",
@@ -1311,10 +1313,10 @@
       ],
       "description": "The properties of a server firewall rule."
     },
-    "FirewallRule": {
+    "FlexibleServerFirewallRule": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FirewallRuleProperties",
+          "$ref": "#/definitions/FlexibleServerFirewallRuleProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a firewall rule."
         }
@@ -1329,13 +1331,13 @@
       ],
       "description": "Represents a server firewall rule."
     },
-    "FirewallRuleListResult": {
+    "FlexibleServerFirewallRuleListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallRule"
+            "$ref": "#/definitions/FlexibleServerFirewallRule"
           },
           "description": "The list of firewall rules in a server."
         },
@@ -1346,7 +1348,7 @@
       },
       "description": "A list of firewall rules."
     },
-    "CustomerMaintenanceWindowProperties": {
+    "FlexibleServerCustomerMaintenanceWindowProperties": {
       "properties": {
         "dayOfWeek": {
           "type": "integer",
@@ -1376,10 +1378,10 @@
       ],
       "description": "The properties of a server firewall rule."
     },
-    "CustomerMaintenanceWindow": {
+    "FlexibleServerCustomerMaintenanceWindow": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CustomerMaintenanceWindowProperties",
+          "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindowProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a customer maintenance window."
         }
@@ -1394,19 +1396,19 @@
       ],
       "description": "Represents a server firewall rule."
     },
-    "CustomerMaintenanceWindowListResult": {
+    "FlexibleServerCustomerMaintenanceWindowListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomerMaintenanceWindow"
+            "$ref": "#/definitions/FlexibleServerCustomerMaintenanceWindow"
           },
           "description": "The list of CustomerMaintenanceWindows in a PostgreSQL server."
         }
       },
       "description": "A list of firewall rules."
     },
-    "ConfigurationProperties": {
+    "FlexibleServerConfigurationProperties": {
       "properties": {
         "value": {
           "type": "string",
@@ -1449,10 +1451,10 @@
       },
       "description": "The properties of a configuration."
     },
-    "Configuration": {
+    "FlexibleServerConfiguration": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
+          "$ref": "#/definitions/FlexibleServerConfigurationProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a configuration."
         }
@@ -1464,13 +1466,13 @@
       ],
       "description": "Represents a Configuration."
     },
-    "ConfigurationListResult": {
+    "FlexibleServerConfigurationListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Configuration"
+            "$ref": "#/definitions/FlexibleServerConfiguration"
           },
           "description": "The list of server configurations."
         },
@@ -1481,7 +1483,7 @@
       },
       "description": "A list of server configurations."
     },
-    "OperationDisplay": {
+    "FlexibleServerOperationDisplay": {
       "properties": {
         "provider": {
           "type": "string",
@@ -1506,7 +1508,7 @@
       },
       "description": "Display metadata associated with the operation."
     },
-    "Operation": {
+    "FlexibleServerOperation": {
       "properties": {
         "name": {
           "type": "string",
@@ -1514,7 +1516,7 @@
           "description": "The name of the operation being performed on this particular object."
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay",
+          "$ref": "#/definitions/FlexibleServerOperationDisplay",
           "readOnly": true,
           "description": "The localized display information for this particular operation or action."
         },
@@ -1544,19 +1546,19 @@
       },
       "description": "REST API operation definition."
     },
-    "OperationListResult": {
+    "FlexibleServerOperationListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/FlexibleServerOperation"
           },
           "description": "The list of resource provider operations."
         }
       },
       "description": "A list of resource provider operations."
     },
-    "NameAvailabilityRequest": {
+    "FlexibleServerNameAvailabilityRequest": {
       "required": [
         "name"
       ],
@@ -1572,7 +1574,7 @@
       },
       "description": "Request from client to check resource name availability."
     },
-    "NameAvailability": {
+    "FlexibleServerNameAvailability": {
       "properties": {
         "message": {
           "type": "string",
@@ -1593,7 +1595,7 @@
       },
       "description": "Represents a resource name availability."
     },
-    "CloudError": {
+    "FlexibleServerCloudError": {
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -1604,7 +1606,7 @@
     }
   },
   "parameters": {
-    "ServerNameParameter": {
+    "FlexibleServerNameParameter": {
       "name": "serverName",
       "in": "path",
       "required": true,
@@ -1612,7 +1614,7 @@
       "description": "The name of the server.",
       "x-ms-parameter-location": "method"
     },
-    "FirewallRuleNameParameter": {
+    "FlexibleServerFirewallRuleNameParameter": {
       "name": "firewallRuleName",
       "in": "path",
       "required": true,
@@ -1620,7 +1622,7 @@
       "description": "The name of the server firewall rule.",
       "x-ms-parameter-location": "method"
     },
-    "ConfigurationNameParameter": {
+    "FlexibleServerConfigurationNameParameter": {
       "name": "configurationName",
       "in": "path",
       "required": true,
@@ -1628,7 +1630,7 @@
       "description": "The name of the server configuration.",
       "x-ms-parameter-location": "method"
     },
-    "MaintenanceWindowNameParameter": {
+    "FlexibleServerMaintenanceWindowNameParameter": {
       "name": "maintenanceWindowName",
       "in": "path",
       "required": true,
