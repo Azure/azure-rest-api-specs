@@ -160,13 +160,23 @@
           "type": "string",
           "format": "date-time",
           "description": "The date when the resource connectivity status last Changed from success to failure or vice-versa. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type."
+        },
+        "isOptional": {
+          "type": "boolean",
+          "description": "Whether this is optional."
         }
       },
       "required": [
         "name",
         "status",
         "lastUpdated",
-        "lastStatusChange"
+        "lastStatusChange",
+        "resourceType",
+        "isOptional"
       ],
       "description": "Details about connectivity to a resource."
     },
