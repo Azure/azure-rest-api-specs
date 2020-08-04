@@ -338,6 +338,14 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/AccountFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/Accounts.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/Encoding.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/streamingservice.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/Common.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json

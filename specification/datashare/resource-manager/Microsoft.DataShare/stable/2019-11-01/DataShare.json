@@ -16,6 +16,53 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataShare/accounts": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "List Accounts in a subscription",
+        "description": "List Accounts in Subscription",
+        "operationId": "Accounts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Accounts_ListBySubscription": {
+            "$ref": "./examples/Accounts_ListBySubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}": {
       "get": {
         "tags": [
@@ -214,53 +261,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataShare/accounts": {
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "summary": "List Accounts in a subscription",
-        "description": "List Accounts in Subscription",
-        "operationId": "Accounts_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AccountList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Accounts_ListBySubscription": {
-            "$ref": "./examples/Accounts_ListBySubscription.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts": {
       "get": {
         "tags": [
@@ -311,40 +311,31 @@
         }
       }
     },
-    "/providers/Microsoft.DataShare/locations/{location}/RejectInvitation": {
-      "post": {
+    "/providers/Microsoft.DataShare/ListInvitations": {
+      "get": {
         "tags": [
           "ConsumerInvitation"
         ],
-        "summary": "Rejects the invitation identified by invitationId",
-        "description": "Reject an invitation",
-        "operationId": "ConsumerInvitations_RejectInvitation",
+        "summary": "List the invitations",
+        "description": "Lists invitations",
+        "operationId": "ConsumerInvitations_ListInvitations",
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "description": "Location of the invitation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "invitation",
-            "in": "body",
-            "description": "An invitation payload",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConsumerInvitation"
-            }
-          },
-          {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The continuation token",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConsumerInvitation"
+              "$ref": "#/definitions/ConsumerInvitationList"
             }
           },
           "default": {
@@ -354,9 +345,12 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "ConsumerInvitations_RejectInvitation": {
-            "$ref": "./examples/ConsumerInvitations_RejectInvitation.json"
+          "ConsumerInvitations_ListInvitations": {
+            "$ref": "./examples/ConsumerInvitations_ListInvitations.json"
           }
         }
       }
@@ -409,31 +403,40 @@
         }
       }
     },
-    "/providers/Microsoft.DataShare/ListInvitations": {
-      "get": {
+    "/providers/Microsoft.DataShare/locations/{location}/RejectInvitation": {
+      "post": {
         "tags": [
           "ConsumerInvitation"
         ],
-        "summary": "List the invitations",
-        "description": "Lists invitations",
-        "operationId": "ConsumerInvitations_ListInvitations",
+        "summary": "Rejects the invitation identified by invitationId",
+        "description": "Reject an invitation",
+        "operationId": "ConsumerInvitations_RejectInvitation",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "name": "location",
+            "in": "path",
+            "description": "Location of the invitation",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "The continuation token",
-            "required": false,
-            "type": "string"
+            "name": "invitation",
+            "in": "body",
+            "description": "An invitation payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitation"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConsumerInvitationList"
+              "$ref": "#/definitions/ConsumerInvitation"
             }
           },
           "default": {
@@ -443,12 +446,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "ConsumerInvitations_ListInvitations": {
-            "$ref": "./examples/ConsumerInvitations_ListInvitations.json"
+          "ConsumerInvitations_RejectInvitation": {
+            "$ref": "./examples/ConsumerInvitations_RejectInvitation.json"
           }
         }
       }
@@ -1283,6 +1283,404 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/listSynchronizationDetails": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List data set level details for a share synchronization",
+        "description": "List synchronization details",
+        "operationId": "Shares_ListSynchronizationDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSynchronization",
+            "in": "body",
+            "description": "Share Synchronization payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShareSynchronization"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationDetailsList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Shares_ListSynchronizationDetails": {
+            "$ref": "./examples/Shares_ListSynchronizationDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/listSynchronizations": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List Synchronizations in a share",
+        "description": "List synchronizations of a share",
+        "operationId": "Shares_ListSynchronizations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSynchronizationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Shares_ListSynchronizations": {
+            "$ref": "./examples/Shares_ListSynchronizations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/reinstate": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Reinstate share subscription in a provider share.",
+        "description": "Reinstate share subscription in a provider share",
+        "operationId": "ProviderShareSubscriptions_Reinstate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_Reinstate": {
+            "$ref": "./examples/ProviderShareSubscriptions_Reinstate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/revoke": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Revoke share subscription in a provider share.",
+        "description": "Revoke share subscription in a provider share",
+        "operationId": "ProviderShareSubscriptions_Revoke",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_Revoke": {
+            "$ref": "./examples/ProviderShareSubscriptions_Revoke.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Get share subscription in a provider share.",
+        "description": "Get share subscription in a provider share",
+        "operationId": "ProviderShareSubscriptions_GetByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_GetByShare": {
+            "$ref": "./examples/ProviderShareSubscriptions_GetByShare.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List of available share subscriptions to a provider share.",
+        "description": "List share subscriptions in a provider share",
+        "operationId": "ProviderShareSubscriptions_ListByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation Token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscriptionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_ListByShare": {
+            "$ref": "./examples/ProviderShareSubscriptions_ListByShare.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}": {
       "get": {
         "tags": [
@@ -1518,14 +1916,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/listSynchronizations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/cancelSynchronization": {
       "post": {
         "tags": [
-          "Share"
+          "ShareSubscription"
         ],
-        "summary": "List Synchronizations in a share",
-        "description": "List synchronizations of a share",
-        "operationId": "Shares_ListSynchronizations",
+        "summary": "Request cancellation of a data share snapshot",
+        "description": "Request to cancel a synchronization.",
+        "operationId": "ShareSubscriptions_CancelSynchronization",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1537,9 +1935,78 @@
             "$ref": "#/parameters/accountName"
           },
           {
-            "name": "shareName",
+            "name": "shareSubscriptionName",
             "in": "path",
-            "description": "The name of the share.",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSubscriptionSynchronization",
+            "in": "body",
+            "description": "Share Subscription Synchronization payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_CancelSynchronization": {
+            "$ref": "./examples/ShareSubscriptions_CancelSynchronization.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/ConsumerSourceDataSets": {
+      "get": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Get source dataSets of a shareSubscription.",
+        "description": "Get source dataSets of a shareSubscription",
+        "operationId": "ConsumerSourceDataSets_ListByShareSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
             "required": true,
             "type": "string"
           },
@@ -1552,27 +2019,13 @@
             "description": "Continuation token",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using OData syntax.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Sorts the results using OData syntax.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ShareSynchronizationList"
+              "$ref": "#/definitions/ConsumerSourceDataSetList"
             }
           },
           "default": {
@@ -1586,20 +2039,20 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Shares_ListSynchronizations": {
-            "$ref": "./examples/Shares_ListSynchronizations.json"
+          "ConsumerSourceDataSets_ListByShareSubscription": {
+            "$ref": "./examples/ConsumerSourceDataSets_ListByShareSubscription.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/listSynchronizationDetails": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSourceShareSynchronizationSettings": {
       "post": {
         "tags": [
-          "Share"
+          "ShareSubscription"
         ],
-        "summary": "List data set level details for a share synchronization",
-        "description": "List synchronization details",
-        "operationId": "Shares_ListSynchronizationDetails",
+        "summary": "Get source share synchronization settings for a shareSubscription.",
+        "description": "Get synchronization settings set on a share",
+        "operationId": "ShareSubscriptions_ListSourceShareSynchronizationSettings",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1611,19 +2064,79 @@
             "$ref": "#/parameters/accountName"
           },
           {
-            "name": "shareName",
+            "name": "shareSubscriptionName",
             "in": "path",
-            "description": "The name of the share.",
+            "description": "The name of the shareSubscription.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "shareSynchronization",
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SourceShareSynchronizationSettingList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_ListSourceShareSynchronizationSettings": {
+            "$ref": "./examples/ShareSubscriptions_ListSourceShareSynchronizationSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSynchronizationDetails": {
+      "post": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "List data set level details for a share subscription synchronization",
+        "description": "List synchronization details",
+        "operationId": "ShareSubscriptions_ListSynchronizationDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSubscriptionSynchronization",
             "in": "body",
-            "description": "Share Synchronization payload.",
+            "description": "Share Subscription Synchronization payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ShareSynchronization"
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
             }
           },
           {
@@ -1669,20 +2182,20 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Shares_ListSynchronizationDetails": {
-            "$ref": "./examples/Shares_ListSynchronizationDetails.json"
+          "ShareSubscriptions_ListSynchronizationDetails": {
+            "$ref": "./examples/ShareSubscriptions_ListSynchronizationDetails.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSynchronizations": {
+      "post": {
         "tags": [
-          "Share"
+          "ShareSubscription"
         ],
-        "summary": "Get share subscription in a provider share.",
-        "description": "Get share subscription in a provider share",
-        "operationId": "ProviderShareSubscriptions_GetByShare",
+        "summary": "List Synchronizations in a share subscription.",
+        "description": "List synchronizations of a share subscription",
+        "operationId": "ShareSubscriptions_ListSynchronizations",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1694,66 +2207,9 @@
             "$ref": "#/parameters/accountName"
           },
           {
-            "name": "shareName",
+            "name": "shareSubscriptionName",
             "in": "path",
-            "description": "The name of the share.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "providerShareSubscriptionId",
-            "in": "path",
-            "description": "To locate shareSubscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProviderShareSubscription"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ProviderShareSubscriptions_GetByShare": {
-            "$ref": "./examples/ProviderShareSubscriptions_GetByShare.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions": {
-      "get": {
-        "tags": [
-          "Share"
-        ],
-        "summary": "List of available share subscriptions to a provider share.",
-        "description": "List share subscriptions in a provider share",
-        "operationId": "ProviderShareSubscriptions_ListByShare",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareName",
-            "in": "path",
-            "description": "The name of the share.",
+            "description": "The name of the share subscription.",
             "required": true,
             "type": "string"
           },
@@ -1763,7 +2219,21 @@
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "Continuation Token",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
             "required": false,
             "type": "string"
           }
@@ -1772,7 +2242,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProviderShareSubscriptionList"
+              "$ref": "#/definitions/ShareSubscriptionSynchronizationList"
             }
           },
           "default": {
@@ -1786,20 +2256,20 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ProviderShareSubscriptions_ListByShare": {
-            "$ref": "./examples/ProviderShareSubscriptions_ListByShare.json"
+          "ShareSubscriptions_ListSynchronizations": {
+            "$ref": "./examples/ShareSubscriptions_ListSynchronizations.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/revoke": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/Synchronize": {
       "post": {
         "tags": [
-          "Share"
+          "ShareSubscription"
         ],
-        "summary": "Revoke share subscription in a provider share.",
-        "description": "Revoke share subscription in a provider share",
-        "operationId": "ProviderShareSubscriptions_Revoke",
+        "summary": "Initiate an asynchronous data share job",
+        "description": "Initiate a copy",
+        "operationId": "ShareSubscriptions_Synchronize",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1811,18 +2281,20 @@
             "$ref": "#/parameters/accountName"
           },
           {
-            "name": "shareName",
+            "name": "shareSubscriptionName",
             "in": "path",
-            "description": "The name of the share.",
+            "description": "The name of share subscription",
             "required": true,
             "type": "string"
           },
           {
-            "name": "providerShareSubscriptionId",
-            "in": "path",
-            "description": "To locate shareSubscription",
+            "name": "synchronize",
+            "in": "body",
+            "description": "Synchronize payload",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/Synchronize"
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1832,13 +2304,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProviderShareSubscription"
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/ProviderShareSubscription"
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
             }
           },
           "default": {
@@ -1853,65 +2325,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "ProviderShareSubscriptions_Revoke": {
-            "$ref": "./examples/ProviderShareSubscriptions_Revoke.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/reinstate": {
-      "post": {
-        "tags": [
-          "Share"
-        ],
-        "summary": "Reinstate share subscription in a provider share.",
-        "description": "Reinstate share subscription in a provider share",
-        "operationId": "ProviderShareSubscriptions_Reinstate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareName",
-            "in": "path",
-            "description": "The name of the share.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "providerShareSubscriptionId",
-            "in": "path",
-            "description": "To locate shareSubscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProviderShareSubscription"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ProviderShareSubscriptions_Reinstate": {
-            "$ref": "./examples/ProviderShareSubscriptions_Reinstate.json"
+          "ShareSubscriptions_Synchronize": {
+            "$ref": "./examples/ShareSubscriptions_Synchronize.json"
           }
         }
       }
@@ -2147,421 +2562,6 @@
         "x-ms-examples": {
           "ShareSubscriptions_ListByAccount": {
             "$ref": "./examples/ShareSubscriptions_ListByAccount.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/ConsumerSourceDataSets": {
-      "get": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "Get source dataSets of a shareSubscription.",
-        "description": "Get source dataSets of a shareSubscription",
-        "operationId": "ConsumerSourceDataSets_ListByShareSubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareSubscriptionName",
-            "in": "path",
-            "description": "The name of the shareSubscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConsumerSourceDataSetList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ConsumerSourceDataSets_ListByShareSubscription": {
-            "$ref": "./examples/ConsumerSourceDataSets_ListByShareSubscription.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSourceShareSynchronizationSettings": {
-      "post": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "Get source share synchronization settings for a shareSubscription.",
-        "description": "Get synchronization settings set on a share",
-        "operationId": "ShareSubscriptions_ListSourceShareSynchronizationSettings",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareSubscriptionName",
-            "in": "path",
-            "description": "The name of the shareSubscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SourceShareSynchronizationSettingList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ShareSubscriptions_ListSourceShareSynchronizationSettings": {
-            "$ref": "./examples/ShareSubscriptions_ListSourceShareSynchronizationSettings.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSynchronizations": {
-      "post": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "List Synchronizations in a share subscription.",
-        "description": "List synchronizations of a share subscription",
-        "operationId": "ShareSubscriptions_ListSynchronizations",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareSubscriptionName",
-            "in": "path",
-            "description": "The name of the share subscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using OData syntax.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Sorts the results using OData syntax.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronizationList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ShareSubscriptions_ListSynchronizations": {
-            "$ref": "./examples/ShareSubscriptions_ListSynchronizations.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSynchronizationDetails": {
-      "post": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "List data set level details for a share subscription synchronization",
-        "description": "List synchronization details",
-        "operationId": "ShareSubscriptions_ListSynchronizationDetails",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareSubscriptionName",
-            "in": "path",
-            "description": "The name of the share subscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "shareSubscriptionSynchronization",
-            "in": "body",
-            "description": "Share Subscription Synchronization payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronization"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using OData syntax.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Sorts the results using OData syntax.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SynchronizationDetailsList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ShareSubscriptions_ListSynchronizationDetails": {
-            "$ref": "./examples/ShareSubscriptions_ListSynchronizationDetails.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/Synchronize": {
-      "post": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "Initiate an asynchronous data share job",
-        "description": "Initiate a copy",
-        "operationId": "ShareSubscriptions_Synchronize",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareSubscriptionName",
-            "in": "path",
-            "description": "The name of share subscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "synchronize",
-            "in": "body",
-            "description": "Synchronize payload",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Synchronize"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronization"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronization"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "ShareSubscriptions_Synchronize": {
-            "$ref": "./examples/ShareSubscriptions_Synchronize.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/cancelSynchronization": {
-      "post": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "Request cancellation of a data share snapshot",
-        "description": "Request to cancel a synchronization.",
-        "operationId": "ShareSubscriptions_CancelSynchronization",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "name": "shareSubscriptionName",
-            "in": "path",
-            "description": "The name of the shareSubscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "shareSubscriptionSynchronization",
-            "in": "body",
-            "description": "Share Subscription Synchronization payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronization"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronization"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionSynchronization"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "ShareSubscriptions_CancelSynchronization": {
-            "$ref": "./examples/ShareSubscriptions_CancelSynchronization.json"
           }
         }
       }
@@ -3067,6 +3067,27 @@
     }
   },
   "definitions": {
+    "AccountList": {
+      "description": "List response for get Accounts.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        }
+      }
+    },
     "Account": {
       "description": "An account data transfer object.",
       "required": [
@@ -3198,19 +3219,6 @@
         }
       }
     },
-    "AccountUpdateParameters": {
-      "description": "Update parameters for accounts",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Tags on the azure resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "OperationResponse": {
       "description": "Response for long running operation",
       "required": [
@@ -3250,8 +3258,21 @@
         }
       }
     },
-    "AccountList": {
-      "description": "List response for get Accounts.",
+    "AccountUpdateParameters": {
+      "description": "Update parameters for accounts",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConsumerInvitationList": {
+      "description": "List response for get InvitationList",
       "required": [
         "value"
       ],
@@ -3266,7 +3287,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Account"
+            "$ref": "#/definitions/ConsumerInvitation"
           }
         }
       }
@@ -3378,27 +3399,6 @@
           "description": "Name of the user who created the resource",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ConsumerInvitationList": {
-      "description": "List response for get InvitationList",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type DataTransferObjects.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConsumerInvitation"
-          }
         }
       }
     },
@@ -3805,122 +3805,6 @@
         }
       }
     },
-    "Share": {
-      "description": "A share data transfer object.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyDto"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ShareProperties",
-          "description": "Properties on the share",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ShareProperties": {
-      "description": "Share property bag.",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "Time at which the share was created.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Share description.",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "Gets or sets the provisioning state",
-          "enum": [
-            "Succeeded",
-            "Creating",
-            "Deleting",
-            "Moving",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        },
-        "shareKind": {
-          "description": "Share kind.",
-          "enum": [
-            "CopyBased",
-            "InPlace"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "shareKind",
-            "modelAsString": true
-          }
-        },
-        "terms": {
-          "description": "Share terms.",
-          "type": "string"
-        },
-        "userEmail": {
-          "description": "Email of the user who created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "userName": {
-          "description": "Name of the user who created the resource",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ShareList": {
-      "description": "List response for get Shares.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type DataTransferObjects.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Share"
-          }
-        }
-      }
-    },
-    "ShareSynchronizationList": {
-      "description": "List response for get ShareSynchronization.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type DataTransferObjects.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ShareSynchronization"
-          }
-        }
-      }
-    },
     "ShareSynchronization": {
       "description": "A ShareSynchronization data transfer object.",
       "type": "object",
@@ -4109,6 +3993,27 @@
         }
       }
     },
+    "ShareSynchronizationList": {
+      "description": "List response for get ShareSynchronization.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareSynchronization"
+          }
+        }
+      }
+    },
     "ProviderShareSubscription": {
       "description": "A provider side share subscription data transfer object.",
       "type": "object",
@@ -4209,11 +4114,8 @@
         }
       }
     },
-    "ShareSubscription": {
-      "description": "A share subscription data transfer object.",
-      "required": [
-        "properties"
-      ],
+    "Share": {
+      "description": "A share data transfer object.",
       "type": "object",
       "allOf": [
         {
@@ -4222,47 +4124,28 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ShareSubscriptionProperties",
-          "description": "Properties on the share subscription",
+          "$ref": "#/definitions/ShareProperties",
+          "description": "Properties on the share",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ShareSubscriptionProperties": {
-      "description": "Share subscription property bag.",
-      "required": [
-        "invitationId",
-        "sourceShareLocation"
-      ],
+    "ShareProperties": {
+      "description": "Share property bag.",
       "type": "object",
       "properties": {
         "createdAt": {
           "format": "date-time",
-          "description": "Time at which the share subscription was created.",
+          "description": "Time at which the share was created.",
           "type": "string",
           "readOnly": true
         },
-        "invitationId": {
-          "description": "The invitation id.",
+        "description": {
+          "description": "Share description.",
           "type": "string"
         },
-        "providerEmail": {
-          "description": "Email of the provider who created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "providerName": {
-          "description": "Name of the provider who created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "providerTenantName": {
-          "description": "Tenant name of the provider who created the resource",
-          "type": "string",
-          "readOnly": true
-        },
         "provisioningState": {
-          "description": "Provisioning state of the share subscription",
+          "description": "Gets or sets the provisioning state",
           "enum": [
             "Succeeded",
             "Creating",
@@ -4277,51 +4160,20 @@
             "modelAsString": true
           }
         },
-        "shareDescription": {
-          "description": "Description of share",
-          "type": "string",
-          "readOnly": true
-        },
         "shareKind": {
-          "description": "Kind of share",
+          "description": "Share kind.",
           "enum": [
             "CopyBased",
             "InPlace"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "shareKind",
             "modelAsString": true
           }
         },
-        "shareName": {
-          "description": "Name of the share",
-          "type": "string",
-          "readOnly": true
-        },
-        "shareSubscriptionStatus": {
-          "description": "Gets the current status of share subscription.",
-          "enum": [
-            "Active",
-            "Revoked",
-            "SourceDeleted",
-            "Revoking"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "shareSubscriptionStatus",
-            "modelAsString": true
-          }
-        },
-        "shareTerms": {
-          "description": "Terms of a share",
-          "type": "string",
-          "readOnly": true
-        },
-        "sourceShareLocation": {
-          "description": "Source share location.",
+        "terms": {
+          "description": "Share terms.",
           "type": "string"
         },
         "userEmail": {
@@ -4336,8 +4188,8 @@
         }
       }
     },
-    "ShareSubscriptionList": {
-      "description": "List response for get ShareSubscription.",
+    "ShareList": {
+      "description": "List response for get Shares.",
       "required": [
         "value"
       ],
@@ -4352,7 +4204,61 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ShareSubscription"
+            "$ref": "#/definitions/Share"
+          }
+        }
+      }
+    },
+    "ShareSubscriptionSynchronization": {
+      "description": "A ShareSubscriptionSynchronization data transfer object.",
+      "required": [
+        "synchronizationId"
+      ],
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Synchronization duration",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of synchronization",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "message of Synchronization",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time of synchronization",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Raw Status",
+          "type": "string",
+          "readOnly": true
+        },
+        "synchronizationId": {
+          "description": "Synchronization id",
+          "type": "string"
+        },
+        "synchronizationMode": {
+          "description": "Synchronization Mode",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
           }
         }
       }
@@ -4506,60 +4412,6 @@
         }
       }
     },
-    "ShareSubscriptionSynchronization": {
-      "description": "A ShareSubscriptionSynchronization data transfer object.",
-      "required": [
-        "synchronizationId"
-      ],
-      "type": "object",
-      "properties": {
-        "durationMs": {
-          "format": "int32",
-          "description": "Synchronization duration",
-          "type": "integer",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "End time of synchronization",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "message of Synchronization",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "start time of synchronization",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Raw Status",
-          "type": "string",
-          "readOnly": true
-        },
-        "synchronizationId": {
-          "description": "Synchronization id",
-          "type": "string"
-        },
-        "synchronizationMode": {
-          "description": "Synchronization Mode",
-          "enum": [
-            "Incremental",
-            "FullSync"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "synchronizationMode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "Synchronize": {
       "description": "Payload for the synchronizing the data.",
       "type": "object",
@@ -4574,6 +4426,154 @@
           "x-ms-enum": {
             "name": "synchronizationMode",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "ShareSubscription": {
+      "description": "A share subscription data transfer object.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ShareSubscriptionProperties",
+          "description": "Properties on the share subscription",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ShareSubscriptionProperties": {
+      "description": "Share subscription property bag.",
+      "required": [
+        "invitationId",
+        "sourceShareLocation"
+      ],
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the share subscription was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invitationId": {
+          "description": "The invitation id.",
+          "type": "string"
+        },
+        "providerEmail": {
+          "description": "Email of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerTenantName": {
+          "description": "Tenant name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the share subscription",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "shareDescription": {
+          "description": "Description of share",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareKind": {
+          "description": "Kind of share",
+          "enum": [
+            "CopyBased",
+            "InPlace"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "shareKind",
+            "modelAsString": true
+          }
+        },
+        "shareName": {
+          "description": "Name of the share",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareSubscriptionStatus": {
+          "description": "Gets the current status of share subscription.",
+          "enum": [
+            "Active",
+            "Revoked",
+            "SourceDeleted",
+            "Revoking"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "shareSubscriptionStatus",
+            "modelAsString": true
+          }
+        },
+        "shareTerms": {
+          "description": "Terms of a share",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceShareLocation": {
+          "description": "Source share location.",
+          "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ShareSubscriptionList": {
+      "description": "List response for get ShareSubscription.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareSubscription"
           }
         }
       }
