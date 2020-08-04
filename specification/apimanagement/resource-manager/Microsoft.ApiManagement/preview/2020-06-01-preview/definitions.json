@@ -2680,7 +2680,8 @@
           "description": "Logger type.",
           "enum": [
             "azureEventHub",
-            "applicationInsights"
+            "applicationInsights",
+            "azureMonitor"
           ],
           "x-ms-enum": {
             "name": "LoggerType",
@@ -2693,6 +2694,10 @@
               {
                 "value": "applicationInsights",
                 "description": "Azure Application Insights as log destination."
+              },
+              {
+                "value": "azureMonitor",
+                "description": "Azure Monitor"
               }
             ]
           }
@@ -2723,8 +2728,7 @@
         }
       },
       "required": [
-        "loggerType",
-        "credentials"
+        "loggerType"
       ],
       "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
     },
