@@ -1,7 +1,7 @@
 {
   "parameters": {
     "guestUserId": "userid",
-    "$select": "externalUserState,userPrincipalName,id,mail,employeeID"
+    "$select": "externalUserState,userPrincipalName,id,mail,employeeId"
   },
   "responses": {
     "200": {
@@ -10,7 +10,16 @@
         "id": "userid",
         "userPrincipalName": "username",
         "mail": "user@domain.com",
-        "employeeID": "toto"
+        "employeeId": "toto"
+      }
+    },
+    "202": {
+      "body": {
+        "externalUserState": "Accepted",
+        "id": "userid",
+        "userPrincipalName": "username",
+        "mail": "user@domain.com",
+        "employeeId": "toto"
       }
     }
   }
