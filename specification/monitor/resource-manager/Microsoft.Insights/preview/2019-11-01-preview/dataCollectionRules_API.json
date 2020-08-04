@@ -186,13 +186,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Data collection rule was succesfully updated",
+            "description": "Data collection rule was successfully updated",
             "schema": {
               "$ref": "#/definitions/DataCollectionRuleResource"
             }
           },
           "201": {
-            "description": "Data collection rule was succesfully created",
+            "description": "Data collection rule was successfully created",
             "schema": {
               "$ref": "#/definitions/DataCollectionRuleResource"
             }
@@ -246,7 +246,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data collection rule was succesfully updated",
+            "description": "Data collection rule was successfully updated",
             "schema": {
               "$ref": "#/definitions/DataCollectionRuleResource"
             }
@@ -289,7 +289,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data collection rule was succesfully deleted"
+            "description": "Data collection rule was successfully deleted"
           },
           "204": {
             "description": "Data collection rule did not exist"
@@ -928,8 +928,8 @@
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Common error response.",
+    "ErrorDetails": {
+      "description": "Common error details.",
       "type": "object",
       "properties": {
         "code": {
@@ -959,10 +959,10 @@
           ]
         },
         "details": {
-          "description": "Additional nested error response objects.",
+          "description": "Additional nested error detail objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/ErrorDetails"
           },
           "readOnly": true,
           "x-ms-mutability": [
@@ -975,6 +975,24 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Common error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          ],
           "readOnly": true,
           "x-ms-mutability": [
             "read"

@@ -601,6 +601,10 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+  - suppress: OperationsAPIImplementation
+    from: dataCollectionRules_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
