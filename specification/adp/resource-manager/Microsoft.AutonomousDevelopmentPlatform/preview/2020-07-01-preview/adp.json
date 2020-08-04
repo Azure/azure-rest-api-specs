@@ -3,10 +3,7 @@
   "info": {
     "version": "2020-07-01-preview",
     "title": "adp",
-    "description": "Microsoft Autonomoud Development Platform",
-    "x-ms-code-generation-settings": {
-      "name": "adpClient"
-    }
+    "description": "Microsoft Autonomoud Development Platform"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -45,7 +42,7 @@
         "description": "Lists all of the available Autonomous Development Platform provider operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "CosmosDBOperationsList": {
+          "List operations": {
             "$ref": "./examples/AdpOperationsList.json"
           }
         },
@@ -59,6 +56,87 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_List",
+        "description": "List all ADP accounts available under the subscription",
+        "x-ms-examples": {
+          "List accounts": {
+            "$ref": "./examples/AdpAccountsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_ListByResourceGroup",
+        "description": "List all ADP accounts available under the resource group",
+        "x-ms-examples": {
+          "List accounts by resource group": {
+            "$ref": "./examples/AdpAccountsListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
             }
           },
           "default": {
@@ -287,7 +365,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Data Pools": {
@@ -550,6 +628,28 @@
         }
       }
     },
+    "AccountList": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "description": "List of accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "description": "The list operation response, that contains the data pools and their properties."
+    },
     "DataPool": {
       "description": "An ADP Data Pool.",
       "properties": {
@@ -616,6 +716,10 @@
             "$ref": "#/definitions/DataPool"
           },
           "description": "List of data pools and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         },
         "systemData": {
           "readOnly": true,

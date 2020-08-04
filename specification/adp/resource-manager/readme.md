@@ -25,6 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the adp.
 
 ```yaml
+title: AdpManagementClient
 openapi-type: arm
 tag: package-2020-07-01-preview
 ```
