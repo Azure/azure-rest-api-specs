@@ -2351,6 +2351,19 @@
           "description": "IoT hub comments.",
           "type": "string"
         },
+        "deviceStreams": {
+          "description": "The device streams properties of iothub.",
+          "type": "object",
+          "properties": {
+            "streamingEndpoints": {
+              "description": "List of Device Streams Endpoints.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
         "features": {
           "description": "The capabilities and features enabled for the IoT hub.",
           "enum": [
@@ -3049,7 +3062,8 @@
             "DeviceMessages",
             "TwinChangeEvents",
             "DeviceLifecycleEvents",
-            "DeviceJobLifecycleEvents"
+            "DeviceJobLifecycleEvents",
+            "DigitalTwinChangeEvents"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3828,7 +3842,8 @@
             "DeviceMessages",
             "TwinChangeEvents",
             "DeviceLifecycleEvents",
-            "DeviceJobLifecycleEvents"
+            "DeviceJobLifecycleEvents",
+            "DigitalTwinChangeEvents"
           ],
           "type": "string",
           "x-ms-enum": {
