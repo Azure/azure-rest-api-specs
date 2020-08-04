@@ -58,7 +58,6 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/ipAllocation.json
   - Microsoft.Network/stable/2020-06-01/ipGroups.json
   - Microsoft.Network/stable/2020-06-01/loadBalancer.json
-  - Microsoft.Network/stable/2020-06-01/masterCustomIpPrefix.json
   - Microsoft.Network/stable/2020-06-01/natGateway.json
   - Microsoft.Network/stable/2020-06-01/network.json
   - Microsoft.Network/stable/2020-06-01/networkInterface.json
