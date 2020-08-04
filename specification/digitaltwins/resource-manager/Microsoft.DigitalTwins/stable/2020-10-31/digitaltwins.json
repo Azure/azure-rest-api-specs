@@ -633,7 +633,7 @@
         "hostName": {
           "description": "Api endpoint to work with DigitalTwinsInstance.",
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -661,7 +661,7 @@
         "tags": {
           "description": "Instance tags",
           "type": "object",
-          "nullable": true,
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -697,7 +697,7 @@
         },
         "tags": {
           "type": "object",
-          "nullable": true,
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           },
@@ -734,7 +734,7 @@
         "details": {
           "description": "Internal error details.",
           "type": "array",
-          "nullable": true,
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
@@ -749,7 +749,7 @@
         "nextLink": {
           "description": "The link used to get the next page of DigitalTwins description objects.",
           "type": "string",
-          "nullable": true
+          "x-nullable": true
         },
         "value": {
           "description": "A list of DigitalTwins description objects.",
@@ -767,7 +767,7 @@
         "nextLink": {
           "description": "The link used to get the next page of DigitalTwins description objects.",
           "type": "string",
-          "nullable": true
+          "x-nullable": true
         },
         "value": {
           "description": "A list of DigitalTwins operations supported by the Microsoft.DigitalTwins resource provider.",
@@ -795,7 +795,7 @@
         "origin": {
           "readOnly": true,
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "description": "The intended executor of the operation."
         },
         "isDataAction": {
@@ -805,7 +805,7 @@
         },
         "properties": {
           "description": "Extra properties for the operation.",
-          "nullable": true,
+          "x-nullable": true,
           "$ref": "#/definitions/OperationProperties"
         }
       }
@@ -842,7 +842,7 @@
       "properties": {
         "serviceSpecification": {
           "description": "Service specification of the operation.",
-          "nullable": true,
+          "x-nullable": true,
           "$ref": "#/definitions/OperationServiceSpecification"
         }
       }
@@ -855,7 +855,7 @@
           "description": "Metric specifications for the operation.",
           "readOnly": true,
           "type": "array",
-          "nullable": true,
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
           }
@@ -864,7 +864,7 @@
           "description": "Log specifications for the operation.",
           "readOnly": true,
           "type": "array",
-          "nullable": true,
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
           }
@@ -913,7 +913,7 @@
           "$ref": "#definitions/OperationMetricAggregationType"
         },
         "supportedAggregationTypes": {
-          "nullable": true,
+          "x-nullable": true,
           "description": "",
           "type": "array",
           "items": {
@@ -921,7 +921,7 @@
           }
         },
         "dimensions": {
-          "nullable": true,
+          "x-nullable": true,
           "description": "",
           "type": "array",
           "items": {
@@ -929,7 +929,7 @@
           }
         },
         "availabilities": {
-          "nullable": true,
+          "x-nullable": true,
           "description": "",
           "type": "array",
           "items": {
@@ -938,7 +938,7 @@
         },
         "lockAggregationType": {
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "description": ""
         }
       }
@@ -974,7 +974,7 @@
         },
         "internalName": {
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "readOnly": true,
           "description": ""
         }
@@ -1134,7 +1134,7 @@
             "Canceled"
           ],
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "readOnly": true,
           "x-ms-enum": {
             "name": "EndpointProvisioningState",
@@ -1144,19 +1144,19 @@
         "createdTime": {
           "description": "Time when the Endpoint was added to DigitalTwinsInstance.",
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "format": "date-time",
           "readOnly": true
         },
         "deadLetterSecret": {
           "description": "Dead letter storage secret. Will be obfuscated during read.",
           "type": "string",
-          "nullable": true,
+          "x-nullable": true,
           "readOnly": true
         },
         "tags": {
           "type": "object",
-          "nullable": true,
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           },
@@ -1184,7 +1184,7 @@
             "secondaryConnectionString": {
               "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string",
-              "nullable": true
+              "x-nullable": true
             }
           }
         }
@@ -1210,7 +1210,7 @@
             "connectionString-SecondaryKey": {
               "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string",
-              "nullable": true
+              "x-nullable": true
             }
           }
         }
@@ -1241,7 +1241,7 @@
             "accessKey2": {
               "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
               "type": "string",
-              "nullable": true
+              "x-nullable": true
             }
           }
         }
@@ -1254,7 +1254,7 @@
         "nextLink": {
           "description": "The link used to get the next page of DigitalTwinsInstance Endpoints.",
           "type": "string",
-          "nullable": true
+          "x-nullable": true
         },
         "value": {
           "description": "A list of DigitalTwinsInstance Endpoints.",
