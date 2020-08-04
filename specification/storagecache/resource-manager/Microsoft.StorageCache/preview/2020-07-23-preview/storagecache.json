@@ -2250,14 +2250,14 @@
         },
         "identity": {
           "$ref": "#/definitions/amlFilesystemIdentity",
-          "description": "The identity of the filesystem, if configured."
+          "description": "The managed identity used by the amlFilesystem, if configured."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the amlFilesystem.",
           "properties": {
             "storageCapacityTiB": {
-              "description": "The size of this filesystem, in TiB.",
+              "description": "The size of this filesystem, in TiB.  This may be rounded up.",
               "type": "number",
               "format": "float"
             },
@@ -2293,9 +2293,9 @@
               "description": "Subnet used for the amlFilesystem.",
               "$ref": "#/definitions/URLString"
             },
-            "upgradeStatus": {
-              "description": "Upgrade status of the amlFilesystem.",
-              "$ref": "#/definitions/CacheUpgradeStatus"
+            "maintenanceStatus": {
+              "description": "Maintenance status of the amlFilesystem.",
+              "$ref": "#/definitions/amlFilesystemMaintenanceStatus"
             },
             "encryptionSettings": {
               "$ref": "#/definitions/amlFilesystemEncryptionSettings",
@@ -2375,6 +2375,47 @@
         }
       }
     },
+    "amlFilesystemMaintenanceStatus": {
+      "description": "Properties describing the software upgrade state of the amlFilesystem.",
+      "properties": {
+        "currentFirmwareVersion": {
+          "description": "Version string of the firmware currently installed on this amlFilesystem.",
+          "type": "string",
+          "readOnly": true
+        },
+        "firmwareUpdateStatus": {
+          "description": "True if there is a firmware update ready to install on this amlFilesystem. The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
+          "enum": [
+            "available",
+            "unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "FirmwareStatusType",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareUpdateDeadline": {
+          "description": "Time at which the pending firmware update will automatically be installed on the amlFilesystem.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastFirmwareUpdate": {
+          "description": "Time of the last successful firmware update.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "pendingFirmwareVersion": {
+          "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
     "amlFilesystemHealth": {
       "description": "An indication of amlFilesystem health. Gives more information about health than just that related to provisioning.",
       "properties": {
@@ -2383,13 +2424,9 @@
           "enum": [
             "Unknown",
             "Healthy",
-            "Degraded",
             "Down",
             "Transitioning",
-            "Stopping",
-            "Stopped",
-            "Upgrading",
-            "Flushing"
+            "Maintenance"
           ],
           "x-ms-enum": {
             "name": "amlFilesystemHealthStateType",
@@ -2420,9 +2457,10 @@
           "description": "Container used for the amlFilesystem.",
           "$ref": "#/definitions/URLString"
         },
-        "containerSasToken": {
-          "description": "Specifies the storage container sas token.",
-          "type": "string"
+        "containerKeyVaultKey": {
+          "x-ms-secret": true,
+          "$ref": "#/definitions/KeyVaultKeyReference",
+          "description": "Specifies the location of the key encryption key in Key Vault."
         },
         "importPrefix" : {
           "description": "Path/Prefix for blobs in above container.  Only blobs containing this prefix get pre-hydrated into the cluster namespace",
