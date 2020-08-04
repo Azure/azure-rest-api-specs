@@ -7,6 +7,7 @@ az:
     extensions: footprintmonitoring
     namespace: azure.mgmt.footprintmonitoring
     package-name: azure-mgmt-footprintmonitoring
+    randomize-names: true
 az-output-folder: $(azure-cli-extension-folder)/src/footprintmonitoring
 python-sdk-output-folder: "$(az-output-folder)/azext_footprintmonitoring/vendored_sdks/footprintmonitoring"
 # add additinal configuration here specific for Azure CLI
