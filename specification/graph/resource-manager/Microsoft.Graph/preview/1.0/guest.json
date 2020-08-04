@@ -3,7 +3,7 @@
   "info": {
     "title": "GraphManagementClient",
     "description": "The Microsoft Graph API provides a RESTful set of web services that interact with Microsoft Graph service to manage your entities and relationships across different services exposed with rich scenarios around users and groups (Azure Active Directory).",
-    "version": "1.0",
+    "version": "1.0-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -77,6 +77,7 @@
         "tags": [
           "GuestUser"
         ],
+        "x-ms-long-running-operation": true,
         "operationId": "GuestUser_Get",
         "description": "Get a GuestUser",
         "parameters": [
@@ -114,6 +115,11 @@
               "$ref": "./graph.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Guest User": {
+            "$ref": "./examples/GuestUserGet.json"
+          }
         }
       },
       "patch": {
@@ -150,6 +156,11 @@
               "$ref": "./graph.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Guest User": {
+            "$ref": "./examples/GuestUserUpdate.json"
+          }
         }
       },
       "delete": {
@@ -176,6 +187,11 @@
             "schema": {
               "$ref": "./graph.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Guest User": {
+            "$ref": "./examples/GuestUserDelete.json"
           }
         }
       }
