@@ -87,12 +87,12 @@
             "type": "string",
             "description": "The unique ID of the Guest User"
           },
-	  {
+          {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "List of attribut you want the user return reparated by comma, exemple : displayName,givenName,postalCode"
+            "description": "List of attribute you want the user return separated by comma, example : displayName,givenName,postalCode"
           }
         ],
         "responses": {
@@ -320,7 +320,7 @@
         },
         "creationType": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Indicates whether the user account was created as a regular school or work account (null), an external account (Invitation), a local account for an Azure Active Directory B2C tenant (LocalAccount) or self-service sign-up using email verification (EmailVerified). Read-only."
         },
         "deletedDateTime": {
@@ -342,12 +342,12 @@
         },
         "externalUserState": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "For an external user invited to the tenant using the invitation API, this property represents the invited user's invitation status. For invited users, the state can be PendingAcceptance or Accepted, or null for all other users."
         },
         "externalUserStateChangeDateTime": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "format": "date-time",
           "description": "Shows the timestamp for the latest change to the externalUserState property."
         },
@@ -366,16 +366,16 @@
         },
         "id": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "The unique identifier for the user. Inherited from directoryObject. Key. Not nullable. Read-only."
         },
         "imAddresses": {
           "type": "array",
-	  "readOnly": true,
+          "readOnly": true,
           "items": {
             "type": "string"
           },
-          "description": "The instant message voice over IP (VOIP) session initiation protocol (SIP) addresses for the user. Read-only."
+          "description": "The instant message voice over IP session initiation protocol (SIP) addresses for the user. Read-only."
         },
         "interests": {
           "type": "array",
@@ -399,13 +399,13 @@
         },
         "legalAgeGroupClassification": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Used by enterprise applications to determine the legal age group of the user. This property is read-only and calculated based on ageGroup and consentProvidedForMinor properties. Allowed values: null, minorWithOutParentalConsent, minorWithParentalConsent, minorNoParentalConsentRequired, notAdult and adult. Refer to the legal age group property definitions for further information.)"
         },
         "mail": {
           "type": "string",
-	  "readOnly": true,
-          "description": "The SMTP address for the user, for example, \"jeff@contoso.onmicrosoft.com\". Read-Only. Supports $filter."
+          "readOnly": true,
+          "description": "The mail address for the user, for example, \"jeff@contoso.onmicrosoft.com\". Read-Only. Supports $filter."
         },
         "mailNickname": {
           "type": "string",
@@ -425,12 +425,12 @@
         },
         "onPremisesDistinguishedName": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Contains the on-premises Active Directory distinguished name or DN. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
         },
         "onPremisesDomainName": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Contains the on-premises domainFQDN, also called dnsDomainName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
         },
         "onPremisesImmutableId": {
@@ -439,28 +439,28 @@
         },
         "onPremisesLastSyncDateTime": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "format": "date-time",
           "description": "Indicates the last time at which the object was synced with the on-premises directory; for example: \"2013-02-16T03:04:54Z\". The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'. Read-only."
         },
         "onPremisesSamAccountName": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Contains the on-premises samAccountName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
         },
         "onPremisesSecurityIdentifier": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Contains the on-premises security identifier (SID) for the user that was synchronized from on-premises to the cloud. Read-only."
         },
         "onPremisesSyncEnabled": {
           "type": "boolean",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only"
         },
         "onPremisesUserPrincipalName": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "description": "Contains the on-premises userPrincipalName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Azure Active Directory via Azure AD Connect. Read-only."
         },
         "otherMails": {
@@ -496,7 +496,7 @@
         },
         "proxyAddresses": {
           "type": "array",
-	  "readOnly": true,
+          "readOnly": true,
           "items": {
             "type": "string"
           },
@@ -504,7 +504,7 @@
         },
         "refreshTokensValidFromDateTime": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "format": "date-time",
           "description": "Any refresh tokens or sessions tokens (session cookies) issued before this time are invalid, and applications will get an error when using an invalid refresh or sessions token to acquire a delegated access token (to access APIs such as Microsoft Graph). If this happens, the application will need to acquire a new refresh token by making a request to the authorize endpoint."
         },
@@ -535,7 +535,7 @@
         },
         "signInSessionsValidFromDateTime": {
           "type": "string",
-	  "readOnly": true,
+          "readOnly": true,
           "format": "date-time",
           "description": "Any refresh tokens or sessions tokens (session cookies) issued before this time are invalid, and applications will get an error when using an invalid refresh or sessions token to acquire a delegated access token (to access APIs such as Microsoft Graph). If this happens, the application will need to acquire a new refresh token by making a request to the authorize endpoint. Read-only. Use revokeSignInSessions to reset."
         },
