@@ -5,33 +5,50 @@
     "workspaceName": "workspaces123",
     "inferenceEndpointName": "testendpoint",
     "api-version": "2020-05-01-preview",
-    "parameters": {
+    "properties": {
       "description": "This is a test endpoint",
-      "properties": "",
-      "authMode":"None"
+      "properties":"",
+      "tags": ""
     }  
   },
   "responses": {
     "200": {
       "body": {
         "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/inferenceEndpoints/testendpoint",
+        "type": "Microsoft.MachineLearningServices/workspaces/inferenceEndpoints",
         "name": "testendpoint",
         "identity": "",
         "location": "westus2euap",
-        "type": "Microsoft.MachineLearningServices/workspaces/inferenceEndpoints",
         "properties": {
           "description": "This is a test endpoint",
           "properties": "",
+          "tags": "",
           "provisioningState": "Succeeded",
           "error": null,
-          "authMode": "None",
+          "authMode": "AML Token-based",
           "uri": ""
         }
       }
     },
     "201": {
       "body": {
-        
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/inferenceEndpoints/testendpoint",
+        "type": "Microsoft.MachineLearningServices/workspaces/inferenceEndpoints",
+        "name": "testendpoint",
+        "identity": "",
+        "location": "westus2euap",
+        "properties": {
+          "description": "This is a test endpoint",
+          "properties": "",
+          "tags": "",
+          "provisioningState": "Creating",
+          "error": null,
+          "authMode": "AML Token-based",
+          "uri": ""
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }

@@ -3,41 +3,33 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
-    "endpointName": "testendpoint",
+    "inferenceEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
     "api-version": "2020-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/endinferenceEndpointspoints/testendpoint/deployments/testdeployment",
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/inferenceEndpoints/testendpoint/deployments/testdeployment",
         "name": "testdeployment",
-        "identity": "",
         "location": "westus2euap",
+        "identity": "",
         "type": "Microsoft.MachineLearningServices/workspaces/inferenceEndpoints/deployments",
         "sku": {
-          "name": "Basic_A0",
+          "name": "Standard_DS2_V2",
           "tier": "Basic",
           "capacity": 5
         },
         "properties": {
-          "modelIds": [
-            "modelURL?"
-          ],
+          "modelIds": "modelURL",
           "scaleSettings": {
             "minimum": 1,
             "maximum": 5
           },
           "weight": 100,
           "provisioningState": "Succeeded",
-          "environmentConfigId": "EnvConfigURL?",
-          "codeAssetId": "CodeAssetURL?",
-          "vnet": {
-            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/testvnet",
-            "name": "testvnet",
-            "type": "Microsoft.Network/virtualNetworks",
-            "subnetName": "default"
-          }
+          "environmentConfigId": "EnvConfigURL",
+          "codeAssetId": ["CodeAssetURL"]
         }
       }
     }

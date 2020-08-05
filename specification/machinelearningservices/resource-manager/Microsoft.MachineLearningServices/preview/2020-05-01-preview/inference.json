@@ -241,6 +241,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "operationId": "MachineLearningInferenceEndpoint_CheckNameAvailability",
+        "description": "Checks that the inference endpoint name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointCheckNameAvailabilityParameter"
+            },
+            "description": "The name of the endpoint within the specified resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the endpoint name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments": {
       "get": {
         "tags": [
@@ -524,9 +567,9 @@
         "tags": [
           "MachineLearningInferenceEndpointDeployments"
         ],
-        "summary": "This is an ARM Contract for Azure Monitor to scale the number of instances of the Inference Deployment.",
+        "summary": "This is for an ARM Contract with Azure Monitor to scale the number of instances of the Inference Deployment.",
         "description": "Get SKU information for scaling an Inference Deployment.",
-        "operationId": "MachineLearningService_ListDeploymentSkus",
+        "operationId": "MachineLearningInferenceEndpointDeployment_ListDeploymentSkus",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -552,6 +595,52 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuDiscoveryInfoCollection"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{endpointName}/deployments/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "MachineLearningInferenceEndpointDeployments"
+        ],
+        "operationId": "MachineLearningInferenceEndpointDeployment_CheckNameAvailability",
+        "description": "Checks that the inference endpoint deployment name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointDeploymentCheckNameAvailabilityParameter"
+            },
+            "description": "The name of the endpoint deployment within the specified resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the endpoint deployment name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           }
         }
@@ -589,6 +678,14 @@
       "description": "Version of Azure Machine Learning resource provider API.",
       "required": true
     },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "description": "location of Azure Machine Learning workspace.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
     "PaginationParameter": {
       "in": "query",
       "name": "$skiptoken",
@@ -615,6 +712,61 @@
     }
   },
   "definitions": {
+    "InferenceEndpointCheckNameAvailabilityParameter": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.MachineLearningServices/workspaces/inferenceEndpoints"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters used to check the availability of the endpoint name."
+    },
+    "InferenceEndpointDeploymentCheckNameAvailabilityParameter": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.MachineLearningServices/workspaces/inferenceEndpoints/deployments"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters used to check the availability of the deployment name."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason that a name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    },
     "MachineLearningServiceError": {
       "type": "object",
       "description": "Wrapper for error response to follow ARM guidelines.",
@@ -911,7 +1063,7 @@
                 "authMode":{
                   "type": "string",
                   "enum": [
-                    "None"
+                    "AML Token-based"
                   ],
                   "x-ms-enum": {
                     "name": "AuthMode",
@@ -985,13 +1137,11 @@
                   "readOnly": true
                 },
                 "codeAssetId": {
-                  "type": "string",
-                  "description": "ResourceId of the Code Assets i.e. startup code.",
-                  "readOnly": true
-                },
-                "vnet": {
-                  "$ref": "#/definitions/VirtualNetworkProfile",
-                  "description": "Description of the Virtual Network and subnet for outbound calls from this deployment.",
+                  "description": "Resource Id of the Code Assets i.e. startup code.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
                   "readOnly": true
                 }
               }
@@ -1057,20 +1207,10 @@
           "description": "Resource Id of the Environment Configuration artifact."
         },
         "codeAssetId": {
-          "type": "string",
-          "description": "Resource Id of the Code Assets i.e. startup code."
-        },
-        "vnet": {
-          "description": "Info of the customer's custom Virtual Network",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "ResourceId of the Virtual Network."
-            },
-            "subnetName": {
-              "type": "string",
-              "description": "Name of the Subnet in the Virtual Network."
-            }
+          "description": "Resource Id of the Code Assets i.e. startup code.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -1094,7 +1234,7 @@
           "type": "integer"
         },
         "default": {
-          "description": "Default/Starting number of instances for this deployment.",
+          "description": "Default/Initial number of instances for this deployment.",
           "type": "integer"
         },
         "scaleType": {
@@ -1209,32 +1349,6 @@
         "weight": {
           "description": "The weight of the deployment for load balancing.",
           "type": "integer"
-        }
-      }
-    },
-    "VirtualNetworkProfile": {
-      "description": "Specification for using a Virtual Network.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the Virtual Network.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the Virtual Network (read-only).",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type of the Virtual Network (read-only).",
-          "type": "string",
-          "readOnly": true
-        },
-        "subnetName": {
-          "description": "Subnet within the Virtual Network.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
