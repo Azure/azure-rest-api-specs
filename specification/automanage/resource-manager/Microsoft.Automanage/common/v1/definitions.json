@@ -28,17 +28,29 @@
       "description": "ARM error response body.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Gets or sets the string that can be used to programmatically identify the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Gets or sets the string that describes the error in detail and provides debugging information.",
-          "type": "string",
-          "readOnly": true
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Details about the error."
         }
       }
+    },
+    "ErrorResponseBody": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "description": "A list of additional details about the error."
+      },
+      "description": "An error response from the Automanage service."
     },
     "Resource": {
       "description": "The core properties of ARM resources",
