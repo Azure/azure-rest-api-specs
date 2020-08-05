@@ -619,7 +619,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{endpointName}/deployments/locations/{locationName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments/locations/{locationName}/checkNameAvailability": {
       "post": {
         "tags": [
           "MachineLearningInferenceEndpointDeployments"
@@ -783,7 +783,8 @@
           "description": "The reason that a name could not be used. The Reason element is only returned if NameAvailable is false.",
           "enum": [
             "AccountNameInvalid",
-            "AlreadyExists"
+            "AlreadyExists",
+            "None"
           ],
           "x-ms-enum": {
             "name": "Reason",
