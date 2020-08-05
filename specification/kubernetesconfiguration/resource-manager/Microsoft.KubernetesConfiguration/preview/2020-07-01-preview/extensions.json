@@ -386,6 +386,12 @@
       "type": "string",
       "default": "Stable"
     },
+    "CustomLocationSettings": {
+      "description": "Settings for CustomLocation enabled extensions (only)",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "ScopeCluster": {
       "description": "Specifies that the scope of the extensionInstance is Cluster",
       "type": "object",
@@ -505,6 +511,12 @@
               "description": "Configuration settings, as name-value pairs for configuring this instance of the extension.",
               "type": "object",
               "$ref": "#/definitions/ConfigurationSettings"
+            },
+            "customLocationSettings": {
+              "description": "Settings for CustomLocation enabled extension instances (only).",
+              "type": "object",
+              "$ref": "#/definitions/CustomLocationSettings",
+              "readonly": true
             },
             "installState": {
               "type": "string",
