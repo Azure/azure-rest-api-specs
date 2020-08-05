@@ -2590,6 +2590,101 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/MasterSites": {
+      "get": {
+        "tags": [
+          "MasterSites"
+        ],
+        "summary": "Get all sites.",
+        "description": "Get all the sites in the subscription.",
+        "operationId": "MasterSites_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all Master site": {
+            "$ref": "./examples/MasterSites_ListBySubscription.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites": {
+      "get": {
+        "tags": [
+          "MasterSites"
+        ],
+        "summary": "Get all sites.",
+        "description": "Get all the sites in the resource group.",
+        "operationId": "MasterSites_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all Master site": {
+            "$ref": "./examples/MasterSites_List.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}": {
       "get": {
         "tags": [
@@ -4882,6 +4977,19 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "MasterSiteList": {
+      "description": "List of sites.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of projects.",
+          "items": {
+            "$ref": "#/definitions/MasterSite"
           }
         }
       }
