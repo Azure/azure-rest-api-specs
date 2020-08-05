@@ -87,9 +87,6 @@
         "tags": [
           "MachineLearningInferenceEndpoints"
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "operationId": "MachineLearningInferenceEndpoint_Get",
         "description": "Gets Details in specified Inference Endpoint.",
         "x-ms-examples": {
@@ -246,6 +243,11 @@
         "tags": [
           "MachineLearningInferenceEndpoints"
         ],
+        "x-ms-examples": {
+          "Check Endpoint Name": {
+            "$ref": "./examples/checkInferenceEndpointName.json"
+          }
+        },
         "operationId": "MachineLearningInferenceEndpoint_CheckNameAvailability",
         "description": "Checks that the inference endpoint name is valid and is not already in use.",
         "parameters": [
@@ -279,6 +281,12 @@
             "description": "OK -- Operation to check the endpoint name availability was successful.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -567,6 +575,11 @@
         "tags": [
           "MachineLearningInferenceEndpointDeployments"
         ],
+        "x-ms-examples": {
+          "Get Sku setting info for deployment": {
+            "$ref": "./examples/getDeploymentSkuInfo.json"
+          }
+        },
         "summary": "This is for an ARM Contract with Azure Monitor to scale the number of instances of the Inference Deployment.",
         "description": "Get SKU information for scaling an Inference Deployment.",
         "operationId": "MachineLearningInferenceEndpointDeployment_ListDeploymentSkus",
@@ -596,6 +609,12 @@
             "schema": {
               "$ref": "#/definitions/SkuDiscoveryInfoCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
           }
         }
       }
@@ -605,6 +624,11 @@
         "tags": [
           "MachineLearningInferenceEndpointDeployments"
         ],
+        "x-ms-examples": {
+          "Check Deployment Name": {
+            "$ref": "./examples/checkInferenceEndpointDeploymentName.json"
+          }
+        },
         "operationId": "MachineLearningInferenceEndpointDeployment_CheckNameAvailability",
         "description": "Checks that the inference endpoint deployment name is valid and is not already in use.",
         "parameters": [
@@ -641,6 +665,12 @@
             "description": "OK -- Operation to check the endpoint deployment name availability was successful.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1112,6 +1142,7 @@
                 "weight": {
                   "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceEndpointDeployment:<deployment-name>.",
                   "type": "integer",
+                  "format":"int32",
                   "minimum": 0
                 },
                 "provisioningState": {
@@ -1195,6 +1226,7 @@
         "weight": {
           "description": "weight of the deployment for load balancing.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "default": 0
         },
@@ -1227,15 +1259,18 @@
         "minimum": {
           "description": "Minimum number of instances for this deployment.",
           "type": "integer",
+          "format": "int32",
           "minimum": 1
         },
         "maximum": {
           "description": "Maximum number of instances for this deployment.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "default": {
           "description": "Default/Initial number of instances for this deployment.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "scaleType": {
           "description": "Available scale configurations for this Deployment.",
@@ -1258,7 +1293,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Allowable SKUs for deployment (Private Preview).",
+          "description": "Allowable Skus for deployment.",
           "type": "string",
           "enum": [
             "Standard_D3_v2",
@@ -1333,7 +1368,8 @@
           "properties": {
             "capacity": {
               "description": "Current number of instances assigned to the resource.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             }
           }
         }
@@ -1348,7 +1384,8 @@
         },
         "weight": {
           "description": "The weight of the deployment for load balancing.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
