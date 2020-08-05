@@ -29,9 +29,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -64,13 +61,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -85,9 +75,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -117,13 +104,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -133,9 +113,6 @@
         ],
         "summary": "Check if there are any client connections connected for the given user",
         "operationId": "ServiceApi_CheckUserExistence",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -159,13 +136,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -180,9 +150,6 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -212,13 +179,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -228,9 +188,6 @@
         ],
         "summary": "Check if the connection with the given connectionId exists",
         "operationId": "ServiceApi_CheckConnectionExistence",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -254,13 +211,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -270,9 +220,6 @@
         ],
         "summary": "Close the client connection",
         "operationId": "ServiceApi_CloseClientConnection",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -299,13 +246,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -319,9 +259,6 @@
         "operationId": "ServiceApi_GroupBroadcast",
         "consumes": [
           "application/json"
-        ],
-        "produces": [
-          "text/plain"
         ],
         "parameters": [
           {
@@ -362,13 +299,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -378,9 +308,6 @@
         ],
         "summary": "Check if there are any client connections inside the given group",
         "operationId": "ServiceApi_CheckGroupExistence",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -404,13 +331,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -422,9 +342,6 @@
         ],
         "summary": "Add a connection to the target group.",
         "operationId": "ServiceApi_AddConnectionToGroup",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -455,13 +372,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -471,9 +381,6 @@
         ],
         "summary": "Remove a connection from the target group.",
         "operationId": "ServiceApi_RemoveConnectionFromGroup",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -504,13 +411,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -522,9 +422,6 @@
         ],
         "summary": "Check whether a user exists in the target group.",
         "operationId": "ServiceApi_CheckUserExistenceInGroup",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -555,13 +452,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -571,9 +461,6 @@
         ],
         "summary": "Add a user to the target group.",
         "operationId": "ServiceApi_AddUserToGroup",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -608,13 +495,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       },
@@ -624,9 +504,6 @@
         ],
         "summary": "Remove a user from the target group.",
         "operationId": "ServiceApi_RemoveUserFromGroup",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -654,13 +531,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
@@ -672,9 +542,6 @@
         ],
         "summary": "Remove a user from all groups.",
         "operationId": "ServiceApi_RemoveUserFromAllGroups",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -698,13 +565,6 @@
           },
           "202": {
             "description": "The delete request is accepted and service is handling the request int the background"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "string"
-            },
-            "x-ms-error-response": true
           }
         }
       }
