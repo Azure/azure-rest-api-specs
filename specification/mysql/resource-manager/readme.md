@@ -111,6 +111,14 @@ These settings apply only when `--tag=package-2020-07-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-07-01-privatepreview'
 input-file:
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 - Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
 ```
 
@@ -221,6 +229,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
 
 ```
 
