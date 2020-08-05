@@ -1,0 +1,1075 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Rules API",
+    "description": "Provides operations for working with Azure Monitor data collection rules",
+    "version": "2019-11-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionRules": {
+      "get": {
+        "tags": [
+          "DataCollectionRules"
+        ],
+        "summary": "Lists all data collection rules in the specified resource group.",
+        "operationId": "DataCollectionRules_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List data collection rules by resource group": {
+            "$ref": "./examples/DataCollectionRulesListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/dataCollectionRules": {
+      "get": {
+        "tags": [
+          "DataCollectionRules"
+        ],
+        "summary": "Lists all data collection rules in the specified subscription.",
+        "operationId": "DataCollectionRules_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List data collection rules by subscription": {
+            "$ref": "./examples/DataCollectionRulesListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/{dataCollectionRuleName}": {
+      "get": {
+        "tags": [
+          "DataCollectionRules"
+        ],
+        "summary": "Returns the specified data collection rule.",
+        "operationId": "DataCollectionRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data collection rule": {
+            "$ref": "./examples/DataCollectionRulesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataCollectionRules"
+        ],
+        "summary": "Creates or updates a data collection rule.",
+        "operationId": "DataCollectionRules_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data collection rule was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResource"
+            }
+          },
+          "201": {
+            "description": "Data collection rule was successfully created",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update data collection rule": {
+            "$ref": "./examples/DataCollectionRulesCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataCollectionRules"
+        ],
+        "summary": "Updates part of a data collection rule.",
+        "operationId": "DataCollectionRules_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload",
+            "schema": {
+              "$ref": "#/definitions/ResourceForUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data collection rule was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update data collection rule": {
+            "$ref": "./examples/DataCollectionRulesUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataCollectionRules"
+        ],
+        "summary": "Deletes a data collection rule.",
+        "operationId": "DataCollectionRules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data collection rule was successfully deleted"
+          },
+          "204": {
+            "description": "Data collection rule did not exist"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete data collection rule": {
+            "$ref": "./examples/DataCollectionRulesDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PerfCounterDataSource": {
+      "description": "Definition of which performance counters will be collected and how they will be collected by this data collection rule.\r\nCollected from both Windows and Linux machines where the counter is present.",
+      "required": [
+        "counterSpecifiers",
+        "name",
+        "samplingFrequencyInSeconds",
+        "scheduledTransferPeriod",
+        "streams"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "List of streams that this data source will be sent to.\r\nA stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Microsoft-Perf",
+              "Microsoft-InsightsMetrics"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownPerfCounterDataSourceStreams",
+              "modelAsString": true
+            }
+          }
+        },
+        "scheduledTransferPeriod": {
+          "description": "The interval between data uploads (scheduled transfers), rounded up to the nearest minute.",
+          "enum": [
+            "PT1M",
+            "PT5M",
+            "PT15M",
+            "PT30M",
+            "PT60M"
+          ],
+          "type": "string",
+          "example": "PT1M",
+          "x-ms-enum": {
+            "name": "KnownPerfCounterDataSourceScheduledTransferPeriod",
+            "modelAsString": true
+          }
+        },
+        "samplingFrequencyInSeconds": {
+          "format": "int32",
+          "description": "The number of seconds between consecutive counter measurements (samples).",
+          "maximum": 30,
+          "minimum": 1,
+          "type": "integer",
+          "example": 15
+        },
+        "counterSpecifiers": {
+          "description": "A list of specifier names of the performance counters you want to collect.\r\nUse a wildcard (*) to collect a counter for all instances.\r\nTo get a list of performance counters on Windows, run the command 'typeperf'.",
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "maxLength": 32,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "myDataSource1"
+        }
+      }
+    },
+    "WindowsEventLogDataSource": {
+      "description": "Definition of which Windows Event Log events will be collected and how they will be collected.\r\nOnly collected from Windows machines.",
+      "required": [
+        "name",
+        "scheduledTransferPeriod",
+        "streams",
+        "xPathQueries"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "List of streams that this data source will be sent to.\r\nA stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Microsoft-WindowsEvent",
+              "Microsoft-Event"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownWindowsEventLogDataSourceStreams",
+              "modelAsString": true
+            }
+          }
+        },
+        "scheduledTransferPeriod": {
+          "description": "The interval between data uploads (scheduled transfers), rounded up to the nearest minute.",
+          "enum": [
+            "PT1M",
+            "PT5M",
+            "PT15M",
+            "PT30M",
+            "PT60M"
+          ],
+          "type": "string",
+          "example": "PT5M",
+          "x-ms-enum": {
+            "name": "KnownWindowsEventLogDataSourceScheduledTransferPeriod",
+            "modelAsString": true
+          }
+        },
+        "xPathQueries": {
+          "description": "A list of Windows Event Log queries in XPATH format.",
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "maxLength": 32,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "myDataSource1"
+        }
+      }
+    },
+    "SyslogDataSource": {
+      "description": "Definition of which syslog data will be collected and how it will be collected.\r\nOnly collected from Linux machines.",
+      "required": [
+        "facilityNames",
+        "name",
+        "streams"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "List of streams that this data source will be sent to.\r\nA stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Microsoft-Syslog"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownSyslogDataSourceStreams",
+              "modelAsString": true
+            }
+          }
+        },
+        "facilityNames": {
+          "description": "The list of facility names.",
+          "maxLength": 20,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "auth",
+              "authpriv",
+              "cron",
+              "daemon",
+              "kern",
+              "lpr",
+              "mail",
+              "mark",
+              "news",
+              "syslog",
+              "user",
+              "UUCP",
+              "local0",
+              "local1",
+              "local2",
+              "local3",
+              "local4",
+              "local5",
+              "local6",
+              "local7"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownSyslogDataSourceFacilityNames",
+              "modelAsString": true
+            }
+          }
+        },
+        "logLevels": {
+          "description": "The log levels to collect.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Debug",
+              "Info",
+              "Notice",
+              "Warning",
+              "Error",
+              "Critical",
+              "Alert",
+              "Emergency"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownSyslogDataSourceLogLevels",
+              "modelAsString": true
+            }
+          }
+        },
+        "name": {
+          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "maxLength": 32,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "myDataSource1"
+        }
+      }
+    },
+    "ExtensionDataSource": {
+      "description": "Definition of which data will be collected from a separate VM extension that integrates with the Azure Monitor Agent.\r\nCollected from either Windows and Linux machines, depending on which extension is defined.",
+      "required": [
+        "extensionName",
+        "name",
+        "streams"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "List of streams that this data source will be sent to.\r\nA stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Microsoft-AntiMalwareStatus",
+              "Microsoft-Auditd",
+              "Microsoft-CISCOASA",
+              "Microsoft-CommonSecurityLog",
+              "Microsoft-ComputerGroup",
+              "Microsoft-Event",
+              "Microsoft-FirewallLog",
+              "Microsoft-HealthStateChange",
+              "Microsoft-Heartbeat",
+              "Microsoft-InsightsMetrics",
+              "Microsoft-OperationLog",
+              "Microsoft-Perf",
+              "Microsoft-ProcessInvestigator",
+              "Microsoft-ProtectionStatus",
+              "Microsoft-RomeDetectionEvent",
+              "Microsoft-SecurityBaseline",
+              "Microsoft-SecurityBaselineSummary",
+              "Microsoft-SecurityEvent",
+              "Microsoft-Syslog",
+              "Microsoft-WindowsEvent"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownExtensionDataSourceStreams",
+              "modelAsString": true
+            }
+          }
+        },
+        "extensionName": {
+          "description": "The name of the VM extension.",
+          "maxLength": 64,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "AzureSecurityLinuxAgent"
+        },
+        "extensionSettings": {
+          "description": "The extension settings. The format is specific for particular extension.",
+          "type": "object"
+        },
+        "name": {
+          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "maxLength": 32,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "myDataSource1"
+        }
+      }
+    },
+    "DataSourcesSpec": {
+      "description": "Specification of data sources that will be collected.",
+      "type": "object",
+      "properties": {
+        "performanceCounters": {
+          "description": "The list of performance counter data source configurations.",
+          "maxLength": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerfCounterDataSource"
+          }
+        },
+        "windowsEventLogs": {
+          "description": "The list of Windows Event Log data source configurations.",
+          "maxLength": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WindowsEventLogDataSource"
+          }
+        },
+        "syslog": {
+          "description": "The list of Syslog data source configurations.",
+          "maxLength": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyslogDataSource"
+          }
+        },
+        "extensions": {
+          "description": "The list of Azure VM extension data source configurations.",
+          "maxLength": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionDataSource"
+          }
+        }
+      }
+    },
+    "LogAnalyticsDestination": {
+      "description": "Log Analytics destination.",
+      "required": [
+        "name",
+        "workspaceResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "workspaceResourceId": {
+          "description": "The resource ID of the Log Analytics workspace.",
+          "type": "string",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace"
+        },
+        "name": {
+          "description": "A friendly name for the destination. \r\nThis name should be unique across all destinations (regardless of type) within the data collection rule.",
+          "maxLength": 32,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "myDest1"
+        }
+      }
+    },
+    "AzureMonitorMetricsDestination": {
+      "description": "Azure Monitor Metrics destination.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "A friendly name for the destination. \r\nThis name should be unique across all destinations (regardless of type) within the data collection rule.",
+          "maxLength": 32,
+          "minLength": 0,
+          "pattern": "^[-\\w\\._\\(\\)]+$",
+          "type": "string",
+          "example": "myDest1"
+        }
+      }
+    },
+    "DestinationsSpec": {
+      "description": "Specification of destinations that can be used in data flows.",
+      "type": "object",
+      "properties": {
+        "logAnalytics": {
+          "description": "List of Log Analytics destinations.",
+          "maxLength": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsDestination"
+          }
+        },
+        "azureMonitorMetrics": {
+          "description": "Azure Monitor Metrics destination.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMonitorMetricsDestination"
+            }
+          ]
+        }
+      }
+    },
+    "DataFlow": {
+      "description": "Definition of which streams are sent to which destinations.",
+      "required": [
+        "destinations",
+        "streams"
+      ],
+      "type": "object",
+      "properties": {
+        "streams": {
+          "description": "List of streams for this data flow.",
+          "maxLength": 20,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Microsoft-AntiMalwareStatus",
+              "Microsoft-Auditd",
+              "Microsoft-CISCOASA",
+              "Microsoft-CommonSecurityLog",
+              "Microsoft-ComputerGroup",
+              "Microsoft-Event",
+              "Microsoft-FirewallLog",
+              "Microsoft-HealthStateChange",
+              "Microsoft-Heartbeat",
+              "Microsoft-InsightsMetrics",
+              "Microsoft-OperationLog",
+              "Microsoft-Perf",
+              "Microsoft-ProcessInvestigator",
+              "Microsoft-ProtectionStatus",
+              "Microsoft-RomeDetectionEvent",
+              "Microsoft-SecurityBaseline",
+              "Microsoft-SecurityBaselineSummary",
+              "Microsoft-SecurityEvent",
+              "Microsoft-Syslog",
+              "Microsoft-WindowsEvent"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownDataFlowStreams",
+              "modelAsString": true
+            }
+          }
+        },
+        "destinations": {
+          "description": "List of destinations for this data flow.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataCollectionRule": {
+      "description": "Definition of what monitoring data to collect and where that data should be sent.",
+      "required": [
+        "dataFlows",
+        "destinations"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the data collection rule.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "dataSources": {
+          "description": "The specification of data sources. \r\nThis property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourcesSpec"
+            }
+          ]
+        },
+        "destinations": {
+          "description": "The specification of destinations.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DestinationsSpec"
+            }
+          ]
+        },
+        "dataFlows": {
+          "description": "The specification of data flows.",
+          "maxLength": 10,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFlow"
+          }
+        },
+        "provisioningState": {
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "example": "Creating",
+          "x-ms-enum": {
+            "name": "KnownDataCollectionRuleProvisioningState",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "DataCollectionRuleResource": {
+      "description": "Definition of ARM tracked top level resource.",
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataCollectionRule"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "description": "Fully qualified ID of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "myCollectionRule",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "Microsoft.Insights/dataCollectionRules",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "etag": {
+          "description": "Resource entity tag (ETag).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataCollectionRuleResourceListResult": {
+      "description": "A pageable list of resources.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionRuleResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "description": "Additional information for common error response.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The additional info type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "info": {
+          "description": "The additional info.",
+          "type": "object",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Common error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code which can be used to programmatically identify the class of error.",
+          "type": "string",
+          "readOnly": true,
+          "example": "BadArgument",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "message": {
+          "description": "Describes the error in detail and provides debugging information.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string",
+          "readOnly": true,
+          "example": "properties.provisioningState",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "details": {
+          "description": "Additional nested error detail objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "additionalInfo": {
+          "description": "Additional error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Common error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ResourceForUpdate": {
+      "description": "Definition of ARM tracked top level resource properties for update operation.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1
+    },
+    "DataCollectionRuleNameParameter": {
+      "in": "path",
+      "name": "dataCollectionRuleName",
+      "description": "The name of the data collection rule. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The ID of the target subscription.",
+      "required": true,
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
