@@ -646,14 +646,55 @@
     }
   },
   "definitions": {
-    "AnalysisTasks": {
+    "JobManifest": {
       "properties": {
         "tasks": {
           "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsTask"
+          "properties": {
+            "entityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntitiesTask"
+              }
+            },
+            "entityRecognitionPiiTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PiiTask"
+              }
+            },
+            "entityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityLinkingTask"
+              }
+            },
+            "keyPhraseExtractionTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/KeyPhrasesTask"
+              }
+            },
+            "sentimentAnalysisTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SentimentTask"
+              }
+            },
+            "customClassificationTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomClassificationTask"
+              }
+            },
+            "customEntityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomEntitiesTask"
+              }
+            }
           },
-          "type": "array"
+          "type": "object"
         }
       },
       "required": [
@@ -773,29 +814,17 @@
         }
       }
     },
-    "TextAnalyticsResult": {
-      "discriminator": "resultType",
-      "properties": {
-        "resultType": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "resultType"
-      ],
-      "type": "object"
-    },
     "TextAnalyticsTask": {
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string"
-        }
-      },
+      "type": "object",
       "required": [
-        "type"
+        "enable"
       ],
-      "type": "object"
+      "properties": {
+          "enable": {
+            "default": false,
+            "type": "boolean"
+          }
+      }
     },
     "TextAnalyticsWarning": {
       "type": "object",
@@ -865,18 +894,18 @@
         },
         {
           "properties": {
-            "parameters": {
-              "properties": {
-                "model-version": {
-                  "default": "latest",
-                  "type": "string"
+              "parameters": {
+                "properties": {
+                  "model-version": {
+                    "default": "latest",
+                    "type": "string"
+                  },
+                  "stringIndexType": {
+                    "$ref": "#/definitions/StringIndexType"
+                  }
                 },
-                "stringIndexType": {
-                  "$ref": "#/definitions/StringIndexType"
-                }
-              },
-              "type": "object"
-            }
+                "type": "object"
+              }
           },
           "type": "object"
         }
@@ -935,10 +964,19 @@
           "$ref": "#/definitions/JobDescriptor"
         },
         {
-          "$ref": "#/definitions/MultiLanguageBatchInput"
+          "type": "object",
+          "required": [
+            "analysisInput"
+          ],
+          "properties": {
+            "analysisInput":
+            {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
+          }
         },
         {
-          "$ref": "#/definitions/AnalysisTasks"
+          "$ref": "#/definitions/JobManifest"
         }
       ]
     },
@@ -1249,23 +1287,6 @@
             "modelAsString": false,
             "name": "State"
           }
-        },
-        "type": {
-          "enum": [
-            "Detect Language",
-            "Extract Key Phrases",
-            "Analyze Sentiment",
-            "Recognize Linked Entities",
-            "Recognize Entities",
-            "Recognize PII Entities",
-            "Custom Classification",
-            "Custom Entities"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "State"
-          }
         }
       },
       "required": [
@@ -1297,14 +1318,139 @@
             },
             "total": {
               "type": "integer"
+            },
+            "entityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/EntitiesResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "entityRecognitionPiiTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/PiiResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "entityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/EntityLinkingResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "keyPhraseExtractionTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/KeyPhraseResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "sentimentAnalysisTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/SentimentResponse"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "customClassificationTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/CustomClassificationResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "customEntityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/CustomEntitiesResult"
+                      }
+                    }
+                  }
+                ]
+              }
             }
           },
           "required": [
             "total",
             "completed",
             "failed",
-            "inProgress",
-            "details"
+            "inProgress"
           ],
           "type": "object"
         }
@@ -2397,83 +2543,6 @@
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         }
       }
-    },
-    "TypedCustomClassificationResult": {
-      "x-ms-discriminator-value": "CustomClassification",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/CustomClassificationResult"
-        }
-      ]
-    },
-    "TypedCustomEntitiesResult": {
-      "x-ms-discriminator-value": "CustomEntityRecognition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/CustomEntitiesResult"
-        }
-      ]
-    },
-    "TypedEntitiesResult": {
-      "x-ms-discriminator-value": "EntityRecognition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/EntitiesResult"
-        }
-      ]
-    },
-    "TypedEntityLinkingResult": {
-      "x-ms-discriminator-value": "EntityLinking",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/EntityLinkingResult"
-        }
-      ]
-    },
-    "TypedKeyPhraseResult": {
-      "x-ms-discriminator-value": "KeyPhrasesExtraction",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/KeyPhraseResult"
-        }
-      ]
-    },
-    "TypedPiiResult": {
-      "x-ms-discriminator-value": "PiiEntityRecognition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/PiiResult"
-        }
-      ]
-    },
-    "TypedSentimentResponse": {
-      "x-ms-discriminator-value": "SentimentAnalysis",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsResult"
-        },
-        {
-          "$ref": "#/definitions/SentimentResponse"
-        }
-      ]
     },
     "StringIndexType": {
       "default": "TextElements_v8",

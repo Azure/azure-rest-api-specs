@@ -5,7 +5,8 @@
         "jobId": "{Job ID}",
         "input": {
             "displayName": "Extracting Location & US Region",
-            "documents": [
+            "analysisInput": {
+              "documents": [
                 {
                     "id": "1",
                     "language": "en",
@@ -16,19 +17,23 @@
                     "language": "en",
                     "text": "I'm flying to NYC tomorrow. See you there."
                 }
-            ],
-            "tasks": [
-                {
-                    "type": "EntitiesTask"
-                },
-                {
-                    "parameters": {
-                        "appId": "71baed8c-a832-489d-8f38-e3b44685785f",
-                        "slotName": "USRegionClassifier"
-                    },
-                    "type": "CustomClassificationTask"
-                }
-            ]
+              ]
+            },
+            "tasks": {
+                "entityRecognitionTasks": [{ 
+                  "enable": true,
+                  "parameters": {
+                    "model-version": "latest"
+                  }
+                }],
+                "customClassificationTasks": [{
+                  "enable": true,
+                  "parameters": {
+                      "appId": "71baed8c-a832-489d-8f38-e3b44685785f",
+                      "slotName": "USRegionClassifier"
+                  }
+                }]
+            }
         }
     },
     "responses": {

@@ -16,10 +16,14 @@
                 "status": "succeeded",
                 "tasks": {
                     "completed": 2,
-                    "details": [
+                    "failed": 0,
+                    "inProgress": 0,
+                    "total": 2,
+                    "entityRecognitionTasks": [
                         {
+                            "name": "Recognize Entities (2020-04-01)",
                             "lastUpdateDateTime": "2020-10-01T15:01:03Z",
-                            "name": "Recognize Entities",
+                            "status": "succeeded",
                             "results": {
                                 "documents": [
                                     {
@@ -75,15 +79,15 @@
                                     }
                                 ],
                                 "errors": [],
-                                "modelVersion": "2020-04-01",
-                                "resultType": "EntityRecognition"
-                            },
-                            "status": "succeeded",
-                            "type": "Recognize Entities"
-                        },
+                                "modelVersion": "2020-04-01"
+                            }
+                        }
+                    ],
+                    "customClassificationTasks": [
                         {
-                            "lastUpdateDateTime": "2020-10-01T15:01:03Z",
                             "name": "Custom Classification 71baed8c-a832-489d-8f38-e3b44685785f/USRegionClassifier",
+                            "lastUpdateDateTime": "2020-10-01T15:01:03Z",
+                            "status": "succeeded",
                             "results": {
                                 "documents": [{
                                     "id": "1",
@@ -99,16 +103,10 @@
                                         "confidenceScore": 0.94
                                     }]
                                 }],
-                                "errors": [],
-                                "resultType": "CustomClassification"
-                            },
-                            "status": "succeeded",
-                            "type": "Custom Classification"
+                                "errors": []
+                            }
                         }
-                    ],
-                    "failed": 0,
-                    "inProgress": 0,
-                    "total": 2
+                    ]
                 }
             }
         },
