@@ -1,0 +1,281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-08-06-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders": {
+      "get": {
+        "x-ms-examples": {
+          "List IoT Defenders": {
+            "$ref": "./examples/IotDefenders/ListIotDefenders.json"
+          }
+        },
+        "tags": [
+          "IoT Defender"
+        ],
+        "description": "List IoT Defenders",
+        "operationId": "IotDefenders_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotDefendersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders/default": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Defender": {
+            "$ref": "./examples/IotDefenders/GetIotDefender.json"
+          }
+        },
+        "tags": [
+          "IoT Defender"
+        ],
+        "operationId": "IotDefenders_Get",
+        "description": "Get IoT Defender",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT Defender",
+            "schema": {
+              "$ref": "#/definitions/IotDefender"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update IoT Defender": {
+            "$ref": "./examples/IotDefenders/PutIotDefender.json"
+          }
+        },
+        "tags": [
+          "IoT Defender"
+        ],
+        "operationId": "IotDefenders_CreateOrUpdate",
+        "description": "Create or update IoT Defender",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated IoT Defender",
+            "schema": {
+              "$ref": "#/definitions/IotDefender"
+            }
+          },
+          "201": {
+            "description": "Created IoT Defender",
+            "schema": {
+              "$ref": "#/definitions/IotDefender"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete IoT Defender": {
+            "$ref": "./examples/IotDefenders/DeleteIotDefender.json"
+          }
+        },
+        "tags": [
+          "IoT Defender"
+        ],
+        "operationId": "IotDefenders_Delete",
+        "description": "Delete IoT Defender",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT Defender deleted"
+          },
+          "204": {
+            "description": "IoT Defender does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders/default/downloadActivation": {
+      "post": {
+        "x-ms-examples": {
+          "Download activation file": {
+            "$ref": "./examples/IotDefenders/DownloadActivation.json"
+          }
+        },
+        "tags": [
+          "IoT Defender"
+        ],
+        "operationId": "IotDefenders_DownloadActivation",
+        "description": "Download activation file",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded activation file"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IotDefendersList": {
+      "description": "List of IoT Defenders",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotDefender"
+          }
+        }
+      }
+    },
+    "IotDefender": {
+      "type": "object",
+      "description": "IoT Defender",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "IoT Defender properties",
+          "$ref": "#/definitions/IotDefenderProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IotDefenderProperties": {
+      "type": "object",
+      "description": "IoT Defender properties",
+      "properties": {
+        "onPremiseSensors": {
+          "description": "List of on-premise sensors",
+          "readOnly": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnPremiseSensorProperties"
+          },
+          "example": [
+            {
+              "name": "sensor-1"
+            }
+          ]
+        }
+      }
+    },
+    "OnPremiseSensorProperties": {
+      "type": "object",
+      "description": "On-premise sensor properties",
+      "properties": {
+        "name": {
+          "description": "Name of the sensor",
+          "readOnly": false,
+          "type": "string",
+          "example": "sensor-1"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
