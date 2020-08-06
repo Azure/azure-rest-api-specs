@@ -1,0 +1,184 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Azure Log Analytics",
+      "description": "Azure Log Analytics API reference",
+      "version": "2020-03-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataCollectorLogs": {
+        "post": {
+          "tags": [
+            "DataCollectorLogs"
+          ],
+          "x-ms-examples": {
+            "DataCollectorLogsDelete": {
+              "$ref": "./examples/DataCollectorLogsDelete.json"
+            }
+          },
+          "operationId": "DataCollectorLogs_Delete",
+          "description": "Deletes a specify custom log table",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DataCollectorLogsResource"
+              },
+              "description": "The parameters required to delete a specify custom log table."
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/ByPassRetentionProtection"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK response definition."
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "DataCollectorLogs"
+          ],
+          "description": "Listing all custom logs tables, being created via data collector endpoint and scoped to the specified workspace",
+          "operationId": "DataCollectorLogs_ListByWorkspace",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK response definition.",
+              "schema": {
+                "$ref": "#/definitions/DataCollectorLogsListResult"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": null
+          },
+          "x-ms-examples": {
+            "Listing all custom logs tables, being created via data collector endpoint and scoped to the specified workspace.": {
+              "$ref": "./examples/DataCollectorLogsListByWorkspace.json"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "DataCollectorLogsProperties": {
+        "description": "Data collector logs properties.",
+        "type": "object",
+        "properties": {
+          "action": {
+            "description": "The action to be applied on a selected custom log table.",
+            "type": "string",
+            "writeOnly": true,
+            "enum": [
+              "Delete"
+            ],
+            "x-ms-enum": {
+              "name": "ActionType",
+              "modelAsString": false
+            }
+          },
+          "name": {
+            "description": "Table's name.",
+            "type": "string"
+          }
+        }
+      },
+      "DataCollectorLogsResource": {
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DataCollectorLogsProperties",
+            "description": "Data collector logs properties."
+          }
+        },
+        "required": [
+          "properties"
+        ],
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          }
+        ],
+        "description": "Data collector logs top level resource container."
+      },
+      "DataCollectorLogsListResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DataCollectorLogsResource"
+            },
+            "description": "custom logs tables list."
+          }
+        },
+        "description": "Custom logs table collection, all tables are scoped to the specified workspace."
+      }
+    },
+    "parameters": {
+      "ByPassRetentionProtection": {
+        "name": "byPassRetentionProtection",
+        "in": "query",
+        "required": false,
+        "type": "boolean",
+        "description": "Will allow to by pass retention validation."
+      }
+    }
+  }
+  
