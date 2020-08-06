@@ -3369,6 +3369,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlists.": {
+            "$ref": "./examples/watchlists/GetWatchlists.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Gets all watchlists in a subscription.",
+        "operationId": "Watchlists_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
       "get": {
         "x-ms-examples": {
