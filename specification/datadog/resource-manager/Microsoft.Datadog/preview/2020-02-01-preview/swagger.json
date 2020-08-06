@@ -162,6 +162,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listHosts": {
+      "post": {
+        "tags": [
+          "Host"
+        ],
+        "summary": "List the hosts for a given monitor resource.",
+        "operationId": "Hosts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogHostListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Hosts_List": {
+            "$ref": "./examples/Hosts_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listMonitoredResources": {
       "post": {
         "tags": [
@@ -855,6 +900,53 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "DatadogHostMetadata": {
+      "type": "object",
+      "properties": {
+        "agent_version": {
+          "description": "The agent version.",
+          "type": "string"
+        }
+      }
+    },
+    "DatadogHost": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the host.",
+          "type": "string"
+        },
+        "apps": {
+          "description": "The Datadog integrations reporting metrics for the host.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meta": {
+          "description": "The host metadata.",
+          "type": "object",
+          "$ref": "#/definitions/DatadogHostMetadata"
+        }
+      }
+    },
+    "DatadogHostListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogHost"
           }
         },
         "nextLink": {
