@@ -321,7 +321,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/sites/{siteName}/applianceConfiguration/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/sites/{siteName}/applianceConfigurations/default": {
       "get": {
         "tags": [
           "migrateProjectSites"
@@ -601,6 +601,11 @@
     "applianceConfiguration":{
       "type":"object",
       "description": "Appliance configuration",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties":{
           "type":"object",
