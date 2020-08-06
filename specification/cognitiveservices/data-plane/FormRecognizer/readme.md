@@ -13,19 +13,6 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
-``` yaml
-
-tag: release_2_0_preview
-add-credentials: true
-openapi-type: data-plane
-```
-
-``` yaml
-
-tag: release_1_0
-add-credentials: true
-openapi-type: data-plane
-```
 # Releases
 
 ### Release 2.0
