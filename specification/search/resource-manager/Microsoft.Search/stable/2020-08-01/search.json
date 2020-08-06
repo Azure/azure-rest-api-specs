@@ -449,7 +449,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchService"
+              "$ref": "#/definitions/SearchServiceUpdate"
             },
             "description": "The definition of the Search service to update."
           },
@@ -1339,32 +1339,16 @@
     "PrivateEndpointConnection": {
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-linked-resources"
-          }
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the private endpoint connection.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
     },
     "NetworkRuleSet": {
@@ -1453,29 +1437,16 @@
     "SharedPrivateLinkResource": {
       "x-ms-azure-resource": true,
       "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the shared private link resource.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the shared private link resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service."
     },
     "SharedPrivateLinkResourceProperties": {
@@ -1566,27 +1537,17 @@
     },
     "PrivateLinkResource": {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the private link resource."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the private link resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "readOnly": true,
           "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "description": "Describes a supported private link resource for the Azure Cognitive Search service."
     },
     "PrivateLinkResourceProperties": {
@@ -1671,14 +1632,62 @@
           "externalDocs": {
             "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure Cognitive Search service and its current state."
+    },
+    "SearchServiceUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SearchServiceProperties",
+          "description": "Properties of the Search service."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits. This property is required when creating a new Search Service.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-rp-info"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to help categorize the resource in the Azure portal."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The parameters used to update an Azure Cognitive Search service."
     },
     "SearchServiceProperties": {
       "properties": {
@@ -1801,55 +1810,6 @@
       },
       "description": "Response containing a list of Azure Cognitive Search services.",
       "x-ms-external": true
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the resource. This can be used with the Azure Resource Manager to link resources together.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-linked-resources"
-          }
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-rp-info"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tags to help categorize the resource in the Azure portal."
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
-        }
-      },
-      "description": "Base type for all Azure resources.",
-      "x-ms-azure-resource": true
     },
     "AsyncOperationResult": {
       "type": "object",
