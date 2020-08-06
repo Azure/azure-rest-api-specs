@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2020-06-30-preview` is specified o
 input-file:
 - Microsoft.Automanage/preview/2020-06-30-preview/automanage.json
 ```
+
 ## Suppression
 
 ``` yaml
