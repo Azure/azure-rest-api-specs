@@ -3,11 +3,11 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `release_2_0`.
+The current release is `release_2_0_GA`.
 
 ``` yaml
 
-tag: release_2_0
+tag: release_2_0_GA
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -34,6 +34,14 @@ These settings apply only when `--tag=release_2_1_preview_1` is specified on the
 ``` yaml $(tag) == 'release_2_1_preview_1'
 input-file: 
   - preview/v2.1-preview.1/FormRecognizer.json
+```
+
+### Release 2.0-GA
+These settings apply only when `--tag=release_2_0_GA` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_0_GA'
+input-file:
+  - stable/v2.0/FormRecognizer.json
 ```
 
 ### Release 2.0
