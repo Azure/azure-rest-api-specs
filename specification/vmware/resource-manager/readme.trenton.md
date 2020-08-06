@@ -23,10 +23,6 @@ overrides:
       set:
         - Required: true
     - where:
-        property: managementCluster
-      set:
-        - Required: true
-    - where:
         property: clusterSize
       set:
         - Required: true
