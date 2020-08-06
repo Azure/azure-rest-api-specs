@@ -346,6 +346,7 @@
             "tags": [ "migrateProjectsAssessment" ],
             "operationId": "migrateProjectsAssessment_calculate",
             "description": "Calculates the assessment",
+            "x-ms-long-running-operation": true,
             "x-ms-examples": {
               "migrateAssessment_recalculate": { "$ref": "./examples/migrateAssessment_calculate.json" }
             },
@@ -376,6 +377,9 @@
             ],
             "responses":{
               "200":{
+                "description": "Calculate command completed successfully"
+              },
+              "202":{
                 "description": "Calculate command was received and is being worked on"
               },
               "default": {
