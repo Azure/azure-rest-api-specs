@@ -35,7 +35,9 @@ These settings apply only when `--tag=package-7.2-preview` is specified on the c
 
 ```yaml $(tag) == 'package-7.2-preview'
 input-file:
-- Microsoft.KeyVault/preview/7.2-preview/keys.json
+- Microsoft.KeyVault/preview/7.2-preview/backuprestore.json
+- Microsoft.KeyVault/preview/7.2-preview/common.json
+- Microsoft.KeyVault/preview/7.2-preview/rbac.json
 ```
 
 ### Tag: package-7.1
