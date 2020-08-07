@@ -1344,7 +1344,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1355,6 +1355,7 @@
         ],
         "operationId": "PrivateEndpointConnections_Put",
         "description": "Update the state of specified private endpoint connection associated with the workspace.",
+        
         "x-ms-examples": {
           "WorkspacePutPrivateEndpointConnection": {
             "$ref": "./examples/workspacePutPrivateEndpointConnection.json"
@@ -1396,7 +1397,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1407,6 +1408,7 @@
         ],
         "operationId": "PrivateEndpointConnections_Delete",
         "description": "Deletes the specified private endpoint connection associated with the workspace.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "WorkspaceDeletePrivateEndpointConnection": {
             "$ref": "./examples/workspaceDeletePrivateEndpointConnection.json"
@@ -1433,13 +1435,16 @@
           "200": {
             "description": "OK -- Delete the private endpoint connection successfully."
           },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -3653,11 +3658,6 @@
           "description": "Resource properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "The Private Endpoint Connection resource."
     },
     "PrivateEndpointConnectionProperties": {
