@@ -271,7 +271,7 @@
                 "required":true,
                 "description": "The machines to add to the assessment",
                 "schema":{
-                  "$ref": "#/definitions/updateMachinesInAssessmentModel"
+                  "$ref": "#/definitions/bulkUpdateMachinesToAssessModel"
                 }
               }
             ],
@@ -291,7 +291,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/machines":{
           "get": {
             "tags": [ "migrateProjectsAssessment" ],
-            "operationId": "migrateProjectsAssessment_listMachines",
+            "operationId": "machines_listByMigrateAssessment",
             "description": "Gets the machines in an assessment",
             "x-ms-examples": {
               "migrateAssessment_listMachines": { "$ref": "./examples/migrateAssessment_listMachines.json" }
@@ -329,8 +329,187 @@
               "200":{
                 "description": "Assessment was found",
                 "schema":{
-                  "$ref":"#/definitions/machinesInAssessment"
+                  "$ref":"#/definitions/machineToAssessList"
                 }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "definitions.json#/definitions/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/machines/{machineId}": {
+          "get": {
+            "tags": [ "migrateProjectsAssessment" ],
+            "operationId": "migrateProjectsAssessment_getMachineById",
+            "description": "Gets a machine in an assessment",
+            "x-ms-examples": {
+              "migrateAssessment_getMachine": { "$ref": "./examples/migrateAssessment_getMachineById.json" }
+            },
+            "parameters":[
+              {
+                "$ref":"definitions.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref":"definitions.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "name": "projectName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the project"
+              },
+              {
+                "name": "assessmentName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the assessment"
+              },
+              {
+                "name": "machineId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The id of the machine in the assessment"
+              },
+              {
+                "$ref":"definitions.json#/parameters/ApiVersionParameter"
+              }
+            ],
+            "responses":{
+              "200":{
+                "description": "Machine was found",
+                "schema":{
+                  "$ref":"#/definitions/machineToAssess"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "definitions.json#/definitions/ErrorResponse"
+                }
+              }
+            }
+          },
+          "put": {
+            "tags": [ "migrateProjectsAssessment" ],
+            "operationId": "migrateProjectsAssessment_createOrUpdateMachine",
+            "description": "Gets a machine in an assessment",
+            "x-ms-examples": {
+              "migrateAssessment_CreateOrUpdateMachine": { "$ref": "./examples/migrateAssessment_createMachine.json" }
+            },
+            "parameters":[
+              {
+                "$ref":"definitions.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref":"definitions.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "name": "projectName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the project"
+              },
+              {
+                "name": "assessmentName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the assessment"
+              },
+              {
+                "name": "machineId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The id of the machine in the assessment"
+              },
+              {
+                "$ref":"definitions.json#/parameters/ApiVersionParameter"
+              },
+              {
+                "name":"properties",
+                "in":"body",
+                "required":true,
+                "description": "Request body. Properties to define the machine",
+                "schema":{
+                  "$ref":"#/definitions/machineToAssess"
+                }
+              }
+            ],
+            "responses":{
+              "201":{
+                "description": "Machine was created",
+                "schema":{
+                  "$ref":"#/definitions/machineToAssess"
+                }
+              },
+              "200":{
+                "description": "Machine was updated",
+                "schema":{
+                  "$ref":"#/definitions/machineToAssess"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "definitions.json#/definitions/ErrorResponse"
+                }
+              }
+            }
+          },
+          "delete": {
+            "tags": [ "migrateProjectsAssessment" ],
+            "operationId": "migrateProjectsAssessment_deleteMachine",
+            "description": "Remove a machine in an assessment",
+            "x-ms-examples": {
+              "migrateAssessment_deleteMachine": { "$ref": "./examples/migrateAssessment_deleteMachine.json" }
+            },
+            "parameters":[
+              {
+                "$ref":"definitions.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref":"definitions.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "name": "projectName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the project"
+              },
+              {
+                "name": "assessmentName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the assessment"
+              },
+              {
+                "name": "machineId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The id of the machine in the assessment"
+              },
+              {
+                "$ref":"definitions.json#/parameters/ApiVersionParameter"
+              }
+            ],
+            "responses":{
+              "200":{
+                "description": "Project was deleted"
+              },
+              "204":{
+                "description": "No content"
               },
               "default": {
                 "description": "Error response describing why the operation failed.",
@@ -541,7 +720,29 @@
           }
         }
       },
-      "machinesInAssessment":{
+      "machineToAssess":{
+        "type":"object",
+        "description": "Information about the machine to asess",
+        "allOf": [
+          {
+            "$ref": "definitions.json#/definitions/ProxyResource"
+          }
+        ],
+        "properties": {
+          "properties":{
+            "type":"object",
+            "description": "Properties of the machine to assess resource",
+            "x-ms-client-flatten":true,
+            "properties":{
+              "siteMachineId":{
+                "type":"string",
+                "description": "The id of the machine under a site e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+              }
+            }
+          }
+        }
+      },
+      "machineToAssessList":{
           "type":"object",
           "description": "List of machines in an assessment",
           "properties": {
@@ -549,8 +750,7 @@
               "type":"array",
               "description": "List of machines in the assessment",
               "items":{
-                  "type":"string",
-                  "description": "the id of the machine e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+                "$ref": "#/definitions/machineToAssess"
               }
             },
             "nextLink":{
@@ -559,7 +759,22 @@
             }
           }
       },
-      "updateMachinesInAssessmentModel":{
+      "machineToAssessBulkInsertModel":{
+        "type":"object",
+        "description": "Bulk model for creating machine to assess resources",
+        "properties": {
+          "machineId":{
+            "type":"string",
+            "description": "The id of the machine under the assessment. This will be used as the name of the arm resource. If not supplied then a new Guid will be generated and assigned"
+          },
+          "siteMachineId":{
+            "type":"string",
+            "description": "The id of the machine under a site e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+          }
+        },
+        "required": [ "siteMachineId" ]
+      },
+      "bulkUpdateMachinesToAssessModel":{
         "type":"object",
         "description": "Update machines model",
         "properties": {
@@ -567,8 +782,7 @@
             "type":"array",
             "description": "Array of machine ids to add to the assessment, updating the machines will cause the assessment to be re-calculated.",
             "items": {
-              "type":"string",
-              "description": "Machine id e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+              "$ref": "#/definitions/machineToAssessBulkInsertModel"
             }
           }
         }
