@@ -1141,11 +1141,12 @@
     "InboundSecurityRules": {
       "properties": {
         "protocol": {
+          "type":  "string",
           "enum": [
             "TCP",
             "UDP"
           ],
-          "description": "Protocol."
+          "description": "Protocol. This should be either TCP or UDP."
         },
         "sourceAddressPrefix": {
           "type": "string",
@@ -1153,9 +1154,10 @@
         },
         "destinationPortRange": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 65535,
-          "description": "NVA port ranges to be opened up. Need to provide specific ports."
+          "description": "NVA port ranges to be opened up. One needs to provide specific ports."
         }
       },
       "description": "Properties of the Inbound Security Rules resource."
