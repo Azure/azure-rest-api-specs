@@ -49,6 +49,7 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -71,6 +72,7 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
@@ -99,6 +101,31 @@ input-file:
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+```
+
+### Tag: package-2020-07-01-privatepreview
+
+These settings apply only when `--tag=package-2020-07-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: OperationsApiResponseSchema
+    from: mysql.json
+    reason: Property isDataAction is not included in get operation reponse body
 ```
 
 ---
@@ -185,6 +212,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
@@ -194,6 +222,8 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 
 ```
 

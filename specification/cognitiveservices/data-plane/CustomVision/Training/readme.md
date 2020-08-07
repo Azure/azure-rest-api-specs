@@ -172,6 +172,7 @@ input-file:
   - $(this-folder)/stable/v3.1/Training.json
   - $(this-folder)/stable/v3.2/Training.json
   - $(this-folder)/stable/v3.3/Training.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

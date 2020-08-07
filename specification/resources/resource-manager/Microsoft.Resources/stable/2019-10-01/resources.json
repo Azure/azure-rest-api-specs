@@ -609,6 +609,68 @@
         }
       }
     },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_WhatIfAtTenantScope",
+        "description": "Returns changes that will be made by the deployment if executed at the scope of the tenant group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedDeploymentWhatIf"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns What-If operation status",
+            "schema": {
+              "$ref": "#/definitions/WhatIfOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnTenant.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
       "post": {
         "tags": [
@@ -923,6 +985,71 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_WhatIfAtManagementGroupScope",
+        "description": "Returns changes that will be made by the deployment if executed at the scope of the management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedDeploymentWhatIf"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns What-If operation status",
+            "schema": {
+              "$ref": "#/definitions/WhatIfOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnManagementGroup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -4384,6 +4511,23 @@
       ],
       "description": "Deployment What-if operation parameters."
     },
+    "ScopedDeploymentWhatIf": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location to store the deployment data."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentWhatIfProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "Deployment What-if operation parameters."
+    },
     "DeploymentWhatIfProperties": {
       "properties": {
         "whatIfSettings": {
@@ -5784,7 +5928,25 @@
             "Replace",
             "Merge",
             "Delete"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "tagsPatchOperation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Replace",
+                "description": "The 'replace' option replaces the entire set of existing tags with a new set."
+              },
+              {
+                "value": "Merge",
+                "description": "The 'merge' option allows adding tags with new names and updating the values of tags with existing names."
+              },
+              {
+                "value": "Delete",
+                "description": "The 'delete' option allows selectively deleting tags based on given names or name/value pairs."
+              }
+            ]
+          }
         },
         "properties": {
           "$ref": "#/definitions/Tags",
