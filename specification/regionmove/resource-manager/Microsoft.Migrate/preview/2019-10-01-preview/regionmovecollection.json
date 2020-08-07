@@ -53,6 +53,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveCollection"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -720,7 +726,7 @@
             "description": "Accepted"
           },
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/MoveResource"
             }
@@ -1033,6 +1039,18 @@
         "modelAsString": true
       }
     },
+    "MoveResourceInputType": {
+      "description": "Defines the move resource input type.",
+      "type": "string",
+      "enum": [
+        "MoveResourceId",
+        "MoveResourceSourceId"
+      ],
+      "x-ms-enum": {
+        "name": "moveResourceInputType",
+        "modelAsString": true
+      }
+    },
     "ProvisioningState": {
       "description": "Defines the provisioning states.",
       "enum": [
@@ -1042,6 +1060,7 @@
         "Failed"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
@@ -1137,6 +1156,10 @@
         },
         "automaticResolution": {
           "$ref": "#/definitions/AutomaticResolutionProperties"
+        },
+        "isOptional": {
+          "description": "Gets or sets a value indicating whether the dependency is optional.",
+          "type": "string"
         }
       }
     },
@@ -1177,6 +1200,9 @@
     "MoveResourceProperties": {
       "description": "Defines the move resource properties.",
       "type": "object",
+      "required": [
+        "sourceId"
+      ],
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1197,6 +1223,15 @@
         "resourceSettings": {
           "description": "Gets or sets the resource settings.",
           "$ref": "#/definitions/ResourceSettings"
+        },
+        "sourceResourceSettings": {
+          "description": "Gets or sets the source resource settings.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSettings"
+            }
+          ],
+          "readOnly": true
         },
         "moveStatus": {
           "allOf": [
@@ -1254,6 +1289,10 @@
     "MoveCollectionProperties": {
       "description": "Defines the move collection properties.",
       "type": "object",
+      "required": [
+        "sourceRegion",
+        "targetRegion"
+      ],
       "properties": {
         "sourceRegion": {
           "description": "Gets or sets the source region.",
@@ -1335,43 +1374,58 @@
     "PrepareRequest": {
       "description": "Defines the request body for initiate prepare operation.",
       "type": "object",
+      "required": [
+        "moveResources"
+      ],
       "properties": {
         "validateOnly": {
           "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
           "type": "boolean"
         },
         "moveResources": {
-          "description": "Gets or sets the list of move resources ARM id's.",
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
         }
       }
     },
     "ResourceMoveRequest": {
       "description": "Defines the request body for resource move operation.",
       "type": "object",
+      "required": [
+        "moveResources"
+      ],
       "properties": {
         "validateOnly": {
           "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
           "type": "boolean"
         },
         "moveResources": {
-          "description": "Gets or sets the list of move resources ARM id's.",
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
         }
       }
     },
     "CommitRequest": {
       "description": "Defines the request body for commit operation.",
       "type": "object",
+      "required": [
+        "moveResources"
+      ],
       "properties": {
         "validateOnly": {
-          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
           "type": "boolean"
         },
         "moveResources": {
@@ -1380,23 +1434,32 @@
           "items": {
             "type": "string"
           }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
         }
       }
     },
     "DiscardRequest": {
       "description": "Defines the request body for discard operation.",
       "type": "object",
+      "required": [
+        "moveResources"
+      ],
       "properties": {
         "validateOnly": {
           "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
           "type": "boolean"
         },
         "moveResources": {
-          "description": "Gets or sets the list of move resources ARM id's.",
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
         }
       }
     },
@@ -1583,7 +1646,8 @@
       "description": "Gets or sets the resource settings.",
       "type": "object",
       "required": [
-        "resourceType"
+        "resourceType",
+        "targetResourceName"
       ],
       "properties": {
         "resourceType": {
@@ -1622,6 +1686,10 @@
         },
         "targetVmSize": {
           "description": "Gets or sets the target vm size.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "Gets or sets the target availability set id for virtual machines not in an availability set at source.",
           "type": "string"
         }
       },
@@ -1873,8 +1941,11 @@
         },
         "additionalInfo": {
           "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
+          "type": "array",
+          "description": "The additional info.",
+          "items": {
+            "$ref": "#/definitions/OperationErrorAdditionalInfo"
+          }
         }
       }
     },
@@ -1882,6 +1953,60 @@
       "description": "Class for operation result properties.",
       "type": "object",
       "properties": {}
+    },
+    "OperationErrorAdditionalInfo": {
+      "description": "The operation error info.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error type."
+        },
+        "info": {
+          "readOnly": true,
+          "$ref": "#/definitions/MoveErrorInfo",
+          "description": "The operation error info."
+        }
+      }
+    },
+    "MoveErrorInfo": {
+      "description": "The move custom error info.",
+      "type": "object",
+      "properties": {
+        "moveResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The affected move resources.",
+          "items": {
+            "$ref": "#/definitions/AffectedMoveResource"
+          }
+        }
+      }
+    },
+    "AffectedMoveResource": {
+      "description": "The RP custom operation error info.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The affected move resource id."
+        },
+        "sourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The affected move resource source id."
+        },
+        "moveResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The affected move resources.",
+          "items": {
+            "$ref": "#/definitions/AffectedMoveResource"
+          }
+        }
+      }
     }
   },
   "parameters": {
