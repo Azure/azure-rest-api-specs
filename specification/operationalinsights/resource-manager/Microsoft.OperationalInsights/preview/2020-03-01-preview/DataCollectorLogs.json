@@ -58,7 +58,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataCollectorLogsResource"
+              "$ref": "#/definitions/DataCollectorLogs"
             },
             "description": "The parameters required to delete a specify custom log table."
           },
@@ -140,7 +140,7 @@
         }
       }
     },
-    "DataCollectorLogsResource": {
+    "DataCollectorLogs": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -148,9 +148,6 @@
           "description": "Data collector logs properties."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
@@ -163,7 +160,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataCollectorLogsResource"
+            "$ref": "#/definitions/DataCollectorLogs"
           },
           "description": "custom logs tables list."
         }
