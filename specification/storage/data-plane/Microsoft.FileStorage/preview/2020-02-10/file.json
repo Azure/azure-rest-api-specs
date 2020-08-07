@@ -3709,6 +3709,9 @@
                         "$ref": "#/parameters/ShareSnapshot"
                     },
                     {
+                        "$ref": "#/parameters/PrevShareSnapshot"
+                    },
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -5211,6 +5214,14 @@
             "name": "prefix",
             "in": "query",
             "description": "Filters the results to return only entries whose name begins with the specified prefix.",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "PrevShareSnapshot": {
+            "name": "prevsharesnapshot",
+            "in": "query",
+            "description": "The previous snapshot parameter is an opaque DateTime value that, when present, specifies the previous snapshot.",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
