@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Elevation API",
     "version": "1.0",
-    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coodinates, by defining endpoints along a polyline, or by defining a bounding  box that consists of equally spaced vertices as rows and columns."
+    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coodinates, by defining an ordered set of vertices that form a polyline and a  number of sample points along the length of a polyline, or by defining a bounding box  that consists of equally spaced vertices as rows and columns. The vertical datum is EPSG:3855.  This datum uses the EGM2008 geoid model applied to the WGS84 ellipsoid as its zero height  reference surface. The vertical unit is measured in meters, the spatial resolution of the  elevation data is 0.8 arc-second for global coverage (~24 meters)."
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -108,7 +108,7 @@
     "/elevation/point": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Lat/Lon Coordinates API provides elevation data for one or more points.  Each point is defined in lat/lon WGS84 coordinate reference system format.  ",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Lat/Lon Coordinates API provides elevation data for one or more points.  A point is defined in lat/long coordinate format.  ",
         "operationId": "Elevation_GetDataForLatLongCoordinates",
         "x-ms-examples": {
           "GetDataForLatLongCoordinates": {
@@ -128,7 +128,7 @@
           {
             "name": "points",
             "in": "query",
-            "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list will be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
+            "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list should be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
             "required": true,
             "type": "string"
           }
@@ -164,7 +164,7 @@
     "/elevation/line": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both endpoints and equally spaced points  along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "Elevation_GetDataForPolyLine",
         "x-ms-examples": {
           "GetDataForPolyLine": {
@@ -191,7 +191,7 @@
           {
             "name": "samples",
             "in": "query",
-            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The combined number of samples and endpoints should not  exceed 2,000.",
+            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The number of samples should not exceed 2,000.",
             "type": "number",
             "minimum": 0,
             "maximum": 2000,
