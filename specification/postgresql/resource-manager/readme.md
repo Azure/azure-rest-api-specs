@@ -39,11 +39,6 @@ These settings apply only when `--tag=package-2020-02-14-privatepreview` is spec
 ``` yaml $(tag) == 'package-2020-02-14-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
-- Microsoft.DBforPostgreSQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
 ```
 
 ### Tag: package-2020-01-01-privatepreview
