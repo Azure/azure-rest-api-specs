@@ -255,6 +255,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryFeaturesValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_QueryFeatureValuesByFactory",
+        "x-ms-examples": {
+          "ExposureControl_QueryFeatureValuesByFactory": {
+            "$ref": "./examples/ExposureControl_QueryFeatureValuesByFactory.json"
+          }
+        },
+        "description": "Get list of exposure control features for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlBatchRequest",
+            "description": "The exposure control request for list of features.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -3105,7 +3156,7 @@
         ],
         "operationId": "TriggerRuns_Cancel",
         "x-ms-examples": {
-          "Triggers_Rerun": {
+          "Triggers_Cancel": {
             "$ref": "./examples/TriggerRuns_Cancel.json"
           }
         },
@@ -5459,6 +5510,22 @@
         }
       }
     },
+    "ExposureControlBatchRequest": {
+      "description": "A list of exposure control features.",
+      "type": "object",
+      "required": [
+        "exposureControlRequests"
+      ],
+      "properties": {
+        "exposureControlRequests": {
+          "type": "array",
+          "description": "List of exposure control features.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlRequest"
+          }
+        }
+      }
+    },
     "ExposureControlRequest": {
       "type": "object",
       "description": "The exposure control request.",
@@ -5470,6 +5537,22 @@
         "featureType": {
           "type": "string",
           "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlBatchResponse": {
+      "description": "A list of exposure control feature values.",
+      "type": "object",
+      "required": [
+        "exposureControlResponses"
+      ],
+      "properties": {
+        "exposureControlResponses": {
+          "type": "array",
+          "description": "List of exposure control feature values.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlResponse"
+          }
         }
       }
     },
