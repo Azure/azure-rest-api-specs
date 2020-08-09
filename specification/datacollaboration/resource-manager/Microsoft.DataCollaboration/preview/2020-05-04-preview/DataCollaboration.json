@@ -1011,6 +1011,20 @@
             "description": "continuation token",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2001,6 +2015,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Proposals_CreateOrUpdate": {
             "$ref": "./examples/Proposals_CreateOrUpdate.json"
@@ -2312,6 +2327,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/dataAssetReferences/{referenceName}/resolve": {
+      "post": {
+        "tags": [
+          "DataAssetReference"
+        ],
+        "summary": "Resolve and return the DataAsset that the DataAssetReference points to.",
+        "description": "Resolve and return the DataAsset that the DataAssetReference points to",
+        "operationId": "DataAssetReferences_Resolve",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataAsset"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssetReferences_Resolve": {
+            "$ref": "./examples/DataAssetReferences_Resolve.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/entitlements": {
       "get": {
         "tags": [
@@ -2344,6 +2416,20 @@
             "name": "$skipToken",
             "in": "query",
             "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
             "required": false,
             "type": "string"
           }
@@ -2600,6 +2686,20 @@
             "name": "$skipToken",
             "in": "query",
             "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
             "required": false,
             "type": "string"
           }
@@ -2877,6 +2977,20 @@
             "name": "$skipToken",
             "in": "query",
             "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
             "required": false,
             "type": "string"
           }
@@ -3235,7 +3349,7 @@
         "tags": [
           "Invitation"
         ],
-        "summary": "Sends a new invitation to a recipient to access a proposal.",
+        "summary": "Creates a new invitation to a recipient to access a proposal.",
         "description": "Create an invitation ",
         "operationId": "Invitations_Create",
         "parameters": [
@@ -3360,13 +3474,130 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/participants": {
+      "get": {
+        "tags": [
+          "Participant"
+        ],
+        "summary": "List Participant in a Proposal.",
+        "description": "List Proposals in a Workspace",
+        "operationId": "Participants_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ParticipantList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Participants_ListByProposal": {
+            "$ref": "./examples/Participants_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/participants/{participantName}": {
+      "get": {
+        "tags": [
+          "Participant"
+        ],
+        "summary": "Get a Participant in a Proposal.",
+        "description": "Get a Participant in a Proposal",
+        "operationId": "Participants_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participantName",
+            "in": "path",
+            "description": "The name of the participant.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Participant"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Participants_Get": {
+            "$ref": "./examples/Participants_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/scriptReferences": {
       "get": {
         "tags": [
           "ScriptReference"
         ],
         "summary": "List ScriptReference in a Proposal.",
-        "description": "List Proposals in a Workspace",
+        "description": "List ScriptReference in a Proposal",
         "operationId": "ScriptReferences_ListByProposal",
         "parameters": [
           {
@@ -3481,7 +3712,7 @@
           "ScriptReference"
         ],
         "summary": "Adds a new ScriptReference to a Proposal.",
-        "description": "Create or update a ScriptReference in a Workspace ",
+        "description": "Create or update a ScriptReference in a Proposal ",
         "operationId": "ScriptReferences_CreateOrUpdate",
         "parameters": [
           {
@@ -3551,7 +3782,7 @@
           "ScriptReference"
         ],
         "summary": "Delete a ScriptReference in a Proposal.",
-        "description": "Delete a ScriptReference in a Workspace",
+        "description": "Delete a ScriptReference in a Proposal",
         "operationId": "ScriptReferences_Delete",
         "parameters": [
           {
@@ -3605,6 +3836,132 @@
         "x-ms-examples": {
           "ScriptReferences_Delete": {
             "$ref": "./examples/ScriptReferences_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/scriptReferences/{referenceName}/resolve": {
+      "post": {
+        "tags": [
+          "ScriptReference"
+        ],
+        "summary": "Resolve and return the Script that the ScriptReference points to.",
+        "description": "Resolve and return the Script that the ScriptReference points to",
+        "operationId": "ScriptReferences_Resolve",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Script"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScriptReferences_Resolve": {
+            "$ref": "./examples/ScriptReferences_Resolve.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/sign": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Sign a Proposal to an existing Workspace.",
+        "description": "Sign a Proposal in a Workspace ",
+        "operationId": "Proposals_Sign",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "proposalSignature",
+            "in": "body",
+            "description": "The proposal signature information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalSignature"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Proposals_Sign": {
+            "$ref": "./examples/Proposals_Sign.json"
           }
         }
       }
@@ -4274,6 +4631,10 @@
             "name": "kind",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of script"
         }
       },
       "discriminator": "kind"
@@ -4364,9 +4725,7 @@
           "description": "The status of the invitation.",
           "enum": [
             "Pending",
-            "Accepted",
-            "Rejected",
-            "Withdrawn"
+            "Rejected"
           ],
           "type": "string",
           "readOnly": true,
@@ -4495,6 +4854,7 @@
           "enum": [
             "Succeeded",
             "Creating",
+            "Updating",
             "Deleting",
             "Moving",
             "Failed"
@@ -4524,6 +4884,10 @@
           "$ref": "#/definitions/DataAssetReferenceProperties",
           "description": "Properties on the dataset reference",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -4561,6 +4925,15 @@
         },
         "dataAssetReferenceId": {
           "description": "Unique id for identifying a dataset reference resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "General Description of the data asset reference",
+          "type": "string"
+        },
+        "ownerId": {
+          "description": "The participant id of the data asset owner",
           "type": "string",
           "readOnly": true
         }
@@ -4629,15 +5002,7 @@
             "BlobFolder",
             "AdlsGen2FileSystem",
             "AdlsGen2Folder",
-            "AdlsGen2File",
-            "AdlsGen1Folder",
-            "AdlsGen1File",
-            "StorageAccount",
-            "KustoCluster",
-            "KustoDatabase",
-            "SqlDBTable",
-            "SqlDWTable",
-            "CosmosDBSqlCollection"
+            "AdlsGen2File"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4781,6 +5146,10 @@
           "$ref": "#/definitions/EntitlementProperties",
           "description": "Properties on the entitlement",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -4809,7 +5178,8 @@
       "description": "Grants access to another shared resource in the same proposal, with optional some constraints and policies",
       "required": [
         "subjectId",
-        "resourceId"
+        "resourceId",
+        "resourceType"
       ],
       "type": "object",
       "properties": {
@@ -4820,6 +5190,18 @@
         "resourceId": {
           "description": "The unique identifier of the resource of the entitlement.\r\nMust be a reference resource from the same proposal.",
           "type": "string"
+        },
+        "resourceType": {
+          "description": "The tyep of resourced used by the entitlement.",
+          "enum": [
+            "DataAssetReference",
+            "ScriptReference"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "resourceType",
+            "modelAsString": true
+          }
         },
         "subjectId": {
           "description": "The unique identifier of the subject of the entitlement.\r\nThe subject must be a participant in the same proposal.",
@@ -4904,9 +5286,7 @@
           "description": "The status of the invitation.",
           "enum": [
             "Pending",
-            "Accepted",
-            "Rejected",
-            "Withdrawn"
+            "Rejected"
           ],
           "type": "string",
           "readOnly": true,
@@ -5207,9 +5587,52 @@
       }
     },
     "Participant": {
-      "description": "Readonly participant information",
+      "description": "Participant information",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ParticipantProperties",
+          "description": "Properties on the participant",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ParticipantList": {
+      "description": "List response for get participants.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Participant"
+          }
+        }
+      }
+    },
+    "ParticipantProperties": {
+      "description": "Participant property bag.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the account was created.",
+          "type": "string",
+          "readOnly": true
+        },
         "participantId": {
           "description": "Unique id for identifying a participant",
           "type": "string",
@@ -5220,8 +5643,7 @@
           "enum": [
             "Pending",
             "Approved",
-            "Active",
-            "Revoked"
+            "Expired"
           ],
           "type": "string",
           "readOnly": true,
@@ -5255,6 +5677,10 @@
           "$ref": "#/definitions/PipelineProperties",
           "description": "Properties on the pipeline",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of pipeline"
         }
       }
     },
@@ -5286,6 +5712,28 @@
         "description": {
           "description": "General Description of the pipeline content",
           "type": "string"
+        },
+        "pipelineId": {
+          "description": "Unique id for identifying a pipeline resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the pipeline",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5539,6 +5987,10 @@
             "name": "kind",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of policy"
         }
       },
       "discriminator": "kind"
@@ -5580,6 +6032,10 @@
           "$ref": "#/definitions/ProposalProperties",
           "description": "Properties on the proposal",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of Workspace"
         }
       }
     },
@@ -5608,8 +6064,36 @@
       "description": "Properties of proposal data transfer object.",
       "type": "object",
       "properties": {
+        "contractStatus": {
+          "description": "Indicate if the contract is an editable Draft or a readonly Active contract",
+          "enum": [
+            "Draft",
+            "Active"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "contractStatus",
+            "modelAsString": true
+          }
+        },
+        "currentVersion": {
+          "description": "The proposal version, any change to the proposal or any of its underlying resources will result in a different value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentVersionTimestamp": {
+          "format": "date-time",
+          "description": "Timestamp of the last time the proposal or any of its underlying resources were updated.",
+          "type": "string",
+          "readOnly": true
+        },
         "description": {
           "description": "Textual description of the proposal",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the proposal",
           "type": "string"
         },
         "invitationId": {
@@ -5619,23 +6103,45 @@
             "create"
           ]
         },
-        "lastUpdated": {
-          "format": "date-time",
-          "description": "Timestamp of the last time the proposal or any of its underlying resources were updated.",
+        "invitationLocation": {
+          "description": "The invitation id for joining a proposal",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create"
+          ]
         },
-        "participants": {
-          "description": "The list of participants participating in the proposal",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Participant"
-          },
-          "readOnly": true
+        "provisioningState": {
+          "description": "Provisioning state of the proposal",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "terms": {
           "description": "Terms of the proposal",
+          "type": "string"
+        }
+      }
+    },
+    "ProposalSignature": {
+      "description": "Dto for Proposal Signing request",
+      "required": [
+        "proposalVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "proposalVersion": {
+          "description": "Proposal version to be signed",
           "type": "string"
         }
       }
@@ -5781,6 +6287,10 @@
           "$ref": "#/definitions/ScriptReferenceProperties",
           "description": "Properties on the script reference",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -5813,44 +6323,38 @@
       ],
       "type": "object",
       "properties": {
-        "content": {
-          "description": "The content of the referenced script. null if Visibility is set to HiddenContent.",
+        "ownerId": {
+          "description": "The participant id of the script owner",
           "type": "string",
           "readOnly": true
         },
         "revision": {
           "format": "int32",
-          "description": "The revision number of the script being referenced",
+          "description": "The revision number of the script being referenced.\r\nIf omited, the script latest version will be referenced.",
           "type": "integer"
         },
         "scriptId": {
           "description": "The unique identifier of the referenced script",
           "type": "string"
         },
+        "scriptKind": {
+          "description": "Kind of the referenced script.",
+          "enum": [
+            "SynapseSpark"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "scriptKind",
+            "modelAsString": true
+          }
+        },
         "scriptReferenceId": {
           "description": "Unique id for identifying a script reference resource",
           "type": "string",
           "readOnly": true
         },
-        "sinks": {
-          "description": "The list of sink parameters in the referenced script. null if Visibility is set to HiddenContent.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "sources": {
-          "description": "The list of source parameters in the referenced script. null if Visibility is set to HiddenContent.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "visibility": {
+        "scriptVisibility": {
           "description": "The referenced script visibility modifier.",
           "enum": [
             "ShowAll",
@@ -5859,30 +6363,27 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "visibility",
+            "name": "scriptVisibility",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "StorageAccountPath": {
-      "description": "Defines a single storage account path.",
-      "required": [
-        "containerName"
-      ],
-      "type": "object",
-      "properties": {
-        "consumerPath": {
-          "description": "Gets or sets the path on the consumer side where the dataset is to be mapped.",
-          "type": "string"
         },
-        "containerName": {
-          "description": "Gets or sets the container name to share.",
-          "type": "string"
+        "sinks": {
+          "description": "The list of parameters the script can use as it's data sinks",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
-        "providerPath": {
-          "description": "Gets or sets the path to file/folder within the container.",
-          "type": "string"
+        "sources": {
+          "description": "The list of parameters the script can use as it's data sources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -6002,6 +6503,23 @@
           "type": "string",
           "x-ms-enum": {
             "name": "language",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the script.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
             "modelAsString": true
           }
         },
@@ -6161,6 +6679,7 @@
           "enum": [
             "Succeeded",
             "Creating",
+            "Updating",
             "Deleting",
             "Moving",
             "Failed"
