@@ -45,7 +45,7 @@
           }
         },
         "operationId": "DataCollectorLogs_Delete",
-        "description": "Deletes a specify custom log table",
+        "description": "Deletes a specify data collector log table",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -58,9 +58,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataCollectorLogs"
+              "$ref": "#/definitions/PostDataCollectorLog"
             },
-            "description": "The parameters required to delete a specify custom log table."
+            "description": "The parameters required to delete a specify data collector log table."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -82,7 +82,7 @@
         "tags": [
           "DataCollectorLogs"
         ],
-        "description": "Listing all custom logs tables, being created via data collector endpoint and scoped to the specified workspace",
+        "description": "Listing all data collector log tables, being created via data collector endpoint and scoped to the specified workspace",
         "operationId": "DataCollectorLogs_ListByWorkspace",
         "parameters": [
           {
@@ -118,14 +118,23 @@
     }
   },
   "definitions": {
-    "DataCollectorLogsProperties": {
-      "description": "Data collector logs properties.",
+    "DataCollectorLogProperties": {
+      "description": "Data collector log properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Table's name.",
+          "type": "string"
+        }
+      }
+    },
+    "PostDataCollectorLogProperties": {
+      "description": "Data collector log properties.",
       "type": "object",
       "properties": {
         "action": {
-          "description": "The action to be applied on a selected custom log table.",
+          "description": "The action to be applied on a selected data collector log table.",
           "type": "string",
-          "writeOnly": true,
           "enum": [
             "Delete"
           ],
@@ -140,12 +149,12 @@
         }
       }
     },
-    "DataCollectorLogs": {
+    "DataCollectorLog": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataCollectorLogsProperties",
-          "description": "Data collector logs properties."
+          "$ref": "#/definitions/DataCollectorLogProperties",
+          "description": "Data collector log properties."
         }
       },
       "allOf": [
@@ -153,19 +162,29 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Data collector logs top level resource container."
+      "description": "Data collector log top level resource container."
+    },
+    "PostDataCollectorLog": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostDataCollectorLogProperties",
+          "description": "Data collector log properties."
+        }
+      },
+      "description": "Data collector log top level resource container."
     },
     "DataCollectorLogsListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataCollectorLogs"
+            "$ref": "#/definitions/DataCollectorLog"
           },
-          "description": "custom logs tables list."
+          "description": "data collector log collection."
         }
       },
-      "description": "Custom logs table collection, all tables are scoped to the specified workspace."
+      "description": "Data collector log tables collection, all tables are scoped to the specified workspace."
     }
   },
   "parameters": {
@@ -174,7 +193,7 @@
       "in": "query",
       "required": false,
       "type": "boolean",
-      "description": "Will allow to by pass retention validation."
+      "description": "When true, enables bypassing retention validation."
     }
   }
 }
