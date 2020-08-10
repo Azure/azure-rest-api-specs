@@ -65,7 +65,7 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
-```
+
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
