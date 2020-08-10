@@ -26,17 +26,17 @@ These are the global settings for the DelegatedNetwork API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10-01
+tag: package-2020-08-08-preview
 ```
 
 
-### Tag: package-2017-10-01
+### Tag: package-2020-08-08-preview
 
-These settings apply only when `--tag=package-2017-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2020-08-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-10-01'
+``` yaml $(tag) == 'package-2020-08-08-preview'
 input-file:
-- Microsoft.DelegatedNetwork/stable/2017-10-01/DelegatedNetwork.json
+- Microsoft.DelegatedNetwork/stable/2020-08-08-preview/DelegatedNetwork.json
 ```
 
 ---
@@ -51,10 +51,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-python
 ```
 
 ## C#
@@ -93,18 +93,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-DelegatedNetwork
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2017-10-01
+  - tag: package-v2020_08_08-preview
 ```
 
-### Tag: package-2017-10-01 and java
+### Tag: package-2020_08_08-preview and java
 
-These settings apply only when `--tag=package-2017-10-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2020_08_08-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-10-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020_08_08-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.DelegatedNetwork.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-v2017_10_01
+  namespace: com.microsoft.azure.management.DelegatedNetwork.v2020_08_08-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-v2020_08_08-preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -127,7 +127,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DelegatedNetwork/stable/2017-10-01/DelegatedNetwork.json
+  - $(this-folder)/Microsoft.DelegatedNetwork/stable/v2020_08_08-preview/DelegatedNetwork.json
 
 ```
 
