@@ -1363,7 +1363,7 @@
         "operationId": "amlFilesystems_Update"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/export": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/archive": {
       "post": {
         "produces": [
           "application/json"
@@ -1392,7 +1392,7 @@
           },
           {
             "name" : "info",
-            "description" : "Inoformation about the export operation",
+            "description" : "Inoformation about the archive operation",
             "in" : "body",
             "schema" : {
               "$ref" : "#/definitions/amlFilesystemExport"
@@ -1401,15 +1401,15 @@
         ],
         "responses": {
           "201": {
-            "description": "amlFilesystem is exported?????.",
+            "description": "amlFilesystem is archived.",
             "schema": {}
           },
           "202": {
-            "description": "amlFilesystem has started the export. Poll the amlFilesystem's export state field to monitor.",
+            "description": "amlFilesystem has started the archive. Poll the amlFilesystem's archive state field to monitor.",
             "schema": {}
           },
           "204": {
-            "description": "amlFilesystem export is exported?????.",
+            "description": "amlFilesystem export is archived.",
             "schema": {}
           },
           "default": {
@@ -1420,8 +1420,8 @@
           }
         },
         "x-ms-examples": {
-          "amlFilesystems_UpgradeFirmware": {
-            "$ref": "./examples/amlFilesystems_Export.json"
+          "amlFilesystems_Archive": {
+            "$ref": "./examples/amlFilesystems_Archive.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1431,8 +1431,8 @@
         "tags": [
           "amlFilesystems"
         ],
-        "description": "Export data from the amlFilesystem.",
-        "operationId": "amlFilesystems_Export"
+        "description": "Archive data from the amlFilesystem.",
+        "operationId": "amlFilesystems_Archive"
       }
     }
   },
@@ -2467,7 +2467,7 @@
           "type" : "string"
         },
         "exportPrefix" : {
-          "description": "Path/Prefix in above blob container where data gets exported when an export task runs",
+          "description": "Path/Prefix in above blob container where data gets exported when an archive task runs",
           "type" : "string"
         }
       }
@@ -2481,55 +2481,79 @@
           "description" : "The state of the namespace hydration",
           "type" : "string",
           "enum" : [
-            "InActive",
+            "NotStarted",
             "InProgress",
             "Failed",
-            "Complete/NotRunning????"
+            "Complete"
           ],
           "x-ms-enum": {
             "name": "HydrationStatusType",
             "modelAsString": true
           }
         },
-        "errorCode" : {
-          "type" : "integer"
-        },
-        "errorMessage" : {
-          "type" : "string"
+        "progress" : {
+          "description" : "Progress inforemation for the namespace hydration",
+          "type" : "object",
+          "properties" : {
+            "BlobCount" : {
+              "description" : "The number of Blobs processed.",
+              "type": "integer"
+            },
+            "BlobName" : {
+              "type" : "string",
+              "description" : "Name of the current blob"
+            },
+            "ErrorCount" : {
+              "type" : "integer",
+              "description" :"Number of failures"
+            }
+          }
         }
       }
     },
-    "amlFilesystemExport" : {
-      "description" : "Information about the amlFilesystem export",
+    "amlFilesystemArchive" : {
+      "description" : "Information about the amlFilesystem archive",
       "type" : "object",
       "properties": {
         "filesystemPath" : {
           "type" : "string",
-          "description" : "The path to the filesystem to export."
+          "description" : "The path to the filesystem to archive."
         },
         "status" : {
+          "description" : "The status of the archive",
           "type" : "object",
           "readOnly" : true,
           "properties": {
             "state" : {
               "readOnly": true,
-              "description" : "The state of the export operation",
+              "description" : "The state of the archive operation",
               "type" : "string",
               "enum" : [
-                "InActive",
+                "NotStarted",
                 "InProgress",
                 "Failed",
-                "Complete/NotRunning????"
+                "Complete"
               ],
               "x-ms-enum": {
-                "name": "ExportStatusType",
+                "name": "ArchiveStatusType",
                 "modelAsString": true
               }
             },
+            "lastCompletionTime" : {
+              "description" : "The time of the last completed archive operation",
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "PercentComplete" : {
+              "description" : "The completion percentage of the archive",
+              "type" : "integer"
+            },
             "errorCode" : {
+              "description" : "The error code of the archive operation",
               "type" : "integer"
             },
             "errorMessage" : {
+              "description" : "The error message of the archive operation",
               "type" : "string"
             }
           }
