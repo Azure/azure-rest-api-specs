@@ -45,7 +45,7 @@
           }
         },
         "operationId": "DataCollectorLogs_Delete",
-        "description": "Deletes a specify data collector log table",
+        "description": "Deletes a specify data collector log table.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -58,9 +58,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostDataCollectorLog"
+              "$ref": "#/definitions/DataCollectorLogAction"
             },
-            "description": "The parameters required to delete a specify data collector log table."
+            "description": "Data Collector log table action properties."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -69,7 +69,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ByPassRetentionProtection"
+            "$ref": "#/parameters/ForceDeletion"
           }
         ],
         "responses": {
@@ -128,7 +128,7 @@
         }
       }
     },
-    "PostDataCollectorLogProperties": {
+    "DataCollectorLogActionProperties": {
       "description": "Data collector log properties.",
       "type": "object",
       "properties": {
@@ -164,11 +164,11 @@
       ],
       "description": "Data collector log top level resource container."
     },
-    "PostDataCollectorLog": {
+    "DataCollectorLogAction": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PostDataCollectorLogProperties",
+          "$ref": "#/definitions/DataCollectorLogActionProperties",
           "description": "Data collector log properties."
         }
       },
@@ -188,8 +188,8 @@
     }
   },
   "parameters": {
-    "ByPassRetentionProtection": {
-      "name": "byPassRetentionProtection",
+    "ForceDeletion": {
+      "name": "force",
       "in": "query",
       "required": false,
       "type": "boolean",
