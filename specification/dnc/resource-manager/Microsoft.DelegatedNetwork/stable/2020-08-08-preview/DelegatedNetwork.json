@@ -188,7 +188,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DigitalTwins/delegatedControllers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/delegatedControllers": {
       "get": {
         "tags": [
           "DelegatedControllers"
@@ -197,7 +197,7 @@
         "operationId": "DelegatedNetwork_ListBySubscription",
         "x-ms-examples": {
           "Get DelegatedController resources by subscription": {
-            "$ref": "./examples/delegatedNetworkControllerListBySub.json"
+            "$ref": "./examples/delegatedNetworkControllersListBySub.json"
           }
         },
         "x-ms-pageable": {
@@ -205,10 +205,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -236,7 +236,7 @@
         "operationId": "DelegatedNetwork_ListByResourceGroup",
         "x-ms-examples": {
           "Get DelegatedNetwork resources by resource group": {
-            "$ref": "./examples/delegatedNetworkControllerListByRG.json"
+            "$ref": "./examples/delegatedNetworkControllersListByRG.json"
           }
         },
         "x-ms-pageable": {
@@ -244,13 +244,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -278,7 +278,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Get available operations": {
-            "$ref": "./examples/delegatedNetworkOperationList.json"
+            "$ref": "./examples/delegatedNetworkOperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -286,7 +286,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
