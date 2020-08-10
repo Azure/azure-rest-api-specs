@@ -188,16 +188,105 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DigitalTwins/delegatedControllers": {
+      "get": {
+        "tags": [
+          "DelegatedControllers"
+        ],
+        "description": "Get all the delegatedController resources in a subscription.",
+        "operationId": "DelegatedNetwork_ListBySubscription",
+        "x-ms-examples": {
+          "Get DelegatedController resources by subscription": {
+            "$ref": "./examples/delegatedNetworkControllerListBySub.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedControllers in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedControllers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/delegatedControllers": {
+      "get": {
+        "tags": [
+          "DelegatedControllers"
+        ],
+        "description": "Get all the delegatedController resources in a resource group.",
+        "operationId": "DelegatedNetwork_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get DelegatedNetwork resources by resource group": {
+            "$ref": "./examples/delegatedNetworkControllerListByRG.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the delegatedControllers in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedControllers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.DelegatedNetwork/operations": {
       "get": {
         "tags": [
           "Operations"
         ],
+        "description": "Lists all of the available DelegatedNetwork service REST API operations.",
         "operationId": "Operations_List",
-        "description": "Lists all of the available DelegatedNetwork REST API operations.",
+        "x-ms-examples": {
+          "Get available operations": {
+            "$ref": "./examples/delegatedNetworkOperationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -213,9 +302,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -295,6 +381,22 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "DelegatedControllers": {
+      "description": "An array of Delegated controller resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedController"
+          },
+          "description": "An array of Delegated controller resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DelegatedController": {
       "description": "Represents an instance of a DNC controller.",
