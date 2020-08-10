@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings": {
       "get": {
         "x-ms-examples": {
-          "List IoT Defenders": {
-            "$ref": "./examples/IotDefenders/ListIotDefenders.json"
+          "List IoT Defender settings": {
+            "$ref": "./examples/IotDefenderSettings/ListIotDefenderSettings.json"
           }
         },
         "tags": [
-          "IoT Defender"
+          "IoT Defender Settings"
         ],
-        "description": "List IoT Defenders",
-        "operationId": "IotDefenders_List",
+        "description": "List IoT Defender Settings",
+        "operationId": "IotDefenderSettings_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotDefendersList"
+              "$ref": "#/definitions/IotDefenderSettingsList"
             }
           },
           "default": {
@@ -70,18 +70,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings/default": {
       "get": {
         "x-ms-examples": {
-          "Get IoT Defender": {
-            "$ref": "./examples/IotDefenders/GetIotDefender.json"
+          "Get IoT Defender settings": {
+            "$ref": "./examples/IotDefenderSettings/GetIotDefenderSettings.json"
           }
         },
         "tags": [
-          "IoT Defender"
+          "IoT Defender Settings"
         ],
-        "operationId": "IotDefenders_Get",
-        "description": "Get IoT Defender",
+        "operationId": "IotDefenderSettings_Get",
+        "description": "Get IoT Defender Settings",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -92,9 +92,9 @@
         ],
         "responses": {
           "200": {
-            "description": "IoT Defender",
+            "description": "IoT Defender Settings",
             "schema": {
-              "$ref": "#/definitions/IotDefender"
+              "$ref": "#/definitions/IotDefenderSettingsModel"
             }
           },
           "default": {
@@ -107,15 +107,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update IoT Defender": {
-            "$ref": "./examples/IotDefenders/PutIotDefender.json"
+          "Create or update IoT Defender settings": {
+            "$ref": "./examples/IotDefenderSettings/PutIotDefenderSettings.json"
           }
         },
         "tags": [
-          "IoT Defender"
+          "IoT Defender Settings"
         ],
-        "operationId": "IotDefenders_CreateOrUpdate",
-        "description": "Create or update IoT Defender",
+        "operationId": "IotDefenderSettings_CreateOrUpdate",
+        "description": "Create or update IoT Defender settings",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -126,15 +126,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated IoT Defender",
+            "description": "Updated IoT Defender settings",
             "schema": {
-              "$ref": "#/definitions/IotDefender"
+              "$ref": "#/definitions/IotDefenderSettingsModel"
             }
           },
           "201": {
-            "description": "Created IoT Defender",
+            "description": "Created IoT Defender settings",
             "schema": {
-              "$ref": "#/definitions/IotDefender"
+              "$ref": "#/definitions/IotDefenderSettingsModel"
             }
           },
           "default": {
@@ -147,15 +147,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete IoT Defender": {
-            "$ref": "./examples/IotDefenders/DeleteIotDefender.json"
+          "Delete IoT Defender settings": {
+            "$ref": "./examples/IotDefenderSettings/DeleteIotDefenderSettings.json"
           }
         },
         "tags": [
-          "IoT Defender"
+          "IoT Defender Settings"
         ],
-        "operationId": "IotDefenders_Delete",
-        "description": "Delete IoT Defender",
+        "operationId": "IotDefenderSettings_Delete",
+        "description": "Delete IoT Defender settings",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -166,10 +166,10 @@
         ],
         "responses": {
           "200": {
-            "description": "IoT Defender deleted"
+            "description": "IoT Defender settings deleted"
           },
           "204": {
-            "description": "IoT Defender does not exist"
+            "description": "IoT Defender settings does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -180,17 +180,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders/default/downloadActivation": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings/default/downloadActivation": {
       "post": {
         "x-ms-examples": {
           "Download activation file": {
-            "$ref": "./examples/IotDefenders/DownloadActivation.json"
+            "$ref": "./examples/IotDefenderSettings/DownloadActivation.json"
           }
         },
         "tags": [
-          "IoT Defender"
+          "IoT Defender Settings"
         ],
-        "operationId": "IotDefenders_DownloadActivation",
+        "operationId": "IotDefenderSettings_DownloadActivation",
         "description": "Download activation file",
         "parameters": [
           {
@@ -215,8 +215,8 @@
     }
   },
   "definitions": {
-    "IotDefendersList": {
-      "description": "List of IoT Defenders",
+    "IotDefenderSettingsList": {
+      "description": "List of IoT Defender settings",
       "type": "object",
       "properties": {
         "value": {
@@ -224,19 +224,19 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotDefender"
+            "$ref": "#/definitions/IotDefenderSettingsModel"
           }
         }
       }
     },
-    "IotDefender": {
+    "IotDefenderSettingsModel": {
       "type": "object",
-      "description": "IoT Defender",
+      "description": "IoT Defender settings",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "IoT Defender properties",
-          "$ref": "#/definitions/IotDefenderProperties"
+          "description": "IoT Defender settings properties",
+          "$ref": "#/definitions/IotDefenderSettingsProperties"
         }
       },
       "allOf": [
@@ -245,9 +245,9 @@
         }
       ]
     },
-    "IotDefenderProperties": {
+    "IotDefenderSettingsProperties": {
       "type": "object",
-      "description": "IoT Defender properties",
+      "description": "IoT Defender settings properties",
       "properties": {
         "onPremiseSensors": {
           "description": "List of on-premise sensors",

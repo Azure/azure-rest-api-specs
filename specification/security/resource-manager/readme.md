@@ -45,8 +45,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/recommendationTypes"].get'
     reason: The list returns limited number of items
   - suppress: PageableOperation
-    from: iotDefenders.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenders"].get'
+    from: iotDefenderSettings.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings"].get'
     reason: The list returns limited number of items
 ```
 
@@ -208,7 +208,7 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-08-06-preview/iotDefenders.json
+- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -392,7 +392,7 @@ These settings apply only when `--tag=package-2020-08-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2020-08-preview-only'
 input-file:
-- Microsoft.Security/preview/2020-08-06-preview/iotDefenders.json
+- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -453,7 +453,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Security/preview/2020-08-06-preview/iotDefenders.json
+  - $(this-folder)/Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
   - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/secureScore.json
   - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
