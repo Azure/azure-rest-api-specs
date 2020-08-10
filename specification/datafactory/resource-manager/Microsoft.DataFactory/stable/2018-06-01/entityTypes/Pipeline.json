@@ -861,6 +861,15 @@
         }
       ]
     },
+    "AzureFileStorageWriteSettings": {
+      "description": "Azure File Storage write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
     "FormatReadSettings": {
       "description": "Format read settings.",
       "discriminator": "type",
@@ -960,6 +969,14 @@
         "validationMode": {
           "type": "object",
           "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
+        },
+        "detectDataType": {
+          "type": "object",
+          "description": "Indicates whether type detection is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
+        },
+        "namespaces": {
+          "type": "object",
+          "description": "Indicates whether namespace is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
         },
         "namespacePrefixes": {
           "type": "object",
@@ -1550,6 +1567,10 @@
         "preferredRegions": {
           "type": "object",
           "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "detectDatetime": {
+          "type": "object",
+          "description": "Whether detect primitive values as datetime values. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
           "type": "array",
@@ -6586,7 +6607,7 @@
         },
         "reportStatusOnCallBack": {
           "type": "object",
-          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [

@@ -183,6 +183,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ContainerInstance/stable/2019-12-01/containerInstance.json
   - $(this-folder)/Microsoft.ContainerInstance/stable/2018-10-01/containerInstance.json
   - $(this-folder)/Microsoft.ContainerInstance/stable/2018-09-01/containerInstance.json
   - $(this-folder)/Microsoft.ContainerInstance/stable/2018-06-01/containerInstance.json
