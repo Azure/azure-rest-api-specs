@@ -145,6 +145,7 @@
       },
       "put": {
         "operationId": "IntegrationRuntimes_Create",
+        "x-ms-long-running-operation": true,
         "summary": "Create integration runtime",
         "description": "Create an integration runtime",
         "tags": [
@@ -191,6 +192,9 @@
               "$ref": "#/definitions/IntegrationRuntimeResource"
             }
           },
+          "202": {
+            "description": "Accepted."
+          },
           "default": {
             "description": "An error response received from PUT integration runtime operation.",
             "schema": {
@@ -212,6 +216,7 @@
       },
       "delete": {
         "operationId": "IntegrationRuntimes_Delete",
+        "x-ms-long-running-operation": true,
         "summary": "Delete integration runtime",
         "description": "Delete an integration runtime",
         "tags": [
@@ -238,6 +243,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."

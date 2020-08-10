@@ -25,7 +25,7 @@ batch:
   - tag: package-2017-12-01
   - tag: package-2020-07-01-privatepreview
   - tag: package-2020-01-01-privatepreview
-  #- tag: package-2018-06-01-privatepreview
+  # - tag: package-2018-06-01-privatepreview # commenting this out as there is an issue with 'ProxyResources'
   - tag: package-2017-12-01-preview
 ```
 
