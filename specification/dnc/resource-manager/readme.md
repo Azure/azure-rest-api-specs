@@ -127,7 +127,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DelegatedNetwork/stable/v2020_08_08-preview/DelegatedNetwork.json
+  - $(this-folder)/Microsoft.DelegatedNetwork/stable/v2020-08-08-preview/DelegatedNetwork.json
 
 ```
 
