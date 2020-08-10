@@ -169,7 +169,8 @@
           "description": "The platform where the assessed resource resides",
           "enum": [
             "Azure",
-            "OnPremise"
+            "OnPremise",
+            "OnPremiseSql"
           ],
           "x-ms-enum": {
             "name": "source",
@@ -182,6 +183,10 @@
               {
                 "value": "OnPremise",
                 "description": "Resource in an on premise machine connected to Azure cloud"
+              },
+              {
+                "value": "OnPremiseSql",
+                "description": "SQL Resource in an on premise machine connected to Azure cloud"
               }
             ]
           }
@@ -240,6 +245,30 @@
         "vmuuid",
         "sourceComputerId",
         "machineName"
+      ]
+    },
+    "OnPremiseSqlResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise Sql resource that was assessed",
+      "x-ms-discriminator-value": "OnPremiseSql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremiseResourceDetails"
+        }
+      ],
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The Sql server name installed on the machine"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The Sql database name installed on the machine"
+        }
+      },
+      "required": [
+        "serverName",
+        "databaseName"
       ]
     },
     "AzureResourceLinks": {
@@ -303,7 +332,8 @@
       "required": true,
       "type": "string",
       "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "Scope": {
       "name": "scope",
@@ -311,7 +341,8 @@
       "required": true,
       "type": "string",
       "description": "Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "ODataFilter": {
       "name": "$filter",
