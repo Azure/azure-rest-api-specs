@@ -1168,6 +1168,30 @@
                   "description": "ResourceId of the environment configuration Artifact.",
                   "readOnly": true
                 },
+                "environmentOverrides": {
+                  "type": "object",
+                  "description": "Environment variables that override any default environment variables in the container.",
+                  "readOnly": true,
+                  "properties": {
+                    "environmentVariables": {
+                      "description": "Contains environment variables defined as key/value pairs.",
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "startupCommand": {
+                      "description": "Command to start the container.",
+                      "type": "string"
+                    }
+                  }
+                },
+                "requestTimeout": {
+                  "description": "Length of time before timing out a request to the deployment.",
+                  "type": "integer",
+                  "format": "int32",
+                  "readOnly": true
+                },
                 "codeAssetId": {
                   "description": "Resource Id of the Code Assets i.e. startup code.",
                   "type": "array",
@@ -1238,6 +1262,28 @@
         "environmentConfigId": {
           "type": "string",
           "description": "Resource Id of the Environment Configuration artifact."
+        },
+        "environmentOverrides": {
+          "type": "object",
+          "description": "Environment variables that override any default environment variables in the container.",
+          "properties": {
+            "environmentVariables": {
+              "description": "Contains environment variables defined as key/value pairs.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "startupCommand": {
+              "description": "Command to start the container.",
+              "type": "string"
+            }
+          }
+        },
+        "requestTimeout": {
+          "description": "Length of time before timing out a request to the deployment.",
+          "type": "integer",
+          "format": "int32"
         },
         "codeAssetId": {
           "description": "Resource Id of the Code Assets i.e. startup code.",
