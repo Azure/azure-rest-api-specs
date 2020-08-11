@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2019-07
+tag: package-2020-06-01
 
 directive:
   - where:
@@ -61,7 +61,6 @@ directive:
       - $.definitions.Snapshot.properties
     suppress:
       - BodyTopLevelProperties
-
   - where:
       - $.definitions.VirtualMachineScaleSetExtension
     suppress:
@@ -138,7 +137,6 @@ directive:
       - $.definitions.DiskEncryptionSetParameters
     suppress:
       - RequiredPropertiesMissingInResourceModel
-
   - where:
       - $.definitions.VirtualMachineScaleSetVM
     suppress:
@@ -171,12 +169,10 @@ directive:
       - $.definitions.GalleryImageVersion
     suppress:
       - TrackedResourcePatchOperation
-
   - where:
       - $.definitions.VirtualMachineImageResource
     suppress:
       - TrackedResourceGetOperation
-
   - where:
       - $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
     suppress:
@@ -190,6 +186,14 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase
   - where:
+      - $.definitions.DiskProperties.properties.diskIOPSReadOnly
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
+      - $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
       - $.definitions.DataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
@@ -197,7 +201,6 @@ directive:
       - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-
   - where:
       - $.definitions.ContainerService
     suppress:
@@ -206,6 +209,102 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-05-01/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-06-01-only
+
+These settings apply only when `--tag=package-2020-06-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01-only'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+```
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.Compute/stable/2019-12-01/compute.json
+- Microsoft.Compute/stable/2019-12-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-05-01/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-05-01-only
+
+These settings apply only when `--tag=package-2020-05-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01-only'
+input-file:
+- Microsoft.Compute/stable/2020-05-01/disk.json
+```
+
+### Tag: package-2019-12-01
+
+These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12-01'
+input-file:
+- Microsoft.Compute/stable/2019-12-01/compute.json
+- Microsoft.Compute/stable/2019-12-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2019-11-01/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2019-12-01-only
+
+These settings apply only when `--tag=package-2019-12-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12-01-only'
+input-file:
+- Microsoft.Compute/stable/2019-12-01/compute.json
+- Microsoft.Compute/stable/2019-12-01/runCommands.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+```
+
+### Tag: package-2019-11-01
+
+These settings apply only when `--package-2019-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01'
+input-file:
+- Microsoft.Compute/stable/2019-07-01/compute.json
+- Microsoft.Compute/stable/2019-07-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2019-11-01/disk.json
+- Microsoft.Compute/stable/2019-07-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2019-11-01-only
+
+These settings apply only when `--package-2019-11-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01-only'
+input-file:
+- Microsoft.Compute/stable/2019-11-01/disk.json
+```
+
 ### Tag: package-2019-07
 
 These settings apply only when `--tag=package-2019-07` is specified on the command line.
@@ -605,6 +704,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -717,12 +817,19 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/gallery.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/disk.json

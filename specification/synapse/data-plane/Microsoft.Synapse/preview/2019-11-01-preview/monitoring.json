@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "MonitoringClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/monitoring/workloadTypes/spark/Applications": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "operationId": "Monitoring_GetSparkJobList",
+        "description": "Get list of spark applications for the workspace.",
+        "x-ms-examples": {
+          "Get list of spark application": {
+            "$ref": "./examples/Monitoring_GetSparkJobList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SparkJobListViewResponse"
+            }
+          }
+        }
+      }
+    },
+    "/monitoring/workloadTypes/sql/querystring": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "operationId": "Monitoring_GetSqlJobQueryString",
+        "description": "Get SQL OD/DW Query for the workspace.",
+        "x-ms-examples": {
+          "Get SOL job query string": {
+            "$ref": "./examples/Monitoring_GetSqlJobQueryString.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SqlQueryStringDataModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SparkJobListViewResponse": {
+      "type": "object",
+      "properties": {
+        "nJobs": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sparkJobs": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkJob"
+          }
+        }
+      }
+    },
+    "SparkJob": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "submitter": {
+          "type": "string"
+        },
+        "compute": {
+          "type": "string"
+        },
+        "sparkApplicationId": {
+          "type": "string"
+        },
+        "livyId": {
+          "type": "string"
+        },
+        "timing": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sparkJobDefinition": {
+          "type": "string"
+        },
+        "pipeline": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkJob"
+          }
+        },
+        "jobType": {
+          "type": "string"
+        },
+        "submitTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "queuedDuration": {
+          "type": "string"
+        },
+        "runningDuration": {
+          "type": "string"
+        },
+        "totalDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "SqlQueryStringDataModel": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    }
+  }
+}

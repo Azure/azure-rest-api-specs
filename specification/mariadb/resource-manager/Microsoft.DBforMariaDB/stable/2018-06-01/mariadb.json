@@ -1147,126 +1147,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
-      "get": {
-        "tags": [
-          "ServerSecurityAlertPolicies"
-        ],
-        "description": "Get a server's security alert policy.",
-        "operationId": "ServerSecurityAlertPolicies_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the security alert policy.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "SecurityAlertPolicyName",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server threat detection policy.",
-            "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicy"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation of getting security alert policies failed."
-          }
-        },
-        "x-ms-examples": {
-          "Get a server's threat detection policy": {
-            "$ref": "./examples/ServerSecurityAlertsGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ServerSecurityAlertPolicies"
-        ],
-        "description": "Creates or updates a threat detection policy.",
-        "operationId": "ServerSecurityAlertPolicies_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the threat detection policy.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "SecurityAlertPolicyName",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The server security alert policy.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicy"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the threat detection policy.",
-            "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicy"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation of setting security alert policies failed."
-          },
-          "202": {
-            "description": "Created request to set the server threat detection policy."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a server's threat detection policy with all parameters": {
-            "$ref": "./examples/ServerSecurityAlertsCreateMax.json"
-          },
-          "Update a server's threat detection policy with minimal parameters": {
-            "$ref": "./examples/ServerSecurityAlertsCreateMin.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.DBforMariaDB/operations": {
       "get": {
         "tags": [
@@ -1318,6 +1198,113 @@
       "x-ms-enum": {
         "name": "SslEnforcementEnum",
         "modelAsString": false
+      }
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerPrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerPrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ServerPrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ServerPrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
       }
     },
     "TrackedResource": {
@@ -1401,6 +1388,18 @@
           "format": "int32",
           "minimum": 0,
           "description": "The maximum number of replicas that a master server can have."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -1456,6 +1455,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1670,6 +1673,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "publicNetworkAccess": {
+              "$ref": "#/definitions/PublicNetworkAccess",
+              "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
             },
             "replicationRole": {
               "type": "string",
@@ -2156,74 +2163,6 @@
       },
       "description": "Represents a resource name availability."
     },
-    "SecurityAlertPolicyProperties": {
-      "description": "Properties of a security alert policy.",
-      "required": [
-        "state"
-      ],
-      "type": "object",
-      "properties": {
-        "state": {
-          "description": "Specifies the state of the policy, whether it is enabled or disabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServerSecurityAlertPolicyState",
-            "modelAsString": false
-          }
-        },
-        "disabledAlerts": {
-          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAddresses": {
-          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAccountAdmins": {
-          "description": "Specifies that the alert is sent to the account administrators.",
-          "type": "boolean"
-        },
-        "storageEndpoint": {
-          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
-          "type": "string"
-        },
-        "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
-          "type": "string"
-        },
-        "retentionDays": {
-          "format": "int32",
-          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
-          "type": "integer"
-        }
-      }
-    },
-    "ServerSecurityAlertPolicy": {
-      "description": "A server security alert policy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityAlertPolicyProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -2281,17 +2220,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the location.",
-      "x-ms-parameter-location": "method"
-    },
-    "SecurityAlertPolicyNameParameter": {
-      "name": "securityAlertPolicyName",
-      "in": "path",
-      "description": "The name of the security alert policy.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "default"
-      ],
       "x-ms-parameter-location": "method"
     }
   }

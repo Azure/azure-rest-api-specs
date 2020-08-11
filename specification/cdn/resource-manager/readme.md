@@ -28,7 +28,17 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2019-04
+tag: package-2020-04
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Cdn/stable/2020-04-15/cdn.json
+- Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2019-12
@@ -45,6 +55,16 @@ input-file:
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-2019-06-preview
+
+These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview'
 input-file:
 - Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
 - Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
@@ -167,7 +187,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Cdn/stable/2020-04-15/cdn.json
+  - $(this-folder)/Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-12-31/cdn.json
+  - $(this-folder)/Microsoft.Cdn/stable/2019-06-15/cdn.json
+  - $(this-folder)/Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
   - $(this-folder)/Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
   - $(this-folder)/Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-04-15/cdn.json
