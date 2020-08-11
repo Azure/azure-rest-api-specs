@@ -1244,8 +1244,16 @@
           "type": "string"
         },
         "sku": {
-          "description": "Sku for the deployment. Give the name of the sku such as Standard_DS2 or Basic_A0.",
+          "description": "Sku for the deployment. Give the name of the sku such as Standard_DS2.",
           "type": "string",
+          "enum": [
+            "Standard_D3_v2",
+            "Standard_D2_v2"
+          ],
+          "x-ms-enum": {
+            "name": "allowableSkus",
+            "modelAsString": true
+          },
           "default": "Standard_D2_v2"
         },
         "weight": {
@@ -1335,7 +1343,7 @@
         }
       }
     },
-    "Sku": {
+    "InferenceSku": {
       "description": "Sku of the resource",
       "type": "object",
       "properties": {
@@ -1373,7 +1381,7 @@
           "type": "string"
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/InferenceSku",
           "description": "Name and tier of the SKU."
         },
         "capacity": {
@@ -1403,7 +1411,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/InferenceSku"
         },
         {
           "type": "object",
