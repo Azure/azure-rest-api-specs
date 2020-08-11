@@ -39,6 +39,26 @@ input-file:
     - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Activation.json
+    where: $.definitions.Activation.properties.displayName
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Activation.json
+    where: $.definitions.Activation.properties.azureRegistrationResourceIdentifier
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Activation.json
+    where: $.definitions.Activation.properties.provisioningState
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Activation.json
+    where: $.definitions.Activation.properties.marketplaceSyndicationEnabled
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Activation.json
+    where: $.definitions.Activation.properties.usageReportingEnabled
+```
+
 ---
 # Code Generation
 
