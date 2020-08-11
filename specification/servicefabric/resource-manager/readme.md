@@ -28,7 +28,7 @@ These are the global settings for the ServiceFabricManagementClient API.
 title: ServiceFabricManagementClient
 description: Service Fabric Management Client
 openapi-type: arm
-tag: package-2019-06-preview
+tag: package-2020-03
 
 directive:
   - suppress: ListInOperationName
@@ -59,6 +59,39 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 
 ```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+- Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
+- Microsoft.ServiceFabric/stable/2020-03-01/application.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
+```
+
+### Tag: package-2020-01-preview
+
+These settings apply only when `--tag=package-2020-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
+```
+
+### Tag: package-2019-11-preview
+
+These settings apply only when `--tag=package-2019-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
+- Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
+```
+
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
@@ -184,6 +217,12 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/application.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2019-03-01/cluster.json

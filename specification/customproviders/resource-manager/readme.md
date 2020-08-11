@@ -53,11 +53,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-trenton
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customproviders']
+  - repo: azure-cli-extensions
 ```
 
 ## Go
@@ -84,6 +86,10 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
+## Trenton
+
+See configuration in [readme.trenton.md](./readme.trenton.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -108,3 +114,32 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## cli
+
+These settings apply only when `--cli` is specified on the command line.
+
+``` yaml $(cli)
+cli:
+  cli-name: customproviders
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.customproviders
+  package-name: azure-mgmt-customproviders
+  clear-output-folder: false
+```
+
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+  cli_name: customproviders
+  azure_arm: true
+  license_header: MICROSOFT_MIT_NO_VERSION
+  payload_flattening_threshold: 2
+  namespace: azure.mgmt.customproviders
+  package_name: azure-mgmt-customproviders
+  clear_output_folder: false
+```

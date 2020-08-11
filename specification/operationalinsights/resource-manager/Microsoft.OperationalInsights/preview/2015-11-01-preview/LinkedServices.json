@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2015-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
+      "put": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesCreate": {
+            "$ref": "./examples/LinkedServicesCreate.json"
+          }
+        },
+        "operationId": "LinkedServices_CreateOrUpdate",
+        "description": "Create or update a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linkedServices resource"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            },
+            "description": "The parameters required to create or update a linked service."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesDelete": {
+            "$ref": "./examples/LinkedServicesDelete.json"
+          }
+        },
+        "operationId": "LinkedServices_Delete",
+        "description": "Deletes a linked service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Workspace that contains the linkedServices resource"
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linked service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesGet": {
+            "$ref": "./examples/LinkedServicesGet.json"
+          }
+        },
+        "operationId": "LinkedServices_Get",
+        "description": "Gets a linked service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Workspace that contains the linkedServices resource"
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linked service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices": {
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "LinkedServicesListByWorkspace": {
+            "$ref": "./examples/LinkedServicesListByWorkspace.json"
+          }
+        },
+        "operationId": "LinkedServices_ListByWorkspace",
+        "description": "Gets the linked services instances in a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Workspace that contains the linked services."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedServiceProperties": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the resource that will be linked to the workspace."
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "description": "Linked service properties."
+    },
+    "LinkedService": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedServiceProperties",
+          "description": "The properties of the linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The top level Linked service resource container.",
+      "x-ms-azure-resource": true
+    },
+    "LinkedServiceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedService"
+          },
+          "description": "Gets or sets a list of linked service instances."
+        }
+      },
+      "description": "The list linked service operation response."
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "description": "Common properties of proxy resource."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the resource group to get. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
+    }
+  }
+}

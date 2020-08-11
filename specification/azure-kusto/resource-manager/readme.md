@@ -28,7 +28,25 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2019-11-09
+tag: package-2020-06-14
+```
+
+### Tag: package-2020-06-14
+
+These settings apply only when `--tag=package-2020-06-14` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06-14'
+input-file:
+  - Microsoft.Kusto/stable/2020-06-14/kusto.json
+```
+
+### Tag: package-2020-02-15
+
+These settings apply only when `--tag=package-2020-02-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-15'
+input-file:
+  - Microsoft.Kusto/stable/2020-02-15/kusto.json
 ```
 
 ### Tag: package-2019-11-09
@@ -151,8 +169,10 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
+  - repo: azure-cli-extensions
 ```
 
 ## C#
@@ -185,6 +205,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Kusto/stable/2020-06-14/kusto.json
+  - $(this-folder)/Microsoft.Kusto/stable/2020-02-15/kusto.json
   - $(this-folder)/Microsoft.Kusto/stable/2019-11-09/kusto.json
   - $(this-folder)/Microsoft.Kusto/stable/2019-09-07/kusto.json
   - $(this-folder)/Microsoft.Kusto/stable/2019-05-15/kusto.json

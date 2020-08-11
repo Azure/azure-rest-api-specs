@@ -24,7 +24,23 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-2020-05
+```
+
+### Tag: package-2020-05
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Management/stable/2020-05-01/management.json
+```
+
+### Tag: package-2020-02
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02'
+input-file:
+  - Microsoft.Management/stable/2020-02-01/management.json
 ```
 
 ### Tag: package-2019-11
@@ -84,6 +100,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
 ```
 
 ## C#
@@ -154,6 +171,8 @@ batch:
   - tag: package-2018-01
   - tag: package-2018-03
   - tag: package-2019-11
+  - tag: package-2020-02
+  - tag: package-2020-05
 ```
 
 ### Tag: package-2017-08 and java
@@ -207,6 +226,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2019-11 and java
 
 These settings apply only when `--tag=package-2019-11 --java` is specified on the command line.
@@ -220,6 +240,31 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-02 and java
+
+These settings apply only when `--tag=package-2020-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2020_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_02_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
 
 
 ## Multi-API/Profile support for AutoRest v3 generators 
@@ -234,6 +279,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Management/stable/2020-05-01/management.json
+  - $(this-folder)/Microsoft.Management/stable/2020-02-01/management.json
   - $(this-folder)/Microsoft.Management/stable/2019-11-01/management.json
   - $(this-folder)/Microsoft.Management/preview/2018-03-01-preview/management.json
   - $(this-folder)/Microsoft.Management/preview/2018-01-01-preview/management.json

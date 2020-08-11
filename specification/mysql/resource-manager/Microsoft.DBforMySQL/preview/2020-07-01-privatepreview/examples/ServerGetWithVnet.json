@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "serverName": "mysqltestsrv",
+    "resourceGroupName": "testrg",
+    "api-version": "2020-07-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D12_v2",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "storageIops": 200,
+            "backupRetentionDays": 7
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "mysqltestsrv.mysql.database.azure.com",
+          "replicationRole": "None",
+          "primaryServerId": "",
+          "replicaCapacity": 5,
+          "publicNetworkAccess": "Enabled",
+          "standbyCount": 0,
+          "vnetInjArgs": {
+            "delegatedSubnetName": "test-subnet",
+            "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
+            "delegatedVnetName": "test-vnet"
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestsrv",
+        "name": "mysqltestsrv",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    }
+  }
+}
