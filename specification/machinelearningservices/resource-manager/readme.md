@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-09'
 input-file:
+  - Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
   - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
 ```
 ### Tag: package-2020-06-01
