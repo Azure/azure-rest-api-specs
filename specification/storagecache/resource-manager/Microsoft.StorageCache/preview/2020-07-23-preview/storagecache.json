@@ -1268,7 +1268,7 @@
         "tags": [
           "amlFilesystems"
         ],
-        "description": "Returns a amlFilesystem.",
+        "description": "Returns an amlFilesystem.",
         "operationId": "amlFilesystems_Get"
       },
       "put": {
@@ -2335,22 +2335,22 @@
               "description": "Subnet used for the amlFilesystem.",
               "$ref": "#/definitions/URLString"
             },
-            "maintenanceStatus": {
-              "description": "Maintenance status of the amlFilesystem.",
-              "$ref": "#/definitions/amlFilesystemMaintenanceStatus"
-            },
             "encryptionSettings": {
               "$ref": "#/definitions/amlFilesystemEncryptionSettings",
               "description": "Specifies encryption settings of the amlFilesystem."
-            },
-            "HSMSettings": {
-              "$ref": "#/definitions/amlFilesystemHSMSettings",
-              "description": "Specifies HSM settings of the amlFilesystem."
             },
             "maintenanceWindow": {
               "description": "Start time of a 30 minute weekly maintenance window",
               "type" : "string",
               "format" : "date-time"
+            },
+            "maintenanceStatus": {
+              "description": "Maintenance status of the amlFilesystem.",
+              "$ref": "#/definitions/amlFilesystemMaintenanceStatus"
+            },
+            "hsmSettings": {
+              "$ref": "#/definitions/amlFilesystemHSMSettings",
+              "description": "Specifies HSM settings of the amlFilesystem."
             },
             "namespaceHydrationStatus": {
               "description" : "Namespace Hydration Status during creation",
