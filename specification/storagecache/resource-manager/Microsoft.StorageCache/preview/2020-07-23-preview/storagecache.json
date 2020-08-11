@@ -1392,10 +1392,10 @@
           },
           {
             "name" : "info",
-            "description" : "Inoformation about the archive operation",
+            "description" : "Information about the archive operation",
             "in" : "body",
             "schema" : {
-              "$ref" : "#/definitions/amlFilesystemExport"
+              "$ref" : "#/definitions/amlFilesystemArchive"
             }
           }
         ],
@@ -1409,7 +1409,7 @@
             "schema": {}
           },
           "204": {
-            "description": "amlFilesystem export is archived.",
+            "description": "amlFilesystem is archived.",
             "schema": {}
           },
           "default": {
@@ -1452,7 +1452,7 @@
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed: Cache, etc.",
+              "description": "Resource on which the operation is performed: Cache, amlFilesystem, etc.",
               "type": "string"
             }
           }
