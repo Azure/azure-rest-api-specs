@@ -1,17 +1,28 @@
 {
   "parameters": {
     "resourceGroupName": "scgroup",
-    "cacheName": "sc1",
+    "cacheName": "fs1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2020-07-23-preview",
-    "cache": {
+    "amlFilesystem": {
       "tags": {
         "Dept": "ContosoAds"
       },
       "location": "westus",
       "properties": {
-        "cacheSizeGB": 3072,
-        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1"
+        "storageCapacityTiB": 3072,
+        "availabilityZones" : ["1", "2"],
+        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+        "maintenanceWindow" : "2020-09-13T13:15Z",
+        "HSMSettings" : {
+          "container" : "https://somecontainer.blob.core.windows.net/containername",
+          "containerKeyVaultKey" : {
+            "keyUrl" : "https://somekv.vault.azure.net/keys/kvk/3540a47df75541378d3518c6a4bdf5af",
+            "sourceVault" : "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/some-rg/providers/Microsoft.KeyVault/vaults/somekv"
+          },
+          "importPrefix" : "asc",
+          "exportPrefix" : "asc"
+        }
       },
       "sku": {
         "name": "Standard_2G"

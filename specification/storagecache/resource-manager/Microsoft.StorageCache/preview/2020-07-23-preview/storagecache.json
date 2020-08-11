@@ -253,6 +253,48 @@
         "operationId": "Caches_List"
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/amlFilesystems": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of amlFilesystem objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/amlFilesystemsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "amlFilesystems_List": {
+            "$ref": "./examples/amlFilesystems_List.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Returns all amlFilesystems the user has access to under a subscription.",
+        "operationId": "amlFilesystems_List"
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches": {
       "get": {
         "produces": [
@@ -2414,6 +2456,7 @@
           "readOnly": true
         }
       },
+      "readOnly" : true,
       "type": "object"
     },
     "amlFilesystemHealth": {
@@ -2435,7 +2478,7 @@
           "type": "string"
         },
         "statusDescription": {
-          "description": "Describes explanation of state.",
+          "description": "Describes of state.",
           "type": "string"
         }
       }
@@ -2446,7 +2489,7 @@
         "keyEncryptionKey": {
           "x-ms-secret": true,
           "$ref": "#/definitions/KeyVaultKeyReference",
-          "description": "Specifies the location of the key encryption key in Key Vault."
+          "description": "Specifies the location of the encryption key in Key Vault."
         }
       }
     },
@@ -2460,7 +2503,7 @@
         "containerKeyVaultKey": {
           "x-ms-secret": true,
           "$ref": "#/definitions/KeyVaultKeyReference",
-          "description": "Specifies the location of the key encryption key in Key Vault."
+          "description": "Specifies the location of the encryption key in Key Vault."
         },
         "importPrefix" : {
           "description": "Path/Prefix for blobs in above container.  Only blobs containing this prefix get pre-hydrated into the cluster namespace",
@@ -2492,18 +2535,18 @@
           }
         },
         "progress" : {
-          "description" : "Progress inforemation for the namespace hydration",
+          "description" : "Progress information for the namespace hydration",
           "type" : "object",
           "properties" : {
-            "BlobCount" : {
+            "blobCount" : {
               "description" : "The number of Blobs processed.",
               "type": "integer"
             },
-            "BlobName" : {
+            "blobName" : {
               "type" : "string",
               "description" : "Name of the current blob"
             },
-            "ErrorCount" : {
+            "errorCount" : {
               "type" : "integer",
               "description" :"Number of failures"
             }
@@ -2544,7 +2587,7 @@
               "type" : "string",
               "format" : "date-time"
             },
-            "PercentComplete" : {
+            "percentComplete" : {
               "description" : "The completion percentage of the archive",
               "type" : "integer"
             },
