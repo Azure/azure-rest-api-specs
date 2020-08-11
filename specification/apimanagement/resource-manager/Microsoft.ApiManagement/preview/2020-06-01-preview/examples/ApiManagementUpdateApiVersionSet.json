@@ -4,7 +4,7 @@
     "resourceGroupName": "rg1",
     "api-version": "2020-06-01-preview",
     "subscriptionId": "subid",
-    "versionSetId": "api1",
+    "versionSetId": "vs1",
     "If-Match": "*",
     "parameters": {
       "properties": {
@@ -15,6 +15,17 @@
     }
   },
   "responses": {
-    "204": {}
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/vs1",
+        "type": "Microsoft.ApiManagement/service/api-version-sets",
+        "name": "vs1",
+        "properties": {
+          "displayName": "api set 1",
+          "versioningScheme": "Segment",
+          "description": "Version configuration"
+        }
+      }
+    }
   }
 }

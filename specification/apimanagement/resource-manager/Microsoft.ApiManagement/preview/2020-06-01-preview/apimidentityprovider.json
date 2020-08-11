@@ -292,8 +292,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The existing identity provider configuration was successfully updated."
+          "200": {
+            "description": "The existing Identity Provider was successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/IdentityProviderContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -358,8 +367,8 @@
         "operationId": "IdentityProvider_ListSecrets",
         "description": "Gets the client secret details of the Identity Provider.",
         "x-ms-examples": {
-          "ApiManagementListSecretsIdentityProvider": {
-            "$ref": "./examples/ApiManagementListSecretsIdentityProvider.json"
+          "ApiManagementIdentityProviderListSecrets": {
+            "$ref": "./examples/ApiManagementIdentityProviderListSecrets.json"
           }
         },
         "parameters": [
@@ -384,6 +393,12 @@
             "description": "The response body contains the client secret.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ClientSecretContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {

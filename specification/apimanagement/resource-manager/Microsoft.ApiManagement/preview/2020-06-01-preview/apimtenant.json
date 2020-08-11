@@ -171,8 +171,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Tenant's access information updated successfully."
+          "200": {
+            "description": "Tenant Access information was updated successfully.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

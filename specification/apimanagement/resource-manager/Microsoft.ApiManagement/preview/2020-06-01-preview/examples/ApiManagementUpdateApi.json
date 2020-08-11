@@ -15,6 +15,27 @@
     }
   },
   "responses": {
-    "204": {}
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "echo-api",
+        "properties": {
+          "displayName": "Echo API New",
+          "apiRevision": "1",
+          "serviceUrl": "http://echoapi.cloudapp.net/api2",
+          "path": "newecho",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "isOnline": true
+        }
+      }
+    }
   }
 }

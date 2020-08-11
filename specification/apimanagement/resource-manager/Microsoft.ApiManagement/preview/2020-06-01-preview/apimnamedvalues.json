@@ -40,7 +40,7 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_ListByService",
-        "description": "Lists a collection of NamedValues defined within a service instance.",
+        "description": "Lists a collection of named values defined within a service instance.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-properties"
         },
@@ -61,7 +61,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "|   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| tags | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all | </br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith | </br>"
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| tags | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -78,7 +78,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A Collection of the NamedValue entities for the specified API Management service instance.",
+            "description": "A Collection of the named value entities for the specified API Management service instance.",
             "schema": {
               "$ref": "./definitions.json#/definitions/NamedValueCollection"
             }
@@ -102,7 +102,7 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_GetEntityTag",
-        "description": "Gets the entity state (Etag) version of the NamedValue specified by its identifier.",
+        "description": "Gets the entity state (Etag) version of the named value specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementHeadNamedValue": {
             "$ref": "./examples/ApiManagementHeadNamedValue.json"
@@ -127,7 +127,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Specified NamedValue entity exists and current entity state version is present in the ETag header.",
+            "description": "Specified named value entity exists and current entity state version is present in the ETag header.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -148,7 +148,7 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_Get",
-        "description": "Gets the details of the NamedValue specified by its identifier.",
+        "description": "Gets the details of the named value specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetNamedValue": {
             "$ref": "./examples/ApiManagementGetNamedValue.json"
@@ -173,7 +173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response body contains the specified NamedValue entity.",
+            "description": "The response body contains the specified named value entity. No secrets included",
             "schema": {
               "$ref": "./definitions.json#/definitions/NamedValueContract"
             },
@@ -197,7 +197,7 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_CreateOrUpdate",
-        "description": "Creates or updates a NamedValue.",
+        "description": "Creates or updates named value.",
         "x-ms-examples": {
           "ApiManagementCreateNamedValue": {
             "$ref": "./examples/ApiManagementCreateNamedValue.json"
@@ -234,10 +234,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to create or update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Request to create or update named value was accepted."
           },
           "201": {
-            "description": "NamedValue was successfully created.",
+            "description": "Named value was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/NamedValueContract"
             },
@@ -249,7 +249,7 @@
             }
           },
           "200": {
-            "description": "NamedValue was successfully updated.",
+            "description": "Named value was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/NamedValueContract"
             },
@@ -277,7 +277,7 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_Update",
-        "description": "Updates the specific NamedValue.",
+        "description": "Updates the specific named value.",
         "x-ms-examples": {
           "ApiManagementUpdateNamedValue": {
             "$ref": "./examples/ApiManagementUpdateNamedValue.json"
@@ -314,13 +314,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked."
-          },
-          "204": {
-            "description": "NamedValue was successfully updated."
+            "description": "Request to create or update named value was accepted."
           },
           "200": {
-            "description": "NamedValue was successfully updated.",
+            "description": "Named value was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/NamedValueContract"
             },
@@ -348,7 +345,7 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_Delete",
-        "description": "Deletes specific NamedValue from the API Management service instance.",
+        "description": "Deletes specific named value from the API Management service instance.",
         "x-ms-examples": {
           "ApiManagementDeleteNamedValue": {
             "$ref": "./examples/ApiManagementDeleteNamedValue.json"
@@ -376,10 +373,10 @@
         ],
         "responses": {
           "200": {
-            "description": "NamedValue was successfully deleted."
+            "description": "Named value was successfully deleted."
           },
           "204": {
-            "description": "NamedValue was successfully deleted."
+            "description": "Named value was successfully deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -396,10 +393,10 @@
           "NamedValue"
         ],
         "operationId": "NamedValue_ListValue",
-        "description": "Gets the secret value of the NamedValue.",
+        "description": "Gets the secret of the named value specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementListSecretsSubscription": {
-            "$ref": "./examples/ApiManagementListSecretsNamedValue.json"
+          "ApiManagementNamedValueListValue": {
+            "$ref": "./examples/ApiManagementNamedValueListValue.json"
           }
         },
         "parameters": [
@@ -421,9 +418,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The response body contains secret value.",
+            "description": "The response body contains the specified named value secret.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PropertyValueContract"
+              "$ref": "./definitions.json#/definitions/NamedValueSecretContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {

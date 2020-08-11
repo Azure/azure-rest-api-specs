@@ -40,10 +40,10 @@
           "EmailTemplate"
         ],
         "operationId": "EmailTemplate_ListByService",
-        "description": "Lists a collection of properties defined within a service instance.",
+        "description": "Gets all email templates",
         "x-ms-examples": {
-          "ApiManagementListEmailTemplates": {
-            "$ref": "./examples/ApiManagementListEmailTemplates.json"
+          "ApiManagementListTemplates": {
+            "$ref": "./examples/ApiManagementListTemplates.json"
           }
         },
         "parameters": [
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "|   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith | </br>"
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -146,8 +146,8 @@
         "operationId": "EmailTemplate_Get",
         "description": "Gets the details of the email template specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementGetEmailTemplate": {
-            "$ref": "./examples/ApiManagementGetEmailTemplate.json"
+          "ApiManagementGetTemplate": {
+            "$ref": "./examples/ApiManagementGetTemplate.json"
           }
         },
         "parameters": [
@@ -195,8 +195,8 @@
         "operationId": "EmailTemplate_CreateOrUpdate",
         "description": "Updates an Email Template.",
         "x-ms-examples": {
-          "ApiManagementCreateEmailTemplate": {
-            "$ref": "./examples/ApiManagementCreateEmailTemplate.json"
+          "ApiManagementCreateTemplate": {
+            "$ref": "./examples/ApiManagementCreateTemplate.json"
           }
         },
         "parameters": [
@@ -254,10 +254,10 @@
           "EmailTemplates"
         ],
         "operationId": "EmailTemplate_Update",
-        "description": "Updates the specific Email Template.",
+        "description": "Updates API Management email template",
         "x-ms-examples": {
-          "ApiManagementUpdateEmailTemplate": {
-            "$ref": "./examples/ApiManagementUpdateEmailTemplate.json"
+          "ApiManagementUpdateTemplate": {
+            "$ref": "./examples/ApiManagementUpdateTemplate.json"
           }
         },
         "parameters": [
@@ -271,6 +271,9 @@
             "$ref": "./apimanagement.json#/parameters/TemplateNameParameter"
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -280,9 +283,6 @@
             "description": "Update parameters."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -290,8 +290,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Email Template was successfully updated."
+          "200": {
+            "description": "email template successfully updated",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/EmailTemplateContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -308,8 +317,8 @@
         "operationId": "EmailTemplate_Delete",
         "description": "Reset the Email Template to default template provided by the API Management service instance.",
         "x-ms-examples": {
-          "ApiManagementDeleteEmailTemplate": {
-            "$ref": "./examples/ApiManagementDeleteEmailTemplate.json"
+          "ApiManagementDeleteTemplate": {
+            "$ref": "./examples/ApiManagementDeleteTemplate.json"
           }
         },
         "parameters": [

@@ -54,6 +54,13 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| region | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
@@ -82,7 +89,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "./definitions.json#/definitions/GatewayContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}": {
@@ -293,8 +301,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The gateway details were successfully updated."
+          "200": {
+            "description": "The Gateway details were successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -359,7 +376,7 @@
         "operationId": "Gateway_ListKeys",
         "description": "Retrieves gateway keys.",
         "x-ms-examples": {
-          "ApiManagementGatewayKeys": {
+          "ApiManagementGatewayListKeys": {
             "$ref": "./examples/ApiManagementGatewayListKeys.json"
           }
         },
@@ -410,7 +427,7 @@
         "operationId": "Gateway_RegenerateKey",
         "description": "Regenerates specified gateway key invalidating any tokens created with it.",
         "x-ms-examples": {
-          "ApiManagementGatewayRegeneratePrimaryKey": {
+          "ApiManagementGatewayRegenerateKey": {
             "$ref": "./examples/ApiManagementGatewayRegenerateKey.json"
           }
         },
@@ -425,18 +442,18 @@
             "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "./definitions.json#/definitions/GatewayKeyRegenerationRequestContract"
             }
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -460,7 +477,7 @@
         "operationId": "Gateway_GenerateToken",
         "description": "Gets the Shared Access Authorization Token for the gateway.",
         "x-ms-examples": {
-          "ApiManagementGatewayToken": {
+          "ApiManagementGatewayGenerateToken": {
             "$ref": "./examples/ApiManagementGatewayGenerateToken.json"
           }
         },
@@ -528,6 +545,13 @@
             "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| hostname | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
@@ -556,7 +580,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "./definitions.json#/definitions/GatewayHostnameConfigurationContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/hostnameConfigurations/{hcId}": {
@@ -614,9 +639,9 @@
           "GatewayHostnameConfiguration"
         ],
         "operationId": "GatewayHostnameConfiguration_Get",
-        "description": "Gets the details of the Gateway hostname configuration specified by its identifier.",
+        "description": "Get details of a hostname configuration",
         "x-ms-examples": {
-          "ApiManagementGetGateway": {
+          "ApiManagementGetGatewayHostnameConfiguration": {
             "$ref": "./examples/ApiManagementGetGatewayHostnameConfiguration.json"
           }
         },
@@ -686,10 +711,7 @@
             "$ref": "./apimanagement.json#/parameters/GatewayHostnameConfigurationIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "name": "parameters",
@@ -698,6 +720,12 @@
             "schema": {
               "$ref": "./definitions.json#/definitions/GatewayHostnameConfigurationContract"
             }
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -758,6 +786,9 @@
             "$ref": "./apimanagement.json#/parameters/GatewayHostnameConfigurationIdParameter"
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -766,10 +797,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Hostname configuration was successfully removed from Gateway"
+            "description": "Hostname configuration was successfully removed from Gateway."
           },
           "204": {
-            "description": "Hostname configuration successfully removed by previous request or does not exist in Gateway"
+            "description": "Hostname configuration successfully removed by previous request or does not exist in Gateway."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -803,6 +834,13 @@
             "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
@@ -831,7 +869,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "./definitions.json#/definitions/ApiContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}": {
