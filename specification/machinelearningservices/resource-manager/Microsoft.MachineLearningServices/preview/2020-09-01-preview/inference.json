@@ -34,6 +34,37 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.MachineLearningServices/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Workspaces REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints": {
       "get": {
         "tags": [
@@ -742,6 +773,49 @@
     }
   },
   "definitions": {
+    "Operation": {
+      "description": "Azure Machine Learning workspace REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display name of operation",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.MachineLearningExperimentation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation that users can perform.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "An array of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of AML workspace operations supported by the AML workspace resource provider."
+        }
+      }
+    },
     "InferenceEndpointCheckNameAvailabilityParameter": {
       "properties": {
         "name": {
@@ -950,51 +1024,6 @@
         }
       }
     },
-    "SystemData": {
-      "description": "Specifies system data of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string"
-        },
-        "createdByType": {
-          "type": "string",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "UserTypes",
-            "modelAsString": false
-          }
-        },
-        "createdAt": {
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "UserTypes",
-            "modelAsString": false
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string"
-        }
-      }
-    },
     "InferenceResourceBase": {
       "description": "Azure Resource Manager resource envelope for Inference objects.",
       "x-ms-azure-resource": true,
@@ -1012,14 +1041,6 @@
         "name": {
           "description": "Specifies the name of the resource.",
           "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
           "readOnly": true
         },
         "identity": {
@@ -1251,7 +1272,7 @@
             "Standard_D2_v2"
           ],
           "x-ms-enum": {
-            "name": "allowableSkus",
+            "name": "allowableRequestSkus",
             "modelAsString": true
           },
           "default": "Standard_D2_v2"
