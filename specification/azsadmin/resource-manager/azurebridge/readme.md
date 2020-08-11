@@ -42,21 +42,16 @@ input-file:
 ## Suppression
 ``` yaml
 directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: Activation.json
-    where: $.definitions.Activation.properties.displayName
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: Activation.json
-    where: $.definitions.Activation.properties.azureRegistrationResourceIdentifier
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: Activation.json
-    where: $.definitions.Activation.properties.provisioningState
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: Activation.json
-    where: $.definitions.Activation.properties.marketplaceSyndicationEnabled
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: Activation.json
-    where: $.definitions.Activation.properties.usageReportingEnabled
+    where: $.definitions.ActivationResource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: AzureBridge.json
+    where: $.definitions.DownloadedProductResource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: Product.json
+    where: $.definitions.ProductResource
+  
 ```
 
 ---
