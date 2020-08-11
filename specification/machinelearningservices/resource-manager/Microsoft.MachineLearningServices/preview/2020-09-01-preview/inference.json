@@ -950,6 +950,51 @@
         }
       }
     },
+    "SystemData": {
+      "description": "Specifies system data of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UserTypes",
+            "modelAsString": false
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UserTypes",
+            "modelAsString": false
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string"
+        }
+      }
+    },
     "InferenceResourceBase": {
       "description": "Azure Resource Manager resource envelope for Inference objects.",
       "x-ms-azure-resource": true,
