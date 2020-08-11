@@ -956,6 +956,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SBNamespaceProperties",
           "description": "Properties of the namespace."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
         }
       },
       "allOf": [
@@ -997,10 +1001,6 @@
         "zoneRedundant": {
           "type": "boolean",
           "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones."
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Properties of BYOK Identity description"
         },
         "encryption": {
           "$ref": "#/definitions/Encryption",
@@ -1291,10 +1291,12 @@
       "properties": {
         "principalId": {
           "type": "string",
+          "readOnly": true,
           "description": "ObjectId from the KeyVault"
         },
         "tenantId": {
           "type": "string",
+          "readOnly": true,
           "description": "TenantId from the KeyVault"
         },
         "type": {
