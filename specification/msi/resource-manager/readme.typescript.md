@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-msi"
   output-folder: "$(typescript-sdks-folder)/sdk/msi/arm-msi"
+  clear-output-folder: true
   generate-metadata: true
 ```

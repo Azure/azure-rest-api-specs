@@ -2762,8 +2762,12 @@
           "description": "Preferred batch size in Kilobytes.",
           "type": "integer"
         },
+        "azureActiveDirectoryTenantId": {
+          "description": "The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        },
         "azureActiveDirectoryApplicationIdOrUri": {
-          "description": "The AAD application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
+          "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
           "type": "string"
         }
       }
@@ -3208,26 +3212,26 @@
       "description": "The properties that represent the Service Bus Topic destination of an event subscription.",
       "type": "object",
       "properties": {
-          "resourceId": {
-              "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
-              "type": "string"
-           }
-       }
+        "resourceId": {
+          "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
+          "type": "string"
+        }
+      }
     },
     "ServiceBusTopicEventSubscriptionDestination": {
       "description": "Information about the service bus topic destination for an event subscription.",
       "type": "object",
       "allOf": [
-          {
-              "$ref": "#/definitions/EventSubscriptionDestination"
-          }
+        {
+          "$ref": "#/definitions/EventSubscriptionDestination"
+        }
       ],
       "properties": {
-          "properties": {
-              "$ref": "#/definitions/ServiceBusTopicEventSubscriptionDestinationProperties",
-              "description": "Service Bus Topic Properties of the event subscription destination.",
-              "x-ms-client-flatten": true
-          }
+        "properties": {
+          "$ref": "#/definitions/ServiceBusTopicEventSubscriptionDestinationProperties",
+          "description": "Service Bus Topic Properties of the event subscription destination.",
+          "x-ms-client-flatten": true
+        }
       },
       "x-ms-discriminator-value": "ServiceBusTopic"
     },
@@ -3235,36 +3239,36 @@
       "description": "The properties that represent the Azure Function destination of an event subscription.",
       "type": "object",
       "properties": {
-          "resourceId": {
-              "description": "The Azure Resource Id that represents the endpoint of the Azure Function destination of an event subscription.",
-              "type": "string"
-          },
-          "maxEventsPerBatch": {
-            "format": "int32",
-            "description": "Maximum number of events per batch.",
-            "type": "integer"
-          },
-          "preferredBatchSizeInKilobytes": {
-            "format": "int32",
-            "description": "Preferred batch size in Kilobytes.",
-            "type": "integer"
-          }
+        "resourceId": {
+          "description": "The Azure Resource Id that represents the endpoint of the Azure Function destination of an event subscription.",
+          "type": "string"
+        },
+        "maxEventsPerBatch": {
+          "format": "int32",
+          "description": "Maximum number of events per batch.",
+          "type": "integer"
+        },
+        "preferredBatchSizeInKilobytes": {
+          "format": "int32",
+          "description": "Preferred batch size in Kilobytes.",
+          "type": "integer"
+        }
       }
     },
     "AzureFunctionEventSubscriptionDestination": {
       "description": "Information about the azure function destination for an event subscription.",
       "type": "object",
       "allOf": [
-          {
-              "$ref": "#/definitions/EventSubscriptionDestination"
-          }
+        {
+          "$ref": "#/definitions/EventSubscriptionDestination"
+        }
       ],
       "properties": {
-          "properties": {
-              "$ref": "#/definitions/AzureFunctionEventSubscriptionDestinationProperties",
-              "description": "Azure Function Properties of the event subscription destination.",
-              "x-ms-client-flatten": true
-          }
+        "properties": {
+          "$ref": "#/definitions/AzureFunctionEventSubscriptionDestinationProperties",
+          "description": "Azure Function Properties of the event subscription destination.",
+          "x-ms-client-flatten": true
+        }
       },
       "x-ms-discriminator-value": "AzureFunction"
     },

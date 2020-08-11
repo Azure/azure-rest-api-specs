@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TimeSeriesInsightsClient",
-    "description": "Time Series Insights environment data plane client for PAYG (Preview L1 SKU) environments.",
+    "description": "Time Series Insights environment data plane client for Gen2 (Preview L1 SKU) environments.",
     "version": "2018-11-01-preview"
   },
   "x-ms-parameterized-host": {
@@ -54,6 +54,12 @@
           "AvailabilityGet": {
             "$ref": "./examples/AvailabilityGet.json"
           },
+          "ColdStoreAvailabilityGet": {
+            "$ref": "./examples/ColdStoreAvailabilityGet.json"
+          },
+          "WarmStoreAvailabilityGet": {
+            "$ref": "./examples/WarmStoreAvailabilityGet.json"
+          },
           "AvailabilityGetEmpty": {
             "$ref": "./examples/AvailabilityGetEmpty.json"
           }
@@ -61,6 +67,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "$ref": "#/parameters/ClientRequestId"
@@ -112,11 +121,20 @@
           },
           "EventSchemaGetEmpty": {
             "$ref": "./examples/EventSchemaGetEmpty.json"
+          },
+          "ColdStoreEventSchemaGet": {
+            "$ref": "./examples/ColdStoreEventSchemaGet.json"
+          },
+          "WarmStoreEventSchemaGet": {
+            "$ref": "./examples/WarmStoreEventSchemaGet.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "name": "parameters",
@@ -170,7 +188,7 @@
           "ModelSettings"
         ],
         "operationId": "ModelSettings_Get",
-        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
+        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every Gen2 environment has a model that is automatically created.",
         "x-ms-examples": {
           "ModelSettingsGet": {
             "$ref": "./examples/ModelSettingsGet.json"
@@ -291,8 +309,23 @@
           "QueryAggregateSeriesPage2": {
             "$ref": "./examples/QueryAggregateSeriesPage2.json"
           },
+          "ColdStoreQueryAggregateSeriesPage1": {
+            "$ref": "./examples/ColdStoreQueryAggregateSeriesPage1.json"
+          },
+          "ColdStoreQueryAggregateSeriesPage2": {
+            "$ref": "./examples/ColdStoreQueryAggregateSeriesPage2.json"
+          },
+          "WarmStoreQueryAggregateSeriesPage": {
+            "$ref": "./examples/WarmStoreQueryAggregateSeriesPage.json"
+          },
           "QueryAggregateSeriesWithSampleInterpolation": {
             "$ref": "./examples/QueryAggregateSeriesWithSampleInterpolation.json"
+          },
+          "QueryAggregateSeriesWithCategoricalVariable": {
+            "$ref": "./examples/QueryAggregateSeriesWithCategoricalVariable.json"
+          },
+          "QueryAggregateSeriesWithCategoricalInterpolatedVariable": {
+            "$ref": "./examples/QueryAggregateSeriesWithCategoricalInterpolatedVariable.json"
           },
           "QueryGetEventsPage1": {
             "$ref": "./examples/QueryGetEventsPage1.json"
@@ -305,6 +338,30 @@
           },
           "QueryGetEventsPage4": {
             "$ref": "./examples/QueryGetEventsPage4.json"
+          },
+          "ColdStoreQueryGetEventsPage1": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage1.json"
+          },
+          "ColdStoreQueryGetEventsPage2": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage2.json"
+          },
+          "ColdStoreQueryGetEventsPage3": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage3.json"
+          },
+          "ColdStoreQueryGetEventsPage4": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage4.json"
+          },
+          "WarmStoreQueryGetEventsPage1": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage1.json"
+          },
+          "WarmStoreQueryGetEventsPage2": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage2.json"
+          },
+          "WarmStoreQueryGetEventsPage3": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage3.json"
+          },
+          "WarmStoreQueryGetEventsPage4": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage4.json"
           },
           "QueryGetEventsWithTakePage1": {
             "$ref": "./examples/QueryGetEventsWithTakePage1.json"
@@ -326,11 +383,32 @@
           },
           "QueryGetSeriesWithTakePage2": {
             "$ref": "./examples/QueryGetSeriesWithTakePage2.json"
+          },
+          "ColdStoreQueryGetSeriesPage1": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage1.json"
+          },
+          "ColdStoreQueryGetSeriesPage2": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage2.json"
+          },
+          "ColdStoreQueryGetSeriesPage3": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage3.json"
+          },
+          "WarmStoreQueryGetSeriesPage1": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage1.json"
+          },
+          "WarmStoreQueryGetSeriesPage2": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage2.json"
+          },
+          "WarmStoreQueryGetSeriesPage3": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage3.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "$ref": "#/parameters/ContinuationToken"
@@ -461,7 +539,7 @@
             "$ref": "./examples/InstancesBatchGetByIds.json"
           },
           "InstancesBatchGetByNames": {
-            "$ref": "./examples/InstancesBatchGetByIds.json"
+            "$ref": "./examples/InstancesBatchGetByNames.json"
           },
           "InstancesBatchUpdate": {
             "$ref": "./examples/InstancesBatchUpdate.json"
@@ -1162,7 +1240,7 @@
       ]
     },
     "Interpolation": {
-      "description": "The interpolation operation to be performed on the raw data points. Interpolation is only supported in \"numeric\" variables. Currently, only sampling of interpolated time series is allowed. Allowed aggregate function - eg: left($value). Can be null if no interpolation needs to be applied.",
+      "description": "The interpolation operation to be performed on the raw data points. Currently, only sampling of interpolated time series is allowed. Allowed aggregate function - eg: left($value). Can be null if no interpolation needs to be applied.",
       "type": "object",
       "properties": {
         "kind": {
@@ -1261,6 +1339,76 @@
         "aggregation"
       ]
     },
+    "CategoricalVariable": {
+      "description": "Categorical variable represents signal that needs to be analyzed based on the count or duration of occurrence of limited set of defined values.",
+      "x-ms-discriminator-value": "categorical",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Variable"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Value time series expression is used to represent the value of the signal that is going to be categorized. It can evaluate to only 'String' or 'Long' type for categorical variables.",
+              "$ref": "#/definitions/Tsx"
+            },
+            "interpolation": {
+              "description": "Categorical variable supports only 'step' interpolation.",
+              "$ref": "#/definitions/Interpolation"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TimeSeriesAggregateCategory"
+              }
+            },
+            "defaultCategory": {
+              "$ref": "#/definitions/TimeSeriesDefaultCategory"
+            }
+          }
+        }
+      ],
+      "required": [
+        "kind",
+        "value",
+        "defaultCategory"
+      ]
+    },
+    "TimeSeriesAggregateCategory": {
+      "description": "Category used in categorical variables. A category is defined by 'label' and the 'values' that are assigned this label.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The name of the category which will be used in constructing the output variable names.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of values that a category maps to. Can be either a unique list of string or list of long.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "label",
+        "values"
+      ]
+    },
+    "TimeSeriesDefaultCategory": {
+      "description": "Represents the default category.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The name of the default category which will be assigned to the values that does not match any of those that are defined in the 'categories'.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
     "Variable": {
       "description": "Variables are named calculations over values from the events. Time Series Insights variable definitions contain formula and computation rules. Variables are stored in the type definition in Time Series Model and can be provided inline via Query APIs to override the stored definition.",
       "type": "object",
@@ -1273,9 +1421,6 @@
         "filter": {
           "description": "Filter over the events that restricts the number of events being considered for computation. Example: \"$event.Status.String='Good'\". Optional.",
           "$ref": "#/definitions/Tsx"
-        },
-        "interpolation": {
-          "$ref": "#/definitions/Interpolation"
         }
       },
       "required": [
@@ -1367,8 +1512,7 @@
         },
         "typeId": {
           "description": "This represents the type that this instance belongs to. Never null.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "name": {
           "description": "Optional name of the instance which is unique in an environment. Names acts as a mutable alias or display name of the time series instance. Mutable, may be null.",
@@ -1382,8 +1526,7 @@
           "description": "Set of time series hierarchy IDs that the instance belong to. May be null.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "instanceFields": {
@@ -1525,9 +1668,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. Mutable, not null.",
@@ -1578,8 +1720,7 @@
           "description": "List of IDs of time series types to return or delete.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1663,9 +1804,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique hierarchy identifier that is a immutable GUID. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique hierarchy identifier. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. It is mutable and not null.",
@@ -1719,8 +1859,7 @@
           "description": "List of hierarchy IDs.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1806,8 +1945,7 @@
         "defaultTypeId": {
           "description": "Default type ID of the model that new time series instances will automatically belong to.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -1852,8 +1990,7 @@
         },
         "defaultTypeId": {
           "description": "Default type id of the model that new instances will automatically belong to.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -2072,16 +2209,14 @@
         "typeId": {
           "description": "Represents the type that time series instance which matched the search request belongs to. Never null.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "hierarchyIds": {
           "description": "List of time series hierarchy IDs that time series instance which matched the search request belongs to. Cannot be used to lookup hierarchies. May be null.",
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "highlights": {
@@ -2117,8 +2252,7 @@
               "readOnly": true,
               "type": "array",
               "items": {
-                "type": "string",
-                "format": "uuid"
+                "type": "string"
               }
             },
             "hierarchyNames": {
@@ -2253,7 +2387,8 @@
         "DateTime",
         "Double",
         "String",
-        "TimeSpan"
+        "TimeSpan",
+        "Long"
       ],
       "x-ms-enum": {
         "name": "PropertyTypes",
@@ -2333,6 +2468,14 @@
       "default": "2018-11-01-preview",
       "type": "string",
       "description": "Version of the API to be used with the client request. Currently supported version is \"2018-11-01-preview\"."
+    },
+    "StoreType": {
+      "name": "storeType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "For the environments with warm store enabled, the query can be executed either on the 'WarmStore' or 'ColdStore'. This parameter in the query defines which store the query should be executed on. If not defined, the query will be executed on the cold store."
     },
     "EnvironmentFqdn": {
       "name": "environmentFqdn",

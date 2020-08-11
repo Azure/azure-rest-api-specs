@@ -25,15 +25,57 @@ To see additional help and options, run:
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
+title: CosmosDBManagementClient
 openapi-type: arm
+tag: package-2020-06-preview
 ```
 
-``` yaml
-tag: package-2019-08
+### Tag: package-2020-06-preview
+
+These settings apply only when `--tag=package-2020-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-preview'
+input-file:
+- Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
-``` yaml
-tag: package-2015-04
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2020-04-01/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+- Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2020-03-01/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+- Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-12-12/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
 ### Tag: package-2019-08
@@ -43,6 +85,7 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 ```
 
 ### Tag: package-2019-08-preview
@@ -52,7 +95,9 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
 ### Tag: package-2015-04
@@ -62,6 +107,42 @@ These settings apply only when `--tag=package-2015-04` is specified on the comma
 ``` yaml $(tag) == 'package-2015-04'
 input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+```
+
+### Tag: package-2014-04
+
+These settings apply only when `--tag=package-2014-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-04'
+input-file:
+- Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+```
+
+### Tag: package-2015-11
+
+These settings apply only when `--tag=package-2015-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-11'
+input-file:
+- Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+```
+
+### Tag: package-2016-03-19
+
+These settings apply only when `--tag=package-2016-03-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-19'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+```
+
+### Tag: package-2016-03-31
+
+These settings apply only when `--tag=package-2016-03-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-31'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
 ```
 
 ## Suppression
@@ -127,6 +208,18 @@ directive:
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P99
     reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: PathResourceProviderNamePascalCase
+    from: cosmos-db.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: notebook.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateEndpointConnection.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateLinkResources.json
+    reason: The name of the provider is Microsoft.DocumentDB
 ```
 
 ---
@@ -148,6 +241,24 @@ swagger-to-sdk:
 ```
 
 
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.CosmosDB
+  output-folder: $(csharp-sdks-folder)/cosmosdb/Microsoft.Azure.Management.CosmosDB/src/Generated
+  clear-output-folder: true
+```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -167,9 +278,23 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
 
 ```
 

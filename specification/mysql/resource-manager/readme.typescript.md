@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-mysql"
   output-folder: "$(typescript-sdks-folder)/sdk/mysql/arm-mysql"
+  clear-output-folder: true
   generate-metadata: true
 ```

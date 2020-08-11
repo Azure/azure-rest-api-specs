@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Advisor.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,37 @@ To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2020-01
 ```
 
+### Tag: package-2020-07-preview
 
+These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-preview'
+input-file:
+  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Advisor/stable/2020-01-01/advisor.json
+```
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -57,10 +73,9 @@ input-file:
 - Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -76,7 +91,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
-
 
 ## Python
 
@@ -95,11 +109,13 @@ python:
   package-version: 1.0.1
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -129,7 +145,7 @@ csharp:
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -141,17 +157,18 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+  - $(this-folder)/Microsoft.Advisor/stable/2020-01-01/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-04-19/advisor.json
   - $(this-folder)/Microsoft.Advisor/stable/2017-03-31/advisor.json
   - $(this-folder)/Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

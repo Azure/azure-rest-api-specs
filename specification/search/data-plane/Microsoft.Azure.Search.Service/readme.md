@@ -23,8 +23,18 @@ To see additional help and options, run:
 These are the global settings for SearchServiceClient.
 
 ``` yaml
+opt-in-extensible-enums: true
 openapi-type: data-plane
 tag: package-2019-05
+```
+
+### Tag: package-2019-05-preview
+
+These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-preview'
+input-file:
+- preview/2019-05-06-preview/searchservice.json
 ```
 
 ### Tag: package-2019-05
@@ -90,21 +100,11 @@ input-file:
 - preview/2015-02-28/searchservice.json
 ```
 
-### Tag: track1-package-2019-05
-
-These settings apply only when `--tag=track1-package-2019-05` is specified on the command line.
-It is meant to be used for generating Track 1 .NET SDK only!
-
-``` yaml $(tag) == 'track1-package-2019-05'
-input-file:
-- track1/stable/2019-05-06/searchservice.json
-```
-
 ---
 # Code Generation
 
 !!! READ THIS !!!
-This swagger is not yet ready for languages other than C#.
+This swagger is ready for C# only.
 !!! READ THIS !!!
 
 ## C# 
@@ -168,6 +168,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
   - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/preview/2017-11-11-preview/searchservice.json
   - $(this-folder)/preview/2017-11-11/searchservice.json
@@ -175,7 +176,6 @@ input-file:
   - $(this-folder)/preview/2016-09-01/searchservice.json
   - $(this-folder)/preview/2015-02-28-preview/searchservice.json
   - $(this-folder)/preview/2015-02-28/searchservice.json
-  - $(this-folder)/track1/stable/2019-05-06/searchservice.json
 
 ```
 

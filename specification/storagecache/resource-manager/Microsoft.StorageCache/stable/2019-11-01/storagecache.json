@@ -266,7 +266,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -325,7 +325,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -386,7 +386,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -456,7 +456,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -518,7 +518,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -530,6 +530,10 @@
           },
           "202": {
             "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
+            "schema": {}
+          },
+          "204": {
+            "description": "Cache flushed.",
             "schema": {}
           },
           "default": {
@@ -575,7 +579,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -587,6 +591,10 @@
           },
           "202": {
             "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
+            "schema": {}
+          },
+          "204": {
+            "description": "Restarted VMs associated with the cache.",
             "schema": {}
           },
           "default": {
@@ -632,7 +640,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -644,6 +652,10 @@
           },
           "202": {
             "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
+            "schema": {}
+          },
+          "204": {
+            "description": "Stopped VMs associated with the cache.",
             "schema": {}
           },
           "default": {
@@ -689,7 +701,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -746,7 +758,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -813,7 +825,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -876,7 +888,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -953,7 +965,7 @@
             "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -965,6 +977,10 @@
           },
           "202": {
             "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
+            "schema": {}
+          },
+          "204": {
+            "description": "Cache firmware is up to date.",
             "schema": {}
           },
           "default": {
@@ -1034,6 +1050,7 @@
       "type": "object"
     },
     "CloudError": {
+      "x-ms-external": true,
       "description": "An error response.",
       "properties": {
         "error": {
@@ -1289,7 +1306,7 @@
     },
     "ResourceName": {
       "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
-      "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
       "type": "string"
     },
     "ResourceSku": {
@@ -1417,7 +1434,6 @@
     "StorageTarget": {
       "description": "A storage system being cached by a Cache.",
       "type": "object",
-      "discriminator": "targetType",
       "properties": {
         "name": {
           "description": "Name of the Storage Target.",
@@ -1438,6 +1454,10 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the Storage Target.",
           "type": "object",
+          "discriminator": "targetType",
+          "required": [
+            "targetType"
+          ],
           "properties": {
             "junctions": {
               "description": "List of Cache namespace junctions to target for namespace associations.",

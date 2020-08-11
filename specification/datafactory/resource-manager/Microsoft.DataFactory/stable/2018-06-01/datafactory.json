@@ -255,6 +255,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryFeaturesValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_QueryFeatureValuesByFactory",
+        "x-ms-examples": {
+          "ExposureControl_QueryFeatureValuesByFactory": {
+            "$ref": "./examples/ExposureControl_QueryFeatureValuesByFactory.json"
+          }
+        },
+        "description": "Get list of exposure control features for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlBatchRequest",
+            "description": "The exposure control request for list of features.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -2336,6 +2387,14 @@
             "x-ms-parameter-location": "method"
           },
           {
+            "name": "startFromFailure",
+            "description": "In recovery mode, if set to true, the rerun will start from failed activities. The property will be used only if startActivityName is not specified.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "name": "parameters",
             "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
             "in": "body",
@@ -2602,6 +2661,57 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_QueryByFactory",
+        "x-ms-examples": {
+          "Triggers_QueryByFactory": {
+            "$ref": "./examples/Triggers_QueryByFactory.json"
+          }
+        },
+        "description": "Query triggers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "filterParameters",
+            "description": "Parameters to filter the triggers.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       }
     },
@@ -3039,76 +3149,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}": {
-      "put": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_Create",
-        "x-ms-examples": {
-          "RerunTriggers_Create": {
-            "$ref": "./examples/RerunTriggers_Create.json"
-          }
-        },
-        "description": "Creates a rerun trigger.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "rerunTumblingWindowTriggerActionParameters",
-            "description": "Rerun tumbling window trigger action parameters.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RerunTumblingWindowTriggerActionParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/TriggerResource"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
       "post": {
         "tags": [
-          "rerunTriggers"
+          "triggerruns"
         ],
-        "operationId": "RerunTriggers_Start",
+        "operationId": "TriggerRuns_Cancel",
         "x-ms-examples": {
-          "RerunTriggers_Start": {
-            "$ref": "./examples/RerunTriggers_Start.json"
+          "Triggers_Cancel": {
+            "$ref": "./examples/TriggerRuns_Cancel.json"
           }
         },
-        "description": "Starts a trigger.",
-        "x-ms-long-running-operation": true,
+        "description": "Cancel a single trigger instance by runId.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3123,7 +3175,7 @@
             "$ref": "#/parameters/triggerName"
           },
           {
-            "$ref": "#/parameters/rerunTriggerName"
+            "$ref": "#/parameters/runId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3131,7 +3183,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Trigger has been started successfully."
+            "description": "TriggerRun has been cancelled."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -3139,146 +3191,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/stop": {
-      "post": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_Stop",
-        "x-ms-examples": {
-          "RerunTriggers_Stop": {
-            "$ref": "./examples/RerunTriggers_Stop.json"
-          }
-        },
-        "description": "Stops a trigger.",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Trigger has been stopped successfully."
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/cancel": {
-      "post": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_Cancel",
-        "x-ms-examples": {
-          "RerunTriggers_Cancel": {
-            "$ref": "./examples/RerunTriggers_Cancel.json"
-          }
-        },
-        "description": "Cancels a trigger.",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Trigger has been canceled successfully."
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers": {
-      "get": {
-        "tags": [
-          "rerunTriggers"
-        ],
-        "operationId": "RerunTriggers_ListByTrigger",
-        "x-ms-examples": {
-          "RerunTriggers_ListByTrigger": {
-            "$ref": "./examples/RerunTriggers_ListByTrigger.json"
-          }
-        },
-        "description": "Lists rerun triggers by an original trigger name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/RerunTriggerListResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3800,6 +3712,373 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks": {
+      "get": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_ListByFactory",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_ListByFactory": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListByFactory.json"
+          }
+        },
+        "description": "Lists managed Virtual Networks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}": {
+      "put": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Create": {
+            "$ref": "./examples/ManagedVirtualNetworks_Create.json"
+          }
+        },
+        "description": "Creates or updates a managed Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed Virtual Network entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedVirtualNetwork",
+            "description": "Managed Virtual Network resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT managed Virtual Network operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_Get",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Get": {
+            "$ref": "./examples/ManagedVirtualNetworks_Get.json"
+          }
+        },
+        "description": "Gets a managed Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed Virtual Network entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET managed Virtual Network operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_ListByFactory",
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_ListByFactory": {
+            "$ref": "./examples/ManagedPrivateEndpoints_ListByFactory.json"
+          }
+        },
+        "description": "Lists managed private endpoints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/managedPrivateEndpointListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "put": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "managedPrivateEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Create": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
+          }
+        },
+        "description": "Creates or updates a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed private endpoint entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "description": "Managed private endpoint resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Get": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Get.json"
+          }
+        },
+        "description": "Gets a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed private endpoint entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Delete": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
+          }
+        },
+        "description": "Deletes a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from DELETE managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4217,6 +4496,26 @@
         }
       }
     },
+    "TriggerQueryResponse": {
+      "description": "A query of triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of triggers.",
+          "items": {
+            "$ref": "#/definitions/TriggerResource"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
     "TriggerListResponse": {
       "description": "A list of trigger resources.",
       "type": "object",
@@ -4583,8 +4882,49 @@
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
           "description": "Git repo information of the factory."
+        },
+        "globalParameters": {
+          "$ref": "#/definitions/GlobalParameterDefinitionSpecification",
+          "description": "List of parameters for factory."
         }
       }
+    },
+    "GlobalParameterDefinitionSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/GlobalParameterSpecification"
+      }
+    },
+    "GlobalParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Global Parameter type.",
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "GlobalParameterType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "object",
+          "description": "Value of parameter."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
     },
     "PipelineResource": {
       "description": "Pipeline resource type.",
@@ -4847,6 +5187,20 @@
       "required": [
         "properties"
       ]
+    },
+    "TriggerFilterParameters": {
+      "description": "Query parameters for triggers.",
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results. Null for first page.",
+          "type": "string"
+        },
+        "parentTriggerName": {
+          "description": "The name of the parent TumblingWindowTrigger to get the child rerun triggers",
+          "type": "string"
+        }
+      }
     },
     "RunFilterParameters": {
       "description": "Query parameters for listing runs.",
@@ -5302,71 +5656,6 @@
         "type": "object"
       }
     },
-    "RerunTumblingWindowTriggerActionParameters": {
-      "description": "Rerun tumbling window trigger Parameters.",
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTime": {
-          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "maxConcurrency": {
-          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 50
-        }
-      },
-      "required": [
-        "startTime",
-        "endTime",
-        "maxConcurrency"
-      ]
-    },
-    "RerunTriggerListResponse": {
-      "description": "A list of rerun triggers.",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of rerun triggers.",
-          "items": {
-            "$ref": "#/definitions/RerunTriggerResource"
-          }
-        },
-        "nextLink": {
-          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RerunTriggerResource": {
-      "description": "RerunTrigger resource type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
-          "description": "Properties of the rerun trigger."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
     "OperationListResponse": {
       "description": "A list of operations that can be performed by the Data Factory service.",
       "properties": {
@@ -5588,6 +5877,22 @@
         }
       }
     },
+    "ExposureControlBatchRequest": {
+      "description": "A list of exposure control features.",
+      "type": "object",
+      "required": [
+        "exposureControlRequests"
+      ],
+      "properties": {
+        "exposureControlRequests": {
+          "type": "array",
+          "description": "List of exposure control features.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlRequest"
+          }
+        }
+      }
+    },
     "ExposureControlRequest": {
       "type": "object",
       "description": "The exposure control request.",
@@ -5599,6 +5904,22 @@
         "featureType": {
           "type": "string",
           "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlBatchResponse": {
+      "description": "A list of exposure control feature values.",
+      "type": "object",
+      "required": [
+        "exposureControlResponses"
+      ],
+      "properties": {
+        "exposureControlResponses": {
+          "type": "array",
+          "description": "List of exposure control feature values.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlResponse"
+          }
         }
       }
     },
@@ -5699,8 +6020,8 @@
           "$ref": "#/definitions/LinkedServiceReference"
         },
         "folderPath": {
-          "description": "Folder path for staging blob.",
-          "type": "string"
+          "description": "Folder path for staging blob. Type: string (or Expression with resultType string)",
+          "type": "object"
         }
       }
     },
@@ -5984,6 +6305,80 @@
         "type",
         "referenceName"
       ]
+    },
+    "managedPrivateEndpointListResponse": {
+      "description": "A list of managed private endpoint resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed private endpoints.",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpointResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedPrivateEndpointResource": {
+      "description": "Managed private endpoint resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/ManagedPrivateEndpoint.json#/definitions/ManagedPrivateEndpoint",
+          "description": "Managed private endpoint properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ManagedVirtualNetworkListResponse": {
+      "description": "A list of managed Virtual Network resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed Virtual Networks.",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNetworkResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedVirtualNetworkResource": {
+      "description": "Managed Virtual Network resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/ManagedVirtualNetwork.json#/definitions/ManagedVirtualNetwork",
+          "description": "Managed Virtual Network properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {
@@ -6068,17 +6463,6 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method"
     },
-    "rerunTriggerName": {
-      "name": "rerunTriggerName",
-      "description": "The rerun trigger name.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-      "minLength": 1,
-      "maxLength": 260,
-      "x-ms-parameter-location": "method"
-    },
     "runId": {
       "name": "runId",
       "description": "The pipeline run identifier.",
@@ -6118,6 +6502,28 @@
       "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
       "minLength": 1,
       "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "managedVirtualNetworkName": {
+      "name": "managedVirtualNetworkName",
+      "description": "Managed virtual network name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
+      "x-ms-parameter-location": "method"
+    },
+    "managedPrivateEndpointName": {
+      "name": "managedPrivateEndpointName",
+      "description": "Managed private endpoint name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
       "x-ms-parameter-location": "method"
     },
     "api-version": {

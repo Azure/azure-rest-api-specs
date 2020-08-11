@@ -4,8 +4,10 @@ jobs:
     vmImage: 'Ubuntu 16.04'
   steps:
   - task: Npm@1
-    displayName: 'npm install'
+    displayName: 'npm ci'
     inputs:
+      command: custom
       verbose: false
+      customCommand: ci
   - script: 'npm run tsc && node scripts/modelValidation.js'
     displayName: 'Model Validation'

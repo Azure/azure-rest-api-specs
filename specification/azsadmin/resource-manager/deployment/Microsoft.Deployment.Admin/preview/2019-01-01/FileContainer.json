@@ -1,0 +1,341 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/fileContainers": {
+      "get": {
+        "x-ms-examples": {
+          "Return file containers list.": {
+            "$ref": "./examples/FileContainer/List.json"
+          }
+        },
+        "description": "Returns an array of file containers.",
+        "tags": [
+          "FileContainers"
+        ],
+        "operationId": "FileContainers_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileContainersList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/fileContainers/{fileContainerId}": {
+      "get": {
+        "x-ms-examples": {
+          "Return the file container details.": {
+            "$ref": "./examples/FileContainer/Get.json"
+          }
+        },
+        "description": "Retrieves the specific file container details.",
+        "tags": [
+          "FileContainers"
+        ],
+        "operationId": "FileContainers_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FileContainerIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileContainer"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates a new file container.": {
+            "$ref": "./examples/FileContainer/Create.json"
+          }
+        },
+        "description": "Creates a new file container.",
+        "tags": [
+          "FileContainers"
+        ],
+        "operationId": "FileContainers_Create",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FileContainerParameters"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FileContainerIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileContainer"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Deletes specified file container.": {
+            "$ref": "examples/FileContainer/Delete.json"
+          }
+        },
+        "tags": [
+          "FileContainers"
+        ],
+        "summary": "Deletes specified file container.",
+        "description": "Delete an existing file container.",
+        "operationId": "FileContainers_Delete",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FileContainerIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FileContainer": {
+      "type": "object",
+      "description": "File container entity.",
+      "properties": {
+        "properties": {
+          "description": "File Container properties",
+          "$ref": "#/definitions/FileContainerAdminProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "FileContainerAdminProperties": {
+      "description": "File Container Properties.",
+      "type": "object",
+      "properties": {
+        "fileContainerId": {
+          "description": "File container resource identifier containing product manifest.",
+          "$ref": "#/definitions/FileContainerId"
+        },
+        "sourceUri": {
+          "description": "The remote file location. This is write-only property, DRP never returns it back to a user.",
+          "$ref": "#/definitions/SourceUri"
+        },
+        "uri": {
+          "description": "The file or container Uri. This is read-only property; a user cannot set it.",
+          "type": "string"
+        },
+        "postCopyAction": {
+          "description": "Specifies the file post copy action.",
+          "$ref": "#/definitions/PostCopyAction"
+        },
+        "error": {
+          "description": "The error response message.",
+          "$ref": "#/definitions/ErrorInfo"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "FileContainersList": {
+      "description": "List of file containers.",
+      "properties": {
+        "value": {
+          "description": "List of file containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileContainer"
+          }
+        },
+        "nextLink": {
+          "description": "Continuation token.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorInfo": {
+      "description": "Extended Error Information.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "The detailed error messages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorInfo"
+          }
+        }
+      }
+    },
+    "PostCopyAction": {
+      "description": "Specifies the file post copy action.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Unzip"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PostCopyAction"
+      }
+    },
+    "SourceUri": {
+      "description": "Specifies The remote file location.",
+      "type": "string"
+    },
+    "FileContainerId": {
+      "description": "File container resource identifier containing product manifest.",
+      "type": "string"
+    },
+    "FileContainerParameters": {
+      "description": "Parameters for creating a new file container.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Specifies the file container body",
+          "$ref": "#/definitions/FileContainerBody"
+        }
+      }
+    },
+    "FileContainerBody": {
+      "description": "Body for creating a new file container.",
+      "type": "object",
+      "properties": {
+        "postCopyAction": {
+          "description": "Specifies the file post copy action.",
+          "$ref": "#/definitions/PostCopyAction"
+        },
+        "sourceUri": {
+          "description": "Specifies The remote file location.",
+          "$ref": "#/definitions/SourceUri"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FileContainerIdParameter": {
+      "description": "The file container identifier.",
+      "name": "fileContainerId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FileContainerParameters": {
+      "description": "The parameters required to create a new file container.",
+      "name": "fileContainerParameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/FileContainerParameters"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

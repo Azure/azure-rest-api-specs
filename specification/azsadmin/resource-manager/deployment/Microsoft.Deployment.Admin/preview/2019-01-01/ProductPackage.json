@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages": {
+      "get": {
+        "x-ms-examples": {
+          "Return product packages list.": {
+            "$ref": "./examples/ProductPackage/List.json"
+          }
+        },
+        "description": "Returns an array of product packages.",
+        "tags": [
+          "ProductPackages"
+        ],
+        "operationId": "ProductPackages_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductPackagesList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages/{packageId}": {
+      "get": {
+        "x-ms-examples": {
+          "Return the product package details.": {
+            "$ref": "./examples/ProductPackage/Get.json"
+          }
+        },
+        "description": "Retrieves the specific product package details.",
+        "tags": [
+          "ProductPackages"
+        ],
+        "operationId": "ProductPackages_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductPackage"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates a new product package.": {
+            "$ref": "./examples/ProductPackage/Create.json"
+          }
+        },
+        "description": "Creates a new product package.",
+        "tags": [
+          "ProductPackages"
+        ],
+        "operationId": "ProductPackages_Create",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductPackageParameters"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductPackage"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Removes a product package.": {
+            "$ref": "./examples/ProductPackage/Delete.json"
+          }
+        },
+        "description": "Deletes a product package.",
+        "tags": [
+          "ProductPackages"
+        ],
+        "operationId": "ProductPackages_Delete",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ProductPackage": {
+      "description": "Properties for a product package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a product package.",
+          "$ref": "#/definitions/ProductPackageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ProductPackagesList": {
+      "description": "List of product packages.",
+      "properties": {
+        "value": {
+          "description": "List of product packages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductPackage"
+          }
+        },
+        "nextLink": {
+          "description": "Continuation Token.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductPackageProperties": {
+      "type": "object",
+      "description": "Properties for Product package.",
+      "properties": {
+        "fileContainerId": {
+          "description": "File container resource identifier containing product manifest.",
+          "$ref": "#/definitions/FileContainerId"
+        },
+        "isDeployable": {
+          "description": "Value indicating whether the package is applicable for deployment.",
+          "type": "boolean"
+        },
+        "isUpdatable": {
+          "description": "Value indicating whether the package is applicable for update.",
+          "type": "boolean"
+        },
+        "productDeploymentId": {
+          "description": "The identifier of product deployment; null if this version is not installed.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "FileContainerId": {
+      "description": "File container resource identifier containing product manifest.",
+      "type": "string"
+    },
+    "ProductProperties": {
+      "description": "Additional properties of the product",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The version of the product",
+          "type": "string"
+        }
+      }
+    },
+    "ProductLink": {
+      "description": "Link to a product.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Displayed name of product.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "URI to product.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductLinks": {
+      "description": "List of product links.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ProductLink"
+      }
+    },
+    "ProductPackageParameters": {
+      "description": "Parameters for creating a new product package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Specifies the product package",
+          "$ref": "#/definitions/ProductPackageBody"
+        }
+      }
+    },
+    "ProductPackageBody": {
+      "description": "Body for creating a new product package.",
+      "type": "object",
+      "properties": {
+        "fileContainerId": {
+          "description": "Specifies the file container.",
+          "$ref": "#/definitions/FileContainerId"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ProductPackageParameters": {
+      "description": "The parameters required to create a new product package.",
+      "name": "ProductPackageParameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ProductPackageParameters"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

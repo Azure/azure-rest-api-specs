@@ -1451,6 +1451,24 @@
             "modelAsString": true
           },
           "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1738,6 +1756,24 @@
             "modelAsString": true
           },
           "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "Properties of the storage account."
@@ -1900,6 +1936,24 @@
             "modelAsString": true
           },
           "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -2319,7 +2373,7 @@
             "Lifecycle"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "RuleType",
             "modelAsString": true
           }
         },

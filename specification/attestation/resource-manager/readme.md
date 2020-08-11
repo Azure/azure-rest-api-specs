@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 ## Python
@@ -71,7 +72,13 @@ csharp:
   clear-output-folder: true
 ```
 
+## Go
 
+See configuration in [readme.go.md](./readme.go.md)
+
+## Trenton
+
+See configuration in [readme.trenton.md](./readme.trenton.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-10-01-preview",
+    "subscriptionId": "subid",
+    "service": {
+      "location": "westus",
+      "tags": {
+        "app-name": "My e-commerce app"
+      },
+      "sku": {
+        "name": "standard"
+      },
+      "properties": {
+        "replicaCount": 3,
+        "partitionCount": 1,
+        "hostingMode": "default"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "networkRuleSet": {
+            "endpointAccess": "Public",
+            "ipRules": []
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": []
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "9d1e1f18-2122-4988-a11c-878782e40a5c",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "networkRuleSet": {
+            "endpointAccess": "Public",
+            "ipRules": []
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": []
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "9d1e1f18-2122-4988-a11c-878782e40a5c",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd"
+        }
+      }
+    }
+  }
+}
