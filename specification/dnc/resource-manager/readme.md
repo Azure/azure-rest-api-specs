@@ -93,18 +93,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-DelegatedNetwork
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-v2020_08_08-preview
+  - tag: package-2020-08-08-preview
 ```
 
-### Tag: package-2020_08_08-preview and java
+### Tag: package-2020-08-08-preview and java
 
-These settings apply only when `--tag=package-2020_08_08-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-08-08-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020_08_08-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-08-08-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.DelegatedNetwork.v2020_08_08-preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-v2020_08_08-preview
+  namespace: com.microsoft.azure.management.DelegatedNetwork.2020-08-08-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-2020-08-08-preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -127,7 +127,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DelegatedNetwork/stable/v2020-08-08-preview/DelegatedNetwork.json
+  - $(this-folder)/Microsoft.DelegatedNetwork/stable/2020-08-08-preview/DelegatedNetwork.json
 
 ```
 
