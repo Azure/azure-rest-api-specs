@@ -983,7 +983,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -1039,7 +1039,7 @@
             "$ref": "#/parameters/returnFaceAttributes"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/recognitionModel"
@@ -1093,7 +1093,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -1707,7 +1707,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -2096,7 +2096,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -2516,7 +2516,7 @@
             "$ref": "#/parameters/returnFaceAttributes"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/recognitionModel"
@@ -2573,7 +2573,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -2621,7 +2621,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -2672,7 +2672,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -2720,7 +2720,7 @@
             "$ref": "#/parameters/targetFace"
           },
           {
-            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           },
           {
             "$ref": "#/parameters/detectionModel"
@@ -2755,6 +2755,18 @@
     }
   },
   "definitions": {
+    "ImageUrl": {
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image.",
+          "type": "string"
+        }
+      }
+    },
     "APIError": {
       "type": "object",
       "description": "Error information returned by the API",
@@ -4077,6 +4089,28 @@
     }
   },
   "parameters": {
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "description": "An image stream.",
+      "required": true,
+      "schema": {
+        "format": "file",
+        "type": "object"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true
+    },
     "returnFaceAttributes": {
       "name": "returnFaceAttributes",
       "in": "query",
