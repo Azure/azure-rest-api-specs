@@ -309,6 +309,7 @@
   "definitions": {
     "OperationListResult": {
       "description": "Result of request to list controller operations.It contains a list of operations and a URL link to get the next set of results",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -336,6 +337,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.DelegatedNetwork.",
@@ -351,6 +353,11 @@
               "description": "Operation type: create, get, delete, etc.",
               "type": "string",
               "readOnly": true
+            },
+            "description": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Friendly description for the operation,"
             }
           }
         }
