@@ -13,26 +13,21 @@
         },
         "step": {
           "type": "Docker",
+          "contentPath": "https://github.com/SteveLasker/node-helloworld",
           "imageNames": [
-            "azurerest:testtag1"
+            "testtask:v1"
           ],
-          "dockerFilePath": "src/DockerFile"
+          "dockerFilePath": "DockerFile",
+          "isPushEnabled": true,
+          "noCache": false
         },
         "trigger": {
-          "sourceTriggers": [
-            {
-              "name": "mySourceTrigger",
-              "sourceRepository": {
-                "sourceControlAuthProperties": {
-                  "tokenType": "PAT",
-                  "token": "xxxxx"
-                }
-              },
-              "sourceTriggerEvents": [
-                "commit"
-              ]
-            }
-          ]
+          "baseImageTrigger": {
+            "name": "myBaseImageTrigger",
+            "baseImageTriggerType": "Runtime",
+            "status": "Enabled",
+            "updateTriggerPayloadType": "Default"
+          }
         },
         "credentials": {
           "customRegistries": {
@@ -71,48 +66,19 @@
           },
           "step": {
             "type": "Docker",
+            "contentPath": "https://github.com/SteveLasker/node-helloworld",
             "imageNames": [
-              "azurerest:testtag1"
+              "testtask:v1"
             ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
+            "dockerFilePath": "DockerFile",
             "isPushEnabled": true,
-            "noCache": false,
-            "arguments": [
-              {
-                "name": "mytestargument",
-                "value": "mytestvalue",
-                "isSecret": false
-              }
-            ]
+            "noCache": false
           },
           "trigger": {
-            "timerTriggers": [
-              {
-                "name": "myTimerTrigger",
-                "status": "Enabled",
-                "schedule": "30 9 * * 1-5"
-              }
-            ],
-            "sourceTriggers": [
-              {
-                "name": "mySourceTrigger",
-                "status": "Enabled",
-                "sourceRepository": {
-                  "sourceControlType": "Github",
-                  "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
-                  "branch": "master"
-                },
-                "sourceTriggerEvents": [
-                  "commit"
-                ]
-              }
-            ],
             "baseImageTrigger": {
               "name": "myBaseImageTrigger",
-              "status": "Enabled",
               "baseImageTriggerType": "Runtime",
-              "updateTriggerEndpoint": null,
+              "status": "Enabled",
               "updateTriggerPayloadType": "Default"
             }
           },
@@ -127,11 +93,6 @@
         "name": "myTask",
         "type": "Microsoft.ContainerRegistry/registries/tasks",
         "location": "eastus",
-        "identity": {
-          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
-          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd",
-          "type": "SystemAssigned"
-        },
         "tags": {
           "testkey": "value"
         }
@@ -152,48 +113,19 @@
           },
           "step": {
             "type": "Docker",
+            "contentPath": "https://github.com/SteveLasker/node-helloworld",
             "imageNames": [
-              "azurerest:testtag1"
+              "testtask:v1"
             ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
+            "dockerFilePath": "DockerFile",
             "isPushEnabled": true,
-            "noCache": false,
-            "arguments": [
-              {
-                "name": "mytestargument",
-                "value": "mytestvalue",
-                "isSecret": false
-              }
-            ]
+            "noCache": false
           },
           "trigger": {
-            "timerTriggers": [
-              {
-                "name": "myTimerTrigger",
-                "status": "Enabled",
-                "schedule": "30 9 * * 1-5"
-              }
-            ],
-            "sourceTriggers": [
-              {
-                "name": "mySourceTrigger",
-                "status": "Enabled",
-                "sourceRepository": {
-                  "sourceControlType": "Github",
-                  "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
-                  "branch": "master"
-                },
-                "sourceTriggerEvents": [
-                  "commit"
-                ]
-              }
-            ],
             "baseImageTrigger": {
               "name": "myBaseImageTrigger",
-              "status": "Enabled",
               "baseImageTriggerType": "Runtime",
-              "updateTriggerEndpoint": null,
+              "status": "Enabled",
               "updateTriggerPayloadType": "Default"
             }
           },
@@ -208,11 +140,6 @@
         "name": "myTask",
         "type": "Microsoft.ContainerRegistry/registries/tasks",
         "location": "eastus",
-        "identity": {
-          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
-          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd",
-          "type": "SystemAssigned"
-        },
         "tags": {
           "testkey": "value"
         }

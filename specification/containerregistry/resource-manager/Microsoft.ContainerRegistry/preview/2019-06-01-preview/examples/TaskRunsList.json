@@ -14,16 +14,15 @@
             "properties": {
               "provisioningState": "Succeeded",
               "runRequest": {
-                "type": "EncodedTaskRunRequest",
-                "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
-                "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
-                "values": [],
+                "type": "DockerBuildRequest",
+                "imageNames": ["testtaskrun:v1"],
+                "isPushEnabled": true,
+                "noCache": false,
+                "dockerFilePath": "Dockerfile",
                 "platform": {
                   "os": "Linux",
                   "architecture": "amd64"
-                },
-                "credentials": {},
-                "isArchiveEnabled": true
+                }
               },
               "runResult": {
                 "type": "Microsoft.ContainerRegistry/registries/runs",
