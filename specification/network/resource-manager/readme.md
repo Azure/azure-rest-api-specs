@@ -82,7 +82,9 @@ input-file:
   - Microsoft.Network/stable/2020-05-01/virtualWan.json
   - Microsoft.Network/stable/2020-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-05-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
