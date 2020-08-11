@@ -7523,33 +7523,33 @@
           "type": "integer"
         },
         "eventGroupingSettings": {
-					"$ref": "#/definitions/EventGroupingSettings",
-					"description": "The event grouping settings."
-				}
+          "$ref": "#/definitions/EventGroupingSettings",
+          "description": "The event grouping settings."
+        }
       },
       "type": "object"
     },
     "EventGroupingSettings": {
-			"description": "Event grouping settings property bag.",
-			"properties": {
-				"aggregationKind": {
-					"$ref": "#/definitions/EventGroupingAggregationKind"
-				}
-			},
-			"type": "object"
-		},
-		"EventGroupingAggregationKind": {
-			"description": "The event grouping aggregation kinds",
-			"enum": [
-				"SingleAlert",
-				"AlertPerResult"
-			],
-			"type": "string",
-			"x-ms-enum": {
-				"modelAsString": false,
-				"name": "EventGroupingAggregationKind"
-			}
-		},
+      "description": "Event grouping settings property bag.",
+      "properties": {
+        "aggregationKind": {
+          "$ref": "#/definitions/EventGroupingAggregationKind"
+        }
+      },
+      "type": "object"
+    },
+    "EventGroupingAggregationKind": {
+      "description": "The event grouping aggregation kinds",
+      "enum": [
+        "SingleAlert",
+        "AlertPerResult"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "EventGroupingAggregationKind"
+      }
+    },
     "ScheduledAlertRuleProperties": {
       "allOf": [
         {
