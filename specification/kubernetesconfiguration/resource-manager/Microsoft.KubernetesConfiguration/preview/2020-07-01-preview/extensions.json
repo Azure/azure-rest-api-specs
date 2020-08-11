@@ -473,6 +473,33 @@
         }
       }
     },
+    "ConfigurationIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the system assigned identity which is used by the configuration."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of the system assigned identity which is used by the configuration."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the configuration. Type 'SystemAssigned' will use an implicitly created identity. Type 'None' will not use Managed Identity for the configuraiton.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the managed cluster."
+    },
     "ExtensionInstance": {
       "description": "The Extension Instance object.",
       "properties": {
@@ -540,6 +567,10 @@
               "$ref": "#/definitions/ErrorDefinition"
             }
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ConfigurationIdentity",
+          "description": "The identity of the configuration."
         }
       },
       "allOf": [
@@ -587,6 +618,10 @@
               "$ref": "#/definitions/ExtensionProtectedSettings"
             }
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ConfigurationIdentity",
+          "description": "The identity of the configuration."
         }
       },
       "allOf": [
@@ -651,6 +686,10 @@
               "$ref": "#/definitions/ErrorDefinition"
             }
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ConfigurationIdentity",
+          "description": "The identity of the configuration."
         }
       },
       "allOf": [
