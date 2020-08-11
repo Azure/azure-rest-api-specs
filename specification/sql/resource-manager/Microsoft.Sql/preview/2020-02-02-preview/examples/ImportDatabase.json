@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "databaseName": "testdb",
+    "api-version": "2020-02-02-preview",
+    "parameters": {
+      "storageKeyType": "StorageAccessKey",
+      "storageKey": "+Ce9Tn6QktcX1kFGHUg5sdh54654678bpsE3OM95q5sdfsdfsdyIUu7sdYtR456hgcsRSbFBoH64qB7MA==",
+      "storageUri": "https://test.blob.core.windows.net/test.bacpac",
+      "administratorLogin": "login",
+      "administratorLoginPassword": "password",
+      "authenticationType": "Sql"
+    }
+  },
+    "responses": {
+        "200": {
+            "body": {
+              "properties": {
+                "requestId": "9d9a794a-5cec-4f23-af70-d29511b522a4",
+                "requestType": "Import",
+                "queuedTime": "2/2/2020 8:33:27 PM",
+                "lastModifiedTime": "2/2/2020 8:34:47 PM",
+                "blobUri": "https://test.blob.core.windows.net/test.bacpac",
+                "serverName": "testsvr.database.windows.net",
+                "databaseName": "testdb",
+                "status": "Completed"
+              },
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb/importExportOperationResults/9d9a794a-5cec-4f23-af70-d29511b522a4",
+                "name": "9d9a794a-5cec-4f23-af70-d29511b522a4",
+                "type": "Microsoft.Sql/servers/databases/importExportOperationResults"
+            }
+        },
+        "202": {}
+    }
+}
