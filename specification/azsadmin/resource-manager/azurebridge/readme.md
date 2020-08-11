@@ -51,7 +51,12 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: Product.json
     where: $.definitions.ProductResource
-  
+  - suppress: PathResourceProviderNamePascalCase
+    from: Activation.json
+  - suppress: PathResourceProviderNamePascalCase
+    from: DownloadedProduct.json
+  - suppress: PathResourceProviderNamePascalCase
+    from: Product.json
 ```
 
 ---
