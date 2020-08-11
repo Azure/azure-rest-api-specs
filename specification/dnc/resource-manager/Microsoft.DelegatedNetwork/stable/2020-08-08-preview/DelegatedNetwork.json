@@ -200,9 +200,6 @@
             "$ref": "./examples/delegatedNetworkControllersListBySub.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -238,9 +235,6 @@
           "Get DelegatedNetwork resources by resource group": {
             "$ref": "./examples/delegatedNetworkControllersListByRG.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -447,16 +441,34 @@
       }
     },
     "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error description",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
       "properties": {
         "code": {
-          "description": "Error code",
-          "type": "string"
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
         }
       }
     }
