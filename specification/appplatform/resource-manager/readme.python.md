@@ -25,14 +25,14 @@ batch:
   - tag: package-2019-05-01-preview
 ```
 
-### Tag: package-2020-07-01 and python
+### Tag: package-2020-07 and python
 
 These settings apply only when `--tag=package-2020-07 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-07' && $(python)
 python:
-  namespace: azure.mgmt.appplatform.v2020-07-01
+  namespace: azure.mgmt.appplatform.v2020_07_01
   output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2020_07_01
 ```
 

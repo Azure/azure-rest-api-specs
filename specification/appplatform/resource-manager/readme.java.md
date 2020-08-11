@@ -20,7 +20,7 @@ batch:
   - tag: package-2019-05-01-preview
 ```
 
-### Tag: package-2020-07-01 and java
+### Tag: package-2020-07 and java
 
 These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.

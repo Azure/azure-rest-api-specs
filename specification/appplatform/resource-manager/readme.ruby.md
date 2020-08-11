@@ -18,7 +18,7 @@ batch:
 
 ### Tag: package-2020-07 and ruby
 
-These settings apply only when `--tag=package-2020-07-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2020-07 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2020-07' && $(ruby)
