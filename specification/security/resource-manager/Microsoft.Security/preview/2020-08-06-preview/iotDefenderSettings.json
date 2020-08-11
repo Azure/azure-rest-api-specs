@@ -38,7 +38,7 @@
       "get": {
         "x-ms-examples": {
           "List IoT Defender settings": {
-            "$ref": "./examples/IotDefenderSettings/ListIotDefenderSettings.json"
+            "$ref": "./examples/IotDefenderSettings/List.json"
           }
         },
         "tags": [
@@ -74,7 +74,7 @@
       "get": {
         "x-ms-examples": {
           "Get IoT Defender settings": {
-            "$ref": "./examples/IotDefenderSettings/GetIotDefenderSettings.json"
+            "$ref": "./examples/IotDefenderSettings/Get.json"
           }
         },
         "tags": [
@@ -108,7 +108,7 @@
       "put": {
         "x-ms-examples": {
           "Create or update IoT Defender settings": {
-            "$ref": "./examples/IotDefenderSettings/PutIotDefenderSettings.json"
+            "$ref": "./examples/IotDefenderSettings/Put.json"
           }
         },
         "tags": [
@@ -148,7 +148,7 @@
       "delete": {
         "x-ms-examples": {
           "Delete IoT Defender settings": {
-            "$ref": "./examples/IotDefenderSettings/DeleteIotDefenderSettings.json"
+            "$ref": "./examples/IotDefenderSettings/Delete.json"
           }
         },
         "tags": [
@@ -170,39 +170,6 @@
           },
           "204": {
             "description": "IoT Defender settings does not exist"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings/default/downloadOnPremiseActivation": {
-      "post": {
-        "x-ms-examples": {
-          "Download activation file": {
-            "$ref": "./examples/IotDefenderSettings/DownloadOnPremiseActivation.json"
-          }
-        },
-        "tags": [
-          "IoT Defender Settings"
-        ],
-        "operationId": "IotDefenderSettings_DownloadOnPremiseActivation",
-        "description": "Download on-premise sensors activation file",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Downloaded activation file"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -248,33 +215,7 @@
     "IotDefenderSettingsProperties": {
       "type": "object",
       "description": "IoT Defender settings properties",
-      "properties": {
-        "onPremiseSensors": {
-          "description": "List of on-premise sensors",
-          "readOnly": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OnPremiseSensorProperties"
-          },
-          "example": [
-            {
-              "name": "sensor-1"
-            }
-          ]
-        }
-      }
-    },
-    "OnPremiseSensorProperties": {
-      "type": "object",
-      "description": "On-premise sensor properties",
-      "properties": {
-        "name": {
-          "description": "Name of the sensor",
-          "readOnly": false,
-          "type": "string",
-          "example": "sensor-1"
-        }
-      }
+      "properties": {}
     }
   },
   "parameters": {}
