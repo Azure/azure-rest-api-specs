@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
 ```
 
 ### Tag: package-2019-10-preview
@@ -243,6 +244,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Billing/stable/2020-05-01/billing.json
+  - $(this-folder)/Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
   - $(this-folder)/Microsoft.Billing/preview/2019-10-01-preview/billing.json
   - $(this-folder)/Microsoft.Billing/preview/2018-11-01-preview/billing.json
   - $(this-folder)/Microsoft.Billing/preview/2018-03-01-preview/billing.json

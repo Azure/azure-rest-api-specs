@@ -861,6 +861,15 @@
         }
       ]
     },
+    "AzureFileStorageWriteSettings": {
+      "description": "Azure File Storage write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
     "FormatReadSettings": {
       "description": "Format read settings.",
       "discriminator": "type",
@@ -960,6 +969,14 @@
         "validationMode": {
           "type": "object",
           "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
+        },
+        "detectDataType": {
+          "type": "object",
+          "description": "Indicates whether type detection is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
+        },
+        "namespaces": {
+          "type": "object",
+          "description": "Indicates whether namespace is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
         },
         "namespacePrefixes": {
           "type": "object",
@@ -1551,6 +1568,10 @@
           "type": "object",
           "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
         },
+        "detectDatetime": {
+          "type": "object",
+          "description": "Whether detect primitive values as datetime values. Type: boolean (or Expression with resultType boolean)."
+        },
         "additionalColumns": {
           "type": "array",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
@@ -1962,6 +1983,14 @@
         "baseRequestId": {
           "type": "object",
           "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        },
+        "customRfcReadTableFunctionModule": {
+          "type": "object",
+          "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "sapDataColumnDelimiter": {
+          "type": "object",
+          "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1997,6 +2026,10 @@
         "customRfcReadTableFunctionModule": {
           "type": "object",
           "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "sapDataColumnDelimiter": {
+          "type": "object",
+          "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for SAP table read in parallel.",
@@ -2039,6 +2072,41 @@
         "maxPartitionsNumber": {
           "type": "object",
           "description": "The maximum value of partitions the table will be split into. Type: integer (or Expression with resultType string)."
+        }
+      }
+    },
+    "RestSink": {
+      "description": "A copy activity Rest service Sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "requestInterval": {
+          "type": "object",
+          "description": "The time to await before sending next request, in milliseconds "
+        },
+        "compressionType": {
+          "type": "object",
+          "description": "Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
+        },
+        "wrapRequestJsonInAnObject": {
+          "type": "object",
+          "description": "Wraps Request Array Json into an Object before calling the rest endpoint , Default is false. ex: if true request content sample format is { rows:[]} else the format is []"
         }
       }
     },
@@ -6539,7 +6607,7 @@
         },
         "reportStatusOnCallBack": {
           "type": "object",
-          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
