@@ -307,16 +307,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of operations supported by the Microsoft.DelegatedNetwork resource provider.",
           "readOnly": true,
+          "description": "List of operations supported by the Microsoft.DelegatedNetwork resource provider.",
           "items": {
             "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -329,31 +328,39 @@
           "type": "string",
           "readOnly": true
         },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
         "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.DelegatedNetwork.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: controller, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: create, get, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Friendly description for the operation,"
-            }
-          }
+          "description": "Operation properties display",
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.DelegatedNetwork.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed: controller, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Operation type: create, get, delete, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Friendly description for the operation,"
         }
       }
     },
