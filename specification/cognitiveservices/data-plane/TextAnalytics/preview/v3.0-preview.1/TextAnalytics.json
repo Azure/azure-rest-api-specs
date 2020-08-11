@@ -77,10 +77,16 @@
               "$ref": "#/definitions/EntitiesResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -135,10 +141,16 @@
               "$ref": "#/definitions/EntitiesResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -193,10 +205,16 @@
               "$ref": "#/definitions/EntityLinkingResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -251,10 +269,16 @@
               "$ref": "#/definitions/KeyPhraseResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -309,10 +333,16 @@
               "$ref": "#/definitions/LanguageResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -367,10 +397,16 @@
               "$ref": "#/definitions/SentimentResponse"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
-              "$ref": "#/definitions/TextAnalyticsError"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -433,6 +469,19 @@
           "type": "string",
           "description": "Document Id."
         },
+        "error": {
+          "type": "object",
+          "description": "Document Error.",
+          "$ref": "#/definitions/TextAnalyticsError"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
         "error": {
           "type": "object",
           "description": "Document Error.",
