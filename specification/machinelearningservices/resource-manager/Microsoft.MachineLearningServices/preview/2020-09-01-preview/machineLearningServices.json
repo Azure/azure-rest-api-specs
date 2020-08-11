@@ -1263,11 +1263,7 @@
           "200": {
             "description": "Successfully retrieved the linked workspaces.",
             "schema": {
-              "type": "array",
-              "description": "array of linked workspaces.",
-              "items": {
-                "$ref": "#/definitions/LinkedWorkspace"
-              }
+              "$ref": "#/definitions/PaginatedLinkedWorkspaceList"
             }
           },
           "default": {
@@ -4048,6 +4044,25 @@
         "userAssignedIdentityResourceId": {
           "description": "ResourceId of the user assigned identity for the linked workspace.",
           "type": "string"
+        }
+      }
+    },
+    "PaginatedLinkedWorkspaceList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning Linked Workspace objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of Machine Learning Linked Workspace objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/LinkedWorkspace"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
         }
       }
     },
