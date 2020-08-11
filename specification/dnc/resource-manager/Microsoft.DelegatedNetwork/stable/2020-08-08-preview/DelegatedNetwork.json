@@ -307,6 +307,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "uniqueItems": false,
           "readOnly": true,
           "description": "List of operations supported by the Microsoft.DelegatedNetwork resource provider.",
           "items": {
@@ -328,6 +329,10 @@
           "type": "string",
           "readOnly": true
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "origin": {
           "description": "Origin of the operation",
           "type": "string"
@@ -335,6 +340,10 @@
         "display": {
           "description": "Operation properties display",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -363,6 +372,11 @@
           "description": "Friendly description for the operation,"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
     },
     "Resource": {
       "description": "Represents an instance of an DNC controller resource.",
