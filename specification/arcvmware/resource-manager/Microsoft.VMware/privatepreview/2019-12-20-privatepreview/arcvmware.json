@@ -2875,6 +2875,54 @@
         }
       }
     },
+    "SCSIControllerType": {
+      "description": "Defines the different types of SCSI controllers.",
+      "enum": [
+        "lsilogic",
+        "buslogic",
+        "pvscsi",
+        "lsilogicsas"
+      ],
+      "type": "string"
+    },
+    "VirtualSCSISharing": {
+      "description": "Defines the sharing mode for sharing the SCSI bus.",
+      "enum": [
+        "noSharing",
+        "physicalSharing",
+        "virtualSharing"
+      ],
+      "type": "string"
+    },
+    "VirtualSCSIController": {
+      "description": "This data object type contains the properties of a SCSI controller device attached to a virtual machine that is reported by the controller.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Gets or sets the controller type.",
+          "$ref": "#/definitions/SCSIControllerType"
+        },
+        "controllerKey": {
+          "format": "int32",
+          "description": "Gets or sets the key of the controller.",
+          "type": "integer"
+        },
+        "busNumber": {
+          "format": "int32",
+          "description": "Gets or sets the bus number of the controller.",
+          "type": "integer"
+        },
+        "scsiCtlrUnitNumber": {
+          "format": "int32",
+          "description": "Gets or sets the SCSI controller unit number.",
+          "type": "integer"
+        },
+        "sharing": {
+          "description": "Gets or sets the sharing mode.",
+          "$ref": "#/definitions/VirtualSCSISharing"
+        }
+      }
+    },
     "StorageProfile": {
       "description": "Defines the resource properties.",
       "type": "object",
@@ -2885,6 +2933,14 @@
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           }
+        },
+        "scsiControllers": {
+          "description": "Gets or sets the list of virtual SCSI controllers associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualSCSIController"
+          },
+          "readOnly": true
         }
       }
     },
