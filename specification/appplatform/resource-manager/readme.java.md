@@ -16,16 +16,16 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appplatform
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2020-07-01
+  - tag: package-2020-07
   - tag: package-2019-05-01-preview
 ```
 
 ### Tag: package-2020-07-01 and java
 
-These settings apply only when `--tag=package-2020-07-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-07-01 && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appplatform.v2020_07_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2020_07_01
