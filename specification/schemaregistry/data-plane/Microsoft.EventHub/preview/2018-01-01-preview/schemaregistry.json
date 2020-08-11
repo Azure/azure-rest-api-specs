@@ -132,9 +132,21 @@
           {
             "name": "serialization-type",
             "in": "header",
-            "description": "Serialization type of the registered schema.  Must match serialization type of the specified schema group.",
-            "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Serialization type for the schema being registered.",
+            "enum": ["avro"],
+            "x-ms-enum": {
+              "name": "SerializationType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "avro",
+                  "name": "AVRO",
+                  "description": "Avro Serialization schema type"
+                }
+              ]
+            },
+            "x-nullable": false
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -205,6 +217,25 @@
             "type": "string"
           },
           {
+            "name": "serialization-type",
+            "in": "header",
+            "type": "string",
+            "description": "Serialization type for the schema being registered.",
+            "enum": ["avro"],
+            "x-ms-enum": {
+              "name": "SerializationType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "avro",
+                  "name": "AVRO",
+                  "description": "Avro Serialization schema type"
+                }
+              ]
+            },
+            "x-nullable": false
+          },
+          {
             "name": "schema-content",
             "in": "body",
             "description": "String representation of the schema being registered.",
@@ -212,15 +243,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "serialization-type",
-            "in": "header",
-            "description": "Serialization type for the schema being registered.  Must match serialization type of the specified schema group.",
-            "required": true,
-            "type": "string",
-            "enum": [],
-            "x-nullable": false
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -236,7 +258,7 @@
               },
               "X-Schema-Type": {
                 "type": "string",
-                "descriFption": "Serialization type for the schema being registered."
+                "description": "Serialization type for the schema being registered."
               },
               "X-Schema-Id": {
                 "type": "string",
@@ -279,6 +301,23 @@
     "ServiceErrorResponse": {
       "description": "Error response returned from Azure Schema Registry service.",
       "type": "string"
+    },
+    "SerializationHeaderParameter": {
+      "type": "string",
+      "description": "Serialization type for the schema being registered.",
+      "enum": ["avro"],
+      "x-ms-enum": {
+        "name": "SerializationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "avro",
+            "name": "AVRO",
+            "description": "Avro Serialization schema type"
+          }
+        ]
+      },
+      "x-nullable": false
     }
   },
   "parameters": {
@@ -297,29 +336,6 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
-    },
-    "SerializationHeaderParameter": {
-      "type": "string",
-      "description": "Serialization type for the schema being registered.",
-      "in": "header",
-      "enum": ["avro"],
-      "x-ms-enum": {
-        "name": "QueryType",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "simple",
-            "name": "Simple",
-            "description": "Uses the simple query syntax for searches. Search text is interpreted using a simple query language that allows for symbols such as +, * and \"\". Queries are evaluated across all searchable fields by default, unless the searchFields parameter is specified."
-          },
-          {
-            "value": "full",
-            "name": "Full",
-            "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
-          }
-        ]
-      },
-      "x-nullable": false
     }
   }
 }
