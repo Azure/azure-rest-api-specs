@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2020-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions/{roleDefinitionId}?api-version={api-version}": {
+      "get": {
+        "operationId": "RoleDefinition_GET",
+        "x-ms-examples": {
+          "CosmosDBRBACCreateorUpdate": {
+            "$ref": "./examples/CosmosDBRoleDefinitionGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Role Definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The Role Definition was found.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleAssignmentId - The Role Definition ID '{0}' is not valid. Role Definition ID must be a GUID.\n\n * 404 RoleAssignmentNotFound - The Role Definition '{0}' was not found."
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleDefinition_CreateOrUpdate",
+        "x-ms-examples": {
+          "CosmosDBRBACCreateorUpdate": {
+            "$ref": "./examples/CosmosDBRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "description": "Creates or Updates Azure Cosmos DB Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "The properties required to create a new role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The Role Definition create request was accepted and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleDefinitionId - The Role Definition ID '{0}' is not valid. Role Definition ID must be a GUID.\n\n * 400 RoleDefinitionNameNullOrEmpty - A Role Definition must have a non-empty, unique name.\n\n * 400 InvalidRoleDefinitionType - The Role definition type value '{0}' is not supported. The supported values are 'CustomRole'.\n\n * 400 MissingAssignableScopes - A Role Definition must have at least one assignable scope and all assignable scopes must be neither null nor empty.\n\n * 400 InvalidAssignableScopePrefix - The Assignable Scope prefix '{0}' must correspond to the current database account '{1}'.\n\n * 409 RoleDefinitionWithSameNameExists - A Role Definition cannot be updated with a name that already exists.\n\n * 400 InvalidDataAction - '{0}' does not match any of the data actions supported by the providers."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleDefinition": {
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Role definition.",
+      "properties": {
+        "properties": {
+          "description": "Properties of a role defintion."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "Indicates whether the Role Definition was built-in or user created. Must always be CustomRole or empty."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A set of fully qualified scopes at or below which Role Assignments may be created using this Role Definition. This will allow application of this Role Defintion on the entire database account or any underlying database / collection. Must have atleast one element. Scopes higher than database account are not enforceable as assignable scopes. Note that resources referenced in assignable scopes need not exist."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "The set of operations allowed through this Role Definition."
+        }
+      }
+    },
+    "RoleDefinitionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified GUID of the Role Definition containing the resource path and the ID supplied for this Role Definition during create."
+        },
+        "name": {
+          "type": "string",
+          "description": "The ID supplied for this Role Definition during create."
+        },
+        "type": {
+          "type": "string",
+          "description": "Microsoft.DocumentDB/databaseAccounts/roleDefinitions."
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleDefinition"
+        }
+      },
+      "description": "The response from an accepted create request."
+    },
+    "RoleDefinitionType": {
+      "type": "object",
+      "properties": {
+        "BuiltInRole": {
+          "type": "string",
+          "description": "Indicates that the Role Definition was built-in by the system."
+        },
+        "CustomRole": {
+          "type": "string",
+          "description": "Indicates that the Role Definition was user created."
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "dataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of data plane operations permitted through this Role Definition."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "roleDefinitionIdParameter": {
+      "name": "roleDefinitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The GUID for the Role Definition."
+    },
+    "databaseAccountNameParameter": {
+      "name": "databaseAccountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of Cosmos DB database account."
+    }
+  }
