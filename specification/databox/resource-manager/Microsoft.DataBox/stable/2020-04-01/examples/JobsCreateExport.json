@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg8091",
+    "jobName": "SdkJob6429",
+    "api-version": "2020-04-01",
+    "x-ms-client-request-id": [
+      "80eaafc7-e8b7-4c5a-ad81-b1ecb9573cd4"
+    ],
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.29017.01",
+      "OSName/Windows",
+      "OSVersion/Microsoft.Windows.10.0.18363.",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "1395"
+    ],
+    "jobResource": {
+      "properties": {
+        "transferType": "ExportFromAzure",
+        "details": {
+          "jobDetailsType": "DataBox",
+          "contactDetails": {
+            "contactName": "Public SDK Test",
+            "phone": "1234567890",
+            "phoneExtension": "1234",
+            "emailList": [
+              "testing@microsoft.com"
+            ]
+          },
+          "shippingAddress": {
+            "streetAddress1": "16 TOWNSEND ST",
+            "streetAddress2": "Unit 1",
+            "city": "San Francisco",
+            "stateOrProvince": "CA",
+            "country": "US",
+            "postalCode": "94107",
+            "companyName": "Microsoft",
+            "addressType": "Commercial"
+          },
+          "dataExportDetails": [
+            {
+              "transferConfiguration": {
+                "transferConfigurationType": "TransferAll",
+                "transferAllDetails": {
+                  "include": {
+                    "dataAccountType": "StorageAccount",
+                    "transferAllBlobs": true,
+                    "transferAllFiles": true
+                  }
+                }
+              },
+              "accountDetails": {
+                "dataAccountType": "StorageAccount",
+                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat/providers/Microsoft.Storage/storageAccounts/aaaaaa2"
+              }
+            }
+          ]
+        }
+      },
+      "location": "westus",
+      "sku": {
+        "name": "DataBox"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": ""
+    }
+  }
+}
