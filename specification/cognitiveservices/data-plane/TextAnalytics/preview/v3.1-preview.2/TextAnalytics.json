@@ -64,7 +64,9 @@
             "name": "stringIndexType",
             "in": "query",
             "description": "(Optional) This value indicates the index type for which the offsets have to be returned.",
-            "type": "boolean",
+            "type": "string",
+            "enum" : [ "textelement_v8", "unicodecodepoint", "utf16codeunit" ],
+            "default" : "textelement_v8",
             "required": false
           },
           {
@@ -107,7 +109,7 @@
     },
     "/entities/recognition/pii": {
       "post": {
-        "summary": "Entities containing personal information",
+        "summary": " Named Entity Recognition (NER) and Redaction of Personal Identifiable Information (PII)",
         "description": "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. For the list of supported entity types, check <a href=\"https://aka.ms/tanerpii\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
         "operationId": "EntitiesRecognitionPii",
         "consumes": [
@@ -135,7 +137,9 @@
             "name": "stringIndexType",
             "in": "query",
             "description": "(Optional) This value indicates the index type for which the offsets have to be returned.",
-            "type": "boolean",
+            "type": "string",
+            "enum" : [ "textelement_v8", "unicodecodepoint", "utf16codeunit" ],
+            "default" : "textelement_v8",
             "required": false
           },
           {
@@ -158,7 +162,7 @@
           "200": {
             "description": "A successful call results in a list of entities containing personal information returned for each valid document",
             "schema": {
-              "$ref": "#/definitions/EntitiesResult"
+              "$ref": "#/definitions/PiiResult"
             }
           },
           "400": {
@@ -212,7 +216,9 @@
             "name": "stringIndexType",
             "in": "query",
             "description": "(Optional) This value indicates the index type for which the offsets have to be returned.",
-            "type": "boolean",
+            "type": "string",
+            "enum" : [ "textelement_v8", "unicodecodepoint", "utf16codeunit" ],
+            "default" : "textelement_v8",
             "required": false
           },
           {
@@ -411,7 +417,9 @@
             "name": "stringIndexType",
             "in": "query",
             "description": "(Optional) This value indicates the index type for which the offsets have to be returned.",
-            "type": "boolean",
+            "type": "string",
+            "enum" : [ "textelement_v8", "unicodecodepoint", "utf16codeunit" ],
+            "default" : "textelement_v8",
             "required": false
           },
           {
@@ -990,6 +998,19 @@
         }
       },
       "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
+    },
+    "PiiResult" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/EntitiesResult"
+      }, {
+        "type" : "object",
+        "required" : [ "redactedText" ],
+        "properties" : {
+          "redactedText" : {
+            "type" : "string"
+          }
+        }
+      } ]
     },
     "EntitiesResult": {
       "type": "object",
