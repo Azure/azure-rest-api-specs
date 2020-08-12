@@ -31,7 +31,7 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10-preview
+tag: package-2020-09
 ```
 
 ### Tag: package-2020-09
