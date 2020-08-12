@@ -237,6 +237,68 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "description": "Updates an Inference Endpoint. This call will update an Inference Endpoint if it exists.",
+        "operationId": "MachineLearningInferenceEndpoints_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Or Update Endpoint": {
+            "$ref": "./examples/updateInferenceEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Inference Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointsUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Endpoint creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Inference Endpoint creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/locations/{locationName}/checkNameAvailability": {
@@ -1219,15 +1281,27 @@
         }
       ]
     },
+    "InferenceEndpointsUpdateParameters": {
+      "description": "The parameters for updating an inference endpoint.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
     "InferenceEndpointDeploymentUpdateParameters": {
       "description": "The parameters for updating an inference deployment.",
       "properties": {
         "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "Resource tags."
         },
         "sku": {
           "description": "Information to update the SKU of the deployment.",
