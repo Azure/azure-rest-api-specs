@@ -424,6 +424,19 @@ python:
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_01
 ```
 
+### Tag: package-resources-2019-03 and python
+
+These settings apply only when `--tag=package-resources-2019-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-03'
+namespace: azure.mgmt.resource.resources.v2019_03_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_03_01
+python:
+  namespace: azure.mgmt.resource.resources.v2019_03_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_03_01
+```
+
 ### Tag: package-resources-2018-05 and python
 
 These settings apply only when `--tag=package-resources-2018-05 --python` is specified on the command line.

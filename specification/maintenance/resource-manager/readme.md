@@ -25,6 +25,8 @@ To see additional help and options, run:
 These are the global settings for the Azure Maintenance API.
 
 ``` yaml
+title: MaintenanceClient
+description: Maintenance Client
 openapi-type: arm
 tag: package-preview-2020-07
 ```
@@ -90,33 +92,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.maintenance
-  package-name: azure-mgmt-maintenance
-  package-version: 1.1.0
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/maintenance/azure-mgmt-maintenance/azure/mgmt/maintenance
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/maintenance/azure-mgmt-maintenance
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -138,6 +114,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Maintenance/preview/2020-07-01-preview/Maintenance.json
   - $(this-folder)/Microsoft.Maintenance/stable/2020-04-01/Maintenance.json
   - $(this-folder)/Microsoft.Maintenance/preview/2018-06-01-preview/Maintenance.json
 

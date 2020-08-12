@@ -77,6 +77,7 @@
           }
         },
         "description": "Creates or updates a linked service.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/linkedServiceName"
@@ -107,6 +108,9 @@
             "schema": {
               "$ref": "#/definitions/LinkedServiceResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -171,6 +175,7 @@
           }
         },
         "description": "Deletes a linked service.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/linkedServiceName"
@@ -182,6 +187,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -415,6 +423,7 @@
           }
         },
         "description": "Creates or updates a pipeline.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -445,6 +454,9 @@
             "schema": {
               "$ref": "#/definitions/PipelineResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -509,6 +521,7 @@
           }
         },
         "description": "Deletes a pipeline.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -520,6 +533,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -545,6 +561,7 @@
           }
         },
         "description": "Creates a run of a pipeline.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -592,6 +609,9 @@
             "schema": {
               "$ref": "#/definitions/CreateRunResponse"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -819,6 +839,7 @@
           }
         },
         "description": "Creates or updates a trigger.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/triggerName"
@@ -849,6 +870,9 @@
             "schema": {
               "$ref": "#/definitions/TriggerResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -913,6 +937,7 @@
           }
         },
         "description": "Deletes a trigger.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/triggerName"
@@ -924,6 +949,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -2145,6 +2173,7 @@
           }
         },
         "description": "Creates or updates a Note Book.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/NotebookName"
@@ -2175,6 +2204,9 @@
             "schema": {
               "$ref": "#/definitions/NotebookResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -2239,6 +2271,7 @@
           }
         },
         "description": "Deletes a Note book.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/NotebookName"
@@ -2250,6 +2283,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -4166,6 +4202,78 @@
           "readOnly": true
         }
       }
+    },
+    "SynapseNotebookReference": {
+      "description": "Synapse notebook reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse notebook reference type.",
+          "enum": [
+            "NotebookReference"
+          ],
+          "x-ms-enum": {
+            "name": "NotebookReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference notebook name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SynapseSparkJobReference": {
+      "description": "Synapse spark job reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse spark job reference type.",
+          "enum": [
+            "SparkJobDefinitionReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkJobReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference spark job name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SqlPoolReference": {
+      "description": "SQL pool reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "SQL pool reference type.",
+          "enum": [
+            "SqlPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "SqlPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference SQL pool name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   },
   "parameters": {
