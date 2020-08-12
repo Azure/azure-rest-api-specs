@@ -1,0 +1,135 @@
+{
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "resourceGroupName": "myResourceGroup",
+    "dataCollectionRuleName": "myCollectionRule",
+    "api-version": "2019-11-01-preview",
+    "body": {
+      "tags": {
+        "tag1": "A",
+        "tag2": "B",
+        "tag3": "C"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+        "name": "myCollectionRule",
+        "type": "Microsoft.Insights/dataCollectionRules",
+        "location": "eastus",
+        "tags": {
+          "tag1": "A",
+          "tag2": "B",
+          "tag3": "C"
+        },
+        "properties": {
+          "dataSources": {
+            "performanceCounters": [
+              {
+                "name": "cloudTeamCoreCounters",
+                "streams": [
+                  "Microsoft-Perf"
+                ],
+                "scheduledTransferPeriod": "PT1M",
+                "samplingFrequencyInSeconds": 15,
+                "counterSpecifiers": [
+                  "\\Processor(_Total)\\% Processor Time",
+                  "\\Memory\\Committed Bytes",
+                  "\\LogicalDisk(_Total)\\Free Megabytes",
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length"
+                ]
+              },
+              {
+                "name": "appTeamExtraCounters",
+                "streams": [
+                  "Microsoft-Perf"
+                ],
+                "scheduledTransferPeriod": "PT5M",
+                "samplingFrequencyInSeconds": 30,
+                "counterSpecifiers": [
+                  "\\Process(_Total)\\Thread Count"
+                ]
+              }
+            ],
+            "windowsEventLogs": [
+              {
+                "name": "cloudSecurityTeamEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "scheduledTransferPeriod": "PT1M",
+                "xPathQueries": [
+                  "Security!"
+                ]
+              },
+              {
+                "name": "appTeam1AppEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "scheduledTransferPeriod": "PT5M",
+                "xPathQueries": [
+                  "System![System[(Level = 1 or Level = 2 or Level = 3)]]",
+                  "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
+                ]
+              }
+            ],
+            "syslog": [
+              {
+                "name": "cronSyslog",
+                "streams": [
+                  "Microsoft-Syslog"
+                ],
+                "facilityNames": [
+                  "cron"
+                ],
+                "logLevels": [
+                  "Debug",
+                  "Critical",
+                  "Emergency"
+                ]
+              },
+              {
+                "name": "syslogBase",
+                "streams": [
+                  "Microsoft-Syslog"
+                ],
+                "facilityNames": [
+                  "syslog"
+                ],
+                "logLevels": [
+                  "Alert",
+                  "Critical",
+                  "Emergency"
+                ]
+              }
+            ]
+          },
+          "destinations": {
+            "logAnalytics": [
+              {
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+                "name": "centralWorkspace"
+              }
+            ]
+          },
+          "dataFlows": [
+            {
+              "streams": [
+                "Microsoft-Perf",
+                "Microsoft-Syslog",
+                "Microsoft-WindowsEvent"
+              ],
+              "destinations": [
+                "centralWorkspace"
+              ]
+            }
+          ]
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    }
+  }
+}
