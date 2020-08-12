@@ -532,6 +532,20 @@
         "publicNetworkAccessForQuery": {
           "description": "The network access type for accessing Application Insights query.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "ApplicationInsights",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDiagnosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         }
       },
       "required": [

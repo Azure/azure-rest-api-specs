@@ -31,6 +31,24 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
+### Tag: package-2020-05-preview
+
+These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05-preview'
+input-file:
+- Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
+```
+
+### Tag: package-2020-01-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
+```
+
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
@@ -329,6 +347,16 @@ input-file:
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
+### Tag: package-2019-11-preview-only
+
+These settings apply only when `--tag=package-2019-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
+  - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
+```
+
 ### Tag: package-2019-06-01-only
 
 These settings apply only when `--tag=package-2019-06-01-only` is specified on the command line.
@@ -446,6 +474,7 @@ input-file:
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json 
 ```
 
 
@@ -532,6 +561,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-monitor
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -571,6 +601,14 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+  - suppress: OperationsAPIImplementation
+    from: dataCollectionRules_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: dataCollectionRuleAssociations_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -600,6 +638,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-01-01-preview/managementGroupDiagnosticSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/operations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
