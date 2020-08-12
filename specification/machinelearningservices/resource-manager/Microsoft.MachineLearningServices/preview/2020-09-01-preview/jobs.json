@@ -37,10 +37,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codeJobs/{id}": {
       "put": {
         "tags": [
-          "CodeJob"
+          "CodeJobs"
         ],
         "description": "Creates and executes a CodeJob.",
-        "operationId": "CodeJob_CreateOrUpdate",
+        "operationId": "CodeJobs_CreateOrUpdate",
         "x-ms-examples": {
           "Create or update CodeJob": {
             "$ref": "./examples/createOrUpdateCodeJob.json"
@@ -102,10 +102,10 @@
       },
       "get": {
         "tags": [
-          "CodeJob"
+          "CodeJobs"
         ],
         "description": "Gets a CodeJob by name/id.",
-        "operationId": "CodeJob_Get",
+        "operationId": "CodeJobs_Get",
         "x-ms-examples": {
           "Get CodeJob": {
             "$ref": "./examples/getCodeJob.json"
@@ -152,10 +152,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codeJobs": {
       "get": {
         "tags": [
-          "CodeJob"
+          "CodeJobs"
         ],
         "description": "Lists CodeJobs in the workspace.",
-        "operationId": "CodeJob_List",
+        "operationId": "CodeJobs_List",
         "x-ms-examples": {
           "List CodeJobs": {
             "$ref": "./examples/listCodeJobs.json"
@@ -362,7 +362,7 @@
         }
       }
     },
-    "CodeJob": {
+    "CodeJobProperties": {
       "description": "Code Job definition",
       "type": "object",
       "properties": {
@@ -436,7 +436,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CodeJob"
+          "$ref": "#/definitions/CodeJobProperties"
         }
       }
     },
@@ -498,25 +498,15 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/CodeJob"
+          "$ref": "#/definitions/CodeJobProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "CodeJobResourceArmDtoPaginatedResult": {
       "type": "object",
