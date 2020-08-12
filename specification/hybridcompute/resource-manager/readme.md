@@ -1,13 +1,13 @@
 # HybridCompute
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for HybridCompute RP.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for HybridCompute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,29 @@ To build the SDK for HybridCompute, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
+
 These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-12
+tag: package-2020-08
 ```
 
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08'
+input-file:
+  - Microsoft.HybridCompute/stable/2020-08-15/HybridCompute.json
+```
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.
@@ -55,6 +66,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -72,7 +84,8 @@ swagger-to-sdk:
 ```
 
 ---
-## C# 
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -115,7 +128,6 @@ directive:
     - MachineExtensions_List
 ```
 
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -132,6 +144,7 @@ python:
   package-name: azure-mgmt-hybridcompute
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
@@ -147,6 +160,7 @@ directive:
     - MachineExtensions_Get
     - MachineExtensions_List
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -173,7 +187,6 @@ go:
   clear-output-folder: true
   namespace: hybridcompute
 ```
-
 
 ### Go multi-api
 
@@ -226,7 +239,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -244,11 +257,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
