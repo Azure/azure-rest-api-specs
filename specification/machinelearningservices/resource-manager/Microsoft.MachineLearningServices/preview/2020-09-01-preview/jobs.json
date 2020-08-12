@@ -46,26 +46,18 @@
             "$ref": "./examples/createOrUpdateCodeJob.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/CodeJobIdParameter"
@@ -81,13 +73,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated CodeJob",
-            "schema": {
-              "$ref": "#/definitions/CodeJobResourceArmDto"
-            }
-          },
-          "201": {
-            "description": "Successfully created CodeJob",
+            "description": "Successfully created or updated CodeJob",
             "schema": {
               "$ref": "#/definitions/CodeJobResourceArmDto"
             }
@@ -111,23 +97,18 @@
             "$ref": "./examples/getCodeJob.json"
           }
         },
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/CodeJobIdParameter"
@@ -154,6 +135,9 @@
         "tags": [
           "CodeJobs"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "description": "Lists CodeJobs in the workspace.",
         "operationId": "CodeJobs_List",
         "x-ms-examples": {
@@ -161,26 +145,21 @@
             "$ref": "./examples/listCodeJobs.json"
           }
         },
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "#/parameters/PaginationParameter"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           }
         ],
         "responses": {
@@ -201,44 +180,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "description": "Azure subscription identifier.",
-      "in": "path",
-      "type": "string",
-      "required": true
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "description": "Name of the resource group in which workspace is located.",
-      "in": "path",
-      "type": "string",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "WorkspaceNameParameter": {
-      "name": "workspaceName",
-      "description": "Name of Azure Machine Learning workspace.",
-      "in": "path",
-      "type": "string",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "APIVersionParameter": {
-      "in": "query",
-      "name": "api-version",
-      "type": "string",
-      "description": "Version of Azure Machine Learning resource provider API.",
-      "required": true
-    },
-    "PaginationParameter": {
-      "in": "query",
-      "name": "$skiptoken",
-      "type": "string",
-      "description": "Continuation token for pagination.",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
     "CodeJobIdParameter": {
       "in": "path",
       "name": "id",
@@ -516,9 +457,6 @@
           "items": {
             "$ref": "#/definitions/CodeJobResourceArmDto"
           }
-        },
-        "continuationToken": {
-          "type": "string"
         },
         "nextLink": {
           "type": "string"
