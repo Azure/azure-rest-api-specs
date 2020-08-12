@@ -917,6 +917,9 @@
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/InferenceEndpointDeploymentSku"
+        },
         "properties": {
           "description": "Inference Endpoint Deployment properties.",
           "$ref": "#/definitions/InferenceEndpointDeploymentProperties",
@@ -927,83 +930,75 @@
     "InferenceEndpointDeploymentProperties": {
       "type": "object",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/InferenceEndpointDeploymentSku"
+        "modelId": {
+          "description": "The model Resource Id.",
+          "type": "string",
+          "readOnly": true
         },
-        "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/SkuScaleSettings",
+          "description": "Min, max, and default scale values of the deployment.",
+          "readOnly": true
+        },
+        "weight": {
+          "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceEndpointDeployment:<deployment-name>.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Scaling",
+            "Updating",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "InferenceEndpointDeploymentProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current provisioning state of the Inference Deployment resource."
+        },
+        "environmentConfigId": {
+          "type": "string",
+          "description": "ResourceId of the environment configuration Artifact.",
+          "readOnly": true
+        },
+        "environmentOverrides": {
           "type": "object",
+          "description": "Environment variables that override any default environment variables in the container.",
+          "readOnly": true,
           "properties": {
-            "modelId": {
-              "description": "The model Resource Id.",
-              "type": "string",
-              "readOnly": true
-            },
-            "scaleSettings": {
-              "$ref": "#/definitions/SkuScaleSettings",
-              "description": "Min, max, and default scale values of the deployment.",
-              "readOnly": true
-            },
-            "weight": {
-              "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceEndpointDeployment:<deployment-name>.",
-              "type": "integer",
-              "format": "int32",
-              "minimum": 0
-            },
-            "provisioningState": {
-              "type": "string",
-              "enum": [
-                "Scaling",
-                "Updating",
-                "Creating",
-                "Deleting",
-                "Succeeded",
-                "Failed"
-              ],
-              "x-ms-enum": {
-                "name": "InferenceEndpointDeploymentProvisioningState",
-                "modelAsString": true
-              },
-              "readOnly": true,
-              "description": "The current provisioning state of the Inference Deployment resource."
-            },
-            "environmentConfigId": {
-              "type": "string",
-              "description": "ResourceId of the environment configuration Artifact.",
-              "readOnly": true
-            },
-            "environmentOverrides": {
+            "environmentVariables": {
+              "description": "Contains environment variables defined as key/value pairs.",
               "type": "object",
-              "description": "Environment variables that override any default environment variables in the container.",
-              "readOnly": true,
-              "properties": {
-                "environmentVariables": {
-                  "description": "Contains environment variables defined as key/value pairs.",
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                "startupCommand": {
-                  "description": "Command to start the container.",
-                  "type": "string"
-                }
+              "additionalProperties": {
+                "type": "string"
               }
             },
-            "requestTimeout": {
-              "description": "Length of time before timing out a request to the deployment.",
-              "type": "integer",
-              "format": "int32",
-              "readOnly": true
-            },
-            "codeAssetId": {
-              "description": "Resource Id of the Code Assets i.e. startup code.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
+            "startupCommand": {
+              "description": "Command to start the container.",
+              "type": "string"
             }
           }
+        },
+        "requestTimeout": {
+          "description": "Length of time before timing out a request to the deployment.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "codeAssetId": {
+          "description": "Resource Id of the Code Assets i.e. startup code.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
