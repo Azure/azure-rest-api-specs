@@ -4130,16 +4130,19 @@
       "properties": {
         "snapshotsToKeep": {
           "type": "integer",
-          "description": "Hourly snapshot count to keep"
+          "description": "Hourly snapshot count to keep",
+          "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30"
+          "example": "30",
+          "format": "int32"
         },
         "usedBytes": {
           "type": "integer",
-          "description": "Resource size in bytes, current storage usage for the volume in bytes"
+          "description": "Resource size in bytes, current storage usage for the volume in bytes",
+          "format": "int64"
         }
       }
     },
@@ -4210,7 +4213,8 @@
       "properties": {
         "snapshotsToKeep": {
           "type": "integer",
-          "description": "Monthly snapshot count to keep"
+          "description": "Monthly snapshot count to keep",
+          "format": "int32"
         },
         "daysOfMonth": {
           "type": "string",
@@ -4220,16 +4224,19 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11"
+          "example": "11",
+          "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30"
+          "example": "30",
+          "format": "int32"
         },
         "usedBytes": {
           "type": "integer",
-          "description": "Resource size in bytes, current storage usage for the volume in bytes"
+          "description": "Resource size in bytes, current storage usage for the volume in bytes",
+          "format": "int64"
         }
       }
     },
@@ -4411,7 +4418,7 @@
           "description": "Yearly backups count to keep",
           "format": "int32"
         },
-        "volumesAssigned": {          
+        "volumesAssigned": {
           "type": "integer",
           "description": "Volumes using current backup policy",
           "format": "int32"
