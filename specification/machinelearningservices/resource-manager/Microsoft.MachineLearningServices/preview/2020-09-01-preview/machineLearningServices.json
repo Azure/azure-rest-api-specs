@@ -1238,6 +1238,9 @@
         "tags": [
           "LinkedWorkspaces"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "ListLinkedWorkspaces": {
             "$ref": "./examples/listLinkedWorkspaces.json"
@@ -1263,11 +1266,7 @@
           "200": {
             "description": "Successfully retrieved the linked workspaces.",
             "schema": {
-              "type": "array",
-              "description": "array of linked workspaces.",
-              "items": {
-                "$ref": "#/definitions/LinkedWorkspace"
-              }
+              "$ref": "#/definitions/PaginatedLinkedWorkspaceList"
             }
           },
           "default": {
@@ -1904,7 +1903,7 @@
       "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/MachineLearningResource"
         }
       ],
       "properties": {
@@ -2597,7 +2596,7 @@
         }
       }
     },
-    "Resource": {
+    "MachineLearningResource": {
       "description": "Azure Resource Manager resource envelope.",
       "x-ms-azure-resource": true,
       "properties": {
@@ -2725,7 +2724,7 @@
       "description": "Machine Learning compute object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/MachineLearningResource"
         },
         {
           "type": "object",
@@ -3785,7 +3784,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/MachineLearningResource"
         }
       ],
       "description": "The Private Endpoint Connection resource."
@@ -3889,7 +3888,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/MachineLearningResource"
         }
       ],
       "description": "A private link resource"
@@ -4051,12 +4050,33 @@
         }
       }
     },
+    "PaginatedLinkedWorkspaceList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning Linked Workspace objects wrapped in ARM resource envelope.",
+      "required": [
+        "nextLink"
+      ],
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of Machine Learning Linked Workspace objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/LinkedWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
     "ServiceResource": {
       "type": "object",
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/MachineLearningResource"
         },
         {
           "type": "object",
