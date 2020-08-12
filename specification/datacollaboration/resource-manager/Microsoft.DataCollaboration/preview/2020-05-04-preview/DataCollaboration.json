@@ -3480,7 +3480,7 @@
           "Participant"
         ],
         "summary": "List Participant in a Proposal.",
-        "description": "List Participants Proposals in a Proposal",
+        "description": "List Participants in a Proposal",
         "operationId": "Participants_ListByProposal",
         "parameters": [
           {
@@ -3587,6 +3587,56 @@
         "x-ms-examples": {
           "Participants_Get": {
             "$ref": "./examples/Participants_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/revoke": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Revoke an Active Proposal in a Workspace",
+        "description": "Revoke an Active Proposal in a Workspace.",
+        "operationId": "Proposals_Revoke",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Proposals_Revoke": {
+            "$ref": "./examples/Proposals_Revoke.json"
           }
         }
       }
@@ -4725,7 +4775,8 @@
           "description": "The status of the invitation.",
           "enum": [
             "Pending",
-            "Rejected"
+            "Rejected",
+            "Accepted"
           ],
           "type": "string",
           "readOnly": true,
@@ -5286,7 +5337,8 @@
           "description": "The status of the invitation.",
           "enum": [
             "Pending",
-            "Rejected"
+            "Rejected",
+            "Accepted"
           ],
           "type": "string",
           "readOnly": true,
