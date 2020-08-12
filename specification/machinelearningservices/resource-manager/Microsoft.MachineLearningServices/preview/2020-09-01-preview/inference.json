@@ -1222,6 +1222,13 @@
     "InferenceEndpointDeploymentUpdateParameters": {
       "description": "The parameters for updating an inference deployment.",
       "properties": {
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "sku": {
           "description": "Information to update the SKU of the deployment.",
           "$ref": "#/definitions/InferenceEndpointDeploymentSku"
