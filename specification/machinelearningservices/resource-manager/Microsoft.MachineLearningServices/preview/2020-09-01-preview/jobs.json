@@ -498,15 +498,25 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/CodeJob"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "CodeJobResourceArmDtoPaginatedResult": {
       "type": "object",
