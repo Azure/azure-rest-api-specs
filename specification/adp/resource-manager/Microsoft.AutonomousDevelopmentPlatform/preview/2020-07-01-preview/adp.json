@@ -197,6 +197,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_Update",
+        "x-ms-long-running-operation": true,
         "description": "Updates the properties of an existing ADP account.",
         "parameters": [
           {
@@ -216,13 +217,19 @@
             "name": "parameters",
             "description": "The parameters to provide for the current ADP account.",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountPatch"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "The resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -246,6 +253,7 @@
         ],
         "operationId": "Accounts_CreateOrUpdate",
         "description": "Creates or updates an ADP account.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -275,6 +283,12 @@
               "$ref": "#/definitions/Account"
             }
           },
+          "201": {
+            "description": "The resource will be updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -294,6 +308,7 @@
         ],
         "operationId": "Accounts_Delete",
         "description": "Deletes an ADP account.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -311,6 +326,9 @@
         "responses": {
           "200": {
             "description": "The ADP account was successfully deleted."
+          },
+          "201": {
+            "description": "The ADP account will be deleted asynchronously."
           },
           "204": {
             "description": "The ADP account does not exist."
@@ -446,7 +464,7 @@
             "name": "parameters",
             "description": "The parameters to provide for the Data Pool.",
             "schema": {
-              "$ref": "#/definitions/DataPool"
+              "$ref": "#/definitions/DataPoolPatch"
             }
           }
         ],
@@ -584,6 +602,23 @@
     }
   },
   "definitions": {
+    "Tags": {
+      "description": "Resource tags",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
     "Account": {
       "description": "An ADP account.",
       "type": "object",
@@ -594,18 +629,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccountProperties"
         },
-        "tags": {
-          "description": "Resource tags.",
-          "$ref": "#/definitions/Tags"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        },
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
@@ -614,7 +637,24 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountPatch": {
+      "description": "An ADP account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "List of account properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccountProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tags"
         }
       ]
     },
@@ -641,11 +681,6 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "description": "The list operation response, that contains the data pools and their properties."
@@ -658,15 +693,6 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataPoolProperties"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "$ref": "#/definitions/Tags"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -675,19 +701,23 @@
         }
       ]
     },
-    "Tags": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
+    "DataPoolPatch": {
+      "description": "An ADP Data Pool.",
+      "properties": {
+        "properties": {
+          "description": "List of data pool properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataPoolBaseProperties"
+        }
       },
-      "x-ms-mutability": [
-        "read",
-        "create",
-        "update"
-      ],
-      "description": "Resource tags."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
-    "DataPoolProperties": {
+    "DataPoolBaseProperties": {
       "description": "Data Pool properties",
       "properties": {
         "dataPoolId": {
@@ -698,13 +728,33 @@
         "locations": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/DataPoolLocation"
           },
           "description": "Gets or sets the collection of locations where Data Pool resources should be created."
         }
-      },
+      }
+    },
+    "DataPoolProperties": {
+      "description": "Data Pool properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataPoolBaseProperties"
+        }
+      ],
       "required": [
         "locations"
+      ]
+    },
+    "DataPoolLocation": {
+      "description": "Location of a Data Pool",
+      "properties": {
+        "name": {
+          "description": "The location name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "DataPoolList": {
@@ -720,48 +770,169 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "description": "The list operation response, that contains the data pools and their properties."
     },
     "Operation": {
-      "description": "REST API operation",
+      "description": "Operation detail payload",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
+          "description": "Name of the operation",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "Provider": {
-              "description": "Service provider: Microsoft.ResourceProvider",
-              "type": "string"
-            },
-            "Resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "Operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            },
-            "Description": {
-              "description": "Description of operation",
-              "type": "string"
-            }
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Additional details about an operation.",
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "serviceSpecification": {
+          "description": "Details about a service operation.",
+          "$ref": "#/definitions/OperationServiceSpecification"
+        }
+      }
+    },
+    "OperationServiceSpecification": {
+      "description": "Details about a service operation.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Details about operations related to logs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Details about operations related to metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecification"
           }
         }
       }
     },
+    "OperationLogSpecification": {
+      "description": "Details about an operation related to logs.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the log category.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized display name.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blobs created in the customer storage account, per hour.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetricSpecification": {
+      "description": "Details about an operation related to metrics.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the metric.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized display name of the metric.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "The description of the metric.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit that the metric is measured in.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "The type of metric aggregation.",
+          "type": "string"
+        },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "string"
+        },
+        "sourceMdmAccount": {
+          "description": "The name of the MDM account.",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "The name of the MDM namespace.",
+          "type": "string"
+        },
+        "availabilities": {
+          "description": "Defines how often data for metrics becomes available.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricAvailability"
+          }
+        }
+      }
+    },
+    "OperationMetricAvailability": {
+      "description": "Defines how often data for a metric becomes available.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "The granularity for the metric.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob created in the customer storage account, per hour.",
+          "type": "string"
+        }
+      }
+    },
     "OperationListResult": {
-      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Available operations of the service.",
       "properties": {
         "value": {
           "type": "array",
@@ -773,11 +944,6 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -821,6 +987,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the ADP account.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*",
+      "maxLength": 50,
       "x-ms-parameter-location": "method"
     },
     "DataPoolNameParameter": {
@@ -829,6 +997,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the Data Pool.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*",
+      "maxLength": 50,
       "x-ms-parameter-location": "method"
     }
   }
