@@ -106,6 +106,14 @@ These settings apply only when `--tag=package-2019-11-01` is specified on the co
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
 ```
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06-01'
+input-file:
+  - Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
+```
 
 ## Suppression
  ``` yaml
