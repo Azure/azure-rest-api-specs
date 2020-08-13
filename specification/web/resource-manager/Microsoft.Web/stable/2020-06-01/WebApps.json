@@ -17117,6 +17117,12 @@
             "type": "string"
           },
           {
+            "name": "additionalFlags",
+            "description": "Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -21726,6 +21732,64 @@
         }
       }
     },
+    "GitHubActionCodeConfiguration": {
+      "description": "The GitHub action code configuration.",
+      "type": "object",
+      "properties": {
+        "runtimeStack": {
+          "description": "Runtime stack is used to determine the workflow file content for code base apps.",
+          "type": "string"
+        },
+        "runtimeVersion": {
+          "description": "Runtime version is used to determine what build version to set in the workflow file.",
+          "type": "string"
+        }
+      }
+    },
+    "GitHubActionConfiguration": {
+      "description": "The GitHub action configuration.",
+      "type": "object",
+      "properties": {
+        "codeConfiguration": {
+          "$ref": "#/definitions/GitHubActionCodeConfiguration",
+          "description": "GitHub Action code configuration."
+        },
+        "containerConfiguration": {
+          "$ref": "#/definitions/GitHubActionContainerConfiguration",
+          "description": "GitHub Action container configuration."
+        },
+        "isLinux": {
+          "description": "This will help determine the workflow configuration to select.",
+          "type": "boolean"
+        },
+        "generateWorkflowFile": {
+          "description": "Workflow option to determine whether the workflow file should be generated and written to the repository.",
+          "type": "boolean"
+        }
+      }
+    },
+    "GitHubActionContainerConfiguration": {
+      "description": "The GitHub action container configuration.",
+      "type": "object",
+      "properties": {
+        "serverUrl": {
+          "description": "The server URL for the container registry where the build will be hosted.",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "The image name for the build.",
+          "type": "string"
+        },
+        "username": {
+          "description": "The username used to upload the image to the container registry.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password used to upload the image to the container registry.",
+          "type": "string"
+        }
+      }
+    },
     "GlobalValidation": {
       "type": "object",
       "allOf": [
@@ -24470,6 +24534,10 @@
                 "create",
                 "read"
               ]
+            },
+            "gitHubActionConfiguration": {
+              "$ref": "#/definitions/GitHubActionConfiguration",
+              "description": "If GitHub Action is selected, than the associated configuration."
             }
           },
           "x-ms-client-flatten": true

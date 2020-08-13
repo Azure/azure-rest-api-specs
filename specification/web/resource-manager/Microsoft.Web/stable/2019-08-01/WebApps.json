@@ -17019,6 +17019,7 @@
           },
           {
             "name": "additionalFlags",
+            "description": "Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.",
             "in": "query",
             "type": "string"
           },
@@ -17046,6 +17047,75 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the source control configuration of an app.",
+        "description": "Description for Updates the source control configuration of an app.",
+        "operationId": "WebApps_UpdateSourceControlSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteSourceControl",
+            "in": "body",
+            "description": "JSON representation of a SiteSourceControl object. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the source control configuration for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated source control for web app.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/start": {
       "post": {
@@ -18713,6 +18783,7 @@
           },
           {
             "name": "additionalFlags",
+            "description": "Comma separated flags to be considered during delete operations. E.g. 'ScmGitHubActionSkipWorkflowDelete' will delete the GitHub Action workflow file from GitHub repo.",
             "in": "query",
             "type": "string"
           },
@@ -24433,5 +24504,4 @@
       ]
     }
   ]
-}
 }
