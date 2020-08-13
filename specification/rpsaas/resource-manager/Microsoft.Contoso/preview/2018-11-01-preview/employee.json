@@ -82,6 +82,29 @@
           }
         }
       },
+      "delete": {
+        "description": "Deletes employee resource for a given name.",
+        "operationId": "Employee_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the employee details."
+          }
+        }
+      },
       "put": {
         "description": "Create or update employee resource.",
         "operationId": "Employee_CreateAndUpdate",
