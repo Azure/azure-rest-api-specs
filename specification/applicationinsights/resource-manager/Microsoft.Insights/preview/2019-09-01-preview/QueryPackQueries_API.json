@@ -421,27 +421,30 @@
           "description": "Body of the query."
         },
         "related": {
-          "categories": {
-            "description": "Categories associated with the query.",
-            "type": "array",
-            "items": {
-              "type": "string"
+          "type": "object",
+          "properties": {
+            "categories": {
+              "description": "Categories associated with the query.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "resourceTypes": {
+              "description": "Resource Types associated with the query.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "solutions": {
+              "description": "Solutions associated with the query.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
-          },
-          "resourceTypes": {
-            "description": "Resource Types associated with the query.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "solutions": {
-            "description": "solutions associated with the query.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+          } 
         },
         "tags": {
           "description": "Tags associated with the query.",
