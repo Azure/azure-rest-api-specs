@@ -65,6 +65,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stream_analytics']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js streamanalytics/resource-manager
 ```
 
 
@@ -150,6 +153,10 @@ directive:
     from: subscriptions.json
     reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

@@ -1079,6 +1079,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js web/resource-manager
 ```
 
 ## Go
@@ -1216,6 +1219,10 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

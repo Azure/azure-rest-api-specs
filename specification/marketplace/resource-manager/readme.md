@@ -60,6 +60,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js marketplace/resource-manager
 ```
 
 ## C#
@@ -75,6 +78,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/marketplace/Microsoft.Azure.Management.Marketplace/src/Generated
   clear-output-folder: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
