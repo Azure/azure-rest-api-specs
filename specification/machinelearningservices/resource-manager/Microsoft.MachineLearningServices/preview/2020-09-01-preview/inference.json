@@ -877,11 +877,6 @@
                 }
               ],
               "readOnly": true
-            },
-            "identity": {
-              "$ref": "machineLearningServices.json#/definitions/Identity",
-              "description": "The identity of the resource.",
-              "readOnly": true
             }
           }
         }
@@ -900,6 +895,11 @@
           "description": "Inference Endpoint properties.",
           "$ref": "#/definitions/InferenceEndpointProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "machineLearningServices.json#/definitions/Identity",
+          "description": "The identity of the resource.",
+          "readOnly": true
         }
       }
     },
@@ -1261,18 +1261,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/InferenceSku"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "capacity": {
-              "description": "Current number of instances assigned to the resource.",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "capacity": {
+          "description": "Current number of instances assigned to the resource.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "InferenceEndpointsUpdateParameters": {
       "description": "The parameters for updating an inference endpoint.",
