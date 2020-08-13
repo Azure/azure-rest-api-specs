@@ -508,6 +508,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js containerservice/resource-manager
 ```
 
 ## C#
@@ -544,6 +547,10 @@ directive:
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
