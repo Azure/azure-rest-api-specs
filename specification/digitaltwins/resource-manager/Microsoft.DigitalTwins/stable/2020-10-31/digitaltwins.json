@@ -211,9 +211,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
-          },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
             "schema": {
@@ -410,9 +407,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
-          },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
             "schema": {
@@ -498,7 +492,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DigitalTwinsInstances in the resource group.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DigitalTwinsInstances in the resource group. If more data is available, the body will contain a link to the next page of items (nextLink).",
             "schema": {
               "$ref": "#/definitions/DigitalTwinsDescriptionListResult"
             }
@@ -1049,14 +1043,15 @@
         },
         "message": {
           "type": "string",
+          "x-nullable": true,
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
         },
         "reason": {
           "type": "string",
+          "x-nullable": true,
           "enum": [
-            "NameIsAvailable",
-            "NameConflict",
-            "InvalidName"
+            "Invalid",
+            "AlreadyExists"
           ],
           "x-ms-enum": {
             "name": "reason",
