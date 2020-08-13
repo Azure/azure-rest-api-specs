@@ -4362,24 +4362,31 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionname}/learnedRoutes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes": {
       "post": {
-        "operationId": "VirtualHubBgpConnections_GetLearnedRoutes",
-        "description": "Retrieves a list of routes the virtual router peer has learned.",
+        "operationId": "VirtualHubBgpConnections_ListLearnedRoutes",
+        "description": "Retrieves a list of routes the virtual hub bgp connection has learned.",
         "parameters": [
           {
-            "name": "virtualRouterName",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual router."
+            "description": "The name of the resource group."
           },
           {
-            "name": "peerName",
+            "name": "hubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual router peer."
+            "description": "The name of the virtual hub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual hub bgp connection."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -4392,7 +4399,7 @@
           "200": {
             "description": "List of advertised BGP routes.",
             "schema": {
-              "$ref": "#/definitions/PeerRouteList"
+              "$ref": "#/definitions/LearnedRouteList"
             }
           },
           "202": {
@@ -4406,8 +4413,8 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualRouterPeerLearnedRoutes": {
-            "$ref": "./examples/VirtualRouterPeerLearnedRouteGet.json"
+          "VirtualRouterPeerListLearnedRoutes": {
+            "$ref": "./examples/VirtualRouterPeerListLearnedRoute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4416,24 +4423,31 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionname}/advertisedRoutes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes": {
       "post": {
-        "operationId": "VirtualHubBgpConnections_GetAdvertisedRoutes",
-        "description": "Retrieves a list of routes the virtual router peer is advertising to the specified peer.",
+        "operationId": "VirtualHubBgpConnections_ListAdvertisedRoutes",
+        "description": "Retrieves a list of routes the virtual hub bgp connection is advertising to the specified peer.",
         "parameters": [
           {
-            "name": "virtualRouterName",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual router."
+            "description": "The name of the resource group."
           },
           {
-            "name": "peerName",
+            "name": "hubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual router peer."
+            "description": "The name of the virtual hub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual hub bgp connection."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -4446,7 +4460,7 @@
           "200": {
             "description": "List of learned BGP routes.",
             "schema": {
-              "$ref": "#/definitions/PeerRouteListResult"
+              "$ref": "#/definitions/AdvertisedRouteList"
             }
           },
           "202": {
@@ -4460,8 +4474,8 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualRouterPeerAdvertisedRoutes": {
-            "$ref": "./examples/VirtualRouterPeerAdvertisedRouteGet.json"
+          "VirtualRouterPeerListAdvertisedRoutes": {
+            "$ref": "./examples/VirtualRouterPeerListAdvertisedRoute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -5450,7 +5464,55 @@
       },
       "description": "Properties of the bgp connection."
     },
-    "PeerRoute": {
+    "AdvertisedRoute": {
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The peer's local address."
+        },
+        "network": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's network prefix."
+        },
+        "nextHop": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's next hop."
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The source this route was learned from."
+        },
+        "asPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's AS path sequence."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The route's weight."
+        }
+      },
+      "description": "Peer advertised routing details."
+    },
+    "AdvertisedRouteList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvertisedRoute"
+          },
+          "description": "List of peer advertised routes."
+        }
+      },
+      "description": "List of virtual router peer advertised routes."
+    },
+    "LearnedRoute": {
       "properties": {
         "localAddress": {
           "type": "string",
@@ -5489,19 +5551,19 @@
           "description": "The route's weight."
         }
       },
-      "description": "Peer routing details."
+      "description": "Peer learned routing details."
     },
-    "PeerRouteList": {
+    "LearnedRouteList": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PeerRoute"
+            "$ref": "#/definitions/LearnedRoute"
           },
-          "description": "List of peer routes."
+          "description": "List of peer learned routes."
         }
       },
-      "description": "List of virtual router peer routes."
+      "description": "List of virtual router peer learned routes."
     },
     "HubIpConfiguration": {
       "properties": {

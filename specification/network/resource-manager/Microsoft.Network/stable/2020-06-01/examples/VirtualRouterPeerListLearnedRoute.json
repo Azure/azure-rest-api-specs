@@ -1,14 +1,16 @@
 {
   "parameters": {
     "api-version": "2020-06-01",
-    "virtualRouterName": "virtualRouter1",
-    "peerName": "peer1"
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "hubName": "virtualRouter1",
+    "connectionName": "peer1"
   },
   "responses": {
     "202": {},
     "200": {
       "body": {
-        "VirtualRouter_0": [
+        "value": [
           {
             "localAddress": "10.85.3.4",
             "network": "10.101.0.0/16",
@@ -17,9 +19,7 @@
             "origin": "EBgp",
             "asPath": "65002-65001",
             "weight": 32768
-          }
-        ],
-        "VirtualRouter_1": [
+          },
           {
             "localAddress": "10.85.3.5",
             "network": "10.101.0.0/16",
