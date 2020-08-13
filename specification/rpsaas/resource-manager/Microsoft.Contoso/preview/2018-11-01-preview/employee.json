@@ -3,7 +3,7 @@
   "info": {
     "title": "ContosoManagementClient",
     "description": "Contoso provider",
-    "version": "2019-01-01"
+    "version": "2018-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": ["https"],
@@ -704,6 +704,19 @@
           },
           "required": ["firstName", "lastName", "group", "likesTea"],
           "type": "object"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       }
     },
