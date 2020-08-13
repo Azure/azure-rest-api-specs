@@ -991,7 +991,7 @@
       "type": "object",
       "properties": {
         "modelIds": {
-          "description": "The array of model Resource Ids.",
+          "description": "The array of model resource Ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1050,12 +1050,6 @@
               "type": "string"
             }
           }
-        },
-        "requestTimeout": {
-          "description": "Length of time before timing out a request to the deployment.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
         },
         "codeAssetId": {
           "description": "Resource Id of the Code Assets i.e. startup code.",
@@ -1316,6 +1310,43 @@
           "description": "The weight of the deployment for load balancing.",
           "type": "integer",
           "format": "int32"
+        },
+        "modelIds": {
+          "description": "The array of model resource Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "environmentConfigId": {
+          "type": "string",
+          "description": "Resource Id of the Environment Configuration artifact."
+        },
+        "environmentOverrides": {
+          "type": "object",
+          "description": "Environment variables that override any default environment variables in the container.",
+          "properties": {
+            "environmentVariables": {
+              "description": "Contains environment variables defined as key/value pairs.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "startupCommand": {
+              "description": "Command to start the container.",
+              "type": "string"
+            }
+          }
+        },
+        "codeAssetId": {
+          "description": "Resource Id of the Code Assets i.e. startup code.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
