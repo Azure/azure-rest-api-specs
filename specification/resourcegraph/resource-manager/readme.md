@@ -84,6 +84,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-trenton
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js resourcegraph/resource-manager
 ```
 
 ## C#
@@ -128,6 +131,10 @@ directive:
     from: resourcegraph.json
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
