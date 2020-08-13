@@ -540,6 +540,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlComputeTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/RecommendedParameter"
           }
         ],
         "responses": {
@@ -549,6 +555,9 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "List VM Sizes": {
@@ -1739,6 +1748,21 @@
       "description": "Category of the workspace connection.",
       "required": false,
       "x-ms-parameter-location": "method"
+    },
+    "AmlComputeTypeParameter": {
+      "in": "query",
+      "name": "computeType",
+      "type": "string",
+      "enum": [ "ComputeInstance", "AmlCompute", "InferenceEndpoint" ],
+      "description": "Specifies the compute type",
+      "required": false
+    },
+    "RecommendedParameter": {
+      "in": "query",
+      "name": "recommended",
+      "type": "boolean",
+      "description": "Specifies whether to return recommended vm sizes or all vm sizes",
+      "required": false
     }
   },
   "definitions": {
@@ -2160,6 +2184,15 @@
           "title": "Premium IO supported",
           "description": "Specifies if the virtual machine size supports premium IO.",
           "readOnly": true
+        },
+        "supportedComputeTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [ "ComputeInstance", "AmlCompute", "InferenceEndpoint" ]
+          },
+          "title": "Supported Compute Types",
+          "description": "Specifies the compute types supported by the virtual machine size."
         }
       },
       "description": "Describes the properties of a VM size."
