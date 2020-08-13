@@ -521,56 +521,49 @@
       }
     },
     "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "description": "Read only system data",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "createdBy": {
           "type": "string",
-          "description": "The identity that created the resource."
+          "description": "An identifier for the identity that created the resource"
         },
         "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
+          "description": "The timestamp of resource creation (UTC)"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The identity that last modified the resource."
+          "description": "An identifier for the identity that last modified the resource"
         },
         "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The type of identity that last modified the resource."
+          "description": "The timestamp of resource last modification (UTC)"
         }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "user",
+        "application",
+        "managedIdentity",
+        "key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
       }
     }
   },
