@@ -179,6 +179,42 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings/default/packageDownloads": {
+      "post": {
+        "x-ms-examples": {
+          "Package downloads": {
+            "$ref": "./examples/IotDefenderSettings/PackageDownloads.json"
+          }
+        },
+        "tags": [
+          "IoT Defender Settings"
+        ],
+        "operationId": "IotDefenderSettings_PackageDownloads",
+        "description": "Information about downloadable packages",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Package downloads",
+            "schema": {
+              "$ref": "#/definitions/PackageDownloads"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -216,6 +252,193 @@
       "type": "object",
       "description": "IoT Defender settings properties",
       "properties": {}
+    },
+    "DownloadLink": {
+      "type": "string",
+      "description": "Download link",
+      "readOnly": true
+    },
+    "PackageDownloadInfo": {
+      "type": "object",
+      "description": "Information on a specific package download",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version number",
+          "readOnly": true
+        },
+        "link": {
+          "description": "Download link",
+          "$ref": "#/definitions/DownloadLink"
+        },
+        "versionKind": {
+          "type": "string",
+          "description": "Kind of the version",
+          "readOnly": true,
+          "enum": [
+            "Latest",
+            "Previous"
+          ],
+          "x-ms-enum": {
+            "name": "versionKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Latest"
+              },
+              {
+                "value": "Previous"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "PackageDownloads": {
+      "type": "object",
+      "description": "Information about package downloads",
+      "readOnly": true,
+      "properties": {
+        "sensor": {
+          "type": "object",
+          "description": "Contains all Sensor binary downloads",
+          "readOnly": true,
+          "properties": {
+            "full": {
+              "type": "object",
+              "description": "Contains full package downloads",
+              "readOnly": true,
+              "properties": {
+                "iso": {
+                  "type": "array",
+                  "description": "Contains all ISO full versions for the sensor",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/PackageDownloadInfo"
+                  }
+                },
+                "ovf": {
+                  "type": "object",
+                  "description": "Contains all OVF (virtual machine) full versions for the sensor",
+                  "properties": {
+                    "enterprise": {
+                      "type": "array",
+                      "description": "Enterprise package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    },
+                    "medium": {
+                      "type": "array",
+                      "description": "Medium package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    },
+                    "line": {
+                      "type": "array",
+                      "description": "Line package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "upgrade": {
+              "type": "array",
+              "description": "Sensor upgrade package downloads (on existing installations)",
+              "items": {
+                "$ref": "#/definitions/PackageDownloadInfo"
+              }
+            }
+          }
+        },
+        "centralManager": {
+          "type": "object",
+          "description": "All downloads for Central Manager",
+          "readOnly": true,
+          "properties": {
+            "full": {
+              "type": "object",
+              "description": "Contains full package downloads",
+              "readOnly": true,
+              "properties": {
+                "iso": {
+                  "type": "array",
+                  "description": "Contains all ISO full versions of the Central Manager",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/PackageDownloadInfo"
+                  }
+                },
+                "ovf": {
+                  "type": "object",
+                  "description": "Contains all OVF (virtual machine) full versions of the Central Manager",
+                  "readOnly": true,
+                  "properties": {
+                    "enterprise": {
+                      "type": "array",
+                      "description": "The Enterprise package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    },
+                    "enterpriseHighAvailability": {
+                      "type": "array",
+                      "description": "The EnterpriseHighAvailability package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    },
+                    "medium": {
+                      "type": "array",
+                      "description": "The Medium package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    },
+                    "mediumHighAvailability": {
+                      "type": "array",
+                      "description": "The MediumHighAvailability package type",
+                      "readOnly": true,
+                      "items": {
+                        "$ref": "#/definitions/PackageDownloadInfo"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "upgrade": {
+              "type": "array",
+              "description": "Central Manager upgrade package downloads (on existing installations)",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/PackageDownloadInfo"
+              }
+            }
+          }
+        },
+        "threatIntelligence": {
+          "type": "object",
+          "description": "All downloads for threat intelligence",
+          "readOnly": true,
+          "properties": {
+            "link": {
+              "description": "Download link",
+              "$ref": "#/definitions/DownloadLink"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {}
