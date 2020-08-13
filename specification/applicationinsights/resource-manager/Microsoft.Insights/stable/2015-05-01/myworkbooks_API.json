@@ -1,0 +1,522 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights private workbook type.",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/myworkbooks": {
+      "get": {
+        "description": "Get all private workbooks defined within a specified resource group and category.",
+        "operationId": "MyWorkbooks_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more private workbook definitions.",
+            "schema": {
+              "$ref": "#/definitions/WorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "WorkbooksList": {
+            "$ref": "./examples/MyWorkbooksList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/myworkbooks/{resourceName}": {
+      "get": {
+        "description": "Get a single private workbook by its resourceName.",
+        "operationId": "MyWorkbooks_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A private workbook definition.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookGet": {
+            "$ref": "./examples/MyWorkbookGet.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a private workbook.",
+        "operationId": "MyWorkbooks_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The private workbook has been successfully deleted."
+          },
+          "204": {
+            "description": "The resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookDelete": {
+            "$ref": "./examples/MyWorkbookDelete.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new private workbook.",
+        "operationId": "MyWorkbooks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "workbookProperties",
+            "description": "Properties that need to be specified to create a new private workbook.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newly created private workbook.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "201": {
+            "description": "The newly created private workbook.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookAdd": {
+            "$ref": "./examples/MyWorkbookAdd.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates a private workbook that has already been added.",
+        "operationId": "MyWorkbooks_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "workbookProperties",
+            "description": "Properties that need to be specified to create a new private workbook.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private workbook definition updated.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookUpdate": {
+            "$ref": "./examples/MyWorkbookUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkbookResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "WorkbooksListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Workbook"
+          },
+          "description": "An array of private workbooks."
+        }
+      },
+      "description": "Workbook list result."
+    },
+    "Workbook": {
+      "description": "An Application Insights private workbook definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkbookResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of private workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "SharedTypeKind",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a web test for an Azure resource.",
+          "$ref": "#/definitions/WorkbookProperties"
+        }
+      }
+    },
+    "LinkProperties": {
+      "description": "Contains a sourceId and private workbook resource id to link two resources.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "description": "The source Azure resource id"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The private workbook Azure resource id"
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of private workbook"
+        }
+      }
+    },
+    "WorkbookProperties": {
+      "description": "Properties that contain a private workbook.",
+      "required": [
+        "name",
+        "kind",
+        "category",
+        "workbookId",
+        "serializedData",
+        "userId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user-defined name of the private workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "description": "Configuration of this particular private workbook. Configuration data is a string containing valid JSON"
+        },
+        "version": {
+          "type": "string",
+          "description": "This instance's version of the data model. This can change as new features are added that can be marked private workbook."
+        },
+        "workbookId": {
+          "type": "string",
+          "description": "Internally assigned unique id of the private workbook definition."
+        },
+        "kind": {
+          "description": "Enum indicating if this private workbook definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+          "x-ms-client-name": "SharedTypeKind",
+          "default": "shared",
+          "type": "string",
+          "enum": [
+            "shared",
+            "user"
+          ],
+          "x-ms-enum": {
+            "name": "SharedTypeKind",
+            "modelAsString": true
+          }
+        },
+        "timeModified": {
+          "type": "string",
+          "description": "Date and time in UTC of the last modification that was made to this private workbook definition.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of 0 or more tags that are associated with this private workbook definition"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique user id of the specific user that owns this private workbook."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Optional resourceId for a source resource."
+        }
+      }
+    },
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "WorkbookError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error message body that will indicate why the operation failed."
+    }
+  },
+  "parameters": {
+    "WorkbookResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "name": "category",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "workbook",
+        "TSG",
+        "performance",
+        "retention"
+      ],
+      "x-ms-enum": {
+        "name": "CategoryType",
+        "modelAsString": true
+      },
+      "description": "Category of private workbook to return.",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceIdParameter": {
+      "name": "sourceId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Azure Resource Id that will fetch all linked private workbooks.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceIdParameter": {
+      "name": "resourceId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Azure Resource Id or any target private workbook resource id.",
+      "x-ms-parameter-location": "method"
+    },
+    "CanFetchWorkbookContentParameter": {
+      "name": "canFetchContent",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Flag indicating whether or not to return the full content for each applicable private workbook. If false, only return summary content for private workbooks.",
+      "x-ms-parameter-location": "method"
+    },
+    "TagsParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "description": "Tags presents on each private workbook returned.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
