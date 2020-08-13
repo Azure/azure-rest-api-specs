@@ -377,6 +377,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js security/resource-manager
 ```
 
 ## C#
@@ -402,6 +405,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 

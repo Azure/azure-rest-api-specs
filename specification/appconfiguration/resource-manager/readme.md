@@ -85,6 +85,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js appconfiguration/resource-manager
 ```
 
 ## C#
@@ -128,6 +131,10 @@ directive:
     where: $.definitions.KeyValue.properties.locked
     reason: This is data plane level information proxied through the RP and cannot be changed.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
