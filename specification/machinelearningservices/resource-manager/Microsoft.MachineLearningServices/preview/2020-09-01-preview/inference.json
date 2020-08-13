@@ -990,9 +990,14 @@
     "InferenceEndpointDeploymentProperties": {
       "type": "object",
       "properties": {
-        "modelId": {
-          "description": "The model Resource Id.",
-          "type": "string",
+        "modelIds": {
+          "description": "The array of model Resource Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 10,
           "readOnly": true
         },
         "scaleSettings": {
@@ -1095,9 +1100,14 @@
             "type": "string"
           }
         },
-        "modelId": {
-          "description": "The model resource Id.",
-          "type": "string"
+        "modelIds": {
+          "description": "The array of model resource Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 10
         },
         "sku": {
           "description": "Sku for the deployment. Give the name of the sku such as Standard_DS2.",
@@ -1143,11 +1153,6 @@
               "type": "string"
             }
           }
-        },
-        "requestTimeout": {
-          "description": "Length of time before timing out a request to the deployment.",
-          "type": "integer",
-          "format": "int32"
         },
         "codeAssetId": {
           "description": "Resource Id of the Code Assets i.e. startup code.",
