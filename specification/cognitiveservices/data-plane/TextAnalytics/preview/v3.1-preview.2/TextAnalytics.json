@@ -916,23 +916,36 @@
          "description":"Represents the confidence scores across all sentiment classes: positive, neutral, negative."
       },
       "PiiResult":{
-        "allOf":[
-          {
-            "$ref":"#/definitions/EntitiesResult"
-          },
-          {
-            "type":"object",
-            "required":[
-                "redactedText"
-            ],
-            "properties":{
-              "redactedText":{
-                  "type":"string"
+        "type":"object",
+        "required":[
+           "documents",
+           "errors",
+           "modelVersion"
+        ],
+        "properties":{
+           "documents":{
+              "type":"array",
+              "description":"Response by document",
+              "items":{
+                 "$ref":"#/definitions/PiiDocumentEntities"
               }
-            }
-          }
-        ]
-      },
+           },
+           "errors":{
+              "type":"array",
+              "description":"Errors by document id.",
+              "items":{
+                 "$ref":"#/definitions/DocumentError"
+              }
+           },
+           "statistics":{
+              "$ref":"#/definitions/RequestStatistics"
+           },
+           "modelVersion":{
+              "type":"string",
+              "description":"This field indicates which model is used for scoring."
+           }
+        }
+     },
       "EntitiesResult":{
          "type":"object",
          "required":[
@@ -964,6 +977,38 @@
             }
          }
       },
+      "PiiDocumentEntities":{
+        "type":"object",
+        "required":[
+           "id",
+           "entities",
+           "warnings"
+        ],
+        "properties":{
+           "id":{
+              "type":"string",
+              "description":"Unique, non-empty document identifier."
+           },
+           "entities":{
+              "type":"array",
+              "description":"Recognized entities in the document.",
+              "items":{
+                 "$ref":"#/definitions/PiiEntity"
+              }
+           },
+           "warnings":{
+              "type":"array",
+              "description":"Warnings encountered while processing document.",
+              "items":{
+                 "$ref":"#/definitions/TextAnalyticsWarning"
+              }
+           },
+           "statistics":{
+              "description":"if showStats=true was specified in the request this field will contain information about the document payload.",
+              "$ref":"#/definitions/DocumentStatistics"
+           }
+        }
+     },
       "DocumentEntities":{
          "type":"object",
          "required":[
@@ -1035,6 +1080,50 @@
             }
          }
       },
+      "PiiEntity":{
+        "type":"object",
+        "required":[
+           "text",
+           "category",
+           "offset",
+           "length",
+           "confidenceScore",
+           "redactedText"
+        ],
+        "properties":{
+           "text":{
+              "type":"string",
+              "description":"Entity text as appears in the request."
+           },
+           "category":{
+              "type":"string",
+              "description":"Entity type, such as Person/Location/Org/SSN etc"
+           },
+           "subcategory":{
+              "type":"string",
+              "description":"Entity sub type, such as Age/Year/TimeRange etc"
+           },
+           "offset":{
+              "type":"integer",
+              "format":"int32",
+              "description":"Start position for the entity text."
+           },
+           "length":{
+              "type":"integer",
+              "format":"int32",
+              "description":"Length for the entity text."
+           },
+           "confidenceScore":{
+              "type":"number",
+              "format":"double",
+              "description":"Confidence score between 0 and 1 of the extracted entity."
+           },
+           "redactedText":{
+             "type":"string",
+             "description":"This field contains the redacted text."
+           }
+        }
+     },
       "EntityLinkingResult":{
          "type":"object",
          "required":[
