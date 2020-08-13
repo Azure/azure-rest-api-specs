@@ -46,7 +46,7 @@
           {
             "name": "api-version",
             "in": "query",
-            "description": "The version of the Experimentation resouce provider API",
+            "description": "The version of the Experimentation resource provider API",
             "required": true,
             "type": "string"
           }
@@ -73,8 +73,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Experimentation/experimentWorkspaces/{experimentWorkspaceName}": {
       "put": {
         "tags": [
-            "ExperimentWorkspace"
-          ],
+          "ExperimentWorkspace"
+        ],
         "operationId": "experimentWorkspaces_CreateOrUpdate",
         "summary": "Create or update an experimentation workspace.",
         "description": "Create an experiment workspace, or update an existing workspace",
@@ -84,10 +84,18 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/experimentWorkspaceParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" },
-          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -96,7 +104,7 @@
               "properties": {
                 "location": {
                   "description": "Region for the resource to be created.",
-                  "type": "string",
+                  "type": "string"
                 }
               }
             },
@@ -105,13 +113,13 @@
         ],
         "responses": {
           "201": {
-              "description": "The request to create the experiment workspace is accepted and is running asynchoronously",
-              "schema": {
-                "$ref": "#/definitions/ExperimentWorkspace"
-              }
+            "description": "The request to create the experiment workspace is accepted and is running asynchronously",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
           },
           "200": {
-            "description": "The request to update the experiment workspace is accepted and is running asynchoronously",
+            "description": "The request to update the experiment workspace is accepted and is running asynchronously",
             "schema": {
               "$ref": "#/definitions/ExperimentWorkspace"
             }
@@ -132,10 +140,18 @@
         "summary": "Patch an experimentation workspace.",
         "description": "Patch an experiment workspace",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/experimentWorkspaceParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" },
-          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -187,14 +203,22 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },                   
-          { "$ref": "#/parameters/experimentWorkspaceParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" },
-          { "$ref": "#/parameters/resourceGroupNameParameter" }
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
         ],
         "responses": {
           "202": {
-            "description": "The request to delete the experiment workspace is accepted and is running asynchoronously"
+            "description": "The request to delete the experiment workspace is accepted and is running asynchronously"
           },
           "204": {
             "description": "The experiment Workspace doesn't exist"
@@ -220,10 +244,18 @@
           }
         },
         "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/experimentWorkspaceParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" },
-          { "$ref": "#/parameters/resourceGroupNameParameter" }
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/experimentWorkspaceParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -253,9 +285,15 @@
         "summary": "Get all experiment workspaces in a resource group.",
         "description": "Get all experiment workspaces in a resource group.",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" },
-          { "$ref": "#/parameters/resourceGroupNameParameter" }
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -285,8 +323,12 @@
         "summary": "Get all experiment workspaces in the specified subscription.",
         "description": "Get all experiment workspaces in the specified subscription.",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" }
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -350,7 +392,7 @@
             "update"
           ],
           "description": "Resource tags."
-        },
+        }
       },
       "x-ms-azure-resource": true
     },
