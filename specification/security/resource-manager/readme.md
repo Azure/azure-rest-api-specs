@@ -40,6 +40,10 @@ directive:
     from: alertTypes.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: recommendationTypes.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/recommendationTypes"].get'
+    reason: The list returns limited number of items
 ```
 
 ### Basic Information
@@ -151,6 +155,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -310,6 +316,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -369,6 +377,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js security/resource-manager
 ```
 
 ## C#
@@ -395,6 +406,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -415,6 +430,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -446,6 +462,8 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendations.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
