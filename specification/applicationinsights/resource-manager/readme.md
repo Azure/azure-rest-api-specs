@@ -126,6 +126,7 @@ input-file:
   - Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
   - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
@@ -159,6 +160,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+- Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
 ```
 
 ### Tag: package-2017-10
@@ -245,6 +247,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+- Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
 - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
 - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
@@ -368,6 +371,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - $(this-folder)/Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-05-01-preview/components_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json
