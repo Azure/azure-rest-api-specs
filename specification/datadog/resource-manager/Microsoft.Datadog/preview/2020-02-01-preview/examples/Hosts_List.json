@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vm1",
+            "apps": [
+              "ntp",
+              "agent"
+            ],
+            "meta": {
+              "agentVersion": "7.19.2"
+            }
+          },
+          {
+            "name": "vm2",
+            "apps": [
+              "infra",
+              "agent"
+            ],
+            "meta": {
+              "agentVersion": "7.18.1"
+            }
+           }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
