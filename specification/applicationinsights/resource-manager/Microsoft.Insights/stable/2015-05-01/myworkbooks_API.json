@@ -262,18 +262,27 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
+          "description": "Azure resource Id",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "name": {
           "type": "string",
           "description": "Azure resource name",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "type": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
+          "description": "Azure resource type",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "location": {
           "type": "string",
