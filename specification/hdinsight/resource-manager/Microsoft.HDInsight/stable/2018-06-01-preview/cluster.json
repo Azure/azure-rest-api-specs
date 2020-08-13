@@ -71,6 +71,9 @@
           },
           "Create cluster with encryption in transit": {
             "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
+          },
+          "Create cluster with encryption at host": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionAtHost.json"
           }
         },
         "parameters": [
@@ -1599,6 +1602,11 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not resource disk encryption is enabled."
         }
       }
     },
