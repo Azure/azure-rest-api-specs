@@ -749,6 +749,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js sql/resource-manager
 ```
 
 ### C#
@@ -814,6 +817,10 @@ directive:
   - suppress: EnumInsteadOfBoolean
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
