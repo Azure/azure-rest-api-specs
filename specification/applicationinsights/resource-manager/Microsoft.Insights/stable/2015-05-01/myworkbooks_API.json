@@ -62,13 +62,13 @@
           "200": {
             "description": "A list containing 0 or more private workbook definitions.",
             "schema": {
-              "$ref": "#/definitions/WorkbooksListResult"
+              "$ref": "#/definitions/MyWorkbooksListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookError"
+              "$ref": "#/definitions/MyWorkbookError"
             }
           }
         },
@@ -104,13 +104,13 @@
           "200": {
             "description": "A private workbook definition.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/MyWorkbook"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookError"
+              "$ref": "#/definitions/MyWorkbookError"
             }
           }
         },
@@ -147,7 +147,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookError"
+              "$ref": "#/definitions/MyWorkbookError"
             }
           }
         },
@@ -179,7 +179,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/MyWorkbook"
             }
           }
         ],
@@ -187,19 +187,19 @@
           "200": {
             "description": "The newly created private workbook.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/MyWorkbook"
             }
           },
           "201": {
             "description": "The newly created private workbook.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/MyWorkbook"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookError"
+              "$ref": "#/definitions/MyWorkbookError"
             }
           }
         },
@@ -231,7 +231,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/MyWorkbook"
             }
           }
         ],
@@ -239,13 +239,13 @@
           "200": {
             "description": "The private workbook definition updated.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/MyWorkbook"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/WorkbookError"
+              "$ref": "#/definitions/MyWorkbookError"
             }
           }
         },
@@ -258,7 +258,7 @@
     }
   },
   "definitions": {
-    "WorkbookResource": {
+    "MyWorkbookResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -302,24 +302,24 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "WorkbooksListResult": {
+    "MyWorkbooksListResult": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Workbook"
+            "$ref": "#/definitions/MyWorkbook"
           },
           "description": "An array of private workbooks."
         }
       },
       "description": "Workbook list result."
     },
-    "Workbook": {
+    "MyWorkbook": {
       "description": "An Application Insights private workbook definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/WorkbookResource"
+          "$ref": "#/definitions/MyWorkbookResource"
         }
       ],
       "properties": {
@@ -338,28 +338,11 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a web test for an Azure resource.",
-          "$ref": "#/definitions/WorkbookProperties"
+          "$ref": "#/definitions/MyWorkbookProperties"
         }
       }
     },
-    "LinkProperties": {
-      "description": "Contains a sourceId and private workbook resource id to link two resources.",
-      "properties": {
-        "sourceId": {
-          "type": "string",
-          "description": "The source Azure resource id"
-        },
-        "targetId": {
-          "type": "string",
-          "description": "The private workbook Azure resource id"
-        },
-        "category": {
-          "type": "string",
-          "description": "The category of private workbook"
-        }
-      }
-    },
-    "WorkbookProperties": {
+    "MyWorkbookProperties": {
       "description": "Properties that contain a private workbook.",
       "required": [
         "name",
@@ -426,7 +409,7 @@
         }
       }
     },
-    "ErrorFieldContract": {
+    "MyErrorFieldContract": {
       "properties": {
         "code": {
           "type": "string",
@@ -443,7 +426,7 @@
       },
       "description": "Error Field contract."
     },
-    "WorkbookError": {
+    "MyWorkbookError": {
       "properties": {
         "code": {
           "type": "string",
@@ -488,7 +471,7 @@
         "name": "CategoryType",
         "modelAsString": true
       },
-      "description": "Category of private workbook to return.",
+      "description": "Category of workbook to return.",
       "x-ms-parameter-location": "method"
     },
     "SourceIdParameter": {
@@ -496,7 +479,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Azure Resource Id that will fetch all linked private workbooks.",
+      "description": "Azure Resource Id that will fetch all linked workbooks.",
       "x-ms-parameter-location": "method"
     },
     "ResourceIdParameter": {
@@ -504,7 +487,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Azure Resource Id or any target private workbook resource id.",
+      "description": "Azure Resource Id or any target workbook resource id.",
       "x-ms-parameter-location": "method"
     },
     "CanFetchWorkbookContentParameter": {
@@ -512,7 +495,7 @@
       "in": "query",
       "required": false,
       "type": "boolean",
-      "description": "Flag indicating whether or not to return the full content for each applicable private workbook. If false, only return summary content for private workbooks.",
+      "description": "Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.",
       "x-ms-parameter-location": "method"
     },
     "TagsParameter": {
@@ -524,7 +507,7 @@
         "type": "string"
       },
       "collectionFormat": "csv",
-      "description": "Tags presents on each private workbook returned.",
+      "description": "Tags presents on each workbook returned.",
       "x-ms-parameter-location": "method"
     }
   }
