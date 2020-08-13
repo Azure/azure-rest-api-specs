@@ -512,6 +512,68 @@
           "description": "The URI to get the next set of Log Analytics QueryPack definitions if too many QueryPacks where returned in the result set."
         }
       }
+    },
+    "OperationsListResult": {
+      "description": "Result of the List Operations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLive"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationLive": {
+      "description": "Represents an operation returned by the GetOperations request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationInfo",
+          "description": "Display name of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationInfo": {
+      "description": "Information about an operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
