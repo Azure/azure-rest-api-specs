@@ -129,4 +129,8 @@ directive:
     where: $.definitions
     from: digitaltwins.json
     reason: 'This is a proxy resource, not a tracked resource.'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.CheckNameResult.properties.nameAvailable
+    from: digitaltwins.json
+    reason: The value will always be a boolean.
 ```
