@@ -666,6 +666,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/removeMoveResources": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_RemoveMoveResources",
+        "description": "Removes the set of resources included in the request body from move collection. The orchestration is done by service. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "moveCollectionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RemoveMoveResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_RemoveMoveResources": {
+            "$ref": "./examples/MoveCollections_RemoveMoveResources.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/moveResources/{moveResourceName}": {
       "put": {
         "tags": [
@@ -1033,6 +1098,18 @@
         "modelAsString": true
       }
     },
+    "MoveResourceInputType": {
+      "description": "Defines the move resource input type.",
+      "type": "string",
+      "enum": [
+        "MoveResourceId",
+        "MoveResourceSourceId"
+      ],
+      "x-ms-enum": {
+        "name": "moveResourceInputType",
+        "modelAsString": true
+      }
+    },
     "ProvisioningState": {
       "description": "Defines the provisioning states.",
       "enum": [
@@ -1397,6 +1474,26 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "RemoveMoveResourcesRequest": {
+      "description": "Defines the request body for remove of move resources operation.",
+      "type": "object",
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
         }
       }
     },
