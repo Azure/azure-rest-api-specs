@@ -26,6 +26,32 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.contoso/employees": {
+      "get": {
+        "description": "Returns list of employees.",
+        "operationId": "Employee_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResourceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.contoso/employees": {
       "get": {
         "description": "Returns list of employees.",
