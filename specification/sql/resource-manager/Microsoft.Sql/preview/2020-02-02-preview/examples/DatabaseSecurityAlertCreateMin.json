@@ -5,7 +5,7 @@
     "serverName": "securityalert-6440",
     "databaseName": "testdb",
     "securityAlertPolicyName": "default",
-    "api-version": "2020-02-02-preview",
+    "api-version": "2018-06-01-preview",
     "databaseSecurityAlertPolicyResource": {
       "properties": {
         "state": "Enabled"
@@ -21,7 +21,13 @@
         "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
         "kind": "V12",
           "properties": {
-            "state": "Enabled"
+            "state": "Enabled",
+            "emailAccountAdmins": "true",
+            "emailAddresses": [],
+            "disabledAlerts": [],
+            "retentionDays": 0,
+            "storageAccountAccessKey": "",
+            "storageEndpoint": ""
         }
       }
     },
@@ -33,7 +39,13 @@
         "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
         "kind": "V12",
         "properties": {
-          "state": "Enabled"
+          "state": "Enabled",
+          "emailAccountAdmins": "true",
+          "emailAddresses": [],
+          "disabledAlerts": [],
+          "retentionDays": 0,
+          "storageAccountAccessKey": "",
+          "storageEndpoint": ""
         }
       }
     }

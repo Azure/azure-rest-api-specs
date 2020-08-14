@@ -4,10 +4,12 @@
         "resourceGroupName": "securityalert-4799",
         "managedInstanceName": "securityalert-6440",
         "securityAlertPolicyName": "Default",
-        "api-version": "2020-02-01-preview",
+        "api-version": "2017-03-01-preview",
         "parameters": {
             "properties": {
                 "state": "Enabled",
+                "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+                "storageEndpoint": "https://mystorage.blob.core.windows.net"
             }
         }
     },
@@ -18,7 +20,13 @@
                 "name": "Default",
                 "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
                 "properties": {
-                    "state": "Enabled"
+                    "state": "Enabled",
+                    "emailAccountAdmins": true,
+                    "emailAddresses": [],
+                    "disabledAlerts": [],
+                    "retentionDays": 0,
+                    "storageAccountAccessKey": "",
+                    "storageEndpoint": "https://mystorage.blob.core.windows.net"
                 }
             }
         },
