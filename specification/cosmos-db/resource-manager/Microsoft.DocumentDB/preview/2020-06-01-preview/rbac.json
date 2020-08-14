@@ -79,6 +79,7 @@
             "$ref": "./examples/CosmosDBSqlRoleDefinitionCreateUpdate.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "description": "Creates or updates an Azure Cosmos DB Role Definition.",
         "parameters": [
           {
@@ -167,6 +168,9 @@
             "$ref": "./examples/CosmosDBSqlRoleDefinitionList.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "description": "Retrieves the list of all Azure Cosmos DB Role Definitions based on the filter.",
         "parameters": [
           {
@@ -243,6 +247,7 @@
             "$ref": "./examples/CosmosDBSqlRoleAssignmentCreateUpdate.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "description": "Creates or updates an Azure Cosmos DB Role Assignment.",
         "parameters": [
           {
@@ -289,6 +294,7 @@
             "$ref": "./examples/CosmosDBSqlRoleAssignmentDelete.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "description": "Deletes an exisiting Azure Cosmos DB Role Assignment.",
         "parameters": [
           {
@@ -330,6 +336,9 @@
           "CosmosDBSqlRoleAssignmentList": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "description": "Retrieves the list of all Azure Cosmos DB Role Assignments based on the filter.",
         "parameters": [
@@ -408,7 +417,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlRoleDefinitionProperties"
+          "$ref": "#/definitions/SqlRoleDefinitionProperties",
+          "description": "Properties related to Role Definition."
         }
       },
       "description": "An Azure Cosmos DB Role Definition."
@@ -420,10 +430,10 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "description": "The set of data plane operations permitted through this Role Definition."
+          }
         }
-      }
+      },
+      "description": "The set of data plane operations permitted through this Role Definition."
     },
     "SqlRoleDefinitionListResult": {
       "properties": {
@@ -431,10 +441,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlRoleDefinitionResponse"
-          },
-          "description": "The relevant Role Definitions."
+          }
         }
-      }
+      },
+      "description": "The relevant Role Definitions."
     },
     "SqlRoleAssignmentProperties": {
       "type": "object",
@@ -471,7 +481,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlRoleAssignmentProperties"
+          "$ref": "#/definitions/SqlRoleAssignmentProperties",
+          "description": "Properties related to Role Assignment."
         }
       },
       "description": "An Azure Cosmos DB Role Assignment"
@@ -482,10 +493,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlRoleAssignmentResponse"
-          },
-          "description": "The relevant Role Assignments."
+          }
         }
-      }
+      },
+      "description": "The relevant Role Assignments."
     }
   },
   "parameters": {
