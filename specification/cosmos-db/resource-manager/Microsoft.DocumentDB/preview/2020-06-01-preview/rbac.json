@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions/{roleDefinitionId}?api-version={api-version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "SqlRoleDefinition_Get",
         "x-ms-examples": {
@@ -159,7 +159,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions?api-version={api-version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions": {
       "get": {
         "operationId": "SqlRoleDefinition_List",
         "x-ms-examples": {
@@ -198,7 +198,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments/{roleAssignmentId}?api-version={api-version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments/{roleAssignmentId}": {
       "get": {
         "operationId": "SqlRoleAssignment_Get",
         "x-ms-examples": {
@@ -323,7 +323,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments?api-version={api-version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments": {
       "get": {
         "operationId": "SqlRoleAssignment_List",
         "x-ms-examples": {
@@ -407,6 +407,7 @@
           "description": "Microsoft.DocumentDB/databaseAccounts/roleDefinitions."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SqlRoleDefinitionProperties"
         }
       },
@@ -436,7 +437,6 @@
       }
     },
     "SqlRoleAssignmentProperties": {
-      "x-ms-azure-resource": true,
       "type": "object",
       "description": "Role Assignment Properties.",
       "properties": {
@@ -470,6 +470,7 @@
           "description": "Microsoft.DocumentDB/databaseAccounts/roleAssignments."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SqlRoleAssignmentProperties"
         }
       },
