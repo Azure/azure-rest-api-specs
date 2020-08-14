@@ -38,6 +38,7 @@ input-file:
 - Microsoft.Storage/stable/2019-06-01/storage.json
 - Microsoft.Storage/stable/2019-06-01/blob.json
 - Microsoft.Storage/stable/2019-06-01/file.json
+- Microsoft.Storage/stable/2019-06-01/privatelinks.json
 - Microsoft.Storage/stable/2019-06-01/queue.json
 - Microsoft.Storage/stable/2019-06-01/table.json
 
