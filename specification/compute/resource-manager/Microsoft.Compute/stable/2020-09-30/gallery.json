@@ -98,6 +98,9 @@
         "x-ms-examples": {
           "Create or update a simple gallery.": {
             "$ref": "./examples/CreateOrUpdateASimpleGallery.json"
+          },
+          "Create or update a simple gallery with sharing profile.": {
+            "$ref": "./examples/CreateOrUpdateASimpleGalleryWithSharingProfile.json"
           }
         }
       },
@@ -177,6 +180,20 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The select expression to apply on the operation.",
+            "enum": [
+              "Permissions"
+            ],
+            "x-ms-enum": {
+              "name": "Permissions",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -196,6 +213,9 @@
         "x-ms-examples": {
           "Get a gallery.": {
             "$ref": "./examples/GetAGallery.json"
+          },
+          "Get a gallery with select permissions.": {
+            "$ref": "./examples/GetAGalleryWithSelectPermissions.json"
           }
         }
       },
@@ -1602,6 +1622,76 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/share": {
+      "put": {
+        "tags": [
+          "GallerySharingUpdate"
+        ],
+        "operationId": "GallerySharingProfile_Update",
+        "description": "Update sharing profile of a gallery.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sharingUpdate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharingUpdate"
+            },
+            "description": "Parameters supplied to the update gallery sharing profile."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharingUpdate"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SharingUpdate"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SharingUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add sharing id to the sharing profile of a gallery.": {
+            "$ref": "./examples/AddToSharingProfileInAGallery.json"
+          },
+          "reset sharing profile of a gallery.": {
+            "$ref": "./examples/ResetSharingProfileInAGallery.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1655,6 +1745,9 @@
             "Deleting",
             "Migrating"
           ]
+        },
+        "sharingProfile": {
+          "$ref": "#/definitions/SharingProfile"
         }
       },
       "description": "Describes the properties of a Shared Image Gallery."
@@ -1668,6 +1761,52 @@
         }
       },
       "description": "Describes the gallery unique name."
+    },
+    "SharingProfile": {
+      "properties": {
+        "permissions": {
+          "type": "string",
+          "description": "This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups**",
+          "enum": [
+            "Private",
+            "Groups"
+          ],
+          "x-ms-enum": {
+            "name": "GallerySharingPermissionTypes",
+            "modelAsString": false
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharingProfileGroup"
+          },
+          "description": "A list of sharing profile groups."
+        }
+      }
+    },
+    "SharingProfileGroup": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants**",
+          "enum": [
+            "Subscriptions",
+            "AADTenants"
+          ],
+          "x-ms-enum": {
+            "name": "SharingProfileGroupTypes",
+            "modelAsString": false
+          }
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of subscription/tenant ids the gallery is aimed to be shared to."
+        }
+      }
     },
     "GalleryApplication": {
       "properties": {
@@ -2621,6 +2760,31 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SharingUpdate": {
+      "properties": {
+        "operationType": {
+          "type": "string",
+          "description": "This property allows you to specify the operation type of gallery sharing update. <br><br> Possible values are: <br><br> **Add** <br><br> **Remove** <br><br> **Reset**",
+          "enum": [
+            "Add",
+            "Remove",
+            "Reset"
+          ],
+          "x-ms-enum": {
+            "name": "SharingUpdateOperationTypes",
+            "modelAsString": false
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharingProfileGroup"
+          },
+          "description": "A list of sharing profile groups."
+        }
+      },
+      "description": "Specifies information about the gallery sharing profile update."
     }
   },
   "parameters": {
