@@ -1639,6 +1639,13 @@
           "format": "double"
         }
       }
+    },
+    "Scopes": {
+      "name": "scopes",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "parameters": {
@@ -1647,10 +1654,13 @@
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
-      "schema": {
-        "type": "array",
-        "items": {
-          "type": "string"
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "$ref": "#/definitions/Scopes"
+          }
         }
       }
     },
