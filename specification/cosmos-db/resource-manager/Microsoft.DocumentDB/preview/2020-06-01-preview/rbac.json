@@ -39,7 +39,7 @@
         "operationId": "SqlRoleDefinition_GET",
         "x-ms-examples": {
           "CosmosDBRoleDefinitionGet": {
-            "$ref": "./examples/CosmosDBRoleDefinitionGet.json"
+            "$ref": "./examples/CosmosDBSqlRoleDefinitionGet.json"
           }
         },
         "description": "Retrieves the properties of an existing Azure Cosmos DB Role Definition.",
@@ -73,10 +73,10 @@
         }
       },
       "put": {
-        "operationId": "RoleDefinition_CreateOrUpdate",
+        "operationId": "SqlRoleDefinition_CreateOrUpdate",
         "x-ms-examples": {
           "CosmosDBRBACCreateorUpdate": {
-            "$ref": "./examples/CosmosDBRoleDefinitionCreateUpdate.json"
+            "$ref": "./examples/CosmosDBSqlRoleDefinitionCreateUpdate.json"
           }
         },
         "description": "Creates or Updates Azure Cosmos DB Role Definitions.",
@@ -122,7 +122,7 @@
         "operationId": "RoleDefinition_Delete",
         "x-ms-examples": {
           "CosmosDBRBACCreateorUpdate": {
-            "$ref": "./examples/needexamplehere.json"
+            "$ref": "./examples/CosmosDBSqlRoleDefinitionDelete.json"
           }
         },
         "description": "Deletes Azure Cosmos DB Role Definition.",
@@ -164,13 +164,13 @@
         "operationId": "RoleDefinition_LIST",
         "x-ms-examples": {
           "CosmosDBRBACCreateorUpdate": {
-            "$ref": "./examples/addexamples.json"
+            "$ref": "./examples/CosmosDBSqlRoleDefinitionList.json"
           }
         },
         "description": "Retrieves the list of role definitions based on the filter.",
         "parameters": [
           {
-            "$ref": "#/parameters/filterParameter"
+            "$ref": "#/parameters/filterRoleDefinitionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -189,7 +189,7 @@
           "200": {
             "description": "OK. The Role Definition was found.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleDefinitionResponse"
+              "$ref": "#/definitions/SqlRoleDefinitionListResult"
             }
           },
           "default": {
@@ -240,7 +240,7 @@
         "operationId": "SqlRoleAssignment_PUT",
         "x-ms-examples": {
           "SqlRoleAssignmentPut": {
-            "$ref": "./examples/CosmosDBSqlRoleAssignmentPut.json"
+            "$ref": "./examples/CosmosDBSqlRoleAssignmentCreateUpdate.json"
           }
         },
         "description": "Create or Update Azure Cosmos DB Role Assignment.",
@@ -316,10 +316,49 @@
           },
           "default": {
             "desciption": "400 InvalidRoleAssignmentId - The Role Assignment ID '{0}' is not valid. Role Assignment ID must be a GUID."
+          },
+          "204": {
+            "description": "Role Assignment does not exist."
           }
         }
-        "204": {
-          "description": "Role Assignment does not exist."
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments?api-version={api-version}&$filter={$filter}": {
+      "get": {
+        "operationId": "SqlRoleAssignment_LIST",
+        "x-ms-examples": {
+          "SqlRoleAssignmentGet": {
+            "$ref": "./examples/CosmosDBSqlRoleAssignmentList.json"
+          }
+        },
+        "description": "Retrieves the list of role assignments based on the filter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/filterRoleAssignmentParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The relevant Role Assignments",
+            "schema": {
+              "$ref": "#/definitions/SqlRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleAssignmentId - The Role Assignment ID '{0}' is not valid. Role Assignment ID must be a GUID.\n\n * 404 RoleAssignmentNotFound - The Role Assignment '{0}' was not found."
+          }
         }
       }
     }
@@ -400,6 +439,17 @@
         }
       }
     },
+    "SqlRoleDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlRoleDefinitionResponse"
+          },
+          "description": "List of role definitions and their properties."
+        }
+      }
+    },
     "SqlRoleAssignmentProperties": {
       "x-ms-azure-resource": true,
       "type": "object",
@@ -439,6 +489,17 @@
         }
       },
       "description": "The response from an accepted create request."
+    },
+    "SqlRoleAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlRoleAssignmentResponse"
+          },
+          "description": "List of role assignments and their properties."
+        }
+      }
     }
   },
   "parameters": {
@@ -465,6 +526,22 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The GUID for the Role Assignment."
+    },
+    "filterRoleDefinitionParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": "no",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The filter to be applied on the request. Use $filter=type eq 'BuiltInRole|CustomRole' to filter by type. Use $filter=roleName eq {name} to retrieve Role Definition with the given name."
+    },
+    "filterRoleAssignmentParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": "no",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The filter to be applied on the request. Use $filter=principalId eq 'edcf5256-366c-4cf0-9007-d450b8e48737' to retrieve all Role Assignments granted to the given AAD principal. Use $filter=assignedTo('edcf5256-366c-4cf0-9007-d450b8e48737') to retrieve all Role Assignments granted to the given AAD principal. Use $filter=atScope('/dbs/contoso-sales') to retrieve all Role Assignments granted for the database 'contoso-sales' or higher up."
     }
   }
 }
