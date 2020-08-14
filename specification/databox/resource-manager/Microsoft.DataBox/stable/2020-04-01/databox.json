@@ -43,7 +43,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -95,7 +95,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -146,7 +146,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -206,7 +206,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -214,7 +214,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-           "AvailableSkusPost": {
+          "AvailableSkusPost": {
             "$ref": "./examples/AvailableSkusPost.json"
           }
         }
@@ -263,7 +263,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -320,7 +320,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -374,7 +374,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -429,7 +429,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -481,7 +481,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -539,7 +539,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -597,7 +597,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -635,16 +635,19 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Job deleted."
+          },
           "202": {
             "description": "Accepted request for delete Job."
-          },
+          },		 
           "204": {
             "description": "Job deleted."
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -709,7 +712,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -767,7 +770,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -821,7 +824,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -878,7 +881,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -1014,6 +1017,17 @@
         }
       },
       "x-ms-discriminator-value": "ValidateAddress"
+    },
+    "ApiError": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
     },
     "ApplianceNetworkConfiguration": {
       "description": "The Network Adapter configuration of a DataBox.",
@@ -2237,6 +2251,21 @@
         }
       }
     },
+	 "Details": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "DiskScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling disk orders.",
       "required": [
@@ -2272,6 +2301,30 @@
           "description": "Bit Locker key of the disk which can be used to unlock the disk to copy data.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+	"ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Details"
+          }
+        },
+        "target": {
+          "type": "string"
         }
       }
     },
@@ -3079,6 +3132,10 @@
           "description": "Origin of the operation. Can be : user|system|user,system",
           "type": "string",
           "readOnly": true
+        },
+		 "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         }
       }
     },
