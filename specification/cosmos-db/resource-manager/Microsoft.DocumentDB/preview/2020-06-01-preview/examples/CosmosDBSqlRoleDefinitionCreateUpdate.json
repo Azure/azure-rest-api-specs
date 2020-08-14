@@ -6,22 +6,20 @@
     "databaseAccountName": "contoso",
     "api-version": "2020-06-01-preview",
     "requestBody": {
-      "properties": {
-        "roleName": "Contoso Finance Records Reader",
-        "type": "CustomRole",
-        "assignableScopes": [
-          "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-sales",
-          "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-purchases"
-        ],
-        "permissions": [
-          {
-            "dataActions": [
-              "Microsoft.DocumentDB/databaseAccounts/databases/read",
-              "Microsoft.DocumentDB/databaseAccounts/databases/collections/read"
-            ]
-          }
-        ]
-      }
+      "roleName": "Contoso Finance Records Reader",
+      "type": "CustomRole",
+      "assignableScopes": [
+        "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-sales",
+        "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-purchases"
+      ],
+      "permissions": [
+        {
+          "dataActions": [
+            "Microsoft.DocumentDB/databaseAccounts/databases/read",
+            "Microsoft.DocumentDB/databaseAccounts/databases/collections/read"
+          ]
+        }
+      ]
     }
   },
   "responses": {
