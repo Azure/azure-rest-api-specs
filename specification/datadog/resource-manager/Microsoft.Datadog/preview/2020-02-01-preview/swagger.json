@@ -165,7 +165,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listHosts": {
       "post": {
         "tags": [
-          "Host"
+          "Hosts"
         ],
         "summary": "List the hosts for a given monitor resource.",
         "operationId": "Hosts_List",
@@ -203,6 +203,51 @@
         "x-ms-examples": {
           "Hosts_List": {
             "$ref": "./examples/Hosts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listLinkedResources": {
+      "post": {
+        "tags": [
+          "LinkedResources"
+        ],
+        "summary": "List all Azure resources associated to the same Datadog organization as the target resource.",
+        "operationId": "LinkedResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LinkedResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LinkedResources_List": {
+            "$ref": "./examples/LinkedResources_List.json"
           }
         }
       }
@@ -908,6 +953,34 @@
         }
       }
     },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
     "DatadogHostMetadata": {
       "type": "object",
       "properties": {
@@ -955,31 +1028,30 @@
         }
       }
     },
-    "ErrorResponseBody": {
+    "LinkedResource": {
+      "description": "The definition of a linked resource.",
       "type": "object",
       "properties": {
-        "code": {
+        "id": {
+          "description": "The ARM id of the linked resource.",
           "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
         }
       }
     },
-    "ResourceProviderDefaultErrorResponse": {
+    "LinkedResourceListResponse": {
+      "description": "Response of a list operation.",
       "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody"
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
         }
       }
     },
@@ -991,8 +1063,20 @@
           "description": "The ARM id of the resource.",
           "type": "string"
         },
-        "location": {
-          "description": "The location of the resource.",
+        "sendingMetrics": {
+          "description": "Flag indicating if resource is sending metrics to Datadog.",
+          "type": "boolean"
+        },
+        "reasonForMetricsStatus": {
+          "description": "Reason for why the resource is sending metrics (or why it is not sending).",
+          "type": "string"
+        },
+        "sendingLogs": {
+          "description": "Flag indicating if resource is sending logs to Datadog.",
+          "type": "boolean"
+        },
+        "reasonForLogsStatus": {
+          "description": "Reason for why the resource is sending logs (or why it is not sending).",
           "type": "string"
         }
       }
@@ -1204,8 +1288,8 @@
         },
         "liftrResourcePreference": {
           "description": "The priority of the resource.",
-          "type": "integer",
           "format": "int32",
+          "type": "integer",
           "readOnly": true
         }
       }
