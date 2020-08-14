@@ -112,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "description": "This is returned as a response when the resource already exists and was updated successfully.",
             "schema": {
               "$ref": "#/definitions/DigitalTwinsDescription"
             }
@@ -173,9 +173,6 @@
               "$ref": "#/definitions/DigitalTwinsDescription"
             }
           },
-          "201": {
-            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -218,7 +215,7 @@
             }
           },
           "204": {
-            "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the DigitalTwins service metadata in the service and the status of the delete operation is set to a completed state."
+            "description": "Returned when the long running delete operation has finished, or the Digital Twins instance does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -325,7 +322,6 @@
         "description": "Create or update DigitalTwinsInstance endpoint.",
         "operationId": "DigitalTwinsEndpoint_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "x-ms-secret": true,
         "x-ms-examples": {
           "Put a DigitalTwinsInstance resource": {
             "$ref": "./examples/DigitalTwinsEndpointPut_example.json"
@@ -415,7 +411,7 @@
             }
           },
           "204": {
-            "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the DigitalTwins service metadata in the service and the status of the delete operation is set to a completed state."
+            "description": "Returned when the long running delete operation has finished, or the egress endpoint does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1145,6 +1141,7 @@
           "readOnly": true
         },
         "deadLetterSecret": {
+          "x-ms-secret": true,
           "description": "Dead letter storage secret. Will be obfuscated during read.",
           "type": "string",
           "x-nullable": true,
@@ -1174,10 +1171,12 @@
           "type": "object",
           "properties": {
             "primaryConnectionString": {
+              "x-ms-secret": true,
               "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string"
             },
             "secondaryConnectionString": {
+              "x-ms-secret": true,
               "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string",
               "x-nullable": true
@@ -1199,11 +1198,13 @@
         {
           "type": "object",
           "properties": {
-            "connectionString-PrimaryKey": {
+            "connectionStringPrimaryKey": {
+              "x-ms-secret": true,
               "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string"
             },
-            "connectionString-SecondaryKey": {
+            "connectionStringSecondaryKey": {
+              "x-ms-secret": true,
               "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
               "type": "string",
               "x-nullable": true
@@ -1231,10 +1232,12 @@
               "type": "string"
             },
             "accessKey1": {
+              "x-ms-secret": true,
               "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
               "type": "string"
             },
             "accessKey2": {
+              "x-ms-secret": true,
               "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
               "type": "string",
               "x-nullable": true
