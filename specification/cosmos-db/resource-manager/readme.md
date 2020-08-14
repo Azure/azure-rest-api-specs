@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2020-06-preview` is specified on t
 input-file:
 - Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
 - Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -287,6 +288,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json

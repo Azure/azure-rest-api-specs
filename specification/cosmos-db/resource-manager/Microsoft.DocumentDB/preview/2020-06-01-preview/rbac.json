@@ -36,9 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions/{roleDefinitionId}?api-version={api-version}": {
       "get": {
-        "operationId": "SqlRoleDefinition_GET",
+        "operationId": "SqlRoleDefinition_Get",
         "x-ms-examples": {
-          "CosmosDBRoleDefinitionGet": {
+          "CosmosDBSqlRoleDefinitionGet": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionGet.json"
           }
         },
@@ -75,7 +75,7 @@
       "put": {
         "operationId": "SqlRoleDefinition_CreateOrUpdate",
         "x-ms-examples": {
-          "CosmosDBRBACCreateorUpdate": {
+          "CosmosDBSqlRoleDefinitionCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionCreateUpdate.json"
           }
         },
@@ -121,7 +121,7 @@
       "delete": {
         "operationId": "RoleDefinition_Delete",
         "x-ms-examples": {
-          "CosmosDBRBACCreateorUpdate": {
+          "CosmosDBSqlRoleDefinitionDelete": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionDelete.json"
           }
         },
@@ -161,9 +161,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions?api-version={api-version}&$filter={$filter}": {
       "get": {
-        "operationId": "RoleDefinition_LIST",
+        "operationId": "RoleDefinition_List",
         "x-ms-examples": {
-          "CosmosDBRBACCreateorUpdate": {
+          "CosmosDBSqlRoleDefinitionList": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionList.json"
           }
         },
@@ -200,9 +200,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments/{roleAssignmentId}?api-version={api-version}": {
       "get": {
-        "operationId": "SqlRoleAssignment_GET",
+        "operationId": "SqlRoleAssignment_Get",
         "x-ms-examples": {
-          "SqlRoleAssignmentGet": {
+          "CosmosDBSqlRoleAssignmentGet": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentGet.json"
           }
         },
@@ -237,9 +237,9 @@
         }
       },
       "put": {
-        "operationId": "SqlRoleAssignment_PUT",
+        "operationId": "SqlRoleAssignment_CreateOrUpdate",
         "x-ms-examples": {
-          "SqlRoleAssignmentCreateUpdate": {
+          "CosmosDBSqlRoleAssignmentCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentCreateUpdate.json"
           }
         },
@@ -283,9 +283,9 @@
         }
       },
       "delete": {
-        "operationId": "SqlRoleAssignment_DELETE",
+        "operationId": "SqlRoleAssignment_Delete",
         "x-ms-examples": {
-          "SqlRoleAssignmentDelete": {
+          "CosmosDBSqlRoleAssignmentDelete": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentDelete.json"
           }
         },
@@ -325,9 +325,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments?api-version={api-version}&$filter={$filter}": {
       "get": {
-        "operationId": "SqlRoleAssignment_LIST",
+        "operationId": "SqlRoleAssignment_List",
         "x-ms-examples": {
-          "SqlRoleAssignmentGet": {
+          "CosmosDBSqlRoleAssignmentList": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentList.json"
           }
         },
@@ -365,8 +365,6 @@
   },
   "definitions": {
     "SqlRoleDefinitionProperties": {
-      "x-ms-azure-resource": true,
-      "type": "object",
       "description": "Role definition.",
       "properties": {
         "roleName": {
@@ -374,7 +372,7 @@
           "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
         },
         "type": {
-          "$ref": "#/definitions/RoleDefinitionType",
+          "type": "string",
           "description": "Indicates whether the Role Definition was built-in or user created. Must always be CustomRole or empty."
         },
         "assignableScopes": {
@@ -413,19 +411,6 @@
         }
       },
       "description": "The response from an accepted create request."
-    },
-    "RoleDefinitionType": {
-      "type": "object",
-      "properties": {
-        "BuiltInRole": {
-          "type": "string",
-          "description": "Indicates that the Role Definition was built-in by the system."
-        },
-        "CustomRole": {
-          "type": "string",
-          "description": "Indicates that the Role Definition was user created."
-        }
-      }
     },
     "Permission": {
       "type": "object",
@@ -530,7 +515,7 @@
     "filterRoleDefinitionParameter": {
       "name": "$filter",
       "in": "query",
-      "required": "no",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The filter to be applied on the request. Use $filter=type eq 'BuiltInRole|CustomRole' to filter by type. Use $filter=roleName eq {name} to retrieve Role Definition with the given name."
@@ -538,7 +523,7 @@
     "filterRoleAssignmentParameter": {
       "name": "$filter",
       "in": "query",
-      "required": "no",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The filter to be applied on the request. Use $filter=principalId eq 'edcf5256-366c-4cf0-9007-d450b8e48737' to retrieve all Role Assignments granted to the given AAD principal. Use $filter=assignedTo('edcf5256-366c-4cf0-9007-d450b8e48737') to retrieve all Role Assignments granted to the given AAD principal. Use $filter=atScope('/dbs/contoso-sales') to retrieve all Role Assignments granted for the database 'contoso-sales' or higher up."
