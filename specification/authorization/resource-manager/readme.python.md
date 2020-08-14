@@ -4,7 +4,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -15,11 +15,27 @@ python:
   no-namespace-folders: true
 ```
 
+``` yaml $(python) && $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-authorization
+no-namespace-folders: true
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python) && $(multiapi) && !$(track2)
+batch:
+  - tag: package-2018-09-01-preview-only
+  - tag: package-2018-07-01-preview-only
+  - tag: package-2018-01-01-preview-only
+  - tag: package-2015-07-01
+  - tag: package-2015-06-01-preview
+```
+
+```yaml $(python) && $(multiapi) && $(track2)
 batch:
   - tag: package-2020-04-01-preview-only
   - tag: package-2018-09-01-preview-only
@@ -27,6 +43,13 @@ batch:
   - tag: package-2018-01-01-preview-only
   - tag: package-2015-07-01
   - tag: package-2015-06-01-preview
+  - multiapiscript: true
+```
+
+```yaml $(python) && $(multiapiscript)
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/
+clear-output-folder: false
+perform-load: false
 ```
 
 ### Tag: package-2020-04-01-preview-only and python
@@ -44,6 +67,8 @@ python:
 These settings apply only when `--tag=package-2018-09-01-preview-only --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-09-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2018_09_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2018_09_01_preview
 python:
   namespace: azure.mgmt.authorization.v2018_09_01_preview
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2018_09_01_preview
@@ -54,6 +79,8 @@ python:
 These settings apply only when `--tag=package-2018-07-01-preview-only --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-07-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2018_07_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2018_07_01_preview
 python:
   namespace: azure.mgmt.authorization.v2018_07_01_preview
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2018_07_01_preview
@@ -64,6 +91,8 @@ python:
 These settings apply only when `--tag=package-2018-01-01-preview-only --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-01-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2018_01_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2018_01_01_preview
 python:
   namespace: azure.mgmt.authorization.v2018_01_01_preview
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2018_01_01_preview
@@ -74,6 +103,8 @@ python:
 These settings apply only when `--tag=package-2015-07-01 --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-07-01' && $(python)
+namespace: azure.mgmt.authorization.v2015_07_01
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2015_07_01
 python:
   namespace: azure.mgmt.authorization.v2015_07_01
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2015_07_01
@@ -84,6 +115,8 @@ python:
 These settings apply only when `--tag=2015-06-01-preview --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06-01-preview' && $(python)
+namespace: azure.mgmt.authorization.v2015_06_01
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2015_06_01
 python:
   namespace: azure.mgmt.authorization.v2015_06_01
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2015_06_01
