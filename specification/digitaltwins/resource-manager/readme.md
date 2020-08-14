@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2020-10
 ```
 
-
 ### Tag: package-2020-10
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10'
+``` yaml $(tag) == 'package-2020-10'
 input-file:
   - Microsoft.DigitalTwins/stable/2020-10-31/digitaltwins.json
 ```
+
 ### Tag: package-2020-03-01-preview
 
 These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
@@ -125,4 +125,12 @@ directive:
     reason: |-
       Flattening properties generates SDK (using autorest) that does not support polymorphism.
       In this case DigitalTwinsEndpointResourceProperties is used as a base class for EventGrid, EventHub and ServiceBus. Flattening DigitalTwinsEndpointResourceProperties removes the link between DigitalTwinsEndpointResource and resources above.
+  - suppress: TrackedResourceListByImmediateParent
+    where: $.definitions
+    from: digitaltwins.json
+    reason: 'This is a proxy resource, not a tracked resource.'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.CheckNameResult.properties.nameAvailable
+    from: digitaltwins.json
+    reason: The value will always be a boolean.
 ```
