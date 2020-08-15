@@ -3,7 +3,7 @@
   "info": {
     "title": "ContosoManagementClient",
     "description": "Contoso provider",
-    "version": "2019-01-01"
+    "version": "2018-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": ["https"],
@@ -26,6 +26,32 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.contoso/employees": {
+      "get": {
+        "description": "Returns list of employees.",
+        "operationId": "Employee_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResourceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.contoso/employees": {
       "get": {
         "description": "Returns list of employees.",
@@ -79,6 +105,29 @@
             "schema": {
               "$ref": "#/definitions/EmployeeResource"
             }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes employee resource for a given name.",
+        "operationId": "Employee_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the employee details."
           }
         }
       },
@@ -704,6 +753,19 @@
           },
           "required": ["firstName", "lastName", "group", "likesTea"],
           "type": "object"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       }
     },

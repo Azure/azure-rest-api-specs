@@ -35,7 +35,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_CheckNameAvailability",
-          "description": "Checks that the name of the MCVP account is valid and is not already in use.",
+          "description": "Checks that the specified MCVP account name is valid and globally unique.",
           "x-ms-examples": {
             "MCVPAccountCheckNameAvailability": {
               "$ref": "./examples/MCVPAccountCheckNameAvailability.json"
@@ -49,18 +49,18 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "name": "nameAvailabilityParameters",
+              "name": "checkNameAvailabilityParameters",
               "in": "body",
               "required": true,
               "schema": {
                 "$ref": "#/definitions/MCVPAccountCheckNameAvailabilityParameters"
               },
-              "description": "The name and type of resource to validate within the specified subscription."
+              "description": "The name and type of MCVP account to validate within the specified subscription."
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The response indicates if the name is valid and available or not.",
+              "description": "OK. The response indicates whether the name is valid and available.",
               "schema": {
                 "$ref": "#/definitions/CheckNameAvailabilityResult"
               }
@@ -80,7 +80,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_Create",
-          "description": "Asynchronously creates a new MCVP account with the specified parameters.",
+          "description": "Creates a new MCVP account.",
           "x-ms-examples": {
             "MCVPAccountCreate": {
               "$ref": "./examples/MCVPAccountCreate.json"
@@ -111,13 +111,13 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The specified MCVP account had already been created by a previous request with the same properties.",
+              "description": "OK. The specified MCVP account has been created or updated successfully.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccount"
               }
             },
             "201": {
-              "description": "Created.",
+              "description": "Created. The specified MCVP account will be created or updated asynchronously.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccount"
               }
@@ -136,7 +136,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_Delete",
-          "description": "Deletes an MCVP account.",
+          "description": "Deletes the specified MCVP account.",
           "x-ms-examples": {
             "MCVPAccountDelete": {
               "$ref": "./examples/MCVPAccountDelete.json"
@@ -158,13 +158,13 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The MCVP account was deleted successfully."
+              "description": "OK. The specified MCVP account was deleted successfully."
             },
             "202": {
-              "description": "Accepted. The request to delete the MCVP account has been accepted and the operation will complete asynchronously."
+              "description": "Accepted. The specified MCVP account will be deleted asynchronously."
             },
             "204": {
-              "description": "NoContent. An MCVP account with the specified parameters does not exist."
+              "description": "NoContent. The specified MCVP account does not exist."
             },
             "default": {
               "description": "Error response describing why the operation failed.",
@@ -180,7 +180,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_GetProperties",
-          "description": "Returns the properties of the specified MCVP account.",
+          "description": "Gets the specified MCVP account.",
           "x-ms-examples": {
             "MCVPAccountGetProperties": {
               "$ref": "./examples/MCVPAccountGetProperties.json"
@@ -202,7 +202,7 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The response includes the properties of the specified MCVP account.",
+              "description": "OK. The response contains the specified MCVP account.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccount"
               }
@@ -220,7 +220,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_Update",
-          "description": "Updates the properties of a specified MCVP account.",
+          "description": "Updates the specified MCVP account.",
           "x-ms-examples": {
             "MCVPAccountUpdate": {
               "$ref": "./examples/MCVPAccountUpdate.json"
@@ -251,7 +251,13 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The properties of the specified MCVP account were updated successfully.",
+              "description": "OK. The specified MCVP account has been updated successfully.",
+              "schema": {
+                "$ref": "#/definitions/MCVPAccount"
+              }
+            },
+            "202": {
+              "description": "Accepted. The specified MCVP account will be updated asynchronously.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccount"
               }
@@ -272,7 +278,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_ListBySubscription",
-          "description": "Lists all the MCVP accounts available under the specified subscription.",
+          "description": "Lists all of the MCVP accounts under the specified subscription.",
           "x-ms-examples": {
             "MCVPAccountListBySubscription": {
               "$ref": "./examples/MCVPAccountListBySubscription.json"
@@ -288,7 +294,7 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The response includes the list of MCVP accounts under the specified subscription.",
+              "description": "OK. The response includes a list of all the MCVP accounts under the specified subscription.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccountListResult"
               }
@@ -311,7 +317,7 @@
             "MCVPAccounts"
           ],
           "operationId": "MCVPAccounts_ListByResourceGroup",
-          "description": "Lists all the MCVP accounts available under the specified resource group.",
+          "description": "Lists all of the MCVP accounts under the specified resource group.",
           "x-ms-examples": {
             "MCVPAccountListByResourceGroup": {
               "$ref": "./examples/MCVPAccountListByResourceGroup.json"
@@ -330,7 +336,7 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The response includes the list of MCVP accounts under the specified resource group.",
+              "description": "OK. The response includes a list of all the MCVP accounts under the specified resource group.",
               "schema": {
                 "$ref": "#/definitions/MCVPAccountListResult"
               }
@@ -352,7 +358,7 @@
           "tags": [
             "Operations"
           ],
-          "description": "Returns list of operations.",
+          "description": "Lists all of the supported Mobility REST API operations.",
           "operationId": "Operations_List",
           "parameters": [
             {
@@ -361,7 +367,7 @@
           ],
           "responses": {
             "200": {
-              "description": "OK. The response includes the list of available operations.",
+              "description": "OK. The response contains a list of all the supported Mobility REST API operations.",
               "schema": {
                 "$ref": "#/definitions/OperationsListResult"
               }
@@ -384,7 +390,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the resource to validate."
+          "description": "Specifies the name of the MCVP account."
         },
         "type": {
           "type": "string",
@@ -395,78 +401,78 @@
             "name": "Type",
             "modelAsString": false
           },
-          "description": "The type of the resource to validate, e.g. Microsoft.Mobility/mcvpAccounts"
+          "description": "Specifies the type of the resource to validate, i.e. Microsoft.Mobility/mcvpAccounts"
         }
       },
       "required": [
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availability of a resource name."
+      "description": "Specifies the parameters used to check the availability of a given MCVP account name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
-        "isNameAvailable": {
+        "nameAvailable": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Indicates whether the name is valid and available."
         },
         "reason": {
           "type": "string",
           "enum": [
-            "AccountNameInvalid",
+            "Invalid",
             "AlreadyExists"
           ],
           "x-ms-enum": {
             "name": "Reason",
             "modelAsString": false
           },
-          "description": "If the name is not valid or available, describes the reason why it cannot be used."
+          "readOnly": true,
+          "description": "Specifies whether the resource is invalid or unavailable."
         },
         "message": {
           "type": "string",
-          "description": "If the name is not valid or available, describes the reason why it cannot be used in detail."
+          "readOnly": true,
+          "description": "If the name is invalid or unavailable, specifies the reason why it cannot be used in detail."
         }
       },
-      "description": "The CheckNameAvailability operation response."
+      "description": "Specifies the response indicating whether the MCVP account name is valid and available."
     },
     "Sku": {
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "The name of the SKU."
+          "description": "Specifies the name of the SKU."
         },
         "tier": {
           "$ref": "#/definitions/Tier",
-          "description": "The tier of the SKU."
+          "description": "Specifies the tier of the SKU."
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The capacity associated with this SKU."
+          "description": "Specifies the capacity associated with this SKU."
         }
       },
       "required": [
         "name",
         "capacity"
       ],
-      "description": "The SKU of the MCVP account."
+      "description": "Specifies the SKU of the MCVP account."
     },
     "SkuName": {
       "type": "string",
       "enum": [
-        "Standard_A",
-        "Standard_B",
-        "Premium_A",
-        "Premium_B"
+        "S0",
+        "P0"
       ],
       "x-ms-enum": {
         "name": "SkuName",
         "modelAsString": true
       },
-      "description": "The SKU name."
+      "description": "Specifies the SKU name."
     },
     "Tier": {
-      "readOnly": true,
       "type": "string",
       "enum": [
         "Standard",
@@ -476,167 +482,208 @@
         "name": "SkuTier",
         "modelAsString": false
       },
-      "description": "The SKU tier, which is based on the SKU name."
+      "readOnly": true,
+      "description": "Specifies the SKU tier."
     },
     "MqttEndpoint": {
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the endpoint is enabled."
+          "description": "Indicates whether the endpoint is enabled or not."
         }
       },
       "required": [
         "enabled"
       ],
-      "description": "The MQTT endpoint."
+      "description": "Specifies the MQTT endpoint."
     },
     "IoTHubEndpoint": {
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the endpoint is enabled."
+          "description": "Indicates whether the endpoint is enabled or not."
+        },
+        "rootCertificates": {
+          "type": "array",
+          "description": "Specifies the list of root certificates.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "enabled"
       ],
-      "description": "The IoT Hub endpoint."
+      "description": "Specifies the IoT Hub endpoint."
     },
     "Endpoints": {
       "properties": {
         "mqtt": {
           "$ref": "#/definitions/MqttEndpoint",
-          "description": "The details of the MQTT endpoint."
+          "description": "Specifies the MQTT endpoint."
         },
         "iotHub": {
           "$ref": "#/definitions/IoTHubEndpoint",
-          "description": "The details of the IoT Hub endpoint."
+          "description": "Specifies the IoT Hub endpoint."
         }
       },
-      "description": "The details of the endpoints."
+      "required": [
+        "mqtt",
+        "iotHub"
+      ],
+      "description": "Specifies the endpoint configuration."
+    },
+    "SslCertificates": {
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "Specifies the primary SSL certificate."
+        },
+        "secondary": {
+          "type": "string",
+          "description": "Specifies the secondary SSL certificate."
+        }
+      },
+      "description": "Specifies the SSL certificates."
     },
     "Networking": {
       "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "Specifies the name of the custom domain."
+        },
+        "sslCertificates": {
+          "$ref": "#/definitions/SslCertificates",
+          "description": "Specifies the SSL certificates."
+        },
         "endpoints": {
           "$ref": "#/definitions/Endpoints",
-          "description": "The details of the endpoints."
+          "description": "Specifies the endpoints."
         }
       },
-      "description": "The networking configuration."
+      "required": [
+        "endpoints"
+      ],
+      "description": "Specifies the networking configuration."
     },
     "CosmosDb": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the Cosmos DB resource."
+          "description": "Specifies the ID of the Cosmos DB resource."
         }
       },
       "required": [
         "id"
       ],
-      "description": "The details of the Cosmos DB resource in the user's subscription."
+      "description": "Specifies the Cosmos DB resource in the user's subscription."
     },
     "Extensions": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the Azure Functions resource."
+          "description": "Specifies the ID of the custom extensions resource."
         }
       },
       "required": [
         "id"
       ],
-      "description": "The details of the Azure Functions resource in the user's subscription."
+      "description": "Specifies the custom extensions resource in the user's subscription."
     },
-    "MCVPAccountPropertiesUpdateParameters": {
+    "Analytics": {
       "properties": {
-        "cosmosDb": {
-          "$ref": "#/definitions/CosmosDb",
-          "description": "The ID of the Cosmos DB resource in the user's subscription."
-        },
-        "extensions": {
-          "$ref": "#/definitions/Extensions",
-          "description": "The ID to the Azure Functions resource in the user's subscription."
-        },
-        "networking": {
-          "$ref": "#/definitions/Networking",
-          "description": "The networking configuration."
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether analytics are enabled or not."
         }
       },
-      "description": "The properties of the MCVP account to update."
+      "required": [
+        "enabled"
+      ],
+      "description": "Specifies the analytics configuration."
     },
     "MCVPAccountUpdateParameters": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the MCVP account."
+          "description": "Specifies the SKU of the MCVP account."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The list of key-value pairs that describe the MCVP account."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MCVPAccountPropertiesUpdateParameters",
-          "description": "The parameters used to update the MCVP account."
+          "description": "Specifies the list of key-value pairs that describe the MCVP account."
         }
       },
-      "description": "The parameters used to update the properties of an MCVP account."
+      "description": "Specifies the parameters used to update the properties of an MCVP account."
     },
     "MCVPAccountProperties": {
       "properties": {
+        "analytics": {
+          "$ref": "#/definitions/Analytics",
+          "description": "Specifies the analytics configuration."
+        },
         "cosmosDb": {
           "$ref": "#/definitions/CosmosDb",
-          "description": "The ID of the Cosmos DB resource in the user's subscription."
+          "description": "Specifies the ID of the Cosmos DB resource in the user's subscription."
         },
         "extensions": {
           "$ref": "#/definitions/Extensions",
-          "description": "The ID to the Azure Functions resource in the user's subscription."
+          "description": "Specifies the ID to the custom extensions resource in the user's subscription."
         },
         "networking": {
           "$ref": "#/definitions/Networking",
-          "description": "The networking configuration."
+          "description": "Specifies the networking configuration."
         },
         "provisioningState": {
           "type": "string",
           "enum": [
+            "Accepted",
             "Succeeded",
             "Failed",
             "Canceled",
-            "Accepted",
-            "Provisioning"
+            "Deleted",
+            "Deleting",
+            "Provisioning",
+            "Patching"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "The current provisioning state of the MCVP account."
+          "description": "Specifies the current provisioning state of the MCVP account."
         }
       },
-      "description": "The properties of the MCVP account."
+      "required": [
+        "cosmosDb",
+        "networking"
+      ],
+      "description": "Specifies the properties of the MCVP account."
     },
     "MCVPAccount": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the MCVP account."
+          "description": "Specifies the SKU of the MCVP account."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MCVPAccountProperties",
-          "description": "The properties of the MCVP account."
+          "description": "Specifies the properties of the MCVP account."
         }
       },
+      "required": [
+        "sku",
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The MCVP account."
+      "description": "Specifies the MCVP account."
     },
     "MCVPAccountListResult": {
       "properties": {
@@ -645,67 +692,75 @@
           "items": {
             "$ref": "#/definitions/MCVPAccount"
           },
-          "description": "The list of MCVP accounts and their properties."
+          "readOnly": true,
+          "description": "Specifies the list of MCVP accounts."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The request URL that can be used to query the next page of MCVP accounts. This is returned when the total number of requested MCVP accounts exceeds the maximum page size."
+          "description": "Specifies the URL to query the next page of MCVP accounts. This is returned when the total number of MCVP accounts exceeds the maximum page size."
         }
       },
-      "description": "The response from the operations that list MCVP accounts by subscription and by resource group."
+      "description": "Specifies the response listing MCVP accounts."
     },
     "Operation": {
       "properties": {
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the operation."
+          "description": "Specifies the name of the operation, i.e. {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}."
         },
         "display": {
           "type": "object",
-          "description": "The properties of the operation.",
           "properties": {
             "provider": {
               "type": "string",
-              "description": "The name of the resource provider."
+              "readOnly": true,
+              "description": "Specifies the localized friendly form of the resource provider name."
             },
             "resource": {
               "type": "string",
-              "description": "The name of the resource."
+              "readOnly": true,
+              "description": "Specifies the localized friendly form of the resource type related to this action/operation ."
             },
             "operation": {
               "type": "string",
-              "description": "The operation."
+              "readOnly": true,
+              "description": "Specifies the localized friendly name for the operation."
             },
             "description": {
               "type": "string",
-              "description": "The description of the operation."
+              "readOnly": true,
+              "description": "Specifies the localized friendly description for the operation."
             }
-          }
+          },
+          "description": "Specifies the localized display information for this particular operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the operation applies to the data plane."
         }
       },
-      "description": "The operation provided by the resource provider."
+      "description": "Specifies an operation supported by the resource provider."
     },
     "OperationsListResult": {
       "properties": {
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The request URL that can be used to query the next page of operations. This is returned when the total number of operations exceeds the maximum page size."
+          "description": "Specifies the URL to query the next page of supported operations. This is returned when the total number of operations exceeds the maximum page size."
         },
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "The array of operations."
+          "readOnly": true,
+          "description": "Specifies the list of supported operations."
         }
       },
-      "required": [
-          "value"
-      ],
-      "description": "The list of available operations."
+      "description": "Specifies the response listing the operations supported by the resource provider."
     }
   },
   "parameters": {

@@ -68,10 +68,10 @@
             "description": "The operation is completed successfully."
           },
           "202": {
-            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation."
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation."
           },
           "204": {
-            "description": "Request successful. Resource with the specified name does not exist."
+            "description": "Request is successful. Resource with the specified name does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -109,7 +109,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of hybrid network virtual network function resource."
+            "description": "The name of the hybrid network virtual network function resource."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -120,7 +120,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation successful. The operation returns the resulting hybrid network virtual network function resource.",
+            "description": "Operation is successful. The operation returns the resulting hybrid network virtual network function resource.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunction"
             }
@@ -166,7 +166,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunction"
             },
-            "description": "Parameters supplied in the body to create or update hybrid network virtual network function operation."
+            "description": "Parameters supplied in the body to the create or update hybrid network virtual network function operation."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -183,7 +183,7 @@
             }
           },
           "201": {
-            "description": "Created or Updated. The header contains ‘Azure-AsyncOperation’ header pointing to an operation resource. The operation URI can be queried to find the current state of the operation.",
+            "description": "Created or Updated. The header contains 'Azure-AsyncOperation' header pointing to an operation resource. The operation URI can be queried to find the current state of the operation.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunction"
             }
@@ -210,7 +210,7 @@
           "VirtualNetworkFunctions"
         ],
         "operationId": "VirtualNetworkFunctions_UpdateTags",
-        "description": "Updates the tags for hybrid network virtual network function resource.",
+        "description": "Updates the tags for the hybrid network virtual network function resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -233,7 +233,7 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update hybrid network virtual network function tags."
+            "description": "Parameters supplied to the update hybrid network virtual network function tags operation."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -265,7 +265,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/virtualNetworkFunctions": {
       "get": {
-        "description": "List all the hybrid network virtual network functions in a subscription.",
+        "description": "Lists all the hybrid network virtual network functions in a subscription.",
         "operationId": "VirtualNetworkFunctions_ListBySubscription",
         "parameters": [
           {
@@ -277,7 +277,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of hybrid network virtual network function resources.",
+            "description": "Request is successful. The operation returns a list of hybrid network virtual network function resources.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunctionListResult"
             }
@@ -308,7 +308,7 @@
           "VirtualNetworkFunctions"
         ],
         "operationId": "VirtualNetworkFunctions_ListByResourceGroup",
-        "description": "List all the hybrid network virtual network function resources in a resource group.",
+        "description": "Lists all the hybrid network virtual network function resources in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -326,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of hybrid network virtual network function resources.",
+            "description": "Request is successful. The operation returns a list of hybrid network virtual network function resources.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkFunctionListResult"
             }

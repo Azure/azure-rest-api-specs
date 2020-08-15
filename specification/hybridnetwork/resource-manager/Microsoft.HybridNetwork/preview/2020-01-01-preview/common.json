@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The defintions in this swagger specification will be used to manage the hybrid network resources.",
+    "description": "The definitions in this swagger specification will be used to manage the hybrid network resources.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -36,21 +36,29 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
-      "description": "Error details.",
+      "description": "The error response that indicates why an operation has failed.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error response details containing error code and error message.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response details containing error code and error message.",
       "type": "object",
       "additionalProperties": true,
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
         "code": {
-          "description": "Error code.",
-          "type": "string"
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
-          "description": "Error message.",
-          "type": "string"
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -162,7 +170,7 @@
         },
         "vmSwitchType": {
           "type": "string",
-          "description": "The type of VM switch",
+          "description": "The type of the VM switch.",
           "enum": [
             "Unknown",
             "Management",
@@ -240,7 +248,7 @@
     },
     "SkuType": {
       "type": "string",
-      "description": "Sku type",
+      "description": "Sku type.",
       "enum": [
         "Unknown",
         "EvolvedPacketCore",
@@ -258,7 +266,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription ID which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The subscription ID which uniquely identifies the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
