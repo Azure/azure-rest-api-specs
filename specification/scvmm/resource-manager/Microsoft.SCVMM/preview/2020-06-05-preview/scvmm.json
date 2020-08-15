@@ -85,7 +85,7 @@
           "VmmServers"
         ],
         "operationId": "VmmServers_CreateOrUpdate",
-        "description": "Create Or Update VmmServers.",
+        "description": "Onboards the SCVMM fabric as an Azure VmmServer resource.",
         "summary": "Implements VmmServers PUT method.",
         "x-ms-examples": {
           "CreateVMMServer": {
@@ -121,13 +121,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the VmmServers resource.",
+            "description": "Creates or Updates the VmmServers resource.",
             "schema": {
               "$ref": "#/definitions/VMMServer"
             }
           },
           "201": {
-            "description": "Creates the VmmServers resource.",
+            "description": "Creates or Updates the VmmServers resource.",
             "schema": {
               "$ref": "#/definitions/VMMServer"
             },
@@ -152,8 +152,8 @@
           "VmmServers"
         ],
         "operationId": "VmmServers_Delete",
-        "summary": "Deletes a VMMServer.",
-        "description": "Implements VMMServer DELETE method.",
+        "description": "Deboards the SCVMM fabric from Azure.",
+        "summary": "Implements VmmServers DELETE method.",
         "x-ms-examples": {
           "DeleteVMMServer": {
             "$ref": "./examples/DeleteVMMServer.json"
@@ -207,8 +207,8 @@
           "VmmServers"
         ],
         "operationId": "VmmServers_Update",
-        "summary": "Updates the resource.",
-        "description": "Implements PATCH method.",
+        "summary": "Implements VmmServers PATCH method.",
+        "description": "Updates the VmmServers resource.",
         "x-ms-examples": {
           "UpdateVMMServer": {
             "$ref": "./examples/UpdateVMMServer.json"
@@ -233,7 +233,7 @@
           },
           {
             "name": "body",
-            "description": "VmmServers patch details.",
+            "description": "VmmServers patch payload.",
             "in": "body",
             "required": true,
             "schema": {
@@ -427,7 +427,7 @@
           "Clouds"
         ],
         "operationId": "Clouds_CreateOrUpdate",
-        "description": "Create Or Update Clouds.",
+        "description": "Onboards the ScVmm fabric cloud as an Azure cloud resource.",
         "summary": "Implements Clouds PUT method.",
         "x-ms-examples": {
           "CreateCloud": {
@@ -463,13 +463,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the Clouds resource.",
+            "description": "Creates or Updates the Clouds resource.",
             "schema": {
               "$ref": "#/definitions/Cloud"
             }
           },
           "201": {
-            "description": "Creates the Clouds resource.",
+            "description": "Creates or Updates the Clouds resource.",
             "schema": {
               "$ref": "#/definitions/Cloud"
             },
@@ -494,8 +494,8 @@
           "Clouds"
         ],
         "operationId": "Clouds_Delete",
-        "summary": "Deletes an Cloud.",
-        "description": "Implements Cloud DELETE method.",
+        "description": "Deregisters the ScVmm fabric cloud from Azure.",
+        "summary": "Implements Cloud resource DELETE method.",
         "x-ms-examples": {
           "DeleteCloud": {
             "$ref": "./examples/DeleteCloud.json"
@@ -549,8 +549,8 @@
           "Clouds"
         ],
         "operationId": "Clouds_Update",
-        "summary": "Updates the resource.",
-        "description": "Implements PATCH method.",
+        "summary": "Implements the Clouds PATCH method.",
+        "description": "Updates the Clouds resource.",
         "x-ms-examples": {
           "UpdateCloud": {
             "$ref": "./examples/UpdateCloud.json"
@@ -575,7 +575,7 @@
           },
           {
             "name": "body",
-            "description": "Clouds patch details.",
+            "description": "Clouds patch payload.",
             "in": "body",
             "required": true,
             "schema": {
@@ -733,7 +733,7 @@
           "VirtualNetworks"
         ],
         "operationId": "VirtualNetworks_CreateOrUpdate",
-        "description": "Create Or Update VirtualNetworks.",
+        "description": "Onboards the ScVmm virtual network as an Azure virtual network resource.",
         "summary": "Implements VirtualNetworks PUT method.",
         "x-ms-examples": {
           "CreateVirtualNetwork": {
@@ -769,13 +769,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the VirtualNetworks resource.",
+            "description": "Creates or Updates the VirtualNetworks resource.",
             "schema": {
               "$ref": "#/definitions/VirtualNetwork"
             }
           },
           "201": {
-            "description": "Creates the VirtualNetworks resource.",
+            "description": "Creates or Updates the VirtualNetworks resource.",
             "schema": {
               "$ref": "#/definitions/VirtualNetwork"
             },
@@ -800,8 +800,8 @@
           "VirtualNetworks"
         ],
         "operationId": "VirtualNetworks_Delete",
-        "summary": "Deletes an VirtualNetwork.",
-        "description": "Implements VirtualNetwork DELETE method.",
+        "description": "Deregisters the ScVmm virtual network from Azure.",
+        "summary": "Implements VirtualNetwork DELETE method.",
         "x-ms-examples": {
           "DeleteVirtualNetwork": {
             "$ref": "./examples/DeleteVirtualNetwork.json"
@@ -855,8 +855,8 @@
           "VirtualNetworks"
         ],
         "operationId": "VirtualNetworks_Update",
-        "summary": "Updates the resource.",
-        "description": "Implements PATCH method.",
+        "summary": "Implements the VirtualNetworks PATCH method.",
+        "description": "Updates the VirtualNetworks resource.",
         "x-ms-examples": {
           "UpdateVirtualNetwork": {
             "$ref": "./examples/UpdateVirtualNetwork.json"
@@ -881,7 +881,7 @@
           },
           {
             "name": "body",
-            "description": "VirtualNetworks patch details.",
+            "description": "VirtualNetworks patch payload.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1039,7 +1039,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_CreateOrUpdate",
-        "description": "Create Or Update VirtualMachines.",
+        "description": "Creates Or Updates virtual machines deployed on scvmm fabric.",
         "summary": "Implements VirtualMachines PUT method.",
         "x-ms-examples": {
           "CreateVirtualMachine": {
@@ -1075,13 +1075,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the VirtualMachines resource.",
+            "description": "Creates or Updates the VirtualMachines resource.",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
           },
           "201": {
-            "description": "Creates the VirtualMachines resource.",
+            "description": "Creates or Updates the VirtualMachines resource.",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             },
@@ -1106,8 +1106,8 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Delete",
-        "summary": "Deletes an VirtualMachine.",
-        "description": "Implements VirtualMachine DELETE method.",
+        "summary": "Implements VirtualMachine DELETE method.",
+        "description": "Deletes a VirtualMachine deployed on ScVmm fabric.",
         "x-ms-examples": {
           "DeleteVirtualMachine": {
             "$ref": "./examples/DeleteVirtualMachine.json"
@@ -1161,8 +1161,8 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Update",
-        "summary": "Updates the resource.",
-        "description": "Implements PATCH method.",
+        "summary": "Implements the VirtualMachines PATCH method.",
+        "description": "Updates the VirtualMachines resource.",
         "x-ms-examples": {
           "UpdateVirtualMachine": {
             "$ref": "./examples/UpdateVirtualMachine.json"
@@ -1187,7 +1187,7 @@
           },
           {
             "name": "body",
-            "description": "VirtualMachines patch details.",
+            "description": "VirtualMachines patch payload.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1345,7 +1345,7 @@
           "VirtualMachineTemplates"
         ],
         "operationId": "VirtualMachineTemplates_CreateOrUpdate",
-        "description": "Create Or Update VirtualMachineTemplates.",
+        "description": "Onboards the ScVmm vmtemplate as an Azure vmtemplate resource.",
         "summary": "Implements VirtualMachineTemplates PUT method.",
         "x-ms-examples": {
           "CreateVirtualMachineTemplate": {
@@ -1381,13 +1381,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the VirtualMachineTemplates resource.",
+            "description": "Creates or Updates the VirtualMachineTemplates resource.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineTemplate"
             }
           },
           "201": {
-            "description": "Creates the VirtualMachineTemplates resource.",
+            "description": "Creates or Updates the VirtualMachineTemplates resource.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineTemplate"
             },
@@ -1412,8 +1412,8 @@
           "VirtualMachineTemplates"
         ],
         "operationId": "VirtualMachineTemplates_Delete",
-        "summary": "Deletes an VirtualMachineTemplate.",
-        "description": "Implements VirtualMachineTemplate DELETE method.",
+        "description": "Deregisters the ScVmm vmtemplate from Azure.",
+        "summary": "Implements VirtualMachineTemplate DELETE method.",
         "x-ms-examples": {
           "DeleteVirtualMachineTemplate": {
             "$ref": "./examples/DeleteVirtualMachineTemplate.json"
@@ -1467,8 +1467,8 @@
           "VirtualMachineTemplates"
         ],
         "operationId": "VirtualMachineTemplates_Update",
-        "summary": "Updates the resource.",
-        "description": "Implements PATCH method.",
+        "summary": "Implements the VirtualMachineTemplate PATCH method.",
+        "description": "Updates the VirtualMachineTemplate resource.",
         "x-ms-examples": {
           "UpdateVirtualMachineTemplate": {
             "$ref": "./examples/UpdateVirtualMachineTemplate.json"
@@ -1705,7 +1705,7 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-		  "description": "The system data."
+          "description": "The system data."
         },
         "extendedLocation": {
           "type": "object",
@@ -1836,7 +1836,7 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-		  "description": "The system data."
+          "description": "The system data."
         },
         "extendedLocation": {
           "type": "object",
@@ -1945,7 +1945,7 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-		  "description": "The system data."
+          "description": "The system data."
         },
         "extendedLocation": {
           "type": "object",
@@ -1997,11 +1997,11 @@
         },
         "cloudId": {
           "type": "string",
-          "description": "ARM Id of the cloud resource to deploy the vm."
+          "description": "ARM Id of the cloud resource to use for deploying the vm."
         },
         "templateId": {
           "type": "string",
-          "description": "ARM Id of the template resource to deploy the vm."
+          "description": "ARM Id of the template resource to use for deploying the vm."
         },
         "osProfile": {
           "description": "OS properties.",
@@ -2021,7 +2021,7 @@
         },
         "vmName": {
           "type": "string",
-          "description": "VMName is the name of VM on the SCVMM server",
+          "description": "VMName is the name of VM on the SCVMM server.",
           "minLength": 1
         },
         "uuid": {
@@ -2055,7 +2055,7 @@
       "type": "object",
       "properties": {
         "adminPassword": {
-          "description": "Admin password of the virtual machine",
+          "description": "Admin password of the virtual machine.",
           "type": "string",
           "x-ms-secret": true
         },
@@ -2151,7 +2151,7 @@
           "readOnly": true
         },
         "ipv6Addresses": {
-          "description": "Gets or sets the nic ipv4 addresses.",
+          "description": "Gets or sets the nic ipv6 addresses.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2159,11 +2159,11 @@
           "readOnly": true
         },
         "macAddress": {
-          "description": "Gets or sets the NIC MAC address.",
+          "description": "Gets or sets the nic MAC address.",
           "type": "string"
         },
         "networkId": {
-          "description": "Gets or sets the ARM Id of the network resource to connect the virtual machine.",
+          "description": "Gets or sets the ARM Id of the network resource to connect to the nic.",
           "type": "string"
         },
         "nicId": {
@@ -2202,17 +2202,17 @@
         "cpuCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of CPUs allocated in the cloud"
+          "description": "CPUCount specifies the maximum number of CPUs that can be allocated in the cloud."
         },
         "memoryMB": {
           "type": "integer",
           "format": "int64",
-          "description": "memoryMB specifies a memory usage limit in megabytes."
+          "description": "MemoryMB specifies a memory usage limit in megabytes."
         },
         "vmCount": {
           "type": "integer",
           "format": "int64",
-          "description": "VMCount gives the max number of VMs"
+          "description": "VMCount gives the max number of VMs that can be deployed in the cloud."
         }
       },
       "readOnly": true
@@ -2340,7 +2340,7 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-		  "description": "The system data."
+          "description": "The system data."
         },
         "extendedLocation": {
           "type": "object",
@@ -2389,7 +2389,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "ID used to uniquily identify the virtual network.",
+          "description": "Unique ID of the virtual machine template.",
           "minLength": 1
         },
         "vmmServerId": {
@@ -2409,12 +2409,12 @@
         "memoryMB": {
           "type": "integer",
           "format": "int32",
-          "description": "MemoryMB is the size of a virtual machine's memory, in MB.",
+          "description": "MemoryMB is the desired size of a virtual machine's memory, in MB.",
           "readOnly": true
         },
         "cpuCount": {
           "type": "integer",
-          "description": "Gets or sets the number of vCPUs for the vm.",
+          "description": "Gets or sets the desired number of vCPUs for the vm.",
           "format": "int32",
           "readOnly": true
         },
@@ -2452,7 +2452,7 @@
           "readOnly": true
         },
         "disks": {
-          "description": "Gets or sets the disks the template.",
+          "description": "Gets or sets the disks of the template.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
@@ -2507,7 +2507,7 @@
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-		  "description": "The system data."
+          "description": "The system data."
         },
         "extendedLocation": {
           "type": "object",
@@ -2555,7 +2555,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+          "description": "Operation name, in format of {provider}/{resource}/{operation}."
         },
         "display": {
           "type": "object",
@@ -2570,7 +2570,7 @@
             },
             "operation": {
               "type": "string",
-              "description": "Type of operation: get, read, delete, etc."
+              "description": "Type of operation: read, write, delete, etc."
             },
             "description": {
               "type": "string",
@@ -2678,7 +2678,7 @@
           "description": "Resource tags."
         }
       },
-      "description": "Object containing updates for patch operations."
+      "description": "Object containing tags updates for patch operations."
     }
   },
   "parameters": {
@@ -2687,7 +2687,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
