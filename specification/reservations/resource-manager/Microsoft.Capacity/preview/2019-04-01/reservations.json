@@ -168,7 +168,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PurchaseParameter"
+            "$ref": "#/parameters/CalculateParameter"
           }
         ],
         "tags": [
@@ -1022,7 +1022,7 @@
       "type": "object",
       "properties": {
         "purchaseProperties": {
-          "$ref": "#/definitions/PurchaseRequest"
+          "$ref": "#/definitions/CalculateRequest"
         },
         "pricingCurrencyTotal": {
           "type": "object",
@@ -1237,6 +1237,48 @@
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "quantity": {
+          "$ref": "#/definitions/PurchaseReservationQuantity"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the Reservation"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopes": {
+          "$ref": "#/definitions/AppliedScopes"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "reservedResourceProperties": {
+          "type": "object",
+          "description": "Properties specific to each reserved resource type. Not required if not applicable.",
+          "properties": {
+            "instanceFlexibility": {
+              "$ref": "#/definitions/InstanceFlexibility"
+            }
+          }
+        }
+      }
+    },
+    "CalculateRequestProperties": {
+      "type": "object",
+      "properties": {
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "term": {
+          "$ref": "#/definitions/ReservationTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "quantity": {
           "$ref": "#/definitions/ReservationQuantity"
         },
         "displayName": {
@@ -1344,6 +1386,22 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PurchaseRequestProperties"
+        }
+      }
+    },
+    "CalculateRequest": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the reserved resource lives."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CalculateRequestProperties"
         }
       }
     },
@@ -1567,6 +1625,10 @@
       "format": "int32",
       "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
     },
+    "PurchaseReservationQuantity": {
+      "type": "string",
+      "description": "Quantity of the SKUs that are part of the Reservation, as a string. Must be greater than zero."
+    },
     "Properties": {
       "type": "object",
       "properties": {
@@ -1672,6 +1734,16 @@
       "description": "Information needed for calculate or purchase reservation",
       "schema": {
         "$ref": "#/definitions/PurchaseRequest"
+      }
+    },
+    "CalculateParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed for calculate or purchase reservation",
+      "schema": {
+        "$ref": "#/definitions/CalculateRequest"
       }
     },
     "ReservationIdParameter": {
