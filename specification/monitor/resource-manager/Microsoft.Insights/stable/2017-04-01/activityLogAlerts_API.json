@@ -414,12 +414,18 @@
         "equals": {
           "type": "string",
           "description": "The field value will be compared to this value (case-insensitive) to determine if the condition is met."
+        },
+        "conatinsAny": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The field value will be compared to the values in this array (case-insensitive) to determine if the condition is met."
         }
       },
       "description": "An Activity Log alert condition that is met by comparing an activity log field and value.",
       "required": [
-        "field",
-        "equals"
+        "field"
       ]
     },
     "ActivityLogAlertActionList": {
