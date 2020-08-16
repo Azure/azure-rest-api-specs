@@ -513,15 +513,14 @@
       }
     },
     "OperationListResult": {
-      "description": "Result of the List Operations operation",
-      "type": "object",
+      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "A collection of operations",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationLive"
-          }
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of CDN operations supported by the CDN resource provider."
         },
         "nextLink": {
           "type": "string",
@@ -529,48 +528,30 @@
         }
       }
     },
-    "OperationLive": {
-      "description": "Represents an operation returned by the GetOperations request",
+    "Operation": {
+      "description": "CDN REST API operation",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the operation",
+          "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
         "display": {
-          "$ref": "#/definitions/OperationInfo",
-          "description": "Display name of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Properties of the operation",
-          "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperationInfo": {
-      "description": "Information about an operation",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Name of the provider",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Name of the resource type",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the operation",
-          "type": "string"
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Cdn",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
         }
       }
     }
