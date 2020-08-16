@@ -712,6 +712,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js compute/resource-manager
 ```
 
 ## Go
@@ -804,6 +807,10 @@ input-file:
 - Microsoft.Compute/stable/2017-12-01/compute.json
 - Microsoft.Compute/stable/2017-03-30/disk.json
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
