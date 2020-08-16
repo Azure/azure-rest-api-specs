@@ -34,18 +34,13 @@
     }
   },
   "paths": {
-    "/providers/microsoft.insights/operations": {
+    "/providers/Microsoft.Insights/operations": {
       "get": {
         "tags": [
           "Operations"
         ],
-        "summary": "List available operations.",
-        "description": "List the available operations supported by the resource provider.",
+        "description": "Lists all of the available insights REST API operations.",
         "operationId": "Operations_List",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -53,23 +48,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationsListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Insights error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        }
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/queryPacks": {
@@ -513,7 +512,7 @@
         }
       }
     },
-    "OperationsListResult": {
+    "OperationListResult": {
       "description": "Result of the List Operations operation",
       "type": "object",
       "properties": {
