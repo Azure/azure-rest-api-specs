@@ -308,7 +308,15 @@
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/JobStatus"
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/JobStatus"
+            }
+          ],
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "codeConfiguration": {
           "$ref": "#/definitions/CodeConfiguration"
@@ -370,7 +378,10 @@
         "computeBinding": {
           "$ref": "#/definitions/ComputeBinding"
         }
-      }
+      },
+      "required": [
+        "computeBinding"
+      ]
     },
     "CodeJobCreateResourceArmDto": {
       "description": "Azure Resource Management create resource envelope.",
