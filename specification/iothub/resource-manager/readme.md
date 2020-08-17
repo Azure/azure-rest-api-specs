@@ -26,18 +26,27 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-preview-2020-07
 ```
 
 
+### Tag: package-preview-2020-07
+
+These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-07'
+input-file:
+  - Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+```
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.Devices/stable/2020-06-15/iothub.json
 ```
+
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -168,6 +177,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js iothub/resource-manager
 ```
 
 ## C#
@@ -191,6 +203,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
