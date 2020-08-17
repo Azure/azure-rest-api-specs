@@ -520,38 +520,27 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Cdn",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            },
-            "isDataAction": {
-              "description": "Indicates whether the operation is a data action",
-              "type": "boolean"
-            },
-            "display": {
-              "$ref": "#/definitions/OperationDisplay",
-              "description": "Display of the operation"
-            }
-          }
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
         }
       }
     },
     "OperationListResult": {
       "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Operation"
           },
