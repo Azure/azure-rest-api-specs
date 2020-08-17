@@ -16,11 +16,21 @@
           "allOf": [
             {
               "field": "Category",
-              "equals": "Administrative"
+              "equals": "ServiceHealth"
             },
             {
-              "field": "Level",
-              "equals": "Error"
+              "anyOf": [
+                {
+                  "field": "properties.incidentType",
+                  "equals": "Incident",
+                  "containsAny": null
+                },
+                {
+                  "field": "properties.incidentType",
+                  "equals": "Maintenance",
+                  "containsAny": null
+                }
+              ]
             }
           ]
         },
@@ -56,11 +66,21 @@
             "allOf": [
               {
                 "field": "Category",
-                "equals": "Administrative"
+                "equals": "ServiceHealth"
               },
               {
-                "field": "Level",
-                "equals": "Error"
+                "anyOf": [
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Incident",
+                    "containsAny": null
+                  },
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Maintenance",
+                    "containsAny": null
+                  }
+                ]
               }
             ]
           },
@@ -95,11 +115,21 @@
             "allOf": [
               {
                 "field": "Category",
-                "equals": "Administrative"
+                "equals": "ServiceHealth"
               },
               {
-                "field": "Level",
-                "equals": "Error"
+                "anyOf": [
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Incident",
+                    "containsAny": null
+                  },
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Maintenance",
+                    "containsAny": null
+                  }
+                ]
               }
             ]
           },
