@@ -534,6 +534,14 @@
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
               "type": "string"
+            },
+            "isDataAction": {
+              "description": "Indicates whether the operation is a data action",
+              "type": "boolean"
+            },
+            "display": {
+              "$ref": "#/definitions/OperationDisplay",
+              "description": "Display of the operation"
             }
           }
         }
@@ -552,6 +560,28 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
         }
       }
     }
