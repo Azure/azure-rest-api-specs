@@ -18,6 +18,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
       "post": {
+        "tags": ["Subscription"],
         "operationId": "Subscription_Cancel",
         "x-ms-examples": {
           "cancelSubscription": {
@@ -51,6 +52,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
       "post": {
+        "tags": ["Subscription"],
         "operationId": "Subscription_Rename",
         "x-ms-examples": {
           "renameSubscription": {
@@ -87,6 +89,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
       "post": {
+        "tags": ["Subscription"],
         "operationId": "Subscription_Enable",
         "x-ms-examples": {
           "enableSubscription": {
@@ -120,6 +123,7 @@
     },
     "/providers/Microsoft.Subscription/operations": {
       "get": {
+        "tags": ["Subscription"],
         "description": "Lists all of the available Microsoft.Subscription API operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
@@ -150,8 +154,9 @@
     },
     "/providers/Microsoft.Subscription/aliases/{aliasName}": {
       "put": {
+        "tags": ["Alias"],
         "description": "Create Alias Subscription.",
-        "operationId": "Subscription_CreateAlias",
+        "operationId": "Alias_Create",
         "x-ms-examples": {
           "CreateAlias": {
             "$ref": "./examples/createAlias.json"
@@ -196,8 +201,9 @@
         ]
       },
       "get": {
+        "tags": ["Alias"],
         "description": "Get Alias Subscription.",
-        "operationId": "Subscription_GetAlias",
+        "operationId": "Alias_Get",
         "x-ms-examples": {
           "GetAlias": {
             "$ref": "./examples/getAlias.json"
@@ -227,8 +233,9 @@
         ]
       },
       "delete": {
+        "tags": ["Alias"],
         "description": "Delete Alias.",
-        "operationId": "Subscription_DeleteAlias",
+        "operationId": "Alias_Delete",
         "x-ms-examples": {
           "DeleteAlias": {
             "$ref": "./examples/deleteAlias.json"
@@ -260,8 +267,9 @@
     },
     "/providers/Microsoft.Subscription/aliases": {
       "get": {
+        "tags": ["Alias"],
         "description": "Get Alias Subscription.",
-        "operationId": "Subscription_ListAlias",
+        "operationId": "Alias_List",
         "x-ms-examples": {
           "GetAlias": {
             "$ref": "./examples/listAlias.json"
