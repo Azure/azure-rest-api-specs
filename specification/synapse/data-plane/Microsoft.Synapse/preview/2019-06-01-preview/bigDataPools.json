@@ -16,6 +16,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/bigDataPools": {
       "get": {
@@ -29,11 +35,6 @@
             "$ref": "./examples/BigDataPools_List.json"
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -43,13 +44,13 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/BigDataPoolListResponse"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfoListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
             }
           }
         }
@@ -67,11 +68,6 @@
             "$ref": "./examples/BigDataPools_Get.json"
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -84,80 +80,20 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/BigDataPoolResponse"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceInfo"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
             }
           }
         }
       }
     }
   },
-  "definitions": {
-    "BigDataPoolListResponse": {
-      "description": "A list of BigDataPools in this workspace",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Big Data Pools",
-          "items": {
-            "$ref": "#/definitions/BigDataPoolResponse"
-          }
-        },
-        "nextLink": {
-          "description": "The link to the next page of results, if any remaining results exist.",
-          "type": "string"
-        }
-      }
-    },
-    "BigDataPoolResponse": {
-      "description": "BigDataPool information",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        },
-        "tags": {
-          "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
-        "properties": {
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json#/definitions/BigDataPoolResourceProperties",
-          "description": "Big Data pool properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {
     "ApiVersionParameter": {
       "name": "api-version",

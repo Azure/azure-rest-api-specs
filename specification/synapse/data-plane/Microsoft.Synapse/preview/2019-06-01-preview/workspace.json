@@ -16,6 +16,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/workspace": {
       "get": {
@@ -29,11 +35,6 @@
             "$ref": "./examples/Workspace_Get.json"
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -43,117 +44,20 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceResponse"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/Workspace"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
             }
           }
         }
       }
     }
   },
-  "definitions": {
-    "WorkspaceResponse": {
-      "description": "Workspace information",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        },
-        "tags": {
-          "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
-        "identity": {
-          "description": "Workspace MSI information",
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ManagedIdentity"
-        },
-        "properties": {
-          "description": "Workspace Properties",
-          "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/WorkspaceProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ErrorContract": {
-      "title": "Error details.",
-      "description": "Contains details when the response code indicates an error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
-        }
-      }
-    },
-    "ErrorDetail": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {
     "ApiVersionParameter": {
       "name": "api-version",

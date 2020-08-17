@@ -16,6 +16,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/sqlPools": {
       "get": {
@@ -29,11 +35,6 @@
             "$ref": "./examples/SqlPools_List.json"
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -43,13 +44,13 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/SqlPoolListResponse"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPoolInfoListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
             }
           }
         }
@@ -67,11 +68,6 @@
             "$ref": "./examples/SqlPools_Get.json"
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -84,149 +80,20 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "#/definitions/SqlPoolResponse"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json#/definitions/SqlPool"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
             }
           }
         }
       }
     }
   },
-  "definitions": {
-    "SqlPoolListResponse": {
-      "description": "A list of SqlPools in this workspace",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Sql Pools",
-          "items": {
-            "$ref": "#/definitions/SqlPoolResponse"
-          }
-        },
-        "nextLink": {
-          "description": "The link to the next page of results, if any remaining results exist.",
-          "type": "string"
-        }
-      }
-    },
-    "SqlPoolResponse": {
-      "description": "SqlPool information",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        },
-        "tags": {
-          "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SQL pool SKU"
-        },
-        "properties": {
-          "$ref": "#/definitions/SqlPoolResourceProperties",
-          "description": "SQL pool properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SqlPoolResourceProperties": {
-      "type": "object",
-      "title": "SQL pool properties",
-      "description": "Properties of a SQL Analytics pool",
-      "properties": {
-        "maxSizeBytes": {
-          "type": "integer",
-          "description": "Maximum size in bytes",
-          "format": "int64"
-        },
-        "collation": {
-          "type": "string",
-          "description": "Collation mode"
-        },
-        "sourceDatabaseId": {
-          "type": "string",
-          "description": "Source database to create from"
-        },
-        "recoverableDatabaseId": {
-          "type": "string",
-          "description": "Backup database to restore from"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Resource state"
-        },
-        "status": {
-          "type": "string",
-          "description": "Resource status"
-        },
-        "restorePointInTime": {
-          "type": "string",
-          "description": "Snapshot time to restore",
-          "format": "date-time"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "What is this?"
-        },
-        "creationDate": {
-          "type": "string",
-          "description": "Date the SQL pool was created",
-          "format": "date-time"
-        }
-      }
-    },
-    "Sku": {
-      "type": "object",
-      "title": "Sku",
-      "description": "SQL pool SKU",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The SKU name"
-        },
-        "tier": {
-          "type": "string",
-          "description": "The SKU name"
-        },
-        "capacity": {
-          "type": "integer",
-          "description": "The SKU capacity"
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {
     "ApiVersionParameter": {
       "name": "api-version",
