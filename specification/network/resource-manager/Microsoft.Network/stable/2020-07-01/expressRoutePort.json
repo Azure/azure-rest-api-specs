@@ -958,6 +958,81 @@
           "description": "The content as a base64 encoded string."
         }
       }
+    },
+    "ExpressRoutePortAuthorizationPropertiesFormat": {
+      "title": "ExpressRoute Port Authorization Properties",
+      "description": "Properties of ExpressRoutePort Authorization.",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorization key."
+        },
+        "authorizationUseStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The authorization use status.",
+          "enum": [
+            "Available",
+            "InUse"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationUseStatus",
+            "modelAsString": true
+          }
+        },
+        "circuit": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the ExpressRoute circuit resource using the authorization."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the authorization resource."
+        }
+      }
+    },
+    "ExpressRoutePortAuthorization": {
+      "title": "ExpressRoute Port Authorization",
+      "description": "ExpressRoutePort Authorization resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRoutePortAuthorizationPropertiesFormat",
+          "description": "ExpressRoutePort properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRoutePortAuthorizationListResult": {
+      "title": "ExpressRoute Port Authorization List Result",
+      "description": "Response for ListExpressRoutePortAuthorizations API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRoutePortAuthorization"
+          },
+          "description": "The authorizations in an ExpressRoute Port."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
     }
   }
 }
