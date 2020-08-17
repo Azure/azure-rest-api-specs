@@ -85,6 +85,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js appconfiguration/resource-manager
 ```
 
 ## C#
@@ -129,6 +132,10 @@ directive:
     reason: This is data plane level information proxied through the RP and cannot be changed.
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -141,10 +148,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppConfiguration/stable/2020-06-01/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/preview/2019-11-01-preview/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/preview/2019-02-01-preview/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/2019-10-01/appconfiguration.json
-  - $(this-folder)/Microsoft.AppConfiguration/stable/2020-06-01/appconfiguration.json
 
 ```
 

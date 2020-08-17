@@ -232,6 +232,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js authorization/resource-manager
 ```
 
 ## Go
@@ -241,6 +244,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
@@ -254,17 +261,18 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-  - $(this-folder)/Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-  - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 
 ```

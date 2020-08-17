@@ -622,6 +622,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js resources/resource-manager
 ```
 
 ## Go
@@ -666,6 +669,10 @@ override-info:
   title: PolicyClient
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -678,9 +685,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2020-06-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
-  - $(this-folder)/Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
@@ -702,6 +709,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
