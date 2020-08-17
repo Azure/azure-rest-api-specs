@@ -268,6 +268,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js applicationinsights/resource-manager
 ```
 
 ## Go
@@ -336,6 +339,10 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -348,31 +355,32 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
-  - $(this-folder)/Microsoft.Insights/stable/2015-05-01/components_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/favorites_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2018-05-01-preview/components_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json
+  - $(this-folder)/Microsoft.Insights/stable/2015-05-01/components_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-10-17-preview/workbookTemplates_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-05-01-preview/componentProactiveDetection_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2018-05-01-preview/components_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPackQueries_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPacks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-02-02-preview/components_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set,
