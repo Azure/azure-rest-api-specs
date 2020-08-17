@@ -8770,6 +8770,24 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+	"A2AVmDiskDetails": {
+	  "description": "Azure VM disk details.",
+	  "type": "object",
+	  "properties": {
+	    "diskUri": {
+		  "description": "The disk Uri.",
+		  "type": "string"
+		},
+        "recoveryAzureStorageAccountId": {
+		  "description": "The recovery VHD storage account Id.",
+		  "type": "string"
+		},
+        "primaryStagingAzureStorageAccountId": {
+		  "description": "The primary staging storage account Id.",
+		  "type": "string"
+		}
+	  }
+	},
     "A2AVmDiskInputDetails": {
       "description": "Azure VM disk input details.",
       "type": "object",
@@ -8788,6 +8806,40 @@
         }
       }
     },
+	"A2AVmManagedDiskDetails": {
+	  "description": "Azure VM managed disk input details.",
+	  "type": "object",
+	  "properties": {
+        "diskId": {
+		  "description": "The disk Id.",
+		  "type": "string"
+		},
+		"primaryStagingAzureStorageAccountId":{
+          "description": "The primary staging storage account Arm Id.",
+		  "type": "string"
+		},
+		"recoveryResourceGroupId": {
+          "description": "The target resource group Arm Id.",
+		  "type": "string"
+		},
+		"recoveryReplicaDiskAccountType": {
+          "description": "The replica disk type.",
+		  "type": "string"
+		},
+        "recoveryTargetDiskAccountType": {
+		  "description": "The target disk type after failover.",
+          "type": "string"
+		},
+		"recoveryDiskEncryptionSetId": {
+		  "description": "The recovery disk encryption set Id.",
+		  "type": "string"
+		},
+        "diskEncryptionInfo": {
+		  "$ref":"#/definitions/DiskEncryptionInfo",
+		  "description":"The recovery disk encryption information (for one / single pass flows)."
+		}
+	  }
+	},
     "A2AVmManagedDiskInputDetails": {
       "description": "Azure VM managed disk input details.",
       "type": "object",
@@ -14709,6 +14761,16 @@
         }
       }
     },
+	"ProtectionProfileCustomDetails": {
+	  "description": "Protection Profile custom input.",
+	  "type": "object",
+	  "properties": {
+	    "instanceType":{
+          "description": "The class type.",
+		  "type": "string"
+		}
+	  }
+	},
     "ProviderError": {
       "description": "This class contains the error details per object.",
       "type": "object",
