@@ -9548,17 +9548,6 @@
       "description": "Create protection intent input.",
       "type": "object",
 	  "properties": {
-	    "location": {
-		  "description": "Create protection intent resource location.",
-		  "type": "string"
-		},
-        "tags": {
-		  "description": "Create protection intent's tags.",
-		  "type": "array",
-		  "items": {
-		    "type": "string"
-		  }
-		},
         "properties": {
 		  "$ref": "#/definitions/CreateProtectionIntentProperties",
           "description": "Create protection intent input properties."
@@ -16212,32 +16201,14 @@
       }
     },
 	"ReplicationProtectionIntent": {
-	  "description": "Replication protection intent.",
+      "description": "Replication protection intent.",
 	  "type": "object",
+	  "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
 	  "properties": {
-	    "id": {
-		  "description": "The Id.",
-		  "type": "string"
-		},
-        "name": {
-		  "description": "The name.",
-		  "type": "string"
-		},
-		"type": {
-		  "description": "The Type of the object.",
-		  "type": "string"
-		},
-        "location": {
-		  "description": "Protection intent resource location.",
-		  "type":"string"
-		},
-        "tags": {
-		  "description": "Create protection intent's tags.",
-		  "type": "array",
-		  "items": {
-		    "type": "string"
-		  }
-		},
         "properties": {
 		  "$ref": "#/definitions/ReplicationProtectionIntentProperties",
 		  "description": "The custom data."
