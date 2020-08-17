@@ -196,7 +196,6 @@
             "schema": {
               "$ref": "#/definitions/Alert"
             }
-
           }
         },
         "x-ms-examples": {
@@ -4071,111 +4070,111 @@
         }
       }
     },
-	"/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationProtectionIntent/{replicationProtectionIntentName}": {
-	  "get": {
-	    "tags":[
-		  "ReplicationProtectionIntent"
-		],
-		"summary": "Gets the details of a Replication protection intent item.",
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationProtectionIntent/{replicationProtectionIntentName}": {
+      "get": {
+        "tags": [
+          "ReplicationProtectionIntent"
+        ],
+        "summary": "Gets the details of a Replication protection intent item.",
         "description": "Gets the details of an ASR replication protection intent.",
-		"operationId": "ReplicationProtectionIntent_Get",
-		"produces": [
-		  "application/json"
-		],
-		"parameters": [
-		  {
-			"$ref": "#/parameters/ApiVersion"
-	      },
-		  {
-			"$ref": "#/parameters/ResourceName"
-		  },
-		  {
-            "$ref": "#/parameters/ResourceGroupName"
-		  },
-		  {
-			"$ref": "#/parameters/SubscriptionId"
-	      },
+        "operationId": "ReplicationProtectionIntent_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
           {
-		    "name": "replicationProtectionIntentName",
-			"in": "path",
-			"description": "Replication protection intent name.",
-			"required": true,
-			"type": "string"
-		  }
-		],
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "replicationProtectionIntentName",
+            "in": "path",
+            "description": "Replication protection intent name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
-		  "200": {
-		    "description": "OK",
-			"schema": {
-			    "$ref": "#/definitions/ReplicationProtectionIntent"
-		    }
-		  }
-		},
-		"x-ms-examples": {
-		  "Gets the details of a Replication protection intent item.": {
-		    "$ref": "./examples/ReplicationProtectionIntent_Get.json"
-	      }
-		}
-	  },	
-	  "put": {
-	    "tags": [
-		  "ReplicationProtectionIntent"
-		],
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionIntent"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a Replication protection intent item.": {
+            "$ref": "./examples/ReplicationProtectionIntent_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReplicationProtectionIntent"
+        ],
         "summary": "Create protection intent Resource.",
         "description": "The operation to create an ASR replication protection intent item.",
         "operationId": "ReplicationProtectionIntent_Create",
-	    "consumes": [
-	      "application/json"
-	    ],
-	    "produces": [
-	      "application/json"
-	    ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-	      {
-		    "$ref": "#/parameters/ApiVersion"
-		  },
-		  {
-		    "$ref": "#/parameters/ResourceName"
-		  },
-		  {
-		    "$ref": "#/parameters/ResourceGroupName"
-		  },
-		  {
-		    "$ref": "#/parameters/SubscriptionId"
-		  },
           {
-		    "name": "replicationProtectionIntentName",
-			"in": "path",
-			"description": "A name for the replication protection item.",
-			"required": true,
-			"type": "string"
-		  },
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
-	        "name": "input",
-		    "in": "body",
-		    "description": "Create Protection Intent Input.",
-		    "required": true,
-		    "schema": {
-		      "$ref": "#/definitions/CreateProtectionIntentInput"
-		    }
-		  }
-	    ],
-        "responses":{
-	    "200":{
-		  "description": "OK",
-		  "schema": {
-		    "$ref": "#/definitions/ReplicationProtectionIntent"
-		  }
-		}
-	  },
-	    "x-ms-examples": {
-	      "Create protection intent Resource.": {
-		    "$ref": "./examples/ReplicationProtectionIntent_Create.json"
-		  }
-	    }
-	  }
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "replicationProtectionIntentName",
+            "in": "path",
+            "description": "A name for the replication protection item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Create Protection Intent Input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProtectionIntentInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionIntent"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create protection intent Resource.": {
+            "$ref": "./examples/ReplicationProtectionIntent_Create.json"
+          }
+        }
+      }
     },
-	"/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}": {
       "get": {
         "tags": [
           "ReplicationProtectionContainerMappings"
@@ -7572,10 +7571,10 @@
         }
       },
       "x-ms-discriminator-value": "A2A"
-    },	
-    "A2ACreateProtectionIntentInput":{
+    },
+    "A2ACreateProtectionIntentInput": {
       "description": "A2A create protection intent input.",
-      "required":[
+      "required": [
         "fabricObjectId",
         "primaryLocation",
         "recoveryLocation",
@@ -7590,107 +7589,107 @@
       ],
       "properties": {
         "fabricObjectId": {
-	      "description": "The fabric specific object Id of the virtual machine.",
-	      "type": "string"
-	    },
-	    "primaryLocation": {
-	      "description": "The primary location for the virtual machine.",
-	      "type": "string"
-	    },
-	    "recoveryLocation": {
-	      "description": "The recovery location for the virtual machine.",
-	      "type":"string"
-	    },
-	    "recoverySubscriptionId": {
-	      "description": "The recovery subscription Id of the virtual machine.",
-	      "type": "string"
-	    },
-	    "recoveryAvailabilityType": {
-	      "description":"The recovery availability type of the virtual machine.",
-	      "type": "string"
-	    },
-	    "primaryFabricFriendlyName": {
-	       "description": "The recovery fabric Name.",
-	       "type": "string"
-	    },
-	    "recoveryFabricFriendlyName": {
-	      "description": "The recovery fabric Name.",
-	      "type": "string"
-	    },
-	    "primaryContainerFriendlyName": {
-		  "description": "The primary container Name.",
-	      "type": "string"
-	    },
-	    "recoveryContainerFriendlyName": {
-	      "description": "The recovery container Name.",
-	      "type":"string"
-	    },
-	    "protectionProfileCustomDetails": {
-	      "$ref": "#/definitions/ProtectionProfileCustomDetails",
-	      "description": "The protectionProfile details."
-	    },
-	    "recoveryResourceGroupCustomDetails": {
-	      "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
-	      "description": "The recovery resource group details."
-	    },
-	    "recoveryAvailabilitySetCustomDetails": {
-	      "$ref": "#/definitions/RecoveryAvailabilitySetCustomDetails",
-	      "description":"The recovery availability set details."
-	    },
-	    "recoveryVirtualNetworkCustomDetails": {
-	      "$ref": "#/definitions/RecoveryVirtualNetworkCustomDetails",
-	      "description": "The recovery virtual network details."
-	    },
-	    "recoveryProximityPlacementGroupCustomDetails": {
-	      "$ref": "#/definitions/RecoveryProximityPlacementGroupCustomDetails",
-	      "description":"The recovery proximity placement group custom details."
-	    },
-	    "autoProtectionOfDataDiskStatus": {
-	      "description": "A value indicating whether the auto protection is enabled.",
-	      "enum": [
-	        "Disabled",
-		    "Enabled"
-	      ],
-	      "type":"string",
-	      "x-ms-enum": {
-	        "name": "AutoProtectionOfDataDiskStatus",
-	        "modelAsString": true
-	      }
-	    },
-	    "vmDisks": {
-	      "description": "The list of vm disk details.",
-	      "type": "array",
-	      "items": {
-	        "$ref": "#/definitions/A2AProtectionIntentDiskInputDetails"
-	      }
-	    },
-	    "vmManagedDisks": {
-	      "description": "The list of vm managed disk details.",
-	      "type": "array",
-	      "items": {
-	        "$ref": "#/definitions/A2AProtectionIntentManagedDiskInputDetails"
-	      }
-	    },
-	    "multiVmGroupName": {
-	      "description": "The multi vm group name.",
-	      "type": "string"
-	    },
-	    "multiVmGroupId": {
-	      "description": "The multi vm group id.",
-	      "type": "string"
-	    },
-	    "recoveryBootDiagStorageAccount": {
-	      "$ref": "#/definitions/StorageAccountCustomDetails",
-	      "description": "The boot diagnostic storage account."
-	    },
-	    "diskEncryptionInfo": {
-	      "$ref": "#/definitions/DiskEncryptionInfo",
-	      "description": "The recovery disk encryption information (for two pass flows)."
-	    },
-	    "recoveryAvailabilityZone": {
-	      "description": "The recovery availability zone.",
-	      "type": "string"
-	    }
+          "description": "The fabric specific object Id of the virtual machine.",
+          "type": "string"
+        },
+        "primaryLocation": {
+          "description": "The primary location for the virtual machine.",
+          "type": "string"
+        },
+        "recoveryLocation": {
+          "description": "The recovery location for the virtual machine.",
+          "type": "string"
+        },
+        "recoverySubscriptionId": {
+          "description": "The recovery subscription Id of the virtual machine.",
+          "type": "string"
+        },
+        "recoveryAvailabilityType": {
+          "description": "The recovery availability type of the virtual machine.",
+          "type": "string"
+        },
+        "primaryFabricFriendlyName": {
+          "description": "The recovery fabric Name.",
+          "type": "string"
+        },
+        "recoveryFabricFriendlyName": {
+          "description": "The recovery fabric Name.",
+          "type": "string"
+        },
+        "primaryContainerFriendlyName": {
+          "description": "The primary container Name.",
+          "type": "string"
+        },
+        "recoveryContainerFriendlyName": {
+          "description": "The recovery container Name.",
+          "type": "string"
+        },
+        "protectionProfileCustomDetails": {
+          "$ref": "#/definitions/ProtectionProfileCustomDetails",
+          "description": "The protectionProfile details."
+        },
+        "recoveryResourceGroupCustomDetails": {
+          "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
+          "description": "The recovery resource group details."
+        },
+        "recoveryAvailabilitySetCustomDetails": {
+          "$ref": "#/definitions/RecoveryAvailabilitySetCustomDetails",
+          "description": "The recovery availability set details."
+        },
+        "recoveryVirtualNetworkCustomDetails": {
+          "$ref": "#/definitions/RecoveryVirtualNetworkCustomDetails",
+          "description": "The recovery virtual network details."
+        },
+        "recoveryProximityPlacementGroupCustomDetails": {
+          "$ref": "#/definitions/RecoveryProximityPlacementGroupCustomDetails",
+          "description": "The recovery proximity placement group custom details."
+        },
+        "autoProtectionOfDataDiskStatus": {
+          "description": "A value indicating whether the auto protection is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoProtectionOfDataDiskStatus",
+            "modelAsString": true
+          }
+        },
+        "vmDisks": {
+          "description": "The list of vm disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AProtectionIntentDiskInputDetails"
+          }
+        },
+        "vmManagedDisks": {
+          "description": "The list of vm managed disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AProtectionIntentManagedDiskInputDetails"
+          }
+        },
+        "multiVmGroupName": {
+          "description": "The multi vm group name.",
+          "type": "string"
+        },
+        "multiVmGroupId": {
+          "description": "The multi vm group id.",
+          "type": "string"
+        },
+        "recoveryBootDiagStorageAccount": {
+          "$ref": "#/definitions/StorageAccountCustomDetails",
+          "description": "The boot diagnostic storage account."
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for two pass flows)."
+        },
+        "recoveryAvailabilityZone": {
+          "description": "The recovery availability zone.",
+          "type": "string"
+        }
       },
       "x-ms-discriminator-value": "A2A"
     },
@@ -8153,64 +8152,64 @@
       "x-ms-discriminator-value": "A2A"
     },
     "A2AProtectionIntentDiskInputDetails": {
-	  "description": "Azure VM disk input details for protection intent.",
-	  "required": [
-	    "diskUri"
-	  ],
-	  "type": "object",
-	  "properties": {
-	    "diskUri": {
-          "description": "The disk Uri.",
-		  "type": "string"
-		},
-		"recoveryAzureStorageAccountCustomDetails": {
-		  "$ref": "#/definitions/StorageAccountCustomDetails",
-          "description": "The recovery VHD storage account Id."
-		},
-		"primaryStagingStorageAccountCustomDetails": {
-		  "$ref": "#/definitions/StorageAccountCustomDetails",
-          "description": "The primary staging storage account Arm Id."
-		}
-      }
-	},
-	"A2AProtectionIntentManagedDiskInputDetails": {
-	  "description": "Azure VM managed disk input details for protection intent.",
+      "description": "Azure VM disk input details for protection intent.",
       "required": [
-	    "diskId"
-	  ],
-	  "type": "object",
-	  "properties": {
-	    "diskId": {
-		  "description": "The disk Id.",
-		  "type": "string"
-		},
-		"primaryStagingStorageAccountCustomDetails":{
+        "diskUri"
+      ],
+      "type": "object",
+      "properties": {
+        "diskUri": {
+          "description": "The disk Uri.",
+          "type": "string"
+        },
+        "recoveryAzureStorageAccountCustomDetails": {
           "$ref": "#/definitions/StorageAccountCustomDetails",
-		  "description": "The primary staging storage account details."
-		},
-		"recoveryResourceGroupCustomDetails": {
-          "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
-		  "description": "The recovery resource group details."
-		},
-		"recoveryReplicaDiskAccountType": {
-          "description": "The replica disk type. Its an optional value and will be same as source disk type if not user provided.",
-		  "type": "string"
-		},
-        "recoveryTargetDiskAccountType": {
-		   "description":"The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
-           "type": "string"
-		},
-		"recoveryDiskEncryptionSetId": {
-		  "description": "The recovery disk encryption set Id.",
-		  "type": "string"
-		},
-        "diskEncryptionInfo": {
-		  "$ref": "#/definitions/DiskEncryptionInfo",
-		  "description": "The recovery disk encryption information (for one / single pass flows)."
-		}
+          "description": "The recovery VHD storage account Id."
+        },
+        "primaryStagingStorageAccountCustomDetails": {
+          "$ref": "#/definitions/StorageAccountCustomDetails",
+          "description": "The primary staging storage account Arm Id."
+        }
       }
-	},
-	"A2ARecoveryPointDetails": {
+    },
+    "A2AProtectionIntentManagedDiskInputDetails": {
+      "description": "Azure VM managed disk input details for protection intent.",
+      "required": [
+        "diskId"
+      ],
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string"
+        },
+        "primaryStagingStorageAccountCustomDetails": {
+          "$ref": "#/definitions/StorageAccountCustomDetails",
+          "description": "The primary staging storage account details."
+        },
+        "recoveryResourceGroupCustomDetails": {
+          "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
+          "description": "The recovery resource group details."
+        },
+        "recoveryReplicaDiskAccountType": {
+          "description": "The replica disk type. Its an optional value and will be same as source disk type if not user provided.",
+          "type": "string"
+        },
+        "recoveryTargetDiskAccountType": {
+          "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
+          "type": "string"
+        },
+        "recoveryDiskEncryptionSetId": {
+          "description": "The recovery disk encryption set Id.",
+          "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
+        }
+      }
+    },
+    "A2ARecoveryPointDetails": {
       "description": "A2A provider specific recovery point details.",
       "type": "object",
       "allOf": [
@@ -8481,120 +8480,120 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
-	"A2AReplicationIntentDetails": {
-	  "description": "A2A provider specific settings.",
-	  "type": "object",
+    "A2AReplicationIntentDetails": {
+      "description": "A2A provider specific settings.",
+      "type": "object",
       "allOf": [
-	    {
-		  "$ref": "#/definitions/ReplicationProtectionIntentProviderSpecificSettings"
-		}
-	  ],
+        {
+          "$ref": "#/definitions/ReplicationProtectionIntentProviderSpecificSettings"
+        }
+      ],
       "properties": {
-	    "fabricObjectId": {
-		  "description": "The fabric specific object Id of the virtual machine.",
-		  "type":"string"
-		},
-        "policyId": {
-		  "description": "The ID of Policy governing this PE.",
-		  "type": "string"
-		},
-        "primaryLocation": {
-		  "description": "The primary location for the virtual machine.",
-		  "type": "string"
-		},
-        "recoveryLocation": {
-		  "description": "The recovery location for the virtual machine.",
-		  "type":"string"
-		},
-        "recoverySubscriptionId": {
-		  "description": "The recovery subscription Id of the virtual machine.",
-		  "type": "string"
-		},
-        "primaryFabricFriendlyName": {
-		  "description": "The recovery fabric Name.",
-		  "type":"string"
-		},
-        "recoveryFabricFriendlyName": {
-		  "description": "The recovery fabric Name.",
-		  "type": "string"
-		},
-        "primaryContainerFriendlyName": {
-		  "description": "The primary container Name.",
-		  "type": "string"
-		},
-        "recoveryContainerFriendlyName": {
-		  "description": "The recovery container Name.",
-		  "type":"string"
-		},
-	    "recoveryAvailabilityType": {
-	      "description":"The recovery availability type of the virtual machine.",
-	      "type": "string"
-	    },
-        "vmDisks": {
-		  "description": "The list of vm disk details.",
-		  "type": "array",
-		  "items": {
-		    "$ref": "#/definitions/A2AVmDiskDetails"
-		  }
-		},
-        "vmManagedDisks": {
-		  "description": "The list of vm managed disk details.",
-		  "type": "array",
-		  "items": {
-		    "$ref":"#/definitions/A2AVmManagedDiskDetails"
-		  }
-		},
-        "recoveryResourceGroupId": {
-		  "description": "The recovery resource group id.",
-		  "type": "string"
-		},
-        "recoveryAvailabilitySetId": {
-		  "description": "The recovery availability set Id.",
-		  "type": "string"
-		},
-        "recoveryVirtualNetworkId": {
-		  "description": "The recovery virtual network Id.",
-		  "type": "string"
-		},
-        "recoveryProximityPlacementGroupId": {
-		  "description": "The recovery proximity placement group custom details.",
-		  "type": "string"
-		},
-        "autoProtectionOfDataDiskStatus": {
-		  "description":"A value indicating whether the auto protection is enabled.",
-		  "enum": [
-		    "Disabled",
-			"Enabled"
-		  ],
-		  "type":"string",
-          "x-ms-enum": {
-		      "name": "AutoProtectionOfDataDiskStatus",
-		      "modelAsString": true
-	 	  }
-		},
-		"multiVmGroupName": {
-		  "description": "The multi vm group name.",
-		  "type": "string"
-		},
-        "multiVmGroupId": {
-		  "description": "The multi vm group id.",
-		  "type": "string"
-		},
-		"recoveryBootDiagStorageAccountId": {
-		  "description": "The boot diagnostic storage account.",
+        "fabricObjectId": {
+          "description": "The fabric specific object Id of the virtual machine.",
           "type": "string"
-		},
-		"diskEncryptionInfo": {
-		  "$ref": "#/definitions/DiskEncryptionInfo",
-		  "description": "The recovery disk encryption information (for two pass flows)."
-		},
+        },
+        "policyId": {
+          "description": "The ID of Policy governing this PE.",
+          "type": "string"
+        },
+        "primaryLocation": {
+          "description": "The primary location for the virtual machine.",
+          "type": "string"
+        },
+        "recoveryLocation": {
+          "description": "The recovery location for the virtual machine.",
+          "type": "string"
+        },
+        "recoverySubscriptionId": {
+          "description": "The recovery subscription Id of the virtual machine.",
+          "type": "string"
+        },
+        "primaryFabricFriendlyName": {
+          "description": "The recovery fabric Name.",
+          "type": "string"
+        },
+        "recoveryFabricFriendlyName": {
+          "description": "The recovery fabric Name.",
+          "type": "string"
+        },
+        "primaryContainerFriendlyName": {
+          "description": "The primary container Name.",
+          "type": "string"
+        },
+        "recoveryContainerFriendlyName": {
+          "description": "The recovery container Name.",
+          "type": "string"
+        },
+        "recoveryAvailabilityType": {
+          "description": "The recovery availability type of the virtual machine.",
+          "type": "string"
+        },
+        "vmDisks": {
+          "description": "The list of vm disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AVmDiskDetails"
+          }
+        },
+        "vmManagedDisks": {
+          "description": "The list of vm managed disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AVmManagedDiskDetails"
+          }
+        },
+        "recoveryResourceGroupId": {
+          "description": "The recovery resource group id.",
+          "type": "string"
+        },
+        "recoveryAvailabilitySetId": {
+          "description": "The recovery availability set Id.",
+          "type": "string"
+        },
+        "recoveryVirtualNetworkId": {
+          "description": "The recovery virtual network Id.",
+          "type": "string"
+        },
+        "recoveryProximityPlacementGroupId": {
+          "description": "The recovery proximity placement group custom details.",
+          "type": "string"
+        },
+        "autoProtectionOfDataDiskStatus": {
+          "description": "A value indicating whether the auto protection is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoProtectionOfDataDiskStatus",
+            "modelAsString": true
+          }
+        },
+        "multiVmGroupName": {
+          "description": "The multi vm group name.",
+          "type": "string"
+        },
+        "multiVmGroupId": {
+          "description": "The multi vm group id.",
+          "type": "string"
+        },
+        "recoveryBootDiagStorageAccountId": {
+          "description": "The boot diagnostic storage account.",
+          "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for two pass flows)."
+        },
         "recoveryAvailabilityZone": {
-		  "description": "The recovery availability zone.",
-		  "type": "string"
-		}
-	  },
-	  "x-ms-discriminator-value":"A2A"
-	},
+          "description": "The recovery availability zone.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2AReprotectInput": {
       "description": "Azure specific reprotect input.",
       "type": "object",
@@ -8774,24 +8773,24 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
-	"A2AVmDiskDetails": {
-	  "description": "Azure VM disk details.",
-	  "type": "object",
-	  "properties": {
-	    "diskUri": {
-		  "description": "The disk Uri.",
-		  "type": "string"
-		},
+    "A2AVmDiskDetails": {
+      "description": "Azure VM disk details.",
+      "type": "object",
+      "properties": {
+        "diskUri": {
+          "description": "The disk Uri.",
+          "type": "string"
+        },
         "recoveryAzureStorageAccountId": {
-		  "description": "The recovery VHD storage account Id.",
-		  "type": "string"
-		},
+          "description": "The recovery VHD storage account Id.",
+          "type": "string"
+        },
         "primaryStagingAzureStorageAccountId": {
-		  "description": "The primary staging storage account Id.",
-		  "type": "string"
-		}
-	  }
-	},
+          "description": "The primary staging storage account Id.",
+          "type": "string"
+        }
+      }
+    },
     "A2AVmDiskInputDetails": {
       "description": "Azure VM disk input details.",
       "type": "object",
@@ -8810,40 +8809,40 @@
         }
       }
     },
-	"A2AVmManagedDiskDetails": {
-	  "description": "Azure VM managed disk input details.",
-	  "type": "object",
-	  "properties": {
+    "A2AVmManagedDiskDetails": {
+      "description": "Azure VM managed disk input details.",
+      "type": "object",
+      "properties": {
         "diskId": {
-		  "description": "The disk Id.",
-		  "type": "string"
-		},
-		"primaryStagingAzureStorageAccountId":{
-          "description": "The primary staging storage account Arm Id.",
-		  "type": "string"
-		},
-		"recoveryResourceGroupId": {
-          "description": "The target resource group Arm Id.",
-		  "type": "string"
-		},
-		"recoveryReplicaDiskAccountType": {
-          "description": "The replica disk type.",
-		  "type": "string"
-		},
-        "recoveryTargetDiskAccountType": {
-		  "description": "The target disk type after failover.",
+          "description": "The disk Id.",
           "type": "string"
-		},
-		"recoveryDiskEncryptionSetId": {
-		  "description": "The recovery disk encryption set Id.",
-		  "type": "string"
-		},
+        },
+        "primaryStagingAzureStorageAccountId": {
+          "description": "The primary staging storage account Arm Id.",
+          "type": "string"
+        },
+        "recoveryResourceGroupId": {
+          "description": "The target resource group Arm Id.",
+          "type": "string"
+        },
+        "recoveryReplicaDiskAccountType": {
+          "description": "The replica disk type.",
+          "type": "string"
+        },
+        "recoveryTargetDiskAccountType": {
+          "description": "The target disk type after failover.",
+          "type": "string"
+        },
+        "recoveryDiskEncryptionSetId": {
+          "description": "The recovery disk encryption set Id.",
+          "type": "string"
+        },
         "diskEncryptionInfo": {
-		  "$ref":"#/definitions/DiskEncryptionInfo",
-		  "description":"The recovery disk encryption information (for one / single pass flows)."
-		}
-	  }
-	},
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
+        }
+      }
+    },
     "A2AVmManagedDiskInputDetails": {
       "description": "Azure VM managed disk input details.",
       "type": "object",
@@ -9548,37 +9547,37 @@
         }
       }
     },
-	"CreateProtectionIntentInput": {
+    "CreateProtectionIntentInput": {
       "description": "Create protection intent input.",
       "type": "object",
-	  "properties": {
-        "properties": {
-		  "$ref": "#/definitions/CreateProtectionIntentProperties",
-          "description": "Create protection intent input properties."
-		}
-	  }
-	},  
-    "CreateProtectionIntentProperties": {
-	  "description": "Create protection intent input properties.",
-	  "type": "object",
       "properties": {
-	    "providerSpecificDetails": {
-		  "$ref": "#/definitions/CreateProtectionIntentProviderSpecificDetails",
-          "description":"The ReplicationProviderInput. For A2A provider, it will be A2ACreateProtectionIntentInput object. For other providers, it can be null."
-		}
-	  }
-	},
+        "properties": {
+          "$ref": "#/definitions/CreateProtectionIntentProperties",
+          "description": "Create protection intent input properties."
+        }
+      }
+    },
+    "CreateProtectionIntentProperties": {
+      "description": "Create protection intent input properties.",
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/CreateProtectionIntentProviderSpecificDetails",
+          "description": "The ReplicationProviderInput. For A2A provider, it will be A2ACreateProtectionIntentInput object. For other providers, it can be null."
+        }
+      }
+    },
     "CreateProtectionIntentProviderSpecificDetails": {
-	  "description": "Create protection intent provider specific input.",
-	  "type": "object",
-	  "properties": {
+      "description": "Create protection intent provider specific input.",
+      "type": "object",
+      "properties": {
         "instanceType": {
-	      "description": "The class type.",
-		  "type": "string"
-	    }
-	  },
-	  "discriminator": "instanceType"
-	},
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "CreateRecoveryPlanInput": {
       "description": "Create recovery plan input class.",
       "required": [
@@ -14754,16 +14753,16 @@
         }
       }
     },
-	"ProtectionProfileCustomDetails": {
-	  "description": "Protection Profile custom input.",
-	  "type": "object",
-	  "properties": {
-	    "instanceType":{
+    "ProtectionProfileCustomDetails": {
+      "description": "Protection Profile custom input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
           "description": "The class type.",
-		  "type": "string"
-		}
-	  }
-	},
+          "type": "string"
+        }
+      }
+    },
     "ProviderError": {
       "description": "This class contains the error details per object.",
       "type": "object",
@@ -14857,17 +14856,17 @@
         }
       },
       "x-ms-discriminator-value": "RcmAzureMigration"
-    },	
+    },
     "RecoveryAvailabilitySetCustomDetails": {
-	  "description": "Recovery Availability Set custom input.",
-	  "type": "object",
+      "description": "Recovery Availability Set custom input.",
+      "type": "object",
       "properties": {
-	    "resourceType": {
-		  "description": "The class type.",
-		  "type": "string"
-		}
-	  }
-	},
+        "resourceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      }
+    },
     "RecoveryPlan": {
       "description": "Recovery plan details.",
       "type": "object",
@@ -15737,26 +15736,26 @@
         }
       }
     },
-	"RecoveryProximityPlacementGroupCustomDetails": {
-	  "description": "Recovery Proximity placement group custom input.",
-	  "type": "object",
-      "properties": {
-	    "resourceType": {
-		  "description": "The class type.",
-		  "type": "string"
-		}
-	  }
-	},
-	"RecoveryResourceGroupCustomDetails": {
-	  "description": "Recovery Resource Group custom input.",
+    "RecoveryProximityPlacementGroupCustomDetails": {
+      "description": "Recovery Proximity placement group custom input.",
       "type": "object",
-	  "properties": {
-	    "resourceType": {
-          "description":  "The class type.",
-		  "type": "string"
-		}
-	  }
-	},
+      "properties": {
+        "resourceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      }
+    },
+    "RecoveryResourceGroupCustomDetails": {
+      "description": "Recovery Resource Group custom input.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      }
+    },
     "RecoveryServicesProvider": {
       "description": "Provider details.",
       "type": "object",
@@ -15868,16 +15867,16 @@
         }
       }
     },
-	"RecoveryVirtualNetworkCustomDetails": {
-	  "description": "Recovery Virtual network custom input.",
-	  "type": "object",
-	  "properties": {
+    "RecoveryVirtualNetworkCustomDetails": {
+      "description": "Recovery Virtual network custom input.",
+      "type": "object",
+      "properties": {
         "resourceType": {
-		  "description": "The class type.",
-		  "type": "string"
-		}
-	  }
-	},
+          "description": "The class type.",
+          "type": "string"
+        }
+      }
+    },
     "RemoveDisksInput": {
       "description": "Input for remove disk(s) operation.",
       "type": "object",
@@ -16204,59 +16203,59 @@
         }
       }
     },
-	"ReplicationProtectionIntent": {
+    "ReplicationProtectionIntent": {
       "description": "Replication protection intent.",
-	  "type": "object",
-	  "allOf": [
+      "type": "object",
+      "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
-	  "properties": {
+      "properties": {
         "properties": {
-		  "$ref": "#/definitions/ReplicationProtectionIntentProperties",
-		  "description": "The custom data."
-		}
-	  }
-	},
+          "$ref": "#/definitions/ReplicationProtectionIntentProperties",
+          "description": "The custom data."
+        }
+      }
+    },
     "ReplicationProtectionIntentProperties": {
-	  "description": "Replication protection intent custom data details.",
-	  "type": "object",
-	  "properties": {
+      "description": "Replication protection intent custom data details.",
+      "type": "object",
+      "properties": {
         "friendlyName": {
-		  "description": "The name.",
-		  "type":"string"
-		},
-		"recoveryServicesProviderId": {
-		  "description": "The recovery provider ARM Id.",
-		  "type":"string"
-		},
+          "description": "The name.",
+          "type": "string"
+        },
+        "recoveryServicesProviderId": {
+          "description": "The recovery provider ARM Id.",
+          "type": "string"
+        },
         "jobId": {
-		  "description": "The job Id.",
-		  "type": "string"
-		},
-		"jobState": {
-		  "description": "The job state.",
-		  "type": "string"
-		},
-		"providerSpecificDetails": {
-          "$ref":"#/definitions/ReplicationProtectionIntentProviderSpecificSettings",
-		  "description":"The Replication provider custom settings."
-		}
-	  }
-	},
-	"ReplicationProtectionIntentProviderSpecificSettings": {
+          "description": "The job Id.",
+          "type": "string"
+        },
+        "jobState": {
+          "description": "The job state.",
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ReplicationProtectionIntentProviderSpecificSettings",
+          "description": "The Replication provider custom settings."
+        }
+      }
+    },
+    "ReplicationProtectionIntentProviderSpecificSettings": {
       "description": "Replication provider specific settings.",
-	  "type": "object",
-	  "properties": {
-	    "instanceType": {
-	      "description": "Gets the Instance type.",
-		  "type": "string",
-		  "readOnly": true
-	    }
-	  },
-	  "discriminator":"instanceType"
-	},
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "ReplicationProviderContainerUnmappingInput": {
       "description": "Provider specific input for unpairing operations.",
       "type": "object",
@@ -16573,16 +16572,16 @@
         }
       }
     },
-	"StorageAccountCustomDetails": {
+    "StorageAccountCustomDetails": {
       "description": "Storage account Custom details input.",
-	  "type": "object",
-	  "properties": {
-	    "resourceType": {
-	      "description": "The class type.",
-	      "type": "string"
-		}
-	  }
-	},
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      }
+    },
     "StorageClassification": {
       "description": "Storage object definition.",
       "type": "object",
