@@ -458,7 +458,7 @@
             "description": "The database import request parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportExportDatabaseDefinition"
+              "$ref": "#/definitions/ImportExistingDatabaseDefinition"
             }
           },
           {
@@ -516,7 +516,7 @@
             "description": "The database export request parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportExportDatabaseDefinition"
+              "$ref": "#/definitions/ExportDatabaseDefinition"
             }
           },
           {
@@ -1193,8 +1193,8 @@
         }
       }
     },
-    "ImportExportDatabaseDefinition": {
-      "description": "Contains the information necessary to perform import/export operation.",
+    "ImportExistingDatabaseDefinition": {
+      "description": "Contains the information necessary to perform import operation for existing database.",
       "required": [
         "storageKeyType",
         "storageKey",
@@ -1204,34 +1204,6 @@
       ],
       "type": "object",
       "properties": {
-        "databaseName": {
-          "description": "Name of the import database.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "edition": {
-          "description": "Edition of the import database.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "serviceObjectiveName": {
-          "description": "Service level objective name of the import database.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "maxSizeBytes": {
-          "description": "Max size in bytes for the import database.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
         "storageKeyType": {
           "description": "Storage key type.",
           "enum": [
@@ -1415,6 +1387,76 @@
           "$ref": "#/definitions/ImportExportOperationResultProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExportDatabaseDefinition": {
+      "description": "Contains the information necessary to perform export database operation.",
+      "required": [
+        "storageKeyType",
+        "storageKey",
+        "storageUri",
+        "administratorLogin",
+        "administratorLoginPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "storageKeyType": {
+          "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "description": "Storage key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "description": "Storage Uri.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       }
     },
