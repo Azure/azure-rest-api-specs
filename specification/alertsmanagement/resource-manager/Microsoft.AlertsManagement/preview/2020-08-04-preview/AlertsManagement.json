@@ -27,6 +27,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.AlertsManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List all operations available through Azure Alerts Management Resource Provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved operations list.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/healthAlerts": {
       "get": {
         "tags": [
@@ -472,6 +497,15 @@
       "description": "Specifies the health state to alert on and the corresponding severity"
     },
     "HealthAlertsErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/HealthAlertsErrorResponseBody"
+        }
+      }
+    },
+    "HealthAlertsErrorResponseBody": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
