@@ -68,7 +68,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleDefinitionId - The Role Definition ID '{0}' is not valid. Role Definition ID must be a GUID.\n\n * 404 RoleDefinitionNotFound - The Role Definition '{0}' was not found."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -115,7 +118,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleDefinitionId - The Role Definition ID '{0}' is not valid. Role Definition ID must be a GUID.\n\n * 400 RoleDefinitionNameNullOrEmpty - A Role Definition must have a non-empty, unique name.\n\n * 400 InvalidRoleDefinitionType - The Role Definition type value '{0}' is not supported. The supported values are 'CustomRole'.\n\n * 400 MissingAssignableScopes - A Role Definition must have at least one assignable scope and all assignable scopes must be neither null nor empty.\n\n * 400 InvalidAssignableScopePrefix - The Assignable Scope prefix '{0}' must correspond to the current database account '{1}'.\n\n * 409 RoleDefinitionWithSameNameExists - A Role Definition cannot be updated with a name that already exists.\n\n * 400 InvalidDataAction - '{0}' does not match any of the data actions supported by the providers."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -152,7 +158,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleDefinitionId - The Role Definition ID '{0}' is not valid. Role Definition ID must be a GUID.\n\n * 400 RoleDefinitionHasAssignments - There are existing Role Assignments referencing Role Definition '{0}'. The Role Assignments must be deleted before the role can be deleted."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           },
           "204": {
             "description": "Role Definition does not exist"
@@ -197,7 +206,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 The provided filter could not be parsed.\n\n * 400 UnsupportedQuery - The filter '{0}' is not supported. Supported filters are either roleName eq '{value}' or type eq 'BuiltInRole'."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -236,7 +248,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleAssignmentId - The Role Assignment ID '{0}' is not valid. Role Assignment ID must be a GUID.\n\n * 404 RoleAssignmentNotFound - The Role Assignment '{0}' was not found."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -283,7 +298,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRoleAssignmentId - The Role Assignment ID '{0}' is not valid. Role Assignment ID must be a GUID.\n\n * 400 InvalidRoleDefinitionId - The Role Definition ID '{0}' is not valid. Role Definition ID must be a GUID.\n\n * 400 InvalidPrincipalId - The Principal ID '{0}' is not valid. Principal ID must be a GUID.\n\n * 400 RoleDefinitionDoesNotExist - The specified Role Definition with ID '{0}' does not exist.\n\n * 404 DatabaseNotFound - Database '{0}' could not be found.\n\n * 404 CollectionNotFound - Collection '{0}' could not be found.\n\n * 400 PrincipalNotFound -Principal '{0}' does not exist in the directory '{1}'.\n\n * 400 RoleAssignmentUpdateNotPermitted - Principal ID and Scope are not allowed to be updated.\n\n * 400 RoleAssignmentScopeNotAssignableToRoleDefinition The role {0} is not available for assignment at the requested Scope.\n\n * 400 BadScopeFormat - The Scope was incorrectly formatted.\n\n * 400 BadRoleDefinitionIdFormat - The Role Definition ID was incorrectly formatted.\n\n * 400 InvalidScopePrefix - The Scope prefix '{0}' must correspond to the current database account '{1}'.\n\n * 400 InvalidRoleDefinitionIdPrefix - The Role Definition ID prefix '{0}' must correspond to the current database account '{1}'."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -320,11 +338,14 @@
               "$ref": "#/definitions/SqlRoleAssignmentResponse"
             }
           },
-          "default": {
-            "description": "400 InvalidRoleAssignmentId - The Role Assignment ID '{0}' is not valid. Role Assignment ID must be a GUID."
-          },
           "204": {
             "description": "Role Assignment does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -366,7 +387,10 @@
             }
           },
           "default": {
-            "description": "400 UnsupportedQuery - The filter '{0}' is not supported. Supported filters are either 'atScope()' or 'principalId eq '{value}' or assignedTo('{value}')'."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -434,6 +458,19 @@
         }
       },
       "description": "The set of data plane operations permitted through this Role Definition."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
     },
     "SqlRoleDefinitionListResult": {
       "properties": {
