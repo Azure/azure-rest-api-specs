@@ -1624,7 +1624,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/share": {
-      "put": {
+      "patch": {
         "tags": [
           "GallerySharingUpdate"
         ],
@@ -1763,6 +1763,7 @@
       "description": "Describes the gallery unique name."
     },
     "SharingProfile": {
+      "description": "Profile for gallery sharing to subscription or tenant",
       "properties": {
         "permissions": {
           "type": "string",
@@ -1786,6 +1787,7 @@
       }
     },
     "SharingProfileGroup": {
+      "description": "Group of the gallery sharing profile",
       "properties": {
         "type": {
           "type": "string",
@@ -2762,6 +2764,7 @@
       "x-ms-azure-resource": true
     },
     "SharingUpdate": {
+      "description": "Specifies information about the gallery sharing profile update.",
       "properties": {
         "operationType": {
           "type": "string",
@@ -2784,7 +2787,32 @@
           "description": "A list of sharing profile groups."
         }
       },
-      "description": "Specifies information about the gallery sharing profile update."
+      "x-ms-azure-resource": true
+    },
+    "SharingUpdateProperties": {
+      "description": "Properties about the gallery sharing profile update.",
+      "properties": {
+        "operationType": {
+          "type": "string",
+          "description": "This property allows you to specify the operation type of gallery sharing update. <br><br> Possible values are: <br><br> **Add** <br><br> **Remove** <br><br> **Reset**",
+          "enum": [
+            "Add",
+            "Remove",
+            "Reset"
+          ],
+          "x-ms-enum": {
+            "name": "SharingUpdateOperationTypes",
+            "modelAsString": false
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharingProfileGroup"
+          },
+          "description": "A list of sharing profile groups."
+        }
+      }
     }
   },
   "parameters": {
