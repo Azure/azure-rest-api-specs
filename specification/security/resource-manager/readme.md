@@ -50,7 +50,7 @@ directive:
     reason: The list returns limited number of items
   - suppress: PageableOperation
     from: iotSensors.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{iotLocation}/iotSensors/{iotSensorName}"].get'
+    where: '$.paths["/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}"].get'
     reason: The list returns limited number of items
 ```
 
