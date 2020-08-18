@@ -5,7 +5,7 @@
     "description": "Shared Gallery Service Client.",
     "version": "2020-09-30"
   },
-  "host": "pir.compute.azure.com",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -34,31 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Compute/operations": {
-      "get": {
-        "tags": [
-          "SharedGalleryOperations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Gets a list of Shared Gallery operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SharedGalleryOperationListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries": {
       "get": {
         "tags": [
@@ -903,63 +878,6 @@
         }
       },
       "description": "Describes the properties of a gallery Image Version."
-    },
-    "SharedGalleryOperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SharedGalleryOperationValue"
-          },
-          "description": "The list of shared gallery operations"
-        }
-      },
-      "description": "The List Shared Gallery Operation operation response."
-    },
-    "SharedGalleryOperationValue": {
-      "properties": {
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The origin of the shared gallery operation."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the shared gallery operation."
-        },
-        "display": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedGalleryOperationValueDisplay"
-        }
-      },
-      "description": "Describes the properties of a Shared Gallery Operation value."
-    },
-    "SharedGalleryOperationValueDisplay": {
-      "properties": {
-        "operation": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the shared gallery operation."
-        },
-        "resource": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the resource the operation applies to."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The description of the operation."
-        },
-        "provider": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource provider for the operation."
-        }
-      },
-      "description": "Describes the properties of a Shared Gallery Operation Value Display."
     },
     "CloudError": {
       "x-ms-external": true,
