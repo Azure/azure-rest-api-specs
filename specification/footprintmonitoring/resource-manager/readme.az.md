@@ -16,33 +16,38 @@ python-sdk-output-folder: "$(az-output-folder)/azext_footprint/vendored_sdks/foo
 cli:
     cli-directive:
       - where:
-            group: profile
-            param: cold_path_sampling_percentage_rate
+            group: profiles
+            param: coldPathSamplingPercentageRate
         alias:
           - sample_rate_cold
       - where:
-            group: profile
-            param: start_delay_milliseconds
+            group: profiles
+            param: startDelayMilliseconds
         alias:
           - start_delay_ms
       - where:
-            group: measurement-endpoint
-            param: hot_path_sampling_percentage_rate
+            group: measurementEndpoints
+            param: hotPathSamplingPercentageRate
         alias:
           - sample_rate_hot
       - where:
-            group: measurement-endpoint
-            param: warm_path_sampling_percentage_rate
+            group: measurementEndpoints
+            param: warmPathSamplingPercentageRate
         alias:
           - sample_rate_warm
       - where:
-            group: measurement-endpoint
-            param: cold_path_sampling_percentage_rate_override
+            group: measurementEndpoints
+            param: coldPathSamplingPercentageRateOverride
         alias:
           - sample_rate_cold
       - where:
-            group: measurement-endpoint-condition
-            param: measurement_endpoint_name
+            group: measurementEndpointConditions
+            param: measurementEndpointName
         alias:
           - endpoint_name
+      - where:
+            group: measurementEndpointConditions
+            param: conditionName
+        alias:
+          - name
 ```
