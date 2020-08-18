@@ -949,7 +949,7 @@
                         "type": "object",
                         "properties": {
                             "id": {
-                                "description": "Resource ID.",
+                                "description": "Resource ID of policy to apply.",
                                 "type": "string"
                             },
                             "patterns": {
@@ -963,7 +963,7 @@
                                             "description": "Domains to match.",
                                             "type": "array",
                                             "items": {
-                                                "description": "Domains.",
+                                                "description": "Domain to match. May start with wildcard or be a single wildcard for every domain in the Front Door.",
                                                 "type": "string"
                                             }
                                         },
@@ -971,7 +971,7 @@
                                             "description": "Paths to match.",
                                             "type": "array",
                                             "items": {
-                                                "description": "Paths.",
+                                                "description": "Path to match. Has to start with /. May end with wildcard after /.",
                                                 "type": "string"
                                             }
                                         }
