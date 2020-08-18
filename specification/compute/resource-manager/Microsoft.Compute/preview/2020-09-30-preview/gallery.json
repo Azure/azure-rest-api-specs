@@ -2049,7 +2049,11 @@
           }
         },
         "features": {
-          "$ref": "#/definitions/GalleryImageFeatures"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryImageFeature"
+          },
+          "description": "A list of gallery image features."
         },
         "endOfLifeDate": {
           "type": "string",
@@ -2089,16 +2093,6 @@
         "identifier"
       ],
       "description": "Describes the properties of a gallery Image Definition."
-    },
-    "GalleryImageFeatures": {
-      "properties": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/GalleryImageFeature"
-        },
-        "description": "A list of gallery image features."
-      },
-      "description": "This is the list of gallery image features."
     },
     "GalleryImageFeature": {
       "properties": {
