@@ -8176,20 +8176,24 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Periodic",
-            "Continuous"
-          ],
-          "description": "Describes the mode of backups.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "BackupType"
-          }
+          "$ref": "#/definitions/BackupPolicyType"
         }
       },
       "required": [
         "type"
       ]
+    },
+    "BackupPolicyType": {
+      "description": "Describes the mode of backups.",
+      "type": "string",
+      "enum": [
+        "Periodic",
+        "Continuous"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BackupPolicyType"
+      }
     },
     "PeriodicModeBackupPolicy": {
       "description": "The object representing periodic mode backup policy.",
