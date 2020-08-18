@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HybridManagementPrivateLinkScopeManagement",
+    "title": "HybridComputeManagementClient",
     "x-ms-code-generation-settings": {
-      "name": "HybridManagementPrivateLinkScopeManagement"
+      "name": "HybridComputeManagementClient"
     },
     "description": "Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.",
     "version": "2020-08-15"
@@ -734,8 +734,7 @@
         {
           "$ref": "#/definitions/PrivateLinkScopesResource"
         }
-      ],
-      "required": [],
+      ],      
       "description": "An Azure Arc PrivateLinkScope definition."
     },
     "HybridComputePrivateLinkScopeProperties": {
@@ -997,18 +996,18 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "An azure resource object"
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags"
     },
     "ErrorResponse": {
-      "description": "Describes the format of Error response.",
+      "description": "The resource management error response.",
       "type": "object",
       "properties": {
         "code": {
-          "description": "Error code",
+          "description": "The error code.",
           "type": "string"
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
+          "description": "The error message.",
           "type": "string"
         }
       }
@@ -1085,14 +1084,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription Id."
+      "description": "The ID of the target subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for this operation."
     }
   }
 }
