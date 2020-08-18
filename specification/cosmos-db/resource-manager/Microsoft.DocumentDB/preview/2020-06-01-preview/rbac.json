@@ -358,7 +358,15 @@
         },
         "type": {
           "type": "string",
-          "description": "Indicates whether the Role Definition was built-in or user created. Must always be CustomRole or empty."
+          "enum": [
+            "BuiltInRole",
+            "CustomRole"
+          ],
+          "description": "Indicates whether the Role Definition was built-in or user created. Must always be CustomRole or empty.",
+          "x-ms-enum": {
+            "name": "RoleDefinitionType",
+            "modelAsString": false
+          }
         },
         "assignableScopes": {
           "type": "array",
