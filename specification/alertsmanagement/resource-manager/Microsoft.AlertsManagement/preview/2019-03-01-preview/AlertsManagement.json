@@ -866,6 +866,21 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
+    },
+    "identifier": {
+      "name": "identifier",
+      "description": "Identification of the information to be retrieved by API call.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "MonitorServiceList"
+      ],
+      "x-ms-enum": {
+        "name": "identifier",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -1382,6 +1397,34 @@
           "description": "List of the items",
           "items": {
             "$ref": "#/definitions/alertsSummaryGroupItem"
+          }
+        }
+      }
+    },
+    "alertsMetaData": {
+      "description": "alert meta data information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        }
+      }
+    },
+    "alertsMetaDataProperties": {
+      "description": "alert meta data property bag",
+      "discriminator": "metadataIdentifier",
+      "required": [
+        "metadataIdentifier"
+      ],
+      "properties": {
+        "metadataIdentifier": {
+          "type": "string",
+          "description": "Identification of the information to be retrieved by API call",
+          "enum": [
+            "MonitorServiceList"
+          ],
+          "x-ms-enum": {
+            "name": "metadataIdentifier",
+            "modelAsString": true
           }
         }
       }
