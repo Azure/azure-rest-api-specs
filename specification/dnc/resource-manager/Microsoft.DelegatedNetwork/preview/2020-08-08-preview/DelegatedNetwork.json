@@ -517,7 +517,7 @@
       "type": "object",
       "properties": {}
     },
-    "Resource": {
+    "ControllerResource": {
       "description": "Represents an instance of an DNC controller resource.",
       "type": "object",
       "properties": {
@@ -539,6 +539,32 @@
         "location": {
           "type": "string",
           "description": "Location of the DNC controller resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DelegatedSubnetResource": {
+      "description": "Represents an instance of a DelegatedSubnet resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the DelegatedSubnet resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the DelegatedSubnet resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the DelegatedSubnet  resource.(Microsoft.DelegatedNetwork/delegatedSubnet)"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the DelegatedSubnet resource."
         }
       },
       "x-ms-azure-resource": true
@@ -604,7 +630,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ControllerResource"
         }
       ]
     },
@@ -675,13 +701,13 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DelegatedSubnetProperties",
           "description": "Properties of the delegated subnet request"
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ]
-      }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DelegatedSubnetResource"
+        }
+      ]
     },
     "DelegatedSubnetProperties" :{
       "description": "Properties of delegated subnet resource.",
