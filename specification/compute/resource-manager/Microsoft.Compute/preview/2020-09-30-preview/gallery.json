@@ -2048,6 +2048,9 @@
             "modelAsString": true
           }
         },
+        "features": {
+          "$ref": "#/definitions/GalleryImageFeatures"
+        },
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
@@ -2086,6 +2089,29 @@
         "identifier"
       ],
       "description": "Describes the properties of a gallery Image Definition."
+    },
+    "GalleryImageFeatures": {
+      "properties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/GalleryImageFeature"
+        },
+        "description": "A list of gallery image features."
+      },
+      "description": "This is the list of gallery image features."
+    },
+    "GalleryImageFeature": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the gallery Image feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the gallery Image feature."
+        }
+      },
+      "description": "A feature for gallery image."
     },
     "GalleryImageIdentifier": {
       "properties": {
@@ -2406,6 +2432,10 @@
         "id": {
           "type": "string",
           "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, or user image."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The uri of the gallery artifact version source. Can be a disk uri, snapshot uri, or user image."
         }
       },
       "description": "The gallery artifact version source."

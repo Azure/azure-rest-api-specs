@@ -721,6 +721,9 @@
             "modelAsString": false
           }
         },
+        "features": {
+          "$ref": "#/definitions/GalleryImageFeatures"
+        },
         "purchasePlan": {
           "$ref": "#/definitions/ImagePurchasePlan"
         }
@@ -731,6 +734,29 @@
         "identifier"
       ],
       "description": "Describes the properties of a gallery Image Definition."
+    },
+    "GalleryImageFeatures": {
+      "properties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/GalleryImageFeature"
+        },
+        "description": "A list of gallery image features."
+      },
+      "description": "This is the list of gallery image features."
+    },
+    "GalleryImageFeature": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the gallery Image feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the gallery Image feature."
+        }
+      },
+      "description": "A feature for gallery image."
     },
     "GalleryImageIdentifier": {
       "properties": {
