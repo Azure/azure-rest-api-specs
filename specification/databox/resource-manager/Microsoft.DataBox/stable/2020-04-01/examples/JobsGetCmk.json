@@ -1,11 +1,12 @@
 {
   "parameters": {
     "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
-    "resourceGroupName": "SdkRg5154",
-    "jobName": "SdkJob952",
+    "resourceGroupName": "SdkRg7937",
+    "jobName": "SdkJob1735",
     "api-version": "2020-04-01",
+    "$expand": "details",
     "x-ms-client-request-id": [
-      "04f2835f-a2a2-4f25-96df-568460e5be24"
+      "c8cf9d3e-55f1-488f-bcee-53f4939f44e8"
     ],
     "Accept-Language": [
       "en-US"
@@ -15,54 +16,9 @@
       "OSName/Windows",
       "OSVersion/Microsoft.Windows.10.0.18363.",
       "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
-    ],
-    "Content-Length": [
-      "1064"
-    ],
-    "jobResource": {
-      "properties": {
-        "transferType": "ImportToAzure",
-        "details": {
-          "jobDetailsType": "DataBox",
-          "contactDetails": {
-            "contactName": "Public SDK Test",
-            "phone": "1234567890",
-            "phoneExtension": "1234",
-            "emailList": [
-              "testing@microsoft.com"
-            ]
-          },
-          "shippingAddress": {
-            "streetAddress1": "16 TOWNSEND ST",
-            "streetAddress2": "Unit 1",
-            "city": "San Francisco",
-            "stateOrProvince": "CA",
-            "country": "US",
-            "postalCode": "94107",
-            "companyName": "Microsoft",
-            "addressType": "Commercial"
-          },
-          "dataImportDetails": [
-            {
-              "accountDetails": {
-                "dataAccountType": "StorageAccount",
-                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
-              }
-            }
-          ]
-        }
-      },
-      "location": "westus",
-      "sku": {
-        "name": "DataBox"
-      }
-    }
+    ]
   },
   "responses": {
-    "202": {},
     "200": {
       "body": {
         "properties": {
@@ -70,8 +26,9 @@
           "isCancellable": true,
           "isDeletable": false,
           "isShippingAddressEditable": true,
+          "isPrepareToShipEnabled": true,
           "status": "DeviceOrdered",
-          "startTime": "2019-09-21T14:49:49.0027611+05:30",
+          "startTime": "2020-08-07T10:47:42.0009935+05:30",
           "details": {
             "copyProgress": [],
             "jobStages": [
@@ -79,7 +36,7 @@
                 "stageName": "DeviceOrdered",
                 "displayName": "Ordered",
                 "stageStatus": "Succeeded",
-                "stageTime": "2019-09-21T14:49:52.3995743+05:30"
+                "stageTime": "2020-08-07T10:47:44.8736499+05:30"
               },
               {
                 "stageName": "DevicePrepared",
@@ -161,8 +118,32 @@
               "companyName": "Microsoft",
               "addressType": "Commercial"
             },
+            "deliveryPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "returnPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "dataImportDetails": [
+              {
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/databoxbvt1/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount2",
+                  "dataAccountType": "StorageAccount"
+                }
+              }
+            ],
             "jobDetailsType": "DataBox",
-            "copyLogDetails": []
+            "copyLogDetails": [],
+            "reverseShipmentLabelSasKey": "https://wusbeta.blob.core.windows.net/customer-reverse-shipment-instructions/CustomerShipmentInstructions_MicrosoftManaged.PDF?sv=2018-03-28&sr=b&sig=JSZSeKrFrrwWbZ4zd7PNdGdNYKExKpxa98vRDDH6ZIk%3D&st=2020-08-07T05%3A08%3A51Z&se=2020-08-08T05%3A18%3A51Z&sp=r",
+            "keyEncryptionKey": {
+              "kekType": "CustomerManaged",
+              "kekUrl": "https://sdkkeyvault.vault.azure.net/keys/SSDKEY/",
+              "kekVaultResourceID": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat/providers/Microsoft.KeyVault/vaults/SDKKeyVault"
+            }
           },
           "deliveryType": "NonScheduled",
           "deliveryInfo": {
@@ -175,8 +156,13 @@
         "sku": {
           "name": "DataBox"
         },
-        "name": "SdkJob952",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg5154/providers/Microsoft.DataBox/jobs/SdkJob952",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "9a68a7c4-0a18-4d06-a5fb-7058e9e98458",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "name": "SdkJob1735",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg7937/providers/Microsoft.DataBox/jobs/SdkJob1735",
         "type": "Microsoft.DataBox/jobs"
       }
     }

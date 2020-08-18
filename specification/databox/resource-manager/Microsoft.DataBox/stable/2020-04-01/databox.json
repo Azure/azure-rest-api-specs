@@ -109,117 +109,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "This method gets the unencrypted secrets related to the job.",
-        "operationId": "Jobs_ListCredentials",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/jobNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of unencrypted credentials of the job.",
-            "schema": {
-              "$ref": "#/definitions/UnencryptedCredentialsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "JobsListCredentials": {
-            "$ref": "./examples/JobsListCredentials.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus": {
-      "post": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This method provides the list of available skus for the given subscription, resource group and location.",
-        "operationId": "Service_ListAvailableSkusByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "availableSkuRequest",
-            "in": "body",
-            "description": "Filters for showing the available skus.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AvailableSkuRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of available skus under Resource group.",
-            "schema": {
-              "$ref": "#/definitions/AvailableSkusResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AvailableSkusPost": {
-            "$ref": "./examples/AvailableSkusPost.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
       "post": {
         "tags": [
@@ -270,63 +159,6 @@
         "x-ms-examples": {
           "RegionConfiguration": {
             "$ref": "./examples/RegionConfiguration.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
-      "post": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This API provides configuration details specific to given region/location at Resource group level.",
-        "operationId": "Service_RegionConfigurationByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "regionConfigurationRequest",
-            "in": "body",
-            "description": "Request body to get the configuration for the region at resource group level.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegionConfigurationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Region configuration response.",
-            "schema": {
-              "$ref": "#/definitions/RegionConfigurationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RegionConfigurationByResourceGroup": {
-            "$ref": "./examples/RegionConfigurationByResourceGroup.json"
           }
         }
       }
@@ -546,6 +378,12 @@
         "x-ms-examples": {
           "JobsGet": {
             "$ref": "./examples/JobsGet.json"
+          },
+          "JobsGetCmk": {
+            "$ref": "./examples/JobsGetCmk.json"
+          },
+          "JobsGetExport": {
+            "$ref": "./examples/JobsGetExport.json"
           }
         }
       },
@@ -605,6 +443,12 @@
         "x-ms-examples": {
           "JobsCreate": {
             "$ref": "./examples/JobsCreate.json"
+          },
+          "JobsCreateDevicePassword": {
+            "$ref": "./examples/JobsCreateDevicePassword.json"
+          },
+          "JobsCreateExport": {
+            "$ref": "./examples/JobsCreateExport.json"
           }
         }
       },
@@ -720,6 +564,9 @@
         "x-ms-examples": {
           "JobsPatch": {
             "$ref": "./examples/JobsPatch.json"
+          },
+          "JobsPatchCmk": {
+            "$ref": "./examples/JobsPatchCmk.json"
           }
         }
       }
@@ -831,6 +678,174 @@
         "x-ms-examples": {
           "JobsCancelPost": {
             "$ref": "./examples/JobsCancelPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "This method gets the unencrypted secrets related to the job.",
+        "operationId": "Jobs_ListCredentials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of unencrypted credentials of the job.",
+            "schema": {
+              "$ref": "#/definitions/UnencryptedCredentialsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "JobsListCredentials": {
+            "$ref": "./examples/JobsListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This method provides the list of available skus for the given subscription, resource group and location.",
+        "operationId": "Service_ListAvailableSkusByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "availableSkuRequest",
+            "in": "body",
+            "description": "Filters for showing the available skus.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailableSkuRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of available skus under Resource group.",
+            "schema": {
+              "$ref": "#/definitions/AvailableSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableSkusPost": {
+            "$ref": "./examples/AvailableSkusPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This API provides configuration details specific to given region/location at Resource group level.",
+        "operationId": "Service_RegionConfigurationByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionConfigurationRequest",
+            "in": "body",
+            "description": "Request body to get the configuration for the region at resource group level.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Region configuration response.",
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionConfigurationByResourceGroup": {
+            "$ref": "./examples/RegionConfigurationByResourceGroup.json"
           }
         }
       }
@@ -2349,7 +2364,7 @@
             "values": [
               {
                 "value": "AzureBlob",
-                "description": "Filter file is of the type Azureblob."
+                "description": "Filter file is of the type AzureBlob."
               },
               {
                 "value": "AzureFile",
@@ -3314,9 +3329,6 @@
     },
     "RegionConfigurationRequest": {
       "description": "Request body to get the configuration for the region.",
-      "required": [
-        "scheduleAvailabilityRequest"
-      ],
       "type": "object",
       "properties": {
         "scheduleAvailabilityRequest": {
@@ -3335,7 +3347,7 @@
       "properties": {
         "scheduleAvailabilityResponse": {
           "$ref": "#/definitions/ScheduleAvailabilityResponse",
-          "description": "Schedule availability response",
+          "description": "Schedule availability for given sku in a region.",
           "readOnly": true
         },
         "transportAvailabilityResponse": {
@@ -3930,8 +3942,7 @@
             "Region",
             "Feature",
             "OfferType",
-            "NoSubscriptionInfo",
-            "CustomerUnregistered"
+            "NoSubscriptionInfo"
           ],
           "type": "string",
           "readOnly": true,
@@ -3962,10 +3973,6 @@
               {
                 "value": "NoSubscriptionInfo",
                 "description": "Subscription has not registered to Microsoft.DataBox and Service does not have the subscription notification."
-              },
-              {
-                "value": "CustomerUnregistered",
-                "description": "Customer unregistered from the subscription."
               }
             ]
           }

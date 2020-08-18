@@ -1,11 +1,11 @@
 {
   "parameters": {
     "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
-    "resourceGroupName": "SdkRg5154",
-    "jobName": "SdkJob952",
+    "resourceGroupName": "SdkRg8091",
+    "jobName": "SdkJob6429",
     "api-version": "2020-04-01",
     "x-ms-client-request-id": [
-      "04f2835f-a2a2-4f25-96df-568460e5be24"
+      "80eaafc7-e8b7-4c5a-ad81-b1ecb9573cd4"
     ],
     "Accept-Language": [
       "en-US"
@@ -20,11 +20,11 @@
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "1064"
+      "1395"
     ],
     "jobResource": {
       "properties": {
-        "transferType": "ImportToAzure",
+        "transferType": "ExportFromAzure",
         "details": {
           "jobDetailsType": "DataBox",
           "contactDetails": {
@@ -45,11 +45,21 @@
             "companyName": "Microsoft",
             "addressType": "Commercial"
           },
-          "dataImportDetails": [
+          "dataExportDetails": [
             {
+              "transferConfiguration": {
+                "transferConfigurationType": "TransferAll",
+                "transferAllDetails": {
+                  "include": {
+                    "dataAccountType": "StorageAccount",
+                    "transferAllBlobs": true,
+                    "transferAllFiles": true
+                  }
+                }
+              },
               "accountDetails": {
                 "dataAccountType": "StorageAccount",
-                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
+                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat/providers/Microsoft.Storage/storageAccounts/aaaaaa2"
               }
             }
           ]
@@ -66,7 +76,7 @@
     "200": {
       "body": {
         "properties": {
-          "transferType": "ImportToAzure",
+          "transferType": "ExportFromAzure",
           "isCancellable": true,
           "isDeletable": false,
           "isShippingAddressEditable": true,
@@ -84,6 +94,11 @@
               {
                 "stageName": "DevicePrepared",
                 "displayName": "Processed",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "DataCopy",
+                "displayName": "Data copy in progress",
                 "stageStatus": "None"
               },
               {
@@ -107,11 +122,6 @@
                 "stageStatus": "None"
               },
               {
-                "stageName": "DataCopy",
-                "displayName": "Data copy in progress",
-                "stageStatus": "None"
-              },
-              {
                 "stageName": "Completed",
                 "displayName": "Completed",
                 "stageStatus": "None"
@@ -130,6 +140,10 @@
                   "sendNotification": true
                 },
                 {
+                  "stageName": "DataCopy",
+                  "sendNotification": true
+                },
+                {
                   "stageName": "Dispatched",
                   "sendNotification": true
                 },
@@ -143,10 +157,6 @@
                 },
                 {
                   "stageName": "AtAzureDC",
-                  "sendNotification": true
-                },
-                {
-                  "stageName": "DataCopy",
                   "sendNotification": true
                 }
               ]
@@ -175,8 +185,8 @@
         "sku": {
           "name": "DataBox"
         },
-        "name": "SdkJob952",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg5154/providers/Microsoft.DataBox/jobs/SdkJob952",
+        "name": "SdkJob6429",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg8091/providers/Microsoft.DataBox/jobs/SdkJob6429",
         "type": "Microsoft.DataBox/jobs"
       }
     }
