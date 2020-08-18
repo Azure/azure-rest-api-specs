@@ -180,6 +180,14 @@ directive:
     - MachineExtensions_Get
     - MachineExtensions_List
 ```
+=======
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## C#
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
@@ -212,34 +220,24 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.hybridcompute
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybridcompute
-```
+## PowerShell
 
-### Java multi-api
+See configuration in the [Azure PowerShell repo](https://github.com/Azure/azure-powershell/tree/generation/src/ConnectedMachine)
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-12
-```
+## Python
 
-### Tag: package-2019-12 and java
+See configuration in [readme.python.md](./readme.python.md)
 
-These settings apply only when `--tag=package-2019-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+## Ruby
 
-``` yaml $(tag) == 'package-2019-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.hybridcompute.v2019_12_12
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hybridcompute/mgmt-v2019_12_12
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## TypeScript
+
+
+See configuration in [readme.typescript](./readme.typescript.md)
 
 regenerate-manager: true
 generate-interface: true
@@ -249,6 +247,7 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+=======
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
