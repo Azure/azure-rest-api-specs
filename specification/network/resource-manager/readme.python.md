@@ -110,7 +110,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.network.v2020_06_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_06_01
 python:
-  namespace: azure.mgmt.network.v2020_05_01
+  namespace: azure.mgmt.network.v2020_06_01
   output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_06_01
 ```
 
