@@ -604,14 +604,7 @@
       "properties": {
         "controllerType": {
           "type": "string",
-          "description": "Type of Delegated controller.",
-          "enum": [
-            "Kubernetes"
-          ],
-          "x-ms-enum": {
-            "name": "ControllerType",
-            "modelAsString": true
-          }
+          "description": "Type of Delegated controller."
         },
         "kubernetesProperties": {
           "description": "properties of kubernetes cluster",
@@ -798,6 +791,7 @@
       "pattern": "^[a-z][a-z0-9]*$",
       "minLength": 3,
       "maxLength": 63,
+      "x-ms-parameter-location": "method",
       "description": "The name of the dnc controller. It must be a minimum of 3 characters, and a maximum of 63."
     },
     "vnetNameParameter": {
