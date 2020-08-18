@@ -386,6 +386,9 @@
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -436,6 +439,9 @@
             "schema": {
               "$ref": "#/definitions/DatadogMonitorResource"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -493,6 +499,9 @@
             "schema": {
               "$ref": "#/definitions/DatadogMonitorResourceUpdateParameters"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -533,6 +542,9 @@
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1530,6 +1542,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
     }
   }
 }
