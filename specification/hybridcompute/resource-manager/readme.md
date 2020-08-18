@@ -75,96 +75,13 @@ swagger-to-sdk:
 ```
 
 ---
-## C# 
+## AzureResourceSchema
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.HybridCompute
-  output-folder: $(csharp-sdks-folder)/HybridCompute/Microsoft.Azure.Management.HybridCompute/src/Generated
-  clear-output-folder: true
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
+## C#
 
-## PowerShell
-
-``` yaml $(powershell)
-powershell:
-  namespace: Microsoft.Azure.Management.HybridCompute
-  output-folder: generated
-  clear-output-folder: true
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
-
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.hybridcompute
-  package-name: azure-mgmt-hybridcompute
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/hybridcompute/azure-mgmt-hybridcompute/azure/mgmt/hybridcompute
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-hybridcompute
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
@@ -172,42 +89,23 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.hybridcompute
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybridcompute
-```
+## PowerShell
 
-### Java multi-api
+See configuration in the [Azure PowerShell repo](https://github.com/Azure/azure-powershell/tree/generation/src/ConnectedMachine)
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-12
-```
+## Python
 
-### Tag: package-2019-12 and java
+See configuration in [readme.python.md](./readme.python.md)
 
-These settings apply only when `--tag=package-2019-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+## Ruby
 
-``` yaml $(tag) == 'package-2019-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.hybridcompute.v2019_12_12
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hybridcompute/mgmt-v2019_12_12
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
-regenerate-manager: true
-generate-interface: true
-```
+## TypeScript
 
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+See configuration in [readme.typescript](./readme.typescript.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -234,4 +132,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

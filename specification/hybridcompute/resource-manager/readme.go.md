@@ -1,4 +1,4 @@
-## Go
+# Go HybridCompute
 
 These settings apply only when `--go` is specified on the command line.
 
@@ -7,9 +7,15 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
   namespace: hybridcompute
+
+  directive:
+  - remove-operation: 
+    - Machines_Reconnect
+    - Machines_CreateOrUpdate
+    - Machines_Update
 ```
 
-### Go multi-api
+## Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
