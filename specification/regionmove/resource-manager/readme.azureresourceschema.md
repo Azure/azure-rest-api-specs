@@ -17,4 +17,3 @@ Please also specify `--azureresourceschema-folder=<path to the root directory of
 ``` yaml $(tag) == 'package-2019-10-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 ```
-
