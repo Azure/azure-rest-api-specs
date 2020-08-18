@@ -1766,16 +1766,14 @@
           }
         },
         "groups": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharingProfileGroup"
           },
           "description": "A list of sharing profile groups."
         }
-      },
-      "required": [
-        "permissions"
-      ]
+      }
     },
     "SharingProfileGroup": {
       "description": "Group of the gallery sharing profile",
@@ -1799,11 +1797,7 @@
           },
           "description": "A list of subscription/tenant ids the gallery is aimed to be shared to."
         }
-      },
-      "required": [
-        "type",
-        "ids"
-      ]
+      }
     },
     "GalleryApplication": {
       "properties": {
