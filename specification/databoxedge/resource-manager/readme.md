@@ -86,6 +86,9 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databoxedge']
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js databoxedge/resource-manager
 ```
 
 ## C#
@@ -192,6 +195,10 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -208,6 +215,7 @@ input-file:
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
