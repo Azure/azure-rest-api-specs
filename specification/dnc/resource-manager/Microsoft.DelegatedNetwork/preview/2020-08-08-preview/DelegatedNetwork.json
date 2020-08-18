@@ -199,9 +199,6 @@
             "$ref": "#/parameters/subnetNameParameter"
           },
           {
-            "$ref": "#/parameters/controllerNameParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -254,9 +251,6 @@
             "$ref": "#/parameters/subnetNameParameter"
           },
           {
-            "$ref": "#/parameters/controllerNameParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -305,9 +299,6 @@
           },
           {
             "$ref": "#/parameters/subnetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/controllerNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -590,7 +581,10 @@
           "enum": [
             "Kubernetes"
           ],
-          "type": "string"
+          "x-ms-enum": {
+            "name": "ControllerType",
+            "modelAsString": true
+          }
         },
         "kubernetesProperties": {
           "description": "properties of kubernetes cluster",
@@ -615,7 +609,7 @@
       ]
     },
     "ControllerProperties": {
-      "description": "Properties of Dedicated Capacity resource.",
+      "description": "Properties of Delegated controller resource.",
       "type": "object",
       "properties": {
         "state": {
@@ -674,13 +668,13 @@
       }
     },
     "DelegatedSubnet": {
-      "description": "Delegated subnet link details",
+      "description": "Delegated subnet details",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DelegatedSubnetProperties",
-          "description": "Properties of the delegated subnet link request"
+          "description": "Properties of the delegated subnet request"
         },
         "allOf": [
           {
@@ -690,7 +684,7 @@
       }
     },
     "DelegatedSubnetProperties" :{
-      "description": "Properties of delegated subnet link resource.",
+      "description": "Properties of delegated subnet resource.",
       "type": "object",
       "properties": {
         "state": {
@@ -706,7 +700,7 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "The current state of delegated subnet lin resource."
+          "description": "The current state of delegated subnet resource."
         }
       }
     },
