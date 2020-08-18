@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2020-08` is specified on the comma
 ```yaml $(tag) == 'package-2020-08'
 input-file:
   - Microsoft.HybridCompute/stable/2020-08-15/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2020-08-15/privateLinkScopes.json
 ```
 ### Tag: package-2019-03
 
