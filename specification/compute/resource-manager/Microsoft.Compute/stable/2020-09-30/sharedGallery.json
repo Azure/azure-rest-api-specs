@@ -374,7 +374,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GalleryImage"
+              "$ref": "#/definitions/SharedGalleryImage"
             }
           },
           "default": {
@@ -430,7 +430,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GalleryImage"
+              "$ref": "#/definitions/SharedGalleryImage"
             }
           },
           "default": {
@@ -572,7 +572,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "PirResource": {
       "description": "The Resource model definition.",
       "properties": {
         "id": {
@@ -621,25 +621,25 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryProperties"
+          "$ref": "#/definitions/SharedGalleryProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/PirResource"
         }
       ],
       "description": "Specifies information about the Shared Image Gallery that you want to create or update."
     },
-    "GalleryProperties": {
+    "SharedGalleryProperties": {
       "properties": {
         "sharingProfile": {
-          "$ref": "#/definitions/SharingProfile"
+          "$ref": "#/definitions/SharedGallerySharingProfile"
         }
       },
       "description": "Describes the properties of a Shared Image Gallery."
     },
-    "SharingProfile": {
+    "SharedGallerySharingProfile": {
       "properties": {
         "sharedSubscriptionIds": {
           "type": "array",
@@ -664,7 +664,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GalleryImage"
+            "$ref": "#/definitions/SharedGalleryImage"
           },
           "description": "A list of shared gallery images."
         },
@@ -677,21 +677,21 @@
         "value"
       ]
     },
-    "GalleryImage": {
+    "SharedGalleryImage": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryImageProperties"
+          "$ref": "#/definitions/SharedGalleryImageProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/PirResource"
         }
       ],
       "description": "Specifies information about the gallery Image Definition that you want to create or update."
     },
-    "GalleryImageProperties": {
+    "SharedGalleryImageProperties": {
       "properties": {
         "osType": {
           "type": "string",
@@ -854,17 +854,17 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryImageVersionProperties"
+          "$ref": "#/definitions/SharedGalleryImageVersionProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/PirResource"
         }
       ],
       "description": "Specifies information about the gallery Image Version that you want to create or update."
     },
-    "GalleryImageVersionProperties": {
+    "SharedGalleryImageVersionProperties": {
       "properties": {
         "publishedDate": {
           "type": "string",
