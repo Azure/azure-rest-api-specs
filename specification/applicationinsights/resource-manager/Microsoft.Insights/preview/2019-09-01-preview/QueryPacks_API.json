@@ -34,7 +34,44 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/queryPacks": {
+    "/providers/Microsoft.Insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available insights REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Insights error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/queryPacks": {
       "get": {
         "description": "Gets a list of all Log Analytics QueryPacks within a subscription.",
         "operationId": "QueryPacks_List",
@@ -70,7 +107,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/queryPacks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks": {
       "get": {
         "description": "Gets a list of Log Analytics QueryPacks within a resource group.",
         "operationId": "QueryPacks_ListByResourceGroup",
@@ -109,7 +146,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/queryPacks/{queryPackName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}": {
       "delete": {
         "description": "Deletes a Log Analytics QueryPack.",
         "operationId": "QueryPacks_Delete",
@@ -286,15 +323,81 @@
       "description": "Describe the format of an Error response.",
       "type": "object",
       "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
         "code": {
-          "description": "Error code",
+          "description": "The error's code.",
           "type": "string"
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
+          "description": "A human readable error message.",
           "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Indicates which value in 'target' is responsible for the error.",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Indicates resources which were responsible for the error.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "description": "Additional properties that can be provided on the error details object",
+          "type": "object"
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInfo": {
+      "title": "The code and message for an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "Inner error details if they exist.",
+          "$ref": "#/definitions/ErrorInfo"
+        },
+        "additionalProperties": {
+          "description": "Additional properties that can be provided on the error info object",
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "QueryPacksResource": {
       "properties": {
@@ -406,6 +509,68 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to get the next set of Log Analytics QueryPack definitions if too many QueryPacks where returned in the result set."
+        }
+      }
+    },
+    "Operation": {
+      "description": "CDN REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of CDN operations supported by the CDN resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
         }
       }
     }
