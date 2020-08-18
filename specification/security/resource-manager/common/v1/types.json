@@ -78,6 +78,27 @@
         }
       ]
     },
+	"TrackedResource2": {
+      "type": "object",
+      "description": "Describes an Azure tracked resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/Location2"
+        },
+        {
+          "$ref": "#/definitions/Kind"
+        },
+        {
+          "$ref": "#/definitions/ETag"
+        },
+        {
+          "$ref": "#/definitions/Tags"
+        }
+      ]
+    },
     "ETag": {
       "type": "object",
       "description": "Entity tag is used for comparing two or more entities from the same requested resource.",
@@ -112,6 +133,17 @@
       }
     },
     "Location": {
+      "type": "object",
+      "description": "Describes an Azure resource with location",
+      "properties": {
+        "location": {
+		  "readOnly": true,
+          "type": "string",
+          "description": "Location where the resource is stored"
+        }
+      }
+    },
+	"Location2": {
       "type": "object",
       "description": "Describes an Azure resource with location",
       "properties": {
