@@ -3651,29 +3651,31 @@
       }
     },
     "PrivateEndpointConnection": {
-      "id": {
-        "type": "string",
-        "description": "ResourceId of the private endpoint connection.",
-        "readOnly": true
-      },
-      "name": {
-        "type": "string",
-        "description": "Friendly name of the private endpoint connection.",
-        "readOnly": true
-      },
-      "type": {
-        "type": "string",
-        "description": "Resource type of private endpoint connection.",
-        "readOnly": true
-      },
+      "x-ms-azure-resource": true,
+      "description": "The Private Endpoint Connection resource.",
+      "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "ResourceId of the private endpoint connection.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the private endpoint connection.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of private endpoint connection.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
         }
-      },
-      "description": "The Private Endpoint Connection resource."
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
