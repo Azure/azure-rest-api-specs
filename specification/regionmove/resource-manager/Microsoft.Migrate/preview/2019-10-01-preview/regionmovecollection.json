@@ -672,12 +672,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/removeMoveResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/bulkRemove": {
       "post": {
         "tags": [
           "MoveCollections"
         ],
-        "operationId": "MoveCollections_RemoveMoveResources",
+        "operationId": "MoveCollections_BulkRemove",
         "description": "Removes the set of move resources included in the request body from move collection. The orchestration is done by service. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -709,7 +709,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/RemoveMoveResourcesRequest"
+              "$ref": "#/definitions/BulkRemoveRequest"
             }
           }
         ],
@@ -731,8 +731,8 @@
           }
         },
         "x-ms-examples": {
-          "MoveCollections_RemoveMoveResources": {
-            "$ref": "./examples/MoveCollections_RemoveMoveResources.json"
+          "MoveCollections_BulkRemove": {
+            "$ref": "./examples/MoveCollections_BulkRemove.json"
           }
         }
       }
@@ -1528,8 +1528,8 @@
         }
       }
     },
-    "RemoveMoveResourcesRequest": {
-      "description": "Defines the request body for remove of move resources operation.",
+    "BulkRemoveRequest": {
+      "description": "Defines the request body for bulk remove of move resources operation.",
       "type": "object",
       "properties": {
         "validateOnly": {
