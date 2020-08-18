@@ -112,6 +112,7 @@
         ],
         "description": "Creates or updates a workspace with the specified parameters.",
         "operationId": "Workspaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Workspace": {
             "$ref": "./examples/createWorkspace.json"
@@ -153,6 +154,12 @@
               "$ref": "#/definitions/Workspace"
             }
           },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -172,6 +179,7 @@
             "$ref": "./examples/deleteWorkspace.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -189,6 +197,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
@@ -1452,6 +1463,20 @@
           },
           "readOnly": true,
           "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperty",
+          "description": "The encryption settings of Azure ML workspace."
+        },
+        "hbiWorkspace": {
+          "type": "boolean",
+          "description": "The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service",
+          "default": false
+        },
+        "serviceProvisionedResourceGroup": {
+          "type": "string",
+          "description": "The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace",
+          "readOnly": true
         }
       }
     },
@@ -1922,7 +1947,6 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "readOnly": true,
           "description": "The identity of the resource."
         },
         "location": {
@@ -3182,6 +3206,52 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "EncryptionProperty": {
+      "properties": {
+        "status": {
+          "description": "Indicates whether or not the encryption is enabled for the workspace.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Customer Key vault properties."
+        }
+      },
+      "required": [
+        "status",
+        "keyVaultProperties"
+      ],
+      "type": "object"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyVaultArmId": {
+          "description": "The ArmId of the keyVault where the customer owned encryption key is present.",
+          "type": "string"
+        },
+        "keyIdentifier": {
+          "description": "Key vault uri to access the encryption key.",
+          "type": "string"
+        },
+        "identityClientId": {
+          "description": "For future use - The client id of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "keyIdentifier",
+        "keyVaultArmId"
+      ],
+      "type": "object"
     }
   }
 }

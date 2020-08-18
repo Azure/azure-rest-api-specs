@@ -1238,6 +1238,10 @@
           "type": "string",
           "description": "The kind of the managed application. Allowed values are MarketPlace and ServiceCatalog.",
           "pattern": "^[-\\w\\._,\\(\\)]+$"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "required": [
@@ -1266,6 +1270,10 @@
           "type": "string",
           "description": "The kind of the managed application. Allowed values are MarketPlace and ServiceCatalog.",
           "pattern": "^[-\\w\\._,\\(\\)]+$"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
@@ -1316,11 +1324,63 @@
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState",
           "description": "The managed application provisioning state."
+        },
+        "billingDetails": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApplicationBillingDetailsDefinition",
+          "description": "The managed application billing details."
+        },
+        "jitAccessPolicy": {
+          "$ref": "#/definitions/ApplicationJitAccessPolicy",
+          "description": "The managed application Jit access policy."
+        },
+        "publisherTenantId": {
+          "type": "string",
+          "description": "The publisher tenant Id.",
+          "readOnly": true
+        },
+        "authorizations": {
+          "description": "The  read-only authorizations property that is retrieved from the application package.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationAuthorization"
+          },
+          "readOnly": true
+        },
+        "managementMode": {
+          "$ref": "#/definitions/ApplicationManagementMode",
+          "description": "The managed application management mode.",
+          "readOnly": true
+        },
+        "customerSupport": {
+          "$ref": "#/definitions/ApplicationPackageContact",
+          "description": "The read-only customer support property that is retrieved from the application package.",
+          "readOnly": true
+        },
+        "supportUrls": {
+          "$ref": "#/definitions/ApplicationPackageSupportUrls",
+          "description": "The read-only support URLs property that is retrieved from the application package.",
+          "readOnly": true
+        },
+        "artifacts": {
+          "description": "The collection of managed application artifacts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationArtifact"
+          },
+          "readOnly": true
+        },
+        "createdBy": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApplicationClientDetails",
+          "description": "The client entity that created the JIT request."
+        },
+        "updatedBy": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApplicationClientDetails",
+          "description": "The client entity that last updated the JIT request."
         }
       },
-      "required": [
-        "managedResourceGroupId"
-      ],
       "description": "The managed application properties."
     },
     "ApplicationPropertiesPatchable": {
@@ -1361,21 +1421,21 @@
           "description": "The managed application definition display name."
         },
         "isEnabled": {
-          "type": "string",
+          "type": "boolean",
           "description": "A value indicating whether the package is enabled or not."
         },
         "authorizations": {
           "description": "The managed application provider authorizations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationProviderAuthorization"
+            "$ref": "#/definitions/ApplicationAuthorization"
           }
         },
         "artifacts": {
           "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationArtifact"
+            "$ref": "#/definitions/ApplicationDefinitionArtifact"
           }
         },
         "description": {
@@ -1393,11 +1453,33 @@
         "createUiDefinition": {
           "type": "object",
           "description": "The createUiDefinition json for the backing template with Microsoft.Solutions/applications resource. It can be a JObject or well-formed JSON string."
+        },
+        "notificationPolicy": {
+          "$ref": "#/definitions/ApplicationNotificationPolicy",
+          "description": "The managed application notification policy."
+        },
+        "lockingPolicy": {
+          "$ref": "#/definitions/ApplicationPackageLockingPolicyDefinition",
+          "description": "The managed application locking policy."
+        },
+        "deploymentPolicy": {
+          "$ref": "#/definitions/ApplicationDeploymentPolicy",
+          "description": "The managed application deployment policy."
+        },
+        "managementPolicy": {
+          "$ref": "#/definitions/ApplicationManagementPolicy",
+          "description": "The managed application management policy that determines publisher's access to the managed resource group."
+        },
+        "policies": {
+          "description": "The managed application provider policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPolicy"
+          }
         }
       },
       "required": [
-        "lockLevel",
-        "authorizations"
+        "lockLevel"
       ],
       "description": "The managed application definition properties."
     },
@@ -1466,10 +1548,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
         }
       },
       "allOf": [
@@ -1528,15 +1606,40 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedResourceIdentity"
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
+    },
+    "userAssignedResourceIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      },
+      "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
     },
     "Resource": {
       "properties": {
@@ -1606,6 +1709,7 @@
       "description": "Provisioning status of the managed application.",
       "readOnly": true,
       "enum": [
+        "NotSpecified",
         "Accepted",
         "Running",
         "Ready",
@@ -1640,6 +1744,7 @@
     "ApplicationArtifactType": {
       "description": "The managed application artifact type.",
       "enum": [
+        "NotSpecified",
         "Template",
         "Custom"
       ],
@@ -1649,10 +1754,38 @@
         "modelAsString": false
       }
     },
+    "ApplicationDefinitionArtifactName": {
+      "description": "The managed application artifact name.",
+      "enum": [
+        "NotSpecified",
+        "ApplicationResourceTemplate",
+        "CreateUiDefinition",
+        "MainTemplateParameters"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ApplicationDefinitionArtifactName",
+        "modelAsString": true
+      }
+    },
+    "ApplicationArtifactName": {
+      "description": "The managed application artifact name.",
+      "enum": [
+        "NotSpecified",
+        "ViewDefinition",
+        "Authorizations",
+        "CustomRoleDefinition"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ApplicationArtifactName",
+        "modelAsString": true
+      }
+    },
     "ApplicationArtifact": {
       "properties": {
         "name": {
-          "type": "string",
+          "$ref": "#/definitions/ApplicationArtifactName",
           "description": "The managed application artifact name."
         },
         "uri": {
@@ -1664,9 +1797,113 @@
           "description": "The managed application artifact type."
         }
       },
+      "required": [
+        "name",
+        "type",
+        "uri"
+      ],
       "description": "Managed application artifact."
     },
-    "ApplicationProviderAuthorization": {
+    "ApplicationDefinitionArtifact": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ApplicationDefinitionArtifactName",
+          "description": "The managed application definition artifact name."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The managed application definition artifact blob uri."
+        },
+        "type": {
+          "$ref": "#/definitions/ApplicationArtifactType",
+          "description": "The managed application definition artifact type."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "uri"
+      ],
+      "description": "Application definition artifact."
+    },
+    "ApplicationNotificationPolicy": {
+      "properties": {
+        "notificationEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationNotificationEndpoint"
+          },
+          "description": "The managed application notification endpoint."
+        }
+      },
+      "required": [
+        "notificationEndpoints"
+      ],
+      "description": "Managed application notification policy."
+    },
+    "ApplicationNotificationEndpoint": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The managed application notification endpoint uri."
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "description": "Managed application notification endpoint."
+    },
+    "ApplicationPackageLockingPolicyDefinition": {
+      "properties": {
+        "allowedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The deny assignment excluded actions."
+        }
+      },
+      "description": "Managed application locking policy."
+    },
+    "ApplicationDeploymentPolicy": {
+      "properties": {
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "The managed application deployment mode."
+        }
+      },
+      "required": [
+        "deploymentMode"
+      ],
+      "description": "Managed application deployment policy."
+    },
+    "ApplicationManagementPolicy": {
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/ApplicationManagementMode",
+          "description": "The managed application management mode."
+        }
+      },
+      "description": "Managed application management policy."
+    },
+    "ApplicationPolicy": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The policy name"
+        },
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition Id."
+        },
+        "parameters": {
+          "type": "string",
+          "description": "The policy parameters."
+        }
+      },
+      "description": "Managed application policy."
+    },
+    "ApplicationAuthorization": {
       "properties": {
         "principalId": {
           "type": "string",
@@ -1682,6 +1919,76 @@
         "roleDefinitionId"
       ],
       "description": "The managed application provider authorization."
+    },
+    "ApplicationPackageContact": {
+      "properties": {
+        "contactName": {
+          "type": "string",
+          "description": "The contact name."
+        },
+        "email": {
+          "type": "string",
+          "description": "The contact email."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The contact phone number."
+        }
+      },
+      "required": [
+        "email",
+        "phone"
+      ],
+      "description": "The application package contact information."
+    },
+    "ApplicationPackageSupportUrls": {
+      "properties": {
+        "publicAzure": {
+          "type": "string",
+          "description": "The public azure support URL."
+        },
+        "governmentCloud": {
+          "type": "string",
+          "description": "The government cloud support URL."
+        }
+      },
+      "description": "The appliance package support URLs."
+    },
+    "ApplicationBillingDetailsDefinition": {
+      "properties": {
+        "resourceUsageId": {
+          "type": "string",
+          "description": "The managed application resource usage Id."
+        }
+      },
+      "description": "Managed application billing details definition."
+    },
+    "ApplicationJitAccessPolicy": {
+      "properties": {
+        "jitAccessEnabled": {
+          "type": "boolean",
+          "description": "Whether the JIT access is enabled."
+        },
+        "jitApprovalMode": {
+          "$ref": "#/definitions/JitApprovalMode",
+          "description": "JIT approval mode."
+        },
+        "jitApprovers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JitApproverDefinition"
+          },
+          "description": "The JIT approvers"
+        },
+        "maximumJitAccessDuration": {
+          "type": "string",
+          "description": "The maximum duration JIT access is granted. This is an ISO8601 time period value."
+        }
+      },
+      "required": [
+        "jitAccessEnabled"
+      ],
+      "description": "Managed application Jit access policy."
     },
     "ErrorResponse": {
       "description": "Error response indicates managed application is not able to process the incoming request. The reason is provided in the error message.",
@@ -1835,6 +2142,47 @@
       ],
       "description": "The JIT scheduling policies."
     },
+    "JitApprovalMode": {
+      "description": "The Jit approval mode.",
+      "enum": [
+        "NotSpecified",
+        "AutoApprove",
+        "ManualApprove"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JitApprovalMode",
+        "modelAsString": true
+      }
+    },
+    "JitApproverDefinition": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The approver service principal Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The approver type.",
+          "enum": [
+            "user",
+            "group"
+          ],
+          "x-ms-enum": {
+            "name": "JitApproverType",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The approver display name."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "JIT approver definition."
+    },
     "ApplicationClientDetails": {
       "readOnly": true,
       "properties": {
@@ -1927,6 +2275,32 @@
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
         }
+      }
+    },
+    "DeploymentMode": {
+      "description": "The deployment mode.",
+      "enum": [
+        "NotSpecified",
+        "Incremental",
+        "Complete"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true
+      }
+    },
+    "ApplicationManagementMode": {
+      "description": "The management mode.",
+      "enum": [
+        "NotSpecified",
+        "Unmanaged",
+        "Managed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ApplicationManagementMode",
+        "modelAsString": true
       }
     }
   },

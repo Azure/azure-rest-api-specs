@@ -9,13 +9,29 @@
         "name": "Standard_GRS"
       },
       "kind": "Storage",
-      "location": "eastus2euap",
+      "location": "eastus",
       "properties": {
         "isHnsEnabled": true,
+        "allowBlobPublicAccess": false,
+        "minimumTlsVersion": "TLS1_2",
         "routingPreference": {
           "routingChoice": "MicrosoftRouting",
           "publishMicrosoftEndpoints": true,
           "publishInternetEndpoints": true
+        },
+        "encryption": {
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": true
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": true
+            }
+          },
+          "requireInfrastructureEncryption": false,
+          "keySource": "Microsoft.Storage"
         }
       },
       "tags": {
@@ -29,10 +45,12 @@
       "body": {
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
-        "location": "eastus2euap",
+        "location": "eastus",
         "name": "sto4445",
         "properties": {
           "isHnsEnabled": true,
+          "allowBlobPublicAccess": false,
+          "minimumTlsVersion": "TLS1_2",
           "creationTime": "2017-05-24T13:25:33.4863236Z",
           "primaryEndpoints": {
             "web": "https://sto4445.web.core.windows.net/",
@@ -62,6 +80,22 @@
             "routingChoice": "MicrosoftRouting",
             "publishMicrosoftEndpoints": true,
             "publishInternetEndpoints": true
+          },
+          "encryption": {
+            "services": {
+              "file": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "blob": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            },
+            "requireInfrastructureEncryption": false,
+            "keySource": "Microsoft.Storage"
           },
           "secondaryLocation": "centraluseuap",
           "statusOfPrimary": "available",

@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup1",
+    "workspaceName": "workspace1",
+    "api-version": "2019-06-01-preview",
+    "workspaceInfo": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "defaultDataLakeStorage": {
+          "accountUrl": "https://accountname.dfs.core.windows.net",
+          "filesystem": "default"
+        },
+        "sqlAdministratorLogin": "login",
+        "sqlAdministratorLoginPassword": "password",
+        "managedVirtualNetwork": "default",
+        "managedResourceGroupName": "workspaceManagedResourceGroupUnique"
+      },
+      "location": "East US",
+      "tags": {
+        "key": "value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1",
+        "name": "workspace1",
+        "type": "Microsoft.Synapse/workspaces",
+        "location": "East US",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "f4b0f1c2-xxxx-43db-xxxx-ccd99e1afd22",
+          "tenantId": "72f988bf-xxxx-41af-xxxx-2d7cd011db47"
+        },
+        "properties": {
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://accountname.dfs.core.windows.net",
+            "filesystem": "default"
+          },
+          "connectivityEndpoints": {
+            "dev": "workspace1.dev.projectarcadia.net",
+            "sql": "workspace1.sql.projectarcadia.net"
+          },
+          "sqlAdministratorLogin": "login",
+          "sqlAdministratorLoginPassword": "password",
+          "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+          "managedVirtualNetwork": "default",
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+              "name": "sql",
+              "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1",
+        "name": "workspace1",
+        "type": "Microsoft.Synapse/workspaces",
+        "location": "East US",
+        "properties": {
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://accountname.dfs.core.windows.net",
+            "filesystem": "default"
+          },
+          "connectivityEndpoints": {
+            "dev": "workspace1.dev.projectarcadia.net",
+            "sql": "workspace1.sql.projectarcadia.net"
+          },
+          "sqlAdministratorLogin": "login",
+          "sqlAdministratorLoginPassword": "password",
+          "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+          "managedVirtualNetwork": "default",
+          "provisioningState": "Provisioning"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

@@ -55,6 +55,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js devspaces/resource-manager
 ```
 
 ## C#
@@ -111,6 +114,10 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -135,3 +142,10 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - from: devspaces.json
+    suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    reason: instanceType is a non-settable property from the client.
+```

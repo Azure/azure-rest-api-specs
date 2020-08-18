@@ -1,0 +1,35 @@
+{
+  "title": "Set device attestation - X509",
+  "description": "Creates or updates the X509 attestation for a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "CheckoutThermostat",
+    "body": {
+      "type": "X509Attestation",
+      "x509": {
+        "clientCertificates": {
+          "primary": {
+            "certificate": "<string representation of the certificate>"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "X509Attestation",
+        "x509": {
+          "clientCertificates": {
+            "primary": {
+              "info": {
+                "sha1Thumbprint": "<thumbprint>"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
