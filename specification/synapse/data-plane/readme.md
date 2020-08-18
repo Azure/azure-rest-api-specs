@@ -62,6 +62,7 @@ These settings apply only when `--tag=package-artifacts-2019-06-01-preview` is s
 
 ``` yaml $(tag) == 'package-artifacts-2019-06-01-preview'
 input-file:
+- Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
 - Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlPools.json
 - Microsoft.Synapse/preview/2019-06-01-preview/bigDataPools.json
