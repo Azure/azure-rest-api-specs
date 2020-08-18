@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotSensors": {
+    "/{scope}/providers/Microsoft.Security/iotSensors": {
       "get": {
         "x-ms-examples": {
           "List IoT sensors": {
@@ -51,7 +51,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/Scope"
           }
         ],
         "responses": {
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{iotLocation}/iotSensors/{iotSensorName}": {
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}": {
       "get": {
         "x-ms-examples": {
           "Get IoT sensor": {
@@ -87,10 +87,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/IotLocation"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/IotSensorName"
@@ -127,10 +124,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/IotLocation"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/IotSensorName"
@@ -173,10 +167,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/IotLocation"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/IotSensorName"
@@ -198,7 +189,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{iotLocation}/iotSensors/{iotSensorName}/downloadActivation": {
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/downloadActivation": {
       "post": {
         "x-ms-examples": {
           "Download activation file": {
@@ -215,10 +206,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/IotLocation"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/IotSensorName"
@@ -273,11 +261,6 @@
       "type": "object",
       "description": "IoT sensor properties",
       "properties": {
-        "iotHubResourceId": {
-          "description": "Resource id of the IoT Hub the sensor is associated with (immutable)",
-          "type": "string",
-          "example": "/subscriptions/326b1ffa-8ac7-4034-8437-69bef733dede/resourceGroups/myGroup/Providers/Microsoft.Devices/iotHubs/myHub"
-        },
         "iotHubDeviceId": {
           "description": "Device id that represents the sensor in the associated IoT Hub",
           "readOnly": true,
@@ -288,20 +271,21 @@
     }
   },
   "parameters": {
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Scope of the query, can be subscription (/subscriptions/326b1ffa-8ac7-4034-8437-69bef733dede) or IoT Hub (/providers/Microsoft.Devices/iotHubs/myHub)",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "IotSensorName": {
       "name": "iotSensorName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "Name of the IoT sensor",
-      "x-ms-parameter-location": "method"
-    },
-    "IotLocation": {
-      "name": "iotLocation",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Location associated with the resource",
       "x-ms-parameter-location": "method"
     }
   }
