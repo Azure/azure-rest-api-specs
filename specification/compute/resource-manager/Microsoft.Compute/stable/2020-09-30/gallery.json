@@ -37,10 +37,10 @@
     "/providers/Microsoft.Compute/operations": {
       "get": {
         "tags": [
-          "SharedImageGalleryOperations"
+          "ComputeOperations"
         ],
         "operationId": "Operations_List",
-        "description": "Gets a list of Shared Image Gallery operations.",
+        "description": "Gets a list of compute operations.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -50,7 +50,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SharedImageGalleryOperationListResult"
+              "$ref": "#/definitions/ComputeOperationListResult"
             }
           }
         },
@@ -2653,44 +2653,44 @@
       ],
       "description": "The List Gallery Application version operation response."
     },
-    "SharedImageGalleryOperationListResult": {
+    "ComputeOperationListResult": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SharedImageGalleryOperationValue"
+            "$ref": "#/definitions/ComputeOperationValue"
           },
-          "description": "The list of shared image gallery operations"
+          "description": "The list of compute operations"
         }
       },
-      "description": "The List Shared Image Gallery Operation operation response."
+      "description": "The List Compute Operation operation response."
     },
-    "SharedImageGalleryOperationValue": {
+    "ComputeOperationValue": {
       "properties": {
         "origin": {
           "type": "string",
           "readOnly": true,
-          "description": "The origin of the shared image gallery operation."
+          "description": "The origin of the compute operation."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the shared image gallery operation."
+          "description": "The name of the compute operation."
         },
         "display": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedImageGalleryOperationValueDisplay"
+          "$ref": "#/definitions/ComputeOperationValueDisplay"
         }
       },
-      "description": "Describes the properties of a Shared Image Gallery Operation value."
+      "description": "Describes the properties of a Compute Operation value."
     },
-    "SharedImageGalleryOperationValueDisplay": {
+    "ComputeOperationValueDisplay": {
       "properties": {
         "operation": {
           "type": "string",
           "readOnly": true,
-          "description": "The display name of the shared image gallery operation."
+          "description": "The display name of the compute operation."
         },
         "resource": {
           "type": "string",
@@ -2708,7 +2708,7 @@
           "description": "The resource provider for the operation."
         }
       },
-      "description": "Describes the properties of a Shared Image Gallery Operation Value Display."
+      "description": "Describes the properties of a Compute Operation Value Display."
     },
     "CloudError": {
       "x-ms-external": true,

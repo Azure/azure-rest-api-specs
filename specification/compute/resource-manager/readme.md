@@ -221,6 +221,7 @@ input-file:
 - Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2020-05-01/disk.json
 - Microsoft.Compute/stable/2020-09-30/gallery.json
+- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
@@ -231,6 +232,7 @@ These settings apply only when `--tag=package-2020-09-30-only` is specified on t
 ``` yaml $(tag) == 'package-2020-09-30-only'
 input-file:
 - Microsoft.Compute/stable/2020-09-30/gallery.json
+- Microsoft.Compute/stable/2020-09-30/sharedGallery.json
 ```
 
 ### Tag: package-2020-06-01
@@ -840,6 +842,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Compute/stable/2020-09-30/sharedGallery.json
   - $(this-folder)/Microsoft.Compute/stable/2020-09-30/gallery.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
