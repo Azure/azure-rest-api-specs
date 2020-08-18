@@ -76,6 +76,9 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_portal']
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js portal/resource-manager
 ```
 
 ## Go
@@ -101,6 +104,10 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## NodeJS
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
