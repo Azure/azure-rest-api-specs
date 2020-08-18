@@ -208,9 +208,6 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SalNameParameter"
-          },
-          {
             "name": "delegatedSubnetParameters",
             "in": "body",
             "required": true,
@@ -264,9 +261,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/SalNameParameter"
           }
         ],
         "responses": {
@@ -320,9 +314,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/SalNameParameter"
           }
         ],
         "responses": {
@@ -579,7 +570,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DncResponse"
+            "$ref": "#/definitions/DelegatedController"
           },
           "description": "An array of Delegated controller resources."
         }
@@ -807,17 +798,6 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "The name of the delegated subnet. This name must be at least 1 character in length, and no more than 90."
-    },
-    "salNameParameter": {
-      "name": "salName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method",
-      "description": "The name of the service association link for delegated subnet."
     }
   }
 }
