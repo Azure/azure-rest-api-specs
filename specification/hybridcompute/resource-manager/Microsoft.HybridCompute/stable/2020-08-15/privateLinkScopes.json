@@ -734,7 +734,7 @@
         {
           "$ref": "#/definitions/PrivateLinkScopesResource"
         }
-      ],
+      ],      
       "description": "An Azure Arc PrivateLinkScope definition."
     },
     "HybridComputePrivateLinkScopeProperties": {
@@ -977,41 +977,6 @@
         }
       }
     },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags"
-    },
-    "ErrorResponse": {
-      "description": "The resource management error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string"
-        }
-      }
-    },
     "ErrorResponseCommon": {
       "allOf": [
         {
@@ -1078,20 +1043,6 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    }
+    }    
   }
 }
