@@ -51,14 +51,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "controllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63,
-            "description": "The name of the dnc controller. It must be a minimum of 3 characters, and a maximum of 63."
+            "$ref": "#/parameters/controllerNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -98,20 +91,22 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "controllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63,
-            "description": "The name of the DNC controller. It must be a minimum of 3 characters, and a maximum of 63."
+            "$ref": "#/parameters/controllerNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "controllerParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ControllerTypeParameters"
+            },
+            "description": "controller type parameters"
           }
         ],
         "responses": {
@@ -152,20 +147,182 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "controllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63,
-            "description": "The name of the DNC controller. It must be at least 3 characters in length, and no more than 63."
+            "$ref": "#/parameters/controllerNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}/providers/Microsoft.DelegatedNetwork/delegatedSubnet": {
+      "get": {
+        "description": "Gets details about the specified dnc DelegatedSubnet Link.",
+        "x-ms-examples": {
+          "Get details of a capacity": {
+            "$ref": "./examples/getDelegatedSubnet.json"
+          }
+        },
+        "tags": [
+          "DNCDelegatedSubnet"
+        ],
+        "operationId": "DelegatedSubnet_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/controllerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SalNameParameter"
+          },
+          {
+            "name": "delegatedSubnetParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnetParameters"
+            },
+            "description": "Delegated subnet details."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put":{
+        "description": "Put delegated subnet resource",
+        "x-ms-examples": {
+          "Get details of a capacity": {
+            "$ref": "./examples/putDelegatedSubnet.json"
+          }
+        },
+        "tags": [
+          "DNCDelegatedSubnet"
+        ],
+        "operationId": "DelegatedSubnet_PutDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/controllerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SalNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnet"
+            }
+          },
+          "201": {
+            "description": "InProgress. The operation is still in progress",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete":{
+        "description": "Delete dnc DelegatedSubnet.",
+        "x-ms-examples": {
+          "Get details of a capacity": {
+            "$ref": "./examples/deleteDelegatedSubnet.json"
+          }
+        },
+        "tags": [
+          "DNCDelegatedSubnet"
+        ],
+        "operationId": "DelegatedSubnet_DeleteDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/controllerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SalNameParameter"
           }
         ],
         "responses": {
@@ -404,6 +561,17 @@
       },
       "x-ms-azure-resource": true
     },
+    "DelegatedSubnetParameters": {
+      "description": "An array of Delegated controller resources.",
+      "type": "object",
+      "properties": {
+        "controllerID": "string",
+        "description": "Delegated Network Controller ID"
+      },
+      "required": [
+        "controllerID"
+      ]
+    },
     "DelegatedControllers": {
       "description": "An array of Delegated controller resources.",
       "type": "object",
@@ -411,7 +579,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DelegatedController"
+            "$ref": "#/definitions/DncResponse"
           },
           "description": "An array of Delegated controller resources."
         }
@@ -420,13 +588,30 @@
         "value"
       ]
     },
+    "ControllerTypeParameters": {
+      "description": "Details of controller type.",
+      "type": "object",
+      "properties": {
+        "controllerType": {
+          "description": "Type of Delegated controller.",
+          "enum": [
+            "Kubernetes"
+          ],
+          "type": "string"
+        },
+        "kubernetesProperties": {
+          "description": "properties of kubernetes cluster",
+          "$ref": "#/definitions/KubernetesProperties"
+        }
+      }
+    },
     "DelegatedController": {
       "description": "Represents an instance of a DNC controller.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DelegatedControllerProperties",
+          "$ref": "#/definitions/ControllerProperties",
           "description": "Properties of the provision operation request."
         }
       },
@@ -436,7 +621,7 @@
         }
       ]
     },
-    "DelegatedControllerProperties": {
+    "ControllerProperties": {
       "description": "Properties of Dedicated Capacity resource.",
       "type": "object",
       "properties": {
@@ -453,11 +638,82 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "The current state of DNC controller resource."
+          "description": "The current state of dnc controller resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of dnc controller."
         },
         "resourceGuid": {
           "type": "string",
-          "description": "Gets or sets resource GUID property of the VirtualNetwork resource"
+          "description": "Gets or sets resource GUID property of the controller resource."
+        },
+        "dncAppID": {
+          "type": "string",
+          "description": "Get controller AAD ID."
+        },
+        "dncEndpoint": {
+          "type": "string",
+          "description": "Dnc Endpoint url."
+        }
+      }
+    },
+    "KubernetesProperties": {
+      "description": "Properties of kubernetes cluster",
+      "type": "object",
+      "properties": {
+        "serverAppID": {
+          "description": "AAD ID used with apiserver",
+          "type": "string"
+        },
+        "serverTenantID": {
+          "description": "TenantID of server App ID",
+          "type": "string"
+        },
+        "clusterRootCA": {
+          "description": "RootCA certificate of kubernetes cluster",
+          "type": "string"
+        },
+        "apiServerEndpoint": {
+          "description": "APIServer url",
+          "type": "string"
+        }
+      }
+    },
+    "DelegatedSubnet": {
+      "description": "Delegated subnet link details",
+      "type": "object",
+      "properties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DelegatedSubnetProperties",
+          "description": "Properties of the delegated subnet link request"
+        }
+      }
+    },
+    "DelegatedSubnetProperties" :{
+      "description": "Properties of delegated subnet link resource.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of delegated subnet lin resource."
         }
       }
     },
@@ -519,6 +775,49 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "The name of the Azure Resource group of which a given DelegatedNetwork resource is part. This name must be at least 1 character in length, and no more than 90."
+    },
+    "controllerNameParameter": {
+      "name": "controllerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the dnc controller. It must be a minimum of 3 characters, and a maximum of 63."
+    },
+    "vnetNameParameter": {
+      "name": "vnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the virtual network. This name must be at least 1 character in length, and no more than 90."
+    },
+    "subnetNameParameter": {
+      "name": "subnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the delegated subnet. This name must be at least 1 character in length, and no more than 90."
+    },
+    "salNameParameter": {
+      "name": "salName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the service association link for delegated subnet."
     }
   }
 }
