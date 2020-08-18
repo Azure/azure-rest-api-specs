@@ -357,7 +357,7 @@
       }
     },
     "ActivityLogAlert": {
-      "description": "An Azure activity log alert.",
+      "description": "An Azure Activity Log Alert rule.",
       "properties": {
         "scopes": {
           "type": "array",
@@ -390,22 +390,56 @@
         "actions"
       ]
     },
+    "ActivityLogAlertCondition": {
+      "description": "An Activity Log alert condition that is met when all its member conditions are met."
+    },
     "ActivityLogAlertAllOfCondition": {
+      "description": "An Activity Log alert condition that is met when all its member conditions are met.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActivityLogAlertCondition"
+        }
+      ],
       "properties": {
         "allOf": {
+          "description": "The list of activity log alert conditions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActivityLogAlertLeafCondition"
-          },
-          "description": "The list of activity log alert conditions."
+            "$ref": "#/definitions/ActivityLogAlertCondition"
+          }
         }
       },
-      "description": "An Activity Log alert condition that is met when all its member conditions are met.",
       "required": [
         "allOf"
       ]
     },
+    "ActivityLogAlertAnyOfCondition": {
+      "description": "An Activity Log alert condition that is met when at least one of its member conditions are met.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActivityLogAlertCondition"
+        }
+      ],
+      "properties": {
+        "anyOf": {
+          "description": "The list of activity log alert conditions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityLogAlertCondition"
+          }
+        }
+      },
+      "required": [
+        "anyOf"
+      ]
+    },
     "ActivityLogAlertLeafCondition": {
+      "description": "An Activity Log Alert rule condition that is met by comparing an activity log field and value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActivityLogAlertCondition"
+        }
+      ],
       "properties": {
         "field": {
           "type": "string",
@@ -423,7 +457,6 @@
           "description": "The field value will be compared to the values in this array (case-insensitive) to determine if the condition is met."
         }
       },
-      "description": "An Activity Log Alert rule condition that is met by comparing an activity log field and value.",
       "required": [
         "field"
       ]
