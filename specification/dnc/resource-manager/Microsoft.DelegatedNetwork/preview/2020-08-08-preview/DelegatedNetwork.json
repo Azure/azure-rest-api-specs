@@ -38,7 +38,7 @@
       "get": {
         "description": "Gets details about the specified dnc controller.",
         "x-ms-examples": {
-          "Get details of a capacity": {
+          "Get details of a controller": {
             "$ref": "./examples/getController.json"
           }
         },
@@ -78,7 +78,7 @@
       "put": {
         "description": "Create a dnc controller",
         "x-ms-examples": {
-          "Create capacity": {
+          "Create controller": {
             "$ref": "./examples/createController.json"
           }
         },
@@ -134,7 +134,7 @@
       "delete": {
         "description": "Deletes the DNC controller",
         "x-ms-examples": {
-          "Get details of a capacity": {
+          "Delete controller": {
             "$ref": "./examples/deleteController.json"
           }
         },
@@ -180,7 +180,7 @@
       "get": {
         "description": "Gets details about the specified dnc DelegatedSubnet Link.",
         "x-ms-examples": {
-          "Get details of a capacity": {
+          "Get details of a delegated subnet": {
             "$ref": "./examples/getDelegatedSubnet.json"
           }
         },
@@ -188,6 +188,49 @@
           "DNCDelegatedSubnet"
         ],
         "operationId": "DelegatedSubnet_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put":{
+        "description": "Put delegated subnet resource",
+        "x-ms-examples": {
+          "put delegated subnet": {
+            "$ref": "./examples/putDelegatedSubnet.json"
+          }
+        },
+        "tags": [
+          "DNCDelegatedSubnet"
+        ],
+        "operationId": "DelegatedSubnet_PutDetails",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -221,49 +264,6 @@
               "$ref": "#/definitions/DelegatedSubnet"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put":{
-        "description": "Put delegated subnet resource",
-        "x-ms-examples": {
-          "Get details of a capacity": {
-            "$ref": "./examples/putDelegatedSubnet.json"
-          }
-        },
-        "tags": [
-          "DNCDelegatedSubnet"
-        ],
-        "operationId": "DelegatedSubnet_PutDetails",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/vnetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/subnetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
-            }
-          },
           "201": {
             "description": "InProgress. The operation is still in progress",
             "schema": {
@@ -282,7 +282,7 @@
       "delete":{
         "description": "Delete dnc DelegatedSubnet.",
         "x-ms-examples": {
-          "Get details of a capacity": {
+          "delete delegated subnet": {
             "$ref": "./examples/deleteDelegatedSubnet.json"
           }
         },
@@ -603,6 +603,7 @@
       "type": "object",
       "properties": {
         "controllerType": {
+          "type": "string",
           "description": "Type of Delegated controller.",
           "enum": [
             "Kubernetes"
