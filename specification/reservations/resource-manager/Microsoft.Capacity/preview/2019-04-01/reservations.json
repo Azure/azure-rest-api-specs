@@ -1703,10 +1703,19 @@
       }
     },
     "Scopes": {
-      "name": "scopes",
-      "type": "array",
-      "items": {
-        "type": "string"
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }  
+          }
+        }
       }
     }
   },
@@ -1717,13 +1726,8 @@
       "in": "body",
       "required": true,
       "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "$ref": "#/definitions/Scopes"
-          }
-        }
+      "schema": {
+        "$ref": "#/definitions/Scopes"
       }
     },
     "PurchaseParameter": {
