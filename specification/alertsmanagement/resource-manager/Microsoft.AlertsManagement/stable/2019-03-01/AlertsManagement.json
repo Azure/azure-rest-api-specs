@@ -1416,6 +1416,44 @@
           "description": "Total number of items of type."
         }
       }
+    },
+    "MonitorServiceList": {
+      "title": "Monitor service details",
+      "description": "Monitor service details",
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "data": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorServiceDetails"
+          }
+        }
+      }
+    },
+    "MonitorServiceDetails": {
+      "description": "Details of a monitor service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Monitor service name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Monitor service display name"
+        }
+      }
     }
+  }
   }
 }
