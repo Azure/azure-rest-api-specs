@@ -201,7 +201,11 @@
       "type": "object",
       "properties": {
         "storageKeyType": {
-          "$ref": "#/definitions/StorageKeyTypeEnum"
+          "description": "Storage key type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "storageKey": {
           "description": "Storage key.",
@@ -436,7 +440,11 @@
           ]
         },
         "storageKeyType": {
-          "$ref": "#/definitions/StorageKeyTypeEnum"
+          "description": "Storage key type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "storageKey": {
           "description": "Storage key.",
@@ -494,7 +502,11 @@
       "type": "object",
       "properties": {
         "storageKeyType": {
-          "$ref": "#/definitions/StorageKeyTypeEnum"
+          "description": "Storage key type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "storageKey": {
           "description": "Storage key.",
@@ -539,21 +551,6 @@
           ]
         }
       }
-    },
-    "StorageKeyTypeEnum": {
-      "description": "Storage key type.",
-      "enum": [
-        "SharedAccessKey",
-        "StorageAccessKey"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "StorageKeyType2Haha",
-        "modelAsString": true
-      },
-      "x-ms-mutability": [
-        "create"
-      ]
     }
   },
   "parameters": {
