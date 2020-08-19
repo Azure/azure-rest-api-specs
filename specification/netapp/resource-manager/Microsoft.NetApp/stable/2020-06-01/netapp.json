@@ -2113,6 +2113,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK created",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
           "201": {
             "description": "Backup created",
             "schema": {
@@ -2354,7 +2360,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/backupPolicyPatch"
+              "$ref": "#/definitions/backupPolicyDetails"
             }
           }
         ],
