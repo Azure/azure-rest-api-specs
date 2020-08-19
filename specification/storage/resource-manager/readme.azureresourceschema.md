@@ -2,6 +2,7 @@
 
 These settings apply only when `--azureresourceschema` is specified on the command line.
 
+
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
