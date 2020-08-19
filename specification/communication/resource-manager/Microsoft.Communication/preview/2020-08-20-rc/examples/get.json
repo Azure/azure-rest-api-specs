@@ -3,12 +3,7 @@
     "subscriptionId": "12345",
     "resourceGroupName": "MyResourceGroup",
     "communicationServiceName": "MyCommunicationResource",
-    "api-version": "2019-10-10-preview",
-    "parameters": {
-      "tags": {
-        "newTag": "newVal"
-      }
-    }
+    "api-version": "2019-10-10-preview"
   },
   "responses": {
     "200": {
@@ -16,17 +11,22 @@
         "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource",
         "name": "MyCommunicationResource",
         "type": "Microsoft.Communication/CommunicationServices",
-        "location": "West US",
-        "tags": {
-          "newTag": "newVal"
-        },
+        "location": "Global",
         "properties": {
-          "provisioningState": "Succeeded",
-          "hostName": "mycommunicationresource.communications.azure.com",
+          "dataLocation": "United States",
+          "provisioningState": "Running",
+          "hostName": "mycommunicationservice.comms.azure.net",
           "version": "0.2.0"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The requested resource was not found"
         }
       }
     }
   }
 }
-

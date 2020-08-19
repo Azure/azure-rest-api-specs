@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Communication Services Management API",
-    "version": "2019-10-10-preview",
+    "version": "2020-08-20-preview",
     "description": "REST API for Azure Communication Services"
   },
   "consumes": [
@@ -100,6 +100,57 @@
           },
           "Check name availability unavailable": {
             "$ref": "./examples/checkNameAvailabilityUnavailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/linkNotificationHub": {
+      "post": {
+        "description": "Links an Azure Notification Hub to this communication service.",
+        "operationId": "CommunicationService_LinkNotificationHub",
+        "summary": "Link Notification Hub",
+        "tags": [ "CommunicationService" ],
+        "parameters": [
+          {
+            "name": "linkNotificationHubParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LinkNotificationHubParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          }
+        ],
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "Success. The notification hub has been linked.",
+            "schema": {
+              "$ref": "#/definitions/LinkedNotificationHub"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Link notification hub": {
+            "$ref": "./examples/linkNotificationHub.json"
           }
         }
       }
@@ -375,9 +426,6 @@
         "x-ms-examples": {
           "Create or update resource": {
             "$ref": "./examples/createOrUpdate.json"
-          },
-          "Create or update resource with push notification credentials": {
-            "$ref": "./examples/createOrUpdateNotificationCredentials.json"
           }
         }
       },
@@ -747,6 +795,34 @@
         }
       }
     },
+    "LinkNotificationHubParameters": {
+      "description": "Description of an Azure Notification Hub to link to the communication service",
+      "required": [
+        "resourceId",
+        "connectionString"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource ID of the notification hub",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string for the notification hub",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedNotificationHub": {
+      "description": "A notification hub that has been linked to the communication service",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource ID of the notification hub",
+          "type": "string"
+        }
+      }
+    },
     "OperationStatus": {
       "description": "The current status of an async operation",
       "type": "object",
@@ -889,73 +965,11 @@
         }
       }
     },
-    "ApnsCredential": {
-      "description": "Credentials for pushing through APNS",
-      "required": [
-        "endpoint",
-        "token",
-        "keyId",
-        "bundleId",
-        "teamId"
-      ],
-      "properties": {
-        "endpoint": {
-          "description": "The endpoint of this credential",
-          "type": "string",
-          "enum": [
-            "Development",
-            "Production"
-          ],
-          "x-ms-enum": {
-            "name": "Endpoint",
-            "modelAsString": false
-          }
-        },
-        "token": {
-          "description": "Provider Authentication Token, obtained through your developer account",
-          "type": "string"
-        },
-        "keyId": {
-          "description": "A 10-character key identifier (kid) key, obtained from your developer account.",
-          "type": "string"
-        },
-        "bundleId": {
-          "description": "The name of the application or BundleId.",
-          "type": "string"
-        },
-        "teamId": {
-          "description": "A 10 character TeamId, also referred to as the App ID Prefix, obtained from your developer account.",
-          "type": "string"
-        }
-      }
-    },
-    "FcmLegacyCredential": {
-      "description": "Credentials for pushing through GCM (Google Cloud Messaging)",
-      "required": [
-        "apiKey"
-      ],
-      "properties": {
-        "apiKey": {
-          "description": "The Google API key",
-          "type": "string"
-        }
-      }
-    },
-    "PushNotificationCredentials": {
-      "description": "Credentials to enable push notifications",
-      "properties": {
-        "apnsCredential": {
-          "description": "Credentials for pushing through APNS",
-          "$ref": "#/definitions/ApnsCredential"
-        },
-        "fcmLegacyCredential": {
-          "description": "Credentials for pushing through Google",
-          "$ref": "#/definitions/FcmLegacyCredential"
-        }
-      }
-    },
     "CommunicationServiceProperties": {
       "description": "A class that describes the properties of the CommunicationService.",
+      "required": [
+        "dataLocation"
+      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -983,9 +997,18 @@
           "type": "string",
           "readOnly": true
         },
-        "pushNotificationCredentials": {
-          "description": "Credentials used to enable push notifications. Setting any credential set will enable push notifications.",
-          "$ref": "#/definitions/PushNotificationCredentials"
+        "dataLocation": {
+          "description": "The location where the communication service stores its data at rest.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "notificationHubId": {
+          "description": "Resource ID of an Azure Notification Hub linked to this resource.",
+          "type": "string",
+          "readOnly": true
         },
         "version": {
           "description": "Version of the CommunicationService resource. Probably you need the same or higher version of client SDKs.",
@@ -993,7 +1016,7 @@
           "readOnly": true
         },
         "immutableResourceId": {
-          "description": "The immutable resource Id of the Spool resource.",
+          "description": "The immutable resource Id of the communication service.",
           "type": "string",
           "readOnly": true
         }
