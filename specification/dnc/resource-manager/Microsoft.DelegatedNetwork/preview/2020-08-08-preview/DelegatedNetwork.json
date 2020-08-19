@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controller/{controllerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controller/{resourceName}": {
       "get": {
         "description": "Gets details about the specified dnc controller.",
         "x-ms-examples": {
@@ -51,7 +51,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/controllerNameParameter"
+            "$ref": "#/parameters/resourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -79,7 +79,7 @@
         "description": "Create a dnc controller",
         "x-ms-examples": {
           "Create controller": {
-            "$ref": "./examples/createController.json"
+            "$ref": "./examples/putController.json"
           }
         },
         "tags": [
@@ -91,7 +91,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/controllerNameParameter"
+            "$ref": "#/parameters/resourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -147,7 +147,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/controllerNameParameter"
+            "$ref": "#/parameters/resourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -174,9 +174,64 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Update dnc controller",
+        "x-ms-examples": {
+          "update controller": {
+            "$ref": "./examples/patchController.json"
+          }
+        },
+        "tags": [
+          "Controller"
+        ],
+        "operationId": "Controller_Patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "controllerParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ControllerTypeParameters"
+            },
+            "description": "controller type parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "201": {
+            "description": "InProgress. The operation is still in progress.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}/providers/Microsoft.DelegatedNetwork/delegatedSubnet": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}/providers/Microsoft.DelegatedNetwork/delegatedSubnets/{resourceName}": {
       "get": {
         "description": "Gets details about the specified dnc DelegatedSubnet Link.",
         "x-ms-examples": {
@@ -191,6 +246,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
           },
           {
             "$ref": "#/parameters/vnetNameParameter"
@@ -234,6 +292,71 @@
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subnetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "delegatedSubnetParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnetParameters"
+            },
+            "description": "Delegated subnet details."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnet"
+            }
+          },
+          "201": {
+            "description": "InProgress. The operation is still in progress",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Patch delegated subnet resource",
+        "x-ms-examples": {
+          "patch delegated subnet": {
+            "$ref": "./examples/patchDelegatedSubnet.json"
+          }
+        },
+        "tags": [
+          "DNCDelegatedSubnet"
+        ],
+        "operationId": "DelegatedSubnet_PatchDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
           },
           {
             "$ref": "#/parameters/vnetNameParameter"
@@ -295,6 +418,9 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
             "$ref": "#/parameters/vnetNameParameter"
           },
           {
@@ -336,7 +462,7 @@
         "operationId": "DelegatedNetwork_ListBySubscription",
         "x-ms-examples": {
           "Get DelegatedController resources by subscription": {
-            "$ref": "./examples/delegatedNetworkControllersListBySub.json"
+            "$ref": "./examples/delegatedNetworkResourcesListBySub.json"
           }
         },
         "parameters": [
@@ -372,7 +498,7 @@
         "operationId": "DelegatedNetwork_ListByResourceGroup",
         "x-ms-examples": {
           "Get DelegatedNetwork resources by resource group": {
-            "$ref": "./examples/delegatedNetworkControllersListByRG.json"
+            "$ref": "./examples/delegatedNetworkResourcesListByRG.json"
           }
         },
         "parameters": [
@@ -783,8 +909,8 @@
       "x-ms-parameter-location": "method",
       "description": "The name of the Azure Resource group of which a given DelegatedNetwork resource is part. This name must be at least 1 character in length, and no more than 90."
     },
-    "controllerNameParameter": {
-      "name": "controllerName",
+    "resourceNameParameter": {
+      "name": "resourceName",
       "in": "path",
       "required": true,
       "type": "string",
@@ -792,7 +918,7 @@
       "minLength": 3,
       "maxLength": 63,
       "x-ms-parameter-location": "method",
-      "description": "The name of the dnc controller. It must be a minimum of 3 characters, and a maximum of 63."
+      "description": "The name of the resource. It must be a minimum of 3 characters, and a maximum of 63."
     },
     "vnetNameParameter": {
       "name": "vnetName",
