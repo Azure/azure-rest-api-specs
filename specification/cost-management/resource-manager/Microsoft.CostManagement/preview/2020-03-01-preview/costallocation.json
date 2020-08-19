@@ -150,7 +150,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
             }
           },
           "default": {
@@ -191,7 +191,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinitionRequest"
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
             }
           }
         ],
@@ -199,7 +199,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
             }
           },
           "default": {
@@ -284,7 +284,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/CostAllocationRuleDefinitionResponse"
+            "$ref": "#/definitions/CostAllocationRuleDefinition"
           }
         },
         "nextLink": {
@@ -357,50 +357,21 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource type of the rule. This is a read only value of Microsoft.CostManagement/CostAllocationRule."
+        },
+        "properties": {
+          "description": "Cost allocation rule properties",
+          "$ref": "#/definitions/CostAllocationRuleProperties"
         }
       },
       "x-ms-azure-resource": true
-    },
-    "CostAllocationRuleDefinitionResponse": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CostAllocationRuleDefinition"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/CostAllocationRulePropertiesResponse",
-              "description": "Cost allocation rule properties"
-            }
-          }
-        }
-      ],
-      "description": "The cost allocation rule model definition"
-    },
-    "CostAllocationRuleDefinitionRequest": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CostAllocationRuleDefinition"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/CostAllocationRulePropertiesRequest",
-              "description": "Cost allocation rule properties"
-            }
-          }
-        }
-      ],
-      "description": "The cost allocation rule model definition"
     },
     "CostAllocationRuleProperties": {
       "type": "object",
       "description": "The properties of a cost allocation rule",
       "additionalProperties": false,
       "required": [
-        "details"
+        "details",
+        "status"
       ],
       "properties": {
         "description": {
@@ -410,58 +381,24 @@
         "details": {
           "description": "Resource information for the cost allocation rule",
           "$ref": "#/definitions/CostAllocationRuleDetails"
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus",
+          "description": "Status of the rule"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "readonly": true,
+          "description": "Time at which the rule was created. Rules that change cost for the same resource are applied in order of creation."
+        },
+        "updatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "readonly": true,
+          "description": "Time at which the rule was last updated."
         }
       }
-    },
-    "CostAllocationRulePropertiesResponse": {
-      "description": "The properties of a cost allocation rule response",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CostAllocationRuleProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "$ref": "#/definitions/RuleStatus",
-              "description": "Status of the rule"
-            },
-            "createdDate": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Time at which the rule was created. Rules that change cost for the same resource are applied in order of creation."
-            },
-            "updatedDate": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Time at which the rule was last updated."
-            }
-          },
-          "required": [
-            "status"
-          ]
-        }
-      ]
-    },
-    "CostAllocationRulePropertiesRequest": {
-      "description": "The properties of a cost allocation rule request",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CostAllocationRuleProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "$ref": "#/definitions/InputRuleStatus",
-              "description": "Status of the rule"
-            }
-          },
-          "required": [
-            "status"
-          ]
-        }
-      ]
     },
     "RuleStatus": {
       "type": "string",
@@ -487,32 +424,8 @@
           },
           {
             "value": "Processing",
-            "description": "Rule is saved and cost allocation is being updated.",
+            "description": "Rule is saved and cost allocation is being updated. Readonly value that cannot be submitted in a put request.",
             "name": "Processing"
-          }
-        ]
-      }
-    },
-    "InputRuleStatus": {
-      "type": "string",
-      "description": "Desired status of the rule.",
-      "enum": [
-        "NotActive",
-        "Active"
-      ],
-      "x-ms-enum": {
-        "name": "InputRuleStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "NotActive",
-            "description": "Rule will be saved but not used to allocate costs.",
-            "name": "NotActive"
-          },
-          {
-            "value": "Active",
-            "description": "Rule will be saved and impacting cost allocation.",
-            "name": "Active"
           }
         ]
       }
