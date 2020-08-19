@@ -1233,18 +1233,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices": {
       "get": {
         "tags": [
-          "LinkedWorkspaces"
+          "LinkedServices"
         ],
         "x-ms-examples": {
-          "ListLinkedWorkspaces": {
-            "$ref": "./examples/listLinkedWorkspaces.json"
+          "ListLinkedServices": {
+            "$ref": "./examples/listLinkedServices.json"
           }
         },
-        "operationId": "LinkedWorkspaces_List",
-        "description": "List all linked workspaces under a AML workspace.",
+        "operationId": "LinkedServices_List",
+        "description": "List all linked services under an AML workspace.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1261,13 +1261,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the linked workspaces.",
+            "description": "Successfully retrieved the linked services.",
             "schema": {
-              "type": "array",
-              "description": "array of linked workspaces.",
-              "items": {
-                "$ref": "#/definitions/LinkedWorkspace"
-              }
+              "$ref": "#/definitions/PaginatedLinkedServiceList"
             }
           },
           "default": {
@@ -1279,16 +1275,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices/{linkName}": {
       "put": {
         "tags": [
-          "LinkedWorkspaces"
+          "LinkedServices"
         ],
-        "operationId": "LinkedWorkspaces_Create",
-        "description": "Add a new linked workspace.",
+        "operationId": "LinkedServices_Create",
+        "description": "Add a new linked service.",
         "x-ms-examples": {
-          "CreateLinkedWorkspace": {
-            "$ref": "./examples/createLinkedWorkspace.json"
+          "CreateLinkedService": {
+            "$ref": "./examples/createLinkedService.json"
           }
         },
         "parameters": [
@@ -1310,18 +1306,18 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The object for creating or updating a new linked workspace",
+            "description": "The object for creating or updating a linked service",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedWorkspaceDto"
+              "$ref": "#/definitions/LinkedServiceDto"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully created the linked workspace.",
+            "description": "Successfully created the linked service.",
             "schema": {
-              "$ref": "#/definitions/LinkedWorkspace"
+              "$ref": "#/definitions/LinkedService"
             }
           },
           "default": {
@@ -1334,13 +1330,13 @@
       },
       "get": {
         "tags": [
-          "LinkedWorkspaces"
+          "LinkedServices"
         ],
-        "operationId": "LinkedWorkspaces_Get",
-        "description": "Get the detail of a linked workspace.",
+        "operationId": "LinkedServices_Get",
+        "description": "Get the detail of a linked service.",
         "x-ms-examples": {
-          "GetLinkedWorkspace": {
-            "$ref": "./examples/getLinkedWorkspace.json"
+          "GetLinkedService": {
+            "$ref": "./examples/getLinkedService.json"
           }
         },
         "parameters": [
@@ -1362,9 +1358,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the detail of the linked workspace.",
+            "description": "Successfully retrieved the detail of the linked service.",
             "schema": {
-              "$ref": "#/definitions/LinkedWorkspace"
+              "$ref": "#/definitions/LinkedService"
             }
           },
           "default": {
@@ -1377,13 +1373,13 @@
       },
       "delete": {
         "tags": [
-          "LinkedWorkspaces"
+          "LinkedServices"
         ],
-        "operationId": "LinkedWorkspaces_Delete",
-        "description": "Delete a linked workspace.",
+        "operationId": "LinkedServices_Delete",
+        "description": "Delete a linked service.",
         "x-ms-examples": {
-          "DeleteLinkedWorkspace": {
-            "$ref": "./examples/deleteLinkedWorkspace.json"
+          "DeleteLinkedService": {
+            "$ref": "./examples/deleteLinkedService.json"
           }
         },
         "parameters": [
@@ -1405,10 +1401,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the linked workspace."
+            "description": "Successfully deleted the linked service."
           },
           "204": {
-            "description": "Specific linked workspace not found."
+            "description": "Specific linked service not found."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -1530,7 +1526,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Friendly name of the linked workspace",
+      "description": "Friendly name of the linked service",
       "x-ms-parameter-location": "method"
     }
   },
@@ -3544,55 +3540,73 @@
       ],
       "type": "object"
     },
-    "LinkedWorkspace": {
-      "description": "Linked workspace.",
+    "LinkedService": {
+      "description": "Linked service.",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
-          "description": "ResourceId of the link of the linked workspace.",
+          "description": "ResourceId of the link of the linked service.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Friendly name of the linked workspace.",
+          "description": "Friendly name of the linked service.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Resource type of linked workspace.",
+          "description": "Resource type of linked service.",
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/LinkedWorkspaceProps"
+          "$ref": "#/definitions/LinkedServiceProps"
         }
       }
     },
-    "LinkedWorkspaceDto": {
+    "LinkedServiceDto": {
       "type": "object",
-      "description": "object used for creating linked workspace.",
+      "description": "object used for creating linked service.",
       "properties": {
         "name": {
-          "description": "Friendly name of the linked workspace",
+          "description": "Friendly name of the linked service",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/LinkedWorkspaceProps"
+          "$ref": "#/definitions/LinkedServiceProps"
         }
       }
     },
-    "LinkedWorkspaceProps": {
+    "LinkedServiceProps": {
       "type": "object",
-      "description": "LinkedWorkspace specific properties.",
+      "description": "LinkedService specific properties.",
       "properties": {
-        "linkedWorkspaceResourceId": {
-          "description": "ResourceId of the link target of the linked workspace.",
+        "linkedServiceResourceId": {
+          "description": "ResourceId of the link target of the linked service.",
           "type": "string"
         },
         "userAssignedIdentityResourceId": {
-          "description": "ResourceId of the user assigned identity for the linked workspace.",
+          "description": "ResourceId of the user assigned identity for the linked service.",
           "type": "string"
+        }
+      }
+    },
+    "PaginatedLinkedServiceList": {
+      "type": "object",
+      "description": "Paginated list of linked service objects.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of linked services",
+          "items": {
+            "$ref": "#/definitions/LinkedService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link(absolute URI) to the next page of results in the list."
         }
       }
     }
