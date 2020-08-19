@@ -66,6 +66,12 @@
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionGetResults"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdated"
+            }
           }
         }
       },
@@ -419,9 +425,9 @@
       },
       "description": "The set of data plane operations permitted through this Role Definition."
     },
-    "ErrorResponse": {
+    "ErrorResponseUpdated": {
       "properties": {
-        "Error": {
+        "error": {
           "properties": {
             "code": {
               "description": "Error code.",
