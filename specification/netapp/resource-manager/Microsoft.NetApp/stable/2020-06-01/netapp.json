@@ -2365,6 +2365,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Backup Policy created",
+            "schema": {
+              "$ref": "#/definitions/backupPolicyDetails"
+            }
+          },          
           "201": {
             "description": "Backup created",
             "schema": {
@@ -2870,7 +2876,8 @@
         },
         "password": {
           "type": "string",
-          "description": "Plain text password of Active Directory domain administrator"
+          "x-ms-secret": true,
+          "description": "Plain text password of Active Directory domain administrator, value is masked in the response"
         },
         "domain": {
           "type": "string",
