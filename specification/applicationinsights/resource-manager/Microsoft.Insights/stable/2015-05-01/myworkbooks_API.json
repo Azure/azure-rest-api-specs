@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/myworkbooks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/myWorkbooks": {
       "get": {
         "description": "Get all private workbooks defined within a specified resource group and category.",
         "operationId": "MyWorkbooks_ListByResourceGroup",
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/myworkbooks/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/myWorkbooks/{resourceName}": {
       "get": {
         "description": "Get a single private workbook by its resourceName.",
         "operationId": "MyWorkbooks_Get",
@@ -337,7 +337,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Metadata describing a web test for an Azure resource.",
+          "description": "Metadata describing a workbook for an Azure resource.",
           "$ref": "#/definitions/MyWorkbookProperties"
         }
       }
@@ -345,15 +345,14 @@
     "MyWorkbookProperties": {
       "description": "Properties that contain a private workbook.",
       "required": [
-        "name",
+        "displayName",
         "kind",
         "category",
-        "workbookId",
         "serializedData",
         "userId"
       ],
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
           "description": "The user-defined name of the private workbook."
         },
@@ -364,10 +363,6 @@
         "version": {
           "type": "string",
           "description": "This instance's version of the data model. This can change as new features are added that can be marked private workbook."
-        },
-        "workbookId": {
-          "type": "string",
-          "description": "Internally assigned unique id of the private workbook definition."
         },
         "kind": {
           "description": "Enum indicating if this private workbook definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
@@ -403,7 +398,7 @@
           "type": "string",
           "description": "Unique user id of the specific user that owns this private workbook."
         },
-        "sourceResourceId": {
+        "sourceId": {
           "type": "string",
           "description": "Optional resourceId for a source resource."
         }

@@ -97,6 +97,9 @@ directive:
     where: $.definitions.WorkbookResource.properties.name
     from: workbooks_API.json
     reason: 'This property is already a part of our API, cannot remove it'
+  - suppress: DefaultErrorResponseSchema
+    from: myworkbooks_API.json
+    reason: 'this error format is already part of the previous api, cannot change it'
 ```
 
 ### Tag: package-preview-2020-06-only
