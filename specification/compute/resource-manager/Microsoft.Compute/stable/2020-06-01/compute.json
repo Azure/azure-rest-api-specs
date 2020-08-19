@@ -9016,11 +9016,15 @@
             "type": "string"
           },
           "description": "The virtual machine zones."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the Virtual Machine."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ExtendedLocationResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a Virtual Machine."
@@ -9337,11 +9341,15 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ImageProperties"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the Image."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ExtendedLocationResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
@@ -10449,11 +10457,15 @@
             "type": "string"
           },
           "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the Virtual Machine Scale Set."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ExtendedLocationResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a Virtual Machine Scale Set."
@@ -11430,21 +11442,6 @@
         "name",
         "type"
       ]
-    },
-    "ExtendedLocationResource": {
-      "description": "Resource with an extended location.",
-      "properties": {
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location of the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "x-ms-azure-resource": true
     },
     "RecoveryWalkResponse": {
       "properties": {
