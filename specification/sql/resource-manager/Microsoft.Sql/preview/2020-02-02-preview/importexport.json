@@ -201,19 +201,7 @@
       "type": "object",
       "properties": {
         "storageKeyType": {
-          "description": "Storage key type.",
-          "enum": [
-            "SharedAccessKey",
-            "StorageAccessKey"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageKeyType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
+          "$ref": "#/parameters/StorageKeyTypeParameter"
         },
         "storageKey": {
           "description": "Storage key.",
@@ -448,19 +436,7 @@
           ]
         },
         "storageKeyType": {
-          "description": "Storage key type.",
-          "enum": [
-            "SharedAccessKey",
-            "StorageAccessKey"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageKeyType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
+          "$ref": "#/parameters/StorageKeyTypeParameter"
         },
         "storageKey": {
           "description": "Storage key.",
@@ -518,19 +494,7 @@
       "type": "object",
       "properties": {
         "storageKeyType": {
-          "description": "Storage key type.",
-          "enum": [
-            "SharedAccessKey",
-            "StorageAccessKey"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageKeyType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
+          "$ref": "#/parameters/StorageKeyTypeParameter"
         },
         "storageKey": {
           "description": "Storage key.",
@@ -660,6 +624,21 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "StorageKeyTypeParameter": {
+      "description": "Storage key type.",
+      "enum": [
+        "SharedAccessKey",
+        "StorageAccessKey"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageKeyType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create"
+      ]
     }
   },
   "securityDefinitions": {
