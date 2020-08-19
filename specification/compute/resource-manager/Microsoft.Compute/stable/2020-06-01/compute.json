@@ -9020,7 +9020,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ExtendedLocationResource"
         }
       ],
       "description": "Describes a Virtual Machine."
@@ -9341,7 +9341,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ExtendedLocationResource"
         }
       ],
       "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
@@ -10453,7 +10453,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ExtendedLocationResource"
         }
       ],
       "description": "Describes a Virtual Machine Scale Set."
@@ -11401,6 +11401,49 @@
           "description": "Resource Id"
         }
       },
+      "x-ms-azure-resource": true
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Compute resources.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "ExtendedLocation": {
+      "description": "ExtendedLocation complex type.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ExtendedLocationResource": {
+      "description": "Resource with an extended location.",
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "x-ms-azure-resource": true
     },
     "RecoveryWalkResponse": {
