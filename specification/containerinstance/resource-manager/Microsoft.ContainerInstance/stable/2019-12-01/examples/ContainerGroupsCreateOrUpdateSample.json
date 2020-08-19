@@ -1,0 +1,237 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2019-12-01",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "containerGroup": {
+      "location": "west us",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "containers": [
+          {
+            "name": "my-contianergroup",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5,
+                  "gpu": {
+                    "count": 1,
+                    "sku": "K80"
+                  }
+                }
+              },
+              "volumeMounts": [
+                {
+                  "name": "empty-volume",
+                  "mountPath": "/mnt/mydir"
+                }
+              ]
+            }
+          }
+        ],
+        "diagnostics": {
+          "logAnalytics": {
+            "workspaceId": "workspaceid",
+            "workspaceKey": "workspaceKey"
+          }
+        },
+        "osType": "Linux",
+        "restartPolicy":"OnFailure",
+        "volumes": [
+          {
+            "name": "empty-volume",
+            "emptyDir": {}
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku":"Standard",
+          "provisioningState":"Succeeded",
+          "containers": [
+            {
+              "name":"my-containergroup",
+              "properties": {
+                "image":"nginx",
+                "command":[],
+                "ports": [
+                  {
+                    "port":80
+                  }
+                ],
+                "environmentVariables":[],
+                "instanceView": {
+                  "restartCount":0,
+                  "currentState": {
+                    "state":"Running",
+                    "startTime":"2020-08-18T07:58:15Z",
+                    "detailStatus":""
+                  },
+                  "events": [
+                    {
+                      "count":1,
+                      "firstTimestamp":"2020-08-18T07:58:06Z",
+                      "lastTimestamp":"2020-08-18T07:58:06Z",
+                      "name":"Pulling",
+                      "message":"pullingimage \"nginx\"",
+                      "type":"Normal"
+                    },
+                    {
+                      "count":1,
+                      "firstTimestamp":"2020-08-18T07:58:15Z",
+                      "lastTimestamp":"2020-08-18T07:58:15Z",
+                      "name":"Pulled",
+                      "message":"Successfullypulled image \"nginx\"",
+                      "type":"Normal"
+                    },
+                    {
+                      "count":1,
+                      "firstTimestamp":"2020-08-18T07:58:15Z",
+                      "lastTimestamp":"2020-08-18T07:58:15Z",
+                      "name":"Created",
+                      "message":"Createdcontainer",
+                      "type":"Normal"
+                    },
+                    {
+                      "count":1,
+                      "firstTimestamp":"2020-08-18T07:58:15Z",
+                      "lastTimestamp":"2020-08-18T07:58:15Z",
+                      "name":"Started",
+                      "message":"Startedcontainer",
+                      "type":"Normal"
+                    }
+                  ]
+                },
+                "resources":{
+                  "requests":{
+                    "memoryInGB":1.5,
+                    "cpu":1.0,
+                    "gpu":{
+                      "count":1,
+                      "sku":"K80"
+                    }
+                  }
+                },
+                "volumeMounts":[
+                  {
+                    "name":"empty-volume",
+                    "mountPath":"/mnt/mydir"
+                  }
+                ]
+              }
+            }
+          ],
+          "initContainers":[],
+          "restartPolicy":"OnFailure",
+          "osType":"Linux",
+          "volumes":[
+            {
+              "name":"empty-volume",
+              "emptyDir":{}
+            }
+          ],
+          "instanceView":{
+            "events":[],
+            "state":"Running"
+          },
+          "diagnostics":{
+            "logAnalytics":{
+              "workspaceId":"workspaceid"
+            }
+          }
+        },
+        "identity":{
+          "principalId":"b74fd589-3ebb-4cb5-9434-9e4d898edd3a",
+          "tenantId":"00000000-0000-0000-0000-000000000000",
+          "type":"SystemAssigned"
+        },
+        "id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgname/providers/Microsoft.ContainerInstance/containerGroups/my-containergroup",
+        "name":"my-containergroup",
+        "type":"Microsoft.ContainerInstance/containerGroups",
+        "location":"eastus"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "provisioningState":"Pending",
+          "containers":[
+            {
+              "name": "my-containergroup",
+              "properties": {
+                "image":"nginx",
+                "command":[],
+                "ports":[
+                  {
+                    "port":80
+                  }
+                ],
+                "environmentVariables":[],
+                "resources": {
+                  "requests": {
+                    "memoryInGB":1.5,
+                    "cpu":1.0,
+                    "gpu":{
+                      "count":1,
+                      "sku":"K80"
+                    }
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name":"empty-volume",
+                    "mountPath":"/mnt/mydir"
+                  }
+                ]
+              }
+            }
+          ],
+          "initContainers":[],
+          "restartPolicy":"OnFailure",
+          "osType":"Linux",
+          "volumes": [
+            {
+              "name":"empty-volume",
+              "emptyDir":{}
+            }
+          ],
+          "instanceView": {
+            "events":[],
+            "state":"Pending"
+          },
+          "diagnostics":{
+            "logAnalytics":{
+              "workspaceId":"workspaceid"
+            }
+          }
+        },
+        "identity":{
+          "principalId":"b74fd589-3ebb-4cb5-9434-9e4d898edd3a",
+          "tenantId":"00000000-0000-0000-0000-000000000000",
+          "type":"SystemAssigned"
+        },
+        "id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgname/providers/Microsoft.ContainerInstance/containerGroups/my-containergroup",
+        "name":"my-containergroup",
+        "type":"Microsoft.ContainerInstance/containerGroups",
+        "location":"eastus"
+      }
+    }
+  }
+}
