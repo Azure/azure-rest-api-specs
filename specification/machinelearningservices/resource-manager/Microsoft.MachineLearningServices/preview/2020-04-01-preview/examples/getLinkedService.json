@@ -9,12 +9,16 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/linkedWorkspaces/link-1",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/linkedServices/link-1",
         "name": "link-1",
-        "type": "linkedWorkspaces",
+        "type": "Microsoft.MachineLearningServices/workspaces/linkedServices",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "aaaaaaaa-1111-2222-3333-444444444444",
+          "tenantId": "bbbbbbbb-1111-2222-3333-444444444444"
+        },
         "properties": {
-          "linkedWorkspaceResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.Synapse/workspaces/linkedWorkspace-1",
-          "userAssignedIdentityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uai1"
+          "linkedServiceResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/linkRg-1/providers/Microsoft.Synapse/workspaces/Syn-1"
         }
       }
     }
