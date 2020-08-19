@@ -477,6 +477,10 @@
           },
           "description": "Provisioning status field"
         },
+        "resourceUsageId": {
+          "type": "string",
+          "description": "Id to track resource usage."
+        },
         "storageAccount": {
           "type": "string",
           "description": "ARM Resource Id of the storage account associated with this workspace."
@@ -567,6 +571,20 @@
           "items": {
             "$ref": "#/definitions/SkuDescription"
           }
+        },
+        "quotaDimensions": {
+          "type": "array",
+          "description": "list of quota dimensions from the provider",
+          "items": {
+            "$ref": "#/definitions/QuotaDimension"
+          }
+        },
+        "pricingDimensions": {
+          "type": "array",
+          "description": "list of pricing dimensions rendered for each sku",
+          "items": {
+            "$ref": "#/definitions/PricingDimension"
+          }
         }
       }
     },
@@ -624,6 +642,86 @@
           "items": {
             "type": "string"
           }
+        },
+        "quotaDimensions": {
+          "type": "array",
+          "description": "list of quota dimensions for the sku",
+          "items": {
+            "$ref": "#/definitions/QuotaDimension"
+          }
+        },
+        "pricingDetails": {
+          "type": "array",
+          "description": "list of pricing details for the sku",
+          "items": {
+            "$ref": "#/definitions/PricingDetail"
+          }
+        }
+      }
+    },
+    "QuotaDimension": {
+      "type": "object",
+      "description": "Descript quota dimension information to end customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "dimension id of quota"
+        },
+        "scope": {
+          "type": "string",
+          "description": "scope of quota"
+        },
+        "period": {
+          "type": "string",
+          "description": "reset period of quota"
+        },
+        "quota": {
+          "type": "number",
+          "description": "limit of quota"
+        },
+        "name": {
+          "type": "string",
+          "description": "friendly name of the quota"
+        },
+        "description": {
+          "type": "string",
+          "description": "short description of the quota"
+        },
+        "unit": {
+          "type": "string",
+          "description": "the standard measurement used for the quota"
+        },
+        "unitPlural": {
+          "type": "string",
+          "description": "unit in the plural form"
+        }
+      }
+    },
+    "PricingDetail": {
+      "type": "object",
+      "description": "Descript pricing detail information to end customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the pricing dimension"
+        },
+        "value": {
+          "type": "string",
+          "description": "value of the pricing dimension"
+        }
+      }
+    },
+    "PricingDimension": {
+      "type": "object",
+      "description": "Descript pricing dimension information to end customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the pricing dimension"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the pricing dimension"
         }
       }
     },
