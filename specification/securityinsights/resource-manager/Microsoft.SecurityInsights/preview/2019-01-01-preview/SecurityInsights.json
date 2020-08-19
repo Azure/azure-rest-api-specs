@@ -8162,7 +8162,9 @@
         "kind": {
           "description": "The kind of the setting",
           "enum": [
-            "EyesOn"
+            "EyesOn",
+            "EntityAnalytics",
+            "Ueba"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8411,6 +8413,78 @@
         }
       },
       "type": "object"
+    },
+    "EntityAnalytics": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EntityAnalyticsProperties",
+          "description": "EntityAnalytics properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "EntityAnalytics"
+    },
+    "EntityAnalyticsProperties": {
+      "description": "EntityAnalytics property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Ueba": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UebaProperties",
+          "description": "Ueba properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Ueba"
+    },
+    "UebaProperties": {
+      "description": "Ueba property bag.",
+      "properties": {
+        "dataSources": {
+          "description": "The relevat data sources that enriched by ueba",
+          "items": {
+            "$ref": "#/definitions/UebaDataSources"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UebaDataSources": {
+      "description": "The data source that enriched by ueba.",
+      "enum": [
+        "AuditLogs",
+        "AzureActivity",
+        "SecurityEvent",
+        "SigninLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UebaDataSources"
+      }
     },
     "UrlEntity": {
       "allOf": [
@@ -9118,7 +9192,7 @@
       "x-ms-parameter-location": "method"
     },
     "SettingsName": {
-      "description": "The setting name. Supports- EyesOn",
+      "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
       "in": "path",
       "name": "settingsName",
       "required": true,
