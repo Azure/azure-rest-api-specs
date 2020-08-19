@@ -104,6 +104,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js billing/resource-manager
 ```
 
 
@@ -231,6 +234,10 @@ generate-interface: true
 
 
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -244,6 +251,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Billing/stable/2020-05-01/billing.json
+  - $(this-folder)/Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
   - $(this-folder)/Microsoft.Billing/preview/2019-10-01-preview/billing.json
   - $(this-folder)/Microsoft.Billing/preview/2018-11-01-preview/billing.json
   - $(this-folder)/Microsoft.Billing/preview/2018-03-01-preview/billing.json

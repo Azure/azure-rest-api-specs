@@ -712,6 +712,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js compute/resource-manager
 ```
 
 ## Go
@@ -805,6 +808,10 @@ input-file:
 - Microsoft.Compute/stable/2017-03-30/disk.json
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -817,13 +824,15 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/gallery.json

@@ -102,6 +102,16 @@ input-file:
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
 - Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+```
+
+### Tag: package-2020-07-01-privatepreview
+
+These settings apply only when `--tag=package-2020-07-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
 ```
 
 ## Suppression
@@ -110,6 +120,12 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: ServerSecurityAlertPolicies.json
     reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: OperationsApiResponseSchema
+    from: mysql.json
+    reason: Property isDataAction is not included in get operation reponse body
 ```
 
 ---
@@ -129,6 +145,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mysql/resource-manager
 ```
 
 
@@ -182,6 +201,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -207,6 +230,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 
 ```
 
