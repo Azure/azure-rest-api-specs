@@ -55,6 +55,12 @@
             "schema": {
               "$ref": "#/definitions/HybridComputePrivateLinkScopeListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            }
           }
         },
         "x-ms-examples": {
@@ -87,6 +93,12 @@
             "description": "A list containing 0 or more Azure Arc PrivateLinkScope definitions.",
             "schema": {
               "$ref": "#/definitions/HybridComputePrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -131,7 +143,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -169,7 +181,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -221,7 +233,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -270,7 +282,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -315,7 +327,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -360,7 +372,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -409,7 +421,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -467,7 +479,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -518,7 +530,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -607,7 +619,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -671,7 +683,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -722,7 +734,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -765,7 +777,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
@@ -1088,7 +1100,7 @@
     "ErrorResponseCommon": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorResponseV2"
         }
       ],
       "properties": {
@@ -1125,6 +1137,48 @@
         }
       },
       "description": "The resource management error additional info."
+    },
+    "ErrorResponseV2": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            },
+            "target": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error target."
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorResponse"
+              },
+              "description": "The error details."
+            },
+            "additionalInfo": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorAdditionalInfo"
+              },
+              "description": "The error additional info."
+            }
+          }
+        }
+      },
+      "description": "The resource management error response."
     }
   },
   "parameters": {
