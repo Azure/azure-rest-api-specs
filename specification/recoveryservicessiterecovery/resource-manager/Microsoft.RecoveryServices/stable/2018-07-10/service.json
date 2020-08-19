@@ -4070,6 +4070,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationProtectionIntents": {
+      "get": {
+        "tags": [
+          "ReplicationProtectionIntents"
+        ],
+        "summary": "Gets the list of replication protection intent objects.",
+        "description": "Gets the list of ASR replication protection intent objects in the vault.",
+        "operationId": "ReplicationProtectionIntents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionIntentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the list of replication protection intent objects.": {
+            "$ref": "./examples/ReplicationProtectionIntents_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationProtectionIntents/{intentObjectName}": {
       "get": {
         "tags": [
@@ -4109,7 +4158,7 @@
               "$ref": "#/definitions/ReplicationProtectionIntent"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
@@ -4172,7 +4221,7 @@
               "$ref": "#/definitions/ReplicationProtectionIntent"
             }
           },
-		  "default": {
+          "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
@@ -16227,6 +16276,23 @@
         "properties": {
           "$ref": "#/definitions/ReplicationProtectionIntentProperties",
           "description": "The custom data."
+        }
+      }
+    },
+    "ReplicationProtectionIntentCollection": {
+      "description": "Replication protection intent objects collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The Replication protection intent details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationProtectionIntent"
+          }
+        },
+        "nextLink": {
+          "description": "The value of next link.",
+          "type": "string"
         }
       }
     },
