@@ -821,8 +821,11 @@
           "description": "Type of Delegated controller."
         },
         "kubernetesProperties": {
-          "description": "properties of kubernetes cluster",
-          "$ref": "#/definitions/KubernetesProperties"
+          "type": "array",
+          "description": "properties of kubernetes clusters",
+          "items": {
+            "$ref": "#/definitions/KubernetesProperties"
+          }
         }
       }
     },
