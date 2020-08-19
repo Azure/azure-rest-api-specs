@@ -158,6 +158,59 @@
         "operationId": "UsageModels_List"
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation id which uniquely identifies the asynchronous operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the status of an asynchronous operation for the Azure HPC cache",
+            "schema": {
+              "$ref": "#/definitions/AscOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AscOperations_Get": {
+            "$ref": "./examples/AscOperations_Get.json"
+          }
+        },
+        "tags": [
+          "AscOperations"
+        ],
+        "description": "Gets the status of an asynchronous operation for the Azure HPC cache",
+        "operationId": "AscOperations_Get"
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/caches": {
       "get": {
         "produces": [
@@ -533,7 +586,7 @@
             "schema": {}
           },
           "204": {
-            "description": "Cache flushed.",
+            "description": "Cache flush already in progress or has completed.",
             "schema": {}
           },
           "default": {
@@ -1097,6 +1150,51 @@
       },
       "type": "object"
     },
+    "AscOperation": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "Cache": {
       "description": "A Cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "properties": {
@@ -1388,18 +1486,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/StorageTargetResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "description": "StorageTarget properties",
-              "$ref": "#/definitions/StorageTargetProperties"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "StorageTarget properties",
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      }
     },
     "StorageTargetResource": {
       "description": "Resource used by a Cache.",
@@ -1425,12 +1520,11 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
-      "discriminator": "targetBaseType",
+      "discriminator": "targetType",
+      "required": [
+        "targetType"
+      ],
       "properties": {
-        "targetBaseType": {
-          "description": "Type of the Storage Target.",
-          "$ref": "#/definitions/StorageTargetType"
-        },
         "junctions": {
           "description": "List of Cache namespace junctions to target for namespace associations.",
           "type": "array",
@@ -1440,6 +1534,15 @@
         },
         "targetType": {
           "description": "Type of the Storage Target.",
+          "enum": [
+            "nfs3",
+            "clfs",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTargetType",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "provisioningState": {
@@ -1470,22 +1573,6 @@
           "description": "Properties when targetType is unknown.",
           "$ref": "#/definitions/UnknownTarget"
         }
-      },
-      "required": [
-        "targetBaseType"
-      ]
-    },
-    "StorageTargetType": {
-      "type": "string",
-      "description": "Type of the Storage Target.",
-      "enum": [
-        "nfs3",
-        "clfs",
-        "unknown"
-      ],
-      "x-ms-enum": {
-        "name": "StorageTargetType",
-        "modelAsString": true
       }
     },
     "Nfs3TargetProperties": {

@@ -26,10 +26,30 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07
+tag: package-2020-05
 opt-in-extensible-enums: true
 ```
 
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Media/stable/2020-05-01/AccountFilters.json
+  - Microsoft.Media/stable/2020-05-01/Accounts.json
+  - Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2020-05-01/Encoding.json
+  - Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2020-05-01/streamingservice.json
+  - Microsoft.Media/stable/2020-05-01/Common.json
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: location is a required property for our patch calls
+```
 ### Tag: package-2020-02-preview
 
 These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
@@ -46,7 +66,6 @@ input-file:
   - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
 
-
 ### Tag: package-2019-09-preview
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
@@ -62,7 +81,6 @@ input-file:
   - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
-
 
 ### Tag: package-2019-05-preview
 
@@ -153,6 +171,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mediaservices/resource-manager
 ```
 
 ## C#
@@ -308,7 +329,11 @@ directive:
     reason: Output not required for job update
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -320,6 +345,14 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/AccountFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/Accounts.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/Encoding.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/streamingservice.json
+  - $(this-folder)/Microsoft.Media/stable/2020-05-01/Common.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
@@ -354,7 +387,7 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'

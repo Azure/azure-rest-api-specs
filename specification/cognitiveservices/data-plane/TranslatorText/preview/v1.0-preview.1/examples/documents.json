@@ -1,0 +1,125 @@
+{
+  "parameters": {
+    "api-version": "v1.0-preview.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "id": "727BF148-F327-47A0-9481-ABAE6362F11E",
+    "$top": 5,
+    "$skip": 10
+  },
+  "responses": {
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "User is not authorized",
+          "target": "Document",
+          "innerError": {
+            "code": 401000,
+            "error": "Unauthorized",
+            "message": "Operation is not authorized"
+          }
+        }
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "target": "Document",
+          "innerError": {
+            "code": 429000,
+            "error": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "target": "Document",
+          "innerError": {
+            "code": 500000,
+            "error": "Internal Server Error",
+            "message": "Unexpected internal server error has occurred"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "target": "Document",
+          "innerError": {
+            "code": 503000,
+            "error": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "id not found",
+          "target": "Document",
+          "innerError": {
+            "code": 404000,
+            "error": "ResourceNotFound",
+            "message": "Resource requested is not found"
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "retry-after": "30",
+        "ETag": "686897696a7c876b7e"
+      },
+      "body": {
+        "value": [
+          {
+            "path": "https://myblob.blob.core.windows.net/destinationContainer/fr/mydoc.txt",
+            "createdDateTimeUtc": "2020-03-26T00:00:00Z",
+            "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
+            "status": "Running",
+            "detectedLanguage": "en",
+            "to": "fr",
+            "progress": 0.1,
+            "id": "273622bd-835c-4946-9798-fd8f19f6bbf2"
+          }
+        ],
+        "@nextLink": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55/documents?$top=5&$skip=15"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Some argument is incorrect",
+          "target": "Document",
+          "innerError": {
+            "code": 400120,
+            "error": "SASTokenInvalid",
+            "message": "SAS token for storage is invalid"
+          }
+        }
+      }
+    }
+  }
+}

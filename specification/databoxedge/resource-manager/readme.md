@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2019-08
 ```
 
+### Tag: package-2020-05-preview
+
+These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2020-05-01-preview/databoxedge.json
+```
+
 ### Tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
@@ -76,6 +85,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databoxedge']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js databoxedge/resource-manager
 ```
 
 ## C#
@@ -127,6 +140,20 @@ batch:
   - tag: package-2019-03
   - tag: package-2019-07
   - tag: package-2019-08
+  - tag: package-2020-05-preview
+```
+
+### Tag: package-2020-05-preview and java
+
+These settings apply only when `--tag=package-2020-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databoxedge.v2020_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2020_05_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-08 and java
@@ -168,6 +195,10 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -180,6 +211,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DataBoxEdge/preview/2020-05-01-preview/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json

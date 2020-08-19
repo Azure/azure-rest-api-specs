@@ -113,6 +113,9 @@
         "x-ms-examples": {
           "Services_CreateOrUpdate": {
             "$ref": "./examples/Services_CreateOrUpdate.json"
+          },
+          "Services_CreateOrUpdate_VNetInjection": {
+            "$ref": "./examples/Services_CreateOrUpdate_VNetInjection.json"
           }
         }
       },
@@ -2296,6 +2299,10 @@
           "$ref": "#/definitions/TraceProperties",
           "description": "Trace properties of the Service"
         },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network profile of the Service"
+        },
         "version": {
           "format": "int32",
           "description": "Version of the Service",
@@ -2309,11 +2316,33 @@
         }
       }
     },
+    "ManagedIdentityProperties": {
+      "description": "Managed identity properties retrieved from ARM request headers.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      }
+    },
     "Sku": {
       "description": "Sku of Azure Spring Cloud",
-      "required": [
-        "name"
-      ],
       "type": "object",
       "properties": {
         "name": {
@@ -2390,6 +2419,32 @@
         },
         "appInsightInstrumentationKey": {
           "description": "Target application insight instrumentation key",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkProfile": {
+      "description": "Service network profile payload",
+      "type": "object",
+      "properties": {
+        "serviceRuntimeSubnetId": {
+          "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
+          "type": "string"
+        },
+        "appSubnetId": {
+          "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
+          "type": "string"
+        },
+        "serviceCidr": {
+          "description": "Azure Spring Cloud service reserved CIDR",
+          "type": "string"
+        },
+        "serviceRuntimeNetworkResourceGroup": {
+          "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
+          "type": "string"
+        },
+        "appNetworkResourceGroup": {
+          "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
           "type": "string"
         }
       }
@@ -2598,6 +2653,10 @@
           "description": "Properties of the App resource",
           "x-ms-client-flatten": false
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentityProperties",
+          "description": "The Managed Identity type of the app resource"
+        },
         "location": {
           "description": "The GEO location of the application, always the same with its parent resource",
           "type": "string"
@@ -2766,11 +2825,13 @@
       "properties": {
         "resourceName": {
           "description": "The name of the bound resource",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceType": {
           "description": "The standard Azure resource type of the bound resource",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceId": {
           "description": "The Azure resource id of the bound resource",
@@ -2980,7 +3041,8 @@
         },
         "appName": {
           "description": "The app name of domain.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "certName": {
           "description": "The bound certificate name of domain.",
@@ -3157,18 +3219,14 @@
       "properties": {
         "cpu": {
           "format": "int32",
-          "description": "Required CPU",
+          "description": "Required CPU, basic tier should be 1, standard tier should be in range (1, 4)",
           "default": 1,
-          "maximum": 4.0,
-          "minimum": 1.0,
           "type": "integer"
         },
         "memoryInGB": {
           "format": "int32",
-          "description": "Required Memory size in GB",
+          "description": "Required Memory size in GB, basic tier should be in range (1, 2), standard tier should be in range (1, 8)",
           "default": 1,
-          "maximum": 8.0,
-          "minimum": 1.0,
           "type": "integer"
         },
         "jvmOptions": {
@@ -3177,10 +3235,8 @@
         },
         "instanceCount": {
           "format": "int32",
-          "description": "Instance count",
+          "description": "Instance count, basic tier should be in range (1, 25), standard tier should be in range (1, 500)",
           "default": 1,
-          "maximum": 20.0,
-          "minimum": 1.0,
           "type": "integer"
         },
         "environmentVariables": {
