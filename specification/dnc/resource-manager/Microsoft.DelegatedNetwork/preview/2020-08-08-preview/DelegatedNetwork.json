@@ -462,7 +462,7 @@
         "operationId": "DelegatedNetwork_ListBySubscription",
         "x-ms-examples": {
           "Get DelegatedController resources by subscription": {
-            "$ref": "./examples/delegatedNetworkResourcesListBySub.json"
+            "$ref": "./examples/delegatedNetworkControllerListBySub.json"
           }
         },
         "parameters": [
@@ -498,7 +498,7 @@
         "operationId": "DelegatedNetwork_ListByResourceGroup",
         "x-ms-examples": {
           "Get DelegatedNetwork resources by resource group": {
-            "$ref": "./examples/delegatedNetworkResourcesListByRG.json"
+            "$ref": "./examples/delegatedNetworkControllerListByRG.json"
           }
         },
         "parameters": [
@@ -517,6 +517,81 @@
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the delegatedControllers in the resource group.",
             "schema": {
               "$ref": "#/definitions/DelegatedControllers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/delegatedSubnets": {
+      "get": {
+        "tags": [
+          "DelegatedSubnets"
+        ],
+        "description": "Get all the DelegatedSubnets resources in a subscription.",
+        "operationId": "DelegatedSubnets_ListBySubscription",
+        "x-ms-examples": {
+          "Get DelegatedSubnets resources by subscription": {
+            "$ref": "./examples/delegatedSubnetListBySub.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedSubnets in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnets"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/delegatedSubnets": {
+      "get": {
+        "tags": [
+          "DelegatedSubnets"
+        ],
+        "description": "Get all the DelegatedSubnets resources in a resource group.",
+        "operationId": "DelegatedSubnets_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get DelegatedSubnets resources by resource group": {
+            "$ref": "./examples/delegatedSubnetListByRG.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedSubnets in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedSubnets"
             }
           },
           "default": {
@@ -711,6 +786,22 @@
             "$ref": "#/definitions/DelegatedController"
           },
           "description": "An array of Delegated controller resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DelegatedSubnets": {
+      "description": "An array of Delegated subnets resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnet"
+          },
+          "description": "An array of Delegated subnets resources."
         }
       },
       "required": [
