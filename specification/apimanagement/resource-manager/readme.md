@@ -163,7 +163,7 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.ApiManagement/preview/2019-12-01/apimanagement.json
+- Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimanagement.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapisByTags.json
