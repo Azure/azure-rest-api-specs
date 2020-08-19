@@ -1674,6 +1674,15 @@
           },
           {
             "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "dataControllerResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResourceNoProperties"
+            }
           }
         ],
         "responses": {
@@ -2188,7 +2197,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/DataControllerResourceNoProperties"
         }
       ],
       "properties": {
@@ -2197,7 +2206,19 @@
           "description": "The data controller's properties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DataControllerResourceNoProperties": {
+      "description": "Data controller resource with no properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
     },
     "AzureResource": {
       "type": "object",
@@ -2304,23 +2325,11 @@
       "properties": {
         "onPremiseProperty": {
           "$ref": "#/definitions/OnPremiseProperty"
-        },
-        "requestType": {
-          "$ref": "#/definitions/RequestType"
-        },
-        "uploadRequest": {
-          "$ref": "#/definitions/UsageUploadRequest"
-        },
-        "uploadResponse": {
-          "$ref": "#/definitions/UsageUploadResponse"
-        },
-        "handshakeRequest": {
-          "$ref": "#/definitions/HandshakeRequest"
-        },
-        "handshakeResponse": {
-          "$ref": "#/definitions/HandshakeResponse"
         }
-      }
+      },
+      "required": [
+        "onPremiseProperty"
+      ]
     },
     "OnPremiseProperty": {
       "description": "Properties from the on premise data controller",
@@ -2339,130 +2348,11 @@
           "type": "string",
           "description": "Unique thumbprint returned to customer to verify the certificate being uploaded"
         }
-      }
-    },
-    "RequestType": {
-      "type": "string",
-      "enum": [
-        "Unknown",
-        "Handshake",
-        "UsageUpload"
-      ],
-      "x-ms-enum": {
-        "name": "RequestType",
-        "modelAsString": true
-      }
-    },
-    "UsageUploadRequest": {
-      "type": "object",
-      "properties": {
-        "exportType": {
-          "type": "string"
-        },
-        "dataTimestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "data": {
-          "items": {
-            "$ref": "#/definitions/UsageRecord"
-          },
-          "type": "array"
-        },
-        "signature": {
-          "type": "string"
-        }
-      }
-    },
-    "UsageRecord": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "eventSeq": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "eventId": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "namespace": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "subscriptionId": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "resourceGroup": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "quantity": {
-          "type": "number",
-          "format": "double"
-        },
-        "tags": {
-          "type": "string"
-        }
-      }
-    },
-    "UsageUploadResponse": {
-      "type": "object",
-      "properties": {
-        "usageUploadStatus": {
-          "$ref": "#/definitions/UsageUploadStatus"
-        },
-        "usageWaterMark": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "UsageUploadStatus": {
-      "type": "string",
-      "enum": [
-        "Unknown",
-        "Failed",
-        "PartialSuccess",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "UsageUploadStatus",
-        "modelAsString": true
-      }
-    },
-    "HandshakeRequest": {
-      "type": "object"
-    },
-    "HandshakeResponse": {
-      "type": "object",
-      "properties": {
-        "usageUploadUrl": {
-          "type": "string"
-        },
-        "usageResultUrl": {
-          "type": "string"
-        }
-      }
+      },
+      "required": [
+        "id",
+        "publicSigningKey"
+      ]
     },
     "PostgresInstanceProperties": {
       "description": "Postgres Instance properties.",
@@ -2534,6 +2424,26 @@
         "dataControllerId": {
           "type": "string",
           "description": "null"
+        },
+        "instanceEndpoint": {
+          "type": "string",
+          "description": "The on premise instance endpoint"
+        },
+        "admin": {
+          "type": "string",
+          "description": "The instance admin user"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The instance start time"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The instance end time"
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The instance vCore"
         }
       }
     },
