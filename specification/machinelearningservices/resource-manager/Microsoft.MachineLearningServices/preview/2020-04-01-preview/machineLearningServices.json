@@ -1418,6 +1418,188 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices": {
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "x-ms-examples": {
+          "ListLinkedServices": {
+            "$ref": "./examples/listLinkedServices.json"
+          }
+        },
+        "operationId": "LinkedServices_List",
+        "description": "List all linked services under an AML workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the linked services.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedLinkedServiceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices/{linkName}": {
+      "put": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_Create",
+        "description": "Add a new linked service.",
+        "x-ms-examples": {
+          "CreateLinkedService": {
+            "$ref": "./examples/createLinkedService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for creating or updating a linked service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the linked service.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_Get",
+        "description": "Get the detail of a linked service.",
+        "x-ms-examples": {
+          "GetLinkedService": {
+            "$ref": "./examples/getLinkedService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the detail of the linked service.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_Delete",
+        "description": "Delete a linked service.",
+        "x-ms-examples": {
+          "DeleteLinkedService": {
+            "$ref": "./examples/deleteLinkedService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the linked service."
+          },
+          "204": {
+            "description": "Specific linked service not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -3593,6 +3775,82 @@
         "userAssignedIdentityResourceId": {
           "description": "ResourceId of the user assigned identity for the linked workspace.",
           "type": "string"
+        }
+      }
+    },
+    "LinkedServiceResponse": {
+      "description": "Linked service.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ResourceId of the link of the linked service.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the linked service.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of linked service.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/LinkedServiceProps"
+        }
+      }
+    },
+    "LinkedServiceRequest": {
+      "type": "object",
+      "description": "object used for creating linked service.",
+      "properties": {
+        "name": {
+          "description": "Friendly name of the linked service",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/LinkedServiceProps"
+        }
+      }
+    },
+    "LinkedServiceProps": {
+      "type": "object",
+      "description": "LinkedService specific properties.",
+      "properties": {
+        "linkedServiceResourceId": {
+          "description": "ResourceId of the link target of the linked service.",
+          "type": "string"
+        },
+        "userAssignedIdentityResourceId": {
+          "description": "ResourceId of the user assigned identity for the linked service.",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedLinkedServiceList": {
+      "type": "object",
+      "description": "Paginated list of linked service objects.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of linked services",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link(absolute URI) to the next page of results in the list."
         }
       }
     }
