@@ -100,6 +100,9 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: myworkbooks_API.json
     reason: 'this error format is already part of the previous api, cannot change it'
+  - suppress: DeleteOperationResponses
+    from: myworkbooks_API.json
+    reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
 ```
 
 ### Tag: package-preview-2020-06-only

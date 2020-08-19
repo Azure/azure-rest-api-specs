@@ -82,6 +82,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/myWorkbooks": {
+      "get": {
+        "description": "Get all private workbooks defined within a specified subscription and category.",
+        "operationId": "MyWorkbooks_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more private workbook definitions.",
+            "schema": {
+              "$ref": "#/definitions/MyWorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MyWorkbookError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "WorkbooksList": {
+            "$ref": "./examples/MyWorkbooksList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/myWorkbooks/{resourceName}": {
       "get": {
         "description": "Get a single private workbook by its resourceName.",
@@ -331,7 +376,7 @@
             "shared"
           ],
           "x-ms-enum": {
-            "name": "SharedTypeKind",
+            "name": "MyWorkbooksSharedTypeKind",
             "modelAsString": true
           }
         },
@@ -374,7 +419,7 @@
             "user"
           ],
           "x-ms-enum": {
-            "name": "SharedTypeKind",
+            "name": "MyWorkbooksSharedTypeKind",
             "modelAsString": true
           }
         },
