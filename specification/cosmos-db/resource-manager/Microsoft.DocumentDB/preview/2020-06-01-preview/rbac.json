@@ -34,9 +34,9 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions/{roleDefinitionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/sqlRoleDefinitions/{roleDefinitionId}": {
       "get": {
-        "operationId": "SqlRoleDefinition_Get",
+        "operationId": "SqlResources_GetRoleDefinition",
         "x-ms-examples": {
           "CosmosDBSqlRoleDefinitionGet": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionGet.json"
@@ -64,13 +64,13 @@
           "200": {
             "description": "The Role Definition was found.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleDefinitionResponse"
+              "$ref": "#/definitions/SqlRoleDefinitionGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "SqlRoleDefinition_CreateOrUpdate",
+        "operationId": "SqlResources_CreateOrUpdateRoleDefinition",
         "x-ms-examples": {
           "CosmosDBSqlRoleDefinitionCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionCreateUpdate.json"
@@ -95,7 +95,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "requestBody",
+            "name": "createUpdateSqlRoleDefinitionParameters",
             "in": "body",
             "required": true,
             "description": "The properties required to create a new role definition.",
@@ -108,13 +108,13 @@
           "200": {
             "description": "The Role Definition create or update request was accepted and will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleDefinitionResponse"
+              "$ref": "#/definitions/SqlRoleDefinitionGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "SqlRoleDefinition_Delete",
+        "operationId": "SqlResources_DeleteRoleDefinition",
         "x-ms-examples": {
           "CosmosDBSqlRoleDefinitionDelete": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionDelete.json"
@@ -141,20 +141,17 @@
         ],
         "responses": {
           "202": {
-            "description": "The Role Definition was deleted.",
-            "schema": {
-              "$ref": "#/definitions/SqlRoleDefinitionResponse"
-            }
+            "description": "The Role Definition delete operation will complete asynchronously."
           },
           "204": {
-            "description": "Role Definition does not exist"
+            "description": "The Role Definition delete operation was completely successfully."
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/sqlRoleDefinitions": {
       "get": {
-        "operationId": "SqlRoleDefinition_List",
+        "operationId": "SqlResources_ListRoleDefinitions",
         "x-ms-examples": {
           "CosmosDBSqlRoleDefinitionList": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionList.json"
@@ -191,9 +188,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments/{roleAssignmentId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/sqlRoleAssignments/{roleAssignmentId}": {
       "get": {
-        "operationId": "SqlRoleAssignment_Get",
+        "operationId": "SqlResources_GetRoleAssignment",
         "x-ms-examples": {
           "CosmosDBSqlRoleAssignmentGet": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentGet.json"
@@ -227,7 +224,7 @@
         }
       },
       "put": {
-        "operationId": "SqlRoleAssignment_CreateOrUpdate",
+        "operationId": "SqlResources_CreateOrUpdateRoleAssignment",
         "x-ms-examples": {
           "CosmosDBSqlRoleAssignmentCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentCreateUpdate.json"
@@ -252,7 +249,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "requestBody",
+            "name": "createUpdateSqlRoleAssignmentParameters",
             "in": "body",
             "required": true,
             "description": "The properties required to create a new Role Assignment.",
@@ -271,7 +268,7 @@
         }
       },
       "delete": {
-        "operationId": "SqlRoleAssignment_Delete",
+        "operationId": "SqlResources_DeleteRoleAssignment",
         "x-ms-examples": {
           "CosmosDBSqlRoleAssignmentDelete": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentDelete.json"
@@ -298,20 +295,17 @@
         ],
         "responses": {
           "202": {
-            "description": "The delete request was accepted and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/SqlRoleAssignmentResponse"
-            }
+            "description": "The Role Assignment delete operation will complete asynchronously."
           },
           "204": {
-            "description": "Role Assignment does not exist."
+            "description": "The Role Assignment delete operation was completely successfully."
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/cosmosRoleAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{databaseAccountName}/sqlRoleAssignments": {
       "get": {
-        "operationId": "SqlRoleAssignment_List",
+        "operationId": "SqlResources_ListRoleAssignments",
         "x-ms-examples": {
           "CosmosDBSqlRoleAssignmentList": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentList.json"
@@ -386,7 +380,7 @@
       "x-ms-azure-resource": true,
       "description": "Role Definition Properties."
     },
-    "SqlRoleDefinitionResponse": {
+    "SqlRoleDefinitionGetResults": {
       "type": "object",
       "properties": {
         "id": {
@@ -427,13 +421,17 @@
     },
     "ErrorResponse": {
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "Error": {
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       },
       "description": "Error Response."
@@ -443,7 +441,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlRoleDefinitionResponse"
+            "$ref": "#/definitions/SqlRoleDefinitionGetResults"
           }
         }
       },

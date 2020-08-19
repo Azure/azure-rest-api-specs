@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "roleDefinitionId": "87717168-47d4-4dde-9021-25f683f6ec9d",
-    "subscriptionId": "subId",
+    "roleDefinitionId": "11111111-1111-1111-1111-111111111111",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "databaseAccountName": "contoso",
     "api-version": "2020-06-01-preview"
@@ -9,21 +9,21 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/cosmosRoleDefinitions/87717168-47d4-4dde-9021-25f683f6ec9d",
-        "name": "87717168-47d4-4dde-9021-25f683f6ec9d",
-        "type": "Microsoft.DocumentDB/databaseAccounts/cosmosRoleDefinitions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/sqlRoleDefinitions/11111111-1111-1111-1111-111111111111",
+        "name": "11111111-1111-1111-1111-111111111111",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions",
         "properties": {
           "roleName": "Contoso Finance Records Reader",
           "type": "CustomRole",
           "assignableScopes": [
-            "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-sales",
-            "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-purchases"
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-sales",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/contoso/dbs/contoso-purchases"
           ],
           "permissions": [
             {
               "dataActions": [
-                "Microsoft.DocumentDB/databaseAccounts/databases/read",
-                "Microsoft.DocumentDB/databaseAccounts/databases/collections/read"
+                "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/create",
+                "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read"
               ]
             }
           ]
