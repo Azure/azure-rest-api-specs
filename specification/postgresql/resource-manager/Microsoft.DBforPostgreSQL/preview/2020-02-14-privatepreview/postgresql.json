@@ -735,6 +735,62 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Update",
+        "x-ms-examples": {
+          "Update a user configuration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
@@ -1122,6 +1178,10 @@
           "format": "date-time",
           "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
         },
+        "availabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server."
+        },
         "vnetInjArgs": {
           "properties": {
             "delegatedVnetID": {
@@ -1135,6 +1195,10 @@
             "delegatedVnetName": {
               "type": "string",
               "description": "delegated vNet name"
+            },
+            "delegatedVnetResourceGroup": {
+              "type": "string",
+              "description": "delegated vNet resource group name"
             }
           }
         },
@@ -1284,12 +1348,6 @@
             "name": "SkuTier",
             "modelAsString": true
           }
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "The scale up/out capacity, representing server's compute units."
         }
       },
       "description": "Sku information related properties of a server."

@@ -534,6 +534,23 @@
         "minimalTlsVersion": {
           "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
           "type": "string"
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
+          "enum": [
+            "GRS",
+            "LRS",
+            "ZRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
