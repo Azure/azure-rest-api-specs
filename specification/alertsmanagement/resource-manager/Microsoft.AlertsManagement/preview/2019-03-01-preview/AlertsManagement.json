@@ -52,36 +52,6 @@
         }
       }
     },
-    "/providers/Microsoft.AlertsManagement/alertsMetaData": {
-      "get": {
-        "operationId": "Alerts_MetaData",
-        "description": "List alerts meta data information based on value of identifier parameter.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/identifier"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully listed alert meta data.",
-            "schema": {
-              "$ref": "#/definitions/alertsMetaData"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MonService": {
-            "$ref": "./examples/AlertsMetaData_MonitorService.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
@@ -896,21 +866,6 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
-    },
-    "identifier": {
-      "name": "identifier",
-      "description": "Identification of the information to be retrieved by API call.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "enum": [
-        "MonitorServiceList"
-      ],
-      "x-ms-enum": {
-        "name": "identifier",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -1431,34 +1386,6 @@
         }
       }
     },
-    "alertsMetaData": {
-      "description": "alert meta data information.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/alertsMetaDataProperties"
-        }
-      }
-    },
-    "alertsMetaDataProperties": {
-      "description": "alert meta data property bag",
-      "discriminator": "metadataIdentifier",
-      "required": [
-        "metadataIdentifier"
-      ],
-      "properties": {
-        "metadataIdentifier": {
-          "type": "string",
-          "description": "Identification of the information to be retrieved by API call",
-          "enum": [
-            "MonitorServiceList"
-          ],
-          "x-ms-enum": {
-            "name": "metadataIdentifier",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "smartGroupsList": {
       "description": "List the alerts.",
       "properties": {
@@ -1610,43 +1537,6 @@
         "count": {
           "type": "integer",
           "description": "Total number of items of type."
-        }
-      }
-    },
-    "MonitorServiceList": {
-      "title": "Monitor service details",
-      "description": "Monitor service details",
-      "required": [
-        "data"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/alertsMetaDataProperties"
-        },
-        {
-          "type": "object"
-        }
-      ],
-      "properties": {
-        "data": {
-          "description": "Array of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitorServiceDetails"
-          }
-        }
-      }
-    },
-    "MonitorServiceDetails": {
-      "description": "Details of a monitor service",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Monitor service name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Monitor service display name"
         }
       }
     }
