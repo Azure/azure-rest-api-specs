@@ -22,16 +22,16 @@
           "ImportExport"
         ],
         "operationId": "Databases_Import",
-        "description": "Imports a bacpac into a new database.",
+        "description": "Imports a bacpac into a new database. ",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -43,7 +43,7 @@
             "schema": {
               "$ref": "#/definitions/ImportRequest"
             },
-            "description": "The database import request parameters."
+            "description": "The required parameters for importing a Bacpac into a database."
           }
         ],
         "responses": {
@@ -83,13 +83,13 @@
         "description": "Creates an import operation that imports a bacpac into an existing database. The existing database must be empty.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -122,7 +122,7 @@
             "schema": {
               "$ref": "#/definitions/ImportExtensionRequest"
             },
-            "description": "The database import request parameters."
+            "description": "The required parameters for importing a Bacpac into a database."
           }
         ],
         "responses": {
@@ -159,16 +159,16 @@
           "ImportExport"
         ],
         "operationId": "Databases_Export",
-        "description": "Exports a database.",
+        "description": "Exports a database to a bacpac.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -178,7 +178,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the database."
+            "description": "The name of the database to be exported."
           },
           {
             "name": "parameters",
@@ -187,7 +187,7 @@
             "schema": {
               "$ref": "#/definitions/ExportRequest"
             },
-            "description": "The database export request parameters."
+            "description": "The required parameters for exporting a database."
           }
         ],
         "responses": {
@@ -497,22 +497,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
