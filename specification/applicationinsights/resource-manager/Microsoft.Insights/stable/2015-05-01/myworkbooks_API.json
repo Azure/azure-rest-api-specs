@@ -370,13 +370,13 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of private workbook. Choices are user and shared.",
+          "description": "The kind of workbook. Choices are user and shared.",
           "enum": [
             "user",
             "shared"
           ],
           "x-ms-enum": {
-            "name": "MyWorkbooksSharedTypeKind",
+            "name": "SharedTypeKind",
             "modelAsString": true
           }
         },
@@ -410,7 +410,7 @@
           "description": "This instance's version of the data model. This can change as new features are added that can be marked private workbook."
         },
         "kind": {
-          "description": "Enum indicating if this private workbook definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+          "description": "Enum indicating if this workbook definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
           "x-ms-client-name": "SharedTypeKind",
           "default": "shared",
           "type": "string",
@@ -419,7 +419,7 @@
             "user"
           ],
           "x-ms-enum": {
-            "name": "MyWorkbooksSharedTypeKind",
+            "name": "SharedTypeKind",
             "modelAsString": true
           }
         },
