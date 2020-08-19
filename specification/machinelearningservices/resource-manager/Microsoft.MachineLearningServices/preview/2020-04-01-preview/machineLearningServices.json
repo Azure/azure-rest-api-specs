@@ -1309,7 +1309,7 @@
             "description": "The object for creating or updating a linked service",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedServiceDto"
+              "$ref": "#/definitions/LinkedServiceRequest"
             }
           }
         ],
@@ -1317,7 +1317,7 @@
           "200": {
             "description": "Successfully created the linked service.",
             "schema": {
-              "$ref": "#/definitions/LinkedService"
+              "$ref": "#/definitions/LinkedServiceResponse"
             }
           },
           "default": {
@@ -1360,7 +1360,7 @@
           "200": {
             "description": "Successfully retrieved the detail of the linked service.",
             "schema": {
-              "$ref": "#/definitions/LinkedService"
+              "$ref": "#/definitions/LinkedServiceResponse"
             }
           },
           "default": {
@@ -3540,7 +3540,7 @@
       ],
       "type": "object"
     },
-    "LinkedService": {
+    "LinkedServiceResponse": {
       "description": "Linked service.",
       "type": "object",
       "x-ms-azure-resource": true,
@@ -3560,18 +3560,24 @@
           "description": "Resource type of linked service.",
           "readOnly": true
         },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
         "properties": {
           "$ref": "#/definitions/LinkedServiceProps"
         }
       }
     },
-    "LinkedServiceDto": {
+    "LinkedServiceRequest": {
       "type": "object",
       "description": "object used for creating linked service.",
       "properties": {
         "name": {
           "description": "Friendly name of the linked service",
           "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
         },
         "properties": {
           "$ref": "#/definitions/LinkedServiceProps"
@@ -3601,7 +3607,7 @@
           "type": "array",
           "description": "An array of linked services",
           "items": {
-            "$ref": "#/definitions/LinkedService"
+            "$ref": "#/definitions/LinkedServiceResponse"
           }
         },
         "nextLink": {
