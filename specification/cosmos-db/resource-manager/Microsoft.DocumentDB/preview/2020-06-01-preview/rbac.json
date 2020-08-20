@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Definition was found.",
+            "description": "The Role Definition was successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionGetResults"
             }
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseUpdated"
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -104,7 +104,7 @@
             "name": "createUpdateSqlRoleDefinitionParameters",
             "in": "body",
             "required": true,
-            "description": "The properties required to create a new role definition.",
+            "description": "The properties required to create or update a Role Definition.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionProperties"
             }
@@ -112,9 +112,18 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Definition create or update request was accepted and will complete asynchronously.",
+            "description": "The Role Definition create or update request was completely successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionGetResults"
+            }
+          },
+          "202": {
+            "description": "The Role Definition create or update request was accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -147,10 +156,16 @@
         ],
         "responses": {
           "202": {
-            "description": "The Role Definition delete operation will complete asynchronously."
+            "description": "The Role Definition delete operation was accepted and will complete asynchronously."
           },
           "204": {
             "description": "The Role Definition delete operation was completely successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -186,9 +201,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The relevant Role Definitions.",
+            "description": "The operation completely succesfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -222,9 +243,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Assignment was found.",
+            "description": "The Role Assignment was successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleAssignmentResponse"
+              "$ref": "#/definitions/SqlRoleAssignmentGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -258,7 +285,7 @@
             "name": "createUpdateSqlRoleAssignmentParameters",
             "in": "body",
             "required": true,
-            "description": "The properties required to create a new Role Assignment.",
+            "description": "The properties required to create or update a Role Assignment.",
             "schema": {
               "$ref": "#/definitions/SqlRoleAssignmentProperties"
             }
@@ -266,9 +293,18 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Assignment create or update request was accepted and will complete asynchronously.",
+            "description": "The Role Assignment create or update request was complete successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleAssignmentResponse"
+              "$ref": "#/definitions/SqlRoleAssignmentGetResults"
+            }
+          },
+          "202": {
+            "description": "The Role Assignment create or update request was accepted and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -301,10 +337,16 @@
         ],
         "responses": {
           "202": {
-            "description": "The Role Assignment delete operation will complete asynchronously."
+            "description": "The Role Assignment delete operation was accepted and will complete asynchronously."
           },
           "204": {
             "description": "The Role Assignment delete operation was completely successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -340,9 +382,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The relevant Role Assignments",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -362,7 +410,7 @@
             "BuiltInRole",
             "CustomRole"
           ],
-          "description": "Indicates whether the Role Definition was built-in or user created. Must always be CustomRole or empty.",
+          "description": "Indicates whether the Role Definition was built-in or user created.",
           "x-ms-enum": {
             "name": "RoleDefinitionType",
             "modelAsString": false
@@ -384,7 +432,7 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "Role Definition Properties."
+      "description": "Properties to update or create an Azure Cosmos DB Role Definition."
     },
     "SqlRoleDefinitionGetResults": {
       "type": "object",
@@ -402,7 +450,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Microsoft.DocumentDB/databaseAccounts/roleDefinitions."
+          "description": "The type of resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -420,12 +468,13 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "An array of data actions."
         }
       },
       "description": "The set of data plane operations permitted through this Role Definition."
     },
-    "ErrorResponseUpdated": {
+    "DefaultErrorResponse": {
       "properties": {
         "error": {
           "properties": {
@@ -440,7 +489,7 @@
           }
         }
       },
-      "description": "Error Response."
+      "description": "An error response from the service."
     },
     "SqlRoleDefinitionListResult": {
       "properties": {
@@ -448,7 +497,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlRoleDefinitionGetResults"
-          }
+          },
+          "description": "List of Role Definitions and their properties."
         }
       },
       "description": "The relevant Role Definitions."
@@ -472,7 +522,7 @@
       "x-ms-azure-resource": true,
       "description": "Role Assignment Properties."
     },
-    "SqlRoleAssignmentResponse": {
+    "SqlRoleAssignmentGetResults": {
       "type": "object",
       "properties": {
         "id": {
@@ -488,7 +538,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Microsoft.DocumentDB/databaseAccounts/roleAssignments."
+          "description": "The type of resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -504,8 +554,9 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlRoleAssignmentResponse"
-          }
+            "$ref": "#/definitions/SqlRoleAssignmentGetResults"
+          },
+          "description": "List of Role Assignments and their properties"
         }
       },
       "description": "The relevant Role Assignments."
