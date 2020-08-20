@@ -299,7 +299,10 @@
                         "$ref": "#/parameters/Timeout"
                     },
                     {
-                        "$ref": "#/parameters/ApiVersionParameter"
+                       "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                       "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -362,6 +365,48 @@
                                 "type": "string",
                                 "format": "date-time-rfc1123",
                                 "description": "Returns the current share next allowed quota downgrade time."
+                            },
+                           "x-ms-lease-duration": {
+                                "x-ms-client-name": "LeaseDuration",
+                                "description": "When a share is leased, specifies whether the lease is of infinite or fixed duration.",
+                                "type": "string",
+                                "enum": [
+                                    "infinite",
+                                    "fixed"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseDurationType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-state": {
+                                "x-ms-client-name": "LeaseState",
+                                "description": "Lease state of the share.",
+                                "type": "string",
+                                "enum": [
+                                    "available",
+                                    "leased",
+                                    "expired",
+                                    "breaking",
+                                    "broken"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStateType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-status": {
+                                "x-ms-client-name": "LeaseStatus",
+                                "description": "The current lease status of the share.",
+                                "type": "string",
+                                "enum": [
+                                    "locked",
+                                    "unlocked"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStatusType",
+                                    "modelAsString": false
+                                }
                             }
                         }
                     },
@@ -396,6 +441,9 @@
                     },
                     {
                         "$ref": "#/parameters/DeleteSnapshots"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -442,6 +490,615 @@
                     "share"
                 ]
             }]
+        },
+        "/{shareName}?restype=share&comp=lease&acquire": {
+            "put": {
+                "tags": [
+                    "share"
+                ],
+                "operationId": "Share_AcquireLease",
+                "description": "The Lease Share operation establishes and manages a lock on a share, or the specified snapshot for set and delete share operations.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Timeout"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseDuration"
+                    },
+                    {
+                        "$ref": "#/parameters/ProposedLeaseIdOptional"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareSnapshot"
+                    },
+                    {
+                        "$ref": "#/parameters/ClientRequestId"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "The Acquire operation completed successfully.",
+                        "headers": {
+                            "ETag": {
+                                "type": "string",
+                                "format": "etag",
+                                "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
+                            },
+                          "Last-Modified": {
+                            "type": "string",
+                            "format": "date-time-rfc1123",
+                            "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
+                          },
+                            "x-ms-lease-time": {
+                                "x-ms-client-name": "LeaseTime",
+                                "type": "integer",
+                                "description": "Approximate time remaining in the lease period, in seconds."
+                            },
+                            "x-ms-lease-id": {
+                                "x-ms-client-name": "LeaseId",
+                                "type": "string",
+                                "description": "Uniquely identifies a share's lease"
+                            },
+                            "x-ms-client-request-id": {
+                                "x-ms-client-name": "ClientRequestId",
+                                "type": "string",
+                                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+                            },
+                            "x-ms-request-id": {
+                                "x-ms-client-name": "RequestId",
+                                "type": "string",
+                                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+                            },
+                            "x-ms-version": {
+                                "x-ms-client-name": "Version",
+                                "type": "string",
+                                "description": "Indicates the version of the File service used to execute the request."
+                            },
+                            "Date": {
+                                "type": "string",
+                                "format": "date-time-rfc1123",
+                                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "headers": {
+                            "x-ms-error-code": {
+                                "x-ms-client-name": "ErrorCode",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/StorageError"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "comp",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "lease"
+                    ]
+                },
+                {
+                    "name": "x-ms-lease-action",
+                    "x-ms-client-name": "action",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "acquire"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LeaseAction",
+                        "modelAsString": false
+                    },
+                    "x-ms-parameter-location": "method",
+                    "description": "Describes what lease action to take."
+                },
+                {
+                    "name": "restype",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "share"
+                    ]
+                }
+            ]
+        },
+        "/{shareName}?restype=share&comp=lease&release": {
+            "put": {
+                "tags": [
+                    "share"
+                ],
+                "operationId": "Share_ReleaseLease",
+                "description": "The Lease Share operation establishes and manages a lock on a share, or the specified snapshot for set and delete share operations.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Timeout"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdRequired"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareSnapshot"
+                    },
+                    {
+                        "$ref": "#/parameters/ClientRequestId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Release operation completed successfully.",
+                        "headers": {
+                            "ETag": {
+                                "type": "string",
+                                "format": "etag",
+                                "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
+                            },
+                          "Last-Modified": {
+                            "type": "string",
+                            "format": "date-time-rfc1123",
+                            "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
+                          },
+                            "x-ms-lease-time": {
+                                "x-ms-client-name": "LeaseTime",
+                                "type": "integer",
+                                "description": "Approximate time remaining in the lease period, in seconds."
+                            },
+                            "x-ms-client-request-id": {
+                                "x-ms-client-name": "ClientRequestId",
+                                "type": "string",
+                                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+                            },
+                            "x-ms-request-id": {
+                                "x-ms-client-name": "RequestId",
+                                "type": "string",
+                                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+                            },
+                            "x-ms-version": {
+                                "x-ms-client-name": "Version",
+                                "type": "string",
+                                "description": "Indicates the version of the File service used to execute the request."
+                            },
+                            "Date": {
+                                "type": "string",
+                                "format": "date-time-rfc1123",
+                                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "headers": {
+                            "x-ms-error-code": {
+                                "x-ms-client-name": "ErrorCode",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/StorageError"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "comp",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "lease"
+                    ]
+                },
+                {
+                    "name": "x-ms-lease-action",
+                    "x-ms-client-name": "action",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "release"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LeaseAction",
+                        "modelAsString": false
+                    },
+                    "x-ms-parameter-location": "method",
+                    "description": "Describes what lease action to take."
+                },
+                {
+                    "name": "restype",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "share"
+                    ]
+                }
+            ]
+        },
+        "/{shareName}?restype=share&comp=lease&change": {
+            "put": {
+                "tags": [
+                    "share"
+                ],
+                "operationId": "Share_ChangeLease",
+                "description": "The Lease Share operation establishes and manages a lock on a share, or the specified snapshot for set and delete share operations.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Timeout"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdRequired"
+                    },
+                    {
+                        "$ref": "#/parameters/ProposedLeaseIdOptional"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareSnapshot"
+                    },
+                    {
+                      "$ref": "#/parameters/ClientRequestId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Change operation completed successfully.",
+                        "headers": {
+                            "ETag": {
+                                "type": "string",
+                                "format": "etag",
+                                "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
+                            },
+                          "Last-Modified": {
+                            "type": "string",
+                            "format": "date-time-rfc1123",
+                            "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
+                          },
+                            "x-ms-lease-time": {
+                                "x-ms-client-name": "LeaseTime",
+                                "type": "integer",
+                                "description": "Approximate time remaining in the lease period, in seconds."
+                            },
+                            "x-ms-lease-id": {
+                                "x-ms-client-name": "LeaseId",
+                                "type": "string",
+                                "description": "Uniquely identifies a share's lease"
+                            },
+                            "x-ms-client-request-id": {
+                                "x-ms-client-name": "ClientRequestId",
+                                "type": "string",
+                                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+                            },
+                            "x-ms-request-id": {
+                                "x-ms-client-name": "RequestId",
+                                "type": "string",
+                                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+                            },
+                            "x-ms-version": {
+                                "x-ms-client-name": "Version",
+                                "type": "string",
+                                "description": "Indicates the version of the File service used to execute the request."
+                            },
+                            "Date": {
+                                "type": "string",
+                                "format": "date-time-rfc1123",
+                                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "headers": {
+                            "x-ms-error-code": {
+                                "x-ms-client-name": "ErrorCode",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/StorageError"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "comp",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "lease"
+                    ]
+                },
+                {
+                    "name": "x-ms-lease-action",
+                    "x-ms-client-name": "action",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "change"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LeaseAction",
+                        "modelAsString": false
+                    },
+                    "x-ms-parameter-location": "method",
+                    "description": "Describes what lease action to take."
+                },
+                {
+                    "name": "restype",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "share"
+                    ]
+                }
+            ]
+        },
+        "/{shareName}?restype=share&comp=lease&renew": {
+            "put": {
+                "tags": [
+                    "share"
+                ],
+                "operationId": "Share_RenewLease",
+                "description": "The Lease Share operation establishes and manages a lock on a share, or the specified snapshot for set and delete share operations.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Timeout"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdRequired"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareSnapshot"
+                    },
+                    {
+                      "$ref": "#/parameters/ClientRequestId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Renew operation completed successfully.",
+                        "headers": {
+                            "ETag": {
+                                "type": "string",
+                                "format": "etag",
+                                "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
+                            },
+                          "Last-Modified": {
+                            "type": "string",
+                            "format": "date-time-rfc1123",
+                            "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
+                          },
+                            "x-ms-lease-time": {
+                                "x-ms-client-name": "LeaseTime",
+                                "type": "integer",
+                                "description": "Approximate time remaining in the lease period, in seconds."
+                            },
+                            "x-ms-lease-id": {
+                                "x-ms-client-name": "LeaseId",
+                                "type": "string",
+                                "description": "Uniquely identifies a share's lease"
+                            },
+                            "x-ms-client-request-id": {
+                                "x-ms-client-name": "ClientRequestId",
+                                "type": "string",
+                                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+                            },
+                            "x-ms-request-id": {
+                                "x-ms-client-name": "RequestId",
+                                "type": "string",
+                                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+                            },
+                            "x-ms-version": {
+                                "x-ms-client-name": "Version",
+                                "type": "string",
+                                "description": "Indicates the version of the File service used to execute the request."
+                            },
+                            "Date": {
+                                "type": "string",
+                                "format": "date-time-rfc1123",
+                                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "headers": {
+                            "x-ms-error-code": {
+                                "x-ms-client-name": "ErrorCode",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/StorageError"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "comp",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "lease"
+                    ]
+                },
+                {
+                    "name": "x-ms-lease-action",
+                    "x-ms-client-name": "action",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "renew"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LeaseAction",
+                        "modelAsString": false
+                    },
+                    "x-ms-parameter-location": "method",
+                    "description": "Describes what lease action to take."
+                },
+                {
+                    "name": "restype",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "share"
+                    ]
+                }
+            ]
+        },
+        "/{shareName}?restype=share&comp=lease&break": {
+            "put": {
+                "tags": [
+                    "share"
+                ],
+                "operationId": "Share_BreakLease",
+                "description": "The Lease Share operation establishes and manages a lock on a share, or the specified snapshot for set and delete share operations.",
+                "parameters": [
+                    {
+                         "$ref": "#/parameters/Timeout"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseBreakPeriod"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClientRequestId"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareSnapshot"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The Break operation completed successfully.",
+                        "headers": {
+                            "ETag": {
+                                "type": "string",
+                                "format": "etag",
+                                "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
+                            },
+                          "Last-Modified": {
+                            "type": "string",
+                            "format": "date-time-rfc1123",
+                            "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
+                          },
+                            "x-ms-lease-time": {
+                                "x-ms-client-name": "LeaseTime",
+                                "type": "integer",
+                                "description": "Approximate time remaining in the lease period, in seconds."
+                            },
+                            "x-ms-lease-id": {
+                                "x-ms-client-name": "LeaseId",
+                                "type": "string",
+                                "description": "Uniquely identifies a share's lease"
+                            },
+                            "x-ms-client-request-id": {
+                                "x-ms-client-name": "ClientRequestId",
+                                "type": "string",
+                                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+                            },
+                            "x-ms-request-id": {
+                                "x-ms-client-name": "RequestId",
+                                "type": "string",
+                                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+                            },
+                            "x-ms-version": {
+                                "x-ms-client-name": "Version",
+                                "type": "string",
+                                "description": "Indicates the version of the File service used to execute the request."
+                            },
+                            "Date": {
+                                "type": "string",
+                                "format": "date-time-rfc1123",
+                                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "headers": {
+                            "x-ms-error-code": {
+                                "x-ms-client-name": "ErrorCode",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/StorageError"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "comp",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "lease"
+                    ]
+                },
+                {
+                    "name": "x-ms-lease-action",
+                    "x-ms-client-name": "action",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "break"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LeaseAction",
+                        "modelAsString": false
+                    },
+                    "x-ms-parameter-location": "method",
+                    "description": "Describes what lease action to take."
+                },
+                {
+                    "name": "restype",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "share"
+                    ]
+                }
+            ]
         },
         "/{shareName}?restype=share&comp=snapshot": {
             "put": {
@@ -682,6 +1339,9 @@
                     },
                     {
                         "$ref": "#/parameters/ShareQuota"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -763,7 +1423,10 @@
                         "$ref": "#/parameters/Metadata"
                     },
                     {
-                        "$ref": "#/parameters/ApiVersionParameter"
+                       "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                       "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -843,6 +1506,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -907,6 +1573,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -986,6 +1655,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -4397,6 +5069,54 @@
                 }
             }
         },
+        "LeaseDuration": {
+            "xml": {
+                "name": "LeaseDuration"
+            },
+            "description": "When a share is leased, specifies whether the lease is of infinite or fixed duration.",
+            "type": "string",
+            "enum": [
+                       "infinite",
+                       "fixed"
+                    ],
+            "x-ms-enum": {
+                "name": "LeaseDurationType",
+                "modelAsString": false
+            }
+        },
+        "LeaseState": {
+            "xml": {
+                "name": "LeaseState"
+            },
+            "description": "Lease state of the share.",
+            "type": "string",
+            "enum": [
+                "available",
+                "leased",
+                "expired",
+                "breaking",
+                "broken"
+            ],
+            "x-ms-enum": {
+                "name": "LeaseStateType",
+                "modelAsString": false
+            }
+        },
+        "LeaseStatus": {
+            "xml": {
+                "name": "LeaseStatus"
+            },
+            "description": "The current lease status of the share.",
+            "type": "string",
+            "enum": [
+                "locked",
+                "unlocked"
+            ],
+            "x-ms-enum": {
+                "name": "LeaseStatusType",
+                "modelAsString": false
+            }
+        },
         "ListFilesAndDirectoriesSegmentResponse": {
             "xml": {
                 "name": "EnumerationResults"
@@ -4706,6 +5426,15 @@
                 },
                 "RemainingRetentionDays": {
                     "type": "integer"
+                },
+                "LeaseStatus": {
+                    "$ref": "#/definitions/LeaseStatus"
+                },
+                "LeaseState": {
+                    "$ref": "#/definitions/LeaseState"
+                },
+                "LeaseDuration": {
+                    "$ref": "#/definitions/LeaseDuration"
                 }
             }
         },
@@ -5160,6 +5889,15 @@
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
+        },
+        "LeaseBreakPeriod": {
+            "name": "x-ms-lease-break-period",
+            "x-ms-client-name": "breakPeriod",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "x-ms-parameter-location": "method",
+            "description": "For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately."
         },
         "LeaseDuration": {
             "name": "x-ms-lease-duration",
