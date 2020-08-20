@@ -28,6 +28,8 @@ jobs:
 - template: .azure-pipelines/Spellcheck.yml
 - template: .azure-pipelines/PrettierCheck.yml
 - job: CredScan
+  pool:
+    vmImage: 'windows-latest'
   steps:
     - task: securedevelopmentteam.vss-secure-development-tools.build-task-credscan.CredScan@3
       inputs:
