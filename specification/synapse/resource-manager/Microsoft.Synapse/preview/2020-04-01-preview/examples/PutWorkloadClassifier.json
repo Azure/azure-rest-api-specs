@@ -1,32 +1,54 @@
 {
   "parameters": {
-            "subscriptionId": "c644c53e-dc36-49f2-b168-57c2893c80d8",
-            "resourceGroupName": "rg_9b2a69b9-3f7d-411d-8d5b-02c61dc08a8d",
-            "workspaceName": "srv_0c0fd09d-0ed0-41d0-881d-3114eb385f82",
-            "sqlPoolName": "3110386e-58d2-4d6d-9810-85f6a7d58d1b",
-            "workloadGroupName": "testWg",
-            "workloadClassifierName": "testClassifier",
-            "api-version": "2020-04-01-preview",
-            "parameters": {
-                     "properties": {
-                               "MemberName": "dbo",
-                               "Label": "wlmLabel",
-                               "Context": "testContext",
-                               "StartTime": "11:00",
-                               "EndTime": "17:00",
-                               "Importance": "High"
-                             }
-                   }
-          },
+    "subscriptionId": "c644c53e-dc36-49f2-b168-57c2893c80d8",
+    "resourceGroupName": "rg_9b2a69b9-3f7d-411d-8d5b-02c61dc08a8d",
+    "workspaceName": "srv_0c0fd09d-0ed0-41d0-881d-3114eb385f82",
+    "sqlPoolName": "3110386e-58d2-4d6d-9810-85f6a7d58d1b",
+    "workloadGroupName": "testWg",
+    "workloadClassifierName": "testClassifier",
+    "api-version": "2020-04-01-preview",
+    "parameters": {
+      "properties": {
+        "memberName": "dbo",
+        "label": "wlmLabel",
+        "context": "testContext",
+        "startTime": "11:00",
+        "endTime": "17:00",
+        "importance": "High"
+      }
+    }
+  },
   "responses": {
-           "202": {
-
-               },
-           "201": {
-
-               },
-           "200": {
-
-               }
-         }
+    "202": {},
+    "201": {
+      "body": {
+        "properties": {
+          "memberName": "dbo",
+          "label": "wlmLabel",
+          "context": "testContext",
+          "startTime": "11:00:00",
+          "endTime": "17:00:00",
+          "importance": "High"
+        },
+        "id": "/subscriptions/c644c53e-dc36-49f2-b168-57c2893c80d8/resourceGroups/rg_9b2a69b9-3f7d-411d-8d5b-02c61dc08a8d/providers/Microsoft.Synapse/workspaces/srv_0c0fd09d-0ed0-41d0-881d-3114eb385f82/sqlPools/3110386e-58d2-4d6d-9810-85f6a7d58d1b/workloadGroups/testWg/workloadClassifiers/testClassifier",
+        "name": "testClassifier",
+        "type": "Microsoft.Synapse/workspaces/sqlPools/workloadGroups/workloadClassifiers"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "memberName": "dbo",
+          "label": "wlmLabel",
+          "context": "testContext",
+          "startTime": "11:00:00",
+          "endTime": "17:00:00",
+          "importance": "High"
+        },
+        "id": "/subscriptions/c644c53e-dc36-49f2-b168-57c2893c80d8/resourceGroups/rg_9b2a69b9-3f7d-411d-8d5b-02c61dc08a8d/providers/Microsoft.Synapse/workspaces/srv_0c0fd09d-0ed0-41d0-881d-3114eb385f82/sqlPools/3110386e-58d2-4d6d-9810-85f6a7d58d1b/workloadGroups/testWg/workloadClassifiers/testClassifier",
+        "name": "testClassifier",
+        "type": "Microsoft.Synapse/workspaces/sqlPools/workloadGroups/workloadClassifiers"
+      }
+    }
+  }
 }
