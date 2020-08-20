@@ -7,7 +7,6 @@ go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: mysql
   clear-output-folder: true
-  flexible-servers: flexible-servers
 ```
 
 ### Go multi-api
@@ -26,7 +25,7 @@ These settings apply only when `--tag=package-2020-07-01-privatepreview --go` is
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2020-07-01-privatepreview' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/$(flexible-servers)/2020-07-01-privatepreview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/flexible-servers/2020-07-01-privatepreview/$(namespace)
 ```
 
 ### Tag: package-2020-01-01 and go
