@@ -35,13 +35,27 @@ These settings apply only when `--tag=package-7.2-preview` is specified on the c
 
 ```yaml $(tag) == 'package-7.2-preview'
 input-file:
-- Microsoft.KeyVault/preview/7.2/certificates.json
-- Microsoft.KeyVault/preview/7.2/common.json
-- Microsoft.KeyVault/preview/7.2/keys.json
-- Microsoft.KeyVault/preview/7.2/rbac.json
-- Microsoft.KeyVault/preview/7.2/secrets.json
-- Microsoft.KeyVault/preview/7.2/storage.json
-- Microsoft.KeyVault/preview/7.2/backuprestore.json
+- Microsoft.KeyVault/preview/7.2-preview/certificates.json
+- Microsoft.KeyVault/preview/7.2-preview/common.json
+- Microsoft.KeyVault/preview/7.2-preview/keys.json
+- Microsoft.KeyVault/preview/7.2-preview/rbac.json
+- Microsoft.KeyVault/preview/7.2-preview/secrets.json
+- Microsoft.KeyVault/preview/7.2-preview/storage.json
+- Microsoft.KeyVault/preview/7.2-preview/backuprestore.json
+- Microsoft.KeyVault/preview/7.2-preview/securitydomain.json
+```
+
+### Tag: package-7.1
+
+These settings apply only when `--tag=package-7.1` is specified on the command line.
+
+```yaml $(tag) == 'package-7.1'
+input-file:
+- Microsoft.KeyVault/stable/7.1/certificates.json
+- Microsoft.KeyVault/stable/7.1/common.json
+- Microsoft.KeyVault/stable/7.1/keys.json
+- Microsoft.KeyVault/stable/7.1/secrets.json
+- Microsoft.KeyVault/stable/7.1/storage.json
 ```
 
 ### Tag: package-7.1-preview
@@ -153,13 +167,19 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/certificates.json
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/common.json
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/keys.json
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/rbac.json
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/secrets.json
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/storage.json
-  - $(this-folder)/Microsoft.KeyVault/preview/7.2/backuprestore.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/common.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/keys.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/rbac.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/storage.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/backuprestore.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/securitydomain.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/common.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/keys.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/storage.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/certificates.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/common.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/keys.json
@@ -290,8 +310,20 @@ directive:
     reason: Merely refactored existing definitions into new files.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
+    where: $.definitions.KeyBundle.properties.release_policy
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
     where: $.definitions.KeyCreateParameters.properties.key_size
     reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyCreateParameters.properties.public_exponent
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyCreateParameters.properties.release_policy
+    reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
     where: $.definitions.KeyCreateParameters.properties.key_ops
@@ -302,8 +334,16 @@ directive:
     reason: Merely refactored existing definitions into new files.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
+    where: $.definitions.KeyImportParameters.properties.release_policy
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
     where: $.definitions.KeyUpdateParameters.properties.key_ops
     reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyUpdateParameters.properties.release_policy
+    reason: Consistency with other properties.
   - suppress: MISSING_REQUIRED_PARAMETER
     from: certificates.json
     where: $..parameters[?(@.name=='vaultBaseUrl')]
@@ -319,4 +359,24 @@ directive:
   - suppress: MISSING_REQUIRED_PARAMETER
     from: storage.json
     reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.TransferKey.properties.transfer_key
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.UploadPendingResponse.properties.status_details
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.status_details
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.key_ops
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus.properties.x5t#S256
+    reason: Consistency with other properties.
 ```

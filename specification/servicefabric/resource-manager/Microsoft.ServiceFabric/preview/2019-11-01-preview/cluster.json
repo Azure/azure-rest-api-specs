@@ -510,6 +510,18 @@
         "ResourceMonitorService"
       ]
     },
+    "ApplicationTypeVersionsCleanupPolicy": {
+      "required": [
+        "maxUnusedVersionsToKeep"
+      ],
+      "properties": {
+        "maxUnusedVersionsToKeep": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of unused versions per application type to keep."
+        }
+      }
+    },
     "ApplicationDeltaHealthPolicy": {
       "type": "object",
       "description": "Defines a delta health policy used to evaluate the health of an application or one of its child entities when upgrading the cluster.\n",
@@ -882,6 +894,10 @@
           "$ref": "#/definitions/UpgradeMode",
           "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n"
         },
+        "applicationTypeVersionsCleanupPolicy": {
+          "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
+          "description": "The policy used to clean up unused versions."
+        },
         "vmImage": {
           "type": "string",
           "description": "The VM image VMSS has been configured with. Generic names such as Windows or Linux can be used."
@@ -957,6 +973,10 @@
         "upgradeMode": {
           "$ref": "#/definitions/UpgradeMode",
           "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n"
+        },
+        "applicationTypeVersionsCleanupPolicy": {
+          "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
+          "description": "The policy used to clean up unused versions."
         }
       },
       "description": "Describes the cluster resource properties that can be updated during PATCH operation."

@@ -13,13 +13,15 @@ If your problem is some existing error name that is not a word and need to supre
 Please run the following command (from an administrator Node.js command prompt if running on Windows):
 
 ```
-npm install; npm run prettier-fix
+npm install
+npm run prettier-fix
 ```
 
 Or if you want to fix specified service:
 
 ```
-npm install; npm run prettier -- --write "specification/<service>/**/*.json"
+npm install
+npm run prettier -- --write "specification/<service>/**/*.json"
 ```
 
 Then please commit and push changes made by prettier.
@@ -89,3 +91,6 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
+## Suppression Process
+
+In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance. 

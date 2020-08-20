@@ -26,11 +26,18 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11-01
+tag: package-2020-03-01
 add-credentials: true
 title: StorageCacheManagementClient
 ```
+### Tag: package-2020-03-01
 
+These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03-01'
+input-file:
+  - Microsoft.StorageCache/stable/2020-03-01/storagecache.json
+```
 ### Tag: package-2019-11-01
 
 These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
@@ -62,9 +69,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
-  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagecache']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js storagecache/resource-manager
 ```
 
 ## Python
@@ -92,6 +102,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -104,6 +118,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.StorageCache/stable/2020-03-01/storagecache.json
   - $(this-folder)/Microsoft.StorageCache/stable/2019-11-01/storagecache.json
   - $(this-folder)/Microsoft.StorageCache/preview/2019-08-01-preview/storagecache.json
 

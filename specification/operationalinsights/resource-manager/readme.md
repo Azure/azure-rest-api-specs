@@ -28,7 +28,7 @@ These are the global settings for the OperationalInsights API.
 title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2020-03-preview
+tag: package-2020-08
 ```
 
 
@@ -82,6 +82,40 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+```
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 ```
 
 ---
@@ -101,8 +135,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-java
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js operationalinsights/resource-manager
 ```
 
 
@@ -128,7 +166,15 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
+directive:
+    - from: swagger-document
+      where: $.info
+      transform: >
+          $.title = 'LogAnalyticsManagementClient';
+          $.description = 'The Log Analytics Client.';
+          return $;
+         
 python-mode: create
 python:
   azure-arm: true
@@ -136,16 +182,14 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.loganalytics
   package-name: azure-mgmt-loganalytics
-  title: LogAnalyticsManagementClient
-  description: The Log Analytics Client.
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create'  && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
@@ -168,6 +212,10 @@ directive:
     suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -201,6 +249,30 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 
 ```
 

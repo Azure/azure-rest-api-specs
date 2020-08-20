@@ -26,7 +26,7 @@ These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-08
+tag: package-2020-03
 ```
 
 ### Tag: package-2020-03
@@ -84,6 +84,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_search']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js search/resource-manager
 ```
 
 
@@ -167,6 +170,10 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
