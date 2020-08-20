@@ -163,7 +163,13 @@
             "description": "The resource exists and was deleted successfully."
           },
           "202": {
-            "description": "The delete operation has been accepted and is deleting the resource."
+            "description": "The delete operation has been accepted and is deleting the resource.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The resource does not exist and the request was well formed."
@@ -490,7 +496,13 @@
             "description": "The resource exists and was deleted successfully."
           },
           "202": {
-            "description": "The delete operation has been accepted and is deleting the resource."
+            "description": "The delete operation has been accepted and is deleting the resource.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The resource does not exist and the request was well formed."
@@ -623,55 +635,6 @@
                 "description": "URI to poll for asynchronous operation status.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments/{deploymentName}/skus": {
-      "get": {
-        "tags": [
-          "MachineLearningInferenceEndpointDeployments"
-        ],
-        "x-ms-examples": {
-          "Get Sku setting info for deployment": {
-            "$ref": "./examples/getDeploymentSkuInfo.json"
-          }
-        },
-        "summary": "This is for an ARM Contract with Azure Monitor to scale the number of instances of the Inference Deployment.",
-        "description": "Get SKU information for scaling an Inference Deployment.",
-        "operationId": "MachineLearningInferenceEndpointDeployments_ListDeploymentSkus",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SkuDiscoveryInfoCollection"
             }
           },
           "default": {
@@ -1151,10 +1114,7 @@
         },
         "codeAssetIds": {
           "description": "Resource Id of the Code Assets i.e. startup code.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -1225,40 +1185,6 @@
             "modelAsString": true
           },
           "description": "The tier of the sku."
-        }
-      }
-    },
-    "SkuDiscoveryInfo": {
-      "description": "SKU discovery information.",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "description": "Resource type that this SKU applies to.",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/InferenceSku",
-          "description": "Name and tier of the SKU."
-        },
-        "capacity": {
-          "$ref": "#/definitions/SkuScaleSettings",
-          "description": "Min, max, and default scale values of the SKU."
-        }
-      }
-    },
-    "SkuDiscoveryInfoCollection": {
-      "description": "Collection of SKU information.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuDiscoveryInfo"
-          }
         }
       }
     },
