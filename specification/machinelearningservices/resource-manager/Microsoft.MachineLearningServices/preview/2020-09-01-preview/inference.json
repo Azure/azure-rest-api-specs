@@ -922,6 +922,15 @@
           "description": "The URI for sending inference requests.",
           "type": "string",
           "readOnly": true
+        },
+        "deploymentWeights": {
+          "description": "The weights of all deployments in inference endpoint",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
         }
       }
     },
