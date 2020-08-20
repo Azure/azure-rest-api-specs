@@ -1256,7 +1256,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -1326,7 +1326,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -2502,7 +2502,7 @@
         },
         "dataset": {
           "description": "Has definition for data in this forecast.",
-          "$ref": "#/definitions/QueryDataset"
+          "$ref": "#/definitions/ForecastDataset"
         },
         "includeActualCost": {
           "description": "a boolean determining if actualCost will be included",
@@ -2517,6 +2517,40 @@
         "type",
         "timeframe"
       ]
+    },
+    "ForecastDataset": {
+      "description": "The definition of data present in the forecast.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the forecast.",
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
+          "$ref": "#/definitions/QueryDatasetConfiguration"
+        },
+        "aggregation": {
+          "type": "object",
+          "description": "Dictionary of aggregation expression to use in the forecast. The key of each item in the dictionary is the alias for the aggregated column. forecast can have up to 2 aggregation clauses.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/QueryAggregation"
+          },
+          "maxItems": 2
+        },
+        "filter": {
+          "type": "object",
+          "description": "Has filter expression to use in the forecast.",
+          "$ref": "#/definitions/QueryFilter"
+        }
+      }
     },
     "QueryDefinition": {
       "description": "The definition of a query.",
