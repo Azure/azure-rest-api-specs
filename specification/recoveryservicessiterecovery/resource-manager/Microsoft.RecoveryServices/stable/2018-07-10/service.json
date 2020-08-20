@@ -4101,12 +4101,6 @@
             "schema": {
               "$ref": "#/definitions/ReplicationProtectionIntentCollection"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/NewErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
@@ -4157,12 +4151,6 @@
             "schema": {
               "$ref": "#/definitions/ReplicationProtectionIntent"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/NewErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -4182,7 +4170,7 @@
           "application/json"
         ],
         "produces": [
-          "application/json"
+          "application/json"StorageAccountCustomDetails
         ],
         "parameters": [
           {
@@ -4219,12 +4207,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ReplicationProtectionIntent"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -14132,48 +14114,6 @@
           "type": "string"
         }
       }
-    },
-    "NewErrorResponse": {
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            },
-            "target": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error target."
-            },
-            "details": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NewErrorResponse"
-              },
-              "description": "The error details."
-            },
-            "additionalInfo": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
-              },
-              "description": "The error additional info."
-            }
-          }
-        }
-      },
-      "description": "The resource management error response."
     },
     "Object": {
       "description": "Base of all objects.",
