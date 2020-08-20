@@ -25,7 +25,7 @@
         "operationId": "ImportExport_Import",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -43,10 +43,10 @@
             }
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -80,10 +80,10 @@
           "ImportExport"
         ],
         "description": "Imports a bacpac into a new database.",
-        "operationId": "Databases_Import",
+        "operationId": "Servers_ImportDatabase",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -98,10 +98,10 @@
             }
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -138,7 +138,7 @@
         "operationId": "Databases_Export",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -156,10 +156,10 @@
             }
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -202,7 +202,15 @@
       "properties": {
         "storageKeyType": {
           "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -441,7 +449,15 @@
         },
         "storageKeyType": {
           "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -503,7 +519,15 @@
       "properties": {
         "storageKeyType": {
           "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -554,6 +578,30 @@
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
