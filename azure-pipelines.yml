@@ -29,9 +29,7 @@ jobs:
 - template: .azure-pipelines/PrettierCheck.yml
 - job: CredScan
   steps:
-    - task: CredScan@2
+    - task: CredScan@3
       inputs:
-        toolMajorVersion: 'V2'
-        searchersFileType: 'Custom'
         verboseOutput: true
 
