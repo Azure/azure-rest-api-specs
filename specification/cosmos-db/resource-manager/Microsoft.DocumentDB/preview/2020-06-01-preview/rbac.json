@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Cosmos DB",
-    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "description": "Azure Cosmos DB Role Based Access Control Resource Provider REST API",
     "version": "2020-06-01-preview"
   },
   "host": "management.azure.com",
@@ -112,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Definition create or update request was completely successfully.",
+            "description": "The Role Definition create or update request was completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionGetResults"
             }
@@ -159,7 +159,7 @@
             "description": "The Role Definition delete operation was accepted and will complete asynchronously."
           },
           "204": {
-            "description": "The Role Definition delete operation was completely successfully."
+            "description": "The Role Definition delete operation was completed successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -201,7 +201,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation completely succesfully.",
+            "description": "The list operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionListResult"
             }
@@ -293,7 +293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Assignment create or update request was complete successfully.",
+            "description": "The Role Assignment create or update request was completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleAssignmentGetResults"
             }
@@ -340,7 +340,7 @@
             "description": "The Role Assignment delete operation was accepted and will complete asynchronously."
           },
           "204": {
-            "description": "The Role Assignment delete operation was completely successfully."
+            "description": "The Role Assignment delete operation was completed successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -382,7 +382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation completed successfully.",
+            "description": "The list operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleAssignmentListResult"
             }
@@ -455,7 +455,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SqlRoleDefinitionProperties",
-          "description": "Properties related to Role Definition."
+          "description": "Properties related to the Role Definition."
         }
       },
       "x-ms-azure-resource": true,
@@ -543,7 +543,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SqlRoleAssignmentProperties",
-          "description": "Properties related to Role Assignment."
+          "description": "Properties related to the Role Assignment."
         }
       },
       "x-ms-azure-resource": true,
