@@ -84,6 +84,59 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "DataCollectorLogs"
+        ],
+        "x-ms-examples": {
+          "DataCollectorLogsDelete": {
+            "$ref": "./examples/DataCollectorLogsGet.json"
+          }
+        },
+        "operationId": "DataCollectorLogs_Get",
+        "description": "Retrieves a specify data collector log table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+[A-Za-z0-9]_CL$",
+            "minLength": 4,
+            "maxLength": 63,
+            "description": "DataCollector table name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ForceDeletion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataCollectorLog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataCollectorLogs": {
