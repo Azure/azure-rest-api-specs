@@ -2990,6 +2990,11 @@
                   "description": "The current state of this ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceState",
                   "readOnly": true
+                },
+                "lastOperation": {
+                  "description": "The last operation on ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceLastOperation",
+                  "readOnly": true
                 }
               }
             }
@@ -4110,21 +4115,65 @@
         "Deleting",
         "Running",
         "Restarting",
-        "RestartFailed",
         "JobRunning",
         "SettingUp",
+        "SetupFailed",
         "Starting",
-        "StartFailed",
-        "StopFailed",
         "Stopped",
         "Stopping",
         "UserSettingUp",
+        "UserSetupFailed",
         "Unknown",
         "Unusable"
       ],
       "x-ms-enum": {
         "name": "ComputeInstanceState",
         "modelAsString": true
+      }
+    },
+    "ComputeInstanceLastOperation": {
+      "type": "object",
+      "description": "The last operation on ComputeInstance.",
+      "properties": {
+        "operationName": {
+          "type": "string",
+          "description": "Name of the last operation.",
+          "enum": [
+            "Create",
+            "Start",
+            "Stop",
+            "Restart",
+            "Reimage",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "OperationName",
+            "modelAsString": true
+          }
+        },
+        "operationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last operation."
+        },
+        "operationStatus": {
+          "type": "string",
+          "description": "Operation status.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "CreateFailed",
+            "StartFailed",
+            "StopFailed",
+            "RestartFailed",
+            "ReimageFailed",
+            "DeleteFailed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        }
       }
     },
     "ComputeInstanceApplication": {
