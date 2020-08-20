@@ -99,6 +99,19 @@ clear-output-folder: false
 perform-load: false
 ```
 
+### Tag: package-2020-07 and python
+
+These settings apply only when `--tag=package-2020-07 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-07'
+namespace: azure.mgmt.network.v2020_07_01
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_07_01
+python:
+  namespace: azure.mgmt.network.v2020_07_01
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_07_01
+```
+
 ### Tag: package-2020-05 and python
 
 These settings apply only when `--tag=package-2020-05 --python` is specified on the command line.
