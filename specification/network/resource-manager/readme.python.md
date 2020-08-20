@@ -27,6 +27,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
 batch:
+  - tag: package-2020-07
   - tag: package-2020-05
   - tag: package-2020-04
   - tag: package-2020-03
@@ -61,6 +62,7 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2020-07
   - tag: package-2020-05
   - tag: package-2020-04
   - tag: package-2020-03
