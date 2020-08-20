@@ -27,3 +27,11 @@ jobs:
 - template: .azure-pipelines/NetworkValidation.yml
 - template: .azure-pipelines/Spellcheck.yml
 - template: .azure-pipelines/PrettierCheck.yml
+- job: CredScan
+  steps:
+    - task: CredScan@2
+      inputs:
+        toolMajorVersion: 'V2'
+        searchersFileType: 'Custom'
+        verboseOutput: true
+
