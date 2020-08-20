@@ -282,7 +282,6 @@
         "value": {
           "description": "The list of cost allocation rules.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/CostAllocationRuleDefinition"
           }
@@ -368,6 +367,7 @@
     "CostAllocationRuleProperties": {
       "type": "object",
       "description": "The properties of a cost allocation rule",
+      "additionalProperties": false,
       "required": [
         "details",
         "status"
