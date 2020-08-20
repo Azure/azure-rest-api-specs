@@ -441,6 +441,19 @@
     },
     "HealthAlertCriteria": {
       "type": "object",
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthAlertCriterion"
+          },
+          "description": "The list of metric criteria for this 'all of' operation. "
+        }
+      },
+      "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
+    },
+    "HealthAlertCriterion": {
+      "type": "object",
       "discriminator": "namespace",
       "properties": {
         "namespace": {
@@ -449,33 +462,25 @@
             "VmGuestHealth"
           ],
           "x-ms-enum": {
-            "name": "ResourceHealthAlertsNamespace",
+            "name": "HealthAlertsNamespace",
             "modelAsString": true
           },
-          "description": "specifies the type of the alert criteria."
+          "description": "specifies the type of the alert criterion."
         }
       },
       "required": [
         "namespace"
       ],
-      "description": "The rule criteria that defines the conditions of the alert rule."
-    },
-    "VmGuestHealthAlertCriteria": {
-      "x-ms-discriminator-value": "VmGuestHealth",
-      "type": "object",
-      "properties": {
-        "allOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VmGuestHealthAlertCriterion"
-          },
-          "description": "The list of metric criteria for this 'all of' operation. "
-        }
-      },
-      "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
+      "description": "The rule criterion that defines the conditions of the alert rule."
     },
     "VmGuestHealthAlertCriterion": {
+      "x-ms-discriminator-value": "VmGuestHealth",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthAlertCriterion"
+        }
+      ],
       "properties": {
         "healthMonitorName": {
           "type": "string",
