@@ -1028,6 +1028,76 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/stop":{
+      "post": {
+        "tags":[
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_StopManagedCluster",
+        "summary": "Stops a Running Managed Cluster",
+        "description": "Stops a Running Managed Cluster",
+        "parameters":[
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }, 
+        ],
+        "responses":{
+          "202":{
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/start":{
+      "post": {
+        "tags":[
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_StartManagedCluster",
+        "summary": "Starts a Stopped Managed Cluster",
+        "description": "Starts a Stopped Managed Cluster",
+        "parameters":[
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }, 
+        ],
+        "responses":{
+          "202":{
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -2220,6 +2290,11 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
         },
+        "powerState":{
+          "$ref":"#/definitions/PowerState",
+          "description": "Represents the Power State of the cluster",
+          "readOnly":true
+        },
         "maxAgentPools": {
           "readOnly": true,
           "type": "integer",
@@ -2343,6 +2418,18 @@
         }
       },
       "description": "Properties of the managed cluster."
+    },
+    "PowerState":{
+      "properties":{
+        "code":{
+          "type":"string",
+          "description": "Tells whether the cluster is Running or Stopped",
+          "enum":[
+            "Running",
+            "Stopped"
+          ]
+        }
+      }
     },
     "ManagedClusterAPIServerAccessProfile": {
       "properties": {
