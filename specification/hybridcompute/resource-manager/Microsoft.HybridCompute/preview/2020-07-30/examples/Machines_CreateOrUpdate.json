@@ -4,14 +4,17 @@
     "resourceGroupName": "myResourceGroup",
     "name": "myMachine",
     "api-version": "2020-07-30-preview",
-    "parameters": "string",
-    "location": "string",
-    "properties": {
-      "vmId": "string",
-      "clientPublicKey": "string"
+    "parameters": {
+      "location": "string",
+      "properties": {
+        "vmId": "string",
+        "locationData": {
+          "name": "string"
+        }
+      }
     },
     "identity": {
-      "Type": "SystemAssigned"
+      "type": "SystemAssigned"
     }
   },
   "responses": {
@@ -50,6 +53,7 @@
           "clientPublicKey": "string"
         }
       }
-    }
+    },
+    "202": {}
   }
 }
