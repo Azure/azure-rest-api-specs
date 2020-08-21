@@ -1,0 +1,624 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-04-01-preview",
+    "title": "SynapseSqlManagementClient",
+    "description": "The Azure Synapse SQL management API provides a RESTful set of web APIs that interact with Azure Synapse SQL services to manage your resources. The API enables users to create, retrieve, update, and delete SqlPools, SqlDatabases, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}/columns": {
+      "get": {
+        "tags": [
+          "SqlPoolColumns"
+        ],
+        "description": "List sqlPool columns",
+        "operationId": "SqlPoolColumns_ListByTable",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sqlPool columns.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolColumnListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedSqlPool - User attempted to perform an update on a paused sqlPool\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/SqlPoolColumn",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List sqlPool columns": {
+            "$ref": "./examples/ListSqlPoolColumnsByTable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}": {
+      "get": {
+        "tags": [
+          "SqlPoolColumns"
+        ],
+        "description": "Get sqlPool column",
+        "operationId": "SqlPoolColumns_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sqlPool column.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolColumn"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedSqlPool - User attempted to perform an update on a paused sqlPool\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Get sqlPool column": {
+            "$ref": "./examples/GetSqlPoolColumn.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas": {
+      "get": {
+        "tags": [
+          "SqlPoolSchemas"
+        ],
+        "description": "List SqlPool schemas",
+        "operationId": "SqlPoolSchemas_ListBySqlPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved SqlPool schemas.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolSchemaListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedSqlPool - User attempted to perform an update on a paused sqlPool\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/SqlPoolSchema",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of SqlPool schemas": {
+            "$ref": "./examples/ListSqlPoolSchemasBySqlPool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}": {
+      "get": {
+        "tags": [
+          "SqlPoolSchemas"
+        ],
+        "description": "Get SqlPool schema",
+        "operationId": "SqlPoolSchemas_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {{
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved SqlPool schema.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolSchema"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedSqlPool - User attempted to perform an update on a paused sqlPool\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SqlPool schema": {
+            "$ref": "./examples/GetSqlPoolSchema.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables": {
+      "get": {
+        "tags": [
+          "SqlPoolTables"
+        ],
+        "description": "List sqlPool tables",
+        "operationId": "SqlPoolTables_ListBySchema",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+		  {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sqlPool tables.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolTableListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedSqlPool - User attempted to perform an update on a paused sqlPool\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/SqlPoolTable",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List  sqlPool tables": {
+            "$ref": "./examples/ListSqlPoolTablesBySchema.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}": {
+      "get": {
+        "tags": [
+          "SqlPoolTables"
+        ],
+        "description": "Get SqlPool table",
+        "operationId": "SqlPoolTables_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved sqlPool table.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolTable"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedSqlPool - User attempted to perform an update on a paused sqlPool\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Get SqlPool table": {
+            "$ref": "./examples/GetSqlPoolTable.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SqlPoolColumnProperties": {
+      "description": "SqlPool column properties.",
+      "type": "object",
+      "properties": {
+        "columnType": {
+          "description": "The column data type.",
+          "enum": [
+            "image",
+            "text",
+            "uniqueidentifier",
+            "date",
+            "time",
+            "datetime2",
+            "datetimeoffset",
+            "tinyint",
+            "smallint",
+            "int",
+            "smalldatetime",
+            "real",
+            "money",
+            "datetime",
+            "float",
+            "sql_variant",
+            "ntext",
+            "bit",
+            "decimal",
+            "numeric",
+            "smallmoney",
+            "bigint",
+            "hierarchyid",
+            "geometry",
+            "geography",
+            "varbinary",
+            "varchar",
+            "binary",
+            "char",
+            "timestamp",
+            "nvarchar",
+            "nchar",
+            "xml",
+            "sysname"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ColumnDataType",
+            "modelAsString": true
+          }
+        },
+        "temporalType": {
+          "description": "The table temporal type.",
+          "enum": [
+            "NonTemporalTable",
+            "HistoryTable",
+            "SystemVersionedTemporalTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TableTemporalType",
+            "modelAsString": true
+          }
+        },
+        "memoryOptimized": {
+          "description": "Whether or not the column belongs to a memory optimized table.",
+          "type": "boolean"
+        },
+        "isComputed": {
+          "description": "Whether or not the column is computed.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "SqlPoolColumn": {
+      "description": "A sqlPool column resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlPoolColumnProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlPoolColumnListResult": {
+      "description": "A list of sqlPool columns.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolColumn"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlPoolSchema": {
+      "description": "A sqlPool schema resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {}
+    },
+    "SqlPoolSchemaListResult": {
+      "description": "A list of sqlPool schemas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolSchema"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlPoolTableProperties": {
+      "description": "SqlPool table properties.",
+      "type": "object",
+      "properties": {
+        "temporalType": {
+          "description": "The table temporal type.",
+          "enum": [
+            "NonTemporalTable",
+            "HistoryTable",
+            "SystemVersionedTemporalTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TableTemporalType",
+            "modelAsString": true
+          }
+        },
+        "memoryOptimized": {
+          "description": "Whether or not the table is memory optimized.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SqlPoolTable": {
+      "description": "A sqlPool table resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlPoolTableProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlPoolTableListResult": {
+      "description": "A list of sqlPool tables.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolTable"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
