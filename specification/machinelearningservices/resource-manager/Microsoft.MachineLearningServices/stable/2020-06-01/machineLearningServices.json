@@ -3537,6 +3537,24 @@
       "description": "Describes The zonal capabilities of a SKU."
     },
     "WorkspaceSku": {
+      "type": "object",
+      "description": "AML workspace sku information",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "skus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuSettings"
+          },
+          "description": "The list of workspace sku settings"
+        }
+      }
+    },
+    "SkuSettings": {
       "description": "Describes Workspace Sku details and features",
       "type": "object",
       "properties": {
