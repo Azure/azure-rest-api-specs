@@ -76,7 +76,7 @@
         }
       },
       "put": {
-        "operationId": "SqlResources_CreateOrUpdateRoleDefinition",
+        "operationId": "SqlResources_CreateUpdateRoleDefinition",
         "x-ms-examples": {
           "CosmosDBSqlRoleDefinitionCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlRoleDefinitionCreateUpdate.json"
@@ -106,7 +106,7 @@
             "required": true,
             "description": "The properties required to create or update a Role Definition.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleDefinitionProperties"
+              "$ref": "#/definitions/SqlRoleDefinitionCreateUpdateParameters"
             }
           }
         ],
@@ -257,7 +257,7 @@
         }
       },
       "put": {
-        "operationId": "SqlResources_CreateOrUpdateRoleAssignment",
+        "operationId": "SqlResources_CreateUpdateRoleAssignment",
         "x-ms-examples": {
           "CosmosDBSqlRoleAssignmentCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlRoleAssignmentCreateUpdate.json"
@@ -287,7 +287,7 @@
             "required": true,
             "description": "The properties required to create or update a Role Assignment.",
             "schema": {
-              "$ref": "#/definitions/SqlRoleAssignmentProperties"
+              "$ref": "#/definitions/SqlRoleAssignmentCreateUpdateParameters"
             }
           }
         ],
@@ -398,7 +398,7 @@
     }
   },
   "definitions": {
-    "SqlRoleDefinitionProperties": {
+    "SqlRoleDefinitionCreateUpdateParameters": {
       "properties": {
         "roleName": {
           "type": "string",
@@ -454,7 +454,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlRoleDefinitionProperties",
+          "$ref": "#/definitions/SqlRoleDefinitionCreateUpdateParameters",
           "description": "Properties related to the Role Definition."
         }
       },
@@ -469,7 +469,14 @@
           "items": {
             "type": "string"
           },
-          "description": "An array of data actions."
+          "description": "An array of data actions that are allowed."
+        },
+        "notDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of data actions that are excluded from the allowed data actions."
         }
       },
       "description": "The set of data plane operations permitted through this Role Definition."
@@ -503,7 +510,7 @@
       },
       "description": "The relevant Role Definitions."
     },
-    "SqlRoleAssignmentProperties": {
+    "SqlRoleAssignmentCreateUpdateParameters": {
       "type": "object",
       "properties": {
         "roleDefinitionId": {
@@ -542,7 +549,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlRoleAssignmentProperties",
+          "$ref": "#/definitions/SqlRoleAssignmentCreateUpdateParameters",
           "description": "Properties related to the Role Assignment."
         }
       },
