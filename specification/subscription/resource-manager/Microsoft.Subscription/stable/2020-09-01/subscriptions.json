@@ -18,7 +18,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
       "post": {
-        "tags": ["Subscription"],
+        "tags": [
+          "Subscription"
+        ],
         "operationId": "Subscription_Cancel",
         "x-ms-examples": {
           "cancelSubscription": {
@@ -52,7 +54,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
       "post": {
-        "tags": ["Subscription"],
+        "tags": [
+          "Subscription"
+        ],
         "operationId": "Subscription_Rename",
         "x-ms-examples": {
           "renameSubscription": {
@@ -89,7 +93,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
       "post": {
-        "tags": ["Subscription"],
+        "tags": [
+          "Subscription"
+        ],
         "operationId": "Subscription_Enable",
         "x-ms-examples": {
           "enableSubscription": {
@@ -123,7 +129,9 @@
     },
     "/providers/Microsoft.Subscription/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "description": "Lists all of the available Microsoft.Subscription API operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
@@ -154,7 +162,9 @@
     },
     "/providers/Microsoft.Subscription/aliases/{aliasName}": {
       "put": {
-        "tags": ["Alias"],
+        "tags": [
+          "Alias"
+        ],
         "description": "Create Alias Subscription.",
         "operationId": "Alias_Create",
         "x-ms-examples": {
@@ -201,7 +211,9 @@
         ]
       },
       "get": {
-        "tags": ["Alias"],
+        "tags": [
+          "Alias"
+        ],
         "description": "Get Alias Subscription.",
         "operationId": "Alias_Get",
         "x-ms-examples": {
@@ -233,7 +245,9 @@
         ]
       },
       "delete": {
-        "tags": ["Alias"],
+        "tags": [
+          "Alias"
+        ],
         "description": "Delete Alias.",
         "operationId": "Alias_Delete",
         "x-ms-examples": {
@@ -267,7 +281,9 @@
     },
     "/providers/Microsoft.Subscription/aliases": {
       "get": {
-        "tags": ["Alias"],
+        "tags": [
+          "Alias"
+        ],
         "description": "Get Alias Subscription.",
         "operationId": "Alias_List",
         "x-ms-examples": {
@@ -407,6 +423,9 @@
     },
     "PutAliasRequest": {
       "description": "The parameters required to create a new subscription.",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
