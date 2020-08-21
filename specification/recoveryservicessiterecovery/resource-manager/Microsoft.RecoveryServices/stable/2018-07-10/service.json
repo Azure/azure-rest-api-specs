@@ -7622,7 +7622,8 @@
         "primaryLocation",
         "recoveryLocation",
         "recoverySubscriptionId",
-        "recoveryAvailabilityType"
+        "recoveryAvailabilityType",
+        "recoveryResourceGroupId"
       ],
       "type": "object",
       "allOf": [
@@ -7652,40 +7653,44 @@
           "type": "string"
         },
         "primaryFabricFriendlyName": {
-          "description": "The recovery fabric Name.",
+          "description": "The recovery fabric Name. If the fabric does not exist with the given name, will create with the given name. If the fabric name is empty, will create fabric with a default name.",
           "type": "string"
         },
         "recoveryFabricFriendlyName": {
-          "description": "The recovery fabric Name.",
+          "description": "The recovery fabric Name. If the fabric does not exist with the given name, will create with the given name. If the fabric name is empty, will create fabric with a default name.",
           "type": "string"
         },
         "primaryContainerFriendlyName": {
-          "description": "The primary container Name.",
+          "description": "The primary container Name. If the container does not exist with the given name, will create with the given name. If the container name is empty, will create container with a default name.",
           "type": "string"
         },
         "recoveryContainerFriendlyName": {
-          "description": "The recovery container Name.",
+          "description": "The recovery container Name. If the container does not exist with the given name, will create with the given name. If the container name is empty, will create container with a default name.",
           "type": "string"
         },
-        "protectionProfileCustomDetails": {
-          "$ref": "#/definitions/ProtectionProfileCustomDetails",
-          "description": "The protectionProfile details."
+        "protectionProfileCustomInput": {
+          "$ref": "#/definitions/ProtectionProfileCustomInput",
+          "description": "The protection profile custom inputs."
         },
-        "recoveryResourceGroupCustomDetails": {
-          "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
-          "description": "The recovery resource group details."
+        "recoveryResourceGroupId": {
+          "description": "The recovery resource group Id. Valid for V2 scenarios.",
+          "type": "string"
         },
-        "recoveryAvailabilitySetCustomDetails": {
-          "$ref": "#/definitions/RecoveryAvailabilitySetCustomDetails",
-          "description": "The recovery availability set details."
+        "primaryStagingStorageAccountCustomInput": {
+          "$ref": "#/definitions/StorageAccountCustomInput",
+          "description": "The primary staging storage account input."
         },
-        "recoveryVirtualNetworkCustomDetails": {
-          "$ref": "#/definitions/RecoveryVirtualNetworkCustomDetails",
-          "description": "The recovery virtual network details."
+        "recoveryAvailabilitySetCustomInput": {
+          "$ref": "#/definitions/RecoveryAvailabilitySetCustomInput",
+          "description": "The recovery availability set input."
         },
-        "recoveryProximityPlacementGroupCustomDetails": {
-          "$ref": "#/definitions/RecoveryProximityPlacementGroupCustomDetails",
-          "description": "The recovery proximity placement group custom details."
+        "recoveryVirtualNetworkCustomInput": {
+          "$ref": "#/definitions/RecoveryVirtualNetworkCustomInput",
+          "description": "The recovery virtual network input."
+        },
+        "recoveryProximityPlacementGroupCustomInput": {
+          "$ref": "#/definitions/RecoveryProximityPlacementGroupCustomInput",
+          "description": "The recovery proximity placement group custom input."
         },
         "autoProtectionOfDataDiskStatus": {
           "description": "A value indicating whether the auto protection is enabled.",
@@ -7700,14 +7705,14 @@
           }
         },
         "vmDisks": {
-          "description": "The list of vm disk details.",
+          "description": "The list of vm disk inputs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectionIntentDiskInputDetails"
           }
         },
         "vmManagedDisks": {
-          "description": "The list of vm managed disk details.",
+          "description": "The list of vm managed disk inputs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectionIntentManagedDiskInputDetails"
@@ -7722,7 +7727,7 @@
           "type": "string"
         },
         "recoveryBootDiagStorageAccount": {
-          "$ref": "#/definitions/StorageAccountCustomDetails",
+          "$ref": "#/definitions/StorageAccountCustomInput",
           "description": "The boot diagnostic storage account."
         },
         "diskEncryptionInfo": {
@@ -8205,13 +8210,13 @@
           "description": "The disk Uri.",
           "type": "string"
         },
-        "recoveryAzureStorageAccountCustomDetails": {
-          "$ref": "#/definitions/StorageAccountCustomDetails",
-          "description": "The recovery VHD storage account Id."
+        "recoveryAzureStorageAccountCustomInput": {
+          "$ref": "#/definitions/StorageAccountCustomInput",
+          "description": "The recovery VHD storage account input."
         },
-        "primaryStagingStorageAccountCustomDetails": {
-          "$ref": "#/definitions/StorageAccountCustomDetails",
-          "description": "The primary staging storage account Arm Id."
+        "primaryStagingStorageAccountCustomInput": {
+          "$ref": "#/definitions/StorageAccountCustomInput",
+          "description": "The primary staging storage account input."
         }
       }
     },
@@ -8226,13 +8231,13 @@
           "description": "The disk Id.",
           "type": "string"
         },
-        "primaryStagingStorageAccountCustomDetails": {
-          "$ref": "#/definitions/StorageAccountCustomDetails",
-          "description": "The primary staging storage account details."
+        "primaryStagingStorageAccountCustomInput": {
+          "$ref": "#/definitions/StorageAccountCustomInput",
+          "description": "The primary staging storage account Input."
         },
-        "recoveryResourceGroupCustomDetails": {
-          "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
-          "description": "The recovery resource group details."
+        "RecoveryResourceGroupCustomInput": {
+          "$ref": "#/definitions/RecoveryResourceGroupCustomInput",
+          "description": "The recovery resource group input."
         },
         "recoveryReplicaDiskAccountType": {
           "description": "The replica disk type. Its an optional value and will be same as source disk type if not user provided.",
@@ -10147,6 +10152,115 @@
         }
       },
       "discriminator": "instanceType"
+    },
+    "ExistingProtectionProfile": {
+      "description": "Existing storage account input.",
+      "required": [
+        "protectionProfileId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionProfileCustomInput"
+        }
+      ],
+      "properties": {
+        "protectionProfileId": {
+          "description": "The protection profile Arm Id. Throw error, if resource does not exists.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Existing"
+    },
+    "ExistingRecoveryAvailabilitySet": {
+      "description": "Existing recovery availability set input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryAvailabilitySetCustomInput"
+        }
+      ],
+      "properties": {
+        "recoveryAvailabilitySetId": {
+          "description": "The recovery availability set Id. Will throw error, if resource does not exist.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Existing"
+    },
+    "ExistingRecoveryProximityPlacementGroup": {
+      "description": "Existing recovery proximity placment group input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryProximityPlacementGroupCustomInput"
+        }
+      ],
+      "properties": {
+        "recoveryProximityPlacementGroupId": {
+          "description": "The recovery proximity placement group Id. Will throw error, if resource doesnt exist.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Existing"
+    },
+    "ExistingRecoveryRecoveryResourceGroup": {
+      "description": "Existing recovery resource group input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryResourceGroupCustomInput"
+        }
+      ],
+      "properties": {
+        "recoveryResourceGroupId": {
+          "description": "The recovery resource group Id. Valid for V2 scenarios.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Existing"
+    },
+    "ExistingRecoveryVirtualNetwork": {
+      "description": "Existing recovery virtual network input.",
+      "required": [
+        "recoveryVirtualNetworkId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryVirtualNetworkCustomInput"
+        }
+      ],
+      "properties": {
+        "recoveryVirtualNetworkId": {
+          "description": "The recovery virtual network Id. Will throw error, if resource does not exist.",
+          "type": "string"
+        },
+        "recoverySubnetName": {
+          "description": "The recovery subnet name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Existing"
+    },
+    "ExistingStorageAccount": {
+      "description": "Existing storage account input.",
+      "required": [
+        "azureStorageAccountId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageAccountCustomInput"
+        }
+      ],
+      "properties": {
+        "azureStorageAccountId": {
+          "description": "The storage account Arm Id. Throw error, if resource does not exists.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Existing"
     },
     "ExportJobDetails": {
       "description": "This class represents details for export jobs workflow.",
@@ -14115,6 +14229,53 @@
         }
       }
     },
+    "NewProtectionProfile": {
+      "description": "New protection profile input.",
+      "required": [
+        "policyName",
+        "multiVmSyncStatus"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionProfileCustomInput"
+        }
+      ],
+      "properties": {
+        "policyName": {
+          "description": "The protection profile input.",
+          "type": "string"
+        },
+        "recoveryPointHistory": {
+          "format": "int32",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
+          "type": "integer"
+        },
+        "crashConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The crash consistent snapshot frequency (in minutes).",
+          "type": "integer"
+        },
+        "appConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The app consistent snapshot frequency (in minutes).",
+          "type": "integer"
+        },
+        "multiVmSyncStatus": {
+          "description": "A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or 'Disabled'.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SetMultiVmSyncStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "New"
+    },
     "Object": {
       "description": "Base of all objects.",
       "type": "object",
@@ -14796,7 +14957,7 @@
         }
       }
     },
-    "ProtectionProfileCustomDetails": {
+    "ProtectionProfileCustomInput": {
       "description": "Protection Profile custom input.",
       "type": "object",
       "properties": {
@@ -14804,7 +14965,8 @@
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ProviderError": {
       "description": "This class contains the error details per object.",
@@ -14900,15 +15062,16 @@
       },
       "x-ms-discriminator-value": "RcmAzureMigration"
     },
-    "RecoveryAvailabilitySetCustomDetails": {
+    "RecoveryAvailabilitySetCustomInput": {
       "description": "Recovery Availability Set custom input.",
       "type": "object",
       "properties": {
-        "resourceType": {
+        "instanceType": {
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "RecoveryPlan": {
       "description": "Recovery plan details.",
@@ -15779,25 +15942,27 @@
         }
       }
     },
-    "RecoveryProximityPlacementGroupCustomDetails": {
+    "RecoveryProximityPlacementGroupCustomInput": {
       "description": "Recovery Proximity placement group custom input.",
       "type": "object",
       "properties": {
-        "resourceType": {
+        "instanceType": {
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
-    "RecoveryResourceGroupCustomDetails": {
+    "RecoveryResourceGroupCustomInput": {
       "description": "Recovery Resource Group custom input.",
       "type": "object",
       "properties": {
-        "resourceType": {
+        "instanceType": {
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "RecoveryServicesProvider": {
       "description": "Provider details.",
@@ -15910,15 +16075,16 @@
         }
       }
     },
-    "RecoveryVirtualNetworkCustomDetails": {
+    "RecoveryVirtualNetworkCustomInput": {
       "description": "Recovery Virtual network custom input.",
       "type": "object",
       "properties": {
-        "resourceType": {
+        "instanceType": {
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "RemoveDisksInput": {
       "description": "Input for remove disk(s) operation.",
@@ -16632,15 +16798,16 @@
         }
       }
     },
-    "StorageAccountCustomDetails": {
-      "description": "Storage account Custom details input.",
+    "StorageAccountCustomInput": {
+      "description": "Storage account custom input.",
       "type": "object",
       "properties": {
-        "resourceType": {
+        "instanceType": {
           "description": "The class type.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "StorageClassification": {
       "description": "Storage object definition.",
