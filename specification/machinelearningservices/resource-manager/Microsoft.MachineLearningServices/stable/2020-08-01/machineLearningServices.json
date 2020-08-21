@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2020-06-01"
+    "version": "2020-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -555,9 +555,6 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         },
         "x-ms-examples": {
           "List VM Sizes": {
@@ -2281,7 +2278,7 @@
     },
     "VirtualMachineSizeListResult": {
       "properties": {
-        "value": {
+        "amlCompute": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
