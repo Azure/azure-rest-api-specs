@@ -1677,11 +1677,11 @@
           },
           {
             "name": "dataControllerResource",
-            "description": "desc",
+            "description": "The update data controller resource",
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/DataControllerResourceNoProperties"
+              "$ref": "#/definitions/DataControllerUpdate"
             }
           }
         ],
@@ -2197,7 +2197,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DataControllerResourceNoProperties"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2211,46 +2211,17 @@
         "properties"
       ]
     },
-    "DataControllerResourceNoProperties": {
-      "description": "Data controller resource with no properties",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "AzureResource": {
-      "type": "object",
+    "DataControllerUpdate": {
       "properties": {
-        "etag": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "kind": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku"
-        },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "type": "object"
-        },
-        "type": {
-          "type": "string"
+          "description": "Resource tags"
         }
-      }
+      },
+      "description": "Used for updating a data controller resource."
     },
     "SystemData": {
       "description": "Read only system data",
