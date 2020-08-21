@@ -144,7 +144,7 @@
           "200": {
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
-              "$ref": "#/definitions/OuContainerOutput"
+              "$ref": "#/definitions/OuContainer"
             }
           }
         },
@@ -178,13 +178,13 @@
             "$ref": "#/parameters/OuContainerNameParameter"
           },
           {
-            "name": "ouContainer",
+            "name": "containerAccount",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OuContainerInput"
+              "$ref": "#/definitions/ContainerAccount"
             },
-            "description": "Properties supplied to the Update OuContainer operation."
+            "description": "Container Account Description."
           }
         ],
         "responses": {
@@ -197,19 +197,19 @@
           "200": {
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
-              "$ref": "#/definitions/OuContainerOutput"
+              "$ref": "#/definitions/OuContainer"
             }
           },
           "201": {
             "description": "HTTP 201 (Created) if the operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OuContainerOutput"
+              "$ref": "#/definitions/OuContainer"
             }
           },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/OuContainerOutput"
+              "$ref": "#/definitions/OuContainer"
             }
           }
         },
@@ -292,13 +292,13 @@
             "$ref": "#/parameters/OuContainerNameParameter"
           },
           {
-            "name": "ouContainer",
+            "name": "containerAccount",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OuContainerInput"
+              "$ref": "#/definitions/ContainerAccount"
             },
-            "description": "Properties supplied to the Update OuContainer operation."
+            "description": "Container Account Description."
           }
         ],
         "responses": {
@@ -311,13 +311,13 @@
           "200": {
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
-              "$ref": "#/definitions/OuContainerOutput"
+              "$ref": "#/definitions/OuContainer"
             }
           },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/OuContainerOutput"
+              "$ref": "#/definitions/OuContainer"
             }
           }
         },
@@ -376,7 +376,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OuContainerOutput"
+            "$ref": "#/definitions/OuContainer"
           },
           "description": "The list of OuContainer."
         },
@@ -388,26 +388,7 @@
       },
       "description": "The response from the List OuContainer operation."
     },
-    "OuContainerInput": {
-      "description": "OuContainer.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContainerAccount",
-            "description": "Container Account"
-          },
-          "description": "The list of container accounts"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "OuContainerOutput": {
+    "OuContainer": {
       "description": "OuContainer.",
       "properties": {
         "properties": {
