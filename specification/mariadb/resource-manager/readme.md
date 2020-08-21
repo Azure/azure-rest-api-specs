@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
-- Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 ```
 
@@ -197,7 +197,6 @@ input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 
 ```
