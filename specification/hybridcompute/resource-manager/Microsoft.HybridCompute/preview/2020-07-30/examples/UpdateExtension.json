@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "name": "myMachine",
+    "extensionName": "myExtension",
+    "api-version": "2020-07-30-preview",
+    "extensionParameters": {
+      "properties": {
+        "forceUpdateTag": "false",
+        "publisher": "string",
+        "type": "string",
+        "typeHandlerVersion": "1.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {},
+        "protectedSettings": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/myExtension",
+        "name": "string",
+        "type": "Microsoft.HybridCompute/machines/extensions",
+        "location": "string",
+        "properties": {
+          "forceUpdateTag": "string",
+          "publisher": "string",
+          "type": "string",
+          "typeHandlerVersion": "string",
+          "autoUpgradeMinorVersion": true,
+          "settings": {},
+          "protectedSettings": {},
+          "provisioningState": "string",
+          "instanceView": {
+            "name": "string",
+            "type": "string",
+            "typeHandlerVersion": "string",
+            "status": {
+              "code": "string",
+              "level": "Info",
+              "displayStatus": "string",
+              "message": "string",
+              "time": "2020-08-08T20:42:10.999Z"
+            }
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}
