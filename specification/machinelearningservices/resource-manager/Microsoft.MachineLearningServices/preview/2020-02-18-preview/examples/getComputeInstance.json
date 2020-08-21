@@ -22,17 +22,17 @@
             "vmSize": "STANDARD_NC6",
             "subnet": "test-subnet-resource-id",
             "applicationSharingPolicy": "Shared",
-            "computeInstanceAuthorizationType": "Personal",
+            "sshSettings": {
+              "sshPublicAccess": "Enabled",
+              "adminUserName": "azureuser",
+              "sshPort": 22
+            },
+            "computeInstanceAuthorizationType": "personal",
             "personalComputeInstanceSettings": {
               "assignedUser": {
                 "objectId": "00000000-0000-0000-0000-000000000000",
                 "tenantId": "00000000-0000-0000-0000-000000000000"
               }
-            },
-            "sshSettings": {
-              "sshPublicAccess": "Enabled",
-              "adminUserName": "azureuser",
-              "sshPort": 22
             },
             "createdBy": {
               "userName": "foobar@microsoft.com",
