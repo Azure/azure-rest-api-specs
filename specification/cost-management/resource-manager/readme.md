@@ -33,6 +33,16 @@ azure-validator: false
 ---
 
 
+### Tag: package-preview-2020-03
+
+These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-03'
+input-file:
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+  - Microsoft.CostManagement/preview/2020-03-01-preview/costallocation.json
+```
+
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
@@ -42,9 +52,7 @@ input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
 ```
 
-=======
 
->>>>>>> Stashed changes
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
