@@ -1,0 +1,337 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertsSuppressionRules": {
+      "get": {
+        "x-ms-examples": {
+          "Get suppression rules for subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/GetAlertsSuppressionRules_example.json"
+          },
+          "Get suppression alert rule for subscription, filtered by AlertType": {
+            "$ref": "./examples/AlertsSuppressionRules/GetAlertsSuppressionRulesWithAlertType_example.json"
+          }
+        },
+        "tags": [
+          "AlertsSuppressionRules"
+        ],
+        "description": "List of all the dismiss rules for the given subscription",
+        "operationId": "AlertsSuppressionRules_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertsSuppressionRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertsSuppressionRules/{alertsSuppressionRuleName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get suppression alert rule for subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/GetAlertsSuppressionRule_example.json"
+          }
+        },
+        "tags": [
+          "AlertsSuppressionRules"
+        ],
+        "description": "Get dismiss rule, with name: {alertsSuppressionRuleName}, for the given subscription",
+        "operationId": "AlertsSuppressionRules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertsSuppressionRuleName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertsSuppressionRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update or create suppression rule for subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/PutAlertsSuppressionRule_example.json"
+          }
+        },
+        "tags": [
+          "AlertsSuppressionRules"
+        ],
+        "description": "Update existing rule or create new rule if it doesn't exist",
+        "operationId": "AlertsSuppressionRules_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertsSuppressionRuleName"
+          },
+          {
+            "$ref": "#/parameters/AlertsSuppressionRule"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertsSuppressionRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete suppression rule data for a subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/DeleteAlertsSuppressionRule_example.json"
+          }
+        },
+        "tags": [
+          "AlertsSuppressionRules"
+        ],
+        "description": "Delete dismiss alert rule for this subscription.",
+        "operationId": "AlertsSuppressionRules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertsSuppressionRuleName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK, No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertsSuppressionRulesList": {
+      "type": "object",
+      "description": "Suppression rules list for subscription.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertsSuppressionRule"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URI to fetch the next page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertsSuppressionRule": {
+      "type": "object",
+      "description": "Describes the suppression rule",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertsSuppressionRuleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AlertsSuppressionRuleProperties": {
+      "type": "object",
+      "description": "describes AlertsSuppressionRule properties",
+      "properties": {
+        "alertType": {
+          "type": "string",
+          "description": "Type of the alert to automatically suppress. For all alert types, use '*'"
+        },
+        "lastModifiedUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time this rule was modified"
+        },
+        "expirationDateUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of the rule, if value is not provided or provided as null this field will default to the maximum allowed expiration date."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for dismissing the alert"
+        },
+        "state": {
+          "type": "string",
+          "description": "Possible states of the rule",
+          "x-ms-enum": {
+            "name": "RuleState"
+          },
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Expired"
+          ]
+        },
+        "comment": {
+          "type": "string",
+          "description": "Any comment regarding the rule"
+        },
+        "suppressionAlertsScope": {
+          "type": "object",
+          "description": "The suppression conditions",
+          "$ref": "#/definitions/SuppressionAlertsScope"
+        }
+      },
+      "required": [
+        "alertType",
+        "reason",
+        "state"
+      ]
+    },
+    "ScopeElement": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "A more specific scope used to identify the alerts to suppress.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The alert entity type to suppress by."
+        }
+      }
+    },
+    "SuppressionAlertsScope": {
+      "type": "object",
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "description": "All the conditions inside need to be true in order to suppress the alert",
+          "items": {
+            "$ref": "#/definitions/ScopeElement"
+          }
+        }
+      },
+      "required": [
+        "allOf"
+      ]
+    }
+  },
+  "parameters": {
+    "AlertType": {
+      "name": "AlertType",
+      "in": "query",
+      "type": "string",
+      "description": "Type of the alert to get rules for",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertsSuppressionRule": {
+      "name": "alertsSuppressionRule",
+      "in": "body",
+      "required": true,
+      "description": "Suppression rule object",
+      "schema": {
+        "$ref": "#/definitions/AlertsSuppressionRule"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AlertsSuppressionRuleName": {
+      "name": "alertsSuppressionRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique name of the suppression alert rule",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

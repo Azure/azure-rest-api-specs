@@ -26,7 +26,7 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06-preview
+tag: package-2019-12-preview
 ```
 
 
@@ -37,6 +37,8 @@ These settings apply only when `--tag=package-2019-12-preview` is specified on t
 ```yaml $(tag) == 'package-2019-12-preview'
 input-file:
   - Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 ### Tag: package-2019-06-preview
 
@@ -178,6 +180,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js containerregistry/resource-manager
 ```
 
 ## C#
@@ -207,6 +212,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -220,9 +229,9 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
-  - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
+  - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json

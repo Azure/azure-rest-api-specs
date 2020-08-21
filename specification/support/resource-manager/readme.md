@@ -24,7 +24,16 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-preview
+tag: package-2020-04
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04'
+input-file:
+  - Microsoft.Support/stable/2020-04-01/support.json
 ```
 
 ### Tag: package-2019-05-preview
@@ -55,6 +64,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_support']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js support/resource-manager
 ```
 
 ## C# 
@@ -81,6 +93,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -93,6 +109,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Support/stable/2020-04-01/support.json
   - $(this-folder)/Microsoft.Support/preview/2019-05-01-preview/support.json
 
 ```

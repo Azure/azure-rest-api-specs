@@ -19,13 +19,32 @@
         "location": "East US 2",
         "tags": null,
         "sku": {
-          "name": "skuName"
+          "name": "premium"
         },
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "parameters": null,
-          "provisioningState": "Created",
-          "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json"
+          "provisioningState": "Accepted",
+          "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
+          "authorizations": [
+            {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "roleDefinitionId": "11111111-1111-1111-1111-111111111111"
+            }
+          ],
+          "createdBy": {
+            "oid": "22222222-2222-2222-2222-222222222222",
+            "puid": "33333333",
+            "applicationId": "44444444-4444-4444-4444-444444444444"
+          },
+          "updatedBy": {
+            "oid": "22222222-2222-2222-2222-222222222222",
+            "puid": "33333333",
+            "applicationId": "44444444-4444-4444-4444-444444444444"
+          },
+          "createdDateTime": "2020-02-20T00:10:29.2858439Z",
+          "workspaceId": "5555555555555555",
+          "workspaceUrl": "adb-5555555555555555.19.azuredatabricks.net"
         }
       }
     },
@@ -35,15 +54,34 @@
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace",
         "type": "Microsoft.Databricks/workspaces",
         "location": "East US 2",
-        "tags": null,
+        "tags": {
+          "environment": "dev"
+        },
         "sku": {
-          "name": "skuName"
+          "name": "premium"
         },
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "parameters": null,
-          "provisioningState": "Created",
-          "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json"
+          "provisioningState": "Accepted",
+          "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
+          "authorizations": [
+            {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "roleDefinitionId": "11111111-1111-1111-1111-111111111111"
+            }
+          ],
+          "createdBy": {
+            "oid": "22222222-2222-2222-2222-222222222222",
+            "puid": "33333333",
+            "applicationId": "44444444-4444-4444-4444-444444444444"
+          },
+          "updatedBy": {
+            "oid": "22222222-2222-2222-2222-222222222222",
+            "puid": "33333333",
+            "applicationId": "44444444-4444-4444-4444-444444444444"
+          },
+          "createdDateTime": "2020-02-20T00:10:29.2858439Z"
         }
       }
     }

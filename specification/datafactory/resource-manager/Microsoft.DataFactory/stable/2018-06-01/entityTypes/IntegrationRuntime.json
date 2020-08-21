@@ -215,6 +215,13 @@
           "items": {
             "$ref": "#/definitions/CustomSetupBase"
           }
+        },
+        "packageStores": {
+          "description": "Package stores for the SSIS Integration Runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageStore"
+          }
         }
       },
       "additionalProperties": {
@@ -289,6 +296,24 @@
           "type": "string"
         }
       }
+    },
+    "PackageStore": {
+      "description": "Package store for the SSIS integration runtime.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the package store",
+          "type": "string"
+        },
+        "packageStoreLinkedService": {
+          "description": "The package store linked service reference.",
+          "$ref": "#/definitions/EntityReference"
+        }
+      },
+      "required": [
+        "name",
+        "packageStoreLinkedService"
+      ]
     },
     "CustomSetupBase": {
       "description": "The base definition of the custom setup.",
@@ -417,6 +442,38 @@
       },
       "required": [
         "componentName"
+      ]
+    },
+    "AzPowerShellSetup": {
+      "description": "The express custom setup of installing Azure PowerShell.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Install Azure PowerShell type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzPowerShellSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzPowerShellSetupTypeProperties": {
+      "description": "Installation of Azure PowerShell type properties.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The required version of Azure PowerShell to install.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
       ]
     },
     "EntityReference": {

@@ -804,7 +804,7 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "Start date",
+            "description": "Start date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -812,14 +812,14 @@
           {
             "name": "endDate",
             "in": "query",
-            "description": "End date",
+            "description": "End date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
           {
             "name": "$filter",
-            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
+            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
             "in": "query",
             "required": false,
             "type": "string"
@@ -973,7 +973,7 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "Start date",
+            "description": "Start date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -981,14 +981,14 @@
           {
             "name": "endDate",
             "in": "query",
-            "description": "End date",
+            "description": "End date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
           {
             "name": "$filter",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1030,6 +1030,9 @@
           "ReservationRecommendationsBySubscription-Legacy": {
             "$ref": "./examples/ReservationRecommendationsBySubscription.json"
           },
+          "ReservationRecommendationsByResourceGroup-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsByResourceGroup.json"
+          },
           "ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod-Legacy": {
             "$ref": "./examples/ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod.json"
           },
@@ -1042,11 +1045,7 @@
         },
         "parameters": [
           {
-            "name": "$filter",
-            "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/filterParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1074,6 +1073,72 @@
         }
       }
     },
+    "/{billingScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+      "get": {
+        "tags": [
+          "ReservationRecommendationDetails"
+        ],
+        "operationId": "ReservationRecommendationDetails_Get",
+        "description": "Details of a reservation recommendation for what-if analysis of reserved instances.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationRecommendationsBySubscription-Legacy": {
+            "$ref": "./examples/ReservationRecommendationDetailsBySubscription.json"
+          },
+          "ReservationRecommendationsByResourceGroup-Legacy": {
+            "$ref": "./examples/ReservationRecommendationDetailsByResourceGroup.json"
+          },
+          "ReservationRecommendationsByBillingAccount-Legacy": {
+            "$ref": "./examples/ReservationRecommendationDetailsByBillingAccount.json"
+          },
+          "ReservationRecommendationsByBillingProfile-Modern": {
+            "$ref": "./examples/ReservationRecommendationDetailsByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeParameter"
+          },
+          {
+            "$ref": "#/parameters/regionParameter"
+          },
+          {
+            "$ref": "#/parameters/termParameter"
+          },
+          {
+            "$ref": "#/parameters/lookBackPeriodParameter"
+          },
+          {
+            "$ref": "#/parameters/productParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationRecommendationDetailsModel"
+            }
+          },
+          "204": {
+            "description": "An empty response is sent when there are no recommendation details."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationTransactions": {
       "get": {
         "tags": [
@@ -1085,14 +1150,14 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "ReservationTransaction": {
-            "$ref": "./examples/ReservationTransactionsListByBillingAccountId.json"
+          "ReservationTransactionsByEnrollmentNumber": {
+            "$ref": "./examples/ReservationTransactionsListByEnrollmentNumber.json"
           }
         },
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1109,6 +1174,58 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ReservationTransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/reservationTransactions": {
+      "get": {
+        "tags": [
+          "ReservationTransactions"
+        ],
+        "operationId": "ReservationTransactions_ListByBillingProfile",
+        "description": "List of transactions for reserved instances on billing account scope",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationTransactionsByBillingProfileId": {
+            "$ref": "./examples/ReservationTransactionsListByBillingProfileId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModernReservationTransactionsListResult"
             }
           },
           "default": {
@@ -2821,6 +2938,200 @@
         }
       }
     },
+    "ReservationRecommendationDetailsModel": {
+      "description": "Reservation recommendation details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
+          "title": "Reservation Recommendation details properties"
+        }
+      }
+    },
+    "ReservationRecommendationDetailsProperties": {
+      "description": "The properties of the reservation recommendation.",
+      "properties": {
+        "currency": {
+          "description": "An ISO 4217 currency code identifier for the costs and savings ",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Resource specific properties.",
+          "$ref": "#/definitions/ReservationRecommendationDetailsResourceProperties",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource Group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "savings": {
+          "description": "Savings information for the recommendation.",
+          "$ref": "#/definitions/ReservationRecommendationDetailsSavingsProperties",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "Scope of the reservation, ex: Single or Shared.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usage": {
+          "description": "Historical usage details used to calculate the estimated savings.",
+          "$ref": "#/definitions/ReservationRecommendationDetailsUsageProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsCalculatedSavingsProperties": {
+      "description": "Details of estimated savings.",
+      "properties": {
+        "onDemandCost": {
+          "description": "The cost without reservation.",
+          "type": "number",
+          "readOnly": true
+        },
+        "overageCost": {
+          "description": "The difference between total reservation cost and reservation cost.",
+          "type": "number",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The quantity for calculated savings.",
+          "type": "number",
+          "readOnly": true
+        },
+        "reservationCost": {
+          "description": "The exact cost of the estimated usage using reservation.",
+          "type": "number",
+          "readOnly": true
+        },
+        "totalReservationCost": {
+          "description": "The cost of the suggested quantity.",
+          "type": "number",
+          "readOnly": true
+        },
+        "savings": {
+          "description": "The amount saved by purchasing the recommended quantity of reservation.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsResourceProperties": {
+      "description": "Details of the resource.",
+      "properties": {
+        "appliedScopes": {
+          "description": "List of subscriptions for which the reservation is applied.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "onDemandRate": {
+          "description": "On demand rate of the resource.",
+          "type": "number",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Azure product ex: Standard_E8s_v3 etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "description": "Azure resource region ex:EastUS, WestUS etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationRate": {
+          "description": "Reservation rate of the resource.",
+          "type": "number",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "The azure resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsSavingsProperties": {
+      "description": "Details of the estimated savings.",
+      "properties": {
+        "calculatedSavings": {
+          "description": "List of calculated savings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationRecommendationDetailsCalculatedSavingsProperties"
+          }
+        },
+        "lookBackPeriod": {
+          "description": "Number of days of usage to look back used for computing the recommendation.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "recommendedQuantity": {
+          "description": "Number of recommended units of the resource.",
+          "type": "number",
+          "readOnly": true
+        },
+        "reservationOrderTerm": {
+          "description": "Term period of the reservation, ex: P1Y or P3Y.",
+          "type": "string",
+          "readOnly": true
+        },
+        "savingsType": {
+          "description": "Type of savings, ex: instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "Measurement unit ex: hour etc.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsUsageProperties": {
+      "description": "Details about historical usage data that has been used for computing the recommendation.",
+      "properties": {
+        "firstConsumptionDate": {
+          "description": "The first usage date used for looking back for computing the recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastConsumptionDate": {
+          "description": "The last usage date used for looking back for computing the recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lookBackUnitType": {
+          "description": "What the usage data values represent ex: virtual machine instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageData": {
+          "description": "The breakdown of historical resource usage.  The values are in the order of usage between the firstConsumptionDate and the lastConsumptionDate.",
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "readOnly": true
+        },
+        "usageGrain": {
+          "description": "The grain of the values represented in the usage data ex: hourly.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ReservationRecommendationsListResult": {
       "description": "Result of listing reservation recommendations.",
       "properties": {
@@ -3089,8 +3400,156 @@
         }
       }
     },
-    "ReservationTransactionProperties": {
-      "default": "The properties of the reservation transaction.",
+    "ModernReservationTransactionProperties": {
+      "description": "The properties of a modern reservation transaction.",
+      "properties": {
+        "amount": {
+          "description": "The charge of the transaction.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "armSkuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The billing frequency, which can be either one-time or recurring.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing profile Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing profile name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the transaction is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventDate": {
+          "description": "The date of the transaction",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "eventType": {
+          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoice": {
+          "description": "Invoice Number",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceId": {
+          "description": "Invoice Id as on the invoice where the specific transaction appears.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice Section Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice Section Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchasingSubscriptionGuid": {
+          "description": "The subscription guid that makes the transaction.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "purchasingSubscriptionName": {
+          "description": "The subscription name that makes the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The quantity of the transaction.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "region": {
+          "description": "The region of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationOrderName": {
+          "description": "The name of the reservation order.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "This is the term of the transaction.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernReservationTransaction": {
+      "description": "Modern Reservation transaction resource.",
+      "type": "object",
+      "x-ms-discriminator-value": "Modern",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ModernReservationTransactionProperties",
+          "title": "Reservation Transaction properties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyReservationTransaction": {
+      "description": "Legacy Reservation transaction resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReservationTransaction"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LegacyReservationTransactionProperties",
+          "title": "Reservation Transaction properties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyReservationTransactionProperties": {
+      "description": "The properties of a legacy reservation transaction.",
       "properties": {
         "eventDate": {
           "description": "The date of the transaction",
@@ -3209,20 +3668,38 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationTransactionProperties",
+          "$ref": "#/definitions/LegacyReservationTransactionProperties",
           "title": "Reservation Transaction properties"
         }
       }
     },
     "ReservationTransactionsListResult": {
-      "description": "Result of listing reservation transactions",
+      "description": "Result of listing reservation recommendations.",
       "properties": {
         "value": {
-          "description": "The list of reservation transactions.",
+          "description": "The list of reservation recommendations.",
           "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ReservationTransaction"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernReservationTransactionsListResult": {
+      "description": "Result of listing reservation recommendations.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation recommendations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ModernReservationTransaction"
           }
         },
         "nextLink": {
@@ -3310,8 +3787,7 @@
           "description": "The category of the budget, whether the budget tracks cost or usage.",
           "type": "string",
           "enum": [
-            "Cost",
-            "Usage"
+            "Cost"
           ],
           "x-ms-enum": {
             "name": "CategoryType",
@@ -3324,7 +3800,7 @@
           "format": "decimal"
         },
         "timeGrain": {
-          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain. BillingMonth, BillingQuarter, and BillingAnnual are only supported by WD customers",
           "type": "string",
           "enum": [
             "Monthly",
@@ -3340,13 +3816,13 @@
           }
         },
         "timePeriod": {
-          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than twelve months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"
         },
-        "filters": {
+        "filter": {
           "description": "May be used to filter budgets by resource group, resource, or meter.",
           "type": "object",
-          "$ref": "#/definitions/Filters"
+          "$ref": "#/definitions/BudgetFilter"
         },
         "currentSpend": {
           "description": "The current amount of cost which is being tracked for a budget.",
@@ -3388,50 +3864,76 @@
         "startDate"
       ]
     },
-    "Filters": {
+    "BudgetFilter": {
       "description": "May be used to filter budgets by resource group, resource, or meter.",
       "properties": {
-        "resourceGroups": {
-          "description": "The list of filters on resource groups, allowed at subscription level only.",
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BudgetFilterProperties"
           },
-          "minItems": 0,
-          "maxItems": 10
+          "minItems": 2
         },
-        "resources": {
-          "description": "The list of filters on resources.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 0,
-          "maxItems": 10
+        "not": {
+          "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/BudgetFilterProperties"
         },
-        "meters": {
-          "description": "The list of filters on meters (GUID), mandatory for budgets of usage category. ",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "minItems": 0,
-          "maxItems": 10
+        "dimensions": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/BudgetComparisonExpression"
         },
         "tags": {
-          "type": "object",
-          "description": "The dictionary of filters on tags.",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "minItems": 0,
-          "maxItems": 10
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/BudgetComparisonExpression"
         }
       }
+    },
+    "BudgetFilterProperties": {
+      "description": "The Dimensions or Tags to filter a budget by.",
+      "properties": {
+        "dimensions": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        },
+        "tags": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        }
+      }
+    },
+    "BudgetComparisonExpression": {
+      "description": "The comparison expression to be used in the budgets.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "BudgetOperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -3498,6 +4000,17 @@
           },
           "minItems": 0,
           "maxItems": 50
+        },
+        "thresholdType": {
+          "description": "The type of threshold",
+          "type": "string",
+          "enum": [
+            "Actual"
+          ],
+          "x-ms-enum": {
+            "name": "ThresholdType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -4019,7 +4532,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
       "type": "object",
       "properties": {
         "error": {
@@ -4465,7 +4978,25 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationRecommendationDetailsParameter": {
+      "name": "billingScope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationTransactionsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation transactions operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount/Enrollment scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -4647,6 +5178,108 @@
             "name": "UsageMetricType"
           }
         ]
+      }
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "termParameter": {
+      "description": "Specify length of reservation recommendation term.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "name": "term",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "term",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "P1Y",
+            "description": "1 year reservation term",
+            "name": "P1Y"
+          },
+          {
+            "value": "P3Y",
+            "description": "3 year reservation term",
+            "name": "P3Y"
+          }
+        ]
+      }
+    },
+    "regionParameter": {
+      "name": "region",
+      "in": "query",
+      "description": "Used to select the region the recommendation should be generated for.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "lookBackPeriodParameter": {
+      "name": "lookBackPeriod",
+      "in": "query",
+      "description": "Filter the time period on which reservation recommendation results are based.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "lookBackPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Last7Days",
+            "description": "Use 7 days of data for recommendations",
+            "name": "Last07Days"
+          },
+          {
+            "value": "Last30Days",
+            "description": "Use 30 days of data for recommendations",
+            "name": "Last30Days"
+          },
+          {
+            "value": "Last60Days",
+            "description": "Use 60 days of data for recommendations",
+            "name": "Last60Days"
+          }
+        ]
+      }
+    },
+    "productParameter": {
+      "name": "product",
+      "in": "query",
+      "description": "Filter the products for which reservation recommendation results are generated. Examples: Standard_DS1_v2 (for VM), Premium_SSD_Managed_Disks_P30 (for Managed Disks)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeParameter": {
+      "description": "Scope of the reservation.",
+      "type": "string",
+      "name": "scope",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Single",
+        "Shared"
+      ],
+      "x-ms-enum": {
+        "name": "scope",
+        "modelAsString": true
       }
     }
   }
