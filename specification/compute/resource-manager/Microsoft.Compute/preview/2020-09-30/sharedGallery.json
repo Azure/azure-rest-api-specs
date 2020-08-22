@@ -50,6 +50,20 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sharedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The query parameter to decide what shared galleries to fetch when doing listing operations.",
+            "enum": [
+              "tenant"
+            ],
+            "x-ms-enum": {
+              "name": "SharedToValues",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -99,6 +113,20 @@
             "required": true,
             "type": "string",
             "description": "The unique name of the Shared Gallery."
+          },
+          {
+            "name": "sharedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The query parameter to decide what shared galleries to fetch when doing listing operations.",
+            "enum": [
+              "tenant"
+            ],
+            "x-ms-enum": {
+              "name": "SharedToValues",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -151,6 +179,20 @@
             "required": true,
             "type": "string",
             "description": "The unique name of the Shared Gallery."
+          },
+          {
+            "name": "sharedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The query parameter to decide what shared galleries to fetch when doing listing operations.",
+            "enum": [
+              "tenant"
+            ],
+            "x-ms-enum": {
+              "name": "SharedToValues",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -207,6 +249,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
+          },
+          {
+            "name": "sharedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The query parameter to decide what shared galleries to fetch when doing listing operations.",
+            "enum": [
+              "tenant"
+            ],
+            "x-ms-enum": {
+              "name": "SharedToValues",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -266,6 +322,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
+          },
+          {
+            "name": "sharedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The query parameter to decide what shared galleries to fetch when doing listing operations.",
+            "enum": [
+              "tenant"
+            ],
+            "x-ms-enum": {
+              "name": "SharedToValues",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -483,7 +553,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+            "description": "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           }
         ],
         "responses": {
@@ -546,7 +616,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+            "description": "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           }
         ],
         "responses": {
@@ -618,22 +688,13 @@
       ]
     },
     "SharedGallery": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedGalleryProperties"
-        }
-      },
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/PirResource"
         }
       ],
       "description": "Specifies information about the Shared Gallery that you want to create or update."
-    },
-    "SharedGalleryProperties": {
-      "properties": {},
-      "description": "Describes the properties of a Shared Gallery."
     },
     "SharedGalleryImageList": {
       "description": "The List Shared Gallery Images operation response.",
@@ -666,7 +727,7 @@
           "$ref": "#/definitions/PirResource"
         }
       ],
-      "description": "Specifies information about the gallery Image Definition that you want to create or update."
+      "description": "Specifies information about the gallery image definition that you want to create or update."
     },
     "SharedGalleryImageProperties": {
       "properties": {
@@ -697,7 +758,7 @@
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The end of life date of the gallery Image Definition. This property can be used for decommissioning purposes. This property is updatable."
+          "description": "The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable."
         },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier"
@@ -736,17 +797,17 @@
         "osState",
         "identifier"
       ],
-      "description": "Describes the properties of a gallery Image Definition."
+      "description": "Describes the properties of a gallery image definition."
     },
     "GalleryImageFeature": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the gallery Image feature."
+          "description": "The name of the gallery image feature."
         },
         "value": {
           "type": "string",
-          "description": "The value of the gallery Image feature."
+          "description": "The value of the gallery image feature."
         }
       },
       "description": "A feature for gallery image."
@@ -755,15 +816,15 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "The name of the gallery Image Definition publisher."
+          "description": "The name of the gallery image definition publisher."
         },
         "offer": {
           "type": "string",
-          "description": "The name of the gallery Image Definition offer."
+          "description": "The name of the gallery image definition offer."
         },
         "sku": {
           "type": "string",
-          "description": "The name of the gallery Image Definition SKU."
+          "description": "The name of the gallery image definition SKU."
         }
       },
       "required": [
@@ -771,7 +832,7 @@
         "offer",
         "sku"
       ],
-      "description": "This is the gallery Image Definition identifier."
+      "description": "This is the gallery image definition identifier."
     },
     "RecommendedMachineConfiguration": {
       "properties": {
@@ -826,7 +887,7 @@
           "description": "The product ID."
         }
       },
-      "description": "Describes the gallery Image Definition purchase plan. This is used by marketplace images."
+      "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
     },
     "SharedGalleryImageVersionList": {
       "description": "The List Shared Gallery Image versions operation response.",
@@ -859,22 +920,22 @@
           "$ref": "#/definitions/PirResource"
         }
       ],
-      "description": "Specifies information about the gallery Image Version that you want to create or update."
+      "description": "Specifies information about the gallery image version that you want to create or update."
     },
     "SharedGalleryImageVersionProperties": {
       "properties": {
         "publishedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The published date of the gallery Image Version Definition. This property can be used for decommissioning purposes. This property is updatable."
+          "description": "The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable."
         },
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The end of life date of the gallery Image Version Definition. This property can be used for decommissioning purposes. This property is updatable."
+          "description": "The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable."
         }
       },
-      "description": "Describes the properties of a gallery Image Version."
+      "description": "Describes the properties of a gallery image version."
     },
     "CloudError": {
       "x-ms-external": true,

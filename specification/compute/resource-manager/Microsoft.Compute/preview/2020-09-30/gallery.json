@@ -274,7 +274,7 @@
           "GalleryImages"
         ],
         "operationId": "GalleryImages_CreateOrUpdate",
-        "description": "Create or update a gallery Image Definition.",
+        "description": "Create or update a gallery image definition.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -294,7 +294,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+            "description": "The name of the gallery image definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -347,7 +347,7 @@
           "GalleryImages"
         ],
         "operationId": "GalleryImages_Update",
-        "description": "Update a gallery Image Definition.",
+        "description": "Update a gallery image definition.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -367,7 +367,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+            "description": "The name of the gallery dmage definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -408,7 +408,7 @@
           "GalleryImages"
         ],
         "operationId": "GalleryImages_Get",
-        "description": "Retrieves information about a gallery Image Definition.",
+        "description": "Retrieves information about a gallery image definition.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -428,7 +428,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition to be retrieved."
+            "description": "The name of the gallery image definition to be retrieved."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -479,7 +479,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition to be deleted."
+            "description": "The name of the gallery image definition to be deleted."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -516,7 +516,7 @@
           "GalleryImageVersions"
         ],
         "operationId": "GalleryImageVersions_CreateOrUpdate",
-        "description": "Create or update a gallery Image Version.",
+        "description": "Create or update a gallery image version.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -536,14 +536,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition in which the Image Version is to be created."
+            "description": "The name of the gallery image definition in which the Image Version is to be created."
           },
           {
             "name": "galleryImageVersionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+            "description": "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -555,7 +555,7 @@
             "schema": {
               "$ref": "#/definitions/GalleryImageVersion"
             },
-            "description": "Parameters supplied to the create or update gallery Image Version operation."
+            "description": "Parameters supplied to the create or update gallery image version operation."
           }
         ],
         "responses": {
@@ -591,6 +591,9 @@
           },
           "Create or update a simple Gallery Image Version using snapshots as a source.": {
             "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithSnapshotsAsSource.json"
+          },
+          "": {
+            "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithVHD.json"
           }
         }
       },
@@ -599,7 +602,7 @@
           "GalleryImageVersions"
         ],
         "operationId": "GalleryImageVersions_Update",
-        "description": "Update a gallery Image Version.",
+        "description": "Update a gallery image version.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -619,14 +622,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition in which the Image Version is to be updated."
+            "description": "The name of the gallery image definition in which the Image Version is to be updated."
           },
           {
             "name": "galleryImageVersionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+            "description": "The name of the gallery image version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -638,7 +641,7 @@
             "schema": {
               "$ref": "#/definitions/GalleryImageVersionUpdate"
             },
-            "description": "Parameters supplied to the update gallery Image Version operation."
+            "description": "Parameters supplied to the update gallery image version operation."
           }
         ],
         "responses": {
@@ -667,7 +670,7 @@
           "GalleryImageVersions"
         ],
         "operationId": "GalleryImageVersions_Get",
-        "description": "Retrieves information about a gallery Image Version.",
+        "description": "Retrieves information about a gallery image version.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -687,14 +690,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition in which the Image Version resides."
+            "description": "The name of the gallery image definition in which the Image Version resides."
           },
           {
             "name": "galleryImageVersionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Version to be retrieved."
+            "description": "The name of the gallery image version to be retrieved."
           },
           {
             "name": "$expand",
@@ -729,13 +732,13 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery Image Version.": {
+          "Get a gallery image version.": {
             "$ref": "./examples/GetAGalleryImageVersion.json"
           },
-          "Get a gallery Image Version with replication status.": {
+          "Get a gallery image version with replication status.": {
             "$ref": "./examples/GetAGalleryImageVersionWithReplicationStatus.json"
           },
-          "Get a gallery Image Version with snapshots as a source.": {
+          "Get a gallery image version with snapshots as a source.": {
             "$ref": "./examples/GetAGalleryImageVersionWithSnapshotsAsSource.json"
           }
         }
@@ -745,7 +748,7 @@
           "GalleryImageVersions"
         ],
         "operationId": "GalleryImageVersions_Delete",
-        "description": "Delete a gallery Image Version.",
+        "description": "Delete a gallery image version.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -765,14 +768,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Definition in which the Image Version resides."
+            "description": "The name of the gallery image definition in which the Image Version resides."
           },
           {
             "name": "galleryImageVersionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the gallery Image Version to be deleted."
+            "description": "The name of the gallery image version to be deleted."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -797,7 +800,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete a gallery Image Version.": {
+          "Delete a gallery image version.": {
             "$ref": "./examples/DeleteAGalleryImageVersion.json"
           }
         }
@@ -1419,7 +1422,7 @@
           "GalleryImages"
         ],
         "operationId": "GalleryImages_ListByGallery",
-        "description": "List gallery Image Definitions in a gallery.",
+        "description": "List gallery image definitions in a gallery.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1468,7 +1471,7 @@
           "GalleryImageVersions"
         ],
         "operationId": "GalleryImageVersions_ListByGalleryImage",
-        "description": "List gallery Image Versions in a gallery Image Definition.",
+        "description": "List gallery image versions in a gallery image definition.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1509,7 +1512,7 @@
           }
         },
         "x-ms-examples": {
-          "List gallery Image Versions in a gallery Image Definition.": {
+          "List gallery image versions in a gallery image definition.": {
             "$ref": "./examples/ListGalleryImageVersionsInAGalleryImage.json"
           }
         },
@@ -1923,7 +1926,7 @@
       "required": [
         "publishingProfile"
       ],
-      "description": "Describes the properties of a gallery Image Version."
+      "description": "Describes the properties of a gallery image version."
     },
     "GalleryApplicationVersionPublishingProfile": {
       "properties": {
@@ -1947,7 +1950,7 @@
       "required": [
         "source"
       ],
-      "description": "The publishing profile of a gallery Image Version."
+      "description": "The publishing profile of a gallery image version."
     },
     "UserArtifactSource": {
       "properties": {
@@ -1978,7 +1981,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the gallery Image Definition that you want to create or update."
+      "description": "Specifies information about the gallery image definition that you want to create or update."
     },
     "GalleryImageUpdate": {
       "properties": {
@@ -1992,17 +1995,17 @@
           "$ref": "#/definitions/UpdateResourceDefinition"
         }
       ],
-      "description": "Specifies information about the gallery Image Definition that you want to update."
+      "description": "Specifies information about the gallery image definition that you want to update."
     },
     "GalleryImageProperties": {
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of this gallery Image Definition resource. This property is updatable."
+          "description": "The description of this gallery image definition resource. This property is updatable."
         },
         "eula": {
           "type": "string",
-          "description": "The Eula agreement for the gallery Image Definition."
+          "description": "The Eula agreement for the gallery image definition."
         },
         "privacyStatementUri": {
           "type": "string",
@@ -2058,7 +2061,7 @@
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The end of life date of the gallery Image Definition. This property can be used for decommissioning purposes. This property is updatable."
+          "description": "The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable."
         },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier"
@@ -2075,7 +2078,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "title": "The current state of the gallery Image Definition.",
+          "title": "The current state of the gallery image definition.",
           "description": "The provisioning state, which only appears in the response.",
           "enum": [
             "Creating",
@@ -2092,17 +2095,17 @@
         "osState",
         "identifier"
       ],
-      "description": "Describes the properties of a gallery Image Definition."
+      "description": "Describes the properties of a gallery image definition."
     },
     "GalleryImageFeature": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the gallery Image feature."
+          "description": "The name of the gallery image feature."
         },
         "value": {
           "type": "string",
-          "description": "The value of the gallery Image feature."
+          "description": "The value of the gallery image feature."
         }
       },
       "description": "A feature for gallery image."
@@ -2111,15 +2114,15 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "The name of the gallery Image Definition publisher."
+          "description": "The name of the gallery image definition publisher."
         },
         "offer": {
           "type": "string",
-          "description": "The name of the gallery Image Definition offer."
+          "description": "The name of the gallery image definition offer."
         },
         "sku": {
           "type": "string",
-          "description": "The name of the gallery Image Definition SKU."
+          "description": "The name of the gallery image definition SKU."
         }
       },
       "required": [
@@ -2127,7 +2130,7 @@
         "offer",
         "sku"
       ],
-      "description": "This is the gallery Image Definition identifier."
+      "description": "This is the gallery image definition identifier."
     },
     "RecommendedMachineConfiguration": {
       "properties": {
@@ -2182,7 +2185,7 @@
           "description": "The product ID."
         }
       },
-      "description": "Describes the gallery Image Definition purchase plan. This is used by marketplace images."
+      "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
     },
     "GalleryImageVersion": {
       "properties": {
@@ -2196,7 +2199,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the gallery Image Version that you want to create or update."
+      "description": "Specifies information about the gallery image version that you want to create or update."
     },
     "GalleryImageVersionUpdate": {
       "properties": {
@@ -2210,7 +2213,7 @@
           "$ref": "#/definitions/UpdateResourceDefinition"
         }
       ],
-      "description": "Specifies information about the gallery Image Version that you want to update."
+      "description": "Specifies information about the gallery image version that you want to update."
     },
     "GalleryImageVersionProperties": {
       "properties": {
@@ -2220,7 +2223,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "title": "The current state of the gallery Image Version.",
+          "title": "The current state of the gallery image version.",
           "description": "The provisioning state, which only appears in the response.",
           "enum": [
             "Creating",
@@ -2242,7 +2245,7 @@
       "required": [
         "storageProfile"
       ],
-      "description": "Describes the properties of a gallery Image Version."
+      "description": "Describes the properties of a gallery image version."
     },
     "GalleryArtifactPublishingProfileBase": {
       "properties": {
@@ -2266,12 +2269,12 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp for when the gallery Image Version is published."
+          "description": "The timestamp for when the gallery image version is published."
         },
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The end of life date of the gallery Image Version. This property can be used for decommissioning purposes. This property is updatable."
+          "description": "The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable."
         },
         "storageAccountType": {
           "type": "string",
@@ -2401,7 +2404,7 @@
           "$ref": "#/definitions/GalleryArtifactPublishingProfileBase"
         }
       ],
-      "description": "The publishing profile of a gallery Image Version."
+      "description": "The publishing profile of a gallery image Version."
     },
     "GalleryImageVersionStorageProfile": {
       "properties": {
@@ -2513,14 +2516,14 @@
           "description": "This is a summary of replication status for each region."
         }
       },
-      "description": "This is the replication status of the gallery Image Version."
+      "description": "This is the replication status of the gallery image version."
     },
     "RegionalReplicationStatus": {
       "properties": {
         "region": {
           "readOnly": true,
           "type": "string",
-          "description": "The region to which the gallery Image Version is being replicated to."
+          "description": "The region to which the gallery image version is being replicated to."
         },
         "state": {
           "readOnly": true,
@@ -2581,7 +2584,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery Image Definitions."
+          "description": "The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery image definitions."
         }
       },
       "required": [
@@ -2596,11 +2599,11 @@
           "items": {
             "$ref": "#/definitions/GalleryImageVersion"
           },
-          "description": "A list of gallery Image Versions."
+          "description": "A list of gallery image versions."
         },
         "nextLink": {
           "type": "string",
-          "description": "The uri to fetch the next page of gallery Image Versions. Call ListNext() with this to fetch the next page of gallery Image Versions."
+          "description": "The uri to fetch the next page of gallery image versions. Call ListNext() with this to fetch the next page of gallery image versions."
         }
       },
       "required": [
