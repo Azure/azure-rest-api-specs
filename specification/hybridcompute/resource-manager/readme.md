@@ -24,7 +24,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07
+tag: package-2020-07-30
 ```
 
 ### Tag: package-2019-03
@@ -54,11 +54,11 @@ input-file:
 - Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
 ```
 
-### Tag: package-2020-07
+### Tag: package-2020-07-30
 
-These settings apply only when `--tag=package-2020-07` is specified on the command line.
+These settings apply only when `--tag=package-2020-07-30` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-07'
+``` yaml $(tag) == 'package-2020-07-30'
 input-file:
 - Microsoft.HybridCompute/preview/2020-07-30/HybridCompute.json
 ```
