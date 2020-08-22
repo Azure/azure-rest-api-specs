@@ -79,9 +79,6 @@
                     "$ref":"#/definitions/Machine"
                  }
               },
-              "204":{
-                 "description":"No Content"
-              },
               "default":{
                  "description":"Error response describing why the operation failed.",
                  "schema":{
@@ -90,7 +87,7 @@
               }
            },
            "x-ms-examples":{
-          "Create or update a machine resource.": {
+          "Create or Update a Machine": {
             "$ref": "./examples/Machines_CreateOrUpdate.json"
           }
            }
@@ -139,9 +136,6 @@
                     "$ref":"#/definitions/Machine"
                  }
               },
-              "204":{
-                 "description":"No Content"
-              },
               "default":{
                  "description":"Error response describing why the operation failed.",
                  "schema":{
@@ -150,7 +144,7 @@
               }
            },
            "x-ms-examples":{
-               "Update a machine resource.":{
+          "Update a Machine": {
                   "$ref": "./examples/Machines_Update.json"
                }
             }
@@ -198,7 +192,7 @@
               }
            },
            "x-ms-examples":{
-               "Delete a machine resource.": {
+          "Delete a Machine": {
                   "$ref": "./examples/Machines_Delete.json"
                }
            }
@@ -211,10 +205,10 @@
         "description": "Retrieves information about the model view or the instance view of a hybrid machine.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resourceGroupName",
@@ -241,7 +235,7 @@
             ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
-              "modelAsString": true
+              "modelAsString": false
             }
           }
         ],
@@ -255,12 +249,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-            "Get a machine resource.": {
+          "Get Machine": {
                "$ref": "./examples/Machines_Get.json"
             }
          }
@@ -275,10 +269,10 @@
         "description": "Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resourceGroupName",
@@ -298,12 +292,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-         "Get all machine resources in a resource group.": {
+          "List Machines by resource group": {
             "$ref": "./examples/Machines_ListByResourceGroup.json"
           }
         },
@@ -321,10 +315,10 @@
         "description": "Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -337,12 +331,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get all machine resources in a subscription.": {
+          "List Machines by resource group": {
             "$ref": "./examples/Machines_ListBySubscription.json"
           }
         },
@@ -390,10 +384,10 @@
             "description": "Parameters supplied to the Create Machine Extension operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -404,7 +398,7 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           }
         },
         "x-ms-examples": {
@@ -452,10 +446,10 @@
             "description": "Parameters supplied to the Create Machine Extension operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -505,10 +499,10 @@
             "description": "The name of the machine extension."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -558,10 +552,10 @@
             "description": "The name of the machine extension."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -609,10 +603,10 @@
             "description": "The expand expression to apply on the operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -642,7 +636,7 @@
         "description": "Gets a list of hybrid compute operations.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -655,7 +649,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -693,7 +687,11 @@
            },
            "display":{
               "x-ms-client-flatten":true,
-              "$ref":"#/definitions/OperationValueDisplay",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationValueDisplay"
+            }
+          ],
               "description":"Display properties"
            }
         },
@@ -736,14 +734,16 @@
         "description":"Specifies the operating system settings for the hybrid machine."
      },
      "MachineProperties":{
-        "allOf": [
-           {
-             "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
-           }
-        ],
-        "properties":{
+         "properties": {
+        "locationData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
            "osProfile":{
-              "$ref":"#/definitions/OSProfile",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OSProfile"
+            }
+          ],
               "description":"Specifies the operating system settings for the hybrid machine."
            },
            "provisioningState":{
@@ -785,8 +785,11 @@
               "description":"The hybrid machine agent full version."
            },
            "vmId":{
-              "readOnly":true,
               "type":"string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
               "description":"Specifies the hybrid machine unique ID."
            },
            "displayName":{
@@ -804,28 +807,53 @@
               "description":"Public Key that the client provides to be used during initial resource onboarding"
            },
            "osName":{
-              "readOnly":true,
+          "readOnly": true,
               "type":"string",
               "description":"The Operating System running on the hybrid machine."
            },
            "osVersion":{
-              "readOnly":true,
+          "readOnly": true,
               "type":"string",
               "description":"The version of Operating System running on the hybrid machine."
            },
-           "extensions":{
-              "type":"array",
-              "items":{
-                 "$ref":"#/definitions/MachineExtensionInstanceView"
-              },
-              "description":"Machine Extensions information"
-           }
+        "vmUUID": {
+          "type": "string",
+          "description": "Specifies the Arc Machine's unique SMBIOS ID"
         },
-        "description":"Describes the properties of a hybrid machine."
-     },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtensionInstanceView"
+          },
+          "description": "Machine Extensions information"
+        },
+        "osSku":{
+         "readOnly":true,
+         "type":"string",
+         "description":"Specifies the Operating System product SKU."
+        },
+        "domainName":{
+           "readOnly":true,
+           "type":"string",
+           "description":"Specifies the Windows domain name."
+        },
+        "adFqdn":{
+           "readOnly":true,
+           "type":"string",
+           "description":"Specifies the AD fully qualified display name."
+        },
+        "dnsFqdn":{
+         "readOnly":true,
+         "type":"string",
+         "description":"Specifies the DNS fully qualified display name."
+        }
+      },
+      "description": "Describes the properties of a hybrid machine."
+    },
      "MachineUpdateProperties":{
        "allOf": [
           {
+	  
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
           }
        ],
@@ -1139,7 +1167,7 @@
                     ],
                     "x-ms-enum":{
                        "name":"StatusLevelTypes",
-                       "modelAsString":false
+                "modelAsString": true
                     }
                  },
                  "displayStatus":{
