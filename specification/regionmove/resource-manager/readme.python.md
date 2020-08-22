@@ -8,14 +8,14 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.Migrate
-  package-name: regionmove
-  package-version: 2019-10-01-preview
+  namespace: azure.mgmt.regionmove
+  package-name: azure-mgmt-regionmove
+  package-version: 0.1.0-preview
   clear-output-folder: true
 ```
 
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/regionmove
+  output-folder: $(python-sdks-folder)/regionmove/azure-mgmt-regionmove/azure/mgmt/regionmove
 ```
