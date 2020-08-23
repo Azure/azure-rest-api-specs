@@ -3,29 +3,19 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "name": "myMachine",
-    "extensionName": "myExtension",
+    "extensionName": "CustomScriptExtension",
     "api-version": "2020-07-30-preview",
     "extensionParameters": {
-      "location": "string",
+      "name": "CustomScriptExtension",
+      "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+      "type": "Microsoft.HybridCompute/Machines/Extensions",
+      "location": "eastus2euap",
       "properties": {
-        "forceUpdateTag": "false",
-        "publisher": "string",
-        "type": "string",
-        "typeHandlerVersion": "string",
-        "autoUpgradeMinorVersion": true,
-        "settings": {},
-        "protectedSettings": {},
-        "instanceView": {
-          "name": "string",
-          "type": "string",
-          "typeHandlerVersion": "string",
-          "status": {
-            "code": "string",
-            "level": "Info",
-            "displayStatus": "string",
-            "message": "string",
-            "time": "2020-08-08T20:36:46.620Z"
-          }
+        "publisher": "Microsoft.Compute",
+        "typeHandlerVersion": "1.10",
+        "type": "CustomScriptExtension",
+        "settings": {
+          "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
         }
       }
     }
@@ -33,28 +23,26 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/myExtension",
-        "name": "string",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+        "name": "CustomScriptExtension",
         "type": "Microsoft.HybridCompute/machines/extensions",
-        "location": "string",
+        "location": "eastus2euap",
         "properties": {
-          "forceUpdateTag": "string",
-          "publisher": "string",
+          "publisher": "Microsoft.Compute",
           "type": "string",
-          "typeHandlerVersion": "string",
-          "autoUpgradeMinorVersion": true,
-          "settings": {},
+          "typeHandlerVersion": "1.10.3",
+          "autoUpgradeMinorVersion": false,
+          "settings": "@{commandToExecute=powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\"}",
           "protectedSettings": {},
-          "provisioningState": "string",
+          "provisioningState": "Succeeded",
           "instanceView": {
-            "name": "string",
-            "type": "string",
-            "typeHandlerVersion": "string",
+            "name": "CustomScriptExtension",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.10.3",
             "status": {
-              "code": "string",
-              "level": "Info",
-              "displayStatus": "string",
-              "message": "string",
+              "code": "success",
+              "level": "Information",
+              "message": "Finished executing command, StdOut: , StdErr:",
               "time": "2020-08-08T20:42:10.999Z"
             }
           }

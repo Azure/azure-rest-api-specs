@@ -5,23 +5,25 @@
     "name": "myMachine",
     "api-version": "2020-07-30-preview",
     "parameters": {
-      "location": "string",
+      "location": "eastus2euap",
       "properties": {
+        "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
         "locationData": {
-          "name": "string"
-        }
+          "name": "Redmond"
+        },
+        "clientPublicKey": "string"
+      },
+      "identity": {
+        "type": "SystemAssigned"
       }
-    },
-    "identity": {
-      "type": "SystemAssigned"
     }
   },
   "responses": {
     "200": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine",
-        "name": "string",
-        "location": "string",
+        "name": "myMachine",
+        "location": "eastus2euap",
         "tags": null,
         "identity": {
           "type": "SystemAssigned",
@@ -47,12 +49,12 @@
           "osProfile": {
             "computerName": null
           },
-          "vmId": "string",
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
           "locationData": {
-            "name": "string",
-            "city": "string",
-            "district": "string",
-            "countryOrRegion": "string"
+            "name": "Redmond",
+            "city": "redmond",
+            "district": null,
+            "countryOrRegion": "usa"
           },
           "clientPublicKey": "string"
         }
