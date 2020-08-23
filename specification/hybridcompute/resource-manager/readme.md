@@ -58,6 +58,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-07-30-preview` is specified on the command line.
 
+
 ``` yaml $(tag) == 'package-2020-07-30-preview'
 input-file:
 - Microsoft.HybridCompute/preview/2020-07-30-preview/HybridCompute.json
