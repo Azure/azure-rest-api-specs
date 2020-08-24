@@ -741,6 +741,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json
+  - $(this-folder)/Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2019-07-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json
