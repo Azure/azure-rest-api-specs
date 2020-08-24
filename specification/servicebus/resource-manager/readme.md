@@ -48,10 +48,10 @@ input-file:
 - Microsoft.ServiceBus/stable/2017-04-01/operations.json
 - Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
 - Microsoft.ServiceBus/stable/2017-04-01/Queue.json
-- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
 - Microsoft.ServiceBus/stable/2017-04-01/sku.json
 - Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
 - Microsoft.ServiceBus/stable/2017-04-01/topics.json
+- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
 ```
 
 ### Tag: package-2017-04
