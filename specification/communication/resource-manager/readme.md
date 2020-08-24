@@ -27,7 +27,49 @@ These are the global settings for the Azure Communication Services API.
 ```yaml
 title: CommunicationServiceManagementClient
 openapi-type: arm
-tag: package-2019-10-10-preview
+tag: package-2020-08-20-preview
+```
+
+### Tag: package-2020-08-20-preview
+
+These settings apply only when `--tag=package-2020-08-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-preview'
+input-file:
+  - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
+```
+
+```yaml $(tag) == 'package-2020-08-20-preview' && $(generate-private)
+input-file:
+  - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService-private.json
+```
+
+### Tag: package-2020-08-20-rc
+
+These settings apply only when `--tag=package-2020-08-20-rc` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-rc'
+input-file:
+  - Microsoft.Communication/preview/2020-08-20-rc/CommunicationService.json
+```
+
+```yaml $(tag) == 'package-2020-08-20-rc' && $(generate-private)
+input-file:
+  - Microsoft.Communication/preview/2020-08-20-rc/CommunicationService-private.json
+```
+
+### Tag: package-2020-08-20-beta
+
+These settings apply only when `--tag=package-2020-08-20-beta` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20-beta'
+input-file:
+  - Microsoft.Communication/preview/2020-08-20-beta/CommunicationService.json
+```
+
+```yaml $(tag) == 'package-2020-08-20-beta' && $(generate-private)
+input-file:
+  - Microsoft.Communication/preview/2020-08-20-beta/CommunicationService-private.json
 ```
 
 ### Tag: package-2019-10-10-preview
