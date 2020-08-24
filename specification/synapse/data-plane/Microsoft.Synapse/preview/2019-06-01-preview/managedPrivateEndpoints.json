@@ -1,0 +1,299 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "VnetClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "parameters": [
+      {
+        "name": "workspaceName",
+        "description": "The name of the workspace to execute operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "description": "Get Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get a managed private endpoint": {
+            "$ref": "./examples/GetManagedPrivateEndpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Create",
+        "description": "Create Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Create a managed private endpoint": {
+            "$ref": "./examples/CreateManagedPrivateEndpoint.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "description": "Delete Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Already deleted"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a managed private endpoint": {
+            "$ref": "./examples/DeleteManagedPrivateEndpoint.json"
+          }
+        }
+      }
+    },
+    "/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_List",
+        "description": "List Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointListResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed private endpoints": {
+            "$ref": "./examples/ListManagedPrivateEndpoints.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedPrivateEndpointListResponse": {
+      "description": "A list of managed private endpoints",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed private endpoints",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpoint": {
+      "description": "Managed private endpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedPrivateEndpointProperties",
+          "description": "Managed private endpoint properties"
+        }
+      }
+    },
+    "ManagedPrivateEndpointProperties": {
+      "description": "Properties of a managed private endpoint",
+      "type": "object",
+      "properties": {
+        "privateLinkResourceId": {
+          "description": "The ARM resource ID of the resource to which the managed private endpoint is created",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "The groupId to which the managed private endpoint is created",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The managed private endpoint provisioning state",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionState": {
+          "description": "The managed private endpoint connection state",
+          "$ref": "#/definitions/ManagedPrivateEndpointConnectionState"
+        },
+        "isReserved": {
+          "description": "Denotes whether the managed private endpoint is reserved",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointConnectionState": {
+      "description": "The connection state of a managed private endpoint",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The approval status",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The managed private endpoint description",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required on the managed private endpoint",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "SynapseDnsSuffixInPath": {
+      "name": "SynapseDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "dev.azuresynapse.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
+      "x-ms-parameter-location": "client"
+    },
+    "ManagedVirtualNetworkNameParameter": {
+      "name": "managedVirtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Managed virtual network name",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedPrivateEndpointNameParameter": {
+      "name": "managedPrivateEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Managed private endpoint name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

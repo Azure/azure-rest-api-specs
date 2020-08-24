@@ -209,6 +209,9 @@
         "x-ms-examples": {
           "StorageAccountGetProperties": {
             "$ref": "./examples/StorageAccountGetProperties.json"
+          },
+          "StorageAccountGetPropertiesCMKEnabled": {
+            "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
           }
         },
         "parameters": [
@@ -226,12 +229,13 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats.",
+            "description": "May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "geoReplicationStats"
+              "geoReplicationStats",
+              "blobRestoreStatus"
             ],
             "x-ms-enum": {
               "name": "StorageAccountExpand",
@@ -260,6 +264,9 @@
           },
           "StorageAccountEnableAD": {
             "$ref": "./examples/StorageAccountEnableAD.json"
+          },
+          "StorageAccountEnableCMK": {
+            "$ref": "./examples/StorageAccountEnableCMK.json"
           }
         },
         "parameters": [
@@ -599,7 +606,7 @@
         "operationId": "StorageAccounts_Failover",
         "description": "Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account's primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover.",
         "x-ms-examples": {
-          "StorageAccountCreate": {
+          "StorageAccountFailover": {
             "$ref": "./examples/StorageAccountFailover.json"
           }
         },
@@ -623,6 +630,61 @@
           },
           "202": {
             "description": "Accepted -- Failover request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_RestoreBlobRanges",
+        "description": "Restore blobs in the specified blob ranges",
+        "x-ms-examples": {
+          "BlobRangesRestore": {
+            "$ref": "./examples/BlobRangesRestore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobRestoreParameters"
+            },
+            "description": "The parameters to provide for restore blob ranges."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- returned when blob ranges are restored completely with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/BlobRestoreStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Blob restore request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/BlobRestoreStatus"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -753,6 +815,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "List all the private endpoint connections associated with the storage account.",
+        "x-ms-examples": {
+          "StorageAccountListPrivateEndpointConnections": {
+            "$ref": "./examples/StorageAccountListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -779,14 +880,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Get the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -822,14 +923,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "The private endpoint connection properties."
           }
@@ -838,7 +939,7 @@
           "200": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -874,7 +975,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -923,7 +1024,201 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies": {
+      "get": {
+        "tags": [
+          "ObjectReplicationPolicies"
+        ],
+        "operationId": "ObjectReplicationPolicies_List",
+        "description": "List the object replication policies associated with the storage account.",
+        "x-ms-examples": {
+          "StorageAccountListObjectReplicationPolicies": {
+            "$ref": "./examples/StorageAccountListObjectReplicationPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List object replication policies successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObjectReplicationPolicies"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}": {
+      "get": {
+        "tags": [
+          "ObjectReplicationPolicies"
+        ],
+        "operationId": "ObjectReplicationPolicies_Get",
+        "description": "Get the object replication policy of the storage account by policy ID.",
+        "x-ms-examples": {
+          "StorageAccountGetObjectReplicationPolicies": {
+            "$ref": "./examples/StorageAccountGetObjectReplicationPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectReplicationPolicyId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the object replication policy successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObjectReplicationPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ObjectReplicationPolicies"
+        ],
+        "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
+        "description": "Create or update the object replication policy of the storage account.",
+        "x-ms-examples": {
+          "StorageAccountCreateObjectReplicationPolicyOnDestination": {
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnDestination.json"
+          },
+          "StorageAccountCreateObjectReplicationPolicyOnSource": {
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnSource.json"
+          },
+          "StorageAccountUpdateObjectReplicationPolicyOnDestination": {
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnDestination.json"
+          },
+          "StorageAccountUpdateObjectReplicationPolicyOnSource": {
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnSource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectReplicationPolicyId"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObjectReplicationPolicy"
+            },
+            "description": "The object replication policy set to a storage account. A unique policy ID will be created if absent."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Put object replication policy successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObjectReplicationPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ObjectReplicationPolicies"
+        ],
+        "operationId": "ObjectReplicationPolicies_Delete",
+        "description": "Deletes the object replication policy associated with the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountDeleteObjectReplicationPolicies": {
+            "$ref": "./examples/StorageAccountDeleteObjectReplicationPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectReplicationPolicyId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the object replication policy successfully."
+          },
+          "204": {
+            "description": "No Content -- The object replication policy does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -965,6 +1260,200 @@
           "200": {
             "description": "OK -- revoke user delegation keys succeeded."
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}": {
+      "put": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_Put",
+        "description": "Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request.",
+        "x-ms-examples": {
+          "StorageAccountPutEncryptionScope": {
+            "$ref": "./examples/StorageAccountPutEncryptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScopeName"
+          },
+          {
+            "name": "encryptionScope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            },
+            "description": "Encryption scope properties to be used for the create or update."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- Create encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "200": {
+            "description": "OK -- Update encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_Patch",
+        "description": "Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.",
+        "x-ms-examples": {
+          "StorageAccountPatchEncryptionScope": {
+            "$ref": "./examples/StorageAccountPatchEncryptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScopeName"
+          },
+          {
+            "name": "encryptionScope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            },
+            "description": "Encryption scope properties to be used for the update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_Get",
+        "description": "Returns the properties for the specified encryption scope.",
+        "x-ms-examples": {
+          "StorageAccountGetEncryptionScope": {
+            "$ref": "./examples/StorageAccountGetEncryptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes": {
+      "get": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_List",
+        "description": "Lists all the encryption scopes available under the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountEncryptionScopeList": {
+            "$ref": "./examples/StorageAccountEncryptionScopeList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List encryption scopes operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScopeListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1296,6 +1785,22 @@
           "type": "string",
           "format": "date-time",
           "description": "Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate."
+        },
+        "keyType": {
+          "type": "string",
+          "description": "Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used.",
+          "enum": [
+            "Service",
+            "Account"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "description": "A service that allows server-side encryption to be used."
@@ -1312,12 +1817,10 @@
         },
         "table": {
           "$ref": "#/definitions/EncryptionService",
-          "readOnly": true,
           "description": "The encryption function of the table storage service."
         },
         "queue": {
           "$ref": "#/definitions/EncryptionService",
-          "readOnly": true,
           "description": "The encryption function of the queue storage service."
         }
       },
@@ -1340,6 +1843,19 @@
           "type": "string",
           "description": "The Uri of KeyVault.",
           "x-ms-client-name": "KeyVaultUri"
+        },
+        "currentVersionedKeyIdentifier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object identifier of the current versioned Key Vault Key in use.",
+          "x-ms-client-name": "CurrentVersionedKeyIdentifier"
+        },
+        "lastKeyRotationTimestamp": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Timestamp of last rotation of the Key Vault Key.",
+          "x-ms-client-name": "LastKeyRotationTimestamp"
         }
       }
     },
@@ -1361,6 +1877,11 @@
             "modelAsString": true
           },
           "default": "Microsoft.Storage"
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "x-ms-client-name": "RequireInfrastructureEncryption",
+          "description": "A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest."
         },
         "keyvaultproperties": {
           "$ref": "#/definitions/KeyVaultProperties",
@@ -1610,6 +2131,24 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1852,6 +2391,40 @@
       },
       "description": "Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing"
     },
+    "BlobRestoreStatus": {
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed.",
+          "enum": [
+            "InProgress",
+            "Complete",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "BlobRestoreProgressStatus",
+            "modelAsString": true
+          }
+        },
+        "failureReason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Failure reason when blob restore is failed."
+        },
+        "restoreId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id for tracking blob restore request."
+        },
+        "parameters": {
+          "readOnly": true,
+          "$ref": "#/definitions/BlobRestoreParameters",
+          "description": "Blob restore request parameters."
+        }
+      },
+      "description": "Blob restore status."
+    },
     "StorageAccountProperties": {
       "properties": {
         "provisioningState": {
@@ -1997,7 +2570,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "description": "List of private endpoint connection associated with the specified storage account"
         },
@@ -2005,6 +2578,30 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "blobRestoreStatus": {
+          "$ref": "#/definitions/BlobRestoreStatus",
+          "x-ms-client-name": "BlobRestoreStatus",
+          "description": "Blob restore status",
+          "readOnly": true
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "Properties of the storage account."
@@ -2172,6 +2769,24 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -2215,6 +2830,44 @@
         }
       },
       "description": "The parameters that can be provided when updating the storage account properties."
+    },
+    "BlobRestoreParameters": {
+      "properties": {
+        "timeToRestore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore blob to the specified time."
+        },
+        "blobRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobRestoreRange"
+          },
+          "description": "Blob ranges to restore."
+        }
+      },
+      "required": [
+        "timeToRestore",
+        "blobRanges"
+      ],
+      "description": "Blob restore parameters"
+    },
+    "BlobRestoreRange": {
+      "properties": {
+        "startRange": {
+          "type": "string",
+          "description": "Blob start range. This is inclusive. Empty means account start."
+        },
+        "endRange": {
+          "type": "string",
+          "description": "Blob end range. This is exclusive. Empty means account end."
+        }
+      },
+      "required": [
+        "startRange",
+        "endRange"
+      ],
+      "description": "Blob range"
     },
     "UsageName": {
       "properties": {
@@ -2591,7 +3244,7 @@
             "Lifecycle"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "RuleType",
             "modelAsString": true
           }
         },
@@ -2638,12 +3291,45 @@
             "type": "string"
           },
           "description": "An array of predefined enum values. Only blockBlob is supported."
+        },
+        "blobIndexMatch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagFilter"
+          },
+          "description": "An array of blob index tag based filters, there can be at most 10 tag filters"
         }
       },
       "required": [
         "blobTypes"
       ],
       "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. "
+    },
+    "TagFilter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "This is the filter tag name, it can have 1 - 128 characters"
+        },
+        "op": {
+          "type": "string",
+          "description": "This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "description": "This is the filter tag value field used for tag based filtering, it can have 0 - 256 characters"
+        }
+      },
+      "required": [
+        "name",
+        "op",
+        "value"
+      ],
+      "description": "Blob index tag based filtering for blob objects"
     },
     "ManagementPolicyAction": {
       "properties": {
@@ -2712,12 +3398,13 @@
       ],
       "description": "Object to define the number of days after creation."
     },
-    "PrivateEndpointConnection": {
+    "EncryptionScope": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/EncryptionScopeProperties",
           "x-ms-client-flatten": true,
-          "description": "Resource properties."
+          "x-ms-client-name": "EncryptionScopeProperties",
+          "description": "Properties of the encryption scope."
         }
       },
       "allOf": [
@@ -2725,101 +3412,98 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
-      "description": "The Private Endpoint Connection resource."
+      "description": "The Encryption Scope resource."
     },
-    "PrivateEndpointConnectionProperties": {
+    "EncryptionScopeProperties": {
       "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The resource of private end point."
+        "source": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Storage",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionScopeSource",
+            "modelAsString": true
+          },
+          "description": "The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault."
         },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionScopeState",
+            "modelAsString": true
+          },
+          "description": "The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled."
         },
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource."
-        }
-      },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ],
-      "description": "Properties of the PrivateEndpointConnectProperties."
-    },
-    "PrivateEndpoint": {
-      "properties": {
-        "id": {
+        "creationTime": {
           "readOnly": true,
           "type": "string",
-          "description": "The ARM identifier for Private Endpoint"
+          "format": "date-time",
+          "description": "Gets the creation date and time of the encryption scope in UTC."
+        },
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last modification date and time of the encryption scope in UTC."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/EncryptionScopeKeyVaultProperties",
+          "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."
         }
       },
-      "description": "The Private Endpoint resource."
+      "description": "Properties of the encryption scope."
     },
-    "PrivateLinkServiceConnectionState": {
+    "EncryptionScopeKeyVaultProperties": {
       "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
+        "keyUri": {
           "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+          "description": "The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope."
         }
       },
-      "description": "A collection of information about the state of the connection between service consumer and provider."
+      "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."
     },
-    "PrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "PrivateLinkResourceListResult": {
+    "EncryptionScopeListResult": {
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private link resources",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
+            "$ref": "#/definitions/EncryptionScope"
+          },
+          "description": "List of encryption scopes requested.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size.",
+          "readOnly": true
         }
       },
-      "description": "A list of private link resources"
+      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes."
     },
-    "PrivateLinkResource": {
+    "ObjectReplicationPolicies": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectReplicationPolicy"
+          },
+          "description": "The replication policy between two storage accounts."
+        }
+      },
+      "description": "List storage account object replication policies."
+    },
+    "ObjectReplicationPolicy": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ObjectReplicationPolicyProperties",
+          "x-ms-client-flatten": true,
+          "description": "Returns the Storage Account Object Replication Policy."
         }
       },
       "allOf": [
@@ -2827,32 +3511,83 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
-      "description": "A private link resource"
+      "description": "The replication policy between two storage accounts. Multiple rules can be defined in one policy."
     },
-    "PrivateLinkResourceProperties": {
+    "ObjectReplicationPolicyProperties": {
       "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
+        "policyId": {
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
+          "description": "A unique id for object replication policy."
         },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
+        "enabledTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates when the policy is enabled on the source account."
+        },
+        "sourceAccount": {
+          "type": "string",
+          "description": "Required. Source account name."
+        },
+        "destinationAccount": {
+          "type": "string",
+          "description": "Required. Destination account name."
+        },
+        "rules": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ObjectReplicationPolicyRule"
           },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The private link resource Private link DNS zone name."
+          "description": "The storage account object replication rules."
         }
       },
-      "description": "Properties of a private link resource."
+      "required": [
+        "sourceAccount",
+        "destinationAccount"
+      ],
+      "description": "The Storage Account ObjectReplicationPolicy properties."
+    },
+    "ObjectReplicationPolicyRule": {
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Rule Id is auto-generated for each new rule on destination account. It is required for put policy on source account."
+        },
+        "sourceContainer": {
+          "type": "string",
+          "description": "Required. Source container name."
+        },
+        "destinationContainer": {
+          "type": "string",
+          "description": "Required. Destination container name."
+        },
+        "filters": {
+          "$ref": "#/definitions/ObjectReplicationPolicyFilter",
+          "description": "Optional. An object that defines the filter set."
+        }
+      },
+      "required": [
+        "sourceContainer",
+        "destinationContainer"
+      ],
+      "description": "The replication policy rule between two containers."
+    },
+    "ObjectReplicationPolicyFilter": {
+      "properties": {
+        "prefixMatch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. Filters the results to replicate only blobs whose names begin with the specified prefix."
+        },
+        "minCreationTime": {
+          "type": "string",
+          "description": "Blobs created after the time will be replicated to the destination. It must be in datetime format 'yyyy-MM-ddTHH:mm:ssZ'. Example: 2020-02-19T16:05:00Z"
+        }
+      },
+      "description": "Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters."
     },
     "ErrorResponse": {
       "properties": {
@@ -2905,12 +3640,23 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "PrivateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
+    "EncryptionScopeName": {
+      "name": "encryptionScopeName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection associated with the Storage Account",
+      "description": "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+      "maxLength": 63,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ObjectReplicationPolicyId": {
+      "name": "objectReplicationPolicyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of object replication policy or 'default' if the policy ID is unknown.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   },

@@ -5,7 +5,7 @@
     "title": "DeploymentAdminClient",
     "description": "Deployment Admin Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/ProductPackagesList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -49,7 +55,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages/{productId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages/{packageId}": {
       "get": {
         "x-ms-examples": {
           "Return the product package details.": {
@@ -66,7 +72,7 @@
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
           },
           {
             "$ref": "Deployment.json#/parameters/ApiVersionParameter"
@@ -79,8 +85,11 @@
               "$ref": "#/definitions/ProductPackage"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -100,7 +109,10 @@
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductPackageParameters"
           },
           {
             "$ref": "Deployment.json#/parameters/ApiVersionParameter"
@@ -115,6 +127,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -135,7 +153,7 @@
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
           },
           {
             "$ref": "Deployment.json#/parameters/ApiVersionParameter"
@@ -145,8 +163,14 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not found"
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -246,9 +270,40 @@
       "items": {
         "$ref": "#/definitions/ProductLink"
       }
+    },
+    "ProductPackageParameters": {
+      "description": "Parameters for creating a new product package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Specifies the product package",
+          "$ref": "#/definitions/ProductPackageBody"
+        }
+      }
+    },
+    "ProductPackageBody": {
+      "description": "Body for creating a new product package.",
+      "type": "object",
+      "properties": {
+        "fileContainerId": {
+          "description": "Specifies the file container.",
+          "$ref": "#/definitions/FileContainerId"
+        }
+      }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "ProductPackageParameters": {
+      "description": "The parameters required to create a new product package.",
+      "name": "ProductPackageParameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ProductPackageParameters"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",

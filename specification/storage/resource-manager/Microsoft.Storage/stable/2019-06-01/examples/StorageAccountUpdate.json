@@ -7,6 +7,8 @@
     "monitor": "true",
     "parameters": {
       "properties": {
+        "allowBlobPublicAccess": false,
+        "minimumTlsVersion": "TLS1_2",
         "networkAcls": {
           "defaultAction": "Allow"
         },
@@ -14,6 +16,19 @@
           "routingChoice": "MicrosoftRouting",
           "publishMicrosoftEndpoints": true,
           "publishInternetEndpoints": true
+        },
+        "encryption": {
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": true
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
         }
       }
     }
@@ -27,6 +42,8 @@
         "name": "sto8596",
         "properties": {
           "isHnsEnabled": true,
+          "allowBlobPublicAccess": false,
+          "minimumTlsVersion": "TLS1_2",
           "creationTime": "2017-06-01T02:42:41.7633306Z",
           "networkAcls": {
             "bypass": "AzureServices",
@@ -62,6 +79,21 @@
             "routingChoice": "MicrosoftRouting",
             "publishMicrosoftEndpoints": true,
             "publishInternetEndpoints": true
+          },
+          "encryption": {
+            "services": {
+              "file": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "blob": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            },
+            "keySource": "Microsoft.Storage"
           },
           "secondaryLocation": "northcentralus(stage)",
           "statusOfPrimary": "available",

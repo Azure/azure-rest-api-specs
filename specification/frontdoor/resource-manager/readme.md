@@ -28,8 +28,62 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2019-11
+tag: package-2020-05
 ```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Network/stable/2020-05-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-05-01/frontdoor.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Network/stable/2020-04-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-04-01/frontdoor.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.Network/stable/2020-01-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-01-01/frontdoor.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
 
 ### Tag: package-2019-11
 
@@ -145,6 +199,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js frontdoor/resource-manager
 ```
 
 
@@ -203,6 +260,10 @@ directive:
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -215,10 +276,17 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
-  - $(this-folder)/Microsoft.Network/stable/2019-05-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2020-05-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2020-01-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-01-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2019-05-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2019-04-01/frontdoor.json
