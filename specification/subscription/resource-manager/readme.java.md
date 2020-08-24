@@ -10,14 +10,38 @@ namespace: com.microsoft.azure.management.subscription
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-subscription
+directive:
+  - rename-operation:
+      from: Subscription_Cancel
+      to: SubscriptionService_Cancel
+  - rename-operation:
+      from: Subscription_Rename
+      to: SubscriptionService_Rename
+  - rename-operation:
+      from: Subscription_Enable
+      to: SubscriptionService_Enable	  
 ```
 
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-09
   - tag: package-2019-10-preview
   - tag: package-2017-11-preview
+```
+
+### Tag: package-2020-09 and java
+
+These settings apply only when `--tag=package-2020-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.subscription.v2020_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2020_09_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-10-preview and java
