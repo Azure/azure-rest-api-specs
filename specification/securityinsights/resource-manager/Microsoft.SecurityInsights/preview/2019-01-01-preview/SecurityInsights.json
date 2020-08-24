@@ -7521,9 +7521,34 @@
         "triggerThreshold": {
           "description": "The threshold triggers this alert rule.",
           "type": "integer"
+        },
+        "eventGroupingSettings": {
+          "$ref": "#/definitions/EventGroupingSettings",
+          "description": "The event grouping settings."
         }
       },
       "type": "object"
+    },
+    "EventGroupingSettings": {
+      "description": "Event grouping settings property bag.",
+      "properties": {
+        "aggregationKind": {
+          "$ref": "#/definitions/EventGroupingAggregationKind"
+        }
+      },
+      "type": "object"
+    },
+    "EventGroupingAggregationKind": {
+      "description": "The event grouping aggregation kinds",
+      "enum": [
+        "SingleAlert",
+        "AlertPerResult"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EventGroupingAggregationKind"
+      }
     },
     "ScheduledAlertRuleProperties": {
       "allOf": [
