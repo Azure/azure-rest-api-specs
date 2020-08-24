@@ -2376,6 +2376,9 @@
             "modelAsString": true
           }
         },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionPropertiesDescription"
+        },
         "locations": {
           "description": "Primary and secondary location for iot hub",
           "readOnly": true,
@@ -4147,6 +4150,29 @@
             "name": "IotHubReplicaRoleType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "EncryptionPropertiesDescription": {
+      "description": "The encryption properties for the IoT hub.",
+      "type": "object",
+      "properties": {
+        "keySource": {
+          "description": "The source of the key.",
+          "type": "string"
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultKeyProperties"
+        }
+      }
+    },
+    "KeyVaultKeyProperties": {
+      "description": "The properties of the KeyVault key",
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "type": "string",
+          "description": "The identifier of the key"
         }
       }
     }
