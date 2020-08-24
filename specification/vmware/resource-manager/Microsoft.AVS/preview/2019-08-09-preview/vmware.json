@@ -43,6 +43,10 @@
       "description": ""
     },
     {
+      "name": "VMWareDatastoreBackings",
+      "description": ""
+    },
+    {
       "name": "Operations",
       "description": ""
     },
@@ -88,6 +92,14 @@
       "required": true,
       "type": "string",
       "description": "Name of the cluster in the private cloud",
+      "x-ms-parameter-location": "method"
+    },
+    "vmwareDatastoreBackingName": {
+      "name": "vmwareDatastoreBackingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the datastore backing (eg. remote NFS/iSCSI volumes) which is used for datastores in the private cloud",
       "x-ms-parameter-location": "method"
     }
   },
@@ -793,6 +805,55 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/vmwareDatastoreBackings/{vmwareDatastoreBackingName}": {
+      "put": {
+        "operationId": "VMWareDatastoreBackings_Create",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "VMWareDatastoreBackings"
+        ],
+        "summary": "Create a datastore backing for the private cloud",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/vmwareDatastoreBackingName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/vmwareDatastoreBacking"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VMWareDatastoreBackings_Create": {
+            "$ref": "./examples/VMWareDatastoreBackings_Create.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1258,6 +1319,78 @@
           ],
           "x-ms-enum": {
             "name": "ClusterProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VMWareDatastoreBacking": {
+      "description": "A datastore backing resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a datastore backing",
+          "$ref": "#/definitions/VMWareDatastoreBackingProperties"
+        }
+      }
+    },
+    "VMWareDatastoreBackingProperties": {
+      "description": "The properties of a datastore backing",
+      "properties": {
+        "backingType": {
+          "description": "The type or protocol of the datastore backing",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NFSv3",
+            "iSCSI"
+          ],
+          "x-ms-enum": {
+            "name": "DatastoreBackingType",
+            "modelAsString": true
+          }
+        },
+        "rsize": {
+          "description": "Block size for data read",
+          "readOnly": true,
+          "type": "integer",
+          "default": "1048576"
+        },
+        "wsize": {
+          "description": "Block size for data write",
+          "readOnly": true,
+          "type": "integer",
+          "default": "1048576"
+        },
+        "storageIP": {
+          "description": "IP address of device hosting storage",
+          "readOnly": true,
+          "type": "string"
+        },
+        "storageFilePath": {
+          "description": "A unique file path for the volume. Used when creating mount targets",
+          "readOnly": true,
+          "type": "string"
+        },
+        "storageVolumeName": {
+          "description": "Volume name of remote storage",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The state of the cluster provisioning",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DatastoreBackingProvisioningState",
             "modelAsString": true
           }
         }
