@@ -18,19 +18,38 @@
               "provisioningState": "Succeeded",
               "managedApplicationTemplate": {},
               "virtualNetworkFunctionTemplate": {
-                "virutalNetworkFunctionRoleConfigurations": [
+                "virtualNetworkFunctionRoleConfigurations": [
                   {
                     "roleName": "test",
                     "roleType": "VirtualMachine",
                     "virtualMachineSize": "Standard_D3_v2",
-                    "imageReference": {
-                      "osType": "Linux",
-                      "vhdName": "vhdName",
-                      "vhdType": "VHD"
+                    "storageProfile": {
+                      "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "18.04-LTS",
+                        "version": "18.04.201804262"
+                      },
+                      "osDisk": {
+                        "osType": "Linux",
+                        "name": "vhdName",
+                        "diskSizeGB": 30
+                      },
+                      "dataDisks": [
+                        {
+                          "createOption": "Empty",
+                          "name": "DataDisk1",
+                          "diskSizeGB": 10
+                        }
+                      ]
                     },
                     "osProfile": {
                       "adminUsername": "dummyuser",
-                      "sshPublicKey": null
+                      "sshPublicKey": null,
+                      "customData": null
+                    },
+                    "customProfile": {
+                      "metadataConfigurationPath": "/var/logs/network.cfg"
                     },
                     "networkInterfaces": [
                       {
@@ -79,19 +98,38 @@
               "provisioningState": "Succeeded",
               "managedApplicationTemplate": {},
               "virtualNetworkFunctionTemplate": {
-                "virutalNetworkFunctionRoleConfigurations": [
+                "virtualNetworkFunctionRoleConfigurations": [
                   {
                     "roleName": "test",
                     "roleType": "VirtualMachine",
                     "virtualMachineSize": "Standard_D3_v2",
-                    "imageReference": {
-                      "osType": "Linux",
-                      "vhdName": "vhdName",
-                      "vhdType": "VHD"
+                    "storageProfile": {
+                      "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "18.04-LTS",
+                        "version": "18.04.201804262"
+                      },
+                      "osDisk": {
+                        "osType": "Linux",
+                        "name": "vhdName",
+                        "diskSizeGB": 30
+                      },
+                      "dataDisks": [
+                        {
+                          "createOption": "Empty",
+                          "name": "DataDisk1",
+                          "diskSizeGB": 10
+                        }
+                      ]
                     },
                     "osProfile": {
                       "adminUsername": "dummyuser",
-                      "sshPublicKey": null
+                      "sshPublicKey": null,
+                      "customData": null
+                    },
+                    "customProfile": {
+                      "metadataConfigurationPath": "/var/logs/network.cfg"
                     },
                     "networkInterfaces": [
                       {

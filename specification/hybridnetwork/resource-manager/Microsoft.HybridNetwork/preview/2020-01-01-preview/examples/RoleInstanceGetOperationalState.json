@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "locationName": "eastus",
+    "vendorName": "testVendor",
+    "serviceKey": "testServiceKey",
+    "roleInstanceNames": {
+      "roleInstanceNames": [
+        "mrm",
+        "msm"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "roleInstances": [
+          {
+            "properties": {
+              "roleInstanceName": "mrm",
+              "operationalState": "Running"
+            }
+          },
+          {
+            "properties": {
+              "roleInstanceName": "msm",
+              "operationalState": "Stopped"
+            }
+          }
+        ],
+        "nextLink": "string"
+      }
+    }
+  }
+}

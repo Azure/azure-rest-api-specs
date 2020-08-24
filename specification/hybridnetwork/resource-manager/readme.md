@@ -41,6 +41,7 @@ input-file:
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/operations.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendor.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunctionVendors.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendorVirtualNetworkFunction.json
 ```
 
 # Code Generation
