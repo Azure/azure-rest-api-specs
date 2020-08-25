@@ -1033,8 +1033,8 @@
         "tags": [
           "ManagedClusters"
         ],
-        "operationId": "ManagedClusters_StopManagedCluster",
-        "summary": "Stops a Running Managed Cluster",
+        "operationId": "ManagedClusters_Stop",
+        "summary": "Stop Managed Cluster",
         "description": "Stops a Running Managed Cluster",
         "parameters": [
           {
@@ -1060,6 +1060,12 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Rotate Cluster Certificates": {
+            "$ref": "./examples/ManagedClustersStop.json"
+          }
         }
       }
     },
@@ -1068,8 +1074,8 @@
         "tags": [
           "ManagedClusters"
         ],
-        "operationId": "ManagedClusters_StartManagedCluster",
-        "summary": "Starts a Stopped Managed Cluster",
+        "operationId": "ManagedClusters_Start",
+        "summary": "Start Managed Cluster",
         "description": "Starts a Stopped Managed Cluster",
         "parameters": [
           {
@@ -1094,6 +1100,12 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Rotate Cluster Certificates": {
+            "$ref": "./examples/ManagedClustersStart.json"
           }
         }
       }
@@ -2425,6 +2437,7 @@
       "description": "Properties of the managed cluster."
     },
     "PowerState": {
+      "description": "Describes the Power State of the cluster",
       "properties": {
         "code": {
           "type": "string",
