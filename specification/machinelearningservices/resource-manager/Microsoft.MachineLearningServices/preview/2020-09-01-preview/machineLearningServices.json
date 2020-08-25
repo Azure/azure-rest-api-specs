@@ -1904,7 +1904,7 @@
       "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/amlResource"
         }
       ],
       "properties": {
@@ -2033,7 +2033,7 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/amlSku",
+          "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         },
         "properties": {
@@ -2597,7 +2597,7 @@
         }
       }
     },
-    "Resource": {
+    "amlResource": {
       "description": "Azure Resource Manager resource envelope.",
       "x-ms-azure-resource": true,
       "properties": {
@@ -2632,7 +2632,7 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/amlSku",
+          "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         }
       }
@@ -2725,7 +2725,7 @@
       "description": "Machine Learning compute object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/amlResource"
         },
         {
           "type": "object",
@@ -3761,7 +3761,7 @@
         }
       }
     },
-    "amlSku": {
+    "Sku": {
       "description": "Sku of the resource",
       "type": "object",
       "properties": {
@@ -3785,7 +3785,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/amlResource"
         }
       ],
       "description": "The Private Endpoint Connection resource."
@@ -3889,7 +3889,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/amlResource"
         }
       ],
       "description": "A private link resource"
@@ -4056,7 +4056,7 @@
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/amlResource"
         },
         {
           "type": "object",
