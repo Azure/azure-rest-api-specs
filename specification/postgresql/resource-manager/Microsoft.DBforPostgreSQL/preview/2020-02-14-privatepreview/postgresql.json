@@ -989,7 +989,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/keys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/keys": {
       "get": {
         "tags": [
           "ServerKeys"
@@ -1034,7 +1034,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/keys/{keyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/keys/{keyName}": {
       "get": {
         "tags": [
           "ServerKeys"
@@ -1242,7 +1242,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/locations/{locationName}/capabilities": {
       "get": {
         "tags": [
           "LocationBasedCapabilities"
@@ -1270,6 +1270,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CapabilitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1321,13 +1327,15 @@
           "description": "storage MB name",
           "readOnly": true
         },
-        "supportedIOPS": {
+        "supportedIops": {
           "type": "integer",
+          "format": "int64",
           "description": "supported IOPS",
           "readOnly": true
         },
         "storageSizeMB": {
           "type": "integer",
+          "format": "int64",
           "description": "storage size in MB",
           "readOnly": true
         }
@@ -1344,16 +1352,19 @@
         },
         "vCores": {
           "type": "integer",
+          "format": "int64",
           "description": "supported vCores",
           "readOnly": true
         },
-        "supportedIOPS": {
+        "supportedIops": {
           "type": "integer",
+          "format": "int64",
           "description": "supported IOPS",
           "readOnly": true
         },
         "supportedMemoryPerVcoreMB": {
           "type": "integer",
+          "format": "int64",
           "description": "supported memory per vCore in MB",
           "readOnly": true
         }
@@ -1611,6 +1622,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
+          "readOnly": true,
           "description": "public network access is enabled or not",
           "enum": [
             "Enabled",
