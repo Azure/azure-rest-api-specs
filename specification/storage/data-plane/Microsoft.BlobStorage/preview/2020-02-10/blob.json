@@ -10075,6 +10075,52 @@
         }
       }
     },
+    "ArrowConfiguration" : {
+      "xml": {
+        "name": "ArrowConfiguration"
+      },
+      "description": "arrow configuration",
+      "type": "object",
+      "required": [
+        "Schema"
+      ],
+      "properties": {
+        "Schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArrowField"
+          },
+          "xml": {
+            "wrapped": true,
+            "name": "Schema"
+          }
+        }
+      }
+    },
+    "ArrowField": {
+      "xml": {
+        "name": "Field"
+      },
+      "description": "field of an arrow schema",
+      "type": "object",
+      "required": [
+        "Type"
+      ],
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Precision": {
+          "type": "integer"
+        },
+        "Scale": {
+          "type": "integer"
+        }
+      }
+    },
     "ListContainersSegmentResponse": {
       "xml": {
         "name": "EnumerationResults"
@@ -10574,6 +10620,9 @@
         },
         "JsonTextConfiguration": {
           "$ref": "#/definitions/JsonTextConfiguration"
+        },
+        "ArrowConfiguration": {
+          "$ref": "#/definitions/ArrowConfiguration"
         }
       }
     },
@@ -10596,7 +10645,8 @@
       "description": "The quick query format type.",
       "enum": [
         "delimited",
-        "json"
+        "json",
+        "arrow"
       ],
       "x-ms-enum": {
         "name": "QueryFormatType",
