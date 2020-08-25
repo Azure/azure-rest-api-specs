@@ -54,7 +54,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the subnet."
+            "description": "The name of the public IP address."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -109,7 +109,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the subnet."
+            "description": "The name of the public IP address."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -374,6 +374,18 @@
           ],
           "x-ms-enum": {
             "name": "PublicIPAddressSkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of a public IP address SKU.",
+          "enum": [
+            "Regional",
+            "Global"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAddressSkuTier",
             "modelAsString": true
           }
         }
