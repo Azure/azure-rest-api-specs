@@ -843,6 +843,51 @@
             "$ref": "#/parameters/vmwareDatastoreBackingName"
           },
           {
+            "name": "backingType",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The type or protocol of the datastore backing, like NFSv3 or iSCSI"
+          },
+          {
+            "name": "readBlockSize",
+            "in": "header",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "description": "Block size for data read"
+          },
+          {
+            "name": "writeBlockSize",
+            "in": "header",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "description": "Block size for data write"
+          },
+          {
+            "name": "storageIP",
+            "in": "header",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "description": "IP address of device hosting storage"
+          },
+          {
+            "name": "storageFilePath",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "A unique file path for the volume. Used when creating mount targets"
+          },
+          {
+            "name": "storageVolumeName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Volume name of remote storage"
+          },
+          {
             "$ref": "#/parameters/apiVersion"
           }
         ],
