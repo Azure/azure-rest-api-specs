@@ -1612,7 +1612,15 @@
       "properties": {
         "credentials": {
           "type": "object",
+          "required": [
+            "username",
+            "password"
+          ],
           "description": "Credentials to connect to VMMServer.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "properties": {
             "username": {
               "type": "string",
@@ -1704,7 +1712,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -1723,7 +1731,9 @@
         }
       },
       "required": [
-        "location"
+        "location",
+        "properties",
+        "extendedLocation"
       ],
       "description": "The VmmServers resource definition."
     },
@@ -1835,7 +1845,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -1854,7 +1864,9 @@
         }
       },
       "required": [
-        "location"
+        "location",
+        "properties",
+        "extendedLocation"
       ],
       "description": "The Clouds resource definition."
     },
@@ -1944,7 +1956,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -1963,7 +1975,9 @@
         }
       },
       "required": [
-        "location"
+        "location",
+        "properties",
+        "extendedLocation"
       ],
       "description": "The VirtualNetworks resource definition."
     },
@@ -2047,6 +2061,10 @@
         "Linux",
         "Other"
       ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "OsType"
+      },
       "type": "string",
       "readOnly": true
     },
@@ -2057,6 +2075,10 @@
         "adminPassword": {
           "description": "Admin password of the virtual machine.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
         },
         "computerName": {
@@ -2132,6 +2154,10 @@
         "Dynamic",
         "Static"
       ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AllocationMethod"
+      },
       "type": "string"
     },
     "NetworkInterfaces": {
@@ -2162,12 +2188,12 @@
           "description": "Gets or sets the nic MAC address.",
           "type": "string"
         },
-        "networkId": {
-          "description": "Gets or sets the ARM Id of the network resource to connect to the nic.",
+        "virtualNetworkId": {
+          "description": "Gets or sets the ARM Id of the microsoft.scvmm/virtualnetwork resource to connect the nic.",
           "type": "string"
         },
-        "nicId": {
-          "description": "Gets or sets the network interface Id.",
+        "nicUuid": {
+          "description": "Gets or sets the network interface unique identifier.",
           "type": "string",
           "readOnly": true
         },
@@ -2339,7 +2365,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -2358,7 +2384,9 @@
         }
       },
       "required": [
-        "location"
+        "location",
+        "properties",
+        "extendedLocation"
       ],
       "description": "The VirtualMachines resource definition."
     },
@@ -2506,7 +2534,7 @@
           "description": "Resource tags"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "extendedLocation": {
@@ -2525,7 +2553,9 @@
         }
       },
       "required": [
-        "location"
+        "location",
+        "properties",
+        "extendedLocation"
       ],
       "description": "The VirtualMachineTemplates resource definition."
     },
@@ -2588,59 +2618,6 @@
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
           "description": "The error details."
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedByAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
         }
       }
     },
