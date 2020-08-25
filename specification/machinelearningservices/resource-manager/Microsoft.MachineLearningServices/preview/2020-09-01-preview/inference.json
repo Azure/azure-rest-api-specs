@@ -645,21 +645,18 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "systemData": {
-              "allOf": [
-                {
-                  "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-                }
-              ],
-              "readOnly": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            }
+          ],
+          "readOnly": true
+        }
+      }
     },
     "InferenceEndpointResource": {
       "type": "object",
@@ -855,7 +852,7 @@
       }
     },
     "InferenceSku": {
-      "description": "Sku of the resource",
+      "description": "Inference Sku of the resource",
       "type": "object",
       "properties": {
         "name": {
