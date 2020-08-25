@@ -47,6 +47,10 @@
       "description": ""
     },
     {
+      "name": "VMWareDatastores",
+      "description": ""
+    },
+    {
       "name": "Operations",
       "description": ""
     },
@@ -100,6 +104,14 @@
       "required": true,
       "type": "string",
       "description": "Name of the datastore backing (eg. remote NFS/iSCSI volumes) which is used for datastores in the private cloud",
+      "x-ms-parameter-location": "method"
+    },
+    "vmwareDatastoreName": {
+      "name": "vmwareDatastoreName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the VMWare datastore which serves as a container for storing VM files",
       "x-ms-parameter-location": "method"
     }
   },
@@ -854,6 +866,65 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/vmwareDatastoreBackings/{vmwareDatastoreBackingName}/vmwareDatastores/{vmwareDatastoreName}": {
+      "put": {
+        "operationId": "VMWareDatastore_Create",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "VMWareDatastores"
+        ],
+        "summary": "Create a datastore for the private cloud",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/vmwareDatastoreBackingName"
+          },
+          {
+            "$ref": "#/parameters/vmwareDatastoreName"
+          },
+          {
+            "name": "dataStoreSize",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Size of the data store (in GB)."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VMWareDatastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VMWareDatastore_Create": {
+            "$ref": "./examples/VMWareDatastore_Create.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1358,13 +1429,13 @@
           "description": "Block size for data read",
           "readOnly": true,
           "type": "integer",
-          "default": "1048576"
+          "default": 1048576
         },
         "writeBlockSize": {
           "description": "Block size for data write",
           "readOnly": true,
           "type": "integer",
-          "default": "1048576"
+          "default": 1048576
         },
         "storageIP": {
           "description": "IP address of device hosting storage",
@@ -1382,7 +1453,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "The state of the cluster provisioning",
+          "description": "The state of the datastore backing provisioning",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1391,6 +1462,44 @@
           ],
           "x-ms-enum": {
             "name": "DatastoreBackingProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VMWareDatastore": {
+      "description": "A datastore resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a datastore",
+          "$ref": "#/definitions/VMWareDatastoreProperties"
+        }
+      }
+    },
+    "VMWareDatastoreProperties": {
+      "description": "The properties of a datastore",
+      "properties": {
+        "size": {
+          "description": "Size for datastore",
+          "readOnly": true,
+          "type": "integer",
+          "default": 10
+        },
+        "provisioningState": {
+          "description": "The state of the datastore provisioning",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DatastoreProvisioningState",
             "modelAsString": true
           }
         }
