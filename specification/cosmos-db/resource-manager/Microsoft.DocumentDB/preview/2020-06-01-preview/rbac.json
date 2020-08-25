@@ -42,7 +42,7 @@
             "$ref": "./examples/CosmosDBSqlRoleDefinitionGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB Role Definition.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Role Definition with the given id.",
         "parameters": [
           {
             "$ref": "#/parameters/roleDefinitionIdParameter"
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -95,7 +95,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -112,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Definition create or update request was completed successfully.",
+            "description": "The Role Definition create or update operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleDefinitionGetResults"
             }
@@ -123,7 +123,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -148,7 +148,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -164,7 +164,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -181,11 +181,8 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "description": "Retrieves the list of all Azure Cosmos DB Role Definitions based on the filter.",
+        "description": "Retrieves the list of all Azure Cosmos DB Role Definitions.",
         "parameters": [
-          {
-            "$ref": "#/parameters/filterRoleDefinitionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -193,7 +190,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -209,7 +206,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -235,7 +232,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -251,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -276,7 +273,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -304,7 +301,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -329,7 +326,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -345,7 +342,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -362,11 +359,8 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "description": "Retrieves the list of all Azure Cosmos DB Role Assignments based on the filter.",
+        "description": "Retrieves the list of all Azure Cosmos DB Role Assignments.",
         "parameters": [
-          {
-            "$ref": "#/parameters/filterRoleAssignmentParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -374,7 +368,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/accountNameParameter"
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -390,7 +384,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "cosmos-db.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -398,7 +392,7 @@
     }
   },
   "definitions": {
-    "SqlRoleDefinitionCreateUpdateParameters": {
+    "SqlRoleDefinitionResource": {
       "properties": {
         "roleName": {
           "type": "string",
@@ -431,35 +425,56 @@
           "description": "The set of operations allowed through this Role Definition."
         }
       },
-      "x-ms-azure-resource": true,
       "description": "Properties to update or create an Azure Cosmos DB Role Definition."
+    },
+    "SqlRoleDefinitionCreateUpdateParameters": {
+      "description": "Parameters to create and update Azure Cosmos DB Role Definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB container.",
+          "$ref": "#/definitions/SqlRoleDefinitionResource"
+        }
+      }
     },
     "SqlRoleDefinitionGetResults": {
       "type": "object",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SqlRoleDefinitionResource",
+          "description": "Properties related to the Role Definition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalResourceProperties"
+        }
+      ],
+      "description": "An Azure Cosmos DB Role Definition."
+    },
+    "AdditionalResourceProperties": {
+      "type": "object",
+      "description": "The core properties of ARM resources.",
+      "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified GUID of the Role Definition containing the resource path and the ID supplied for this Role Definition during create."
+          "description": "The unique resource identifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The ID supplied for this Role Definition during create."
+          "description": "The name of the ARM resource."
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of resource."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlRoleDefinitionCreateUpdateParameters",
-          "description": "Properties related to the Role Definition."
+          "description": "The type of Azure resource."
         }
       },
-      "x-ms-azure-resource": true,
-      "description": "An Azure Cosmos DB Role Definition."
+      "x-ms-azure-resource": true
     },
     "Permission": {
       "type": "object",
@@ -474,27 +489,11 @@
       },
       "description": "The set of data plane operations permitted through this Role Definition."
     },
-    "DefaultErrorResponse": {
-      "properties": {
-        "error": {
-          "properties": {
-            "code": {
-              "description": "Error code.",
-              "type": "string"
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string"
-            }
-          }
-        }
-      },
-      "description": "An error response from the service."
-    },
     "SqlRoleDefinitionListResult": {
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/SqlRoleDefinitionGetResults"
           },
@@ -503,7 +502,7 @@
       },
       "description": "The relevant Role Definitions."
     },
-    "SqlRoleAssignmentCreateUpdateParameters": {
+    "SqlRoleAssignmentResource": {
       "type": "object",
       "properties": {
         "roleDefinitionId": {
@@ -519,40 +518,41 @@
           "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
         }
       },
-      "x-ms-azure-resource": true,
       "description": "Role Assignment Properties."
     },
+    "SqlRoleAssignmentCreateUpdateParameters": {
+      "description": "Paramenters to create and update Azure Cosmos DB Role Assignment.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Role Assignment.",
+          "$ref": "#/definitions/SqlRoleAssignmentResource"
+        }
+      }
+    },
+
     "SqlRoleAssignmentGetResults": {
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The fully qualified GUID of the Role Assignment containing the resource path and the ID supplied for this Role Assignment during create."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID supplied for this Role Assignment during create."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of resource."
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlRoleAssignmentCreateUpdateParameters",
+          "$ref": "#/definitions/SqlRoleAssignmentResource",
           "description": "Properties related to the Role Assignment."
         }
       },
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalResourceProperties"
+        }
+      ],
       "description": "An Azure Cosmos DB Role Assignment"
     },
     "SqlRoleAssignmentListResult": {
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/SqlRoleAssignmentGetResults"
           },
@@ -571,17 +571,6 @@
       "x-ms-parameter-location": "method",
       "description": "The GUID for the Role Definition."
     },
-    "accountNameParameter": {
-      "name": "accountName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Cosmos DB database account name.",
-      "minLength": 3,
-      "maxLength": 50,
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-    },
     "roleAssignmentIdParameter": {
       "name": "roleAssignmentId",
       "in": "path",
@@ -589,22 +578,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The GUID for the Role Assignment."
-    },
-    "filterRoleDefinitionParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The filter to be applied on the request. Use $filter=type eq 'BuiltInRole|CustomRole' to filter by type. Use $filter=roleName eq {name} to retrieve Role Definition with the given name."
-    },
-    "filterRoleAssignmentParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The filter to be applied on the request. Use $filter=principalId eq 'edcf5256-366c-4cf0-9007-d450b8e48737' to retrieve all Role Assignments granted to the given AAD principal. Use $filter=assignedTo('edcf5256-366c-4cf0-9007-d450b8e48737') to retrieve all Role Assignments granted to the given AAD principal. Use $filter=atScope('/dbs/contoso-sales') to retrieve all Role Assignments granted for the database 'contoso-sales' or higher up."
     }
   }
 }
