@@ -66,7 +66,7 @@ batch:
  - tag: profile-hybrid-2019-03-01
  ```
 
- ### Profile: hybrid_2020_09_01
+### Profile: hybrid_2020_09_01
 
 These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
 
