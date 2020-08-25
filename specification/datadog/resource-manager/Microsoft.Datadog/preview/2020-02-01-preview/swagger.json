@@ -1251,6 +1251,18 @@
         "name": "MonitoringStatus"
       }
     },
+      "MarketplaceSubscriptionStatus": {
+        "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
+        "enum": [
+          "Active",
+          "Suspended"
+          ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "MarketplaceSubscriptionStatus"
+        }
+      },
     "DatadogOrganizationProperties": {
       "type": "object",
       "properties": {
@@ -1336,6 +1348,9 @@
         "monitoringStatus": {
           "$ref": "#/definitions/MonitoringStatus"
         },
+          "marketplaceSubscriptionStatus": {
+            "$ref": "#/definitions/MarketplaceSubscriptionStatus"
+          },
         "datadogOrganizationProperties": {
           "$ref": "#/definitions/DatadogOrganizationProperties"
         },
