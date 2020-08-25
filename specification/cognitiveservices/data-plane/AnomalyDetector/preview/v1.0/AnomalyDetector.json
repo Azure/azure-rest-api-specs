@@ -39,7 +39,7 @@
             "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/DetectRequest"
             }
           }
         ],
@@ -82,7 +82,7 @@
             "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/DetectRequest"
             }
           }
         ],
@@ -186,12 +186,12 @@
         }
       }
     },
-    "Granularity": {
+    "TimeGranularity": {
       "type": "string",
       "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid.",
       "x-nullable": false,
        "x-ms-enum": {
-        "name": "Granularity",
+        "name": "TimeGranularity",
         "modelAsString": false,
         "values": [
           {
@@ -235,7 +235,7 @@
       "x-nullable": false,
       "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
     },
-    "Request": {
+    "DetectRequest": {
       "type": "object",
       "required": [
         "granularity",
@@ -246,11 +246,11 @@
           "type": "array",
           "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
           "items": {
-            "$ref": "#/definitions/Point"
+            "$ref": "#/definitions/TimeSeriesPoint"
           }
         },
         "granularity": {
-          "$ref": "#/definitions/Granularity"
+          "$ref": "#/definitions/TimeGranularity"
         },
         "customInterval": {
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
@@ -273,7 +273,7 @@
         }
       }
     },
-    "Point": {
+    "TimeSeriesPoint": {
       "type": "object",
       "required": [
         "timestamp",
@@ -425,11 +425,11 @@
           "type": "array",
           "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the change point detection result.",
           "items": {
-            "$ref": "#/definitions/Point"
+            "$ref": "#/definitions/TimeSeriesPoint"
           }
         },
         "granularity": {
-          "$ref": "#/definitions/Granularity",
+          "$ref": "#/definitions/TimeGranularity",
           "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid."
         },
         "customInterval": {
