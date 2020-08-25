@@ -12,7 +12,6 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.communication
   package-name: azure-mgmt-communication
-  package-version: 2019-10-10-preview
   clear-output-folder: true
 ```
 
