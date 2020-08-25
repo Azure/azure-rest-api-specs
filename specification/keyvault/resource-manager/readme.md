@@ -102,6 +102,16 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+```
+
 ### Supressions
 
 ``` yaml
