@@ -33,7 +33,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 
 ``` yaml $(tag) == 'package-netapp-2020-06-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.netapp.v2020_02_01
+  namespace: com.microsoft.azure.management.netapp.v2020_06_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2020_06_01
 regenerate-manager: true
 generate-interface: true
