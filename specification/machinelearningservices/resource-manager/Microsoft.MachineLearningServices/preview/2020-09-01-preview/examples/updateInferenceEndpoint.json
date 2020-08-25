@@ -6,8 +6,10 @@
     "inferenceEndpointName": "testendpoint",
     "api-version": "2020-09-01-preview",
     "properties": {
-      "tags": {
-        "test": "true"
+      "deploymentWeight": {
+        "deploymentA": 50,
+        "deploymentB": 50
+      }
       }
     }
   },
@@ -29,7 +31,10 @@
           "error": null,
           "authMode": "AMLTokenAuth",
           "uri": "",
-          "deploymentWeights": {}
+          "deploymentWeights": {
+            "deploymentA": 50,
+            "deploymentB": 50
+          }
         }
       }
     },

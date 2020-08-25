@@ -216,7 +216,7 @@
             "description": "The payload that is used to create or update the Inference Endpoint.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointCreateRequest"
+              "$ref": "#/definitions/InferenceEndpointResource"
             }
           }
         ],
@@ -490,7 +490,7 @@
             "description": "The payload that is used to create or update the Inference Deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointDeploymentCreateRequest"
+              "$ref": "#/definitions/InferenceEndpointDeploymentResource"
             }
           }
         ],
@@ -508,128 +508,6 @@
                 "description": "URI to poll for asynchronous operation status.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "MachineLearningInferenceEndpointDeployments"
-        ],
-        "description": "Updates mutable objects of an Inference Deployment. This call will update an Inference Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Inference Deployment, call PUT or POST for creation.",
-        "operationId": "MachineLearningInferenceEndpointDeployments_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update Deployment": {
-            "$ref": "./examples/updateDeployment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "properties",
-            "description": "The payload that is used to update the Inference Deployment.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointDeploymentUpdateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Inference Deployment update was successful.",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointDeploymentResource"
-            }
-          },
-          "202": {
-            "description": "Inference Deployment update initiated.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/{inferenceEndpointName}/deployments/locations/{locationName}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "MachineLearningInferenceEndpointDeployments"
-        ],
-        "x-ms-examples": {
-          "Check Deployment Name": {
-            "$ref": "./examples/checkInferenceEndpointDeploymentName.json"
-          }
-        },
-        "operationId": "MachineLearningInferenceEndpointDeployments_CheckNameAvailability",
-        "description": "Checks that the inference endpoint deployment name is valid and is not already in use.",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/InferenceEndpointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationNameParameter"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointDeploymentCheckNameAvailabilityParameter"
-            },
-            "description": "The name of the endpoint deployment within the specified resource group."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Operation to check the endpoint deployment name availability was successful.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           },
           "default": {
@@ -799,8 +677,7 @@
         },
         "identity": {
           "$ref": "machineLearningServices.json#/definitions/Identity",
-          "description": "The identity of the resource.",
-          "readOnly": true
+          "description": "The identity of the resource."
         }
       }
     },
@@ -809,16 +686,14 @@
       "properties": {
         "description": {
           "description": "The Endpoint description.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "properties": {
           "description": "The Endpoint property dictionary. Properties are immutable.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -853,7 +728,6 @@
             "name": "AuthMode",
             "modelAsString": true
           },
-          "readOnly": true,
           "description": "Authentication mode configured on the Inference Endpoint for inference requests."
         },
         "uri": {
@@ -866,9 +740,10 @@
           "type": "object",
           "additionalProperties": {
             "type": "integer",
-            "format": "int32"
-          },
-          "readOnly": true
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100
+          }
         }
       }
     },
@@ -901,19 +776,11 @@
             "type": "string"
           },
           "minItems": 1,
-          "maxItems": 10,
-          "readOnly": true
+          "maxItems": 10
         },
         "scaleSettings": {
           "$ref": "#/definitions/SkuScaleSettings",
-          "description": "Min, max, and default scale values of the deployment.",
-          "readOnly": true
-        },
-        "weight": {
-          "description": "Weight of the deployment for load balancing. Traffic directed at the endpoint is distributed in the ratio of deployment weights. A zero weight implies the deployment does not participate in load balancing and can only be reached by adding the header InferenceEndpointDeployment:<deployment-name>.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0
+          "description": "Min, max, and default scale values of the deployment."
         },
         "provisioningState": {
           "type": "string",
@@ -934,113 +801,7 @@
         },
         "environmentConfigId": {
           "type": "string",
-          "description": "ResourceId of the environment configuration Artifact.",
-          "readOnly": true
-        },
-        "environmentOverrides": {
-          "type": "object",
-          "description": "Environment variables that override any default environment variables in the container.",
-          "readOnly": true,
-          "properties": {
-            "environmentVariables": {
-              "description": "Contains environment variables defined as key/value pairs.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "startupCommand": {
-              "description": "Command to start the container.",
-              "type": "string"
-            }
-          }
-        },
-        "codeAssetIds": {
-          "description": "Resource Id of the Code Assets i.e. startup code.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "InferenceEndpointCreateRequest": {
-      "description": "The request to create an Inference Endpoint.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the endpoint.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "The Endpoint property dictionary. Properties are immutable.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "InferenceEndpointDeploymentCreateRequest": {
-      "description": "The request to create an Inference Deployment.",
-      "type": "object",
-      "required": [
-        "modelIds",
-        "sku",
-        "weight"
-      ],
-      "properties": {
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "modelIds": {
-          "description": "The array of model resource Ids.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "maxItems": 10
-        },
-        "sku": {
-          "description": "Sku for the deployment. Give the name of the sku such as Standard_DS2.",
-          "type": "string",
-          "enum": [
-            "ML_Standard_D3_v2",
-            "ML_Standard_D2_v2"
-          ],
-          "x-ms-enum": {
-            "name": "allowableRequestSkus",
-            "modelAsString": true
-          },
-          "default": "ML_Standard_D2_v2"
-        },
-        "weight": {
-          "description": "weight of the deployment for load balancing.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "default": 0
-        },
-        "scaleSettings": {
-          "description": "Scale settings for this deployment",
-          "$ref": "#/definitions/SkuScaleSettings"
-        },
-        "environmentConfigId": {
-          "type": "string",
-          "description": "Resource Id of the Environment Configuration artifact."
+          "description": "ResourceId of the environment configuration Artifact."
         },
         "environmentOverrides": {
           "type": "object",
@@ -1061,7 +822,10 @@
         },
         "codeAssetIds": {
           "description": "Resource Id of the Code Assets i.e. startup code.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1070,8 +834,7 @@
       "type": "object",
       "required": [
         "minimum",
-        "maximum",
-        "default"
+        "maximum"
       ],
       "properties": {
         "minimum": {
@@ -1097,12 +860,7 @@
             "automatic",
             "manual",
             "none"
-          ],
-          "default": "automatic",
-          "x-ms-enum": {
-            "name": "skuTiers",
-            "modelAsString": true
-          }
+          ]
         }
       }
     },
@@ -1148,76 +906,6 @@
           "description": "Current number of instances assigned to the resource.",
           "type": "integer",
           "format": "int32"
-        }
-      }
-    },
-    "InferenceEndpointsUpdateParameters": {
-      "description": "The parameters for updating an inference endpoint.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      }
-    },
-    "InferenceEndpointDeploymentUpdateParameters": {
-      "description": "The parameters for updating an inference deployment.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
-        "sku": {
-          "description": "Information to update the SKU of the deployment.",
-          "$ref": "#/definitions/InferenceEndpointDeploymentSku"
-        },
-        "weight": {
-          "description": "The weight of the deployment for load balancing.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "modelIds": {
-          "description": "The array of model resource Ids.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "maxItems": 10
-        },
-        "environmentConfigId": {
-          "type": "string",
-          "description": "Resource Id of the Environment Configuration artifact."
-        },
-        "environmentOverrides": {
-          "type": "object",
-          "description": "Environment variables that override any default environment variables in the container.",
-          "properties": {
-            "environmentVariables": {
-              "description": "Contains environment variables defined as key/value pairs.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "startupCommand": {
-              "description": "Command to start the container.",
-              "type": "string"
-            }
-          }
-        },
-        "codeAssetIds": {
-          "description": "Resource Id of the Code Assets i.e. startup code.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     }

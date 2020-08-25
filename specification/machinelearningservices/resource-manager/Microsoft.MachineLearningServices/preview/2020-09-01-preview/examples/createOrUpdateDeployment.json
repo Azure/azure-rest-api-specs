@@ -7,20 +7,24 @@
     "deploymentName": "testdeployment",
     "api-version": "2020-09-01-preview",
     "properties": {
-      "modelIds": [
-        "modelURL"
-      ],
-      "sku": "ML_Standard_D3_v2",
-      "weight": 100,
-      "scaleSettings": {
-        "minimum": 1,
-        "maximum": 5,
-        "default": 2
+      "sku": {
+        "name": "ML_Standard_D3_v2",
+        "tier": "Basic",
+        "capacity": 5
       },
-      "environmentConfigId": "EnvConfigURL",
-      "codeAssetIds": [
-        "CodeAssetURL"
-      ]
+      "properties": {
+        "modelIds": [
+          "modelURL"
+        ],
+        "scaleSettings": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "environmentConfigId": "EnvConfigURL",
+        "codeAssetIds": [
+          "CodeAssetURL"
+        ]
+      }
     }
   },
   "responses": {
@@ -41,10 +45,8 @@
           ],
           "scaleSettings": {
             "minimum": 1,
-            "maximum": 5,
-            "default": 2
+            "maximum": 5
           },
-          "weight": 100,
           "provisioningState": "Succeeded",
           "environmentConfigId": "EnvConfigURL",
           "codeAssetIds": [
