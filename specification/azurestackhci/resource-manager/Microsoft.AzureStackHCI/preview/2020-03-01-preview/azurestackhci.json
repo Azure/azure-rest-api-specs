@@ -387,10 +387,10 @@
           "description": "Status of the cluster agent.",
           "type": "string",
           "enum": [
-            "NeverConnected",
+            "NotYetRegistered",
             "ConnectedRecently",
             "NotConnectedRecently",
-            "Expired",
+            "Disconnected",
             "Error"
           ],
           "x-ms-enum": {
@@ -424,6 +424,24 @@
         "billingModel": {
           "description": "Type of billing applied to the resource.",
           "type": "string",
+          "readOnly": true
+        },
+        "registrationTimestamp": {
+          "description": "First cluster sync timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "description": "Most recent cluster sync timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastBillingTimestamp": {
+          "description": "Most recent billing meter timestamp.",
+          "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }
