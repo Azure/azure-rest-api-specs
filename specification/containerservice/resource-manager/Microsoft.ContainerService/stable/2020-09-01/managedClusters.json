@@ -1028,15 +1028,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/stop":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/stop": {
       "post": {
-        "tags":[
+        "tags": [
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_StopManagedCluster",
         "summary": "Stops a Running Managed Cluster",
         "description": "Stops a Running Managed Cluster",
-        "parameters":[
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1050,8 +1050,8 @@
             "$ref": "#/parameters/ResourceNameParameter"
           }
         ],
-        "responses":{
-          "202":{
+        "responses": {
+          "202": {
             "description": "Accepted"
           },
           "default": {
@@ -1063,15 +1063,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/start":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/start": {
       "post": {
-        "tags":[
+        "tags": [
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_StartManagedCluster",
         "summary": "Starts a Stopped Managed Cluster",
         "description": "Starts a Stopped Managed Cluster",
-        "parameters":[
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1085,8 +1085,8 @@
             "$ref": "#/parameters/ResourceNameParameter"
           }
         ],
-        "responses":{
-          "202":{
+        "responses": {
+          "202": {
             "description": "Accepted"
           },
           "default": {
@@ -2295,10 +2295,10 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
         },
-        "powerState":{
-          "$ref":"#/definitions/PowerState",
+        "powerState": {
+          "$ref": "#/definitions/PowerState",
           "description": "Represents the Power State of the cluster",
-          "readOnly":true
+          "readOnly": true
         },
         "maxAgentPools": {
           "readOnly": true,
@@ -2424,12 +2424,12 @@
       },
       "description": "Properties of the managed cluster."
     },
-    "PowerState":{
-      "properties":{
-        "code":{
-          "type":"string",
+    "PowerState": {
+      "properties": {
+        "code": {
+          "type": "string",
           "description": "Tells whether the cluster is Running or Stopped",
-          "enum":[
+          "enum": [
             "Running",
             "Stopped"
           ],
