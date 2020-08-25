@@ -36,9 +36,8 @@ These settings apply only when `--tag=package-preview-2020-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-04'
 input-file:
-  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
-  - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
-  - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
+  - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2019-09-01/providers.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
 ```
 ### Tag: package-2019-09
