@@ -449,32 +449,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AdditionalResourceProperties"
+          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
         }
       ],
       "description": "An Azure Cosmos DB Role Definition."
-    },
-    "AdditionalResourceProperties": {
-      "type": "object",
-      "description": "The core properties of ARM resources.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the ARM resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of Azure resource."
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "Permission": {
       "type": "object",
@@ -542,7 +520,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AdditionalResourceProperties"
+          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
         }
       ],
       "description": "An Azure Cosmos DB Role Assignment"
