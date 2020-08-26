@@ -387,133 +387,133 @@
         "SyntheticMonitorId"
       ],
         "properties": {
-        "SyntheticMonitorId": {
-          "type": "string",
-          "description": "Unique ID of this WebTest. This is typically the same value as the Name field."
-        },
-        "Name": {
-          "x-ms-client-name": "WebTestName",
-          "type": "string",
-          "description": "User defined name if this WebTest."
-        },
-        "Description": {
-          "type": "string",
-          "description": "Purpose/user defined descriptive test for this WebTest."
-        },
-        "Enabled": {
-          "type": "boolean",
-          "description": "Is the test actively being monitored."
-        },
-        "Frequency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Interval in seconds between test runs for this WebTest. Default value is 300.",
-          "default": 300
-        },
-        "Timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds until this WebTest will timeout and fail. Default value is 30.",
-          "default": 30
-        },
-        "Kind": {
-          "x-ms-client-name": "WebTestKind",
-          "type": "string",
-          "description": "The kind of web test this is, valid choices are ping, multistep, basic, and standard.",
-          "default": "ping",
-          "enum": [
-            "ping",
-            "multistep",
-            "basic",
-            "standard"
-          ],
-          "x-ms-enum": {
-            "name": "WebTestKind",
-            "modelAsString": false
-          }
-        },
-        "RetryEnabled": {
-          "type": "boolean",
-          "description": "Allow for retries should this WebTest fail."
-        },
-        "Locations": {
-          "type": "array",
-          "description":
-            "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
-          "items": {
-            "$ref": "#/definitions/WebTestGeolocation"
-          }
-        },
-        "Configuration": {
-          "type": "object",
-          "description": "An XML configuration specification for a WebTest.",
-          "properties": {
-            "WebTest": {
-              "type": "string",
-              "description": "The XML specification of a WebTest to run against an application."
+          "SyntheticMonitorId": {
+            "type": "string",
+            "description": "Unique ID of this WebTest. This is typically the same value as the Name field."
+          },
+          "Name": {
+            "x-ms-client-name": "WebTestName",
+            "type": "string",
+            "description": "User defined name if this WebTest."
+          },
+          "Description": {
+            "type": "string",
+            "description": "Purpose/user defined descriptive test for this WebTest."
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Is the test actively being monitored."
+          },
+          "Frequency": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Interval in seconds between test runs for this WebTest. Default value is 300.",
+            "default": 300
+          },
+          "Timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Seconds until this WebTest will timeout and fail. Default value is 30.",
+            "default": 30
+          },
+          "Kind": {
+            "x-ms-client-name": "WebTestKind",
+            "type": "string",
+            "description": "The kind of web test this is, valid choices are ping, multistep, basic, and standard.",
+            "default": "ping",
+            "enum": [
+              "ping",
+              "multistep",
+              "basic",
+              "standard"
+            ],
+            "x-ms-enum": {
+              "name": "WebTestKind",
+              "modelAsString": false
             }
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "description":
-            "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
-          "readOnly": true
-        },
-        "Request": {
-          "type": "object",
-          "description": "the collection of request properties",
-          "properties": {
-            "RequestUrl": {
-              "type": "string",
-              "description": "Url location to test."
-            },
-            "Headers": {
-              "type": "array",
-              "description": "List of headers and their values to add to the webtest call."
-            },
-            "HttpVerb": {
-              "type": "string",
-              "description": "Http verb to use for this web test."
-            },
-            "RequestBody": {
-              "type": "string",
-              "description": "Base64 encoded string body to send with this web test."
-            },
-            "ParseDependentRequests": {
-              "type": "boolean",
-              "description": "Parse Dependent request for this webtest."
-            },
-            "FollowRedirects": {
-              "type": "boolean",
-              "description": "Follow redirects for this web test."
+          },
+          "RetryEnabled": {
+            "type": "boolean",
+            "description": "Allow for retries should this WebTest fail."
+          },
+          "Locations": {
+            "type": "array",
+            "description":
+              "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
+            "items": {
+              "$ref": "#/definitions/WebTestGeolocation"
             }
-          }
-        },
-        "ContentValidation": {
-          "type": "object",
-          "description": "the collection of content validation properties",
-          "properties": {
-            "ContentMatch": {
-              "type": "string",
-              "description": "content to look for in the return of the webtest."
-            },
-            "IgnoreCase": {
-              "type": "boolean",
-              "description": "When set, this value makes the ContentMatch validation case insensitive."
-            },
-            "PassIfTextFound": {
-              "type": "boolean",
-              "description":
-                "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
+          },
+          "Configuration": {
+            "type": "object",
+            "description": "An XML configuration specification for a WebTest.",
+            "properties": {
+              "WebTest": {
+                "type": "string",
+                "description": "The XML specification of a WebTest to run against an application."
+              }
             }
-          }
-        },
-        "SSLCheck": {
+          },
+          "provisioningState": {
+            "type": "string",
+            "description":
+              "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
+            "readOnly": true
+          },
+          "Request": {
+            "type": "object",
+            "description": "the collection of request properties",
+            "properties": {
+              "RequestUrl": {
+                "type": "string",
+                "description": "Url location to test."
+              },
+              "Headers": {
+                "type": "array",
+                "description": "List of headers and their values to add to the webtest call."
+              },
+              "HttpVerb": {
+                "type": "string",
+                "description": "Http verb to use for this web test."
+              },
+              "RequestBody": {
+                "type": "string",
+                "description": "Base64 encoded string body to send with this web test."
+              },
+              "ParseDependentRequests": {
+                "type": "boolean",
+                "description": "Parse Dependent request for this webtest."
+              },
+              "FollowRedirects": {
+                "type": "boolean",
+                "description": "Follow redirects for this web test."
+              }
+            }
+          },
+          "ContentValidation": {
+            "type": "object",
+            "description": "the collection of content validation properties",
+            "properties": {
+              "ContentMatch": {
+                "type": "string",
+                "description": "content to look for in the return of the webtest."
+              },
+              "IgnoreCase": {
+                "type": "boolean",
+                "description": "When set, this value makes the ContentMatch validation case insensitive."
+              },
+              "PassIfTextFound": {
+                "type": "boolean",
+                "description":
+                  "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
+              }
+            }
+          },
+          "SSLCheck": {
             "type": "boolean",
             "description": "Checks to see if the SSL cert is still valid."
           },
-          " SSLCertRemainingLifetimeCheck ": {
+          "SSLCertRemainingLifetimeCheck ": {
             "type": "integer",
             "format": "int32",
             "description": "A number of days to check still remain before the the existing SSL cert expires."
