@@ -48,6 +48,14 @@ input-file:
 - Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
 ```
 
+### Tag: package-2020-06-01-preview
+
+These settings apply only when `--tag=package-2020-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01-preview'
+input-file:
+- Microsoft.AzureStack/stable/2020-06-01-preview/Registration.json
+```
 ---
 
 ### Validations
@@ -119,6 +127,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2017-06-01
+  - tag: package-2020-06-01-preview
 ```
 
 ### Tag: package-2017-06-01 and java
@@ -134,6 +143,13 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+``` yaml $(tag) == 'package-2020-06-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azurestack.v2020-06-01-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azurestack/mgmt-v2020-06-01-preview
+regenerate-manager: true
+generate-interface: true
+```
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -159,6 +175,7 @@ input-file:
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/Product.json
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/Registration.json
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
+  - Microsoft.AzureStack/stable/2020-06-01-preview/Registration.json
 
 ```
 
