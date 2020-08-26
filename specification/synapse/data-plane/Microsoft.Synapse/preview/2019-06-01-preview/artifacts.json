@@ -254,6 +254,7 @@
           }
         },
         "description": "Creates or updates a dataset.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/datasetName"
@@ -284,6 +285,9 @@
             "schema": {
               "$ref": "#/definitions/DatasetResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -348,6 +352,7 @@
           }
         },
         "description": "Deletes a dataset.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/datasetName"
@@ -359,6 +364,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -561,7 +569,6 @@
           }
         },
         "description": "Creates a run of a pipeline.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -604,14 +611,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
+          "202": {
+            "description": "Accepted.",
             "schema": {
               "$ref": "#/definitions/CreateRunResponse"
             }
-          },
-          "202": {
-            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1278,6 +1282,7 @@
           }
         },
         "description": "Creates or updates a data flow.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/dataFlowName"
@@ -1308,6 +1313,9 @@
             "schema": {
               "$ref": "#/definitions/DataFlowResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1369,6 +1377,7 @@
           }
         },
         "description": "Deletes a data flow.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/dataFlowName"
@@ -1380,6 +1389,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
