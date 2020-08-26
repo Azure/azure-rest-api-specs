@@ -30,5 +30,5 @@ output-folder: $(python-sdks-folder)/regionmove/azure-mgmt-regionmove/azure/mgmt
 ``` yaml $(python) && $(python-mode) == 'create' 
 python: 
   basic-setup-py: true 
-  output-folder: $(python-sdks-folder)/redis/azure-mgmt-regionmove 
+  output-folder: $(python-sdks-folder)/regionmove/azure-mgmt-regionmove 
 ``` 
