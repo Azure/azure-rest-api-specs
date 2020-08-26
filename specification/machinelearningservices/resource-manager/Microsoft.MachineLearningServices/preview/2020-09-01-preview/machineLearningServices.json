@@ -4058,11 +4058,17 @@
       }
     },
     "LinkedServiceList": {
-      "readOnly": true,
-      "type": "array",
-      "description": "An array of linked services",
-      "items": {
-        "$ref": "#/definitions/LinkedServiceResponse"
+      "type": "object",
+      "description": "List response of linked service.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of linked service.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResponse"
+          }
+        }
       }
     },
     "ServiceResource": {
