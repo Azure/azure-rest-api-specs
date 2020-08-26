@@ -776,19 +776,6 @@
         }
       }
     },
-    "LiftrResourceCategories": {
-      "description": "Liftr resource categories.",
-      "enum": [
-        "Unknown",
-        "MonitorLogs"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "LiftrResourceCategories"
-      },
-      "readOnly": true
-    },
     "MonitorProperties": {
       "description": "Properties specific to the monitor resource.",
       "type": "object",
@@ -811,16 +798,6 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "liftrResourceCategory": {
-          "description": "Liftr resource categories.",
-          "$ref": "#/definitions/LiftrResourceCategories"
-        },
-        "liftrResourcePreference": {
-          "description": "The priority of the resource.",
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
         }
       }
     },
@@ -938,6 +915,19 @@
         }
       }
     },
+    "SendingLogs": {
+      "enum": [
+        "True",
+        "False"
+      ],
+      "type": "string",
+      "description": "Flag indicating the status of the resource for sending logs operation to Elastic.",
+      "title": "SendingLogs",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SendingLogs"
+      }
+    },
     "MonitoredResource": {
       "description": "The properties of a resource currently being monitored by the Elastic monitor resource.",
       "type": "object",
@@ -947,8 +937,8 @@
           "type": "string"
         },
         "sendingLogs": {
-          "description": "Flag indicating if resource is sending logs to Elastic.",
-          "type": "boolean"
+          "description": "Flag indicating the status of the resource for sending logs operation to Elastic.",
+          "$ref": "#/definitions/SendingLogs"
         },
         "reasonForLogsStatus": {
           "description": "Reason for why the resource is sending logs (or why it is not sending).",
