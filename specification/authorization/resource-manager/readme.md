@@ -212,10 +212,10 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+# - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+# - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+# - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+# - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
