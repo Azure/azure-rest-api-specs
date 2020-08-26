@@ -35,8 +35,8 @@
         },
         "storageProfile": {
           "source": {
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/vhd/{vhdName}",
-            "uri": "http://mystorageaccount.core.windows.net/mycontainer/myblob?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2055-04-30T02%3A23%3A26Z&sr=b&sp=r&sip=168.1.5.60-168.1.5.70&spr=https&sig=tesT"
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+            "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
           }
         }
       }
@@ -75,23 +75,10 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
-            "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
-              "sizeInGB": 10,
-              "hostCaching": "ReadOnly"
-            },
-            "dataDiskImages": [
-              {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
-                },
-                "lun": 1,
-                "sizeInGB": 10,
-                "hostCaching": "None"
-              }
-            ]
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+              "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+            }
           },
           "provisioningState": "Updating"
         },
@@ -131,23 +118,10 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
-            "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
-              "sizeInGB": 10,
-              "hostCaching": "ReadOnly"
-            },
-            "dataDiskImages": [
-              {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
-                },
-                "lun": 1,
-                "sizeInGB": 10,
-                "hostCaching": "None"
-              }
-            ]
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+              "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+            }
           },
           "provisioningState": "Creating"
         },
@@ -187,23 +161,10 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
-            "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
-              "sizeInGB": 10,
-              "hostCaching": "ReadOnly"
-            },
-            "dataDiskImages": [
-              {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
-                },
-                "lun": 1,
-                "sizeInGB": 10,
-                "hostCaching": "None"
-              }
-            ]
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+              "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+            }
           },
           "provisioningState": "Updating"
         },

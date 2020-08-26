@@ -592,7 +592,7 @@
           "Create or update a simple Gallery Image Version using snapshots as a source.": {
             "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithSnapshotsAsSource.json"
           },
-          "": {
+          "Create or update a simple Gallery Image Version using vhd as a source.": {
             "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithVHD.json"
           }
         }
@@ -740,6 +740,9 @@
           },
           "Get a gallery image version with snapshots as a source.": {
             "$ref": "./examples/GetAGalleryImageVersionWithSnapshotsAsSource.json"
+          },
+          "Get a gallery image version with vhd as a source.": {
+            "$ref": "./examples/GetAGalleryImageVersionWithVhdAsSource.json"
           }
         }
       },
@@ -1661,6 +1664,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharingUpdate"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -1674,6 +1683,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Add sharing id to the sharing profile of a gallery.": {
             "$ref": "./examples/AddToSharingProfileInAGallery.json"
@@ -2428,11 +2438,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, or user image."
+          "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource."
         },
         "uri": {
           "type": "string",
-          "description": "The uri of the gallery artifact version source. Can be a disk uri, snapshot uri, or user image."
+          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
         }
       },
       "description": "The gallery artifact version source."
