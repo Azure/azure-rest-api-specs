@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2020-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-06-01-preview'
 input-file:
-- Microsoft.AzureStack/stable/2020-06-01-preview/Registration.json
+- Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
 ```
 ---
 
@@ -175,7 +175,7 @@ input-file:
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/Product.json
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/Registration.json
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
-  - Microsoft.AzureStack/stable/2020-06-01-preview/Registration.json
+  - $(this-folder)/Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
 
 ```
 
