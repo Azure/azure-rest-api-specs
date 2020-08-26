@@ -327,6 +327,13 @@
           "type": "string",
           "description": "This is the list of tags for your VM."
         },
+        "tagsList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsProperties"
+          },
+          "description": "This is the list of tags for your VM formatted as a JSON array for easier programmatic parsing."
+        },
         "version": {
           "type": "string",
           "description": "This is the version of the VM image."
@@ -442,6 +449,20 @@
         "keyData": {
           "type": "string",
           "description": "This is the SSH public key certificate used to authenticate with the VM."
+        }
+      }
+    },
+    "TagsProperties": {
+      "type": "object",
+      "description": "This contains the properties of the tags in a tagsList.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is the name of the tag. It is equivalent to the key in the key-value pair format."
+        },
+        "value": {
+          "type": "string",
+          "description": "This is the value of the tag. It is, as expected, equivalent to the value in the key-value pair format."
         }
       }
     },

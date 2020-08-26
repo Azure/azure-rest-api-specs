@@ -112,7 +112,7 @@ These settings apply only when `--tag=package-2020-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2020-06-01'
 input-file:
-  - Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
+- Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
 ```
 
 ## Suppression
@@ -268,7 +268,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
    
-   - - suppress: DefinitionsPropertiesNamesCamelCase
+   - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
      where:
