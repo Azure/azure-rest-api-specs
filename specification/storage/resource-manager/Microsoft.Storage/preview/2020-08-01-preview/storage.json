@@ -302,6 +302,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
+      "get": {
+        "tags": [
+          "DeletedAccounts"
+        ],
+        "operationId": "DeletedAccounts_List",
+        "description": "Lists deleted accounts under the subscription.",
+        "x-ms-examples": {
+          "DeletedAccountList": {
+            "$ref": "./examples/DeletedAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List of deleted accounts was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts": {
       "get": {
         "tags": [
@@ -2425,6 +2461,45 @@
       },
       "description": "Blob restore status."
     },
+    "DeletedAccountProperties": {
+      "properties": {
+        "key": {
+          "readOnly": true,
+          "type": "string",
+          "description": "key of the deleted account"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "name of the deleted account"
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "location of the deleted account"
+        },
+        "subscription": {
+          "readOnly": true,
+          "type": "string",
+          "description": "subscription of the deleted account"
+        },
+        "resourceGroupName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "resource group of the deleted account"
+        },
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "creation time of the deleted account"
+        },
+        "deletionTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "deletion time of the deleted account"
+        }
+      }
+    },
     "StorageAccountProperties": {
       "properties": {
         "provisioningState": {
@@ -2606,6 +2681,21 @@
       },
       "description": "Properties of the storage account."
     },
+    "DeletedAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeletedAccountProperties",
+          "description": "Properties of the deleted account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Deleted storage account" 
+    },
     "StorageAccount": {
       "properties": {
         "sku": {
@@ -2691,6 +2781,19 @@
         }
       },
       "description": "The response from the List Storage Accounts operation."
+    },
+    "DeletedAccountListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedAccount"
+          },
+          "description": "Gets the list of deleted accounts and their properties."
+        }
+      },
+      "description": "The response from the List Deleted Accounts operation."
     },
     "StorageAccountListKeysResult": {
       "properties": {
