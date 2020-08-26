@@ -1263,7 +1263,7 @@
           "200": {
             "description": "Successfully retrieved the linked services.",
             "schema": {
-              "$ref": "#/definitions/PaginatedLinkedServiceList"
+              "$ref": "#/definitions/LinkedServiceList"
             }
           },
           "default": {
@@ -4057,23 +4057,12 @@
         }
       }
     },
-    "PaginatedLinkedServiceList": {
-      "type": "object",
-      "description": "Paginated list of linked service objects.",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "description": "An array of linked services",
-          "items": {
-            "$ref": "#/definitions/LinkedServiceResponse"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A continuation link(absolute URI) to the next page of results in the list."
-        }
+    "LinkedServiceList": {
+      "readOnly": true,
+      "type": "array",
+      "description": "An array of linked services",
+      "items": {
+        "$ref": "#/definitions/LinkedServiceResponse"
       }
     },
     "ServiceResource": {
