@@ -160,20 +160,12 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "MinZoom": {
-      "name": "minZoom",
+    "DescriptionTileset": {
+      "name": "description",
+      "description": "User provided description of the tileset.",
+      "type": "string",
       "in": "query",
-      "description": "The lowest zoom level to create tiles. All features will be included in between the MinZoom and MaxZoom (inclusive).  MaxZoom must be provided if MinZoom is provided. This parameter is only supported for a Dataset created with 'outdoor' ontology. Value must be in the range: 0, 19 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": false,
-      "type": "integer",
-      "x-ms-parameter-location": "method"
-    },
-    "MaxZoom": {
-      "name": "maxZoom",
-      "in": "query",
-      "description": "The highest zoom level to create tiles. All features will be included in between the MinZoom and MaxZoom (inclusive).  MinZoom must be provided if MaxZoom is provided. This parameter is only supported for a Dataset created with 'outdoor' ontology. Value must be in the range: 0, 19 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": false,
-      "type": "integer",
       "x-ms-parameter-location": "method"
     }
   },
@@ -206,10 +198,7 @@
             "$ref": "#/parameters/DatasetIdQuery"
           },
           {
-            "$ref": "#/parameters/MinZoom"
-          },
-          {
-            "$ref": "#/parameters/MaxZoom"
+            "$ref": "#/parameters/DescriptionTileset"
           }
         ],
         "responses": {

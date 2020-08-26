@@ -1913,35 +1913,338 @@
         "values": [
           {
             "value": "New",
-            "description": "'New' - the status of an alert upon initial issuance."
+            "description": "\"New\" - the status of an alert upon initial issuance."
           },
           {
             "value": "Extend",
-            "description": "'Extend' - the alert has been extended in time, in area, or both since its initial issuance."
+            "description": "\"Extend\" - the alert has been extended in time, in area, or both since its initial issuance."
           },
           {
             "value": "Cancel",
-            "description": "'Cancel' - the alert has been canceled prior to its original expiration time."
+            "description": "\"Cancel\" - the alert has been canceled prior to its original expiration time."
           },
           {
             "value": "Correct",
-            "description": "'Correct' - the alert has been modified to correct a previous error."
+            "description": "\"Correct\" - the alert has been modified to correct a previous error."
           },
           {
             "value": "Expire",
-            "description": "'Expire' - the alert has expired and is no longer active."
+            "description": "\"Expire\" - the alert has expired and is no longer active."
           },
           {
             "value": "Upgrade",
-            "description": "'Upgrade' - the alert has been upgraded to a higher class or category since its initial issuance."
+            "description": "\"Upgrade\" - the alert has been upgraded to a higher class or category since its initial issuance."
           },
           {
             "value": "Continue",
-            "description": "'Continue' - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
+            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertAreas`, `startTime`, `endTime`, or `class`."
           },
           {
             "value": "Update",
-            "description": "'Update' - the alert has been updated since its initial issuance."
+            "description": "\"Update\" - the alert has been updated since its initial issuance."
+          }
+        ]
+      }
+    },
+    "DailyIndicesResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Daily Indices call.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DailyIndex"
+          },
+          "description": "A list of all daily indices for the queried location."
+        }
+      }
+    },
+    "DailyIndex": {
+      "type": "object",
+      "description": "Information about a daily index.",
+      "properties": {
+        "indexName": {
+          "type": "string",
+          "description": "Name of the index, for example, \"Construction\", \"Outdoor Activity\", \"Flight Delays\"."
+        },
+        "indexId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Numeric ID used to identify the specific index. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index IDs. For example, the index ID can support UI visualization scenarios."
+        },
+        "dateTime": {
+          "type": "string",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
+        },
+        "category": {
+          "type": "string",
+          "description": "Textual description for `categoryValue` corresponding to the level that the index value falls under, for example \"Very Good\"."
+        },
+        "categoryValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Level that the index value falls under, represented by an integer. This value can be 1 through 5 and should be used in combination with the `ascending` flag because it can differ among indices. For example, the following values apply for Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, and Extreme=5."
+        },
+        "ascending": {
+          "type": "boolean",
+          "description": "Describes the direction of the `value` and `categoryValue`. For example, when `ascending`=True, the poorest index value is 0 and the best index value is 10. When `ascending`=True, the poorest index value is 10 and the best index value is 0."
+        },
+        "description": {
+          "type": "string",
+          "description": "A textual explanation that can be used for display purposes to summarize the index value and category. For example, when the index value for Flight Delays is very good, the description will be \"Conditions are excellent for flying!\"."
+        }
+      }
+    },
+    "CurrentAirQualityResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Current Air Quality call.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AirQuality"
+          },
+          "description": "A list of all air quality results for the queried location."
+        }
+      }
+    },
+    "HourlyAirQualityForecastResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Hourly Air Quality Forecast call.",
+      "properties": {
+        "forecasts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AirQuality"
+          },
+          "description": "A list of all hourly air quality forecasts for the queried location."
+        }
+      }
+    },
+    "DailyAirQualityForecastResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Daily Air Quality Forecast call.",
+      "properties": {
+        "forecasts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DailyAirQuality"
+          },
+          "description": "A list of all daily air quality forecasts for the queried location."
+        }
+      }
+    },
+    "AirQuality": {
+      "type": "object",
+      "description": "Information about the air quality in a specific location at a specific time.",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "index": {
+          "type": "number",
+          "format": "float",
+          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+        },
+        "globalIndex": {
+          "type": "number",
+          "format": "float",
+          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+        },
+        "dominantPollutant": {
+          "type": "string",
+          "description": "The pollutant with the highest concentration."
+        },
+        "category": {
+          "type": "string",
+          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+        },
+        "categoryColor": {
+          "type": "string",
+          "description": "A unique color corresponding to the category of this air quality result."
+        },
+        "description": {
+          "type": "string",
+          "description": "A textual explanation of this air quality result in the requested language."
+        },
+        "pollutants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pollutant"
+          },
+          "description": "Information about individual pollutants."
+        }
+      }
+    },
+    "DailyAirQuality": {
+      "type": "object",
+      "description": "Information about the air quality in a specific location at a specific time.",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+        },
+        "index": {
+          "type": "number",
+          "format": "float",
+          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+        },
+        "globalIndex": {
+          "type": "number",
+          "format": "float",
+          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+        },
+        "dominantPollutant": {
+          "$ref": "#/definitions/DominantPollutant",
+          "description": "The pollutant with the highest concentration."
+        },
+        "category": {
+          "type": "string",
+          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+        },
+        "categoryColor": {
+          "type": "string",
+          "description": "A unique color corresponding to the category of this air quality result."
+        },
+        "description": {
+          "type": "string",
+          "description": "A textual explanation of this air quality result in the requested language."
+        }
+      }
+    },
+    "Pollutant": {
+      "type": "object",
+      "description": "Detailed information about an individual pollutant. Not returned if `pollutants`=false.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PollutantType",
+          "description": "Type of pollutant. Please note that more may be added at any time."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the pollutant in English."
+        },
+        "index": {
+          "type": "number",
+          "format": "float",
+          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+        },
+        "globalIndex": {
+          "type": "number",
+          "format": "float",
+          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+        },
+        "concentration": {
+          "$ref": "#/definitions/Concentration",
+          "description": "An object containing the number of pollutant particles per volume of air."
+        }
+      }
+    },
+    "PollutantType": {
+      "type": "string",
+      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "enum": [
+        "CO",
+        "NO2",
+        "O3",
+        "PM2.5",
+        "PM10",
+        "SO2"
+      ],
+      "x-ms-enum": {
+        "name": "PollutantType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "CO",
+            "description": "Carbon monoxide (\"CO\")"
+          },
+          {
+            "value": "NO2",
+            "description": "Nitrogen dioxide (\"NO2\")"
+          },
+          {
+            "value": "O3",
+            "description": "Ozone (\"O3\")"
+          },
+          {
+            "value": "PM2.5",
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
+          },
+          {
+            "value": "PM10",
+            "description": "Particulate matter 10 (\"PM10\")"
+          },
+          {
+            "value": "SO2",
+            "description": "Sulfur dioxide (\"SO2\")"
+          }
+        ]
+      }
+    },
+    "Concentration": {
+      "type": "object",
+      "description": "An object containing the number of pollutant particles per volume of air.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The numerical value indicating the concentration of the corresponding pollutant."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Type of unit for the concentration of the pollutant."
+        },
+        "unitType": {
+          "type": "integer",
+          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+        }
+      }
+    },
+    "DominantPollutant": {
+      "type": "string",
+      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "enum": [
+        "Carbon Monoxide",
+        "Nitrogen Dioxide",
+        "Ozone",
+        "Particulate Matter 2.5",
+        "Particulate Matter 10",
+        "Sulfur Dioxide"
+      ],
+      "x-ms-enum": {
+        "name": "DominantPollutant",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Carbon Monoxide",
+            "description": "Carbon monoxide (\"CO\")"
+          },
+          {
+            "value": "Nitrogen Dioxide",
+            "description": "Nitrogen dioxide (\"NO2\")"
+          },
+          {
+            "value": "Ozone",
+            "description": "Ozone (\"O3\")"
+          },
+          {
+            "value": "Particulate Matter 2.5",
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
+          },
+          {
+            "value": "Particulate Matter 10",
+            "description": "Particulate matter 10 (\"PM10\")"
+          },
+          {
+            "value": "Sulfur Dioxide",
+            "description": "Sulfur dioxide (\"SO2\")"
           }
         ]
       }

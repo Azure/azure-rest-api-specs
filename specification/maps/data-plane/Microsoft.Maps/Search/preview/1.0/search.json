@@ -560,7 +560,7 @@
     "/search/fuzzy/{format}": {
       "get": {
         "x-publish": true,
-        "description": "\n**Free Form Search**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://docs.microsoft.com/en-us/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
+        "description": "\n**Free Form Search**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://docs.microsoft.com/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
         "operationId": "Search_GetSearchFuzzy",
         "x-ms-examples": {
           "Search City Seattle": {
@@ -905,7 +905,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "The POI category to search for (e.g., \"AIRPORT\", \"RESTAURANT\"), must be properly URL encoded. Supported main categories can be requested by calling [Get Search POI Category Tree API](https://aka.ms/AzureMapsPOICategoryTree). List of available categories can also be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/supported-search-categories). We recommend to use POI Search Category Tree API to request the supported categories.",
+            "description": "The POI category to search for (e.g., \"AIRPORT\", \"RESTAURANT\"), must be properly URL encoded. Supported main categories can be requested by calling [Get Search POI Category Tree API](https://aka.ms/AzureMapsPOICategoryTree). List of available categories can also be found [here](https://docs.microsoft.com/azure/azure-maps/supported-search-categories). We recommend to use POI Search Category Tree API to request the supported categories.",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -1010,7 +1010,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "Language in which search results should be returned. Should be one of supported IETF language tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not available for a specific field, default language is used (English).\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
+            "description": "Language in which search results should be returned. Should be one of supported IETF language tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not available for a specific field, default language is used (English).\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -1222,7 +1222,7 @@
           {
             "name": "entityType",
             "in": "query",
-            "description": "Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API.",
+            "description": "Specifies the level of filtering performed on geographies. Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API. The following parameters are ignored when entityType is set:\n\n* heading\n* number\n* returnRoadUse\n* returnSpeedLimit\n* roadUse\n* returnMatchType",
             "required": false,
             "type": "string",
             "enum": [
@@ -3505,7 +3505,7 @@
       }
     },
     "DataSources": {
-      "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API.",
+      "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API.",
       "type": "object",
       "properties": {
         "geometry": {
@@ -3518,14 +3518,14 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Pass this as geometryId to the [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API to fetch geometry information for this result.",
+          "description": "Pass this as geometryId to the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API to fetch geometry information for this result.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "EntityType": {
-      "description": "Defines geography entity types.",
+      "description": "Geography entity type. Present only when entityType was requested and is available.",
       "type": "string",
       "enum": [
         "Country",
