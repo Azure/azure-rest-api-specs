@@ -216,7 +216,7 @@ input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-# - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ---
