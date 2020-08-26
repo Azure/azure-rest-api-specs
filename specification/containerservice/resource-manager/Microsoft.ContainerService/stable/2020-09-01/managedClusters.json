@@ -1280,6 +1280,101 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "privateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_List",
+        "summary": "Gets a list of private link resources in the specified managed cluster.",
+        "description": "Gets a list of private link resources in the specified managed cluster. The operation returns properties of each private link resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Private Link Resources by Managed Cluster": {
+            "$ref": "./examples/PrivateLinkResourcesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resolvePrivateLinkServiceId": {
+      "post": {
+        "tags": [
+          "resolvePrivateLinkServiceId"
+        ],
+        "operationId": "ResolvePrivateLinkServiceId_POST",
+        "summary": "Gets the private link service ID for the specified managed cluster.",
+        "description": "Gets the private link service ID the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            },
+            "description": "Parameters (name, groupId) supplied in order to resolve a private link service ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve the Private Link Service ID for Managed Cluster": {
+            "$ref": "./examples/ResolvePrivateLinkServiceId.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2983,6 +3078,56 @@
         "description": {
           "type": "string",
           "description": "The private link service connection description."
+        }
+      }
+    },
+    "PrivateLinkResourcesListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the private link resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the private link resource.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group ID of the resource."
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "RequiredMembers of the resource"
+        },
+        "privateLinkServiceID": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The private link service ID of the resource, this field is exposed only to NRP internally."
         }
       }
     }
