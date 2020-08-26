@@ -468,7 +468,10 @@
             },
             "Headers": {
               "type": "array",
-              "description": "List of headers and their values to add to the webtest call."
+              "description": "List of headers and their values to add to the webtest call.",
+              "items": {
+                "$ref": "#/definitions/Header"
+              }
             },
             "HttpVerb": {
               "type": "string",
@@ -534,6 +537,20 @@
           "x-ms-client-name": "location",
           "type": "string",
           "description": "Location ID for the webtest to run from."
+        }
+      }
+    },
+    "Header": {
+      "description": "A header it include in the request.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the header to include in the request.."
+        },
+        "Value": {
+          "type": "string",
+          "description": "Value of the header to include in the request.."
         }
       }
     }
