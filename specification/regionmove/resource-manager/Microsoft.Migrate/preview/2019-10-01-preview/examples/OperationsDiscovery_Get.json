@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2016-08-10",
+    "api-version": "2019-10-01-preview",
     "resourceGroupName": "resourceGroupPS1",
     "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
   },
@@ -9,12 +9,22 @@
       "body": {
         "value": [
           {
-            "name": "Microsoft.RecoveryServices/Vaults/vaultTokens/read",
+            "name": "Read",
             "display": {
-              "provider": "Microsoft.RecoveryServices",
-              "resource": "Vaults",
-              "operation": "Vault Token",
-              "description": "The Vault Token operation can be used to get   Vault Token for vault level backend operations."
+              "provider": "Microsoft.Migrate",
+              "resource": "Microsoft.Migrate/moveCollections",
+              "operation": "Read",
+              "description": "Reads the move collection."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "Write",
+            "display": {
+              "provider": "Microsoft.Migrate",
+              "resource": "Microsoft.Migrate/moveCollections",
+              "operation": "Write",
+              "description": "Creates or updates a move collection."
             },
             "origin": "user"
           }
