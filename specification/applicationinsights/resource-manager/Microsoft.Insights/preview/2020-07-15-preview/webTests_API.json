@@ -463,7 +463,7 @@
         "Request": {
           "type": "object",
           "description": "the collection of request properties",
-          "requestValidationProperties": {
+          "properties": {
             "RequestUrl": {
               "type": "string",
               "description": "Url location to test."
@@ -493,7 +493,7 @@
         "ContentValidation": {
           "type": "object",
           "description": "the collection of content validation properties",
-          "contentValidationProperties": {
+          "properties": {
             "ContentMatch": {
               "type": "string",
               "description": "content to look for in the return of the webtest."
@@ -507,8 +507,9 @@
               "description":
                 "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
             }
-          },
-          "SSLCheck": {
+          }
+        },
+        "SSLCheck": {
             "type": "boolean",
             "description": "Checks to see if the SSL cert is still valid."
           },
