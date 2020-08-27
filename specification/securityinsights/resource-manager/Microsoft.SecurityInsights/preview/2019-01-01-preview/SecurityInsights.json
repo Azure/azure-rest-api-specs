@@ -3563,18 +3563,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators": {
+      "put": {
         "x-ms-examples": {
-          "Get all threat intelligence.": {
-            "$ref": "./examples/threatintelligence/GetThreatIntelligence.json"
+          "Upsert the Threat Intelligence": {
+            "$ref": "./examples/threatintelligence/CreateThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Gets all threat intelligence in a subscription.",
-        "operationId": "ThreatIntelligenceIndicators_ListBySubscription",
+        "description": "Create a threat intelligence.",
+        "operationId": "ThreatIntelligenceIndicator_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3592,23 +3592,20 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "#/parameters/ODataTop"
-          },
-          {
-            "$ref": "#/parameters/ODataSkipToken"
-          },
-          {
-            "$ref": "#/parameters/ODataOrderBy"
+            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceResource"
             }
           },
           "default": {
@@ -3617,23 +3614,20 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{tiIdentifier}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/{tiIdentifier}": {
       "get": {
         "x-ms-examples": {
-          "Get an account entity.": {
+          "Get a threat intelligence indicator by id.": {
             "$ref": "./examples/threatintelligence/GetThreatIntelligenceById.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Gets a threat intelligence.",
+        "description": "Gets a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_Get",
         "parameters": [
           {
@@ -3680,7 +3674,7 @@
           "ThreatIntelligence"
         ],
         "description": "Upsert a threat intelligence.",
-        "operationId": "ThreatIntelligenceIndicator_Create",
+        "operationId": "ThreatIntelligenceIndicatorUpsert_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3827,7 +3821,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/query": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/query": {
       "post": {
         "x-ms-examples": {
           "Get all threat intelligence.": {
@@ -3878,18 +3872,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/metrics": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/metrics": {
+      "get": {
         "x-ms-examples": {
-          "Collect threat intelligence metrics.": {
+          "Get threat intelligence indicators metrics.": {
             "$ref": "./examples/threatintelligence/CollectThreatIntelligenceMetrics.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Collect the threat intelligence metrics.",
-        "operationId": "ThreatIntelligenceIndicator_CollectMetrics",
+        "description": "Get the threat intelligence metrics.",
+        "operationId": "ThreatIntelligenceIndicatorMetrics_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3926,18 +3920,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/bulkDelete": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/appendTags": {
       "post": {
         "x-ms-examples": {
-          "Bulk delete the threat intelligence entities.": {
-            "$ref": "./examples/threatintelligence/BulkDeleteThreatIntelligence.json"
+          "Append tags to a Threat Intelligence": {
+            "$ref": "./examples/threatintelligence/AppendTagsThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Bulk delete the threat intelligence entities.",
-        "operationId": "ThreatIntelligenceIndicators_BulkDelete",
+        "description": "Append tags to a threat intelligence.",
+        "operationId": "ThreatIntelligenceIndicator_AppendTags",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3955,60 +3949,12 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceBulkRequestBody"
+            "$ref": "#/parameters/ThreatIntelligenceAppendTagsRequestBody"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/bulkTag": {
-      "post": {
-        "x-ms-examples": {
-          "Bulk delete the threat intelligence entities.": {
-            "$ref": "./examples/threatintelligence/BulkTagThreatIntelligence.json"
-          }
-        },
-        "tags": [
-          "ThreatIntelligence"
-        ],
-        "description": "Bulk tag the threat intelligence entities.",
-        "operationId": "ThreatIntelligenceIndicatorsList_BulkTag",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/ThreatIntelligenceBulkRequestBody"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResourceList"
-            }
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -9646,23 +9592,15 @@
         ]
       }
     },
-    "ThreatIntelligenceBulkRequestBody": {
-      "description": "Describes threat intelligence bulk request body",
+    "ThreatIntelligenceAppendTagsRequestBody": {
+      "description": "Describes threat intelligence indicator append tags request body",
       "properties": {
         "ids": {
-          "description": "IDs of threat intelligence entities",
-          "items": {
-            "description": "ID of a threat intelligence entity",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "operation": {
-          "description": "operation Name",
+          "description": "ID of threat intelligence indicator",
           "type": "string"
         },
-        "parameters": {
-          "description": "List of parameters",
+        "threatIntelligenceTags": {
+          "description": "List of threat intelligence tags",
           "items": {
             "description": "parameter",
             "type": "string"
@@ -10127,13 +10065,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceBulkRequestBody": {
-      "description": "The threat intelligence bulk request body",
+    "ThreatIntelligenceAppendTagsRequestBody": {
+      "description": "The threat intelligence append tags request body",
       "in": "body",
-      "name": "ThreatIntelligenceBulkRequestBody",
+      "name": "ThreatIntelligenceAppendTagsRequestBody",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceBulkRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceAppendTagsRequestBody"
       },
       "x-ms-parameter-location": "method"
     }
