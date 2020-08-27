@@ -136,6 +136,7 @@ input-file:
 - Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
 - Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
 override-info:
@@ -495,6 +496,10 @@ directive:
     from: policyAssignments.json
     where: $.paths
     reason: policy assignment under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyExemptions.json
+    where: $.paths
+    reason: policy exemption under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -507,6 +512,14 @@ directive:
     from: policySetDefinitions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyExemptions.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: BodyTopLevelProperties
+    from: policyExemptions.json
+    where: $.definitions.PolicyExemption.properties
+    reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.ResourceGroup.properties
@@ -700,6 +713,7 @@ input-file:
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
