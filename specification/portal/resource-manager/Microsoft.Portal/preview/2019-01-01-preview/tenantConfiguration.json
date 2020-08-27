@@ -33,12 +33,6 @@
         ],
         "operationId": "TenantConfiguration_Get",
         "description": "Gets the tenant configuration.",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -49,7 +43,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the tenant configuration.",
+            "description": "OK. Returns the tenant configuration.",
             "schema": {
               "$ref": "#/definitions/Configuration"
             }
@@ -73,12 +67,6 @@
         ],
         "operationId": "TenantConfiguration_Create",
         "description": "Create the tenant configuration. If configuration already exists - update it.",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -98,13 +86,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Created response definition. Resource has been created",
+            "description": "Created. New configuration was created",
             "schema": {
               "$ref": "#/definitions/Configuration"
             }
           },
           "200": {
-            "description": "Resource already exists.",
+            "description": "OK. Existing configuration updated.",
             "schema": {
               "$ref": "#/definitions/Configuration"
             }
@@ -119,6 +107,40 @@
         "x-ms-examples": {
           "Create or update Tenant configuration": {
             "$ref": "examples/TenantConfiguration/CreateOrUpdateTenantConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Delete",
+        "description": "Delete the tenant configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Configuration was deleted."
+          },
+          "204": {
+            "description": "No content. Configuration was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Tenant configuration": {
+            "$ref": "examples/TenantConfiguration/DeleteTenantConfiguration.json"
           }
         }
       }
@@ -137,7 +159,8 @@
       "x-ms-enum": {
         "name": "configurationName",
         "modelAsString": true
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
