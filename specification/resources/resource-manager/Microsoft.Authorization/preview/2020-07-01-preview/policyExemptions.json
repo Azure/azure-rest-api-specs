@@ -183,7 +183,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -229,7 +229,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -305,7 +305,7 @@
             "description": "The name of the resource."
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -348,7 +348,7 @@
             "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "#/parameters/PolicyExemptionFilterParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -377,12 +377,7 @@
   "definitions": {
     "CloudError": {
       "x-ms-external": true,
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-        }
-      },
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
       "description": "An error response from a policy operation."
     },
     "PolicyExemptionProperties": {
@@ -537,7 +532,7 @@
       "description": "The API version to use for the operation.",
       "x-ms-parameter-location": "client"
     },
-    "FilterParameter": {
+    "PolicyExemptionFilterParameter": {
       "name": "$filter",
       "in": "query",
       "required": false,
