@@ -26,7 +26,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Portal/tenantConfiguration/default": {
+    "/providers/Microsoft.Portal/tenantConfiguration/{configurationName}": {
       "get": {
         "tags": [
           "tenantConfiguration"
@@ -41,6 +41,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
             "$ref": "portal.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -48,7 +51,7 @@
           "200": {
             "description": "OK - Returns the tenant configuration.",
             "schema": {
-              "$ref": "#/definitions/TenantConfiguration"
+              "$ref": "#/definitions/Configuration"
             }
           },
           "default": {
@@ -59,7 +62,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Tenant Configuration": {
+          "Get Tenant configuration": {
             "$ref": "examples/TenantConfiguration/GetTenantConfiguration.json"
           }
         }
@@ -68,8 +71,8 @@
         "tags": [
           "tenantConfiguration"
         ],
-        "operationId": "TenantConfiguration_Put",
-        "description": "Create/Update the tenant configuration.",
+        "operationId": "TenantConfiguration_Create",
+        "description": "Create the tenant configuration. If configuration already exists - update it.",
         "produces": [
           "application/json"
         ],
@@ -78,6 +81,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
             "$ref": "portal.json#/parameters/ApiVersionParameter"
           },
           {
@@ -85,7 +91,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TenantConfiguration"
+              "$ref": "#/definitions/Configuration"
             },
             "description": "The parameters required to create or update tenant configuration."
           }
@@ -94,13 +100,13 @@
           "201": {
             "description": "Created response definition. Resource has been created",
             "schema": {
-              "$ref": "#/definitions/TenantConfiguration"
+              "$ref": "#/definitions/Configuration"
             }
           },
           "200": {
             "description": "Resource already exists.",
             "schema": {
-              "$ref": "#/definitions/TenantConfiguration"
+              "$ref": "#/definitions/Configuration"
             }
           },
           "default": {
@@ -111,16 +117,32 @@
           }
         },
         "x-ms-examples": {
-          "Create or update Tenant Configuration": {
+          "Create or update Tenant configuration": {
             "$ref": "examples/TenantConfiguration/CreateOrUpdateTenantConfiguration.json"
           }
         }
       }
     }
   },
+  "parameters": {
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The configuration name. Value must be 'default'",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "configurationName",
+        "modelAsString": true
+      }
+    }
+  },
   "definitions": {
-    "TenantConfiguration": {
-      "description": "Tenant Configuration.",
+    "Configuration": {
+      "description": "Tenant configuration.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -140,13 +162,13 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TenantConfigurationProperties",
+          "$ref": "#/definitions/ConfigurationProperties",
           "description": "Tenant configuration properties."
         }
       }
     },
-    "TenantConfigurationProperties": {
-      "description": "Tenant Configuration Properties.",
+    "ConfigurationProperties": {
+      "description": "Tenant configuration Properties.",
       "x-ms-azure-resource": true,
       "properties": {
         "enforcePrivateMarkdownStorage": {
