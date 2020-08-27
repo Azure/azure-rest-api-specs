@@ -316,6 +316,9 @@
           },
           "ApiManagementUpdateServicePublisherDetails": {
             "$ref": "./examples/ApiManagementUpdateServicePublisherDetails.json"
+          },
+          "ApiManagementUndelete": {
+            "$ref": "./examples/ApiManagementUndelete.json"
           }
         },
         "parameters": [
@@ -1053,6 +1056,11 @@
           "type": "string",
           "description": "Publisher name.",
           "maxLength": 100
+        },
+        "restore": {
+          "type": "boolean",
+          "description": "Undelete Api Management Service if it was previously soft-deleted. If this flag is specified and set to True all other properties will be ignored.",
+          "default": false
         }
       },
       "allOf": [

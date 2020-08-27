@@ -5679,6 +5679,62 @@
     "ContentItemContractProperties": {
       "properties": {},
       "additionalProperties": true
+    },
+    "DeletedServicesCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedServiceContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged deleted Api Management Services List Representation."
+    },
+    "DeletedServiceContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeletedServiceContractProperties",
+          "description": "Deleted Api Management Service details."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Api Management Service Master Location."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Deleted Api Management Service information."
+    },
+    "DeletedServiceContractProperties": {
+      "properties": {
+        "serviceId": {
+          "type": "string",
+          "description": "Fully-qualified API Management Service Resource ID"
+        },
+        "scheduledPurgeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC Date and Time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC Timestamp when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
+        }
+      }
     }
   },
   "parameters": {}
