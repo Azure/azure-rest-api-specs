@@ -61,16 +61,3 @@ input-file:
   - Microsoft.Maps/Weather/preview/1.0/weather.json
   - Microsoft.Maps/WFS/preview/1.0/wfs.json
 ```
-
-## CSharp Settings
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  azure-arm: false
-  namespace: Microsoft.Azure.Maps
-  output-folder: $(csharp-sdks-folder)/Maps/Generated
-  clear-output-folder: true
-```
