@@ -1427,7 +1427,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelationList"
+              "$ref": "#/definitions/RelationList"
             }
           },
           "default": {
@@ -1437,7 +1437,7 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/BookmarkRelation",
+        "x-ms-odata": "#/definitions/Relation",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1533,7 +1533,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelation"
+              "$ref": "#/definitions/Relation"
             }
           },
           "default": {
@@ -1578,20 +1578,20 @@
             "$ref": "#/parameters/RelationName"
           },
           {
-            "$ref": "#/parameters/RelationInputModel"
+            "$ref": "#/parameters/Relation"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelation"
+              "$ref": "#/definitions/Relation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelation"
+              "$ref": "#/definitions/Relation"
             }
           },
           "default": {
@@ -1905,7 +1905,7 @@
           "Check Data Connector Requirements"
         ],
         "description": "Get requirements state for a data connector type.",
-        "operationId": "listDataConnectorRequirements",
+        "operationId": "DataConnectorsCheckRequirements_Post",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -2391,14 +2391,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings": {
+      "get": {
+        "x-ms-examples": {
+          "Get EyesOn settings.": {
+            "$ref": "./examples/settings/GetAllSettings.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "List of all the settings",
+        "operationId": "ProductSettings_GetAll",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
       "get": {
         "x-ms-examples": {
-          "Get UEBA settings.": {
-            "$ref": "./examples/settings/GetUebaSettings.json"
-          },
-          "Get Fusion settings.": {
-            "$ref": "./examples/settings/GetFusionSettings.json"
+          "Get EyesOn settings.": {
+            "$ref": "./examples/settings/GetEyesOnSetting.json"
           }
         },
         "tags": [
@@ -2441,16 +2483,62 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "x-ms-examples": {
-          "Update UEBA settings.": {
-            "$ref": "./examples/settings/UpdateUebaSettings.json"
+          "Delete EyesOn settings.": {
+            "$ref": "./examples/settings/DeleteEyesOnSetting.json"
           }
         },
         "tags": [
           "Settings"
         ],
-        "description": "Updates the setting.",
+        "description": "Delete setting of the product.",
+        "operationId": "ProductSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SettingsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update EyesOn settings.": {
+            "$ref": "./examples/settings/UpdateEyesOnSetting.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Updates setting.",
         "operationId": "ProductSettings_Update",
         "parameters": [
           {
@@ -3232,6 +3320,248 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlists.": {
+            "$ref": "./examples/watchlists/GetWatchlists.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Gets all watchlists.",
+        "operationId": "Watchlists_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlists.": {
+            "$ref": "./examples/watchlists/GetWatchlists.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Gets all watchlists in a subscription.",
+        "operationId": "Watchlists_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a watchlist.": {
+            "$ref": "./examples/watchlists/GetWatchlistByAlias.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Gets a watchlist.",
+        "operationId": "Watchlists_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a watchlist.": {
+            "$ref": "./examples/watchlists/DeleteWatchlist.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Delete a watchlist.",
+        "operationId": "Watchlists_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates a watchlist.": {
+            "$ref": "./examples/watchlists/CreateWatchlist.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Creates a watchlist",
+        "operationId": "Watchlists_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/Watchlist"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3268,17 +3598,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents AAD (Azure Active Directory) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AADCheckRequirementsProperties",
+          "description": "AAD (Azure Active Directory) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "AADCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "AAD (Azure Active Directory) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "AATPDataConnector": {
       "allOf": [
@@ -3313,17 +3653,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents AATP (Azure Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AATPCheckRequirementsProperties",
+          "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
+    },
+    "AATPCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "ASCDataConnector": {
       "allOf": [
@@ -3358,23 +3708,31 @@
       "type": "object"
     },
     "ASCCheckRequirements": {
-      "description": "ASC (Azure Security Center) requirements check properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
+      "description": "Represents ASC (Azure Security Center) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ASCCheckRequirementsProperties",
+          "description": "ASC (Azure Security Center) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSecurityCenter"
+    },
+    "ASCCheckRequirementsProperties": {
+      "description": "ASC (Azure Security Center) requirements check properties.",
       "properties": {
         "subscriptionId": {
           "description": "The subscription id to connect to, and get the data from.",
           "type": "string"
         }
       },
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "AccountEntity": {
       "allOf": [
@@ -3852,7 +4210,8 @@
         "Collection",
         "Exfiltration",
         "CommandAndControl",
-        "Impact"
+        "Impact",
+        "PreAttack"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3912,12 +4271,9 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Amazon Web Services CloudTrail requirements check properties.",
+      "description": "Amazon Web Services CloudTrail requirements check request.",
       "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
     },
     "AzureResourceEntity": {
       "allOf": [
@@ -3946,6 +4302,11 @@
       "properties": {
         "resourceId": {
           "description": "The azure resource id of the resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription id of the resource",
           "readOnly": true,
           "type": "string"
         }
@@ -4043,73 +4404,6 @@
         "bookmarkName": {
           "type": "string",
           "description": "The case related bookmark name"
-        }
-      },
-      "required": [
-        "relationName",
-        "caseIdentifier",
-        "bookmarkId"
-      ]
-    },
-    "BookmarkRelationList": {
-      "description": "List of bookmark relations.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of relations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of relations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BookmarkRelation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "BookmarkRelation": {
-      "type": "object",
-      "description": "Represents a bookmark relation",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RelationBase"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Bookmark relation properties",
-          "$ref": "#/definitions/BookmarkRelationProperties"
-        }
-      }
-    },
-    "BookmarkRelationProperties": {
-      "type": "object",
-      "description": "Bookmark relation properties",
-      "properties": {
-        "relationName": {
-          "type": "string",
-          "description": "Name of relation"
-        },
-        "bookmarkId": {
-          "type": "string",
-          "description": "The case related bookmark id"
-        },
-        "caseIdentifier": {
-          "type": "string",
-          "description": "The case identifier"
-        },
-        "caseTitle": {
-          "type": "string",
-          "description": "The case title"
-        },
-        "caseSeverity": {
-          "type": "string",
-          "description": "The case severity"
         }
       },
       "required": [
@@ -4827,12 +5121,18 @@
       ]
     },
     "DataConnectorsCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorKind"
+      "description": "Data connector requirements properties.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorKind",
+          "description": "Describes the kind of connector to be checked."
         }
-      ],
-      "description": "Data connector requirements properties."
+      },
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "DataConnectorAuthorizationState": {
       "description": "Describes the state of user's authorization for a connector kind.",
@@ -6087,6 +6387,10 @@
             ]
           }
         },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
         "classificationReason": {
           "description": "The classification reason the incident was closed with",
           "enum": [
@@ -6134,6 +6438,11 @@
           "format": "date-time",
           "type": "string"
         },
+        "incidentUrl": {
+          "description": "The deep-link url to the incident in Azure portal",
+          "readOnly": true,
+          "type": "string"
+        },
         "incidentNumber": {
           "description": "A sequential number",
           "readOnly": true,
@@ -6161,6 +6470,15 @@
           "$ref": "#/definitions/IncidentOwnerInfo",
           "description": "Describes a user that the incident is assigned to",
           "type": "object"
+        },
+        "relatedAnalyticRuleIds": {
+          "description": "List of resource ids of Analytic rules related to the incident",
+          "items": {
+            "description": "Related Analytic rule resource id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "severity": {
           "description": "The severity of the incident",
@@ -6338,17 +6656,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents MCAS (Microsoft Cloud App Security) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MCASCheckRequirementsProperties",
+          "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftCloudAppSecurity"
+    },
+    "MCASCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "MDATPDataConnector": {
       "allOf": [
@@ -6383,17 +6711,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MDATPCheckRequirementsProperties",
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
+    },
+    "MDATPCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "MalwareEntity": {
       "allOf": [
@@ -6670,6 +7008,15 @@
             }
           ],
           "description": "SharePoint data type connection.",
+          "type": "object"
+        },
+        "teams": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Teams data type connection.",
           "type": "object"
         }
       },
@@ -7073,6 +7420,7 @@
         },
         "relatedResourceName": {
           "description": "The name of the related resource",
+          "readOnly": true,
           "type": "string"
         },
         "relatedResourceType": {
@@ -7182,9 +7530,34 @@
         "triggerThreshold": {
           "description": "The threshold triggers this alert rule.",
           "type": "integer"
+        },
+        "eventGroupingSettings": {
+          "$ref": "#/definitions/EventGroupingSettings",
+          "description": "The event grouping settings."
         }
       },
       "type": "object"
+    },
+    "EventGroupingSettings": {
+      "description": "Event grouping settings property bag.",
+      "properties": {
+        "aggregationKind": {
+          "$ref": "#/definitions/EventGroupingAggregationKind"
+        }
+      },
+      "type": "object"
+    },
+    "EventGroupingAggregationKind": {
+      "description": "The event grouping aggregation kinds",
+      "enum": [
+        "SingleAlert",
+        "AlertPerResult"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EventGroupingAggregationKind"
+      }
     },
     "ScheduledAlertRuleProperties": {
       "allOf": [
@@ -7728,6 +8101,19 @@
           "description": "The name of the vendor that raise the alert.",
           "readOnly": true,
           "type": "string"
+        },
+        "alertLink": {
+          "description": "The uri link of the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resourceIdentifiers": {
+          "description": "The list of resource identifiers of the alert.",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
@@ -7776,6 +8162,21 @@
       },
       "type": "object"
     },
+    "SettingList": {
+      "description": "List of all the settings.",
+      "properties": {
+        "value": {
+          "description": "Array of settings.",
+          "items": {
+            "$ref": "#/definitions/Settings"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Settings": {
       "allOf": [
         {
@@ -7787,10 +8188,7 @@
       ],
       "description": "The Setting.",
       "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "SettingsKind": {
       "description": "Describes an Azure resource with kind.",
@@ -7798,8 +8196,9 @@
         "kind": {
           "description": "The kind of the setting",
           "enum": [
-            "UebaSettings",
-            "ToggleSettings"
+            "EyesOn",
+            "EntityAnalytics",
+            "Ueba"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7864,17 +8263,28 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents threat intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TICheckRequirementsProperties",
+          "description": "TI (Threat Intelligence) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "TICheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "TI (Threat Intelligence) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "properties": {},
+      "type": "object"
     },
     "TiTaxiiDataConnector": {
       "allOf": [
@@ -7951,17 +8361,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents threat intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
+          "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
+    },
+    "TiTaxiiCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "description": "Threat Intelligence taxii client data connector properties.",
+      "type": "object"
     },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
@@ -8000,7 +8420,7 @@
       },
       "type": "object"
     },
-    "ToggleSettings": {
+    "EyesOn": {
       "allOf": [
         {
           "$ref": "#/definitions/Settings"
@@ -8009,76 +8429,96 @@
       "description": "Settings with single toggle.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ToggleSettingsProperties",
-          "description": "toggle properties",
+          "$ref": "#/definitions/EyesOnSettingsProperties",
+          "description": "EyesOn properties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "ToggleSettings"
+      "x-ms-discriminator-value": "EyesOn"
     },
-    "ToggleSettingsProperties": {
-      "description": "toggle property bag.",
+    "EyesOnSettingsProperties": {
+      "description": "EyesOn property bag.",
       "properties": {
         "isEnabled": {
           "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
           "type": "boolean"
         }
       },
       "type": "object"
     },
-    "UebaSettings": {
+    "EntityAnalytics": {
       "allOf": [
         {
           "$ref": "#/definitions/Settings"
         }
       ],
-      "description": "Represents settings for User and Entity Behavior Analytics enablement.",
+      "description": "Settings with single toggle.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UebaSettingsProperties",
-          "description": "User and Entity Behavior Analytics settings properties",
+          "$ref": "#/definitions/EntityAnalyticsProperties",
+          "description": "EntityAnalytics properties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "UebaSettings"
+      "x-ms-discriminator-value": "EntityAnalytics"
     },
-    "UebaSettingsProperties": {
-      "description": "User and Entity Behavior Analytics settings property bag.",
+    "EntityAnalyticsProperties": {
+      "description": "EntityAnalytics property bag.",
       "properties": {
-        "atpLicenseStatus": {
-          "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "LicenseStatus"
-          }
-        },
         "isEnabled": {
-          "description": "Determines whether User and Entity Behavior Analytics is enabled for this workspace.",
-          "type": "boolean"
-        },
-        "statusInMcas": {
-          "description": "Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "description": "Determines whether the setting is enable or disabled.",
           "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "StatusInMcas"
-          }
+          "type": "boolean"
         }
       },
       "type": "object"
+    },
+    "Ueba": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UebaProperties",
+          "description": "Ueba properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Ueba"
+    },
+    "UebaProperties": {
+      "description": "Ueba property bag.",
+      "properties": {
+        "dataSources": {
+          "description": "The relevant data sources that enriched by ueba",
+          "items": {
+            "$ref": "#/definitions/UebaDataSources"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UebaDataSources": {
+      "description": "The data source that enriched by ueba.",
+      "enum": [
+        "AuditLogs",
+        "AzureActivity",
+        "SecurityEvent",
+        "SigninLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UebaDataSources"
+      }
     },
     "UrlEntity": {
       "allOf": [
@@ -8265,6 +8705,207 @@
         "severity",
         "title",
         "relationName"
+      ],
+      "type": "object"
+    },
+    "WatchlistList": {
+      "description": "List all the watchlists.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of watchlists.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of watchlist.",
+          "items": {
+            "$ref": "#/definitions/Watchlist"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Watchlist": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Watchlist in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistProperties",
+          "description": "Watchlist properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistProperties": {
+      "description": "Describes watchlist properties",
+      "properties": {
+        "createdTimeUtc": {
+          "description": "The time the watchlist was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the watchlist",
+          "type": "string"
+        },
+        "watchlistType": {
+          "description": "The type of the watchlist",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the watchlist",
+          "enum": [
+            "Local file",
+            "Remote storage"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "source"
+          }
+        },
+        "provider": {
+          "description": "The provider of the watchlist",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the watchlist",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenantId where the watchlist belongs to.",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "The workspaceId where the watchlist belongs to.",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this watchlist",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the watchlist",
+          "type": "string"
+        },
+        "lastUpdatedTimeUtc": {
+          "description": "The last time the watchlist was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist",
+          "type": "object"
+        },
+        "defaultDuration": {
+          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "watchlistItems": {
+          "description": "List of watchlist items.",
+          "items": {
+            "$ref": "#/definitions/WatchlistItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "displayName",
+        "source",
+        "provider"
+      ],
+      "type": "object"
+    },
+    "WatchlistItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a Watchlist Item in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistItemProperties",
+          "description": "Watchlist item properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistItemProperties": {
+      "description": "Describes watchlist item properties",
+      "properties": {
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist",
+          "type": "object"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist",
+          "type": "object"
+        },
+        "watchlistItemName": {
+          "description": "Name of the watchlist item",
+          "type": "string"
+        },
+        "watchlistItemPair": {
+          "description": "A key-value pair for a watchlist item",
+          "type": "object"
+        },
+        "entityMapping": {
+          "description": "A key-value pair for a watchlist item entity mapping",
+          "type": "object"
+        },
+        "tenantId": {
+          "description": "The tenantId to which this watchlist item belongs to",
+          "type": "string"
+        },
+        "createdTimeUtc": {
+          "description": "The time the watchlist item was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastUpdatedTimeUtc": {
+          "description": "The last time the watchlist item was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "timeToLiveUtc": {
+          "description": "The time to live for the watchlist item",
+          "format": "date-time",
+          "type": "string"
+        },
+        "watchlistItemType": {
+          "description": "The type of the watchlist item",
+          "type": "string"
+        },
+        "watchlistId": {
+          "description": "The watchlist id of the parent of this watchlist item",
+          "type": "string"
+        }
+      },
+      "required": [
+        "watchlistId",
+        "watchlistItemPair"
       ],
       "type": "object"
     }
@@ -8585,7 +9226,7 @@
       "x-ms-parameter-location": "method"
     },
     "SettingsName": {
-      "description": "The setting name. Supports- Fusion, UEBA",
+      "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
       "in": "path",
       "name": "settingsName",
       "required": true,
@@ -8608,6 +9249,24 @@
       "name": "workspaceName",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistAlias": {
+      "description": "Watchlist Alias",
+      "in": "path",
+      "name": "watchlistAlias",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Watchlist": {
+      "description": "The watchlist",
+      "in": "body",
+      "name": "watchlist",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Watchlist"
+      },
       "x-ms-parameter-location": "method"
     }
   }

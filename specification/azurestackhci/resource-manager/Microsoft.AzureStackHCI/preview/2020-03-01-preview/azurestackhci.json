@@ -1,0 +1,614 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-03-01-preview",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.AzureStackHCI/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List all available Microsoft.AzureStackHCI provider operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_List",
+        "x-ms-examples": {
+          "ListClusters": {
+            "$ref": "./examples/ListClusters.json"
+          }
+        },
+        "description": "List all HCI clusters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListClusters": {
+            "$ref": "./examples/ListClustersByResourceGroup.json"
+          }
+        },
+        "description": "List all HCI clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Get",
+        "x-ms-examples": {
+          "GetClusters": {
+            "$ref": "./examples/GetCluster.json"
+          }
+        },
+        "description": "Get HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Create",
+        "x-ms-examples": {
+          "GetClusters": {
+            "$ref": "./examples/CreateCluster.json"
+          }
+        },
+        "description": "Create an HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cluster",
+            "in": "body",
+            "description": "Details of the HCI cluster.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Update",
+        "x-ms-examples": {
+          "GetClusters": {
+            "$ref": "./examples/UpdateCluster.json"
+          }
+        },
+        "description": "Update an HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cluster",
+            "in": "body",
+            "description": "Details of the HCI cluster.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Delete",
+        "x-ms-examples": {
+          "GetClusters": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        },
+        "description": "Delete an HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClusterList": {
+      "description": "List of clusters.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Cluster": {
+      "description": "Cluster details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Cluster properties.",
+          "$ref": "#/definitions/ClusterProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "Cluster properties.",
+      "type": "object",
+      "required": [
+        "aadClientId",
+        "aadTenantId"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the cluster agent.",
+          "type": "string",
+          "enum": [
+            "NotYetRegistered",
+            "ConnectedRecently",
+            "NotConnectedRecently",
+            "Disconnected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "cloudId": {
+          "description": "Unique, immutable resource id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aadClientId": {
+          "description": "App id of cluster AAD identity.",
+          "type": "string"
+        },
+        "aadTenantId": {
+          "description": "Tenant id of cluster AAD identity.",
+          "type": "string"
+        },
+        "reportedProperties": {
+          "description": "Properties reported by cluster agent.",
+          "$ref": "#/definitions/ClusterReportedProperties"
+        },
+        "trialDaysRemaining": {
+          "description": "Number of days remaining in the trial period.",
+          "type": "number",
+          "readOnly": true
+        },
+        "billingModel": {
+          "description": "Type of billing applied to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "registrationTimestamp": {
+          "description": "First cluster sync timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "description": "Most recent cluster sync timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastBillingTimestamp": {
+          "description": "Most recent billing meter timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterReportedProperties": {
+      "description": "Properties reported by cluster agent.",
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "description": "Name of the on-prem cluster connected to this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterId": {
+          "description": "Unique id generated by the on-prem cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clusterVersion": {
+          "description": "Version of the cluster software.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "List of nodes reported by the cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterNode"
+          },
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "description": "Last time the cluster reported the data.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterNode": {
+      "description": "Cluster node details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the cluster node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id of the node in the cluster.",
+          "type": "number",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "description": "Manufacturer of the cluster node hardware.",
+          "type": "string",
+          "readOnly": true
+        },
+        "model": {
+          "description": "Model name of the cluster node hardware.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Operating system running on the cluster node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osVersion": {
+          "description": "Version of the operating system running on the cluster node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "description": "Immutable id of the cluster node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "coreCount": {
+          "description": "Number of physical cores on the cluster node.",
+          "type": "number",
+          "readOnly": true
+        },
+        "memoryInGiB": {
+          "description": "Total available memory on the cluster node (in GiB).",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterUpdate": {
+      "description": "Cluster details to update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of available operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Operation properties."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource type name.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Operation description.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
