@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
 - Microsoft.AAD/stable/2020-01-01/domainservices.json
+- Microsoft.AAD/stable/2020-01-01/oucontainer.json
 ```
 
 ### Tag: package-2017-06
@@ -45,6 +46,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.AAD/stable/2017-06-01/domainservices.json
+- Microsoft.AAD/stable/2017-06-01/oucontainer.json
 ```
 
 ### Tag: package-2017-01
@@ -71,9 +73,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-  - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js domainservices/resource-manager
 ```
 
 ## C#
@@ -159,10 +158,6 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -178,6 +173,8 @@ input-file:
   - $(this-folder)/Microsoft.AAD/stable/2020-01-01/domainservices.json
   - $(this-folder)/Microsoft.AAD/stable/2017-06-01/domainservices.json
   - $(this-folder)/Microsoft.AAD/stable/2017-01-01/domainservices.json
+  - $(this-folder)/Microsoft.AAD/stable/2020-01-01/oucontainer.json
+  - $(this-folder)/Microsoft.AAD/stable/2017-06-01/oucontainer.json
 
 ```
 

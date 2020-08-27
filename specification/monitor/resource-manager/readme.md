@@ -676,6 +676,8 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/baseline_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettingsAssociation_API.json

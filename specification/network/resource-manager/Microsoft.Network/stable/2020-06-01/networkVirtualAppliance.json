@@ -682,6 +682,79 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/inboundSecurityRules/{ruleCollectionName}": {
+      "put": {
+        "operationId": "InboundSecurityRule_CreateOrUpdate",
+        "description": "Creates or updates the specified Network Virtual Appliance Inbound Security Rules.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of security rule collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InboundSecurityRule"
+            },
+            "description": "Parameters supplied to the create or update Network Virtual Appliance Inbound Security Rules operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Network Virtual Appliance Inbound Security Rules resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundSecurityRule"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance Inbound Security Rules resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundSecurityRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Network Virtual Appliance Inbound Security Rules": {
+            "$ref": "./examples/InboundSecurityRulePut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -767,6 +840,14 @@
           "type": "array",
           "readOnly": true,
           "description": "List of references to VirtualApplianceSite.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "inboundSecurityRules": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to InboundSecurityRules.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
@@ -1009,6 +1090,81 @@
         }
       },
       "description": "Response for ListNetworkVirtualApplianceSkus API service call."
+    },
+    "InboundSecurityRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InboundSecurityRuleProperties",
+          "description": "The properties of the Inbound Security Rules."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of security rule collection."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "NVA inbound security rule type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "NVA Inbound Security Rule resource."
+    },
+    "InboundSecurityRuleProperties": {
+      "properties": {
+        "rules": {
+          "type": "array",
+          "readOnly": false,
+          "description": "List of allowed rules.",
+          "items": {
+            "$ref": "#/definitions/InboundSecurityRules"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Properties of the Inbound Security Rules resource."
+    },
+    "InboundSecurityRules": {
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "InboundSecurityRulesProtocol",
+            "modelAsString": true
+          },
+          "description": "Protocol. This should be either TCP or UDP."
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The CIDR or source IP range. Only /30, /31 and /32 Ip ranges are allowed."
+        },
+        "destinationPortRange": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "NVA port ranges to be opened up. One needs to provide specific ports."
+        }
+      },
+      "description": "Properties of the Inbound Security Rules resource."
     }
   }
 }
