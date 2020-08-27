@@ -42,7 +42,7 @@
             "$ref": "./examples/CosmosDBSqlRoleDefinitionGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB SQL Role Definition with the given id.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB SQL Role Definition with the given Id.",
         "parameters": [
           {
             "$ref": "#/parameters/roleDefinitionIdParameter"
@@ -223,7 +223,7 @@
             "$ref": "./examples/CosmosDBSqlRoleAssignmentGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB SQL Role Assignment with the given id.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB SQL Role Assignment with the given Id.",
         "parameters": [
           {
             "$ref": "#/parameters/roleAssignmentIdParameter"
@@ -293,7 +293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Role Assignment create or update request was completed successfully.",
+            "description": "The Role Assignment create or update operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlRoleAssignmentGetResults"
             }
@@ -434,12 +434,12 @@
       "description": "Azure Cosmos DB SQL Role Definition resource object."
     },
     "SqlRoleDefinitionCreateUpdateParameters": {
-      "description": "Parameters to create and update Azure Cosmos DB SQL Role Definition.",
+      "description": "Parameters to create and update an Azure Cosmos DB SQL Role Definition.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB container.",
+          "description": "Properties to create and update an Azure Cosmos DB SQL Role Definition.",
           "$ref": "#/definitions/SqlRoleDefinitionResource"
         }
       }
@@ -458,7 +458,7 @@
           "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
         }
       ],
-      "description": "An Azure Cosmos DB Role Definition."
+      "description": "An Azure Cosmos DB SQL Role Definition."
     },
     "Permission": {
       "type": "object",
@@ -502,15 +502,15 @@
           "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
         }
       },
-      "description": "Azure Cosmos DB SQL Role Definition resource object."
+      "description": "Azure Cosmos DB SQL Role Assignment resource object."
     },
     "SqlRoleAssignmentCreateUpdateParameters": {
-      "description": "Paramenters to create and update Azure Cosmos DB SQL Role Assignment.",
+      "description": "Parameters to create and update an Azure Cosmos DB SQL Role Assignment.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB SQL Role Assignment.",
+          "description": "Properties to create and update an Azure Cosmos DB SQL Role Assignment.",
           "$ref": "#/definitions/SqlRoleAssignmentResource"
         }
       }
