@@ -479,7 +479,7 @@ input-file:
 These settings apply only when `--tag=package-2018-06-exclude-gallery` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-06-exclude-gallery'
-input-file:profile-hybrid
+input-file:
 - Microsoft.Compute/stable/2018-06-01/compute.json
 - Microsoft.Compute/stable/2018-06-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
