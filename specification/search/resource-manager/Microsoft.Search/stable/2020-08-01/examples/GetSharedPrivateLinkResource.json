@@ -2,7 +2,7 @@
   "parameters": {
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-08-01",
     "subscriptionId": "subid",
     "sharedPrivateLinkResourceName": "testResource"
   },
@@ -10,11 +10,14 @@
     "200": {
       "body": {
         "name": "testResource",
+        "type": "Microsoft.Search/searchServices/sharedPrivateLinkResources",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/sharedPrivateLinkResources/testResource",
         "properties": {
           "requestMessage": "please approve",
           "groupId": "blob",
           "privateLinkResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storageAccountName",
-          "status": "Pending"
+          "status": "Pending",
+          "resourceRegion": null
         }
       }
     }
