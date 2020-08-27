@@ -170,7 +170,7 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+- Microsoft.Devices/stable/2020-06-15/iothub.json
 ```
 
 ---
