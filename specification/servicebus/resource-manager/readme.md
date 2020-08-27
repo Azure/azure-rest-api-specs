@@ -39,13 +39,13 @@ input-file:
 - Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
 - Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
 - Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
 - Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
 - Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
 - Microsoft.ServiceBus/stable/2017-04-01/migrate.json
 - Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
-- Microsoft.ServiceBus/stable/2017-04-01/operations.json
 - Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
 - Microsoft.ServiceBus/stable/2017-04-01/Queue.json
 - Microsoft.ServiceBus/stable/2017-04-01/sku.json
