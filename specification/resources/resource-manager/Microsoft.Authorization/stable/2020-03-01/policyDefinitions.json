@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2019-09-01",
+    "version": "2020-03-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -215,7 +215,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
       "put": {
         "tags": [
           "PolicyDefinitions"
@@ -359,7 +359,7 @@
         ],
         "operationId": "PolicyDefinitions_List",
         "summary": "Retrieves policy definitions in a subscription",
-        "description": "This operation retrieves a list of all the policy definitions in a given subscription.",
+        "description": "This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn and Custom. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
         "x-ms-examples": {
           "List policy definitions by subscription": {
             "$ref": "./examples/listPolicyDefinitions.json"
@@ -371,6 +371,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -408,6 +414,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -429,14 +438,14 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions": {
       "get": {
         "tags": [
           "PolicyDefinitions"
         ],
         "operationId": "PolicyDefinitions_ListByManagementGroup",
         "summary": "Retrieve policy definitions in a management group",
-        "description": "This operation retrieves a list of all the policy definitions in a given management group.",
+        "description": "This operation retrieves a list of all the policy definitions in a given management group that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given management group. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn and Custom. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
         "x-ms-examples": {
           "List policy definitions by management group": {
             "$ref": "./examples/listPolicyDefinitionsByManagementGroup.json"
@@ -448,6 +457,12 @@
           },
           {
             "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -475,7 +490,7 @@
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
         }
       },
       "description": "An error response from a policy operation."
@@ -645,6 +660,26 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for the operation."
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
