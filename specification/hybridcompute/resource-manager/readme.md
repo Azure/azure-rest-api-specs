@@ -70,7 +70,7 @@ These settings apply only when `--tag=package-2020-08-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-08-02'
 input-file:
-- Microsoft.HybridCompute/preview/2020-08-02/HybridCompute.json
+- Microsoft.HybridCompute/stable/2020-08-02/HybridCompute.json
 ```
 
 ---
