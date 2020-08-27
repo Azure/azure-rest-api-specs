@@ -1985,7 +1985,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3021" ></a>R3021 PathResourceTypeNameCamelCase
 
-**Category** : ARM Warning
+**Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
