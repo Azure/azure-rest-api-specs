@@ -221,6 +221,9 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: privateLinkResources.json
     reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: rbac.json
+    reason: The name of the provider is Microsoft.DocumentDB
 ```
 
 ---
