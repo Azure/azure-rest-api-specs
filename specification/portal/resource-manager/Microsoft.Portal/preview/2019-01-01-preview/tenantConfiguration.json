@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-preview",
+    "title": "portal",
+    "description": "Manage tenant configuration.",
+    "x-ms-code-generation-settings": {
+      "name": "portalClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Portal/tenantConfiguration/default": {
+      "get": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Get",
+        "description": "Gets the tenant configuration.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the tenant configuration.",
+            "schema": {
+              "$ref": "#/definitions/TenantConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Tenant Configuration": {
+            "$ref": "./examples/TenantConfiguration/GetTenantConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Put",
+        "description": "Create/Update the tenant configuration.",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tenantConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantConfiguration"
+            },
+            "description": "The parameters required to create or update tenant configuration."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created response definition. Resource has been created",
+            "schema": {
+              "$ref": "#/definitions/TenantConfiguration"
+            }
+          },
+          "200": {
+            "description": "Resource already exists.",
+            "schema": {
+              "$ref": "#/definitions/TenantConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Tenant Configuration": {
+            "$ref": "./examples/TenantConfiguration/CreateOrUpdateTenantConfiguration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TenantConfiguration": {
+      "description": "Tenant Configuration.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant configuration id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant configuration name - default."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantConfigurationProperties",
+          "description": "Tenant configuration properties."
+        }
+      }
+    },
+    "TenantConfigurationInstanceProperties": {
+      "description": "Tenant Configuration Properties.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "enforcePrivateMarkdownStorage": {
+          "type": "boolean",
+          "description": "Flag to enforce URI storage for Markdown tiles in Private dashboards."
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
