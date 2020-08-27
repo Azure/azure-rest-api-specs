@@ -109,13 +109,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus": {
       "post": {
         "tags": [
           "Service"
         ],
-        "description": "This API provides configuration details specific to given region/location at Subscription level.",
-        "operationId": "Service_RegionConfiguration",
+        "description": "This method provides the list of available skus for the given subscription, resource group and location.",
+        "operationId": "Service_ListAvailableSkusByResourceGroup",
         "consumes": [
           "application/json"
         ],
@@ -127,26 +127,29 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/locationParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "regionConfigurationRequest",
+            "name": "availableSkuRequest",
             "in": "body",
-            "description": "Request body to get the configuration for the region.",
+            "description": "Filters for showing the available skus.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegionConfigurationRequest"
+              "$ref": "#/definitions/AvailableSkuRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Region configuration response.",
+            "description": "The list of available skus under Resource group.",
             "schema": {
-              "$ref": "#/definitions/RegionConfigurationResponse"
+              "$ref": "#/definitions/AvailableSkusResult"
             }
           },
           "default": {
@@ -156,9 +159,12 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "RegionConfiguration": {
-            "$ref": "./examples/RegionConfiguration.json"
+          "AvailableSkusPost": {
+            "$ref": "./examples/AvailableSkusPost.json"
           }
         }
       }
@@ -214,6 +220,63 @@
         "x-ms-examples": {
           "ValidateAddressPost": {
             "$ref": "./examples/ValidateAddressPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/validateInputs": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This method does all necessary pre-job creation validation under resource group.",
+        "operationId": "Service_ValidateInputsByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "validationRequest",
+            "in": "body",
+            "description": "Inputs of the customer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The validation status and responses of each validating parameter.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateInputsByResourceGroup": {
+            "$ref": "./examples/ValidateInputsByResourceGroup.json"
           }
         }
       }
@@ -733,13 +796,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
       "post": {
         "tags": [
           "Service"
         ],
-        "description": "This method provides the list of available skus for the given subscription, resource group and location.",
-        "operationId": "Service_ListAvailableSkusByResourceGroup",
+        "description": "This API provides configuration details specific to given region/location at Subscription level.",
+        "operationId": "Service_RegionConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -751,29 +814,26 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/locationParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "availableSkuRequest",
+            "name": "regionConfigurationRequest",
             "in": "body",
-            "description": "Filters for showing the available skus.",
+            "description": "Request body to get the configuration for the region.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AvailableSkuRequest"
+              "$ref": "#/definitions/RegionConfigurationRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of available skus under Resource group.",
+            "description": "Region configuration response.",
             "schema": {
-              "$ref": "#/definitions/AvailableSkusResult"
+              "$ref": "#/definitions/RegionConfigurationResponse"
             }
           },
           "default": {
@@ -783,12 +843,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "AvailableSkusPost": {
-            "$ref": "./examples/AvailableSkusPost.json"
+          "RegionConfiguration": {
+            "$ref": "./examples/RegionConfiguration.json"
           }
         }
       }
@@ -846,63 +903,6 @@
         "x-ms-examples": {
           "RegionConfigurationByResourceGroup": {
             "$ref": "./examples/RegionConfigurationByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/validateInputs": {
-      "post": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This method does all necessary pre-job creation validation under resource group.",
-        "operationId": "Service_ValidateInputsByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "validationRequest",
-            "in": "body",
-            "description": "Inputs of the customer.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The validation status and responses of each validating parameter.",
-            "schema": {
-              "$ref": "#/definitions/ValidationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidateInputsByResourceGroup": {
-            "$ref": "./examples/ValidateInputsByResourceGroup.json"
           }
         }
       }
@@ -1609,7 +1609,11 @@
         },
         "sharePassword": {
           "description": "Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       },
       "discriminator": "dataAccountType"
