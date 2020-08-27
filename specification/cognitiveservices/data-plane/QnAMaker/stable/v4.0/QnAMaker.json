@@ -567,6 +567,20 @@
           },
           {
             "$ref": "#/parameters/Environment"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "The source property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "changedSince",
+            "in": "query",
+            "description": "The last changed status property filter to apply.",
+            "required": false,
+            "type": "string"
           }
         ],
         "consumes": [
@@ -995,6 +1009,11 @@
               "$ref": "#/definitions/ContextDTO"
             }
           ]
+        },
+        "changedTimeStamp": {
+          "type": "string",
+          "description": "Timestamp when the operation was created.",
+          "maxLength": 300
         }
       }
     },
