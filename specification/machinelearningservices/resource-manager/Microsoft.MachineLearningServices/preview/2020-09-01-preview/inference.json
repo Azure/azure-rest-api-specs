@@ -243,6 +243,68 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningInferenceEndpoints"
+        ],
+        "description": "Updates an Inference Endpoint. This call will update an Inference Endpoint if it exists.",
+        "operationId": "MachineLearningInferenceEndpoints_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Endpoint": {
+            "$ref": "./examples/updateInferenceEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Inference Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Endpoint update initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Inference Endpoint update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferenceEndpoints/locations/{locationName}/checkNameAvailability": {
@@ -503,6 +565,71 @@
           },
           "202": {
             "description": "Inference Deployment creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningInferenceEndpointDeployments"
+        ],
+        "description": "Updates an Inference Deployment. This call will update an Inference Deployment if it exists.",
+        "operationId": "MachineLearningInferenceEndpointDeployments_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Deployment": {
+            "$ref": "./examples/updateDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InferenceEndpointDeploymentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Inference Deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointDeploymentUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inference Deployment update initiated.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointDeploymentResource"
+            }
+          },
+          "202": {
+            "description": "Inference Deployment update initiated.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation status.",
@@ -893,6 +1020,50 @@
           "description": "Current number of instances assigned to the resource.",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "InferenceEndpointUpdateRequest": {
+      "description": "Update request body for Inference Endpoint.",
+      "properties": {
+        "tags": {
+          "description": "Tags of the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deploymentWeights": {
+          "description": "The weights of all deployments in inference endpoint",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "InferenceEndpointDeploymentUpdateRequest": {
+      "description": "Update request body for Inference Endpoint Deployment.",
+      "properties": {
+        "tags": {
+          "description": "Tags of the endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "description": "Mutable properties for SKU.",
+          "type": "object",
+          "properties": {
+            "capacity": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         }
       }
     }
