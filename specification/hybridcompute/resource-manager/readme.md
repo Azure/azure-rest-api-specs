@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 ```yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
 ```
 ### Tag: package-2019-03
 
