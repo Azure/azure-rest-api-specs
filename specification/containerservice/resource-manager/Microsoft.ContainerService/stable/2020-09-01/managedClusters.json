@@ -738,6 +738,9 @@
           },
           "Create Agent Pool with PPG": {
             "$ref": "./examples/AgentPoolsCreate_PPG.json"
+          },
+          "Create Agent Pool with Ephemeral OS Disk": {
+            "$ref": "./examples/AgentPoolsCreate_Ephemeral.json"
           }
         }
       },
@@ -1799,6 +1802,10 @@
         "osDiskSizeGB": {
           "$ref": "#/definitions/ContainerServiceOSDisk",
           "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
+        },
+        "osDiskType": {
+          "$ref": "#/definitions/OSDiskType",
+          "description": "OS disk type to be used for machines in a given agent pool. Allowed values are 'Ephemeral' and 'Managed'. Defaults to 'Managed'. May not be changed after creation."
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
@@ -3160,6 +3167,18 @@
           "description": "The private link service ID of the resource, this field is exposed only to NRP internally."
         }
       }
+    },
+    "OSDiskType": {
+      "type": "string",
+      "enum": [
+        "Managed",
+        "Ephemeral"
+      ],
+      "x-ms-enum": {
+        "name": "OSDiskType",
+        "modelAsString": true
+      },
+      "description": "OSDiskType represents the type of an OS disk on an agent pool."
     }
   },
   "parameters": {
