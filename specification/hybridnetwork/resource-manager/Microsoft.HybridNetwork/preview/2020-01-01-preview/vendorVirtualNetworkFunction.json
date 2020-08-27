@@ -229,7 +229,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -297,7 +297,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -365,17 +365,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances/getOperationalState": {
-      "post": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances/{roleInstanceName}": {
+      "get": {
         "tags": [
           "RoleInstances"
         ],
-        "operationId": "RoleInstances_ListGetOperationalState",
-        "description": "Gets the operational state of role instances of a vendor virtual network function.",
+        "operationId": "RoleInstances_Get",
+        "description": "Gets the information of role instance of vendor virtual network function.",
         "parameters": [
           {
             "name": "locationName",
@@ -399,13 +399,11 @@
             "description": "The GUID for the vendor virtual network function."
           },
           {
-            "name": "roleInstanceNames",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionRoleInstanceNames"
-            },
-            "description": "A list of role instance names of a virtual network function. Omitting the role instance names will result in getting the operational state of all role instances of the virtual network function."
+            "name": "roleInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role instance of the vendor virtual network function."
           },
           {
             "$ref": "./common.json#/parameters/ApiVersionParameter"
@@ -418,7 +416,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionRoleInstanceList"
+              "$ref": "#/definitions/RoleInstance"
             }
           },
           "default": {
@@ -429,8 +427,8 @@
           }
         },
         "x-ms-examples": {
-          "Get the operational state of role instances of a vendor virtual network function": {
-            "$ref": "./examples/RoleInstanceGetOperationalState.json"
+          "Get the operational state of role instance of vendor virtual network function": {
+            "$ref": "./examples/RoleInstanceGet.json"
           }
         }
       }
@@ -488,6 +486,67 @@
         "x-ms-examples": {
           "List all vnfs of vendor resource": {
             "$ref": "./examples/VendorVnfListByVendor.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances": {
+      "get": {
+        "tags": [
+          "RoleInstances"
+        ],
+        "operationId": "RoleInstances_List",
+        "description": "Lists the information of role instances of vendor virtual network function.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure region where the virtual network function resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "serviceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the vendor virtual network function."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkFunctionRoleInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all role instances of vendor virtual network function": {
+            "$ref": "./examples/RoleInstanceListByVendorVirtualNetworkFunction.json"
           }
         },
         "x-ms-pageable": {
@@ -585,22 +644,10 @@
       },
       "description": "Virtual network function vendor configuration."
     },
-    "VirtualNetworkFunctionRoleInstanceNames": {
-      "properties": {
-        "roleInstanceNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The role instance names."
-        }
-      },
-      "description": "Specifies a list of role instance names of the vendor virtual network function."
-    },
-    "VirtualNetworkFunctionRoleInstanceList": {
+    "VirtualNetworkFunctionRoleInstanceListResult": {
       "description": "List of role instances of vendor virtual network function.",
       "properties": {
-        "roleInstances": {
+        "value": {
           "readOnly": true,
           "type": "array",
           "items": {
