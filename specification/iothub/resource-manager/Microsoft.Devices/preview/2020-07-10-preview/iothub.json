@@ -4163,8 +4163,10 @@
           "type": "string"
         },
         "keyVaultProperties": {
-          "description": "The properties of the KeyVault key.",
-          "$ref": "#/definitions/KeyVaultKeyProperties"
+           "type": "array",
+           "items": {
+              "$ref": "#/definitions/KeyVaultKeyProperties"
+            }
         }
       }
     },
