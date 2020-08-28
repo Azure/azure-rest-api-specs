@@ -24,5 +24,5 @@ directive:
       subject: MachineExtension
       parameter-name: ^.*instance-view.*$
     set:
-      removed: true
+      hide: true
 ```
