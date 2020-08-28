@@ -22,7 +22,7 @@ directive:
       parameter-name: name
   - where:
       subject: MachineExtension
-      property-name: ^.*instance-view.*$
+      parameter-name: ^.*instance-view.*$
     set:
       removed: true
 ```
