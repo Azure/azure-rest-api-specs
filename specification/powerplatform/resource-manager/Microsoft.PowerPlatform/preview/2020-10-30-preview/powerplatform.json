@@ -1,0 +1,451 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "2020-06-30-preview",
+		"title": "PowerPlatform"
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"paths": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}": {
+			"put": {
+				"tags": [
+					"EnterprisePromises"
+				],
+				"operationId": "EnterprisePromises_CreateOrUpdate",
+				"description": "Creates an EnterprisePromise",
+				"x-ms-examples": {
+					"Create or update EnterprisePromise": {
+						"$ref": "./examples/createOrUpdateEnterprisePromise.json"
+					}
+				},
+				"parameters": [
+					{
+						"name": "enterprisePromiseName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Name of the EnterprisePromise."
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromise"
+						},
+						"description": "Parameters supplied to create or update EnterprisePromise."
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created. The EnterprisePromise was created successfully.",
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromise"
+						}
+					},
+					"200": {
+						"description": "OK. The EnterprisePromise was updated successfully.",
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromise"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-long-running-operation": false,
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			},
+			"get": {
+				"tags": [
+					"EnterprisePromises"
+				],
+				"operationId": "EnterprisePromises_Get",
+				"description": "Get information about an EnterprisePromise",
+				"x-ms-examples": {
+					"Get an EnterprisePromise": {
+						"$ref": "./examples/getEnterprisePromise.json"
+					}
+				},
+				"parameters": [
+					{
+						"name": "EnterprisePromiseName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The EnterprisePromise name."
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK. The EnterprisePromise was returned successfully.",
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromise"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			},
+			"delete": {
+				"tags": [
+					"EnterprisePromises"
+				],
+				"operationId": "EnterprisePromises_Delete",
+				"description": "Delete an EnterprisePromise",
+				"x-ms-examples": {
+					"Delete an EnterprisePromise": {
+						"$ref": "./examples/deleteEnterprisePromise.json"
+					}
+				},
+				"parameters": [
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"name": "enterprisePromiseName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Name of the EnterprisePromise"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"204": {
+						"description": "OK"
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-long-running-operation": false,
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			},
+			"patch": {
+				"tags": [
+					"EnterprisePromises"
+				],
+				"operationId": "EnterprisePromises_Update",
+				"description": "Updates an EnterprisePromise",
+				"x-ms-examples": {
+					"Update EnterprisePromise": {
+						"$ref": "./examples/updateEnterprisePromise.json"
+					}
+				},
+				"parameters": [
+					{
+						"name": "enterprisePromiseName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "Name of the EnterprisePromise."
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromise"
+						},
+						"description": "Parameters supplied to update EnterprisePromise."
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK. The EnterprisePromise was updated successfully.",
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromise"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-long-running-operation": false,
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises": {
+			"get": {
+				"tags": [
+					"EnterprisePromises"
+				],
+				"operationId": "EnterprisePromises_ListByResourceGroup",
+				"description": "Retrieve a list of EnterprisePromises within a given resource group",
+				"x-ms-examples": {
+					"List EnterprisePromises by resource group": {
+						"$ref": "./examples/listEnterprisePromisesByResourceGroup.json"
+					}
+				},
+				"parameters": [
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK. List of EnterprisePromises.",
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromiseList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": null
+				},
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.PowerPlatform/enterprisePromises": {
+			"get": {
+				"tags": [
+					"EnterprisePromises"
+				],
+				"operationId": "EnterprisePromises_ListBySubscription",
+				"description": "Retrieve a list of EnterprisePromises within a subscription",
+				"x-ms-examples": {
+					"List EnterprisePromises by subscription": {
+						"$ref": "./examples/listEnterprisePromisesBySubscription.json"
+					}
+				},
+				"parameters": [
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK. List of EnterprisePromises.",
+						"schema": {
+							"$ref": "#/definitions/EnterprisePromiseList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": null
+				},
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			}
+		},
+		"/providers/Microsoft.PowerPlatform/operations": {
+			"get": {
+				"tags": [
+					"Operations"
+				],
+				"description": "Lists all of the available PowerPlatform REST API operations.",
+				"x-ms-examples": {
+					"Lists all of the available PowerPlatform REST API operations": {
+						"$ref": "./examples/listOperations.json"
+					}
+				},
+				"operationId": "Operations_List",
+				"parameters": [
+					{
+						"$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/OperationList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": null
+				},
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				]
+			}
+		}
+	},
+	"definitions": {
+		"EnterprisePromise": {
+			"properties": {
+				"identity": {
+					"$ref": "#/definitions/EnterprisePromiseIdentity",
+					"description": "The identity of the EnterprisePromise."
+				}
+			},
+			"allOf": [
+				{
+					"$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+				}
+			],
+			"description": "Definition of the EnterprisePromise."
+		},
+		"EnterprisePromiseIdentity": {
+			"properties": {
+				"systemAssignedIdentityPrincipalId": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The principal id of EnterprisePromise identity."
+				},
+				"tenantId": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The tenant id associated with the EnterprisePromise."
+				},
+				"type": {
+					"type": "string",
+					"description": "The type of identity used for the EnterprisePromise. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+					"enum": [
+						"SystemAssigned",
+						"None"
+					],
+					"x-ms-enum": {
+						"name": "ResourceIdentityType",
+						"modelAsString": false
+					}
+				}
+			},
+			"description": "Identity for the EnterprisePromise."
+		},
+		"EnterprisePromiseList": {
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EnterprisePromise"
+					},
+					"description": "Result of the list EnterprisePromise operation."
+				}
+			},
+			"description": "The response of the list EnterprisePromise operation."
+		}
+	},
+	"parameters": {}
+}
