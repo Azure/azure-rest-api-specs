@@ -864,7 +864,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/VMWareDatastoreBackingCreationResponse"
+              "$ref": "#/definitions/Resource"
             }
           },
           "default": {
@@ -916,7 +916,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/VMWareDatastoreCreationResponse"
+              "$ref": "#/definitions/Resource"
             }
           },
           "default": {
@@ -1399,44 +1399,6 @@
             "name": "ClusterProvisioningState",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "VMWareDatastoreBackingCreationResponse": {
-      "description": "The properties of a datastore backing",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "The state of the datastore backing provisioning",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed"
-          ]
-        }
-      }
-    },
-    "VMWareDatastoreCreationResponse": {
-      "description": "A datastore resource",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "The state of the datastore backing provisioning",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed"
-          ]
         }
       }
     },
