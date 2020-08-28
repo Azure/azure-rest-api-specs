@@ -4,8 +4,6 @@ This directory contains the Cli common model for the Hybrid Compute service.
 
 > Metadata
 ``` yaml
-# Migrated from Powershell's readme
-
 title: 'ConnectedMachine'
 
 cli:

@@ -112,6 +112,10 @@ swagger-to-sdk:
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+## az CLI
+
+See configuration in [readme.az.md](./readme.az.md) and [readme.cli.md](./readme.cli.md)
+
 ## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
