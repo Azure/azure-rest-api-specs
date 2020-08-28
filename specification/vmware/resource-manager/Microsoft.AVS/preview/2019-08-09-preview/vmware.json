@@ -825,7 +825,7 @@
         "tags": [
           "VMWareDatastoreBackings"
         ],
-        "summary": "Create a datastore backing for the private cloud",
+        "summary": "Create a datastore backing for the private cloud's cluster",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -847,44 +847,14 @@
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "The type or protocol of the datastore backing, like NFSv3 or iSCSI"
+            "description": "The type or protocol of the datastore backing, like NFSv3 or NFSv4 or iSCSI"
           },
           {
-            "name": "readBlockSize",
-            "in": "header",
-            "required": true,
-            "type": "integer",
-            "format": "int64",
-            "description": "Block size for data read"
-          },
-          {
-            "name": "writeBlockSize",
-            "in": "header",
-            "required": true,
-            "type": "integer",
-            "format": "int64",
-            "description": "Block size for data write"
-          },
-          {
-            "name": "storageIP",
+            "name": "backingResourceID",
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "IP address of device hosting storage"
-          },
-          {
-            "name": "storageFilePath",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "A unique file path for the volume. Used when creating mount targets"
-          },
-          {
-            "name": "storageVolumeName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Volume name of remote storage"
+            "description": "The resource ID of the NFS/iSCSI volume"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -894,7 +864,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/VMWareDatastoreBacking"
+              "$ref": "#/definitions/VMWareDatastoreBackingCreationResponse"
             }
           },
           "default": {
@@ -939,13 +909,6 @@
             "$ref": "#/parameters/vmwareDatastoreName"
           },
           {
-            "name": "dataStoreSize",
-            "in": "header",
-            "required": true,
-            "type": "number",
-            "description": "Size of the data store (in GB)."
-          },
-          {
             "$ref": "#/parameters/apiVersion"
           }
         ],
@@ -953,7 +916,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/VMWareDatastore"
+              "$ref": "#/definitions/VMWareDatastoreCreationResponse"
             }
           },
           "default": {
@@ -1439,63 +1402,14 @@
         }
       }
     },
-    "VMWareDatastoreBacking": {
-      "description": "A datastore backing resource",
+    "VMWareDatastoreBackingCreationResponse": {
+      "description": "The properties of a datastore backing",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
-        "properties": {
-          "description": "The properties of a datastore backing",
-          "$ref": "#/definitions/VMWareDatastoreBackingProperties"
-        }
-      }
-    },
-    "VMWareDatastoreBackingProperties": {
-      "description": "The properties of a datastore backing",
-      "properties": {
-        "backingType": {
-          "description": "The type or protocol of the datastore backing",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "NFSv3",
-            "iSCSI"
-          ],
-          "x-ms-enum": {
-            "name": "DatastoreBackingType",
-            "modelAsString": true
-          }
-        },
-        "readBlockSize": {
-          "description": "Block size for data read",
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64"
-        },
-        "writeBlockSize": {
-          "description": "Block size for data write",
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64"
-        },
-        "storageIP": {
-          "description": "IP address of device hosting storage",
-          "readOnly": true,
-          "type": "string"
-        },
-        "storageFilePath": {
-          "description": "A unique file path for the volume. Used when creating mount targets",
-          "readOnly": true,
-          "type": "string"
-        },
-        "storageVolumeName": {
-          "description": "Volume name of remote storage",
-          "readOnly": true,
-          "type": "string"
-        },
         "provisioningState": {
           "description": "The state of the datastore backing provisioning",
           "type": "string",
@@ -1503,15 +1417,11 @@
           "enum": [
             "Succeeded",
             "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "DatastoreBackingProvisioningState",
-            "modelAsString": true
-          }
+          ]
         }
       }
     },
-    "VMWareDatastore": {
+    "VMWareDatastoreCreationResponse": {
       "description": "A datastore resource",
       "allOf": [
         {
@@ -1519,33 +1429,14 @@
         }
       ],
       "properties": {
-        "properties": {
-          "description": "The properties of a datastore",
-          "$ref": "#/definitions/VMWareDatastoreProperties"
-        }
-      }
-    },
-    "VMWareDatastoreProperties": {
-      "description": "The properties of a datastore",
-      "properties": {
-        "size": {
-          "description": "Size of datastore (in GB)",
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64"
-        },
         "provisioningState": {
-          "description": "The state of the datastore provisioning",
+          "description": "The state of the datastore backing provisioning",
           "type": "string",
           "readOnly": true,
           "enum": [
             "Succeeded",
             "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "DatastoreProvisioningState",
-            "modelAsString": true
-          }
+          ]
         }
       }
     },
