@@ -21,7 +21,7 @@ directive:
     set:
       parameter-name: name
   - where:
-      model-name: MachineExtension
+      subject: MachineExtension
       property-name: ^.*instance-view.*$
     set:
       removed: true
