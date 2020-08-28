@@ -27,8 +27,8 @@ csharp:
 These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
 
 ``` yaml $(csharp-profile)=='hybrid_2020_09_01'
-namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).IotHub
-output-folder: $(csharp-sdks-folder)/$(csharp-profile)/IotHub/Management.IotHub/Generated
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).DataBoxEdge
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/IotHub/Management.DataBoxEdge/Generated
 
 batch:
   - tag: profile-hybrid-2020-09-01
