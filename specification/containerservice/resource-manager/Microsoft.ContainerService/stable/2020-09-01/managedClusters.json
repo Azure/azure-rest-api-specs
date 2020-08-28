@@ -1031,6 +1031,94 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/stop": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_Stop",
+        "summary": "Stop Managed Cluster",
+        "description": "Stops a Running Managed Cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Stop Managed Cluster": {
+            "$ref": "./examples/ManagedClustersStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/start": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_Start",
+        "summary": "Start Managed Cluster",
+        "description": "Starts a Stopped Managed Cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start Managed Cluster": {
+            "$ref": "./examples/ManagedClustersStart.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -1860,6 +1948,11 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
         },
+        "powerState": {
+          "readOnly": true,
+          "description": "Describes whether the Agent Pool is Running or Stopped",
+          "$ref": "#/definitions/PowerState"
+        },
         "availabilityZones": {
           "type": "array",
           "items": {
@@ -2322,6 +2415,11 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
         },
+        "powerState": {
+          "$ref": "#/definitions/PowerState",
+          "description": "Represents the Power State of the cluster",
+          "readOnly": true
+        },
         "maxAgentPools": {
           "readOnly": true,
           "type": "integer",
@@ -2475,6 +2573,23 @@
         }
       },
       "description": "Properties of the managed cluster."
+    },
+    "PowerState": {
+      "description": "Describes the Power State of the cluster",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Tells whether the cluster is Running or Stopped",
+          "enum": [
+            "Running",
+            "Stopped"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ManagedClusterAPIServerAccessProfile": {
       "properties": {
