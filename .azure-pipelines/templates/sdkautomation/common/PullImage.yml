@@ -1,0 +1,10 @@
+steps:
+  - task: Docker@2
+    displayName: Login into ACR
+    inputs:
+      command: login
+      containerRegistry: $(REGISTRY_ENDPOINT)
+  - script: |
+      docker pull $IMAGE
+      docker tag $IMAGE sdk-automation:latest
+    displayName: Pull SDK Automation Image

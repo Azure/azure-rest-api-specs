@@ -1,0 +1,15 @@
+jobs:
+- job: FilterSdkRepos
+  displayName: Filter SDK Repositories
+  pool:
+    vmImage: 'Ubuntu 18.04'
+  timeoutInMinutes: 180
+  variables:
+  - templates: template/SDKAutomationVariables.yml
+    EXECUTION_MODE: SDK_FILTER
+  steps:
+  - checkout: none
+  - templates: template/GetPRNumber.yml
+  - templates: template/PullImage.yml
+  - templates: template/RunSDKAutomation.yml
+    name: FilterSdkRepos

@@ -1,0 +1,17 @@
+jobs:
+- job: AzureSdkForPythonTrack2
+  displayName: Run SDKAutomation for azure-sdk-for-python-track2
+  pool:
+    vmImage: 'Ubuntu 18.04'
+  timeoutInMinutes: 180
+  dependsOn: FilterSdkRepos
+  condition: contains(dependencies.FilterSdkRepos.outputs['FilterSdkRepos.EnabledJobs'], 'azure-sdk-for-python-track2')
+  variables:
+  - templates: common/Variables.yml
+    EXECUTION_MODE: SDK_GEN
+    SDK_REPO_NAME: azure-sdk-for-python-track2
+  steps:
+  - checkout: none
+  - templates: common/GetPRNumber.yml
+  - templates: common/PullImage.yml
+  - templates: common/RunSDKAutomation.yml

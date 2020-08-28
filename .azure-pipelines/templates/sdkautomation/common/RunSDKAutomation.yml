@@ -1,0 +1,25 @@
+steps:
+  - script: |
+      docker run \
+        -e EXECUTION_MODE \
+        -e BLOB_STORAGE_NAME \
+        -e BLOB_STORAGE_KEY \
+        -e GITHUB_COMMENT_AUTHOR_NAME \
+        -e GITHUBAPP_ID \
+        -e GITHUBAPP_PRIVATE_KEY \
+        -e NODE_OPTIONS \
+        -e BLOB_STORAGE_PREFIX \
+        -e SPEC_REPO \
+        -e PR_NUMBER \
+        -e SDK_REPO_NAME \
+        -e AZURE_DEVOPS_EXT_PAT \
+        -e BUILD_ID \
+        sdk-automation:latest npm start
+    env:
+      BLOB_STORAGE_NAME: $(blob-storage-name)
+      BLOB_STORAGE_KEY: $(blob-storage-key)
+      GITHUB_COMMENT_AUTHOR_NAME: $(github-comment-author-name)
+      GITHUBAPP_ID: $(githubapp-id)
+      GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
+      AZURE_DEVOPS_EXT_PAT: $(azure-devops-ext-pat)
+    displayName: SDK Automation
