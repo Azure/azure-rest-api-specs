@@ -24,7 +24,7 @@
         "description": "Uploads one or more models. When any error occurs, no models are uploaded.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n409 (Conflict): One or more of the provided models already exist.",
         "operationId": "DigitalTwinModels_Add",
         "x-ms-examples": {
-          "ModelAdd": {
+          "Add models": {
             "$ref": "./examples/ModelAdd.json"
           }
         },
@@ -72,10 +72,10 @@
         },
         "operationId": "DigitalTwinModels_List",
         "x-ms-examples": {
-          "ModelsGet": {
+          "List models": {
             "$ref": "./examples/ModelsGet.json"
           },
-          "ModelsGetWithContextAndIncludeModelDefinition": {
+          "List models (include dependencies and definitions)": {
             "$ref": "./examples/ModelsGetWithDependenciesAndIncludeModelDefinition.json"
           }
         },
@@ -125,10 +125,10 @@
         "description": "Retrieves model metadata and optionally the model definition.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no model with the provided id.",
         "operationId": "DigitalTwinModels_GetById",
         "x-ms-examples": {
-          "ModelGetById": {
+          "Get a model by id": {
             "$ref": "./examples/ModelGetById.json"
           },
-          "ModelGetByIdWithIncludeModelDefinition": {
+          "Get a model by id (with definition)": {
             "$ref": "./examples/ModelGetByIdWithIncludeModelDefinition.json"
           }
         },
@@ -168,7 +168,7 @@
           "application/json-patch+json"
         ],
         "x-ms-examples": {
-          "ModelUpdateDecommissioned": {
+          "Decommission a model": {
             "$ref": "./examples/ModelUpdateDecommissioned.json"
           }
         },
@@ -211,7 +211,7 @@
         "operationId": "DigitalTwinModels_Delete",
         "description": "Deletes a model. A model can only be deleted if no other models reference it.\nStatus codes:\n204 (No Content): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no model with the provided id.\n409 (Conflict): There are dependencies on the model that prevent it from being deleted.",
         "x-ms-examples": {
-          "DeleteModel": {
+          "Delete a model": {
             "$ref": "./examples/DeleteModel.json"
           }
         },
@@ -244,13 +244,13 @@
         "operationId": "Query_QueryTwins",
         "description": "Executes a query that allows traversing relationships and filtering by property values.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "x-ms-examples": {
-          "QueryFirstPage": {
+          "Query for digital twins": {
             "$ref": "./examples/QueryFirstPage.json"
           },
-          "QueryNextPage": {
+          "Retrieve paged query results": {
             "$ref": "./examples/QueryNextPage.json"
           },
-          "QueryJoin": {
+          "Query for digital twins through a relationship": {
             "$ref": "./examples/QueryJoin.json"
           }
         },
@@ -301,7 +301,7 @@
         "operationId": "DigitalTwins_GetById",
         "description": "Retrieves a digital twin.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-examples": {
-          "GetTwin": {
+          "Get a digital twin by id": {
             "$ref": "./examples/GetTwin.json"
           }
         },
@@ -341,10 +341,10 @@
         "operationId": "DigitalTwins_Add",
         "description": "Adds or replaces a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n412 (Precondition Failed): The model is decommissioned or the digital twin already exists (when using If-None-Match: *).",
         "x-ms-examples": {
-          "PutTwinBasicExample": {
+          "Add a digital twin": {
             "$ref": "./examples/PutTwinBasicExample.json"
           },
-          "PutTwinAdvancedExample": {
+          "Add a digital twin (with properties and components)": {
             "$ref": "./examples/PutTwinAdvancedExample.json"
           }
         },
@@ -399,7 +399,7 @@
         "operationId": "DigitalTwins_Delete",
         "description": "Deletes a digital twin. All relationships referencing the digital twin must already be deleted.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-examples": {
-          "DeleteTwin": {
+          "Delete a digital twin": {
             "$ref": "./examples/DeleteTwin.json"
           }
         },
@@ -436,10 +436,10 @@
           "application/json-patch+json"
         ],
         "x-ms-examples": {
-          "PatchTwinBasicExample": {
+          "Update a digital twin": {
             "$ref": "./examples/PatchTwinBasicExample.json"
           },
-          "PatchTwinAdvancedExample": {
+          "Update a digital twin (multiple updates)": {
             "$ref": "./examples/PatchTwinAdvancedExample.json"
           }
         },
@@ -496,7 +496,7 @@
         "operationId": "DigitalTwins_GetRelationshipById",
         "description": "Retrieves a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is either no digital twin or relationship with the provided id.",
         "x-ms-examples": {
-          "GetRelationshipById": {
+          "Get a relationship by id": {
             "$ref": "./examples/GetRelationshipById.json"
           }
         },
@@ -539,10 +539,10 @@
         "operationId": "DigitalTwins_AddRelationship",
         "description": "Adds a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin, target digital twin, or relationship with the provided id.\n409 (Conflict): A relationship with the provided id already exists.",
         "x-ms-examples": {
-          "CreateRelationshipBasicExample": {
+          "Create a relationship": {
             "$ref": "./examples/CreateRelationshipBasicExample.json"
           },
-          "CreateRelationshipAdvancedExample": {
+          "Create a relationship (with properties)": {
             "$ref": "./examples/CreateRelationshipAdvancedExample.json"
           }
         },
@@ -557,7 +557,7 @@
             "name": "relationship",
             "in": "body",
             "description": "The data for the relationship.",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "object"
             }
@@ -597,7 +597,7 @@
         "operationId": "DigitalTwins_DeleteRelationship",
         "description": "Deletes a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is either no digital twin or relationship with the provided id.",
         "x-ms-examples": {
-          "DeleteRelationship": {
+          "Delete a relationship": {
             "$ref": "./examples/DeleteRelationship.json"
           }
         },
@@ -637,10 +637,10 @@
         "operationId": "DigitalTwins_UpdateRelationship",
         "description": "Updates the properties on a relationship between two digital twins.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin or relationship with the provided id.",
         "x-ms-examples": {
-          "PatchRelationshipBasicExample": {
+          "Update relationship properties": {
             "$ref": "./examples/PatchRelationshipBasicExample.json"
           },
-          "PatchRelationshipAdvancedExample": {
+          "Update relationship properties (multiple updates)": {
             "$ref": "./examples/PatchRelationshipAdvancedExample.json"
           }
         },
@@ -655,7 +655,7 @@
             "name": "patchDocument",
             "description": "JSON Patch description of the update to the relationship properties.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "array",
               "items": {
@@ -700,10 +700,10 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetRelationship": {
+          "List relationships": {
             "$ref": "./examples/GetRelationship.json"
           },
-          "GetRelationshipByName": {
+          "List relationships by name": {
             "$ref": "./examples/GetRelationshipByRelationshipName.json"
           }
         },
@@ -749,7 +749,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetIncomingRelationship": {
+          "List incoming relationships": {
             "$ref": "./examples/GetIncomingRelationship.json"
           }
         },
@@ -785,7 +785,7 @@
         "operationId": "DigitalTwins_SendTelemetry",
         "description": "Sends telemetry on behalf of a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is no digital twin with the provided id.",
         "x-ms-examples": {
-          "SendTelemetry": {
+          "Send telemetry": {
             "$ref": "./examples/SendTelemetry.json"
           }
         },
@@ -803,14 +803,14 @@
             }
           },
           {
-            "name": "dt-id",
+            "name": "Message-Id",
             "in": "header",
             "description": "A unique message identifier (in the scope of the digital twin id) that is commonly used for de-duplicating messages.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "dt-timestamp",
+            "name": "Telemetry-Source-Time",
             "in": "header",
             "description": "An RFC 3339 timestamp that identifies the time the telemetry was measured.",
             "required": false,
@@ -841,7 +841,7 @@
         "operationId": "DigitalTwins_SendComponentTelemetry",
         "description": "Sends telemetry on behalf of a component in a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin with the provided id or the component path is invalid.",
         "x-ms-examples": {
-          "SendTelemetry": {
+          "Send telemetry in a component": {
             "$ref": "./examples/SendTelemetryFromComponent.json"
           }
         },
@@ -862,14 +862,14 @@
             }
           },
           {
-            "name": "dt-id",
+            "name": "Message-Id",
             "in": "header",
             "description": "A unique message identifier (in the scope of the digital twin id) that is commonly used for de-duplicating messages.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "dt-timestamp",
+            "name": "Telemetry-Source-Time",
             "in": "header",
             "description": "An RFC 3339 timestamp that identifies the time the telemetry was measured.",
             "required": false,
@@ -900,7 +900,7 @@
         "operationId": "DigitalTwins_GetComponent",
         "description": "Retrieves a component from a digital twin.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is either no digital twin with the provided id or the component path is invalid.",
         "x-ms-examples": {
-          "GetComponent": {
+          "Get a component in a digital twin": {
             "$ref": "./examples/GetComponent.json"
           }
         },
@@ -943,10 +943,10 @@
         "operationId": "DigitalTwins_UpdateComponent",
         "description": "Updates a component on a digital twin.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.\n404 (Not Found): There is either no digital twin with the provided id or the component path is invalid.",
         "x-ms-examples": {
-          "PatchComponentBasicExample": {
+          "Update a component in a digital twin": {
             "$ref": "./examples/PatchComponentBasicExample.json"
           },
-          "PatchComponentAdvancedExample": {
+          "Update a component in a digital twin (multiple updates)": {
             "$ref": "./examples/PatchComponentAdvancedExample.json"
           }
         },
@@ -964,7 +964,7 @@
             "name": "patchDocument",
             "description": "An update specification described by JSON Patch. Updates to property values and $model elements may happen in the same request. Operations are limited to add, replace and remove.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "array",
               "items": {
@@ -1009,7 +1009,7 @@
         "description": "Retrieves all event routes.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "operationId": "EventRoutes_List",
         "x-ms-examples": {
-          "EventRoutesList": {
+          "List event routes": {
             "$ref": "./examples/EventRoutesList.json"
           }
         },
@@ -1048,7 +1048,7 @@
         "description": "Retrieves an event route.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no event route with the provided id.",
         "operationId": "EventRoutes_GetById",
         "x-ms-examples": {
-          "EventRouteGet": {
+          "Get an event route by id": {
             "$ref": "./examples/EventRouteGet.json"
           }
         },
@@ -1082,10 +1082,10 @@
         "description": "Adds or replaces an event route.\nStatus codes:\n200 (OK): Success.\n400 (Bad Request): The request is invalid.",
         "operationId": "EventRoutes_Add",
         "x-ms-examples": {
-          "EventRoutePut": {
+          "Add an event route": {
             "$ref": "./examples/EventRoutePut.json"
           },
-          "EventRouteWithFilter": {
+          "Add an event route (with filter)": {
             "$ref": "./examples/EventRoutePutWithFilter.json"
           }
         },
@@ -1124,7 +1124,7 @@
         "description": "Deletes an event route.\nStatus codes:\n200 (OK): Success.\n404 (Not Found): There is no event route with the provided id.",
         "operationId": "EventRoutes_Delete",
         "x-ms-examples": {
-          "EventRouteDelete": {
+          "Delete an event route": {
             "$ref": "./examples/EventRouteDelete.json"
           }
         },
@@ -1155,7 +1155,8 @@
       "description": "A route which directs notification and telemetry events to an endpoint. Endpoints are a destination outside of Azure Digital Twins such as an EventHub.",
       "type": "object",
       "required": [
-        "endpointName"
+        "endpointName",
+        "filter"
       ],
       "properties": {
         "id": {
