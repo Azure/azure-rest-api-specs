@@ -37,7 +37,14 @@
           "maxStalenessPrefix": 200
         },
         "enableFreeTier": false,
-        "enableAnalyticalStorage": true
+        "enableAnalyticalStorage": true,
+        "backupPolicy": {
+          "type": "Periodic",
+          "periodicModeProperties": {
+            "backupIntervalInMinutes": 240,
+            "backupRetentionIntervalInHours": 8
+          }
+        }
       }
     }
   },
@@ -137,7 +144,14 @@
           "cors": [],
           "enableFreeTier": false,
           "apiProperties": {},
-          "enableAnalyticalStorage": true
+          "enableAnalyticalStorage": true,
+          "backupPolicy": {
+            "type": "Periodic",
+            "periodicModeProperties": {
+              "backupIntervalInMinutes": 240,
+              "backupRetentionIntervalInHours": 8
+            }
+          }
         }
       }
     }
