@@ -1,69 +1,83 @@
 {
-    "parameters": {
-        "api-version": "2020-07-01-preview",
-        "subscriptionId": "00000000-0000-0000-0000-000000000000",
-        "resourceGroupName": "myResourceGroup",
-        "monitorName": "myMonitor",
-        "requestBody": {
-            "name": "myMonitor",
-            "sku":{
-                "name": "free_Monthly"            
-            },
-            "properties": {
-                "elasticOrganizationProperties": {
-                },
-                "userInfo": {
-                    "name": "Alice",
-                    "emailAddress": "alice@microsoft.com",
-                    "phoneNumber": "123-456-7890"
-                }
-            },
-            "tags": {
-                "Environment": "Dev"
-            },
-            "location": "West US"
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
-                "name": "myMonitor",
-                "type": "Microsoft.Elastic/monitors",
-                "sku":{
-                    "name": "free_Monthly"
-                },
-                "properties": {
-                    "provisioningState": "Succeeded",
-                    "elasticOrganizationProperties": {
-                        "id": "myOrg123"
-                    }
-                },
-                "tags": {
-                    "Environment": "Dev"
-                },
-                "location": "West US"
-            }
+  "parameters": {
+    "api-version": "2020-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "name": "myMonitor",
+      "sku": {
+        "name": "free_Monthly"
+      },
+      "properties": {
+        "elasticOrganizationProperties": {
+          "name": "myOrg",
+          "template":  "myTemplate"
         },
-        "201": {
-            "body": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
-                "name": "myMonitor",
-                "type": "Microsoft.Elastic/monitors",
-                "sku":{
-                    "name": "free_Monthly"
-                },
-                "properties": {
-                    "provisioningState": "Accepted",
-                    "elasticOrganizationProperties": {
-                        "id": "myOrg123"
-                    }
-                },
-                "tags": {
-                    "Environment": "Dev"
-                },
-                "location": "West US"
-            }
+        "userInfo": {
+          "firstName": "Alice",
+          "lastName": "Bob",
+          "companyName": "Microsoft",
+          "emailAddress": "alice@microsoft.com",
+          "companyInfo": {
+            "domain": "microsoft.com",
+            "business": "Technology",
+            "employeeNumber": "10000",
+            "state": "WA",
+            "country": "US"
+          }
         }
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US 2"
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "elasticOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123",
+            "template": "myTemplate"
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "elasticOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123",
+            "template": "myTemplate"
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
 }

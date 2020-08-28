@@ -358,6 +358,257 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listMonitoredResources": {
+      "post": {
+        "tags": [
+          "MonitoredResources"
+        ],
+        "summary": "List the resources currently being monitored by the Elastic monitor resource.",
+        "operationId": "MonitoredResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitoredResources_List": {
+            "$ref": "./examples/MonitoredResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "List the tag rules for a given monitor resource.",
+        "operationId": "TagRules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRulesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TagRules_List": {
+            "$ref": "./examples/TagRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules/{ruleSetName}": {
+      "put": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Create or update a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleSetNameParameter"
+          },
+          {
+            "description": "request body of MonitoringTagRules",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_CreateOrUpdate": {
+            "$ref": "./examples/TagRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Get a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Get": {
+            "$ref": "./examples/TagRules_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Delete a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TagRules_Delete": {
+            "$ref": "./examples/TagRules_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -473,10 +724,11 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Deleted"
+        "Deleted",
+        "NotSpecified"
       ],
       "type": "string",
-      "description": "Provisioning state of Elastic RP.",
+      "description": "Provisioning state of Elastic resource.",
       "title": "ProvisioningState",
       "x-ms-enum": {
         "modelAsString": true,
@@ -487,19 +739,83 @@
       "description": "Elastic Resource Properties.",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of the Elastic organization.",
+          "type": "string",
+          "readOnly": true
+        },
         "id": {
           "description": "Id of the Elastic organization.",
           "type": "string",
           "readOnly": true
+        },
+        "template": {
+          "description": "Name of the template for Elastic cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoringStatus": {
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MonitoringStatus"
+      }
+    },
+    "CompanyInfo": {
+      "description": "Company information of the user to be passed to partners.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "description": "Domain of the company",
+          "pattern": "^[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "business": {
+          "description": "Business of the company",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "employeesNumber": {
+          "description": "Number of employees in the company",
+          "pattern": "^\\d+$",
+          "maxLength": 20,
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the company location.",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "country": {
+          "description": "Country of the compnay location.",
+          "maxLength": 50,
+          "type": "string"
         }
       }
     },
     "UserInfo": {
-      "description": "User Information.",
+      "description": "User Information to be passed to partners.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Name of the user",
+        "firstName": {
+          "description": "First name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name of the user",
           "maxLength": 50,
           "type": "string"
         },
@@ -508,10 +824,9 @@
           "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
           "type": "string"
         },
-        "phoneNumber": {
-          "description": "Phone number of the user used by Elastic for contacting them if needed",
-          "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
-          "type": "string"
+        "companyInfo": {
+          "description": "Company information of the user to be passed to partners.",
+          "$ref": "#/definitions/CompanyInfo"
         }
       }
     },
@@ -520,9 +835,12 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provision states for elastic RP.",
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
+          "description": "Provisioning state of the monitor resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "monitoringStatus": {
+          "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+          "$ref": "#/definitions/MonitoringStatus"
         },
         "elasticOrganizationProperties": {
           "description": "Elastic organization properties.",
@@ -650,6 +968,163 @@
           }
         }
       }
+    },
+    "SendingLogs": {
+      "enum": [
+        "True",
+        "False"
+      ],
+      "type": "string",
+      "description": "Flag indicating the status of the resource for sending logs operation to Elastic.",
+      "title": "SendingLogs",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SendingLogs"
+      }
+    },
+    "MonitoredResource": {
+      "description": "The properties of a resource currently being monitored by the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string"
+        },
+        "sendingLogs": {
+          "description": "Flag indicating the status of the resource for sending logs operation to Elastic.",
+          "$ref": "#/definitions/SendingLogs"
+        },
+        "reasonForLogsStatus": {
+          "description": "Reason for why the resource is sending logs (or why it is not sending).",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoredResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "TagAction": {
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TagAction"
+      }
+    },
+    "FilteringTag": {
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name (also known as the key) of the tag.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        },
+        "action": {
+          "description": "Valid actions for a filtering tag.",
+          "$ref": "#/definitions/TagAction"
+        }
+      }
+    },
+    "LogRules": {
+      "description": "Set of rules for sending logs for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "sendAadLogs": {
+          "description": "Flag specifying if AAD logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendSubscriptionLogs": {
+          "description": "Flag specifying if subscription logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendActivityLogs": {
+          "description": "Flag specifying if activity logs from Azure resources should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          }
+        }
+      }
+    },
+    "MonitoringTagRulesProperties": {
+      "description": "Definition of the properties for a TagRules resource.",
+      "type": "object",
+      "properties": {
+        "logRules": {
+          "description": "Rules for sending logs.",
+          "$ref": "#/definitions/LogRules"
+        }
+      }
+    },
+    "MonitoringTagRules": {
+      "description": "Capture logs and metrics of Azure resources based on ARM tags.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "description": "Name of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the monitoring tag rules.",
+          "$ref": "#/definitions/MonitoringTagRulesProperties",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "MonitoringTagRulesListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTagRules"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -682,6 +1157,14 @@
       "in": "path",
       "name": "monitorName",
       "description": "Monitor resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleSetNameParameter": {
+      "in": "path",
+      "name": "ruleSetName",
+      "description": "Tag Rule Set resource name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
