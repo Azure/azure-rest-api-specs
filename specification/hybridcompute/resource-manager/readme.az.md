@@ -21,13 +21,8 @@ directive:
     set:
       parameter-name: name
   - where:
-      subject: MachineExtension
-      parameter-name: properties-type
-    set:
-      parameter-name: extension-type
-  - where:
       model-name: MachineExtension
-      property-name: properties-type
+      property-name: ^.*instance-view.*$
     set:
-      property-name: machine-extension-type
+      removed: true
 ```
