@@ -663,7 +663,20 @@
       }
     },
     "RoleInstance": {
+      "x-ms-azure-resource": true,
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The role instance name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ARM ID of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoleInstanceProperties",
@@ -674,10 +687,6 @@
     },
     "RoleInstanceProperties": {
       "properties": {
-        "roleInstanceName": {
-          "type": "string",
-          "description": "The role instance name."
-        },
         "operationalState": {
           "type": "string",
           "description": "The operational state of the role instance.",
