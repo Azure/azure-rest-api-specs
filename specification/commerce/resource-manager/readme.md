@@ -39,6 +39,15 @@ input-file:
 - Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
 ```
 
+### Tag: hybrid_2020_09_01
+
+These settings apply only when `--tag=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(tag) == 'hybrid_2020_09_01'
+input-file:
+- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+```
+
 ---
 # Code Generation
 
