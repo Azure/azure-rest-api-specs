@@ -71,7 +71,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -142,6 +141,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
 
 # Needed when there is more than one input file
 override-info:
@@ -500,6 +500,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
 
 # Needed when there is more than one input file
 override-info:
@@ -749,6 +750,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js sql/resource-manager
 ```
 
 ### C#
@@ -814,6 +818,10 @@ directive:
   - suppress: EnumInsteadOfBoolean
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 

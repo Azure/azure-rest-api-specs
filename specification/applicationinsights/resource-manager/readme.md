@@ -97,6 +97,12 @@ directive:
     where: $.definitions.WorkbookResource.properties.name
     from: workbooks_API.json
     reason: 'This property is already a part of our API, cannot remove it'
+  - suppress: DefaultErrorResponseSchema
+    from: myworkbooks_API.json
+    reason: 'this error format is already part of the previous api, cannot change it'
+  - suppress: DeleteOperationResponses
+    from: myworkbooks_API.json
+    reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
 ```
 
 ### Tag: package-preview-2020-06-only
@@ -126,6 +132,7 @@ input-file:
   - Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
   - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
@@ -159,6 +166,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+- Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
 ```
 
 ### Tag: package-2017-10
@@ -245,6 +253,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+- Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
 - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
 - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
@@ -268,6 +277,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js applicationinsights/resource-manager
 ```
 
 ## Go
@@ -336,6 +348,10 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -361,6 +377,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - $(this-folder)/Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-05-01-preview/components_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json

@@ -569,6 +569,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js monitor/resource-manager
 ```
 
 ## Python
@@ -626,6 +629,10 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -669,6 +676,8 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/baseline_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettingsAssociation_API.json
