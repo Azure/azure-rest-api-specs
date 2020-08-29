@@ -17,9 +17,8 @@ cli:
             operationGroup: 'machines'
             operation: '(reconnect|createOrUpdate|update)'
         removed: true
-      - select: 'param'
-        where:
+      - where:
             operationGroup: 'machineExtensions'
-            param: ^.*instance-view.*$
+            param: ^.*instanceView.*$
         hidden: true
 ```
