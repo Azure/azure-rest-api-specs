@@ -19,7 +19,7 @@ cli:
         removed: true
       - select: 'param'
         where:
-            operationGroup: 'machineExtension'
+            operationGroup: 'machineExtensions'
             param: ^.*instance-view.*$
         hidden: true
 ```
