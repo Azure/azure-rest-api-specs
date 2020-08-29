@@ -3,30 +3,16 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `release_2_0_GA`.
+The current release is `release_2_0`.
 
 ``` yaml
 
-tag: release_2_0_GA
+tag: release_2_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-``` yaml
-
-tag: release_1_0
-add-credentials: true
-openapi-type: data-plane
-```
 # Releases
-
-### Release 2.1-preview.2
-These settings apply only when `--tag=release_2_1_preview_2` is specified on the command line.
-
-``` yaml $(tag) == 'release_2_1_preview_2'
-input-file:
-  - preview/v2.1-preview.2/FormRecognizer.json
-```
 
 ### Release 2.1-preview.1
 These settings apply only when `--tag=release_2_1_preview_1` is specified on the command line.
@@ -36,18 +22,18 @@ input-file:
   - preview/v2.1-preview.1/FormRecognizer.json
 ```
 
-### Release 2.0-GA
-These settings apply only when `--tag=release_2_0_GA` is specified on the command line.
-
-``` yaml $(tag) == 'release_2_0_GA'
-input-file:
-  - stable/v2.0/FormRecognizer.json
-```
-
 ### Release 2.0
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
+input-file: 
+  - stable/v2.0/FormRecognizer.json
+```
+
+### Release 2.0-preview
+These settings apply only when `--tag=release_2_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_0_preview'
 input-file: 
   - preview/v2.0/FormRecognizer.json
 ```
@@ -125,6 +111,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/preview/v2.1-preview.1/FormRecognizer.json
+  - $(this-folder)/stable/v2.0/FormRecognizer.json
   - $(this-folder)/preview/v2.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizerReceipt.json

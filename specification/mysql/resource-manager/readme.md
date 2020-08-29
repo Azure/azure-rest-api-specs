@@ -105,6 +105,15 @@ input-file:
 - Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 ```
 
+### Tag: package-2020-07-01-privatepreview
+
+These settings apply only when `--tag=package-2020-07-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
+```
+
 ## Suppression
 ``` yaml
 directive:
@@ -114,6 +123,9 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: Servers.json
     reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: OperationsApiResponseSchema
+    from: mysql.json
+    reason: Property isDataAction is not included in get operation reponse body
 ```
 
 ---
