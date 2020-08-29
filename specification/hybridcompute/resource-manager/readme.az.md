@@ -20,9 +20,4 @@ directive:
       parameter-name: extension-name
     set:
       parameter-name: name
-  - where:
-      subject: MachineExtension
-      parameter-name: ^.*instance-view.*$
-    set:
-      remove: true
 ```

@@ -7,14 +7,18 @@ This directory contains the Cli common model for the Hybrid Compute service.
 title: 'ConnectedMachine'
 
 cli:
-    cli-directive:
-      - select: 'operationGroup'
-        where:
-            operationGroup: 'operations'
-        hidden: true
-      - select: 'operation'
-        where:
-            operationGroup: 'machines'
-            operation: '(reconnect|createOrUpdate|update)'
-        removed: true
+  cli-directive:
+    - select: 'operationGroup'
+      where:
+        operationGroup: 'operations'
+      hidden: true
+    - select: 'operation'
+      where:
+        operationGroup: 'machines'
+        operation: '(reconnect|createOrUpdate|update)'
+      removed: true
+      - where:
+        operationGroup: 'machineExtensions'
+        param: ^.*instance-view.*$
+      hidden: true
 ```
