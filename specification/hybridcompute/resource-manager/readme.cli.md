@@ -18,7 +18,7 @@ cli:
             operation: '(reconnect|createOrUpdate|update)'
         removed: true
       - where:
-            param: ^.*instanceView.*$
+            param: ^.*instance-view.*$
         json: true
         hidden: true
 ```
