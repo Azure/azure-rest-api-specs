@@ -2776,7 +2776,8 @@
                     },
                     "queryTimeout": {
                       "readOnly": true,
-                      "type": "long",
+                      "type": "integer",
+                      "format": "int64",
                       "description": "SQL query timeout. Unit in seconds."
                     }
                   }
@@ -2807,7 +2808,7 @@
             },
             "partitionFormatInPath": {
               "type": "boolean",
-              "description": "Indicates how the source data is partitioned. This is defined to filter on a range of partitioned data before performin actions or materialization.",
+              "description": "Indicates how the source data is partitioned. This is defined to filter on a range of partitioned data before performing actions or materialization.",
               "readOnly": true
             },
             "notes": {
@@ -2937,7 +2938,7 @@
       "description": "Dataset state",
       "properties": {
         "state": {
-          "description": "Datatset state",
+          "description": "Dataset state",
           "type": "string"
         },
         "deprecatedBy": {
@@ -2984,7 +2985,7 @@
         },
         "userIss": {
           "type": "string",
-          "description": "The issuer which issed the token for this user."
+          "description": "The issuer which issued the token for this user."
         },
         "userTenantId": {
           "type": "string",
