@@ -19,5 +19,6 @@ cli:
         removed: true
       - where:
             param: ^.*instanceView.*$
+        json: true
         hidden: true
 ```
