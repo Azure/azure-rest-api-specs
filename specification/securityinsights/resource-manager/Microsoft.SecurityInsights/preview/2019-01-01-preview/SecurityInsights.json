@@ -3099,6 +3099,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/entities": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an entity": {
+            "$ref": "./examples/incidents/entities/GetAllIncidentEntities.json"
+          }
+        },
+        "tags": [
+          "IncidentEntities"
+        ],
+        "description": "Gets all incident related entities.",
+        "operationId": "IncidentEntities_ListByIncident",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentEntitiesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations": {
       "get": {
         "x-ms-examples": {
@@ -6264,6 +6312,43 @@
       },
       "required": [
         "message"
+      ],
+      "type": "object"
+    },
+    "IncidentEntitiesResponse": {
+      "description": "The incident related entities response.",
+      "properties": {
+        "entities": {
+          "description": "Array of the incident related entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "metaData": {
+          "description": "The metadata from the incident related entities results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
+          }
+        }
+      }
+    },
+    "IncidentEntitiesResultsMetadata": {
+      "description": "Information of a specific aggregation in the incident related entities result.",
+      "properties": {
+        "count": {
+          "description": "Total number of aggregations of the given kind in the incident related entities result.",
+          "type": "integer"
+        },
+        "entityKind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the aggregated entity."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
       ],
       "type": "object"
     },
