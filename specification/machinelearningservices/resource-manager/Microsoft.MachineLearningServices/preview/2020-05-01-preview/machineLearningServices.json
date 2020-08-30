@@ -1643,6 +1643,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets": {
+      "get": {
+        "tags": [
+          "MachineLearningServices"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningService_ListByWorkspace",
+        "description": "Gets datasets in specified workspace.",
+        "x-ms-examples": {
+          "Get Services": {
+            "$ref": "./examples/getDatasets.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning datasets and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetResourcesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2606,6 +2654,347 @@
         "value": {
           "readOnly": true,
           "type": "string"
+        }
+      }
+    },
+    "PaginatedDatasetResourcesList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning dataset objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of Machine Learning dataset objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "DatasetResource": {
+      "type": "object",
+      "description": "Machine Learning dataset object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Dataset properties",
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        }
+      ]
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "Machine Learning dataset object.",
+      "properties": {
+        "datasetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unique Dataset identifier."
+        },
+        "datasetState": {
+          "type": "object",
+          "$ref": "#/definitions/DatasetState"
+        },
+        "latest": {
+          "type": "object",
+          "description": "Last created Dataset definition.",
+          "properties": {
+            "datasetId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Unique Dataset identifier."
+            },
+            "versionId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "An identifier uniquely identifies a definition change."
+            },
+            "datasetDefinitionState": {
+              "type": "object",
+              "$ref": "#/definitions/DatasetState"
+            },
+            "dataflow": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Dataflow Json"
+            },
+            "dataPath": {
+              "type": "object",
+              "description": " Datastore and reference to location of data such as relativePath, Sql Query and etc.",
+              "properties": {
+                "datastoreName": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Data store Name"
+                },
+                "relativePath": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Relative path in the data store"
+                },
+                "azureFilePath": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Azure path for Azure Blob or File"
+                },
+                "paths": {
+                  "type": "array",
+                  "description": "List of files expanded from a file GLOB specified",
+                  "items": {
+                    "type": "string"
+                  },
+                  "readOnly": true
+                },
+                "sqlDataPath": {
+                  "type": "object",
+                  "description": "Sql Query/Table/Stored Procedure details.",
+                  "properties": {
+                    "sqlTableName": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "SQL table name"
+                    },
+                    "sqlQuery": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "SQL query"
+                    },
+                    "sqlStoredProcedureName": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "SQL storedProcedure name"
+                    },
+                    "queryTimeout": {
+                      "readOnly": true,
+                      "type": "long",
+                      "description": "SQL query timeout. Unit in seconds."
+                    }
+                  }
+                },
+                "httpUrl": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "HTTP URL."
+                },
+                "additionalProperties": {
+                  "description": "Additional Properties.",
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                },
+                "partitionFormat": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Specify the partition format of path. Defaults to None."
+                },
+                "partitionFormatIgnoreError": {
+                  "type": "boolean",
+                  "description": "Whether or not to ignore unmatched path.",
+                  "readOnly": true
+                }
+              }
+            },
+            "partitionFormatInPath": {
+              "type": "boolean",
+              "description": "Indicates how the source data is partitioned. This is defined to filter on a range of partitioned data before performin actions or materialization.",
+              "readOnly": true
+            },
+            "notes": {
+              "type": "boolean",
+              "description": "Summary of Definition changes.",
+              "readOnly": true
+            },
+            "etag": {
+              "type": "string",
+              "description": "eTag",
+              "readOnly": true
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "The dataset creation time (UTC).",
+              "type": "string",
+              "readOnly": true
+            },
+            "modifiedTime": {
+              "format": "date-time",
+              "description": "The dataset last modified time (UTC).",
+              "type": "string",
+              "readOnly": true
+            },
+            "createdBy": {
+              "type": "object",
+              "$ref": "#/definitions/UserInfo"
+            },
+            "fileType": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Dataset FileType, specified by user."
+            },
+            "properties": {
+              "description": "Properties stores information like name of time series column for time series dataset.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            },
+            "savedDatasetId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Indicates the saved dataset this definition is mapping to, populated on Get."
+            },
+            "telemetryInfo": {
+              "description": " Telemetry information about the dataset including information like which service the dataset was created from.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "useDescriptionTagsFromDefinition": {
+              "type": "boolean",
+              "description": " Whether to use description and tags from the definition level as opposed to dataset level (old behavior).",
+              "readOnly": true
+            },
+            "description": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Description about the dataset."
+            },
+            "tags": {
+              "description": "Tags associated with the dataset.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "The dataset creation time (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "The dataset last modified time (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "eTag",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Unique dataset name",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description about this dataset version.",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags for this dataset version.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "isVisible": {
+          "type": "boolean",
+          "description": "Flag to hide Dataset in UI",
+          "readOnly": true
+        },
+        "defaultCompute": {
+          "type": "string",
+          "description": "Name of the default compute to be used for any Dataset actions (such as Profile, Write).",
+          "readOnly": true
+        },
+        "datasetType": {
+          "type": "string",
+          "description": "Dataset Type."
+        }
+      }
+    },
+    "DatasetState": {
+      "type": "object",
+      "description": "Dataset state",
+      "properties": {
+        "state": {
+          "description": "Datatset state",
+          "type": "string"
+        },
+        "deprecatedBy": {
+          "description": "Reference to better Dataset or a Definition",
+          "type": "object",
+          "properties": {
+            "datasetId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Unique Dataset identifier."
+            },
+            "definitionVersion": {
+              "description": "Definition Version",
+              "type": "string"
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "eTag",
+          "readOnly": true
+        }
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "description": "User who created.",
+      "properties": {
+        "properties": {
+          "userObjectId": {
+            "type": "string",
+            "description": "A user or service principal's object ID.."
+          },
+          "userPuId": {
+            "type": "string",
+            "description": "A user or service principal's PuID."
+          },
+          "userIdp": {
+            "type": "string",
+            "description": "A user identity provider. Eg live.com"
+          },
+          "userAltSecId": {
+            "type": "string",
+            "description": "A user alternate sec id. This represents the user in a different identity provider system Eg.1:live.com:puid"
+          },
+          "userIss": {
+            "type": "string",
+            "description": "The issuer which issed the token for this user."
+          },
+          "userTenantId": {
+            "type": "string",
+            "description": "A user or service principal's tenant ID."
+          },
+          "userName": {
+            "type": "string",
+            "description": " A user's full name or a service principal's app ID."
+          }
         }
       }
     },
