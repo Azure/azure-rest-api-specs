@@ -1691,6 +1691,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetName}": {
+      "get": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "operationId": "MachineLearningDatasets_Get",
+        "description": "Get a Dataset by name.",
+        "x-ms-examples": {
+          "Get Service": {
+            "$ref": "./examples/getDataset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatasetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1896,6 +1941,14 @@
         "name": "OrderString",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "DatasetNameParameter": {
+      "in": "query",
+      "name": "datasetName",
+      "type": "string",
+      "description": "The Dataset name.",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
