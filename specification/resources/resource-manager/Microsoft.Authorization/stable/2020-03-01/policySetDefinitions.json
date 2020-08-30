@@ -274,7 +274,7 @@
         ],
         "operationId": "PolicySetDefinitions_ListBuiltIn",
         "summary": "Retrieves built-in policy set definitions.",
-        "description": "This operation retrieves a list of all the built-in policy set definitions.",
+        "description": "This operation retrieves a list of all the built-in policy set definitions that match the optional given $filter. If $filter='category -eq {value}' is provided, the returned list only includes all built-in policy set definitions whose category match the {value}.",
         "x-ms-examples": {
           "List built-in policy set definitions": {
             "$ref": "./examples/listBuiltInPolicySetDefinitions.json"
@@ -283,6 +283,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicySetDefinitionsFilterParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
