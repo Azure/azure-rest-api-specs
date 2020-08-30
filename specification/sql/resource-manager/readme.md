@@ -496,6 +496,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-02-02-preview/DatabaseSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/DevOpsAudit.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/operations.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
