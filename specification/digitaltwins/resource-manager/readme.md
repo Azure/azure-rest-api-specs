@@ -141,4 +141,8 @@ directive:
     where: '$.definitions.ServiceBus.allOf["1"].properties.secondaryConnectionString'
     from: digitaltwins.json
     reason: Secrets are obfuscated on read.
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.EventHub.allOf["1"].properties.connectionStringPrimaryKey'
+    from: digitaltwins.json
+    reason: Secrets are obfuscated on read.
 ```
