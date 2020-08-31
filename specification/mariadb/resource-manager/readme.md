@@ -52,6 +52,7 @@ input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
 - Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -76,6 +77,26 @@ input-file:
 - Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01'
+input-file:
+- Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
+    reason: The name of the provider is Microsoft.DBforMariaDB
+```
+
 ---
 # Code Generation
 
@@ -93,6 +114,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mariadb/resource-manager
 ```
 
 
@@ -146,6 +170,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -164,10 +192,12 @@ input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 
 ```
 

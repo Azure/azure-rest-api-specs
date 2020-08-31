@@ -31,6 +31,16 @@ openapi-type: arm
 tag: package-2020-01-01
 ```
 
+### Tag: package-2020-02-14-privatepreview
+
+These settings apply only when `--tag=package-2020-02-14-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-02-14-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
+```
+
 ### Tag: package-2020-01-01-privatepreview
 
 These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
@@ -50,6 +60,7 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
@@ -75,6 +86,7 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 ```
@@ -90,6 +102,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 ```
 
+
 ### Tag: package-2017-12-01
 
 These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
@@ -98,8 +111,16 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is DBforPostgreSQL
+```
 
 ---
 # Code Generation
@@ -118,6 +139,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js postgresql/resource-manager
 ```
 
 ### C#
@@ -170,6 +194,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -189,6 +217,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 
 ```

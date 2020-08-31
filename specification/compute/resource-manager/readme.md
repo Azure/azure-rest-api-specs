@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-05-01
+tag: package-2020-06-30
 
 directive:
   - where:
@@ -61,7 +61,6 @@ directive:
       - $.definitions.Snapshot.properties
     suppress:
       - BodyTopLevelProperties
-
   - where:
       - $.definitions.VirtualMachineScaleSetExtension
     suppress:
@@ -138,7 +137,6 @@ directive:
       - $.definitions.DiskEncryptionSetParameters
     suppress:
       - RequiredPropertiesMissingInResourceModel
-
   - where:
       - $.definitions.VirtualMachineScaleSetVM
     suppress:
@@ -171,12 +169,10 @@ directive:
       - $.definitions.GalleryImageVersion
     suppress:
       - TrackedResourcePatchOperation
-
   - where:
       - $.definitions.VirtualMachineImageResource
     suppress:
       - TrackedResourceGetOperation
-
   - where:
       - $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
     suppress:
@@ -205,7 +201,6 @@ directive:
       - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-
   - where:
       - $.definitions.ContainerService
     suppress:
@@ -213,6 +208,52 @@ directive:
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
+```
+### Tag: package-2020-06-30
+
+These settings apply only when `--tag=package-2020-06-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-30'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-06-30-only
+
+These settings apply only when `--tag=package-2020-06-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-30-only'
+input-file:
+- Microsoft.Compute/stable/2020-06-30/disk.json
+```
+
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-05-01/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-06-01-only
+
+These settings apply only when `--tag=package-2020-06-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01-only'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
 ```
 
 ### Tag: package-2020-05-01
@@ -693,6 +734,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js compute/resource-manager
 ```
 
 ## Go
@@ -786,6 +830,10 @@ input-file:
 - Microsoft.Compute/stable/2017-03-30/disk.json
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -798,13 +846,16 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-30/disk.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/gallery.json
