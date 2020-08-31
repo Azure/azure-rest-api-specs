@@ -1633,10 +1633,9 @@
             "modelAsString": true
           }
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
+        "haEnabled": {
+          "type": "string",
+          "description": "stand by count value can be either enabled or disabled"
         },
         "sourceServerName": {
           "type": "string",
@@ -1650,6 +1649,11 @@
         "availabilityZone": {
           "type": "string",
           "description": "availability Zone information of the server."
+        },
+        "standByAvailabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server.",
+          "readOnly": true
         },
         "byokEnforcement": {
           "type": "string",
