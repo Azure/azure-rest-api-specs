@@ -133,4 +133,8 @@ directive:
     where: $.definitions.CheckNameResult.properties.nameAvailable
     from: digitaltwins.json
     reason: The value will always be a boolean.
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.ServiceBus.allOf["1"].properties.primaryConnectionString'
+    from: digitaltwins.json
+    reason: 'Secrets are obfuscated on GETs. E.g., "Endpoint=sb://mysb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=***". This is to allow customers to identify the namespace of the resource.'
 ```
