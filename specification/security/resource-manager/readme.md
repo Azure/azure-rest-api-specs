@@ -156,7 +156,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -186,6 +185,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
@@ -480,7 +480,6 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/alerts.json
   - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
@@ -498,6 +497,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/alerts.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
