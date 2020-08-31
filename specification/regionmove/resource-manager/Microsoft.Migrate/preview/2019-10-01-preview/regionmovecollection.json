@@ -19,7 +19,7 @@
           "MoveCollections"
         ],
         "operationId": "MoveCollections_Create",
-        "description": "Creates a move collection.",
+        "description": "Creates or updates a move collection.",
         "consumes": [
           "application/json"
         ],
@@ -1171,7 +1171,13 @@
           }
         },
         "errors": {
-          "$ref": "#/definitions/MoveResourceError"
+          "description": "Defines the move resource errors.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveResourceError"
+            }
+          ],
+          "readOnly": true
         }
       }
     },

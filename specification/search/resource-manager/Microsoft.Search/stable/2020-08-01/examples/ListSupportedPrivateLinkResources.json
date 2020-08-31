@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-08-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/privateLinkResources/searchService",
+            "name": "searchService",
+            "type": "Microsoft.Search/searchServices/privateLinkResources",
+            "properties": {
+              "groupId": "searchService",
+              "requiredMembers": [
+                "searchService"
+              ],
+              "requiredZoneNames": [
+                "privatelink.search.windows.net"
+              ],
+              "shareablePrivateLinkResourceTypes": [
+                {
+                  "name": "blob",
+                  "properties": {
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "groupId": "blob",
+                    "description": "Azure Cognitive Search indexers can connect to blobs in Azure Storage for reading data (data source), for writing intermediate results of indexer execution (annotation cache, preview) or for storing any knowledge store projections (preview)"
+                  }
+                },
+                {
+                  "name": "table",
+                  "properties": {
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "groupId": "table",
+                    "description": "Azure Cognitive Search indexers can connect to tables in Azure Storage for reading data (data source), for writing book-keeping information about intermediate results of indexer execution (annotation cache, preview) or for storing any knowledge store projections (preview)"
+                  }
+                },
+                {
+                  "name": "Sql",
+                  "properties": {
+                    "type": "Microsoft.DocumentDB/databaseAccounts",
+                    "groupId": "Sql",
+                    "description": "Azure Cognitive Search indexers can connect to CosmosDB using the SQL head for reading data (data source)."
+                  }
+                },
+                {
+                  "name": "plr",
+                  "properties": {
+                    "type": "Microsoft.Sql/servers",
+                    "groupId": "sqlServer",
+                    "description": "Azure Cognitive Search indexers can connect to AzureSQL databases in a SQL server for reading data (data source)."
+                  }
+                },
+                {
+                  "name": "vault",
+                  "properties": {
+                    "type": "Microsoft.KeyVault/vaults",
+                    "groupId": "vault",
+                    "description": "Azure Cognitive Search can access keys in Azure Key Vault to encrypt search index and synonym map data"
+                  }
+                },
+                {
+                  "name": "plr",
+                  "properties": {
+                    "type": "Microsoft.DBforMySQL/servers",
+                    "groupId": "mysqlServer",
+                    "description": "Azure Cognitive Search indexers can connect to MySQL databases for reading data (data source, preview)."
+                  }
+                },
+                {
+                  "name": "site",
+                  "properties": {
+                    "type": "Microsoft.Web/sites",
+                    "groupId": "sites",
+                    "description": "Azure Cognitive Search indexers can connect to App Services when executing custom web api skills that can be present in a skillset (optional) attached to the indexer."
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
