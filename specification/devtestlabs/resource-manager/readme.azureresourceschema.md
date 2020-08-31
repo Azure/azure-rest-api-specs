@@ -5,36 +5,15 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-2018-09
-  - tag: package-2016-05
-  - tag: package-2015-05-preview
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-2018-09 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.DevTestLab/stable/2018-09-15/DTL.json
+  - Microsoft.DevTestLab/stable/2016-05-15/DTL.json
+  - Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
+
 ```
-
-### Tag: package-2016-05 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-05' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2015-05-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2015-05-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-05-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

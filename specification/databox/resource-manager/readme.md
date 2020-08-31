@@ -192,7 +192,7 @@ input-file:
   - $(this-folder)/Microsoft.DataBox/stable/2020-04-01/databox.json
   - $(this-folder)/Microsoft.DataBox/stable/2019-09-01/databox.json
   - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
-  
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
