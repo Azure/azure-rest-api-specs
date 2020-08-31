@@ -1284,6 +1284,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+      "post": {
+        "tags": [
+          "VirtualNetworkSubnetUsage"
+        ],
+        "operationId": "VirtualNetworkSubnetUsage",
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/VirtualNetworkSubnetUsage.json"
+          }
+        },
+        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageParameter"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.DBForPostgreSql/operations": {
       "get": {
         "tags": [
@@ -1319,6 +1367,46 @@
     }
   },
   "definitions": {
+    "VirtualNetworkSubnetUsageParameter": {
+      "type": "object",
+      "properties": {
+        "virtualNetworkArmResourceId": {
+          "type": "string",
+          "description": "Virtual network resource id."
+        }
+      },
+      "description": "Virtual netowrk subnet usage parameter"
+    },
+    "VirtualNetworkSubnetUsageResult": {
+      "type": "object",
+      "properties": {
+        "delegatedSubnetsUsage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnetUsage"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Virtual netowrk subnet usage data."
+    },
+    "DelegatedSubnetUsage": {
+      "type": "object",
+      "properties": {
+        "subnetName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the subnet"
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Number of used deleagted subnets"
+        }
+      },
+      "description": "Delegated subnet usage data."
+    },
     "StorageMBCapability": {
       "type": "object",
       "properties": {
