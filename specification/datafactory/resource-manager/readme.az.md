@@ -7,6 +7,7 @@ az:
   extensions: datafactory
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-datafactory
+  disable-checks: true
 az-output-folder:  $(azure-cli-extension-folder)/src/datafactory
 python-sdk-output-folder: "$(az-output-folder)/azext_datafactory/vendored_sdks/datafactory"
 
@@ -58,16 +59,7 @@ cli:
             param: properties
         poly-resource: true
       - where:
-            group: ExposureControl
-        hidden: true
-      - where:
-            group: integrationRuntimeObjectMetadata
-        hidden: true
-      - where:
-            group: DataFlows
-        hidden: true
-      - where:
-            group: DataFlowDebugSession
+            group: ExposureControl|IntegrationRuntimeObjectMetadata|DataFlows|DataFlowDebugSession|ManagedVirtualNetworks|ManagedPrivateEndpoints
         hidden: true
       - where:
             group: Factories
@@ -80,20 +72,13 @@ cli:
             param: dataFactoryLocation
         name: location
       - where:
-            group: LinkedServices
+            group: Triggers|LinkedServices|Datasets
             op: CreateOrUpdate#Update
-        hidden: true
-      - where:
-            group: Datasets
-            op: CreateOrUpdate#Update
-        hidden: true
+            param: properties
+        cli-flatten: true
       - where:
             group: Pipelines
             op: CreateOrUpdate#Update
             param: pipeline
         cli-flatten: true
-      - where:
-            group: Triggers
-            op: CreateOrUpdate#Update
-        hidden: true
 ```

@@ -779,6 +779,10 @@
         "distcpSettings": {
           "description": "Specifies Distcp-related settings.",
           "$ref": "#/definitions/DistcpSettings"
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -4129,6 +4133,14 @@
         "path": {
           "type": "object",
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        },
+        "logLevel": {
+          "type": "object",
+          "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
+        },
+        "enableReliableLogging": {
+          "type": "object",
+          "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {

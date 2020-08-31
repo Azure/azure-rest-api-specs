@@ -61,9 +61,18 @@ tag: package-deploymentscripts-2019-10-preview
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2019-06-preview
+tag: package-preview-2020-08
 ```
 
+
+### Tag: package-preview-2020-08
+
+These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-08'
+input-file:
+  - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+```
 ### Tag: package-resources-2020-06
 
 These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
@@ -77,7 +86,7 @@ input-file:
 
 These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-subscriptions-2020-01'
+``` yaml $(tag) == 'package-subscriptions-2020-01'
 input-file:
   - Microsoft.Resources/stable/2020-01-01/subscriptions.json
 ```
@@ -622,6 +631,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js resources/resource-manager
 ```
 
 ## Go
@@ -665,6 +677,10 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
@@ -725,6 +741,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json
+  - $(this-folder)/Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2019-07-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json

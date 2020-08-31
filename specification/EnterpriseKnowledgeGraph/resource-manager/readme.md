@@ -75,6 +75,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js EnterpriseKnowledgeGraph/resource-manager
 ```
 
 ## C#
@@ -90,6 +93,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/enterpriseknowledgegraphservice/Microsoft.Azure.Management.EnterpriseKnowledgeGraphService/src/Generated
   clear-output-folder: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
