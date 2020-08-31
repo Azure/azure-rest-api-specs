@@ -1211,6 +1211,179 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualMachines/{virtualMachineName}/stop": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Stop",
+        "description": "Stop virtual machine.",
+        "summary": "Implements the operation to stop a virtual machine.",
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/StopVirtualMachine.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VirtualMachine."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine stop action payload.",
+            "schema": {
+              "$ref": "#/definitions/StopVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/start": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Start",
+        "description": "Start virtual machine.",
+        "summary": "Implements the operation to start a virtual machine.",
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VirtualMachine."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/restart": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Restart",
+        "description": "Restart virtual machine.",
+        "summary": "Implements the operation to restart a virtual machine.",
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/RestartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the VirtualMachine."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScVmm/virtualMachines": {
       "get": {
         "tags": [
@@ -2321,6 +2494,16 @@
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           }
+        }
+      }
+    },
+    "StopVirtualMachineOptions": {
+      "description": "Defines the stop action properties.",
+      "type": "object",
+      "properties": {
+        "skipShutdown": {
+          "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.",
+          "type": "boolean"
         }
       }
     },
