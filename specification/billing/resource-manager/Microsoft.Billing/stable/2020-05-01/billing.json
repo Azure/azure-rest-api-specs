@@ -1064,6 +1064,9 @@
         "x-ms-examples": {
           "BillingAccountInvoicesList": {
             "$ref": "./examples/BillingAccountInvoicesList.json"
+          },
+          "BillingAccountInvoicesListWithRebillDetails": {
+            "$ref": "./examples/BillingAccountInvoicesListWithRebillDetails.json"
           }
         },
         "operationId": "Invoices_ListByBillingAccount",
@@ -1120,6 +1123,9 @@
         "x-ms-examples": {
           "InvoicesListByBillingProfile": {
             "$ref": "./examples/InvoicesListByBillingProfile.json"
+          },
+          "InvoicesListByBillingProfileWithRebillDetails": {
+            "$ref": "./examples/InvoicesListByBillingProfileWithRebillDetails.json"
           }
         },
         "operationId": "Invoices_ListByBillingProfile",
@@ -1179,6 +1185,15 @@
         "x-ms-examples": {
           "Invoice": {
             "$ref": "./examples/Invoice.json"
+          },
+          "InvoiceWithRebillDetails": {
+            "$ref": "./examples/InvoiceWithRebillDetails.json"
+          },
+          "VoidInvoice": {
+            "$ref": "./examples/VoidInvoice.json"
+          },
+          "CreditNote": {
+            "$ref": "./examples/CreditNote.json"
           }
         },
         "operationId": "Invoices_Get",
@@ -4704,7 +4719,8 @@
           "enum": [
             "Due",
             "OverDue",
-            "Paid"
+            "Paid",
+            "Void"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -4814,6 +4830,38 @@
             "$ref": "#/definitions/PaymentProperties"
           }
         },
+        "rebillDetails": {
+          "description": "Rebill details for an invoice.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/RebillDetails"
+          }
+        },
+        "documentType": {
+          "description": "The type of the document.",
+          "type": "string",
+          "enum": [
+            "Invoice",
+            "CreditNote"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceDocumentType",
+            "modelAsString": true
+          }
+        },
+        "billedDocumentId": {
+          "description": "The Id of the active invoice which is originally billed after this invoice was voided. This field is applicable to the void invoices only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creditForDocumentId": {
+          "description": "The Id of the invoice which got voided and this credit note was issued as a result. This field is applicable to the credit notes only.",
+          "type": "string",
+          "readOnly": true
+        },
         "subscriptionId": {
           "description": "The ID of the subscription for which the invoice is generated.",
           "type": "string",
@@ -4858,6 +4906,30 @@
           "description": "The type of payment method.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "RebillDetails": {
+      "description": "The rebill details of an invoice.",
+      "properties": {
+        "creditNoteDocumentId": {
+          "description": "The ID of credit note.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceDocumentId": {
+          "description": "The ID of invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rebillDetails": {
+          "description": "Rebill details for an invoice.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/RebillDetails"
+          }
         }
       }
     },
