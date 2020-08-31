@@ -261,55 +261,6 @@
         }
       }
     },
-    "/wfs/datasets/{datasetid}/version": {
-      "get": {
-        "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Version API lists the version information the dataset is using.",
-        "x-publish": true,
-        "operationId": "WFS_GetVersionInformationPreview",
-        "x-ms-examples": {
-          "GetVersionInformation": {
-            "$ref": "./examples/GetVersionInformation.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Datasetid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "schema": {
-              "$ref": "#/definitions/Version"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
     "/wfs/datasets/{datasetid}/collections": {
       "get": {
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Collections Description API provides descriptions of all the collections in a given dataset.",
