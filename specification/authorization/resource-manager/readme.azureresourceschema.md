@@ -5,126 +5,25 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-2020-04-preview
-  - tag: package-2015-07-01
-  - tag: package-2015-06-01-preview
-  - tag: package-2017-10-01-preview-only
-  - tag: package-2018-01-01-preview-only
-  - tag: package-2018-07-01-preview-only
-  - tag: package-2018-09-01-preview-only
-  - tag: package-2017-10-01-preview
-  - tag: package-2018-01-01-preview
-  - tag: package-2018-07-01-preview
-  - tag: package-2018-09-01-preview
-  - tag: profile-hybrid-2019-03-01
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-2020-04-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2020-04-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-04-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+
 ```
-
-### Tag: package-2015-07-01 and azureresourceschema
-
-These settings apply only when `--tag=package-2015-07-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-07-01' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2015-06-01-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2015-06-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-06-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-10-01-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2017-10-01-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-10-01-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-01-01-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2018-01-01-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01-01-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-07-01-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2018-07-01-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-07-01-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-09-01-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09-01-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09-01-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-10-01-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2017-10-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-10-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-01-01-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-01-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-07-01-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-07-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-07-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-09-01-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: profile-hybrid-2019-03-01 and azureresourceschema
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

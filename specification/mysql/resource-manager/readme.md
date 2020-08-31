@@ -230,6 +230,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
 
 ```
 
