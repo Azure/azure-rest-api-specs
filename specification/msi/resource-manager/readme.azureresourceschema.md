@@ -5,26 +5,14 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-2018-11-30
-  - tag: package-2015-08-31-preview
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-2018-11-30 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-11-30 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-11-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
+  - Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
+
 ```
-
-### Tag: package-2015-08-31-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2015-08-31-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-08-31-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

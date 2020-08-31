@@ -5,116 +5,29 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-2020-06-preview
-  - tag: package-2020-04
-  - tag: package-2020-03
-  - tag: package-2019-12
-  - tag: package-2019-08
-  - tag: package-2019-08-preview
-  - tag: package-2015-04
-  - tag: package-2014-04
-  - tag: package-2015-11
-  - tag: package-2016-03-19
-  - tag: package-2016-03-31
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-2020-06-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2020-06-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-06-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2020-04-01/notebook.json
+  - Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2020-03-01/notebook.json
+  - Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2019-12-12/notebook.json
+  - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2019-08-01/notebook.json
+  - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
+
 ```
-
-### Tag: package-2020-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-04' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2020-03 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-03' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-12 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-12 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-12' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-08 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-08 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-08-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2019-08-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-08-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2015-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2015-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-04' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2014-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2014-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2014-04' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2015-11 and azureresourceschema
-
-These settings apply only when `--tag=package-2015-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-11' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2016-03-19 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-03-19 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-03-19' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2016-03-31 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-03-31 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-03-31' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
