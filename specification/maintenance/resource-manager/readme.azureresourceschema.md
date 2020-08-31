@@ -5,36 +5,15 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-preview-2020-07
-  - tag: package-2020-04
-  - tag: package-2018-06-preview
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-preview-2020-07 and azureresourceschema
-
-These settings apply only when `--tag=package-preview-2020-07 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2020-07' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.Maintenance/preview/2020-07-01-preview/Maintenance.json
+  - Microsoft.Maintenance/stable/2020-04-01/Maintenance.json
+  - Microsoft.Maintenance/preview/2018-06-01-preview/Maintenance.json
+
 ```
-
-### Tag: package-2020-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-04' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-06-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-06-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-06-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

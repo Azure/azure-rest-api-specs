@@ -5,36 +5,16 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-preview-2020-04
-  - tag: package-2019-04
-  - tag: package-2018-09-preview
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-preview-2020-04 and azureresourceschema
-
-These settings apply only when `--tag=package-preview-2020-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2020-04' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2018-09-01-preview/graphquery.json
+
 ```
-
-### Tag: package-2019-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-09-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

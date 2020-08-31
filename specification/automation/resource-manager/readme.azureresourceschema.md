@@ -6,7 +6,9 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 # include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
+require: ../../../profiles/readme.md
+
+output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files across all versions
 input-file:
@@ -44,5 +46,5 @@ input-file:
   - Microsoft.Automation/stable/2018-06-30/python2package.json
   - Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
   - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
-output-folder: $(azureresourceschema-folder)/schemas
+
 ```
