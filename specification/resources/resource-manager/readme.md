@@ -136,6 +136,7 @@ input-file:
 - Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
 - Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
 override-info:
@@ -151,7 +152,6 @@ input-file:
 - Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
 - Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
-- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
 override-info:
