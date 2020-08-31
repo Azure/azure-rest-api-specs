@@ -12,7 +12,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files across all versions
 input-file:
-  - Microsoft.MachineLearningCompute/preview/2017-08-01-preview/machineLearningCompute.json
-  - Microsoft.MachineLearningCompute/preview/2017-06-01-preview/machineLearningCompute.json
+  - Microsoft.Automanage/preview/2020-06-30-preview/automanage.json
 
 ```

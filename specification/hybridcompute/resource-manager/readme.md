@@ -155,6 +155,7 @@ input-file:
   - $(this-folder)/Microsoft.HybridCompute/preview/2019-08-02/HybridCompute.json
   - $(this-folder)/Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
   - $(this-folder)/Microsoft.HybridCompute/preview/2020-07-30-preview/HybridCompute.json
+  - $(this-folder)/Microsoft.HybridCompute/stable/2020-08-02/HybridCompute.json
 
 ```
 
