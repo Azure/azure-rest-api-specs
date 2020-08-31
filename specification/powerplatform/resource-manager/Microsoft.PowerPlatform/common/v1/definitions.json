@@ -1,4 +1,28 @@
 {
+  "swagger": "2.0",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "info": {
+    "version": "v1",
+    "title": "Common types"
+  },
+  "paths": {},
   "definitions": {
     "ErrorResponse": {
       "description": "ARM error response body.",
@@ -153,10 +177,6 @@
       "description": "The response model for the list of PowerPlatform operations"
     }
   },
-  "info": {
-    "version": "v1",
-    "title": "Common types"
-  },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
@@ -181,25 +201,5 @@
       "description": "The resource group name.",
       "x-ms-parameter-location": "method"
     }
-  },
-  "paths": {},
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "swagger": "2.0"
+  }
 }
