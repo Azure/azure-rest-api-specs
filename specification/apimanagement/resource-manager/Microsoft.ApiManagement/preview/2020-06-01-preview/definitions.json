@@ -1168,6 +1168,25 @@
       ],
       "description": "External OAuth authorization server Update settings contract."
     },
+    "AuthorizationServerSecretsContract": {
+      "properties": {
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "oAuth Authorization Server Secrets."
+        },
+        "resourceOwnerUsername": {
+          "type": "string",
+          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
+        },
+        "resourceOwnerPassword": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
+        }
+      },
+      "description": "OAuth Server Secrets Contract."
+    },
     "BackendAuthorizationHeaderCredentials": {
       "properties": {
         "scheme": {
@@ -2748,7 +2767,8 @@
           "description": "Logger type.",
           "enum": [
             "azureEventHub",
-            "applicationInsights"
+            "applicationInsights",
+            "azureMonitor"
           ],
           "x-ms-enum": {
             "name": "LoggerType",
@@ -2761,6 +2781,10 @@
               {
                 "value": "applicationInsights",
                 "description": "Azure Application Insights as log destination."
+              },
+              {
+                "value": "azureMonitor",
+                "description": "Azure Monitor"
               }
             ]
           }
