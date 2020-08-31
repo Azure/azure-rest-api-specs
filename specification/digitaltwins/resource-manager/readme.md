@@ -137,4 +137,8 @@ directive:
     where: '$.definitions.ServiceBus.allOf["1"].properties.primaryConnectionString'
     from: digitaltwins.json
     reason: 'Secrets are obfuscated on GETs. E.g., "Endpoint=sb://mysb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=***". This is to allow customers to identify the namespace of the resource.'
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.ServiceBus.allOf["1"].properties.secondaryConnectionString'
+    from: digitaltwins.json
+    reason: Secrets are obfuscated on read.
 ```
