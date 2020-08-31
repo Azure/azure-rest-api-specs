@@ -74,6 +74,53 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}": {
+      "get": {
+        "tags": [
+          "DeletedService"
+        ],
+        "operationId": "DeletedServices_GetByName",
+        "description": "Get soft-deleted Api Management Service by name.",
+        "x-ms-examples": {
+          "ApiManagementListRegions": {
+            "$ref": "./examples/ApiManagementGetDeletedServiceByName.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted API Management service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Soft-deleted Api Management Service.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DeletedServiceContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+      },
       "delete": {
         "tags": [
           "DeletedService"
