@@ -335,6 +335,9 @@
                 "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2463,40 +2466,30 @@
     },
     "DeletedAccountProperties": {
       "properties": {
-        "key": {
+        "storageAccountResourceId": {
           "readOnly": true,
           "type": "string",
-          "description": "key of the deleted account"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "name of the deleted account"
+          "description": "Full resource id of the original storage account."
         },
         "location": {
           "readOnly": true,
           "type": "string",
-          "description": "location of the deleted account"
+          "description": "Location of the deleted account."
         },
-        "subscription": {
+        "restoreReference": {
           "readOnly": true,
           "type": "string",
-          "description": "subscription of the deleted account"
-        },
-        "resourceGroupName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "resource group of the deleted account"
+          "description": "Can be used to attempt recovering this deleted account via PutStorageAccount API."
         },
         "creationTime": {
           "readOnly": true,
           "type": "string",
-          "description": "creation time of the deleted account"
+          "description": "Creation time of the deleted account."
         },
         "deletionTime": {
           "readOnly": true,
           "type": "string",
-          "description": "deletion time of the deleted account"
+          "description": "Deletion time of the deleted account."
         }
       }
     },
@@ -2791,6 +2784,11 @@
             "$ref": "#/definitions/DeletedAccount"
           },
           "description": "Gets the list of deleted accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of deleted accounts. Returned when total number of requested deleted accounts exceed maximum page size.",
+          "readOnly": true
         }
       },
       "description": "The response from the List Deleted Accounts operation."
