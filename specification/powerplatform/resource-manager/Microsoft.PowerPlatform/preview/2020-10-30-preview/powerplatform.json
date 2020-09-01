@@ -107,7 +107,7 @@
         },
         "parameters": [
           {
-            "name": "EnterprisePromiseName",
+            "name": "enterprisePromiseName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -394,20 +394,56 @@
   },
   "definitions": {
     "EnterprisePromise": {
-      "identity": {
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EnterprisePromiseIdentity",
+          "description": "The identity of the Automanage account."
+        },
+        "lockbox": {
+          "$ref": "#/definitions/status"
+        },
+        "encryption": {
+          "$ref": "#/definitions/status",
+          "keyVault": {
+            "id": {
+              "type": "string",
+              "description": "Uri of KeyVault"
+            },
+            "Key": {
+              "name": {
+                "type": "string",
+                "description": "Name of the Key from KeyVault"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version of the Key from KeyVault"
+              }
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+            }
+          ],
+          "description": "Definition of the EnterprisePromise."
+        }
+      }
+    },
+    "EnterprisePromiseIdentity": {
+      "properties": {
         "systemAssignedIdentityPrincipalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal id of EnterprisePromise identity."
+          "description": "The principal id of Automanage account identity."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant id associated with the EnterprisePromise."
+          "description": "The tenant id associated with the Automanage account."
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the EnterprisePromise. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "description": "The type of identity used for the Automanage account. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
           "enum": [
             "SystemAssigned",
             "None"
@@ -416,64 +452,23 @@
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
-        },
-        "description": "The identity of the EnterprisePromise."
-      },
-      "properties": {
-        "lockbox": {
-          "status": {
-            "type": "string",
-            "readOnly": true,
-            "description": "The state of onboarding, which only appears in the response.",
-            "x-ms-enum": {
-              "name": "status",
-              "modelAsString": true
-            },
-            "enum": [
-              "Enabled",
-              "Disabled",
-              "NotConfigured"
-            ]
-          }
-        },
-        "encryption": {
-          "status": {
-            "type": "string",
-            "readOnly": true,
-            "description": "The state of onboarding, which only appears in the response.",
-            "x-ms-enum": {
-              "name": "status",
-              "modelAsString": true
-            },
-            "enum": [
-              "Enabled",
-              "Disabled",
-              "NotConfigured"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "Uri of KeyVault"
-          },
-          "Key": {
-            "name": {
-              "type": "string",
-              "description": "Name of the Key from KeyVault"
-            },
-            "version": {
-              "type": "string",
-              "description": "Version of the Key from KeyVault"
-            }
-          },
-          "description": "Properties to configure keyVault Properties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Definition of the EnterprisePromise."
+      "description": "Identity for the Automanage account."
+    },
+    "status": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The state of onboarding, which only appears in the response.",
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true
+      },
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotConfigured"
+      ]
     },
     "EnterprisePromiseList": {
       "properties": {
@@ -486,6 +481,7 @@
         }
       },
       "description": "The response of the list EnterprisePromise operation."
+
     }
   },
   "parameters": {}
