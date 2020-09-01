@@ -5,13 +5,8 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
-
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files across all versions
-input-file:
-  - Microsoft.ADHybridHealthService\stable\2014-01-01\ADHybridHealthService.json
+batch: []
 
 ```
+
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.

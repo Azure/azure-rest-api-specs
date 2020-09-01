@@ -5,16 +5,44 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
+batch:
+  - tag: schema-analysisservices-2017-08-01
+  - tag: schema-analysisservices-2017-07-14
+  - tag: schema-analysisservices-2016-05-16
 
+```
+
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-analysisservices-2017-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-analysisservices-2017-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
-# all the input files across all versions
+# all the input files in this apiVersion
 input-file:
   - Microsoft.AnalysisServices/stable/2017-08-01/analysisservices.json
-  - Microsoft.AnalysisServices/preview/2017-08-01-beta/analysisservices.json
+
+```
+
+### Tag: schema-analysisservices-2017-07-14 and azureresourceschema
+
+``` yaml $(tag) == 'schema-analysisservices-2017-07-14' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.AnalysisServices/stable/2017-07-14/analysisservices.json
+
+```
+
+### Tag: schema-analysisservices-2016-05-16 and azureresourceschema
+
+``` yaml $(tag) == 'schema-analysisservices-2016-05-16' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.AnalysisServices/stable/2016-05-16/analysisservices.json
 
 ```

@@ -5,12 +5,51 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
+batch:
+  - tag: schema-network-2020-06-01
+  - tag: schema-network-2020-05-01
+  - tag: schema-network-2020-04-01
+  - tag: schema-network-2020-03-01
+  - tag: schema-network-2019-12-01
+  - tag: schema-network-2019-11-01
+  - tag: schema-network-2019-09-01
+  - tag: schema-network-2019-08-01
+  - tag: schema-network-2019-07-01
+  - tag: schema-network-2019-06-01
+  - tag: schema-network-2019-04-01
+  - tag: schema-network-2019-02-01
+  - tag: schema-network-2018-12-01
+  - tag: schema-network-2018-11-01
+  - tag: schema-network-2018-10-01
+  - tag: schema-network-2018-08-01
+  - tag: schema-network-2018-07-01
+  - tag: schema-network-2018-06-01
+  - tag: schema-network-2018-04-01
+  - tag: schema-network-2018-02-01
+  - tag: schema-network-2018-01-01
+  - tag: schema-network-2017-11-01
+  - tag: schema-network-2017-10-01
+  - tag: schema-network-2017-09-01
+  - tag: schema-network-2017-08-01
+  - tag: schema-network-2017-06-01
+  - tag: schema-network-2017-03-01
+  - tag: schema-network-2016-12-01
+  - tag: schema-network-2016-09-01
+  - tag: schema-network-2016-06-01
+  - tag: schema-network-2016-03-30
+  - tag: schema-network-2015-06-15
+  - tag: schema-network-2015-05-01-preview
 
+```
+
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-network-2020-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2020-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
-# all the input files across all versions
+# all the input files in this apiVersion
 input-file:
   - Microsoft.Network/stable/2020-06-01/applicationGateway.json
   - Microsoft.Network/stable/2020-06-01/applicationSecurityGroup.json
@@ -59,6 +98,16 @@ input-file:
   - Microsoft.Network/stable/2020-06-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-06-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-06-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2020-05-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2020-05-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2020-05-01/applicationGateway.json
   - Microsoft.Network/stable/2020-05-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2020-05-01/availableDelegations.json
@@ -103,6 +152,16 @@ input-file:
   - Microsoft.Network/stable/2020-05-01/virtualWan.json
   - Microsoft.Network/stable/2020-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-05-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2020-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2020-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2020-04-01/applicationGateway.json
   - Microsoft.Network/stable/2020-04-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2020-04-01/availableDelegations.json
@@ -148,6 +207,16 @@ input-file:
   - Microsoft.Network/stable/2020-04-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-04-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2020-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2020-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2020-03-01/applicationGateway.json
   - Microsoft.Network/stable/2020-03-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2020-03-01/availableDelegations.json
@@ -193,6 +262,16 @@ input-file:
   - Microsoft.Network/stable/2020-03-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-03-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-12-01/applicationGateway.json
   - Microsoft.Network/stable/2019-12-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-12-01/availableDelegations.json
@@ -237,6 +316,16 @@ input-file:
   - Microsoft.Network/stable/2019-12-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-12-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-12-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-11-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-11-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-11-01/applicationGateway.json
   - Microsoft.Network/stable/2019-11-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-11-01/availableDelegations.json
@@ -280,6 +369,16 @@ input-file:
   - Microsoft.Network/stable/2019-11-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-11-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-11-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-09-01/applicationGateway.json
   - Microsoft.Network/stable/2019-09-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-09-01/availableDelegations.json
@@ -324,6 +423,16 @@ input-file:
   - Microsoft.Network/stable/2019-09-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-09-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-09-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-08-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-08-01/applicationGateway.json
   - Microsoft.Network/stable/2019-08-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-08-01/availableDelegations.json
@@ -367,6 +476,16 @@ input-file:
   - Microsoft.Network/stable/2019-08-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-08-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-08-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-07-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-07-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-07-01/applicationGateway.json
   - Microsoft.Network/stable/2019-07-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-07-01/availableDelegations.json
@@ -409,6 +528,16 @@ input-file:
   - Microsoft.Network/stable/2019-07-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-07-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-07-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-06-01/applicationGateway.json
   - Microsoft.Network/stable/2019-06-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-06-01/availableDelegations.json
@@ -450,6 +579,16 @@ input-file:
   - Microsoft.Network/stable/2019-06-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-06-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-06-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-04-01/applicationGateway.json
   - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-04-01/availableDelegations.json
@@ -489,6 +628,16 @@ input-file:
   - Microsoft.Network/stable/2019-04-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-04-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-04-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2019-02-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2019-02-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2019-02-01/applicationGateway.json
   - Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-02-01/availableDelegations.json
@@ -525,6 +674,16 @@ input-file:
   - Microsoft.Network/stable/2019-02-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-02-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-02-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2018-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-12-01/applicationGateway.json
   - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-12-01/availableDelegations.json
@@ -560,6 +719,16 @@ input-file:
   - Microsoft.Network/stable/2018-12-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-12-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2018-12-01/webapplicationfirewall.json
+
+```
+
+### Tag: schema-network-2018-11-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-11-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-11-01/applicationGateway.json
   - Microsoft.Network/stable/2018-11-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-11-01/availableDelegations.json
@@ -594,6 +763,16 @@ input-file:
   - Microsoft.Network/stable/2018-11-01/virtualWan.json
   - Microsoft.Network/stable/2018-11-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-11-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2018-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-10-01/availableDelegations.json
@@ -627,6 +806,16 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/virtualWan.json
   - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2018-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-08-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-08-01/applicationGateway.json
   - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-08-01/availableDelegations.json
@@ -660,6 +849,16 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/virtualWan.json
   - Microsoft.Network/stable/2018-08-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-08-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2018-07-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-07-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-07-01/azureFirewall.json
   - Microsoft.Network/stable/2018-07-01/applicationGateway.json
   - Microsoft.Network/stable/2018-07-01/applicationSecurityGroup.json
@@ -686,6 +885,16 @@ input-file:
   - Microsoft.Network/stable/2018-07-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-07-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2018-07-01/serviceEndpointPolicy.json
+
+```
+
+### Tag: schema-network-2018-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-06-01/azureFirewall.json
   - Microsoft.Network/stable/2018-06-01/applicationGateway.json
   - Microsoft.Network/stable/2018-06-01/applicationSecurityGroup.json
@@ -710,6 +919,16 @@ input-file:
   - Microsoft.Network/stable/2018-06-01/virtualWan.json
   - Microsoft.Network/stable/2018-06-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-06-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2018-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-04-01/azureFirewall.json
   - Microsoft.Network/stable/2018-04-01/applicationGateway.json
   - Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
@@ -734,6 +953,16 @@ input-file:
   - Microsoft.Network/stable/2018-04-01/virtualWan.json
   - Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2018-02-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-02-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-02-01/applicationGateway.json
   - Microsoft.Network/stable/2018-02-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-02-01/checkDnsAvailability.json
@@ -756,6 +985,16 @@ input-file:
   - Microsoft.Network/stable/2018-02-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2018-02-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-02-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2018-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2018-01-01/applicationGateway.json
   - Microsoft.Network/stable/2018-01-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2018-01-01/checkDnsAvailability.json
@@ -776,6 +1015,16 @@ input-file:
   - Microsoft.Network/stable/2018-01-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2018-01-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-01-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2017-11-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2017-11-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2017-11-01/applicationGateway.json
   - Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
@@ -796,6 +1045,16 @@ input-file:
   - Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2017-11-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2017-11-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2017-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2017-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2017-10-01/applicationGateway.json
   - Microsoft.Network/stable/2017-10-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2017-10-01/checkDnsAvailability.json
@@ -816,6 +1075,16 @@ input-file:
   - Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2017-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2017-10-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2017-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2017-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2017-09-01/applicationGateway.json
   - Microsoft.Network/stable/2017-09-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2017-09-01/checkDnsAvailability.json
@@ -836,6 +1105,16 @@ input-file:
   - Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2017-09-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2017-09-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2017-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2017-08-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2017-08-01/applicationGateway.json
   - Microsoft.Network/stable/2017-08-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2017-08-01/endpointService.json
@@ -854,6 +1133,16 @@ input-file:
   - Microsoft.Network/stable/2017-08-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2017-08-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2017-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2017-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2017-06-01/applicationGateway.json
   - Microsoft.Network/stable/2017-06-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2017-06-01/endpointService.json
@@ -872,6 +1161,16 @@ input-file:
   - Microsoft.Network/stable/2017-06-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2017-06-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2017-06-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2017-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2017-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2017-03-01/applicationGateway.json
   - Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json
@@ -889,6 +1188,16 @@ input-file:
   - Microsoft.Network/stable/2017-03-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2017-03-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2017-03-01/vmssPublicIpAddress.json
+
+```
+
+### Tag: schema-network-2016-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2016-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2016-12-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2016-12-01/applicationGateway.json
   - Microsoft.Network/stable/2016-12-01/checkDnsAvailability.json
@@ -905,6 +1214,16 @@ input-file:
   - Microsoft.Network/stable/2016-12-01/usage.json
   - Microsoft.Network/stable/2016-12-01/virtualNetwork.json
   - Microsoft.Network/stable/2016-12-01/virtualNetworkGateway.json
+
+```
+
+### Tag: schema-network-2016-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2016-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2016-09-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2016-09-01/applicationGateway.json
   - Microsoft.Network/stable/2016-09-01/checkDnsAvailability.json
@@ -919,8 +1238,38 @@ input-file:
   - Microsoft.Network/stable/2016-09-01/usage.json
   - Microsoft.Network/stable/2016-09-01/virtualNetwork.json
   - Microsoft.Network/stable/2016-09-01/virtualNetworkGateway.json
+
+```
+
+### Tag: schema-network-2016-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2016-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2016-06-01/network.json
+
+```
+
+### Tag: schema-network-2016-03-30 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2016-03-30' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2016-03-30/network.json
+
+```
+
+### Tag: schema-network-2015-06-15 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2015-06-15' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/stable/2015-06-15/applicationGateway.json
   - Microsoft.Network/stable/2015-06-15/checkDnsAvailability.json
   - Microsoft.Network/stable/2015-06-15/expressRouteCircuit.json
@@ -934,6 +1283,16 @@ input-file:
   - Microsoft.Network/stable/2015-06-15/virtualNetwork.json
   - Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json
   - Microsoft.Network/stable/2015-06-15/vmssNetworkInterface.json
+
+```
+
+### Tag: schema-network-2015-05-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2015-05-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.Network/preview/2015-05-01-preview/network.json
 
 ```

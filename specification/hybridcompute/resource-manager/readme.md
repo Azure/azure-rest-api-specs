@@ -151,6 +151,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
+  - $(this-folder)/Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
   - $(this-folder)/Microsoft.HybridCompute/preview/2019-03-18/HybridCompute.json
   - $(this-folder)/Microsoft.HybridCompute/preview/2019-08-02/HybridCompute.json
   - $(this-folder)/Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
