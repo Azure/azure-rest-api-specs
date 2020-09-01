@@ -398,29 +398,11 @@
         "identity": {
           "$ref": "#/definitions/EnterprisePromiseIdentity",
           "description": "The identity of the Automanage account."
-        },
-        "lockbox": {
-          "$ref": "#/definitions/status"
-        },
-        "encryption": {
-          "type": "object",
-          "description": "The encryption settings for a configuration store.",
-          "properties": {
-            "keyVaultProperties": {
-              "$ref": "#/definitions/KeyVaultProperties",
-              "description": "Key vault properties."
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/status"
-            }
-          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the EnterprisePromise."
@@ -448,6 +430,25 @@
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "lockbox": {
+          "$ref": "#/definitions/status",
+          "description": "lockbox configuration"
+        },
+        "encryption": {
+          "type": "object",
+          "description": "The encryption settings for a configuration store.",
+          "properties": {
+            "keyVaultProperties": {
+              "$ref": "#/definitions/KeyVaultProperties",
+              "description": "Key vault properties."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/status"
+            }
+          ]
         }
       },
       "description": "Identity for the EnterprisePromise."
@@ -475,21 +476,23 @@
           "description": "Uri of KeyVault"
         },
         "key": {
-          "$ref": "#/definitions/keyProperties"
+          "$ref": "#/definitions/keyProperties",
+          "description": "Identity of the secret that includes name and version."
         }
       }
     },
     "keyProperties": {
       "properties": {
         "name": {
-          "description": "The URI of the key vault key used to encrypt data.",
+          "description": "The identifier of the key vault key used to encrypt data.",
           "type": "string"
         },
-        "keyVersion": {
+        "version": {
           "description": "The version of the identity which will be used to access key vault.",
           "type": "string"
         }
-      }
+      },
+      "description": "Url and version of the KeyVault Secret"
     },
     "EnterprisePromiseList": {
       "properties": {
