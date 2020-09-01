@@ -6,9 +6,12 @@
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "properties": {
-        "administratorLoginPassword": "newpa$$w0rd",
-        "sslEnforcement": "Disabled",
-        "publicNetworkAccess": "Disabled"
+        "maintenanceWindow": {
+          "customWindow": "Enabled",
+          "dayOfWeek": 0,
+          "startHour": 8,
+          "startMinute": 0
+        }
       }
     }
   },
@@ -30,15 +33,15 @@
           "publicNetworkAccess": "Disabled",
           "state": "Ready",
           "fullyQualifiedDomainName": "mysqltestsvc4.mysql.database.azure.com",
-          "haEnabled": "Enabled",
-          "haState": "Healthy",
+          "haEnabled": "Disabled",
+          "haState": "NotEnabled",
           "availabilityZone": "1",
-          "standByAvailabilityZone": "2",
+          "standByAvailabilityZone": null,
           "maintenanceWindow": {
             "dayOfWeek": 0,
-            "startHour": 0,
+            "startHour": 8,
             "startMinute": 0,
-            "customWindow": "Disabled"
+            "customWindow": "Enabled"
           },
           "delegatedSubnetArguments": {}
         },

@@ -108,6 +108,9 @@
         "x-ms-examples": {
           "Update a server": {
             "$ref": "./examples/ServerUpdate.json"
+          },
+          "Update server customer maintenance window": {
+            "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -1040,127 +1043,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
-      "put": {
-        "tags": [
-          "MaintenanceWindows"
-        ],
-        "operationId": "MaintenanceWindows_CreateOrUpdate",
-        "x-ms-examples": {
-          "Create a maintenance window": {
-            "$ref": "./examples/MaintenanceWindowCreate.json"
-          }
-        },
-        "description": "Creates a new maintenance window.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MaintenanceWindow"
-            },
-            "description": "The required parameters for creating or updating a customer maintenance window."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceWindow"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceWindow"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "MaintenanceWindows"
-        ],
-        "operationId": "MaintenanceWindows_Delete",
-        "x-ms-examples": {
-          "Delete a maintenance window": {
-            "$ref": "./examples/MaintenanceWindowDelete.json"
-          }
-        },
-        "description": "Deletes a maintenance window.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySql/locations/{locationName}/capabilities": {
       "get": {
         "tags": [
-          "MaintenanceWindows"
+          "LocationBasedCapabilities"
         ],
-        "operationId": "MaintenanceWindows_Get",
+        "operationId": "LocationBasedCapabilities_List",
         "x-ms-examples": {
-          "Get a maintenance window": {
-            "$ref": "./examples/MaintenanceWindowGet.json"
+          "CapabilitiesList": {
+            "$ref": "./examples/CapabilitiesByLocationList.json"
           }
         },
-        "description": "Get the maintenance windows of a given server.",
+        "description": "Get capabilities at specified location in a given subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -1169,62 +1063,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+            "$ref": "#/parameters/LocationNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MaintenanceWindow"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/maintenanceWindows": {
-      "get": {
-        "tags": [
-          "MaintenanceWindows"
-        ],
-        "operationId": "MaintenanceWindows_ListByServer",
-        "x-ms-examples": {
-          "List maintenance windows for a server": {
-            "$ref": "./examples/MaintenanceWindowsListByServer.json"
-          }
-        },
-        "description": "List all the maintenance windows in a given server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceWindowListResult"
+              "$ref": "#/definitions/CapabilitiesListResult"
             }
           },
           "default": {
@@ -1239,12 +1085,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySql/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+      "post": {
+        "tags": [
+          "CheckVirtualNetworkSubnetUsage"
+        ],
+        "operationId": "CheckVirtualNetworkSubnetUsage",
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/CheckVirtualNetworkSubnetUsage.json"
+          }
+        },
+        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageParameter"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySql/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
         ],
-        "operationId": "CheckNameAvailability_Execute",
+        "operationId": "CheckNameAvailability",
         "x-ms-examples": {
           "Check name availability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -1366,22 +1260,51 @@
         "modelAsString": true
       }
     },
-    "VnetInjArgs": {
+    "HaEnabled": {
+      "type": "string",
+      "description": "Whether or not HA is enabled for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "HaEnabledEnum",
+        "modelAsString": true
+      }
+    },
+    "DelegatedSubnetArguments": {
       "properties": {
-        "delegatedVnetID": {
+        "subnetArmResourceId": {
           "type": "string",
-          "description": "delegated vNet ID"
-        },
-        "delegatedSubnetName": {
-          "type": "string",
-          "description": "delegated subnet name"
-        },
-        "delegatedVnetName": {
-          "type": "string",
-          "description": "delegated vNet name"
+          "description": "delegated subnet arm resource id."
         }
       },
-      "description": "Vnet properties of a server"
+      "description": "Delegated subnet arguments of a server"
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "indicates whether custom window is enabled or disabled"
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start hour for maintenance window"
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start minute for maintenance window"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "day of week for maintenance window"
+        }
+      }
     },
     "StorageProfile": {
       "properties": {
@@ -1435,6 +1358,10 @@
           }
         }
       },
+      "required": [
+        "name",
+        "tier"
+      ],
       "description": "Billing information related properties of a server."
     },
     "ServerProperties": {
@@ -1507,10 +1434,9 @@
             "modelAsString": true
           }
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
+        "haEnabled": {
+          "$ref": "#/definitions/HaEnabled",
+          "description": "Enable HA or not for a server."
         },
         "fullyQualifiedDomainName": {
           "type": "string",
@@ -1545,6 +1471,10 @@
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
+        },
         "sourceServerId": {
           "type": "string",
           "description": "The source MySQL server name to restore from.",
@@ -1560,9 +1490,23 @@
             "create"
           ]
         },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "Vnet arguments."
+        "availabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server."
+        },
+        "standByAvailabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server.",
+          "readOnly": true
+        },
+        "byokEnforcement": {
+          "type": "string",
+          "description": "Status showing whether the data encryption is enabled with customer-managed keys.",
+          "readOnly": true
+        },
+        "delegatedSubnetArguments": {
+          "$ref": "#/definitions/DelegatedSubnetArguments",
+          "description": "Delegated subnet arguments."
         },
         "createMode": {
           "type": "string",
@@ -1629,18 +1573,21 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "Vnet arguments."
+        "delegatedSubnetArguments": {
+          "$ref": "#/definitions/DelegatedSubnetArguments",
+          "description": "Delegated subnet arguments."
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
+        "haEnabled": {
+          "$ref": "#/definitions/HaEnabled",
+          "description": "Enable HA or not for a server."
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
         },
         "replicationRole": {
           "type": "string",
@@ -1890,70 +1837,192 @@
       },
       "description": "A list of server configurations."
     },
-    "MaintenanceWindowProperties": {
+    "VirtualNetworkSubnetUsageParameter": {
+      "type": "object",
       "properties": {
-        "dayOfWeek": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The day of week of the maintenance window to start"
-        },
-        "durationInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration of the maintenance window to run."
-        },
-        "startHour": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting hour of the maintenance window."
-        },
-        "startMinute": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting minutes of the maintenance window."
+        "virtualNetworkArmResourceId": {
+          "type": "string",
+          "description": "Virtual network resource id."
         }
       },
-      "required": [
-        "dayOfWeek",
-        "startHour",
-        "startMinute"
-      ],
-      "description": "The properties of a server maintenance window."
+      "description": "Virtual network subnet usage parameter"
     },
-    "MaintenanceWindow": {
+    "DelegatedSubnetUsage": {
+      "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/MaintenanceWindowProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a customer maintenance window."
+        "subnetName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the subnet"
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Number of used delegated subnets"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "description": "Represents a server maintenance window."
+      "description": "Delegated subnet usage data."
     },
-    "MaintenanceWindowListResult": {
+    "VirtualNetworkSubnetUsageResult": {
+      "type": "object",
+      "properties": {
+        "delegatedSubnetsUsage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnetUsage"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Virtual network subnet usage data."
+    },
+    "StorageMBCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage MB name",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "storageSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "storage size in MB",
+          "readOnly": true
+        }
+      },
+      "description": "storage size in MB capability"
+    },
+    "VcoreCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "vCore name",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported vCores",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "supportedMemoryPerVcoreMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported memory per vCore in MB",
+          "readOnly": true
+        }
+      },
+      "description": "Vcores capability"
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "server version",
+          "readOnly": true
+        },
+        "supportedVcores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VcoreCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "StorageEditionCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage edition name",
+          "readOnly": true
+        },
+        "supportedStorageMB": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageMBCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "storage edition capability"
+    },
+    "ServerEditionCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Server edition capabilities."
+    },
+    "CapabilityProperties": {
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "zone name",
+          "readOnly": true
+        },
+        "supportedFlexibleServerEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEditionCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Location capabilities."
+    },
+    "CapabilitiesListResult": {
       "type": "object",
       "properties": {
         "value": {
+          "description": "A list of supported capabilities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MaintenanceWindow"
+            "$ref": "#/definitions/CapabilityProperties"
           },
-          "description": "The list of server maintenance window."
+          "readOnly": true
         },
         "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
-      "description": "A list of maintenance windows for a MySQL server."
+      "description": "location capability"
     },
     "OperationDisplay": {
       "properties": {
@@ -2107,12 +2176,12 @@
       "description": "The name of the server configuration.",
       "x-ms-parameter-location": "method"
     },
-    "MaintenanceWindowNameParameter": {
-      "name": "maintenanceWindowName",
+    "LocationNameParameter": {
+      "name": "locationName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the maintenance window.",
+      "description": "The name of the location.",
       "x-ms-parameter-location": "method"
     }
   }
