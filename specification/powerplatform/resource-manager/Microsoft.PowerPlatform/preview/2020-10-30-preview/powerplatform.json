@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-06-30-preview",
+    "version": "2020-10-30-preview",
     "title": "PowerPlatform"
   },
   "host": "management.azure.com",
@@ -395,26 +395,6 @@
   "definitions": {
     "EnterprisePromise": {
       "identity": {
-        "$ref": "#/definitions/EnterprisePromiseIdentity",
-        "description": "The identity of the EnterprisePromise."
-      },
-      "properties": {
-        "lockbox": {
-          "$ref": "#/definitions/status"
-        },
-        "encryption": {
-          "$ref": "#/definitions/KeyVaultProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Definition of the EnterprisePromise."
-    },
-    "EnterprisePromiseIdentity": {
-      "properties": {
         "systemAssignedIdentityPrincipalId": {
           "readOnly": true,
           "type": "string",
@@ -436,42 +416,64 @@
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
-        }
-      },
-      "description": "Identity for the EnterprisePromise."
-    },
-    "status": {
-      "type": "string",
-      "description": "The status of the configuration property",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "NotConfigured"
-      ],
-      "x-ms-enum": {
-        "name": "ConfigurationStatusType",
-        "modelAsString": false
-      }
-    },
-    "KeyVaultProperties": {
-      "properties": {
-        "$ref": "#/definitions/status",
-        "id": {
-          "type": "string",
-          "description": "Uri of KeyVault"
         },
-        "Key": {
-          "name": {
+        "description": "The identity of the EnterprisePromise."
+      },
+      "properties": {
+        "lockbox": {
+          "status": {
             "type": "string",
-            "description": "Name of the Key from KeyVault"
-          },
-          "version": {
-            "type": "string",
-            "description": "Version of the Key from KeyVault"
+            "readOnly": true,
+            "description": "The state of onboarding, which only appears in the response.",
+            "x-ms-enum": {
+              "name": "status",
+              "modelAsString": true
+            },
+            "enum": [
+              "Enabled",
+              "Disabled",
+              "NotConfigured"
+            ]
           }
+        },
+        "encryption": {
+          "status": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The state of onboarding, which only appears in the response.",
+            "x-ms-enum": {
+              "name": "status",
+              "modelAsString": true
+            },
+            "enum": [
+              "Enabled",
+              "Disabled",
+              "NotConfigured"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Uri of KeyVault"
+          },
+          "Key": {
+            "name": {
+              "type": "string",
+              "description": "Name of the Key from KeyVault"
+            },
+            "version": {
+              "type": "string",
+              "description": "Version of the Key from KeyVault"
+            }
+          },
+          "description": "Properties to configure keyVault Properties"
         }
       },
-      "description": "Properties to configure keyVault Properties"
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the EnterprisePromise.",
     },
     "EnterprisePromiseList": {
       "properties": {
