@@ -403,23 +403,19 @@
           "$ref": "#/definitions/status"
         },
         "encryption": {
-          "$ref": "#/definitions/status",
-          "keyVault": {
-            "id": {
-              "type": "string",
-              "description": "Uri of KeyVault"
-            },
-            "Key": {
-              "name": {
-                "type": "string",
-                "description": "Name of the Key from KeyVault"
-              },
-              "version": {
-                "type": "string",
-                "description": "Version of the Key from KeyVault"
-              }
+          "type": "object",
+          "description": "The encryption settings for a configuration store.",
+          "properties": {
+            "keyVaultProperties": {
+              "$ref": "#/definitions/KeyVaultProperties",
+              "description": "Key vault properties."
             }
-          }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/status"
+            }
+          ]
         }
       },
       "allOf": [
@@ -469,6 +465,31 @@
         "Disabled",
         "NotConfigured"
       ]
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Settings concerning key vault encryption for a configuration store.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        },
+        "key": {
+          "$ref": "#/definitions/keyProperties"
+        }
+      }
+    },
+    "keyProperties": {
+      "properties": {
+        "name": {
+          "description": "The URI of the key vault key used to encrypt data.",
+          "type": "string"
+        },
+        "keyVersion": {
+          "description": "The version of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      }
     },
     "EnterprisePromiseList": {
       "properties": {
