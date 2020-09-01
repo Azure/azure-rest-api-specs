@@ -888,7 +888,7 @@
         "tags": [
           "VirtualNetworkSubnetUsage"
         ],
-        "operationId": "VirtualNetworkSubnetUsage",
+        "operationId": "VirtualNetworkSubnetUsage_Execute",
         "x-ms-examples": {
           "CapabilitiesList": {
             "$ref": "./examples/VirtualNetworkSubnetUsage.json"
@@ -1256,7 +1256,15 @@
         },
         "haEnabled": {
           "type": "string",
-          "description": "stand by count value can be either enabled or disabled"
+          "description": "stand by count value can be either enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+            ],
+          "x-ms-enum": {
+            "name": "HAEnabledEnum",
+            "modelAsString": false
+          }
         },
         "sourceServerName": {
           "type": "string",
