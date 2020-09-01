@@ -5,15 +5,36 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
-
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files across all versions
-input-file:
-  - Microsoft.StorageCache/stable/2020-03-01/storagecache.json
-  - Microsoft.StorageCache/stable/2019-11-01/storagecache.json
-  - Microsoft.StorageCache/preview/2019-08-01-preview/storagecache.json
-
+batch:
+  - tag: package-2020-03-01
+  - tag: package-2019-11-01
+  - tag: package-2019-08
 ```
+
+### Tag: package-2020-03-01 and azureresourceschema
+
+These settings apply only when `--tag=package-2020-03-01 --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2020-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+
+### Tag: package-2019-11-01 and azureresourceschema
+
+These settings apply only when `--tag=package-2019-11-01 --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2019-11-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+
+### Tag: package-2019-08 and azureresourceschema
+
+These settings apply only when `--tag=package-2019-08 --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2019-08' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+

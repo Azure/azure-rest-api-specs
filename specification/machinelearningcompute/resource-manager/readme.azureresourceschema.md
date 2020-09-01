@@ -5,14 +5,26 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
-
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files across all versions
-input-file:
-  - Microsoft.MachineLearningCompute/preview/2017-08-01-preview/machineLearningCompute.json
-  - Microsoft.MachineLearningCompute/preview/2017-06-01-preview/machineLearningCompute.json
-
+batch:
+  - tag: package-2017-08-preview
+  - tag: package-2017-06-preview
 ```
+
+### Tag: package-2017-08-preview and azureresourceschema
+
+These settings apply only when `--tag=package-2017-08-preview --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2017-08-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+
+### Tag: package-2017-06-preview and azureresourceschema
+
+These settings apply only when `--tag=package-2017-06-preview --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2017-06-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+

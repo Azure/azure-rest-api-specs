@@ -5,16 +5,26 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
-
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files across all versions
-input-file:
-  - Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
-  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
-  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
-  - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
-
+batch:
+  - tag: package-preview-2020-07
+  - tag: package-2017-04-01
 ```
+
+### Tag: package-preview-2020-07 and azureresourceschema
+
+These settings apply only when `--tag=package-preview-2020-07 --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-preview-2020-07' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+
+### Tag: package-2017-04-01 and azureresourceschema
+
+These settings apply only when `--tag=package-2017-04-01 --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2017-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+

@@ -5,14 +5,16 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
-
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files across all versions
-input-file:
-  - Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
-  - Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
-
+batch:
+  - tag: package-2019-05-01-preview
 ```
+
+### Tag: package-2019-05-01-preview and azureresourceschema
+
+These settings apply only when `--tag=package-2019-05-01-preview --azureresourceschema` is specified on the command line.
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+``` yaml $(tag) == 'package-2019-05-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+```
+
