@@ -105,6 +105,9 @@
         "x-ms-examples": {
           "ServerUpdate": {
             "$ref": "./examples/ServerUpdate.json"
+          },
+          "ServerUpdateWithCustomerMaintenanceWindow": {
+            "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -793,202 +796,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
-      "put": {
-        "tags": [
-          "CustomerMaintenanceWindow"
-        ],
-        "operationId": "CustomerMaintenanceWindow_CreateOrUpdate",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowCreate": {
-            "$ref": "./examples/CustomerMaintenanceWindowCreate.json"
-          }
-        },
-        "description": "Creates a new customer maintenance window.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
-            },
-            "description": "The required parameters for creating or updating a customer maintenance window."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "CustomerMaintenanceWindow"
-        ],
-        "operationId": "CustomerMaintenanceWindow_Delete",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowDelete": {
-            "$ref": "./examples/CustomerMaintenanceWindowDelete.json"
-          }
-        },
-        "description": "Deletes a PostgreSQL server Customer maintenance window.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "CustomerMaintenanceWindow"
-        ],
-        "operationId": "CustomerMaintenanceWindow_Get",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowGet": {
-            "$ref": "./examples/CustomerMaintenanceWindowGet.json"
-          }
-        },
-        "description": "Get the Customer maintenance windows of a given PostgreSQL server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows": {
-      "get": {
-        "tags": [
-          "CustomerMaintenanceWindow"
-        ],
-        "operationId": "CustomerMaintenanceWindow_ListByServer",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowList": {
-            "$ref": "./examples/CustomerMaintenanceWindowListByServer.json"
-          }
-        },
-        "description": "List all the Customer Maintenance Windows in a given PostgreSQL flexible server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindowListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/keys": {
       "get": {
         "tags": [
@@ -1375,7 +1182,7 @@
           "description": "Virtual network resource id."
         }
       },
-      "description": "Virtual netowrk subnet usage parameter"
+      "description": "Virtual network subnet usage parameter"
     },
     "VirtualNetworkSubnetUsageResult": {
       "type": "object",
@@ -1388,7 +1195,7 @@
           "readOnly": true
         }
       },
-      "description": "Virtual netowrk subnet usage data."
+      "description": "Virtual network subnet usage data."
     },
     "DelegatedSubnetUsage": {
       "type": "object",
@@ -1402,7 +1209,7 @@
           "type": "integer",
           "format": "int64",
           "readOnly": true,
-          "description": "Number of used deleagted subnets"
+          "description": "Number of used delegated subnets"
         }
       },
       "description": "Delegated subnet usage data."
@@ -1721,6 +1528,10 @@
             "modelAsString": true
           }
         },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
+        },
         "haEnabled": {
           "type": "string",
           "description": "stand by count value can be either enabled or disabled"
@@ -1804,6 +1615,32 @@
       ],
       "description": "Represents a server."
     },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "indicates whether custom window is enabled or disabled",
+          "readOnly": true
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start hour for maintenance window"
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start minute for maintenance window"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "day of week for maintenance window"
+        }
+      }
+    },
     "ServerPropertiesForUpdate": {
       "properties": {
         "administratorLoginPassword": {
@@ -1819,6 +1656,10 @@
           "type": "integer",
           "format": "int32",
           "description": "stand by count value can be either 0 or 1"
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
         }
       }
     },
