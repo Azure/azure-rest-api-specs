@@ -1522,66 +1522,6 @@
       },
       "description": "A list of firewall rules."
     },
-    "CustomerMaintenanceWindowProperties": {
-      "properties": {
-        "dayOfWeek": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The day of week of the customer maintenance window to start"
-        },
-        "durationInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration of the customer maintenance window to run."
-        },
-        "startHour": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting hour of the customer maintenance window."
-        },
-        "startMinute": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting minutes of the customer maintenance window."
-        }
-      },
-      "required": [
-        "dayOfWeek",
-        "startHour",
-        "startMinute"
-      ],
-      "description": "The properties of a server firewall rule."
-    },
-    "CustomerMaintenanceWindow": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CustomerMaintenanceWindowProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a customer maintenance window."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "description": "Represents a server firewall rule."
-    },
-    "CustomerMaintenanceWindowListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomerMaintenanceWindow"
-          },
-          "description": "The list of CustomerMaintenanceWindows in a PostgreSQL server."
-        }
-      },
-      "description": "A list of firewall rules."
-    },
     "ConfigurationProperties": {
       "properties": {
         "value": {
