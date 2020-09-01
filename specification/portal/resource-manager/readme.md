@@ -136,13 +136,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.ConfigurationProperties.properties.enforcePrivateMarkdownStorage
-    from: tenantConfiguration.json
-    reason: 'The name of the flag itself is very self descriptive ("enforcePrivateMarkdownStorage"), so having there boolean doesn''t reduce descriptiveness'
-```
