@@ -5,136 +5,23 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-batch:
-  - tag: package-2019-12-preview
-  - tag: package-2019-06-preview
-  - tag: package-2019-06-preview-only
-  - tag: package-2019-05
-  - tag: package-2019-05-preview
-  - tag: package-2019-04
-  - tag: package-2019-04-only
-  - tag: package-2018-09
-  - tag: package-2018-02-preview
-  - tag: package-2017-10
-  - tag: package-2017-06-preview
-  - tag: package-2017-03
-  - tag: package-2016-06-preview
-```
+# include the azure profile definitions from the standard location
+require: ../../../profiles/readme.md
 
-### Tag: package-2019-12-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2019-12-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-12-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files across all versions
+input-file:
+  - Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
+  - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
+  - Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+  - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
+  - Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2017-06-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/stable/2017-03-01/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
+
 ```
-
-### Tag: package-2019-06-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2019-06-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-06-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-06-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-05 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-05' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-05-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2019-05-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-05-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-04-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-04-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-09 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-02-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-02-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-10 and azureresourceschema
-
-These settings apply only when `--tag=package-2017-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-06-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2017-06-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-06-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-03 and azureresourceschema
-
-These settings apply only when `--tag=package-2017-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2016-06-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2016-06-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-06-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

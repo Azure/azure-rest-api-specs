@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2019-09
+tag: package-policy-2020-03
 ```
 
 ``` yaml $(package-resources)
@@ -125,6 +125,21 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2020-03
+
+These settings apply only when `--tag=package-policy-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-03'
+input-file:
+- Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2019-09
@@ -694,12 +709,16 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
   - $(this-folder)/Microsoft.Resources/stable/2020-06-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
@@ -741,7 +760,6 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json
-  - $(this-folder)/Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2019-07-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json

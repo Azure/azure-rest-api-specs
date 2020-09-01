@@ -15,14 +15,49 @@ python:
   title: DataBoxManagementClient
   description: The DataBox Client.
   clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2020-04
+  - tag: package-2019-09
+  - tag: package-2018-01
+```
+
+### Tag: package-2020-04 and python
+
+These settings apply only when `--tag=package-2020-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-04' && $(python)
 python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox
+  namespace: azure.mgmt.databox.v2020_04_01
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2020_04_01
+```
+
+### Tag: package-2019-09 and python
+
+These settings apply only when `--tag=package-2019-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(python)
+python:
+  namespace: azure.mgmt.databox.v2019_09_01
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2019_09_01
+```
+
+### Tag: package-2018-01 and python
+
+These settings apply only when `--tag=package-2018-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(python)
+python:
+  namespace: azure.mgmt.databox.v2018_01_01
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2018_01_01
 ```
