@@ -5,12 +5,70 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ### AzureResourceSchema multi-api
 
 ``` yaml $(azureresourceschema) && $(multiapi)
-# include the azure profile definitions from the standard location
-require: ../../../profiles/readme.md
+batch:
+  - tag: schema-apimanagement-2019-12-01-preview
+  - tag: schema-apimanagement-2019-12-01
+  - tag: schema-apimanagement-2019-01-01
+  - tag: schema-apimanagement-2018-06-01-preview
+  - tag: schema-apimanagement-2018-01-01
+  - tag: schema-apimanagement-2017-03-01
+  - tag: schema-apimanagement-2016-10-10
+  - tag: schema-apimanagement-2016-07-07
 
+```
+
+Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-apimanagement-2019-12-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2019-12-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
-# all the input files across all versions
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/definitions.json
+
+```
+
+### Tag: schema-apimanagement-2019-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2019-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
 input-file:
   - Microsoft.ApiManagement/stable/2019-12-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimapis.json
@@ -47,40 +105,16 @@ input-file:
   - Microsoft.ApiManagement/stable/2019-12-01/apimtenant.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimusers.json
   - Microsoft.ApiManagement/stable/2019-12-01/definitions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapisByTags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapiversionsets.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimauthorizationservers.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimbackends.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimcaches.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimcertificates.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdeployment.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdiagnostics.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimemailtemplates.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgateways.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgroups.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimidentityprovider.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimissues.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimloggers.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnetworkstatus.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnotifications.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimopenidconnectproviders.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicies.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicydescriptions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimportalsettings.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproducts.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproductsByTags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnamedvalues.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimquotas.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimregions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimreports.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimsubscriptions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtagresources.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtenant.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimusers.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/definitions.json
+
+```
+
+### Tag: schema-apimanagement-2019-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2019-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.ApiManagement/stable/2019-01-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2019-01-01/apimapis.json
   - Microsoft.ApiManagement/stable/2019-01-01/apimapisByTags.json
@@ -114,6 +148,16 @@ input-file:
   - Microsoft.ApiManagement/stable/2019-01-01/apimtenant.json
   - Microsoft.ApiManagement/stable/2019-01-01/apimusers.json
   - Microsoft.ApiManagement/stable/2019-01-01/definitions.json
+
+```
+
+### Tag: schema-apimanagement-2018-06-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2018-06-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapisByTags.json
@@ -147,6 +191,16 @@ input-file:
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimusers.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapiversionsets.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/definitions.json
+
+```
+
+### Tag: schema-apimanagement-2018-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2018-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.ApiManagement/stable/2018-01-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2018-01-01/apimapis.json
   - Microsoft.ApiManagement/stable/2018-01-01/apimauthorizationservers.json
@@ -172,6 +226,16 @@ input-file:
   - Microsoft.ApiManagement/stable/2018-01-01/apimtenant.json
   - Microsoft.ApiManagement/stable/2018-01-01/apimusers.json
   - Microsoft.ApiManagement/stable/2018-01-01/apimversionsets.json
+
+```
+
+### Tag: schema-apimanagement-2017-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2017-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.ApiManagement/stable/2017-03-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2017-03-01/apimapis.json
   - Microsoft.ApiManagement/stable/2017-03-01/apimauthorizationservers.json
@@ -197,6 +261,16 @@ input-file:
   - Microsoft.ApiManagement/stable/2017-03-01/apimtenant.json
   - Microsoft.ApiManagement/stable/2017-03-01/apimusers.json
   - Microsoft.ApiManagement/stable/2017-03-01/apimversionsets.json
+
+```
+
+### Tag: schema-apimanagement-2016-10-10 and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2016-10-10' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.ApiManagement/stable/2016-10-10/apimanagement.json
   - Microsoft.ApiManagement/stable/2016-10-10/apimapis.json
   - Microsoft.ApiManagement/stable/2016-10-10/apimauthorizationservers.json
@@ -215,6 +289,16 @@ input-file:
   - Microsoft.ApiManagement/stable/2016-10-10/apimsubscriptions.json
   - Microsoft.ApiManagement/stable/2016-10-10/apimtenant.json
   - Microsoft.ApiManagement/stable/2016-10-10/apimusers.json
+
+```
+
+### Tag: schema-apimanagement-2016-07-07 and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2016-07-07' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
   - Microsoft.ApiManagement/stable/2016-07-07/apimanagement.json
   - Microsoft.ApiManagement/stable/2016-07-07/apimdeployment.json
 
