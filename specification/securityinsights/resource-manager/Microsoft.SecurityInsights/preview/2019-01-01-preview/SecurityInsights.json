@@ -3563,17 +3563,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence": {
       "put": {
         "x-ms-examples": {
-          "Upsert the Threat Intelligence": {
+          "Create a new Threat Intelligence Indicator": {
             "$ref": "./examples/threatintelligence/CreateThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Create a threat intelligence.",
+        "description": "Create a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_Create",
         "parameters": [
           {
@@ -3617,10 +3617,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/{tiIdentifier}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{name}": {
       "get": {
         "x-ms-examples": {
-          "Get a threat intelligence indicator by id.": {
+          "Get a threat intelligence indicator by name.": {
             "$ref": "./examples/threatintelligence/GetThreatIntelligenceById.json"
           }
         },
@@ -3750,7 +3750,7 @@
             "$ref": "#/parameters/ThreatIntelligenceIdentifier"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToPatch"
+            "$ref": "#/parameters/ThreatIntelligenceReplaceTagsModel"
           }
         ],
         "responses": {
@@ -3872,7 +3872,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/metrics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/metrics": {
       "get": {
         "x-ms-examples": {
           "Get threat intelligence indicators metrics.": {
@@ -3908,7 +3908,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceMetric"
+              "$ref": "#/definitions/ThreatIntelligenceMetricResourceList"
             }
           },
           "default": {
@@ -3920,7 +3920,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/appendTags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{name}/appendTags": {
       "post": {
         "x-ms-examples": {
           "Append tags to a Threat Intelligence": {
@@ -3949,12 +3949,66 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
+            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+          },
+          {
             "$ref": "#/parameters/ThreatIntelligenceAppendTagsRequestBody"
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{name}/replaceTags": {
+      "post": {
+        "x-ms-examples": {
+          "Replace tags to a Threat Intelligence": {
+            "$ref": "./examples/threatintelligence/ReplaceTagsThreatIntelligence.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Replace tags to a threat intelligence.",
+        "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ThreatIntelligenceReplaceTagsModel"
+          }
+        ],
+        "responses": {          
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceResource"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -9703,10 +9757,6 @@
     "ThreatIntelligenceAppendTagsRequestBody": {
       "description": "Describes threat intelligence indicator append tags request body",
       "properties": {
-        "ids": {
-          "description": "ID of threat intelligence indicator",
-          "type": "string"
-        },
         "threatIntelligenceTags": {
           "description": "List of threat intelligence tags",
           "items": {
@@ -9717,6 +9767,30 @@
         }
       },
       "type": "object"
+    },
+    "ThreatIntelligenceMetricResourceList": {
+      "description": "List of all the threat intelligence metric resource.",
+      "properties": {
+        "value": {
+          "description": "Array of threat intelligence metrics resource.",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligenceMetricResource"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ThreatIntelligenceMetricResource": {
+      "description": "Threat intelligence metric resource.",
+      "properties": {
+        "properties": {
+          "description": "Threat intelligence metric.",
+          "$ref": "#/definitions/ThreatIntelligenceMetric"
+        }
+      }
     },
     "ThreatIntelligenceMetric": {
       "description": "Describes threat intelligence metric",
@@ -10130,7 +10204,7 @@
     "ThreatIntelligenceIdentifier": {
       "description": "Threat Intelligence Identifier",
       "in": "path",
-      "name": "tiIdentifier",
+      "name": "name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -10145,10 +10219,10 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceIndicatorObjectToPatch": {
-      "description": "The threat intelligence entity properties for patch",
+    "ThreatIntelligenceReplaceTagsModel": {
+      "description": "The threat intelligence entity properties for updating tags",
       "in": "body",
-      "name": "ThreatIntelligenceIndicatorObjectToPatch",
+      "name": "ThreatIntelligenceReplaceTagsModel",
       "required": true,
       "schema": {
         "$ref": "#/definitions/ThreatIntelligenceIndicatorWithoutReadOnlyFields"
