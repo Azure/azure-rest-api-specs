@@ -3204,6 +3204,24 @@
                   "$ref": "#/definitions/ComputeInstanceState",
                   "readOnly": true
                 },
+                "computeInstanceAuthorizationType": {
+                  "type": "string",
+                  "title": "Compute Instance Authorization type.",
+                  "description": "The Compute Instance Authorization type. Available values are personal (default).",
+                  "default": "personal",
+                  "enum": [
+                    "personal"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ComputeInstanceAuthorizationType",
+                    "modelAsString": true
+                  }
+                },
+                "personalComputeInstanceSettings": {
+                  "title": "Personal Compute Instance settings.",
+                  "description": "Settings for a personal compute instance.",
+                  "$ref": "#/definitions/PersonalComputeInstanceSettings"
+                },
                 "lastOperation": {
                   "description": "The last operation on ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceLastOperation",
@@ -3755,7 +3773,7 @@
       "description": "The type of compute",
       "enum": [
         "AKS",
-        "AmlCompute",        
+        "AmlCompute",
         "ComputeInstance",
         "DataFactory",
         "VirtualMachine",
@@ -5932,6 +5950,35 @@
           "description": "Uniquely identifies the user within his/her organization."
         }
       }
+    },
+    "PersonalComputeInstanceSettings": {
+      "type": "object",
+      "properties": {
+        "assignedUser": {
+          "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User.",
+          "description": "A user explicitly assigned to a personal compute instance."
+        }
+      },
+      "description": "Settings for a personal compute instance."
+    },
+    "AssignedUser": {
+      "type": "object",
+      "description": "A user that can be assigned to a compute instance.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "User’s AAD Object Id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "User’s AAD Tenant Id."
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId"
+      ]
     }
   }
 }
