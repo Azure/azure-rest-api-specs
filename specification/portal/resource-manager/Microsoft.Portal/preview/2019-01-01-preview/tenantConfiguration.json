@@ -66,7 +66,7 @@
           "tenantConfiguration"
         ],
         "operationId": "TenantConfiguration_Create",
-        "description": "Create the tenant configuration. If configuration already exists - update it.",
+        "description": "Create the tenant configuration. If configuration already exists - update it. Tenant Admin permission is required.",
         "parameters": [
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -115,7 +115,7 @@
           "tenantConfiguration"
         ],
         "operationId": "TenantConfiguration_Delete",
-        "description": "Delete the tenant configuration.",
+        "description": "Delete the tenant configuration. Tenant Admin permission is required.",
         "parameters": [
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -166,29 +166,18 @@
   "definitions": {
     "Configuration": {
       "description": "Tenant configuration.",
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The tenant configuration id."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The tenant configuration name - default."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource type."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConfigurationProperties",
           "description": "Tenant configuration properties."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]        
     },
     "ConfigurationProperties": {
       "description": "Tenant configuration Properties.",
