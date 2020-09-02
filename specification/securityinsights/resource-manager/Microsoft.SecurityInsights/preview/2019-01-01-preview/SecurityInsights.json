@@ -3563,7 +3563,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/createThreatIntelligence": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/createIndicator": {
       "post": {
         "x-ms-examples": {
           "Create a new Threat Intelligence": {
@@ -3617,7 +3617,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators": {
       "get": {
         "x-ms-examples": {
           "Get all threat intelligence.": {
@@ -3677,7 +3677,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}": {
       "get": {
         "x-ms-examples": {
           "Get a threat intelligence indicator by name.": {
@@ -3779,61 +3779,6 @@
           }
         }
       },
-      "patch": {
-        "x-ms-examples": {
-          "Patch the Threat Intelligence": {
-            "$ref": "./examples/threatintelligence/PatchThreatIntelligence.json"
-          }
-        },
-        "tags": [
-          "ThreatIntelligence"
-        ],
-        "description": "Patch a threat intelligence.",
-        "operationId": "ThreatIntelligenceIndicator_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
-          },
-          {
-            "$ref": "#/parameters/ThreatIntelligenceReplaceTagsModel"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
       "delete": {
         "x-ms-examples": {
           "Delete the Threat Intelligence": {
@@ -3881,7 +3826,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/query": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/queryIndicators": {
       "post": {
         "x-ms-examples": {
           "Get all threat intelligence.": {
@@ -3932,7 +3877,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/indicators/metrics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics": {
       "get": {
         "x-ms-examples": {
           "Get threat intelligence indicators metrics.": {
@@ -3980,7 +3925,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{name}/appendTags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}/appendTags": {
       "post": {
         "x-ms-examples": {
           "Append tags to a Threat Intelligence": {
@@ -4028,7 +3973,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{name}/replaceTags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}/replaceTags": {
       "post": {
         "x-ms-examples": {
           "Replace tags to a Threat Intelligence": {
