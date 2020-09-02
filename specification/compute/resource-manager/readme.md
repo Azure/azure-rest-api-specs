@@ -873,7 +873,6 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Compute/preview/2020-09-30/sharedGallery.json
   - $(this-folder)/Microsoft.Compute/preview/2020-09-30/gallery.json
-  - $(this-folder)/Microsoft.Compute/stable/2020-06-30/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
