@@ -6,45 +6,55 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-02
-  - tag: package-preview-2019-05
-  - tag: package-2018-02
-  - tag: package-2019-02
+  - tag: schema-virtualmachineimages-2020-02-14
+  - tag: schema-virtualmachineimages-2019-05-01-preview
+  - tag: schema-virtualmachineimages-2019-02-01-preview
+  - tag: schema-virtualmachineimages-2018-02-01-preview
+
 ```
 
-### Tag: package-2020-02 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-02 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-02' && $(azureresourceschema)
+### Tag: schema-virtualmachineimages-2020-02-14 and azureresourceschema
+
+``` yaml $(tag) == 'schema-virtualmachineimages-2020-02-14' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.VirtualMachineImages/stable/2020-02-14/imagebuilder.json
+
 ```
 
-### Tag: package-preview-2019-05 and azureresourceschema
+### Tag: schema-virtualmachineimages-2019-05-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-preview-2019-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2019-05' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-virtualmachineimages-2019-05-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
+
 ```
 
-### Tag: package-2018-02 and azureresourceschema
+### Tag: schema-virtualmachineimages-2019-02-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-virtualmachineimages-2019-02-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json
+
 ```
 
-### Tag: package-2019-02 and azureresourceschema
+### Tag: schema-virtualmachineimages-2018-02-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-virtualmachineimages-2018-02-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json
+
+```

@@ -6,165 +6,199 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2019-10
-  - tag: package-2019-06
-  - tag: package-2019-05
-  - tag: package-preview-2019-05
-  - tag: package-preview-2019-04
-  - tag: package-preview-2018-11
-  - tag: package-2019-01
-  - tag: package-2017-11
-  - tag: package-2018-01
-  - tag: package-2018-03
-  - tag: package-2018-05
-  - tag: package-2018-06
-  - tag: package-2018-08
-  - tag: package-2018-10
-  - tag: package-2017-04-preview
-  - tag: package-2017-12-preview
+  - tag: schema-consumption-2019-10-01
+  - tag: schema-consumption-2019-06-01
+  - tag: schema-consumption-2019-05-01-preview
+  - tag: schema-consumption-2019-05-01
+  - tag: schema-consumption-2019-04-01-preview
+  - tag: schema-consumption-2019-01-01
+  - tag: schema-consumption-2018-11-01-preview
+  - tag: schema-consumption-2018-10-01
+  - tag: schema-consumption-2018-08-31
+  - tag: schema-consumption-2018-06-30
+  - tag: schema-consumption-2018-05-31
+  - tag: schema-consumption-2018-03-31
+  - tag: schema-consumption-2018-01-31
+  - tag: schema-consumption-2017-12-30-preview
+  - tag: schema-consumption-2017-11-30
+  - tag: schema-consumption-2017-04-24-preview
+
 ```
 
-### Tag: package-2019-10 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-10 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2019-10' && $(azureresourceschema)
+### Tag: schema-consumption-2019-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-consumption-2019-10-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2019-10-01/consumption.json
+
 ```
 
-### Tag: package-2019-06 and azureresourceschema
+### Tag: schema-consumption-2019-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2019-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2019-06-01/consumption.json
+
 ```
 
-### Tag: package-2019-05 and azureresourceschema
+### Tag: schema-consumption-2019-05-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-05' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2019-05-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
+
 ```
 
-### Tag: package-preview-2019-05 and azureresourceschema
+### Tag: schema-consumption-2019-05-01 and azureresourceschema
 
-These settings apply only when `--tag=package-preview-2019-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2019-05' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2019-05-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2019-05-01/consumption.json
+
 ```
 
-### Tag: package-preview-2019-04 and azureresourceschema
+### Tag: schema-consumption-2019-04-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-preview-2019-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2019-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2019-04-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/preview/2019-04-01-preview/consumption.json
+
 ```
 
-### Tag: package-preview-2018-11 and azureresourceschema
+### Tag: schema-consumption-2019-01-01 and azureresourceschema
 
-These settings apply only when `--tag=package-preview-2018-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2018-11' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2019-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2019-01-01/consumption.json
+
 ```
 
-### Tag: package-2019-01 and azureresourceschema
+### Tag: schema-consumption-2018-11-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-11-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/preview/2018-11-01-preview/consumption.json
+
 ```
 
-### Tag: package-2017-11 and azureresourceschema
+### Tag: schema-consumption-2018-10-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-10-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2018-10-01/consumption.json
+
 ```
 
-### Tag: package-2018-01 and azureresourceschema
+### Tag: schema-consumption-2018-08-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-08-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2018-08-31/consumption.json
+
 ```
 
-### Tag: package-2018-03 and azureresourceschema
+### Tag: schema-consumption-2018-06-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-06-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2018-06-30/consumption.json
+
 ```
 
-### Tag: package-2018-05 and azureresourceschema
+### Tag: schema-consumption-2018-05-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-05' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-05-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2018-05-31/consumption.json
+
 ```
 
-### Tag: package-2018-06 and azureresourceschema
+### Tag: schema-consumption-2018-03-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-03-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2018-03-31/consumption.json
+
 ```
 
-### Tag: package-2018-08 and azureresourceschema
+### Tag: schema-consumption-2018-01-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-08 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-08' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2018-01-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2018-01-31/consumption.json
+
 ```
 
-### Tag: package-2018-10 and azureresourceschema
+### Tag: schema-consumption-2017-12-30-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-10' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2017-12-30-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/preview/2017-12-30-preview/consumption.json
+
 ```
 
-### Tag: package-2017-04-preview and azureresourceschema
+### Tag: schema-consumption-2017-11-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-04-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-04-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2017-11-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2017-11-30/consumption.json
+
 ```
 
-### Tag: package-2017-12-preview and azureresourceschema
+### Tag: schema-consumption-2017-04-24-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-12-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-12-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-consumption-2017-04-24-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
+
+```
