@@ -187,7 +187,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the status of an asynchronous operation for the Azure HPC cache",
+            "description": "The asynchronous operation was returned.",
             "schema": {
               "$ref": "#/definitions/AscOperation"
             }
@@ -332,16 +332,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache deleted.",
-            "schema": {}
+            "description": "Cache deleted."
           },
           "202": {
-            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor.",
-            "schema": {}
+            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor."
           },
           "204": {
-            "description": "Cache deleted.",
-            "schema": {}
+            "description": "Cache deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -465,6 +462,12 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -578,16 +581,13 @@
         ],
         "responses": {
           "200": {
-            "description": "All cached data has been flushed to the Storage Target(s).",
-            "schema": {}
+            "description": "All cached data has been flushed to the Storage Target(s)."
           },
           "202": {
-            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Cache flush already in progress or has completed.",
-            "schema": {}
+            "description": "Cache flush already in progress or has completed."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -642,16 +642,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache is Active.",
-            "schema": {}
+            "description": "Restarted VMs associated with the cache."
           },
           "202": {
-            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Restarted VMs associated with the cache.",
-            "schema": {}
+            "description": "Restarted VMs associated with the cache."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -706,16 +703,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache is stopped.",
-            "schema": {}
+            "description": "Stopped VMs associated with the cache."
           },
           "202": {
-            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Stopped VMs associated with the cache.",
-            "schema": {}
+            "description": "Stopped VMs associated with the cache."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -835,16 +829,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Storage target deleted.",
-            "schema": {}
+            "description": "Storage target deleted."
           },
           "202": {
-            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor.",
-            "schema": {}
+            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor."
           },
           "204": {
-            "description": "Storage Target deleted.",
-            "schema": {}
+            "description": "Storage Target deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -984,6 +975,12 @@
               "$ref": "#/definitions/StorageTarget"
             }
           },
+          "202": {
+            "description": "Storage Target creation or update has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -994,6 +991,9 @@
         "x-ms-examples": {
           "StorageTargets_CreateOrUpdate": {
             "$ref": "./examples/StorageTargets_CreateOrUpdate.json"
+          },
+          "StorageTargets_CreateOrUpdate_NoJunctions": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_NoJunctions.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1033,17 +1033,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Cache firmware is up to date.",
-            "schema": {}
+          "200": {
+            "description": "Cache firmware is up to date."
           },
           "202": {
-            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
-            "schema": {}
+            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor."
           },
           "204": {
-            "description": "Cache firmware is up to date.",
-            "schema": {}
+            "description": "Cache firmware is up to date."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1225,13 +1222,19 @@
           "$ref": "#/definitions/CacheIdentity",
           "description": "The identity of the cache, if configured."
         },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the Cache.",
           "properties": {
             "cacheSizeGB": {
               "description": "The size of this Cache, in GB.",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "health": {
               "description": "Health of the Cache.",
@@ -1281,6 +1284,10 @@
             "securitySettings": {
               "$ref": "#/definitions/CacheSecuritySettings",
               "description": "Specifies security settings of the cache."
+            },
+            "directoryServicesSettings": {
+              "$ref": "#/definitions/CacheDirectorySettings",
+              "description": "Specifies Directory Services settings of the cache."
             }
           },
           "type": "object"
@@ -1332,6 +1339,7 @@
         "mtu": {
           "description": "The IPv4 maximum transmission unit configured for the subnet.",
           "type": "integer",
+          "format": "int32",
           "minimum": 576,
           "maximum": 1500,
           "default": 1500
@@ -1359,9 +1367,249 @@
     "CacheSecuritySettings": {
       "description": "Cache security settings.",
       "properties": {
-        "rootSquash": {
+        "accessPolicies": {
+          "description": "NFS access policies defined for this cache.",
+          "items": {
+            "$ref": "#/definitions/NfsAccessPolicy"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "CacheDirectorySettings": {
+      "description": "Cache Directory Services settings.",
+      "type": "object",
+      "properties": {
+        "activeDirectory": {
+          "$ref": "#/definitions/CacheActiveDirectorySettings",
+          "description": "Specifies the settings for joining the HPC Cache to an Active Directory domain."
+        },
+        "usernameDownload": {
+          "$ref": "#/definitions/CacheUsernameDownloadSettings",
+          "description": "Specifies the settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
+        }
+      }
+    },
+    "CacheActiveDirectorySettings": {
+      "description": "Active Directory settings used to join a Cache to a Domain.",
+      "properties": {
+        "primaryDnsIpAddress": {
+          "description": "primary DNS IP address of the AD Domain controller.",
+          "type": "string"
+        },
+        "secondaryDnsIpAddress": {
+          "description": "secondary DNS IP address of the AD Domain controller.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The Fully Qualified Domain Name of the Active Directory Domain.",
+          "type": "string"
+        },
+        "domainNetBios": {
+          "description": "The Active Directory Domain's NetBios.",
+          "type": "string"
+        },
+        "smbServerName": {
+          "description": "The name (NetBIOS) used for the HPC Cache to join the Active Directory Domain. Length must be not greater than 15 and chars must be in list of [-0-9a-zA-Z_] char class.",
+          "pattern": "^[-0-9a-zA-Z_]{1,15}$",
+          "type": "string"
+        },
+        "domainJoined": {
+          "description": "This field indicates if the HPC Cache is joined to the Active Directory Domain.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinedType",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "description": "Active Directory admin or user credentials used to join the HPC Cache to a Domain.",
+          "properties": {
+            "username": {
+              "description": "User name of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
+              "type": "string"
+            },
+            "password": {
+              "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
+              "x-ms-secret": true,
+              "type": "string"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "primaryDnsIpAddress",
+        "secondaryDnsIpAddress",
+        "domainName",
+        "smbServerName"
+      ]
+    },
+    "CacheUsernameDownloadSettings": {
+      "description": "Settings for username and group download for Extended groups.",
+      "type": "object",
+      "properties": {
+        "extendedGroups": {
           "type": "boolean",
-          "description": "root squash of cache property."
+          "description": "This indicates if Extended Groups is enabled."
+        },
+        "usernameSource": {
+          "description": "This setting determines how the system gets username and group names for clients.",
+          "enum": [
+            "AD",
+            "LDAP",
+            "File",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "UsernameSource",
+            "modelAsString": true
+          },
+          "type": "string",
+          "default": "None"
+        },
+        "groupFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing the group (etc/group) information. This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "userFileURI": {
+          "type": "string",
+          "description": "The URI of the file containing the user (etc/passwd) information. This field must be populated when 'usernameSource' is set to 'File'."
+        },
+        "ldapServer": {
+          "type": "string",
+          "description": "The fully qualified domain name or IP address of the LDAP server to use."
+        },
+        "ldapBaseDn": {
+          "type": "string",
+          "description": "The base distinguished name for the LDAP domain."
+        },
+        "encryptLdapConnection": {
+          "type": "boolean",
+          "description": "This indicates if the LDAP connection should be encrypted."
+        },
+        "requireValidCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificates should be validated by a certificate authority. When true caCertificateURI must be provided."
+        },
+        "autoDownloadCertificate": {
+          "type": "boolean",
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' when 'requireValidCertificate' is true, or a self signed certificate otherwise."
+        },
+        "caCertificateURI": {
+          "type": "string",
+          "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to 'true'."
+        },
+        "usernamePolled": {
+          "description": "Indicates if the HPC Cache has performed the username download successfully.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Yes",
+            "No",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "UsernamePolledType",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "description": "When present, these are the credentials for secure LDAP connection.",
+          "properties": {
+            "bindDn": {
+              "type": "string",
+              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+            },
+            "bindPassword": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+            }
+          }
+        }
+      }
+    },
+    "NfsAccessPolicy": {
+      "description": "A set of rules describing access policies applied to NFSv3 clients of the cache.",
+      "properties": {
+        "name": {
+          "description": "Name identifying this policy.  Access Policy names are not case sensitive.",
+          "type": "string"
+        },
+        "accessRules": {
+          "description": "The set of rules describing client accesses allowed under this policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NfsAccessRule"
+          }
+        }
+      }
+    },
+    "NfsAccessRule": {
+      "description": "Rule to place restrictions on portions of the NFS namespace being presented to clients.",
+      "properties": {
+        "scope": {
+          "description": "Scope applied to this rule.",
+          "type": "string",
+          "enum": [
+            "default",
+            "network",
+            "host"
+          ],
+          "x-ms-enum": {
+            "name": "NfsAccessRuleScope",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: CIDR (eg 10.99.1.0/24), host: IP address or FQDN",
+          "type": "string"
+        },
+        "access": {
+          "description": "Access allowed by this rule.",
+          "type": "string",
+          "enum": [
+            "no",
+            "ro",
+            "rw"
+          ],
+          "x-ms-enum": {
+            "name": "NfsAccessRuleAccess",
+            "modelAsString": true
+          }
+        },
+        "suid": {
+          "description": "Allow SUID semantics.",
+          "type": "boolean"
+        },
+        "submountAccess": {
+          "description": "Allow mounts below the junction.",
+          "type": "boolean"
+        },
+        "rootSquash": {
+          "description": "Map root accesses to anonymousUID and anonymousGID.",
+          "type": "boolean"
+        },
+        "anonymousUID": {
+          "description": "UID value that replaces 0 when rootSquash is true.",
+          "type": "string",
+          "default": "-2"
+        },
+        "anonymousGID": {
+          "description": "GID value that replaces 0 when rootSquash is true.",
+          "type": "string",
+          "default": "-2"
         }
       }
     },
@@ -1513,6 +1761,16 @@
           "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
           "readOnly": true,
           "type": "string"
+        },
+        "location": {
+          "description": "Region name string.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -1520,7 +1778,6 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
-      "discriminator": "targetType",
       "required": [
         "targetType"
       ],
@@ -1575,18 +1832,8 @@
         }
       }
     },
-    "Nfs3TargetProperties": {
-      "description": "An NFSv3 mount point for use as a Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "nfs3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "Nfs3Target": {
-      "description": "Properties pertained to Nfs3Target",
+      "description": "Properties pertaining to the Nfs3Target",
       "properties": {
         "target": {
           "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
@@ -1594,23 +1841,13 @@
           "type": "string"
         },
         "usageModel": {
-          "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
           "type": "string"
         }
       }
     },
-    "ClfsTargetProperties": {
-      "description": "Storage container for use as a CLFS Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "clfs",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "ClfsTarget": {
-      "description": "Properties pertained to ClfsTarget",
+      "description": "Properties pertaining to the ClfsTarget",
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
@@ -1618,18 +1855,8 @@
         }
       }
     },
-    "UnknownTargetProperties": {
-      "description": "Storage container for use as an Unknown Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "unknown",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "UnknownTarget": {
-      "description": "Properties pertained to UnknownTarget",
+      "description": "Properties pertaining to the UnknownTarget",
       "properties": {
         "unknownMap": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
@@ -1778,6 +2005,10 @@
         },
         "nfsExport": {
           "description": "NFS export where targetPath exists.",
+          "type": "string"
+        },
+        "nfsAccessPolicy": {
+          "description": "Name of the access policy applied to this junction.",
           "type": "string"
         }
       }

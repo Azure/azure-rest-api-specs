@@ -36,6 +36,53 @@
               },
               "networkSettings": {
                 "mtu": 1500
+              },
+              "securitySettings": {
+                "accessPolicies": [
+                  {
+                    "name": "default",
+                    "accessRules": [
+                      {
+                        "scope": "default",
+                        "access": "rw",
+                        "suid": false,
+                        "submountAccess": true,
+                        "rootSquash": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "encryptionSettings": {
+                "keyEncryptionKey": {
+                  "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
+                  "sourceVault": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+                  }
+                }
+              },
+              "directoryServicesSettings": {
+                "activeDirectory": {
+                  "primaryDnsIpAddress": "192.0.2.10",
+                  "secondaryDnsIpAddress": "192.0.2.11",
+                  "domainName": "contosoAd.contoso.local",
+                  "domainNetBios": "contosoAd",
+                  "smbServerName": "contosoSmb",
+                  "domainJoined": "Yes"
+                },
+                "usernameDownload": {
+                  "extendedGroups": true,
+                  "usernameSource": "LDAP",
+                  "groupFileURI": "",
+                  "userFileURI": "",
+                  "ldapServer": "192.0.2.12",
+                  "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
+                  "encryptLdapConnection": false,
+                  "requireValidCertificate": false,
+                  "autoDownloadCertificate": false,
+                  "caCertificateURI": "",
+                  "usernamePolled": "Yes"
+                }
               }
             },
             "sku": {
@@ -71,6 +118,53 @@
               },
               "networkSettings": {
                 "mtu": 1500
+              },
+              "securitySettings": {
+                "accessPolicies": [
+                  {
+                    "name": "default",
+                    "accessRules": [
+                      {
+                        "scope": "default",
+                        "access": "rw",
+                        "suid": false,
+                        "submountAccess": true,
+                        "rootSquash": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "encryptionSettings": {
+                "keyEncryptionKey": {
+                  "keyUrl": "https://keyvault-cmk.vault.azure.net/keys/key2048/test",
+                  "sourceVault": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.KeyVault/vaults/keyvault-cmk"
+                  }
+                }
+              },
+              "directoryServicesSettings": {
+                "activeDirectory": {
+                  "primaryDnsIpAddress": "192.0.2.10",
+                  "secondaryDnsIpAddress": "192.0.2.11",
+                  "domainName": "contosoAd.contoso.local",
+                  "domainNetBios": "contosoAd",
+                  "smbServerName": "contosoSmb",
+                  "domainJoined": "Yes"
+                },
+                "usernameDownload": {
+                  "extendedGroups": true,
+                  "usernameSource": "AD",
+                  "groupFileURI": "",
+                  "userFileURI": "",
+                  "ldapServer": "",
+                  "ldapBaseDn": "",
+                  "encryptLdapConnection": false,
+                  "requireValidCertificate": false,
+                  "autoDownloadCertificate": false,
+                  "caCertificateURI": "",
+                  "usernamePolled": "Yes"
+                }
               }
             },
             "sku": {

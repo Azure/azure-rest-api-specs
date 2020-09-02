@@ -11,7 +11,69 @@
       "location": "westus",
       "properties": {
         "cacheSizeGB": 3072,
-        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1"
+        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+        "networkSettings": {
+          "mtu": 1400
+        },
+        "securitySettings": {
+          "accessPolicies": [
+            {
+              "name": "default",
+              "accessRules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": false
+                }
+              ]
+            },
+            {
+              "name": "restrictive",
+              "accessRules": [
+                {
+                  "scope": "host",
+                  "filter": "10.99.3.145",
+                  "access": "rw",
+                  "suid": true,
+                  "submountAccess": true,
+                  "rootSquash": false
+                },
+                {
+                  "scope": "network",
+                  "filter": "10.99.1.0/24",
+                  "access": "rw",
+                  "suid": true,
+                  "submountAccess": true,
+                  "rootSquash": false
+                },
+                {
+                  "scope": "default",
+                  "access": "no",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": true,
+                  "anonymousUID": "-2",
+                  "anonymousGID": "-2"
+                }
+              ]
+            }
+          ]
+        },
+        "directoryServicesSettings": {
+          "activeDirectory": {
+            "primaryDnsIpAddress": "192.0.2.10",
+            "secondaryDnsIpAddress": "192.0.2.11",
+            "smbServerName": "contosoSmb",
+            "domainName": "contosoAd.contoso.local",
+            "domainNetBios": "contosoAd"
+          },
+          "usernameDownload": {
+            "extendedGroups": true,
+            "usernameSource": "AD"
+          }
+        }
       },
       "sku": {
         "name": "Standard_2G"
@@ -48,7 +110,53 @@
             "pendingFirmwareVersion": "V5.1.15"
           },
           "networkSettings": {
-            "mtu": 1500
+            "mtu": 1400
+          },
+          "securitySettings": {
+            "accessPolicies": [
+              {
+                "name": "default",
+                "accessRules": [
+                  {
+                    "scope": "default",
+                    "access": "rw",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  }
+                ]
+              },
+              {
+                "name": "restrictive",
+                "accessRules": [
+                  {
+                    "scope": "host",
+                    "filter": "10.99.3.145",
+                    "access": "rw",
+                    "suid": true,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  },
+                  {
+                    "scope": "network",
+                    "filter": "10.99.1.0/24",
+                    "access": "rw",
+                    "suid": true,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  },
+                  {
+                    "scope": "default",
+                    "access": "no",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": true,
+                    "anonymousUID": "-2",
+                    "anonymousGID": "-2"
+                  }
+                ]
+              }
+            ]
           }
         },
         "sku": {

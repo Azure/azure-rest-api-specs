@@ -18,12 +18,14 @@
                 {
                   "namespacePath": "/path/on/cache",
                   "targetPath": "/path/on/exp1",
-                  "nfsExport": "exp1"
+                  "nfsExport": "exp1",
+                  "nfsAccessPolicy": "default"
                 },
                 {
                   "namespacePath": "/path2/on/cache",
                   "targetPath": "/path2/on/exp2",
-                  "nfsExport": "exp2"
+                  "nfsExport": "exp2",
+                  "nfsAccessPolicy": "default"
                 }
               ],
               "targetType": "nfs3",
@@ -41,7 +43,8 @@
               "junctions": [
                 {
                   "namespacePath": "/some/crazy/place/on/cache",
-                  "targetPath": "/"
+                  "targetPath": "/",
+                  "nfsAccessPolicy": "default"
                 }
               ],
               "targetType": "clfs",
@@ -59,7 +62,8 @@
                 {
                   "namespacePath": "/some/crazier/place/on/cache",
                   "targetPath": "/",
-                  "nfsExport": ""
+                  "nfsExport": "",
+                  "nfsAccessPolicy": "default"
                 }
               ],
               "targetType": "unknown",
