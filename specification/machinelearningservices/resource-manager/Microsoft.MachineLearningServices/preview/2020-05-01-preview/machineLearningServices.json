@@ -1735,6 +1735,114 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "operationId": "MachineLearningDataset_CreateOrUpdate",
+        "description": "Creates or updates dataset. This call will overwrite a dataset if it exists. This is a nonrecoverable operation. If your intent is to create a new dataset, do a GET first to verify that it does not exist yet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Dataset": {
+            "$ref": "./examples/createDataset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatasetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Dataset.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "201": {
+            "description": "Dataset creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "operationId": "MachineLearningDataset_Delete",
+        "description": "Deletes specified Machine Learning Dataset.",
+        "x-ms-examples": {
+          "Delete Dataset": {
+            "$ref": "./examples/deleteDataset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatasetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
       }
     }
   },
@@ -5839,6 +5947,148 @@
         }
       ],
       "x-ms-discriminator-value": "Custom"
+    },
+    "DatasetCreateRequest": {
+      "description": "The request for creating dataset.",
+      "type": "object",
+      "properties": {
+        "skipValidation": {
+          "description": "Skip validation that ensures data can be loaded from the dataset before registration.",
+          "default": false,
+          "type": "boolean"
+        },
+        "datasetType": {
+          "description": "Specifies dataset type.",
+          "default": false,
+          "type": "string",
+          "enum": [
+            "tabular",
+            "file"
+          ],
+          "x-ms-enum": {
+            "name": "DatasetType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "description": "Header type.",
+              "type": "string",
+              "enum": [
+                "all_files_have_same_headers",
+                "only_first_file_has_headers",
+                "no_headers",
+                "combine_all_files_headers"
+              ],
+              "x-ms-enum": {
+                "name": "Header",
+                "modelAsString": true
+              }
+            },
+            "includePath": {
+              "description": "Boolean to keep path information as column in the dataset. Defaults to False. This is useful when reading multiple files, and want to know which file a particular record originated from, or to keep useful information in file path.",
+              "default": false,
+              "type": "boolean"
+            },
+            "partitionFormat": {
+              "description": "The partition information of each path will be extracted into columns based on the specified format. Format part '{column_name}' creates string column, and '{column_name:yyyy/MM/dd/HH/mm/ss}' creates datetime column, where 'yyyy', 'MM', 'dd', 'HH', 'mm' and 'ss' are used to extract year, month, day, hour, minute and second for the datetime type. The format should start from the position of first partition key until the end of file path. For example, given the path '../USA/2019/01/01/data.parquet' where the partition is by country/region and time, partition_format='/{CountryOrRegion}/{PartitionDate:yyyy/MM/dd}/data.csv' creates a string column'CountryOrRegion' with the value 'USA' and a datetime column 'PartitionDate' with the value '2019-01-01",
+              "type": "string"
+            },
+            "path": {
+              "type": "object",
+              "properties": {
+                "httpUrl": {
+                  "description": "The Http URL.",
+                  "type": "string"
+                },
+                "dataPath": {
+                  "type": "object",
+                  "properties": {
+                    "datastoreName": {
+                      "description": "The datastore name.",
+                      "type": "string"
+                    },
+                    "relativePath": {
+                      "description": "Path within the datastore.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "query": {
+              "type": "object",
+              "properties": {
+                "datastoreName": {
+                  "description": "The SQL/PostgreSQL/MySQL datastore name.",
+                  "type": "string"
+                },
+                "query": {
+                  "description": "SQL Quey.",
+                  "type": "string"
+                }
+              }
+            },
+            "sourceType": {
+              "description": "Data source type.",
+              "type": "string",
+              "enum": [
+                "delimited_files",
+                "json_lines_files",
+                "parquet_files"
+              ],
+              "x-ms-enum": {
+                "name": "SourceType",
+                "modelAsString": true
+              }
+            },
+            "separator": {
+              "description": "The separator used to split columns for 'delimited_files' sourceType.",
+              "type": "string"
+            }
+          }
+        },
+        "registration": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "The description for the dataset.",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the dataset.",
+              "type": "string"
+            },
+            "tags": {
+              "description": "Tags associated with the dataset.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "timeSeries": {
+          "type": "object",
+          "properties": {
+            "fineGrainTimestamp": {
+              "description": " Column name to be used as FineGrainTimestamp",
+              "type": "string"
+            },
+            "coarseGrainTimestamp": {
+              "description": "Column name to be used as CoarseGrainTimestamp. Can only be used if 'fineGrainTimestamp' is specified and cannot be same as 'fineGrainTimestamp'.",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "datasetType",
+        "parameters",
+        "registration"
+      ]
     }
   }
 }
