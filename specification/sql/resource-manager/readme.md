@@ -71,7 +71,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -113,7 +112,6 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
-- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
@@ -124,7 +122,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -135,12 +132,18 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
-- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
-- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+- Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+
 
 # Needed when there is more than one input file
 override-info:
@@ -228,7 +231,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -238,11 +240,14 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
-- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+- Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -319,7 +324,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -329,11 +333,14 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
-- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+- Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -478,6 +485,33 @@ override-info:
 
 The following packages are each composed of all apis from only one api-version.
 
+### Tag: package-pure-2020-02-preview
+
+These settings apply only when `--tag=package-pure-2020-02-preview` is specified on the command line.
+
+This section contains all input swagger files for version 2020-02-02-preview. All APIs of that version must be added this section when the API is ready for production.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+These can be regenerated by running the following PowerShell script from this readme file's folder: `dir .\Microsoft.Sql\preview\2020-02-02-preview\ -File | Resolve-Path -Relative | % { " - $_".Replace("\", "/") }`
+
+``` yaml $(tag) == 'package-pure-2020-02-preview'
+input-file:
+- ./Microsoft.Sql/preview/2020-02-02-preview/DatabaseSecurityAlertPolicies.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/operations.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+  ```
+
 ### Tag: package-pure-2019-06-preview
 
 These settings apply only when `--tag=package-pure-2019-06-preview` is specified on the command line.
@@ -505,7 +539,7 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
-  ```
+```
 
 ### Tag: package-pure-2018-06-preview
 
@@ -721,6 +755,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js sql/resource-manager
 ```
 
 ### C#
@@ -787,6 +824,10 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -805,7 +846,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/dataMasking.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/firewallRules.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/importExport.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/metrics.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -847,7 +887,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
-  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
@@ -858,7 +897,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/usages.json
-  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -869,16 +907,24 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
-  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
-  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/importexport.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
+  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/importExport.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
@@ -891,6 +937,14 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/restorePoints.json
   - $(this-folder)/Microsoft.Sql/stable/2015-05-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/DatabaseSecurityAlertPolicies.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/operations.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/databases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
@@ -901,6 +955,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json

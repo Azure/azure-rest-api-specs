@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "resourceName": "testPL1-1",
+    "resourceGroupName": "testRP",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "privateLinkId": "testPL1-proxy.dc9bcc9d-dbd2-48ba-bbbb-bcbdaed437ae",
+    "parameters": {
+      "properties": {
+        "hostname": "Azure Notebooks",
+        "connectionDetails": [
+          {
+            "id": "f6124779c97049738cc02655385b62ab_1111",
+            "privateIpAddress": "10.10.10.1",
+            "linkIdentifier": 1111,
+            "groupId": "f6124779c97049738cc02655385b62ab",
+            "memberName": "f6124779c97049738cc02655385b62ab_member"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRp/providers/Microsoft.Network/privateEndpoints/testPL1-1",
+        "privateLinkServiceProxies": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000//resourceGroups/testRp/providers/Microsoft.Network/privateEndpoints/testPL1-1/privateLinkServiceProxies/testPL1-proxy.dc9bcc9d-dbd2-48ba-bbbb-bcbdaed437ae",
+            "groupConnectivityInformation": [
+              {
+                "groupId": "f6124779c97049738cc02655385b62ab",
+                "memberName": "f6124779c97049738cc02655385b62ab_member",
+                "customerVisibleFqdns": [
+                  "testpl1.notebooks-test.azure.net"
+                ],
+                "internalFqdn": "privatelink.notebookapis-dev2.azure.com"
+              }
+            ]
+          }
+        ],
+        "connectionDetails": [
+          {
+            "id": "f6124779c97049738cc02655385b62ab_1111",
+            "privateIpAddress": "10.10.10.1",
+            "linkIdentifier": 1111,
+            "groupId": "f6124779c97049738cc02655385b62ab",
+            "memberName": "f6124779c97049738cc02655385b62ab_member"
+          }
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRp/providers/Microsoft.Network/privateEndpoints/testPL1-1",
+        "privateLinkServiceProxies": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000//resourceGroups/testRp/providers/Microsoft.Network/privateEndpoints/testPL1-1/privateLinkServiceProxies/testPL1-proxy.dc9bcc9d-dbd2-48ba-bbbb-bcbdaed437ae",
+            "groupConnectivityInformation": [
+              {
+                "groupId": "f6124779c97049738cc02655385b62ab",
+                "memberName": "f6124779c97049738cc02655385b62ab_member",
+                "customerVisibleFqdns": [
+                  "testpl1.notebooks-test.azure.net"
+                ],
+                "internalFqdn": "privatelink.notebookapis-dev2.azure.com"
+              }
+            ]
+          }
+        ],
+        "connectionDetails": [
+          {
+            "id": "f6124779c97049738cc02655385b62ab_1111",
+            "privateIpAddress": "10.10.10.1",
+            "linkIdentifier": 1111,
+            "groupId": "f6124779c97049738cc02655385b62ab",
+            "memberName": "f6124779c97049738cc02655385b62ab_member"
+          }
+        ]
+      }
+    }
+  }
+}
