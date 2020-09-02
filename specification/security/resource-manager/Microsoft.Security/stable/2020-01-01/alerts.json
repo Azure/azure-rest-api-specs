@@ -1,0 +1,966 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) alerts resource provider",
+    "version": "2020-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alerts": {
+      "get": {
+        "x-ms-examples": {
+          "Get security alerts on a subscription": {
+            "$ref": "./examples/Alerts/GetAlertsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "List all the alerts that are associated with the subscription",
+        "operationId": "Alerts_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/alerts": {
+      "get": {
+        "x-ms-examples": {
+          "Get security alerts on a resource group": {
+            "$ref": "./examples/Alerts/GetAlertsResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "List all the alerts that are associated with the resource group",
+        "operationId": "Alerts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts": {
+      "get": {
+        "x-ms-examples": {
+          "Get security alerts on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "List all the alerts that are associated with the subscription that are stored in a specific location",
+        "operationId": "Alerts_ListSubscriptionLevelByRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts": {
+      "get": {
+        "x-ms-examples": {
+          "Get security alerts on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertsResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "List all the alerts that are associated with the resource group that are stored in a specific location",
+        "operationId": "Alerts_ListResourceGroupLevelByRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security alert on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Get an alert that is associated with a subscription",
+        "operationId": "Alerts_GetSubscriptionLevel",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security alert on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Get an alert that is associated a resource group or a resource in a resource group",
+        "operationId": "Alerts_GetResourceGroupLevel",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/dismiss": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateSubscriptionLevelStateToDismiss",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/resolve": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertSubscriptionLocation_resolve_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateSubscriptionLevelStateToResolve",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/activate": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateSubscriptionLevelStateToActivate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/resolve": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertResourceGroupLocation_resolve_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateResourceGroupLevelStateToResolve",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/dismiss": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateResourceGroupLevelStateToDismiss",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/activate": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateResourceGroupLevelStateToActivate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Alert": {
+      "type": "object",
+      "description": "Security alert",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "describes security alert properties.",
+          "$ref": "#/definitions/AlertProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AlertEntity": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Changing set of properties depending on the entity type.",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of entity"
+        }
+      }
+    },
+    "AlertExtendedLinks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Links related to the alert"
+    },
+    "AlertExtendedProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Custom properties for the alert."
+    },
+    "AlertList": {
+      "type": "object",
+      "description": "List of security alerts",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "describes security alert properties.",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AlertProperties": {
+      "type": "object",
+      "description": "describes security alert properties.",
+      "properties": {
+        "alertType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unique identifier for the detection logic (all alert instances from the same detection logic will have the same alertType)."
+        },
+        "systemAlertId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unique identifier for the alert."
+        },
+        "productComponentName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of Azure Security Center pricing tier which powering this alert. Learn more: https://docs.microsoft.com/en-us/azure/security-center/security-center-pricing"
+        },
+        "alertDisplayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the alert."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the suspicious activity that was detected."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Informational",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "alertSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Informational",
+                "description": "Informational"
+              },
+              {
+                "value": "Low",
+                "description": "Low"
+              },
+              {
+                "value": "Medium",
+                "description": "Medium"
+              },
+              {
+                "value": "High",
+                "description": "High"
+              }
+            ]
+          },
+          "description": "The risk level of the threat that was detected. Learn more: https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-overview#how-are-alerts-classified."
+        },
+        "intent": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "PreAttack",
+            "InitialAccess",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Execution",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact",
+            "Probing",
+            "Exploitation"
+          ],
+          "x-ms-enum": {
+            "name": "intent",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown"
+              },
+              {
+                "value": "PreAttack",
+                "description": "PreAttack could be either an attempt to access a certain resource regardless of a malicious intent, or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt, originating from outside the network, to scan the target system and find a way in.  Further details on the PreAttack stage can be read in [MITRE Pre-Att&ck matrix](https://attack.mitre.org/matrices/pre/)."
+              },
+              {
+                "value": "InitialAccess",
+                "description": "InitialAccess is the stage where an attacker manages to get foothold on the attacked resource."
+              },
+              {
+                "value": "Persistence",
+                "description": "Persistence is any access, action, or configuration change to a system that gives a threat actor a persistent presence on that system."
+              },
+              {
+                "value": "PrivilegeEscalation",
+                "description": "Privilege escalation is the result of actions that allow an adversary to obtain a higher level of permissions on a system or network."
+              },
+              {
+                "value": "DefenseEvasion",
+                "description": "Defense evasion consists of techniques an adversary may use to evade detection or avoid other defenses."
+              },
+              {
+                "value": "CredentialAccess",
+                "description": "Credential access represents techniques resulting in access to or control over system, domain, or service credentials that are used within an enterprise environment."
+              },
+              {
+                "value": "Discovery",
+                "description": "Discovery consists of techniques that allow the adversary to gain knowledge about the system and internal network."
+              },
+              {
+                "value": "LateralMovement",
+                "description": "Lateral movement consists of techniques that enable an adversary to access and control remote systems on a network and could, but does not necessarily, include execution of tools on remote systems."
+              },
+              {
+                "value": "Execution",
+                "description": "The execution tactic represents techniques that result in execution of adversary-controlled code on a local or remote system."
+              },
+              {
+                "value": "Collection",
+                "description": "Collection consists of techniques used to identify and gather information, such as sensitive files, from a target network prior to exfiltration."
+              },
+              {
+                "value": "Exfiltration",
+                "description": "Exfiltration refers to techniques and attributes that result or aid in the adversary removing files and information from a target network."
+              },
+              {
+                "value": "CommandAndControl",
+                "description": "The command and control tactic represents how adversaries communicate with systems under their control within a target network."
+              },
+              {
+                "value": "Impact",
+                "description": "Impact events primarily try to directly reduce the availability or integrity of a system, service, or network; including manipulation of data to impact a business or operational process."
+              },
+              {
+                "value": "Probing",
+                "description": "Probing could be either an attempt to access a certain resource regardless of a malicious intent, or a failed attempt to gain access to a target system to gather information prior to exploitation."
+              },
+              {
+                "value": "Exploitation",
+                "description": "Exploitation is the stage where an attacker manages to get a foothold on the attacked resource. This stage is relevant for compute hosts and resources such as user accounts, certificates etc."
+              }
+            ]
+          },
+          "description": "The kill chain related intent behind the alert. For list of supported values, and explanations of Azure Security Center's supported kill chain intents."
+        },
+        "startTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the first event or activity included in the alert in ISO8601 format."
+        },
+        "endTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the last event or activity included in the alert in ISO8601 format."
+        },
+        "resourceIdentifiers": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The resource identifiers that can be used to direct the alert to the right product exposure group (tenant, workspace, subscription etc.). There can be multiple identifiers of different type per alert.",
+          "items": {
+            "$ref": "#/definitions/ResourceIdentifier"
+          }
+        },
+        "remediationSteps": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Manual action items to take to remediate the alert.",
+          "items": {
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "vendorName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the vendor that raises the alert."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Active",
+            "Resolved",
+            "Dismissed"
+          ],
+          "x-ms-enum": {
+            "name": "alertStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "An alert which doesn't specify a value is assigned the status 'Active'"
+              },
+              {
+                "value": "Resolved",
+                "description": "Alert closed after handling"
+              },
+              {
+                "value": "Dismissed",
+                "description": "Alert dismissed as false positive"
+              }
+            ]
+          },
+          "description": "The life cycle status of the alert."
+        },
+        "extendedLinks": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Links related to the alert",
+          "items": {
+            "$ref": "#/definitions/AlertExtendedLinks"
+          }
+        },
+        "alertUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A direct link to the alert page in Azure Portal."
+        },
+        "timeGeneratedUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the alert was generated in ISO8601 format."
+        },
+        "productName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the product which published this alert (Azure Security Center, Azure ATP, Microsoft Defender ATP, O365 ATP, MCAS, and so on)."
+        },
+        "processingEndTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC processing end time of the alert in ISO8601 format."
+        },
+        "entities": {
+          "readOnly": true,
+          "type": "array",
+          "description": "A list of entities related to the alert.",
+          "items": {
+            "$ref": "#/definitions/AlertEntity"
+          }
+        },
+        "isIncident": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "This field determines whether the alert is an incident (a compound grouping of several alerts) or a single alert."
+        },
+        "correlationKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Key for corelating related alerts. Alerts with the same correlation key considered to be related."
+        },
+        "extendedProperties": {
+          "$ref": "#/definitions/AlertExtendedProperties",
+          "description": "Custom properties for the alert."
+        },
+        "compromisedEntity": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the resource most related to this alert."
+        }
+      }
+    },
+    "AzureResourceIdentifier": {
+      "type": "object",
+      "description": "Azure resource identifier.",
+      "x-ms-discriminator-value": "AzureResource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceIdentifier"
+        }
+      ],
+      "properties": {
+        "azureResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ARM resource identifier for the cloud resource being alerted on"
+        }
+      }
+    },
+    "LogAnalyticsIdentifier": {
+      "type": "object",
+      "description": "Represents a Log Analytics workspace scope identifier.",
+      "x-ms-discriminator-value": "LogAnalytics",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceIdentifier"
+        }
+      ],
+      "properties": {
+        "workspaceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The LogAnalytics workspace id that stores this alert."
+        },
+        "workspaceSubscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The azure subscription id for the LogAnalytics workspace storing this alert.",
+          "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+        },
+        "workspaceResourceGroup": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The azure resource group for the LogAnalytics workspace storing this alert"
+        },
+        "agentId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "(optional) The LogAnalytics agent id reporting the event that this alert is based on."
+        }
+      }
+    },
+    "ResourceIdentifier": {
+      "type": "object",
+      "description": "A resource identifier for an alert which can be used to direct the alert to the right product exposure group (tenant, workspace, subscription etc.).",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "There can be multiple identifiers of different type per alert, this field specify the identifier type.",
+          "enum": [
+            "AzureResource",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentifierType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureResource"
+              },
+              {
+                "value": "LogAnalytics"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AlertName": {
+      "name": "alertName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the alert object",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -33,6 +33,7 @@ batch:
   - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
+  - tag: package-preview-2020-04
 ```
 
 ```yaml $(multiapi) && $(track2)
@@ -48,6 +49,18 @@ batch:
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-preview-2020-04 and python
+
+These settings apply only when `--tag=package-preview-2020-04 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-04'
+namespace: azure.mgmt.keyvault.v2020_04_01_preview
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01_preview
+python:
+  namespace: azure.mgmt.keyvault.v2020_04_01_preview
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01_preview
 ```
 
 ### Tag: package-2019-09 and python
