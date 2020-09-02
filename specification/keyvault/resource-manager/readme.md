@@ -111,6 +111,7 @@ Creating this tag to pick proper resources from the hybrid profile.
 input-file:
 - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
 - Microsoft.KeyVault/stable/2019-09-01/providers.json
+- Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
 ### Supressions

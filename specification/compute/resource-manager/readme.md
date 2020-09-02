@@ -877,7 +877,7 @@ Creating this tag to pick proper resources from the hybrid profile.
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
-- Microsoft.Compute/stable/2019-03-01/disk.json
+- Microsoft.Compute/stable/2019-07-01/disk.json
 ```
 
 ## AzureResourceSchema
