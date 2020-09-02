@@ -327,14 +327,14 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "Namespaces PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_ListByNamespaces",
         "x-ms-examples": {
-          "NamespaceListByResourceGroup": {
+          "PrivateEndpointConnectionsList": {
             "$ref": "./examples/NameSpaces/PrivateEndPointConnectionList.json"
           }
         },
@@ -884,11 +884,18 @@
           "description": "Properties of the private link resource.",
           "x-ms-client-flatten": true
         },
-        "allOf": [
-          {
-            "$ref": "../../common/v1/definitions.json#/definitions/Resource"
-          }
-        ]
+        "id": {
+          "description": "Fully qualified identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        }
       }
     },
     "PrivateLinkResourceProperties": {
