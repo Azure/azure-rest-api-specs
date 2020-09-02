@@ -3563,6 +3563,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/createThreatIntelligence": {
+      "post": {
+        "x-ms-examples": {
+          "Create a new Threat Intelligence": {
+            "$ref": "./examples/threatintelligence/CreateThreatIntelligence.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Create a threat intelligence.",
+        "operationId": "CreateThreatIntelligence",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence": {
       "get": {
         "x-ms-examples": {
@@ -3620,58 +3674,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Create a new Threat Intelligence Indicator": {
-            "$ref": "./examples/threatintelligence/CreateThreatIntelligence.json"
-          }
-        },
-        "tags": [
-          "ThreatIntelligence"
-        ],
-        "description": "Create a threat intelligence indicator.",
-        "operationId": "ThreatIntelligenceIndicator_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
         }
       }
     },
