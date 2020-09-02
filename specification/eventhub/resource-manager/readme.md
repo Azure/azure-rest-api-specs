@@ -103,6 +103,9 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
+- Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
 - Microsoft.EventHub/preview/2017-04-01/AuthorizationRules.json
 - Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
 - Microsoft.EventHub/stable/2017-04-01/consumergroups.json
