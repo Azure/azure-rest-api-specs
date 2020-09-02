@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-09-preview
+  - tag: schema-attestation-2018-09-01-preview
+
 ```
 
-### Tag: package-2018-09-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09-preview --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-09-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-attestation-2018-09-01-preview and azureresourceschema
 
+``` yaml $(tag) == 'schema-attestation-2018-09-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
+
+```
