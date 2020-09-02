@@ -1,0 +1,117 @@
+{
+  "parameters": {
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyDefinitionName": "EventHubDiagnosticLogs",
+    "api-version": "2020-03-01",
+    "parameters": {
+      "properties": {
+        "mode": "Indexed",
+        "displayName": "Event Hubs should have diagnostic logging enabled",
+        "description": "Audit enabling of logs and retain them up to a year. This enables recreation of activity trails for investigation purposes when a security incident occurs or your network is compromised",
+        "metadata": {
+          "category": "Event Hub"
+        },
+        "policyRule": {
+          "if": {
+            "field": "type",
+            "equals": "Microsoft.EventHub/namespaces"
+          },
+          "then": {
+            "effect": "AuditIfNotExists",
+            "details": {
+              "type": "Microsoft.Insights/diagnosticSettings",
+              "existenceCondition": {
+                "allOf": [
+                  {
+                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.enabled",
+                    "equals": "true"
+                  },
+                  {
+                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                    "equals": "[parameters('requiredRetentionDays')]"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "parameters": {
+          "requiredRetentionDays": {
+            "type": "Integer",
+            "defaultValue": 365,
+            "allowedValues": [
+              0,
+              30,
+              90,
+              180,
+              365
+            ],
+            "metadata": {
+              "displayName": "Required retention (days)",
+              "description": "The required diagnostic logs retention in days"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "name": "ResourceNaming",
+        "properties": {
+          "mode": "Indexed",
+          "displayName": "Event Hubs should have diagnostic logging enabled",
+          "description": "Audit enabling of logs and retain them up to a year. This enables recreation of activity trails for investigation purposes when a security incident occurs or your network is compromised",
+          "metadata": {
+            "category": "Event Hub"
+          },
+          "policyRule": {
+            "if": {
+              "field": "type",
+              "equals": "Microsoft.EventHub/namespaces"
+            },
+            "then": {
+              "effect": "AuditIfNotExists",
+              "details": {
+                "type": "Microsoft.Insights/diagnosticSettings",
+                "existenceCondition": {
+                  "allOf": [
+                    {
+                      "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.enabled",
+                      "equals": "true"
+                    },
+                    {
+                      "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                      "equals": "[parameters('requiredRetentionDays')]"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "parameters": {
+            "requiredRetentionDays": {
+              "type": "Integer",
+              "defaultValue": 365,
+              "allowedValues": [
+                0,
+                30,
+                90,
+                180,
+                365
+              ],
+              "metadata": {
+                "displayName": "Required retention (days)",
+                "description": "The required diagnostic logs retention in days"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

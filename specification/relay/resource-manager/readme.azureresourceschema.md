@@ -6,35 +6,46 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2017-04
-  - tag: package-2016-07
-  - tag: package-2018-01-preview
+  - tag: schema-relay-2018-01-01-preview
+  - tag: schema-relay-2017-04-01
+  - tag: schema-relay-2016-07-01
+
 ```
 
-### Tag: package-2017-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2017-04 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2017-04' && $(azureresourceschema)
+### Tag: schema-relay-2018-01-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-relay-2018-01-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
+  - Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
+  - Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+  - Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
+
 ```
 
-### Tag: package-2016-07 and azureresourceschema
+### Tag: schema-relay-2017-04-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-07 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-07' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-relay-2017-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Relay/stable/2017-04-01/relay.json
+
 ```
 
-### Tag: package-2018-01-preview and azureresourceschema
+### Tag: schema-relay-2016-07-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-relay-2016-07-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Relay/stable/2016-07-01/relay.json
+
+```

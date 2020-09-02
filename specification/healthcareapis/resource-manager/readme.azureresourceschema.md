@@ -6,25 +6,31 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2019-09
-  - tag: package-2018-08-preview
+  - tag: schema-healthcareapis-2019-09-16
+  - tag: schema-healthcareapis-2018-08-20-preview
+
 ```
 
-### Tag: package-2019-09 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-09 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2019-09' && $(azureresourceschema)
+### Tag: schema-healthcareapis-2019-09-16 and azureresourceschema
+
+``` yaml $(tag) == 'schema-healthcareapis-2019-09-16' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
+
 ```
 
-### Tag: package-2018-08-preview and azureresourceschema
+### Tag: schema-healthcareapis-2018-08-20-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-08-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-healthcareapis-2018-08-20-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
+
+```

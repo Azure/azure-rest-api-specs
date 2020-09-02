@@ -71,7 +71,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-- Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -142,6 +141,9 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+
 
 # Needed when there is more than one input file
 override-info:
@@ -245,6 +247,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -337,6 +340,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -499,7 +503,9 @@ input-file:
 - ./Microsoft.Sql/preview/2020-02-02-preview/operations.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
-- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
 override-info:
@@ -840,7 +846,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/dataMasking.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/firewallRules.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/importExport.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/metrics.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -882,7 +887,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
-  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
@@ -893,7 +897,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/usages.json
-  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -909,13 +912,19 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/importexport.json
+  - $(this-folder)/Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
+  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/importExport.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
@@ -933,6 +942,9 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/operations.json
   - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+  - $(this-folder)/./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/databases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
