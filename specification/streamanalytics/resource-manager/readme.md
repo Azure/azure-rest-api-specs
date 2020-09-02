@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for StreamAnalytics.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for StreamAnalytics, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,23 +15,36 @@ To build the SDK for StreamAnalytics, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the StreamAnalytics API.
 
 ``` yaml
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-2016-03
+tag: package-preview-2017-04
 ```
 
 
+### Tag: package-preview-2017-04
+
+These settings apply only when `--tag=package-preview-2017-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2017-04'
+input-file:
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/outputs.json
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/streamingjobs.json
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/subscriptions.json
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/transformations.json
+```
 ### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
@@ -46,10 +59,9 @@ input-file:
 - Microsoft.StreamAnalytics/stable/2016-03-01/subscriptions.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -69,7 +81,6 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js streamanalytics/resource-manager
 ```
-
 
 ## C#
 
@@ -123,7 +134,6 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
 # Suppression
 
 ``` yaml
@@ -158,7 +168,7 @@ directive:
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -179,11 +189,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
