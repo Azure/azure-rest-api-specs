@@ -228,25 +228,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: PageableOperation
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources"].get'
-    from: iotdps.json
-    reason: We only allow 10 operations
-  - suppress: AvoidNestedProperties
-    where: $.definitions.GroupIdInformation.properties.properties
-    from: iotdps.json
-    reason: Data structure defined by Networking Private links team. Cannot be changed
-  - suppress: AvoidNestedProperties
-    where: $.definitions.PrivateEndpointConnection.properties.properties
-    from: iotdps.json
-    reason: This API is defined by Azure Networking team and cannot be changed
-  - suppress: TrackedResourceListByImmediateParent
-    where: $.definitions
-    from: iotdps.json
-    reason: These are defined by Azure Networking Private Links team
-```
