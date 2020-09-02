@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "migratorTestRG",
+    "api-version": "2019-09-01-preview",
+    "migratorName": "migrator",
+    "migrationName": "migration",
+    "LiveDataMigration" : {
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/migratorTestRG/providers/Wandisco.Fusion/migratorName/migrator/migrationName/migration",
+        "name": "migration",
+        "properties": {
+          "path": "/repl1",
+          "targetId": "11111111-2222-3333-4444",
+          "migrationStatus": "Scheduled",
+          "exclusions": [
+            "exclusion1",
+            "exclusion2"
+          ],
+          "migrationId": "11111111-3333-4444-5555"
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/migratorTarget",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    }
+  }
+}

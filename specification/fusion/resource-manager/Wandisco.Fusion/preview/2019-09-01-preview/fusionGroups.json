@@ -39,7 +39,7 @@
         "tags": [
           "fusionGroups"
         ],
-        "description": "Returns list of fusionGroups under  subscription.",
+        "description": "Returns list of fusionGroups under subscription.",
         "operationId": "FusionGroups_ListBySubscription",
         "parameters": [
           {
@@ -1124,7 +1124,6 @@
             "name": "consistencyCheckOptions",
             "description": "Consistency Check options",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/ConsistencyCheckOptions"
             }
@@ -1478,7 +1477,955 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/managedOnPremZones/{managedOnPremZoneName}/updateDownloadLocation": {
+      "post": {
+        "tags": [
+          "managedOnPremZone"
+        ],
+        "description": "Update the downloadLocation of the Managed OnPrem Zone.",
+        "operationId": "ManagedOnPremZones_UpdateDownloadLocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedOnPremZoneParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Update DownloadLocation for Managed OnPrem Zone": {
+            "$ref": "./examples/FusionGroup/ManagedOnPremZoneUpdateDownloadLocation.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update download location request completed."
+          },
+          "202": {
+            "description": "Update download location request accepted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Wandisco.Fusion/migrators": {
+      "get": {
+        "tags": [
+          "migrators"
+        ],
+        "description": "Returns list of migrators under subscription.",
+        "operationId": "Migrators_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "migrators details.",
+            "schema": {
+              "$ref": "#/definitions/MigratorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get fusion groups list": {
+            "$ref": "./examples/LiveDataMigrator/MigratorsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators": {
+      "get": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Returns list of Migrators.",
+        "operationId": "Migrators_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "migrator details.",
+            "schema": {
+              "$ref": "#/definitions/MigratorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Migrators list": {
+            "$ref": "./examples/LiveDataMigrator/MigratorList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}": {
+      "get": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Returns a given Migrator.",
+        "operationId": "Migrators_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "migrator details.",
+            "schema": {
+              "$ref": "#/definitions/Migrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Migrator by name": {
+            "$ref": "./examples/LiveDataMigrator/MigratorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Creates a Migrator.",
+        "operationId": "Migrators_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "name": "Migrator",
+            "description": "migrator details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Migrator"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Create Migrator": {
+            "$ref": "./examples/LiveDataMigrator/MigratorCreate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updating Migrator.",
+            "schema": {
+              "$ref": "#/definitions/Migrator"
+            }
+          },
+          "201": {
+            "description": "Creating Migrator.",
+            "schema": {
+              "$ref": "#/definitions/Migrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Updates a given Migrator.",
+        "operationId": "Migrators_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "name": "Migrator",
+            "description": "migrator update details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Migrator.",
+            "schema": {
+              "$ref": "#/definitions/Migrator"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Patch": {
+            "$ref": "./examples/LiveDataMigrator/MigratorPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Deletes a given Migrator.",
+        "operationId": "Migrators_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Migrator was successfully deleted"
+          },
+          "202": {
+            "description": "The Migrator was accepted for deletion"
+          },
+          "204": {
+            "description": "The Migrator was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/LiveDataMigrator/MigratorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/updateDownloadLocation": {
+      "post": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Update the downloadLocation of the Migrator.",
+        "operationId": "Migrators_UpdateDownloadLocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Refresh a Migrator": {
+            "$ref": "./examples/LiveDataMigrator/MigratorUpdateDownloadLocation.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update download location request completed."
+          },
+          "202": {
+            "description": "Update download location request accepted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/liveDataMigrations": {
+      "get": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "List migrations in the migrator",
+        "operationId": "LiveDataMigrations_ListByMigrator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigrationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Migration": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/liveDataMigrations/{migrationName}": {
+      "get": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "Read a migrator migration",
+        "operationId": "LiveDataMigrations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigration"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Migration": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "Start a Migrator migration",
+        "operationId": "LiveDataMigrations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "migration",
+            "description": "migration details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigration"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Migration": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "Delete a Migrator migration",
+        "operationId": "LiveDataMigrations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "The migration was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Migration": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "Updates a given LiveDataMigration.",
+        "operationId": "LiveDataMigrations_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "LiveDataMigration",
+            "description": "LiveDataMigration update properties.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating LiveDataMigration",
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigration"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Patch": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/liveDataMigrations/{migrationName}/start": {
+      "post": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "Start an existing migrator migration",
+        "operationId": "LiveDataMigrations_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Migration": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/liveDataMigrations/{migrationName}/stop": {
+      "post": {
+        "tags": [
+          "LiveDataMigrations"
+        ],
+        "description": "Stop a migrator migration",
+        "operationId": "LiveDataMigrations_Stop",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop Migration": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/targets": {
+      "get": {
+        "tags": [
+          "migratorTarget"
+        ],
+        "description": "Returns list of Migrator Targets.",
+        "operationId": "Targets_ListByMigrator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "migrator details.",
+            "schema": {
+              "$ref": "#/definitions/MigratorTargetList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Migrators list": {
+            "$ref": "./examples/LiveDataMigrator/MigratorTargetList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/targets/{migratorTargetName}": {
+      "get": {
+        "tags": [
+          "migratorTarget"
+        ],
+        "description": "Returns a given Migrator Target.",
+        "operationId": "Targets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorTargetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "migrator target details.",
+            "schema": {
+              "$ref": "#/definitions/MigratorTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Migrator Target by name": {
+            "$ref": "./examples/LiveDataMigrator/MigratorTargetGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "migratorTarget"
+        ],
+        "description": "Creates a Migrator Target.",
+        "operationId": "Targets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorTargetNameParameter"
+          },
+          {
+            "name": "MigratorTarget",
+            "description": "migrator target details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigratorTarget"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Create Migrator": {
+            "$ref": "./examples/LiveDataMigrator/MigratorTargetCreate.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updating Migrator Target.",
+            "schema": {
+              "$ref": "#/definitions/MigratorTarget"
+            }
+          },
+          "201": {
+            "description": "Creating Migrator Target.",
+            "schema": {
+              "$ref": "#/definitions/MigratorTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "migratorTarget"
+        ],
+        "description": "Updates a given Migrator Target.",
+        "operationId": "Targets_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorTargetNameParameter"
+          },
+          {
+            "name": "Migrator Target",
+            "description": "migrator target update details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Migrator Target.",
+            "schema": {
+              "$ref": "#/definitions/MigratorTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Patch": {
+            "$ref": "./examples/LiveDataMigrator/MigratorTargetPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "migratorTarget"
+        ],
+        "description": "Deletes a given Migrator Target.",
+        "operationId": "Targets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorTargetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Migrator Target was successfully deleted"
+          },
+          "202": {
+            "description": "The Migrator Target was accepted for deletion"
+          },
+          "204": {
+            "description": "The Migrator Target was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/LiveDataMigrator/MigratorTargetDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -2164,6 +3111,7 @@
   "definitions": {
     "TagsUpdate": {
       "description": "Resource tags",
+      "type": "object",
       "properties": {
         "tags": {
           "description": "resource tags.",
@@ -2396,6 +3344,8 @@
           "description": "Managed identity of storage account (use either key or identity)"
         },
         "storageAccessKey": {
+          "x-ms-secret": true,
+          "x-ms-mutability": ["create"],
           "description": "Access Key for storage (use either key or identity)",
           "type": "string"
         },
@@ -2747,6 +3697,150 @@
         }
       }
     },
+    "Migrator": {
+      "description": "Migrator Resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Migrator resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigratorProperties"
+        },
+        "plan": {
+          "description": "Plan to use for Store purchase",
+          "$ref": "#/definitions/Plan"
+        }
+      }
+    },
+    "MigratorList": {
+      "description": "The list of Migrators.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of migrators list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of migrators.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Migrator"
+          }
+        }
+      }
+    },
+    "MigratorProperties": {
+      "description": "Migrator properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "deploymentType" : {
+          "description": "The type of install required for the migrator",
+          "type": "string",
+          "enum": [
+            "DEB",
+            "RPM"
+          ],
+          "x-ms-enum": {
+            "name": "MigratorDeploymentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DEB"
+              },
+              {
+                "value": "RPM"
+              }
+            ]
+          },
+          "default": "RPM"
+        },
+        "downloadLocation": {
+          "description": "The location for downloading deployment files",
+          "type": "string",
+          "readOnly": true
+        },
+        "kerberos": {
+          "title": "KerberosConfiguration",
+          "description": "The configuration properties for authenticating to the source filesystem",
+          "$ref": "#/definitions/KerberosConfiguration"
+        }
+      }
+    },
+    "MigratorTarget": {
+      "description": "Migrator Target Resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Migrator target resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigratorTargetProperties"
+        }
+      }
+    },
+    "MigratorTargetList": {
+      "description": "The list of Migrator Targets.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of migrator targets list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of migrator targets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigratorTarget"
+          }
+        }
+      }
+    },
+    "MigratorTargetProperties": {
+      "description": "Migrator target properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "storageAccountId": {
+          "description": "Resource ID of ADLS Gen 2 account to replicate to",
+          "type": "string"
+        },
+        "storageContainer": {
+          "description": "Container to target migration to",
+          "type": "string"
+        },
+        "storageAccessKey": {
+          "x-ms-secret": true,
+          "x-ms-mutability": ["create"],
+          "description": "Access Key for storage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "storageAccountId",
+        "storageAccessKey",
+        "storageContainer"
+      ]
+    },
     "ReplicationRule": {
       "description": "Replication Rule",
       "type": "object",
@@ -2948,6 +4042,10 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane",
+          "type": "boolean"
+        },
         "display": {
           "description": "The object that represents the operation.",
           "properties": {
@@ -2961,6 +4059,10 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of the operation",
               "type": "string"
             }
           }
@@ -3137,7 +4239,8 @@
         },
         "progress": {
           "description": "Migration status",
-          "$ref": "#/definitions/MigrationProgress"
+          "$ref": "#/definitions/MigrationProgress",
+          "readOnly": true
         },
         "dateAfterWhichToMigrate": {
           "description": "Date after which migration should occur. Required if overwritePolicy is SkipIfDateIsEarlier.",
@@ -3204,6 +4307,134 @@
           "description": "Number of bytes to migrate"
         }
       }
+    },
+    "LiveDataMigration": {
+      "description": "Instance of a Migrator migration",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Migration properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LiveDataMigrationProperties"
+        }
+      }
+    },
+    "LiveDataMigrationList": {
+      "description": "The list of Migrator Migrations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Migrator Migrations list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of migrations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveDataMigration"
+          }
+        }
+      }
+    },
+    "LiveDataMigrationProperties": {
+      "description": "Properties of migrator migration",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Migration path on the source file system"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "ID of the target file system"
+        },
+        "autoStart": {
+          "description": "Flag to start migration immediately",
+          "type": "boolean"
+        },
+        "exclusions": {
+          "type": "array",
+          "description": "List of ids referring to exclusions to be applied to the migration",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetActionPolicy": {
+          "description": "The policy to use when replacing files on the target",
+          "type": "string",
+          "enum": [
+            "Overwrite",
+            "SkipIfSizeMatch"
+          ],
+          "default": "Overwrite",
+          "x-ms-enum": {
+            "name": "TargetActionPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Overwrite"
+              },
+              {
+                "value": "SkipIfSizeMatch"
+              }
+            ]
+          }
+        },
+        "migrationStatus": {
+          "description": "Status of the Migration",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Non-Scheduled",
+            "Scheduled",
+            "Running",
+            "Live",
+            "Paused",
+            "Stopping",
+            "Stopped"
+          ],
+          "x-ms-enum": {
+            "name": "LiveDataMigrationState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Non-Scheduled"
+              },
+              {
+                "value": "Scheduled"
+              },
+              {
+                "value": "Running"
+              },
+              {
+                "value": "Live"
+              },
+              {
+                "value": "Paused"
+              },
+              {
+                "value": "Stopping"
+              },
+              {
+                "value": "Stopped"
+              }
+            ]
+          }
+        },
+        "migrationId": {
+          "description": "Unique Identifier for the migration",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "path",
+        "targetId"
+      ]
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
@@ -3344,6 +4575,24 @@
           }
         }
       }
+    },
+    "KerberosConfiguration": {
+      "type": "object",
+      "description": "The configuration properties for authenticating using Kerberos",
+      "properties": {
+        "enabled": {
+          "description": "The client will use kerberos authentication if enabled is true",
+          "type": "boolean"
+        },
+        "principal": {
+          "description": "The principal the client should use",
+          "type": "string"
+        },
+        "keytabLocation": {
+          "description": "The location of the keytab file for the client to use",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -3392,6 +4641,22 @@
       "required": true,
       "type": "string",
       "description": "The name of the managed onPremZone resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "MigratorNameParameter": {
+      "name": "migratorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the migrator resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "MigratorTargetNameParameter": {
+      "name": "migratorTargetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the migrator target resource.",
       "x-ms-parameter-location": "method"
     },
     "ReplicationRuleNameParameter": {

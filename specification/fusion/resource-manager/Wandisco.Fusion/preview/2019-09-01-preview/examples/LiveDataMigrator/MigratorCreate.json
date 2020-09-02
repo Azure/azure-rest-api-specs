@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "migratorTestRG",
+    "api-version": "2019-09-01-preview",
+    "migratorName": "migrator1",
+    "Migrator" : {
+      "properties": {
+        "deploymentType" : "DEB",
+        "kerberos": {
+          "enabled": true,
+          "principal": "hdfs@REALM",
+          "keytabLocation": "/etc/security/keytabs/hdfs.keytab"
+        }
+      },
+      "location": "East US",
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/migratorTestRG/providers/Wandisco.Fusion/migrators/migratorName",
+        "name": "migratorCreate",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "downloadLocation" : "https://downloadlocation.com",
+          "deploymentType": "DEB",
+          "kerberos": {
+            "enabled": true,
+            "principal": "hdfs@REALM",
+            "keytabLocation": "/etc/security/keytabs/hdfs.keytab"
+          }
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/migrator",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/migratorTestRG/providers/Wandisco.Fusion/migrators/migratorName",
+        "name": "migratorCreate",
+        "properties": {
+          "provisioningState": "Accepted",
+          "deploymentType" : "DEB",
+          "kerberos": {
+            "enabled": true,
+            "principal": "hdfs@REALM",
+            "keytabLocation": "/etc/security/keytabs/hdfs.keytab"
+          }
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/migrator",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    }
+  }
+}
