@@ -60,10 +60,10 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
-- Microsoft.DBforPostgreSQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -210,15 +210,15 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 
 ```
