@@ -65,7 +65,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/Location"
+          "$ref": "#/definitions/AzureTrackedResourceLocation"
         },
         {
           "$ref": "#/definitions/Kind"
@@ -122,6 +122,16 @@
         }
       }
     },
+    "AzureTrackedResourceLocation": {
+      "type": "object",
+      "description": "Describes an Azure resource with location",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location where the resource is stored"
+        }
+      }
+    },
     "AscLocationList": {
       "type": "object",
       "description": "List of locations where ASC saves your data",
@@ -169,7 +179,8 @@
           "description": "The platform where the assessed resource resides",
           "enum": [
             "Azure",
-            "OnPremise"
+            "OnPremise",
+            "OnPremiseSql"
           ],
           "x-ms-enum": {
             "name": "source",
@@ -182,6 +193,10 @@
               {
                 "value": "OnPremise",
                 "description": "Resource in an on premise machine connected to Azure cloud"
+              },
+              {
+                "value": "OnPremiseSql",
+                "description": "SQL Resource in an on premise machine connected to Azure cloud"
               }
             ]
           }
@@ -240,6 +255,30 @@
         "vmuuid",
         "sourceComputerId",
         "machineName"
+      ]
+    },
+    "OnPremiseSqlResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise Sql resource that was assessed",
+      "x-ms-discriminator-value": "OnPremiseSql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremiseResourceDetails"
+        }
+      ],
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The Sql server name installed on the machine"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The Sql database name installed on the machine"
+        }
+      },
+      "required": [
+        "serverName",
+        "databaseName"
       ]
     },
     "AzureResourceLinks": {

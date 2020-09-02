@@ -10,6 +10,38 @@ namespace: com.microsoft.azure.management.resources
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
+
+directive:
+  - rename-operation:
+      from: Tags_DeleteValue
+      to: TagOperations_DeleteValue
+  - rename-operation:
+      from: Tags_CreateOrUpdateValue
+      to: TagOperations_CreateOrUpdateValue
+  - rename-operation:
+      from: Tags_CreateOrUpdate
+      to: TagOperations_CreateOrUpdate
+  - rename-operation:
+      from: Tags_Delete
+      to: TagOperations_Delete
+  - rename-operation:
+      from: Tags_DeleteValue
+      to: TagOperations_DeleteValue
+  - rename-operation:
+      from: Tags_List
+      to: TagOperations_List
+  - rename-operation:
+      from: Tags_CreateOrUpdateAtScope
+      to: TagOperations_CreateOrUpdateAtScope
+  - rename-operation:
+      from: Tags_UpdateAtScope
+      to: TagOperations_UpdateAtScope
+  - rename-operation:
+      from: Tags_GetAtScope
+      to: TagOperations_GetAtScope
+  - rename-operation:
+      from: Tags_DeleteAtScope
+      to: TagOperations_DeleteAtScope
 ```
 
 ### Java multi-api
@@ -198,7 +230,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2020-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2020_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2020_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2020_06_01
 regenerate-manager: true
 generate-interface: true
 ```

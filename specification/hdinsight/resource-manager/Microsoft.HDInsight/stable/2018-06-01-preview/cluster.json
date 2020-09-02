@@ -65,6 +65,15 @@
           },
           "Create cluster with TLS 1.2": {
             "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with custom network settings": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
+          },
+          "Create cluster with encryption in transit": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
+          },
+          "Create cluster with encryption at host": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionAtHost.json"
           }
         },
         "parameters": [
@@ -329,6 +338,78 @@
               "$ref": "#/definitions/ClusterResizeParameters"
             },
             "description": "The parameters for the resize operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_UpdateAutoScaleConfiguration",
+        "description": "Updates the Autoscale Configuration for HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable or Update Autoscale with the load based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithLoadBasedConfiguration.json"
+          },
+          "Enable or Update Autoscale with the schedule based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithScheduleBasedConfiguration.json"
+          },
+          "Disable Autoscale for the HDInsight cluster": {
+            "$ref": "./examples/DisableClusterAutoScale.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the roleName",
+            "enum": [
+              "workernode"
+            ],
+            "x-ms-enum": {
+              "name": "RoleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleConfigurationUpdateParameter"
+            },
+            "description": "The parameters for the update autoscale configuration operation."
           }
         ],
         "responses": {
@@ -728,6 +809,15 @@
       },
       "description": "The autoscale request parameters"
     },
+    "AutoscaleConfigurationUpdateParameter": {
+      "properties": {
+        "autoscale": {
+          "$ref": "#/definitions/Autoscale",
+          "description": "The autoscale configuration."
+        }
+      },
+      "description": "The autoscale configuration update parameter."
+    },
     "HardwareProfile": {
       "properties": {
         "vmSize": {
@@ -924,6 +1014,35 @@
       },
       "description": "The storage profile."
     },
+    "NetworkSettings": {
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "enum": [
+            "InboundAndOutbound",
+            "OutboundOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "outboundOnlyPublicNetworkAccessType": {
+          "type": "string",
+          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "enum": [
+            "PublicLoadBalancer",
+            "UDR"
+          ],
+          "x-ms-enum": {
+            "name": "OutboundOnlyPublicNetworkAccessType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The network settings."
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -979,9 +1098,17 @@
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
         },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       }
     },
@@ -1159,9 +1286,17 @@
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
         },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       },
       "required": [
@@ -1467,6 +1602,21 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not resource disk encryption is enabled."
+        }
+      }
+    },
+    "EncryptionInTransitProperties": {
+      "description": "The encryption-in-transit properties.",
+      "properties": {
+        "isEncryptionInTransitEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not inter cluster node communication is encrypted in transit."
         }
       }
     },
