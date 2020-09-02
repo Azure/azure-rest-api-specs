@@ -6,45 +6,55 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2017-08
-  - tag: package-2017-11
-  - tag: package-2018-01
-  - tag: package-2020-01
+  - tag: schema-devices-2020-01-01
+  - tag: schema-devices-2018-01-22
+  - tag: schema-devices-2017-11-15
+  - tag: schema-devices-2017-08-21-preview
+
 ```
 
-### Tag: package-2017-08 and azureresourceschema
-
-These settings apply only when `--tag=package-2017-08 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2017-08' && $(azureresourceschema)
+### Tag: schema-devices-2020-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-devices-2020-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Devices/stable/2020-01-01/iotdps.json
+
 ```
 
-### Tag: package-2017-11 and azureresourceschema
+### Tag: schema-devices-2018-01-22 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-devices-2018-01-22' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Devices/stable/2018-01-22/iotdps.json
+
 ```
 
-### Tag: package-2018-01 and azureresourceschema
+### Tag: schema-devices-2017-11-15 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-devices-2017-11-15' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Devices/stable/2017-11-15/iotdps.json
+
 ```
 
-### Tag: package-2020-01 and azureresourceschema
+### Tag: schema-devices-2017-08-21-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2020-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-devices-2017-08-21-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Devices/preview/2017-08-21-preview/iotdps.json
+
+```

@@ -923,6 +923,36 @@
         }
       }
     },
+    "TarReadSettings": {
+      "description": "The Tar compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "TarGZipReadSettings": {
+      "description": "The TarGZip compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
