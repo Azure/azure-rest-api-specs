@@ -1,18 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PowerPlatform",
-    "version": "2020-11-30-preview"
+    "version": "2020-10-30-preview",
+    "title": "PowerPlatform"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
   ],
   "security": [
     {
@@ -28,7 +22,7 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "Impersonate your user account"
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
@@ -62,6 +56,12 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -101,6 +101,12 @@
             "description": "Successfully retrieved a specified private link resource.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
