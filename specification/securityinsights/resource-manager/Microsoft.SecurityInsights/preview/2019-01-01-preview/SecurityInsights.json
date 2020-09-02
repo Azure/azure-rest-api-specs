@@ -4965,13 +4965,13 @@
         "kind": {
           "description": "The kind of the data connector",
           "enum": [
+            "OfficeATP",
             "AzureActiveDirectory",
             "AzureSecurityCenter",
             "MicrosoftCloudAppSecurity",
             "ThreatIntelligence",
             "ThreatIntelligenceTaxii",
             "Office365",
-            "OfficeATP",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
             "MicrosoftDefenderAdvancedThreatProtection"
@@ -4981,6 +4981,9 @@
             "modelAsString": true,
             "name": "DataConnectorKind",
             "values": [
+              {
+                "value": "OfficeATP"
+              },
               {
                 "value": "AzureActiveDirectory"
               },
@@ -4998,9 +5001,6 @@
               },
               {
                 "value": "Office365"
-              },
-              {
-                "value": "OfficeATP"
               },
               {
                 "value": "AmazonWebServicesCloudTrail"
@@ -6704,7 +6704,7 @@
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "Office365AdvancedThreatProtection"
+      "x-ms-discriminator-value": "OfficeATP"
     },
     "OfficeATPDataConnectorProperties": {
       "allOf": [
@@ -6733,7 +6733,7 @@
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "Office365AdvancedThreatProtection"
+      "x-ms-discriminator-value": "OfficeATP"
     },
     "OfficeATPCheckRequirementsProperties": {
       "allOf": [
