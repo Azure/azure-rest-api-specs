@@ -58,6 +58,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_commerce']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js commerce/resource-manager
 ```
 
 
@@ -76,6 +79,7 @@ python:
   namespace: azure.mgmt.commerce
   package-name: azure-mgmt-commerce
   clear-output-folder: true
+  no-namespace-folders: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
@@ -86,6 +90,27 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce
+```
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2015-06-preview
+```
+
+
+### Tag: package-2015-06-preview and python
+
+These settings apply only when `--tag=package-2015-06-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-05-preview' && $(python)
+python:
+  namespace: azure.mgmt.databoxedge.v2016_06_01_preview
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2016_06_01_preview
 ```
 
 ## Go
@@ -127,6 +152,10 @@ generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

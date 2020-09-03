@@ -26,18 +26,45 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04
+tag: package-2020-08
 ```
 
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08'
+input-file:
+  - Microsoft.Devices/stable/2020-08-01/iothub.json
+```
+### Tag: package-preview-2020-07
+
+These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-07'
+input-file:
+  - Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.Devices/stable/2020-06-15/iothub.json
+```
 
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-04'
+``` yaml $(tag) == 'package-2020-04'
 input-file:
   - Microsoft.Devices/stable/2020-04-01/iothub.json
 ```
+
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
@@ -159,6 +186,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js iothub/resource-manager
 ```
 
 ## C#
@@ -183,6 +213,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.go.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -195,6 +229,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2020-06-15/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2020-04-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2020-03-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2019-11-04/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2019-07-01-preview/iothub.json

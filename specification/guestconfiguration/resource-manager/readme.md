@@ -113,6 +113,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js guestconfiguration/resource-manager
 ```
 
 
@@ -129,6 +132,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/guestconfiguration/Microsoft.Azure.Management.GuestConfiguration/src/Generated
   clear-output-folder: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

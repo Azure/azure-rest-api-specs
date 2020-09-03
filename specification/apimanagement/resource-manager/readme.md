@@ -46,6 +46,7 @@ input-file:
   - Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
@@ -344,6 +345,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_api_management']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js apimanagement/resource-manager
 ```
 
 ## C#
@@ -372,6 +376,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -392,6 +400,7 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcontenttypes.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
