@@ -164,6 +164,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/keyvault.json

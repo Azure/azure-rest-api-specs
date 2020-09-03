@@ -6,55 +6,86 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2019-09
-  - tag: package-2018-02-14-preview
-  - tag: package-2018-02
-  - tag: package-2016-10
-  - tag: package-2015-06
+  - tag: schema-keyvault-2020-04-01-preview
+  - tag: schema-keyvault-2019-09-01
+  - tag: schema-keyvault-2018-02-14-preview
+  - tag: schema-keyvault-2018-02-14
+  - tag: schema-keyvault-2016-10-01
+  - tag: schema-keyvault-2015-06-01
+
 ```
 
-### Tag: package-2019-09 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-09 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2019-09' && $(azureresourceschema)
+### Tag: schema-keyvault-2020-04-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-keyvault-2020-04-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
+
 ```
 
-### Tag: package-2018-02-14-preview and azureresourceschema
+### Tag: schema-keyvault-2019-09-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02-14-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02-14-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-keyvault-2019-09-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2019-09-01/providers.json
+
 ```
 
-### Tag: package-2018-02 and azureresourceschema
+### Tag: schema-keyvault-2018-02-14-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-keyvault-2018-02-14-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+
 ```
 
-### Tag: package-2016-10 and azureresourceschema
+### Tag: schema-keyvault-2018-02-14 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-keyvault-2018-02-14' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/stable/2018-02-14/keyvault.json
+  - Microsoft.KeyVault/stable/2018-02-14/providers.json
+
 ```
 
-### Tag: package-2015-06 and azureresourceschema
+### Tag: schema-keyvault-2016-10-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-keyvault-2016-10-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/stable/2016-10-01/keyvault.json
+  - Microsoft.KeyVault/stable/2016-10-01/providers.json
+
 ```
 
+### Tag: schema-keyvault-2015-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-keyvault-2015-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
+
+```

@@ -947,6 +947,7 @@
         "Committed"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "MoveState",
         "modelAsString": true
@@ -985,6 +986,7 @@
         "InitialSync"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "JobName",
         "modelAsString": true
@@ -999,7 +1001,8 @@
         },
         "jobProgress": {
           "description": "Gets or sets the monitoring job percentage.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1018,7 +1021,8 @@
         },
         "targetId": {
           "description": "Gets the Target ARM Id of the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1542,18 +1546,22 @@
       "properties": {
         "code": {
           "type": "string",
+          "readOnly": true,
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
           "type": "string",
+          "readOnly": true,
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
           "type": "string",
+          "readOnly": true,
           "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/MoveResourceErrorBody"
           },
