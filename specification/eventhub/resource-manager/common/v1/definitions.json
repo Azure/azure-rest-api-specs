@@ -71,61 +71,18 @@
       "x-ms-azure-resource": true
     },
     "ErrorResponse": {
+      "description": "Error response indicates Event Hub service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
       "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            },
-            "target": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error target."
-            },
-            "details": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorResponse"
-              },
-              "description": "The error details."
-            },
-            "additionalInfo": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorAdditionalInfo"
-              },
-              "description": "The error additional info."
-            }
-          }
-        }
-      },
-      "description": "The resource management error response."
-    },
-    "ErrorAdditionalInfo": {
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
+        "code": {
+          "description": "Error code.",
+          "type": "string"
         },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
-      },
-      "description": "The resource management error additional info."
+      }
     }
   },
   "parameters": {
