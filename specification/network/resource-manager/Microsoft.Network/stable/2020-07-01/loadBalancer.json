@@ -209,6 +209,9 @@
           "Create load balancer with Standard SKU": {
             "$ref": "./examples/LoadBalancerCreateStandardSku.json"
           },
+          "Create load balancer with Global Tier and one regional load balancer in its backend pool": {
+            "$ref": "./examples/LoadBalancerCreateGlobalTier.json"
+          },
           "Create load balancer with Frontend IP in Zone 1": {
             "$ref": "./examples/LoadBalancerCreateWithZones.json"
           },
@@ -1383,6 +1386,18 @@
             "name": "LoadBalancerSkuName",
             "modelAsString": true
           }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of a load balancer SKU.",
+          "enum": [
+            "Regional",
+            "Global"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerSkuTier",
+            "modelAsString": true
+          }
         }
       },
       "description": "SKU of a load balancer."
@@ -1504,6 +1519,11 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to IP address defined in network interfaces."
+        },
+        "loadBalancerFrontendIPConfiguration": {
+          "readOnly": false,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to the frontend ip address configuration defined in regional loadbalancer."
         }
       },
       "description": "Properties of the load balancer backend addresses."
@@ -1524,6 +1544,13 @@
     },
     "BackendAddressPoolPropertiesFormat": {
       "properties": {
+        "loadBalancerBackendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerBackendAddress"
+          },
+          "description": "An array of backend addresses."
+        },
         "backendIPConfigurations": {
           "readOnly": true,
           "type": "array",
@@ -1531,13 +1558,6 @@
             "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
           },
           "description": "An array of references to IP addresses defined in network interfaces."
-        },
-        "loadBalancerBackendAddresses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LoadBalancerBackendAddress"
-          },
-          "description": "An array of backend addresses."
         },
         "loadBalancingRules": {
           "readOnly": true,
