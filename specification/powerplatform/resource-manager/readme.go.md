@@ -15,5 +15,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2020-10-30-preview' && $(go)
 namespace: powerplatform
-output-folder: $(go-sdks-folder)/powerplatform/Generated
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-10-30/$(namespace)
 ```
