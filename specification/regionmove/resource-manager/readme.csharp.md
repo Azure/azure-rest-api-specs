@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Migrate.RegionMove
-  output-folder: $(csharp-sdks-folder)/regionmove/Microsoft.Azure.Management.Migrate/src/Generated
+  namespace: Microsoft.Migrate.ResourceMover
+  output-folder: $(csharp-sdks-folder)/resourcemover/Microsoft.Azure.Management.Migrate/src/Generated
 ```
