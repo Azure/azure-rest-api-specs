@@ -57,8 +57,6 @@ Differences in v3 (compared to v2):
 
   * `+2017-10-01-preview/capabilities.json`
 
-  * `+2017-10-01-preview/databases.json`
-
   * `+2017-10-01-preview/elasticPools.json`
 
   * `+2018-06-01-preview/capabilities.json`
@@ -105,7 +103,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-- Microsoft.Sql/preview/2017-10-01-preview/databases.json
 - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
@@ -122,10 +119,10 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
-- Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/databases.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
 - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
