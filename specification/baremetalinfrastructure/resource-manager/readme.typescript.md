@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "azurebaremetal"
-  output-folder: "$(typescript-sdks-folder)/packages/azurebaremetal"
+  package-name: "baremetalinfrastructure"
+  output-folder: "$(typescript-sdks-folder)/packages/baremetalinfrastructure"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

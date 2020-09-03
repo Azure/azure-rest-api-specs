@@ -9,7 +9,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: Microsoft.BareMetalInfrastructure
-  package-name: azurebaremetal
+  package-name: baremetalinfrastructure
   package-version: 2020-08-06-preview
   clear-output-folder: true
 ```
@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/azurebaremetal
+  output-folder: $(python-sdks-folder)/azure-mgmt/baremetalinfrastructure
 ```

@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.BareMetalInfrastructure
-  output-folder: $(csharp-sdks-folder)/azurebaremetal/management/Microsoft.BareMetalInfrastructure/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/baremetalinfrastructure/management/Microsoft.BareMetalInfrastructure/GeneratedProtocol
 ```

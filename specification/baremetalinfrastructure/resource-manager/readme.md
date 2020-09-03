@@ -1,8 +1,8 @@
-# azurebaremetal
+# baremetalinfrastructure
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for azurebaremetal.
+This is the AutoRest configuration file for baremetalinfrastructure.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the azurebaremetal.
+These are the global settings for the baremetalinfrastructure.
 
 ```yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-08-06-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-08-06-preview'
 input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2020-08-06-preview/azurebaremetal.json
+  - Microsoft.BareMetalInfrastructure/preview/2020-08-06-preview/baremetalinfrastructure.json
 ```
 
 ---
@@ -55,7 +55,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurebaremetal']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_baremetalinfrastructure']
 ```
 
 ## Go
