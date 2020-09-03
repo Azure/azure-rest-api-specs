@@ -13,6 +13,7 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2016-03
+  - tag: package-2017-04-preview
 ```
 
 ### Tag: package-2016-03 and ruby
@@ -22,5 +23,15 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2016-03' && $(ruby)
 namespace: "Azure::StreamAnalytics::Mgmt::V2016_03_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_stream_analytics/lib
+```
+
+### Tag: package-2017-04-preview and ruby
+
+These settings apply only when `--tag=package-2017-04-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2017-04-preview' && $(ruby)
+namespace: "Azure::StreamAnalytics::Mgmt::V2017_04_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_stream_analytics/lib
 ```

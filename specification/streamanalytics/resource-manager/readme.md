@@ -28,15 +28,15 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-preview-2017-04
+tag: package-2017-04-preview
 ```
 
 
-### Tag: package-preview-2017-04
+### Tag: package-2017-04-preview
 
-These settings apply only when `--tag=package-preview-2017-04` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2017-04'
+```yaml $(tag) == 'package-2017-04-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
@@ -44,6 +44,7 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/streamingjobs.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/subscriptions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/transformations.json
+  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/operations.json
 ```
 ### Tag: package-2016-03
 

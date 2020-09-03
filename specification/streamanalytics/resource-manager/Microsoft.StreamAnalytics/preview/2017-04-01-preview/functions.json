@@ -75,16 +75,16 @@
             "description": "Set to '*' to allow a new function to be created, but to prevent updating an existing function. Other values will result in a 412 Pre-condition Failed response."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -150,16 +150,16 @@
             "description": "The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -193,16 +193,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -233,16 +233,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -285,16 +285,16 @@
             "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           }
         ],
         "responses": {
@@ -336,16 +336,16 @@
             "description": "If the function specified does not already exist, this parameter must contain the full function definition intended to be tested. If the function specified already exists, this parameter can be left null to test the existing function as is or if specified, the properties specified will overwrite the corresponding properties in the existing function (exactly like a PATCH operation) and the resulting function will be tested."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -388,16 +388,16 @@
             "description": "Parameters used to specify the type of function to retrieve the default definition for."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StreamingJobNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
           },
           {
             "$ref": "#/parameters/FunctionNameParameter"
@@ -441,6 +441,29 @@
           "readOnly": true,
           "type": "string",
           "description": "The current entity tag for the function. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
+        },
+        "properties": {
+          "$ref": "#/definitions/FunctionConfiguration",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "FunctionConfiguration": {
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FunctionInput"
+          }
+        },
+        "output": {
+          "$ref": "#/definitions/FunctionOutput"
+        },
+        "binding": {
+          "$ref": "#/definitions/FunctionBinding"
         }
       }
     },
@@ -451,34 +474,7 @@
         {
           "$ref": "#/definitions/FunctionProperties"
         }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScalarFunctionConfiguration",
-          "description": "Describes the configuration of the scalar function.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ScalarFunctionConfiguration": {
-      "description": "Describes the configuration of the scalar function.",
-      "properties": {
-        "inputs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FunctionInput"
-          },
-          "description": "A list of inputs describing the parameters of the function."
-        },
-        "output": {
-          "$ref": "#/definitions/FunctionOutput",
-          "description": "The output of the function."
-        },
-        "binding": {
-          "$ref": "#/definitions/FunctionBinding",
-          "description": "The physical binding of the function. For example, in the Azure Machine Learning web service’s case, this describes the endpoint."
-        }
-      }
+      ]
     },
     "FunctionInput": {
       "description": "Describes one input parameter of a function.",
@@ -510,10 +506,13 @@
           "type": "string",
           "description": "Indicates the function binding type."
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
-    "AzureMachineLearningWebServiceFunctionBinding": {
-      "description": "The binding to an Azure Machine Learning web service.",
+    "AzureMachineLearningStudioFunctionBinding": {
+      "description": "The binding to an Azure Machine Learning Studio.",
       "x-ms-discriminator-value": "Microsoft.MachineLearning/WebService",
       "allOf": [
         {
@@ -522,33 +521,33 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureMachineLearningWebServiceFunctionBindingProperties",
-          "description": "The binding properties associated with an Azure Machine learning web service.",
+          "$ref": "#/definitions/AzureMachineLearningStudioFunctionBindingProperties",
+          "description": "The binding properties associated with an Azure Machine learning Studio.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "AzureMachineLearningWebServiceFunctionBindingProperties": {
-      "description": "The binding properties associated with an Azure Machine learning web service.",
+    "AzureMachineLearningStudioFunctionBindingProperties": {
+      "description": "The binding properties associated with an Azure Machine learning Studio.",
       "properties": {
         "endpoint": {
           "type": "string",
-          "description": "The Request-Response execute endpoint of the Azure Machine Learning web service. Find out more here: https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs"
+          "description": "The Request-Response execute endpoint of the Azure Machine Learning Studio. Find out more here: https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs"
         },
         "apiKey": {
           "type": "string",
           "description": "The API key used to authenticate with Request-Response endpoint."
         },
         "inputs": {
-          "$ref": "#/definitions/AzureMachineLearningWebServiceInputs",
-          "description": "The inputs for the Azure Machine Learning web service endpoint."
+          "$ref": "#/definitions/AzureMachineLearningStudioInputs",
+          "description": "The inputs for the Azure Machine Learning Studio endpoint."
         },
         "outputs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureMachineLearningWebServiceOutputColumn"
+            "$ref": "#/definitions/AzureMachineLearningStudioOutputColumn"
           },
-          "description": "A list of outputs from the Azure Machine Learning web service endpoint execution."
+          "description": "A list of outputs from the Azure Machine Learning Studio endpoint execution."
         },
         "batchSize": {
           "type": "integer",
@@ -557,8 +556,8 @@
         }
       }
     },
-    "AzureMachineLearningWebServiceInputs": {
-      "description": "The inputs for the Azure Machine Learning web service endpoint.",
+    "AzureMachineLearningStudioInputs": {
+      "description": "The inputs for the Azure Machine Learning Studio endpoint.",
       "properties": {
         "name": {
           "type": "string",
@@ -567,14 +566,14 @@
         "columnNames": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureMachineLearningWebServiceInputColumn"
+            "$ref": "#/definitions/AzureMachineLearningStudioInputColumn"
           },
-          "description": "A list of input columns for the Azure Machine Learning web service endpoint."
+          "description": "A list of input columns for the Azure Machine Learning Studio endpoint."
         }
       }
     },
-    "AzureMachineLearningWebServiceInputColumn": {
-      "description": "Describes an input column for the Azure Machine Learning web service endpoint.",
+    "AzureMachineLearningStudioInputColumn": {
+      "description": "Describes an input column for the Azure Machine Learning Studio endpoint.",
       "properties": {
         "name": {
           "type": "string",
@@ -591,8 +590,8 @@
         }
       }
     },
-    "AzureMachineLearningWebServiceOutputColumn": {
-      "description": "Describes an output column for the Azure Machine Learning web service endpoint.",
+    "AzureMachineLearningStudioOutputColumn": {
+      "description": "Describes an output column for the Azure Machine Learning Studio endpoint.",
       "properties": {
         "name": {
           "type": "string",
@@ -601,6 +600,106 @@
         "dataType": {
           "type": "string",
           "description": "The (Azure Machine Learning supported) data type of the output column. A list of valid  Azure Machine Learning data types are described at https://msdn.microsoft.com/en-us/library/azure/dn905923.aspx ."
+        }
+      }
+    },
+    "AzureMachineLearningServiceFunctionBinding": {
+      "description": "The binding to an Azure Machine Learning web service.",
+      "x-ms-discriminator-value": "Microsoft.MachineLearningServices",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionBinding"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureMachineLearningServiceFunctionBindingProperties",
+          "description": "The binding properties associated with an Azure Machine learning web service.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureMachineLearningServiceFunctionBindingProperties": {
+      "description": "The binding properties associated with an Azure Machine learning web service.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "The Request-Response execute endpoint of the Azure Machine Learning web service."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key used to authenticate with Request-Response endpoint."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMachineLearningServiceInputColumn"
+          },
+          "description": "The inputs for the Azure Machine Learning web service endpoint."
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMachineLearningServiceOutputColumn"
+          },
+          "description": "A list of outputs from the Azure Machine Learning web service endpoint execution."
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number between 1 and 10000 describing maximum number of rows for every Azure ML RRS execute request. Default is 1000."
+        },
+        "numberOfParallelRequests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of parallel requests that will be sent per partition of your job to the machine learning service. Default is 1."
+        }
+      }
+    },
+    "AzureMachineLearningServiceInputs": {
+      "description": "The inputs for the Azure Machine Learning web service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the input. This is the name provided while authoring the endpoint."
+        },
+        "columnNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMachineLearningServiceInputColumn"
+          },
+          "description": "A list of input columns for the Azure Machine Learning web service endpoint."
+        }
+      }
+    },
+    "AzureMachineLearningServiceInputColumn": {
+      "description": "Describes an input column for the Azure Machine Learning web service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the input column."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The (Azure Machine Learning supported) data type of the input column."
+        },
+        "mapTo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero based index of the function parameter this input maps to."
+        }
+      }
+    },
+    "AzureMachineLearningServiceOutputColumn": {
+      "description": "Describes an output column for the Azure Machine Learning web service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the output column."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The (Azure Machine Learning supported) data type of the output column."
         }
       }
     },
@@ -629,6 +728,43 @@
         }
       }
     },
+    "CSharpFunctionBinding": {
+      "description": "The binding to a CSharp function.",
+      "x-ms-discriminator-value": "Microsoft.StreamAnalytics/CLRUdf",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionBinding"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CSharpFunctionBindingProperties",
+          "description": "The binding properties associated with a CSharp function.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CSharpFunctionBindingProperties": {
+      "description": "The binding properties associated with a CSharp function.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "The Csharp code containing a single function definition."
+        },
+        "dllpath": {
+          "type": "string",
+          "description": "The Csharp code containing a single function definition."
+        },
+        "class": {
+          "type": "string",
+          "description": "The Csharp code containing a single function definition."
+        },
+        "method": {
+          "type": "string",
+          "description": "The Csharp code containing a single function definition."
+        }
+      }
+    },
     "FunctionRetrieveDefaultDefinitionParameters": {
       "description": "Parameters used to specify the type of function to retrieve the default definition for.",
       "discriminator": "bindingType",
@@ -637,10 +773,13 @@
           "type": "string",
           "description": "Indicates the function binding type."
         }
-      }
+      },
+      "required": [
+        "bindingType"
+      ]
     },
-    "AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters": {
-      "description": "The parameters needed to retrieve the default function definition for an Azure Machine Learning web service function.",
+    "AzureMachineLearningStudioFunctionRetrieveDefaultDefinitionParameters": {
+      "description": "The parameters needed to retrieve the default function definition for an Azure Machine Learning Studio function.",
       "x-ms-discriminator-value": "Microsoft.MachineLearning/WebService",
       "allOf": [
         {
@@ -649,18 +788,47 @@
       ],
       "properties": {
         "bindingRetrievalProperties": {
-          "$ref": "#/definitions/AzureMachineLearningWebServiceFunctionBindingRetrievalProperties",
+          "$ref": "#/definitions/AzureMachineLearningStudioFunctionBindingRetrievalProperties",
+          "description": "The binding retrieval properties associated with an Azure Machine learning Studio.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureMachineLearningStudioFunctionBindingRetrievalProperties": {
+      "description": "The binding retrieval properties associated with an Azure Machine learning Studio.",
+      "properties": {
+        "executeEndpoint": {
+          "type": "string",
+          "description": "The Request-Response execute endpoint of the Azure Machine Learning Studio. Find out more here: https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs"
+        },
+        "udfType": {
+          "$ref": "#/definitions/UdfType",
+          "description": "The function type."
+        }
+      }
+    },
+    "AzureMachineLearningServiceFunctionRetrieveDefaultDefinitionParameters": {
+      "description": "The parameters needed to retrieve the default function definition for an Azure Machine Learning web service function.",
+      "x-ms-discriminator-value": "Microsoft.MachineLearningServices",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionRetrieveDefaultDefinitionParameters"
+        }
+      ],
+      "properties": {
+        "bindingRetrievalProperties": {
+          "$ref": "#/definitions/AzureMachineLearningServiceFunctionBindingRetrievalProperties",
           "description": "The binding retrieval properties associated with an Azure Machine learning web service.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "AzureMachineLearningWebServiceFunctionBindingRetrievalProperties": {
+    "AzureMachineLearningServiceFunctionBindingRetrievalProperties": {
       "description": "The binding retrieval properties associated with an Azure Machine learning web service.",
       "properties": {
         "executeEndpoint": {
           "type": "string",
-          "description": "The Request-Response execute endpoint of the Azure Machine Learning web service. Find out more here: https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs"
+          "description": "The Request-Response execute endpoint of the Azure Machine Learning web service."
         },
         "udfType": {
           "$ref": "#/definitions/UdfType",
@@ -690,6 +858,35 @@
         "script": {
           "type": "string",
           "description": "The JavaScript code containing a single function definition. For example: 'function (x, y) { return x + y; }'."
+        },
+        "udfType": {
+          "$ref": "#/definitions/UdfType",
+          "description": "The function type."
+        }
+      }
+    },
+    "CSharpFunctionRetrieveDefaultDefinitionParameters": {
+      "description": "The parameters needed to retrieve the default function definition for a CSharp function.",
+      "x-ms-discriminator-value": "Microsoft.StreamAnalytics/CLRUdf",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionRetrieveDefaultDefinitionParameters"
+        }
+      ],
+      "properties": {
+        "bindingRetrievalProperties": {
+          "$ref": "#/definitions/CSharpFunctionBindingRetrievalProperties",
+          "description": "The binding retrieval properties associated with a CSharp function.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CSharpFunctionBindingRetrievalProperties": {
+      "description": "The binding retrieval properties associated with a CSharp function.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "The CSharp code containing a single function definition."
         },
         "udfType": {
           "$ref": "#/definitions/UdfType",
@@ -745,32 +942,16 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "AggregateFunctionProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionProperties"
+        }
+      ]
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "GUID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
-    "StreamingJobNameParameter": {
-      "name": "jobName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the streaming job.",
-      "x-ms-parameter-location": "method"
-    },
     "FunctionNameParameter": {
       "name": "functionName",
       "in": "path",
@@ -778,13 +959,6 @@
       "type": "string",
       "description": "The name of the function.",
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
