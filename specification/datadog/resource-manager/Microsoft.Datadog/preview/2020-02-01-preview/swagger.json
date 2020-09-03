@@ -1276,6 +1276,20 @@
           "type": "string",
           "readOnly": true
         },
+        "linkingAuthCode": {
+          "description": "The auth code used to linking to an existing datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "linkingClientId": {
+          "description": "The client_id from an existing in exchange for an auth token to link organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
         "apiKey": {
           "description": "Api key associated to the Datadog organization.",
           "type": "string",
@@ -1285,13 +1299,6 @@
         },
         "applicationKey": {
           "description": "Application key associated to the Datadog organization.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "idpMetadata": {
-          "description": "The XML metadata required to setup single sign on during organization creation.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -1602,16 +1609,25 @@
         }
       }
     },
+    "SingleSignOnStates": {
+      "description": "Various states of the SSO resource",
+      "enum": [
+        "Initial",
+        "Enable",
+        "Disable",
+        "Exisiting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SingleSignOnStates"
+      }
+    },
     "DatadogSingleSignOnProperties": {
       "type": "object",
       "properties": {
         "singleSignOnState": {
-          "description": "This state of single sign-on functionality.",
-          "type": "string"
-        },
-        "metadataXML": {
-          "description": "The metadataXML from the Azure AD app to setup SSO.",
-          "type": "string"
+          "$ref": "#/definitions/SingleSignOnStates"
         },
         "enterpriseAppId": {
           "description": "The Id of the Enterprise App used for Single sign-on.",
