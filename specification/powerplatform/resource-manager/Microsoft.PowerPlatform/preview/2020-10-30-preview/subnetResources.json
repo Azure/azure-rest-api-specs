@@ -27,7 +27,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/Subnets/{subnetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/subnets/{subnetName}": {
       "get": {
         "tags": [
           "Subnets"
@@ -131,6 +131,57 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/subnets": {
+      "get": {
+        "tags": [
+          "Subnets"
+        ],
+        "operationId": "Subnets_ListByEnterprisePromise",
+        "description": "Retrieve a list of subnets within a given enterprisePromise",
+        "x-ms-examples": {
+          "List EnterprisePromises by resource group": {
+            "$ref": "./examples/listSubnetsByEnterprisePromise.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePromiseNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of subnets.",
+            "schema": {
+              "$ref": "#/definitions/SubnetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/providers/Microsoft.PowerPlatform/operations": {
       "get": {
         "tags": [
@@ -215,6 +266,10 @@
         "status": {
           "$ref": "#/definitions/SubnetState",
           "description": "Connection State of the subnet."
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "description": "Metadata for the subnet."
         }
       }
     },
@@ -241,6 +296,11 @@
         "Disabled",
         "NotConfigured"
       ]
+    },
+    "systemData": {
+      "readOnly": true,
+      "description": "The system meta data relating to this resource.",
+      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
     }
   },
   "parameters": {
