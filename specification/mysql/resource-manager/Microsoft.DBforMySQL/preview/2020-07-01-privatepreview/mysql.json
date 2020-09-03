@@ -499,6 +499,202 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/keys/{keyName}": {
+      "put": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "Keys_CreateOrUpdate",
+        "x-ms-examples": {
+          "Creates or updates a MySQL Server key": {
+            "$ref": "./examples/KeyCreate.json"
+          }
+        },
+        "description": "Creates or updates a MySQL Server key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KeyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested MySQL Server key resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the MySQL Server key.",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "202": {
+            "description": "Operation in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "Keys_Delete",
+        "x-ms-examples": {
+          "Delete the MySQL Server key": {
+            "$ref": "./examples/KeyDelete.json"
+          }
+        },
+        "description": "Deletes the MySQL Server key with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KeyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the MySQL Server key."
+          },
+          "202": {
+            "description": "Operation in progress"
+          },
+          "204": {
+            "description": "The specified MySQL Server key does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "Keys_Get",
+        "x-ms-examples": {
+          "Get a server key": {
+            "$ref": "./examples/KeyGet.json"
+          }
+        },
+        "description": "Gets a server key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KeyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified server key.",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/keys": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "Keys_ListByServer",
+        "x-ms-examples": {
+          "List the keys for a server.": {
+            "$ref": "./examples/KeysListByServer.json"
+          }
+        },
+        "description": "Gets a list of  Server keys.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of MySQL Server keys.",
+            "schema": {
+              "$ref": "#/definitions/ServerKeyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
@@ -1456,11 +1652,6 @@
           "type": "string",
           "description": "The replication role."
         },
-        "primaryServerId": {
-          "type": "string",
-          "description": "The primary server id of a replica server.",
-          "readOnly": true
-        },
         "replicaCapacity": {
           "type": "integer",
           "format": "int32",
@@ -1477,9 +1668,10 @@
         },
         "sourceServerId": {
           "type": "string",
-          "description": "The source MySQL server name to restore from.",
+          "description": "The source MySQL server id.",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "restorePointInTime": {
@@ -1633,6 +1825,76 @@
         }
       },
       "description": "A list of servers."
+    },
+    "ServerKeyProperties": {
+      "description": "Properties for a key execution.",
+      "required": [
+        "serverKeyType"
+      ],
+      "type": "object",
+      "properties": {
+        "serverKeyType": {
+          "description": "The key type like 'AzureKeyVault'.",
+          "enum": [
+            "AzureKeyVault"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "The URI of the key.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The key creation date.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerKey": {
+      "description": "A MySQL Server key.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector used to protect the key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerKeyProperties",
+          "description": "Properties of the ServerKey Resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerKeyListResult": {
+      "description": "A list of MySQL Server keys.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of MySQL Server keys.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerKey"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "FirewallRuleProperties": {
       "properties": {
@@ -1868,6 +2130,7 @@
       "type": "object",
       "properties": {
         "delegatedSubnetsUsage": {
+          "description": "A list of delegated subnet usage",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DelegatedSubnetUsage"
@@ -1938,6 +2201,7 @@
           "readOnly": true
         },
         "supportedVcores": {
+          "description": "A list of supported Vcores",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VcoreCapability"
@@ -1955,6 +2219,7 @@
           "readOnly": true
         },
         "supportedStorageMB": {
+          "description": "A list of supported storage size in MB",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageMBCapability"
@@ -1972,6 +2237,7 @@
           "readOnly": true
         },
         "supportedStorageEditions": {
+          "description": "A list of supported storage editions",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
@@ -1979,6 +2245,7 @@
           "readOnly": true
         },
         "supportedServerVersions": {
+          "description": "A list of supported server versions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
@@ -1996,6 +2263,7 @@
           "readOnly": true
         },
         "supportedFlexibleServerEditions": {
+          "description": "A list of supported flexible server editions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServerEditionCapability"
@@ -2182,6 +2450,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the location.",
+      "x-ms-parameter-location": "method"
+    },
+    "KeyNameParameter": {
+      "name": "keyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server key.",
       "x-ms-parameter-location": "method"
     }
   }
