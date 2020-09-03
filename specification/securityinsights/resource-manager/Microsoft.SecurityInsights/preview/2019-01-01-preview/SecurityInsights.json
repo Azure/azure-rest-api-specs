@@ -5669,13 +5669,13 @@
         "kind": {
           "description": "The kind of the data connector",
           "enum": [
-            "OfficeATP",
             "AzureActiveDirectory",
             "AzureSecurityCenter",
             "MicrosoftCloudAppSecurity",
             "ThreatIntelligence",
             "ThreatIntelligenceTaxii",
             "Office365",
+            "OfficeATP",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
             "MicrosoftDefenderAdvancedThreatProtection"
@@ -5685,9 +5685,6 @@
             "modelAsString": true,
             "name": "DataConnectorKind",
             "values": [
-              {
-                "value": "OfficeATP"
-              },
               {
                 "value": "AzureActiveDirectory"
               },
@@ -5705,6 +5702,9 @@
               },
               {
                 "value": "Office365"
+              },
+              {
+                "value": "OfficeATP"
               },
               {
                 "value": "AmazonWebServicesCloudTrail"
@@ -7392,6 +7392,61 @@
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
+    "OfficeATPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeATPDataConnectorProperties",
+          "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeATP"
+    },
+    "OfficeATPDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ],
+      "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
+      "type": "object"
+    },
+    "OfficeATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeATPCheckRequirementsProperties",
+          "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeATP"
+    },
+    "OfficeATPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+      "type": "object"
+    },
     "OfficeConsent": {
       "allOf": [
         {
@@ -7858,24 +7913,7 @@
           "description": "Array of relations.",
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "productFilter": {
-          "description": "The alerts' productName on which the cases will be generated",
-          "enum": [
-            "Microsoft Cloud App Security",
-            "Office 365 Advanced Threat Protection",
-            "Azure Security Center",
-            "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "MicrosoftSecurityProductName"
+            "$ref": "#/definitions/Relation"
           }
         }
       },
@@ -7923,104 +7961,7 @@
         }
       },
       "required": [
-        "displayName",
-        "enabled",
-        "productFilter"
-      ],
-      "type": "object"
-    },
-    "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertRuleTemplate"
-        }
-      ],
-      "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
-            }
-          ],
-          "description": "MicrosoftSecurityIncidentCreation rule template properties",
-          "required": [
-            "displayName",
-            "description",
-            "createdDateUTC",
-            "status",
-            "alertRulesCreatedByTemplateCount",
-            "productFilter"
-          ],
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
-    },
-    "OfficeATPDataConnector": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ],
-      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OfficeATPDataConnectorProperties",
-          "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "OfficeATP"
-    },
-    "OfficeATPDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
-      "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
-      "type": "object"
-    },
-    "OfficeATPCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        }
-      ],
-      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) requirements check request.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OfficeATPCheckRequirementsProperties",
-          "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "OfficeATP"
-    },
-    "OfficeATPCheckRequirementsProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
-      "type": "object"
-    },
-    "OfficeConsent": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+        "relatedResourceId"
       ],
       "type": "object"
     },
