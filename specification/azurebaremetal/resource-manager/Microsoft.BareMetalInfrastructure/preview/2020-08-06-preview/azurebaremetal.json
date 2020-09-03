@@ -176,7 +176,7 @@
         "summary": "Gets a list of Azure BareMetal instances in the specified subscription.",
         "description": "Gets a list of AzureBareMetal instances in the specified subscription. The operations returns various properties of each Azure BareMetal instance.",
         "x-ms-examples": {
-          "List all HANA instances in a subscription": {
+          "List all AzureBareMetal instances in a subscription": {
             "$ref": "./examples/AzureBareMetalInstances_List.json"
           }
         },
@@ -334,7 +334,7 @@
         "summary": "Deletes a Azure BareMetal instance.",
         "description": "Deletes a Azure BareMetal instance with the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
-          "Get properties of a HANA instance": {
+          "Delete an AzureBareMetal instance": {
             "$ref": "./examples/AzureBareMetalInstances_Delete.json"
           }
         },
@@ -378,10 +378,10 @@
         "summary": "Patches the Tags field of a Azure BareMetal instance.",
         "description": "Patches the Tags field of a Azure BareMetal instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
-          "Update Tags field of a HANA instance": {
+          "Update Tags field of an AzureBareMetal instance": {
             "$ref": "./examples/AzureBareMetalInstances_PatchTags.json"
           },
-          "Delete Tags field of a HANA instance": {
+          "Delete Tags field of an AzureBareMetal instance": {
             "$ref": "./examples/AzureBareMetalInstances_PatchTags_Delete.json"
           }
         },
@@ -551,7 +551,7 @@
             "Migrating"
           ],
           "x-ms-enum": {
-            "name": "HanaProvisioningStatesEnum",
+            "name": "AzureBareMetalProvisioningStatesEnum",
             "modelAsString": true
           },
           "description": "State of provisioning of the AzureBareMetalInstance"
@@ -663,7 +663,7 @@
           "items": {
             "$ref": "#/definitions/Disk"
           },
-          "description": "Specifies information about the operating system disk used by the hana instance."
+          "description": "Specifies information about the operating system disk used by baremetal instance."
         }
       },
       "description": "Specifies the storage settings for the AzureBareMetal instance disks."
