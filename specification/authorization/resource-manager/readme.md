@@ -256,18 +256,18 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-  - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-  - $(this-folder)/Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - $(this-folder)/Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
   - $(this-folder)/Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 
 ```
