@@ -4050,9 +4050,33 @@
     "LinkedServiceProps": {
       "type": "object",
       "description": "LinkedService specific properties.",
+      "required": [
+        "linkedServiceResourceId"
+      ],
       "properties": {
         "linkedServiceResourceId": {
           "description": "ResourceId of the link target of the linked service.",
+          "type": "string"
+        },
+        "linkType": {
+          "description": "Type of the link target.",
+          "type": "string",
+          "enum": [
+            "Synapse"
+          ],
+          "x-ms-enum": {
+            "name": "LinkedServiceLinkType",
+            "modelAsString": false
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "The creation time of the linked service.",
+          "type": "string"
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "The last modified time of the linked service.",
           "type": "string"
         }
       }
