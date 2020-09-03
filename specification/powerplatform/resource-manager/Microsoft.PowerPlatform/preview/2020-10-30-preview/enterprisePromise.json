@@ -443,12 +443,7 @@
               "$ref": "#/definitions/KeyVaultProperties",
               "description": "Key vault properties."
             }
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/status"
-            }
-          ]
+          }
         },
         "systemData": {
           "$ref": "#/definitions/systemData",
@@ -487,6 +482,10 @@
         "key": {
           "$ref": "#/definitions/keyProperties",
           "description": "Identity of the secret that includes name and version."
+        },
+        "status": {
+          "description": "The state of onboarding, which only appears in the response.",
+          "$ref": "#/definitions/status"
         }
       }
     },
