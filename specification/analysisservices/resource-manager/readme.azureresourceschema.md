@@ -6,45 +6,43 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2017-08
-  - tag: package-2017-08-beta
-  - tag: package-2017-07
-  - tag: package-2016-05
+  - tag: schema-analysisservices-2017-08-01
+  - tag: schema-analysisservices-2017-07-14
+  - tag: schema-analysisservices-2016-05-16
+
 ```
 
-### Tag: package-2017-08 and azureresourceschema
-
-These settings apply only when `--tag=package-2017-08 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2017-08' && $(azureresourceschema)
+### Tag: schema-analysisservices-2017-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-analysisservices-2017-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.AnalysisServices/stable/2017-08-01/analysisservices.json
+
 ```
 
-### Tag: package-2017-08-beta and azureresourceschema
+### Tag: schema-analysisservices-2017-07-14 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-08-beta --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-08-beta' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-analysisservices-2017-07-14' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.AnalysisServices/stable/2017-07-14/analysisservices.json
+
 ```
 
-### Tag: package-2017-07 and azureresourceschema
+### Tag: schema-analysisservices-2016-05-16 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-07 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-analysisservices-2016-05-16' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.AnalysisServices/stable/2016-05-16/analysisservices.json
+
 ```
-
-### Tag: package-2016-05 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-05' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
