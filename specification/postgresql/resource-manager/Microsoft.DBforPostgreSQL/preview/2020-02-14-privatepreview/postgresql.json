@@ -1659,10 +1659,17 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
+        "haEnabled": {
+          "type": "string",
+          "description": "stand by count value can be either enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HAEnabledEnum",
+            "modelAsString": false
+          }
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
