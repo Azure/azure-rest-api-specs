@@ -26,12 +26,12 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Portal/tenantConfiguration/{configurationName}": {
+    "/providers/Microsoft.Portal/tenantConfigurations/{configurationName}": {
       "get": {
         "tags": [
           "tenantConfiguration"
         ],
-        "operationId": "TenantConfiguration_Get",
+        "operationId": "TenantConfigurations_Get",
         "description": "Gets the tenant configuration.",
         "parameters": [
           {
@@ -65,8 +65,8 @@
         "tags": [
           "tenantConfiguration"
         ],
-        "operationId": "TenantConfiguration_Create",
-        "description": "Create the tenant configuration. If configuration already exists - update it. Tenant Admin permission is required.",
+        "operationId": "TenantConfigurations_Create",
+        "description": "Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.",
         "parameters": [
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -114,8 +114,8 @@
         "tags": [
           "tenantConfiguration"
         ],
-        "operationId": "TenantConfiguration_Delete",
-        "description": "Delete the tenant configuration. Tenant Admin permission is required.",
+        "operationId": "TenantConfigurations_Delete",
+        "description": "Delete the tenant configuration. User has to be a Tenant Admin for this operation.",
         "parameters": [
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -185,7 +185,7 @@
       "properties": {
         "enforcePrivateMarkdownStorage": {
           "type": "boolean",
-          "description": "Flag to enforce URI storage for Markdown tiles in Private dashboards."
+          "description": "When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited."
         }
       }
     }
