@@ -440,8 +440,77 @@
         "metadata": {
           "description": "The dashboard part's metadata.",
           "type": "object",
-          "additionalProperties": {
+          "$ref": "#/definitions/DashboardPartMetadata"
+        }
+      }
+    },
+    "DashboardPartMetadata": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "A dashboard part metadata.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of dashboard part."
+        }
+      },
+      "discriminator": "type"
+    },
+    "MarkdownPartMetadata": {
+      "type": "object",
+      "description": "Markdown part metadata.",
+      "x-ms-discriminator-value": "Extension/HubsExtension/PartType/MarkdownPart",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardPartMetadata"
+        }
+      ],
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "description": "Input to dashboard part.",
+          "items": {
             "type": "object"
+          }
+        },
+        "settings": {
+          "type": "object",
+          "description": "Markdown part settings.",
+          "properties": {
+            "content": {
+              "type": "object",
+              "description": "The content of markdown part.",
+              "properties": {
+                "settings": {
+                  "type": "object",
+                  "description": "The setting of the content of markdown part.",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "The content of the markdown part."
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "The title of the markdown part."
+                    },
+                    "subtitle": {
+                      "type": "string",
+                      "description": "The subtitle of the mardown part."
+                    },
+                    "markdownSource": {
+                      "type": "object",
+                      "description": "The source of the content of the markdown part."
+                    },
+                    "markdownUri": {
+                      "type": "string",
+                      "description": "The uri of markdown content."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -459,10 +528,13 @@
           "description": "The lens order."
         },
         "parts": {
-          "type": "object",
+          "type": "array",
           "description": "The dashboard parts.",
           "additionalProperties": {
             "$ref": "#/definitions/DashboardParts"
+          },
+          "items": {
+            "type": "object"
           }
         },
         "metadata": {
@@ -479,10 +551,13 @@
       "description": "The shared dashboard properties.",
       "properties": {
         "lenses": {
-          "type": "object",
+          "type": "array",
           "description": "The dashboard lenses.",
           "additionalProperties": {
             "$ref": "#/definitions/DashboardLens"
+          },
+          "items": {
+            "type": "object"
           }
         },
         "metadata": {
