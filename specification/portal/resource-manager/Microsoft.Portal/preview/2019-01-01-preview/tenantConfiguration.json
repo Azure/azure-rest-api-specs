@@ -26,6 +26,39 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Portal/tenantConfigurations": {
+      "get": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfigurations_List",
+        "description": "Gets list of the tenant configurations.",
+        "parameters": [
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the list of tenant configurations.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Get list of Tenant configurations": {
+          "$ref": "examples/TenantConfiguration/GetListOfTenantConfigurations.json"
+        }
+      }
+    },
     "/providers/Microsoft.Portal/tenantConfigurations/{configurationName}": {
       "get": {
         "tags": [
@@ -139,7 +172,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Tenant configuration": {
+          "Delete Tenant configuration": {
             "$ref": "examples/TenantConfiguration/DeleteTenantConfiguration.json"
           }
         }
@@ -164,7 +197,25 @@
     }
   },
   "definitions": {
+    "ConfigurationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "description": "The array of custom resource provider manifests."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of tenant configurations."
+    },
     "Configuration": {
+      "type": "object",
       "description": "Tenant configuration.",
       "properties": {
         "properties": {
@@ -180,6 +231,7 @@
       ]
     },
     "ConfigurationProperties": {
+      "type": "object",
       "description": "Tenant configuration Properties.",
       "x-ms-azure-resource": true,
       "properties": {
