@@ -1639,6 +1639,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_network']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js network/resource-manager
 ```
 
 ## Suppression
@@ -1677,6 +1680,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -1689,6 +1696,53 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/applicationGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/applicationSecurityGroup.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/availableDelegations.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/availableServiceAliases.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/azureFirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/azureFirewallFqdnTag.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/bastionHost.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/checkDnsAvailability.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/customIpPrefix.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/ddosCustomPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/ddosProtectionPlan.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/dscpConfiguration.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/endpointService.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/expressRouteCircuit.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/expressRouteCrossConnection.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/expressRoutePort.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/firewallPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/ipAllocation.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/ipGroups.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/loadBalancer.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/natGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/networkInterface.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/networkProfile.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/networkSecurityGroup.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/networkVirtualAppliance.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/operation.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/privateEndpoint.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/privateLinkService.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/publicIpAddress.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/publicIpPrefix.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/routeFilter.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/routeTable.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/securityPartnerProvider.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/serviceCommunity.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/serviceEndpointPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/serviceTags.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/usage.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/virtualNetwork.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/virtualNetworkGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/virtualNetworkTap.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/virtualRouter.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/virtualWan.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/vmssNetworkInterface.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/vmssPublicIpAddress.json
+  - $(this-folder)/Microsoft.Network/stable/2020-06-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/applicationGateway.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/applicationSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/availableDelegations.json

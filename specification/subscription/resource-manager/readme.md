@@ -31,7 +31,19 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10-preview
+tag: package-2020-09
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
 ```
 
 ### Tag: package-2020-01
@@ -122,6 +134,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js subscription/resource-manager
 ```
 
 
@@ -189,6 +204,10 @@ description: The subscription client
 ```
 
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -201,8 +220,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Subscription/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+  - $(this-folder)/Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+  - $(this-folder)/Microsoft.Subscription/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json

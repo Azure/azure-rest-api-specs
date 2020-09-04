@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for AppPlatform.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for AppPlatform, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,18 @@ To build the SDK for AppPlatform, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-01-preview
+tag: package-2020-07
 ```
 
 ### Suppression
@@ -41,8 +41,23 @@ directive:
     from: appplatform.json
     where: $.definitions.Dimension.properties.toBeExportedForShoebox
     reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+  - suppress: R3021
+    from: appplatform.json
+    reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
+    #where: 
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
 ```
 
+
+### Tag: package-2020-07
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07'
+input-file:
+  - Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
+```
 ### Tag: package-2019-05-01-preview
 
 These settings apply only when `--tag=package-2019-05-01-preview` is specified on the command line.
@@ -53,8 +68,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -64,6 +79,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-appplatform
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
@@ -72,8 +89,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_appplatform']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js appplatform/resource-manager
 ```
-
 
 ## Go
 
@@ -98,6 +117,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -110,15 +133,15 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
   - $(this-folder)/Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

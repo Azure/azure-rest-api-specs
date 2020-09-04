@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-06-30",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": 200,
+        "encryption": {
+          "diskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "diskEncryptionSetId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          }
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  }
+}

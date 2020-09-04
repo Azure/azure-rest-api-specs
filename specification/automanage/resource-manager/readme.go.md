@@ -11,6 +11,11 @@ go:
 
 ### Go multi-api
 
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2020-06-30-preview
+```
+
 ### Tag: package-2020-06-30-preview and go
 
 These settings apply only when `--tag=package-2020-06-30-preview --go` is specified on the command line.
