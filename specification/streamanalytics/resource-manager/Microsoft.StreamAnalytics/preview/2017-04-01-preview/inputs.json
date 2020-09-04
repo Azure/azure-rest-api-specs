@@ -523,6 +523,22 @@
         }
       }
     },
+    "EventHubV2StreamInputDataSource": {
+      "description": "Describes an Event Hub input data source that contains stream data.",
+      "x-ms-discriminator-value": "Microsoft.EventHub/EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventHubStreamInputDataSourceProperties",
+          "description": "The properties that are associated with an Event Hub input containing stream data. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "EventHubStreamInputDataSourceProperties": {
       "description": "The properties that are associated with a Event Hub input containing stream data.",
       "allOf": [
@@ -988,33 +1004,43 @@
       "discriminator": "type",
       "properties": {
         "type": {
+          "description": "This element is associated with the datasource element. It indicates the type of data source that data will be read from. The value for SQL Database should be Microsoft.Sql/Server/Database.",
           "type": "string"
         },
         "server": {
+          "description": "This element is associated with the datasource element. This is the name of the server that contains the database that will be written to.",
           "type": "string"
         },
         "database": {
+          "description": "This element is associated with the datasource element. This is the name of the database that output will be written to.",
           "type": "string"
         },
         "user": {
+          "description": "This element is associated with the datasource element. This is the user name that will be used to connect to the SQL Database instance.",
           "type": "string"
         },
         "password": {
+          "description": "This element is associated with the datasource element. This is the password that will be used to connect to the SQL Database instance.",
           "type": "string"
         },
         "table": {
+          "description": "This element is associated with the datasource element. The name of the table in the Azure SQL database..",
           "type": "string"
         },
         "refreshType": {
+          "description": "This element is associated with the datasource element. This element is of enum type. It indicates what kind of data refresh option do we want to use:Static/RefreshPeriodicallyWithFull/RefreshPeriodicallyWithDelta",
           "type": "string"
         },
         "refreshRate": {
+          "description": "This element is associated with the datasource element. This indicates how frequently the data will be fetched from the database. It is of DateTime format.",
           "type": "string"
         },
         "fullSnapshotQuery": {
+          "description": "This element is associated with the datasource element. This query is used to fetch data from the sql database.",
           "type": "string"
         },
         "deltaSnapshotQuery": {
+          "description": "This element is associated with the datasource element. This query is used to fetch incremental changes from the SQL database. To use this option, we recommend using temporal tables in Azure SQL Database.",
           "type": "string"
         }
       },

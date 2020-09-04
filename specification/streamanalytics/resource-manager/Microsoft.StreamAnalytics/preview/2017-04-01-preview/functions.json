@@ -603,106 +603,6 @@
         }
       }
     },
-    "AzureMachineLearningServiceFunctionBinding": {
-      "description": "The binding to an Azure Machine Learning web service.",
-      "x-ms-discriminator-value": "Microsoft.MachineLearningServices",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FunctionBinding"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureMachineLearningServiceFunctionBindingProperties",
-          "description": "The binding properties associated with an Azure Machine learning web service.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AzureMachineLearningServiceFunctionBindingProperties": {
-      "description": "The binding properties associated with an Azure Machine learning web service.",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "The Request-Response execute endpoint of the Azure Machine Learning web service."
-        },
-        "apiKey": {
-          "type": "string",
-          "description": "The API key used to authenticate with Request-Response endpoint."
-        },
-        "inputs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureMachineLearningServiceInputColumn"
-          },
-          "description": "The inputs for the Azure Machine Learning web service endpoint."
-        },
-        "outputs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureMachineLearningServiceOutputColumn"
-          },
-          "description": "A list of outputs from the Azure Machine Learning web service endpoint execution."
-        },
-        "batchSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number between 1 and 10000 describing maximum number of rows for every Azure ML RRS execute request. Default is 1000."
-        },
-        "numberOfParallelRequests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of parallel requests that will be sent per partition of your job to the machine learning service. Default is 1."
-        }
-      }
-    },
-    "AzureMachineLearningServiceInputs": {
-      "description": "The inputs for the Azure Machine Learning web service endpoint.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the input. This is the name provided while authoring the endpoint."
-        },
-        "columnNames": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureMachineLearningServiceInputColumn"
-          },
-          "description": "A list of input columns for the Azure Machine Learning web service endpoint."
-        }
-      }
-    },
-    "AzureMachineLearningServiceInputColumn": {
-      "description": "Describes an input column for the Azure Machine Learning web service endpoint.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the input column."
-        },
-        "dataType": {
-          "type": "string",
-          "description": "The (Azure Machine Learning supported) data type of the input column."
-        },
-        "mapTo": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The zero based index of the function parameter this input maps to."
-        }
-      }
-    },
-    "AzureMachineLearningServiceOutputColumn": {
-      "description": "Describes an output column for the Azure Machine Learning web service endpoint.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the output column."
-        },
-        "dataType": {
-          "type": "string",
-          "description": "The (Azure Machine Learning supported) data type of the output column."
-        }
-      }
-    },
     "JavaScriptFunctionBinding": {
       "description": "The binding to a JavaScript function.",
       "x-ms-discriminator-value": "Microsoft.StreamAnalytics/JavascriptUdf",
@@ -894,6 +794,106 @@
         }
       }
     },
+    "AzureMachineLearningServiceFunctionBinding": {
+      "description": "The binding to an Azure Machine Learning web service.",
+      "x-ms-discriminator-value": "Microsoft.MachineLearningServices",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionBinding"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureMachineLearningServiceFunctionBindingProperties",
+          "description": "The binding properties associated with an Azure Machine learning web service.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureMachineLearningServiceFunctionBindingProperties": {
+      "description": "The binding properties associated with an Azure Machine learning web service.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "The Request-Response execute endpoint of the Azure Machine Learning web service."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key used to authenticate with Request-Response endpoint."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMachineLearningServiceInputColumn"
+          },
+          "description": "The inputs for the Azure Machine Learning web service endpoint."
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMachineLearningServiceOutputColumn"
+          },
+          "description": "A list of outputs from the Azure Machine Learning web service endpoint execution."
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number between 1 and 10000 describing maximum number of rows for every Azure ML RRS execute request. Default is 1000."
+        },
+        "numberOfParallelRequests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of parallel requests that will be sent per partition of your job to the machine learning service. Default is 1."
+        }
+      }
+    },
+    "AzureMachineLearningServiceInputs": {
+      "description": "The inputs for the Azure Machine Learning web service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the input. This is the name provided while authoring the endpoint."
+        },
+        "columnNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMachineLearningServiceInputColumn"
+          },
+          "description": "A list of input columns for the Azure Machine Learning web service endpoint."
+        }
+      }
+    },
+    "AzureMachineLearningServiceInputColumn": {
+      "description": "Describes an input column for the Azure Machine Learning web service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the input column."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The (Azure Machine Learning supported) data type of the input column."
+        },
+        "mapTo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero based index of the function parameter this input maps to."
+        }
+      }
+    },
+    "AzureMachineLearningServiceOutputColumn": {
+      "description": "Describes an output column for the Azure Machine Learning web service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the output column."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The (Azure Machine Learning supported) data type of the output column."
+        }
+      }
+    },
     "FunctionListResult": {
       "properties": {
         "value": {
@@ -944,6 +944,8 @@
       "x-ms-azure-resource": true
     },
     "AggregateFunctionProperties": {
+      "description": "The properties that are associated with an aggregate function.",
+      "x-ms-discriminator-value": "Aggregate",
       "allOf": [
         {
           "$ref": "#/definitions/FunctionProperties"

@@ -222,6 +222,9 @@ directive:
     where: $.definitions.SubscriptionQuota
     from: subscriptions.json
     reason: Need the “name” property to be writable on nested resources so that our RP can support a DEEP PUT scenario which at the time, ARM did not have a native way to support.
+
+  - suppress: R3023 # Operations API must be implemented for '/providers/Microsoft.StreamAnalytics/operations'.
+    reason:  Operations API under 2017-04-01-preview is the super-set of all RPs operations (across all API-versions).
 ```
 
 ## AzureResourceSchema
