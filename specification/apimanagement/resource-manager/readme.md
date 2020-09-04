@@ -47,6 +47,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimcaches.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimcertificates.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimdeletedservices.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimdeployment.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimdiagnostics.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimemailtemplates.json
