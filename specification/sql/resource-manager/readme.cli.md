@@ -1,0 +1,436 @@
+## CLI
+
+These settings don't need to apply `--cli` on the command line.
+
+``` yaml
+cli:
+  cli-name: sql
+  package-name: azure-mgmt-sql
+  namespace: azure.mgmt.sql
+  test-scenario:
+    - name: /Servers/put/Create server
+    - name: /InstancePools/put/Create an instance pool with min properties.
+    - name: /InstancePools/put/Create an instance pool with all properties.
+    - name: /ManagedInstances/put/Create managed instance with all properties
+    - name: /ManagedInstances/put/Create managed instance with minimal properties
+    - name: /ServerKeys/put/Creates or updates a server key
+    - name: /Databases/put/Creates a VCore database by specifying sku name.
+    - name: /Databases/put/Creates a Hyperscale database and specifies the number of readonly replicas.
+    - name: /Databases/put/Creates a database from recoverableDatabaseId.
+    - name: /Databases/put/Creates a database from restore with restorableDroppedDatabaseId.
+    - name: /Databases/put/Creates a database from restore with database deletion time.
+    - name: /Databases/put/Creates a database from PointInTimeRestore.
+    - name: /Databases/put/Creates a database as an on-line secondary.
+    - name: /Databases/put/Creates a database as a copy.
+    - name: /Databases/put/Creates a database with default mode.
+    - name: /Databases/put/Creates a database with minimum number of parameters.
+    - name: /Databases/put/Creates a data warehouse by specifying service objective name.
+    - name: /Databases/put/Creates a VCore database by specifying sku name and capacity.
+    - name: /Databases/put/Creates a VCore database by specifying service objective name.
+    - name: /JobAgents/put/Create or update a job agent with all properties
+    - name: /JobAgents/put/Create or update a job agent with minimum properties
+    - name: /ServerDnsAliases/put/Create server DNS alias
+    - name: /SyncAgents/put/Create a new sync agent
+    - name: /SyncAgents/put/Update a sync agent
+    - name: /ElasticPools/put/Create or update elastic pool with all parameter
+    - name: /ElasticPools/put/Create or update elastic pool with minimum parameters
+    - name: /ManagedInstanceKeys/put/Creates or updates a managed instance key
+    - name: /FirewallRules/put/Update a firewall rule max/min
+    - name: /FirewallRules/put/Create a firewall rule max/min
+    - name: /ServerAzureADAdministrators/put/Creates or updates an existing Azure Active Directory administrator.
+    - name: /FailoverGroups/put/Create failover group
+    - name: /ServerConnectionPolicies/put/Create or update a server's secure connection policy
+    - name: /ManagedDatabases/put/Creates a new managed database from restoring a long term retention backup
+    - name: /ManagedDatabases/put/Creates a new managed database from restoring a geo-replicated backup
+    - name: /ManagedDatabases/put/Creates a new managed database by restoring from an external backup
+    - name: /ManagedDatabases/put/Creates a new managed database using point in time restore
+    - name: /ManagedDatabases/put/Creates a new managed database with maximal properties
+    - name: /ManagedDatabases/put/Creates a new managed database with minimal properties
+    - name: /ServerBlobAuditingPolicies/put/Update a server's blob auditing policy with all parameters
+    - name: /ServerBlobAuditingPolicies/put/Update a server's blob auditing policy with minimal parameters
+    - name: /ServerCommunicationLinks/put/Create a server communication link
+    - name: /Jobs/put/Create a job with all properties specified
+    - name: /Jobs/put/Create a job with default properties
+    - name: /VirtualNetworkRules/put/Create or update a virtual network rule
+    - name: /EncryptionProtectors/put/Update the encryption protector to service managed
+    - name: /EncryptionProtectors/put/Update the encryption protector to key vault
+    - name: /ServerAzureADOnlyAuthentications/put/Creates or updates Azure Active Directory only authentication object.
+    - name: /InstanceFailoverGroups/put/Create failover group
+    - name: /ServerSecurityAlertPolicies/put/Update a server's threat detection policy with minimal parameters
+    - name: /ServerSecurityAlertPolicies/put/Update a server's threat detection policy with all parameters
+    - name: /ExtendedServerBlobAuditingPolicies/put/Update a server's extended blob auditing policy with all parameters
+    - name: /ExtendedServerBlobAuditingPolicies/put/Update a server's extended blob auditing policy with minimal parameters
+    - name: /ManagedInstanceAdministrators/put/Update administrator of managed instance
+    - name: /ManagedInstanceAdministrators/put/Create administrator of managed instance
+    - name: /ServerVulnerabilityAssessments/put/Create a server's vulnerability assessment with all parameters
+    - name: /ServerVulnerabilityAssessments/put/Create a server's vulnerability assessment with minimal parameters, when storageAccountAccessKey is specified
+    - name: /ServerVulnerabilityAssessments/put/Create a server's vulnerability assessment with minimal parameters, when storageContainerSasKey is specified
+    - name: /Databases/put/Import bacpac into an existing database Min with SAS key
+    - name: /Databases/put/Import bacpac into an existing database Max with SAS key
+    - name: /Databases/put/Import bacpac into an existing database Min with storage key
+    - name: /Databases/put/Import bacpac into an existing database Max with storage key
+    - name: /SyncGroups/put/Update a sync group
+    - name: /SyncGroups/put/Create a sync group
+    - name: /JobCredentials/put/Create or update a credential
+    - name: /PrivateEndpointConnections/put/Approve or reject a private endpoint connection with a given name.
+    - name: /JobTargetGroups/put/Create or update a target group with minimal properties.
+    - name: /JobTargetGroups/put/Create or update a target group with all properties.
+    - name: /WorkloadGroups/put/Create a workload group with all properties specified.
+    - name: /WorkloadGroups/put/Create a workload group with the required properties specified.
+    - name: /ManagedInstanceEncryptionProtectors/put/Update the encryption protector to service managed
+    - name: /ManagedInstanceEncryptionProtectors/put/Update the encryption protector to key vault
+    - name: /JobSteps/put/Create or update a job step with all properties specified.
+    - name: /JobSteps/put/Create or update a job step with minimal properties specified.
+    - name: /ManagedServerSecurityAlertPolicies/put/Update a server's threat detection policy with all parameters
+    - name: /ManagedServerSecurityAlertPolicies/put/Update a server's threat detection policy with minimal parameters
+    - name: /GeoBackupPolicies/put/Update geo backup policy
+    - name: /DatabaseBlobAuditingPolicies/put/Create or update a database's azure monitor auditing policy with minimal parameters
+    - name: /DatabaseBlobAuditingPolicies/put/Create or update a database's blob auditing policy with all parameters
+    - name: /DatabaseBlobAuditingPolicies/put/Create or update a database's blob auditing policy with minimal parameters
+    - name: /ManagedInstanceVulnerabilityAssessments/put/Create a managed instance's vulnerability assessment with all parameters
+    - name: /ManagedInstanceVulnerabilityAssessments/put/Create a managed instance's vulnerability assessment with minimal parameters, when storageContainerSasKey is specified
+    - name: /ManagedInstanceVulnerabilityAssessments/put/Create a managed instance's vulnerability assessment with minimal parameters, when storageAccountAccessKey is specified
+    - name: /BackupLongTermRetentionPolicies/put/Create or update the long term retention policy for the database.
+    - name: /BackupShortTermRetentionPolicies/put/Update the short term retention policy for the database.
+    - name: /DataMaskingPolicies/put/Create or update data masking policy min
+    - name: /DataMaskingPolicies/put/Create or update data masking policy max
+    - name: /JobExecutions/put/Create job execution.
+    - name: /DatabaseThreatDetectionPolicies/put/Create database security alert policy max
+    - name: /DatabaseThreatDetectionPolicies/put/Create database security alert policy min
+    - name: /ExtendedDatabaseBlobAuditingPolicies/put/Create or update an extended database's azure monitor auditing policy with minimal parameters
+    - name: /ExtendedDatabaseBlobAuditingPolicies/put/Create or update an extended database's blob auditing policy with all parameters
+    - name: /ExtendedDatabaseBlobAuditingPolicies/put/Create or update an extended database's blob auditing policy with minimal parameters
+    - name: /DatabaseVulnerabilityAssessments/put/Create a database's vulnerability assessment with all parameters
+    - name: /DatabaseVulnerabilityAssessments/put/Create a database's vulnerability assessment with minimal parameters, when storageAccountAccessKey is specified
+    - name: /DatabaseVulnerabilityAssessments/put/Create a database's vulnerability assessment with minimal parameters, when storageContainerSasKey is specified
+    - name: /TransparentDataEncryptions/put/Create or update a database's transparent data encryption configuration
+    - name: /SyncMembers/put/Update a sync member
+    - name: /SyncMembers/put/Create a new sync member
+    - name: /ManagedInstanceLongTermRetentionPolicies/put/Create or update the LTR policy for the managed database.
+    - name: /ManagedBackupShortTermRetentionPolicies/put/Update the short term retention policy for the database.
+    - name: /ManagedDatabaseSecurityAlertPolicies/put/Update a database's threat detection policy with all parameters
+    - name: /ManagedDatabaseSecurityAlertPolicies/put/Update a database's threat detection policy with minimal parameters
+    - name: /ManagedDatabaseVulnerabilityAssessments/put/Create a database's vulnerability assessment with minimal parameters
+    - name: /ManagedDatabaseVulnerabilityAssessments/put/Create a database's vulnerability assessment with all parameters
+    - name: /DataMaskingRules/put/Create/Update data masking rule for default max
+    - name: /DataMaskingRules/put/Create/Update data masking rule for default min
+    - name: /DataMaskingRules/put/Create/Update data masking rule for numbers
+    - name: /DataMaskingRules/put/Create/Update data masking rule for text
+    - name: /WorkloadClassifiers/put/Create a workload group with all properties specified.
+    - name: /WorkloadClassifiers/put/Create a workload group with the required properties specified.
+    - name: /ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies/put/Update the short term retention policy for the restorable dropped database.
+    - name: /DatabaseVulnerabilityAssessmentRuleBaselines/put/Creates or updates a database's vulnerability assessment rule baseline.
+    - name: /SensitivityLabels/put/Updates the sensitivity label of a given column with all parameters
+    - name: /ManagedDatabaseVulnerabilityAssessmentRuleBaselines/put/Creates or updates a database's vulnerability assessment rule baseline.
+    - name: /ManagedDatabaseSensitivityLabels/put/Updates or creates a sensitivity label of a given column with all parameters in a managed database
+    - name: /LongTermRetentionBackups/get/Get the long term retention backup.
+    - name: /ManagedDatabaseSensitivityLabels/get/Gets the sensitivity label of a given column in a managed database
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get the long term retention backup.
+    - name: /ManagedDatabaseVulnerabilityAssessmentRuleBaselines/get/Gets a database's vulnerability assessment rule baseline.
+    - name: /LongTermRetentionBackups/get/Get all long term retention backups under the database.
+    - name: /SensitivityLabels/get/Gets the sensitivity label of a given column
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get all long term retention backups under the database.
+    - name: /DatabaseVulnerabilityAssessmentRuleBaselines/get/Gets a database's vulnerability assessment rule baseline.
+    - name: /LongTermRetentionBackups/get/Get the long term retention backup.
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get the long term retention backup of a managed database.
+    - name: /ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies/get/Get the short term retention policy for the database.
+    - name: /JobTargetExecutions/get/Get a job step target execution
+    - name: /ManagedDatabaseVulnerabilityAssessmentScans/get/Gets a database vulnerability assessment scan record by scan ID
+    - name: /LongTermRetentionBackups/get/Get all long term retention backups under the database.
+    - name: /WorkloadClassifiers/get/Gets a workload classifier for a data warehouse
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get all long term retention backups under the database.
+    - name: /ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies/get/Get the short term retention policy list for the database.
+    - name: /ManagedDatabaseVulnerabilityAssessmentScans/get/Gets the list of a database vulnerability assessment scan records
+    - name: /JobTargetExecutions/get/List job step target executions
+    - name: /TransparentDataEncryptionActivities/get/List a database's transparent data encryption activities
+    - name: /DatabaseVulnerabilityAssessmentScans/get/Gets a database vulnerability assessment scan record by scan ID
+    - name: /ManagedDatabaseVulnerabilityAssessments/get/Get a database's vulnerability assessment
+    - name: /JobStepExecutions/get/Get a job step execution
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get all long term retention backups under the managed instance.
+    - name: /SyncMembers/get/Get a sync member schema
+    - name: /ManagedDatabaseSecurityAlertPolicies/get/Get a database's threat detection policy
+    - name: /JobSteps/get/Get the specified version of a job step.
+    - name: /ManagedBackupShortTermRetentionPolicies/get/Get the short term retention policy for the database.
+    - name: /ManagedInstanceLongTermRetentionPolicies/get/Get the long term retention policy for the managed database.
+    - name: /SyncMembers/get/Get a sync member
+    - name: /DatabaseVulnerabilityAssessmentScans/get/Gets the list of a database vulnerability assessment scan records
+    - name: /TransparentDataEncryptions/get/Get a database's transparent data encryption configuration
+    - name: /JobTargetExecutions/get/List job step target executions
+    - name: /LongTermRetentionBackups/get/Get all long term retention backups under the server.
+    - name: /DatabaseVulnerabilityAssessments/get/Get a database's vulnerability assessment
+    - name: /JobStepExecutions/get/List job step executions
+    - name: /WorkloadClassifiers/get/Get the list of workload classifiers for a workload group
+    - name: /ManagedDatabaseRestoreDetails/get/Managed database restore details.
+    - name: /DataMaskingRules/get/List data masking rules
+    - name: /ExtendedDatabaseBlobAuditingPolicies/get/Get an extended database's blob auditing policy
+    - name: /DatabaseThreatDetectionPolicies/get/Get database security alert policy
+    - name: /JobExecutions/get/Get a job execution.
+    - name: /JobSteps/get/List job steps for the specified version of a job.
+    - name: /RestorableDroppedManagedDatabases/get/Gets a restorable dropped managed database.
+    - name: /ServiceTierAdvisors/get/Get a service tier advisor
+    - name: /ManagedBackupShortTermRetentionPolicies/get/Get the short term retention policy list for the database.
+    - name: /DataMaskingPolicies/get/Get data masking policy
+    - name: /ManagedInstanceLongTermRetentionPolicies/get/Get the long term retention policies for the managed database.
+    - name: /BackupShortTermRetentionPolicies/get/Get the short term retention policy for the database.
+    - name: /BackupLongTermRetentionPolicies/get/Get the long term retention policy for the database.
+    - name: /ManagedInstanceVulnerabilityAssessments/get/Get a managed instance's vulnerability assessment
+    - name: /DatabaseBlobAuditingPolicies/get/Get a database's blob auditing policy
+    - name: /JobVersions/get/Get a version of a job.
+    - name: /ManagedDatabaseSensitivityLabels/get/Gets the recommended sensitivity labels of a given database in a managed database
+    - name: /GeoBackupPolicies/get/Get geo backup policy
+    - name: /SyncMembers/get/List sync members under a sync group
+    - name: /DatabaseAutomaticTuning/get/Get a database's automatic tuning settings
+    - name: /ManagedServerSecurityAlertPolicies/get/Get a managed server's threat detection policy
+    - name: /ManagedDatabaseVulnerabilityAssessments/get/Get a database's vulnerability assessments list
+    - name: /ManagedDatabaseSensitivityLabels/get/Gets the current sensitivity labels of a given database in a managed database
+    - name: /SyncGroups/get/Get a hub database schema.
+    - name: /JobSteps/get/Get the latest version of a job step.
+    - name: /RecoverableManagedDatabases/get/Gets a recoverable databases by managed instances
+    - name: /ManagedDatabaseSecurityAlertPolicies/get/Get a list of the database's threat detection policies.
+    - name: /ManagedInstanceEncryptionProtectors/get/Get the encryption protector
+    - name: /WorkloadGroups/get/Gets a workload group for a data warehouse
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get all long term retention backups under the managed instance.
+    - name: /RestorePoints/get/Gets a datawarehouse database restore point.
+    - name: /RestorePoints/get/Gets a database restore point.
+    - name: /RecommendedElasticPools/get/Get recommended elastic pool metrics
+    - name: /JobTargetGroups/get/Get a target group.
+    - name: /SyncGroups/get/Get sync group logs
+    - name: /RestorableDroppedDatabases/get/Get a restorable dropped database
+    - name: /PrivateEndpointConnections/get/Gets private endpoint connection.
+    - name: /ElasticPoolDatabaseActivities/get/List elastic pool database activity
+    - name: /JobCredentials/get/Get a credential
+    - name: /SyncGroups/get/Get a sync group
+    - name: /BackupShortTermRetentionPolicies/get/Get the short term retention policy for the database.
+    - name: /JobExecutions/get/List a job's executions.
+    - name: /BackupLongTermRetentionPolicies/get/Get the long term retention policy for the database.
+    - name: /ReplicationLinks/get/Get a replication link
+    - name: /ServerVulnerabilityAssessments/get/Get a server's vulnerability assessment
+    - name: /RecommendedElasticPools/get/Get a recommended elastic pool
+    - name: /JobVersions/get/Get all versions of a job.
+    - name: /SensitivityLabels/get/Gets the recommended sensitivity labels of a given database
+    - name: /ManagedInstanceAdministrators/get/Get administrator of managed instance
+    - name: /ElasticPoolActivities/get/List Elastic pool activity
+    - name: /ExtendedServerBlobAuditingPolicies/get/Get a server's blob extended auditing policy
+    - name: /JobSteps/get/List job steps for the latest version of a job.
+    - name: /LongTermRetentionBackups/get/Get all long term retention backups under the server.
+    - name: /ElasticPools/get/List database usage metrics
+    - name: /ExtendedDatabaseBlobAuditingPolicies/get/List extended auditing settings of a database
+    - name: /DatabaseVulnerabilityAssessments/get/Get the database's vulnerability assessment policies
+    - name: /ServerSecurityAlertPolicies/get/Get a server's threat detection policy
+    - name: /SensitivityLabels/get/Gets the current sensitivity labels of a given database
+    - name: /InstanceFailoverGroups/get/Get failover group
+    - name: /ServerAzureADOnlyAuthentications/get/Gets a Azure Active Directory only authentication property.
+    - name: /EncryptionProtectors/get/Get the encryption protector
+    - name: /VirtualNetworkRules/get/Gets a virtual network rule
+    - name: /Jobs/get/Get a job
+    - name: /ServiceTierAdvisors/get/Get a list of a service tier advisors
+    - name: /ServerCommunicationLinks/get/Get a server communication link
+    - name: /SyncAgents/get/Get sync agent linked databases
+    - name: /ServerBlobAuditingPolicies/get/Get a server's blob auditing policy
+    - name: /ManagedInstanceOperations/get/Gets the managed instance management operation
+    - name: /ManagedDatabases/get/Gets a managed database
+    - name: /ServerConnectionPolicies/get/Get a server's secure connection policy
+    - name: /GeoBackupPolicies/get/List geo backup policies
+    - name: /Databases/get/List database usage metrics
+    - name: /ElasticPoolOperations/get/List the elastic pool management operations
+    - name: /ManagedDatabases/get/List inaccessible managed databases by managed instances
+    - name: /Databases/get/Gets a list of databases in an elastic pool.
+    - name: /ReplicationLinks/get/List Replication links
+    - name: /ServiceObjectives/get/Get a service objective
+    - name: /DatabaseBlobAuditingPolicies/get/List audit settings of a database
+    - name: /RestorableDroppedManagedDatabases/get/List restorable dropped databases by managed instances
+    - name: /ElasticPools/get/List database usage metrics
+    - name: /WorkloadGroups/get/Get the list of workload groups for a data warehouse
+    - name: /JobTargetGroups/get/Get all target groups in an agent.
+    - name: /ServerAutomaticTuning/get/Get a server's automatic tuning settings
+    - name: /RestorePoints/get/List datawarehouse database restore points.
+    - name: /RestorePoints/get/List database restore points.
+    - name: /ManagedInstanceVulnerabilityAssessments/get/Get a managed instance's vulnerability assessment policies
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get all long term retention backups under the location.
+    - name: /JobCredentials/get/List credentials in a job agent
+    - name: /JobExecutions/get/List all job executions in a job agent.
+    - name: /JobExecutions/get/List all job executions in a job agent with filtering.
+    - name: /RecoverableDatabases/get/Get a recoverable database
+    - name: /FailoverGroups/get/Get failover group
+    - name: /ManagedServerSecurityAlertPolicies/get/Get the managed server's threat detection policies
+    - name: /DatabaseOperations/get/List the database management operations
+    - name: /SyncGroups/get/List sync groups under a given database
+    - name: /RecoverableManagedDatabases/get/List recoverable databases by managed instances
+    - name: /ServerAzureADAdministrators/get/Gets a Azure Active Directory administrator.
+    - name: /FirewallRules/get/Get Firewall Rule
+    - name: /ManagedInstanceKeys/get/Get the managed instance key
+    - name: /ManagedInstanceEncryptionProtectors/get/List encryption protectors by managed instance
+    - name: /Databases/get/List database usage metrics
+    - name: /PrivateLinkResources/get/Gets a private link resource for SQL.
+    - name: /ElasticPools/get/Get an elastic pool
+    - name: /DatabaseUsages/get/List database usage metrics
+    - name: /Jobs/get/List jobs in a job agent
+    - name: /ManagedInstanceAdministrators/get/List administrators of managed instance
+    - name: /SyncAgents/get/Get a sync agent
+    - name: /ServerDnsAliases/get/Get server DNS alias
+    - name: /JobAgents/get/Get a job agent
+    - name: /Databases/get/Gets a database.
+    - name: /ManagedInstanceOperations/get/List the managed instance management operations
+    - name: /ManagedInstances/get/List managed instances by instance pool
+    - name: /LongTermRetentionBackups/get/Get all long term retention backups under the location.
+    - name: /ManagedDatabases/get/List databases by managed instances
+    - name: /RestorableDroppedDatabases/get/Get list of restorable dropped databases
+    - name: /InstanceFailoverGroups/get/List failover group
+    - name: /PrivateEndpointConnections/get/Gets list of private endpoint connections on a server.
+    - name: /ServerAzureADOnlyAuthentications/get/Gets a list of Azure Active Directory only authentication object.
+    - name: /ExtendedServerBlobAuditingPolicies/get/List extended auditing settings of a server
+    - name: /ServerVulnerabilityAssessments/get/Get a server's vulnerability assessment policies
+    - name: /RecommendedElasticPools/get/List recommended elastic pools
+    - name: /ManagedInstanceKeys/get/List the keys for a managed instance.
+    - name: /ServerSecurityAlertPolicies/get/List the server's threat detection policies
+    - name: /RecoverableDatabases/get/Get list of restorable dropped databases
+    - name: /PrivateLinkResources/get/Gets private link resources for SQL.
+    - name: /EncryptionProtectors/get/List encryption protectors by server
+    - name: /ServerKeys/get/Get the server key
+    - name: /VirtualNetworkRules/get/List virtual network rules
+    - name: /Usages/get/List instance pool usages.
+    - name: /Usages/get/List instance pool usages expanded with children.
+    - name: /ServerCommunicationLinks/get/List server communication links
+    - name: /ManagedInstances/get/Get managed instance
+    - name: /ServiceObjectives/get/List service objectives
+    - name: /VirtualClusters/get/Get virtual cluster
+    - name: /ServerBlobAuditingPolicies/get/List auditing settings of a server
+    - name: /FailoverGroups/get/List failover group
+    - name: /ServerAzureADAdministrators/get/Gets a list of Azure Active Directory administrator.
+    - name: /FirewallRules/get/List Firewall Rules
+    - name: /ElasticPools/get/Get all elastic pools in a server
+    - name: /InstancePools/get/Get an instance pool
+    - name: /SyncAgents/get/Get sync agents under a server
+    - name: /ServerDnsAliases/get/List server DNS aliases
+    - name: /Databases/get/Gets a list of databases.
+    - name: /JobAgents/get/List job agents in a server
+    - name: /LongTermRetentionManagedInstanceBackups/get/Get all long term retention backups under the location.
+    - name: /ServerUsages/get/List servers usages
+    - name: /ServerKeys/get/List the server keys by server
+    - name: /Servers/get/Get server
+    - name: /LongTermRetentionBackups/get/Get all long term retention backups under the location.
+    - name: /SubscriptionUsages/get/Get specific subscription usage in the given location.
+    - name: /ManagedInstances/get/List managed instances by resource group
+    - name: /VirtualClusters/get/List virtual clusters by resource group
+    - name: /InstancePools/get/List instance pools by resource group
+    - name: /SyncGroups/get/Get a sync database ID
+    - name: /Servers/get/List servers by resource group
+    - name: /Capabilities/get/List subscription capabilities in the given location.
+    - name: /SubscriptionUsages/get/List subscription usages in the given location.
+    - name: /ManagedInstances/get/List managed instances
+    - name: /VirtualClusters/get/List virtualClusters
+    - name: /InstancePools/get/List instance pools in the subscription
+    - name: /Servers/get/List servers
+    - name: /ManagedDatabaseSensitivityLabels/post/Disables the sensitivity recommendations on a given column
+    - name: /ManagedDatabaseSensitivityLabels/post/Enables the sensitivity recommendations on a given column
+    - name: /SensitivityLabels/post/Disables sensitivity recommendations on a given column
+    - name: /SensitivityLabels/post/Enables sensitivity recommendations on a given column
+    - name: /ManagedDatabaseVulnerabilityAssessmentScans/post/Executes a database's vulnerability assessment scan.
+    - name: /ManagedDatabaseVulnerabilityAssessmentScans/post/Export a database's vulnerability assessment scan results.
+    - name: /ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies/patch/Update the short term retention policy for the restorable dropped database.
+    - name: /DatabaseVulnerabilityAssessmentScans/post/Executes a database's vulnerability assessment scan.
+    - name: /DatabaseVulnerabilityAssessmentScans/post/Export a database's vulnerability assessment scan results.
+    - name: /SyncMembers/post/Refresh a sync member database schema
+    - name: /ManagedBackupShortTermRetentionPolicies/patch/Update the short term retention policy for the database.
+    - name: /SyncMembers/patch/Update an existing sync member
+    - name: /JobExecutions/post/Cancel a job execution.
+    - name: /ReplicationLinks/post/Failover a replication link
+    - name: /ManagedInstanceEncryptionProtectors/post/Revalidates the encryption protector
+    - name: /BackupShortTermRetentionPolicies/patch/Update the short term retention policy for the database.
+    - name: /InstanceFailoverGroups/post/Forced failover of a failover group allowing data loss
+    - name: /SyncGroups/post/Refresh a hub database schema.
+    - name: /SyncGroups/post/Trigger a sync group synchronization.
+    - name: /DatabaseAutomaticTuning/patch/Updates database automatic tuning settings with minimal properties
+    - name: /DatabaseAutomaticTuning/patch/Updates database automatic tuning settings with all properties
+    - name: /ElasticPoolOperations/post/Cancel the elastic pool management operation
+    - name: /SyncGroups/post/Cancel a sync group synchronization
+    - name: /ReplicationLinks/post/Failover a replication link
+    - name: /ReplicationLinks/post/Delete replication link
+    - name: /FailoverGroups/post/Forced failover of a failover group allowing data loss
+    - name: /DatabaseOperations/post/Cancel the database management operation
+    - name: /ManagedDatabases/post/Completes a managed database external backup restore.
+    - name: /EncryptionProtectors/post/Revalidates the encryption protector
+    - name: /SyncGroups/patch/Update a sync group
+    - name: /InstanceFailoverGroups/post/Planned failover of a failover group
+    - name: /JobExecutions/post/Start a job execution.
+    - name: /ManagedInstanceOperations/post/Cancel the managed instance management operation
+    - name: /Databases/post/Upgrades a data warehouse.
+    - name: /FailoverGroups/post/Planned failover of a failover group
+    - name: /ManagedDatabases/patch/Updates a managed database with minimal properties
+    - name: /ManagedDatabases/patch/Updates a managed database with maximal properties
+    - name: /ElasticPools/post/Failover an elastic pool
+    - name: /SyncAgents/post/Generate a sync agent key
+    - name: /ServerAutomaticTuning/patch/Updates server automatic tuning settings with minimal properties
+    - name: /ServerAutomaticTuning/patch/Updates server automatic tuning settings with all properties
+    - name: /RestorePoints/post/Creates datawarehouse database restore point.
+    - name: /FailoverGroups/patch/Update failover group
+    - name: /ServerDnsAliases/post/Acquire server DNS alias
+    - name: /Databases/post/Failover an database
+    - name: /Databases/post/Export a database into a new bacpac file with storage key
+    - name: /Databases/post/Export a database into a new bacpac file with SAS key
+    - name: /Databases/post/Resumes a database.
+    - name: /ElasticPools/patch/Update an elastic pool with all parameter
+    - name: /ElasticPools/patch/Update an elastic pool with minimum parameters
+    - name: /Databases/post/Pauses a database.
+    - name: /Databases/post/Renames a database.
+    - name: /ManagedInstanceTdeCertificates/post/Upload a TDE certificate
+    - name: /JobAgents/patch/Update a job agent's tags.
+    - name: /Databases/patch/Updates a database.
+    - name: /ManagedInstances/post/Failover a managed instance.
+    - name: /ManagedInstances/patch/Update managed instance with minimal properties
+    - name: /ManagedInstances/patch/Update managed instance with all properties
+    - name: /VirtualClusters/patch/Update virtual cluster with tags
+    - name: /TdeCertificates/post/Upload a TDE certificate
+    - name: /InstancePools/patch/Patch an instance pool
+    - name: /Databases/post/Import bacpac into new database Max with storage key
+    - name: /Databases/post/Import bacpac into new database Min with storage key
+    - name: /Databases/post/Import bacpac into new database Max with SAS key
+    - name: /Databases/post/Import bacpac into new database Min with SAS key
+    - name: /Servers/patch/Update a server
+    - name: /Servers/post/Check for a server name that already exists
+    - name: /Servers/post/Check for a server name that is available
+    - name: /Servers/post/Check for a server name that is invalid
+    - name: /LongTermRetentionBackups/delete/Delete the long term retention backup.
+    - name: /ManagedDatabaseSensitivityLabels/delete/Deletes the sensitivity label of a given column in a managed database
+    - name: /LongTermRetentionManagedInstanceBackups/delete/Delete the long term retention backup.
+    - name: /ManagedDatabaseVulnerabilityAssessmentRuleBaselines/delete/Removes a database's vulnerability assessment rule baseline.
+    - name: /SensitivityLabels/delete/Deletes the sensitivity label of a given column
+    - name: /DatabaseVulnerabilityAssessmentRuleBaselines/delete/Removes a database's vulnerability assessment rule baseline.
+    - name: /LongTermRetentionBackups/delete/Delete the long term retention backup.
+    - name: /LongTermRetentionManagedInstanceBackups/delete/Delete the long term retention backup.
+    - name: /WorkloadClassifiers/delete/Delete a workload classifier
+    - name: /ManagedDatabaseVulnerabilityAssessments/delete/Remove a database's vulnerability assessment
+    - name: /SyncMembers/delete/Delete a sync member
+    - name: /DatabaseVulnerabilityAssessments/delete/Remove a database's vulnerability assessment
+    - name: /ManagedInstanceVulnerabilityAssessments/delete/Remove a managed instance's vulnerability assessment
+    - name: /JobSteps/delete/Delete a job step.
+    - name: /WorkloadGroups/delete/Delete a workload group
+    - name: /RestorePoints/delete/Deletes a restore point.
+    - name: /JobTargetGroups/delete/Delete a target group.
+    - name: /PrivateEndpointConnections/delete/Deletes a private endpoint connection with a given name.
+    - name: /JobCredentials/delete/Delete a credential
+    - name: /SyncGroups/delete/Delete a sync group
+    - name: /ReplicationLinks/delete/Delete a replication link
+    - name: /ServerVulnerabilityAssessments/delete/Remove a server's vulnerability assessment
+    - name: /ManagedInstanceAdministrators/delete/Delete administrator of managed instance
+    - name: /InstanceFailoverGroups/delete/Delete failover group
+    - name: /ServerAzureADOnlyAuthentications/delete/Deletes Azure Active Directory only authentication object.
+    - name: /VirtualNetworkRules/delete/Delete a virtual network rule
+    - name: /Jobs/delete/Delete a job
+    - name: /ServerCommunicationLinks/delete/Delete a server communication link
+    - name: /ManagedDatabases/delete/Delete managed database
+    - name: /FailoverGroups/delete/Delete failover group
+    - name: /ServerAzureADAdministrators/delete/Delete Azure Active Directory administrator.
+    - name: /FirewallRules/delete/Delete a firewall rule
+    - name: /ManagedInstanceKeys/delete/Delete the managed instance key
+    - name: /ElasticPools/delete/Delete an elastic pool
+    - name: /SyncAgents/delete/Delete a sync agent
+    - name: /ServerDnsAliases/delete/Delete server DNS alias
+    - name: /JobAgents/delete/Delete a job agent
+    - name: /Databases/delete/Deletes a database.
+    - name: /ServerKeys/delete/Delete the server key
+    - name: /ManagedInstances/delete/Delete managed instance
+    - name: /VirtualClusters/delete/Delete virtual cluster
+    - name: /InstancePools/delete/Delete an instance pool
+    - name: /Servers/delete/Delete server
+```
