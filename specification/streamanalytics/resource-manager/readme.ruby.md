@@ -14,6 +14,7 @@ azure-arm: true
 batch:
   - tag: package-2016-03
   - tag: package-2017-04-preview
+  --tag: package-2020-03-preview
 ```
 
 ### Tag: package-2016-03 and ruby
@@ -35,3 +36,12 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 namespace: "Azure::StreamAnalytics::Mgmt::V2017_04_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_stream_analytics/lib
 ```
+
+### Tag: package-package-2020-03-preview and ruby
+
+These settings apply only when `--tag=package-2020-03-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2020-03-preview' && $(ruby)
+namespace: "Azure::StreamAnalytics::Mgmt::V2020_03_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_stream_analytics/lib
