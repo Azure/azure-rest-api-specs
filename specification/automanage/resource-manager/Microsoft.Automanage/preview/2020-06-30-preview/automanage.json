@@ -385,7 +385,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/VmNameParameter"
+            "$ref": "#/parameters/VmNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -445,7 +445,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/VmNameParameter"
+            "$ref": "#/parameters/VmNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -498,7 +498,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/VmNameParameter"
+            "$ref": "#/parameters/VmNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1259,5 +1259,14 @@
       "description": "The response of the list ConfigurationProfilePreference operation."
     }
   },
-  "parameters": {}
+  "parameters": {
+    "VmNameParameter": {	
+      "name": "vmName",	
+      "in": "path",	
+      "required": true,	
+      "type": "string",	
+      "description": "The name of the virtual machine.",	
+      "x-ms-parameter-location": "method"	
+    }
+  }
 }

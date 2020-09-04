@@ -97,6 +97,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Automanage/preview/2020-06-30-preview/automanage.json
+  
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
