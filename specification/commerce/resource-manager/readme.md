@@ -51,6 +51,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-commerce
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -58,6 +60,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_commerce']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js commerce/resource-manager
 ```
 
 
@@ -76,16 +81,29 @@ python:
   namespace: azure.mgmt.commerce
   package-name: azure-mgmt-commerce
   clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2015-06-preview
+```
+
+### Tag: package-2015-06-preview and python
+
+These settings apply only when `--tag=package-2015-06-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2015-06-preview' && $(python)
+namespace: azure.mgmt.commerce.v2015_06_01_preview
+output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce/v2015_06_01_preview
 python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce
+  namespace: azure.mgmt.commerce.v2015_06_01_preview
+  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce/v2015_06_01_preview
 ```
 
 ## Go
@@ -127,6 +145,10 @@ generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
