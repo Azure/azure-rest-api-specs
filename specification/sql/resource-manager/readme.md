@@ -140,6 +140,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/importexport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 
 
 # Needed when there is more than one input file
@@ -245,6 +246,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 
 # Needed when there is more than one input file
 override-info:
@@ -338,6 +340,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 
 # Needed when there is more than one input file
 override-info:
@@ -503,6 +506,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/importexport.json
 - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+- ./Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 
 # Needed when there is more than one input file
 override-info:
