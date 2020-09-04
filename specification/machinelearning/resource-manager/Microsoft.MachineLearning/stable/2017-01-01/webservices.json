@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -85,6 +91,12 @@
             "schema": {
               "$ref": "#/definitions/WebService"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -126,6 +138,12 @@
             "description": "Success.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations.",
             "schema": {
               "$ref": "#/definitions/WebService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -170,6 +188,12 @@
             "schema": {
               "$ref": "#/definitions/WebService"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -200,11 +224,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "No Content."
+          },
           "202": {
             "description": "Accepted. Note that a 202 status is returned even if the service did not exist."
           },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -252,6 +285,12 @@
             "schema": {
               "$ref": "#/definitions/AsyncOperationStatus"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -288,6 +327,12 @@
             "description": "Success.",
             "schema": {
               "$ref": "#/definitions/WebServiceKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -332,6 +377,12 @@
             "schema": {
               "$ref": "#/definitions/PaginatedWebServicesList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -372,6 +423,12 @@
             "schema": {
               "$ref": "#/definitions/PaginatedWebServicesList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -410,6 +467,19 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
+    },
     "Resource": {
       "description": "Azure resource.",
       "x-ms-azure-resource": true,
@@ -688,6 +758,7 @@
           "type": "integer",
           "minimum": 4,
           "maximum": 200,
+          "format": "int64",
           "description": "Specifies the maximum concurrent calls that can be made to the web service. Minimum value: 4, Maximum value: 200."
         }
       }

@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -64,6 +70,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -98,6 +110,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CommitmentAssociation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -135,6 +153,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CommitmentAssociationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -179,6 +203,12 @@
             "schema": {
               "$ref": "#/definitions/CommitmentAssociation"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -195,6 +225,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -228,6 +264,12 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlan"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -240,6 +282,15 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -265,6 +316,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -315,6 +372,12 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlanListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -348,6 +411,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -385,6 +454,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PlanUsageHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -440,6 +515,19 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
+    },
     "SkuListResult": {
       "type": "object",
       "description": "The list of commitment plan SKUs.",
