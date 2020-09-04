@@ -539,16 +539,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the MySQL Server key.",
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ServerKey"
             }
           },
           "202": {
-            "description": "Operation in progress",
-            "schema": {
-              "$ref": "#/definitions/ServerKey"
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -589,13 +592,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the MySQL Server key."
+            "description": "OK"
           },
           "202": {
-            "description": "Operation in progress"
+            "description": "Accepted"
           },
           "204": {
-            "description": "The specified MySQL Server key does not exist."
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -636,7 +639,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified server key.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServerKey"
             }
@@ -678,7 +681,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of MySQL Server keys.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServerKeyListResult"
             }
