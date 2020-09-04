@@ -1,8 +1,8 @@
-# baremetalinfrastructure
+# BareMetalInfrastructure
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for baremetalinfrastructure.
+This is the AutoRest configuration file for BareMetalInfrastructure.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the baremetalinfrastructure.
+These are the global settings for the BareMetalInfrastructure API.
 
 ```yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-08-06-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-08-06-preview'
 input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2020-08-06-preview/baremetalinfrastructure.json
+  - Microsoft.BareMetalInfrastructure/preview/2020-08-06-preview/BareMetalInfrastructure.json
 ```
 
 ---
