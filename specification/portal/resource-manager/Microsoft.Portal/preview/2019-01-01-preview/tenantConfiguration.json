@@ -217,22 +217,33 @@
     "Configuration": {
       "type": "object",
       "description": "Tenant configuration.",
+      "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant configuration id. Ex - /providers/Microsoft.Portal/tenantConfigurations/default"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant configuration name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConfigurationProperties",
           "description": "Tenant configuration properties."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ConfigurationProperties": {
       "type": "object",
-      "description": "Tenant configuration Properties.",
+      "description": "Tenant configuration properties.",
       "x-ms-azure-resource": true,
       "properties": {
         "enforcePrivateMarkdownStorage": {
