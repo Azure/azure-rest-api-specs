@@ -6,35 +6,43 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2017-04
-  - tag: package-2016-03
-  - tag: package-2014-09
+  - tag: schema-notificationhubs-2017-04-01
+  - tag: schema-notificationhubs-2016-03-01
+  - tag: schema-notificationhubs-2014-09-01
+
 ```
 
-### Tag: package-2017-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2017-04 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2017-04' && $(azureresourceschema)
+### Tag: schema-notificationhubs-2017-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-notificationhubs-2017-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json
+
 ```
 
-### Tag: package-2016-03 and azureresourceschema
+### Tag: schema-notificationhubs-2016-03-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-notificationhubs-2016-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.NotificationHubs/stable/2016-03-01/notificationhubs.json
+
 ```
 
-### Tag: package-2014-09 and azureresourceschema
+### Tag: schema-notificationhubs-2014-09-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2014-09 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2014-09' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-notificationhubs-2014-09-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json
+
+```

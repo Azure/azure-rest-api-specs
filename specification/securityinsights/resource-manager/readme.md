@@ -52,6 +52,12 @@ These settings apply only when `--tag=package-2019-01-preview-only` is specified
 ```yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+directive:
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.ThreatIntelligenceResource
+    reason: Our API is designed based on per region per workspace concept. There is no use case of our customers to get all indicators in multiple workspaces.
+    approved-by: "@cheggert"
 ```
 
 ---

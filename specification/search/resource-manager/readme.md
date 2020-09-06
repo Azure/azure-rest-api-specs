@@ -219,11 +219,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Search/preview/2020-08-01-preview/search.json
   - $(this-folder)/Microsoft.Search/stable/2020-08-01/search.json
   - $(this-folder)/Microsoft.Search/stable/2020-03-13/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
+  - $(this-folder)/Microsoft.Search/preview/2020-08-01-preview/search.json
   - $(this-folder)/Microsoft.Search/preview/2019-10-01-preview/search.json
 
 ```
