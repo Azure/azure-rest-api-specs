@@ -8294,6 +8294,46 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+    "A2ATestFailoverInput": {
+      "description": "A2A provider specific input for test failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        },
+        "cloudServiceCreationOption": {
+          "description": "A value indicating whether to use recovery cloud service for TFO or not.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
+    "A2AUnplannedFailoverInput": {
+      "description": "A2A provider specific input for unplanned failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UnplannedFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        },
+        "cloudServiceCreationOption": {
+          "description": "A value indicating whether to use recovery cloud service for failover or not.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2AUnprotectedDiskDetails": {
       "description": "A2A unprotected disk details.",
       "type": "object",
@@ -8515,6 +8555,10 @@
           "description": "The name of the machine where the provider is getting added.",
           "type": "string"
         },
+        "machineId": {
+          "description": "The Id of the machine where the provider is getting added.",
+          "type": "string"
+        },
         "authenticationIdentityInput": {
           "$ref": "#/definitions/IdentityProviderInput",
           "description": "The identity provider input for DRA authentication."
@@ -8522,6 +8566,10 @@
         "resourceAccessIdentityInput": {
           "$ref": "#/definitions/IdentityProviderInput",
           "description": "The identity provider input for resource access."
+        },
+        "dataPlaneAuthenticationIdentityInput": {
+          "$ref": "#/definitions/IdentityProviderInput",
+          "description": "The identity provider input for data plane authentication."
         }
       }
     },
@@ -8558,6 +8606,73 @@
         "runAsAccountId": {
           "description": "The account Id which has privileges to discover the vCenter.",
           "type": "string"
+        }
+      }
+    },
+    "AgentDetails": {
+      "description": "Agent details.",
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "description": "The Id of the agent running on the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineId": {
+          "description": "The Id of the machine to which the agent is registered.",
+          "type": "string",
+          "readOnly": true
+        },
+        "biosId": {
+          "description": "The machine BIOS Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "The machine FQDN.",
+          "type": "string",
+          "readOnly": true
+        },
+        "disks": {
+          "description": "The details of agent disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentDiskDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AgentDiskDetails": {
+      "description": "Agent disk details.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskName": {
+          "description": "The disk name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isOSDisk": {
+          "description": "A value indicating whether the disk is the OS disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacityInBytes": {
+          "format": "int64",
+          "description": "The disk capacity in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "lunId": {
+          "format": "int32",
+          "description": "The lun of disk.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -9335,11 +9450,11 @@
       "type": "object",
       "properties": {
         "secretIdentifier": {
-          "description": "The secret url / identifier.",
+          "description": "The secret URL / identifier.",
           "type": "string"
         },
         "keyVaultResourceArmId": {
-          "description": "The KeyVault resource ARM id for secret.",
+          "description": "The KeyVault resource ARM Id for secret.",
           "type": "string"
         }
       }
@@ -9377,6 +9492,56 @@
         "description": {
           "description": "The description. The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views. Prescriptive guidance for namespaces: Read any 'display.provider' resource Create or Update any 'display.provider' resource Delete any 'display.provider' resource Perform any other action on any 'display.provider' resource Prescriptive guidance for namespaces: Read any 'display.resource' Create or Update any 'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'",
           "type": "string"
+        }
+      }
+    },
+    "DraDetails": {
+      "description": "DRA details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The DRA Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The DRA name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The DRA version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The last heartbeat received from the DRA.",
+          "type": "string",
+          "readOnly": true
+        },
+        "health": {
+          "description": "The health of the DRA.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "healthErrors": {
+          "description": "The health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "readOnly": true
         }
       }
     },
@@ -10534,6 +10699,62 @@
         },
         "logStorageAccountId": {
           "description": "The storage account to be used for logging during replication.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplicaAzure"
+    },
+    "HyperVReplicaAzureTestFailoverInput": {
+      "description": "HvrA provider specific input for test failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vaultLocation": {
+          "description": "Location of the vault.",
+          "type": "string"
+        },
+        "primaryKekCertificatePfx": {
+          "description": "Primary kek certificate pfx.",
+          "type": "string"
+        },
+        "secondaryKekCertificatePfx": {
+          "description": "Secondary kek certificate pfx.",
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplicaAzure"
+    },
+    "HyperVReplicaAzureUnplannedFailoverInput": {
+      "description": "HvrA provider specific input for unplanned failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UnplannedFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vaultLocation": {
+          "description": "Location of the vault.",
+          "type": "string"
+        },
+        "primaryKekCertificatePfx": {
+          "description": "Primary kek certificate pfx.",
+          "type": "string"
+        },
+        "secondaryKekCertificatePfx": {
+          "description": "Secondary kek certificate pfx.",
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
         }
       },
@@ -11990,6 +12211,46 @@
       },
       "x-ms-discriminator-value": "InMageAzureV2"
     },
+    "InMageAzureV2TestFailoverInput": {
+      "description": "InMageAzureV2 provider specific input for test failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vaultLocation": {
+          "description": "Location of the vault.",
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageAzureV2"
+    },
+    "InMageAzureV2UnplannedFailoverInput": {
+      "description": "InMageAzureV2 provider specific input for unplanned failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UnplannedFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vaultLocation": {
+          "description": "Location of the vault.",
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageAzureV2"
+    },
     "InMageAzureV2UpdateReplicationProtectedItemInput": {
       "description": "InMage Azure V2 input to update replication protected item.",
       "type": "object",
@@ -12371,6 +12632,1142 @@
         }
       }
     },
+    "InMageRcmAgentUpgradeBlockingErrorDetails": {
+      "description": "InMageRcm source agent upgrade blocking error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessageParameters": {
+          "description": "The error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "errorTags": {
+          "description": "The error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InMageRcmApplyRecoveryPointInput": {
+      "description": "ApplyRecoveryPoint input specific to InMageRcm provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplyRecoveryPointProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointId": {
+          "description": "The recovery point Id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmDiskInput": {
+      "description": "InMageRcm disk input.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string"
+        },
+        "logStorageAccountId": {
+          "description": "The log storage account ARM Id.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "The disk type.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskAccountType",
+            "modelAsString": true
+          }
+        },
+        "diskEncryptionSetId": {
+          "description": "The disk encryption set ARM Id.",
+          "type": "string"
+        }
+      }
+    },
+    "InMageRcmDisksDefaultInput": {
+      "description": "InMageRcm disk input.",
+      "type": "object",
+      "properties": {
+        "logStorageAccountId": {
+          "description": "The log storage account ARM Id.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "The disk type.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskAccountType",
+            "modelAsString": true
+          }
+        },
+        "diskEncryptionSetId": {
+          "description": "The disk encryption set ARM Id.",
+          "type": "string"
+        }
+      }
+    },
+    "InMageRcmEnableProtectionInput": {
+      "description": "InMageRcm specific enable protection input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnableProtectionProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "fabricDiscoveryMachineId": {
+          "description": "The ARM Id of discovered machine.",
+          "type": "string"
+        },
+        "disksToInclude": {
+          "description": "The disks to include list.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmDiskInput"
+          }
+        },
+        "disksDefault": {
+          "$ref": "#/definitions/InMageRcmDisksDefaultInput",
+          "description": "The default disk input."
+        },
+        "targetResourceGroupId": {
+          "description": "The target resource group ARM Id.",
+          "type": "string"
+        },
+        "targetNetworkId": {
+          "description": "The selected target network ARM Id.",
+          "type": "string"
+        },
+        "testNetworkId": {
+          "description": "The selected test network ARM Id.",
+          "type": "string"
+        },
+        "targetSubnetName": {
+          "description": "The selected target subnet name.",
+          "type": "string"
+        },
+        "testSubnetName": {
+          "description": "The selected test subnet name.",
+          "type": "string"
+        },
+        "targetVmName": {
+          "description": "The target VM name.",
+          "type": "string"
+        },
+        "targetVmSize": {
+          "description": "The target VM size.",
+          "type": "string"
+        },
+        "licenseType": {
+          "description": "The license type.",
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "WindowsServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        },
+        "targetAvailabilitySetId": {
+          "description": "The target availability set ARM Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
+          "type": "string"
+        },
+        "targetBootDiagnosticsStorageAccountId": {
+          "description": "The target boot diagnostics storage account ARM Id.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "The run-as account Id.",
+          "type": "string"
+        },
+        "processServerId": {
+          "description": "The process server Id.",
+          "type": "string"
+        },
+        "multiVmGroupName": {
+          "description": "The multi VM group name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmEventDetails": {
+      "description": "Event details for InMageRcm provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "protectedItemName": {
+          "description": "The protected item name.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmFabricCreationInput": {
+      "description": "InMageRcm fabric provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificCreationInput"
+        }
+      ],
+      "properties": {
+        "vmwareSiteId": {
+          "description": "The ARM Id of the VMware site.",
+          "type": "string"
+        },
+        "physicalSiteId": {
+          "description": "The ARM Id of the physical site.",
+          "type": "string"
+        },
+        "sourceAgentIdentity": {
+          "$ref": "#/definitions/IdentityProviderInput",
+          "description": "The identity provider input for source agent authentication."
+        },
+        "authCertificate": {
+          "description": "The certificate to be used for AAD authentication.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmFabricSpecificDetails": {
+      "description": "InMageRcm fabric specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificDetails"
+        }
+      ],
+      "properties": {
+        "vmwareSiteId": {
+          "description": "The ARM Id of the VMware site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "physicalSiteId": {
+          "description": "The ARM Id of the physical site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "description": "The service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceResourceId": {
+          "description": "The service resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceContainerId": {
+          "description": "The service container Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataPlaneUri": {
+          "description": "The data plane Uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "controlPlaneUri": {
+          "description": "The control plane Uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "processServers": {
+          "description": "The list of process servers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessServerDetails"
+          },
+          "readOnly": true
+        },
+        "rcmProxies": {
+          "description": "The list of RCM proxies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RcmProxyDetails"
+          },
+          "readOnly": true
+        },
+        "pushInstallers": {
+          "description": "The list of push installers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PushInstallerDetails"
+          },
+          "readOnly": true
+        },
+        "replicationAgents": {
+          "description": "The list of replication agents.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationAgentDetails"
+          },
+          "readOnly": true
+        },
+        "reprotectAgents": {
+          "description": "The list of reprotect agents.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReprotectAgentDetails"
+          },
+          "readOnly": true
+        },
+        "dras": {
+          "description": "The list of DRAs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DraDetails"
+          },
+          "readOnly": true
+        },
+        "agentDetails": {
+          "description": "The list of agent details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentDetails"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmLastAgentUpgradeErrorDetails": {
+      "description": "InMageRcm last source agent upgrade error details.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessageParameters": {
+          "description": "The error message parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "errorTags": {
+          "description": "The error tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InMageRcmMobilityAgentDetails": {
+      "description": "InMageRcm mobility agent details.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The agent version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestVersion": {
+          "description": "The latest agent version available.",
+          "type": "string",
+          "readOnly": true
+        },
+        "driverVersion": {
+          "description": "The driver version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestUpgradableVersionWithoutReboot": {
+          "description": "The latest upgradeable version available without reboot.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentVersionExpiryDate": {
+          "format": "date-time",
+          "description": "The agent version expiry date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "driverVersionExpiryDate": {
+          "format": "date-time",
+          "description": "The driver version expiry date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The time of the last heartbeat received from the agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reasonsBlockingUpgrade": {
+          "description": "The whether update is possible or not.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "AlreadyOnLatestVersion",
+              "RebootRequired",
+              "AgentNoHeartbeat",
+              "RcmProxyNoHeartbeat",
+              "ProcessServerNoHeartbeat",
+              "IncompatibleApplianceVersion",
+              "NotProtected",
+              "UnsupportedProtectionScenario",
+              "DistroIsNotReported",
+              "DistroNotSupportedForUpgrade",
+              "MissingUpgradePath",
+              "InvalidAgentVersion",
+              "InvalidDriverVersion",
+              "Unknown"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AgentUpgradeBlockedReason",
+              "modelAsString": true
+            }
+          },
+          "readOnly": true
+        },
+        "isUpgradeable": {
+          "description": "A value indicating whether agent is upgradeable or not.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InMageRcmNicDetails": {
+      "description": "InMageRcm NIC details.",
+      "type": "object",
+      "properties": {
+        "nicId": {
+          "description": "The NIC Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isPrimaryNic": {
+          "description": "A value indicating whether this is the primary NIC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isSelectedForFailover": {
+          "description": "A value indicating whether this NIC is selected for failover.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceIPAddress": {
+          "description": "The source IP address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceIPAddressType": {
+          "description": "The source IP address type.",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EthernetAddressType",
+            "modelAsString": true
+          }
+        },
+        "sourceNetworkId": {
+          "description": "Source network Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceSubnetName": {
+          "description": "Source subnet name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetIPAddress": {
+          "description": "The target IP address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetIPAddressType": {
+          "description": "The target IP address type.",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EthernetAddressType",
+            "modelAsString": true
+          }
+        },
+        "targetSubnetName": {
+          "description": "Target subnet name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "testSubnetName": {
+          "description": "Test subnet name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "testIPAddress": {
+          "description": "The test IP address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "testIPAddressType": {
+          "description": "The test IP address type.",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EthernetAddressType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "InMageRcmNicInput": {
+      "description": "InMageRcm NIC input.",
+      "type": "object",
+      "properties": {
+        "nicId": {
+          "description": "The NIC Id.",
+          "type": "string"
+        },
+        "isPrimaryNic": {
+          "description": "A value indicating whether this is the primary NIC.",
+          "type": "string"
+        },
+        "isSelectedForFailover": {
+          "description": "A value indicating whether this NIC is selected for failover.",
+          "type": "string"
+        },
+        "targetSubnetName": {
+          "description": "Target subnet name.",
+          "type": "string"
+        },
+        "targetStaticIPAddress": {
+          "description": "The target static IP address.",
+          "type": "string"
+        },
+        "testSubnetName": {
+          "description": "The test subnet name.",
+          "type": "string"
+        },
+        "testStaticIPAddress": {
+          "description": "The test static IP address.",
+          "type": "string"
+        }
+      }
+    },
+    "InMageRcmPolicyCreationInput": {
+      "description": "InMageRcm policy creation input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointHistoryInMinutes": {
+          "format": "int32",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
+          "type": "integer"
+        },
+        "crashConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The crash consistent snapshot frequency (in minutes).",
+          "type": "integer"
+        },
+        "appConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The app consistent snapshot frequency (in minutes).",
+          "type": "integer"
+        },
+        "enableMultiVmSync": {
+          "description": "A value indicating whether multi-VM sync has to be enabled.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmPolicyDetails": {
+      "description": "InMageRcm specific policy details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "recoveryPointHistoryInMinutes": {
+          "format": "int32",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "appConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The app consistent snapshot frequency in minutes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "crashConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The crash consistent snapshot frequency in minutes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "enableMultiVmSync": {
+          "description": "A value indicating whether multi-VM sync has to be enabled.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmProtectedDiskDetails": {
+      "description": "InMageRcm protected disk details.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskName": {
+          "description": "The disk name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isOSDisk": {
+          "description": "A value indicating whether the disk is the OS disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacityInBytes": {
+          "format": "int64",
+          "description": "The disk capacity in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "logStorageAccountId": {
+          "description": "The log storage account ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskEncryptionSetId": {
+          "description": "The disk encryption set ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "seedManagedDiskId": {
+          "description": "The ARM Id of the seed managed disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetManagedDiskId": {
+          "description": "The ARM Id of the target managed disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskType": {
+          "description": "The disk type.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DiskAccountType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "InMageRcmRecoveryPointDetails": {
+      "description": "InMageRcm provider specific recovery point details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificRecoveryPointDetails"
+        }
+      ],
+      "properties": {
+        "isMultiVmSyncPoint": {
+          "description": "A value indicating whether the recovery point is multi VM consistent.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmReplicationDetails": {
+      "description": "InMageRcm provider specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificSettings"
+        }
+      ],
+      "properties": {
+        "internalIdentifier": {
+          "description": "The virtual machine internal identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fabricDiscoveryMachineId": {
+          "description": "The ARM Id of the discovered VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "multiVmGroupName": {
+          "description": "The multi VM group name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "discoveryType": {
+          "description": "The type of the discovered VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "processServerId": {
+          "description": "The process server Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "processorCoreCount": {
+          "format": "int32",
+          "description": "The processor core count.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allocatedMemoryInMB": {
+          "format": "double",
+          "description": "The allocated mememory in MB.",
+          "type": "number",
+          "readOnly": true
+        },
+        "processServerName": {
+          "description": "The process server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "description": "The run-as account Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osType": {
+          "description": "The type of the OS on the VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "firmwareType": {
+          "description": "The firmware type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetGeneration": {
+          "description": "The target generation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "licenseType": {
+          "description": "License Type of the VM to be used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetVmName": {
+          "description": "Target VM name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetVmSize": {
+          "description": "The target VM size.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetResourceGroupId": {
+          "description": "The target resource group Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetAvailabilitySetId": {
+          "description": "The target availability set Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetBootDiagnosticsStorageAccountId": {
+          "description": "The target boot diagnostics storage account ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetNetworkId": {
+          "description": "The target network Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "testNetworkId": {
+          "description": "The test network Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "failoverRecoveryPointId": {
+          "description": "The recovery point Id to which the VM was failed over.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastRecoveryPointReceived": {
+          "format": "date-time",
+          "description": "The last recovery point received time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastRpoInSeconds": {
+          "format": "int64",
+          "description": "The last recovery point objective value.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "lastRpoCalculatedTime": {
+          "format": "date-time",
+          "description": "The last recovery point objective calculated time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastRecoveryPointId": {
+          "description": "The last recovery point Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialReplicationProgressPercentage": {
+          "format": "int32",
+          "description": "The initial replication progress percentage. This is calculated based on total bytes processed for all disks in the source VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "initialReplicationProcessedBytes": {
+          "format": "int64",
+          "description": "The initial replication processed bytes. This includes sum of total bytes transferred and matched bytes on all selected disks in source VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "initialReplicationTransferredBytes": {
+          "format": "int64",
+          "description": "The initial replication transferred bytes from source VM to azure for all selected disks on source VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resyncProgressPercentage": {
+          "format": "int32",
+          "description": "The resync progress percentage. This is calculated based on total bytes processed for all disks in the source VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resyncProcessedBytes": {
+          "format": "int64",
+          "description": "The resync processed bytes. This includes sum of total bytes transferred and matched bytes on all selected disks in source VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resyncTransferredBytes": {
+          "format": "int64",
+          "description": "The resync transferred bytes from source VM to azure for all selected disks on source VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resyncRequired": {
+          "description": "A value indicating whether resync is required.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resyncState": {
+          "description": "The resync state.",
+          "enum": [
+            "None",
+            "PreparedForResynchronization",
+            "StartedResynchronization"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResyncState",
+            "modelAsString": true
+          }
+        },
+        "agentUpgradeState": {
+          "description": "The agent auto upgrade state.",
+          "enum": [
+            "None",
+            "Started",
+            "Completed",
+            "Commit"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MobilityAgentUpgradeState",
+            "modelAsString": true
+          }
+        },
+        "lastAgentUpgradeType": {
+          "description": "The last agent upgrade type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastAgentUpgradeFailedJobId": {
+          "description": "The last agent upgrade failed or cancelled job Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "protectedDisks": {
+          "description": "The list of protected disks.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InMageRcmProtectedDiskDetails"
+          }
+        },
+        "isLastUpgradeSuccessful": {
+          "description": "A value indicating whether last agent upgrade was successful or not.",
+          "type": "string",
+          "readOnly": true
+        },
+        "mobilityAgentDetails": {
+          "$ref": "#/definitions/InMageRcmMobilityAgentDetails",
+          "description": "The mobility agent information.",
+          "readOnly": true
+        },
+        "lastAgentUpgradeErrorDetails": {
+          "description": "The last agent upgrade error information.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InMageRcmLastAgentUpgradeErrorDetails"
+          }
+        },
+        "agentUpgradeBlockingErrorDetails": {
+          "description": "The agent upgrade blocking error information.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InMageRcmAgentUpgradeBlockingErrorDetails"
+          }
+        },
+        "vmNics": {
+          "description": "The network details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InMageRcmNicDetails"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmTestFailoverInput": {
+      "description": "InMageRcm provider specific input for test failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "networkId": {
+          "description": "The test network Id.",
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmUnplannedFailoverInput": {
+      "description": "InMageRcm provider specific input for unplanned failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UnplannedFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "performShutdown": {
+          "description": "A value indicating whether VM is to be shutdown.",
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
+    "InMageRcmUpdateReplicationProtectedItemInput": {
+      "description": "InMageRcm provider specific input to update replication protected item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateReplicationProtectedItemProviderInput"
+        }
+      ],
+      "properties": {
+        "targetVmName": {
+          "description": "The target VM name.",
+          "type": "string"
+        },
+        "targetVmSize": {
+          "description": "The target VM size.",
+          "type": "string"
+        },
+        "targetResourceGroupId": {
+          "description": "The target resource group ARM Id.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "The target availability set ARM Id.",
+          "type": "string"
+        },
+        "targetAvailabilityZone": {
+          "description": "The target availability zone.",
+          "type": "string"
+        },
+        "targetProximityPlacementGroupId": {
+          "description": "The target proximity placement group Id.",
+          "type": "string"
+        },
+        "targetBootDiagnosticsStorageAccountId": {
+          "description": "The target boot diagnostics storage account ARM Id.",
+          "type": "string"
+        },
+        "targetNetworkId": {
+          "description": "The target network ARM Id.",
+          "type": "string"
+        },
+        "testNetworkId": {
+          "description": "The test network ARM Id.",
+          "type": "string"
+        },
+        "vmNics": {
+          "description": "The list of NIC details.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmNicInput"
+          }
+        },
+        "licenseType": {
+          "description": "The license type.",
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "WindowsServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
     "InMageReplicationDetails": {
       "description": "InMage provider specific settings",
       "type": "object",
@@ -12606,6 +14003,64 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "x-ms-discriminator-value": "InMage"
+    },
+    "InMageTestFailoverInput": {
+      "description": "Provider specific input for InMage test failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointType": {
+          "description": "The recovery point type. Values from LatestTime, LatestTag or Custom. In the case of custom, the recovery point provided by RecoveryPointId will be used. In the other two cases, recovery point id will be ignored.",
+          "enum": [
+            "LatestTime",
+            "LatestTag",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMage"
+    },
+    "InMageUnplannedFailoverInput": {
+      "description": "Provider specific input for InMage unplanned failover.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UnplannedFailoverProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointType": {
+          "description": "The recovery point type. Values from LatestTime, LatestTag or Custom. In the case of custom, the recovery point provided by RecoveryPointId will be used. In the other two cases, recovery point id will be ignored.",
+          "enum": [
+            "LatestTime",
+            "LatestTag",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointId": {
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMage"
@@ -12980,11 +14435,11 @@
       "type": "object",
       "properties": {
         "keyIdentifier": {
-          "description": "The key url / identifier.",
+          "description": "The key URL / identifier.",
           "type": "string"
         },
         "keyVaultResourceArmId": {
-          "description": "The KeyVault resource ARM id for key.",
+          "description": "The KeyVault resource ARM Id for key.",
           "type": "string"
         }
       }
@@ -13982,6 +15437,137 @@
         }
       }
     },
+    "ProcessServerDetails": {
+      "description": "Process server details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The process server Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The process server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The process server version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The last heartbeat received from the process server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalMemoryInBytes": {
+          "format": "int64",
+          "description": "The total memory.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "availableMemoryInBytes": {
+          "format": "int64",
+          "description": "The available memory.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "usedMemoryInBytes": {
+          "format": "int64",
+          "description": "The used memory.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memoryUsagePercentage": {
+          "format": "double",
+          "description": "The memory usage percentage.",
+          "type": "number",
+          "readOnly": true
+        },
+        "totalSpaceInBytes": {
+          "format": "int64",
+          "description": "The total disk space.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "availableSpaceInBytes": {
+          "format": "int64",
+          "description": "The available disk space.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "usedSpaceInBytes": {
+          "format": "int64",
+          "description": "The used disk space.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "freeSpacePercentage": {
+          "format": "double",
+          "description": "The free disk space percentage.",
+          "type": "number",
+          "readOnly": true
+        },
+        "throughputUploadPendingDataInBytes": {
+          "format": "int64",
+          "description": "The uploading pending data in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputInBytes": {
+          "format": "int64",
+          "description": "The throughput in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "processorUsagePercentage": {
+          "format": "double",
+          "description": "The processor usage percentage.",
+          "type": "number",
+          "readOnly": true
+        },
+        "health": {
+          "description": "The health of the process server.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "healthErrors": {
+          "description": "The health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "readOnly": true
+        },
+        "historicHealth": {
+          "description": "The historic health of the process server based on the health in last 24 hours.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ProtectableItem": {
       "description": "Replication protected item",
       "type": "object",
@@ -14366,6 +15952,106 @@
         }
       },
       "x-ms-discriminator-value": "RcmAzureMigration"
+    },
+    "PushInstallerDetails": {
+      "description": "Push installer details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The push installer Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The push installer name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The push installer version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The last heartbeat received from the push installer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "health": {
+          "description": "The health of the push installer.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "healthErrors": {
+          "description": "The health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "RcmProxyDetails": {
+      "description": "RCM proxy details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The RCM proxy Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The RCM proxy name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The RCM proxy version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The last heartbeat received from the RCM proxy.",
+          "type": "string",
+          "readOnly": true
+        },
+        "health": {
+          "description": "The health of the RCM proxy.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "healthErrors": {
+          "description": "The health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "readOnly": true
+        }
+      }
     },
     "RecoveryPlan": {
       "description": "Recovery plan details.",
@@ -14801,6 +16487,36 @@
         }
       },
       "x-ms-discriminator-value": "InMage"
+    },
+    "RecoveryPlanInMageRcmFailoverInput": {
+      "description": "Recovery plan InMageRcm failover input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointType": {
+          "description": "The recovery point type.",
+          "enum": [
+            "Latest",
+            "LatestApplicationConsistent",
+            "LatestCrashConsistent",
+            "LatestProcessed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPlanPointType",
+            "modelAsString": true
+          }
+        },
+        "useMultiVmSyncPoint": {
+          "description": "A value indicating whether multi VM sync enabled VMs should use multi VM sync points for failover.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
     },
     "RecoveryPlanManualActionDetails": {
       "description": "Recovery plan manual action details.",
@@ -15418,6 +17134,56 @@
         }
       }
     },
+    "ReplicationAgentDetails": {
+      "description": "Replication agent details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The replication agent Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The replication agent name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The replication agent version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The last heartbeat received from the replication agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "health": {
+          "description": "The health of the replication agent.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "healthErrors": {
+          "description": "The health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "ReplicationEligibilityResults": {
       "description": "Replication eligibility results response model.",
       "type": "object",
@@ -15727,6 +17493,56 @@
         }
       },
       "discriminator": "instanceType"
+    },
+    "ReprotectAgentDetails": {
+      "description": "Reprotect agent details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The reprotect agent Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The reprotect agent name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHeartbeatUtc": {
+          "format": "date-time",
+          "description": "The last heartbeat received from the reprotect agent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "health": {
+          "description": "The health of the reprotect agent.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "healthErrors": {
+          "description": "The health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "readOnly": true
+        }
+      }
     },
     "ResolveHealthError": {
       "description": "Resolve health errors input properties.",
@@ -16365,21 +18181,21 @@
       }
     },
     "TestFailoverInput": {
-      "description": "Input definition for planned failover.",
+      "description": "Input definition for test failover.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TestFailoverInputProperties",
-          "description": "Planned failover input properties"
+          "description": "test failover input properties"
         }
       }
     },
     "TestFailoverInputProperties": {
-      "description": "Input definition for planned failover input properties.",
+      "description": "Input definition for test failover input properties.",
       "type": "object",
       "properties": {
         "failoverDirection": {
-          "description": "Failover direction.",
+          "description": "Test failover direction.",
           "type": "string"
         },
         "networkType": {
@@ -16395,7 +18211,7 @@
           "type": "string"
         },
         "providerSpecificDetails": {
-          "$ref": "#/definitions/ProviderSpecificFailoverInput",
+          "$ref": "#/definitions/TestFailoverProviderSpecificInput",
           "description": "Provider specific settings"
         }
       }
@@ -16438,6 +18254,17 @@
         }
       },
       "x-ms-discriminator-value": "TestFailoverJobDetails"
+    },
+    "TestFailoverProviderSpecificInput": {
+      "description": "Provider specific test failover input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "TestMigrateCleanupInput": {
       "description": "Input for test migrate cleanup.",
@@ -16503,17 +18330,17 @@
       "discriminator": "instanceType"
     },
     "UnplannedFailoverInput": {
-      "description": "Input definition for planned failover.",
+      "description": "Input definition for unplanned failover.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UnplannedFailoverInputProperties",
-          "description": "Planned failover input properties"
+          "description": "Unplanned failover input properties."
         }
       }
     },
     "UnplannedFailoverInputProperties": {
-      "description": "Input definition for planned failover input properties.",
+      "description": "Input definition for unplanned failover input properties.",
       "type": "object",
       "properties": {
         "failoverDirection": {
@@ -16525,10 +18352,21 @@
           "type": "string"
         },
         "providerSpecificDetails": {
-          "$ref": "#/definitions/ProviderSpecificFailoverInput",
+          "$ref": "#/definitions/UnplannedFailoverProviderSpecificInput",
           "description": "Provider specific settings"
         }
       }
+    },
+    "UnplannedFailoverProviderSpecificInput": {
+      "description": "Provider specific unplanned failover input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "UpdateMigrationItemInput": {
       "description": "Update migration item input.",
