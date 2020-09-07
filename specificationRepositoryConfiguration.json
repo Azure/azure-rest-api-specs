@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
-  "pipelineName": "automation - sdk",
-  "sdkRepositoryMappings": {
+  "pipelineName": "automation - sdk - test",
+    "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
       "mainRepository": "Azure/azure-sdk-for-go"
@@ -48,42 +48,44 @@
     }
   },
   "overrides": {
-    "Azure/azure-rest-api-specs-pr": {
+    "openapi-env-test/azure-rest-api-specs": {
       "sdkRepositoryMappings": {
         "azure-sdk-for-go": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-go-pr",
-          "mainRepository": "Azure/azure-sdk-for-go-pr"
+          "mainBranch": "latest",
+          "mainRepository": "openapi-env-test/azure-sdk-for-go"
         },
         "azure-sdk-for-java": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-java-pr",
-          "mainRepository": "Azure/azure-sdk-for-java-pr"
+          "mainRepository": "openapi-env-test/azure-sdk-for-java"
         },
         "azure-sdk-for-js": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-js-pr",
-          "mainRepository": "Azure/azure-sdk-for-js-pr"
+          "mainRepository": "openapi-env-test/azure-sdk-for-js"
         },
         "azure-sdk-for-net": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-net-pr",
-          "mainRepository": "Azure/azure-sdk-for-net-pr"
+          "mainRepository": "openapi-env-test/azure-sdk-for-net"
         },
         "azure-sdk-for-python": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
-          "mainRepository": "Azure/azure-sdk-for-python-pr",
+          "mainRepository": "openapi-env-test/azure-sdk-for-python",
           "mainBranch": "release/v3"
         },
         "azure-sdk-for-python-track2": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
-          "mainRepository": "Azure/azure-sdk-for-python-pr"
+          "mainRepository": "openapi-env-test/azure-sdk-for-python"
         },
         "azure-cli-extensions": {
-          "integrationRepository": "azure-sdk/azure-cli-extensions-pr",
-          "mainRepository": "Azure/azure-cli-extensions-pr"
+          "mainRepository": "openapi-env-test/azure-cli-extensions"
         },
+        "azure-sdk-for-ruby": {
+          "mainBranch": "latest",
+          "mainRepository": "openapi-env-test/azure-sdk-for-ruby"
+        },
+        "azure-sdk-for-node": "openapi-env-test/azure-sdk-for-node",
         "azure-sdk-for-trenton": {
-          "integrationRepository": "Azure/azure-sdk-for-trenton",
-          "mainRepository": "Azure/azure-sdk-for-trenton",
-          "secondaryRepository": "Azure/azure-sdk-for-trenton",
-          "secondaryBranch": "secondary"
+          "integrationRepository": "test-repo-billy/azure-sdk-for-trenton",
+          "mainRepository": "test-repo-billy/azure-sdk-for-trenton",
+          "secondaryRepository":"test-repo-billy/azure-sdk-for-trenton",
+          "secondaryBranch":"secondary"
+        },
+        "azure-resource-manager-schemas": {
+          "mainRepository": "openapi-env-test/azure-resource-manager-schemas"
         }
       }
     }
