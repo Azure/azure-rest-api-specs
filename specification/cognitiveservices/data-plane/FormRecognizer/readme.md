@@ -38,6 +38,7 @@ input-file:
   - preview/v2.0/FormRecognizer.json
 ```
 
+
 ### Release 1.0
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
@@ -126,4 +127,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
