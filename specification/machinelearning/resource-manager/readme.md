@@ -62,6 +62,15 @@ input-file:
 - Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json
 ```
 
+### Tag: package-commitmentPlans-2020-09-preview
+
+These settings apply only when `--tag=package-commitmentPlans-2020-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-commitmentPlans-2020-09-preview'
+input-file:
+- Microsoft.MachineLearning/preview/2020-09-07-preview/commitmentPlans.json
+```
+
 ### Tag: package-workspaces-2016-04
 
 These settings apply only when `--tag=package-workspaces-2016-04` is specified on the command line.
@@ -182,6 +191,7 @@ batch:
 batch:
   - tag: package-webservices-2017-01
   - tag: package-commitmentPlans-2016-05-preview
+  - tag: package-commitmentPlans-2020-09-preview
   - tag: package-webservices-2016-05-preview
   - tag: package-workspaces-2016-04
   - tag: package-workspaces-2019-10
@@ -209,6 +219,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.machinelearning.v2016_05_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearning/mgmt-v2016_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-commitmentPlans-2020-09-preview and java
+
+These settings apply only when `--tag=package-commitmentPlans-2020-09-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-commitmentPlans-2020-09-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearning.v2016_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearning/mgmt-v2020_09_07_preview
 regenerate-manager: true
 generate-interface: true
 ```
