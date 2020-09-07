@@ -2534,6 +2534,19 @@
           "description": "A boolean value that indicates if double encryption is enabled.",
           "default": false,
           "type": "boolean"
+        },
+        "engineType": {
+          "type": "string",
+          "description": "The engine type",
+          "default": "V2",
+          "enum": [
+            "V2",
+            "V3"
+          ],
+          "x-ms-enum": {
+            "name": "EngineType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Class representing the Kusto cluster properties."
