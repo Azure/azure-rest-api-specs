@@ -816,16 +816,24 @@
       "description": "Details of controller type.",
       "type": "object",
       "properties": {
-        "controllerType": {
-          "type": "string",
-          "description": "Type of Delegated controller."
-        },
-        "kubernetesProperties": {
+        "orchestratorInstances": {
           "type": "array",
-          "description": "properties of kubernetes clusters",
-          "items": {
-            "$ref": "#/definitions/KubernetesProperties"
-          }
+          "description": "Orchestrator properties",
+          "$ref": "#/definitions/OrchestratorInstanceParameters"
+        }
+      }
+    },
+    "OrchestratorInstanceParameters": {
+      "description": "Details of controller type.",
+      "properties": {
+        "orchestratorType": {
+          "type": "string",
+          "description": "Type of orchestrator(Eg: Kubernetes)."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OrchestratorProperties",
+          "description": "Proerties of orchestrator instance"
         }
       }
     },
@@ -864,10 +872,6 @@
           "readOnly": true,
           "description": "The current state of dnc controller resource."
         },
-        "type": {
-          "type": "string",
-          "description": "Type of dnc controller."
-        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource GUID property of the controller resource."
@@ -882,8 +886,8 @@
         }
       }
     },
-    "KubernetesProperties": {
-      "description": "Properties of kubernetes cluster",
+    "OrchestratorProperties": {
+      "description": "Properties of orchestrator",
       "type": "object",
       "properties": {
         "serverAppID": {
@@ -938,6 +942,10 @@
           },
           "readOnly": true,
           "description": "The current state of delegated subnet resource."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Guid for the resource(delegatedSubnet) created"
         }
       }
     },
