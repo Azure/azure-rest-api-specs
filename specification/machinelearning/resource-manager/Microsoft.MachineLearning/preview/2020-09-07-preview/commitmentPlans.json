@@ -34,7 +34,13 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -65,7 +71,13 @@
             "schema": {
               "$ref": "#/definitions/SkuListResult"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     },
@@ -99,7 +111,13 @@
             "schema": {
               "$ref": "#/definitions/CommitmentAssociation"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     },
@@ -136,7 +154,13 @@
             "schema": {
               "$ref": "#/definitions/CommitmentAssociationListResult"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     },
@@ -179,7 +203,13 @@
             "schema": {
               "$ref": "#/definitions/CommitmentAssociation"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     },
@@ -196,7 +226,16 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlan"
             }
-          }
+          },
+		  "404": {
+			"description": "Azure ML commitment plan not found."
+		  },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       },
       "put": {
@@ -228,7 +267,16 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlan"
             }
-          }
+          },
+		  "400": {
+			"description": "Failed to create or update the Azure ML commitment plan."
+		  },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       },
       "delete": {
@@ -240,7 +288,19 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
+          },
+		  "204": {
+            "description": "The Azure ML commitment plan does not exist in the subscription."
+          },
+		  "400": {
+			"description": "Failed to remove the Azure ML commitment plan."
+		  },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       },
       "patch": {
@@ -266,7 +326,13 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlan"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       },
       "parameters": [
@@ -315,7 +381,13 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlanListResult"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     },
@@ -349,7 +421,13 @@
             "schema": {
               "$ref": "#/definitions/CommitmentPlanListResult"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     },
@@ -386,7 +464,13 @@
             "schema": {
               "$ref": "#/definitions/PlanUsageHistoryListResult"
             }
-          }
+          },
+		  "default": {
+		    "description": "Error response describing why the operation failed",
+			"schema":{
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
         }
       }
     }
@@ -636,9 +720,6 @@
     "Resource": {
       "x-ms-azure-resource": true,
       "description": "Common properties of an ARM resource.",
-      "required": [
-        "location"
-      ],
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -1001,7 +1082,15 @@
         "display": {
           "$ref": "#/definitions/OperationDisplayInfo",
           "description": "The API operation info."
-        }
+        },
+		"origin": {
+          "type": "string",
+          "description": "The operation origin."
+        },
+		"properties": {
+		  "type": "object",
+		  "description": "The operation properties."
+		}
       }
     },
     "OperationDisplayInfo": {
