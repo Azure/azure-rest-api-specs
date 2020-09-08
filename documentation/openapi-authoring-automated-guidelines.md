@@ -2957,16 +2957,16 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The API version:{api-version} having been in a preview state over one year , please move it to GA or retire it.
+**Output Message** : The API version:{api-version} having been in a preview state over one year , please move to GA or retire.
 
-**Description** : Per [Retirement-of-Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews),Service, feature, API, and SKU in preview for over one year need to move to GA or retire.
+**Description** : Per [Retirement-of-Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews), service, feature, API, and SKU in preview for over one year need to move to GA or retire.
 
 **CreatedAt**: Sep 8, 2020
 
 **LastModifiedAt**: Sep 8, 2020
 
 **How to fix the violation**: 
-   Consider retiring the preview version or moving to GA. 
+   Consider retiring or moving to GA. 
    
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
