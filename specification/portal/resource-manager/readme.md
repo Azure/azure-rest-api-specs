@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-2019-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2019-01-01-preview'
 input-file:
   - Microsoft.Portal/preview/2019-01-01-preview/portal.json
+  - Microsoft.Portal/preview/2019-01-01-preview/tenantConfiguration.json
 ```
 
 ### Tag: package-2018-10-01-preview
@@ -131,6 +132,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Portal/preview/2019-01-01-preview/portal.json
+  - $(this-folder)/Microsoft.Portal/preview/2019-01-01-preview/tenantConfiguration.json
   - $(this-folder)/Microsoft.Portal/preview/2018-10-01-preview/portal.json
   - $(this-folder)/Microsoft.Portal/preview/2015-08-01-preview/portal.json
 
