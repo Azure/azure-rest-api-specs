@@ -2151,12 +2151,6 @@
           "description": "storage MB name",
           "readOnly": true
         },
-        "supportedIops": {
-          "type": "integer",
-          "format": "int64",
-          "description": "supported IOPS",
-          "readOnly": true
-        },
         "storageSizeMB": {
           "type": "integer",
           "format": "int64",
@@ -2221,12 +2215,26 @@
           "description": "storage edition name",
           "readOnly": true
         },
-        "supportedStorageMB": {
-          "description": "A list of supported storage size in MB",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageMBCapability"
-          },
+        "minStorageSize": {
+          "description": "The minimal supported storage size in MB",
+          "$ref": "#/definitions/StorageMBCapability",
+          "readOnly": true
+        },
+        "maxStorageSize": {
+          "description": "The maximum supported storage size in MB",
+          "$ref": "#/definitions/StorageMBCapability",
+          "readOnly": true
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimal backup retention days",
+          "readOnly": true
+        },
+        "maxBackupRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum backup retention days",
           "readOnly": true
         }
       },
