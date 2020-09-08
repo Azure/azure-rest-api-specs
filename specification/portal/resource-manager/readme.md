@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 ```yaml $(tag) == 'package-preview-2020-09'
 input-file:
   - Microsoft.Portal/preview/2020-09-01-preview/portal.json
+  - Microsoft.Portal/preview/2020-09-01-preview/tenantConfiguration.json
 ```
 ### Tag: package-2019-01-01-preview
 
