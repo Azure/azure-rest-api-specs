@@ -26,12 +26,13 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-04
+tag: package-2019-09
 ```
 
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
 
 ```yaml $(tag) == 'package-preview-2020-04'
 input-file:
