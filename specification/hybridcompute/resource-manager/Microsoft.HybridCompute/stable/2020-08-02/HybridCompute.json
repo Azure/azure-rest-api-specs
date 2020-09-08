@@ -822,6 +822,7 @@
           "description": "Specifies the Arc Machine's unique SMBIOS ID"
         },
         "extensions": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MachineExtensionInstanceView"
@@ -1128,24 +1129,29 @@
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The machine extension name."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
         },
         "typeHandlerVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the version of the script handler."
         },
         "status": {
           "properties": {
             "code": {
               "type": "string",
+              "readOnly": true,
               "description": "The status code."
             },
             "level": {
               "type": "string",
+              "readOnly": true,
               "description": "The level code.",
               "enum": [
                 "Info",
@@ -1159,14 +1165,17 @@
             },
             "displayStatus": {
               "type": "string",
+              "readOnly": true,
               "description": "The short localizable label for the status."
             },
             "message": {
               "type": "string",
+              "readOnly": true,
               "description": "The detailed status message, including for alerts and error messages."
             },
             "time": {
               "type": "string",
+              "readOnly": true,
               "format": "date-time",
               "description": "The time of the status."
             }
