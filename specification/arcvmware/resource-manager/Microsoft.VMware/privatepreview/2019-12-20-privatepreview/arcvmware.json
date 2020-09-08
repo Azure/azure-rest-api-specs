@@ -1221,13 +1221,26 @@
               "$ref": "#/definitions/VirtualMachine"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
