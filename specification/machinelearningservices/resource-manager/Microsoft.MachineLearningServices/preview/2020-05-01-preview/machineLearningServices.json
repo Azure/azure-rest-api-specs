@@ -3461,14 +3461,14 @@
         "dataStoreType": {
           "description": "The datastore type.",
           "enum": [
-            "AzureBlob",
-            "AzureFile",
-            "AzureDataLake",
-            "AzureSqlDatabase",
-            "AzurePostgreSql",
-            "DBFS",
-            "AzureDataLakeGen2",
-            "AzureMySql"
+            "1",
+            "2",
+            "4",
+            "8",
+            "16",
+            "32",
+            "64",
+            "5"
           ],
           "format": "int32",
           "type": "integer",
@@ -3559,8 +3559,8 @@
         "serviceDataAccessAuthIdentity": {
           "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
           "enum": [
-            "None",
-            "WorkspaceSystemAssignedIdentity"
+            0,
+            1
           ],
           "format": "int32",
           "type": "integer",
@@ -3798,10 +3798,10 @@
     "AzureStorageCredentialTypes": {
       "description": " The credential type.",
       "enum": [
-        "None",
-        "Sas",
-        "AccountKey",
-        "ClientCredentials"
+        0,
+        1,
+        2,
+        3
       ],
       "format": "int32",
       "type": "integer",
@@ -3813,8 +3813,8 @@
     "AzureDataLakeCredentialTypes": {
       "description": "The Azure Data Lake credentialType name.",
       "enum": [
-        "None",
-        "ServicePrincipal"
+        0,
+        1
       ],
       "format": "int32",
       "type": "integer",
@@ -3826,9 +3826,9 @@
     "SqlCredentialTypes": {
       "description": "Sql Authentication type.",
       "enum": [
-        "SqlAuthentication",
-        "ServicePrincipal",
-        "None"
+        0,
+        1,
+        2
       ],
       "format": "int32",
       "type": "integer",
