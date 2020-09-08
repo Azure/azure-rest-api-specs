@@ -3422,6 +3422,62 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/changeInvoiceSection": {
+      "post": {
+        "description": "Moves a subscription's charges to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_Move",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MoveBillingSubscription": {
+            "$ref": "./examples/ChangeInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+            },
+            "description": "Request parameters that are provided to the move subscription operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Billing Subscription transfer is in progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/initiateTransfer": {
       "post": {
         "tags": [
