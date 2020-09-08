@@ -2019,7 +2019,7 @@
       },
       "delete": {
         "tags": [
-          "MachineLearningDatasets"
+          "MachineLearningDatastores"
         ],
         "operationId": "MachineLearningDatastore_Delete",
         "description": "Deletes specified Machine Learning Datastore.",
@@ -3461,17 +3461,16 @@
         "dataStoreType": {
           "description": "The datastore type.",
           "enum": [
-            "1",
-            "2",
-            "4",
-            "8",
-            "16",
-            "32",
-            "64",
-            "5"
+            "AzureBlob",
+            "AzureFile",
+            "AzureDataLake",
+            "AzureSqlDatabase",
+            "AzurePostgreSql",
+            "DBFS",
+            "AzureDataLakeGen2",
+            "AzureMySql"
           ],
-          "format": "int32",
-          "type": "integer",
+          "type": "string",
           "x-ms-enum": {
             "name": "DataStoreType",
             "modelAsString": true
@@ -3559,11 +3558,10 @@
         "serviceDataAccessAuthIdentity": {
           "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
           "enum": [
-            0,
-            1
+            "None",
+            "WorkspaceSystemAssignedIdentity"
           ],
-          "format": "int32",
-          "type": "integer",
+          "type": "string",
           "x-ms-enum": {
             "name": "ServiceDataAccessAuthIdentity",
             "modelAsString": true
@@ -3798,26 +3796,24 @@
     "AzureStorageCredentialTypes": {
       "description": " The credential type.",
       "enum": [
-        0,
-        1,
-        2,
-        3
+        "None",
+        "Sas",
+        "AccountKey",
+        "ClientCredentials"
       ],
-      "format": "int32",
-      "type": "integer",
+      "type": "string",
       "x-ms-enum": {
         "name": "AzureStorageCredentialTypes",
         "modelAsString": true
       }
     },
     "AzureDataLakeCredentialTypes": {
-      "description": "The Azure Data Lake credentialType name.",
+      "description": "The Azure Data Lake credentialtype name.",
       "enum": [
-        0,
-        1
+        "None",
+        "ServicePrincipal"
       ],
-      "format": "int32",
-      "type": "integer",
+      "type": "string",
       "x-ms-enum": {
         "name": "AzureDataLakeCredentialTypes",
         "modelAsString": true
@@ -3826,12 +3822,11 @@
     "SqlCredentialTypes": {
       "description": "Sql Authentication type.",
       "enum": [
-        0,
-        1,
-        2
+        "SqlAuthentication",
+        "ServicePrincipal",
+        "None"
       ],
-      "format": "int32",
-      "type": "integer",
+      "type": "string",
       "x-ms-enum": {
         "name": "SqlCredentialTypes",
         "modelAsString": true
@@ -6803,7 +6798,7 @@
             "psqldb"
           ],
           "x-ms-enum": {
-            "name": "DatastoreTypeArm",
+            "name": "DatasetType",
             "modelAsString": true
           }
         },
@@ -6914,6 +6909,7 @@
         }
       },
       "required": [
+        "name",
         "dataStoreType"
       ]
     }
