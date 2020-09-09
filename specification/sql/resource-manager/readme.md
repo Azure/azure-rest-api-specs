@@ -82,7 +82,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/hybridLinkCreate.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
@@ -142,6 +141,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/hybridLinks.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
