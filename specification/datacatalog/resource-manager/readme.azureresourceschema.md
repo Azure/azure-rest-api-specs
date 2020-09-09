@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2016-03-30
+  - tag: schema-datacatalog-2016-03-30
+
 ```
 
-### Tag: package-2016-03-30 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-03-30 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2016-03-30' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-datacatalog-2016-03-30 and azureresourceschema
 
+``` yaml $(tag) == 'schema-datacatalog-2016-03-30' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DataCatalog/stable/2016-03-30/datacatalog.json
+
+```

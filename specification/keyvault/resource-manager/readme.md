@@ -26,12 +26,13 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-04
+tag: package-2019-09
 ```
 
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
 
 ```yaml $(tag) == 'package-preview-2020-04'
 input-file:
@@ -164,6 +165,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/keyvault.json
