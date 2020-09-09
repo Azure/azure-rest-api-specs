@@ -347,6 +347,16 @@ input-file:
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
+### Tag: package-2019-11-preview-only
+
+These settings apply only when `--tag=package-2019-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
+  - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
+```
+
 ### Tag: package-2019-06-01-only
 
 These settings apply only when `--tag=package-2019-06-01-only` is specified on the command line.
@@ -559,6 +569,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js monitor/resource-manager
 ```
 
 ## Python
@@ -591,6 +604,14 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+  - suppress: OperationsAPIImplementation
+    from: dataCollectionRules_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: dataCollectionRuleAssociations_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -607,6 +628,10 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -651,6 +676,8 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/baseline_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-06-01-preview/guestDiagnosticSettingsAssociation_API.json
