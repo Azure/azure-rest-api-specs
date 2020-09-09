@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2020-03-01.11.0",
+    "version": "2020-09-01.12.0",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -5951,7 +5951,7 @@
             },
             "description": "A response containing the Task counts for the specified Job.",
             "schema": {
-              "$ref": "#/definitions/TaskCounts"
+              "$ref": "#/definitions/TaskCountsResult"
             }
           },
           "default": {
@@ -7843,6 +7843,9 @@
           },
           "Add a task with container settings": {
             "$ref": "./examples/TaskAdd_ContainerSettings.json"
+          },
+          "Add a task with extra slot requirement": {
+            "$ref": "./examples/TaskAdd_RequiredSlots.json"
           }
         },
         "summary": "Adds a Task to the specified Job.",
@@ -11798,6 +11801,12 @@
           "$ref": "#/definitions/TaskConstraints",
           "title": "Constraints that apply to the Job Manager Task."
         },
+        "requiredSlots": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of scheduling slots that the Task required to run.",
+          "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1."
+        },
         "killJobOnCompletion": {
           "type": "boolean",
           "title": "Whether completion of the Job Manager Task signifies completion of the entire Job.",
@@ -11950,7 +11959,7 @@
         "commandLine"
       ],
       "title": "A Job Release Task to run on Job completion on any Compute Node where the Job has run.",
-      "description": "The Job Release Task runs when the Job ends, because of one of the following: The user calls the Terminate Job API, or the Delete Job API while the Job is still active, the Job's maximum wall clock time constraint is reached, and the Job is still active, or the Job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. The Job Release Task runs on each Node where Tasks of the Job have run and the Job Preparation Task ran and completed. If you reimage a Node after it has run the Job Preparation Task, and the Job ends without any further Tasks of the Job running on that Node (and hence the Job Preparation Task does not re-run), then the Job Release Task does not run on that Compute Node. If a Node reboots while the Job Release Task is still running, the Job Release Task runs again when the Compute Node starts up. The Job is not marked as complete until all Job Release Tasks have completed. The Job Release Task runs in the background. It does not occupy a scheduling slot; that is, it does not count towards the maxTasksPerNode limit specified on the Pool."
+      "description": "The Job Release Task runs when the Job ends, because of one of the following: The user calls the Terminate Job API, or the Delete Job API while the Job is still active, the Job's maximum wall clock time constraint is reached, and the Job is still active, or the Job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. The Job Release Task runs on each Node where Tasks of the Job have run and the Job Preparation Task ran and completed. If you reimage a Node after it has run the Job Preparation Task, and the Job ends without any further Tasks of the Job running on that Node (and hence the Job Preparation Task does not re-run), then the Job Release Task does not run on that Compute Node. If a Node reboots while the Job Release Task is still running, the Job Release Task runs again when the Compute Node starts up. The Job is not marked as complete until all Job Release Tasks have completed. The Job Release Task runs in the background. It does not occupy a scheduling slot; that is, it does not count towards the taskSlotsPerNode limit specified on the Pool."
     },
     "TaskSchedulingPolicy": {
       "properties": {
@@ -11972,7 +11981,7 @@
               },
               {
                 "value": "pack",
-                "description": "As many Tasks as possible (maxTasksPerNode) should be assigned to each Compute Node in the Pool before any Tasks are assigned to the next Compute Node in the Pool."
+                "description": "As many Tasks as possible (taskSlotsPerNode) should be assigned to each Compute Node in the Pool before any Tasks are assigned to the next Compute Node in the Pool."
               }
             ]
           }
@@ -12154,11 +12163,11 @@
           "title": "The virtual machine configuration for the Pool.",
           "description": "This property must be specified if the Pool needs to be created with Azure IaaS VMs. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
-        "maxTasksPerNode": {
+        "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of Tasks that can run concurrently on a single Compute Node in the Pool.",
-          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the Pool or 256."
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
@@ -13187,6 +13196,23 @@
       },
       "title": "The result of listing the status of the Job Preparation and Job Release Tasks for a Job."
     },
+    "TaskCountsResult": {
+      "properties": {
+        "taskCounts": {
+          "$ref": "#/definitions/TaskCounts",
+          "title": "The number of Tasks per state."
+        },
+        "taskSlotCounts": {
+          "$ref": "#/definitions/TaskSlotCounts",
+          "title": "The number of TaskSlots required by Tasks per state."
+        }
+      },
+      "required": [
+        "taskCounts",
+        "taskSlotCounts"
+      ],
+      "title": "The Task and TaskSlot counts for a Job."
+    },
     "TaskCounts": {
       "properties": {
         "active": {
@@ -13223,6 +13249,43 @@
         "failed"
       ],
       "title": "The Task counts for a Job."
+    },
+    "TaskSlotCounts": {
+      "properties": {
+        "active": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of TaskSlots for active Tasks."
+        },
+        "running": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of TaskSlots for running Tasks."
+        },
+        "completed": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of TaskSlots for completed Tasks."
+        },
+        "succeeded": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of TaskSlots for succeeded Tasks."
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of TaskSlots for failed Tasks."
+        }
+      },
+      "required": [
+        "active",
+        "running",
+        "completed",
+        "succeeded",
+        "failed"
+      ],
+      "title": "The TaskSlot counts for a Job."
     },
     "AutoScaleRunError": {
       "properties": {
@@ -13328,11 +13391,11 @@
         },
         "virtualMachineImageId": {
           "type": "string",
-          "title": "The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}.",
-          "description": "This property is mutually exclusive with other ImageReference properties. For Virtual Machine Image it must be in the same region and subscription as the Azure Batch account. The Shared Image Gallery Image must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+          "title": "The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version.",
+          "description": "This property is mutually exclusive with other ImageReference properties. The Shared Image Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
-      "title": "A reference to an Azure Virtual Machines Marketplace Image or a custom Azure Virtual Machine Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List supported Images' operation."
+      "title": "A reference to an Azure Virtual Machines Marketplace Image or a bring-your-own Shared Image Gallery Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List Supported Images' operation."
     },
     "WindowsConfiguration": {
       "properties": {
@@ -13350,7 +13413,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The logical unit number.",
-          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive."
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
@@ -13556,7 +13619,7 @@
               "values": [
                 {
                   "value": "osdisk",
-                  "description": "The OS Disk on the compute node is encrypted.",
+                  "description": "The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time.",
                   "name": "OsDisk"
                 },
                 {
@@ -13616,7 +13679,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -13866,11 +13929,11 @@
           "title": "The list of application licenses the Batch service will make available on each Compute Node in the Pool.",
           "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail."
         },
-        "maxTasksPerNode": {
+        "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of Tasks that can run concurrently on a single Compute Node in the Pool.",
-          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the Pool or 256."
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
@@ -14006,11 +14069,11 @@
           "title": "The list of application licenses the Batch service will make available on each Compute Node in the Pool.",
           "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail."
         },
-        "maxTasksPerNode": {
+        "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of Tasks that can run concurrently on a single Compute Node in the Pool.",
-          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the Pool or 256."
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
@@ -14445,6 +14508,12 @@
           "$ref": "#/definitions/TaskConstraints",
           "title": "The execution constraints that apply to this Task."
         },
+        "requiredSlots": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of scheduling slots that the Task required to run.",
+          "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1."
+        },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
           "title": "The user identity under which the Task runs.",
@@ -14545,6 +14614,12 @@
           "$ref": "#/definitions/TaskConstraints",
           "title": "The execution constraints that apply to this Task.",
           "description": "If you do not specify constraints, the maxTaskRetryCount is the maxTaskRetryCount specified for the Job, the maxWallClockTime is infinite, and the retentionTime is 7 days."
+        },
+        "requiredSlots": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of scheduling slots that the Task required to run.",
+          "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1."
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -15050,6 +15125,11 @@
           "format": "int32",
           "title": "The total number of currently running Job Tasks on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks."
         },
+        "runningTaskSlotsCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The total number of scheduling slots used by currently running Job Tasks on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks."
+        },
         "totalTasksSucceeded": {
           "type": "integer",
           "format": "int32",
@@ -15109,7 +15189,7 @@
             "$ref": "#/definitions/InboundNATPool"
           },
           "title": "A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally.",
-          "description": "The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400."
+          "description": "The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
       },
       "required": [
