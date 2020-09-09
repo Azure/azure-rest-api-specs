@@ -133,6 +133,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
   - $(this-folder)/Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
 
 ```

@@ -34,4 +34,6 @@ output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage/azure/mgmt
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage
 ```

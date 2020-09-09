@@ -6,55 +6,56 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-webservices-2017-01
-  - tag: package-commitmentPlans-2016-05-preview
-  - tag: package-workspaces-2016-04
-  - tag: package-workspaces-2019-10
-  - tag: package-webservices-2016-05-preview
+  - tag: schema-machinelearning-2019-10-01
+  - tag: schema-machinelearning-2017-01-01
+  - tag: schema-machinelearning-2016-05-01-preview
+  - tag: schema-machinelearning-2016-04-01
+
 ```
 
-### Tag: package-webservices-2017-01 and azureresourceschema
-
-These settings apply only when `--tag=package-webservices-2017-01 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-webservices-2017-01' && $(azureresourceschema)
+### Tag: schema-machinelearning-2019-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-machinelearning-2019-10-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MachineLearning/stable/2019-10-01/workspaces.json
+
 ```
 
-### Tag: package-commitmentPlans-2016-05-preview and azureresourceschema
+### Tag: schema-machinelearning-2017-01-01 and azureresourceschema
 
-These settings apply only when `--tag=package-commitmentPlans-2016-05-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-machinelearning-2017-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MachineLearning/stable/2017-01-01/webservices.json
+
 ```
 
-### Tag: package-workspaces-2016-04 and azureresourceschema
+### Tag: schema-machinelearning-2016-05-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-workspaces-2016-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-workspaces-2016-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-machinelearning-2016-05-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json
+  - Microsoft.MachineLearning/preview/2016-05-01-preview/webservices.json
+
 ```
 
-### Tag: package-workspaces-2019-10 and azureresourceschema
+### Tag: schema-machinelearning-2016-04-01 and azureresourceschema
 
-These settings apply only when `--tag=package-workspaces-2019-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-workspaces-2019-10' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-machinelearning-2016-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MachineLearning/stable/2016-04-01/workspaces.json
+
 ```
-
-### Tag: package-webservices-2016-05-preview and azureresourceschema
-
-These settings apply only when `--tag=package-webservices-2016-05-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-webservices-2016-05-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

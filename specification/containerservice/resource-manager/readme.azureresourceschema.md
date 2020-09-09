@@ -6,425 +6,298 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-06
-  - tag: package-2020-04
-  - tag: package-2020-03
-  - tag: package-2020-02
-  - tag: package-2020-01
-  - tag: package-2019-11
-  - tag: package-2019-10-27-preview
-  - tag: package-2019-09-30-preview
-  - tag: package-2019-10
-  - tag: package-2019-08
-  - tag: package-2019-06
-  - tag: package-2019-04
-  - tag: package-2019-02
-  - tag: package-2018-08-preview
-  - tag: package-2018-09-30-preview
-  - tag: package-2018-03
-  - tag: package-2017-09
-  - tag: package-2017-08
-  - tag: package-2017-07
-  - tag: package-2020-06-01-only
-  - tag: package-2020-04-01-only
-  - tag: package-2020-03-01-only
-  - tag: package-2020-02-01-only
-  - tag: package-2020-01-01-only
-  - tag: package-2019-11-01-only
-  - tag: package-2019-10-27-preview-only
-  - tag: package-2019-10-01-only
-  - tag: package-2019-08-01-only
-  - tag: package-2019-06-01-only
-  - tag: package-2019-04-30-only
-  - tag: package-2019-04-01-only
-  - tag: package-2019-02-only
-  - tag: package-2018-08-preview-only
-  - tag: package-2018-09-preview-only
-  - tag: package-2019-09-preview-only
-  - tag: package-2018-03-only
-  - tag: package-2017-07-only-extended
-  - tag: package-2017-08-only
-  - tag: package-2017-09-only
-  - tag: package-2017-01-only
-  - tag: package-2016-09-only
-  - tag: package-2016-03-only
+  - tag: schema-containerservice-2020-07-01
+  - tag: schema-containerservice-2020-06-01
+  - tag: schema-containerservice-2020-04-01
+  - tag: schema-containerservice-2020-03-01
+  - tag: schema-containerservice-2020-02-01
+  - tag: schema-containerservice-2020-01-01
+  - tag: schema-containerservice-2019-11-01
+  - tag: schema-containerservice-2019-10-27-preview
+  - tag: schema-containerservice-2019-10-01
+  - tag: schema-containerservice-2019-09-30
+  - tag: schema-containerservice-2019-08-01
+  - tag: schema-containerservice-2019-06-01
+  - tag: schema-containerservice-2019-04-30
+  - tag: schema-containerservice-2019-04-01
+  - tag: schema-containerservice-2019-02-01
+  - tag: schema-containerservice-2018-09-30-preview
+  - tag: schema-containerservice-2018-08-01-preview
+  - tag: schema-containerservice-2018-03-31
+  - tag: schema-containerservice-2017-09-30
+  - tag: schema-containerservice-2017-08-31
+  - tag: schema-containerservice-2017-07-01
+  - tag: schema-containerservice-2017-01-31
+  - tag: schema-containerservice-2016-09-30
+  - tag: schema-containerservice-2016-03-30
+
 ```
 
-### Tag: package-2020-06 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-06 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-06' && $(azureresourceschema)
+### Tag: schema-containerservice-2020-07-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-containerservice-2020-07-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-07-01/managedClusters.json
+
 ```
 
-### Tag: package-2020-04 and azureresourceschema
+### Tag: schema-containerservice-2020-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2020-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-06-01/managedClusters.json
+
 ```
 
-### Tag: package-2020-03 and azureresourceschema
+### Tag: schema-containerservice-2020-04-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2020-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-04-01/managedClusters.json
+
 ```
 
-### Tag: package-2020-02 and azureresourceschema
+### Tag: schema-containerservice-2020-03-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2020-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-03-01/managedClusters.json
+
 ```
 
-### Tag: package-2020-01 and azureresourceschema
+### Tag: schema-containerservice-2020-02-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2020-02-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
+
 ```
 
-### Tag: package-2019-11 and azureresourceschema
+### Tag: schema-containerservice-2020-01-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-11' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2020-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
+
 ```
 
-### Tag: package-2019-10-27-preview and azureresourceschema
+### Tag: schema-containerservice-2019-11-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-10-27-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-10-27-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-11-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
+
 ```
 
-### Tag: package-2019-09-30-preview and azureresourceschema
+### Tag: schema-containerservice-2019-10-27-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-09-30-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-09-30-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-10-27-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
+
 ```
 
-### Tag: package-2019-10 and azureresourceschema
+### Tag: schema-containerservice-2019-10-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-10' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-10-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+
 ```
 
-### Tag: package-2019-08 and azureresourceschema
+### Tag: schema-containerservice-2019-09-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-08 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-09-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
+
 ```
 
-### Tag: package-2019-06 and azureresourceschema
+### Tag: schema-containerservice-2019-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+
 ```
 
-### Tag: package-2019-04 and azureresourceschema
+### Tag: schema-containerservice-2019-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-06-01/location.json
+  - Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
+
 ```
 
-### Tag: package-2019-02 and azureresourceschema
+### Tag: schema-containerservice-2019-04-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-04-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+
 ```
 
-### Tag: package-2018-08-preview and azureresourceschema
+### Tag: schema-containerservice-2019-04-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-08-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2019-04-01/location.json
+
 ```
 
-### Tag: package-2018-09-30-preview and azureresourceschema
+### Tag: schema-containerservice-2019-02-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-09-30-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09-30-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2019-02-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+
 ```
 
-### Tag: package-2018-03 and azureresourceschema
+### Tag: schema-containerservice-2018-09-30-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2018-09-30-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+
 ```
 
-### Tag: package-2017-09 and azureresourceschema
+### Tag: schema-containerservice-2018-08-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-09 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-09' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2018-08-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
+
 ```
 
-### Tag: package-2017-08 and azureresourceschema
+### Tag: schema-containerservice-2018-03-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-08 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-08' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2018-03-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2018-03-31/managedClusters.json
+
 ```
 
-### Tag: package-2017-07 and azureresourceschema
+### Tag: schema-containerservice-2017-09-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-07 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2017-09-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2017-09-30/location.json
+
 ```
 
-### Tag: package-2020-06-01-only and azureresourceschema
+### Tag: schema-containerservice-2017-08-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-06-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-06-01-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2017-08-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
+
 ```
 
-### Tag: package-2020-04-01-only and azureresourceschema
+### Tag: schema-containerservice-2017-07-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-04-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-04-01-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2017-07-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+
 ```
 
-### Tag: package-2020-03-01-only and azureresourceschema
+### Tag: schema-containerservice-2017-01-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-03-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-03-01-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2017-01-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+
 ```
 
-### Tag: package-2020-02-01-only and azureresourceschema
+### Tag: schema-containerservice-2016-09-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-02-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-02-01-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2016-09-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2016-09-30/containerService.json
+
 ```
 
-### Tag: package-2020-01-01-only and azureresourceschema
+### Tag: schema-containerservice-2016-03-30 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-01-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-01-01-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-containerservice-2016-03-30' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2016-03-30/containerService.json
+
 ```
-
-### Tag: package-2019-11-01-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-11-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-11-01-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-10-27-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-10-27-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-10-27-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-10-01-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-10-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-10-01-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-08-01-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-08-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-08-01-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-06-01-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-06-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06-01-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-04-30-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-04-30-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04-30-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-04-01-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-04-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04-01-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-02-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-02-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-02-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-08-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2018-08-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-09-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-09-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2019-09-preview-only and azureresourceschema
-
-These settings apply only when `--tag=package-2019-09-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-09-preview-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-03-only and azureresourceschema
-
-These settings apply only when `--tag=package-2018-03-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-07-only-extended and azureresourceschema
-
-These settings apply only when `--tag=package-2017-07-only-extended --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-07-only-extended' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-08-only and azureresourceschema
-
-These settings apply only when `--tag=package-2017-08-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-08-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-09-only and azureresourceschema
-
-These settings apply only when `--tag=package-2017-09-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-09-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2017-01-only and azureresourceschema
-
-These settings apply only when `--tag=package-2017-01-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-01-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2016-09-only and azureresourceschema
-
-These settings apply only when `--tag=package-2016-09-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-09-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2016-03-only and azureresourceschema
-
-These settings apply only when `--tag=package-2016-03-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-03-only' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

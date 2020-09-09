@@ -6,105 +6,130 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-04
-  - tag: package-2019-12
-  - tag: package-2019-06
-  - tag: package-2019-06-preview
-  - tag: package-2019-04
-  - tag: package-2017-10
-  - tag: package-2017-04
-  - tag: package-2016-10
-  - tag: package-2016-04
-  - tag: package-2015-06
+  - tag: schema-cdn-2020-04-15
+  - tag: schema-cdn-2019-12-31
+  - tag: schema-cdn-2019-06-15-preview
+  - tag: schema-cdn-2019-06-15
+  - tag: schema-cdn-2019-04-15
+  - tag: schema-cdn-2017-10-12
+  - tag: schema-cdn-2017-04-02
+  - tag: schema-cdn-2016-10-02
+  - tag: schema-cdn-2016-04-02
+  - tag: schema-cdn-2015-06-01
+
 ```
 
-### Tag: package-2020-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-04 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-04' && $(azureresourceschema)
+### Tag: schema-cdn-2020-04-15 and azureresourceschema
+
+``` yaml $(tag) == 'schema-cdn-2020-04-15' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2020-04-15/cdn.json
+  - Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
+
 ```
 
-### Tag: package-2019-12 and azureresourceschema
+### Tag: schema-cdn-2019-12-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-12 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-12' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2019-12-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2019-12-31/cdn.json
+
 ```
 
-### Tag: package-2019-06 and azureresourceschema
+### Tag: schema-cdn-2019-06-15-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2019-06-15-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
+  - Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
+
 ```
 
-### Tag: package-2019-06-preview and azureresourceschema
+### Tag: schema-cdn-2019-06-15 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-06-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-06-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2019-06-15' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2019-06-15/cdn.json
+  - Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
+
 ```
 
-### Tag: package-2019-04 and azureresourceschema
+### Tag: schema-cdn-2019-04-15 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2019-04-15' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2019-04-15/cdn.json
+
 ```
 
-### Tag: package-2017-10 and azureresourceschema
+### Tag: schema-cdn-2017-10-12 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2017-10-12' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2017-10-12/cdn.json
+
 ```
 
-### Tag: package-2017-04 and azureresourceschema
+### Tag: schema-cdn-2017-04-02 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2017-04-02' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2017-04-02/cdn.json
+
 ```
 
-### Tag: package-2016-10 and azureresourceschema
+### Tag: schema-cdn-2016-10-02 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-10 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2016-10-02' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2016-10-02/cdn.json
+
 ```
 
-### Tag: package-2016-04 and azureresourceschema
+### Tag: schema-cdn-2016-04-02 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2016-04-02' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2016-04-02/cdn.json
+
 ```
 
-### Tag: package-2015-06 and azureresourceschema
+### Tag: schema-cdn-2015-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-cdn-2015-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Cdn/stable/2015-06-01/cdn.json
+
+```

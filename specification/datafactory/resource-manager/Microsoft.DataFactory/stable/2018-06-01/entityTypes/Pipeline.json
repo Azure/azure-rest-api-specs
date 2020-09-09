@@ -923,6 +923,36 @@
         }
       }
     },
+    "TarReadSettings": {
+      "description": "The Tar compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "TarGZipReadSettings": {
+      "description": "The TarGZip compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -1036,6 +1066,52 @@
         "recordNamespace": {
           "type": "string",
           "description": "Record namespace in the write result."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OrcWriteSettings": {
+      "description": "Orc write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ParquetWriteSettings": {
+      "description": "Parquet write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1055,6 +1131,14 @@
         "fileExtension": {
           "type": "object",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1300,6 +1384,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "ORC store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/OrcWriteSettings",
+          "description": "ORC format settings."
         }
       }
     },
@@ -3709,6 +3797,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetWriteSettings",
+          "description": "Parquet format settings."
         }
       }
     },

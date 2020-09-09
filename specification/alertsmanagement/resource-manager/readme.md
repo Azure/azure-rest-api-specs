@@ -105,6 +105,15 @@ input-file:
 - Microsoft.AlertsManagement/preview/2018-05-05-preview/AlertsManagement.json
 ```
 
+### Tag: package-2020-08-04-preview
+
+These settings apply only when `--tag=package-2020-08-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-04-preview'
+input-file:
+- Microsoft.AlertsManagement/preview/2020-08-04-preview/AlertsManagement.json
+```
+
 ---
 
 # Code Generation
@@ -120,6 +129,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js alertsmanagement/resource-manager
@@ -200,6 +210,7 @@ input-file:
   - $(this-folder)/Microsoft.AlertsManagement/stable/2019-03-01/SmartDetectorAlertRulesApi.json
   - $(this-folder)/Microsoft.AlertsManagement/stable/2018-05-05/AlertsManagement.json
   - $(this-folder)/Microsoft.AlertsManagement/preview/2018-05-05-preview/AlertsManagement.json
+  - $(this-folder)/Microsoft.AlertsManagement/preview/2020-08-04-preview/AlertsManagement.json
 
 ```
 
