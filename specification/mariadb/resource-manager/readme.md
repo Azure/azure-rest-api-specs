@@ -93,7 +93,6 @@ input-file:
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: Servers.json
     reason: The name of the provider is Microsoft.DBforMariaDB
 ```
 

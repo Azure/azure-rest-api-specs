@@ -136,6 +136,7 @@ input-file:
   - Microsoft.Network/stable/2020-05-01/virtualWan.json
   - Microsoft.Network/stable/2020-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-05-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
 ```
 
 ### Tag: package-2020-04
@@ -2626,6 +2627,6 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
