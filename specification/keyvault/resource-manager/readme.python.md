@@ -42,6 +42,7 @@ batch:
   - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
+  - tag: package-preview-2020-04
   - multiapiscript: true
 ```
 
