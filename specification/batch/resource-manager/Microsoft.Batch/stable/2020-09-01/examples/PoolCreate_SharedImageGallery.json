@@ -4,14 +4,14 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2020-05-01",
+    "api-version": "2020-09-01",
     "parameters": {
       "properties": {
         "vmSize": "STANDARD_D4",
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
-              "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/images/image-123"
+              "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/galleries/testgallery/images/testimagedef/versions/0.0.1"
             },
             "nodeAgentSkuId": "batch.node.ubuntu 18.04"
           }
@@ -38,14 +38,14 @@
           "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
           "vmSize": "STANDARD_D4",
           "interNodeCommunication": "Disabled",
-          "maxTasksPerNode": 1,
+          "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
             "nodeFillType": "Spread"
           },
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/images/image-123"
+                "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/galleries/testgallery/images/testimagedef/versions/0.0.1"
               },
               "nodeAgentSkuId": "batch.node.ubuntu 18.04"
             }

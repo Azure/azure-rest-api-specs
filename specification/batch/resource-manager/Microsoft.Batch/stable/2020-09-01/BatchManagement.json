@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagement",
-    "version": "2020-05-01",
+    "version": "2020-09-01",
     "x-ms-code-generation-settings": {
       "name": "BatchManagementClient"
     }
@@ -1851,7 +1851,7 @@
             "$ref": "./examples/PoolCreate_FullExample.json"
           },
           "CreatePool - Custom Image": {
-            "$ref": "./examples/PoolCreate_CustomImage.json"
+            "$ref": "./examples/PoolCreate_SharedImageGallery.json"
           },
           "CreatePool - Public IPs": {
             "$ref": "./examples/PoolCreate_PublicIPs.json"
@@ -3472,10 +3472,10 @@
           "$ref": "#/definitions/NetworkConfiguration",
           "title": "The network configuration for the pool."
         },
-        "maxTasksPerNode": {
+        "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
           "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
@@ -4006,7 +4006,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The logical unit number.",
-          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive."
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
@@ -4049,7 +4049,7 @@
               },
               {
                 "value": "Pack",
-                "description": "As many tasks as possible (maxTasksPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool."
+                "description": "As many tasks as possible (taskSlotsPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool."
               }
             ]
           }
@@ -4444,7 +4444,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -4557,7 +4557,7 @@
             "$ref": "#/definitions/InboundNatPool"
           },
           "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
-          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400."
+          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
       },
       "required": [
