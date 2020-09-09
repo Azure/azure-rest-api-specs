@@ -8,6 +8,7 @@ az:
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-datafactory
   disable-checks: true
+  randomize-names: true
 az-output-folder:  $(azure-cli-extension-folder)/src/datafactory
 python-sdk-output-folder: "$(az-output-folder)/azext_datafactory/vendored_sdks/datafactory"
 
@@ -46,6 +47,7 @@ cli:
     # directive on operationGroup
       - where:
             group: Pipelines
+            op: CreateOrUpdate$|CreateOrUpdate#Create
             parameter: pipeline
         json: true
       - where:
