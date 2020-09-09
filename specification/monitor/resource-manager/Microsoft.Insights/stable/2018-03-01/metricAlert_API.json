@@ -551,6 +551,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "Alert severity {0, 1, 2, 3, 4}"
         },
         "enabled": {
@@ -573,6 +574,14 @@
           "type": "string",
           "format": "duration",
           "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
+        },
+        "targetResourceType": {
+          "type": "string",
+          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
