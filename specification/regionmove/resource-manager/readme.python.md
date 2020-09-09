@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.regionmove
-  package-name: azure-mgmt-regionmove
+  namespace: azure.mgmt.resourcemover
+  package-name: azure-mgmt-resourcemover
   package-version: 0.1.0-preview
   clear-output-folder: true
 ```
@@ -17,7 +17,7 @@ python:
 ```yaml $(python) && $(track2)
 azure-arm: true 
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-regionmove
+package-name: azure-mgmt-resourcemover
 clear-output-folder: true
 no-namespace-folders: true
 package-version: 0.1.0-preview
@@ -25,11 +25,11 @@ package-version: 0.1.0-preview
 
 ```yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/regionmove/azure-mgmt-regionmove/azure/mgmt/regionmove
+output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover/azure/mgmt/resourcemover
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true 
-  output-folder: $(python-sdks-folder)/regionmove/azure-mgmt-regionmove
+  output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover
 ```
