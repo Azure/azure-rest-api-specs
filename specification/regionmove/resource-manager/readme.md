@@ -59,7 +59,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcemover']
   - repo: azure-resource-manager-schemas
     after_scripts:
-      - node sdkauto_afterscript.js resourcemover/resource-manager
+      - node sdkauto_afterscript.js regionmove/resource-manager
 ```
 
 ## Go
