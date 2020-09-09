@@ -28,7 +28,7 @@ These are the global settings for the OperationalInsights API.
 title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2020-03-preview
+tag: package-2020-08
 ```
 
 
@@ -70,6 +70,7 @@ These settings apply only when `--tag=package-2020-03-preview` is specified on t
 input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
@@ -88,6 +89,34 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+```
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 ```
 
 ---
@@ -110,6 +139,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js operationalinsights/resource-manager
 ```
 
 
@@ -182,6 +214,10 @@ directive:
     reason: properties etag defined as eTag in model
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -202,6 +238,7 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
@@ -219,6 +256,25 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+  - $(this-folder)/Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 
 ```
 

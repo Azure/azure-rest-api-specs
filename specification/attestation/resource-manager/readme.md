@@ -51,6 +51,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js attestation/resource-manager
 ```
 
 ## Python
@@ -79,6 +82,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Trenton
 
 See configuration in [readme.trenton.md](./readme.trenton.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
