@@ -3,7 +3,7 @@
   "info": {
     "title": "BingManagementClient",
     "description": "Bing Management Client",
-    "version": "2020-06-10-preview"
+    "version": "2020-06-10"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,9 +39,8 @@
         "tags": [
           "BingAccounts"
         ],
-        "description": "Create Bing Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
-        "operationId": "BingAccounts_CreateAndUpdate",
-        "x-ms-long-running-operation": true,
+        "description": "Create a Bing account. Accounts is a resource group-wide resource type. It holds keys for developers to access Bing APIs and is the resource type for billing.",
+        "operationId": "Accounts_Create",
         "x-ms-examples": {
           "Create Account": {
             "$ref": "./examples/CreateAccount.json"
@@ -61,7 +60,7 @@
             "schema": {
               "$ref": "#/definitions/BingAccount"
             },
-            "description": "The parameters to provide for the created account."
+            "description": "The parameters of the account to create."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -78,7 +77,7 @@
             }
           },
           "201": {
-            "description": "If resource is created successfully, the service should return 201 (OK).",
+            "description": "If resource is created successfully, the service should return 201 (Created).",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
@@ -96,7 +95,7 @@
           "BingAccounts"
         ],
         "description": "Updates a Bing account",
-        "operationId": "BingAccounts_Update",
+        "operationId": "Accounts_Update",
         "x-ms-examples": {
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
@@ -116,7 +115,7 @@
             "schema": {
               "$ref": "#/definitions/BingAccount"
             },
-            "description": "The parameters to provide for the created account."
+            "description": "The parameters to update in the account."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -127,7 +126,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
@@ -144,9 +143,8 @@
         "tags": [
           "BingAccounts"
         ],
-        "description": "Deletes a Bing account from the resource group. ",
-        "operationId": "BingAccounts_Delete",
-        "x-ms-long-running-operation": true,
+        "description": "Deletes a Bing account from the resource group.",
+        "operationId": "Accounts_Delete",
         "x-ms-examples": {
           "Delete Account": {
             "$ref": "./examples/DeleteAccount.json"
@@ -170,9 +168,6 @@
           "200": {
             "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
           },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
-          },
           "204": {
             "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
           },
@@ -189,7 +184,7 @@
           "BingAccounts"
         ],
         "description": "Returns a Bing account specified by the parameters.",
-        "operationId": "BingAccounts_GetProperties",
+        "operationId": "Accounts_GetProperties",
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
@@ -211,7 +206,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account, for example Bing.CustomSearch, Bing.Search.v7.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API, for example: F0, S1, S2",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
@@ -231,7 +226,7 @@
           "BingAccounts"
         ],
         "description": "Returns all the resources of a particular type belonging to a resource group",
-        "operationId": "BingAccounts_ListByResourceGroup",
+        "operationId": "Accounts_ListByResourceGroup",
         "x-ms-examples": {
           "List Accounts by Resource Group": {
             "$ref": "./examples/ListAccountsByResourceGroup.json"
@@ -273,7 +268,7 @@
           "BingAccounts"
         ],
         "description": "Returns all the resources of a particular type belonging to a subscription.",
-        "operationId": "BingAccounts_List",
+        "operationId": "Accounts_List",
         "x-ms-examples": {
           "List Accounts by Subscription": {
             "$ref": "./examples/ListAccountsBySubscription.json"
@@ -289,7 +284,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. ",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section.",
             "schema": {
               "$ref": "#/definitions/BingAccountListResult"
             }
@@ -311,7 +306,7 @@
         "tags": [
           "BingAccounts"
         ],
-        "operationId": "BingAccounts_ListKeys",
+        "operationId": "Accounts_ListKeys",
         "description": "Lists the account keys for the specified Bing account.",
         "x-ms-examples": {
           "List Keys": {
@@ -353,7 +348,7 @@
         "tags": [
           "BingAccounts"
         ],
-        "operationId": "BingAccounts_RegenerateKey",
+        "operationId": "Accounts_RegenerateKey",
         "description": "Regenerates the specified account key for the specified Bing account.",
         "x-ms-examples": {
           "Regenerate Keys": {
@@ -375,7 +370,7 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeyParameters"
             },
-            "description": "regenerate key parameters."
+            "description": "Regenerate key parameters."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -386,7 +381,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The key list is returned when the specified key is regenerated.",
             "schema": {
               "$ref": "#/definitions/BingAccountKeys"
             }
@@ -403,11 +398,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/skus": {
       "get": {
         "tags": [
-          "Skus",
-          "BingAccounts"
+          "Skus"
         ],
         "operationId": "ResourceSkus_List",
-        "description": "Gets the list of Microsoft.Bing SKUs available for your Subscription.",
+        "description": "Gets the list of Microsoft.Bing SKUs available for the Subscription.",
         "x-ms-examples": {
           "Regenerate Keys": {
             "$ref": "./examples/GetSkus.json"
@@ -423,7 +417,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The operation was successful",
             "schema": {
               "$ref": "#/definitions/ResourceSkusResult"
             }
@@ -443,7 +437,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/skus": {
       "get": {
         "tags": [
-          "BingAccounts"
+          "BingAccounts",
+          "Skus"
         ],
         "description": "List available SKUs for the requested Bing account",
         "x-ms-examples": {
@@ -451,7 +446,7 @@
             "$ref": "./examples/ListSkus.json"
           }
         },
-        "operationId": "BingAccounts_ListSkus",
+        "operationId": "Accounts_ListSkus",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -493,7 +488,7 @@
             "$ref": "./examples/GetUsages.json"
           }
         },
-        "operationId": "BingAccounts_GetUsages",
+        "operationId": "Accounts_GetUsages",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -533,7 +528,7 @@
           "Operations"
         ],
         "description": "Lists all the available Bing account operations.",
-        "operationId": "BingOperations_List",
+        "operationId": "Operations_List",
         "x-ms-examples": {
           "Get Operations": {
             "$ref": "./examples/GetOperations.json"
@@ -546,7 +541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The operation was successful.",
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
@@ -567,7 +562,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/locations/{location}/checkSkuAvailability": {
       "post": {
         "tags": [
-          "BingAccounts"
+          "Skus"
         ],
         "operationId": "CheckSkuAvailability",
         "description": "Check available SKUs.",
@@ -594,12 +589,12 @@
             "schema": {
               "$ref": "#/definitions/CheckSkuAvailabilityParameter"
             },
-            "description": "Check SKU Availability POST body."
+            "description": "The SKUs to check for availability in the specified subscription and location."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CheckSkuAvailabilityResultList"
             }
@@ -617,18 +612,18 @@
   "definitions": {
     "BingAccountKind": {
       "type": "string",
-      "description": "Required. Indicates the type of bing account."
+      "description": "Required. Indicates the type of Bing account."
     },
     "Sku": {
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "Gets or sets the sku name. Required for account creation, optional for update."
+          "description": "Gets or sets the SKU name. Required for account creation, optional for update."
         },
         "tier": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the sku tier. This is based on the SKU name.",
+          "description": "Gets the SKU tier. This is based on the SKU name.",
           "enum": [
             "Free",
             "Standard",
@@ -689,7 +684,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+          "description": "Gets or sets a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
         },
         "type": {
           "type": "string",
@@ -741,12 +736,12 @@
         },
         "internalId": {
           "type": "string",
-          "description": "The internal identifier.",
+          "description": "An internal identifier.",
           "readOnly": true
         },
         "statisticsEnabled": {
           "type": "boolean",
-          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
+          "description": "(Bing Search Only) A flag indicating whether Bing Statistics is enabled."
         }
       },
       "description": "Properties of Bing account."
@@ -968,7 +963,7 @@
       }
     },
     "CheckSkuAvailabilityParameter": {
-      "description": "Check SKU availability parameter.",
+      "description": "The SKUs to check for availability in the specified subscription and location",
       "properties": {
         "skus": {
           "type": "array",
@@ -1158,17 +1153,17 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
-          "description": "The list of skus available for the subscription."
+          "description": "The list of SKUs available for the subscription."
         },
         "nextLink": {
           "type": "string",
-          "description": "The uri to fetch the next page of Skus."
+          "description": "The URI to fetch the next page of SKUs."
         }
       },
       "required": [
         "value"
       ],
-      "description": "The Get Skus operation response."
+      "description": "The list SKUs operation response."
     },
     "Error": {
       "x-ms-external": true,
@@ -1189,7 +1184,7 @@
       "maxLength": 64,
       "minLength": 2,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-      "description": "The name of Bing account.",
+      "description": "The name of the Bing account.",
       "x-ms-parameter-location": "method"
     },
     "locationParameter": {
