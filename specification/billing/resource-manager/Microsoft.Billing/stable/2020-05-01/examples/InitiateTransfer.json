@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "transferName": "{transferName}",
+    "parameters": {
+      "properties": {
+        "recipientEmailId": "user@contoso.com"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}",
+        "name": "{transferName}",
+        "type": "Microsoft.Billing/transfers",
+        "properties": {
+          "creationTime": "2018-10-10T17:32:28Z",
+          "expirationTime": "2018-11-05T17:32:28Z",
+          "transferStatus": "Pending",
+          "recipientEmailId": "user@contoso.com",
+          "initiatorEmailId": "xyz@contoso.com",
+          "lastModifiedTime": "2018-10-10T17:32:28Z"
+        }
+      }
+    }
+  }
+}
