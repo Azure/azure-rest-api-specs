@@ -1810,6 +1810,10 @@
             "modelAsString": true
           }
         },
+        "encryption": {
+          "description": "The encryption properties for the IoT DPS instance.",
+          "$ref": "#/definitions/EncryptionPropertiesDescription"
+        },
         "publicNetworkAccess": {
           "type": "string",
           "description": "Whether requests from Public Network are allowed",
@@ -1915,6 +1919,33 @@
         "connectionString",
         "location"
       ]
+    },
+    "EncryptionPropertiesDescription": {
+      "description": "The encryption properties for the IoT DPS instance.",
+      "type": "object",
+      "properties": {
+        "keySource": {
+          "description": "The source of the key.",
+          "type": "string"
+        },
+        "keyVaultProperties": {
+          "description": "The properties of the KeyVault key.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyVaultKeyProperties"
+          }
+        }
+      }
+    },
+    "KeyVaultKeyProperties": {
+      "description": "The properties of the KeyVault key.",
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "type": "string",
+          "description": "The identifier of the key."
+        }
+      }
     },
     "IpFilterRule": {
       "description": "The IP filter rules for a provisioning Service.",
