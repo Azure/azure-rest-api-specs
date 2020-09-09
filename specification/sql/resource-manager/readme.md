@@ -141,7 +141,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
-- Microsoft.Sql/preview/2020-02-02-preview/hybridLinks.json
+- Microsoft.Sql/preview/2020-02-02-preview/HybridLinks.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 
 # Needed when there is more than one input file
