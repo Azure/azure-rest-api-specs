@@ -1645,6 +1645,7 @@
         "earliestRestoreDate": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Earliest restore point creation time (ISO8601 format)"
         },
         "storageProfile": {
@@ -1659,10 +1660,12 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
+          "readOnly": true,
           "description": "The maximum number of replicas that a primary server can have."
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
+          "readOnly": true,
           "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "maintenanceWindow": {
@@ -1689,7 +1692,7 @@
           "type": "string",
           "description": "availability Zone information of the server."
         },
-        "standByAvailabilityZone": {
+        "standbyAvailabilityZone": {
           "type": "string",
           "description": "availability Zone information of the server.",
           "readOnly": true
@@ -1775,10 +1778,6 @@
         "haEnabled": {
           "$ref": "#/definitions/HaEnabled",
           "description": "Enable HA or not for a server."
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
