@@ -26,6 +26,9 @@ no-namespace-folders: true
 ``` 
 
 ``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage/azure/mgmt/automanage
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage/azure/mgmt/automanage
 ```
@@ -34,4 +37,6 @@ output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage/azure/mgmt
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/automanage/azure-mgmt-automanage
 ```
