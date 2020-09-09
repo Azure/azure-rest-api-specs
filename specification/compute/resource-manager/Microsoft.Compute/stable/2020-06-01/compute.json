@@ -5174,7 +5174,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             },
             "description": "Parameters supplied to the Create Virtual Machine Extension operation."
           },
@@ -5189,13 +5189,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "default": {
@@ -5252,7 +5252,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtensionUpdate"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionUpdate"
             },
             "description": "Parameters supplied to the Update Virtual Machine Extension operation."
           },
@@ -5267,7 +5267,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "default": {
@@ -5403,7 +5403,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtension"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
             }
           },
           "default": {
@@ -5467,7 +5467,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineExtensionsListResult"
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsListResult"
             }
           },
           "default": {
@@ -7335,6 +7335,20 @@
       ],
       "description": "Describes a Virtual Machine Extension."
     },
+    "VirtualMachineScaleSetVMExtension": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Describes a VMSS VM Extension."
+    },
     "VirtualMachineExtensionUpdate": {
       "properties": {
         "properties": {
@@ -7349,6 +7363,20 @@
       ],
       "description": "Describes a Virtual Machine Extension."
     },
+    "VirtualMachineScaleSetVMExtensionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineExtensionUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Describes a VMSS VM Extension."
+    },
     "VirtualMachineExtensionsListResult": {
       "properties": {
         "value": {
@@ -7360,6 +7388,18 @@
         }
       },
       "description": "The List Extension operation response"
+    },
+    "VirtualMachineScaleSetVMExtensionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
+          },
+          "description": "The list of VMSS VM extensions"
+        }
+      },
+      "description": "The List VMSS VM Extension operation response"
     },
     "VirtualMachineSoftwarePatchProperties": {
       "properties": {
