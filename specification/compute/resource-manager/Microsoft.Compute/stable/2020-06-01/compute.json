@@ -7337,6 +7337,15 @@
     },
     "VirtualMachineScaleSetVMExtension": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionProperties"
@@ -7365,6 +7374,16 @@
     },
     "VirtualMachineScaleSetVMExtensionUpdate": {
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionUpdateProperties"
