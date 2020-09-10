@@ -442,17 +442,15 @@
   },
   "definitions": {
     "External": {
-      "description": "External Property.",
+      "description": "The storage account where the custom code artifacts are located.",
       "properties": {
         "storageAccount": {
           "$ref": "./inputs.json#/definitions/StorageAccount"
         },
         "container": {
-          "description": "",
           "type": "string"
         },
         "path": {
-          "description": "",
           "type": "string"
         }
       }
@@ -551,7 +549,15 @@
         },
         "jobType": {
           "type": "string",
-          "description": "Describes the type of the job"
+          "description": "Describes the type of the job. Valid modes are `Cloud` and 'Edge'.",
+          "enum": [
+            "Cloud",
+            "Edge"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
         },
         "outputStartMode": {
           "$ref": "#/definitions/OutputStartMode",
@@ -648,15 +654,24 @@
         },
         "identity": {
           "$ref": "./inputs.json#/definitions/Identity",
-          "description": "Describes how identity is verified."
+          "description": "Describes the system-assigned managed identity assigned to this job that can be used to authenticate with inputs and outputs."
         },
         "externals": {
           "$ref": "#/definitions/External",
-          "description": "External Property."
+          "description": "The storage account where the custom code artifacts are located."
         },
         "cluster": {
-          "type": "string",
-          "description": "The resource id of cluster which streaming jobs will run on."
+          "$ref": "#/definitions/ClusterInfo",
+          "description": "The cluster which streaming jobs will run on."
+        }
+      }
+    },
+    "ClusterInfo": {
+      "description": "The properties associated with a Stream Analytics cluster.",
+      "properties": {
+        "id": {
+          "description": "The resource id of cluster.",
+          "type": "string"
         }
       }
     },

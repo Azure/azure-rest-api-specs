@@ -35,7 +35,7 @@ tag: package-2020-03-preview
 
 These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
 
-This section contains the composite set of APIs. Deticate cluster and private endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2017-04-01-preview version.
+This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2017-04-01-preview version.
 
 ```yaml $(tag) == 'package-2020-03-preview'
 input-file:
@@ -54,7 +54,7 @@ input-file:
 
 These settings apply only when `--tag=package-pure-2020-03-preview` is specified on the command line.
 
-This section only contains input swagger files for version 2020-03-01-preview, incluing deticate cluster and private endpoint related APIs.  
+This section only contains input swagger files for version 2020-03-01-preview, including Stream Analytics Cluster and Private Endpoint related APIs.  
 
 ```yaml $(tag) == 'package-pure-2020-03-preview'
 input-file:
@@ -62,13 +62,13 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
 ```
 
-### Tag: package-2017-04-preview
+### Tag: package-pure-2017-04-preview
 
-These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-pure-2017-04-preview` is specified on the command line.
 
-This section only contains input swagger files for version 2017-04-01-preview, incluing streamingjobs related APIs. 
+This section only contains input swagger files for version 2017-04-01-preview, including streamingjobs related APIs. 
 
-```yaml $(tag) == 'package-2017-04-preview'
+```yaml $(tag) == 'package-pure-2017-04-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
@@ -79,11 +79,11 @@ input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/operations.json
 ```
 
-### Tag: package-2016-03
+### Tag: package-pure-2016-03
 
-These settings apply only when `--tag=package-2016-03` is specified on the command line.
+These settings apply only when `--tag=package-pure-2016-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-03'
+``` yaml $(tag) == 'package-pure-2016-03'
 input-file:
 - Microsoft.StreamAnalytics/stable/2016-03-01/streamingjobs.json
 - Microsoft.StreamAnalytics/stable/2016-03-01/inputs.json
@@ -152,15 +152,16 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-streamanalytics
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2016-03
+  - tag: package-pure-2017-04-preview
+  - tag: package-pure-2020-03-preview
 ```
 
-### Tag: package-2016-03 and java
+### Tag: package-pure-2016-03 and java
 
-These settings apply only when `--tag=package-2016-03 --java` is specified on the command line.
+These settings apply only when `--tag=package-pure-2016-03 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2016-03' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-pure-2016-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.streamanalytics.v2016_03_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/streamanalytics/mgmt-v2016_03_01
@@ -168,12 +169,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2017-04-preview and java
+### Tag: package-pure-2017-04-preview and java
 
-These settings apply only when `--tag=package-2017-04-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-pure-2017-04-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-pure-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.streamanalytics.v2017_04_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/streamanalytics/mgmt-v2017_04_01_preview
@@ -181,12 +182,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2020-03-preview and java
+### Tag: package-pure-2020-03-preview and java
 
-These settings apply only when `--tag=package-2020-03-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-pure-2020-03-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-03-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-pure-2020-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.streamanalytics.v2020_03_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/streamanalytics/mgmt-v2020_03_01_preview

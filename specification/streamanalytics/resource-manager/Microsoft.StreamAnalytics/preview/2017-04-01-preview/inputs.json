@@ -993,7 +993,7 @@
         }
       }
     },
-    "azureSqlReferenceInputDataSource": {
+    "AzureSqlReferenceInputDataSource": {
       "description": "Describes an Azure SQL database reference input data source.",
       "x-ms-discriminator-value": "Microsoft.Sql/Server/Database",
       "allOf": [
@@ -1001,12 +1001,14 @@
           "$ref": "#/definitions/ReferenceInputDataSource"
         }
       ],
-      "discriminator": "type",
       "properties": {
-        "type": {
-          "description": "This element is associated with the datasource element. It indicates the type of data source that data will be read from. The value for SQL Database should be Microsoft.Sql/Server/Database.",
-          "type": "string"
-        },
+        "properties": {
+          "$ref": "#/definitions/AzureSqlReferenceInputDataSourceProperties"
+        }
+      }
+    },
+    "AzureSqlReferenceInputDataSourceProperties": {
+      "properties": {
         "server": {
           "description": "This element is associated with the datasource element. This is the name of the server that contains the database that will be written to.",
           "type": "string"
@@ -1043,10 +1045,7 @@
           "description": "This element is associated with the datasource element. This query is used to fetch incremental changes from the SQL database. To use this option, we recommend using temporal tables in Azure SQL Database.",
           "type": "string"
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "EventSerializationType": {
       "type": "string",
