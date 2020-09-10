@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-08-06-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-08-06-preview' && $(go)
-namespace: Microsoft.BareMetalInfrastructure
+namespace: baremetalinfrastructure
 output-folder: $(go-sdks-folder)/baremetalinfrastructure/Generated
 ```
