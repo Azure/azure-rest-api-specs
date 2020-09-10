@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017_04",
+    "version": "2017-04",
     "title": "ServiceBusManagementClient",
     "description": "Azure Service Bus client for managing Queues, Topics, and Subscriptions.",
     "x-ms-code-generation-settings": {
@@ -1157,7 +1157,6 @@
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }
-
         },
         "published": {
           "description": "The timestamp for when this topic was published",
@@ -1525,14 +1524,16 @@
           "xml": {
             "name": "Value",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
-          }        
+          }
         }
       }
     },
     "RuleFilter": {
       "type": "object",
       "discriminator": "type",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "xml": {
         "name": "Filter",
         "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1693,9 +1694,11 @@
       ]
     },
     "RuleAction": {
-      "type":"object",
+      "type": "object",
       "discriminator": "type",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "xml": {
         "name": "Action",
         "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1760,7 +1763,9 @@
     "EmptyRuleAction": {
       "type": "object",
       "allOf": [
-        {"$ref": "#/definitions/RuleAction"}
+        {
+          "$ref": "#/definitions/RuleAction"
+        }
       ]
     },
     "RuleDescription": {
@@ -1922,11 +1927,11 @@
       }
     }
   },
-  "paths": {
-    "/{entityName}": {
+  "x-ms-paths": {
+    "/{topicName}": {
       "parameters": [
         {
-          "name": "entityName",
+          "name": "topicName",
           "in": "path",
           "description": "The name of the queue or topic relative to the Service Bus namespace.",
           "minLength": 1,
@@ -1936,9 +1941,9 @@
         }
       ],
       "get": {
-        "operationId": "Entity_Get",
-        "summary": "Get Queue or Topic",
-        "description": "Get the details about the Queue or Topic with the given entityName.",
+        "operationId": "Entity_Get_Topic",
+        "summary": "Get Topic",
+        "description": "Get the details about the Queue or Topic with the given topicName.",
         "tags": [
           "Queue Operations",
           "Topic Operations"
@@ -1955,7 +1960,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/CreateTopicBody"
             }
           },
           "default": {
@@ -1965,20 +1970,19 @@
       },
       "put": {
         "tags": [
-          "Queue Operations",
           "Topic Operations"
         ],
-        "operationId": "Entity_Put",
-        "description": "Create or update a queue or topic at the provided entityName",
+        "operationId": "Entity_Put_Topic",
+        "description": "Create or update a topic at the provided topicName",
         "parameters": [
           {
             "name": "requestBody",
             "in": "body",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/CreateTopicBody"
             },
             "required": true,
-            "description": "Parameters required to make or edit a queue or topic.",
+            "description": "Parameters required to make or edit a topic.",
             "x-ms-parameter-location": "method"
           },
           {
@@ -1995,15 +1999,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Update -- Update Queue/Topic operation completed successfully.",
+            "description": "Update -- Update Topic operation completed successfully.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/CreateTopicBody"
             }
           },
           "201": {
-            "description": "Created -- Create Queue/Topic operation completed successfully.",
+            "description": "Created -- Create Topic operation completed successfully.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/CreateTopicBody"
             }
           },
           "default": {
@@ -2012,9 +2016,9 @@
         }
       },
       "delete": {
-        "operationId": "Entity_Delete",
-        "summary": "Delete Queue or Topic",
-        "description": "Delete the Queue or Topic with the given entityName.",
+        "operationId": "Entity_Delete_Topic",
+        "summary": "Delete Topic",
+        "description": "Delete the Topic with the given topicName.",
         "tags": [
           "Queue Operations",
           "Topic Operations"
@@ -2028,7 +2032,121 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/CreateTopicBody"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/ServiceBusManagementErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/{queueName}": {
+      "parameters": [
+        {
+          "name": "queueName",
+          "in": "path",
+          "description": "The name of the queue or topic relative to the Service Bus namespace.",
+          "minLength": 1,
+          "x-ms-parameter-location": "method",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "operationId": "Entity_Get_Queue",
+        "summary": "Get Queue",
+        "description": "Get the details about the Queue with the given queueName.",
+        "tags": [
+          "Queue Operations",
+          "Topic Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Enrich"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateQueueBody"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/ServiceBusManagementErrorResponse"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Queue Operations"
+        ],
+        "operationId": "Entity_Put_Queue",
+        "description": "Create or update a queue at the provided queueName",
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateQueueBody"
+            },
+            "required": true,
+            "description": "Parameters required to make or edit a queue.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Match condition for an entity to be updated. If specified and a matching entity is not found, an error will be raised. To force an unconditional update, set to the wildcard character (*). If not specified, an insert will be performed when no existing entity is found to update and a replace will be performed if an existing entity is found.",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update -- Update Queue operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateQueueBody"
+            }
+          },
+          "201": {
+            "description": "Created -- Create Queue operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateQueueBody"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/ServiceBusManagementErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Entity_Delete_Queue",
+        "summary": "Delete Queue or Topic",
+        "description": "Delete the Queue with the given queueName.",
+        "tags": [
+          "Queue Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateQueueBody"
             }
           },
           "default": {
