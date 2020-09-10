@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2019-12-20-privatepreview --go` is
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2019-12-20-privatepreview' && $(go)
-namespace: Microsoft.VMware
+namespace: arcvmware
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/management/2019-12-20-privatepreview/$(namespace)
 ```
