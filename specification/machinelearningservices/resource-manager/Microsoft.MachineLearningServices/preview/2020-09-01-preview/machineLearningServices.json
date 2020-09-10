@@ -430,6 +430,50 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/transitivepeusages": {
+      "get": {
+        "tags": [
+          "TransitivePEUsage"
+        ],
+        "operationId": "TransitivePEUsage_Get",
+        "description": "Gets the current transitive private endpoint usage information as well as limits for AML resources for given subscription and location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransitivePEUsagesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Transitive PE Usages": {
+            "$ref": "./examples/getTransitivePEUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages": {
       "get": {
         "tags": [
@@ -2147,6 +2191,55 @@
         }
       },
       "description": "Describes AML Resource Usage."
+    },
+    "TransitivePEUsage": {
+      "type": "object",
+      "properties": {
+        "totalUsage": {
+          "readOnly": true,
+          "type": "integer"
+        }
+      }
+    },
+    "PrivateDNSZoneUsage": {
+      "type": "object",
+      "properties": {
+        "totalUsage": {
+          "readOnly": true,
+          "type": "integer"
+        }
+      }
+    },
+    "TransitivePEUsagesResult": {
+      "type": "object",
+      "description": "The transitive private endpoint usage in this location",
+      "properties": {
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Subscription id that the transitive private endpoint usage is measured."
+        },
+        "transitivePrivateEndpointsUsage": {
+          "readOnly": true,
+          "description": "Transitive private endpoint usage",
+          "$ref": "#/definitions/TransitivePEUsage"
+        },
+        "transitivePrivateEndpointsQuota": {
+          "readOnly": true,
+          "description": "Transitive private endpoint quota that currently set",
+          "type": "integer"
+        },
+        "privateDnsZonesUsage": {
+          "readOnly": true,
+          "description": "Private DNS zone usage",
+          "$ref": "#/definitions/PrivateDNSZoneUsage"
+        },
+        "privateDnsZonesQuota": {
+          "readOnly": true,
+          "description": "Private Dns Zones quota that currently set",
+          "type": "integer"
+        }
+      }
     },
     "ListUsagesResult": {
       "properties": {
