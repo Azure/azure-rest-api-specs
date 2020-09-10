@@ -20,6 +20,9 @@ directive:
   - rename-operation:
       from: VirtualHubBgpConnection_Delete
       to: VirtualHubBgpConnections_Delete
+  - rename-operation:
+      from: InboundSecurityRule_CreateOrUpdate
+      to: InboundSecurityRuleOperation_CreateOrUpdate
 ```
 
 ### Java multi-api
