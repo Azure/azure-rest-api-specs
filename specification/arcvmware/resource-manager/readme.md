@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2019-12-20-privatepreview` is spec
 
 ```yaml $(tag) == 'package-2019-12-20-privatepreview'
 input-file:
-  - Microsoft.VMware\privatepreview\2019-12-20-privatepreview\arcvmware.json
+  - Microsoft.VMware\preview\2019-12-20-privatepreview\arcvmware.json
 ```
 
 ---
