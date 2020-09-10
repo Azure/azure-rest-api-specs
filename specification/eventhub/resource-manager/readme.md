@@ -34,7 +34,7 @@ tag: package-2018-01-preview
 ``` yaml
 directive:
   - suppress: R4007
-    reason: DefaultErrorResponseSchema - we will be implimenting in new API version
+    reason: DefaultErrorResponseSchema - we will be Implementing in new API version
 ```
 
 ### Tag: package-2017-04
