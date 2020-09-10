@@ -7,33 +7,29 @@
     "api-version": "2020-06-01",
     "body": {
       "location": "eastus",
-      "properties": {
+      "properties": {        
+        "enabled": true,
         "hourlySchedule": {
-          "snapshotsToKeep": 10,
-          "minute": 10,
-          "usedBytes": 100000
+          "snapshotsToKeep": 2,
+          "minute": 50
         },
         "dailySchedule": {
-          "snapshotsToKeep": 10,
-          "hour": 10,
-          "minute": 10,
-          "usedBytes": 100000
+          "snapshotsToKeep": 4,
+          "hour": 14,
+          "minute": 30
         },
         "weeklySchedule": {
-          "snapshotsToKeep": 10,
-          "day": "Monday",
-          "hour": 10,
-          "minute": 10,
-          "usedBytes": 100000
+          "snapshotsToKeep": 3,
+          "day": "Wednesday",
+          "hour": 14,
+          "minute": 45
         },
         "monthlySchedule": {
-          "snapshotsToKeep": 10,
-          "DaysOfMonth": "1,5,11",
-          "hour": 10,
-          "minute": 10,
-          "usedBytes": 100000
-        },
-        "enabled": true
+          "snapshotsToKeep": 5,
+          "daysOfMonth": "10,11,12",
+          "hour": 14,
+          "minute": 15
+        }
       }
     }
   },
@@ -45,32 +41,30 @@
         "type": "Microsoft.NetApp/netAppAccounts/snapshotPolicies",
         "location": "eastus",
         "properties": {
+          "name": "sdk-net-tests-snapshotPolicy-1",
+          "enabled": true,
           "hourlySchedule": {
-            "snapshotsToKeep": 10,
-            "minute": 10,
-            "usedBytes": 100000
+            "snapshotsToKeep": 2,
+            "minute": 50
           },
           "dailySchedule": {
-            "snapshotsToKeep": 10,
-            "hour": 10,
-            "minute": 10,
-            "usedBytes": 100000
+            "snapshotsToKeep": 4,
+            "hour": 14,
+            "minute": 30
           },
           "weeklySchedule": {
-            "snapshotsToKeep": 10,
-            "day": "Monday",
-            "hour": 10,
-            "minute": 10,
-            "usedBytes": 100000
+            "snapshotsToKeep": 3,
+            "day": "Wednesday",
+            "hour": 14,
+            "minute": 45
           },
           "monthlySchedule": {
-            "snapshotsToKeep": 10,
-            "DaysOfMonth": "1,5,11",
-            "hour": 10,
-            "minute": 10,
-            "usedBytes": 100000
+            "snapshotsToKeep": 5,
+            "daysOfMonth": "10,11,12",
+            "hour": 14,
+            "minute": 15
           },
-          "enabled": true
+          "provisioningState": "Succeeded"
         }
       }
     }

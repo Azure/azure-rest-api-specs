@@ -3963,41 +3963,43 @@
       "description": "Snapshot policy properties",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Snapshot policy name"
+        },
         "hourlySchedule": {
           "title": "hourlySchedule",
           "description": "Schedule for hourly snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/hourlySchedule"
-          }
+          "$ref": "#/definitions/hourlySchedule"
         },
         "dailySchedule": {
           "title": "dailySchedule",
           "description": "Schedule for daily snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/dailySchedule"
-          }
+          "$ref": "#/definitions/dailySchedule"
         },
         "weeklySchedule": {
           "title": "weeklySchedule",
           "description": "Schedule for weekly snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/weeklySchedule"
-          }
+          "$ref": "#/definitions/weeklySchedule"
         },
         "monthlySchedule": {
           "title": "monthlySchedule",
           "description": "Schedule for monthly snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/monthlySchedule"
-          }
+          "$ref": "#/definitions/monthlySchedule"
         },
         "enabled": {
           "type": "boolean",
           "description": "The property to decide policy is enabled or not"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
         }
       }
     },
