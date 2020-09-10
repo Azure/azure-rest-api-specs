@@ -27,12 +27,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/subnets/{subnetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/subnets/{subnetName}": {
       "get": {
         "tags": [
           "Subnets"
         ],
-        "summary": "Gets Subnets associated with EnterprisePromise authorized for outbound calls from PowerPlatform.",
+        "summary": "Gets Subnets associated with EnterprisePolicy authorized for outbound calls from PowerPlatform.",
         "description": "Description of Subnets that are authorized for outbound calls from PowerPlatform.",
         "operationId": "Subnets_Get",
         "parameters": [
@@ -46,7 +46,7 @@
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePromiseNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
           },
           {
             "$ref": "#/parameters/SubnetNameParameter"
@@ -97,7 +97,7 @@
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePromiseNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
           },
           {
             "$ref": "#/parameters/SubnetNameParameter"
@@ -131,16 +131,16 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/subnets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/subnets": {
       "get": {
         "tags": [
           "Subnets"
         ],
-        "operationId": "Subnets_ListByEnterprisePromise",
-        "description": "Retrieve a list of subnets within a given enterprisePromise",
+        "operationId": "Subnets_ListByEnterprisePolicy",
+        "description": "Retrieve a list of subnets within a given enterprisePolicy",
         "x-ms-examples": {
-          "List EnterprisePromises by resource group": {
-            "$ref": "./examples/listSubnetsByEnterprisePromise.json"
+          "List EnterprisePolicies by resource group": {
+            "$ref": "./examples/listSubnetsByEnterprisePolicy.json"
           }
         },
         "parameters": [
@@ -154,7 +154,7 @@
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePromiseNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
           }
         ],
         "responses": {

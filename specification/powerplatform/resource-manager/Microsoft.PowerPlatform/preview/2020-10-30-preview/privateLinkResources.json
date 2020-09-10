@@ -27,13 +27,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
         ],
-        "description": "Gets the private link resources that need to be created for enterprisePromise.",
-        "operationId": "PrivateLinkResources_ListByEnterprisePromise",
+        "description": "Gets the private link resources that need to be created for enterprisePolicy.",
+        "operationId": "PrivateLinkResources_ListByEnterprisePolicy",
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -48,7 +48,7 @@
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePromiseNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
           }
         ],
         "responses": {
@@ -78,12 +78,12 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePromises/{enterprisePromiseName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateLinkResources/{groupName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
         ],
-        "description": "Gets the private link resources that need to be created for an EnterprisePromise.",
+        "description": "Gets the private link resources that need to be created for an EnterprisePolicy.",
         "operationId": "PrivateLinkResources_Get",
         "parameters": [
           {
@@ -96,7 +96,7 @@
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePromiseNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
           },
           {
             "$ref": "#/parameters/GroupNameParameter"

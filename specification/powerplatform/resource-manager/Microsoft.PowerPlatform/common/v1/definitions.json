@@ -58,17 +58,17 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "ARM resource id of the EnterprisePromise."
+          "description": "ARM resource id of the EnterprisePolicy."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "Name of the EnterprisePromise."
+          "description": "Name of the EnterprisePolicy."
         },
         "location": {
           "type": "string",
           "readOnly": true,
-          "description": "Region where the VM is located."
+          "description": "Region where the EnterprisePolicy is located."
         },
         "type": {
           "readOnly": true,
@@ -124,7 +124,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: For ex. providers/Microsoft.PowerPlatform/enterprisePromises/write or read",
+          "description": "Operation name: For ex. providers/Microsoft.PowerPlatform/enterprisePolicies/write or read",
           "type": "string"
         },
         "isDataAction": {
@@ -138,7 +138,7 @@
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed:  For ex. ",
+              "description": "Resource on which the operation is performed.",
               "type": "string"
             },
             "operation": {
@@ -183,7 +183,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription ID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription ID which uniquely identifies Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -201,12 +201,12 @@
       "description": "The resource group name.",
       "x-ms-parameter-location": "method"
     },
-    "EnterprisePromiseNameParameter": {
-      "name": "enterprisePromiseName",
+    "EnterprisePolicyNameParameter": {
+      "name": "enterprisePolicyName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "EnterprisePromise for the Microsoft Azure subscription.",
+      "description": "EnterprisePolicy for the Microsoft Azure subscription.",
       "x-ms-parameter-location": "method"
     }
   }
