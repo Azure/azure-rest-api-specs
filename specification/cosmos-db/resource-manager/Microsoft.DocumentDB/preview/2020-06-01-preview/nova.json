@@ -1,0 +1,512 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Cosmos DB - Managed Cassandra",
+        "description": "Azure Cosmos DB Database Service Managed Cassandra REST API",
+        "version": "2020-06-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "Impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}": {
+            "get": {
+                "operationId": "CassandraCluster_Get",
+                "description": "Lists the properties of a managed Cassandra cluster.",
+                "x-ms-examples": {
+                    "CosmosDBManagedCassandraClusterGet": {
+                        "$ref": "./examples/CosmosDBManagedCassandraClusterGet.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/clusterNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The managed Cassandra cluster was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterGetResults"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "CassandraCluster_Delete",
+                "description": "Deletes a managed Cassandra cluster.",
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "CosmosDBManagedCassandraClusterDelete": {
+                        "$ref": "./examples/CosmosDBManagedCassandraClusterDelete.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/clusterNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted. Deletion will run asynchronously."
+                    },
+                    "204": {
+                        "description": "Succeeded. The managed Cassandra cluster has been deleted."
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraCluster_CreateUpdate",
+                "description": "Creates a managed Cassandra cluster.",
+                "x-ms-examples": {
+                    "CosmosDBManagedCassandraClusterCreatePrivateLink": {
+                        "$ref": "./examples/CosmosDBManagedCassandraClusterCreatePrivateLink.json"
+                    },
+                    "CosmosDBManagedCassandraClusterCreateHybrid": {
+                        "$ref": "./examples/CosmosDBManagedCassandraClusterCreateHybrid.json"
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/clusterNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "createUpdateCassandraClusterParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClusterCreateUpdateParameters"
+                        },
+                        "description": "Parameters to provide for specifying the managed Cassandra cluster."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted. Creation will proceed asynchronously."
+                    },
+                    "201": {
+                        "description": "Succeeded. The cluster has been created or updated and is available to clients.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterGetResults"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters/{dataCenterName}": {
+            "get": {
+                "operationId": "CassandraDataCenter_Get",
+                "description": "Get properties of a managed Cassandra data center.",
+                "x-ms-examples": {
+                    "CosmosDBManagedCassandraDataCenterGet": {
+                        "$ref": "./examples/CosmosDBManagedCassandraDataCenterGet.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/clusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/dataCenterNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The managed Cassandra data center was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/DataCenterGetResults"
+                        }
+                    }
+                } 
+            },
+            "delete": {
+                "operationId": "CassandraDataCenter_Delete",
+                "description": "Delete a managed Cassandra data center.",
+                "x-ms-examples": {
+                    "CosmosDBManagedCassandraDataCenterDelete": {
+                        "$ref": "./examples/CosmosDBManagedCassandraDataCenterDelete.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/clusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/dataCenterNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted. Deletion will run asynchronously."
+                    },
+                    "204": {
+                        "description": "Succeeded. The managed Cassandra cluster has been deleted."
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraDataCenter_CreateUpdate",
+                "description": "Create or update a managed Cassandra data center.",
+                "x-ms-examples": {
+                    "CosmosDBManagedCassandraDataCenterCreate": {
+                        "$ref": "./examples/CosmosDBManagedCassandraDataCenterCreate.json"
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/clusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/dataCenterNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "createUpdateParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DataCenterCreateUpdateParameters"
+                        },
+                        "description": "Parameters to provide for specifying the managed Cassandra data center."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted. Creation will proceed asynchronously."
+                    },
+                    "201": {
+                        "description": "Succeeded. The data center has been created or updated and is available to clients.",
+                        "schema": {
+                            "$ref": "#/definitions/DataCenterGetResults"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "clusterNameParameter": {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Managed Cassandra cluster name.",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+        },
+        "dataCenterNameParameter": {
+            "name": "dataCenterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Data center name in a managed Cassandra cluster.",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+        }
+    },
+    "definitions": {
+        "ClusterCreateUpdateParameters": {
+            "description": "Parameters passed when creating or updating a managed Cassandra cluster.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties to create or update a managed Cassandra cluster.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/ClusterProperties"
+                        },
+                        {
+                            "$ref": "#/definitions/ClusterPutOnlyProperties"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
+                }
+            ]
+        },
+        "ClusterGetResults": {
+            "description": "A managed Cassandra cluster.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of a managed Cassandra cluster.",
+                    "properties": {
+                        "resource": {
+                            "description": "Properties of this resource.",
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/ClusterProperties"
+                                },
+                                {
+                                    "$ref": "#/definitions/ClusterGetOnlyProperties"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
+                }
+            ]
+        },
+        "ClusterProperties": {
+            "type": "object",
+            "description": "Properties of a managed Cassandra cluster that appear in all descriptions of it.",
+            "properties": {
+                "delegatedManagementSubnetId": {
+                    "type": "string",
+                    "description": "Resource ID of a subnet that this cluster's management service should run in."
+                },
+                "cassandraVersion": {
+                    "type": "string",
+                    "pattern": "^\\d+\\.\\d+$",
+                    "description": "Which version of Cassandra should this cluster converge to running."
+                },
+                "externalSeedNodes": {
+                    "type": "array",
+                    "description": "List of IP addresses of seed nodes in un-managed data centers.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "overrideClusterName": {
+                    "type": "string",
+                    "description": "Optional value to use for clusterName in cassandra.yaml. If omitted, use the cluster's resource name."
+                },
+                "trustedCertificates": {
+                    "description": "List of TLS certificates used to authorize clients connecting to the cluster.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "trustedNodeToNodeCertificates": {
+                    "description": "List of TLS certificates used to authorize gossip from unmanaged data centers.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ClusterPutOnlyProperties": {
+            "type": "object",
+            "description": "Properties of a managed Cassandra cluster that appear only on PUt requests.",
+            "properties": {
+                "initialCassandraAdminPassword": {
+                    "description": "Password for clients connecting as admin to the cluster. May be changed after cluster creation.",
+                    "type": "string"
+                }
+            }
+        },
+        "ClusterGetOnlyProperties": {
+            "type": "object",
+            "description": "Properties of a managed Cassandra cluster that appear only on GET requests.",
+            "properties": {
+                "seedNodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses of all seed nodes in the cluster."
+                },
+                "novaNodeToNodeCertificate": {
+                    "description": "TLS certificate that unmanaged nodes must trust for gossip with managed nodes.",
+                    "type": "string"
+                },
+                "dataCenters": {
+                    "type": "array",
+                    "description": "List of all data centers in this cluster.",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the data center."
+                            }
+                        },
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/DataCenterGetOnlyProperties"
+                            },
+                            {
+                                "$ref": "#/definitions/DataCenterProperties"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "DataCenterGetResults": {
+            "description": "A managed Cassandra data center.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of a managed Cassandra data center.",
+                    "properties": {
+                        "resource": {
+                            "type": "object",
+                            "description": "Properties of this resource.",
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/DataCenterProperties"
+                                },
+                                {
+                                    "$ref": "#/definitions/DataCenterGetOnlyProperties"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
+                }
+            ]
+        },
+        "DataCenterCreateUpdateParameters": {
+            "description": "Parameters passed when creating or updating a managed Cassandra data center.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties to create or update a managed Cassandra data center.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DataCenterProperties"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "cosmos-db.json#/definitions/ARMResourceProperties"
+                }
+            ]
+        },
+        "DataCenterProperties": {
+            "type": "object",
+            "description": "Properties of a managed Cassandra data center for both GET and PUT requests.",
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "The region this data center is in (determined by delegatedSubnetId)"
+                },
+                "delegatedSubnetId": {
+                    "type": "string",
+                    "description": "Azure resource ID of a subnet this should connect to. This will also determine the data center's region."
+                },
+                "capacity": {
+                    "type": "integer",
+                    "description": "The number of nodes the data center should have."
+                }
+            }
+        },
+        "DataCenterGetOnlyProperties": {
+            "type": "object",
+            "description": "Properties of a managed Cassandra data center on a GET request.",
+            "properties": {
+                "seedNodes": {
+                    "type": "array",
+                    "description": "IP addresses for seed nodes in this data center.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

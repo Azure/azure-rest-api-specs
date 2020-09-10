@@ -1,0 +1,42 @@
+{
+    "parameters": {
+        "subscriptionId": "subid",
+        "resourceGroupName": "cassandra-prod-rg",
+        "api-version": "2020-06-01-preview",
+        "clusterName": "cassandra-prod",
+        "createUpdateCassandraClusterParameters": {
+            "location": "West US",
+            "tags": {},
+            "properties": {
+                "cassandraVersion": "3.11",
+                "initialCassandraAdminPassword": "mypassword",
+                "trustedCertificates": [
+                    "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+                ]
+            }
+        }
+    },
+    "responses": {
+        "202": {},
+        "201": {
+            "body": {
+                "id": "/subscriptions/subid/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+                "name": "cassandra-prod",
+                "type": "Microsoft.DocumentDB/cassandraClusters",
+                "location": "West US",
+                "tags": {},
+                "properties": {
+                    "resource": {
+                        "cassandraVersion": "3.11",
+                        "externalSeedNodes": [],
+                        "seedNodes": [],
+                        "trustedCertificates": [
+                            "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+                        ],
+                        "dataCenters": []
+                    }
+                }
+            }
+        }
+    }
+}

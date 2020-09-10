@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "cassandra-prod-rg",
+    "api-version": "2020-06-01-preview",
+    "clusterName": "cassandra-prod",
+    "dataCenterName": "dc1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod/dataCenters/dc1",
+        "name": "dc1",
+        "type": "Microsoft.DocumentDB/cassandraClusters/dataCenters",
+        "tags": {},
+        "location": "West US 2",
+        "properties": {
+          "resource": {
+            "location": "uswest2",
+            "delegatedSubnetId": "/subscriptions/536e130b-d7d6-4ac7-98a5-de20d69588d2/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/dc1",
+            "capacity": 9,
+            "seedNodes": [
+              "192.168.12.2",
+              "192.168.12.3",
+              "192.168.12.4"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

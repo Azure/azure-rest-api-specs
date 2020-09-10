@@ -1,0 +1,39 @@
+{
+    "parameters": {
+        "subscriptionId": "subid",
+        "resourceGroupName": "cassandra-prod-rg",
+        "api-version": "2020-06-01-preview",
+        "clusterName": "cassandra-prod",
+        "dataCenterName": "dc1",
+        "createUpdateParameters": {
+            "location": "West US 2",
+            "tags": {},
+            "properties": {
+                "delegatedSubnetId": "/subscriptions/536e130b-d7d6-4ac7-98a5-de20d69588d2/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/dc1-subnet",
+                "capacity": 9
+            }
+        }
+    },
+    "responses": {
+        "202": {},
+        "201": {
+            "body": {
+                "id": "/subscriptions/subid/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod/dataCenters/dc1",
+                "name": "dc1",
+                "location": "West US 2",
+                "tags": {},
+                "properties": {
+                    "resource": {
+                        "delegatedSubnetId": "/subscriptions/536e130b-d7d6-4ac7-98a5-de20d69588d2/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/dc1-subnet",
+                        "capacity": 9,
+                        "seedNodes": [
+                            "192.168.12.2",
+                            "192.168.12.3",
+                            "192.168.12.4"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
