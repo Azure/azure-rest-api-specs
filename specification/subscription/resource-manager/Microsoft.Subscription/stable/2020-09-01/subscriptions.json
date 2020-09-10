@@ -1,0 +1,586 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01",
+    "title": "SubscriptionClient",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "operationId": "Subscription_Cancel",
+        "x-ms-examples": {
+          "cancelSubscription": {
+            "$ref": "./examples/cancelSubscription.json"
+          }
+        },
+        "description": "The operation to cancel a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanceledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "operationId": "Subscription_Rename",
+        "x-ms-examples": {
+          "renameSubscription": {
+            "$ref": "./examples/renameSubscription.json"
+          }
+        },
+        "description": "The operation to rename a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RenamedSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "operationId": "Subscription_Enable",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/enableSubscription.json"
+          }
+        },
+        "description": "The operation to enable a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnabledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "getOperations": {
+            "$ref": "./examples/getOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/aliases/{aliasName}": {
+      "put": {
+        "tags": [
+          "Alias"
+        ],
+        "description": "Create Alias Subscription.",
+        "operationId": "Alias_Create",
+        "x-ms-examples": {
+          "CreateAlias": {
+            "$ref": "./examples/createAlias.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "201": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAliasRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Alias"
+        ],
+        "description": "Get Alias Subscription.",
+        "operationId": "Alias_Get",
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/getAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Alias"
+        ],
+        "description": "Delete Alias.",
+        "operationId": "Alias_Delete",
+        "x-ms-examples": {
+          "DeleteAlias": {
+            "$ref": "./examples/deleteAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted the alias"
+          },
+          "204": {
+            "description": "Alias does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/aliases": {
+      "get": {
+        "tags": [
+          "Alias"
+        ],
+        "description": "Get Alias Subscription.",
+        "operationId": "Alias_List",
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/listAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "CanceledSubscriptionId": {
+      "description": "The ID of the canceled subscription",
+      "properties": {
+        "value": {
+          "description": "The ID of the canceled subscription",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RenamedSubscriptionId": {
+      "description": "The ID of the subscriptions that is being renamed",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being renamed",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnabledSubscriptionId": {
+      "description": "The ID of the subscriptions that is being enabled",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being enabled",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionName": {
+      "type": "object",
+      "description": "The new name of the subscription.",
+      "properties": {
+        "subscriptionName": {
+          "type": "string",
+          "description": "New subscription name"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Subscription",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "PutAliasRequest": {
+      "description": "The parameters required to create a new subscription.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutAliasRequestProperties",
+          "description": "Put alias request properties."
+        }
+      }
+    },
+    "PutAliasRequestProperties": {
+      "description": "Put subscription properties.",
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "workload": {
+          "description": "The workload type of the subscription. It can be either Production or DevTest.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "workload",
+            "modelAsString": true
+          },
+          "enum": [
+            "Production",
+            "DevTest"
+          ]
+        },
+        "billingScope": {
+          "description": "Determines whether subscription is fieldLed, partnerLed or LegacyEA",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "This parameter can be used to create alias for existing subscription Id",
+          "type": "string"
+        }
+      }
+    },
+    "PutAliasResponse": {
+      "description": "Subscription Information with the alias.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the alias resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Alias ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Subscription/aliases.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PutAliasResponseProperties",
+          "description": "Put Alias response properties."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PutAliasResponseProperties": {
+      "description": "Put subscription creation result properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "Newly created subscription Id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PutAliasListResult": {
+      "description": "The list of aliases.",
+      "properties": {
+        "value": {
+          "description": "The list of alias.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PutAliasResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2020-09-01"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription Id."
+    },
+    "subscriptionNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Subscription Name",
+      "schema": {
+        "$ref": "#/definitions/SubscriptionName"
+      }
+    },
+    "aliasNameParameter": {
+      "name": "aliasName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Alias Name"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

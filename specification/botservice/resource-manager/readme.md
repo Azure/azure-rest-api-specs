@@ -96,6 +96,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js botservice/resource-manager
 ```
 
 ## C#
@@ -124,6 +127,10 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See readme.python.md file.
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -136,6 +143,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.BotService/stable/2020-06-02/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2018-07-12/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2017-12-01/botservice.json
 

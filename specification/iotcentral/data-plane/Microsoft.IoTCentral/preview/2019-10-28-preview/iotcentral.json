@@ -304,10 +304,6 @@
           "description": "Display name of the device.",
           "type": "string"
         },
-        "description": {
-          "description": "Detailed description of the device.",
-          "type": "string"
-        },
         "instanceOf": {
           "description": "The device template definition for the device.",
           "type": "string"
@@ -504,7 +500,8 @@
           "properties": {
             "email": {
               "description": "Email address of the user.",
-              "type": "string"
+              "type": "string",
+              "format": "email"
             }
           },
           "required": [
@@ -1186,7 +1183,7 @@
     "/apiTokens": {
       "get": {
         "operationId": "ApiTokens_List",
-        "summary": "Get the list of API tokens in an application.",
+        "summary": "Get the list of API tokens in an application. The token value will never be returned for security reasons.",
         "x-ms-examples": {
           "List API tokens": {
             "$ref": "./examples/apitoken_list.json"
@@ -1234,7 +1231,7 @@
       },
       "put": {
         "operationId": "ApiTokens_Set",
-        "summary": "Create a new API token in the application.",
+        "summary": "Create a new API token in the application to use in the IoT Central public API. The token value will be returned in the response, and won't be returned again in subsequent requests.",
         "x-ms-examples": {
           "Create API token": {
             "$ref": "./examples/apitoken_create.json"
@@ -1446,7 +1443,7 @@
       },
       "put": {
         "operationId": "DeviceTemplates_Set",
-        "summary": "Create or update a device template",
+        "summary": "Publish a new device template or update the cloud properties and overrides of an existing device template. Default views will be automatically generated for new device templates created this way.",
         "x-ms-examples": {
           "Create a device template": {
             "$ref": "./examples/devicetemplates_create.json"
@@ -1943,6 +1940,7 @@
       "get": {
         "operationId": "Devices_GetComponentTelemetryValue",
         "summary": "Get device telemetry value",
+        "description": "Get the last telemetry value from a device.",
         "x-ms-examples": {
           "Get telemetry": {
             "$ref": "./examples/devices_telemetry_get.json"
@@ -2192,6 +2190,7 @@
       "get": {
         "operationId": "Devices_GetModuleComponentTelemetryValue",
         "summary": "Get module telemetry value",
+        "description": "Get the last telemetry value from a module.",
         "x-ms-examples": {
           "Get telemetry from module": {
             "$ref": "./examples/modules_telemetry_get.json"

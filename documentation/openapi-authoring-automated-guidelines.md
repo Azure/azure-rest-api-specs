@@ -56,6 +56,11 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs |
 | [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs |
 | [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs |
+| [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs |
+| [R4016](#r4016) | [TopLevelResourcesListByResourceGroup](#r4016) | ARM OpenAPI(swagger) specs |
+| [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
+| [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
+| [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -67,7 +72,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
 | [R4009](#r4009) | [RequiredSystemDataInNewApiVersions](#r4009) | ARM OpenAPI(swagger) specs |
-
+| [R4014](#r4014) | [AllResourcesMustHaveGetOperation](#r4014) | ARM OpenAPI(swagger) specs |
 ### SDK Violations
 
 #### SDK Errors
@@ -110,9 +115,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
 | [R4000](#r4000) | [ParameterDescriptionRequired](#r4000) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4000](#r4000-3) | [DescriptiveDescriptionRequired](#r4000-3) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4000](#r4000-4) | [DescriptionAndTitleMissing](#r4000-4) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4000](#r4000-5) | [OperationDescriptionOrSummaryRequired](#r4000-5)  | ARM and Data plane OpenAPI(swagger) specs |
+| [R4020](#r4000-3) | [DescriptiveDescriptionRequired](#r4000-3) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4021](#r4000-4) | [DescriptionAndTitleMissing](#r4000-4) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4022](#r4000-5) | [OperationDescriptionOrSummaryRequired](#r4000-5)  | ARM and Data plane OpenAPI(swagger) specs |
 | [R2001](#r2001) | [AvoidNestedProperties](#r2001) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4002](#r4002) | [LocationMustHaveXmsMutability](#r4002) | ARM OpenAPI(swagger) specs |
 | [R2066](#r2066) | [PostOperationIdContainsUrlVerb](#r2066) | ARM and Data plane OpenAPI(swagger) specs |
@@ -135,7 +140,16 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
-  
+
+
+### RPaaS Violations
+
+#### RPaaS Errors
+
+| Id | Rule Name | Applies to |
+| --- | --- | --- |
+| [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
+
 ### Documentation
 
 #### Documentation Errors
@@ -1418,7 +1432,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemdata. Model definition '{0}' has extra properties ['{1}'].
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData. Model definition '{0}' has extra properties ['{1}'].
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
 
@@ -1684,7 +1698,7 @@ But it's allowed when all required properties are marked as discriminator, becau
 
 **Why the rule is important**: A PATCH operation is used to update properties of a resource. So, If the resource has 'X' number of properties and if you wish to change one of them, then a PATCH request could be sent with a value for that specified property. In other words, all the properties in the PATCH request are updated. Now, if any of the values are marked as required/default, it would force the system to update it always which is not the intention of the PATCH operation.
 
-**How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
+**How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.A recommended way is to define a new model that only contains the patchable properties to replace the original parameter in request body. 
 
 **Good Examples**: The following is a good example:
 ```json
@@ -1716,10 +1730,7 @@ But it's allowed when all required properties are marked as discriminator, becau
           "type": "string"
         }
       },
-      "discriminator": "prop0",
-      "required": [
-        "prop0"
-      ]
+      "required": []
     }
   }
 ......
@@ -1743,7 +1754,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4000-3" />R4000 DescriptiveDescriptionRequired
+### <a name="r4000-3" />R4020 DescriptiveDescriptionRequired
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
@@ -1758,7 +1769,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4000-4" />R4000 DescriptionAndTitleMissing
+### <a name="r4000-4" />R4021 DescriptionAndTitleMissing
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
@@ -1773,7 +1784,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4000-5" />R4000 OperationDescriptionOrSummaryRequired
+### <a name="r4000-5" />R4022 OperationDescriptionOrSummaryRequired
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
@@ -1913,7 +1924,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Missing operationId. path:'${operation path}' operation:'${operation}'.
 
-**Description** : Each operation must haave a unique operationId.
+**Description** : Each operation must have a unique operationId.
 
 **CreatedAt** : February 18, 2020
 
@@ -1947,7 +1958,7 @@ For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/v
 
 Rename resource provider as pascal case in path.
 
-Eg: In this case, you need to replace `Microsoft.computer` with `Microsoft.Computer` to follw pascal case.
+Eg: In this case, you need to replace `Microsoft.computer` with `Microsoft.Computer` to follow pascal case.
 
 
 Invalid: 
@@ -2001,7 +2012,7 @@ For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/v
 
 Rename resource type or other identifiers as camel case in path.
 
-Eg: In this case, you need to replace `ResourceGroups` with `resourceGroups` to follw camel case.
+Eg: In this case, you need to replace `ResourceGroups` with `resourceGroups` to follow camel case.
 
 
 Invalid: 
@@ -2041,9 +2052,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
-**Output Message** : Enum must not contain duplicated value (case insentive).
+**Output Message** : Enum must not contain duplicated value (case insensitive).
 
-**Description** : Enum must not contain duplicated value (case insentive).
+**Description** : Enum must not contain duplicated value (case insensitive).
 
 **CreatedAt**: February 18, 2020
 
@@ -2143,7 +2154,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Enum value must not contain empty value.
 
-**Description** : Emum must not be empty, or contain special character, like space, tab, etc. It will lead to code generation failure in downstream pipeline.
+**Description** : Enum must not be empty, or contain special character, like space, tab, etc. It will lead to code generation failure in downstream pipeline.
 
 **CreatedAt**: February 18, 2020
 
@@ -2341,7 +2352,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 The following would be invalid:
 
 ```json
- "responese":{
+ "response":{
    "default": {
      "schema":{
          "error":"error msg",
@@ -2356,7 +2367,7 @@ The following would be invalid:
 the correct schema:
 
 ```json
- "responese":{
+ "response":{
    "default": {
      "error":
      {
@@ -2379,7 +2390,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Response schema must not be empty.
 
-**Description** : Response schema must not be empty, or it will block code genaration.
+**Description** : Response schema must not be empty, or it will block code generation.
 
 **CreatedAt**: April 2, 2020
 
@@ -2391,7 +2402,7 @@ The following would be invalid:
 
 ```json
 ...
- "responese":{
+ "response":{
    "default": {
      "schema":{
      }
@@ -2415,7 +2426,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **LastModifiedAt**: May 21, 2020
 
-**How to fix the violation**: For each response in the GET/PUT/PATCH opearation add the systemData object:
+**How to fix the violation**: For each response in the GET/PUT/PATCH operation add the systemData object:
 ``` json
  "systemData": {
     "$ref": "#/definitions/SystemData"
@@ -2446,7 +2457,7 @@ The following would be valid:
  "responses":{
    "default": {
      "schema":{
-       "$ref":#/definiton/Error
+       "$ref":#/definition/Error
      }
   }
  }
@@ -2482,20 +2493,20 @@ The following would be valid:
      .....
      .....
    ]
-  "responese":{
+  "response":{
    "default": {
      "schema":{
-       "$ref":#/definiton/Error
+       "$ref":#/definition/Error
      }
    },
    "200": {
      "schema":{
-       "$ref":#/definiton/response
+       "$ref":#/definition/response
      }
    },
    "204": {
      "schema":{
-       "$ref":#/definiton/resonse
+       "$ref":#/definition/response
      }
    }
   }
@@ -2513,7 +2524,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The operation: '{operation name}' is defined with x-ms-pageable enabled,but can not find the corresponding nextLink property in the response, please add it.
 
-**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) ,when specifying a x-ms-pagable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
+**Description** :  Per [extensions](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) ,when specifying a x-ms-pageable/nextLinkName, the corresponding nextlink property must be defined in the response schema.
 
 **CreatedAt**: May 21, 2020
 
@@ -2531,7 +2542,7 @@ The following would be valid:
           "nextLinkName": "nextLink"
   },
   ....
-  "responese":{
+  "response":{
    "200": {
      "schema":{
        "description": "The list of metric items.",
@@ -2578,6 +2589,362 @@ The following would be valid:
           "type": "integer",
           "format": "int64",
       ....
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4014" ></a>R4014 AllResourcesMustHaveGetOperation
+
+**Category** : ARM Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The resource "{0}" does not have get operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) ,all the resources ,including top-level and nested resources, must have a get operation. 
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: 
+Since all the models that having 'x-ms-azure-resource' enabled are considered as ARM resource,
+If the output resource is not exactly a ARM resource,you should remove the extension from the model. 
+Otherwise,for each resource which doesn't have a get operation,add the corresponding get operation. 
+
+For example:
+
+```json
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyResourceType/{Name}/SubResource/{subName}": {
+      "get": {
+         ...
+        "operationId": "SubResource_Get",
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SubResource"
+            }
+          },
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4015" ></a>R4015 NestedResourcesMustHaveListOperation
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The nested resource "{0}" does not have list operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the nested must have a list operation which returns the collection of the resource.
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each nested resource, add the corresponding list operation.
+
+For example:
+
+```json
+...
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyTopLevelResourceType/{name}/MySubResource": {
+      "get": {
+        ...
+        ...
+        "description": "Handles requests to list all resources in a service.",
+        "operationId": "MySubResource_List",
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the service.",
+            "schema": {
+              "$ref": "#/definitions/MySubResourceList"
+            }
+          }
+        },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4016" ></a>R4016 TopLevelResourcesListByResourceGroup
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The top-level resource "{0}" does not have list by resource group operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the top-level resources must have a list by resource group operation which returns the collection of the resource. 
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each top-level resource, add the corresponding list by resource group operation.
+
+For example:
+
+```json
+...
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyTopLevelResourceType": {
+      "get": {
+        ...
+        ...
+        "description": "Handles requests to list all resources in a resource group.",
+        "operationId": "Services_ListByRG",
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/MyTopLevelResourceList"
+            }
+          }
+        },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4017" ></a>R4017 TopLevelResourcesListBySubscription
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The top-level resource "{0}" does not have list by subscription operation, please add it.
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), all the top-level resources must have a list by subscription operation which returns the collection of the resource. 
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: For each top-level resource, add the corresponding list operation.
+
+For example:
+
+```json
+...
+  "/subscriptions/{subscriptionId}/providers/Microsoft.MyNameSpace/MyTopLevelResourceType": {
+      "get": {
+        ...
+        ...
+        "description": "Handles requests to list all resources in a subscription.",
+        "operationId": "Services_ListBySubscription",
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/MyTopLevelResourceList"
+            }
+          }
+        },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4018" ></a>R4018 OperationsApiResponseSchema
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
+
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` or `display.resource`,must be included.
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**:  For each operations API ,provide a schema which consistent with the above contract.
+
+The following response is a good example::
+
+```json
+...
+ "AvailableOperations": {
+    "description": "Available operations of the service",
+    "type": "object",
+    "properties": {
+      "value": {
+        "description": "Collection of available operation details",
+        "uniqueItems": false,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/OperationDetail"
+        }
+      },
+      "nextLink": {
+        "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+        "type": "string"
+      }
+    }
+  },
+  "OperationDetail": {
+    "description": "Operation detail payload",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Name of the operation",
+        "type": "string"
+      },
+      "isDataAction": {
+        "description": "Indicates whether the operation is a data action",
+        "type": "boolean"
+      },
+      "display": {
+        "$ref": "#/definitions/OperationDisplay",
+        "description": "Display of the operation"
+      },
+      "origin": {
+        "description": "Origin of the operation",
+        "type": "string"
+      },
+      "properties": {
+        "$ref": "#/definitions/OperationProperties",
+        "description": "Properties of the operation"
+      }
+    }
+  },
+  "OperationDisplay": {
+    "description": "Operation display payload",
+    "type": "object",
+    "properties": {
+      "provider": {
+        "description": "Resource provider of the operation",
+        "type": "string"
+      },
+      "resource": {
+        "description": "Resource of the operation",
+        "type": "string"
+      },
+      "operation": {
+        "description": "Localized friendly name for the operation",
+        "type": "string"
+      },
+      "description": {
+        "description": "Localized friendly description for the operation",
+        "type": "string"
+      }
+    }
+  }
+....
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4019" ></a>R4019 GetCollectionResponseSchema
+
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response model in the GET collection operation "{0}" does not match with the response model in the individual GET operation "{1}".
+
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md#get-resource), for all resources (top-level and nested), collection GETs should have a response definition with a property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
+
+**CreatedAt**: July 13, 2020
+
+**LastModifiedAt**: July 13, 2020
+
+**How to fix the violation**: Make sure the collection GETs return an array and its items schema the same as the response schema in corresponding individual GET. 
+
+The following response is a good example:
+
+```json
+...
+
+ "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyResourceType/{Name}": {
+      "get": {
+        ...
+        ...
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Service.",
+            "schema": {
+              "$ref": "#/definitions/MyResourceSchema"
+            }
+          }
+
+...
+...
+
+ "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyNameSpace/MyResourceType": {
+      "get": {
+        .....
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Services in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/MyResourceList"
+            }
+          },
+...
+...
+"MyResourceList":{
+   "type": "object", 
+     "properties": { 
+       "value": { 
+           "type": "array", 
+           "items": { 
+               "$ref": "#/definitions/MyResourceSchema" 
+           } 
+       },
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4023" ></a>R4023 RPaasPutLongRunningOperation201Only
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] Only 201 is the supported response code for PUT async response
+
+**Description** : An async PUT operation response include status code 201 with Azure-async-operation header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to describe how the long running operation is tracked.
+
+**CreatedAt**: August 10, 2020
+
+**LastModifiedAt**: August 10, 2020
+
+**Why this rule is important**: RPaaS only supports 201 for async operations. This is enforced at runtime via swagger validation.
+
+**How to fix the violation**: Add the following for async PUT operations.
+
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "201": {
+        "description": "Created",
+        "schema": {
+          "$ref": "#/definitions/MySimpleObject"
+        }
+      },
+      "200": {
+        "description": "Succeeded",
+        "schema": {
+          "$ref": "#/definitions/MySimpleObject"
+        }
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "azure-async-operation"
   }
 ...
 ```
