@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2018-01-preview
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefaultErrorResponseSchema
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules"].get.responses.default'
+    from: AuthorizationRules.json
+    reason: we will be implimenting in new API version
+```
 
 ### Tag: package-2017-04
 
