@@ -15,5 +15,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2019-12-20-privatepreview' && $(go)
 namespace: arcvmware
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/management/2019-12-20-privatepreview/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(namespace)/management/2019-12-20-privatepreview/$(namespace)
 ```
