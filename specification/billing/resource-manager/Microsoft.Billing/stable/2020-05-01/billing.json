@@ -2583,8 +2583,10 @@
             }
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}/cancel": {
+      "post": {
         "tags": [
           "Transfers"
         ],
@@ -2749,8 +2751,10 @@
             }
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transfers/{transferName}/cancel": {
+      "post": {
         "tags": [
           "Transfers"
         ],
@@ -3015,7 +3019,6 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "operationId": "Transfers_ChangeInvoiceSection",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "MoveBillingSubscription": {
             "$ref": "./examples/ChangeInvoiceSection.json"
@@ -3051,7 +3054,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
