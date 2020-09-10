@@ -33,10 +33,8 @@ tag: package-2018-01-preview
 
 ``` yaml
 directive:
-  - suppress: DefaultErrorResponseSchema
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules"].get.responses.default'
-    from: AuthorizationRules.json
-    reason: we will be implimenting in new API version
+  - suppress: R4007
+    reason: 'DefaultErrorResponseSchema' we will be implimenting in new API version
 ```
 
 ### Tag: package-2017-04
