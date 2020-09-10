@@ -349,6 +349,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Lists notebook keys associated with this workspace. The notebook keys are used for loading notebook components, which a reader should have access to. So make it a Get, not Post call",
+        "operationId": "Workspaces_ListNotebookKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listWorkspaceNotebookKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NotebookListCredentialsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys": {
       "post": {
         "tags": [
@@ -2894,6 +2936,17 @@
       ],
       "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
       "x-ms-azure-resource": true
+    },
+    "NotebookListCredentialsResult": {
+      "type": "object",
+      "properties": {
+        "primaryAccessKey": {
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "type": "string"
+        }
+      }
     },
     "ListWorkspaceKeysResult": {
       "type": "object",
