@@ -2,7 +2,29 @@
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
     "security_domain": {
-      "value": "<previously stored security domain>"
+      "value": {
+        "EncData": {
+          "data": [
+            {
+              "compact_jwe": "<encrypted data1>",
+              "tag": "hsm_backup"
+            },
+            {
+              "compact_jwe": "<encrypted data2>",
+              "tag": "base_enclave_backup"
+            },
+            {
+              "compact_jwe": "<encrypted data3>",
+              "tag": "partition_enclave_backup"
+            }
+          ],
+          "kdf": "sp108_kdf"
+        },
+        "WrappedKey": {
+          "enc_key": "eyJhbGciOiJ",
+          "x5t_256": "h8ObF2NU85MhzEEE2JrSSGcF7aK2CiNrffef1r8mY"
+        }
+      }
     },
     "api-version": "7.2-preview"
   },

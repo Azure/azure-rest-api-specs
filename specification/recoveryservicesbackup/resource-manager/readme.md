@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2020-02
+tag: package-2020-07
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -45,6 +45,20 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
+### Tag: package-2020-07
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07'
+input-file:
+- Microsoft.RecoveryServices/stable/2020-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2020-02-02/bms.json
+- Microsoft.RecoveryServices/stable/2019-06-15/bms.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-08-10/operations.json
+```
+
 ### Tag: package-2020-02
 
 These settings apply only when `--tag=package-2020-02` is specified on the command line.
@@ -152,6 +166,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_backup']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js recoveryservicesbackup/resource-manager
 ```
 
 
@@ -178,6 +195,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -190,6 +211,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.RecoveryServices/stable/2020-07-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2020-02-02/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2019-06-15/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2017-07-01/bms.json
