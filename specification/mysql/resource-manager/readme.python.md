@@ -27,17 +27,18 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && !$(track2)
+```yaml !$(track2)
 batch:
   - tag: package-2020-01-01
   - tag: package-2018-06-01
   - tag: package-2017-12-01
   - tag: package-2020-07-01-privatepreview
   - tag: package-2020-01-01-privatepreview
+  - tag: package-2018-06-01-privatepreview
   - tag: package-2017-12-01-preview
 ```
 
-```yaml $(multiapi) && $(track2)
+```yaml $(track2)
 clear-output-folder: true
 batch:
   - tag: package-2020-01-01
@@ -45,12 +46,12 @@ batch:
   - tag: package-2017-12-01
   - tag: package-2020-07-01-privatepreview
   - tag: package-2020-01-01-privatepreview
+  - tag: package-2018-06-01-privatepreview
   - tag: package-2017-12-01-preview
-  - multiapiscript: true
-
+  - batchscript: true
 ```
 
-``` yaml $(multiapiscript)
+``` yaml $(batchscript)
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/
 clear-output-folder: false
 perform-load: false
@@ -62,6 +63,8 @@ These settings apply only when `--tag=package-2020-01-01 --python` is specified 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-01-01' && $(python)
+namespace: azure.mgmt.rdbms.mysql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 python:
   namespace: azure.mgmt.rdbms.mysql
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
@@ -73,6 +76,8 @@ These settings apply only when `--tag=package-2018-06-01 --python` is specified 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2018-06-01' && $(python)
+namespace: azure.mgmt.rdbms.mysql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 python:
   namespace: azure.mgmt.rdbms.mysql
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
@@ -84,6 +89,8 @@ These settings apply only when `--tag=package-2017-12-01 --python` is specified 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-01' && $(python)
+namespace: azure.mgmt.rdbms.mysql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 python:
   namespace: azure.mgmt.rdbms.mysql
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
@@ -95,9 +102,11 @@ These settings apply only when `--tag=package-2020-07-01-privatepreview --python
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-07-01-privatepreview' && $(python)
+namespace: azure.mgmt.rdbms.mysql_flexibleservers
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql_flexibleservers
 python:
-  namespace: azure.mgmt.rdbms.mysql.flexibleservers
-  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql/flexibleservers
+  namespace: azure.mgmt.rdbms.mysql_flexibleservers
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql_flexibleservers
 ```
 
 ### Tag: package-2020-01-01-privatepreview and python
@@ -106,6 +115,8 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview --python
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview' && $(python)
+namespace: azure.mgmt.rdbms.mysql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 python:
   namespace: azure.mgmt.rdbms.mysql
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
@@ -117,6 +128,8 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview --python
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview' && $(python)
+namespace: azure.mgmt.rdbms.mysql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 python:
   namespace: azure.mgmt.rdbms.mysql
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
@@ -128,6 +141,8 @@ These settings apply only when `--tag=package-2017-12-01-preview --python` is sp
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-01-preview' && $(python)
+namespace: azure.mgmt.rdbms.mysql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 python:
   namespace: azure.mgmt.rdbms.mysql
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
