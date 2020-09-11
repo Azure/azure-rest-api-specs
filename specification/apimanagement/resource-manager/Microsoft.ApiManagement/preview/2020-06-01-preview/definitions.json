@@ -2636,11 +2636,24 @@
       ],
       "description": "Issue contract Update Properties."
     },
+    "KeyVaultContractCreateProperties" :{
+      "properties": {
+        "secretIdentifier": {
+          "type": "string",
+          "description": "Key vault secret identifier for fetching secret."
+        },
+        "identityClientId": {
+          "type": "string",
+          "description": "SystemAssignedIdentity or UserAssignedIdentity Client Id which will be used to access key vault secret."
+        }
+      },
+      "description": "Create keyVault contract details."
+    },
     "KeyVaultContractProperties": {
       "properties": {
         "secretIdentifier": {
           "type": "string",
-          "description": "Key vault secret ID for fetching secret."
+          "description": "Key vault secret identifier for fetching secret."
         },
         "identityClientId": {
           "type": "string",
@@ -2648,8 +2661,7 @@
         },
         "lastStatus": {
           "$ref": "#/definitions/KeyVaultLastAccessStatusContractProperties",
-          "description": "Last time sync and refresh status of secret from key vault.",
-          "readonly": true
+          "description": "Last time sync and refresh status of secret from key vault."
         }
       },
       "description": "KeyVault contract details."
@@ -3702,7 +3714,7 @@
           "maxLength": 4096
         },
         "keyVault": {
-          "$ref": "#/definitions/KeyVaultContractProperties",
+          "$ref": "#/definitions/KeyVaultContractCreateProperties",
           "description": "KeyVault location details of the namedValue."
         }
       },
@@ -3794,7 +3806,7 @@
           "maxLength": 4096
         },
         "keyVault": {
-          "$ref": "#/definitions/KeyVaultContractProperties",
+          "$ref": "#/definitions/KeyVaultContractCreateProperties",
           "description": "KeyVault location details of the namedValue."
         }
       },
