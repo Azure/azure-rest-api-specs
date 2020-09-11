@@ -7,7 +7,7 @@
     "api-version": "2019-10-01-preview",
     "properties": {
       "sourceId": "/subscriptions/subid/resourceGroups/eastus/providers/Microsoft.Compute/virtualMachines/eastusvm1",
-      "dependsOnOverride": [
+      "dependsOnOverrides": [
         {
           "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/networkInterfaces/eastusvm140",
           "targetId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/westus/providers/Microsoft.Network/networkInterfaces/eastusvm140"
@@ -17,12 +17,12 @@
         "resourceType": "Microsoft.Compute/VirtualMachines",
         "targetResourceName": "westusvm1",
         "targetAvailabilityZone": "2",
-        "targetVmSize": null
+        "targetVmSize": null,
+        "targetAvailabilitySetId": "/subscriptions/subid/resourceGroups/eastus/providers/Microsoft.Compute/availabilitySets/avset1"
       }
     }
   },
   "responses": {
-    "202": {},
     "200": {
       "body": {
         "name": "moveresourcename1",
@@ -37,15 +37,23 @@
               "resolutionStatus": "Unresolved"
             }
           ],
+          "dependsOnOverrides": [
+            {
+              "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+              "targetId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/westus/providers/Microsoft.Network/networkInterfaces/eastusvm140"
+            }
+          ],
           "resourceSettings": {
             "resourceType": "Microsoft.Compute/virtualMachines",
             "targetResourceName": "westusvm1",
             "targetAvailabilityZone": "2",
-            "targetVmSize": null
+            "targetVmSize": null,
+            "targetAvailabilitySetId": "/subscriptions/subid/resourceGroups/eastus/providers/Microsoft.Compute/availabilitySets/avset1"
           },
           "provisioningState": "Succeeded"
         }
       }
-    }
+    },
+    "202": {}
   }
 }

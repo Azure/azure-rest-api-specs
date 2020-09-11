@@ -65,7 +65,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/Location"
+          "$ref": "#/definitions/AzureTrackedResourceLocation"
         },
         {
           "$ref": "#/definitions/Kind"
@@ -117,6 +117,16 @@
       "properties": {
         "location": {
           "readOnly": true,
+          "type": "string",
+          "description": "Location where the resource is stored"
+        }
+      }
+    },
+    "AzureTrackedResourceLocation": {
+      "type": "object",
+      "description": "Describes an Azure resource with location",
+      "properties": {
+        "location": {
           "type": "string",
           "description": "Location where the resource is stored"
         }

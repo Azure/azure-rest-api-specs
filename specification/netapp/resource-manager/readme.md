@@ -28,7 +28,16 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2020-02-01
+tag: package-netapp-2020-06-01
+```
+
+### Tag: package-netapp-2020-06-01
+
+These settings apply only when `--tag=package-netapp-2020-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-06-01'
+input-file:
+- Microsoft.NetApp/stable/2020-06-01/netapp.json
 ```
 
 ### Tag: package-netapp-2020-02-01
@@ -121,6 +130,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-trenton  
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js netapp/resource-manager
 ```
 
 
@@ -144,6 +156,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -156,6 +172,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.NetApp/stable/2020-06-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2020-02-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-11-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-10-01/netapp.json

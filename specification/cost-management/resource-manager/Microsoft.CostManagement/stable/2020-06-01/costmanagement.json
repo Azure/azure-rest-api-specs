@@ -1133,7 +1133,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "name": "$expand",
@@ -1194,7 +1194,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -1256,7 +1256,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -1326,7 +1326,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -1380,7 +1380,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -1434,7 +1434,7 @@
             "$ref": "#/parameters/scopeQueryParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion20200601Parameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -2502,7 +2502,7 @@
         },
         "dataset": {
           "description": "Has definition for data in this forecast.",
-          "$ref": "#/definitions/QueryDataset"
+          "$ref": "#/definitions/ForecastDataset"
         },
         "includeActualCost": {
           "description": "a boolean determining if actualCost will be included",
@@ -2517,6 +2517,40 @@
         "type",
         "timeframe"
       ]
+    },
+    "ForecastDataset": {
+      "description": "The definition of data present in the forecast.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the forecast.",
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
+          "$ref": "#/definitions/QueryDatasetConfiguration"
+        },
+        "aggregation": {
+          "type": "object",
+          "description": "Dictionary of aggregation expression to use in the forecast. The key of each item in the dictionary is the alias for the aggregated column. forecast can have up to 2 aggregation clauses.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/QueryAggregation"
+          },
+          "maxItems": 2
+        },
+        "filter": {
+          "type": "object",
+          "description": "Has filter expression to use in the forecast.",
+          "$ref": "#/definitions/QueryFilter"
+        }
+      }
     },
     "QueryDefinition": {
       "description": "The definition of a query.",
@@ -3132,6 +3166,20 @@
     }
   },
   "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2019-11-01."
+    },
+    "apiVersion20200601Parameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2020-06-01."
+    },
     "viewNameParameter": {
       "name": "viewName",
       "in": "path",
@@ -3183,13 +3231,6 @@
       "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request (e.g. '2020-06-01')."
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",

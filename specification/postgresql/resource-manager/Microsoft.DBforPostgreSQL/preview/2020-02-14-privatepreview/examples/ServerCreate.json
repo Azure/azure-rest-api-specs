@@ -8,7 +8,6 @@
       "location": "westus",
       "sku": {
         "tier": "GeneralPurpose",
-        "capacity": 4,
         "name": "Standard_D4s_v3"
       },
       "properties": {
@@ -19,12 +18,14 @@
         "vnetInjArgs": {
           "delegatedSubnetName": "test-subnet",
           "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
-          "delegatedVnetName": "test-vnet"
+          "delegatedVnetName": "test-vnet",
+          "delegatedVnetResourceGroup": "test-vnet-rg"
         },
         "storageProfile": {
           "storageMB": 524288,
           "backupRetentionDays": 7
-        }
+        },
+        "availabilityZone": "1"
       },
       "tags": {
         "ElasticServer": "1"
@@ -36,7 +37,6 @@
       "body": {
         "sku": {
           "tier": "GeneralPurpose",
-          "capacity": 4,
           "name": "Standard_D4s_v3"
         },
         "properties": {
@@ -56,7 +56,8 @@
           "storageProfile": {
             "storageMB": 524288,
             "backupRetentionDays": 7
-          }
+          },
+          "availabilityZone": "1"
         },
         "location": "westus",
         "tags": {
@@ -71,7 +72,6 @@
       "body": {
         "sku": {
           "tier": "GeneralPurpose",
-          "capacity": 4,
           "name": "Standard_D4s_v3"
         },
         "properties": {
@@ -91,7 +91,8 @@
           "storageProfile": {
             "storageMB": 524288,
             "backupRetentionDays": 7
-          }
+          },
+          "availabilityZone": "1"
         },
         "location": "westus",
         "tags": {
