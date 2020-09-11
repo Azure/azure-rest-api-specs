@@ -46,6 +46,12 @@
           },
           "Create a JavaScript function": {
             "$ref": "./examples/Function_Create_JavaScript.json"
+          },
+          "Create an Azure ML Service function": {
+            "$ref": "./examples/Function_Create_AzureMLService.json"
+          },
+          "Create a CLRUdf function": {
+            "$ref": "./examples/Function_Create_CSharp.json"
           }
         },
         "parameters": [
@@ -651,7 +657,7 @@
           "type": "string",
           "description": "The Csharp code containing a single function definition."
         },
-        "dllpath": {
+        "dllPath": {
           "type": "string",
           "description": "The Csharp code containing a single function definition."
         },
@@ -891,6 +897,11 @@
         "dataType": {
           "type": "string",
           "description": "The (Azure Machine Learning supported) data type of the output column."
+        },
+        "mapTo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero based index of the function parameter this input maps to."
         }
       }
     },

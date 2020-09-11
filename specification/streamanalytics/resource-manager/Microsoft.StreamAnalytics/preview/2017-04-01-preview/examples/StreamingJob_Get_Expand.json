@@ -12,47 +12,44 @@
         "ETag": "87551cc5-1290-4d08-afcd-cdaa92e5ade0"
       },
       "body": {
-        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804",
-        "name": "sj7804",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest",
+        "name": "zhejunmltest",
         "type": "Microsoft.StreamAnalytics/streamingjobs",
         "location": "West US",
-        "tags": {
-          "key1": "value1",
-          "randomKey": "randomValue",
-          "key3": "value3"
-        },
         "properties": {
           "sku": {
             "name": "Standard"
           },
-          "jobId": "732e4b1d-94a7-43ae-8297-3ad04f1540b9",
+          "jobId": "aacee415-41d4-47f6-acf4-de9ae50175b0",
           "provisioningState": "Succeeded",
           "jobState": "Created",
-          "eventsOutOfOrderPolicy": "Drop",
+          "eventsOutOfOrderPolicy": "Adjust",
           "outputErrorPolicy": "Drop",
           "eventsOutOfOrderMaxDelayInSeconds": 0,
           "eventsLateArrivalMaxDelayInSeconds": 5,
           "dataLocale": "en-US",
-          "createdDate": "2017-05-11T04:37:11.54Z",
-          "compatibilityLevel": "1.0",
+          "createdDate": "2020-07-17T08:36:07.463Z",
+          "compatibilityLevel": "1.2",
+          "jobStorageAccount": null,
+          "contentStoragePolicy": "SystemAccount",
           "inputs": [
             {
-              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/inputs/inputtest",
-              "name": "inputtest",
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/inputs/Input",
+              "name": "Input",
               "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
               "properties": {
                 "type": "Stream",
                 "datasource": {
-                  "type": "Microsoft.Storage/Blob",
+                  "type": "Microsoft.Devices/IotHubs",
                   "properties": {
-                    "storageAccounts": [
-                      {
-                        "accountName": "accountName"
-                      }
-                    ],
-                    "container": "containerName",
-                    "pathPattern": ""
+                    "iotHubNamespace": "MyASAIoT",
+                    "sharedAccessPolicyName": "iothubowner",
+                    "endpoint": "messages/events",
+                    "consumerGroupName": "$Default"
                   }
+                },
+                "compression": {
+                  "type": "None"
                 },
                 "serialization": {
                   "type": "Json",
@@ -60,40 +57,186 @@
                     "encoding": "UTF8"
                   }
                 },
-                "etag": "ca88f8fa-605b-4c7f-8695-46f5faa60cd0"
+                "etag": "3cb574f7-b63a-4ac1-a1db-8e8a3b88a20d"
               }
             }
           ],
           "transformation": {
-            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/transformations/transformationtest",
-            "name": "transformationtest",
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/transformations/Transformation",
+            "name": "Transformation",
             "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
             "properties": {
-              "streamingUnits": 1,
-              "query": "Select Id, Name from inputtest",
-              "etag": "91d8fcbe-60b3-49c3-9f21-9942b95602b8"
+              "streamingUnits": 3,
+              "query": "\r\nWITH sentiment AS (  \r\nSELECT Temperature, diabetespredict(Temperature) as result \r\nFROM Input  \r\n)  \r\n\r\nSELECT Temperature, result.[Score]  \r\nINTO BlobOutput1\r\nFROM sentiment\r\n\r\n/*\r\nSELECT data, MLFunction2(data)\r\nFROM sampleRequestData\r\n*/\r\n/*\r\nSELECT data, AksArrayScore(data)\r\nFROM sampleData\r\n*/",
+              "etag": "7241d411-e71d-4205-b77e-4cc56aba34c0"
             }
           },
-          "functions": [],
+          "functions": [
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/functions/diabetespredict",
+              "name": "diabetespredict",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+              "properties": {
+                "type": "Scalar",
+                "properties": {
+                  "inputs": [
+                    {
+                      "dataType": "array",
+                      "isConfigurationParameter": null
+                    }
+                  ],
+                  "output": {
+                    "dataType": "float"
+                  },
+                  "binding": {
+                    "type": "Microsoft.MachineLearningServices",
+                    "properties": {
+                      "endpoint": "http://52.183.91.247/api/v1/service/aks-service-1/score",
+                      "apiKey": null,
+                      "inputs": [
+                        {
+                          "name": "data",
+                          "dataType": "array",
+                          "mapTo": 0
+                        }
+                      ],
+                      "outputs": [
+                        {
+                          "name": "output",
+                          "dataType": "double",
+                          "mapTo": 0
+                        }
+                      ],
+                      "batchSize": 1000,
+                      "numberOfParallelRequests": 1
+                    }
+                  }
+                },
+                "etag": "acfdd307-418c-48f3-8856-7c176d38529f"
+              }
+            },
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/functions/MLFunction2",
+              "name": "MLFunction2",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+              "properties": {
+                "type": "Scalar",
+                "properties": {
+                  "inputs": [
+                    {
+                      "dataType": "array",
+                      "isConfigurationParameter": null
+                    }
+                  ],
+                  "output": {
+                    "dataType": "float"
+                  },
+                  "binding": {
+                    "type": "Microsoft.MachineLearningServices",
+                    "properties": {
+                      "endpoint": "http://13.83.67.157/api/v1/service/nyc-fare-predict/score",
+                      "apiKey": null,
+                      "inputs": [
+                        {
+                          "name": "data",
+                          "dataType": "array",
+                          "mapTo": 0
+                        }
+                      ],
+                      "outputs": [
+                        {
+                          "name": "output",
+                          "dataType": "double",
+                          "mapTo": 0
+                        }
+                      ],
+                      "batchSize": 1000,
+                      "numberOfParallelRequests": 1
+                    }
+                  }
+                },
+                "etag": "4d537fa6-f43c-4ee6-a45e-9a8f8002a65c"
+              }
+            },
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/functions/MLFunction3",
+              "name": "MLFunction3",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/functions",
+              "properties": {
+                "type": "Scalar",
+                "properties": {
+                  "inputs": [
+                    {
+                      "dataType": "array",
+                      "isConfigurationParameter": null
+                    }
+                  ],
+                  "output": {
+                    "dataType": "float"
+                  },
+                  "binding": {
+                    "type": "Microsoft.MachineLearningServices",
+                    "properties": {
+                      "endpoint": "http://52.183.91.247/api/v1/service/aks-service-1/score",
+                      "apiKey": null,
+                      "inputs": [
+                        {
+                          "name": "data",
+                          "dataType": "array",
+                          "mapTo": 0
+                        }
+                      ],
+                      "outputs": [
+                        {
+                          "name": "output",
+                          "dataType": "double",
+                          "mapTo": 0
+                        }
+                      ],
+                      "batchSize": 1000,
+                      "numberOfParallelRequests": 1
+                    }
+                  }
+                },
+                "etag": "912f08e7-4a8c-46eb-afaf-d88f930a7b45"
+              }
+            }
+          ],
           "outputs": [
             {
-              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/outputs/outputtest",
-              "name": "outputtest",
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/zhejunmltest/outputs/BlobOutput1",
+              "name": "BlobOutput1",
               "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
               "properties": {
                 "datasource": {
-                  "type": "Microsoft.Sql/Server/Database",
+                  "type": "Microsoft.Storage/Blob",
                   "properties": {
-                    "server": "serverName",
-                    "database": "databaseName",
-                    "table": "tableName",
-                    "user": "userName"
+                    "storageAccounts": [
+                      {
+                        "accountName": "zhejuntest2"
+                      }
+                    ],
+                    "container": "output",
+                    "pathPattern": "{date}{time}",
+                    "dateFormat": "yyyy/MM/dd",
+                    "timeFormat": "HH",
+                    "authenticationMode": "ConnectionString"
                   }
                 },
-                "etag": "62097c3c-b503-41ff-a56f-196a9598ab90"
+                "serialization": {
+                  "type": "Json",
+                  "properties": {
+                    "encoding": "UTF8",
+                    "format": "LineSeparated"
+                  }
+                },
+                "etag": "1c271cd5-dd4a-4d3e-95ee-1dbcaa530c2c"
               }
             }
-          ]
+          ],
+          "etag": "89ba3a42-e217-432e-bf23-798dbf001519",
+          "jobType": "Cloud",
+          "cluster": null
         }
       }
     }

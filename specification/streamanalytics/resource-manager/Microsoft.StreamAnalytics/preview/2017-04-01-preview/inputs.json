@@ -687,6 +687,10 @@
         "sharedAccessPolicyKey": {
           "type": "string",
           "description": "The shared access policy key for the specified shared access policy. Required on PUT (CreateOrReplace) requests."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
         }
       }
     },
@@ -969,7 +973,6 @@
     },
     "Compression": {
       "description": "Describes how input data is compressed",
-      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string"

@@ -17,29 +17,73 @@
         "ETag": "3e6872bc-c9d0-45b6-91b6-da66f1773056"
       },
       "body": {
-        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj59",
-        "name": "sj59",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/abdasPartitionCountTags",
+        "name": "abdasPartitionCountTags",
         "type": "Microsoft.StreamAnalytics/streamingjobs",
         "location": "West US",
         "tags": {
-          "key1": "value1",
-          "randomKey": "randomValue",
-          "key3": "value3"
+          "hidden-link:/Microsoft.StreamAnalytics/streamingjobs/inputs/input": "{\"partitionCount\":1}"
         },
         "properties": {
           "sku": {
             "name": "Standard"
           },
-          "jobId": "d53ecc3c-fcb0-485d-9caf-25e20fcb2061",
+          "jobId": "6d2b662c-a8b1-4a19-b3bb-8314adfa7ec3",
           "provisioningState": "Succeeded",
           "jobState": "Created",
-          "eventsOutOfOrderPolicy": "Drop",
-          "outputErrorPolicy": "Drop",
-          "eventsOutOfOrderMaxDelayInSeconds": 21,
-          "eventsLateArrivalMaxDelayInSeconds": 13,
+          "eventsOutOfOrderPolicy": "Adjust",
+          "outputErrorPolicy": "Stop",
+          "eventsOutOfOrderMaxDelayInSeconds": 0,
+          "eventsLateArrivalMaxDelayInSeconds": 5,
           "dataLocale": "en-US",
-          "createdDate": "2017-05-11T04:37:04.697Z",
-          "compatibilityLevel": "1.0"
+          "createdDate": "2020-07-10T18:03:00.21Z",
+          "compatibilityLevel": "1.2",
+          "jobStorageAccount": null,
+          "contentStoragePolicy": "SystemAccount",
+          "inputs": [
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/abdasPartitionCountTags/inputs/input",
+              "name": "input",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+              "properties": {
+                "type": "Stream",
+                "datasource": {
+                  "type": "Microsoft.ServiceBus/EventHub",
+                  "properties": {
+                    "consumerGroupName": "abdasPartitionCountTags_input_consumer_group",
+                    "eventHubName": "anothereh",
+                    "serviceBusNamespace": "another-new-ns",
+                    "sharedAccessPolicyName": "abdasPartitionCountTags_input_policy",
+                    "authenticationMode": "ConnectionString"
+                  }
+                },
+                "compression": {
+                  "type": "None"
+                },
+                "serialization": {
+                  "type": "Json",
+                  "properties": {
+                    "encoding": "UTF8"
+                  }
+                },
+                "etag": "26fb1bf7-f153-4bb9-a1e8-5ca32d9489be"
+              }
+            }
+          ],
+          "transformation": {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/abdasPartitionCountTags/transformations/Transformation",
+            "name": "Transformation",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+            "properties": {
+              "streamingUnits": 3,
+              "query": "SELECT\r\n    *\r\nINTO\r\n    [YourOutputAlias]\r\nFROM\r\n    [YourInputAlias]",
+              "etag": "57f64482-3663-49d1-b29f-cd74a9a7e211"
+            }
+          },
+          "functions": [],
+          "outputs": [],
+          "jobType": "Cloud",
+          "cluster": null
         }
       }
     }

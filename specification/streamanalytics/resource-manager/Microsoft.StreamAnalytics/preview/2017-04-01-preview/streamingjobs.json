@@ -522,6 +522,10 @@
           "$ref": "#/definitions/StreamingJobProperties",
           "description": "The properties that are associated with a streaming job.  Required on PUT (CreateOrReplace) requests.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "./inputs.json#/definitions/Identity",
+          "description": "Describes the system-assigned managed identity assigned to this job that can be used to authenticate with inputs and outputs."
         }
       }
     },
@@ -651,10 +655,6 @@
             "name": "ContentStoragePolicy",
             "modelAsString": true
           }
-        },
-        "identity": {
-          "$ref": "./inputs.json#/definitions/Identity",
-          "description": "Describes the system-assigned managed identity assigned to this job that can be used to authenticate with inputs and outputs."
         },
         "externals": {
           "$ref": "#/definitions/External",
