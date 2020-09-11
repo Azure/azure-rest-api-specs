@@ -36,46 +36,48 @@
     }
   },
   "responses": {
-    "200": {
-      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/datastores/datastore123",
-      "name": "datastore123",
-      "type": "Microsoft.MachineLearningServices/workspaces/datastores",
-      "properties": {
-        "contents": {
-          "type": "AzureBlob",
-          "azureStorage": {
-            "accountName": "mystorageaccount",
-            "containerName": "azureml",
-            "credentials": {
-              "type": "AccountKey",
-              "accountKey": {
-                "key": null
-              }
-            },
-            "endpoint": "core.windows.net",
-            "protocol": "https"
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/datastores/datastore123",
+        "name": "datastore123",
+        "type": "Microsoft.MachineLearningServices/workspaces/datastores",
+        "properties": {
+          "contents": {
+            "type": "AzureBlob",
+            "azureStorage": {
+              "accountName": "mystorageaccount",
+              "containerName": "azureml",
+              "credentials": {
+                "type": "AccountKey",
+                "accountKey": {
+                  "key": null
+                }
+              },
+              "endpoint": "core.windows.net",
+              "protocol": "https"
+            }
+          },
+          "description": "Test datastore",
+          "hasBeenValidated": true,
+          "isDefault": true,
+          "linkedInfo": {
+            "linkedId": "linkedid",
+            "linkedResourceName": "linkedresource",
+            "origin": "Synapse"
+          },
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
           }
         },
-        "description": "Test datastore",
-        "hasBeenValidated": true,
-        "isDefault": true,
-        "linkedInfo": {
-          "linkedId": "linkedid",
-          "linkedResourceName": "linkedresource",
-          "origin": "Synapse"
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+        "systemData": {
+          "createdAt": "2020-09-01T12:00:00.000Z",
+          "createdBy": "John Smith",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-09-01T12:00:00.000Z",
+          "lastModifiedBy": "John Smith",
+          "lastModifiedByType": "User"
         }
-      },
-      "systemData": {
-        "createdAt": "2020-09-01T12:00:00.000Z",
-        "createdBy": "John Smith",
-        "createdByType": "User",
-        "lastModifiedAt": "2020-09-01T12:00:00.000Z",
-        "lastModifiedBy": "John Smith",
-        "lastModifiedByType": "User"
       }
     }
   }
