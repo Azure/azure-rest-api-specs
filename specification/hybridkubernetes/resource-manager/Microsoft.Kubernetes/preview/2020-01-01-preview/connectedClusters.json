@@ -260,6 +260,14 @@
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
+          },
+          {
+            "in": "body",
+            "name": "ClientAuthenticationDetails",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationDetails"
+            },
+            "description": "Authentication parameters supplied by the user to fetch credentials for accessing the cluster."
           }
         ],
         "responses": {
@@ -604,6 +612,56 @@
         "serverAppId": {
           "type": "string",
           "description": "The server app id to access AD server"
+        }
+      }
+    },
+    "AuthenticationDetails": {
+      "type": "object",
+      "required": [
+        "authenticationMethod",
+        "value"
+      ],
+      "properties": {
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The mode of client authentication.",
+          "enum": [
+            "Token",
+            "Certificate"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Authentication token."
+            },
+            "clientCertificate": {
+              "$ref": "#/definitions/AuthenticationCertificateDetails"
+            }
+          }
+        }
+      }
+    },
+    "AuthenticationCertificateDetails": {
+      "type": "object",
+      "required": [
+        "certificateData",
+        "keyData"
+      ],
+      "properties": {
+        "certificateData": {
+          "type": "string",
+          "description": "Base64 encoded client certificate data."
+        },
+        "keyData": {
+          "type": "string",
+          "description": "Base64 encoded key data."
         }
       }
     },
