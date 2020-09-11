@@ -9,6 +9,30 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
       "delete": {
@@ -17,11 +41,6 @@
         ],
         "summary": "Delete all datastores within a workspace.",
         "operationId": "Datastores_DeleteAll",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -45,6 +64,14 @@
           },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete all datastores.": {
+            "$ref": "./examples/deleteAllDatastores.json"
           }
         }
       },
@@ -54,11 +81,6 @@
         ],
         "summary": "List datastores.",
         "operationId": "Datastores_List",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -126,6 +148,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List datastores.": {
+            "$ref": "./examples/getDatastores.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -138,11 +165,6 @@
         ],
         "summary": "Delete datastore.",
         "operationId": "Datastores_Delete",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -173,6 +195,14 @@
           },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete datastore.": {
+            "$ref": "./examples/deleteDatastore.json"
           }
         }
       },
@@ -182,11 +212,6 @@
         ],
         "summary": "Get datastore.",
         "operationId": "Datastores_Get",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -221,6 +246,11 @@
               "$ref": "#/definitions/DatastorePropertiesResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get datastore.": {
+            "$ref": "./examples/getDatastore.json"
+          }
         }
       },
       "put": {
@@ -229,17 +259,6 @@
         ],
         "summary": "Create or update datastore.",
         "operationId": "Datastores_CreateOrUpdate",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -266,7 +285,7 @@
             "description": "Datastore entity to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatastorePropertiesResourceRequest"
+              "$ref": "#/definitions/DatastorePropertiesResource"
             }
           }
         ],
@@ -283,21 +302,21 @@
               "$ref": "#/definitions/DatastorePropertiesResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update datastore.": {
+            "$ref": "./examples/createOrUpdateDatastore.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecret": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets": {
       "post": {
         "tags": [
           "Datastore"
         ],
         "summary": "Get datastore secrets.",
-        "operationId": "Datastores_GetSecrets",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "operationId": "Datastores_ListSecrets",
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -332,6 +351,11 @@
               "$ref": "#/definitions/DatastoreCredentials"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get datastore secrets.": {
+            "$ref": "./examples/listDatastoreSecrets.json"
+          }
         }
       }
     },
@@ -341,12 +365,7 @@
           "Datastore"
         ],
         "summary": "Set default datastore.",
-        "operationId": "Datastores_SetDefault",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "operationId": "Datastores_SetAzureMLDefault",
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -378,6 +397,11 @@
           "200": {
             "description": "Success"
           }
+        },
+        "x-ms-examples": {
+          "Set default datastore.": {
+            "$ref": "./examples/setDefaultDatastore.json"
+          }
         }
       }
     },
@@ -388,11 +412,6 @@
         ],
         "summary": "Get default datastore.",
         "operationId": "Datastores_GetDefault",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -420,6 +439,11 @@
               "$ref": "#/definitions/DatastorePropertiesResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete default datastore.": {
+            "$ref": "./examples/getDefaultDatastore.json"
+          }
         }
       }
     },
@@ -430,11 +454,6 @@
         ],
         "summary": "List model containers.",
         "operationId": "ModelContainers_List",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -473,6 +492,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List model containers.": {
+            "$ref": "./examples/getModelContainers.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -485,11 +509,6 @@
         ],
         "summary": "Delete model container.",
         "operationId": "ModelContainers_Delete",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -520,6 +539,14 @@
           },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete model container.": {
+            "$ref": "./examples/deleteModelContainer.json"
           }
         }
       },
@@ -529,11 +556,6 @@
         ],
         "summary": "Get model container.",
         "operationId": "ModelContainers_Get",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -568,6 +590,11 @@
               "$ref": "#/definitions/ModelContainerResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get model container.": {
+            "$ref": "./examples/getModelContainer.json"
+          }
         }
       },
       "put": {
@@ -576,17 +603,6 @@
         ],
         "summary": "Create or update model container.",
         "operationId": "ModelContainers_CreateOrUpdate",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -613,7 +629,7 @@
             "description": "Model container entity to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModelContainerResourceRequest"
+              "$ref": "#/definitions/ModelContainerResource"
             }
           }
         ],
@@ -630,6 +646,11 @@
               "$ref": "#/definitions/ModelContainerResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update model container.": {
+            "$ref": "./examples/createOrUpdateModelContainer.json"
+          }
         }
       }
     },
@@ -640,11 +661,6 @@
         ],
         "summary": "List model versions.",
         "operationId": "ModelVersions_List",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -734,6 +750,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List model versions.": {
+            "$ref": "./examples/getModelVersions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -746,11 +767,6 @@
         ],
         "summary": "Delete model.",
         "operationId": "ModelVersions_Delete",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -788,6 +804,14 @@
           },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete model version.": {
+            "$ref": "./examples/deleteModelVersion.json"
           }
         }
       },
@@ -797,11 +821,6 @@
         ],
         "summary": "Get model.",
         "operationId": "ModelVersions_Get",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -843,6 +862,11 @@
               "$ref": "#/definitions/ModelVersionResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get model version.": {
+            "$ref": "./examples/getModelVersion.json"
+          }
         }
       },
       "put": {
@@ -851,17 +875,6 @@
         ],
         "summary": "Create or update model.",
         "operationId": "ModelVersions_CreateOrUpdate",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -895,7 +908,7 @@
             "description": "Model entity to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ModelVersionResourceRequest"
+              "$ref": "#/definitions/ModelVersionResource"
             }
           }
         ],
@@ -911,6 +924,11 @@
             "schema": {
               "$ref": "#/definitions/ModelVersionResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update model version.": {
+            "$ref": "./examples/createOrUpdateModelVersion.json"
           }
         }
       }
@@ -1515,14 +1533,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DatastoreProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ]
     },
@@ -1540,15 +1558,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      }
-    },
-    "DatastorePropertiesResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DatastoreProperties"
         }
       }
     },
@@ -1631,14 +1640,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ModelVersion"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ]
     },
@@ -1675,14 +1684,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ModelContainer"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ]
     },
@@ -1703,15 +1712,6 @@
         }
       }
     },
-    "ModelContainerResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModelContainer"
-        }
-      }
-    },
     "ModelVersionResourcePaginatedResult": {
       "type": "object",
       "properties": {
@@ -1726,15 +1726,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      }
-    },
-    "ModelVersionResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModelVersion"
         }
       }
     }
