@@ -5789,75 +5789,6 @@
         },
         "configuration": {
           "type": "object",
-          "properties": {
-            "parsingMode": {
-              "$ref": "#/definitions/ParsingMode"
-            },
-            "excludedFileNameExtensions": {
-              "type": "string",
-              "default": "",
-              "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
-            },
-            "indexedFileNameExtensions": {
-              "type": "string",
-              "default": "",
-              "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
-            },
-            "failOnUnsupportedContentType": {
-              "type": "boolean",
-              "default": false,
-              "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
-            },
-            "failOnUnprocessableDocument": {
-              "type": "boolean",
-              "default": false,
-              "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
-            },
-            "indexStorageMetadataOnlyForOversizedDocuments": {
-              "type": "boolean",
-              "default": false,
-              "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://docs.microsoft.com/azure/search/search-limits-quotas-capacity."
-            },
-            "delimitedTextHeaders": {
-              "type": "string",
-              "description": "For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index."
-            },
-            "delimitedTextDelimiter": {
-              "type": "string",
-              "description": "For CSV blobs, specifies the end-of-line single-character delimiter for CSV files where each line starts a new document (for example, \"|\")."
-            },
-            "firstLineContainsHeaders": {
-              "type": "boolean",
-              "default": true,
-              "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains headers."
-            },
-            "documentRoot": {
-              "type": "string",
-              "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
-            },
-            "dataToExtract": {
-              "$ref": "#/definitions/DataToExtract"
-            },
-            "imageAction": {
-              "$ref": "#/definitions/ImageAction"
-            },
-            "allowSkillsetToReadFileData": {
-              "type": "boolean",
-              "default": false,
-              "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source.  This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
-            },
-            "pdfTextRotationAlgorithm": {
-              "$ref": "#/definitions/PdfTextRotationAlgorithm"
-            },
-            "executionEnvironment": {
-              "$ref": "#/definitions/ExecutionEnvironment"
-            },
-            "queryTimeout": {
-              "type": "string",
-              "default": "00:05:00",
-              "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
-            }
-          },
           "additionalProperties": {
             "type": "object"
           },
@@ -5865,6 +5796,85 @@
         }
       },
       "description": "Represents parameters for indexer execution.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "IndexingParametersConfiguration": {
+      "type": "object",
+      "properties": {
+        "parsingMode": {
+          "$ref": "#/definitions/ParsingMode"
+        },
+        "excludedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
+        },
+        "indexedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
+        },
+        "failOnUnsupportedContentType": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
+        },
+        "failOnUnprocessableDocument": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
+        },
+        "indexStorageMetadataOnlyForOversizedDocuments": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://docs.microsoft.com/azure/search/search-limits-quotas-capacity."
+        },
+        "delimitedTextHeaders": {
+          "type": "string",
+          "description": "For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index."
+        },
+        "delimitedTextDelimiter": {
+          "type": "string",
+          "description": "For CSV blobs, specifies the end-of-line single-character delimiter for CSV files where each line starts a new document (for example, \"|\")."
+        },
+        "firstLineContainsHeaders": {
+          "type": "boolean",
+          "default": true,
+          "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains headers."
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
+        },
+        "dataToExtract": {
+          "$ref": "#/definitions/DataToExtract"
+        },
+        "imageAction": {
+          "$ref": "#/definitions/ImageAction"
+        },
+        "allowSkillsetToReadFileData": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source.  This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
+        },
+        "pdfTextRotationAlgorithm": {
+          "$ref": "#/definitions/PdfTextRotationAlgorithm"
+        },
+        "executionEnvironment": {
+          "$ref": "#/definitions/ExecutionEnvironment"
+        },
+        "queryTimeout": {
+          "type": "string",
+          "default": "00:05:00",
+          "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
       }
