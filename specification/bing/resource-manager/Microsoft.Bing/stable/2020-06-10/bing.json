@@ -543,7 +543,7 @@
           "200": {
             "description": "The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/OperationEntityListResult"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -901,64 +901,79 @@
         "name": "UnitType"
       }
     },
-    "OperationEntityListResult": {
-      "description": "The list of Bing accounts operation response.",
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
-        },
         "value": {
-          "description": "The list of operations.",
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationEntity"
+            "$ref": "#/definitions/OperationDetail"
           }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
-    "OperationEntity": {
-      "description": "The operation supported by Bing.",
+    "OperationDetail": {
+      "description": "Operation detail payload",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "description": "Name of the operation",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
-          "$ref": "#/definitions/OperationDisplayInfo",
-          "description": "The operation supported by Bing."
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
         },
         "origin": {
-          "description": "The origin of the operation.",
+          "description": "Origin of the operation",
           "type": "string"
         },
         "properties": {
-          "description": "Additional properties.",
-          "type": "object"
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
-    "OperationDisplayInfo": {
-      "description": "The operation supported by Bing.",
+    "OperationDisplay": {
+      "description": "Operation display payload",
       "type": "object",
       "properties": {
-        "description": {
-          "description": "The description of the operation.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "The action that users can perform, based on their permission level.",
-          "type": "string"
-        },
         "provider": {
-          "description": "Service provider: Microsoft Bing.",
+          "description": "Resource provider of the operation",
           "type": "string"
         },
         "resource": {
-          "description": "Resource on which the operation is performed.",
+          "description": "Resource of the operation",
           "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
         }
       }
     },
