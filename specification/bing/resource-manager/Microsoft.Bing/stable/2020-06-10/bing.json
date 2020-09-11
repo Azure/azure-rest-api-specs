@@ -1085,6 +1085,52 @@
       },
       "description": "Describes restrictions of a SKU."
     },
+    "ResourceSkuLocationInfo": {
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is supported."
+        },
+        "zoneDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "description": "Details of capabilities available to a SKU in specific zones."
+        }
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "properties": {
+        "name": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of zones that the SKU is available in with the specified capabilities."
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+        }
+      },
+      "description": "Describes The zonal capabilities of a SKU."
+    },
     "ResourceSku": {
       "properties": {
         "resourceType": {
@@ -1114,6 +1160,14 @@
             "type": "string"
           },
           "description": "The set of locations that the SKU is available."
+        },
+        "locationInfo": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "description": "A list of locations and availability zones in those locations where the SKU is available."
         },
         "restrictions": {
           "type": "array",
