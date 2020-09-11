@@ -1,1171 +1,955 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Azure Machine Learning ManagementFrontEnd Service",
-      "version": "1.0.0"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
-        "get": {
-          "tags": [
-            "ModelContainer"
-          ],
-          "summary": "List model containers.",
-          "operationId": "ModelContainers_List",
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "$skipToken",
-              "description": "Opaque token to retrieve the next page of results from a previous query.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "count",
-              "description": "Maximum number of results to return.",
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/ModelContainerResourcePaginatedResult"
-              }
-            }
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning ManagementFrontEnd Service",
+    "version": "1.0.0"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
+      "get": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "List model containers.",
+        "operationId": "ModelContainers_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
           }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}": {
-        "delete": {
-          "tags": [
-            "ModelContainer"
-          ],
-          "summary": "Delete model container.",
-          "operationId": "ModelContainers_Delete",
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model container name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "get": {
-          "tags": [
-            "ModelContainer"
-          ],
-          "summary": "Get model container.",
-          "operationId": "ModelContainers_Get",
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model container name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/ModelContainerResource"
-              }
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "ModelContainer"
-          ],
-          "summary": "Create or update model container.",
-          "operationId": "ModelContainers_CreateOrUpdate",
-          "consumes": [
-            "application/json-patch+json",
-            "application/json",
-            "text/json",
-            "application/*+json"
-          ],
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model container name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Model container entity to create or update.",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/ModelContainerResourceRequest"
-              }
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/ModelContainerResource"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions": {
-        "get": {
-          "tags": [
-            "ModelVersion"
-          ],
-          "summary": "List model versions.",
-          "operationId": "ModelVersions_List",
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "$skipToken",
-              "description": "Opaque token to retrieve the next page of results from a previous query.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "version",
-              "description": "Model version.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "description",
-              "description": "Model description.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "count",
-              "description": "Maximum number of results to return.",
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "query",
-              "name": "offset",
-              "description": "Number of initial results to skip.",
-              "type": "integer",
-              "format": "int32"
-            },
-            {
-              "in": "query",
-              "name": "tags",
-              "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "properties",
-              "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "orderBy",
-              "description": "Property by which to order the results.",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "latestVersionOnly",
-              "description": "Only return the most recent version of a model.",
-              "type": "boolean",
-              "default": false
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/ModelVersionResourcePaginatedResult"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}": {
-        "delete": {
-          "tags": [
-            "ModelVersion"
-          ],
-          "summary": "Delete model.",
-          "operationId": "ModelVersions_Delete",
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "version",
-              "description": "Model version.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "get": {
-          "tags": [
-            "ModelVersion"
-          ],
-          "summary": "Get model.",
-          "operationId": "ModelVersions_Get",
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "version",
-              "description": "Model version.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/ModelVersionResource"
-              }
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "ModelVersion"
-          ],
-          "summary": "Create or update model.",
-          "operationId": "ModelVersions_CreateOrUpdate",
-          "consumes": [
-            "application/json-patch+json",
-            "application/json",
-            "text/json",
-            "application/*+json"
-          ],
-          "produces": [
-            "text/plain",
-            "application/json",
-            "text/json"
-          ],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "WorkspaceId",
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "path",
-              "name": "WorkspaceName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "ResourceGroup",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "SubscriptionId",
-              "required": true,
-              "type": "string",
-              "format": "uuid"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceLocation",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "TenantId",
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "WorkspaceProperties",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Model name.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "version",
-              "description": "Model version.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "api-version",
-              "description": "API version.",
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "resourceGroupName",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Model entity to create or update.",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/ModelVersionResourceRequest"
-              }
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
-            "201": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/ModelVersionResource"
-              }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResourcePaginatedResult"
             }
           }
         }
       }
     },
-    "definitions": {
-      "InnerErrorResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "innerError": {
-            "$ref": "#/definitions/InnerErrorResponse"
-          }
-        }
-      },
-      "DebugInfoResponse": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "stackTrace": {
-            "type": "string"
-          },
-          "innerException": {
-            "$ref": "#/definitions/DebugInfoResponse"
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          },
-          "errorResponse": {
-            "$ref": "#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "RootError": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "severity": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "message": {
-            "type": "string"
-          },
-          "messageFormat": {
-            "type": "string"
-          },
-          "messageParameters": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "referenceCode": {
-            "type": "string"
-          },
-          "detailsUri": {
-            "format": "uri",
-            "type": "string"
-          },
-          "target": {
-            "type": "string"
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/RootError"
-            }
-          },
-          "innerError": {
-            "$ref": "#/definitions/InnerErrorResponse"
-          }
-        }
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/RootError"
-          },
-          "correlation": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "environment": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          },
-          "time": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "componentName": {
-            "type": "string"
-          }
-        }
-      },
-      "UserType": {
-        "enum": [
-          "User",
-          "Application",
-          "ManagedIdentity",
-          "Key"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}": {
+      "delete": {
+        "tags": [
+          "ModelContainer"
         ],
-        "type": "string"
-      },
-      "SystemData": {
-        "description": "Azure Resource Manager resource Envelope",
-        "type": "object",
-        "properties": {
-          "createdAt": {
-            "format": "date-time",
-            "description": "the timestamp of resource creation (UTC)",
+        "summary": "Delete model container.",
+        "operationId": "ModelContainers_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model container name.",
+            "required": true,
             "type": "string"
           },
-          "createdBy": {
-            "description": "a string identifier for the identity that created the resource",
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
             "type": "string"
           },
-          "createdByType": {
-            "$ref": "#/definitions/UserType"
-          },
-          "lastModifiedAt": {
-            "format": "date-time",
-            "description": "the timestamp of resource last modification (UTC)",
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
             "type": "string"
           },
-          "lastModifiedBy": {
-            "description": "a string identifier for the identity that last modified the resource",
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
             "type": "string"
           },
-          "lastModifiedByType": {
-            "$ref": "#/definitions/UserType"
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
           }
         }
       },
-      "AssetPath": {
-        "description": "Details of an AssetUri.",
-        "type": "object",
-        "properties": {
-          "path": {
-            "description": "The path of file/directory.",
+      "get": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "Get model container.",
+        "operationId": "ModelContainers_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model container name.",
+            "required": true,
             "type": "string"
           },
-          "isDirectory": {
-            "description": "Whether the path defines a directory or a single file.",
-            "type": "boolean"
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
           }
-        }
-      },
-      "ModelVersion": {
-        "description": "Details of an ModelDto",
-        "type": "object",
-        "properties": {
-          "stage": {
-            "description": "Model asset stage.",
-            "type": "string"
-          },
-          "name": {
-            "description": "The Name of the Asset.",
-            "type": "string",
-            "readOnly": true
-          },
-          "version": {
-            "description": "The Asset version assigned by service.",
-            "type": "string",
-            "readOnly": true
-          },
-          "description": {
-            "description": "The Asset description text.",
-            "type": "string"
-          },
-          "datastoreId": {
-            "description": "The Asset datastoreId",
-            "type": "string"
-          },
-          "tags": {
-            "description": "The Asset tag dictionary.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "properties": {
-            "description": "The Asset property dictionary.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "assetPaths": {
-            "description": "Details of asset path\r\nAdding list of back compat",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AssetPath"
-            }
-          },
-          "linkedResourceIds": {
-            "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "ModelVersionResource": {
-        "description": "Azure Resource Manager resource Envelope",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The resource URL of the entity (not URL encoded).",
-            "type": "string",
-            "readOnly": true
-          },
-          "name": {
-            "description": "The name of the resource entity.",
-            "type": "string",
-            "readOnly": true
-          },
-          "type": {
-            "description": "The resource provider and type.",
-            "type": "string",
-            "readOnly": true
-          },
-          "properties": {
-            "$ref": "#/definitions/ModelVersion"
-          },
-          "systemData": {
-            "$ref": "#/definitions/SystemData"
-          }
-        }
-      },
-      "ModelContainer": {
-        "type": "object",
-        "properties": {
-          "latestVersions": {
-            "description": "Latest Versions for all assets",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ModelVersionResource"
-            }
-          },
-          "name": {
-            "description": "The Name of the Asset container",
-            "type": "string"
-          },
-          "description": {
-            "description": "The asset container description text.",
-            "type": "string"
-          },
-          "tags": {
-            "description": "The asset tag dictionary. Tags can be added, removed, and updated.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ModelContainerResource": {
-        "description": "Azure Resource Manager resource Envelope",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The resource URL of the entity (not URL encoded).",
-            "type": "string",
-            "readOnly": true
-          },
-          "name": {
-            "description": "The name of the resource entity.",
-            "type": "string",
-            "readOnly": true
-          },
-          "type": {
-            "description": "The resource provider and type.",
-            "type": "string",
-            "readOnly": true
-          },
-          "properties": {
-            "$ref": "#/definitions/ModelContainer"
-          },
-          "systemData": {
-            "$ref": "#/definitions/SystemData"
-          }
-        }
-      },
-      "ModelContainerResourcePaginatedResult": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
+          "200": {
+            "description": "Success",
+            "schema": {
               "$ref": "#/definitions/ModelContainerResource"
             }
-          },
-          "continuationToken": {
-            "type": "string"
-          },
-          "nextLink": {
-            "type": "string"
           }
         }
       },
-      "ModelContainerResourceRequest": {
-        "description": "Azure Resource Management create resource envelope.",
-        "type": "object",
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/ModelContainer"
+      "put": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "Create or update model container.",
+        "operationId": "ModelContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Model container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResourceRequest"
+            }
           }
-        }
-      },
-      "ModelVersionResourcePaginatedResult": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ModelVersionResource"
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "continuationToken": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions": {
+      "get": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "List model versions.",
+        "operationId": "ModelVersions_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model name.",
+            "required": true,
             "type": "string"
           },
-          "nextLink": {
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "description": "Model version.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "description": "Model description.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Number of initial results to skip.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "Property by which to order the results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "latestVersionOnly",
+            "description": "Only return the most recent version of a model.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResourcePaginatedResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Delete model.",
+        "operationId": "ModelVersions_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Model version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
           }
         }
       },
-      "ModelVersionResourceRequest": {
-        "description": "Azure Resource Management create resource envelope.",
-        "type": "object",
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/ModelVersion"
+      "get": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Get model.",
+        "operationId": "ModelVersions_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Model version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Create or update model.",
+        "operationId": "ModelVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Model version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Model entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            }
           }
         }
       }
     }
+  },
+  "definitions": {
+    "InnerErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse"
+        }
+      }
+    },
+    "DebugInfoResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "innerException": {
+          "$ref": "#/definitions/DebugInfoResponse"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "errorResponse": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "RootError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        },
+        "messageFormat": {
+          "type": "string"
+        },
+        "messageParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "referenceCode": {
+          "type": "string"
+        },
+        "detailsUri": {
+          "format": "uri",
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootError"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RootError"
+        },
+        "correlation": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "componentName": {
+          "type": "string"
+        }
+      }
+    },
+    "UserType": {
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "type": "string"
+    },
+    "SystemData": {
+      "description": "Azure Resource Manager resource Envelope",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "the timestamp of resource creation (UTC)",
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "a string identifier for the identity that created the resource",
+          "type": "string"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/UserType"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "the timestamp of resource last modification (UTC)",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "a string identifier for the identity that last modified the resource",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/UserType"
+        }
+      }
+    },
+    "AssetPath": {
+      "description": "Details of an AssetUri.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The path of file/directory.",
+          "type": "string"
+        },
+        "isDirectory": {
+          "description": "Whether the path defines a directory or a single file.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ModelVersion": {
+      "description": "Details of an ModelDto",
+      "type": "object",
+      "properties": {
+        "stage": {
+          "description": "Model asset stage.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Name of the Asset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The Asset version assigned by service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The Asset description text.",
+          "type": "string"
+        },
+        "datastoreId": {
+          "description": "The Asset datastoreId",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The Asset tag dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The Asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "assetPaths": {
+          "description": "Details of asset path\r\nAdding list of back compat",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetPath"
+          }
+        },
+        "linkedResourceIds": {
+          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ModelVersionResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelVersion"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ModelContainer": {
+      "type": "object",
+      "properties": {
+        "latestVersions": {
+          "description": "Latest Versions for all assets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelVersionResource"
+          }
+        },
+        "name": {
+          "description": "The Name of the Asset container",
+          "type": "string"
+        },
+        "description": {
+          "description": "The asset container description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The asset tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModelContainerResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelContainer"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ModelContainerResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelContainerResource"
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelContainerResourceRequest": {
+      "description": "Azure Resource Management create resource envelope.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModelContainer"
+        }
+      }
+    },
+    "ModelVersionResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelVersionResource"
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelVersionResourceRequest": {
+      "description": "Azure Resource Management create resource envelope.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModelVersion"
+        }
+      }
+    }
   }
+}
