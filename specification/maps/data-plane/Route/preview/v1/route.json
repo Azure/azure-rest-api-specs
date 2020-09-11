@@ -1097,7 +1097,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "The language parameter determines the language of the guidance messages. Proper nouns (the names of streets, plazas, etc.) are returned in the specified  language, or if that is not available, they are returned in an available language  that is close to it. Allowed values are (a subset of) the IETF language tags. The currently supported  languages are listed in the [Supported languages  section](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages).\n\nDefault value: en-GB",
+            "description": "The language parameter determines the language of the guidance messages. Proper nouns (the names of streets, plazas, etc.) are returned in the specified  language, or if that is not available, they are returned in an available language  that is close to it. Allowed values are (a subset of) the IETF language tags. The currently supported  languages are listed in the [Supported languages  section](https://docs.microsoft.com/azure/azure-maps/supported-languages).\n\nDefault value: en-GB",
             "required": false,
             "type": "string"
           },
@@ -1227,7 +1227,7 @@
       },
       "post": {
         "x-publish": true,
-        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of a vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/en-us/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns  a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\nRouting service provides a set of parameters for a detailed description of a vehicle-specific Consumption Model. Please check [Consumption Model](https://docs.microsoft.com/azure/azure-maps/consumption-model) for detailed explanation of the concepts and parameters involved.",
         "operationId": "Route_PostRouteDirections",
         "x-ms-examples": {
           "PostRouteDirections": {
@@ -1436,7 +1436,7 @@
     "/route/range/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Route Range (Isochrone) API__\n\n\n**Applies to**: S1 pricing tier.\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
+        "description": "__Route Range (Isochrone) API__\n\n\n**Applies to**: S1 pricing tier.\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
         "operationId": "Route_GetRouteRange",
         "x-ms-examples": {
           "GetRouteRange": {

@@ -399,9 +399,9 @@
           {
             "name": "details",
             "description": "Return full details for the current conditions. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the current condition data, which includes observation date time, weather phrase, icon code, precipitation indicator flag, and temperature.",
-            "default": true,
+            "default": "true",
             "in": "query",
-            "type": "boolean"
+            "type": "string"
           },
           {
             "name": "duration",
@@ -533,7 +533,7 @@
           },
           {
             "name": "query",
-            "description": "Coordinates through which the route is calculated, separated by colon (:) and entered in chronological order. A minimum of two waypoints is required. A single API call may contain up to 60 waypoints. \nA waypoint indicates location, ETA, and optional heading: latitude,longitude,ETA,heading, where\n  * `Latitude` - Latitude coordinate in decimal degrees.\n  * `Longitude` - Longitude coordinate in decimal degrees.\n  * `ETA (estimated time of arrival)` - The number of minutes from the present time that it will take for the vehicle to reach the waypoint. Allowed range is from 0.0 to 120.0 minutes.\n  * `Heading` - An optional value indicating the vehicle heading as it passes the waypoint. Expressed in clockwise degrees relative to true north. This is issued to calculate sun glare as a driving hazard. Allowed range is from 0.0 to 360.0 degrees. If not provided, a heading will automatically be derived based on the position of neighboring waypoints. \nIt is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. This way a more accurate assessment can be provided for the trip and prevent isolated events not being captured between waypoints. Information can and should be updated along the route (especially for trips greater than 2 hours) to continuously pull new waypoints moving forward, but also to ensure that forecast information for content such as precipitation type and intensity is accurate as storms develop and dissipate over time.",
+            "description": "Coordinates through which the route is calculated, separated by colon (:) and entered in chronological order. A minimum of two waypoints is required. A single API call may contain up to 60 waypoints. \nA waypoint indicates location, ETA, and optional heading: latitude,longitude,ETA,heading, where\n  * `Latitude` - Latitude coordinate in decimal degrees.\n  * `Longitude` - Longitude coordinate in decimal degrees.\n  * `ETA (estimated time of arrival)` - The number of minutes from the present time that it will take for the vehicle to reach the waypoint. Allowed range is from 0.0 to 120.0 minutes.\n  * `Heading` - An optional value indicating the vehicle heading as it passes the waypoint. Expressed in clockwise degrees relative to true north. This is issued to calculate sun glare as a driving hazard. Allowed range is from 0.0 to 360.0 degrees. If not provided, a heading will automatically be derived based on the position of neighboring waypoints.\n\nIt is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. This way a more accurate assessment can be provided for the trip and prevent isolated events not being captured between waypoints.  Information can and should be updated along the route (especially for trips greater than 2 hours) to continuously pull new waypoints moving forward, but also to ensure that forecast information for content such as precipitation type and intensity is accurate as storms develop and dissipate over time.",
             "in": "query",
             "type": "string",
             "required": true
@@ -547,6 +547,150 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/WeatherAlongRouteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/weather/severe/alerts/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get Severe Weather Alerts**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nGet Severe Weather Alerts service returns the severe weather alerts that are available worldwide from official Government Meteorological Agencies and leading global weather alert providers. Details such as alert type, category and level are returned. For example, the service can return details about severe thunderstorms or forest fires.",
+        "operationId": "Weather_GetSevereWeatherAlertsPreview,",
+        "x-ms-examples": {
+          "SevereWeatherAlert": {
+            "$ref": "./examples/GetSevereWeatherAlerts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which severe weather alerts are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "details",
+            "description": "Return full details for the severe weather alerts. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the alerts data, which excludes the area-specific full description of alert details (`alertDetails`).",
+            "default": "true",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK,",
+            "schema": {
+              "$ref": "#/definitions/SevereWeatherAlertsResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/weather/indices/daily/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Get Daily Indices Preview**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThere may be times when you want to know if the weather conditions are optimal for a specific activity, for example, for outdoor construction, indoor activities, running or farming including soil moisture information.  Azure Maps Indices API returns index values that will guide end users to plan future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like for playing golf, and retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
+        "operationId": "Weather_GetDailyIndicesPreview",
+        "x-ms-examples": {
+          "DailyIndices": {
+            "$ref": "./examples/GetDailyIndices.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "Coordinates of the location for which daily indices are requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/WeatherLanguage"
+          },
+          {
+            "name": "duration",
+            "description": "Specifies for how many days the daily indices are returned. By default, the indices data for the current day will be returned. When requesting future indices data, the current day is included in the response as day 1. Available values are\n  * `1` - Return daily index data for the current day. Default value.\n  * `5` - Return 5 days of daily index data starting from the current day.\n  * `10` - Return 10 days of daily index data starting from the current day.\n  * `15` - Return 15 days of daily index data starting from the current day.",
+            "default": 1,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "indexId",
+            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported indices.",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "indexGroupId",
+            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index groups.",
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DailyIndicesResponse"
             }
           },
           "400": {
@@ -1785,7 +1929,8 @@
           "description": "2-character ISO 3166-1 Alpha-2 country code, for example, \"US\"."
         },
         "alertId": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "A unique numerical identifier for a weather alert."
         },
         "description": {
@@ -1837,7 +1982,7 @@
       "properties": {
         "localized": {
           "type": "string",
-          "description": "Description of the alert in the specified language. By default English (en-US) is returned, if the language parameter is not specified in the request."
+          "description": "Description of the alert in the specified language. By default English (en-US) is returned if the language parameter is not specified in the request."
         },
         "english": {
           "type": "string",
@@ -1859,11 +2004,11 @@
         },
         "startTime": {
           "type": "string",
-          "description": "The start date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones, the returned time in the response is the local time to the requested coordinate location."
+          "description": "The start date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
         },
         "endTime": {
           "type": "string",
-          "description": "The end date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones, the returned time in the response is the local time to the requested coordinate location."
+          "description": "The end date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
         },
         "latestStatus": {
           "$ref": "#/definitions/LatestStatus",
@@ -1875,7 +2020,7 @@
         },
         "alertDetailsLanguageCode": {
           "type": "string",
-          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language paramater. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
+          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language parameter. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
         }
       }
     },
@@ -2077,7 +2222,7 @@
           "items": {
             "$ref": "#/definitions/Pollutant"
           },
-          "description": "Information about an individual pollutant."
+          "description": "Information about individual pollutants."
         }
       }
     },
@@ -2100,7 +2245,7 @@
           "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
         },
         "dominantPollutant": {
-          "type": "string",
+          "$ref": "#/definitions/DominantPollutant",
           "description": "The pollutant with the highest concentration."
         },
         "category": {
@@ -2119,7 +2264,7 @@
     },
     "Pollutant": {
       "type": "object",
-      "description": "Information about an individual pollutant.",
+      "description": "Detailed information about an individual pollutant. Not returned if `pollutants`=false.",
       "properties": {
         "type": {
           "$ref": "#/definitions/PollutantType",
@@ -2134,7 +2279,7 @@
           "format": "float",
           "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
         },
-        "plumeLabsIndex": {
+        "globalIndex": {
           "type": "number",
           "format": "float",
           "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
@@ -2174,7 +2319,7 @@
           },
           {
             "value": "PM2.5",
-            "description": "Particulate matter 2.5 (\"PM2_5\")"
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
           },
           {
             "value": "PM10",
@@ -2189,7 +2334,7 @@
     },
     "Concentration": {
       "type": "object",
-      "description": "Information about an individual pollutant.",
+      "description": "An object containing the number of pollutant particles per volume of air.",
       "properties": {
         "value": {
           "type": "number",
@@ -2204,6 +2349,48 @@
           "type": "integer",
           "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
         }
+      }
+    },
+    "DominantPollutant": {
+      "type": "string",
+      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "enum": [
+        "Carbon Monoxide",
+        "Nitrogen Dioxide",
+        "Ozone",
+        "Particulate Matter 2.5",
+        "Particulate Matter 10",
+        "Sulfur Dioxide"
+      ],
+      "x-ms-enum": {
+        "name": "DominantPollutant",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Carbon Monoxide",
+            "description": "Carbon monoxide (\"CO\")"
+          },
+          {
+            "value": "Nitrogen Dioxide",
+            "description": "Nitrogen dioxide (\"NO2\")"
+          },
+          {
+            "value": "Ozone",
+            "description": "Ozone (\"O3\")"
+          },
+          {
+            "value": "Particulate Matter 2.5",
+            "description": "Particulate matter 2.5 (\"PM2.5\")"
+          },
+          {
+            "value": "Particulate Matter 10",
+            "description": "Particulate matter 10 (\"PM10\")"
+          },
+          {
+            "value": "Sulfur Dioxide",
+            "description": "Sulfur dioxide (\"SO2\")"
+          }
+        ]
       }
     }
   }
