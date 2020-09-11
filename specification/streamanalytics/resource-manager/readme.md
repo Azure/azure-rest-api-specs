@@ -152,7 +152,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-streamanalytics
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-pure-2016-03
+  - tag: package-2020-03-preview
 ```
 
 ### Tag: package-pure-2016-03 and java
