@@ -1,11 +1,13 @@
 {
   "parameters": {
-    "api-version": "2020-06-10-preview",
+    "api-version": "2020-06-10",
     "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     "location": "global",
     "parameters": {
       "skus": [
-        "S1"
+        "F1",
+        "S1",
+        "S2"
       ],
       "kind": "Bing.Search.v7",
       "type": "Microsoft.Bing/accounts"
@@ -18,10 +20,20 @@
           {
             "kind": "Bing.Search.v7",
             "type": "Microsoft.Bing/accounts",
+            "skuName": "F1",
+            "skuAvailable": true
+          },
+          {
+            "kind": "Bing.Search.v7",
+            "type": "Microsoft.Bing/accounts",
             "skuName": "S1",
-            "skuAvailable": true,
-            "reason": null,
-            "message": null
+            "skuAvailable": true
+          },
+          {
+            "kind": "Bing.Search.v7",
+            "type": "Microsoft.Bing/accounts",
+            "skuName": "S2",
+            "skuAvailable": true
           }
         ]
       }

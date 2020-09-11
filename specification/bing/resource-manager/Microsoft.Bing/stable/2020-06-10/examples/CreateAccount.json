@@ -1,53 +1,50 @@
 {
   "parameters": {
-    "api-version": "2020-06-10-preview",
+    "api-version": "2020-06-10",
     "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "resourceGroupName": "myResourceGroup",
-    "accountName": "testCreate1",
+    "resourceGroupName": "MyResourceGroup",
+    "accountName": "MyAccount1",
     "account": {
-      "location": "global",
-      "kind": "Bing.Search.v7",
+      "type": "Microsoft.Bing/accounts",
       "sku": {
         "name": "S1"
       },
-      "properties": {
-      }
+      "kind": "Bing.Search.v7",
+      "location": "global"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.Bing/accounts/testCreate1",
-        "name": "testCreate1",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount1",
+        "name": "MyAccount1",
         "type": "Microsoft.Bing/accounts",
-        "location": "global",
         "sku": {
           "name": "S1"
         },
         "kind": "Bing.Search.v7",
-        "etag": "W/\"datetime'2020-06-10T08%3A00%3A05.445595Z'\"",
+        "location": "global",
         "properties": {
-          "endpoint": "https://westus.api.cognitive.microsoft.com/emotion/v1.0",
           "provisioningState": "Succeeded",
-          "internalId": "9dc1c5b9bb95486aa63899acdaebd9a0"
+          "endpoint": "https://api.bing.microsoft.com/",
+          "internalId": "00000000000000000000000000000000"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.Bing/accounts/testCreate1",
-        "name": "testCreate1",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount1",
+        "name": "MyAccount1",
         "type": "Microsoft.Bing/accounts",
-        "location": "global",
         "sku": {
           "name": "S1"
         },
-        "kind": "Emotion",
-        "etag": "W/\"datetime'2020-06-10T07%3A57%3A48.4582781Z'\"",
+        "kind": "Bing.Search.v7",
+        "location": "global",
         "properties": {
-          "endpoint": "https://westus.api.cognitive.microsoft.com/emotion/v1.0",
           "provisioningState": "Succeeded",
-          "internalId": "9dc1c5b9bb95486aa63899acdaebd9a0"
+          "endpoint": "https://api.bing.microsoft.com/",
+          "internalId": "00000000000000000000000000000000"
         }
       }
     }
