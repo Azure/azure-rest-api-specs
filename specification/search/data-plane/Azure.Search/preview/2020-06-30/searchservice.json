@@ -5788,11 +5788,7 @@
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
         },
         "configuration": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+          "$ref": "#/definitions/IndexingParametersConfiguration"
         }
       },
       "description": "Represents parameters for indexer execution.",
