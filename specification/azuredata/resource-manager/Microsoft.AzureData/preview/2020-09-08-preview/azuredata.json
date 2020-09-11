@@ -743,6 +743,15 @@
           },
           {
             "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "resource",
+            "description": "The postgres instance",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
           }
         ],
         "responses": {
@@ -1468,9 +1477,17 @@
       "description": "Postgres Instance properties.",
       "type": "object",
       "properties": {
-        "hybridDataManagerId": {
+        "dataControllerId": {
           "type": "string",
-          "description": "null"
+          "description": "The data controller id"
+        },
+        "admin": {
+          "type": "string",
+          "description": "The instance admin"
+        },
+        "k8sRaw": {
+          "type": "object",
+          "description": "The raw kubernetes information"
         }
       }
     },
@@ -1502,9 +1519,8 @@
             "type": "string"
           }
         },
-        "hybridDataManagerId": {
-          "type": "string",
-          "description": "null"
+        "properties": {
+          "$ref": "#/definitions/PostgresInstanceProperties"
         }
       }
     },
