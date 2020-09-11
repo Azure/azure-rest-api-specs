@@ -1,14 +1,428 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Machine Learning ManagementFrontEnd Service",
-    "version": "1.0.0"
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
+      "delete": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Delete all datastores within a workspace.",
+        "operationId": "Datastores_DeleteAll",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "List datastores.",
+        "operationId": "Datastores_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of datastores to return.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "searchText",
+            "description": "Text to search for in the datastore names.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "Order by property (createdtime | modifiedtime | name).",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderByAsc",
+            "description": "Order by property in ascending order.",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastorePropertiesResourcePaginatedResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}": {
+      "delete": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Delete datastore.",
+        "operationId": "Datastores_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Get datastore.",
+        "operationId": "Datastores_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastorePropertiesResource"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Create or update datastore.",
+        "operationId": "Datastores_CreateOrUpdate",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datastore entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatastorePropertiesResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastorePropertiesResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecret": {
+      "post": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Get datastore secrets.",
+        "operationId": "Datastores_GetSecrets",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastoreCredentials"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/setAzureMLDefault": {
+      "post": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Set default datastore.",
+        "operationId": "Datastores_SetDefault",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Datastore name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/azuremldefault": {
+      "get": {
+        "tags": [
+          "Datastore"
+        ],
+        "summary": "Get default datastore.",
+        "operationId": "Datastores_GetDefault",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastorePropertiesResource"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
       "get": {
         "tags": [
@@ -23,16 +437,19 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
             "in": "query",
@@ -40,24 +457,6 @@
             "description": "Maximum number of results to return.",
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -73,6 +472,9 @@
               "$ref": "#/definitions/ModelContainerResourcePaginatedResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -90,33 +492,21 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
             "required": true,
             "type": "string"
           }
@@ -146,33 +536,21 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
             "required": true,
             "type": "string"
           }
@@ -211,33 +589,21 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
             "required": true,
             "type": "string"
           },
@@ -281,22 +647,25 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model name.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
             "type": "string"
           },
           {
@@ -349,24 +718,6 @@
             "description": "Only return the most recent version of a model.",
             "type": "boolean",
             "default": false
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -382,6 +733,9 @@
               "$ref": "#/definitions/ModelVersionResourcePaginatedResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -399,6 +753,18 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model name.",
@@ -409,30 +775,6 @@
             "in": "path",
             "name": "version",
             "description": "Model version.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
             "required": true,
             "type": "string"
           }
@@ -462,6 +804,18 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model name.",
@@ -472,30 +826,6 @@
             "in": "path",
             "name": "version",
             "description": "Model version.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
             "required": true,
             "type": "string"
           }
@@ -534,6 +864,18 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model name.",
@@ -544,30 +886,6 @@
             "in": "path",
             "name": "version",
             "description": "Model version.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
             "required": true,
             "type": "string"
           },
@@ -706,42 +1024,531 @@
         }
       }
     },
-    "UserType": {
+    "ContentsType": {
       "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
+        "AzureBlob",
+        "AzureDataLake",
+        "AzureDataLakeGen2",
+        "AzureFile",
+        "AzureMySql",
+        "AzurePostgreSql",
+        "AzureSqlDatabase",
+        "GlusterFs"
       ],
       "type": "string"
     },
-    "SystemData": {
+    "CredentialsType": {
+      "enum": [
+        "AccountKey",
+        "Certificate",
+        "Sas",
+        "ServicePrincipal",
+        "SqlAdmin"
+      ],
+      "type": "string"
+    },
+    "AccountKeySection": {
+      "required": [
+        "key"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "CertificateSection": {
+      "required": [
+        "certificate",
+        "clientId",
+        "tenantId",
+        "thumbprint"
+      ],
+      "type": "object",
+      "properties": {
+        "authorityUrl": {
+          "type": "string"
+        },
+        "resourceUri": {
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "clientId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "certificate": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "thumbprint": {
+          "pattern": "\\w",
+          "type": "string"
+        }
+      }
+    },
+    "SasSection": {
+      "required": [
+        "sasToken"
+      ],
+      "type": "object",
+      "properties": {
+        "sasToken": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ServicePrincipalSection": {
+      "required": [
+        "clientId",
+        "clientSecret",
+        "tenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "authorityUrl": {
+          "type": "string"
+        },
+        "resourceUri": {
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "clientId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "clientSecret": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "SqlAdminSection": {
+      "required": [
+        "password",
+        "userId"
+      ],
+      "type": "object",
+      "properties": {
+        "userId": {
+          "pattern": "\\w",
+          "type": "string"
+        },
+        "password": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DatastoreCredentials": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CredentialsType"
+        },
+        "accountKey": {
+          "$ref": "#/definitions/AccountKeySection"
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateSection"
+        },
+        "sas": {
+          "$ref": "#/definitions/SasSection"
+        },
+        "servicePrincipal": {
+          "$ref": "#/definitions/ServicePrincipalSection"
+        },
+        "sqlAdmin": {
+          "$ref": "#/definitions/SqlAdminSection"
+        }
+      }
+    },
+    "AzureDataLakeSection": {
+      "required": [
+        "credentials",
+        "storeName"
+      ],
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "storeName": {
+          "pattern": "\\w",
+          "type": "string"
+        }
+      }
+    },
+    "AzureMySqlSection": {
+      "required": [
+        "credentials",
+        "databaseName",
+        "endpoint",
+        "portNumber",
+        "serverName"
+      ],
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "databaseName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "portNumber": {
+          "format": "int32",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "AzurePostgreSqlSection": {
+      "required": [
+        "credentials",
+        "databaseName",
+        "endpoint",
+        "portNumber",
+        "serverName"
+      ],
+      "type": "object",
+      "properties": {
+        "enableSSL": {
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "credentials": {
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "databaseName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "portNumber": {
+          "format": "int32",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "AzureSqlDatabaseSection": {
+      "required": [
+        "credentials",
+        "databaseName",
+        "endpoint",
+        "portNumber",
+        "serverName"
+      ],
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "databaseName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "portNumber": {
+          "format": "int32",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "AzureStorageSection": {
+      "required": [
+        "accountName",
+        "containerName",
+        "credentials",
+        "endpoint",
+        "protocol"
+      ],
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "blobCacheTimeout": {
+          "format": "int32",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "containerName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "credentials": {
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "endpoint": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "protocol": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "GlusterFsSection": {
+      "required": [
+        "serverAddress",
+        "volumeName"
+      ],
+      "type": "object",
+      "properties": {
+        "serverAddress": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "volumeName": {
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "DatastoreContents": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType"
+        },
+        "azureDataLake": {
+          "$ref": "#/definitions/AzureDataLakeSection"
+        },
+        "azureMySql": {
+          "$ref": "#/definitions/AzureMySqlSection"
+        },
+        "azurePostgreSql": {
+          "$ref": "#/definitions/AzurePostgreSqlSection"
+        },
+        "azureSqlDatabase": {
+          "$ref": "#/definitions/AzureSqlDatabaseSection"
+        },
+        "azureStorage": {
+          "$ref": "#/definitions/AzureStorageSection"
+        },
+        "glusterFs": {
+          "$ref": "#/definitions/GlusterFsSection"
+        }
+      }
+    },
+    "OriginType": {
+      "enum": [
+        "Synapse"
+      ],
+      "type": "string"
+    },
+    "LinkedInfo": {
+      "type": "object",
+      "properties": {
+        "linkedId": {
+          "type": "string"
+        },
+        "linkedResourceName": {
+          "type": "string"
+        },
+        "origin": {
+          "$ref": "#/definitions/OriginType"
+        }
+      }
+    },
+    "DatastoreProperties": {
+      "required": [
+        "contents"
+      ],
+      "type": "object",
+      "properties": {
+        "contents": {
+          "$ref": "#/definitions/DatastoreContents"
+        },
+        "description": {
+          "type": "string"
+        },
+        "hasBeenValidated": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "linkedInfo": {
+          "$ref": "#/definitions/LinkedInfo"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatastorePropertiesResource": {
       "description": "Azure Resource Manager resource Envelope",
       "type": "object",
       "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource creation (UTC)",
+        "properties": {
+          "$ref": "#/definitions/DatastoreProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SystemData"
+        }
+      ]
+    },
+    "DatastorePropertiesResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatastorePropertiesResource"
+          }
+        },
+        "continuationToken": {
           "type": "string"
         },
-        "createdBy": {
-          "description": "a string identifier for the identity that created the resource",
+        "nextLink": {
           "type": "string"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/UserType"
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource last modification (UTC)",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "description": "a string identifier for the identity that last modified the resource",
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/UserType"
+        }
+      }
+    },
+    "DatastorePropertiesResourceRequest": {
+      "description": "Azure Resource Management create resource envelope.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatastoreProperties"
         }
       }
     },
@@ -822,28 +1629,18 @@
       "description": "Azure Resource Manager resource Envelope",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ModelVersion"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SystemData"
+        }
+      ]
     },
     "ModelContainer": {
       "type": "object",
@@ -876,28 +1673,18 @@
       "description": "Azure Resource Manager resource Envelope",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ModelContainer"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SystemData"
+        }
+      ]
     },
     "ModelContainerResourcePaginatedResult": {
       "type": "object",
