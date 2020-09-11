@@ -246,6 +246,9 @@
         "x-ms-examples": {
           "ListClusterUserCredentialsExample": {
             "$ref": "./examples/ConnectedClustersListClusterCredentialsResult.json"
+          },
+          "ListClusterUserCredentialsNonAadExample": {
+            "$ref": "./examples/ConnectedClustersListClusterCredentialsResultNonAad.json"
           }
         },
         "parameters": [
@@ -263,6 +266,7 @@
           },
           {
             "in": "body",
+            "required": false,
             "name": "ClientAuthenticationDetails",
             "schema": {
               "$ref": "#/definitions/AuthenticationDetails"
@@ -627,7 +631,7 @@
           "description": "The mode of client authentication.",
           "enum": [
             "Token",
-            "Certificate"
+            "ClientCertificate"
           ],
           "x-ms-enum": {
             "name": "AuthenticationMethod",
