@@ -184,7 +184,7 @@
           "BingAccounts"
         ],
         "description": "Returns a Bing account specified by the parameters.",
-        "operationId": "Accounts_GetProperties",
+        "operationId": "Accounts_Get",
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
@@ -307,7 +307,7 @@
           "BingAccounts"
         ],
         "operationId": "Accounts_ListKeys",
-        "description": "Lists the account keys for the specified Bing account.",
+        "description": "Gets the keys to access the Bing APIs for the specified Bing account.",
         "x-ms-examples": {
           "List Keys": {
             "$ref": "./examples/ListKeys.json"
@@ -400,11 +400,11 @@
         "tags": [
           "Skus"
         ],
-        "operationId": "ResourceSkus_List",
-        "description": "Gets the list of Microsoft.Bing SKUs available for the Subscription.",
+        "operationId": "Skus_List",
+        "description": "Gets the list of Microsoft.Bing SKUs available for the subscription.",
         "x-ms-examples": {
-          "Regenerate Keys": {
-            "$ref": "./examples/GetSkus.json"
+          "List SKUs for Subscription": {
+            "$ref": "./examples/ListSkusForSubscription.json"
           }
         },
         "parameters": [
@@ -442,8 +442,8 @@
         ],
         "description": "List available SKUs for the requested Bing account",
         "x-ms-examples": {
-          "List SKUs": {
-            "$ref": "./examples/ListSkus.json"
+          "List SKUs for Account": {
+            "$ref": "./examples/ListSkusForAccount.json"
           }
         },
         "operationId": "Accounts_ListSkus",
@@ -482,13 +482,13 @@
         "tags": [
           "BingAccounts"
         ],
-        "description": "Get usages for the requested Bing account",
+        "description": "List usages for the requested Bing account",
         "x-ms-examples": {
-          "Get Usages": {
-            "$ref": "./examples/GetUsages.json"
+          "List Usages": {
+            "$ref": "./examples/ListUsages.json"
           }
         },
-        "operationId": "Accounts_GetUsages",
+        "operationId": "Accounts_ListUsages",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -530,8 +530,8 @@
         "description": "Lists all the available Bing account operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "Get Operations": {
-            "$ref": "./examples/GetOperations.json"
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
           }
         },
         "parameters": [
@@ -565,7 +565,7 @@
           "Skus"
         ],
         "operationId": "CheckSkuAvailability",
-        "description": "Check available SKUs.",
+        "description": "Check whether specific SKUs are available for the location and",
         "x-ms-examples": {
           "Check SKU Availability": {
             "$ref": "./examples/CheckSkuAvailability.json"
@@ -1067,7 +1067,7 @@
         "restrictionInfo": {
           "$ref": "#/definitions/ResourceSkuRestrictionInfo",
           "readOnly": true,
-          "description": "The information about the restriction where the SKU cannot be used."
+          "description": "Information about the restriction where the SKU cannot be used."
         },
         "reasonCode": {
           "type": "string",
@@ -1144,7 +1144,8 @@
           },
           "description": "List of availability zones where the SKU is restricted."
         }
-      }
+      },
+      "description": "Information about the restriction where the SKU cannot be used."
     },
     "ResourceSkusResult": {
       "properties": {
