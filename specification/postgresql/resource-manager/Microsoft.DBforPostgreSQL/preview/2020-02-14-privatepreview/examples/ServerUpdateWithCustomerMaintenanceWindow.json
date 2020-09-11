@@ -1,9 +1,20 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc1",
+    "serverName": "pgtestsvc4",
     "resourceGroupName": "testrg",
     "api-version": "2020-02-14-privatepreview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "maintenanceWindow": {
+          "dayOfWeek": 0,
+          "startHour": 8,
+          "startMinute": 0,
+          "customWindow": "Enabled"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -22,26 +33,27 @@
           "publicNetworkAccess": "Enabled",
           "storageProfile": {
             "storageMB": 524288,
-            "backupRetentionDays": 7
+            "backupRetentionDays": 20
           },
-          "haEnabled": "Enabled",
+          "delegatedSubnetArguments": {},
+          "haEnabled": "Disabled",
           "availabilityZone": "1",
-          "standbyAvailabilityZone": "2",
           "maintenanceWindow": {
             "dayOfWeek": 0,
-            "startHour": 0,
+            "startHour": 8,
             "startMinute": 0,
-            "customWindow": "Disabled"
+            "customWindow": "Enabled"
           }
         },
         "location": "westus",
         "tags": {
           "ElasticServer": "1"
         },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc1",
-        "name": "pgtestsvc1",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+        "name": "pgtestsvc4",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
-    }
+    },
+    "202": {}
   }
 }
