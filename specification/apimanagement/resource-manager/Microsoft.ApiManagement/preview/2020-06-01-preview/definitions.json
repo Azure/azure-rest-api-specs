@@ -2636,7 +2636,7 @@
       ],
       "description": "Issue contract Update Properties."
     },
-    "KeyVaultContractCreateProperties" :{
+    "KeyVaultContractCreateProperties": {
       "properties": {
         "secretIdentifier": {
           "type": "string",
@@ -2651,19 +2651,16 @@
     },
     "KeyVaultContractProperties": {
       "properties": {
-        "secretIdentifier": {
-          "type": "string",
-          "description": "Key vault secret identifier for fetching secret."
-        },
-        "identityClientId": {
-          "type": "string",
-          "description": "SystemAssignedIdentity or UserAssignedIdentity Client Id which will be used to access key vault secret."
-        },
         "lastStatus": {
           "$ref": "#/definitions/KeyVaultLastAccessStatusContractProperties",
           "description": "Last time sync and refresh status of secret from key vault."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyVaultContractCreateProperties"
+        }
+      ],
       "description": "KeyVault contract details."
     },
     "KeyVaultLastAccessStatusContractProperties": {
