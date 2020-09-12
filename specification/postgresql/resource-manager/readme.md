@@ -30,6 +30,16 @@ description: The Microsoft Azure management API provides create, read, update, a
 openapi-type: arm
 tag: package-2020-01-01
 ```
+### Tag: package-2020-02-14-preview
+
+These settings apply only when `--tag=package-2020-02-14-preview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-02-14-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+```
+
 
 ### Tag: package-2020-02-14-privatepreview
 
