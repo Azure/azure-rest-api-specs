@@ -640,7 +640,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           },
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ModelContainerResource"
@@ -1066,13 +1066,9 @@
       "type": "string"
     },
     "AccountKeySection": {
-      "required": [
-        "key"
-      ],
       "type": "object",
       "properties": {
         "key": {
-          "pattern": "\\w",
           "type": "string",
           "x-ms-secret": true
         }
@@ -1080,7 +1076,6 @@
     },
     "CertificateSection": {
       "required": [
-        "certificate",
         "clientId",
         "tenantId",
         "thumbprint"
@@ -1102,7 +1097,6 @@
           "type": "string"
         },
         "certificate": {
-          "pattern": "\\w",
           "type": "string",
           "x-ms-secret": true
         },
@@ -1113,13 +1107,9 @@
       }
     },
     "SasSection": {
-      "required": [
-        "sasToken"
-      ],
       "type": "object",
       "properties": {
         "sasToken": {
-          "pattern": "\\w",
           "type": "string",
           "x-ms-secret": true
         }
@@ -1128,7 +1118,6 @@
     "ServicePrincipalSection": {
       "required": [
         "clientId",
-        "clientSecret",
         "tenantId"
       ],
       "type": "object",
@@ -1148,7 +1137,6 @@
           "type": "string"
         },
         "clientSecret": {
-          "pattern": "\\w",
           "type": "string",
           "x-ms-secret": true
         }
@@ -1156,7 +1144,6 @@
     },
     "SqlAdminSection": {
       "required": [
-        "password",
         "userId"
       ],
       "type": "object",
@@ -1166,7 +1153,6 @@
           "type": "string"
         },
         "password": {
-          "pattern": "\\w",
           "type": "string",
           "x-ms-secret": true
         }
