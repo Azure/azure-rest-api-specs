@@ -40,6 +40,18 @@ directive:
     from: alertTypes.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: recommendationTypes.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/recommendationTypes"].get'
+    reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: iotDefenderSettings.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings"].get'
+    reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: iotSensors.json
+    where: '$.paths["/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}"].get'
+    reason: The list returns limited number of items
 ```
 
 ### Basic Information
@@ -56,6 +68,7 @@ tag: package-composite-v3
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
+
 
 ### Tag: package-composite-v1
 
@@ -143,7 +156,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -151,6 +163,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -171,6 +185,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
@@ -178,6 +193,8 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -310,6 +327,8 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -353,6 +372,20 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2020-08-preview-only
+
+These settings apply only when `--tag=package-2020-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-08-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ---
 
 # Code Generation
@@ -369,6 +402,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js security/resource-manager
 ```
 
 ## C#
@@ -395,6 +431,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -408,6 +448,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
+  - $(this-folder)/Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
   - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/secureScore.json
   - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
@@ -415,6 +457,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -437,7 +480,6 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/alerts.json
   - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
@@ -446,6 +488,8 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendations.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
@@ -453,6 +497,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/alerts.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json

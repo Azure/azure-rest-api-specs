@@ -1,0 +1,261 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj7804",
+    "streamingJob": {
+      "properties": {
+        "sku": {
+          "name": "Standard"
+        },
+        "eventsOutOfOrderPolicy": "Drop",
+        "outputErrorPolicy": "Drop",
+        "eventsOutOfOrderMaxDelayInSeconds": 0,
+        "eventsLateArrivalMaxDelayInSeconds": 5,
+        "dataLocale": "en-US",
+        "compatibilityLevel": "1.0",
+        "inputs": [
+          {
+            "properties": {
+              "type": "Stream",
+              "datasource": {
+                "type": "Microsoft.Storage/Blob",
+                "properties": {
+                  "storageAccounts": [
+                    {
+                      "accountName": "yourAccountName",
+                      "accountKey": "yourAccountKey=="
+                    }
+                  ],
+                  "container": "containerName",
+                  "pathPattern": ""
+                }
+              },
+              "serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8"
+                }
+              }
+            },
+            "name": "inputtest"
+          }
+        ],
+        "transformation": {
+          "properties": {
+            "streamingUnits": 1,
+            "query": "Select Id, Name from inputtest"
+          },
+          "name": "transformationtest"
+        },
+        "outputs": [
+          {
+            "properties": {
+              "datasource": {
+                "type": "Microsoft.Sql/Server/Database",
+                "properties": {
+                  "server": "serverName",
+                  "database": "databaseName",
+                  "user": "userName",
+                  "password": "userPassword",
+                  "table": "tableName"
+                }
+              }
+            },
+            "name": "outputtest"
+          }
+        ],
+        "functions": []
+      },
+      "location": "West US",
+      "tags": {
+        "key1": "value1",
+        "randomKey": "randomValue",
+        "key3": "value3"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "87551cc5-1290-4d08-afcd-cdaa92e5ade0"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804",
+        "name": "sj7804",
+        "type": "Microsoft.StreamAnalytics/streamingjobs",
+        "location": "West US",
+        "tags": {
+          "key1": "value1",
+          "randomKey": "randomValue",
+          "key3": "value3"
+        },
+        "properties": {
+          "sku": {
+            "name": "Standard"
+          },
+          "jobId": "732e4b1d-94a7-43ae-8297-3ad04f1540b9",
+          "provisioningState": "Succeeded",
+          "jobState": "Created",
+          "eventsOutOfOrderPolicy": "Drop",
+          "outputErrorPolicy": "Drop",
+          "eventsOutOfOrderMaxDelayInSeconds": 0,
+          "eventsLateArrivalMaxDelayInSeconds": 5,
+          "dataLocale": "en-US",
+          "createdDate": "2017-05-11T04:37:11.54Z",
+          "compatibilityLevel": "1.0",
+          "inputs": [
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/inputs/inputtest",
+              "name": "inputtest",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+              "properties": {
+                "type": "Stream",
+                "datasource": {
+                  "type": "Microsoft.Storage/Blob",
+                  "properties": {
+                    "storageAccounts": [
+                      {
+                        "accountName": "accountName"
+                      }
+                    ],
+                    "container": "containerName",
+                    "pathPattern": ""
+                  }
+                },
+                "serialization": {
+                  "type": "Json",
+                  "properties": {
+                    "encoding": "UTF8"
+                  }
+                },
+                "etag": "ca88f8fa-605b-4c7f-8695-46f5faa60cd0"
+              }
+            }
+          ],
+          "transformation": {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/transformations/transformationtest",
+            "name": "transformationtest",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+            "properties": {
+              "streamingUnits": 1,
+              "query": "Select Id, Name from inputtest",
+              "etag": "91d8fcbe-60b3-49c3-9f21-9942b95602b8"
+            }
+          },
+          "functions": [],
+          "outputs": [
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/outputs/outputtest",
+              "name": "outputtest",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+              "properties": {
+                "datasource": {
+                  "type": "Microsoft.Sql/Server/Database",
+                  "properties": {
+                    "server": "serverName",
+                    "database": "databaseName",
+                    "table": "tableName",
+                    "user": "userName"
+                  }
+                },
+                "etag": "62097c3c-b503-41ff-a56f-196a9598ab90"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "87551cc5-1290-4d08-afcd-cdaa92e5ade0"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804",
+        "name": "sj7804",
+        "type": "Microsoft.StreamAnalytics/streamingjobs",
+        "location": "West US",
+        "tags": {
+          "key1": "value1",
+          "randomKey": "randomValue",
+          "key3": "value3"
+        },
+        "properties": {
+          "sku": {
+            "name": "Standard"
+          },
+          "jobId": "732e4b1d-94a7-43ae-8297-3ad04f1540b9",
+          "provisioningState": "Succeeded",
+          "jobState": "Created",
+          "eventsOutOfOrderPolicy": "Drop",
+          "outputErrorPolicy": "Drop",
+          "eventsOutOfOrderMaxDelayInSeconds": 0,
+          "eventsLateArrivalMaxDelayInSeconds": 5,
+          "dataLocale": "en-US",
+          "createdDate": "2017-05-11T04:37:11.54Z",
+          "compatibilityLevel": "1.0",
+          "inputs": [
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/inputs/inputtest",
+              "name": "inputtest",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+              "properties": {
+                "type": "Stream",
+                "datasource": {
+                  "type": "Microsoft.Storage/Blob",
+                  "properties": {
+                    "storageAccounts": [
+                      {
+                        "accountName": "accountName"
+                      }
+                    ],
+                    "container": "containerName",
+                    "pathPattern": ""
+                  }
+                },
+                "serialization": {
+                  "type": "Json",
+                  "properties": {
+                    "encoding": "UTF8"
+                  }
+                },
+                "etag": "ca88f8fa-605b-4c7f-8695-46f5faa60cd0"
+              }
+            }
+          ],
+          "transformation": {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/transformations/transformationtest",
+            "name": "transformationtest",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+            "properties": {
+              "streamingUnits": 1,
+              "query": "Select Id, Name from inputtest",
+              "etag": "91d8fcbe-60b3-49c3-9f21-9942b95602b8"
+            }
+          },
+          "functions": [],
+          "outputs": [
+            {
+              "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/outputs/outputtest",
+              "name": "outputtest",
+              "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+              "properties": {
+                "datasource": {
+                  "type": "Microsoft.Sql/Server/Database",
+                  "properties": {
+                    "server": "serverName",
+                    "database": "databaseName",
+                    "table": "tableName",
+                    "user": "userName"
+                  }
+                },
+                "etag": "62097c3c-b503-41ff-a56f-196a9598ab90"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

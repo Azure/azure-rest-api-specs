@@ -33,6 +33,16 @@ azure-validator: false
 ---
 
 
+### Tag: package-preview-2020-03
+
+These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-03'
+input-file:
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+  - Microsoft.CostManagement/preview/2020-03-01-preview/costallocation.json
+```
+
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
@@ -42,9 +52,7 @@ input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
 ```
 
-=======
 
->>>>>>> Stashed changes
 ### Tag: package-2019-11
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
@@ -204,6 +212,9 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_costmanagement']
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js cost-management/resource-manager
 ```
 
 ## C#
@@ -327,6 +338,10 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -340,6 +355,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+  - $(this-folder)/Microsoft.CostManagement/preview/2020-03-01-preview/costallocation.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-11-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-09-01/costmanagement.json

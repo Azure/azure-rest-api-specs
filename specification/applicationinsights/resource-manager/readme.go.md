@@ -41,6 +41,7 @@ input-file:
  - ./Microsoft.Insights/stable/2015-05-01/components_API.json
  - ./Microsoft.Insights/stable/2015-05-01/webTests_API.json
  - ./Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
 
 override-info:
   title: ApplicationInsightsManagementClient
