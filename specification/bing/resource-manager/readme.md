@@ -28,7 +28,8 @@ To see additional help and options, run:
 These are the global settings for the Bing RP.
 
 ``` yaml
-openapi-type: rpaas
+openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-06-10
 ```
 

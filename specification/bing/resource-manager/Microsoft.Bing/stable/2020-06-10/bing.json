@@ -1045,6 +1045,13 @@
           "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
           "type": "string"
         },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          },
+          "description": "List of availability."
+        },
         "supportedAggregationTypes": {
           "description": "Supported aggregation types",
           "uniqueItems": false,
@@ -1086,6 +1093,23 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        }
+      }
+    },
+    "Availability": {
+      "description": "Availability of the metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "The time grain of the availability."
+        },
+        "retention": {
+          "type": "string",
+          "description": "The retention of the availability."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the availability blob."
         }
       }
     },
