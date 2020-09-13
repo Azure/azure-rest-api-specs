@@ -46,6 +46,10 @@
             "$ref": "./examples/CreateAccount.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -71,13 +75,13 @@
         ],
         "responses": {
           "200": {
-            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
+            "description": "The resource is successfully created or already existed.",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
           },
           "201": {
-            "description": "If resource is created successfully, the service should return 201 (Created).",
+            "description": "The resource is created and the operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
@@ -100,6 +104,10 @@
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -126,7 +134,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "description": "The update completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "202": {
+            "description": "The update was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/BingAccount"
             }
