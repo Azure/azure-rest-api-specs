@@ -56,6 +56,10 @@ directive:
     from: onPremiseIotSensors.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors"].get'
     reason: The list returns limited number of items
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: onPremiseIotSensors.json
+    where: $.definitions.OnPremiseIotSensor
+    reason: The resource is managed in a subscription level (instead of inside a resource group)
 ```
 
 ### Basic Information
