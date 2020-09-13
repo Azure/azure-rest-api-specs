@@ -34,31 +34,31 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Security/iotSensors": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors": {
       "get": {
         "x-ms-examples": {
-          "List IoT sensors": {
-            "$ref": "./examples/IotSensors/List.json"
+          "List on-premise IoT sensors": {
+            "$ref": "./examples/OnPremiseIotSensors/List.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "On-Premise IoT Sensors"
         ],
-        "description": "List IoT sensors",
-        "operationId": "IotSensors_List",
+        "description": "List on-premise IoT sensors",
+        "operationId": "OnPremiseIotSensors_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotSensorsList"
+              "$ref": "#/definitions/OnPremiseIotSensorsList"
             }
           },
           "default": {
@@ -70,34 +70,34 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors/{onPremiseIotSensorName}": {
       "get": {
         "x-ms-examples": {
-          "Get IoT sensor": {
-            "$ref": "./examples/IotSensors/Get.json"
+          "Get on-premise IoT sensor": {
+            "$ref": "./examples/OnPremiseIotSensors/Get.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "On-Premise IoT Sensors"
         ],
-        "operationId": "IotSensors_Get",
-        "description": "Get IoT sensor",
+        "operationId": "OnPremiseIotSensors_Get",
+        "description": "Get on-premise IoT sensor",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/IotSensorName"
+            "$ref": "#/parameters/OnPremiseIotSensorName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotSensor"
+              "$ref": "#/definitions/OnPremiseIotSensor"
             }
           },
           "default": {
@@ -110,37 +110,37 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update IoT sensor": {
-            "$ref": "./examples/IotSensors/Put.json"
+          "Create or update on-premise IoT sensor": {
+            "$ref": "./examples/OnPremiseIotSensors/Put.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "On-Premise IoT Sensors"
         ],
-        "operationId": "IotSensors_CreateOrUpdate",
-        "description": "Create or update IoT sensor",
+        "operationId": "OnPremiseIotSensors_CreateOrUpdate",
+        "description": "Create or update on-premise IoT sensor",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/IotSensorName"
+            "$ref": "#/parameters/OnPremiseIotSensorName"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated IoT sensor",
+            "description": "Updated on-premise IoT sensor",
             "schema": {
-              "$ref": "#/definitions/IotSensor"
+              "$ref": "#/definitions/OnPremiseIotSensor"
             }
           },
           "201": {
-            "description": "Created IoT sensor",
+            "description": "Created on-premise IoT sensor",
             "schema": {
-              "$ref": "#/definitions/IotSensor"
+              "$ref": "#/definitions/OnPremiseIotSensor"
             }
           },
           "default": {
@@ -153,32 +153,32 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete IoT sensor": {
-            "$ref": "./examples/IotSensors/Delete.json"
+          "Delete on-premise IoT sensor": {
+            "$ref": "./examples/OnPremiseIotSensors/Delete.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "On-Premise IoT Sensors"
         ],
-        "operationId": "IotSensors_Delete",
-        "description": "Delete IoT sensor",
+        "operationId": "OnPremiseIotSensors_Delete",
+        "description": "Delete on-premise IoT sensor",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/IotSensorName"
+            "$ref": "#/parameters/OnPremiseIotSensorName"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deleted IoT sensor"
+            "description": "Deleted on-premise IoT sensor"
           },
           "204": {
-            "description": "IoT sensor does not exist"
+            "description": "On-premise IoT sensor does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -189,27 +189,27 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/downloadActivation": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors/{onPremiseIotSensorName}/downloadActivation": {
       "post": {
         "x-ms-examples": {
           "Download activation file": {
-            "$ref": "./examples/IotSensors/DownloadActivation.json"
+            "$ref": "./examples/OnPremiseIotSensors/DownloadActivation.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "On-Premise IoT Sensors"
         ],
-        "operationId": "IotSensors_DownloadActivation",
+        "operationId": "OnPremiseIotSensors_DownloadActivation",
         "description": "Download sensor activation file",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/IotSensorName"
+            "$ref": "#/parameters/OnPremiseIotSensorName"
           }
         ],
         "responses": {
@@ -227,8 +227,8 @@
     }
   },
   "definitions": {
-    "IotSensorsList": {
-      "description": "List of IoT sensors",
+    "OnPremiseIotSensorsList": {
+      "description": "List of on-premise IoT sensors",
       "type": "object",
       "properties": {
         "value": {
@@ -236,19 +236,19 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotSensor"
+            "$ref": "#/definitions/OnPremiseIotSensor"
           }
         }
       }
     },
-    "IotSensor": {
+    "OnPremiseIotSensor": {
       "type": "object",
-      "description": "IoT sensor",
+      "description": "On-premise IoT sensor",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "IoT sensor properties",
-          "$ref": "#/definitions/IotSensorProperties"
+          "description": "On-premise IoT sensor properties",
+          "$ref": "#/definitions/OnPremiseIotSensorProperties"
         }
       },
       "allOf": [
@@ -257,28 +257,19 @@
         }
       ]
     },
-    "IotSensorProperties": {
+    "OnPremiseIotSensorProperties": {
       "type": "object",
-      "description": "IoT sensor properties",
+      "description": "On-premise IoT sensor properties",
       "properties": {}
     }
   },
   "parameters": {
-    "IotSensorScope": {
-      "name": "scope",
+    "OnPremiseIotSensorName": {
+      "name": "onPremiseIotSensorName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Scope of the query (IoT Hub, /providers/Microsoft.Devices/iotHubs/myHub)",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
-    "IotSensorName": {
-      "name": "iotSensorName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the IoT sensor",
+      "description": "Name of the on-premise IoT sensor",
       "x-ms-parameter-location": "method"
     }
   }
