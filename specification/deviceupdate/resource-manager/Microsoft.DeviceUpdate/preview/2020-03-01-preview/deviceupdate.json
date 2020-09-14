@@ -71,6 +71,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances": {
+      "get": {
+        "description": "Returns instances for the given account name.",
+        "operationId": "Instances_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of instances.",
+            "schema": {
+              "$ref": "#/definitions/InstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of instances by account": {
+            "$ref": "./examples/Instances/Instances_ListByAccount.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts": {
       "get": {
         "description": "Returns list of accounts.",
@@ -154,7 +193,7 @@
         "operationId": "Accounts_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -375,7 +414,7 @@
         "operationId": "Instances_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -679,6 +718,11 @@
                 "modelAsString": true
               }
             },
+            "accountName": {
+              "description": "Parent Device Update Account name to which Instance belongs to.",
+              "type": "string",
+              "readOnly": true
+            },
             "iotHubs": {
               "description": "List of IoT Hubs associated with the account.",
               "type": "array",
@@ -732,11 +776,7 @@
           "x-ms-secret": true,
           "type": "string"
         }
-      },
-      "required": [
-        "ioTHubConnectionString",
-        "eventHubConnectionString"
-      ]
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",

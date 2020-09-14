@@ -1,4 +1,4 @@
-# deviceupdate
+# Device Update
 
 > see https://aka.ms/autorest
 
@@ -26,6 +26,7 @@ These are the global settings for the deviceupdate.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-03-01-preview
 ```
 
