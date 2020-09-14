@@ -306,7 +306,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -316,53 +316,6 @@
           "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection State of the Private Endpoint Connection."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata for the Private Endpoint Connection."
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "type": "object",
-      "description": "Private endpoint which the connection belongs to.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "description": "Connection State of the Private Endpoint Connection.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The private link service connection status."
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
