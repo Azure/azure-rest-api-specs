@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2020-08-preview
   - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2017-06
@@ -19,6 +20,16 @@ batch:
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2020-08-preview and ruby
+
+These settings apply only when `--tag=package-2020-08-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2020-08-preview' && $(ruby)
+namespace: "Azure::Storage::Mgmt::V2020_08_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
 
 ### Tag: package-2018-02 and ruby
