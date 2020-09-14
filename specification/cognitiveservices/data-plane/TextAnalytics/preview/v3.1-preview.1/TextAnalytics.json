@@ -54,6 +54,9 @@
           },
           {
             "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -112,6 +115,9 @@
           },
           {
             "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -164,6 +170,9 @@
           },
           {
             "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -267,7 +276,7 @@
             "$ref": "#/parameters/ShowStats"
           },
           {
-            "$ref": "#/parameters/MultiLanguageInput"
+            "$ref": "#/parameters/LanguageInput"
           }
         ],
         "responses": {
@@ -326,6 +335,9 @@
           },
           {
             "$ref": "#/parameters/MultiLanguageInput"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
           }
         ],
         "responses": {
@@ -444,7 +456,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorCodeValue",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Error code."
         },
@@ -1338,7 +1350,7 @@
       ],
       "x-ms-enum": {
         "name": "StringIndexType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "TextElements_v8",
@@ -1354,7 +1366,7 @@
           }
         ]
       },
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "ShowStats": {
       "name": "showStats",
@@ -1379,6 +1391,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/MultiLanguageBatchInput"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "LanguageInput": {
+      "in": "body",
+      "name": "input",
+      "description": "Collection of documents to analyze for language endpoint.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/LanguageBatchInput"
       },
       "x-ms-parameter-location": "method"
     }

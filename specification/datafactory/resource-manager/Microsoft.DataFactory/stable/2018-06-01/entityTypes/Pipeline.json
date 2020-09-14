@@ -779,6 +779,10 @@
         "distcpSettings": {
           "description": "Specifies Distcp-related settings.",
           "$ref": "#/definitions/DistcpSettings"
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -861,6 +865,15 @@
         }
       ]
     },
+    "AzureFileStorageWriteSettings": {
+      "description": "Azure File Storage write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
     "FormatReadSettings": {
       "description": "Format read settings.",
       "discriminator": "type",
@@ -906,6 +919,36 @@
       "properties": {
         "preserveZipFileNameAsFolder": {
           "description": "Preserve the zip file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "TarReadSettings": {
+      "description": "The Tar compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "TarGZipReadSettings": {
+      "description": "The TarGZip compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
       }
@@ -961,6 +1004,14 @@
           "type": "object",
           "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
         },
+        "detectDataType": {
+          "type": "object",
+          "description": "Indicates whether type detection is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
+        },
+        "namespaces": {
+          "type": "object",
+          "description": "Indicates whether namespace is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
+        },
         "namespacePrefixes": {
           "type": "object",
           "description": "Namespace uri to prefix mappings to override the prefixes in column names when namespace is enabled, if no prefix is defined for a namespace uri, the prefix of xml element/attribute name in the xml data file will be used. Example: \"{\"http://www.example.com/xml\":\"prefix\"}\" Type: object (or Expression with resultType object)."
@@ -1015,6 +1066,52 @@
         "recordNamespace": {
           "type": "string",
           "description": "Record namespace in the write result."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OrcWriteSettings": {
+      "description": "Orc write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ParquetWriteSettings": {
+      "description": "Parquet write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1034,6 +1131,14 @@
         "fileExtension": {
           "type": "object",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1279,6 +1384,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "ORC store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/OrcWriteSettings",
+          "description": "ORC format settings."
         }
       }
     },
@@ -1550,6 +1659,10 @@
         "preferredRegions": {
           "type": "object",
           "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "detectDatetime": {
+          "type": "object",
+          "description": "Whether detect primitive values as datetime values. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
           "type": "array",
@@ -1962,6 +2075,14 @@
         "baseRequestId": {
           "type": "object",
           "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        },
+        "customRfcReadTableFunctionModule": {
+          "type": "object",
+          "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "sapDataColumnDelimiter": {
+          "type": "object",
+          "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1997,6 +2118,10 @@
         "customRfcReadTableFunctionModule": {
           "type": "object",
           "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "sapDataColumnDelimiter": {
+          "type": "object",
+          "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for SAP table read in parallel.",
@@ -3672,6 +3797,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetWriteSettings",
+          "description": "Parquet format settings."
         }
       }
     },
@@ -4096,6 +4225,14 @@
         "path": {
           "type": "object",
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        },
+        "logLevel": {
+          "type": "object",
+          "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
+        },
+        "enableReliableLogging": {
+          "type": "object",
+          "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -6574,7 +6711,7 @@
         },
         "reportStatusOnCallBack": {
           "type": "object",
-          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [

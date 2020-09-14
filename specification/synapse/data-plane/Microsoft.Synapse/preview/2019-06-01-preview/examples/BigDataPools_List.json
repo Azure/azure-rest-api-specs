@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2020-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "creationDate": "2020-07-14T10:09:52.5133333Z",
+              "sparkVersion": "2.4",
+              "nodeCount": 3,
+              "nodeSize": "Small",
+              "nodeSizeFamily": "MemoryOptimized",
+              "autoScale": {
+                "enabled": true,
+                "minNodeCount": 3,
+                "maxNodeCount": 20
+              },
+              "autoPause": {
+                "enabled": true,
+                "delayInMinutes": 15
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Synapse/workspaces/exampleWorkspace/sparkComputes/pool1",
+            "name": "pool1",
+            "type": "Microsoft.Synapse/workspaces/sparkComputes",
+            "location": "southeastasia",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}
