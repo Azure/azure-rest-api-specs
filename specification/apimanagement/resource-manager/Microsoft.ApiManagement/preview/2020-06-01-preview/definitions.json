@@ -1865,6 +1865,28 @@
             ]
           },
           "description": "The verbosity level applied to traces emitted by trace policies."
+        },
+        "operationNameFormat": {
+          "type": "string",
+          "enum": [
+            "Name",
+            "Url"
+          ],
+          "x-ms-enum": {
+            "name": "OperationNameFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Name",
+                "description": "API_NAME;rev=API_REVISION - OPERATION_NAME"
+              },
+              {
+                "value": "Url",
+                "description": "HTTP_VERB URL"
+              }
+            ]
+          },
+          "description": "The format of the Operation Name for Application Insights telemetries. Default is Name."
         }
       },
       "required": [
