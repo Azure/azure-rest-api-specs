@@ -3019,6 +3019,18 @@
           "type": "string",
           "description": "Date the SQL pool was created",
           "format": "date-time"
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store data and backups for this sql pool. The supported options are GRS (Geo-Redundant Storage) and LRS (Locally Redundant Storage).",
+          "enum": [
+            "GRS",
+            "LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
         }
       }
     },
