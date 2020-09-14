@@ -48,13 +48,6 @@ batch:
   - tag: package-2020-01-01-privatepreview
   - tag: package-2018-06-01-privatepreview
   - tag: package-2017-12-01-preview
-  - batchscript: true
-```
-
-``` yaml $(batchscript)
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/
-clear-output-folder: false
-perform-load: false
 ```
 
 ### Tag: package-2020-01-01 and python
