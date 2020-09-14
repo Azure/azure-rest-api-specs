@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-08
+tag: package-2020-08-02
 ```
 
 
@@ -100,6 +100,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js hybridcompute/resource-manager
@@ -110,6 +111,10 @@ swagger-to-sdk:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## az CLI
+
+See configuration in [readme.az.md](./readme.az.md) and [readme.cli.md](./readme.cli.md)
 
 ## C#
 
