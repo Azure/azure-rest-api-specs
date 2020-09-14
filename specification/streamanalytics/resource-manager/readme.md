@@ -225,6 +225,18 @@ directive:
 
   - suppress: R3023 # Operations API must be implemented for '/providers/Microsoft.StreamAnalytics/operations'.
     reason:  Operations API under 2017-04-01-preview is the super-set of all RPs operations (across all API-versions).
+
+  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    from: outputs.json
+    reason: type is a non-settable property from the client.
+  
+  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    from: inputs.json
+    reason: type is a non-settable property from the client.
+
+  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    from: functions.json
+    reason: type is a non-settable property from the client.
 ```
 
 ## AzureResourceSchema
