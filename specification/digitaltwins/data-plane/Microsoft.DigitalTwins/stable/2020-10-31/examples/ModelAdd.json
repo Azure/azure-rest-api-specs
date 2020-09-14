@@ -42,6 +42,22 @@
           "decommissioned": false
         }
       ]
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "DTDLParserError",
+          "message": "None of the models in this request could be created due to a problem with one or more models: Identifier 'Sample' is invalid."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ModelAlreadyExists",
+          "message": "Model with same id already exists 'dtmi:com:example:Sample;1'."
+        }
+      }
     }
   }
 }

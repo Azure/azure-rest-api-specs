@@ -4,6 +4,14 @@
     "api-version": "2020-10-31"
   },
   "responses": {
-    "204": {}
+    "204": {},
+    "404": {
+      "body": {
+        "error": {
+          "code": "EventRouteNotFound",
+          "message": "There is no route available that matches the provided input."
+        }
+      }
+    }
   }
 }

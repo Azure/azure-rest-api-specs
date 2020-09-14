@@ -39,6 +39,22 @@
         ],
         "continuationToken": "<token>"
       }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "An invalid continuationToken was provided."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "code": "QuotaReachedError",
+          "message": "Your rate limit has been exceeded."
+        }
+      }
     }
   }
 }

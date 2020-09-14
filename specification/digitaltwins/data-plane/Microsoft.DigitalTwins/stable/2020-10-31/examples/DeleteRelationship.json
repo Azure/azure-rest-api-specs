@@ -5,6 +5,30 @@
     "relationshipId": "myRelationshipId"
   },
   "responses": {
-    "204": {}
+    "204": {},
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidArgument",
+          "message": "The parameter 'id' cannot be null or empty."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "DigitalTwinNotFound",
+          "message": "Please verify that the twin id is valid and ensure that the twin is not deleted."
+        }
+      }
+    },
+    "412": {
+      "body": {
+        "error": {
+          "code": "PreconditionFailed",
+          "message": "The provided etag 'etag-1' doesn't match the current etag for the resource."
+        }
+      }
+    }
   }
 }
