@@ -566,6 +566,10 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the firewall policy."
         }
       },
       "allOf": [
@@ -622,6 +626,14 @@
         "dnsSettings": {
           "description": "DNS Proxy Settings definition.",
           "$ref": "#/definitions/DnsSettings"
+        },
+        "intrusionDetection": {
+          "description": "The configuration for Intrusion detection.",
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetection"
+        },
+        "transportSecurity": {
+          "description": "TLS Configuration definition.",
+          "$ref": "#/definitions/FirewallPolicyTransportSecurity"
         }
       },
       "description": "Firewall Policy definition."
@@ -825,6 +837,13 @@
             "type": "string"
           }
         },
+        "targetUrls": {
+          "type": "array",
+          "description": "List of Urls for this rule condition.",
+          "items": {
+            "type": "string"
+          }
+        },
         "fqdnTags": {
           "type": "array",
           "description": "List of FQDN Tags for this rule.",
@@ -838,6 +857,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "terminateTLS": {
+          "type": "boolean",
+          "description": "Terminate TLS connections for this rule."
         }
       },
       "description": "Rule of type application."
@@ -1114,6 +1137,170 @@
           "x-nullable": true
         }
       }
+    },
+    "FirewallPolicyIntrusionDetection": {
+      "description": "Configuration for intrusion detection mode and rules.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateOptions",
+          "description": "Intrusion detection general state."
+        },
+        "configuration": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration",
+          "description": "Intrusion detection configuration properties."
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionStateOptions": {
+      "type": "string",
+      "description": "Possible state values.",
+      "enum": [
+        "Off",
+        "Alert",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyIntrusionDetectionStateType",
+        "modelAsString": true
+      }
+    },
+    "FirewallPolicyIntrusionDetectionConfiguration": {
+      "description": "The operation for configuring intrusion detection.",
+      "properties": {
+        "signatureOverrides": {
+          "type": "array",
+          "description": "List of specific signatures states.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionSignatureSpecification"
+          }
+        },
+        "bypassTrafficSettings": {
+          "type": "array",
+          "description": "List of rules for traffic to bypass.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionSignatureSpecification": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Signature id"
+        },
+        "mode": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateOptions",
+          "description": "The signature state."
+        }
+      },
+      "description": "Intrusion detection signatures specification states."
+    },
+    "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the bypass traffic rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the bypass traffic rule."
+        },
+        "protocol": {
+          "type": "string",
+          "$ref": "#/definitions/FirewallPolicyIntrusionSystemBypassTrafficProtocol",
+          "description": "The rule bypass protocol."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports or ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Intrusion detection bypass traffic specification."
+    },
+    "FirewallPolicyIntrusionSystemBypassTrafficProtocol": {
+      "type": "string",
+      "description": "Possible intrusion detection bypass traffic protocols.",
+      "enum": [
+        "TCP",
+        "UDP",
+        "ICMP",
+        "ANY"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyIntrusionDetectionProtocol",
+        "modelAsString": true
+      }
+    },
+    "FirewallPolicyTransportSecurity": {
+      "properties": {
+        "certificateAuthority": {
+          "$ref": "#/definitions/FirewallPolicyCertificateAuthority",
+          "description": "The CA used for intermediate CA generation."
+        },
+        "excludedDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of domains which are excluded from TLS termination."
+        }
+      },
+      "description": "Configuration needed to perform TLS termination & initiation."
+    },
+    "FirewallPolicyCertificateAuthority": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirewallPolicyCertificateAuthorityPropertiesFormat",
+          "description": "Properties of the certificate authority."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the CA certificate."
+        }
+      },
+      "description": "Trusted Root certificates properties for tls."
+    },
+    "FirewallPolicyCertificateAuthorityPropertiesFormat": {
+      "properties": {
+        "keyVaultSecretId": {
+          "type": "string",
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
+        }
+      },
+      "description": "Trusted Root certificates properties for tls."
     }
   }
 }
