@@ -20,4 +20,8 @@ directive:
       parameter-name: extension-name
     set:
       parameter-name: name
+  - where:
+      param: autoUpgradeMinorVersion
+    alias:
+      - auto_rev_minor_version
 ```
