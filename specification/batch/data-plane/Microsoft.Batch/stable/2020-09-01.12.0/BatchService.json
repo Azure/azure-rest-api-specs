@@ -574,7 +574,7 @@
           "Accounts"
         ],
         "operationId": "Account_ListPoolNodeCounts",
-        "description": "Gets the number of Compute Nodes in each state, grouped by Pool.",
+        "description": "Gets the number of Compute Nodes in each state, grouped by Pool. Note that the numbers returned may not always be up to date. If you need exact node counts, use a list query.",
         "x-ms-examples": {
           "NodeCountsPayload": {
             "$ref": "./examples/AccountListPoolNodeCounts.json"
@@ -5875,7 +5875,7 @@
           }
         },
         "summary": "Gets the Task counts for the specified Job.",
-        "description": "Task counts provide a count of the Tasks by active, running or completed Task state, and a count of Tasks which succeeded or failed. Tasks in the preparing state are counted as running.",
+        "description": "Task counts provide a count of the Tasks by active, running or completed Task state, and a count of Tasks which succeeded or failed. Tasks in the preparing state are counted as running. Note that the numbers returned may not always be up to date. If you need exact task counts, use a list query.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -11804,7 +11804,7 @@
         "requiredSlots": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of scheduling slots that the Task required to run.",
+          "title": "The number of scheduling slots that the Task requires to run.",
           "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1."
         },
         "killJobOnCompletion": {
@@ -13395,7 +13395,7 @@
           "description": "This property is mutually exclusive with other ImageReference properties. The Shared Image Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
-      "title": "A reference to an Azure Virtual Machines Marketplace Image or a bring-your-own Shared Image Gallery Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List Supported Images' operation."
+      "title": "A reference to an Azure Virtual Machines Marketplace Image or a Shared Image Gallery Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List Supported Images' operation."
     },
     "WindowsConfiguration": {
       "properties": {
@@ -14511,7 +14511,7 @@
         "requiredSlots": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of scheduling slots that the Task required to run.",
+          "title": "The number of scheduling slots that the Task requires to run.",
           "description": "The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1."
         },
         "userIdentity": {
@@ -15902,7 +15902,8 @@
         "destination",
         "uploadOptions"
       ],
-      "title": "A specification for uploading files from an Azure Batch Compute Node to another location after the Batch service has finished executing the Task process."
+      "title": "A specification for uploading files from an Azure Batch Compute Node to another location after the Batch service has finished executing the Task process.",
+      "description": "On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure."
     },
     "OutputFileDestination": {
       "properties": {
