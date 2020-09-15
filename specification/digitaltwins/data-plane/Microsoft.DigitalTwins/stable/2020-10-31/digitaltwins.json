@@ -21,7 +21,7 @@
         "tags": [
           "Models"
         ],
-        "description": "Uploads one or more models. When any error occurs, no models are uploaded.",
+        "description": "Uploads one or more models. When any error occurs, no models are uploaded.\nStatus codes:\n* 201 Created\n* 400 Bad Request\n  * DTDLParserError - The models provided are not valid DTDL.\n  * InvalidArgument - The model id is invalid.\n  * LimitExceeded - The maximum number of model ids allowed in 'dependenciesFor' has been reached.\n  * ModelVersionNotSupported - The version of DTDL used is not supported.\n* 409 Conflict\n  * ModelAlreadyExists - The model provided already exists.",
         "operationId": "DigitalTwinModels_Add",
         "x-ms-examples": {
           "Add models": {
@@ -45,31 +45,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "201": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/NonPagedModelDataCollection"
             }
           },
-          "400": {
-            "description": "Bad request.\n* DTDLParserError - The model is invalid.\n* InvalidArgument - The models provided are not valid JSON.\n* LimitExceeded - The maximum number of models allowed has been reached.\n* ModelVersionNotSupported - The version of DTDL used is not supported.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "Conflict.\n* ModelAlreadyExists - The model provided already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -80,7 +69,7 @@
         "tags": [
           "Models"
         ],
-        "description": "Retrieves model metadata and, optionally, model definitions.",
+        "description": "Retrieves model metadata and, optionally, model definitions.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The model id is invalid.\n  * LimitExceeded - The maximum number of model ids allowed in 'dependenciesFor' has been reached.\n* 404 Not Found\n  * ModelNotFound - The model was not found.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -113,31 +102,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/PagedModelDataCollection"
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The model id is invalid.\n* LimitExceeded - The maximum number of model ids allowed in 'dependenciesFor' has been reached.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* ModelNotFound - The model was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -150,7 +128,7 @@
         "tags": [
           "Models"
         ],
-        "description": "Retrieves model metadata and optionally the model definition.",
+        "description": "Retrieves model metadata and optionally the model definition.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The model id is invalid.\n  * MissingArgument - The model id was not provided.\n* 404 Not Found\n  * ModelNotFound - The model was not found.",
         "operationId": "DigitalTwinModels_GetById",
         "x-ms-examples": {
           "Get a model by id": {
@@ -169,31 +147,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/ModelData"
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The model id is invalid.\n* MissingArgument - The model id was not provided.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not Found.\n* ModelNotFound - The model was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -204,7 +171,7 @@
         "tags": [
           "Models"
         ],
-        "description": "Updates the metadata for a model.",
+        "description": "Updates the metadata for a model.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The model id is invalid.\n  * JsonPatchInvalid - The JSON Patch provided is invalid.\n  * MissingArgument - The model id was not provided.\n* 404 Not Found\n  * ModelNotFound - The model was not found.\n* 409 Conflict\n  * ModelReferencesNotDecommissioned - The model refers to models that are not decommissioned.",
         "operationId": "DigitalTwinModels_Update",
         "consumes": [
           "application/json-patch+json"
@@ -232,35 +199,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The model id is invalid.\n* MissingArgument - The model id was not provided.\n* JsonPatchInvalid - The JSON Patch provided is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not Found.\n* ModelNotFound - The model was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "Conflict.\n* ModelReferencesNotDecommissioned - The model refers to models that are not decommissioned.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -272,7 +221,7 @@
           "Models"
         ],
         "operationId": "DigitalTwinModels_Delete",
-        "description": "Deletes a model. A model can only be deleted if no other models reference it.",
+        "description": "Deletes a model. A model can only be deleted if no other models reference it.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The model id is invalid.\n  * MissingArgument - The model id was not provided.\n* 404 Not Found\n  * ModelNotFound - The model was not found.\n* 409 Conflict\n  * ModelReferencesNotDeleted - The model refers to models that are not deleted.",
         "x-ms-examples": {
           "Delete a model": {
             "$ref": "./examples/DeleteModel.json"
@@ -284,35 +233,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The model id is invalid.\n* MissingArgument - The model id was not provided.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not Found.\n* ModelNotFound - The model was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "Conflict.\n* ModelReferencesNotDeleted - The model refers to models that are not deleted.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -326,7 +257,7 @@
           "Query"
         ],
         "operationId": "Query_QueryTwins",
-        "description": "Executes a query that allows traversing relationships and filtering by property values.",
+        "description": "Executes a query that allows traversing relationships and filtering by property values.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * BadRequest - The continuation token is invalid.\n  * SqlQueryError - The query contains some errors.\n* 429 Too Many Requests\n  * QuotaReachedError - The maximum query rate limit has been reached.",
         "x-ms-examples": {
           "Query for digital twins": {
             "$ref": "./examples/QueryFirstPage.json"
@@ -349,15 +280,18 @@
             }
           },
           {
+            "$ref": "#/parameters/max-items-per-page"
+          },
+          {
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/max-items-per-page"
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/QueryResult"
             },
@@ -368,22 +302,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request.\n* BadRequest - The continuation token is invalid.\n* SQLQueryError - The query contains some errors.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.\n* QuotaReachedError - The maximum query rate limit has been reached.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -397,7 +317,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_GetById",
-        "description": "Retrieves a digital twin.",
+        "description": "Retrieves a digital twin.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.",
         "x-ms-examples": {
           "Get a digital twin by id": {
             "$ref": "./examples/GetTwin.json"
@@ -409,11 +329,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "type": "object"
             },
@@ -424,22 +347,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -451,7 +360,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_Add",
-        "description": "Adds or replaces a digital twin.",
+        "description": "Adds or replaces a digital twin.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or payload is invalid.\n  * ModelDecommissioned - The model for the digital twin is decommissioned.\n  * TwinLimitReached - The maximum number of digital twins allowed has been reached.\n  * ValidationFailed - The digital twin payload is not valid.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "x-ms-examples": {
           "Add a digital twin": {
             "$ref": "./examples/PutTwinBasicExample.json"
@@ -478,11 +387,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "type": "object"
             },
@@ -494,24 +406,10 @@
             }
           },
           "202": {
-            "description": "Asynchronous Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or payload is invalid.\n* ValidationFailed - The digital twin payload is not valid.\n* ModelDecommissioned - The model for the digital twin is decommissioned.\n* JsonPatchInvalid - The JSON Patch provided is invalid.\n* TwinLimitReached - The maximum number of digital twins allowed has been reached.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Asynchronous Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -523,7 +421,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_Delete",
-        "description": "Deletes a digital twin. All relationships referencing the digital twin must already be deleted.",
+        "description": "Deletes a digital twin. All relationships referencing the digital twin must already be deleted.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id is invalid.\n  * RelationshipsNotDeleted - The digital twin contains relationships.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "x-ms-examples": {
           "Delete a digital twin": {
             "$ref": "./examples/DeleteTwin.json"
@@ -538,35 +436,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id is invalid.\n* RelationshipsNotDeleted - The digital twin contains relationships.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -578,7 +458,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_Update",
-        "description": "Updates a digital twin.",
+        "description": "Updates a digital twin.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or payload is invalid.\n  * JsonPatchInvalid - The JSON Patch provided is invalid.\n  * ValidationFailed - Applying the patch results in an invalid digital twin.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -611,11 +491,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success.",
+            "description": "Success",
             "headers": {
               "ETag": {
                 "description": "Weak Etag.",
@@ -624,31 +507,10 @@
             }
           },
           "202": {
-            "description": "Asynchronous Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or payload is invalid.\n* ValidationFailed - Applying the patch results in an invalid digital twin.\n* JsonPatchInvalid - The JSON Patch provided is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Asynchronous Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -662,7 +524,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_GetRelationshipById",
-        "description": "Retrieves a relationship between two digital twins.",
+        "description": "Retrieves a relationship between two digital twins.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or relationship id is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n  * RelationshipNotFound - The relationship was not found.",
         "x-ms-examples": {
           "Get a relationship by id": {
             "$ref": "./examples/GetRelationshipById.json"
@@ -677,11 +539,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "type": "object"
             },
@@ -692,22 +557,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or relationship id is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.\n* RelationshipNotFound - The relationship was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -719,7 +570,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_AddRelationship",
-        "description": "Adds a relationship between two digital twins.",
+        "description": "Adds a relationship between two digital twins.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id, relationship id, or payload is invalid.\n  * InvalidRelationship - The relationship is invalid.\n  * OperationNotAllowed - The relationship cannot connect to the same digital twin.\n  * ValidationFailed - The relationship content is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n  * TargetTwinNotFound - The digital twin target of the relationship was not found.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "x-ms-examples": {
           "Create a relationship": {
             "$ref": "./examples/CreateRelationshipBasicExample.json"
@@ -749,11 +600,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "type": "object"
             },
@@ -764,36 +618,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id, relationship id, or payload is invalid.\n* InvalidRelationship - The relationship is invalid.\n* OperationNotAllowed - The relationship cannot connect to the same digital twin.\n* ValidationFailed - The relationship content is not valid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.\n* TargetTwinNotFound - The digital twin target of the relationship was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "Conflict.\n* RelationshipAlreadyExists - The relationship already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -805,7 +631,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_DeleteRelationship",
-        "description": "Deletes a relationship between two digital twins.",
+        "description": "Deletes a relationship between two digital twins.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or relationship id is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n  * RelationshipNotFound - The relationship was not found.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "x-ms-examples": {
           "Delete a relationship": {
             "$ref": "./examples/DeleteRelationship.json"
@@ -823,35 +649,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or relationship id is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.\n* RelationshipNotFound - The relationship was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -866,7 +674,7 @@
           "application/json-patch+json"
         ],
         "operationId": "DigitalTwins_UpdateRelationship",
-        "description": "Updates the properties on a relationship between two digital twins.",
+        "description": "Updates the properties on a relationship between two digital twins.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or relationship id is invalid.\n  * InvalidRelationship - The relationship is invalid.\n  * JsonPatchInvalid - The JSON Patch provided is invalid.\n  * ValidationFailed - The relationship content is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n  * RelationshipNotFound - The relationship was not found.\n* 409 Conflict\n  * RelationshipAlreadyExists - The relationship already exists.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "x-ms-examples": {
           "Update relationship properties": {
             "$ref": "./examples/PatchRelationshipBasicExample.json"
@@ -899,11 +707,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success.",
+            "description": "Success",
             "headers": {
               "ETag": {
                 "description": "Weak Etag.",
@@ -911,36 +722,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or relationship id is invalid.\n* InvalidRelationship - The relationship is invalid.\n* ValidationFailed - The relationship content is not valid.\n* JsonPatchInvalid - The JSON Patch provided is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.\n* RelationshipNotFound - The relationship was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "Conflict.\n* RelationshipAlreadyExists - The relationship already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -954,7 +737,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_ListRelationships",
-        "description": "Retrieves the relationships from a digital twin.",
+        "description": "Retrieves the relationships from a digital twin.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -979,31 +762,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/RelationshipCollection"
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1017,7 +789,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_ListIncomingRelationships",
-        "description": "Retrieves all incoming relationship for a digital twin.",
+        "description": "Retrieves all incoming relationship for a digital twin.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1032,31 +804,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/IncomingRelationshipCollection"
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1070,7 +831,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_SendTelemetry",
-        "description": "Sends telemetry on behalf of a digital twin.",
+        "description": "Sends telemetry on behalf of a digital twin.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or message id is invalid.\n  * ValidationFailed - The telemetry content is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.",
         "x-ms-examples": {
           "Send telemetry": {
             "$ref": "./examples/SendTelemetry.json"
@@ -1105,28 +866,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or message id is invalid.\n* ValidationFailed - The telemetry content is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1140,7 +890,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_SendComponentTelemetry",
-        "description": "Sends telemetry on behalf of a component in a digital twin.",
+        "description": "Sends telemetry on behalf of a component in a digital twin.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id, message id, or component path is invalid.\n  * ValidationFailed - The telemetry content is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n  * ComponentNotFound - The component path was not found.",
         "x-ms-examples": {
           "Send telemetry in a component": {
             "$ref": "./examples/SendTelemetryFromComponent.json"
@@ -1178,28 +928,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id, message id, or component path is invalid.\n* ValidationFailed - The telemetry content is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.\n* ComponentNotFound - The component path was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1213,7 +952,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_GetComponent",
-        "description": "Retrieves a component from a digital twin.",
+        "description": "Retrieves a component from a digital twin.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * InvalidArgument - The digital twin id or component path is invalid.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n  * ComponentNotFound - The component path was not found.",
         "x-ms-examples": {
           "Get a component in a digital twin": {
             "$ref": "./examples/GetComponent.json"
@@ -1228,11 +967,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "type": "object"
             },
@@ -1243,22 +985,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id or component path is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.\n* ComponentNotFound - The component path was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1270,7 +998,7 @@
           "Twins"
         ],
         "operationId": "DigitalTwins_UpdateComponent",
-        "description": "Updates a component on a digital twin.",
+        "description": "Updates a component on a digital twin.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * InvalidArgument - The digital twin id, component path, or payload is invalid.\n  * JsonPatchInvalid - The JSON Patch provided is invalid.\n  * ValidationFailed - Applying the patch results in an invalid digital twin.\n* 404 Not Found\n  * DigitalTwinNotFound - The digital twin was not found.\n* 412 Precondition Failed\n  * PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
         "x-ms-examples": {
           "Update a component in a digital twin": {
             "$ref": "./examples/PatchComponentBasicExample.json"
@@ -1306,11 +1034,14 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success.",
+            "description": "Success",
             "headers": {
               "ETag": {
                 "description": "Weak Etag.",
@@ -1319,31 +1050,10 @@
             }
           },
           "202": {
-            "description": "Asynchronous Success."
-          },
-          "400": {
-            "description": "Bad request.\n* InvalidArgument - The digital twin id, component path, or payload is invalid.\n* ValidationFailed - Applying the patch results in an invalid digital twin.\n* JsonPatchInvalid - The JSON Patch provided is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.\n* DigitalTwinNotFound - The digital twin was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "412": {
-            "description": "Precondition failed.\n* PreconditionFailed - The precondition check (If-Match or If-None-Match) failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Asynchronous Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1356,7 +1066,7 @@
         "tags": [
           "EventRoutes"
         ],
-        "description": "Retrieves all event routes.",
+        "description": "Retrieves all event routes.\nStatus codes:\n* 200 OK",
         "operationId": "EventRoutes_List",
         "x-ms-examples": {
           "List event routes": {
@@ -1369,17 +1079,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/EventRouteCollection"
             }
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1395,7 +1108,7 @@
         "tags": [
           "EventRoutes"
         ],
-        "description": "Retrieves an event route.",
+        "description": "Retrieves an event route.\nStatus codes:\n* 200 OK\n* 404 Not Found\n  * EventRouteNotFound - The event route was not found.",
         "operationId": "EventRoutes_GetById",
         "x-ms-examples": {
           "Get an event route by id": {
@@ -1408,24 +1121,20 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/EventRoute"
             }
           },
-          "404": {
-            "description": "Not found.\n* EventRouteNotFound - The event route was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1436,7 +1145,7 @@
         "tags": [
           "EventRoutes"
         ],
-        "description": "Adds or replaces an event route.",
+        "description": "Adds or replaces an event route.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * EventRouteEndpointInvalid - The endpoint provided does not exist or is not active.\n  * EventRouteFilterInvalid - The event route filter is invalid.\n  * EventRouteIdInvalid - The event route id is invalid.\n  * LimitExceeded - The maximum number of event routes allowed has been reached.",
         "operationId": "EventRoutes_Add",
         "x-ms-examples": {
           "Add an event route": {
@@ -1460,21 +1169,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "400": {
-            "description": "Bad request.\n* EventRouteIdInvalid - The event route id is invalid.\n* EventRouteFilterInvalid - The event route filter is invalid.\n* EventRouteEndpointInvalid - The endpoint provided does not exist or is not active.\n* LimitExceeded - The maximum number of event routes allowed has been reached.\n* ModelVersionNotSupported - The version of DTDL used is not supported.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1485,7 +1190,7 @@
         "tags": [
           "EventRoutes"
         ],
-        "description": "Deletes an event route.",
+        "description": "Deletes an event route.\nStatus codes:\n* 204 No Content\n* 404 Not Found\n  * EventRouteNotFound - The event route was not found.",
         "operationId": "EventRoutes_Delete",
         "x-ms-examples": {
           "Delete an event route": {
@@ -1498,21 +1203,17 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/traceparent"
           }
         ],
         "responses": {
           "204": {
-            "description": "Success."
-          },
-          "404": {
-            "description": "Not found.\n* EventRouteNotFound - The event route was not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            "description": "Success"
           },
           "default": {
-            "description": "Error.",
+            "description": "Default response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1861,6 +1562,17 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "traceparent": {
+      "name": "traceparent",
+      "in": "header",
+      "description": "Identifies the request in a distributed tracing system.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
     }
   },
   "security": [
