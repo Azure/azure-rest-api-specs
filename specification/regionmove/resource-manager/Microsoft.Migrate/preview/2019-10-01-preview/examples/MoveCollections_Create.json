@@ -4,12 +4,15 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "api-version": "2019-10-01-preview",
-    "identity": {
-      "type": "SystemAssigned"
-    },
-    "properties": {
-      "sourceRegion": "eastus",
-      "targetRegion": "westus"
+    "body": {
+      "location": "eastus2",
+      "properties": {
+        "sourceRegion": "eastus",
+        "targetRegion": "westus"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
     }
   },
   "responses": {
