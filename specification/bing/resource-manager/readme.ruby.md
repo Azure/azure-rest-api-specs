@@ -22,7 +22,7 @@ These settings apply only when `--tag=package-2020-06-10 --ruby` is specified on
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2020-06-10' && $(ruby)
-namespace: "Azure::CognitiveServices::Mgmt::V2020_06_10
+namespace: "Azure::Bing::Mgmt::V2020_06_10
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_bing/lib
 ```
 
@@ -32,6 +32,6 @@ These settings apply only when `--tag=package-2020-06-10-preview --ruby` is spec
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2020-06-10-preview' && $(ruby)
-namespace: "Azure::CognitiveServices::Mgmt::V2020_06_10_preview"
+namespace: "Azure::Bing::Mgmt::V2020_06_10_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_bing/lib
 ```
