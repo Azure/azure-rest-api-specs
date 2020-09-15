@@ -21,7 +21,7 @@ directive:
     set:
       parameter-name: name
   - where:
-      param: autoUpgradeMinorVersion
-    alias:
-      - auto_rev_minor_version
+      parameter-name: autoUpgradeMinorVersion
+    set:
+      alias: auto-rev-minor-version
 ```
