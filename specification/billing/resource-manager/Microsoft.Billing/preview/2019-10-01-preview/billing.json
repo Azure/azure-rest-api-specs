@@ -158,6 +158,141 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingActivityList": {
+      "get": {
+        "tags": [
+          "BillingActivity"
+        ],
+        "x-ms-examples": {
+          "BillingActivity": {
+            "$ref": "./examples/BillingActivityList.json"
+          }
+        },
+        "operationId": "BillingActivity_Get",
+        "description": "Gets billing activity logs for a billing account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/activityLogEventCategoryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingActivityList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingActivityLogs/{activityLogName}": {
+      "get": {
+        "tags": [
+          "BillingActivity"
+        ],
+        "x-ms-examples": {
+          "BillingActivityRelatedProperties": {
+            "$ref": "./examples/BillingActivityRelatedProperty.json"
+          }
+        },
+        "operationId": "BillingAuditLogsRelatedProperties_Get",
+        "description": "Gets detailed billing audit logs by activity log id and billing account name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/activityLogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingActivityRelatedProperty"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+        }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingActivityEventCategory": {
+      "get": {
+        "tags": [
+          "BillingActivity"
+        ],
+        "x-ms-examples": {
+          "BillingActivityLogs": {
+            "$ref": "./examples/billingActivityEventCategory.json"
+          }
+        },
+        "operationId": "BillingActivityTypes_Get",
+        "description": "Gets billing activity types at enrollment scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingActivityEventCategoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+        }      
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
       "post": {
         "tags": [
@@ -5395,6 +5530,165 @@
     }
   },
   "definitions": {
+  "BillingActivityList": {
+    "description": "The list of activity logs.",
+    "properties": {
+      "value": {
+        "description": "The list of activity logs.",
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "$ref": "#/definitions/BillingActivity"
+        }
+      },
+      "nextLink": {
+        "description": "The link (url) to the next page of results.",
+        "type": "string",
+        "readOnly": true
+      }
+    }
+  },
+  "BillingActivity": {
+    "description": "The activity log.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "The properties of the activity event.",
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/BillingActivityProperties"
+      }
+    }
+  },
+  "BillingActivityProperties": {
+    "description": "The properties of the activity logs.",
+    "properties": {
+      "activityEventName": {
+        "description": "The unique string needed to get related properties related to this event.",
+        "type": "string",
+        "readOnly": true
+      },
+      "createdOn": {
+        "description": "The date the activity log was created.",
+        "type": "string",
+        "readOnly": true
+      },
+      "createdByUserEmailAddress": {
+        "description": "The email address of the user who created the activity log. This is supported only for non SPN users.",
+        "type": "string",
+        "readOnly": true
+      },
+      "enrollmentNumber": {
+        "description": "The enrollment number for which the activity log is being fetched.",
+        "type": "string",
+        "readOnly": true
+      },
+      "friendlyEventName": {
+        "description": "The string describing the activityEventName.",
+        "type": "string",
+        "readOnly": true
+      }
+    }
+  },
+  "BillingActivityRelatedProperty": {
+    "description": "The activity related properties.",
+    "type": "object",
+    "properties": {
+      "activityEventName": {
+        "description": "The unique string for this event.",
+        "type": "string",
+        "readOnly": true
+      },
+      "relatedProperties": {
+        "description": "The related specific properties for an event.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/KeyValuePair"
+        }
+      }
+    }
+  },
+  "KeyValuePair": {
+    "description": "The key-value pair item.",
+    "type": "object",
+    "properties": {
+      "key": {      
+        "description": "The key.",
+        "readOnly": true,
+	"type": "string"
+      },
+      "value": {       
+        "description": "The value.",
+        "readOnly": true,
+	"type": "string"
+      }
+    }
+  },
+  "BillingActivityEventCategoryListResult": {
+    "description": "The list of activity categories.",
+    "properties": {
+      "value": {
+        "description": "The list of activity categories.",
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "$ref": "#/definitions/BillingActivityEventCategory"
+        }
+      },
+      "nextLink": {
+        "description": "The link (url) to the next page of results.",
+        "type": "string",
+        "readOnly": true
+      }
+    }
+  },
+  "BillingActivityEventCategory": {
+    "description": "The properties of an activity event category.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "The properties of an activity event category.",
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/BillingActivityEventCategoryProperties"
+      }
+    }
+  },
+  "BillingActivityEventCategoryProperties": {
+    "description": "The properties of an activity event category.",
+    "properties": {
+      "name": {
+        "description": "The event category name",
+        "type": "string",
+        "readOnly": true
+      },
+      "relatedProperties": {
+        "description": "The related specific properties for an event.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/BillingActivityEventProperties"
+        }
+      }
+    }
+  },
+    "BillingActivityEventProperties": {
+      "description": "The additional specific properties for an event.",
+      "properties": {
+        "name": {
+          "description": "Name of the additional proerty for an event.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CustomerListResult": {
       "description": "The list of customers.",
       "properties": {
@@ -8602,6 +8896,36 @@
       "required": true,
       "type": "string",
       "description": "The version of the API to be used with the client request. The current version is 2019-10-01-preview."
+    },
+    "startDateParameter": {
+        "name": "$startDate",
+        "description": "Start datetime from which activity logs are requested. The date should be specified in MM-DD-YYYY format.",
+        "format": "date-time",
+        "in": "query",
+        "required": false,
+        "type": "string"
+      },
+    "endDateParameter": {
+        "name": "$endDate",
+        "description": "Start datetime till which activity logs are requested. The date should be specified in MM-DD-YYYY format.",
+        "format": "date-time",
+        "in": "query",
+        "required": false,
+        "type": "string"
+    },
+    "activityLogEventCategoryParameter": {
+      "name": "activityLogEventCategory",
+      "description": "Operation type based on which activity logs will be filtered. ",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "activityLogNameParameter": {
+      "name": "activityLogName",
+      "description": "Log id based on which activity logs will be retrieved. ",
+      "in": "path",
+      "required": true,
+      "type": "string"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
