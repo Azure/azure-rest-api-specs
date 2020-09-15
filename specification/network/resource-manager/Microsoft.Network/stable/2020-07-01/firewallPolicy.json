@@ -1208,7 +1208,7 @@
         },
         "protocol": {
           "type": "string",
-          "$ref": "#/definitions/FirewallPolicyIntrusionSystemBypassTrafficProtocol",
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficProtocol",
           "description": "The rule bypass protocol."
         },
         "sourceAddresses": {
@@ -1249,7 +1249,7 @@
       },
       "description": "Intrusion detection bypass traffic specification."
     },
-    "FirewallPolicyIntrusionSystemBypassTrafficProtocol": {
+    "FirewallPolicyIntrusionDetectionBypassTrafficProtocol": {
       "type": "string",
       "description": "Possible intrusion detection bypass traffic protocols.",
       "enum": [
@@ -1268,13 +1268,6 @@
         "certificateAuthority": {
           "$ref": "#/definitions/FirewallPolicyCertificateAuthority",
           "description": "The CA used for intermediate CA generation."
-        },
-        "excludedDomains": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of domains which are excluded from TLS termination."
         }
       },
       "description": "Configuration needed to perform TLS termination & initiation."
