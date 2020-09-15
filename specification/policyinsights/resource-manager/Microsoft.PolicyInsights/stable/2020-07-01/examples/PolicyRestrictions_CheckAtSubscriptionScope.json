@@ -1,136 +1,136 @@
 {
-   "parameters": {
-      "subscriptionId": "35ee058e-5fa0-414c-8145-3ebb8d09b6e2",
-      "api-version": "2020-07-01",
-      "parameters": {
-         "resourceDetails": {
-            "resourceContent": {
-               "type": "Microsoft.Compute/virtualMachines",
-               "properties": {
-                  "priority": "Spot"
-               }
-            },
-            "apiVersion": "2019-12-01"
-         },
-         "pendingFields": [
-            {
-               "field": "name",
-               "values": [
-                  "myVMName"
-               ]
-            },
-            {
-               "field": "location",
-               "values": [
+  "parameters": {
+    "subscriptionId": "35ee058e-5fa0-414c-8145-3ebb8d09b6e2",
+    "api-version": "2020-07-01",
+    "parameters": {
+      "resourceDetails": {
+        "resourceContent": {
+          "type": "Microsoft.Compute/virtualMachines",
+          "properties": {
+            "priority": "Spot"
+          }
+        },
+        "apiVersion": "2019-12-01"
+      },
+      "pendingFields": [
+        {
+          "field": "name",
+          "values": [
+            "myVMName"
+          ]
+        },
+        {
+          "field": "location",
+          "values": [
+            "eastus",
+            "westus",
+            "westus2",
+            "westeurope"
+          ]
+        },
+        {
+          "field": "tags"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "fieldRestrictions": [
+          {
+            "field": "tags.newtag",
+            "restrictions": [
+              {
+                "result": "Required",
+                "defaultValue": "defaultVal",
+                "policy": {
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/1D0906C3",
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/57DAC8A0",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/05D92080",
+                  "policyDefinitionReferenceId": "DefRef"
+                }
+              }
+            ]
+          },
+          {
+            "field": "tags.environment",
+            "restrictions": [
+              {
+                "result": "Required",
+                "values": [
+                  "Prod",
+                  "Int",
+                  "Test"
+                ],
+                "policy": {
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/30BD79F6",
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/7EB1508A",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/735551F1",
+                  "policyDefinitionReferenceId": "DefRef"
+                }
+              }
+            ]
+          },
+          {
+            "field": "location",
+            "restrictions": [
+              {
+                "result": "Deny",
+                "values": [
+                  "west europe"
+                ],
+                "policy": {
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/0711CCC1",
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/1563EBD3",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/1E17783A",
+                  "policyDefinitionReferenceId": "DefRef"
+                }
+              },
+              {
+                "result": "Deny",
+                "values": [
                   "eastus",
-                  "westus",
-                  "westus2",
-                  "westeurope"
-               ]
-            },
+                  "westus"
+                ],
+                "policy": {
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/25C9F66B",
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/5382A69D",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/392D107B",
+                  "policyDefinitionReferenceId": "DefRef"
+                }
+              }
+            ]
+          }
+        ],
+        "contentEvaluationResult": {
+          "policyEvaluations": [
             {
-               "field": "tags"
-            }
-         ]
-      }
-   },
-   "responses": {
-      "200": {
-         "headers": {},
-         "body": {
-            "fieldRestrictions": [
-               {
-                  "field": "tags.newtag",
-                  "restrictions": [
-                     {
-                        "result": "Required",
-                        "defaultValue": "defaultVal",
-                        "policy": {
-                           "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/1D0906C3",
-                           "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/57DAC8A0",
-                           "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/05D92080",
-                           "policyDefinitionReferenceId": "DefRef"
-                        }
-                     }
-                  ]
-               },
-               {
-                  "field": "tags.environment",
-                  "restrictions": [
-                     {
-                        "result": "Required",
-                        "values": [
-                           "Prod",
-                           "Int",
-                           "Test"
-                        ],
-                        "policy": {
-                           "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/30BD79F6",
-                           "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/7EB1508A",
-                           "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/735551F1",
-                           "policyDefinitionReferenceId": "DefRef"
-                        }
-                     }
-                  ]
-               },
-               {
-                  "field": "location",
-                  "restrictions": [
-                     {
-                        "result": "Deny",
-                        "values": [
-                           "west europe"
-                        ],
-                        "policy": {
-                           "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/0711CCC1",
-                           "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/1563EBD3",
-                           "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/1E17783A",
-                           "policyDefinitionReferenceId": "DefRef"
-                        }
-                     },
-                     {
-                        "result": "Deny",
-                        "values": [
-                           "eastus",
-                           "westus"
-                        ],
-                        "policy": {
-                           "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/25C9F66B",
-                           "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/5382A69D",
-                           "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/392D107B",
-                           "policyDefinitionReferenceId": "DefRef"
-                        }
-                     }
-                  ]
-               }
-            ],
-            "contentEvaluationResult": {
-               "policyEvaluations": [
+              "policyInfo": {
+                "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/435CAE41",
+                "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/2162358E",
+                "policyDefinitionReferenceId": "defref222",
+                "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/2FF66C37"
+              },
+              "evaluationResult": "NonCompliant",
+              "evaluationDetails": {
+                "evaluatedExpressions": [
                   {
-                     "policyInfo": {
-                        "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/435CAE41",
-                        "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/2162358E",
-                        "policyDefinitionReferenceId": "defref222",
-                        "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/2FF66C37"
-                     },
-                     "evaluationResult": "NonCompliant",
-                     "evaluationDetails": {
-                        "evaluatedExpressions": [
-                           {
-                              "result": "True",
-                              "expressionKind": "field",
-                              "expression": "type",
-                              "path": "type",
-                              "expressionValue": "microsoft.compute/virtualmachines",
-                              "targetValue": "microsoft.compute/virtualmachines",
-                              "operator": "equals"
-                           }
-                        ]
-                     }
+                    "result": "True",
+                    "expressionKind": "field",
+                    "expression": "type",
+                    "path": "type",
+                    "expressionValue": "microsoft.compute/virtualmachines",
+                    "targetValue": "microsoft.compute/virtualmachines",
+                    "operator": "equals"
                   }
-               ]
+                ]
+              }
             }
-         }
+          ]
+        }
       }
-   }
+    }
+  }
 }
