@@ -206,6 +206,42 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/microsoft.quantum/workspaces": {
+      "get": {
+        "operationId": "Workspaces_ListBySubscription",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/quantumWorkspacesList.json"
+          }
+        },
+        "description": "Gets the list of Workspaces within a Subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspaces successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.quantum/workspaces": {
       "get": {
         "operationId": "Workspaces_ListByResourceGroup",
