@@ -17,4 +17,8 @@ cli:
             operationGroup: 'machines'
             operation: '(reconnect|createOrUpdate|update)'
         removed: true
+      - where:
+            param: 'autoUpgradeMinorVersion'
+        alias:
+            - auto_upgrade_minor
 ```
