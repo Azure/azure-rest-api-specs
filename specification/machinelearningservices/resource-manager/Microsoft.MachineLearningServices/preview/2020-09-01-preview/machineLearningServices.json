@@ -708,6 +708,9 @@
           },
           "Get a AML Compute": {
             "$ref": "./examples/getAmlCompute.json"
+          },
+          "Get an ComputeInstance": {
+            "$ref": "./examples/getComputeInstance.json"
           }
         },
         "parameters": [
@@ -753,6 +756,12 @@
         "x-ms-examples": {
           "Create a AML Compute": {
             "$ref": "./examples/createBasicAmlCompute.json"
+          },
+          "Create an ComputeInstance Compute with minimal inputs": {
+            "$ref": "./examples/createComputeInstanceMinimal.json"
+          },
+          "Create an ComputeInstance Compute": {
+            "$ref": "./examples/createComputeInstance.json"
           },
           "Create AKS Compute": {
             "$ref": "./examples/createBasicAKSCompute.json"
@@ -1008,6 +1017,135 @@
             "schema": {
               "$ref": "#/definitions/ComputeSecrets"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Start",
+        "description": "Posts a start action to a compute instance",
+        "x-ms-examples": {
+          "Start ComputeInstance Compute": {
+            "$ref": "./examples/startComputeInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Stop",
+        "description": "Posts a stop action to a compute instance",
+        "x-ms-examples": {
+          "Stop ComputeInstance Compute": {
+            "$ref": "./examples/stopComputeInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Restart",
+        "description": "Posts a restart action to a compute instance",
+        "x-ms-examples": {
+          "Restart ComputeInstance Compute": {
+            "$ref": "./examples/restartComputeInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2994,6 +3132,108 @@
       ],
       "x-ms-discriminator-value": "AmlCompute"
     },
+    "ComputeInstance": {
+      "description": "An Azure Machine Learning compute instance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Compute Instance properties",
+              "type": "object",
+              "properties": {
+                "vmSize": {
+                  "description": "Virtual Machine Size",
+                  "type": "string"
+                },
+                "subnet": {
+                  "title": "Subnet.",
+                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
+                  "$ref": "#/definitions/ResourceId"
+                },
+                "applicationSharingPolicy": {
+                  "type": "string",
+                  "default": "Shared",
+                  "title": "Sharing policy for applications on this compute instance",
+                  "description": "Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.",
+                  "enum": [
+                    "Personal",
+                    "Shared"
+                  ],
+                  "x-ms-enum": {
+                    "name": "applicationSharingPolicy",
+                    "modelAsString": true
+                  }
+                },
+                "sshSettings": {
+                  "description": "Specifies policy and settings for SSH access.",
+                  "$ref": "#/definitions/ComputeInstanceSshSettings"
+                },
+                "connectivityEndpoints": {
+                  "readOnly": true,
+                  "description": "Describes all connectivity endpoints available for this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
+                },
+                "applications": {
+                  "type": "array",
+                  "readOnly": true,
+                  "description": "Describes available applications and their endpoints on this ComputeInstance.",
+                  "items": {
+                    "$ref": "#/definitions/ComputeInstanceApplication"
+                  }
+                },
+                "createdBy": {
+                  "readOnly": true,
+                  "description": "Describes information on user who created this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceCreatedBy"
+                },
+                "errors": {
+                  "readOnly": true,
+                  "title": "Errors.",
+                  "description": "Collection of errors encountered on this ComputeInstance.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MachineLearningServiceError"
+                  }
+                },
+                "state": {
+                  "description": "The current state of this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceState",
+                  "readOnly": true
+                },
+                "computeInstanceAuthorizationType": {
+                  "type": "string",
+                  "title": "Compute Instance Authorization type.",
+                  "description": "The Compute Instance Authorization type. Available values are personal (default).",
+                  "default": "personal",
+                  "enum": [
+                    "personal"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ComputeInstanceAuthorizationType",
+                    "modelAsString": true
+                  }
+                },
+                "personalComputeInstanceSettings": {
+                  "title": "Personal Compute Instance settings.",
+                  "description": "Settings for a personal compute instance.",
+                  "$ref": "#/definitions/PersonalComputeInstanceSettings"
+                },
+                "lastOperation": {
+                  "description": "The last operation on ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceLastOperation",
+                  "readOnly": true
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ComputeInstance"
+    },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
       "allOf": [
@@ -3534,6 +3774,7 @@
       "enum": [
         "AKS",
         "AmlCompute",
+        "ComputeInstance",
         "DataFactory",
         "VirtualMachine",
         "HDInsight",
@@ -5575,6 +5816,193 @@
         }
       ],
       "x-ms-discriminator-value": "Custom"
+    },
+    "ComputeInstanceSshSettings": {
+      "type": "object",
+      "description": "Specifies policy and settings for SSH access.",
+      "properties": {
+        "sshPublicAccess": {
+          "type": "string",
+          "default": "Disabled",
+          "title": "Access policy for SSH",
+          "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "sshPublicAccess",
+            "modelAsString": true
+          }
+        },
+        "adminUserName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the admin user name."
+        },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Describes the port for connecting through SSH."
+        },
+        "adminPublicKey": {
+          "type": "string",
+          "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
+        }
+      }
+    },
+    "ComputeInstanceState": {
+      "type": "string",
+      "description": "Current state of an ComputeInstance.",
+      "enum": [
+        "Creating",
+        "CreateFailed",
+        "Deleting",
+        "Running",
+        "Restarting",
+        "JobRunning",
+        "SettingUp",
+        "SetupFailed",
+        "Starting",
+        "Stopped",
+        "Stopping",
+        "UserSettingUp",
+        "UserSetupFailed",
+        "Unknown",
+        "Unusable"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeInstanceState",
+        "modelAsString": true
+      }
+    },
+    "ComputeInstanceLastOperation": {
+      "type": "object",
+      "description": "The last operation on ComputeInstance.",
+      "properties": {
+        "operationName": {
+          "type": "string",
+          "description": "Name of the last operation.",
+          "enum": [
+            "Create",
+            "Start",
+            "Stop",
+            "Restart",
+            "Reimage",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "OperationName",
+            "modelAsString": true
+          }
+        },
+        "operationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last operation."
+        },
+        "operationStatus": {
+          "type": "string",
+          "description": "Operation status.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "CreateFailed",
+            "StartFailed",
+            "StopFailed",
+            "RestartFailed",
+            "ReimageFailed",
+            "DeleteFailed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceApplication": {
+      "type": "object",
+      "description": "Defines an Aml Instance application and its connectivity endpoint URI.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Name of the ComputeInstance application."
+        },
+        "endpointUri": {
+          "type": "string",
+          "description": "Application' endpoint URI."
+        }
+      }
+    },
+    "ComputeInstanceConnectivityEndpoints": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Defines all connectivity endpoints and properties for an ComputeInstance.",
+      "properties": {
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Public IP Address of this ComputeInstance."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed)."
+        }
+      }
+    },
+    "ComputeInstanceCreatedBy": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Describes information on user who created this ComputeInstance.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the user."
+        },
+        "userOrgId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uniquely identifies user' Azure Active Directory organization."
+        },
+        "userId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uniquely identifies the user within his/her organization."
+        }
+      }
+    },
+    "PersonalComputeInstanceSettings": {
+      "type": "object",
+      "properties": {
+        "assignedUser": {
+          "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User.",
+          "description": "A user explicitly assigned to a personal compute instance."
+        }
+      },
+      "description": "Settings for a personal compute instance."
+    },
+    "AssignedUser": {
+      "type": "object",
+      "description": "A user that can be assigned to a compute instance.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "User’s AAD Object Id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "User’s AAD Tenant Id."
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId"
+      ]
     }
   }
 }
