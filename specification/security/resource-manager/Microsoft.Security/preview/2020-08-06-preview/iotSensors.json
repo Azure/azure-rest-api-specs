@@ -201,6 +201,9 @@
         ],
         "operationId": "IotSensors_DownloadActivation",
         "description": "Download sensor activation file",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -214,7 +217,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Downloaded activation file"
+            "description": "Downloaded activation file",
+            "schema": {
+              "type": "file"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
