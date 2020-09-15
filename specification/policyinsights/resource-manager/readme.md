@@ -66,6 +66,20 @@ directive:
     where:
       - $.paths["/providers/Microsoft.PolicyInsights/operations"].get
 
+  - suppress: PostOperationIdContainsUrlVerb
+    reason: The operation can be performed at multiple scopes. The operationId needs to indicate the scope.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
+
+  - suppress: ListInOperationName
+    reason: The result is an object that contains two arrays, it is not a top level list nor what would be considered a list operation.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
+
 ```
 
 ### Tag: package-2019-10
@@ -79,6 +93,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 ```
 
 
