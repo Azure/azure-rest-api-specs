@@ -115,7 +115,7 @@ input-file:
 - Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
 - Microsoft.EventHub/stable/2017-04-01/namespaces.json
 - Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
-- Microsoft.EventHub/stable/2015-08-01/EventHub.json
+# - Microsoft.EventHub/stable/2015-08-01/EventHub.json
 ```
 
 
