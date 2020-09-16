@@ -26,7 +26,7 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2018-01-preview
 ```
 
 ### Tag: package-2018-01-preview
@@ -35,7 +35,23 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
+- Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+- Microsoft.ServiceBus/stable/2017-04-01/sku.json
+- Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2017-04-01/topics.json
+- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
 ```
 
 ### Tag: package-2017-04
@@ -45,7 +61,21 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
+- Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2017-04-01/namespaces.json
+- Microsoft.ServiceBus/stable/2017-04-01/networksets.json
+- Microsoft.ServiceBus/stable/2017-04-01/operations.json
+- Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+- Microsoft.ServiceBus/stable/2017-04-01/sku.json
+- Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2017-04-01/topics.json
 ```
 
 Important notes:
@@ -154,10 +184,26 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
-  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
   - $(this-folder)/Microsoft.ServiceBus/stable/2015-08-01/servicebus.json
-
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/namespaces.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/networksets.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/operations.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/sku.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+  - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/topics.json
+  - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
+  - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
+  - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
+  - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
