@@ -67,6 +67,14 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlPools.json
 - Microsoft.Synapse/preview/2019-06-01-preview/bigDataPools.json
 - Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntimes.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/DataFlow.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Dataset.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/LinkedService.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Notebook.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Pipeline.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SparkJobDefinition.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SqlScript.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Trigger.json
 ```
 
 ### Tag: package-access-control-2020-02-01-preview
