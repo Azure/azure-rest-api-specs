@@ -27,6 +27,7 @@ These are the global settings for the Datadog API.
 ``` yaml
 title: DatadogManagementClient
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-02-01-preview
 ```
 

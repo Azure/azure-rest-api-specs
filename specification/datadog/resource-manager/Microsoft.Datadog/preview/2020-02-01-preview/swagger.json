@@ -539,6 +539,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Monitors_Create": {
             "$ref": "./examples/Monitors_Create.json"
@@ -913,6 +916,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SingleSignOnConfigurations_CreateOrUpdate": {
             "$ref": "./examples/SingleSignOnConfigurations_CreateOrUpdate.json"
@@ -1322,20 +1328,6 @@
         },
         "linkingClientId": {
           "description": "The client_id from an existing in exchange for an auth token to link organization.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "apiKey": {
-          "description": "Api key associated to the Datadog organization.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "applicationKey": {
-          "description": "Application key associated to the Datadog organization.",
           "type": "string",
           "x-ms-mutability": [
             "create"
