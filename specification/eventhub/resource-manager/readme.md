@@ -113,7 +113,7 @@ input-file:
 - Microsoft.EventHub/stable/2017-04-01/operations.json
 - Microsoft.EventHub/stable/2017-04-01/eventhubs.json
 - Microsoft.EventHub/stable/2017-04-01/sku.json
-- Microsoft.EventHub/stable/2015-08-01/EventHub.json
+# - Microsoft.EventHub/stable/2015-08-01/EventHub.json
 ```
 
 
