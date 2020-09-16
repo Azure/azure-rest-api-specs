@@ -164,7 +164,7 @@
           "BillingActivity"
         ],
         "x-ms-examples": {
-          "BillingActivity": {
+          "BillingActivityList": {
             "$ref": "./examples/BillingActivityList.json"
           }
         },
@@ -260,8 +260,8 @@
           "BillingActivity"
         ],
         "x-ms-examples": {
-          "BillingActivityLogs": {
-            "$ref": "./examples/billingActivityEventCategory.json"
+          "BillingActivityEventCategory": {
+            "$ref": "./examples/BillingActivityEventCategory.json"
           }
         },
         "operationId": "BillingActivityTypes_Get",
@@ -5607,22 +5607,22 @@
         "description": "The related specific properties for an event.",
         "type": "array",
         "items": {
-          "$ref": "#/definitions/KeyValuePair"
+          "$ref": "#/definitions/activityEventRelatedProperty"
         }
       }
     }
   },
-  "KeyValuePair": {
-    "description": "The key-value pair item.",
+  "activityEventRelatedProperty": {
+    "description": "The activityEventRelatedProperty key-value pair item.",
     "type": "object",
     "properties": {
-      "key": {      
-        "description": "The key.",
+      "propertyName": {      
+        "description": "Name of the activity event property.",
         "readOnly": true,
 	"type": "string"
       },
-      "value": {       
-        "description": "The value.",
+      "propertyValue": {       
+        "description": "Value of the activity event property.",
         "readOnly": true,
 	"type": "string"
       }
