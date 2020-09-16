@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "subscriptionId": "bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21",
+    "resourceGroupName": "tugamidiAlerts",
+    "resourceNamespace": "Microsoft.Compute",
+    "resourceType": "virtualMachines",
+    "resourceName": "linuxEUS",
+    "monitorId": "logical-disks|C@3A",
+    "api-version": "2020-01-13-preview",
+    "startTimestampUtc": "2020-01-04T20:20:18.5765757Z",
+    "endTimestampUtc": "2020-01-09T20:20:18.5765757Z",
+    "$expand": "evidence,configuration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|disk-free-space-mb/history/1578514818",
+            "name": "1578514818",
+            "type": "Microsoft.WorkloadMonitor/monitors/history",
+            "properties": {
+              "monitorName": "logical-disks|C:|disk-free-space-mb",
+              "monitorType": "logical-disks|*|disk-free-space-mb",
+              "monitoredObject": "C:",
+              "evaluationTimestamp": "2020-01-07T20:20:18.5765757Z",
+              "currentStateFirstObservedTimestamp": "2020-01-07T20:20:18.5765757Z",
+              "previousMonitorState": "Warning",
+              "currentMonitorState": "Critical",
+              "evidence": {
+                "reason": {
+                  "code": 2100,
+                  "message": "Collected samples met critical condition for this monitor."
+                },
+                "samples": [
+                  {
+                    "value": 1361.019,
+                    "timestamp": "2020-03-24T20:51:00.6058242Z"
+                  },
+                  {
+                    "value": 1261.019,
+                    "timestamp": "2020-03-24T21:51:00.6058242Z"
+                  }
+                ]
+              },
+              "monitorConfiguration": {}
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|disk-free-space-mb/history/1578255618",
+            "name": "1578255618",
+            "type": "Microsoft.WorkloadMonitor/monitors/history",
+            "properties": {
+              "monitorName": "logical-disks|C:|disk-free-space-mb",
+              "monitorType": "logical-disks|*|disk-free-space-mb",
+              "monitoredObject": "C:",
+              "evaluationTimestamp": "2020-01-06T20:20:18.5765757Z",
+              "currentStateFirstObservedTimestamp": "2020-01-05T20:20:18.5765757Z",
+              "previousMonitorState": "Warning",
+              "currentMonitorState": "Warning",
+              "evidence": {
+                "reason": {
+                  "code": 2100,
+                  "message": "Collected samples met critical condition for this monitor."
+                },
+                "samples": [
+                  {
+                    "value": 1361.019,
+                    "timestamp": "2020-03-24T20:51:00.6058242Z"
+                  },
+                  {
+                    "value": 1261.019,
+                    "timestamp": "2020-03-24T21:51:00.6058242Z"
+                  }
+                ]
+              },
+              "monitorConfiguration": {}
+            }
+          },
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|disk-free-space-mb/history/1578255618",
+            "name": "1578255618",
+            "type": "Microsoft.WorkloadMonitor/monitors/history",
+            "properties": {
+              "monitorName": "logical-disks|C:|disk-free-space-mb",
+              "monitorType": "logical-disks|*|disk-free-space-mb",
+              "monitoredObject": "C:",
+              "evaluationTimestamp": "2020-01-05T20:20:18.5765757Z",
+              "currentStateFirstObservedTimestamp": "2020-01-05T20:20:18.5765757Z",
+              "previousMonitorState": "Healthy",
+              "currentMonitorState": "Warning",
+              "evidence": {
+                "reason": {
+                  "code": 2100,
+                  "message": "Collected samples met critical condition for this monitor."
+                },
+                "samples": [
+                  {
+                    "value": 1361.019,
+                    "timestamp": "2020-03-24T20:51:00.6058242Z"
+                  },
+                  {
+                    "value": 1261.019,
+                    "timestamp": "2020-03-24T21:51:00.6058242Z"
+                  }
+                ]
+              },
+              "monitorConfiguration": {}
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21",
+    "resourceGroupName": "tugamidiAlerts",
+    "resourceNamespace": "Microsoft.Compute",
+    "resourceType": "virtualMachines",
+    "resourceName": "linuxEUS",
+    "api-version": "2020-01-13-preview",
+    "$filter": "monitorName eq 'root'" 
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/root",
+            "name": "root",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "properties": {
+              "monitorName": "root",
+              "monitorType": "root",
+              "monitoredObject": "",
+              "parentMonitorName": "",
+              "evaluationTimestamp": "2020-02-15T20:20:18.5765757Z",
+              "currentStateFirstObservedTimestamp": "2020-02-15T20:20:1.5765757Z",
+              "lastReportedTimestamp": "2020-02-15T20:20:18.5765757Z",
+              "previousMonitorState": "Critical",
+              "currentMonitorState": "Critical"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

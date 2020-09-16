@@ -1,0 +1,738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Workload Monitor API",
+    "version": "2020-01-13-preview",
+    "title": "Workload Monitor API",
+    "contact": {
+      "email": "wlmengg@microsoft.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.WorkloadMonitor/operations": {
+      "get": {
+        "summary": "Gets a list of possible operations",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of operations",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationList_Get": {
+            "$ref": "./examples/OperationList_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
+      "get": {
+        "summary": "Get list of a monitors of a resource (with optional filter).",
+        "operationId": "Monitors_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/resourceType"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "$ref": "#/definitions/MonitorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor list with default values": { "$ref": "./examples/MonitorList_GetDefault.json" },
+          "Get monitor list with filtered values": { "$ref": "./examples/MonitorList_GetFiltered.json" },
+          "Get monitor list with expanded values": { "$ref": "./examples/MonitorList_GetExpanded.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}": {
+      "get": {
+        "summary": "Get the current status of a monitor of a resource.",
+        "operationId": "MonitorInfo_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/resourceType"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorId"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor with default values": { "$ref": "./examples/Monitor_GetDefault.json" },
+          "Get monitor with expanded values": { "$ref": "./examples/Monitor_GetExpanded.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history": {
+      "get": {
+        "summary": "Get history of a monitor of a resource (with optional filter).",
+        "operationId": "MonitorStateChanges_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/resourceType"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorId"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          },
+          {
+            "in": "query",
+            "name": "startTimestampUtc",
+            "description": "The start Timestamp for the desired history",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "in": "query",
+            "name": "endTimestampUtc",
+            "description": "The end Timestamp for the desired history",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "$ref": "#/definitions/MonitorHistory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor history with default values": { "$ref": "./examples/MonitorHistory_GetDefault.json" },
+          "Get monitor list with filtered values": { "$ref": "./examples/MonitorHistory_GetFiltered.json" },
+          "Get monitor history with expanded values": { "$ref": "./examples/MonitorHistory_GetExpanded.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history/{timestampUnix}": {
+      "get": {
+        "summary": "Get the status of a monitor at a specific timestamp in history.",
+        "operationId": "MonitorHistoricalStateChange_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/resourceType"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorId"
+          },
+          {
+            "$ref": "#/parameters/timestampUnix"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "$ref": "#/definitions/MonitorStateChange"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "x-ms-examples": {
+            "Get monitor state change with default values": { "$ref": "./examples/MonitorStateChange_GetDefault.json" },
+            "Get monitor state change with expanded values": { "$ref": "./examples/MonitorStateChange_GetExpanded.json" }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2020-01-13-preview"
+      ]
+    },
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "required": true,
+      "type": "string",
+      "description": "The subscriptionId of the resource",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "description": "The resourceGroupName of the resource",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceNamespace": {
+      "in": "path",
+      "name": "resourceNamespace",
+      "required": true,
+      "type": "string",
+      "description": "The resourceNamespace of the resource",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceType": {
+      "in": "path",
+      "name": "resourceType",
+      "required": true,
+      "type": "string",
+      "description": "The resourceType of the resource",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceName": {
+      "in": "path",
+      "name": "resourceName",
+      "required": true,
+      "type": "string",
+      "description": "The resourceType of the resource",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorId": {
+      "in": "path",
+      "name": "monitorId",
+      "description": "The monitorId of the resource (url encoded)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "timestampUnix": {
+      "in": "path",
+      "name": "timestampUnix",
+      "description": "The timestamp of the state change (Unix format)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "list example: $filter=monitorName eq 'logical-disks|C:|disk-free-space-mb'; history example: $filter=monitorName eq 'logical-disks|C:|disk-free-space-mb'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "expand": {
+      "name": "$expand",
+      "in": "query",
+      "description": "ex: $expand=evidence,config",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "MonitorHistory": {
+      "title": "Monitor History",
+      "description": "The monitor history of a monitor",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "title": "State Change Array",
+          "description": "Array of state change transitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorStateChange"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "MonitorList": {
+      "title": "Monitor List",
+      "description": "Basic information about the current status of a monitor.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "title": "Monitor Array",
+          "description": "Array of monitors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Monitor"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Monitor": {
+      "title": "Monitor Status",
+      "description": "Information about a monitor.",
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "title": "Arm ID",
+          "description": "Arm ID of this monitor.",
+          "type": "string",
+          "example": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A"
+        },
+        "name": {
+          "title": "Url-encoded monitor name",
+          "description": "Url-encoded monitor name.",
+          "type": "string",
+          "example": "logical-disks|C@3A"
+        },
+        "type": {
+          "title": "Resource type",
+          "description": "Type of ARM resource.",
+          "type": "string",
+          "example": "Microsoft.WorkloadMonitor/monitors"
+        },
+        "properties": {
+          "title": "Monitor Properties",
+          "description": "Properties of the monitor.",
+          "type": "object",
+          "properties": {
+            "monitorName": {
+              "title": "Monitor Name",
+              "description": "Human-readable name of this monitor.",
+              "type": "string",
+              "example": "logical-disks|C:"
+            },
+            "monitorType": {
+              "title": "Monitor Type",
+              "description": "Type of this monitor.",
+              "type": "string",
+              "example": "logical-disks|*"
+            },
+            "monitoredObject": {
+              "title": "Monitored Object",
+              "description": "Dynamic monitored object of this monitor.",
+              "type": "string",
+              "example": "C:"
+            },
+            "parentMonitorName": {
+              "title": "Parent Monitor Name",
+              "description": "Name of this monitor's parent.",
+              "type": "string",
+              "example": "logical-disks"
+            },
+            "healthState": {
+              "title": "Health State",
+              "description": "Current health state of this monitor.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/HealthState"
+                }
+              ],
+              "example": "Healthy"
+            },
+            "lastEvaluated": {
+              "title": "Last Evaluated",
+              "description": "Timestamp that this monitor was last evaluated.",
+              "type": "string",
+              "example": "2020-02-15T20:20:18.5765757Z"
+            },
+            "lastStateChange": {
+              "title": "Last State Change",
+              "description": "Timestamp of this monitor's last state change.",
+              "type": "string",
+              "example": "2020-02-15T20:20:1.5765757Z"
+            },
+            "lastReported": {
+              "title": "Last Reported",
+              "description": "Timestamp of this monitor's last reported state.",
+              "type": "string",
+              "example": "2020-02-15T20:20:1.5765757Z"
+            },
+            "evidence": {
+              "title": "Evidence",
+              "description": "Evidence of this monitor's last state change.",
+              "type": "object"
+            },
+            "config": {
+              "title": "Configuration",
+              "description": "Configuration settings at the time of this monitor's last state change.",
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "MonitorStateChange": {
+      "title": "Monitor State Change",
+      "description": "Information about a state transition of a monitor.",
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "title": "Arm ID",
+          "description": "Arm ID of this monitor.",
+          "type": "string",
+          "example": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A/history/1584316800"
+        },
+        "name": {
+          "title": "Name of resource",
+          "description": "Timestamp of state change (in unix).",
+          "type": "string",
+          "example": "1584316800"
+        },
+        "type": {
+          "title": "Resource type",
+          "description": "Type of ARM resource.",
+          "type": "string",
+          "example": "Microsoft.WorkloadMonitor/monitors/history"
+        },
+        "properties": {
+          "title": "Monitor Properties",
+          "description": "Properties of the monitor.",
+          "type": "object",
+          "properties": {
+            "monitorName": {
+              "title": "Monitor Name",
+              "description": "Human-readable name of this monitor.",
+              "type": "string",
+              "example": "logical-disks|C:"
+            },
+            "monitorType": {
+              "title": "Monitor Type",
+              "description": "Type of this monitor.",
+              "type": "string",
+              "example": "logical-disks|*"
+            },
+            "monitoredObject": {
+              "title": "Monitored Object",
+              "description": "Dynamic monitored object of this monitor.",
+              "type": "string",
+              "example": "C:"
+            },
+            "timestampUtc": {
+              "title": "Timestamp",
+              "description": "Timestamp of the state change.",
+              "type": "string",
+              "example": "2020-01-08T20:20:18.5765757Z"
+            },
+            "prevHealthState": {
+              "title": "Previous Health State",
+              "description": "Previous health state.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/HealthState"
+                }
+              ],
+              "example": "Healthy"
+            },
+            "newHealthState": {
+              "title": "New Health State",
+              "description": "New health state.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/HealthState"
+                }
+              ],
+              "example": "Critical"
+            }
+          }
+        }
+      }
+    },
+    "HealthState": {
+      "title": "Health State",
+      "description": "Possible health states of a monitor.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Healthy",
+        "Critical",
+        "Warning",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true
+      }
+    },
+    "OperationList": {
+      "title": "Operation List",
+      "description": "List of possible operations.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "title": "Operations Array",
+          "description": "Array of possible operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "title": "Operation",
+      "description": "Operation supported by the resource provider.",
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "name",
+        "display",
+        "origin"
+      ],
+      "properties": {
+        "name": {
+          "title": "Operation Name",
+          "description": "Name of the operation.",
+          "type": "string",
+          "example": "Microsoft.WorkloadMonitor/monitors/read"
+        },
+        "display": {
+          "title": "Display",
+          "description": "The properties of the resource operation.",
+          "type": "object",
+          "required": [
+            "provider",
+            "resource",
+            "operation",
+            "description"
+          ],
+          "properties": {
+            "provider": {
+              "title": "Provider Name",
+              "description": "Provider name of this operation.",
+              "type": "string",
+              "example": "Microsoft.WorkloadMonitor"
+            },
+            "resource": {
+              "title": "Resource Name",
+              "description": "Resource name of this operation.",
+              "type": "string",
+              "example": "Monitors"
+            },
+            "operation": {
+              "title": "Operation Name",
+              "description": "Operation name of the operation.",
+              "type": "string",
+              "example": "Get monitors"
+            },
+            "description": {
+              "title": "Description",
+              "description": "Description of the operation.",
+              "type": "string",
+              "example": "Gets monitors and their current health state"
+            }
+          }
+        },
+        "origin": {
+          "title": "Origin",
+          "description": "The origin of the operation.",
+          "type": "string",
+          "example": "user, system"
+        }
+      }
+    },
+    "DefaultError": {
+      "title": "Default Error",
+      "description": "Error body contract.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable representation of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Error details.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/juweinga/newRP/1.0.0",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
