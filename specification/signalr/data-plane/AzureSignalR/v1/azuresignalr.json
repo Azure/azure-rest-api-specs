@@ -12,9 +12,20 @@
         ],
         "summary": "Get service health status.",
         "operationId": "HealthApi_GetHealthStatus",
+        "produces": [
+          "text/plain"
+        ],
         "responses": {
           "200": {
-            "description": "The service is healthy"
+            "description": "The service is healthy",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -61,6 +72,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -104,6 +119,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -113,6 +132,9 @@
         ],
         "summary": "Check if there are any client connections connected for the given user",
         "operationId": "ServiceApi_CheckUserExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -132,10 +154,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "404": {
             "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -179,6 +209,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -188,6 +222,9 @@
         ],
         "summary": "Check if the connection with the given connectionId exists",
         "operationId": "ServiceApi_CheckConnectionExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -207,10 +244,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "404": {
             "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -246,6 +291,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -299,6 +348,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -308,6 +361,9 @@
         ],
         "summary": "Check if there are any client connections inside the given group",
         "operationId": "ServiceApi_CheckGroupExistence",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -327,10 +383,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "404": {
             "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -342,6 +406,9 @@
         ],
         "summary": "Add a connection to the target group.",
         "operationId": "ServiceApi_AddConnectionToGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -368,10 +435,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "404": {
             "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -381,6 +456,9 @@
         ],
         "summary": "Remove a connection from the target group.",
         "operationId": "ServiceApi_RemoveConnectionFromGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -407,10 +485,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "404": {
             "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -422,6 +508,9 @@
         ],
         "summary": "Check whether a user exists in the target group.",
         "operationId": "ServiceApi_CheckUserExistenceInGroup",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -448,10 +537,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "404": {
             "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -495,6 +592,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       },
@@ -531,6 +632,10 @@
         "responses": {
           "202": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
@@ -542,6 +647,9 @@
         ],
         "summary": "Remove a user from all groups.",
         "operationId": "ServiceApi_RemoveUserFromAllGroups",
+        "produces": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -561,10 +669,18 @@
         ],
         "responses": {
           "200": {
-            "description": "The user is deleted"
+            "description": "The user is deleted",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
           },
           "202": {
             "description": "The delete request is accepted and service is handling the request int the background"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
           }
         }
       }
