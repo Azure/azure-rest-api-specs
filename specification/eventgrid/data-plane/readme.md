@@ -61,6 +61,15 @@ input-file:
 - Microsoft.Web/stable/2018-01-01/Web.json
 ```
 
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+    where: $.definitions.CloudEventEvent.properties.data_base64
+    reason: This parameter name is defined by the Cloud Events 1.0 specification
+```
+
 ---
 # Code Generation
 
