@@ -57,7 +57,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2019-10-preview
+tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
@@ -89,6 +89,15 @@ These settings apply only when `--tag=package-subscriptions-2020-01` is specifie
 ``` yaml $(tag) == 'package-subscriptions-2020-01'
 input-file:
   - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+```
+
+### Tag: package-deploymentscripts-2020-10
+
+These settings apply only when `--tag=package-deploymentscripts-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentscripts-2020-10'
+input-file:
+- Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
 ```
 
 ### Tag: package-deploymentscripts-2019-10-preview
@@ -726,6 +735,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2020-06-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+  - $(this-folder)/Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
