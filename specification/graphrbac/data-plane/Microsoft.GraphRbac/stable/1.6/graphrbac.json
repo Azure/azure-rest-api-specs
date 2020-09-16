@@ -1435,6 +1435,88 @@
         }
       }
     },
+    "/{tenantID}/servicePrincipals/{objectId}/appRoleAssignedTo": {
+      "get": {
+        "tags": [
+          "ServicePrincipalAppRoleAssignedTo"
+        ],
+        "operationId": "ServicePrincipals_ListAppRoleAssignedTo",
+        "summary": "Principals (users, groups, and service principals) that are assigned to this service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AppRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/appRoleAssignments": {
+      "get": {
+        "tags": [
+          "ServicePrincipalAppRoleAssignments"
+        ],
+        "operationId": "ServicePrincipals_ListAppRoleAssignments",
+        "summary": "Applications that the service principal is assigned to.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AppRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
     "/{tenantID}/servicePrincipals/{objectId}/owners": {
       "get": {
         "tags": [
@@ -3318,6 +3400,59 @@
         }
       },
       "description": "KeyCredential list operation result."
+    },
+    "AppRoleAssignmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRoleAssignment"
+          },
+          "description": "A collection of AppRoleAssignment."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "AppRoleAssignment list operation result."
+    },
+    "AppRoleAssignment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role id that was assigned to the principal. This role must be declared by the target resource application resourceId in its appRoles property."
+        },
+        "principalDisplayName": {
+          "type": "string",
+          "description": "The display name of the principal that was granted the access."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier (objectId) for the principal being granted the access."
+        },
+        "principalType": {
+          "type": "string",
+          "description": "The type of principal. This can either be \"User\", \"Group\" or \"ServicePrincipal\"."
+        },
+        "resourceDisplayName": {
+          "type": "string",
+          "description": "The display name of the resource to which the assignment was made."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The unique identifier (objectId) for the target resource (service principal) for which the assignment was made."
+        }
+      },
+      "x-ms-discriminator-value": "AppRoleAssignment",
+      "description": "AppRoleAssignment information."
     },
     "DirectoryObjectListResult": {
       "type": "object",
