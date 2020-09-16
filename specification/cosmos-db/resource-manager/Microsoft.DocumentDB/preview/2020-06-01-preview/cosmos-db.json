@@ -5207,6 +5207,38 @@
         "defaultConsistencyLevel"
       ]
     },
+    "CorsPolicy": {
+      "type": "object",
+      "description": "The CORS policy for the Cosmos DB database account.",
+      "properties": {
+        "allowedOrigins": {
+          "description": "The origin domains that are permitted to make a request against the service via CORS.",
+          "type": "string"
+        },
+        "allowedMethods": {
+          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request.",
+          "type": "string"
+        },
+        "allowedHeaders": {
+          "description": "The request headers that the origin domain may specify on the CORS request.",
+          "type": "string"
+        },
+        "exposedHeaders": {
+          "description": "The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.",
+          "type": "string"
+        },
+        "maxAgeInSeconds": {
+          "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647,
+          "format": "int64"
+        }
+      },
+      "required": [
+        "allowedOrigins"
+      ]
+    },
     "DatabaseAccountGetProperties": {
       "description": "Properties for the database account.",
       "type": "object",
@@ -5351,6 +5383,13 @@
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
           "$ref": "#/definitions/BackupPolicy"
+        },
+        "cors": {
+          "type": "array",
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "items": {
+            "$ref": "#/definitions/CorsPolicy"
+          }
         }
       }
     },
@@ -5447,6 +5486,13 @@
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
           "$ref": "#/definitions/BackupPolicy"
+        },
+        "cors": {
+          "type": "array",
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "items": {
+            "$ref": "#/definitions/CorsPolicy"
+          }
         }
       },
       "required": [
@@ -5593,6 +5639,13 @@
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
           "$ref": "#/definitions/BackupPolicy"
+        },
+        "cors": {
+          "type": "array",
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "items": {
+            "$ref": "#/definitions/CorsPolicy"
+          }
         }
       }
     },
@@ -5610,6 +5663,9 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountUpdateProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -6971,17 +7027,36 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
-            "SystemAssigned, UserAssigned",
+            "SystemAssigned,UserAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."

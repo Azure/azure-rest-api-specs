@@ -121,11 +121,18 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js migrate/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
@@ -139,10 +146,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.OffAzure/stable/2020-07-07/migrate.json
   - $(this-folder)/Microsoft.Migrate/stable/2018-02-02/migrate.json
   - $(this-folder)/Microsoft.Migrate/stable/2019-10-01/migrate.json
   - $(this-folder)/Microsoft.OffAzure/stable/2020-01-01/migrate.json
-  - $(this-folder)/Microsoft.OffAzure/stable/2020-07-07/migrate.json
 
 ```
 

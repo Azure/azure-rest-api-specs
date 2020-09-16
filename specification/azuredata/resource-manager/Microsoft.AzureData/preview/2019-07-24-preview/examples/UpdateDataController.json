@@ -4,7 +4,7 @@
     "resourceGroupName": "testrg",
     "dataControllerName": "testdataController1",
     "api-version": "2019-07-24",
-    "parameters": {
+    "dataControllerResource": {
       "tags": {
         "mytag": "myval"
       }
@@ -13,7 +13,13 @@
   "responses": {
     "200": {
       "body": {
-        "properties": {},
+        "properties": {
+          "onPremiseProperty": {
+            "id": "12345678-1234-1234-ab12-1a2b3c4d5e6f",
+            "publicSigningKey": "publicOnPremSigningKey",
+            "signingCertificateThumbprint": "Unique thumbprint returned to customer to verify the certificate they uploaded"
+          }
+        },
         "location": "northeurope",
         "systemData": {
           "createdBy": "user1",

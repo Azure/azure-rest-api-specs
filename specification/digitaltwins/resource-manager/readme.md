@@ -26,7 +26,16 @@ These are the global settings for the digitaltwins.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03-01-preview
+tag: package-2020-10
+```
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+  - Microsoft.DigitalTwins/stable/2020-10-31/digitaltwins.json
 ```
 
 ### Tag: package-2020-03-01-preview
@@ -50,12 +59,17 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-digitaltwins
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_digitaltwins']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js digitaltwins/resource-manager
 ```
 
 ## Go
@@ -82,6 +96,10 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -94,12 +112,13 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DigitalTwins/stable/2020-10-31/digitaltwins.json
   - $(this-folder)/Microsoft.DigitalTwins/preview/2020-03-01-preview/digitaltwins.json
 
 ```
 
 If there are files that should not be in the `all-api-versions` set,
-uncomment the  `exclude-file` section below and add the file paths.
+uncomment the `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
@@ -116,4 +135,28 @@ directive:
     reason: |-
       Flattening properties generates SDK (using autorest) that does not support polymorphism.
       In this case DigitalTwinsEndpointResourceProperties is used as a base class for EventGrid, EventHub and ServiceBus. Flattening DigitalTwinsEndpointResourceProperties removes the link between DigitalTwinsEndpointResource and resources above.
+  - suppress: TrackedResourceListByImmediateParent
+    where: $.definitions
+    from: digitaltwins.json
+    reason: 'This is a proxy resource, not a tracked resource.'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.CheckNameResult.properties.nameAvailable
+    from: digitaltwins.json
+    reason: The value will always be a boolean.
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.ServiceBus.allOf["1"].properties.primaryConnectionString'
+    from: digitaltwins.json
+    reason: 'Secrets are obfuscated on GETs. E.g., "Endpoint=sb://mysb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=***". This is to allow customers to identify the namespace of the resource.'
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.ServiceBus.allOf["1"].properties.secondaryConnectionString'
+    from: digitaltwins.json
+    reason: Secrets are obfuscated on read.
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.EventHub.allOf["1"].properties.connectionStringPrimaryKey'
+    from: digitaltwins.json
+    reason: Secrets are obfuscated on read.
+  - suppress: SECRET_PROPERTY
+    where: '$.definitions.EventHub.allOf["1"].properties.connectionStringSecondaryKey'
+    from: digitaltwins.json
+    reason: Secrets are obfuscated on read.
 ```

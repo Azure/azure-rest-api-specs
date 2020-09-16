@@ -110,6 +110,15 @@ input-file:
 - Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
 ```
 
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
+```
+
 ### Tag: package-2020-05-01-preview
 
 These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
@@ -163,6 +172,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js machinelearningservices/resource-manager
 ```
 
 ## C#
@@ -209,6 +221,7 @@ batch:
   - tag: package-2019-06-01
   - tag: package-2019-05-01
   - tag: package-2018-11-19
+  - tag: package-2020-09-01-preview
   - tag: package-2020-05-01-preview
   - tag: package-2020-04-01-preview
   - tag: package-2020-02-18-preview
@@ -318,6 +331,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-09-01-preview and java
+
+These settings apply only when `--tag=package-2020-09-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2020_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_09_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2020-05-01-preview and java
 
 These settings apply only when `--tag=package-2020-05-01-preview --java` is specified on the command line.
@@ -357,6 +383,10 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -378,6 +408,7 @@ input-file:
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-04-01-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-02-18-preview/machineLearningServices.json

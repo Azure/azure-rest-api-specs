@@ -96,12 +96,12 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
-- Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
 ```
 
@@ -145,6 +145,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mysql/resource-manager
 ```
 
 
@@ -162,33 +165,9 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.rdbms.mysql
-  package-name: azure-mgmt-rdbms
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -197,6 +176,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
@@ -222,8 +205,8 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
 
 ```
 

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Device Provisioning Services.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DeviceProvisioningServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,16 +15,36 @@ To build the SDK for DeviceProvisioningServices, simply [Install AutoRest](https
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-preview-2020-09
+```
+
+
+### Tag: package-preview-2020-09
+
+These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-09'
+input-file:
+  - Microsoft.Devices/preview/2020-09-01-preview/iotdps.json
+```
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Devices/stable/2020-03-01/iotdps.json
 ```
 
 ### Tag: package-2017-08
@@ -64,8 +84,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -80,8 +100,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js deviceprovisioningservices/resource-manager
 ```
-
 
 ## C#
 
@@ -113,11 +135,13 @@ python:
   package-name: azure-mgmt-iothubprovisioningservices
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -190,9 +214,11 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -211,11 +237,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

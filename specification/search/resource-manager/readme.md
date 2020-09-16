@@ -26,7 +26,15 @@ These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03
+tag: package-2020-08
+```
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+``` yaml $(tag) == 'package-2020-08'
+input-file:
+- Microsoft.Search/stable/2020-08-01/search.json
 ```
 
 ### Tag: package-2020-03
@@ -55,9 +63,19 @@ input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
 ```
 
+### Tag: package-2020-08-preview
+
+These settings apply only when `--tag=package-2020-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-preview'
+input-file:
+- Microsoft.Search/preview/2020-08-01-preview/search.json
+```
+
 ### Tag: package-2019-10-preview
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2019-10-preview'
 input-file:
 - Microsoft.Search/preview/2019-10-01-preview/search.json
@@ -84,6 +102,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_search']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js search/resource-manager
 ```
 
 
@@ -126,6 +147,7 @@ batch:
   - tag: package-2015-02
   - tag: package-2015-08
   - tag: package-2020-03
+  - tag: package-2020-08
 ```
 
 ### Tag: package-2015-02 and java
@@ -167,6 +189,23 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-08 and java
+
+These settings apply only when `--tag=package-2020-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.search.v2020_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-resource-manager/v2020_08_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -180,9 +219,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Search/stable/2020-08-01/search.json
   - $(this-folder)/Microsoft.Search/stable/2020-03-13/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
+  - $(this-folder)/Microsoft.Search/preview/2020-08-01-preview/search.json
   - $(this-folder)/Microsoft.Search/preview/2019-10-01-preview/search.json
 
 ```

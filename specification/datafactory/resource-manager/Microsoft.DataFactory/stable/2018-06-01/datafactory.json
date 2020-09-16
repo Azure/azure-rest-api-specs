@@ -255,6 +255,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryFeaturesValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_QueryFeatureValuesByFactory",
+        "x-ms-examples": {
+          "ExposureControl_QueryFeatureValuesByFactory": {
+            "$ref": "./examples/ExposureControl_QueryFeatureValuesByFactory.json"
+          }
+        },
+        "description": "Get list of exposure control features for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlBatchRequest",
+            "description": "The exposure control request for list of features.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -3105,7 +3156,7 @@
         ],
         "operationId": "TriggerRuns_Cancel",
         "x-ms-examples": {
-          "Triggers_Rerun": {
+          "Triggers_Cancel": {
             "$ref": "./examples/TriggerRuns_Cancel.json"
           }
         },
@@ -3655,6 +3706,373 @@
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks": {
+      "get": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_ListByFactory",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_ListByFactory": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListByFactory.json"
+          }
+        },
+        "description": "Lists managed Virtual Networks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}": {
+      "put": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Create": {
+            "$ref": "./examples/ManagedVirtualNetworks_Create.json"
+          }
+        },
+        "description": "Creates or updates a managed Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed Virtual Network entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedVirtualNetwork",
+            "description": "Managed Virtual Network resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT managed Virtual Network operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "managedVirtualNetworks"
+        ],
+        "operationId": "ManagedVirtualNetworks_Get",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Get": {
+            "$ref": "./examples/ManagedVirtualNetworks_Get.json"
+          }
+        },
+        "description": "Gets a managed Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed Virtual Network entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET managed Virtual Network operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_ListByFactory",
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_ListByFactory": {
+            "$ref": "./examples/ManagedPrivateEndpoints_ListByFactory.json"
+          }
+        },
+        "description": "Lists managed private endpoints.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/managedPrivateEndpointListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "put": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "managedPrivateEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Create": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
+          }
+        },
+        "description": "Creates or updates a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed private endpoint entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "description": "Managed private endpoint resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Get": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Get.json"
+          }
+        },
+        "description": "Gets a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the managed private endpoint entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET managed private endpoint operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Delete": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
+          }
+        },
+        "description": "Deletes a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from DELETE managed private endpoint operation.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -5459,6 +5877,22 @@
         }
       }
     },
+    "ExposureControlBatchRequest": {
+      "description": "A list of exposure control features.",
+      "type": "object",
+      "required": [
+        "exposureControlRequests"
+      ],
+      "properties": {
+        "exposureControlRequests": {
+          "type": "array",
+          "description": "List of exposure control features.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlRequest"
+          }
+        }
+      }
+    },
     "ExposureControlRequest": {
       "type": "object",
       "description": "The exposure control request.",
@@ -5470,6 +5904,22 @@
         "featureType": {
           "type": "string",
           "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlBatchResponse": {
+      "description": "A list of exposure control feature values.",
+      "type": "object",
+      "required": [
+        "exposureControlResponses"
+      ],
+      "properties": {
+        "exposureControlResponses": {
+          "type": "array",
+          "description": "List of exposure control feature values.",
+          "items": {
+            "$ref": "#/definitions/ExposureControlResponse"
+          }
         }
       }
     },
@@ -5855,6 +6305,80 @@
         "type",
         "referenceName"
       ]
+    },
+    "managedPrivateEndpointListResponse": {
+      "description": "A list of managed private endpoint resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed private endpoints.",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpointResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedPrivateEndpointResource": {
+      "description": "Managed private endpoint resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/ManagedPrivateEndpoint.json#/definitions/ManagedPrivateEndpoint",
+          "description": "Managed private endpoint properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ManagedVirtualNetworkListResponse": {
+      "description": "A list of managed Virtual Network resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed Virtual Networks.",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNetworkResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedVirtualNetworkResource": {
+      "description": "Managed Virtual Network resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/ManagedVirtualNetwork.json#/definitions/ManagedVirtualNetwork",
+          "description": "Managed Virtual Network properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {
@@ -5978,6 +6502,28 @@
       "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
       "minLength": 1,
       "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "managedVirtualNetworkName": {
+      "name": "managedVirtualNetworkName",
+      "description": "Managed virtual network name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
+      "x-ms-parameter-location": "method"
+    },
+    "managedPrivateEndpointName": {
+      "name": "managedPrivateEndpointName",
+      "description": "Managed private endpoint name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "minLength": 1,
+      "maxLength": 127,
       "x-ms-parameter-location": "method"
     },
     "api-version": {
