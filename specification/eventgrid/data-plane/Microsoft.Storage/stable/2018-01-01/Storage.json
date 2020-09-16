@@ -7,6 +7,21 @@
   },
   "paths": {},
   "definitions": {
+    "EventGridStorageBlobCreatedEventData": {
+      "description": "EventGrid event that contains a StorageBlobCreatedEventData event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.EventGrid/stable/2018-01-01/EventGrid.json#/definitions/EventGridReceivedEvent"
+        }
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/StorageBlobCreatedEventData"
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Storage.BlobCreated"
+    },
     "StorageBlobCreatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobCreated event.",
       "type": "object",

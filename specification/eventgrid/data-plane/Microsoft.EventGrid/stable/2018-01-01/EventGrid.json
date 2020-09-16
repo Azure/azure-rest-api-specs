@@ -257,6 +257,51 @@
       },
       "additionalProperties": true
     },
+    "EventGridReceivedEvent": {
+      "type": "object",
+      "description": "Properties of an event published to an Event Grid topic.",
+      "discriminator": "eventType",
+      "required": [
+        "id",
+        "subject",
+        "data",
+        "eventType",
+        "eventTime",
+        "dataVersion"
+      ],
+      "properties": {
+        "id": {
+          "description": "An unique identifier for the event.",
+          "type": "string"
+        },
+        "topic": {
+          "description": "The resource path of the event source.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "A resource path relative to the topic path.",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "The type of the event that occurred.",
+          "type": "string"
+        },
+        "eventTime": {
+          "description": "The time (in UTC) the event was generated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "metadataVersion": {
+          "description": "The schema version of the event metadata.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "dataVersion": {
+          "description": "The schema version of the data object.",
+          "type": "string"
+        }
+      }
+    },
     "CustomEventEvent": {
       "type": "object",
       "description": "Properties of an event published to an Event Grid topic using a custom schema"
