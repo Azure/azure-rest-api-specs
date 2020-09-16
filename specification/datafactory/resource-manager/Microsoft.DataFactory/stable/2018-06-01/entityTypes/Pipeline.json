@@ -4431,6 +4431,17 @@
         }
       }
     },
+    "DynamicsSinkWriteBehavior": {
+      "description": "Defines values for DynamicsSinkWriteBehavior.",
+      "type": "string",
+      "enum": [
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsSinkWriteBehavior",
+        "modelAsString": true
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -4442,14 +4453,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
@@ -4475,14 +4479,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
@@ -4508,14 +4505,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
