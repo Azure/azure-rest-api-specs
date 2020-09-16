@@ -744,6 +744,111 @@
       },
       "x-ms-azure-resource": true
     },
+    "DelegatedControllers": {
+      "description": "An array of Delegated controller resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedController"
+          },
+          "description": "An array of Delegated controller resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ControllerTypeParameters": {
+      "description": "Details of controller type.",
+      "type": "object",
+      "properties": {
+        "controllerType": {
+          "type": "string",
+          "description": "Type of controller",
+          "enum": [
+            "Kubernetes"
+          ],
+          "x-ms-enum": {
+            "name": "ControllerType",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Controller properties",
+          "$ref": "#/definitions/ControllerInstanceProperties"
+        }
+      }
+    },
+    "DelegatedController": {
+      "description": "Represents an instance of a DNC controller.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ControllerResponseProperties",
+          "description": "Properties of the provision operation request."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControllerResource"
+        }
+      ]
+    },
+    "ControllerResponseProperties": {
+      "description": "Properties of Delegated controller resource.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ControllerState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of dnc controller resource."
+        },
+        "dncAppId": {
+          "type": "string",
+          "description": "The current state of dnc controller resource."
+        },
+        "dncEndpoint": {
+          "type": "string",
+          "description": "dnc endpoint url that customers can use to connect to"
+        }
+      }
+    },
+    "ControllerInstanceProperties": {
+      "description": "Properties of orchestrator",
+      "type": "object",
+      "properties": {
+        "serverAppID": {
+          "description": "AAD ID used with apiserver",
+          "type": "string"
+        },
+        "serverTenantID": {
+          "description": "TenantID of server App ID",
+          "type": "string"
+        },
+        "clusterRootCA": {
+          "description": "RootCA certificate of kubernetes cluster",
+          "type": "string"
+        },
+        "apiServerEndpoint": {
+          "description": "APIServer url",
+          "type": "string"
+        }
+      }
+    },
     "DelegatedSubnetResource": {
       "description": "Represents an instance of a DelegatedSubnet resource.",
       "type": "object",
@@ -776,25 +881,9 @@
       "properties": {
         "controllerID": {
           "type": "string",
-          "description": "Delegated Network Controller ID"
+          "description": "Delegated Network Controller ARM resource ID"
         }
       }
-    },
-    "DelegatedControllers": {
-      "description": "An array of Delegated controller resources.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DelegatedController"
-          },
-          "description": "An array of Delegated controller resources."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "DelegatedSubnetList": {
       "description": "An array of Delegated subnets resources.",
@@ -812,105 +901,13 @@
         "value"
       ]
     },
-    "ControllerTypeParameters": {
-      "description": "Details of controller type.",
-      "type": "object",
-      "properties": {
-        "controllerType": {
-          "type": "string",
-          "description": "Type of Delegated controller."
-        },
-        "kubernetesProperties": {
-          "type": "array",
-          "description": "properties of kubernetes clusters",
-          "items": {
-            "$ref": "#/definitions/KubernetesProperties"
-          }
-        }
-      }
-    },
-    "DelegatedController": {
-      "description": "Represents an instance of a DNC controller.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ControllerProperties",
-          "description": "Properties of the provision operation request."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ControllerResource"
-        }
-      ]
-    },
-    "ControllerProperties": {
-      "description": "Properties of Delegated controller resource.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "type": "string",
-          "enum": [
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Provisioning"
-          ],
-          "x-ms-enum": {
-            "name": "ControllerState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current state of dnc controller resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of dnc controller."
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource GUID property of the controller resource."
-        },
-        "dncAppID": {
-          "type": "string",
-          "description": "Get controller AAD ID."
-        },
-        "dncEndpoint": {
-          "type": "string",
-          "description": "Dnc Endpoint url."
-        }
-      }
-    },
-    "KubernetesProperties": {
-      "description": "Properties of kubernetes cluster",
-      "type": "object",
-      "properties": {
-        "serverAppID": {
-          "description": "AAD ID used with apiserver",
-          "type": "string"
-        },
-        "serverTenantID": {
-          "description": "TenantID of server App ID",
-          "type": "string"
-        },
-        "clusterRootCA": {
-          "description": "RootCA certificate of kubernetes cluster",
-          "type": "string"
-        },
-        "apiServerEndpoint": {
-          "description": "APIServer url",
-          "type": "string"
-        }
-      }
-    },
     "DelegatedSubnet": {
       "description": "Delegated subnet details",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DelegatedSubnetProperties",
+          "$ref": "#/definitions/DelegatedSubnetResponseProperties",
           "description": "Properties of the delegated subnet request"
         }
       },
@@ -920,7 +917,7 @@
         }
       ]
     },
-    "DelegatedSubnetProperties": {
+    "DelegatedSubnetResponseProperties": {
       "description": "Properties of delegated subnet resource.",
       "type": "object",
       "properties": {
@@ -938,6 +935,10 @@
           },
           "readOnly": true,
           "description": "The current state of delegated subnet resource."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Guid for the resource(delegatedSubnet) created"
         }
       }
     },
