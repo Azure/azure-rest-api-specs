@@ -122,6 +122,9 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IotDefenderSettingsModel"
           }
         ],
         "responses": {
@@ -251,7 +254,16 @@
     "IotDefenderSettingsProperties": {
       "type": "object",
       "description": "IoT Defender settings properties",
-      "properties": {}
+      "properties": {
+        "unmanagedDevicesQuota": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Size of the unmanaged devices quota. Value is required to be in multiples of 1000."
+        }
+      },
+      "required": [
+        "unmanagedDevicesQuota"
+      ]
     },
     "DownloadLink": {
       "type": "string",
@@ -445,5 +457,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "IotDefenderSettingsModel": {
+      "name": "iotDefenderSettingsModel",
+      "in": "body",
+      "required": true,
+      "description": "The IoT defender settings model",
+      "schema": {
+        "$ref": "#/definitions/IotDefenderSettingsModel"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
