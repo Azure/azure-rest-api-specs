@@ -1163,15 +1163,29 @@
         "description": "Deletes the managed application definition.",
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1201,12 +1215,29 @@
         "description": "Creates a new managed application definition.",
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -1216,9 +1247,6 @@
               "$ref": "#/definitions/ApplicationDefinition"
             },
             "description": "Parameters supplied to the create or update a managed application definition."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
