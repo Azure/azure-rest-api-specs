@@ -2668,12 +2668,13 @@
     "DiskRestorePointProperties": {
       "properties": {
         "timeCreated": {
-          "type": "DateTimeOffset",
+          "type": "string",
+          "format": "date-time",
           "description": "The timestamp of restorePoint creation",
           "readOnly": true
         },
         "sourceResourceId": {
-          "type": "Uri",
+          "type": "string",
           "description": "arm id of source disk",
           "readOnly": true
         },
@@ -2707,7 +2708,7 @@
           "readOnly": true
         },
         "sourceUniqueId": {
-          "type": "Guid",
+          "type": "string",
           "description": "unique incarnation id of the source disk",
           "readonly": true
         },
