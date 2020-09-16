@@ -1343,6 +1343,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}": {
+      "get": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_Get",
+        "description": "Get disk restorePoint resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskRestorePoint"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an incremental disk restorePoint resource.": {
+            "$ref": "./examples/GetDiskRestorePointResources.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2614,6 +2656,66 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "DiskRestorePoint": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskProperties"
+        }
+      }
+    },
+    "DiskRestorePointProperties": {
+      "properties": {
+        "timeCreated": {
+          "type": "DateTimeOffset",
+          "description": "The timestamp of restorePoint creation",
+          "readOnly": true
+        },
+        "sourceResourceId": {
+          "type": "Uri",
+          "description": "arm id of source disk",
+          "readOnly": true
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        }, 
+        "familyId": {
+          "type": "string",
+          "description": "id of the backing snapshot's MIS family",
+          "readOnly": true
+        },
+        "sourceUniqueId": {
+          "type": "Guid",
+          "description": "unique incarnation id of the source disk",
+          "readonly": true
+        },
+        "diskEncryptionSet": {
+           "$ref": "#/definitions/DiskEncryptionSet"
+        }
+      },
+      "description": "Properties of an incremental disk restore point"
     },
     "PrivateLinkResourceListResult": {
       "properties": {
