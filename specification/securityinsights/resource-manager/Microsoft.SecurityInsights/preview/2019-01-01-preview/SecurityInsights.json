@@ -6264,6 +6264,91 @@
       },
       "type": "object"
     },
+    "HuntingBookmark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a Hunting bookmark entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntingBookmarkProperties",
+          "description": "HuntingBookmark entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
+    },
+    "HuntingBookmarkProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Describes bookmark properties",
+      "properties": {
+        "created": {
+          "description": "The time the bookmark was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the bookmark",
+          "type": "string"
+        },
+        "eventTime": {
+          "description": "The time of the event",
+          "format": "date-time",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the bookmark",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query of the bookmark.",
+          "type": "string"
+        },
+        "queryResult": {
+          "description": "The query result of the bookmark.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the bookmark was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "query"
+      ],
+      "type": "object"
+    },
     "IncidentAdditionalData": {
       "description": "Incident additional data property bag.",
       "properties": {
@@ -7899,91 +7984,6 @@
         "lookbackDuration",
         "entitiesMatchingMethod"
       ]
-    },
-    "HuntingBookmark": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "description": "Represents a Hunting bookmark entity.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HuntingBookmarkProperties",
-          "description": "HuntingBookmark entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "Bookmark"
-    },
-    "HuntingBookmarkProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "description": "Describes bookmark properties",
-      "properties": {
-        "created": {
-          "description": "The time the bookmark was created",
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that created the bookmark",
-          "type": "object"
-        },
-        "displayName": {
-          "description": "The display name of the bookmark",
-          "type": "string"
-        },
-        "eventTime": {
-          "description": "The time of the event",
-          "format": "date-time",
-          "type": "string"
-        },
-        "labels": {
-          "description": "List of labels relevant to this bookmark",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "type": "array"
-        },
-        "notes": {
-          "description": "The notes of the bookmark",
-          "type": "string"
-        },
-        "query": {
-          "description": "The query of the bookmark.",
-          "type": "string"
-        },
-        "queryResult": {
-          "description": "The query result of the bookmark.",
-          "type": "string"
-        },
-        "updated": {
-          "description": "The last time the bookmark was updated",
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that updated the bookmark",
-          "type": "object"
-        },
-        "incidentInfo": {
-          "$ref": "#/definitions/IncidentInfo",
-          "description": "Describes an incident that relates to bookmark",
-          "type": "object"
-        }
-      },
-      "required": [
-        "displayName",
-        "query"
-      ],
-      "type": "object"
     },
     "SecurityAlert": {
       "allOf": [
