@@ -168,7 +168,7 @@
             "$ref": "./examples/BillingActivityList.json"
           }
         },
-        "operationId": "BillingActivity_Get",
+        "operationId": "BillingActivityList_Get",
         "description": "Gets billing activity logs for a billing account",
         "parameters": [
           {
@@ -216,8 +216,8 @@
             "$ref": "./examples/BillingActivityRelatedProperty.json"
           }
         },
-        "operationId": "BillingAuditLogsRelatedProperties_Get",
-        "description": "Gets detailed billing audit logs by activity log id and billing account name",
+        "operationId": "BillingActivityLogsRelatedProperties_Get",
+        "description": "Gets detailed billing activity logs by activity log id and billing account name",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -241,7 +241,8 @@
             "headers": {
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -251,6 +252,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -264,7 +268,7 @@
             "$ref": "./examples/BillingActivityEventCategory.json"
           }
         },
-        "operationId": "BillingActivityTypes_Get",
+        "operationId": "BillingActivityTypesList_Get",
         "description": "Gets billing activity types at enrollment scope.",
         "parameters": [
           {
@@ -288,8 +292,8 @@
             }
           }
         },
-	"x-ms-pageable": {
-            "nextLinkName": "nextLink"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5683,7 +5687,7 @@
       "description": "The additional specific properties for an event.",
       "properties": {
         "name": {
-          "description": "Name of the additional proerty for an event.",
+          "description": "Name of the additional property for an event.",
           "type": "string",
           "readOnly": true
         }
