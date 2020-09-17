@@ -20,6 +20,9 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -200,7 +203,7 @@
             "description": "The start Timestamp for the desired history",
             "required": false,
             "type": "string",
-            "format": "datetime"
+            "format": "date-time"
           },
           {
             "in": "query",
@@ -208,14 +211,14 @@
             "description": "The end Timestamp for the desired history",
             "required": false,
             "type": "string",
-            "format": "datetime"
+            "format": "date-time"
           }
         ],
         "responses": {
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "$ref": "#/definitions/MonitorHistory"
+              "$ref": "#/definitions/MonitorStateChangeList"
             }
           },
           "default": {
@@ -283,10 +286,8 @@
           }
         },
         "x-ms-examples": {
-          "x-ms-examples": {
-            "Get monitor state change with default values": { "$ref": "./examples/MonitorStateChange_GetDefault.json" },
-            "Get monitor state change with expanded values": { "$ref": "./examples/MonitorStateChange_GetExpanded.json" }
-          }
+          "Get monitor state change with default values": { "$ref": "./examples/MonitorStateChange_GetDefault.json" },
+          "Get monitor state change with expanded values": { "$ref": "./examples/MonitorStateChange_GetExpanded.json" }
         }
       }
     }
@@ -376,7 +377,7 @@
     }
   },
   "definitions": {
-    "MonitorHistory": {
+    "MonitorStateChangeList": {
       "title": "Monitor History",
       "description": "The monitor history of a monitor",
       "type": "object",
@@ -391,6 +392,8 @@
           }
         },
         "nextLink": {
+          "title": "Pageable next link",
+          "description": "Link to next page if list is too long.",
           "type": "string"
         }
       }
@@ -410,6 +413,8 @@
           }
         },
         "nextLink": {
+          "title": "Pageable next link",
+          "description": "Link to next page if list is too long.",
           "type": "string"
         }
       }
@@ -448,6 +453,7 @@
           "title": "Monitor Properties",
           "description": "Properties of the monitor.",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "monitorName": {
               "title": "Monitor Name",
@@ -549,6 +555,7 @@
           "title": "Monitor Properties",
           "description": "Properties of the monitor.",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "monitorName": {
               "title": "Monitor Name",
@@ -627,6 +634,11 @@
           "items": {
             "$ref": "#/definitions/Operation"
           }
+        },
+        "nextLink": {
+          "title": "Pageable next link",
+          "description": "Link to next page if list is too long.",
+          "type": "string"
         }
       }
     },

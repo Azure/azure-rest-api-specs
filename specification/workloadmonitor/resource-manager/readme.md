@@ -43,6 +43,21 @@ directive:
     - R3026 # Create/Update/Delete operations are not exposed.
 ```
 
+### Tag: package-2020-01-13-preview
+
+These settings apply only when `--tag=package-2020-01-13-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-13-preview'
+input-file:
+- Microsoft.WorkloadMonitor/preview/2020-01-13-preview/Microsoft.WorkloadMonitor.json
+```
+
+``` yaml
+directive:
+- suppress:
+    - R3026 # Create/Update/Delete operations are not exposed.
+```
+
 ---
 # Code Generation
 
@@ -123,6 +138,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-08-31-preview
+  - tag: package-2020-01-13-preview
 ```
 
 ### Tag: package-2018-08-31-preview and go
@@ -132,6 +148,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-08-31-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/workloadmonitor/mgmt/2018-08-31-preview/workloadmonitor
+```
+
+### Tag: package-2020-01-13-preview and go
+
+These settings apply only when `--tag=package-2020-01-13-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-01-13-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/workloadmonitor/mgmt/2020-01-13-preview/workloadmonitor
 ```
 
 
@@ -154,6 +179,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-workloadmonitor
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-08-31-preview
+  - tag: package-2020-01-13-preview
 ```
 
 ### Tag: package-2018-08-31-preview and java
@@ -165,6 +191,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.workloadmonitor.v2018_08_31_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/workloadmonitor/mgmt-v2018_08_31_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-01-13-preview and java
+
+These settings apply only when `--tag=package-2020-01-13-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01-13-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.workloadmonitor.v2020-01-13-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/workloadmonitor/mgmt-v2020-01-13-preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -186,6 +225,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+  - $(this-folder)/Microsoft.WorkloadMonitor/preview/2020-01-13-preview/Microsoft.WorkloadMonitor.json
 
 ```
 
@@ -196,4 +236,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
