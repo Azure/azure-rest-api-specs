@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "resourceGroup",
+    "enterprisePolicyName": "enterprisePolicy",
+    "api-version": "2020-10-30-preview",
+    "parameters": {
+      "tags": {
+        "Organization": "Administration"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "East US"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "enterprisePolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.PowerPlatform/enterprisePolicies/enterprisePolicy",
+        "type": "Microsoft.PowerPlatform/enterprisePolicies",
+        "location": "East US",
+        "tags": {
+          "Organization": "Administration"
+        },
+        "identity": {
+          "systemAssignedIdentityPrincipalId": "principalId",
+          "tenantId": "tenantId",
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  }
+}
