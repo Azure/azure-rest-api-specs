@@ -984,6 +984,300 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelineRuns": {
+      "get": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "List pipeline runs in a workspace.",
+        "description": "List pipelines runs in a workspace",
+        "operationId": "PipelineRuns_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineRuns_ListByWorkspace": {
+            "$ref": "./examples/PipelineRuns_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelineRuns/{pipelineRunName}": {
+      "get": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "Get pipeline run.",
+        "description": "Get a pipeline run from a workspace",
+        "operationId": "PipelineRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "./examples/PipelineRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelineRuns/{pipelineRunName}/cancel": {
+      "post": {
+        "tags": [
+          "PipelineRun"
+        ],
+        "summary": "Request cancellation of a pipeline run",
+        "description": "Request to cancel a pipeline run.",
+        "operationId": "PipelineRuns_Cancel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Cancel": {
+            "$ref": "./examples/PipelineRuns_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns": {
+      "get": {
+        "tags": [
+          "PipelineStepRun"
+        ],
+        "summary": "List all step runs in a pipeline run.",
+        "description": "List all step runs in a pipeline run",
+        "operationId": "PipelineStepRuns_ListByPipelineRun",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepRunList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PipelineStepRuns_ListByPipelineRun": {
+            "$ref": "./examples/PipelineStepRuns_ListByPipelineRun.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns/{pipelineStepRunName}": {
+      "get": {
+        "tags": [
+          "PipelineStepRun"
+        ],
+        "summary": "Get pipeline step run.",
+        "description": "Get a pipeline step run from a pipeline run",
+        "operationId": "PipelineStepRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pipelineStepRunName",
+            "in": "path",
+            "description": "The name of the pipeline step run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineStepRuns_Get": {
+            "$ref": "./examples/PipelineStepRuns_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines": {
       "get": {
         "tags": [
@@ -1215,321 +1509,6 @@
         "x-ms-examples": {
           "Pipelines_Delete": {
             "$ref": "./examples/Pipelines_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns": {
-      "get": {
-        "tags": [
-          "PipelineRun"
-        ],
-        "summary": "List pipeline runs in a pipeline.",
-        "description": "List pipelines run of a pipeline",
-        "operationId": "PipelineRuns_ListByPipeline",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/workspaceName"
-          },
-          {
-            "name": "pipelineName",
-            "in": "path",
-            "description": "The name of the pipeline.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PipelineRunList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataCollaborationError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PipelineRuns_ListByPipeline": {
-            "$ref": "./examples/PipelineRuns_ListByPipeline.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}": {
-      "get": {
-        "tags": [
-          "PipelineRun"
-        ],
-        "summary": "Get pipeline run.",
-        "description": "Get a pipeline run in a pipeline",
-        "operationId": "PipelineRuns_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/workspaceName"
-          },
-          {
-            "name": "pipelineName",
-            "in": "path",
-            "description": "The name of the pipeline.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pipelineRunName",
-            "in": "path",
-            "description": "The name of the pipeline run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PipelineRun"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataCollaborationError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PipelineRuns_Get": {
-            "$ref": "./examples/PipelineRuns_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/cancel": {
-      "post": {
-        "tags": [
-          "PipelineRun"
-        ],
-        "summary": "Request cancellation of a pipeline run",
-        "description": "Request to cancel a pipeline run.",
-        "operationId": "PipelineRuns_Cancel",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/workspaceName"
-          },
-          {
-            "name": "pipelineName",
-            "in": "path",
-            "description": "The name of the pipeline.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pipelineRunName",
-            "in": "path",
-            "description": "The name of the pipeline run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PipelineRun"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/PipelineRun"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataCollaborationError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "PipelineRuns_Cancel": {
-            "$ref": "./examples/PipelineRuns_Cancel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns": {
-      "get": {
-        "tags": [
-          "PipelineStepRun"
-        ],
-        "summary": "List pipeline step runs in a pipeline run.",
-        "description": "List pipelines run of a pipeline",
-        "operationId": "PipelineStepRuns_ListByPipelineRun",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/workspaceName"
-          },
-          {
-            "name": "pipelineName",
-            "in": "path",
-            "description": "The name of the pipeline.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pipelineRunName",
-            "in": "path",
-            "description": "The name of the pipeline run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PipelineStepRunList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataCollaborationError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PipelineStepRuns_ListByPipelineRun": {
-            "$ref": "./examples/PipelineStepRuns_ListByPipelineRun.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/pipelines/{pipelineName}/pipelineRuns/{pipelineRunName}/pipelineStepRuns/{pipelineStepRunId}": {
-      "get": {
-        "tags": [
-          "PipelineStepRun"
-        ],
-        "summary": "Get pipeline step run.",
-        "description": "Get a pipeline run in a pipeline",
-        "operationId": "PipelineStepRuns_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/workspaceName"
-          },
-          {
-            "name": "pipelineName",
-            "in": "path",
-            "description": "The name of the pipeline.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pipelineRunName",
-            "in": "path",
-            "description": "The name of the pipeline run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pipelineStepRunId",
-            "in": "path",
-            "description": "The id of the pipeline step run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PipelineStepRun"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataCollaborationError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PipelineStepRuns_Get": {
-            "$ref": "./examples/PipelineStepRuns_Get.json"
           }
         }
       }
@@ -1812,6 +1791,15 @@
             "type": "string"
           },
           {
+            "name": "pipelineRunParameters",
+            "in": "body",
+            "description": "The parameters for running the pipeline",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineRunParameters"
+            }
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1822,8 +1810,8 @@
               "$ref": "#/definitions/PipelineRun"
             }
           },
-          "201": {
-            "description": "Success",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/PipelineRun"
             }
@@ -1834,6 +1822,10 @@
               "$ref": "#/definitions/DataCollaborationError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Pipelines_Run": {
@@ -4016,6 +4008,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/resourceReferences": {
+      "get": {
+        "tags": [
+          "ResourceReference"
+        ],
+        "summary": "List resource references in a Workspace.",
+        "description": "List resource references in a Workspace",
+        "operationId": "ResourceReferences_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceReferenceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ResourceReferences_ListByWorkspace": {
+            "$ref": "./examples/ResourceReferences_ListByWorkspace.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/scripts": {
       "get": {
         "tags": [
@@ -4990,6 +5049,80 @@
         }
       }
     },
+    "DataAssetReferenceResourceReference": {
+      "description": "ResourceReference used to only allow access if the resource is used within the specified Azure dataAssetReference.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataAssetReferenceResourceReferenceProperties",
+          "description": "Properties for dataAssetReference resource reference",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "DataAssetReference"
+    },
+    "DataAssetReferenceResourceReferenceProperties": {
+      "description": "Properties for dataAssetReference resource reference used to only allow access if the resource is used within the specified Azure dataAssetReference.",
+      "type": "object",
+      "properties": {
+        "dataAssetReferenceId": {
+          "description": "The unique identifier of the referenced data asset",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "General Description of the data asset reference",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataAssetResourceReference": {
+      "description": "ResourceReference used to only allow access if the resource is used within the specified Azure dataAsset.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataAssetResourceReferenceProperties",
+          "description": "Properties for dataAsset resource reference",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "DataAsset"
+    },
+    "DataAssetResourceReferenceProperties": {
+      "description": "Properties for dataAsset resource reference used to only allow access if the resource is used within the specified Azure dataAsset.",
+      "type": "object",
+      "properties": {
+        "dataAssetId": {
+          "description": "The unique identifier of the referenced data asset",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "General Description of the data asset reference",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "DataCollaborationError": {
       "description": "The data collaboration error model.",
       "required": [
@@ -5826,6 +5959,24 @@
         }
       }
     },
+    "PipelineRunParameters": {
+      "description": "The parameters for a pipeline run.",
+      "type": "object",
+      "properties": {
+        "pipelineRunMode": {
+          "description": "Mode of pipeline run used.",
+          "enum": [
+            "Production",
+            "Test"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "pipelineRunMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "PipelineRunProperties": {
       "description": "A pipeline run property bag.",
       "type": "object",
@@ -5838,12 +5989,22 @@
         },
         "endTime": {
           "format": "date-time",
-          "description": "End time of pipeline",
+          "description": "End time of pipeline run",
           "type": "string",
           "readOnly": true
         },
         "errorMessage": {
           "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineId": {
+          "description": "Object id of the pipeline used to create this run",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineName": {
+          "description": "Name of the pipeline used to create this run",
           "type": "string",
           "readOnly": true
         },
@@ -5853,7 +6014,9 @@
             "Succeeded",
             "Failed",
             "InProgress",
+            "Preparing",
             "Queued",
+            "Unknown",
             "Cancelled",
             "Canceling"
           ],
@@ -5866,17 +6029,7 @@
         },
         "startTime": {
           "format": "date-time",
-          "description": "Start time of pipeline",
-          "type": "string",
-          "readOnly": true
-        },
-        "userEmail": {
-          "description": "Email of the user who created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "userName": {
-          "description": "Name of the user who created the resource",
+          "description": "Start time of pipeline run",
           "type": "string",
           "readOnly": true
         }
@@ -5972,13 +6125,13 @@
       "properties": {
         "durationMs": {
           "format": "int32",
-          "description": "Duration of pipeline step",
+          "description": "Duration of pipeline step run",
           "type": "integer",
           "readOnly": true
         },
         "endTime": {
           "format": "date-time",
-          "description": "End time of pipeline step",
+          "description": "End time of pipeline step run",
           "type": "string",
           "readOnly": true
         },
@@ -5987,8 +6140,8 @@
           "type": "string",
           "readOnly": true
         },
-        "pipelineStepId": {
-          "description": "The id of pipeline step.",
+        "pipelineStepName": {
+          "description": "The name of the step used for this step run",
           "type": "string",
           "readOnly": true
         },
@@ -5998,7 +6151,9 @@
             "Succeeded",
             "Failed",
             "InProgress",
+            "Preparing",
             "Queued",
+            "Unknown",
             "Cancelled",
             "Canceling"
           ],
@@ -6011,7 +6166,7 @@
         },
         "startTime": {
           "format": "date-time",
-          "description": "Start time of pipeline step",
+          "description": "Start time of pipeline step run",
           "type": "string",
           "readOnly": true
         }
@@ -6220,6 +6375,75 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResourceReference": {
+      "description": "A set of data from external storage",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of resource reference.",
+          "enum": [
+            "DataAsset",
+            "DataAssetReference",
+            "Script",
+            "ScriptReference"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "description": "Id of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceName": {
+          "description": "Name of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "Type of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "description": "SystemData Info of resource",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ResourceReferenceList": {
+      "description": "List response for get resource references",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          }
+        }
+      }
+    },
     "Script": {
       "description": "A script data transfer object",
       "required": [
@@ -6416,6 +6640,142 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "scriptVisibility",
+            "modelAsString": true
+          }
+        },
+        "sinks": {
+          "description": "The list of parameters the script can use as it's data sinks",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sources": {
+          "description": "The list of parameters the script can use as it's data sources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ScriptReferenceResourceReference": {
+      "description": "ResourceReference used to only allow access if the resource is used within the specified Azure scriptReference.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScriptReferenceResourceReferenceProperties",
+          "description": "Properties for scriptReference resource reference",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "ScriptReference"
+    },
+    "ScriptReferenceResourceReferenceProperties": {
+      "description": "Properties for scriptReference resource reference used to only allow access if the resource is used within the specified Azure scriptReference.",
+      "type": "object",
+      "properties": {
+        "revision": {
+          "format": "int32",
+          "description": "The revision number of the scriptReference being referenced.\r\nIf omitted, the scriptReference latest version will be referenced.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scriptKind": {
+          "description": "Kind of the referenced script.",
+          "enum": [
+            "SynapseSpark"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "scriptKind",
+            "modelAsString": true
+          }
+        },
+        "scriptReferenceId": {
+          "description": "The unique identifier of the referenced scriptReference",
+          "type": "string",
+          "readOnly": true
+        },
+        "sinks": {
+          "description": "The list of parameters the scriptReference can use as it's data sinks",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sources": {
+          "description": "The list of parameters the scriptReference can use as it's data sources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ScriptResourceReference": {
+      "description": "ResourceReference used to only allow access if the resource is used within the specified Azure script.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScriptResourceReferenceProperties",
+          "description": "Properties for script resource reference",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Script"
+    },
+    "ScriptResourceReferenceProperties": {
+      "description": "Properties for script resource reference used to only allow access if the resource is used within the specified Azure script.",
+      "type": "object",
+      "properties": {
+        "revision": {
+          "format": "int32",
+          "description": "The revision number of the script being referenced.\r\nIf omitted, the script latest version will be referenced.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scriptId": {
+          "description": "The unique identifier of the referenced script",
+          "type": "string",
+          "readOnly": true
+        },
+        "scriptKind": {
+          "description": "Kind of the referenced script.",
+          "enum": [
+            "SynapseSpark"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "scriptKind",
             "modelAsString": true
           }
         },
