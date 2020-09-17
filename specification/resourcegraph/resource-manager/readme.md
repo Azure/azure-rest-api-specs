@@ -40,6 +40,14 @@ semantic-validator: true
 model-validator: true
 message-format: json
 ```
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-09'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcegraph.json
+```
 
 ### Tag: package-preview-2020-04
 
