@@ -27,4 +27,5 @@ cli:
         alias:
             - n
             - extension_name
+            - name
 ```
