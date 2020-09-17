@@ -22,7 +22,7 @@ cli:
         alias:
             - auto_upgrade_minor
       - where:
-            operationGroup: 'machineExtensions'
+            operationGroup: 'machineextensions'
             param: 'name'
         alias:
             - n
