@@ -878,6 +878,11 @@
                             "format": "date-time-rfc1123",
                             "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
                           },
+                            "x-ms-lease-time": {
+                                "x-ms-client-name": "LeaseTime",
+                                "type": "integer",
+                                "description": "Approximate time remaining in the lease period, in seconds."
+                            },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
@@ -5285,16 +5290,14 @@
                 "name": "Range"
             }
         },
-        "Protocol": {
+        "ShareProtocolSettings": {
             "description": "Protocol settings",
             "type": "object",
-			"xml": {
-                "name": "ProtocolSettings"
-            },
             "properties": {
-                "Smb": {
+                "ShareSmbSettings": {
                     "description": "Settings for SMB protocol.",
-                    "$ref": "#/definitions/Smb",
+                    "$ref": "#/definitions/ShareSmbSettings",
+					"x-ms-client-name": "smb",
                     "xml": {
                         "name": "SMB"
                     }
@@ -5465,7 +5468,7 @@
                 "name": "SignedIdentifiers"
             }
         },
-        "Smb": {
+        "ShareSmbSettings": {
             "description": "Settings for SMB protocol.",
             "type": "object",
             "properties": {
@@ -5497,9 +5500,13 @@
                         "wrapped": true
                     }
                 },
-                "Protocol": {
+                "ShareProtocolSettings": {
                     "description": "Protocol settings",
-                    "$ref":"#/definitions/Protocol"
+					"x-ms-client-name": "Protocol",
+					"xml": {
+                        "name": "ProtocolSettings"
+                    },
+                    "$ref":"#/definitions/ShareProtocolSettings"
                 }
             }
         },
