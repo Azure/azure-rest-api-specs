@@ -21,10 +21,4 @@ cli:
             param: 'autoUpgradeMinorVersion'
         alias:
             - auto_upgrade_minor
-      - where:
-            operationGroup: 'machineextensions'
-            param: 'name'
-        alias:
-            - n
-            - extension_name
 ```
