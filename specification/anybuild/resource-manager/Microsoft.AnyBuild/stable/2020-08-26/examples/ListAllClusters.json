@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-1234567890ab",
+    "api-version": "2020-08-26"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/MyResourceGroup/providers/Microsoft.AnyBuild/clusters/MyCluster",
+            "name": "MyCluster",
+            "type": "Cluster",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Creating",
+              "agentsMode": "Inflated",
+              "clusterUri": "anybuild-mycluster.westus.cloudapp.azure.com",
+              "pools": [
+                {
+                  "cores": 2,
+                  "agentOs": {
+                    "osOffer": "UbuntuServer",
+                    "osSKU": "18.04-LTS"
+                  },
+                  "capacity": {
+                    "minimum": 2,
+                    "maximum": 12
+                  }
+                },
+                {
+                  "cores": 4,
+                  "agentOs": {
+                    "osOffer": "Windows-10",
+                    "osSKU": "19h2-pro"
+                  },
+                  "capacity": {
+                    "minimum": 4,
+                    "maximum": 8
+                  }
+                },
+                {
+                  "cores": 16,
+                  "agentOs": {
+                    "osOffer": "Windows-10",
+                    "osSKU": "19h2-pro"
+                  },
+                  "capacity": {
+                    "minimum": 1,
+                    "maximum": 6
+                  },
+                  "schedules": [
+                    {
+                      "capacity": {
+                        "minimum": 0,
+                        "maximum": 4
+                      },
+                      "timeZone": "Pacific Standard Time",
+                      "begin": {
+                        "dayOfWeek": "Friday",
+                        "hour": 17,
+                        "minute": 0
+                      },
+                      "end": {
+                        "dayOfWeek": "Monday",
+                        "hour": 7,
+                        "minute": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

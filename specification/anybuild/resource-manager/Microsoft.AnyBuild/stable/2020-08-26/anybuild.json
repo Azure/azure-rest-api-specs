@@ -1,0 +1,779 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-26",
+    "title": "anybuild",
+    "description": "AnyBuild is a remote execution service that accelerates builds via distribution and caching.",
+    "x-ms-code-generation-settings": {
+      "name": "AnyBuildClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnyBuild/clusters": {
+      "get": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Gets all clusters in a subscription.",
+        "operationId": "Clusters_ListAll",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all clusters in a subscription": {
+            "$ref": "./examples/ListAllClusters.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnyBuild/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_List",
+        "description": "Lists all clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all clusters in a resource group.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all clusters in a resource group": {
+            "$ref": "./examples/ListClusters.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnyBuild/clusters/{clusterName}": {
+      "get": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Gets cluster information by name in a resource group.",
+        "operationId": "Clusters_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster details by name": {
+            "$ref": "./examples/GetCluster.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Create or update a cluster.",
+        "operationId": "Clusters_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The operation will be completed asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a new cluster": {
+            "$ref": "./examples/CreateOrUpdateCluster.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Update a cluster.",
+        "operationId": "Clusters_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Updates a cluster": {
+            "$ref": "./examples/UpdateCluster.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Deletes cluster by name.",
+        "operationId": "Clusters_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnyBuild/clusters/{clusterName}/reset": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Reset",
+        "description": "Reset cluster to its initial state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterResetParameters"
+            },
+            "description": "Parameters supplied to the Reset cluster operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Reset a Cluster.": {
+            "$ref": "./examples/ResetCluster.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AnyBuild/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all available operations for Microsoft.AnyBuild provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClusterListResult": {
+      "description": "List of all clusters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of clusters. Call ListNext() with this URI to fetch the next page of clusters."
+        }
+      }
+    },
+    "Cluster": {
+      "description": "Detailed information about AnyBuild cluster and its pools of agents.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties"
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "Describes the properties of a Cluster.",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the cluster.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deflating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "agentsMode": {
+          "$ref": "#/definitions/AgentsMode"
+        },
+        "clusterUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The fully-qualified cluster URI."
+        },
+        "pools": {
+          "type": "array",
+          "description": "List of agent pools in the cluster.",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        }
+      }
+    },
+    "AgentsMode": {
+      "description": "Defines expected mode of agents in the cluster when provisioning is complete. When Deflated, all data stored in the cluster and all its agents is deleted. When Inflated, all pools are brought up to the required capacity.",
+      "enum": [
+        "Inflated",
+        "Deflated"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AgentsMode",
+        "modelAsString": true
+      }
+    },
+    "Pool": {
+      "description": "Describes a pool of agents.",
+      "properties": {
+        "cores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of cores supported by each agent in the pool."
+        },
+        "agentOs": {
+          "$ref": "#/definitions/AgentOs",
+          "description": "Details about operating system to use for agents in the pool."
+        },
+        "capacity": {
+          "$ref": "#/definitions/PoolCapacity",
+          "description": "The default capacity range of the pool. Scheduled capacity changes can change the range."
+        },
+        "schedules": {
+          "type": "array",
+          "description": "Schedules for controlling capacity of the pool throughout days the week.",
+          "items": {
+            "$ref": "#/definitions/PoolSchedule"
+          }
+        }
+      }
+    },
+    "AgentOs": {
+      "description": "Describes the type of operating system to use for agents in this pool.",
+      "required": [
+        "osOffer",
+        "osSKU"
+      ],
+      "properties": {
+        "osOffer": {
+          "type": "string",
+          "description": "The offer of base image used to create agents in the pool. For more information see [ImageReference.offer](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachinescalesets/get#imagereference)."
+        },
+        "osSKU": {
+          "type": "string",
+          "description": "The SKU of base image used to create agents in the pool. For more information see [ImageReference.sku](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachinescalesets/get#imagereference)."
+        }
+      }
+    },
+    "PoolCapacity": {
+      "description": "Describes capacity range of the pool. Auto-scaling can increase or decrease agent pool counts dynamically within this range.",
+      "required": [
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of agents in the pool."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of agents in the pool."
+        }
+      }
+    },
+    "PoolSchedule": {
+      "description": "Schedule for controlling capacity of the pool during the specified time interval.",
+      "required": [
+        "capacity",
+        "timeZone",
+        "begin",
+        "end"
+      ],
+      "properties": {
+        "capacity": {
+          "$ref": "#/definitions/PoolCapacity",
+          "description": "Capacity range of this time interval."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time zone for the beginning and ending time of this time interval. The values are the same as for [RecurrentSchedule.timeZone](https://docs.microsoft.com/en-us/rest/api/monitor/autoscalesettings/listbyresourcegroup#recurrentschedule)."
+        },
+        "begin": {
+          "$ref": "#/definitions/TimeOfDay",
+          "description": "Time when the time interval begins."
+        },
+        "end": {
+          "$ref": "#/definitions/TimeOfDay",
+          "description": "Time when the time interval ends."
+        }
+      }
+    },
+    "TimeOfDay": {
+      "description": "Time when pool schedule begins or ends.",
+      "required": [
+        "hour",
+        "minute"
+      ],
+      "properties": {
+        "dayOfWeek": {
+          "description": "Day of the week.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hour when pool schedule begins or ends. Values supported are 0 to 23 on the 24-hour clock (AM/PM times are not supported)."
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minute when pool schedule begins or ends."
+        }
+      }
+    },
+    "ClusterResetParameters": {
+      "properties": {
+        "agentsMode": {
+          "description": "Controls the mode of agents in the cluster after the reset operation is complete.",
+          "$ref": "#/definitions/AgentsMode"
+        }
+      },
+      "description": "Parameters for Resetting a Cluster."
+    },
+    "ClusterUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Updated information for AnyBuild cluster and its pools of agents."
+    },
+    "UpdateResource": {
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The List AnyBuild operations response.",
+      "properties": {
+        "value": {
+          "description": "List of AnyBuild operations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to fetch the next page (per server side paging).\r\nnull for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Describes the properties of AnyBuild operation.",
+      "properties": {
+        "name": {
+          "description": "The name of AnyBuild operation in format Microsoft.AnyBuild/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "True, when operation applies to data-plane. False, for ARM/control-plane operations.",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Describes the display properties of AnyBuild operation.",
+      "properties": {
+        "provider": {
+          "description": "The friendly name of the resource provider for the operation.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized display name of the resource the operation applies to.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "in": "path",
+      "name": "clusterName",
+      "required": true,
+      "type": "string",
+      "description": "The name of AnyBuild cluster.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
