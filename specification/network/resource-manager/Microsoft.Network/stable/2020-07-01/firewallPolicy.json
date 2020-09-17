@@ -1274,23 +1274,13 @@
     },
     "FirewallPolicyCertificateAuthority": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirewallPolicyCertificateAuthorityPropertiesFormat",
-          "description": "Properties of the certificate authority."
+        "keyVaultSecretId": {
+          "type": "string",
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "name": {
           "type": "string",
           "description": "Name of the CA certificate."
-        }
-      },
-      "description": "Trusted Root certificates properties for tls."
-    },
-    "FirewallPolicyCertificateAuthorityPropertiesFormat": {
-      "properties": {
-        "keyVaultSecretId": {
-          "type": "string",
-          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         }
       },
       "description": "Trusted Root certificates properties for tls."
