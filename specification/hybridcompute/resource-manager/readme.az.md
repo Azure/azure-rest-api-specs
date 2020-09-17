@@ -20,4 +20,7 @@ directive:
       parameter-name: extension-name
     set:
       parameter-name: name
+      alias:
+        - n
+        - extension-name
 ```
