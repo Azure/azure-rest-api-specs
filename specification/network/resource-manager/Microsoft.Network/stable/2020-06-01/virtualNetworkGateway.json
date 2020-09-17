@@ -2767,14 +2767,21 @@
         },
         "type": {
           "type": "string",
-          "description": "Type of extended location."
+          "description": "Type of extended location.",
+          "enum": [
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "name",
         "type"
       ],
-      "description": "The extended location of type local virtual network gateway."
+      "description": "The extended location of type local virtual network gateway.",
     },
     "VirtualNetworkGateway": {
       "properties": {
