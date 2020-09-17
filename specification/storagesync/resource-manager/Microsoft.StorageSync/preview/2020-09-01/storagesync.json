@@ -4266,17 +4266,17 @@
       "description": "Server Endpoint sync status",
       "properties": {
         "downloadHealth": {
-          "$ref": "#/definitions/ServerEndpointSyncHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Download Health Status.",
           "readOnly": true
         },
         "uploadHealth": {
-          "$ref": "#/definitions/ServerEndpointSyncHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Upload Health Status.",
           "readOnly": true
         },
         "combinedHealth": {
-          "$ref": "#/definitions/ServerEndpointSyncHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Combined Health Status.",
           "readOnly": true
         },
@@ -4512,18 +4512,16 @@
         "modelAsString": true
       }
     },
-    "ServerEndpointSyncHealthState": {
+    "ServerEndpointHealthState": {
       "type": "string",
-      "description": "Type of the sync health state",
+      "description": "Type of the server endpoint health state",
       "enum": [
+        "Unavailable",
         "Healthy",
-        "Error",
-        "SyncBlockedForRestore",
-        "SyncBlockedForChangeDetectionPostRestore",
-        "NoActivity"
+        "Error"
       ],
       "x-ms-enum": {
-        "name": "ServerEndpointSyncHealthState",
+        "name": "ServerEndpointHealthState",
         "modelAsString": true
       }
     },
@@ -4641,7 +4639,7 @@
           "readOnly": true
         },
         "health": {
-          "$ref": "#/definitions/ServerEndpointCloudTieringHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Cloud tiering health state.",
           "readOnly": true
         },
@@ -4688,18 +4686,6 @@
           "description": "Status of the date policy",
           "readOnly": true
         }
-      }
-    },
-    "ServerEndpointCloudTieringHealthState": {
-      "type": "string",
-      "description": "Type of the cloud tiering health state",
-      "enum": [
-        "Healthy",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "ServerEndpointCloudTieringHealthState",
-        "modelAsString": true
       }
     },
     "CloudTieringSpaceSavings": {
