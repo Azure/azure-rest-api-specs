@@ -1423,6 +1423,21 @@
       ],
       "x-ms-azure-resource": true
     },
+    "ProxyOnlyResource": {
+      "description": "The ProxyOnly Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        }
+      }
+    },
     "Disk": {
       "properties": {
         "managedBy": {
@@ -2662,7 +2677,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskProperties"
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ProxyOnlyResource"
+          }
+        ]
       }
     },
     "DiskRestorePointProperties": {
